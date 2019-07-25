@@ -69,6 +69,9 @@ private class IBMCompareComplyV1Test {
   private static String HIGH;
   private static String BEGIN_KEY;
   private static String END_KEY;
+  private static String VALUE;
+  private static String UNIT;
+  private static Double NUMERIC_VALUE;
 
   static {
     VERSION = '2018-10-15';
@@ -140,6 +143,9 @@ private class IBMCompareComplyV1Test {
     HIGH = 'High';
     BEGIN_KEY = 'begin';
     END_KEY = 'end';
+    VALUE = 'value';
+    UNIT = 'unit';
+    NUMERIC_VALUE = 21.0;
   }
 
   static testMethod void testAddFeedbackOptions() {
@@ -643,6 +649,12 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
+    System.assertEquals(TEXT, response.getTables().get(0).getTitle().getText());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getTitle().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getTitle().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getContexts().get(0).getText());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getContexts().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getContexts().get(0).getLocation().getXend());
     System.assertEquals(TEXT, response.getDocumentStructure().getSectionTitles().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXend());
@@ -658,6 +670,8 @@ private class IBMCompareComplyV1Test {
         response.getDocumentStructure().getLeadingSentences().get(0).getElementLocations().get(0).getXbegin());
     System.assertEquals(TEST_END,
         response.getDocumentStructure().getLeadingSentences().get(0).getElementLocations().get(0).getXend());
+    System.assertEquals(TEST_BEGIN, response.getDocumentStructure().getParagraphs().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getDocumentStructure().getParagraphs().get(0).getLocation().getXend());
     System.assertEquals(PARTY, response.getParties().get(0).getParty());
     System.assertEquals(UNKNOWN, response.getParties().get(0).getImportance());
     System.assertEquals(ROLE, response.getParties().get(0).getRole());
@@ -666,6 +680,9 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_END, response.getParties().get(0).getAddresses().get(0).getLocation().getXend());
     System.assertEquals(NAME, response.getParties().get(0).getContacts().get(0).getName());
     System.assertEquals(ROLE, response.getParties().get(0).getContacts().get(0).getRole());
+    System.assertEquals(TEXT, response.getParties().get(0).getMentions().get(0).getText());
+    System.assertEquals(TEST_BEGIN, response.getParties().get(0).getMentions().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getParties().get(0).getMentions().get(0).getLocation().getXend());
     System.assertEquals(TEXT, response.getEffectiveDates().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getEffectiveDates().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getEffectiveDates().get(0).getLocation().getXend());
@@ -674,14 +691,42 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getContractAmounts().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getContractAmounts().get(0).getLocation().getXend());
     System.assertEquals(HIGH, response.getContractAmounts().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT, response.getContractAmounts().get(0).getText());
+    System.assertEquals(TEXT_NORMALIZED, response.getContractAmounts().get(0).getTextNormalized());
+    System.assertEquals(VALUE, response.getContractAmounts().get(0).getInterpretation().getValue());
+    System.assertEquals(NUMERIC_VALUE, response.getPaymentTerms().get(0).getInterpretation().getNumericValue());
+    System.assertEquals(UNIT, response.getContractAmounts().get(0).getInterpretation().getUnit());
+    System.assertEquals(PROVENANCE_ID, response.getContractAmounts().get(0).getProvenanceIds().get(0));
+    System.assertEquals(TEST_BEGIN, response.getContractAmounts().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getContractAmounts().get(0).getLocation().getXend());
     System.assertEquals(TEXT, response.getTerminationDates().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getTerminationDates().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTerminationDates().get(0).getLocation().getXend());
     System.assertEquals(HIGH, response.getTerminationDates().get(0).getConfidenceLevel());
-    System.assertEquals(TEXT, response.getContractType().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getContractType().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getContractType().get(0).getLocation().getXend());
-    System.assertEquals(HIGH, response.getContractType().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT_NORMALIZED, response.getTerminationDates().get(0).getTextNormalized());
+    System.assertEquals(PROVENANCE_ID, response.getTerminationDates().get(0).getProvenanceIds().get(0));
+    System.assertEquals(TEXT, response.getContractTypes().get(0).getText());
+    System.assertEquals(TEST_BEGIN, response.getContractTypes().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getContractTypes().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getContractTypes().get(0).getConfidenceLevel());
+    System.assertEquals(HIGH, response.getContractTerms().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT, response.getContractTerms().get(0).getText());
+    System.assertEquals(TEXT_NORMALIZED, response.getContractTerms().get(0).getTextNormalized());
+    System.assertEquals(VALUE, response.getContractTerms().get(0).getInterpretation().getValue());
+    System.assertEquals(NUMERIC_VALUE, response.getContractTerms().get(0).getInterpretation().getNumericValue());
+    System.assertEquals(UNIT, response.getContractTerms().get(0).getInterpretation().getUnit());
+    System.assertEquals(PROVENANCE_ID, response.getContractTerms().get(0).getProvenanceIds().get(0));
+    System.assertEquals(TEST_BEGIN, response.getContractTerms().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getContractTerms().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getPaymentTerms().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT, response.getPaymentTerms().get(0).getText());
+    System.assertEquals(TEXT_NORMALIZED, response.getPaymentTerms().get(0).getTextNormalized());
+    System.assertEquals(VALUE, response.getPaymentTerms().get(0).getInterpretation().getValue());
+    System.assertEquals(NUMERIC_VALUE, response.getPaymentTerms().get(0).getInterpretation().getNumericValue());
+    System.assertEquals(UNIT, response.getPaymentTerms().get(0).getInterpretation().getUnit());
+    System.assertEquals(PROVENANCE_ID, response.getPaymentTerms().get(0).getProvenanceIds().get(0));
+    System.assertEquals(TEST_BEGIN, response.getPaymentTerms().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getPaymentTerms().get(0).getLocation().getXend());
     Test.stopTest();
   }
 

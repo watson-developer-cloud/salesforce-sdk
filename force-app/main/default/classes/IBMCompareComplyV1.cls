@@ -27,6 +27,20 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   }
 
   /**
+   * Instantiates a new `IBMCompareComplyV1` with username and password.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param username the username
+   * @param password the password
+   * @deprecated Use IBMCompareComplyV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
+   */
+  public IBMCompareComplyV1(String versionDate, String username, String password) {
+    this(versionDate);
+    setUsernameAndPassword(username, password);
+  }
+
+  /**
    * Instantiates a new `IBMCompareComplyV1` with the specified authentication configuration.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API

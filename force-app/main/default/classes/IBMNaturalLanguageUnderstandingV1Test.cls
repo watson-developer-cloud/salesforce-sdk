@@ -1,28 +1,32 @@
 @isTest
 private class IBMNaturalLanguageUnderstandingV1Test {
-  private static String text;
-  private static Long limitVal;
-  private static String model;
+  private static String TEXT;
+  private static Long LIMIT_VAL;
+  private static String MODEL;
+  private static Double CONFIDENCE;
+  private static Long LOCATION;
 
   static {
-    text = 'text';
-    limitVal = 200L;
-    model = 'model';
+    TEXT = 'text';
+    LIMIT_VAL = 200L;
+    MODEL = 'model';
+    CONFIDENCE = 0.5;
+    LOCATION = 0L;
   }
 
   static testMethod void testCategoriesOptions() {
     Test.startTest();
 
     IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions options = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptionsBuilder()
-      .xlimit(limitVal)
+      .xlimit(LIMIT_VAL)
       .explanation(true)
-      .model(model)
+      .model(MODEL)
       .build();
     options = options.newBuilder().build();
 
-    System.assertEquals(limitVal, options.xlimit());
+    System.assertEquals(LIMIT_VAL, options.xlimit());
     System.assert(options.explanation());
-    System.assertEquals(model, options.model());
+    System.assertEquals(MODEL, options.model());
 
     Test.stopTest();
   }
@@ -144,7 +148,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getKeywords()[0].getText(), 'free trial');
     System.assertEquals(resp.getCategories()[0].getScore(), 0.89792);
     System.assertEquals(resp.getCategories()[0].getLabel(), 'Company');
-    System.assertEquals(resp.getCategories()[0].getExplanation().getRelevantText()[0].getText(), text);
+    System.assertEquals(resp.getCategories()[0].getExplanation().getRelevantText()[0].getText(), TEXT);
     System.assertEquals(resp.getEmotion().getDocument().getEmotion().getAnger(), 0.099437);
     System.assertEquals(resp.getEmotion().getTargets()[0].getText(), 'test');
     System.assertEquals(resp.getEmotion().getTargets()[0].getEmotion().getAnger(), 0.099437);
@@ -179,6 +183,10 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getSyntax().getSentences().get(0).getText(), 'sentence');
     System.assertEquals(resp.getSyntax().getSentences().get(0).getLocation().get(0), 0L);
     System.assertEquals(resp.getSyntax().getSentences().get(0).getLocation().get(1), 5L);
+    System.assertEquals(CONFIDENCE, resp.getEntities().get(0).getConfidence());
+    System.assertEquals(TEXT, resp.getEntities().get(0).getMentions().get(0).getText());
+    System.assertEquals(LOCATION, resp.getEntities().get(0).getMentions().get(0).getLocation().get(0));
+    System.assertEquals(CONFIDENCE, resp.getEntities().get(0).getMentions().get(0).getConfidence());
     Test.stopTest();
   }
 

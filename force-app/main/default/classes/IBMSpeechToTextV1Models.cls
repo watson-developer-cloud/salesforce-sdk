@@ -5,6 +5,7 @@ public class IBMSpeechToTextV1Models {
   public class AcousticModel extends IBMWatsonResponseModel {
     private String customization_id_serialized_name;
     private String created_serialized_name;
+    private String updated_serialized_name;
     private String language_serialized_name;
     private List<String> versions_serialized_name;
     private String owner_serialized_name;
@@ -39,6 +40,20 @@ public class IBMSpeechToTextV1Models {
     @AuraEnabled
     public String getCreated() {
       return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The date and time in Coordinated Universal Time (UTC) at which the custom acoustic model was last modified. The
+     * `created` and `updated` fields are equal when an acoustic model is first added but has yet to be updated. The
+     * value is provided in full ISO 8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     *
+     * @return the updated
+     */
+    @AuraEnabled
+    public String getUpdated() {
+      return updated_serialized_name;
     }
  
     /**
@@ -178,6 +193,15 @@ public class IBMSpeechToTextV1Models {
      */
     public void setCreated(final String created) {
       this.created_serialized_name = created;
+    }
+
+    /**
+     * Sets the updated.
+     *
+     * @param updated the new updated
+     */
+    public void setUpdated(final String updated) {
+      this.updated_serialized_name = updated;
     }
 
     /**
@@ -345,7 +369,10 @@ public class IBMSpeechToTextV1Models {
      * The name of the new audio resource for the custom acoustic model. Use a localized name that matches the language
      * of the custom model and reflects the contents of the resource.
      * * Include a maximum of 128 characters in the name.
-     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+     * colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+     * does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+     * strongly discouraged.)
      * * Do not use the name of an audio resource that has already been added to the custom model.
      *
      * @return the audioName
@@ -597,10 +624,14 @@ public class IBMSpeechToTextV1Models {
      * The name of the new corpus for the custom language model. Use a localized name that matches the language of the
      * custom model and reflects the contents of the corpus.
      * * Include a maximum of 128 characters in the name.
-     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+     * colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+     * does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+     * strongly discouraged.)
      * * Do not use the name of an existing corpus or grammar that is already defined for the custom model.
      * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
      * by the user.
+     * * Do not use the name `base_lm` or `default_lm`. Both names are reserved for future use by the service.
      *
      * @return the corpusName
      */
@@ -791,10 +822,14 @@ public class IBMSpeechToTextV1Models {
      * The name of the new grammar for the custom language model. Use a localized name that matches the language of the
      * custom model and reflects the contents of the grammar.
      * * Include a maximum of 128 characters in the name.
-     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+     * colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+     * does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+     * strongly discouraged.)
      * * Do not use the name of an existing grammar or corpus that is already defined for the custom model.
      * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
      * by the user.
+     * * Do not use the name `base_lm` or `default_lm`. Both names are reserved for future use by the service.
      *
      * @return the grammarName
      */
@@ -5826,6 +5861,7 @@ public class IBMSpeechToTextV1Models {
   public class LanguageModel extends IBMWatsonResponseModel {
     private String customization_id_serialized_name;
     private String created_serialized_name;
+    private String updated_serialized_name;
     private String language_serialized_name;
     private String dialect_serialized_name;
     private List<String> versions_serialized_name;
@@ -5862,6 +5898,20 @@ public class IBMSpeechToTextV1Models {
     @AuraEnabled
     public String getCreated() {
       return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The date and time in Coordinated Universal Time (UTC) at which the custom language model was last modified. The
+     * `created` and `updated` fields are equal when a language model is first added but has yet to be updated. The
+     * value is provided in full ISO 8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     *
+     * @return the updated
+     */
+    @AuraEnabled
+    public String getUpdated() {
+      return updated_serialized_name;
     }
  
     /**
@@ -6032,6 +6082,15 @@ public class IBMSpeechToTextV1Models {
      */
     public void setCreated(final String created) {
       this.created_serialized_name = created;
+    }
+
+    /**
+     * Sets the updated.
+     *
+     * @param updated the new updated
+     */
+    public void setUpdated(final String updated) {
+      this.updated_serialized_name = updated;
     }
 
     /**
@@ -6739,7 +6798,7 @@ public class IBMSpeechToTextV1Models {
      * optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or descending
      * order. By default, words are sorted in ascending alphabetical order. For alphabetical ordering, the
      * lexicographical precedence is numeric values, uppercase letters, and lowercase letters. For count ordering,
-     * values with the same count are ordered alphabetically. With the `curl` command, URL encode the `+` symbol as
+     * values with the same count are ordered alphabetically. With the `curl` command, URL-encode the `+` symbol as
      * `%2B`.
      *
      * @return the xsort
@@ -6958,7 +7017,8 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * If processing metrics are requested, information about the service's processing of the input audio.
+   * If processing metrics are requested, information about the service's processing of the input audio. Processing
+   * metrics are not available with the synchronous **Recognize audio** method.
    */
   public class ProcessingMetrics extends IBMWatsonGenericModel {
     private ProcessedAudio processed_audio_serialized_name;
@@ -9046,7 +9106,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the processingMetrics.
      *
-     * If processing metrics are requested, information about the service's processing of the input audio.
+     * If processing metrics are requested, information about the service's processing of the input audio. Processing
+     * metrics are not available with the synchronous **Recognize audio** method.
      *
      * @return the processingMetrics
      */
@@ -9580,51 +9641,51 @@ public class IBMSpeechToTextV1Models {
    * A warning from training of a custom language or custom acoustic model.
    */
   public class TrainingWarning extends IBMWatsonGenericModel {
-    private String description_serialized_name;
-    private String warning_id_serialized_name;
+    private String code_serialized_name;
+    private String message_serialized_name;
  
     /**
-     * Gets the description.
+     * Gets the code.
+     *
+     * An identifier for the type of invalid resources listed in the `description` field.
+     *
+     * @return the code
+     */
+    @AuraEnabled
+    public String getCode() {
+      return code_serialized_name;
+    }
+ 
+    /**
+     * Gets the message.
      *
      * A warning message that lists the invalid resources that are excluded from the custom model's training. The
      * message has the following format: `Analysis of the following {resource_type} has not completed successfully:
      * [{resource_names}]. They will be excluded from custom {model_type} model training.`.
      *
-     * @return the description
+     * @return the message
      */
     @AuraEnabled
-    public String getDescription() {
-      return description_serialized_name;
-    }
- 
-    /**
-     * Gets the warningId.
-     *
-     * An identifier for the type of invalid resources listed in the `description` field.
-     *
-     * @return the warningId
-     */
-    @AuraEnabled
-    public String getWarningId() {
-      return warning_id_serialized_name;
+    public String getMessage() {
+      return message_serialized_name;
     }
 
     /**
-     * Sets the description.
+     * Sets the code.
      *
-     * @param description the new description
+     * @param code the new code
      */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
+    public void setCode(final String code) {
+      this.code_serialized_name = code;
     }
 
     /**
-     * Sets the warningId.
+     * Sets the message.
      *
-     * @param warningId the new warningId
+     * @param message the new message
      */
-    public void setWarningId(final String warningId) {
-      this.warning_id_serialized_name = warningId;
+    public void setMessage(final String message) {
+      this.message_serialized_name = message;
     }
 
   }

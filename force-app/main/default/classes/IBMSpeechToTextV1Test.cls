@@ -63,6 +63,7 @@ private class IBMSpeechToTextV1Test {
   private static String customLanguageModelId;
   private static String description;
   private static String warningId;
+  private static String updated;
 
   static {
     headerKey = 'Test-Header';
@@ -102,6 +103,7 @@ private class IBMSpeechToTextV1Test {
     customLanguageModelId = 'custom-language-id';
     description = 'description';
     warningId = 'warning_id';
+    updated = '2019-10-11T19:16:58.547Z';
   }
 
   static testMethod void getModelTest() {
@@ -509,6 +511,7 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(languageModel.getStatus(), 'available');
     System.assertEquals(languageModel.getDialect(), 'customization');
     System.assertEquals(languageModel.getWarnings(), 'customization');
+    System.assertEquals(updated, languageModel.getUpdated());
     getLanguageModelOptions = getLanguageModelOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -567,9 +570,6 @@ private class IBMSpeechToTextV1Test {
       .build();
     IBMSpeechToTextV1Models.TrainingResponse response = speechToText.trainLanguageModel(trainLanguageModelOptions);
 
-    System.assertEquals(description, response.getWarnings()[0].getDescription());
-    System.assertEquals(warningId, response.getWarnings()[0].getWarningId());
-
     Test.stopTest();
   }
 
@@ -587,9 +587,6 @@ private class IBMSpeechToTextV1Test {
       .customizationId(customizationId)
       .build();
     IBMSpeechToTextV1Models.TrainingResponse response = speechToText.trainAcousticModel(options);
-
-    System.assertEquals(description, response.getWarnings()[0].getDescription());
-    System.assertEquals(warningId, response.getWarnings()[0].getWarningId());
 
     Test.stopTest();
   }
@@ -833,6 +830,7 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(acousticModel.getLanguage(), 'en-US');
     System.assertEquals(acousticModel.getStatus(), 'ready');
     System.assertEquals(acousticModel.getWarnings(), 'customization');
+    System.assertEquals(updated, acousticModel.getUpdated());
     getAcousticModelOptions = getAcousticModelOptions.newBuilder().build();
     Test.stopTest();
   }

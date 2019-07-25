@@ -2198,6 +2198,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String type_serialized_name;
     private String text_serialized_name;
     private Double relevance_serialized_name;
+    private Double confidence_serialized_name;
     private List<EntityMention> mentions_serialized_name;
     private Long count_serialized_name;
     private EmotionScores emotion_serialized_name;
@@ -2238,6 +2239,20 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     @AuraEnabled
     public Double getRelevance() {
       return relevance_serialized_name;
+    }
+ 
+    /**
+     * Gets the confidence.
+     *
+     * Confidence in the entity identification from 0 to 1. Higher values indicate higher confidence. In standard
+     * entities requests, confidence is returned only for English text. All entities requests that use custom models
+     * return the confidence score.
+     *
+     * @return the confidence
+     */
+    @AuraEnabled
+    public Double getConfidence() {
+      return confidence_serialized_name;
     }
  
     /**
@@ -2328,6 +2343,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
+     * Sets the confidence.
+     *
+     * @param confidence the new confidence
+     */
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
+    }
+
+    /**
      * Sets the mentions.
      *
      * @param mentions the new mentions
@@ -2414,6 +2438,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class EntityMention extends IBMWatsonGenericModel {
     private String text_serialized_name;
     private List<Long> location_serialized_name;
+    private Double confidence_serialized_name;
  
     /**
      * Gets the text.
@@ -2438,6 +2463,20 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<Long> getLocation() {
       return location_serialized_name;
     }
+ 
+    /**
+     * Gets the confidence.
+     *
+     * Confidence in the entity identification from 0 to 1. Higher values indicate higher confidence. In standard
+     * entities requests, confidence is returned only for English text. All entities requests that use custom models
+     * return the confidence score.
+     *
+     * @return the confidence
+     */
+    @AuraEnabled
+    public Double getConfidence() {
+      return confidence_serialized_name;
+    }
 
     /**
      * Sets the text.
@@ -2455,6 +2494,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public void setLocation(final List<Long> location) {
       this.location_serialized_name = location;
+    }
+
+    /**
+     * Sets the confidence.
+     *
+     * @param confidence the new confidence
+     */
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
     }
 
   }
