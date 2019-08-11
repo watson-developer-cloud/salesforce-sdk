@@ -36,7 +36,7 @@ public class IBMWatsonClient {
         httpRequest.setBodyAsBlob(EncodingUtil.base64Decode(form64));
         httpRequest.setHeader('Content-Length', String.valueof(form64.length()));
       } else if (request.getBody().contentType.toString().contains(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-        httpRequest.setBody(IBMWatsonJSONUtil.serialize(request.getBody().content));
+        httpRequest.setBody(request.getBody().content);
       } else {
         if (request.getBody().content != null) {
           httpRequest.setBody(request.getBody().content);
