@@ -89,7 +89,7 @@ public class IBMWatsonJSONUtil {
    *
    * @return Map representing the JSON request with moved additional properties
    */
-  private static Map<String, Object> raiseAdditionalProperties(Map<String, Object> jsonMap) {
+  public static Map<String, Object> raiseAdditionalProperties(Map<String, Object> jsonMap) {
     Map<String, Object> additionalProperties = (Map<String, Object>) jsonMap.get('additional_properties');
     if (additionalProperties != null) {
       for (String key : additionalProperties.keySet()) {
