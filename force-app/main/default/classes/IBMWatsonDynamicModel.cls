@@ -12,9 +12,7 @@ public virtual class IBMWatsonDynamicModel extends IBMWatsonGenericModel {
     if (additional_properties == null) {
       additional_properties = new Map<String, Object>();
     }
-
-    String valJson = JSON.serialize(val).remove('_serialized_name');
-    additional_properties.put(key.removeEnd('_serialized_name'), JSON.deserializeUntyped(valJson));
+    additional_properties.put(key, val);
   }
 
   public Map<String, Object> getDynamicProperties() {

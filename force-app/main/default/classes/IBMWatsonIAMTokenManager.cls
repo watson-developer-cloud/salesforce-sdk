@@ -124,9 +124,8 @@ public class IBMWatsonIAMTokenManager implements IBMWatsonAuthenticator {
 
     if (response.isSuccessful() && String.isNotBlank(response.getBody())) {
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
-      Map<String, Object> safeJsonMap = IBMWatsonJSONUtil.prepareResponse(jsonMap);
-      String jsonString = JSON.serialize(safeJsonMap);
-      return (IBMWatsonIAMToken) ((IBMWatsonGenericModel) IBMWatsonIAMToken.class.newInstance()).deserialize(jsonString, safeJsonMap, IBMWatsonIAMToken.class);
+      String jsonString = JSON.serialize(jsonMap);
+      return (IBMWatsonIAMToken) ((IBMWatsonGenericModel) IBMWatsonIAMToken.class.newInstance()).deserialize(jsonString, jsonMap, IBMWatsonIAMToken.class);
     } else {
       Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
       String errorMessage = responseMap.get('errorMessage').toString();

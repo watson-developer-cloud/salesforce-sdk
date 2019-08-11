@@ -2,68 +2,68 @@
  * This class models a response received from the ICP4D "get token" API.
  */
 public class IBMWatsonICP4DTokenResponse extends IBMWatsonGenericModel {
-  private String username_serialized_name;
-  private String role_serialized_name;
-  private String[] permissions_serialized_name;
-  private String sub_serialized_name;
-  private String iss_serialized_name;
-  private String aud_serialized_name;
-  private String uid_serialized_name;
-  private String accessToken_serialized_name;
-  private String message_serialized_name;
+  private String username;
+  private String role;
+  private String[] permissions;
+  private String sub;
+  private String iss;
+  private String aud;
+  private String uid;
+  private String accessToken;
+  private String message;
 
   public String getUsername() {
-    return username_serialized_name;
+    return username;
   }
   public void setUsername(String username) {
-    this.username_serialized_name = username;
+    this.username = username;
   }
   public String getRole() {
-    return role_serialized_name;
+    return role;
   }
   public void setRole(String role) {
-    this.role_serialized_name = role;
+    this.role = role;
   }
   public String[] getPermissions() {
-    return permissions_serialized_name;
+    return permissions;
   }
   public void setPermissions(String[] permissions) {
-    this.permissions_serialized_name = permissions;
+    this.permissions = permissions;
   }
   public String getSub() {
-    return sub_serialized_name;
+    return sub;
   }
   public void setSub(String sub) {
-    this.sub_serialized_name = sub;
+    this.sub = sub;
   }
   public String getIss() {
-    return iss_serialized_name;
+    return iss;
   }
   public void setIss(String iss) {
-    this.iss_serialized_name = iss;
+    this.iss = iss;
   }
   public String getAud() {
-    return aud_serialized_name;
+    return aud;
   }
   public void setAud(String aud) {
-    this.aud_serialized_name = aud;
+    this.aud = aud;
   }
   public String getUid() {
-    return uid_serialized_name;
+    return uid;
   }
   public void setUid(String uid) {
-    this.uid_serialized_name = uid;
+    this.uid = uid;
   }
   public String getAccessToken() {
-    return accessToken_serialized_name;
+    return accessToken;
   }
   public void setAccessToken(String accessToken) {
-    this.accessToken_serialized_name = accessToken;
+    this.accessToken = accessToken;
   }
   public String getMessage() {
-    return message_serialized_name;
+    return message;
   }
   public void setMessage(String message) {
-    this.message_serialized_name = message;
+    this.message = message;
   }
 }

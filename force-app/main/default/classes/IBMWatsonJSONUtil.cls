@@ -34,54 +34,6 @@ public class IBMWatsonJSONUtil {
   }
 
   /**
-   * Calls appropriate methods to prepare the JSON response for deserialization. This involves removing empty
-   * string values and adding the property suffix to avoid using reserved words.
-   *
-   * @param jsonMap Map<String, Object> representation of the JSON response
-   *
-   * return Map<String, Object> representing our JSON object ready to be deserialized
-   */
-  public static Map<String, Object> prepareResponse(Map<String, Object> jsonMap) {
-    return addPropertySuffix(jsonMap);
-  }
-
-  /**
-   * Adds '_serialized_name' suffix to all property keys.
-   *
-   * @param jsonMap Map<String, Object> representation of the JSON response
-   *
-   * @return Map<String, Object> representing the JSON response with modified keys
-   */
-  public static Map<String, Object> addPropertySuffix(Map<String, Object> jsonMap) {
-    Map<String, Object> safeMap = new Map<String, Object>();
-
-    for (String key : jsonMap.keySet()) {
-      String safeKey = key + '_serialized_name';
-      Object jsonValue = jsonMap.get(key);
-      if (jsonValue instanceof Map<String, Object>) {
-        safeMap.put(safeKey, addPropertySuffix((Map<String, Object>) jsonValue));
-      } else if (jsonValue instanceof List<Object>) {
-        safeMap.put(safeKey, addPropertySuffixList((List<Object>) jsonValue));
-      } else {
-        safeMap.put(safeKey, jsonValue);
-      }
-    }
-    return safeMap;
-  }
-
-  private static List<Object> addPropertySuffixList(List<Object> jsonList) {
-    List<Object> safeList = new List<Object>();
-    for (Object jsonValue : jsonList) {
-      if (jsonValue instanceof Map<String, Object>) {
-        safeList.add(addPropertySuffix((Map<String, Object>) jsonValue));
-      } else {
-        safeList.add(jsonValue);
-      }
-    }
-    return safeList;
-  }
-
-  /**
    * Brings additional properties on dynamic models up one JSON level so that they can
    * be processed properly by the service.
    *

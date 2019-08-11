@@ -83,8 +83,7 @@ public class IBMWatsonICP4DAuthenticator implements IBMWatsonAuthenticator {
 
     if (response.isSuccessful() && String.isNotBlank(response.getBody())) {
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
-      Map<String, Object> safeJsonMap = IBMWatsonJSONUtil.prepareResponse(jsonMap);
-      String jsonString = JSON.serialize(safeJsonMap);
+      String jsonString = JSON.serialize(jsonMap);
       return (IBMWatsonICP4DTokenResponse)JSON.deserialize(jsonString, IBMWatsonICP4DTokenResponse.class);
     } else {
       Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());

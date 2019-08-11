@@ -204,10 +204,10 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getresults()[0].getresults()[0].getFinalResults(),true);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getTranscript(), 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getConfidence(),0);
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getNormalizedText(), 'string');
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getStartTime(),0);
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getEndTime(),0);
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getConfidence(),0);
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getNormalizedText(), 'string');
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getStartTime(),0);
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getEndTime(),0);
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getConfidence(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getStartTime(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getEndTime(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),0);
