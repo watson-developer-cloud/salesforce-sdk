@@ -7,20 +7,15 @@ public virtual class IBMWatsonResponseModel {
    * @return serialized String form of this
    */
   public override String toString() {
-    // get JSON string representation
-    String jsonString = JSON.serialize(this, true);
-
     // remove response headers from string representation
-    Map<String, Object> fullJsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+    Map<String, Object> fullJsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
     fullJsonMap.remove('headers');
-    String jsonStringWithoutHeaders = JSON.serialize(fullJsonMap);
 
-    // call custom serializer to raise additional properties
-    jsonStringWithoutHeaders = IBMWatsonJSONUtil.serialize(jsonStringWithoutHeaders);
+    // raise additional props
+    fullJsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(fullJsonMap);
 
     // pretty print formatting
-    jsonStringWithoutHeaders = JSON.serializePretty(JSON.deserializeUntyped(jsonStringWithoutHeaders));
-    return jsonStringWithoutHeaders;
+    return JSON.serializePretty(fullJsonMap);
   }
 
   /**
@@ -69,5 +64,13 @@ public virtual class IBMWatsonResponseModel {
       this.headers = new Map<String, String>();
     }
     this.headers.put(name, value);
+  }
+
+  public virtual Map<String, String> getSdkToApiMapping() {
+    return new Map<String, String>();
+  }
+
+  public virtual Map<String, String> getApiToSdkMapping() {
+    return new Map<String, String>();
   }
 }
