@@ -152,7 +152,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('utterances', toneChatOptions.utterances());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, toneChatOptions.getSdkToApiMapping()));
 
     return (IBMToneAnalyzerV3Models.UtteranceAnalyses) createServiceCall(builder.build(), IBMToneAnalyzerV3Models.UtteranceAnalyses.class);
   }

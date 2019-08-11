@@ -62,7 +62,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', classifyOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, classifyOptions.getSdkToApiMapping()));
 
     return (IBMNaturalLanguageClassifierV1Models.Classification) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.Classification.class);
   }
@@ -91,7 +91,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('collection', classifyCollectionOptions.collection());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, classifyCollectionOptions.getSdkToApiMapping()));
 
     return (IBMNaturalLanguageClassifierV1Models.ClassificationCollection) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.ClassificationCollection.class);
   }

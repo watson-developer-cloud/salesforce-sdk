@@ -3,9 +3,9 @@ public class IBMToneAnalyzerV3Models {
    * The results of the analysis for the full input content.
    */
   public class DocumentAnalysis extends IBMWatsonGenericModel {
-    private List<ToneScore> tones_serialized_name;
-    private List<ToneCategory> tone_categories_serialized_name;
-    private String warning_serialized_name;
+    private List<ToneScore> tones;
+    private List<ToneCategory> toneCategories;
+    private String warning;
  
     /**
      * Gets the tones.
@@ -18,7 +18,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public List<ToneScore> getTones() {
-      return tones_serialized_name;
+      return tones;
     }
  
     /**
@@ -32,7 +32,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public List<ToneCategory> getToneCategories() {
-      return tone_categories_serialized_name;
+      return toneCategories;
     }
  
     /**
@@ -46,7 +46,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getWarning() {
-      return warning_serialized_name;
+      return warning;
     }
 
     /**
@@ -55,7 +55,7 @@ public class IBMToneAnalyzerV3Models {
      * @param tones the new tones
      */
     public void setTones(final List<ToneScore> tones) {
-      this.tones_serialized_name = tones;
+      this.tones = tones;
     }
 
     /**
@@ -64,7 +64,7 @@ public class IBMToneAnalyzerV3Models {
      * @param toneCategories the new toneCategories
      */
     public void setToneCategories(final List<ToneCategory> toneCategories) {
-      this.tone_categories_serialized_name = toneCategories;
+      this.toneCategories = toneCategories;
     }
 
     /**
@@ -73,7 +73,7 @@ public class IBMToneAnalyzerV3Models {
      * @param warning the new warning
      */
     public void setWarning(final String warning) {
-      this.warning_serialized_name = warning;
+      this.warning = warning;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -89,11 +89,11 @@ public class IBMToneAnalyzerV3Models {
       if (deserializedTones != null) {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tones_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
           ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
-        ret.tones_serialized_name = newTones;
+        ret.tones = newTones;
       }
 
       // calling custom deserializer for toneCategories
@@ -102,14 +102,26 @@ public class IBMToneAnalyzerV3Models {
       if (deserializedToneCategories != null) {
         for (Integer i = 0; i < deserializedToneCategories.size(); i++) {
           ToneCategory currentItem = ret.getToneCategories().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tone_categories_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('toneCategories');
           ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
           newToneCategories.add(newItem);
         }
-        ret.tone_categories_serialized_name = newToneCategories;
+        ret.toneCategories = newToneCategories;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (tones != null && tones[0] != null) {
+        mapping.putAll(tones[0].getApiToSdkMapping());
+      }
+      mapping.put('tone_categories', 'toneCategories');
+      if (toneCategories != null && toneCategories[0] != null) {
+        mapping.putAll(toneCategories[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -117,12 +129,12 @@ public class IBMToneAnalyzerV3Models {
    * The results of the analysis for the individual sentences of the input content.
    */
   public class SentenceAnalysis extends IBMWatsonGenericModel {
-    private Long sentence_id_serialized_name;
-    private String text_serialized_name;
-    private List<ToneScore> tones_serialized_name;
-    private List<ToneCategory> tone_categories_serialized_name;
-    private Long input_from_serialized_name;
-    private Long input_to_serialized_name;
+    private Long sentenceId;
+    private String text;
+    private List<ToneScore> tones;
+    private List<ToneCategory> toneCategories;
+    private Long inputFrom;
+    private Long inputTo;
  
     /**
      * Gets the sentenceId.
@@ -134,7 +146,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public Long getSentenceId() {
-      return sentence_id_serialized_name;
+      return sentenceId;
     }
  
     /**
@@ -146,7 +158,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -160,7 +172,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public List<ToneScore> getTones() {
-      return tones_serialized_name;
+      return tones;
     }
  
     /**
@@ -174,7 +186,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public List<ToneCategory> getToneCategories() {
-      return tone_categories_serialized_name;
+      return toneCategories;
     }
  
     /**
@@ -187,7 +199,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public Long getInputFrom() {
-      return input_from_serialized_name;
+      return inputFrom;
     }
  
     /**
@@ -200,7 +212,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public Long getInputTo() {
-      return input_to_serialized_name;
+      return inputTo;
     }
 
     /**
@@ -209,7 +221,7 @@ public class IBMToneAnalyzerV3Models {
      * @param sentenceId the new sentenceId
      */
     public void setSentenceId(final long sentenceId) {
-      this.sentence_id_serialized_name = sentenceId;
+      this.sentenceId = sentenceId;
     }
 
     /**
@@ -218,7 +230,7 @@ public class IBMToneAnalyzerV3Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -227,7 +239,7 @@ public class IBMToneAnalyzerV3Models {
      * @param tones the new tones
      */
     public void setTones(final List<ToneScore> tones) {
-      this.tones_serialized_name = tones;
+      this.tones = tones;
     }
 
     /**
@@ -236,7 +248,7 @@ public class IBMToneAnalyzerV3Models {
      * @param toneCategories the new toneCategories
      */
     public void setToneCategories(final List<ToneCategory> toneCategories) {
-      this.tone_categories_serialized_name = toneCategories;
+      this.toneCategories = toneCategories;
     }
 
     /**
@@ -245,7 +257,7 @@ public class IBMToneAnalyzerV3Models {
      * @param inputFrom the new inputFrom
      */
     public void setInputFrom(final long inputFrom) {
-      this.input_from_serialized_name = inputFrom;
+      this.inputFrom = inputFrom;
     }
 
     /**
@@ -254,7 +266,7 @@ public class IBMToneAnalyzerV3Models {
      * @param inputTo the new inputTo
      */
     public void setInputTo(final long inputTo) {
-      this.input_to_serialized_name = inputTo;
+      this.inputTo = inputTo;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -270,11 +282,11 @@ public class IBMToneAnalyzerV3Models {
       if (deserializedTones != null) {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tones_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
           ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
-        ret.tones_serialized_name = newTones;
+        ret.tones = newTones;
       }
 
       // calling custom deserializer for toneCategories
@@ -283,14 +295,29 @@ public class IBMToneAnalyzerV3Models {
       if (deserializedToneCategories != null) {
         for (Integer i = 0; i < deserializedToneCategories.size(); i++) {
           ToneCategory currentItem = ret.getToneCategories().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tone_categories_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('toneCategories');
           ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
           newToneCategories.add(newItem);
         }
-        ret.tone_categories_serialized_name = newToneCategories;
+        ret.toneCategories = newToneCategories;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('sentence_id', 'sentenceId');
+      if (tones != null && tones[0] != null) {
+        mapping.putAll(tones[0].getApiToSdkMapping());
+      }
+      mapping.put('tone_categories', 'toneCategories');
+      if (toneCategories != null && toneCategories[0] != null) {
+        mapping.putAll(toneCategories[0].getApiToSdkMapping());
+      }
+      mapping.put('input_from', 'inputFrom');
+      mapping.put('input_to', 'inputTo');
+      return mapping;
     }
   }
 
@@ -298,8 +325,8 @@ public class IBMToneAnalyzerV3Models {
    * The tone analysis results for the input from the general-purpose endpoint.
    */
   public class ToneAnalysis extends IBMWatsonResponseModel {
-    private DocumentAnalysis document_tone_serialized_name;
-    private List<SentenceAnalysis> sentences_tone_serialized_name;
+    private DocumentAnalysis documentTone;
+    private List<SentenceAnalysis> sentencesTone;
  
     /**
      * Gets the documentTone.
@@ -310,7 +337,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public DocumentAnalysis getDocumentTone() {
-      return document_tone_serialized_name;
+      return documentTone;
     }
  
     /**
@@ -324,7 +351,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public List<SentenceAnalysis> getSentencesTone() {
-      return sentences_tone_serialized_name;
+      return sentencesTone;
     }
 
     /**
@@ -333,7 +360,7 @@ public class IBMToneAnalyzerV3Models {
      * @param documentTone the new documentTone
      */
     public void setDocumentTone(final DocumentAnalysis documentTone) {
-      this.document_tone_serialized_name = documentTone;
+      this.documentTone = documentTone;
     }
 
     /**
@@ -342,7 +369,7 @@ public class IBMToneAnalyzerV3Models {
      * @param sentencesTone the new sentencesTone
      */
     public void setSentencesTone(final List<SentenceAnalysis> sentencesTone) {
-      this.sentences_tone_serialized_name = sentencesTone;
+      this.sentencesTone = sentencesTone;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -353,7 +380,7 @@ public class IBMToneAnalyzerV3Models {
       ToneAnalysis ret = (ToneAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentTone
-      DocumentAnalysis newDocumentTone = (DocumentAnalysis) new DocumentAnalysis().deserialize(JSON.serialize(ret.getDocumentTone()), (Map<String, Object>) jsonMap.get('document_tone_serialized_name'), DocumentAnalysis.class);
+      DocumentAnalysis newDocumentTone = (DocumentAnalysis) new DocumentAnalysis().deserialize(JSON.serialize(ret.getDocumentTone()), (Map<String, Object>) jsonMap.get('documentTone'), DocumentAnalysis.class);
       ret.setDocumentTone(newDocumentTone);
 
       // calling custom deserializer for sentencesTone
@@ -362,14 +389,27 @@ public class IBMToneAnalyzerV3Models {
       if (deserializedSentencesTone != null) {
         for (Integer i = 0; i < deserializedSentencesTone.size(); i++) {
           SentenceAnalysis currentItem = ret.getSentencesTone().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('sentences_tone_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('sentencesTone');
           SentenceAnalysis newItem = (SentenceAnalysis) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceAnalysis.class);
           newSentencesTone.add(newItem);
         }
-        ret.sentences_tone_serialized_name = newSentencesTone;
+        ret.sentencesTone = newSentencesTone;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_tone', 'documentTone');
+      if (documentTone != null) {
+        mapping.putAll(documentTone.getApiToSdkMapping());
+      }
+      mapping.put('sentences_tone', 'sentencesTone');
+      if (sentencesTone != null && sentencesTone[0] != null) {
+        mapping.putAll(sentencesTone[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -377,9 +417,9 @@ public class IBMToneAnalyzerV3Models {
    * The category for a tone from the input content.
    */
   public class ToneCategory extends IBMWatsonGenericModel {
-    private List<ToneScore> tones_serialized_name;
-    private String category_id_serialized_name;
-    private String category_name_serialized_name;
+    private List<ToneScore> tones;
+    private String categoryId;
+    private String categoryName;
  
     /**
      * Gets the tones.
@@ -390,7 +430,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public List<ToneScore> getTones() {
-      return tones_serialized_name;
+      return tones;
     }
  
     /**
@@ -403,7 +443,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getCategoryId() {
-      return category_id_serialized_name;
+      return categoryId;
     }
  
     /**
@@ -415,7 +455,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getCategoryName() {
-      return category_name_serialized_name;
+      return categoryName;
     }
 
     /**
@@ -424,7 +464,7 @@ public class IBMToneAnalyzerV3Models {
      * @param tones the new tones
      */
     public void setTones(final List<ToneScore> tones) {
-      this.tones_serialized_name = tones;
+      this.tones = tones;
     }
 
     /**
@@ -433,7 +473,7 @@ public class IBMToneAnalyzerV3Models {
      * @param categoryId the new categoryId
      */
     public void setCategoryId(final String categoryId) {
-      this.category_id_serialized_name = categoryId;
+      this.categoryId = categoryId;
     }
 
     /**
@@ -442,7 +482,7 @@ public class IBMToneAnalyzerV3Models {
      * @param categoryName the new categoryName
      */
     public void setCategoryName(final String categoryName) {
-      this.category_name_serialized_name = categoryName;
+      this.categoryName = categoryName;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -458,14 +498,24 @@ public class IBMToneAnalyzerV3Models {
       if (deserializedTones != null) {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tones_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
           ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
-        ret.tones_serialized_name = newTones;
+        ret.tones = newTones;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (tones != null && tones[0] != null) {
+        mapping.putAll(tones[0].getApiToSdkMapping());
+      }
+      mapping.put('category_id', 'categoryId');
+      mapping.put('category_name', 'categoryName');
+      return mapping;
     }
   }
 
@@ -476,7 +526,7 @@ public class IBMToneAnalyzerV3Models {
     private List<Utterance> utterances;
     private String contentLanguage;
     private String acceptLanguage;
- 
+
     /**
      * Gets the utterances.
      *
@@ -487,7 +537,7 @@ public class IBMToneAnalyzerV3Models {
     public List<Utterance> utterances() {
       return utterances;
     }
- 
+
     /**
      * Gets the contentLanguage.
      *
@@ -503,7 +553,7 @@ public class IBMToneAnalyzerV3Models {
     public String contentLanguage() {
       return contentLanguage;
     }
- 
+
     /**
      * Gets the acceptLanguage.
      *
@@ -534,6 +584,12 @@ public class IBMToneAnalyzerV3Models {
       return new ToneChatOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('contentLanguage', 'Content-Language');
+      mapping.put('acceptLanguage', 'Accept-Language');
+      return mapping;
+    }
   }
 
   /**
@@ -641,9 +697,9 @@ public class IBMToneAnalyzerV3Models {
    * The score for an utterance from the input content.
    */
   public class ToneChatScore extends IBMWatsonGenericModel {
-    private Double score_serialized_name;
-    private String tone_id_serialized_name;
-    private String tone_name_serialized_name;
+    private Double score;
+    private String toneId;
+    private String toneName;
  
     /**
      * Gets the score.
@@ -655,7 +711,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return score_serialized_name;
+      return score;
     }
  
     /**
@@ -668,7 +724,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getToneId() {
-      return tone_id_serialized_name;
+      return toneId;
     }
  
     /**
@@ -680,7 +736,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getToneName() {
-      return tone_name_serialized_name;
+      return toneName;
     }
 
     /**
@@ -689,7 +745,7 @@ public class IBMToneAnalyzerV3Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.score_serialized_name = score;
+      this.score = score;
     }
 
     /**
@@ -698,7 +754,7 @@ public class IBMToneAnalyzerV3Models {
      * @param toneId the new toneId
      */
     public void setToneId(final String toneId) {
-      this.tone_id_serialized_name = toneId;
+      this.toneId = toneId;
     }
 
     /**
@@ -707,16 +763,22 @@ public class IBMToneAnalyzerV3Models {
      * @param toneName the new toneName
      */
     public void setToneName(final String toneName) {
-      this.tone_name_serialized_name = toneName;
+      this.toneName = toneName;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('tone_id', 'toneId');
+      mapping.put('tone_name', 'toneName');
+      return mapping;
+    }
   }
 
   /**
    * Input for the general-purpose endpoint.
    */
-  public class ToneInput {
-    private String text_serialized_name;
+  public class ToneInput extends IBMWatsonGenericModel {
+    private String text;
  
     /**
      * Gets the text.
@@ -726,12 +788,12 @@ public class IBMToneAnalyzerV3Models {
      * @return the text
      */
     public String text() {
-      return text_serialized_name;
+      return text;
     }
   
     private ToneInput(ToneInputBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      this.text_serialized_name = builder.text;
+      this.text = builder.text;
     }
 
     /**
@@ -742,7 +804,6 @@ public class IBMToneAnalyzerV3Models {
     public ToneInputBuilder newBuilder() {
       return new ToneInputBuilder(this);
     }
-
   }
 
   /**
@@ -752,7 +813,7 @@ public class IBMToneAnalyzerV3Models {
     private String text;
 
     private ToneInputBuilder(ToneInput toneInput) {
-      this.text = toneInput.text_serialized_name;
+      this.text = toneInput.text;
     }
 
     /**
@@ -802,7 +863,7 @@ public class IBMToneAnalyzerV3Models {
     private List<String> tones;
     private String contentLanguage;
     private String acceptLanguage;
- 
+
     /**
      * Gets the toneInput.
      *
@@ -814,7 +875,7 @@ public class IBMToneAnalyzerV3Models {
     public ToneInput toneInput() {
       return toneInput;
     }
- 
+
     /**
      * Gets the body.
      *
@@ -826,7 +887,7 @@ public class IBMToneAnalyzerV3Models {
     public String body() {
       return body;
     }
- 
+
     /**
      * Gets the contentType.
      *
@@ -838,7 +899,7 @@ public class IBMToneAnalyzerV3Models {
     public String contentType() {
       return contentType;
     }
- 
+
     /**
      * Gets the sentences.
      *
@@ -850,7 +911,7 @@ public class IBMToneAnalyzerV3Models {
     public Boolean sentences() {
       return sentences;
     }
- 
+
     /**
      * Gets the tones.
      *
@@ -866,7 +927,7 @@ public class IBMToneAnalyzerV3Models {
     public List<String> tones() {
       return tones;
     }
- 
+
     /**
      * Gets the contentLanguage.
      *
@@ -882,7 +943,7 @@ public class IBMToneAnalyzerV3Models {
     public String contentLanguage() {
       return contentLanguage;
     }
- 
+
     /**
      * Gets the acceptLanguage.
      *
@@ -916,6 +977,14 @@ public class IBMToneAnalyzerV3Models {
       return new ToneOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('toneInput', 'tone_input');
+      mapping.put('contentType', 'Content-Type');
+      mapping.put('contentLanguage', 'Content-Language');
+      mapping.put('acceptLanguage', 'Accept-Language');
+      return mapping;
+    }
   }
 
   /**
@@ -1069,9 +1138,9 @@ public class IBMToneAnalyzerV3Models {
    * The score for a tone from the input content.
    */
   public class ToneScore extends IBMWatsonGenericModel {
-    private Double score_serialized_name;
-    private String tone_id_serialized_name;
-    private String tone_name_serialized_name;
+    private Double score;
+    private String toneId;
+    private String toneName;
  
     /**
      * Gets the score.
@@ -1087,7 +1156,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return score_serialized_name;
+      return score;
     }
  
     /**
@@ -1107,7 +1176,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getToneId() {
-      return tone_id_serialized_name;
+      return toneId;
     }
  
     /**
@@ -1119,7 +1188,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getToneName() {
-      return tone_name_serialized_name;
+      return toneName;
     }
 
     /**
@@ -1128,7 +1197,7 @@ public class IBMToneAnalyzerV3Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.score_serialized_name = score;
+      this.score = score;
     }
 
     /**
@@ -1137,7 +1206,7 @@ public class IBMToneAnalyzerV3Models {
      * @param toneId the new toneId
      */
     public void setToneId(final String toneId) {
-      this.tone_id_serialized_name = toneId;
+      this.toneId = toneId;
     }
 
     /**
@@ -1146,17 +1215,23 @@ public class IBMToneAnalyzerV3Models {
      * @param toneName the new toneName
      */
     public void setToneName(final String toneName) {
-      this.tone_name_serialized_name = toneName;
+      this.toneName = toneName;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('tone_id', 'toneId');
+      mapping.put('tone_name', 'toneName');
+      return mapping;
+    }
   }
 
   /**
    * An utterance for the input of the general-purpose endpoint.
    */
-  public class Utterance {
-    private String text_serialized_name;
-    private String user_serialized_name;
+  public class Utterance extends IBMWatsonGenericModel {
+    private String text;
+    private String user;
  
     /**
      * Gets the text.
@@ -1167,7 +1242,7 @@ public class IBMToneAnalyzerV3Models {
      * @return the text
      */
     public String text() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -1178,13 +1253,13 @@ public class IBMToneAnalyzerV3Models {
      * @return the user
      */
     public String user() {
-      return user_serialized_name;
+      return user;
     }
   
     private Utterance(UtteranceBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      this.text_serialized_name = builder.text;
-      this.user_serialized_name = builder.user;
+      this.text = builder.text;
+      this.user = builder.user;
     }
 
     /**
@@ -1195,7 +1270,6 @@ public class IBMToneAnalyzerV3Models {
     public UtteranceBuilder newBuilder() {
       return new UtteranceBuilder(this);
     }
-
   }
 
   /**
@@ -1206,8 +1280,8 @@ public class IBMToneAnalyzerV3Models {
     private String user;
 
     private UtteranceBuilder(Utterance utterance) {
-      this.text = utterance.text_serialized_name;
-      this.user = utterance.user_serialized_name;
+      this.text = utterance.text;
+      this.user = utterance.user;
     }
 
     /**
@@ -1261,8 +1335,8 @@ public class IBMToneAnalyzerV3Models {
    * The results of the analysis for the utterances of the input content.
    */
   public class UtteranceAnalyses extends IBMWatsonResponseModel {
-    private List<UtteranceAnalysis> utterances_tone_serialized_name;
-    private String warning_serialized_name;
+    private List<UtteranceAnalysis> utterancesTone;
+    private String warning;
  
     /**
      * Gets the utterancesTone.
@@ -1273,7 +1347,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public List<UtteranceAnalysis> getUtterancesTone() {
-      return utterances_tone_serialized_name;
+      return utterancesTone;
     }
  
     /**
@@ -1286,7 +1360,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getWarning() {
-      return warning_serialized_name;
+      return warning;
     }
 
     /**
@@ -1295,7 +1369,7 @@ public class IBMToneAnalyzerV3Models {
      * @param utterancesTone the new utterancesTone
      */
     public void setUtterancesTone(final List<UtteranceAnalysis> utterancesTone) {
-      this.utterances_tone_serialized_name = utterancesTone;
+      this.utterancesTone = utterancesTone;
     }
 
     /**
@@ -1304,7 +1378,7 @@ public class IBMToneAnalyzerV3Models {
      * @param warning the new warning
      */
     public void setWarning(final String warning) {
-      this.warning_serialized_name = warning;
+      this.warning = warning;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1320,14 +1394,23 @@ public class IBMToneAnalyzerV3Models {
       if (deserializedUtterancesTone != null) {
         for (Integer i = 0; i < deserializedUtterancesTone.size(); i++) {
           UtteranceAnalysis currentItem = ret.getUtterancesTone().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('utterances_tone_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('utterancesTone');
           UtteranceAnalysis newItem = (UtteranceAnalysis) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UtteranceAnalysis.class);
           newUtterancesTone.add(newItem);
         }
-        ret.utterances_tone_serialized_name = newUtterancesTone;
+        ret.utterancesTone = newUtterancesTone;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('utterances_tone', 'utterancesTone');
+      if (utterancesTone != null && utterancesTone[0] != null) {
+        mapping.putAll(utterancesTone[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -1335,10 +1418,10 @@ public class IBMToneAnalyzerV3Models {
    * The results of the analysis for an utterance of the input content.
    */
   public class UtteranceAnalysis extends IBMWatsonGenericModel {
-    private Long utterance_id_serialized_name;
-    private String utterance_text_serialized_name;
-    private List<ToneChatScore> tones_serialized_name;
-    private String error_serialized_name;
+    private Long utteranceId;
+    private String utteranceText;
+    private List<ToneChatScore> tones;
+    private String error;
  
     /**
      * Gets the utteranceId.
@@ -1350,7 +1433,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public Long getUtteranceId() {
-      return utterance_id_serialized_name;
+      return utteranceId;
     }
  
     /**
@@ -1362,7 +1445,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getUtteranceText() {
-      return utterance_text_serialized_name;
+      return utteranceText;
     }
  
     /**
@@ -1376,7 +1459,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public List<ToneChatScore> getTones() {
-      return tones_serialized_name;
+      return tones;
     }
  
     /**
@@ -1389,7 +1472,7 @@ public class IBMToneAnalyzerV3Models {
      */
     @AuraEnabled
     public String getError() {
-      return error_serialized_name;
+      return error;
     }
 
     /**
@@ -1398,7 +1481,7 @@ public class IBMToneAnalyzerV3Models {
      * @param utteranceId the new utteranceId
      */
     public void setUtteranceId(final long utteranceId) {
-      this.utterance_id_serialized_name = utteranceId;
+      this.utteranceId = utteranceId;
     }
 
     /**
@@ -1407,7 +1490,7 @@ public class IBMToneAnalyzerV3Models {
      * @param utteranceText the new utteranceText
      */
     public void setUtteranceText(final String utteranceText) {
-      this.utterance_text_serialized_name = utteranceText;
+      this.utteranceText = utteranceText;
     }
 
     /**
@@ -1416,7 +1499,7 @@ public class IBMToneAnalyzerV3Models {
      * @param tones the new tones
      */
     public void setTones(final List<ToneChatScore> tones) {
-      this.tones_serialized_name = tones;
+      this.tones = tones;
     }
 
     /**
@@ -1425,7 +1508,7 @@ public class IBMToneAnalyzerV3Models {
      * @param error the new error
      */
     public void setError(final String error) {
-      this.error_serialized_name = error;
+      this.error = error;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1441,14 +1524,24 @@ public class IBMToneAnalyzerV3Models {
       if (deserializedTones != null) {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneChatScore currentItem = ret.getTones().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tones_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
           ToneChatScore newItem = (ToneChatScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneChatScore.class);
           newTones.add(newItem);
         }
-        ret.tones_serialized_name = newTones;
+        ret.tones = newTones;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('utterance_id', 'utteranceId');
+      mapping.put('utterance_text', 'utteranceText');
+      if (tones != null && tones[0] != null) {
+        mapping.putAll(tones[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 

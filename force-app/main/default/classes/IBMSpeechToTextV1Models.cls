@@ -3,18 +3,18 @@ public class IBMSpeechToTextV1Models {
    * Information about an existing custom acoustic model.
    */
   public class AcousticModel extends IBMWatsonResponseModel {
-    private String customization_id_serialized_name;
-    private String created_serialized_name;
-    private String updated_serialized_name;
-    private String language_serialized_name;
-    private List<String> versions_serialized_name;
-    private String owner_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String base_model_name_serialized_name;
-    private String status_serialized_name;
-    private Long progress_serialized_name;
-    private String warnings_serialized_name;
+    private String customizationId;
+    private String created;
+    private String updated;
+    private String language;
+    private List<String> versions;
+    private String owner;
+    private String name;
+    private String description;
+    private String baseModelName;
+    private String status;
+    private Long progress;
+    private String warnings;
  
     /**
      * Gets the customizationId.
@@ -26,7 +26,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getCustomizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
  
     /**
@@ -39,7 +39,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -53,7 +53,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -65,7 +65,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
  
     /**
@@ -79,7 +79,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<String> getVersions() {
-      return versions_serialized_name;
+      return versions;
     }
  
     /**
@@ -91,7 +91,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getOwner() {
-      return owner_serialized_name;
+      return owner;
     }
  
     /**
@@ -103,7 +103,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -115,7 +115,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -127,7 +127,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getBaseModelName() {
-      return base_model_name_serialized_name;
+      return baseModelName;
     }
  
     /**
@@ -147,7 +147,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -161,7 +161,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getProgress() {
-      return progress_serialized_name;
+      return progress;
     }
  
     /**
@@ -174,7 +174,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getWarnings() {
-      return warnings_serialized_name;
+      return warnings;
     }
 
     /**
@@ -183,7 +183,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the new customizationId
      */
     public void setCustomizationId(final String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -192,7 +192,7 @@ public class IBMSpeechToTextV1Models {
      * @param created the new created
      */
     public void setCreated(final String created) {
-      this.created_serialized_name = created;
+      this.created = created;
     }
 
     /**
@@ -201,7 +201,7 @@ public class IBMSpeechToTextV1Models {
      * @param updated the new updated
      */
     public void setUpdated(final String updated) {
-      this.updated_serialized_name = updated;
+      this.updated = updated;
     }
 
     /**
@@ -210,7 +210,7 @@ public class IBMSpeechToTextV1Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
     /**
@@ -219,7 +219,7 @@ public class IBMSpeechToTextV1Models {
      * @param versions the new versions
      */
     public void setVersions(final List<String> versions) {
-      this.versions_serialized_name = versions;
+      this.versions = versions;
     }
 
     /**
@@ -228,7 +228,7 @@ public class IBMSpeechToTextV1Models {
      * @param owner the new owner
      */
     public void setOwner(final String owner) {
-      this.owner_serialized_name = owner;
+      this.owner = owner;
     }
 
     /**
@@ -237,7 +237,7 @@ public class IBMSpeechToTextV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -246,7 +246,7 @@ public class IBMSpeechToTextV1Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     /**
@@ -255,7 +255,7 @@ public class IBMSpeechToTextV1Models {
      * @param baseModelName the new baseModelName
      */
     public void setBaseModelName(final String baseModelName) {
-      this.base_model_name_serialized_name = baseModelName;
+      this.baseModelName = baseModelName;
     }
 
     /**
@@ -264,7 +264,7 @@ public class IBMSpeechToTextV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -273,7 +273,7 @@ public class IBMSpeechToTextV1Models {
      * @param progress the new progress
      */
     public void setProgress(final long progress) {
-      this.progress_serialized_name = progress;
+      this.progress = progress;
     }
 
     /**
@@ -282,16 +282,22 @@ public class IBMSpeechToTextV1Models {
      * @param warnings the new warnings
      */
     public void setWarnings(final String warnings) {
-      this.warnings_serialized_name = warnings;
+      this.warnings = warnings;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customization_id', 'customizationId');
+      mapping.put('base_model_name', 'baseModelName');
+      return mapping;
+    }
   }
 
   /**
    * Information about existing custom acoustic models.
    */
   public class AcousticModels extends IBMWatsonResponseModel {
-    private List<AcousticModel> customizations_serialized_name;
+    private List<AcousticModel> customizations;
  
     /**
      * Gets the customizations.
@@ -304,7 +310,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<AcousticModel> getCustomizations() {
-      return customizations_serialized_name;
+      return customizations;
     }
 
     /**
@@ -313,7 +319,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizations the new customizations
      */
     public void setCustomizations(final List<AcousticModel> customizations) {
-      this.customizations_serialized_name = customizations;
+      this.customizations = customizations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -329,14 +335,22 @@ public class IBMSpeechToTextV1Models {
       if (deserializedCustomizations != null) {
         for (Integer i = 0; i < deserializedCustomizations.size(); i++) {
           AcousticModel currentItem = ret.getCustomizations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('customizations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('customizations');
           AcousticModel newItem = (AcousticModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AcousticModel.class);
           newCustomizations.add(newItem);
         }
-        ret.customizations_serialized_name = newCustomizations;
+        ret.customizations = newCustomizations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (customizations != null && customizations[0] != null) {
+        mapping.putAll(customizations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -350,7 +364,7 @@ public class IBMSpeechToTextV1Models {
     private String contentType;
     private String containedContentType;
     private Boolean allowOverwrite;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -362,7 +376,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the audioName.
      *
@@ -380,7 +394,7 @@ public class IBMSpeechToTextV1Models {
     public String audioName() {
       return audioName;
     }
- 
+
     /**
      * Gets the audioResource.
      *
@@ -394,7 +408,7 @@ public class IBMSpeechToTextV1Models {
     public IBMWatsonFile audioResource() {
       return audioResource;
     }
- 
+
     /**
      * Gets the contentType.
      *
@@ -409,7 +423,7 @@ public class IBMSpeechToTextV1Models {
     public String contentType() {
       return contentType;
     }
- 
+
     /**
      * Gets the containedContentType.
      *
@@ -431,7 +445,7 @@ public class IBMSpeechToTextV1Models {
     public String containedContentType() {
       return containedContentType;
     }
- 
+
     /**
      * Gets the allowOverwrite.
      *
@@ -467,6 +481,16 @@ public class IBMSpeechToTextV1Models {
       return new AddAudioOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('audioName', 'audio_name');
+      mapping.put('audioResource', 'audio_resource');
+      mapping.put('contentType', 'Content-Type');
+      mapping.put('containedContentType', 'Contained-Content-Type');
+      mapping.put('allowOverwrite', 'allow_overwrite');
+      return mapping;
+    }
   }
 
   /**
@@ -605,7 +629,7 @@ public class IBMSpeechToTextV1Models {
     private String corpusName;
     private IBMWatsonFile corpusFile;
     private Boolean allowOverwrite;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -617,7 +641,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the corpusName.
      *
@@ -638,7 +662,7 @@ public class IBMSpeechToTextV1Models {
     public String corpusName() {
       return corpusName;
     }
- 
+
     /**
      * Gets the corpusFile.
      *
@@ -656,7 +680,7 @@ public class IBMSpeechToTextV1Models {
     public IBMWatsonFile corpusFile() {
       return corpusFile;
     }
- 
+
     /**
      * Gets the allowOverwrite.
      *
@@ -690,6 +714,14 @@ public class IBMSpeechToTextV1Models {
       return new AddCorpusOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('corpusName', 'corpus_name');
+      mapping.put('corpusFile', 'corpus_file');
+      mapping.put('allowOverwrite', 'allow_overwrite');
+      return mapping;
+    }
   }
 
   /**
@@ -803,7 +835,7 @@ public class IBMSpeechToTextV1Models {
     private IBMWatsonFile grammarFile;
     private String contentType;
     private Boolean allowOverwrite;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -815,7 +847,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the grammarName.
      *
@@ -836,7 +868,7 @@ public class IBMSpeechToTextV1Models {
     public String grammarName() {
       return grammarName;
     }
- 
+
     /**
      * Gets the grammarFile.
      *
@@ -852,7 +884,7 @@ public class IBMSpeechToTextV1Models {
     public IBMWatsonFile grammarFile() {
       return grammarFile;
     }
- 
+
     /**
      * Gets the contentType.
      *
@@ -866,7 +898,7 @@ public class IBMSpeechToTextV1Models {
     public String contentType() {
       return contentType;
     }
- 
+
     /**
      * Gets the allowOverwrite.
      *
@@ -902,6 +934,15 @@ public class IBMSpeechToTextV1Models {
       return new AddGrammarOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('grammarName', 'grammar_name');
+      mapping.put('grammarFile', 'grammar_file');
+      mapping.put('contentType', 'Content-Type');
+      mapping.put('allowOverwrite', 'allow_overwrite');
+      return mapping;
+    }
   }
 
   /**
@@ -1030,7 +1071,7 @@ public class IBMSpeechToTextV1Models {
     private String word;
     private List<String> soundsLike;
     private String displayAs;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -1042,7 +1083,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the wordName.
      *
@@ -1056,7 +1097,7 @@ public class IBMSpeechToTextV1Models {
     public String wordName() {
       return wordName;
     }
- 
+
     /**
      * Gets the word.
      *
@@ -1071,7 +1112,7 @@ public class IBMSpeechToTextV1Models {
     public String word() {
       return word;
     }
- 
+
     /**
      * Gets the soundsLike.
      *
@@ -1091,7 +1132,7 @@ public class IBMSpeechToTextV1Models {
     public List<String> soundsLike() {
       return soundsLike;
     }
- 
+
     /**
      * Gets the displayAs.
      *
@@ -1125,6 +1166,14 @@ public class IBMSpeechToTextV1Models {
       return new AddWordOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('wordName', 'word_name');
+      mapping.put('soundsLike', 'sounds_like');
+      mapping.put('displayAs', 'display_as');
+      return mapping;
+    }
   }
 
   /**
@@ -1262,7 +1311,7 @@ public class IBMSpeechToTextV1Models {
   public class AddWordsOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private List<CustomWord> words;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -1274,7 +1323,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the words.
      *
@@ -1304,6 +1353,14 @@ public class IBMSpeechToTextV1Models {
       return new AddWordsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      if (words != null && words[0] != null) {
+        mapping.putAll(words[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -1400,10 +1457,10 @@ public class IBMSpeechToTextV1Models {
    * Information about an audio resource from a custom acoustic model.
    */
   public class AudioDetails extends IBMWatsonGenericModel {
-    private String type_serialized_name;
-    private String codec_serialized_name;
-    private Long frequency_serialized_name;
-    private String compression_serialized_name;
+    private String xtype;
+    private String codec;
+    private Long frequency;
+    private String compression;
  
     /**
      * Gets the xtype.
@@ -1418,7 +1475,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -1430,7 +1487,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getCodec() {
-      return codec_serialized_name;
+      return codec;
     }
  
     /**
@@ -1443,7 +1500,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getFrequency() {
-      return frequency_serialized_name;
+      return frequency;
     }
  
     /**
@@ -1459,7 +1516,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getCompression() {
-      return compression_serialized_name;
+      return compression;
     }
 
     /**
@@ -1468,7 +1525,7 @@ public class IBMSpeechToTextV1Models {
      * @param xtype the new xtype
      */
     public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+      this.xtype = xtype;
     }
 
     /**
@@ -1477,7 +1534,7 @@ public class IBMSpeechToTextV1Models {
      * @param codec the new codec
      */
     public void setCodec(final String codec) {
-      this.codec_serialized_name = codec;
+      this.codec = codec;
     }
 
     /**
@@ -1486,7 +1543,7 @@ public class IBMSpeechToTextV1Models {
      * @param frequency the new frequency
      */
     public void setFrequency(final long frequency) {
-      this.frequency_serialized_name = frequency;
+      this.frequency = frequency;
     }
 
     /**
@@ -1495,21 +1552,26 @@ public class IBMSpeechToTextV1Models {
      * @param compression the new compression
      */
     public void setCompression(final String compression) {
-      this.compression_serialized_name = compression;
+      this.compression = compression;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      return mapping;
+    }
   }
 
   /**
    * Information about an audio resource from a custom acoustic model.
    */
   public class AudioListing extends IBMWatsonResponseModel {
-    private Long duration_serialized_name;
-    private String name_serialized_name;
-    private AudioDetails details_serialized_name;
-    private String status_serialized_name;
-    private AudioResource container_serialized_name;
-    private List<AudioResource> audio_serialized_name;
+    private Long duration;
+    private String name;
+    private AudioDetails details;
+    private String status;
+    private AudioResource container;
+    private List<AudioResource> audio;
  
     /**
      * Gets the duration.
@@ -1521,7 +1583,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getDuration() {
-      return duration_serialized_name;
+      return duration;
     }
  
     /**
@@ -1533,7 +1595,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -1546,7 +1608,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public AudioDetails getDetails() {
-      return details_serialized_name;
+      return details;
     }
  
     /**
@@ -1565,7 +1627,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -1578,7 +1640,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public AudioResource getContainer() {
-      return container_serialized_name;
+      return container;
     }
  
     /**
@@ -1591,7 +1653,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<AudioResource> getAudio() {
-      return audio_serialized_name;
+      return audio;
     }
 
     /**
@@ -1600,7 +1662,7 @@ public class IBMSpeechToTextV1Models {
      * @param duration the new duration
      */
     public void setDuration(final long duration) {
-      this.duration_serialized_name = duration;
+      this.duration = duration;
     }
 
     /**
@@ -1609,7 +1671,7 @@ public class IBMSpeechToTextV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -1618,7 +1680,7 @@ public class IBMSpeechToTextV1Models {
      * @param details the new details
      */
     public void setDetails(final AudioDetails details) {
-      this.details_serialized_name = details;
+      this.details = details;
     }
 
     /**
@@ -1627,7 +1689,7 @@ public class IBMSpeechToTextV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -1636,7 +1698,7 @@ public class IBMSpeechToTextV1Models {
      * @param container the new container
      */
     public void setContainer(final AudioResource container) {
-      this.container_serialized_name = container;
+      this.container = container;
     }
 
     /**
@@ -1645,7 +1707,7 @@ public class IBMSpeechToTextV1Models {
      * @param audio the new audio
      */
     public void setAudio(final List<AudioResource> audio) {
-      this.audio_serialized_name = audio;
+      this.audio = audio;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1656,11 +1718,11 @@ public class IBMSpeechToTextV1Models {
       AudioListing ret = (AudioListing) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for details
-      AudioDetails newDetails = (AudioDetails) new AudioDetails().deserialize(JSON.serialize(ret.getDetails()), (Map<String, Object>) jsonMap.get('details_serialized_name'), AudioDetails.class);
+      AudioDetails newDetails = (AudioDetails) new AudioDetails().deserialize(JSON.serialize(ret.getDetails()), (Map<String, Object>) jsonMap.get('details'), AudioDetails.class);
       ret.setDetails(newDetails);
 
       // calling custom deserializer for container
-      AudioResource newContainer = (AudioResource) new AudioResource().deserialize(JSON.serialize(ret.getContainer()), (Map<String, Object>) jsonMap.get('container_serialized_name'), AudioResource.class);
+      AudioResource newContainer = (AudioResource) new AudioResource().deserialize(JSON.serialize(ret.getContainer()), (Map<String, Object>) jsonMap.get('container'), AudioResource.class);
       ret.setContainer(newContainer);
 
       // calling custom deserializer for audio
@@ -1669,14 +1731,28 @@ public class IBMSpeechToTextV1Models {
       if (deserializedAudio != null) {
         for (Integer i = 0; i < deserializedAudio.size(); i++) {
           AudioResource currentItem = ret.getAudio().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('audio_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('audio');
           AudioResource newItem = (AudioResource) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioResource.class);
           newAudio.add(newItem);
         }
-        ret.audio_serialized_name = newAudio;
+        ret.audio = newAudio;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (details != null) {
+        mapping.putAll(details.getApiToSdkMapping());
+      }
+      if (container != null) {
+        mapping.putAll(container.getApiToSdkMapping());
+      }
+      if (audio != null && audio[0] != null) {
+        mapping.putAll(audio[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -1684,8 +1760,8 @@ public class IBMSpeechToTextV1Models {
    * If audio metrics are requested, information about the signal characteristics of the input audio.
    */
   public class AudioMetrics extends IBMWatsonGenericModel {
-    private Double sampling_interval_serialized_name;
-    private AudioMetricsDetails accumulated_serialized_name;
+    private Double samplingInterval;
+    private AudioMetricsDetails accumulated;
  
     /**
      * Gets the samplingInterval.
@@ -1698,7 +1774,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getSamplingInterval() {
-      return sampling_interval_serialized_name;
+      return samplingInterval;
     }
  
     /**
@@ -1710,7 +1786,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public AudioMetricsDetails getAccumulated() {
-      return accumulated_serialized_name;
+      return accumulated;
     }
 
     /**
@@ -1719,7 +1795,7 @@ public class IBMSpeechToTextV1Models {
      * @param samplingInterval the new samplingInterval
      */
     public void setSamplingInterval(final Double samplingInterval) {
-      this.sampling_interval_serialized_name = samplingInterval;
+      this.samplingInterval = samplingInterval;
     }
 
     /**
@@ -1728,7 +1804,7 @@ public class IBMSpeechToTextV1Models {
      * @param accumulated the new accumulated
      */
     public void setAccumulated(final AudioMetricsDetails accumulated) {
-      this.accumulated_serialized_name = accumulated;
+      this.accumulated = accumulated;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1739,10 +1815,19 @@ public class IBMSpeechToTextV1Models {
       AudioMetrics ret = (AudioMetrics) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for accumulated
-      AudioMetricsDetails newAccumulated = (AudioMetricsDetails) new AudioMetricsDetails().deserialize(JSON.serialize(ret.getAccumulated()), (Map<String, Object>) jsonMap.get('accumulated_serialized_name'), AudioMetricsDetails.class);
+      AudioMetricsDetails newAccumulated = (AudioMetricsDetails) new AudioMetricsDetails().deserialize(JSON.serialize(ret.getAccumulated()), (Map<String, Object>) jsonMap.get('accumulated'), AudioMetricsDetails.class);
       ret.setAccumulated(newAccumulated);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('sampling_interval', 'samplingInterval');
+      if (accumulated != null) {
+        mapping.putAll(accumulated.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -1750,15 +1835,15 @@ public class IBMSpeechToTextV1Models {
    * Detailed information about the signal characteristics of the input audio.
    */
   public class AudioMetricsDetails extends IBMWatsonGenericModel {
-    private Boolean final_serialized_name;
-    private Double end_time_serialized_name;
-    private Double signal_to_noise_ratio_serialized_name;
-    private Double speech_ratio_serialized_name;
-    private Double high_frequency_loss_serialized_name;
-    private List<AudioMetricsHistogramBin> direct_current_offset_serialized_name;
-    private List<AudioMetricsHistogramBin> clipping_rate_serialized_name;
-    private List<AudioMetricsHistogramBin> speech_level_serialized_name;
-    private List<AudioMetricsHistogramBin> non_speech_level_serialized_name;
+    private Boolean xfinal;
+    private Double endTime;
+    private Double signalToNoiseRatio;
+    private Double speechRatio;
+    private Double highFrequencyLoss;
+    private List<AudioMetricsHistogramBin> directCurrentOffset;
+    private List<AudioMetricsHistogramBin> clippingRate;
+    private List<AudioMetricsHistogramBin> speechLevel;
+    private List<AudioMetricsHistogramBin> nonSpeechLevel;
  
     /**
      * Gets the xfinal.
@@ -1771,7 +1856,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Boolean getXfinal() {
-      return final_serialized_name;
+      return xfinal;
     }
  
     /**
@@ -1783,7 +1868,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getEndTime() {
-      return end_time_serialized_name;
+      return endTime;
     }
  
     /**
@@ -1797,7 +1882,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getSignalToNoiseRatio() {
-      return signal_to_noise_ratio_serialized_name;
+      return signalToNoiseRatio;
     }
  
     /**
@@ -1809,7 +1894,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getSpeechRatio() {
-      return speech_ratio_serialized_name;
+      return speechRatio;
     }
  
     /**
@@ -1825,7 +1910,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getHighFrequencyLoss() {
-      return high_frequency_loss_serialized_name;
+      return highFrequencyLoss;
     }
  
     /**
@@ -1838,7 +1923,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<AudioMetricsHistogramBin> getDirectCurrentOffset() {
-      return direct_current_offset_serialized_name;
+      return directCurrentOffset;
     }
  
     /**
@@ -1854,7 +1939,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<AudioMetricsHistogramBin> getClippingRate() {
-      return clipping_rate_serialized_name;
+      return clippingRate;
     }
  
     /**
@@ -1868,7 +1953,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<AudioMetricsHistogramBin> getSpeechLevel() {
-      return speech_level_serialized_name;
+      return speechLevel;
     }
  
     /**
@@ -1882,7 +1967,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<AudioMetricsHistogramBin> getNonSpeechLevel() {
-      return non_speech_level_serialized_name;
+      return nonSpeechLevel;
     }
 
     /**
@@ -1891,7 +1976,7 @@ public class IBMSpeechToTextV1Models {
      * @param xfinal the new xfinal
      */
     public void setXfinal(final Boolean xfinal) {
-      this.final_serialized_name = xfinal;
+      this.xfinal = xfinal;
     }
 
     /**
@@ -1900,7 +1985,7 @@ public class IBMSpeechToTextV1Models {
      * @param endTime the new endTime
      */
     public void setEndTime(final Double endTime) {
-      this.end_time_serialized_name = endTime;
+      this.endTime = endTime;
     }
 
     /**
@@ -1909,7 +1994,7 @@ public class IBMSpeechToTextV1Models {
      * @param signalToNoiseRatio the new signalToNoiseRatio
      */
     public void setSignalToNoiseRatio(final Double signalToNoiseRatio) {
-      this.signal_to_noise_ratio_serialized_name = signalToNoiseRatio;
+      this.signalToNoiseRatio = signalToNoiseRatio;
     }
 
     /**
@@ -1918,7 +2003,7 @@ public class IBMSpeechToTextV1Models {
      * @param speechRatio the new speechRatio
      */
     public void setSpeechRatio(final Double speechRatio) {
-      this.speech_ratio_serialized_name = speechRatio;
+      this.speechRatio = speechRatio;
     }
 
     /**
@@ -1927,7 +2012,7 @@ public class IBMSpeechToTextV1Models {
      * @param highFrequencyLoss the new highFrequencyLoss
      */
     public void setHighFrequencyLoss(final Double highFrequencyLoss) {
-      this.high_frequency_loss_serialized_name = highFrequencyLoss;
+      this.highFrequencyLoss = highFrequencyLoss;
     }
 
     /**
@@ -1936,7 +2021,7 @@ public class IBMSpeechToTextV1Models {
      * @param directCurrentOffset the new directCurrentOffset
      */
     public void setDirectCurrentOffset(final List<AudioMetricsHistogramBin> directCurrentOffset) {
-      this.direct_current_offset_serialized_name = directCurrentOffset;
+      this.directCurrentOffset = directCurrentOffset;
     }
 
     /**
@@ -1945,7 +2030,7 @@ public class IBMSpeechToTextV1Models {
      * @param clippingRate the new clippingRate
      */
     public void setClippingRate(final List<AudioMetricsHistogramBin> clippingRate) {
-      this.clipping_rate_serialized_name = clippingRate;
+      this.clippingRate = clippingRate;
     }
 
     /**
@@ -1954,7 +2039,7 @@ public class IBMSpeechToTextV1Models {
      * @param speechLevel the new speechLevel
      */
     public void setSpeechLevel(final List<AudioMetricsHistogramBin> speechLevel) {
-      this.speech_level_serialized_name = speechLevel;
+      this.speechLevel = speechLevel;
     }
 
     /**
@@ -1963,7 +2048,7 @@ public class IBMSpeechToTextV1Models {
      * @param nonSpeechLevel the new nonSpeechLevel
      */
     public void setNonSpeechLevel(final List<AudioMetricsHistogramBin> nonSpeechLevel) {
-      this.non_speech_level_serialized_name = nonSpeechLevel;
+      this.nonSpeechLevel = nonSpeechLevel;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1979,11 +2064,11 @@ public class IBMSpeechToTextV1Models {
       if (deserializedDirectCurrentOffset != null) {
         for (Integer i = 0; i < deserializedDirectCurrentOffset.size(); i++) {
           AudioMetricsHistogramBin currentItem = ret.getDirectCurrentOffset().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('direct_current_offset_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('directCurrentOffset');
           AudioMetricsHistogramBin newItem = (AudioMetricsHistogramBin) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioMetricsHistogramBin.class);
           newDirectCurrentOffset.add(newItem);
         }
-        ret.direct_current_offset_serialized_name = newDirectCurrentOffset;
+        ret.directCurrentOffset = newDirectCurrentOffset;
       }
 
       // calling custom deserializer for clippingRate
@@ -1992,11 +2077,11 @@ public class IBMSpeechToTextV1Models {
       if (deserializedClippingRate != null) {
         for (Integer i = 0; i < deserializedClippingRate.size(); i++) {
           AudioMetricsHistogramBin currentItem = ret.getClippingRate().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('clipping_rate_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('clippingRate');
           AudioMetricsHistogramBin newItem = (AudioMetricsHistogramBin) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioMetricsHistogramBin.class);
           newClippingRate.add(newItem);
         }
-        ret.clipping_rate_serialized_name = newClippingRate;
+        ret.clippingRate = newClippingRate;
       }
 
       // calling custom deserializer for speechLevel
@@ -2005,11 +2090,11 @@ public class IBMSpeechToTextV1Models {
       if (deserializedSpeechLevel != null) {
         for (Integer i = 0; i < deserializedSpeechLevel.size(); i++) {
           AudioMetricsHistogramBin currentItem = ret.getSpeechLevel().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('speech_level_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('speechLevel');
           AudioMetricsHistogramBin newItem = (AudioMetricsHistogramBin) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioMetricsHistogramBin.class);
           newSpeechLevel.add(newItem);
         }
-        ret.speech_level_serialized_name = newSpeechLevel;
+        ret.speechLevel = newSpeechLevel;
       }
 
       // calling custom deserializer for nonSpeechLevel
@@ -2018,14 +2103,40 @@ public class IBMSpeechToTextV1Models {
       if (deserializedNonSpeechLevel != null) {
         for (Integer i = 0; i < deserializedNonSpeechLevel.size(); i++) {
           AudioMetricsHistogramBin currentItem = ret.getNonSpeechLevel().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('non_speech_level_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('nonSpeechLevel');
           AudioMetricsHistogramBin newItem = (AudioMetricsHistogramBin) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioMetricsHistogramBin.class);
           newNonSpeechLevel.add(newItem);
         }
-        ret.non_speech_level_serialized_name = newNonSpeechLevel;
+        ret.nonSpeechLevel = newNonSpeechLevel;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('final', 'xfinal');
+      mapping.put('end_time', 'endTime');
+      mapping.put('signal_to_noise_ratio', 'signalToNoiseRatio');
+      mapping.put('speech_ratio', 'speechRatio');
+      mapping.put('high_frequency_loss', 'highFrequencyLoss');
+      mapping.put('direct_current_offset', 'directCurrentOffset');
+      if (directCurrentOffset != null && directCurrentOffset[0] != null) {
+        mapping.putAll(directCurrentOffset[0].getApiToSdkMapping());
+      }
+      mapping.put('clipping_rate', 'clippingRate');
+      if (clippingRate != null && clippingRate[0] != null) {
+        mapping.putAll(clippingRate[0].getApiToSdkMapping());
+      }
+      mapping.put('speech_level', 'speechLevel');
+      if (speechLevel != null && speechLevel[0] != null) {
+        mapping.putAll(speechLevel[0].getApiToSdkMapping());
+      }
+      mapping.put('non_speech_level', 'nonSpeechLevel');
+      if (nonSpeechLevel != null && nonSpeechLevel[0] != null) {
+        mapping.putAll(nonSpeechLevel[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2035,9 +2146,9 @@ public class IBMSpeechToTextV1Models {
    * infinity and the first boundary, and between the last boundary and positive infinity, respectively.
    */
   public class AudioMetricsHistogramBin extends IBMWatsonGenericModel {
-    private Double begin_serialized_name;
-    private Double end_serialized_name;
-    private Long count_serialized_name;
+    private Double xbegin;
+    private Double xend;
+    private Long count;
  
     /**
      * Gets the xbegin.
@@ -2048,7 +2159,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getXbegin() {
-      return begin_serialized_name;
+      return xbegin;
     }
  
     /**
@@ -2060,7 +2171,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getXend() {
-      return end_serialized_name;
+      return xend;
     }
  
     /**
@@ -2072,7 +2183,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getCount() {
-      return count_serialized_name;
+      return count;
     }
 
     /**
@@ -2081,7 +2192,7 @@ public class IBMSpeechToTextV1Models {
      * @param xbegin the new xbegin
      */
     public void setXbegin(final Double xbegin) {
-      this.begin_serialized_name = xbegin;
+      this.xbegin = xbegin;
     }
 
     /**
@@ -2090,7 +2201,7 @@ public class IBMSpeechToTextV1Models {
      * @param xend the new xend
      */
     public void setXend(final Double xend) {
-      this.end_serialized_name = xend;
+      this.xend = xend;
     }
 
     /**
@@ -2099,19 +2210,25 @@ public class IBMSpeechToTextV1Models {
      * @param count the new count
      */
     public void setCount(final long count) {
-      this.count_serialized_name = count;
+      this.count = count;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('begin', 'xbegin');
+      mapping.put('end', 'xend');
+      return mapping;
+    }
   }
 
   /**
    * Information about an audio resource from a custom acoustic model.
    */
   public class AudioResource extends IBMWatsonGenericModel {
-    private Long duration_serialized_name;
-    private String name_serialized_name;
-    private AudioDetails details_serialized_name;
-    private String status_serialized_name;
+    private Long duration;
+    private String name;
+    private AudioDetails details;
+    private String status;
  
     /**
      * Gets the duration.
@@ -2122,7 +2239,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getDuration() {
-      return duration_serialized_name;
+      return duration;
     }
  
     /**
@@ -2137,7 +2254,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -2150,7 +2267,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public AudioDetails getDetails() {
-      return details_serialized_name;
+      return details;
     }
  
     /**
@@ -2168,7 +2285,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
 
     /**
@@ -2177,7 +2294,7 @@ public class IBMSpeechToTextV1Models {
      * @param duration the new duration
      */
     public void setDuration(final long duration) {
-      this.duration_serialized_name = duration;
+      this.duration = duration;
     }
 
     /**
@@ -2186,7 +2303,7 @@ public class IBMSpeechToTextV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -2195,7 +2312,7 @@ public class IBMSpeechToTextV1Models {
      * @param details the new details
      */
     public void setDetails(final AudioDetails details) {
-      this.details_serialized_name = details;
+      this.details = details;
     }
 
     /**
@@ -2204,7 +2321,7 @@ public class IBMSpeechToTextV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2215,10 +2332,18 @@ public class IBMSpeechToTextV1Models {
       AudioResource ret = (AudioResource) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for details
-      AudioDetails newDetails = (AudioDetails) new AudioDetails().deserialize(JSON.serialize(ret.getDetails()), (Map<String, Object>) jsonMap.get('details_serialized_name'), AudioDetails.class);
+      AudioDetails newDetails = (AudioDetails) new AudioDetails().deserialize(JSON.serialize(ret.getDetails()), (Map<String, Object>) jsonMap.get('details'), AudioDetails.class);
       ret.setDetails(newDetails);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (details != null) {
+        mapping.putAll(details.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2226,8 +2351,8 @@ public class IBMSpeechToTextV1Models {
    * Information about the audio resources from a custom acoustic model.
    */
   public class AudioResources extends IBMWatsonResponseModel {
-    private Double total_minutes_of_audio_serialized_name;
-    private List<AudioResource> audio_serialized_name;
+    private Double totalMinutesOfAudio;
+    private List<AudioResource> audio;
  
     /**
      * Gets the totalMinutesOfAudio.
@@ -2240,7 +2365,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getTotalMinutesOfAudio() {
-      return total_minutes_of_audio_serialized_name;
+      return totalMinutesOfAudio;
     }
  
     /**
@@ -2253,7 +2378,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<AudioResource> getAudio() {
-      return audio_serialized_name;
+      return audio;
     }
 
     /**
@@ -2262,7 +2387,7 @@ public class IBMSpeechToTextV1Models {
      * @param totalMinutesOfAudio the new totalMinutesOfAudio
      */
     public void setTotalMinutesOfAudio(final Double totalMinutesOfAudio) {
-      this.total_minutes_of_audio_serialized_name = totalMinutesOfAudio;
+      this.totalMinutesOfAudio = totalMinutesOfAudio;
     }
 
     /**
@@ -2271,7 +2396,7 @@ public class IBMSpeechToTextV1Models {
      * @param audio the new audio
      */
     public void setAudio(final List<AudioResource> audio) {
-      this.audio_serialized_name = audio;
+      this.audio = audio;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2287,14 +2412,23 @@ public class IBMSpeechToTextV1Models {
       if (deserializedAudio != null) {
         for (Integer i = 0; i < deserializedAudio.size(); i++) {
           AudioResource currentItem = ret.getAudio().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('audio_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('audio');
           AudioResource newItem = (AudioResource) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioResource.class);
           newAudio.add(newItem);
         }
-        ret.audio_serialized_name = newAudio;
+        ret.audio = newAudio;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('total_minutes_of_audio', 'totalMinutesOfAudio');
+      if (audio != null && audio[0] != null) {
+        mapping.putAll(audio[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2303,7 +2437,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class CheckJobOptions extends IBMWatsonOptionsModel {
     private String id;
- 
+
     /**
      * Gets the id.
      *
@@ -2330,7 +2464,6 @@ public class IBMSpeechToTextV1Models {
     public CheckJobOptionsBuilder newBuilder() {
       return new CheckJobOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -2409,7 +2542,6 @@ public class IBMSpeechToTextV1Models {
     public CheckJobsOptionsBuilder newBuilder() {
       return new CheckJobsOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -2453,7 +2585,7 @@ public class IBMSpeechToTextV1Models {
    * Information about the corpora from a custom language model.
    */
   public class Corpora extends IBMWatsonResponseModel {
-    private List<Corpus> corpora_serialized_name;
+    private List<Corpus> corpora;
  
     /**
      * Gets the corpora.
@@ -2465,7 +2597,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<Corpus> getCorpora() {
-      return corpora_serialized_name;
+      return corpora;
     }
 
     /**
@@ -2474,7 +2606,7 @@ public class IBMSpeechToTextV1Models {
      * @param corpora the new corpora
      */
     public void setCorpora(final List<Corpus> corpora) {
-      this.corpora_serialized_name = corpora;
+      this.corpora = corpora;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2490,14 +2622,22 @@ public class IBMSpeechToTextV1Models {
       if (deserializedCorpora != null) {
         for (Integer i = 0; i < deserializedCorpora.size(); i++) {
           Corpus currentItem = ret.getCorpora().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('corpora_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('corpora');
           Corpus newItem = (Corpus) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Corpus.class);
           newCorpora.add(newItem);
         }
-        ret.corpora_serialized_name = newCorpora;
+        ret.corpora = newCorpora;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (corpora != null && corpora[0] != null) {
+        mapping.putAll(corpora[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2505,11 +2645,11 @@ public class IBMSpeechToTextV1Models {
    * Information about a corpus from a custom language model.
    */
   public class Corpus extends IBMWatsonResponseModel {
-    private String name_serialized_name;
-    private Long total_words_serialized_name;
-    private Long out_of_vocabulary_words_serialized_name;
-    private String status_serialized_name;
-    private String error_serialized_name;
+    private String name;
+    private Long totalWords;
+    private Long outOfVocabularyWords;
+    private String status;
+    private String error;
  
     /**
      * Gets the name.
@@ -2520,7 +2660,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -2532,7 +2672,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getTotalWords() {
-      return total_words_serialized_name;
+      return totalWords;
     }
  
     /**
@@ -2544,7 +2684,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getOutOfVocabularyWords() {
-      return out_of_vocabulary_words_serialized_name;
+      return outOfVocabularyWords;
     }
  
     /**
@@ -2562,7 +2702,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -2575,7 +2715,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getError() {
-      return error_serialized_name;
+      return error;
     }
 
     /**
@@ -2584,7 +2724,7 @@ public class IBMSpeechToTextV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -2593,7 +2733,7 @@ public class IBMSpeechToTextV1Models {
      * @param totalWords the new totalWords
      */
     public void setTotalWords(final long totalWords) {
-      this.total_words_serialized_name = totalWords;
+      this.totalWords = totalWords;
     }
 
     /**
@@ -2602,7 +2742,7 @@ public class IBMSpeechToTextV1Models {
      * @param outOfVocabularyWords the new outOfVocabularyWords
      */
     public void setOutOfVocabularyWords(final long outOfVocabularyWords) {
-      this.out_of_vocabulary_words_serialized_name = outOfVocabularyWords;
+      this.outOfVocabularyWords = outOfVocabularyWords;
     }
 
     /**
@@ -2611,7 +2751,7 @@ public class IBMSpeechToTextV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -2620,9 +2760,15 @@ public class IBMSpeechToTextV1Models {
      * @param error the new error
      */
     public void setError(final String error) {
-      this.error_serialized_name = error;
+      this.error = error;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('total_words', 'totalWords');
+      mapping.put('out_of_vocabulary_words', 'outOfVocabularyWords');
+      return mapping;
+    }
   }
 
   /**
@@ -2632,7 +2778,7 @@ public class IBMSpeechToTextV1Models {
     private String name;
     private String baseModelName;
     private String description;
- 
+
     /**
      * Gets the name.
      *
@@ -2645,7 +2791,7 @@ public class IBMSpeechToTextV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the baseModelName.
      *
@@ -2660,7 +2806,7 @@ public class IBMSpeechToTextV1Models {
     public String baseModelName() {
       return baseModelName;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -2691,6 +2837,11 @@ public class IBMSpeechToTextV1Models {
       return new CreateAcousticModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('baseModelName', 'base_model_name');
+      return mapping;
+    }
   }
 
   /**
@@ -2811,7 +2962,7 @@ public class IBMSpeechToTextV1Models {
     private Boolean processingMetrics;
     private Double processingMetricsInterval;
     private Boolean audioMetrics;
- 
+
     /**
      * Gets the audio.
      *
@@ -2822,7 +2973,7 @@ public class IBMSpeechToTextV1Models {
     public IBMWatsonFile audio() {
       return audio;
     }
- 
+
     /**
      * Gets the contentType.
      *
@@ -2834,7 +2985,7 @@ public class IBMSpeechToTextV1Models {
     public String contentType() {
       return contentType;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -2846,7 +2997,7 @@ public class IBMSpeechToTextV1Models {
     public String model() {
       return model;
     }
- 
+
     /**
      * Gets the callbackUrl.
      *
@@ -2862,7 +3013,7 @@ public class IBMSpeechToTextV1Models {
     public String callbackUrl() {
       return callbackUrl;
     }
- 
+
     /**
      * Gets the events.
      *
@@ -2888,7 +3039,7 @@ public class IBMSpeechToTextV1Models {
     public String events() {
       return events;
     }
- 
+
     /**
      * Gets the userToken.
      *
@@ -2901,7 +3052,7 @@ public class IBMSpeechToTextV1Models {
     public String userToken() {
       return userToken;
     }
- 
+
     /**
      * Gets the resultsTtl.
      *
@@ -2914,7 +3065,7 @@ public class IBMSpeechToTextV1Models {
     public Long resultsTtl() {
       return resultsTtl;
     }
- 
+
     /**
      * Gets the languageCustomizationId.
      *
@@ -2931,7 +3082,7 @@ public class IBMSpeechToTextV1Models {
     public String languageCustomizationId() {
       return languageCustomizationId;
     }
- 
+
     /**
      * Gets the acousticCustomizationId.
      *
@@ -2946,7 +3097,7 @@ public class IBMSpeechToTextV1Models {
     public String acousticCustomizationId() {
       return acousticCustomizationId;
     }
- 
+
     /**
      * Gets the baseModelVersion.
      *
@@ -2961,7 +3112,7 @@ public class IBMSpeechToTextV1Models {
     public String baseModelVersion() {
       return baseModelVersion;
     }
- 
+
     /**
      * Gets the customizationWeight.
      *
@@ -2984,7 +3135,7 @@ public class IBMSpeechToTextV1Models {
     public Double customizationWeight() {
       return customizationWeight;
     }
- 
+
     /**
      * Gets the inactivityTimeout.
      *
@@ -2998,7 +3149,7 @@ public class IBMSpeechToTextV1Models {
     public Long inactivityTimeout() {
       return inactivityTimeout;
     }
- 
+
     /**
      * Gets the keywords.
      *
@@ -3013,7 +3164,7 @@ public class IBMSpeechToTextV1Models {
     public List<String> keywords() {
       return keywords;
     }
- 
+
     /**
      * Gets the keywordsThreshold.
      *
@@ -3028,7 +3179,7 @@ public class IBMSpeechToTextV1Models {
     public Double keywordsThreshold() {
       return keywordsThreshold;
     }
- 
+
     /**
      * Gets the maxAlternatives.
      *
@@ -3041,7 +3192,7 @@ public class IBMSpeechToTextV1Models {
     public Long maxAlternatives() {
       return maxAlternatives;
     }
- 
+
     /**
      * Gets the wordAlternativesThreshold.
      *
@@ -3056,7 +3207,7 @@ public class IBMSpeechToTextV1Models {
     public Double wordAlternativesThreshold() {
       return wordAlternativesThreshold;
     }
- 
+
     /**
      * Gets the wordConfidence.
      *
@@ -3069,7 +3220,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean wordConfidence() {
       return wordConfidence;
     }
- 
+
     /**
      * Gets the timestamps.
      *
@@ -3081,7 +3232,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean timestamps() {
       return timestamps;
     }
- 
+
     /**
      * Gets the profanityFilter.
      *
@@ -3095,7 +3246,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean profanityFilter() {
       return profanityFilter;
     }
- 
+
     /**
      * Gets the smartFormatting.
      *
@@ -3114,7 +3265,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean smartFormatting() {
       return smartFormatting;
     }
- 
+
     /**
      * Gets the speakerLabels.
      *
@@ -3134,7 +3285,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean speakerLabels() {
       return speakerLabels;
     }
- 
+
     /**
      * Gets the customizationId.
      *
@@ -3146,7 +3297,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the grammarName.
      *
@@ -3161,7 +3312,7 @@ public class IBMSpeechToTextV1Models {
     public String grammarName() {
       return grammarName;
     }
- 
+
     /**
      * Gets the redaction.
      *
@@ -3184,7 +3335,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean redaction() {
       return redaction;
     }
- 
+
     /**
      * Gets the processingMetrics.
      *
@@ -3198,7 +3349,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean processingMetrics() {
       return processingMetrics;
     }
- 
+
     /**
      * Gets the processingMetricsInterval.
      *
@@ -3217,7 +3368,7 @@ public class IBMSpeechToTextV1Models {
     public Double processingMetricsInterval() {
       return processingMetricsInterval;
     }
- 
+
     /**
      * Gets the audioMetrics.
      *
@@ -3271,6 +3422,31 @@ public class IBMSpeechToTextV1Models {
       return new CreateJobOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('contentType', 'Content-Type');
+      mapping.put('callbackUrl', 'callback_url');
+      mapping.put('userToken', 'user_token');
+      mapping.put('resultsTtl', 'results_ttl');
+      mapping.put('languageCustomizationId', 'language_customization_id');
+      mapping.put('acousticCustomizationId', 'acoustic_customization_id');
+      mapping.put('baseModelVersion', 'base_model_version');
+      mapping.put('customizationWeight', 'customization_weight');
+      mapping.put('inactivityTimeout', 'inactivity_timeout');
+      mapping.put('keywordsThreshold', 'keywords_threshold');
+      mapping.put('maxAlternatives', 'max_alternatives');
+      mapping.put('wordAlternativesThreshold', 'word_alternatives_threshold');
+      mapping.put('wordConfidence', 'word_confidence');
+      mapping.put('profanityFilter', 'profanity_filter');
+      mapping.put('smartFormatting', 'smart_formatting');
+      mapping.put('speakerLabels', 'speaker_labels');
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('grammarName', 'grammar_name');
+      mapping.put('processingMetrics', 'processing_metrics');
+      mapping.put('processingMetricsInterval', 'processing_metrics_interval');
+      mapping.put('audioMetrics', 'audio_metrics');
+      return mapping;
+    }
   }
 
   /**
@@ -3694,7 +3870,7 @@ public class IBMSpeechToTextV1Models {
     private String baseModelName;
     private String dialect;
     private String description;
- 
+
     /**
      * Gets the name.
      *
@@ -3707,7 +3883,7 @@ public class IBMSpeechToTextV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the baseModelName.
      *
@@ -3723,7 +3899,7 @@ public class IBMSpeechToTextV1Models {
     public String baseModelName() {
       return baseModelName;
     }
- 
+
     /**
      * Gets the dialect.
      *
@@ -3742,7 +3918,7 @@ public class IBMSpeechToTextV1Models {
     public String dialect() {
       return dialect;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -3774,6 +3950,11 @@ public class IBMSpeechToTextV1Models {
       return new CreateLanguageModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('baseModelName', 'base_model_name');
+      return mapping;
+    }
   }
 
   /**
@@ -3879,10 +4060,10 @@ public class IBMSpeechToTextV1Models {
   /**
    * Information about a word that is to be added to a custom language model.
    */
-  public class CustomWord {
-    private String word_serialized_name;
-    private List<String> sounds_like_serialized_name;
-    private String display_as_serialized_name;
+  public class CustomWord extends IBMWatsonGenericModel {
+    private String word;
+    private List<String> soundsLike;
+    private String displayAs;
  
     /**
      * Gets the word.
@@ -3896,7 +4077,7 @@ public class IBMSpeechToTextV1Models {
      * @return the word
      */
     public String getWord() {
-      return word_serialized_name;
+      return word;
     }
  
     /**
@@ -3916,7 +4097,7 @@ public class IBMSpeechToTextV1Models {
      * @return the soundsLike
      */
     public List<String> getSoundsLike() {
-      return sounds_like_serialized_name;
+      return soundsLike;
     }
  
     /**
@@ -3929,36 +4110,109 @@ public class IBMSpeechToTextV1Models {
      * @return the displayAs
      */
     public String getDisplayAs() {
-      return display_as_serialized_name;
+      return displayAs;
+    }
+  
+    private CustomWord(CustomWordBuilder builder) {
+      this.word = builder.word;
+      this.soundsLike = builder.soundsLike;
+      this.displayAs = builder.displayAs;
     }
 
     /**
-     * Sets the word.
+     * New builder.
      *
-     * @param word the new word
+     * @return a CustomWord builder
      */
-    public void setWord(final String word) {
-      this.word_serialized_name = word;
+    public CustomWordBuilder newBuilder() {
+      return new CustomWordBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('soundsLike', 'sounds_like');
+      mapping.put('displayAs', 'display_as');
+      return mapping;
+    }
+  }
+
+  /**
+   * CustomWord Builder.
+   */
+  public class CustomWordBuilder {
+    private String word;
+    private List<String> soundsLike;
+    private String displayAs;
+
+    private CustomWordBuilder(CustomWord customWord) {
+      this.word = customWord.word;
+      this.soundsLike = customWord.soundsLike;
+      this.displayAs = customWord.displayAs;
     }
 
     /**
-     * Sets the soundsLike.
+     * Instantiates a new builder.
+     */
+    public CustomWordBuilder() {
+    }
+
+    /**
+     * Builds a CustomWord.
+     *
+     * @return the customWord
+     */
+    public CustomWord build() {
+      return new CustomWord(this);
+    }
+
+    /**
+     * Adds an soundsLike to soundsLike.
      *
      * @param soundsLike the new soundsLike
+     * @return the CustomWord builder
      */
-    public void setSoundsLike(final List<String> soundsLike) {
-      this.sounds_like_serialized_name = soundsLike;
+    public CustomWordBuilder addSoundsLike(String soundsLike) {
+      IBMWatsonValidator.notNull(soundsLike, 'soundsLike cannot be null');
+      if (this.soundsLike == null) {
+        this.soundsLike = new List<String>();
+      }
+      this.soundsLike.add(soundsLike);
+      return this;
     }
 
     /**
-     * Sets the displayAs.
+     * Set the word.
      *
-     * @param displayAs the new displayAs
+     * @param word the word
+     * @return the CustomWord builder
      */
-    public void setDisplayAs(final String displayAs) {
-      this.display_as_serialized_name = displayAs;
+    public CustomWordBuilder setWord(String word) {
+      this.word = word;
+      return this;
     }
 
+    /**
+     * Set the soundsLike.
+     * Existing soundsLike will be replaced.
+     *
+     * @param soundsLike the soundsLike
+     * @return the CustomWord builder
+     */
+    public CustomWordBuilder setSoundsLike(List<String> soundsLike) {
+      this.soundsLike = soundsLike;
+      return this;
+    }
+
+    /**
+     * Set the displayAs.
+     *
+     * @param displayAs the displayAs
+     * @return the CustomWord builder
+     */
+    public CustomWordBuilder setDisplayAs(String displayAs) {
+      this.displayAs = displayAs;
+      return this;
+    }
   }
 
   /**
@@ -3966,7 +4220,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class DeleteAcousticModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -3994,6 +4248,11 @@ public class IBMSpeechToTextV1Models {
       return new DeleteAcousticModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4061,7 +4320,7 @@ public class IBMSpeechToTextV1Models {
   public class DeleteAudioOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String audioName;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -4073,7 +4332,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the audioName.
      *
@@ -4102,6 +4361,12 @@ public class IBMSpeechToTextV1Models {
       return new DeleteAudioOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('audioName', 'audio_name');
+      return mapping;
+    }
   }
 
   /**
@@ -4184,7 +4449,7 @@ public class IBMSpeechToTextV1Models {
   public class DeleteCorpusOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String corpusName;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -4196,7 +4461,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the corpusName.
      *
@@ -4225,6 +4490,12 @@ public class IBMSpeechToTextV1Models {
       return new DeleteCorpusOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('corpusName', 'corpus_name');
+      return mapping;
+    }
   }
 
   /**
@@ -4307,7 +4578,7 @@ public class IBMSpeechToTextV1Models {
   public class DeleteGrammarOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String grammarName;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -4319,7 +4590,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the grammarName.
      *
@@ -4348,6 +4619,12 @@ public class IBMSpeechToTextV1Models {
       return new DeleteGrammarOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('grammarName', 'grammar_name');
+      return mapping;
+    }
   }
 
   /**
@@ -4429,7 +4706,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class DeleteJobOptions extends IBMWatsonOptionsModel {
     private String id;
- 
+
     /**
      * Gets the id.
      *
@@ -4456,7 +4733,6 @@ public class IBMSpeechToTextV1Models {
     public DeleteJobOptionsBuilder newBuilder() {
       return new DeleteJobOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -4523,7 +4799,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class DeleteLanguageModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -4551,6 +4827,11 @@ public class IBMSpeechToTextV1Models {
       return new DeleteLanguageModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4617,7 +4898,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
     private String customerId;
- 
+
     /**
      * Gets the customerId.
      *
@@ -4644,6 +4925,11 @@ public class IBMSpeechToTextV1Models {
       return new DeleteUserDataOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customerId', 'customer_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4711,7 +4997,7 @@ public class IBMSpeechToTextV1Models {
   public class DeleteWordOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String wordName;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -4723,7 +5009,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the wordName.
      *
@@ -4754,6 +5040,12 @@ public class IBMSpeechToTextV1Models {
       return new DeleteWordOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('wordName', 'word_name');
+      return mapping;
+    }
   }
 
   /**
@@ -4835,7 +5127,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class GetAcousticModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -4863,6 +5155,11 @@ public class IBMSpeechToTextV1Models {
       return new GetAcousticModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4930,7 +5227,7 @@ public class IBMSpeechToTextV1Models {
   public class GetAudioOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String audioName;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -4942,7 +5239,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the audioName.
      *
@@ -4971,6 +5268,12 @@ public class IBMSpeechToTextV1Models {
       return new GetAudioOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('audioName', 'audio_name');
+      return mapping;
+    }
   }
 
   /**
@@ -5053,7 +5356,7 @@ public class IBMSpeechToTextV1Models {
   public class GetCorpusOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String corpusName;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -5065,7 +5368,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the corpusName.
      *
@@ -5094,6 +5397,12 @@ public class IBMSpeechToTextV1Models {
       return new GetCorpusOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('corpusName', 'corpus_name');
+      return mapping;
+    }
   }
 
   /**
@@ -5176,7 +5485,7 @@ public class IBMSpeechToTextV1Models {
   public class GetGrammarOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String grammarName;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -5188,7 +5497,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the grammarName.
      *
@@ -5217,6 +5526,12 @@ public class IBMSpeechToTextV1Models {
       return new GetGrammarOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('grammarName', 'grammar_name');
+      return mapping;
+    }
   }
 
   /**
@@ -5298,7 +5613,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class GetLanguageModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -5326,6 +5641,11 @@ public class IBMSpeechToTextV1Models {
       return new GetLanguageModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -5392,7 +5712,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class GetModelOptions extends IBMWatsonOptionsModel {
     private String modelId;
- 
+
     /**
      * Gets the modelId.
      *
@@ -5419,6 +5739,11 @@ public class IBMSpeechToTextV1Models {
       return new GetModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('modelId', 'model_id');
+      return mapping;
+    }
   }
 
   /**
@@ -5486,7 +5811,7 @@ public class IBMSpeechToTextV1Models {
   public class GetWordOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String wordName;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -5498,7 +5823,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the wordName.
      *
@@ -5529,6 +5854,12 @@ public class IBMSpeechToTextV1Models {
       return new GetWordOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('wordName', 'word_name');
+      return mapping;
+    }
   }
 
   /**
@@ -5609,10 +5940,10 @@ public class IBMSpeechToTextV1Models {
    * Information about a grammar from a custom language model.
    */
   public class Grammar extends IBMWatsonResponseModel {
-    private String name_serialized_name;
-    private Long out_of_vocabulary_words_serialized_name;
-    private String status_serialized_name;
-    private String error_serialized_name;
+    private String name;
+    private Long outOfVocabularyWords;
+    private String status;
+    private String error;
  
     /**
      * Gets the name.
@@ -5623,7 +5954,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -5635,7 +5966,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getOutOfVocabularyWords() {
-      return out_of_vocabulary_words_serialized_name;
+      return outOfVocabularyWords;
     }
  
     /**
@@ -5653,7 +5984,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -5667,7 +5998,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getError() {
-      return error_serialized_name;
+      return error;
     }
 
     /**
@@ -5676,7 +6007,7 @@ public class IBMSpeechToTextV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -5685,7 +6016,7 @@ public class IBMSpeechToTextV1Models {
      * @param outOfVocabularyWords the new outOfVocabularyWords
      */
     public void setOutOfVocabularyWords(final long outOfVocabularyWords) {
-      this.out_of_vocabulary_words_serialized_name = outOfVocabularyWords;
+      this.outOfVocabularyWords = outOfVocabularyWords;
     }
 
     /**
@@ -5694,7 +6025,7 @@ public class IBMSpeechToTextV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -5703,16 +6034,21 @@ public class IBMSpeechToTextV1Models {
      * @param error the new error
      */
     public void setError(final String error) {
-      this.error_serialized_name = error;
+      this.error = error;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('out_of_vocabulary_words', 'outOfVocabularyWords');
+      return mapping;
+    }
   }
 
   /**
    * Information about the grammars from a custom language model.
    */
   public class Grammars extends IBMWatsonResponseModel {
-    private List<Grammar> grammars_serialized_name;
+    private List<Grammar> grammars;
  
     /**
      * Gets the grammars.
@@ -5724,7 +6060,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<Grammar> getGrammars() {
-      return grammars_serialized_name;
+      return grammars;
     }
 
     /**
@@ -5733,7 +6069,7 @@ public class IBMSpeechToTextV1Models {
      * @param grammars the new grammars
      */
     public void setGrammars(final List<Grammar> grammars) {
-      this.grammars_serialized_name = grammars;
+      this.grammars = grammars;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5749,14 +6085,22 @@ public class IBMSpeechToTextV1Models {
       if (deserializedGrammars != null) {
         for (Integer i = 0; i < deserializedGrammars.size(); i++) {
           Grammar currentItem = ret.getGrammars().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('grammars_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('grammars');
           Grammar newItem = (Grammar) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Grammar.class);
           newGrammars.add(newItem);
         }
-        ret.grammars_serialized_name = newGrammars;
+        ret.grammars = newGrammars;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (grammars != null && grammars[0] != null) {
+        mapping.putAll(grammars[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5764,10 +6108,10 @@ public class IBMSpeechToTextV1Models {
    * Information about a match for a keyword from speech recognition results.
    */
   public class KeywordResult extends IBMWatsonGenericModel {
-    private String normalized_text_serialized_name;
-    private Double start_time_serialized_name;
-    private Double end_time_serialized_name;
-    private Double confidence_serialized_name;
+    private String normalizedText;
+    private Double startTime;
+    private Double endTime;
+    private Double confidence;
  
     /**
      * Gets the normalizedText.
@@ -5778,7 +6122,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getNormalizedText() {
-      return normalized_text_serialized_name;
+      return normalizedText;
     }
  
     /**
@@ -5790,7 +6134,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getStartTime() {
-      return start_time_serialized_name;
+      return startTime;
     }
  
     /**
@@ -5802,7 +6146,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getEndTime() {
-      return end_time_serialized_name;
+      return endTime;
     }
  
     /**
@@ -5814,7 +6158,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
 
     /**
@@ -5823,7 +6167,7 @@ public class IBMSpeechToTextV1Models {
      * @param normalizedText the new normalizedText
      */
     public void setNormalizedText(final String normalizedText) {
-      this.normalized_text_serialized_name = normalizedText;
+      this.normalizedText = normalizedText;
     }
 
     /**
@@ -5832,7 +6176,7 @@ public class IBMSpeechToTextV1Models {
      * @param startTime the new startTime
      */
     public void setStartTime(final Double startTime) {
-      this.start_time_serialized_name = startTime;
+      this.startTime = startTime;
     }
 
     /**
@@ -5841,7 +6185,7 @@ public class IBMSpeechToTextV1Models {
      * @param endTime the new endTime
      */
     public void setEndTime(final Double endTime) {
-      this.end_time_serialized_name = endTime;
+      this.endTime = endTime;
     }
 
     /**
@@ -5850,29 +6194,28 @@ public class IBMSpeechToTextV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+      this.confidence = confidence;
     }
-
   }
 
   /**
    * Information about an existing custom language model.
    */
   public class LanguageModel extends IBMWatsonResponseModel {
-    private String customization_id_serialized_name;
-    private String created_serialized_name;
-    private String updated_serialized_name;
-    private String language_serialized_name;
-    private String dialect_serialized_name;
-    private List<String> versions_serialized_name;
-    private String owner_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String base_model_name_serialized_name;
-    private String status_serialized_name;
-    private Long progress_serialized_name;
-    private String error_serialized_name;
-    private String warnings_serialized_name;
+    private String customizationId;
+    private String created;
+    private String updated;
+    private String language;
+    private String dialect;
+    private List<String> versions;
+    private String owner;
+    private String name;
+    private String description;
+    private String baseModelName;
+    private String status;
+    private Long progress;
+    private String error;
+    private String warnings;
  
     /**
      * Gets the customizationId.
@@ -5884,7 +6227,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getCustomizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
  
     /**
@@ -5897,7 +6240,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -5911,7 +6254,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -5923,7 +6266,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
  
     /**
@@ -5940,7 +6283,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getDialect() {
-      return dialect_serialized_name;
+      return dialect;
     }
  
     /**
@@ -5954,7 +6297,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<String> getVersions() {
-      return versions_serialized_name;
+      return versions;
     }
  
     /**
@@ -5966,7 +6309,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getOwner() {
-      return owner_serialized_name;
+      return owner;
     }
  
     /**
@@ -5978,7 +6321,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -5990,7 +6333,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -6002,7 +6345,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getBaseModelName() {
-      return base_model_name_serialized_name;
+      return baseModelName;
     }
  
     /**
@@ -6022,7 +6365,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -6036,7 +6379,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getProgress() {
-      return progress_serialized_name;
+      return progress;
     }
  
     /**
@@ -6050,7 +6393,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getError() {
-      return error_serialized_name;
+      return error;
     }
  
     /**
@@ -6063,7 +6406,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getWarnings() {
-      return warnings_serialized_name;
+      return warnings;
     }
 
     /**
@@ -6072,7 +6415,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the new customizationId
      */
     public void setCustomizationId(final String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -6081,7 +6424,7 @@ public class IBMSpeechToTextV1Models {
      * @param created the new created
      */
     public void setCreated(final String created) {
-      this.created_serialized_name = created;
+      this.created = created;
     }
 
     /**
@@ -6090,7 +6433,7 @@ public class IBMSpeechToTextV1Models {
      * @param updated the new updated
      */
     public void setUpdated(final String updated) {
-      this.updated_serialized_name = updated;
+      this.updated = updated;
     }
 
     /**
@@ -6099,7 +6442,7 @@ public class IBMSpeechToTextV1Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
     /**
@@ -6108,7 +6451,7 @@ public class IBMSpeechToTextV1Models {
      * @param dialect the new dialect
      */
     public void setDialect(final String dialect) {
-      this.dialect_serialized_name = dialect;
+      this.dialect = dialect;
     }
 
     /**
@@ -6117,7 +6460,7 @@ public class IBMSpeechToTextV1Models {
      * @param versions the new versions
      */
     public void setVersions(final List<String> versions) {
-      this.versions_serialized_name = versions;
+      this.versions = versions;
     }
 
     /**
@@ -6126,7 +6469,7 @@ public class IBMSpeechToTextV1Models {
      * @param owner the new owner
      */
     public void setOwner(final String owner) {
-      this.owner_serialized_name = owner;
+      this.owner = owner;
     }
 
     /**
@@ -6135,7 +6478,7 @@ public class IBMSpeechToTextV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -6144,7 +6487,7 @@ public class IBMSpeechToTextV1Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     /**
@@ -6153,7 +6496,7 @@ public class IBMSpeechToTextV1Models {
      * @param baseModelName the new baseModelName
      */
     public void setBaseModelName(final String baseModelName) {
-      this.base_model_name_serialized_name = baseModelName;
+      this.baseModelName = baseModelName;
     }
 
     /**
@@ -6162,7 +6505,7 @@ public class IBMSpeechToTextV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -6171,7 +6514,7 @@ public class IBMSpeechToTextV1Models {
      * @param progress the new progress
      */
     public void setProgress(final long progress) {
-      this.progress_serialized_name = progress;
+      this.progress = progress;
     }
 
     /**
@@ -6180,7 +6523,7 @@ public class IBMSpeechToTextV1Models {
      * @param error the new error
      */
     public void setError(final String error) {
-      this.error_serialized_name = error;
+      this.error = error;
     }
 
     /**
@@ -6189,16 +6532,22 @@ public class IBMSpeechToTextV1Models {
      * @param warnings the new warnings
      */
     public void setWarnings(final String warnings) {
-      this.warnings_serialized_name = warnings;
+      this.warnings = warnings;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customization_id', 'customizationId');
+      mapping.put('base_model_name', 'baseModelName');
+      return mapping;
+    }
   }
 
   /**
    * Information about existing custom language models.
    */
   public class LanguageModels extends IBMWatsonResponseModel {
-    private List<LanguageModel> customizations_serialized_name;
+    private List<LanguageModel> customizations;
  
     /**
      * Gets the customizations.
@@ -6211,7 +6560,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<LanguageModel> getCustomizations() {
-      return customizations_serialized_name;
+      return customizations;
     }
 
     /**
@@ -6220,7 +6569,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizations the new customizations
      */
     public void setCustomizations(final List<LanguageModel> customizations) {
-      this.customizations_serialized_name = customizations;
+      this.customizations = customizations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6236,14 +6585,22 @@ public class IBMSpeechToTextV1Models {
       if (deserializedCustomizations != null) {
         for (Integer i = 0; i < deserializedCustomizations.size(); i++) {
           LanguageModel currentItem = ret.getCustomizations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('customizations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('customizations');
           LanguageModel newItem = (LanguageModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LanguageModel.class);
           newCustomizations.add(newItem);
         }
-        ret.customizations_serialized_name = newCustomizations;
+        ret.customizations = newCustomizations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (customizations != null && customizations[0] != null) {
+        mapping.putAll(customizations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -6252,7 +6609,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class ListAcousticModelsOptions extends IBMWatsonOptionsModel {
     private String language;
- 
+
     /**
      * Gets the language.
      *
@@ -6279,7 +6636,6 @@ public class IBMSpeechToTextV1Models {
     public ListAcousticModelsOptionsBuilder newBuilder() {
       return new ListAcousticModelsOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -6337,7 +6693,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class ListAudioOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -6365,6 +6721,11 @@ public class IBMSpeechToTextV1Models {
       return new ListAudioOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -6431,7 +6792,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class ListCorporaOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -6459,6 +6820,11 @@ public class IBMSpeechToTextV1Models {
       return new ListCorporaOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -6525,7 +6891,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class ListGrammarsOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -6553,6 +6919,11 @@ public class IBMSpeechToTextV1Models {
       return new ListGrammarsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -6619,7 +6990,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class ListLanguageModelsOptions extends IBMWatsonOptionsModel {
     private String language;
- 
+
     /**
      * Gets the language.
      *
@@ -6646,7 +7017,6 @@ public class IBMSpeechToTextV1Models {
     public ListLanguageModelsOptionsBuilder newBuilder() {
       return new ListLanguageModelsOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -6716,7 +7086,6 @@ public class IBMSpeechToTextV1Models {
     public ListModelsOptionsBuilder newBuilder() {
       return new ListModelsOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -6763,7 +7132,7 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String wordType;
     private String xsort;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -6775,7 +7144,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the wordType.
      *
@@ -6790,7 +7159,7 @@ public class IBMSpeechToTextV1Models {
     public String wordType() {
       return wordType;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -6824,6 +7193,13 @@ public class IBMSpeechToTextV1Models {
       return new ListWordsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('wordType', 'word_type');
+      mapping.put('xsort', 'sort');
+      return mapping;
+    }
   }
 
   /**
@@ -6915,10 +7291,10 @@ public class IBMSpeechToTextV1Models {
    * Detailed timing information about the service's processing of the input audio.
    */
   public class ProcessedAudio extends IBMWatsonGenericModel {
-    private Double received_serialized_name;
-    private Double seen_by_engine_serialized_name;
-    private Double transcription_serialized_name;
-    private Double speaker_labels_serialized_name;
+    private Double received;
+    private Double seenByEngine;
+    private Double transcription;
+    private Double speakerLabels;
  
     /**
      * Gets the received.
@@ -6932,7 +7308,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getReceived() {
-      return received_serialized_name;
+      return received;
     }
  
     /**
@@ -6948,7 +7324,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getSeenByEngine() {
-      return seen_by_engine_serialized_name;
+      return seenByEngine;
     }
  
     /**
@@ -6960,7 +7336,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getTranscription() {
-      return transcription_serialized_name;
+      return transcription;
     }
  
     /**
@@ -6975,7 +7351,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getSpeakerLabels() {
-      return speaker_labels_serialized_name;
+      return speakerLabels;
     }
 
     /**
@@ -6984,7 +7360,7 @@ public class IBMSpeechToTextV1Models {
      * @param received the new received
      */
     public void setReceived(final Double received) {
-      this.received_serialized_name = received;
+      this.received = received;
     }
 
     /**
@@ -6993,7 +7369,7 @@ public class IBMSpeechToTextV1Models {
      * @param seenByEngine the new seenByEngine
      */
     public void setSeenByEngine(final Double seenByEngine) {
-      this.seen_by_engine_serialized_name = seenByEngine;
+      this.seenByEngine = seenByEngine;
     }
 
     /**
@@ -7002,7 +7378,7 @@ public class IBMSpeechToTextV1Models {
      * @param transcription the new transcription
      */
     public void setTranscription(final Double transcription) {
-      this.transcription_serialized_name = transcription;
+      this.transcription = transcription;
     }
 
     /**
@@ -7011,9 +7387,15 @@ public class IBMSpeechToTextV1Models {
      * @param speakerLabels the new speakerLabels
      */
     public void setSpeakerLabels(final Double speakerLabels) {
-      this.speaker_labels_serialized_name = speakerLabels;
+      this.speakerLabels = speakerLabels;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('seen_by_engine', 'seenByEngine');
+      mapping.put('speaker_labels', 'speakerLabels');
+      return mapping;
+    }
   }
 
   /**
@@ -7021,9 +7403,9 @@ public class IBMSpeechToTextV1Models {
    * metrics are not available with the synchronous **Recognize audio** method.
    */
   public class ProcessingMetrics extends IBMWatsonGenericModel {
-    private ProcessedAudio processed_audio_serialized_name;
-    private Double wall_clock_since_first_byte_received_serialized_name;
-    private Boolean periodic_serialized_name;
+    private ProcessedAudio processedAudio;
+    private Double wallClockSinceFirstByteReceived;
+    private Boolean periodic;
  
     /**
      * Gets the processedAudio.
@@ -7034,7 +7416,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public ProcessedAudio getProcessedAudio() {
-      return processed_audio_serialized_name;
+      return processedAudio;
     }
  
     /**
@@ -7051,7 +7433,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getWallClockSinceFirstByteReceived() {
-      return wall_clock_since_first_byte_received_serialized_name;
+      return wallClockSinceFirstByteReceived;
     }
  
     /**
@@ -7069,7 +7451,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Boolean getPeriodic() {
-      return periodic_serialized_name;
+      return periodic;
     }
 
     /**
@@ -7078,7 +7460,7 @@ public class IBMSpeechToTextV1Models {
      * @param processedAudio the new processedAudio
      */
     public void setProcessedAudio(final ProcessedAudio processedAudio) {
-      this.processed_audio_serialized_name = processedAudio;
+      this.processedAudio = processedAudio;
     }
 
     /**
@@ -7087,7 +7469,7 @@ public class IBMSpeechToTextV1Models {
      * @param wallClockSinceFirstByteReceived the new wallClockSinceFirstByteReceived
      */
     public void setWallClockSinceFirstByteReceived(final Double wallClockSinceFirstByteReceived) {
-      this.wall_clock_since_first_byte_received_serialized_name = wallClockSinceFirstByteReceived;
+      this.wallClockSinceFirstByteReceived = wallClockSinceFirstByteReceived;
     }
 
     /**
@@ -7096,7 +7478,7 @@ public class IBMSpeechToTextV1Models {
      * @param periodic the new periodic
      */
     public void setPeriodic(final Boolean periodic) {
-      this.periodic_serialized_name = periodic;
+      this.periodic = periodic;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7107,10 +7489,20 @@ public class IBMSpeechToTextV1Models {
       ProcessingMetrics ret = (ProcessingMetrics) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for processedAudio
-      ProcessedAudio newProcessedAudio = (ProcessedAudio) new ProcessedAudio().deserialize(JSON.serialize(ret.getProcessedAudio()), (Map<String, Object>) jsonMap.get('processed_audio_serialized_name'), ProcessedAudio.class);
+      ProcessedAudio newProcessedAudio = (ProcessedAudio) new ProcessedAudio().deserialize(JSON.serialize(ret.getProcessedAudio()), (Map<String, Object>) jsonMap.get('processedAudio'), ProcessedAudio.class);
       ret.setProcessedAudio(newProcessedAudio);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('processed_audio', 'processedAudio');
+      if (processedAudio != null) {
+        mapping.putAll(processedAudio.getApiToSdkMapping());
+      }
+      mapping.put('wall_clock_since_first_byte_received', 'wallClockSinceFirstByteReceived');
+      return mapping;
     }
   }
 
@@ -7118,14 +7510,14 @@ public class IBMSpeechToTextV1Models {
    * Information about a current asynchronous speech recognition job.
    */
   public class RecognitionJob extends IBMWatsonResponseModel {
-    private String id_serialized_name;
-    private String status_serialized_name;
-    private String created_serialized_name;
-    private String updated_serialized_name;
-    private String url_serialized_name;
-    private String user_token_serialized_name;
-    private List<SpeechRecognitionResults> results_serialized_name;
-    private List<String> warnings_serialized_name;
+    private String id;
+    private String status;
+    private String created;
+    private String updated;
+    private String url;
+    private String userToken;
+    private List<SpeechRecognitionResults> results;
+    private List<String> warnings;
  
     /**
      * Gets the id.
@@ -7136,7 +7528,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getId() {
-      return id_serialized_name;
+      return id;
     }
  
     /**
@@ -7156,7 +7548,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -7169,7 +7561,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -7183,7 +7575,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -7196,7 +7588,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getUrl() {
-      return url_serialized_name;
+      return url;
     }
  
     /**
@@ -7209,7 +7601,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getUserToken() {
-      return user_token_serialized_name;
+      return userToken;
     }
  
     /**
@@ -7222,7 +7614,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<SpeechRecognitionResults> getResults() {
-      return results_serialized_name;
+      return results;
     }
  
     /**
@@ -7237,7 +7629,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<String> getWarnings() {
-      return warnings_serialized_name;
+      return warnings;
     }
 
     /**
@@ -7246,7 +7638,7 @@ public class IBMSpeechToTextV1Models {
      * @param id the new id
      */
     public void setId(final String id) {
-      this.id_serialized_name = id;
+      this.id = id;
     }
 
     /**
@@ -7255,7 +7647,7 @@ public class IBMSpeechToTextV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -7264,7 +7656,7 @@ public class IBMSpeechToTextV1Models {
      * @param created the new created
      */
     public void setCreated(final String created) {
-      this.created_serialized_name = created;
+      this.created = created;
     }
 
     /**
@@ -7273,7 +7665,7 @@ public class IBMSpeechToTextV1Models {
      * @param updated the new updated
      */
     public void setUpdated(final String updated) {
-      this.updated_serialized_name = updated;
+      this.updated = updated;
     }
 
     /**
@@ -7282,7 +7674,7 @@ public class IBMSpeechToTextV1Models {
      * @param url the new url
      */
     public void setUrl(final String url) {
-      this.url_serialized_name = url;
+      this.url = url;
     }
 
     /**
@@ -7291,7 +7683,7 @@ public class IBMSpeechToTextV1Models {
      * @param userToken the new userToken
      */
     public void setUserToken(final String userToken) {
-      this.user_token_serialized_name = userToken;
+      this.userToken = userToken;
     }
 
     /**
@@ -7300,7 +7692,7 @@ public class IBMSpeechToTextV1Models {
      * @param results the new results
      */
     public void setResults(final List<SpeechRecognitionResults> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     /**
@@ -7309,7 +7701,7 @@ public class IBMSpeechToTextV1Models {
      * @param warnings the new warnings
      */
     public void setWarnings(final List<String> warnings) {
-      this.warnings_serialized_name = warnings;
+      this.warnings = warnings;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7325,14 +7717,23 @@ public class IBMSpeechToTextV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           SpeechRecognitionResults currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           SpeechRecognitionResults newItem = (SpeechRecognitionResults) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeechRecognitionResults.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('user_token', 'userToken');
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7340,7 +7741,7 @@ public class IBMSpeechToTextV1Models {
    * Information about current asynchronous speech recognition jobs.
    */
   public class RecognitionJobs extends IBMWatsonResponseModel {
-    private List<RecognitionJob> recognitions_serialized_name;
+    private List<RecognitionJob> recognitions;
  
     /**
      * Gets the recognitions.
@@ -7352,7 +7753,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<RecognitionJob> getRecognitions() {
-      return recognitions_serialized_name;
+      return recognitions;
     }
 
     /**
@@ -7361,7 +7762,7 @@ public class IBMSpeechToTextV1Models {
      * @param recognitions the new recognitions
      */
     public void setRecognitions(final List<RecognitionJob> recognitions) {
-      this.recognitions_serialized_name = recognitions;
+      this.recognitions = recognitions;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7377,14 +7778,22 @@ public class IBMSpeechToTextV1Models {
       if (deserializedRecognitions != null) {
         for (Integer i = 0; i < deserializedRecognitions.size(); i++) {
           RecognitionJob currentItem = ret.getRecognitions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('recognitions_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('recognitions');
           RecognitionJob newItem = (RecognitionJob) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RecognitionJob.class);
           newRecognitions.add(newItem);
         }
-        ret.recognitions_serialized_name = newRecognitions;
+        ret.recognitions = newRecognitions;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (recognitions != null && recognitions[0] != null) {
+        mapping.putAll(recognitions[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7413,7 +7822,7 @@ public class IBMSpeechToTextV1Models {
     private String grammarName;
     private Boolean redaction;
     private Boolean audioMetrics;
- 
+
     /**
      * Gets the audio.
      *
@@ -7424,7 +7833,7 @@ public class IBMSpeechToTextV1Models {
     public IBMWatsonFile audio() {
       return audio;
     }
- 
+
     /**
      * Gets the contentType.
      *
@@ -7436,7 +7845,7 @@ public class IBMSpeechToTextV1Models {
     public String contentType() {
       return contentType;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -7448,7 +7857,7 @@ public class IBMSpeechToTextV1Models {
     public String model() {
       return model;
     }
- 
+
     /**
      * Gets the languageCustomizationId.
      *
@@ -7465,7 +7874,7 @@ public class IBMSpeechToTextV1Models {
     public String languageCustomizationId() {
       return languageCustomizationId;
     }
- 
+
     /**
      * Gets the acousticCustomizationId.
      *
@@ -7480,7 +7889,7 @@ public class IBMSpeechToTextV1Models {
     public String acousticCustomizationId() {
       return acousticCustomizationId;
     }
- 
+
     /**
      * Gets the baseModelVersion.
      *
@@ -7495,7 +7904,7 @@ public class IBMSpeechToTextV1Models {
     public String baseModelVersion() {
       return baseModelVersion;
     }
- 
+
     /**
      * Gets the customizationWeight.
      *
@@ -7518,7 +7927,7 @@ public class IBMSpeechToTextV1Models {
     public Double customizationWeight() {
       return customizationWeight;
     }
- 
+
     /**
      * Gets the inactivityTimeout.
      *
@@ -7532,7 +7941,7 @@ public class IBMSpeechToTextV1Models {
     public Long inactivityTimeout() {
       return inactivityTimeout;
     }
- 
+
     /**
      * Gets the keywords.
      *
@@ -7547,7 +7956,7 @@ public class IBMSpeechToTextV1Models {
     public List<String> keywords() {
       return keywords;
     }
- 
+
     /**
      * Gets the keywordsThreshold.
      *
@@ -7562,7 +7971,7 @@ public class IBMSpeechToTextV1Models {
     public Double keywordsThreshold() {
       return keywordsThreshold;
     }
- 
+
     /**
      * Gets the maxAlternatives.
      *
@@ -7575,7 +7984,7 @@ public class IBMSpeechToTextV1Models {
     public Long maxAlternatives() {
       return maxAlternatives;
     }
- 
+
     /**
      * Gets the wordAlternativesThreshold.
      *
@@ -7590,7 +7999,7 @@ public class IBMSpeechToTextV1Models {
     public Double wordAlternativesThreshold() {
       return wordAlternativesThreshold;
     }
- 
+
     /**
      * Gets the wordConfidence.
      *
@@ -7603,7 +8012,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean wordConfidence() {
       return wordConfidence;
     }
- 
+
     /**
      * Gets the timestamps.
      *
@@ -7615,7 +8024,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean timestamps() {
       return timestamps;
     }
- 
+
     /**
      * Gets the profanityFilter.
      *
@@ -7629,7 +8038,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean profanityFilter() {
       return profanityFilter;
     }
- 
+
     /**
      * Gets the smartFormatting.
      *
@@ -7648,7 +8057,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean smartFormatting() {
       return smartFormatting;
     }
- 
+
     /**
      * Gets the speakerLabels.
      *
@@ -7668,7 +8077,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean speakerLabels() {
       return speakerLabels;
     }
- 
+
     /**
      * Gets the customizationId.
      *
@@ -7680,7 +8089,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the grammarName.
      *
@@ -7695,7 +8104,7 @@ public class IBMSpeechToTextV1Models {
     public String grammarName() {
       return grammarName;
     }
- 
+
     /**
      * Gets the redaction.
      *
@@ -7718,7 +8127,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean redaction() {
       return redaction;
     }
- 
+
     /**
      * Gets the audioMetrics.
      *
@@ -7766,6 +8175,26 @@ public class IBMSpeechToTextV1Models {
       return new RecognizeOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('contentType', 'Content-Type');
+      mapping.put('languageCustomizationId', 'language_customization_id');
+      mapping.put('acousticCustomizationId', 'acoustic_customization_id');
+      mapping.put('baseModelVersion', 'base_model_version');
+      mapping.put('customizationWeight', 'customization_weight');
+      mapping.put('inactivityTimeout', 'inactivity_timeout');
+      mapping.put('keywordsThreshold', 'keywords_threshold');
+      mapping.put('maxAlternatives', 'max_alternatives');
+      mapping.put('wordAlternativesThreshold', 'word_alternatives_threshold');
+      mapping.put('wordConfidence', 'word_confidence');
+      mapping.put('profanityFilter', 'profanity_filter');
+      mapping.put('smartFormatting', 'smart_formatting');
+      mapping.put('speakerLabels', 'speaker_labels');
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('grammarName', 'grammar_name');
+      mapping.put('audioMetrics', 'audio_metrics');
+      return mapping;
+    }
   }
 
   /**
@@ -8109,7 +8538,7 @@ public class IBMSpeechToTextV1Models {
   public class RegisterCallbackOptions extends IBMWatsonOptionsModel {
     private String callbackUrl;
     private String userSecret;
- 
+
     /**
      * Gets the callbackUrl.
      *
@@ -8122,7 +8551,7 @@ public class IBMSpeechToTextV1Models {
     public String callbackUrl() {
       return callbackUrl;
     }
- 
+
     /**
      * Gets the userSecret.
      *
@@ -8153,6 +8582,12 @@ public class IBMSpeechToTextV1Models {
       return new RegisterCallbackOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('callbackUrl', 'callback_url');
+      mapping.put('userSecret', 'user_secret');
+      return mapping;
+    }
   }
 
   /**
@@ -8231,8 +8666,8 @@ public class IBMSpeechToTextV1Models {
    * Information about a request to register a callback for asynchronous speech recognition.
    */
   public class RegisterStatus extends IBMWatsonResponseModel {
-    private String status_serialized_name;
-    private String url_serialized_name;
+    private String status;
+    private String url;
  
     /**
      * Gets the status.
@@ -8245,7 +8680,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -8257,7 +8692,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getUrl() {
-      return url_serialized_name;
+      return url;
     }
 
     /**
@@ -8266,7 +8701,7 @@ public class IBMSpeechToTextV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -8275,9 +8710,8 @@ public class IBMSpeechToTextV1Models {
      * @param url the new url
      */
     public void setUrl(final String url) {
-      this.url_serialized_name = url;
+      this.url = url;
     }
-
   }
 
   /**
@@ -8285,7 +8719,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class ResetAcousticModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -8313,6 +8747,11 @@ public class IBMSpeechToTextV1Models {
       return new ResetAcousticModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -8379,7 +8818,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class ResetLanguageModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -8407,6 +8846,11 @@ public class IBMSpeechToTextV1Models {
       return new ResetLanguageModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -8472,11 +8916,11 @@ public class IBMSpeechToTextV1Models {
    * Information about the speakers from speech recognition results.
    */
   public class SpeakerLabelsResult extends IBMWatsonGenericModel {
-    private Double from_serialized_name;
-    private Double to_serialized_name;
-    private Long speaker_serialized_name;
-    private Double confidence_serialized_name;
-    private Boolean final_serialized_name;
+    private Double xfrom;
+    private Double to;
+    private Long speaker;
+    private Double confidence;
+    private Boolean finalResults;
  
     /**
      * Gets the xfrom.
@@ -8488,7 +8932,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getXfrom() {
-      return from_serialized_name;
+      return xfrom;
     }
  
     /**
@@ -8500,7 +8944,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getTo() {
-      return to_serialized_name;
+      return to;
     }
  
     /**
@@ -8514,7 +8958,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getSpeaker() {
-      return speaker_serialized_name;
+      return speaker;
     }
  
     /**
@@ -8526,7 +8970,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
  
     /**
@@ -8540,7 +8984,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Boolean getFinalResults() {
-      return final_serialized_name;
+      return finalResults;
     }
 
     /**
@@ -8549,7 +8993,7 @@ public class IBMSpeechToTextV1Models {
      * @param xfrom the new xfrom
      */
     public void setXfrom(final Double xfrom) {
-      this.from_serialized_name = xfrom;
+      this.xfrom = xfrom;
     }
 
     /**
@@ -8558,7 +9002,7 @@ public class IBMSpeechToTextV1Models {
      * @param to the new to
      */
     public void setTo(final Double to) {
-      this.to_serialized_name = to;
+      this.to = to;
     }
 
     /**
@@ -8567,7 +9011,7 @@ public class IBMSpeechToTextV1Models {
      * @param speaker the new speaker
      */
     public void setSpeaker(final long speaker) {
-      this.speaker_serialized_name = speaker;
+      this.speaker = speaker;
     }
 
     /**
@@ -8576,7 +9020,7 @@ public class IBMSpeechToTextV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+      this.confidence = confidence;
     }
 
     /**
@@ -8585,21 +9029,27 @@ public class IBMSpeechToTextV1Models {
      * @param finalResults the new finalResults
      */
     public void setFinalResults(final Boolean finalResults) {
-      this.final_serialized_name = finalResults;
+      this.finalResults = finalResults;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('from', 'xfrom');
+      mapping.put('final', 'finalResults');
+      return mapping;
+    }
   }
 
   /**
    * Information about an available language model.
    */
   public class SpeechModel extends IBMWatsonResponseModel {
-    private String name_serialized_name;
-    private String language_serialized_name;
-    private Long rate_serialized_name;
-    private String url_serialized_name;
-    private SupportedFeatures supported_features_serialized_name;
-    private String description_serialized_name;
+    private String name;
+    private String language;
+    private Long rate;
+    private String url;
+    private SupportedFeatures supportedFeatures;
+    private String description;
  
     /**
      * Gets the name.
@@ -8610,7 +9060,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -8622,7 +9072,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
  
     /**
@@ -8634,7 +9084,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getRate() {
-      return rate_serialized_name;
+      return rate;
     }
  
     /**
@@ -8646,7 +9096,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getUrl() {
-      return url_serialized_name;
+      return url;
     }
  
     /**
@@ -8658,7 +9108,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public SupportedFeatures getSupportedFeatures() {
-      return supported_features_serialized_name;
+      return supportedFeatures;
     }
  
     /**
@@ -8670,7 +9120,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
 
     /**
@@ -8679,7 +9129,7 @@ public class IBMSpeechToTextV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -8688,7 +9138,7 @@ public class IBMSpeechToTextV1Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
     /**
@@ -8697,7 +9147,7 @@ public class IBMSpeechToTextV1Models {
      * @param rate the new rate
      */
     public void setRate(final long rate) {
-      this.rate_serialized_name = rate;
+      this.rate = rate;
     }
 
     /**
@@ -8706,7 +9156,7 @@ public class IBMSpeechToTextV1Models {
      * @param url the new url
      */
     public void setUrl(final String url) {
-      this.url_serialized_name = url;
+      this.url = url;
     }
 
     /**
@@ -8715,7 +9165,7 @@ public class IBMSpeechToTextV1Models {
      * @param supportedFeatures the new supportedFeatures
      */
     public void setSupportedFeatures(final SupportedFeatures supportedFeatures) {
-      this.supported_features_serialized_name = supportedFeatures;
+      this.supportedFeatures = supportedFeatures;
     }
 
     /**
@@ -8724,7 +9174,7 @@ public class IBMSpeechToTextV1Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8735,10 +9185,19 @@ public class IBMSpeechToTextV1Models {
       SpeechModel ret = (SpeechModel) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for supportedFeatures
-      SupportedFeatures newSupportedFeatures = (SupportedFeatures) new SupportedFeatures().deserialize(JSON.serialize(ret.getSupportedFeatures()), (Map<String, Object>) jsonMap.get('supported_features_serialized_name'), SupportedFeatures.class);
+      SupportedFeatures newSupportedFeatures = (SupportedFeatures) new SupportedFeatures().deserialize(JSON.serialize(ret.getSupportedFeatures()), (Map<String, Object>) jsonMap.get('supportedFeatures'), SupportedFeatures.class);
       ret.setSupportedFeatures(newSupportedFeatures);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('supported_features', 'supportedFeatures');
+      if (supportedFeatures != null) {
+        mapping.putAll(supportedFeatures.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -8746,7 +9205,7 @@ public class IBMSpeechToTextV1Models {
    * Information about the available language models.
    */
   public class SpeechModels extends IBMWatsonResponseModel {
-    private List<SpeechModel> models_serialized_name;
+    private List<SpeechModel> models;
  
     /**
      * Gets the models.
@@ -8757,7 +9216,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<SpeechModel> getModels() {
-      return models_serialized_name;
+      return models;
     }
 
     /**
@@ -8766,7 +9225,7 @@ public class IBMSpeechToTextV1Models {
      * @param models the new models
      */
     public void setModels(final List<SpeechModel> models) {
-      this.models_serialized_name = models;
+      this.models = models;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8782,14 +9241,22 @@ public class IBMSpeechToTextV1Models {
       if (deserializedModels != null) {
         for (Integer i = 0; i < deserializedModels.size(); i++) {
           SpeechModel currentItem = ret.getModels().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('models_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('models');
           SpeechModel newItem = (SpeechModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeechModel.class);
           newModels.add(newItem);
         }
-        ret.models_serialized_name = newModels;
+        ret.models = newModels;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (models != null && models[0] != null) {
+        mapping.putAll(models[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -8797,10 +9264,10 @@ public class IBMSpeechToTextV1Models {
    * An alternative transcript from speech recognition results.
    */
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
-    private String transcript_serialized_name;
-    private Double confidence_serialized_name;
-    private List<List<String>> timestamps_serialized_name;
-    private List<List<String>> word_confidence_serialized_name;
+    private String transcript;
+    private Double confidence;
+    private List<String> timestamps;
+    private List<String> wordConfidence;
  
     /**
      * Gets the transcript.
@@ -8811,7 +9278,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getTranscript() {
-      return transcript_serialized_name;
+      return transcript;
     }
  
     /**
@@ -8824,7 +9291,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
  
     /**
@@ -8837,8 +9304,8 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<List<String>> getTimestamps() {
-      return timestamps_serialized_name;
+    public List<String> getTimestamps() {
+      return timestamps;
     }
  
     /**
@@ -8851,8 +9318,8 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<List<String>> getWordConfidence() {
-      return word_confidence_serialized_name;
+    public List<String> getWordConfidence() {
+      return wordConfidence;
     }
 
     /**
@@ -8861,7 +9328,7 @@ public class IBMSpeechToTextV1Models {
      * @param transcript the new transcript
      */
     public void setTranscript(final String transcript) {
-      this.transcript_serialized_name = transcript;
+      this.transcript = transcript;
     }
 
     /**
@@ -8870,7 +9337,7 @@ public class IBMSpeechToTextV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+      this.confidence = confidence;
     }
 
     /**
@@ -8878,8 +9345,8 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<List<String>> timestamps) {
-      this.timestamps_serialized_name = timestamps;
+    public void setTimestamps(final List<String> timestamps) {
+      this.timestamps = timestamps;
     }
 
     /**
@@ -8887,20 +9354,25 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<List<String>> wordConfidence) {
-      this.word_confidence_serialized_name = wordConfidence;
+    public void setWordConfidence(final List<String> wordConfidence) {
+      this.wordConfidence = wordConfidence;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('word_confidence', 'wordConfidence');
+      return mapping;
+    }
   }
 
   /**
    * Component results for a speech recognition request.
    */
   public class SpeechRecognitionResult extends IBMWatsonGenericModel {
-    private Boolean final_serialized_name;
-    private List<SpeechRecognitionAlternative> alternatives_serialized_name;
-    private Map<String, List<KeywordResult>> keywords_result_serialized_name;
-    private List<WordAlternativeResults> word_alternatives_serialized_name;
+    private Boolean finalResults;
+    private List<SpeechRecognitionAlternative> alternatives;
+    private IBMWatsonMapModel keywordsResult;
+    private List<WordAlternativeResults> wordAlternatives;
  
     /**
      * Gets the finalResults.
@@ -8912,7 +9384,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Boolean getFinalResults() {
-      return final_serialized_name;
+      return finalResults;
     }
  
     /**
@@ -8925,7 +9397,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<SpeechRecognitionAlternative> getAlternatives() {
-      return alternatives_serialized_name;
+      return alternatives;
     }
  
     /**
@@ -8939,8 +9411,8 @@ public class IBMSpeechToTextV1Models {
      * @return the keywordsResult
      */
     @AuraEnabled
-    public Map<String, List<KeywordResult>> getKeywordsResult() {
-      return keywords_result_serialized_name;
+    public IBMWatsonMapModel getKeywordsResult() {
+      return keywordsResult;
     }
  
     /**
@@ -8953,7 +9425,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<WordAlternativeResults> getWordAlternatives() {
-      return word_alternatives_serialized_name;
+      return wordAlternatives;
     }
 
     /**
@@ -8962,7 +9434,7 @@ public class IBMSpeechToTextV1Models {
      * @param finalResults the new finalResults
      */
     public void setFinalResults(final Boolean finalResults) {
-      this.final_serialized_name = finalResults;
+      this.finalResults = finalResults;
     }
 
     /**
@@ -8971,7 +9443,7 @@ public class IBMSpeechToTextV1Models {
      * @param alternatives the new alternatives
      */
     public void setAlternatives(final List<SpeechRecognitionAlternative> alternatives) {
-      this.alternatives_serialized_name = alternatives;
+      this.alternatives = alternatives;
     }
 
     /**
@@ -8979,8 +9451,8 @@ public class IBMSpeechToTextV1Models {
      *
      * @param keywordsResult the new keywordsResult
      */
-    public void setKeywordsResult(final Map<String, List<KeywordResult>> keywordsResult) {
-      this.keywords_result_serialized_name = keywordsResult;
+    public void setKeywordsResult(final IBMWatsonMapModel keywordsResult) {
+      this.keywordsResult = keywordsResult;
     }
 
     /**
@@ -8989,7 +9461,7 @@ public class IBMSpeechToTextV1Models {
      * @param wordAlternatives the new wordAlternatives
      */
     public void setWordAlternatives(final List<WordAlternativeResults> wordAlternatives) {
-      this.word_alternatives_serialized_name = wordAlternatives;
+      this.wordAlternatives = wordAlternatives;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9005,31 +9477,16 @@ public class IBMSpeechToTextV1Models {
       if (deserializedAlternatives != null) {
         for (Integer i = 0; i < deserializedAlternatives.size(); i++) {
           SpeechRecognitionAlternative currentItem = ret.getAlternatives().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('alternatives_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('alternatives');
           SpeechRecognitionAlternative newItem = (SpeechRecognitionAlternative) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeechRecognitionAlternative.class);
           newAlternatives.add(newItem);
         }
-        ret.alternatives_serialized_name = newAlternatives;
+        ret.alternatives = newAlternatives;
       }
 
       // calling custom deserializer for keywordsResult
-      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
-      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
-      if (deserializedKeywordsResult != null) {
-        for (String key : deserializedKeywordsResult.keySet()) {
-          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
-          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
-          for (Integer i = 0; i < keywordResultList.size(); i++) {
-            KeywordResult currentItem = keywordResultList.get(i);
-            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
-            Object innerObject = ((List<Object>) itemInMap.get(key)).get(i);
-            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerObject)), KeywordResult.class);
-            newKeywordResult.add(newItem);
-          }
-          newKeywordsResult.put(key, newKeywordResult);
-        }
-        ret.setKeywordsResult(newKeywordsResult);
-      }
+      IBMWatsonMapModel newKeywordsResult = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywordsResult'), IBMWatsonMapModel.class);
+      ret.setKeywordsResult(newKeywordsResult);
 
       // calling custom deserializer for wordAlternatives
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
@@ -9037,14 +9494,28 @@ public class IBMSpeechToTextV1Models {
       if (deserializedWordAlternatives != null) {
         for (Integer i = 0; i < deserializedWordAlternatives.size(); i++) {
           WordAlternativeResults currentItem = ret.getWordAlternatives().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('word_alternatives_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('wordAlternatives');
           WordAlternativeResults newItem = (WordAlternativeResults) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordAlternativeResults.class);
           newWordAlternatives.add(newItem);
         }
-        ret.word_alternatives_serialized_name = newWordAlternatives;
+        ret.wordAlternatives = newWordAlternatives;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('final', 'finalResults');
+      if (alternatives != null && alternatives[0] != null) {
+        mapping.putAll(alternatives[0].getApiToSdkMapping());
+      }
+      mapping.put('keywords_result', 'keywordsResult');
+      mapping.put('word_alternatives', 'wordAlternatives');
+      if (wordAlternatives != null && wordAlternatives[0] != null) {
+        mapping.putAll(wordAlternatives[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -9052,12 +9523,12 @@ public class IBMSpeechToTextV1Models {
    * The complete results for a speech recognition request.
    */
   public class SpeechRecognitionResults extends IBMWatsonResponseModel {
-    private List<SpeechRecognitionResult> results_serialized_name;
-    private Long result_index_serialized_name;
-    private List<SpeakerLabelsResult> speaker_labels_serialized_name;
-    private ProcessingMetrics processing_metrics_serialized_name;
-    private AudioMetrics audio_metrics_serialized_name;
-    private List<String> warnings_serialized_name;
+    private List<SpeechRecognitionResult> results;
+    private Long resultIndex;
+    private List<SpeakerLabelsResult> speakerLabels;
+    private ProcessingMetrics processingMetrics;
+    private AudioMetrics audioMetrics;
+    private List<String> warnings;
  
     /**
      * Gets the results.
@@ -9072,7 +9543,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<SpeechRecognitionResult> getResults() {
-      return results_serialized_name;
+      return results;
     }
  
     /**
@@ -9085,7 +9556,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getResultIndex() {
-      return result_index_serialized_name;
+      return resultIndex;
     }
  
     /**
@@ -9100,7 +9571,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<SpeakerLabelsResult> getSpeakerLabels() {
-      return speaker_labels_serialized_name;
+      return speakerLabels;
     }
  
     /**
@@ -9113,7 +9584,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public ProcessingMetrics getProcessingMetrics() {
-      return processing_metrics_serialized_name;
+      return processingMetrics;
     }
  
     /**
@@ -9125,7 +9596,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public AudioMetrics getAudioMetrics() {
-      return audio_metrics_serialized_name;
+      return audioMetrics;
     }
  
     /**
@@ -9147,7 +9618,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<String> getWarnings() {
-      return warnings_serialized_name;
+      return warnings;
     }
 
     /**
@@ -9156,7 +9627,7 @@ public class IBMSpeechToTextV1Models {
      * @param results the new results
      */
     public void setResults(final List<SpeechRecognitionResult> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     /**
@@ -9165,7 +9636,7 @@ public class IBMSpeechToTextV1Models {
      * @param resultIndex the new resultIndex
      */
     public void setResultIndex(final long resultIndex) {
-      this.result_index_serialized_name = resultIndex;
+      this.resultIndex = resultIndex;
     }
 
     /**
@@ -9174,7 +9645,7 @@ public class IBMSpeechToTextV1Models {
      * @param speakerLabels the new speakerLabels
      */
     public void setSpeakerLabels(final List<SpeakerLabelsResult> speakerLabels) {
-      this.speaker_labels_serialized_name = speakerLabels;
+      this.speakerLabels = speakerLabels;
     }
 
     /**
@@ -9183,7 +9654,7 @@ public class IBMSpeechToTextV1Models {
      * @param processingMetrics the new processingMetrics
      */
     public void setProcessingMetrics(final ProcessingMetrics processingMetrics) {
-      this.processing_metrics_serialized_name = processingMetrics;
+      this.processingMetrics = processingMetrics;
     }
 
     /**
@@ -9192,7 +9663,7 @@ public class IBMSpeechToTextV1Models {
      * @param audioMetrics the new audioMetrics
      */
     public void setAudioMetrics(final AudioMetrics audioMetrics) {
-      this.audio_metrics_serialized_name = audioMetrics;
+      this.audioMetrics = audioMetrics;
     }
 
     /**
@@ -9201,7 +9672,7 @@ public class IBMSpeechToTextV1Models {
      * @param warnings the new warnings
      */
     public void setWarnings(final List<String> warnings) {
-      this.warnings_serialized_name = warnings;
+      this.warnings = warnings;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9217,11 +9688,11 @@ public class IBMSpeechToTextV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           SpeechRecognitionResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           SpeechRecognitionResult newItem = (SpeechRecognitionResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeechRecognitionResult.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       // calling custom deserializer for speakerLabels
@@ -9230,22 +9701,43 @@ public class IBMSpeechToTextV1Models {
       if (deserializedSpeakerLabels != null) {
         for (Integer i = 0; i < deserializedSpeakerLabels.size(); i++) {
           SpeakerLabelsResult currentItem = ret.getSpeakerLabels().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('speaker_labels_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('speakerLabels');
           SpeakerLabelsResult newItem = (SpeakerLabelsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeakerLabelsResult.class);
           newSpeakerLabels.add(newItem);
         }
-        ret.speaker_labels_serialized_name = newSpeakerLabels;
+        ret.speakerLabels = newSpeakerLabels;
       }
 
       // calling custom deserializer for processingMetrics
-      ProcessingMetrics newProcessingMetrics = (ProcessingMetrics) new ProcessingMetrics().deserialize(JSON.serialize(ret.getProcessingMetrics()), (Map<String, Object>) jsonMap.get('processing_metrics_serialized_name'), ProcessingMetrics.class);
+      ProcessingMetrics newProcessingMetrics = (ProcessingMetrics) new ProcessingMetrics().deserialize(JSON.serialize(ret.getProcessingMetrics()), (Map<String, Object>) jsonMap.get('processingMetrics'), ProcessingMetrics.class);
       ret.setProcessingMetrics(newProcessingMetrics);
 
       // calling custom deserializer for audioMetrics
-      AudioMetrics newAudioMetrics = (AudioMetrics) new AudioMetrics().deserialize(JSON.serialize(ret.getAudioMetrics()), (Map<String, Object>) jsonMap.get('audio_metrics_serialized_name'), AudioMetrics.class);
+      AudioMetrics newAudioMetrics = (AudioMetrics) new AudioMetrics().deserialize(JSON.serialize(ret.getAudioMetrics()), (Map<String, Object>) jsonMap.get('audioMetrics'), AudioMetrics.class);
       ret.setAudioMetrics(newAudioMetrics);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      mapping.put('result_index', 'resultIndex');
+      mapping.put('speaker_labels', 'speakerLabels');
+      if (speakerLabels != null && speakerLabels[0] != null) {
+        mapping.putAll(speakerLabels[0].getApiToSdkMapping());
+      }
+      mapping.put('processing_metrics', 'processingMetrics');
+      if (processingMetrics != null) {
+        mapping.putAll(processingMetrics.getApiToSdkMapping());
+      }
+      mapping.put('audio_metrics', 'audioMetrics');
+      if (audioMetrics != null) {
+        mapping.putAll(audioMetrics.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -9253,8 +9745,8 @@ public class IBMSpeechToTextV1Models {
    * Additional service features that are supported with the model.
    */
   public class SupportedFeatures extends IBMWatsonGenericModel {
-    private Boolean custom_language_model_serialized_name;
-    private Boolean speaker_labels_serialized_name;
+    private Boolean customLanguageModel;
+    private Boolean speakerLabels;
  
     /**
      * Gets the customLanguageModel.
@@ -9266,7 +9758,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Boolean getCustomLanguageModel() {
-      return custom_language_model_serialized_name;
+      return customLanguageModel;
     }
  
     /**
@@ -9278,7 +9770,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Boolean getSpeakerLabels() {
-      return speaker_labels_serialized_name;
+      return speakerLabels;
     }
 
     /**
@@ -9287,7 +9779,7 @@ public class IBMSpeechToTextV1Models {
      * @param customLanguageModel the new customLanguageModel
      */
     public void setCustomLanguageModel(final Boolean customLanguageModel) {
-      this.custom_language_model_serialized_name = customLanguageModel;
+      this.customLanguageModel = customLanguageModel;
     }
 
     /**
@@ -9296,9 +9788,15 @@ public class IBMSpeechToTextV1Models {
      * @param speakerLabels the new speakerLabels
      */
     public void setSpeakerLabels(final Boolean speakerLabels) {
-      this.speaker_labels_serialized_name = speakerLabels;
+      this.speakerLabels = speakerLabels;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('custom_language_model', 'customLanguageModel');
+      mapping.put('speaker_labels', 'speakerLabels');
+      return mapping;
+    }
   }
 
   /**
@@ -9307,7 +9805,7 @@ public class IBMSpeechToTextV1Models {
   public class TrainAcousticModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String customLanguageModelId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -9319,7 +9817,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the customLanguageModelId.
      *
@@ -9351,6 +9849,12 @@ public class IBMSpeechToTextV1Models {
       return new TrainAcousticModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('customLanguageModelId', 'custom_language_model_id');
+      return mapping;
+    }
   }
 
   /**
@@ -9432,7 +9936,7 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String wordTypeToAdd;
     private Double customizationWeight;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -9444,7 +9948,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the wordTypeToAdd.
      *
@@ -9459,7 +9963,7 @@ public class IBMSpeechToTextV1Models {
     public String wordTypeToAdd() {
       return wordTypeToAdd;
     }
- 
+
     /**
      * Gets the customizationWeight.
      *
@@ -9497,6 +10001,13 @@ public class IBMSpeechToTextV1Models {
       return new TrainLanguageModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('wordTypeToAdd', 'word_type_to_add');
+      mapping.put('customizationWeight', 'customization_weight');
+      return mapping;
+    }
   }
 
   /**
@@ -9588,7 +10099,7 @@ public class IBMSpeechToTextV1Models {
    * The response from training of a custom language or custom acoustic model.
    */
   public class TrainingResponse extends IBMWatsonResponseModel {
-    private List<TrainingWarning> warnings_serialized_name;
+    private List<TrainingWarning> warnings;
  
     /**
      * Gets the warnings.
@@ -9601,7 +10112,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<TrainingWarning> getWarnings() {
-      return warnings_serialized_name;
+      return warnings;
     }
 
     /**
@@ -9610,7 +10121,7 @@ public class IBMSpeechToTextV1Models {
      * @param warnings the new warnings
      */
     public void setWarnings(final List<TrainingWarning> warnings) {
-      this.warnings_serialized_name = warnings;
+      this.warnings = warnings;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9626,11 +10137,11 @@ public class IBMSpeechToTextV1Models {
       if (deserializedWarnings != null) {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           TrainingWarning currentItem = ret.getWarnings().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
           TrainingWarning newItem = (TrainingWarning) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingWarning.class);
           newWarnings.add(newItem);
         }
-        ret.warnings_serialized_name = newWarnings;
+        ret.warnings = newWarnings;
       }
 
       return ret;
@@ -9641,8 +10152,8 @@ public class IBMSpeechToTextV1Models {
    * A warning from training of a custom language or custom acoustic model.
    */
   public class TrainingWarning extends IBMWatsonGenericModel {
-    private String code_serialized_name;
-    private String message_serialized_name;
+    private String code;
+    private String message;
  
     /**
      * Gets the code.
@@ -9653,7 +10164,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getCode() {
-      return code_serialized_name;
+      return code;
     }
  
     /**
@@ -9667,7 +10178,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getMessage() {
-      return message_serialized_name;
+      return message;
     }
 
     /**
@@ -9676,7 +10187,7 @@ public class IBMSpeechToTextV1Models {
      * @param code the new code
      */
     public void setCode(final String code) {
-      this.code_serialized_name = code;
+      this.code = code;
     }
 
     /**
@@ -9685,9 +10196,8 @@ public class IBMSpeechToTextV1Models {
      * @param message the new message
      */
     public void setMessage(final String message) {
-      this.message_serialized_name = message;
+      this.message = message;
     }
-
   }
 
   /**
@@ -9695,7 +10205,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class UnregisterCallbackOptions extends IBMWatsonOptionsModel {
     private String callbackUrl;
- 
+
     /**
      * Gets the callbackUrl.
      *
@@ -9722,6 +10232,11 @@ public class IBMSpeechToTextV1Models {
       return new UnregisterCallbackOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('callbackUrl', 'callback_url');
+      return mapping;
+    }
   }
 
   /**
@@ -9790,7 +10305,7 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String customLanguageModelId;
     private Boolean force;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -9802,7 +10317,7 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the customLanguageModelId.
      *
@@ -9815,7 +10330,7 @@ public class IBMSpeechToTextV1Models {
     public String customLanguageModelId() {
       return customLanguageModelId;
     }
- 
+
     /**
      * Gets the force.
      *
@@ -9848,6 +10363,12 @@ public class IBMSpeechToTextV1Models {
       return new UpgradeAcousticModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      mapping.put('customLanguageModelId', 'custom_language_model_id');
+      return mapping;
+    }
   }
 
   /**
@@ -9940,7 +10461,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class UpgradeLanguageModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -9968,6 +10489,11 @@ public class IBMSpeechToTextV1Models {
       return new UpgradeLanguageModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customizationId', 'customization_id');
+      return mapping;
+    }
   }
 
   /**
@@ -10033,12 +10559,12 @@ public class IBMSpeechToTextV1Models {
    * Information about a word from a custom language model.
    */
   public class Word extends IBMWatsonResponseModel {
-    private String word_serialized_name;
-    private List<String> sounds_like_serialized_name;
-    private String display_as_serialized_name;
-    private Long count_serialized_name;
-    private List<String> source_serialized_name;
-    private List<WordError> error_serialized_name;
+    private String word;
+    private List<String> soundsLike;
+    private String displayAs;
+    private Long count;
+    private List<String> source;
+    private List<WordError> error;
  
     /**
      * Gets the word.
@@ -10049,7 +10575,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getWord() {
-      return word_serialized_name;
+      return word;
     }
  
     /**
@@ -10063,7 +10589,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<String> getSoundsLike() {
-      return sounds_like_serialized_name;
+      return soundsLike;
     }
  
     /**
@@ -10076,7 +10602,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getDisplayAs() {
-      return display_as_serialized_name;
+      return displayAs;
     }
  
     /**
@@ -10091,7 +10617,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Long getCount() {
-      return count_serialized_name;
+      return count;
     }
  
     /**
@@ -10105,7 +10631,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<String> getSource() {
-      return source_serialized_name;
+      return source;
     }
  
     /**
@@ -10118,7 +10644,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<WordError> getError() {
-      return error_serialized_name;
+      return error;
     }
 
     /**
@@ -10127,7 +10653,7 @@ public class IBMSpeechToTextV1Models {
      * @param word the new word
      */
     public void setWord(final String word) {
-      this.word_serialized_name = word;
+      this.word = word;
     }
 
     /**
@@ -10136,7 +10662,7 @@ public class IBMSpeechToTextV1Models {
      * @param soundsLike the new soundsLike
      */
     public void setSoundsLike(final List<String> soundsLike) {
-      this.sounds_like_serialized_name = soundsLike;
+      this.soundsLike = soundsLike;
     }
 
     /**
@@ -10145,7 +10671,7 @@ public class IBMSpeechToTextV1Models {
      * @param displayAs the new displayAs
      */
     public void setDisplayAs(final String displayAs) {
-      this.display_as_serialized_name = displayAs;
+      this.displayAs = displayAs;
     }
 
     /**
@@ -10154,7 +10680,7 @@ public class IBMSpeechToTextV1Models {
      * @param count the new count
      */
     public void setCount(final long count) {
-      this.count_serialized_name = count;
+      this.count = count;
     }
 
     /**
@@ -10163,7 +10689,7 @@ public class IBMSpeechToTextV1Models {
      * @param source the new source
      */
     public void setSource(final List<String> source) {
-      this.source_serialized_name = source;
+      this.source = source;
     }
 
     /**
@@ -10172,7 +10698,7 @@ public class IBMSpeechToTextV1Models {
      * @param error the new error
      */
     public void setError(final List<WordError> error) {
-      this.error_serialized_name = error;
+      this.error = error;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10188,14 +10714,21 @@ public class IBMSpeechToTextV1Models {
       if (deserializedError != null) {
         for (Integer i = 0; i < deserializedError.size(); i++) {
           WordError currentItem = ret.getError().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('error_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('error');
           WordError newItem = (WordError) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordError.class);
           newError.add(newItem);
         }
-        ret.error_serialized_name = newError;
+        ret.error = newError;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('sounds_like', 'soundsLike');
+      mapping.put('display_as', 'displayAs');
+      return mapping;
     }
   }
 
@@ -10203,8 +10736,8 @@ public class IBMSpeechToTextV1Models {
    * An alternative hypothesis for a word from speech recognition results.
    */
   public class WordAlternativeResult extends IBMWatsonGenericModel {
-    private Double confidence_serialized_name;
-    private String word_serialized_name;
+    private Double confidence;
+    private String word;
  
     /**
      * Gets the confidence.
@@ -10215,7 +10748,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
  
     /**
@@ -10227,7 +10760,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getWord() {
-      return word_serialized_name;
+      return word;
     }
 
     /**
@@ -10236,7 +10769,7 @@ public class IBMSpeechToTextV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+      this.confidence = confidence;
     }
 
     /**
@@ -10245,18 +10778,17 @@ public class IBMSpeechToTextV1Models {
      * @param word the new word
      */
     public void setWord(final String word) {
-      this.word_serialized_name = word;
+      this.word = word;
     }
-
   }
 
   /**
    * Information about alternative hypotheses for words from speech recognition results.
    */
   public class WordAlternativeResults extends IBMWatsonGenericModel {
-    private Double start_time_serialized_name;
-    private Double end_time_serialized_name;
-    private List<WordAlternativeResult> alternatives_serialized_name;
+    private Double startTime;
+    private Double endTime;
+    private List<WordAlternativeResult> alternatives;
  
     /**
      * Gets the startTime.
@@ -10267,7 +10799,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getStartTime() {
-      return start_time_serialized_name;
+      return startTime;
     }
  
     /**
@@ -10279,7 +10811,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public Double getEndTime() {
-      return end_time_serialized_name;
+      return endTime;
     }
  
     /**
@@ -10291,7 +10823,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<WordAlternativeResult> getAlternatives() {
-      return alternatives_serialized_name;
+      return alternatives;
     }
 
     /**
@@ -10300,7 +10832,7 @@ public class IBMSpeechToTextV1Models {
      * @param startTime the new startTime
      */
     public void setStartTime(final Double startTime) {
-      this.start_time_serialized_name = startTime;
+      this.startTime = startTime;
     }
 
     /**
@@ -10309,7 +10841,7 @@ public class IBMSpeechToTextV1Models {
      * @param endTime the new endTime
      */
     public void setEndTime(final Double endTime) {
-      this.end_time_serialized_name = endTime;
+      this.endTime = endTime;
     }
 
     /**
@@ -10318,7 +10850,7 @@ public class IBMSpeechToTextV1Models {
      * @param alternatives the new alternatives
      */
     public void setAlternatives(final List<WordAlternativeResult> alternatives) {
-      this.alternatives_serialized_name = alternatives;
+      this.alternatives = alternatives;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10334,14 +10866,21 @@ public class IBMSpeechToTextV1Models {
       if (deserializedAlternatives != null) {
         for (Integer i = 0; i < deserializedAlternatives.size(); i++) {
           WordAlternativeResult currentItem = ret.getAlternatives().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('alternatives_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('alternatives');
           WordAlternativeResult newItem = (WordAlternativeResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordAlternativeResult.class);
           newAlternatives.add(newItem);
         }
-        ret.alternatives_serialized_name = newAlternatives;
+        ret.alternatives = newAlternatives;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('start_time', 'startTime');
+      mapping.put('end_time', 'endTime');
+      return mapping;
     }
   }
 
@@ -10349,7 +10888,7 @@ public class IBMSpeechToTextV1Models {
    * An error associated with a word from a custom language model.
    */
   public class WordError extends IBMWatsonGenericModel {
-    private String element_serialized_name;
+    private String element;
  
     /**
      * Gets the element.
@@ -10364,7 +10903,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public String getElement() {
-      return element_serialized_name;
+      return element;
     }
 
     /**
@@ -10373,16 +10912,15 @@ public class IBMSpeechToTextV1Models {
      * @param element the new element
      */
     public void setElement(final String element) {
-      this.element_serialized_name = element;
+      this.element = element;
     }
-
   }
 
   /**
    * Information about the words from a custom language model.
    */
   public class Words extends IBMWatsonResponseModel {
-    private List<Word> words_serialized_name;
+    private List<Word> words;
  
     /**
      * Gets the words.
@@ -10394,7 +10932,7 @@ public class IBMSpeechToTextV1Models {
      */
     @AuraEnabled
     public List<Word> getWords() {
-      return words_serialized_name;
+      return words;
     }
 
     /**
@@ -10403,7 +10941,7 @@ public class IBMSpeechToTextV1Models {
      * @param words the new words
      */
     public void setWords(final List<Word> words) {
-      this.words_serialized_name = words;
+      this.words = words;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10419,14 +10957,22 @@ public class IBMSpeechToTextV1Models {
       if (deserializedWords != null) {
         for (Integer i = 0; i < deserializedWords.size(); i++) {
           Word currentItem = ret.getWords().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('words_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('words');
           Word newItem = (Word) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
           newWords.add(newItem);
         }
-        ret.words_serialized_name = newWords;
+        ret.words = newWords;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (words != null && words[0] != null) {
+        mapping.putAll(words[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 

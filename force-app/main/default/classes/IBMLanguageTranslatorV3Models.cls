@@ -7,7 +7,7 @@ public class IBMLanguageTranslatorV3Models {
     private IBMWatsonFile forcedGlossary;
     private IBMWatsonFile parallelCorpus;
     private String name;
- 
+
     /**
      * Gets the baseModelId.
      *
@@ -20,7 +20,7 @@ public class IBMLanguageTranslatorV3Models {
     public String baseModelId() {
       return baseModelId;
     }
- 
+
     /**
      * Gets the forcedGlossary.
      *
@@ -33,7 +33,7 @@ public class IBMLanguageTranslatorV3Models {
     public IBMWatsonFile forcedGlossary() {
       return forcedGlossary;
     }
- 
+
     /**
      * Gets the parallelCorpus.
      *
@@ -46,7 +46,7 @@ public class IBMLanguageTranslatorV3Models {
     public IBMWatsonFile parallelCorpus() {
       return parallelCorpus;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -77,6 +77,13 @@ public class IBMLanguageTranslatorV3Models {
       return new CreateModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('baseModelId', 'base_model_id');
+      mapping.put('forcedGlossary', 'forced_glossary');
+      mapping.put('parallelCorpus', 'parallel_corpus');
+      return mapping;
+    }
   }
 
   /**
@@ -182,7 +189,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class DeleteDocumentOptions extends IBMWatsonOptionsModel {
     private String documentId;
- 
+
     /**
      * Gets the documentId.
      *
@@ -209,6 +216,11 @@ public class IBMLanguageTranslatorV3Models {
       return new DeleteDocumentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('documentId', 'document_id');
+      return mapping;
+    }
   }
 
   /**
@@ -275,7 +287,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class DeleteModelOptions extends IBMWatsonOptionsModel {
     private String modelId;
- 
+
     /**
      * Gets the modelId.
      *
@@ -302,6 +314,11 @@ public class IBMLanguageTranslatorV3Models {
       return new DeleteModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('modelId', 'model_id');
+      return mapping;
+    }
   }
 
   /**
@@ -367,7 +384,7 @@ public class IBMLanguageTranslatorV3Models {
    * DocumentList.
    */
   public class DocumentList extends IBMWatsonResponseModel {
-    private List<DocumentStatus> documents_serialized_name;
+    private List<DocumentStatus> documents;
  
     /**
      * Gets the documents.
@@ -378,7 +395,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public List<DocumentStatus> getDocuments() {
-      return documents_serialized_name;
+      return documents;
     }
 
     /**
@@ -387,7 +404,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param documents the new documents
      */
     public void setDocuments(final List<DocumentStatus> documents) {
-      this.documents_serialized_name = documents;
+      this.documents = documents;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -403,14 +420,22 @@ public class IBMLanguageTranslatorV3Models {
       if (deserializedDocuments != null) {
         for (Integer i = 0; i < deserializedDocuments.size(); i++) {
           DocumentStatus currentItem = ret.getDocuments().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('documents_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('documents');
           DocumentStatus newItem = (DocumentStatus) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentStatus.class);
           newDocuments.add(newItem);
         }
-        ret.documents_serialized_name = newDocuments;
+        ret.documents = newDocuments;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (documents != null && documents[0] != null) {
+        mapping.putAll(documents[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -418,17 +443,17 @@ public class IBMLanguageTranslatorV3Models {
    * Document information, including translation status.
    */
   public class DocumentStatus extends IBMWatsonResponseModel {
-    private String document_id_serialized_name;
-    private String filename_serialized_name;
-    private String status_serialized_name;
-    private String model_id_serialized_name;
-    private String base_model_id_serialized_name;
-    private String source_serialized_name;
-    private String target_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime completed_serialized_name;
-    private Long word_count_serialized_name;
-    private Long character_count_serialized_name;
+    private String documentId;
+    private String filename;
+    private String status;
+    private String modelId;
+    private String baseModelId;
+    private String source;
+    private String target;
+    private Datetime created;
+    private Datetime completed;
+    private Long wordCount;
+    private Long characterCount;
  
     /**
      * Gets the documentId.
@@ -439,7 +464,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -452,7 +477,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getFilename() {
-      return filename_serialized_name;
+      return filename;
     }
  
     /**
@@ -464,7 +489,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -476,7 +501,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getModelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
  
     /**
@@ -489,7 +514,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getBaseModelId() {
-      return base_model_id_serialized_name;
+      return baseModelId;
     }
  
     /**
@@ -501,7 +526,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getSource() {
-      return source_serialized_name;
+      return source;
     }
  
     /**
@@ -513,7 +538,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getTarget() {
-      return target_serialized_name;
+      return target;
     }
  
     /**
@@ -525,7 +550,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -537,7 +562,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Datetime getCompleted() {
-      return completed_serialized_name;
+      return completed;
     }
  
     /**
@@ -549,7 +574,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Long getWordCount() {
-      return word_count_serialized_name;
+      return wordCount;
     }
  
     /**
@@ -561,7 +586,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Long getCharacterCount() {
-      return character_count_serialized_name;
+      return characterCount;
     }
 
     /**
@@ -570,7 +595,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param documentId the new documentId
      */
     public void setDocumentId(final String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
     }
 
     /**
@@ -579,7 +604,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param filename the new filename
      */
     public void setFilename(final String filename) {
-      this.filename_serialized_name = filename;
+      this.filename = filename;
     }
 
     /**
@@ -588,7 +613,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -597,7 +622,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param modelId the new modelId
      */
     public void setModelId(final String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -606,7 +631,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param baseModelId the new baseModelId
      */
     public void setBaseModelId(final String baseModelId) {
-      this.base_model_id_serialized_name = baseModelId;
+      this.baseModelId = baseModelId;
     }
 
     /**
@@ -615,7 +640,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param source the new source
      */
     public void setSource(final String source) {
-      this.source_serialized_name = source;
+      this.source = source;
     }
 
     /**
@@ -624,7 +649,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param target the new target
      */
     public void setTarget(final String target) {
-      this.target_serialized_name = target;
+      this.target = target;
     }
 
     /**
@@ -633,7 +658,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param created the new created
      */
     public void setCreated(final Datetime created) {
-      this.created_serialized_name = created;
+      this.created = created;
     }
 
     /**
@@ -642,7 +667,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param completed the new completed
      */
     public void setCompleted(final Datetime completed) {
-      this.completed_serialized_name = completed;
+      this.completed = completed;
     }
 
     /**
@@ -651,7 +676,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param wordCount the new wordCount
      */
     public void setWordCount(final long wordCount) {
-      this.word_count_serialized_name = wordCount;
+      this.wordCount = wordCount;
     }
 
     /**
@@ -660,9 +685,18 @@ public class IBMLanguageTranslatorV3Models {
      * @param characterCount the new characterCount
      */
     public void setCharacterCount(final long characterCount) {
-      this.character_count_serialized_name = characterCount;
+      this.characterCount = characterCount;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_id', 'documentId');
+      mapping.put('model_id', 'modelId');
+      mapping.put('base_model_id', 'baseModelId');
+      mapping.put('word_count', 'wordCount');
+      mapping.put('character_count', 'characterCount');
+      return mapping;
+    }
   }
 
   /**
@@ -670,7 +704,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class GetDocumentStatusOptions extends IBMWatsonOptionsModel {
     private String documentId;
- 
+
     /**
      * Gets the documentId.
      *
@@ -697,6 +731,11 @@ public class IBMLanguageTranslatorV3Models {
       return new GetDocumentStatusOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('documentId', 'document_id');
+      return mapping;
+    }
   }
 
   /**
@@ -763,7 +802,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class GetModelOptions extends IBMWatsonOptionsModel {
     private String modelId;
- 
+
     /**
      * Gets the modelId.
      *
@@ -790,6 +829,11 @@ public class IBMLanguageTranslatorV3Models {
       return new GetModelOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('modelId', 'model_id');
+      return mapping;
+    }
   }
 
   /**
@@ -857,7 +901,7 @@ public class IBMLanguageTranslatorV3Models {
   public class GetTranslatedDocumentOptions extends IBMWatsonOptionsModel {
     private String documentId;
     private String accept;
- 
+
     /**
      * Gets the documentId.
      *
@@ -868,7 +912,7 @@ public class IBMLanguageTranslatorV3Models {
     public String documentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the accept.
      *
@@ -903,6 +947,12 @@ public class IBMLanguageTranslatorV3Models {
       return new GetTranslatedDocumentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('documentId', 'document_id');
+      mapping.put('accept', 'Accept');
+      return mapping;
+    }
   }
 
   /**
@@ -981,8 +1031,8 @@ public class IBMLanguageTranslatorV3Models {
    * IdentifiableLanguage.
    */
   public class IdentifiableLanguage extends IBMWatsonGenericModel {
-    private String language_serialized_name;
-    private String name_serialized_name;
+    private String language;
+    private String name;
  
     /**
      * Gets the language.
@@ -993,7 +1043,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
  
     /**
@@ -1005,7 +1055,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
 
     /**
@@ -1014,7 +1064,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
     /**
@@ -1023,16 +1073,15 @@ public class IBMLanguageTranslatorV3Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
-
   }
 
   /**
    * IdentifiableLanguages.
    */
   public class IdentifiableLanguages extends IBMWatsonResponseModel {
-    private List<IdentifiableLanguage> languages_serialized_name;
+    private List<IdentifiableLanguage> languages;
  
     /**
      * Gets the languages.
@@ -1043,7 +1092,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public List<IdentifiableLanguage> getLanguages() {
-      return languages_serialized_name;
+      return languages;
     }
 
     /**
@@ -1052,7 +1101,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param languages the new languages
      */
     public void setLanguages(final List<IdentifiableLanguage> languages) {
-      this.languages_serialized_name = languages;
+      this.languages = languages;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1068,11 +1117,11 @@ public class IBMLanguageTranslatorV3Models {
       if (deserializedLanguages != null) {
         for (Integer i = 0; i < deserializedLanguages.size(); i++) {
           IdentifiableLanguage currentItem = ret.getLanguages().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('languages_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('languages');
           IdentifiableLanguage newItem = (IdentifiableLanguage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiableLanguage.class);
           newLanguages.add(newItem);
         }
-        ret.languages_serialized_name = newLanguages;
+        ret.languages = newLanguages;
       }
 
       return ret;
@@ -1083,8 +1132,8 @@ public class IBMLanguageTranslatorV3Models {
    * IdentifiedLanguage.
    */
   public class IdentifiedLanguage extends IBMWatsonGenericModel {
-    private String language_serialized_name;
-    private Double confidence_serialized_name;
+    private String language;
+    private Double confidence;
  
     /**
      * Gets the language.
@@ -1095,7 +1144,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
  
     /**
@@ -1107,7 +1156,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
 
     /**
@@ -1116,7 +1165,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
     /**
@@ -1125,16 +1174,15 @@ public class IBMLanguageTranslatorV3Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+      this.confidence = confidence;
     }
-
   }
 
   /**
    * IdentifiedLanguages.
    */
   public class IdentifiedLanguages extends IBMWatsonResponseModel {
-    private List<IdentifiedLanguage> languages_serialized_name;
+    private List<IdentifiedLanguage> languages;
  
     /**
      * Gets the languages.
@@ -1145,7 +1193,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public List<IdentifiedLanguage> getLanguages() {
-      return languages_serialized_name;
+      return languages;
     }
 
     /**
@@ -1154,7 +1202,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param languages the new languages
      */
     public void setLanguages(final List<IdentifiedLanguage> languages) {
-      this.languages_serialized_name = languages;
+      this.languages = languages;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1170,11 +1218,11 @@ public class IBMLanguageTranslatorV3Models {
       if (deserializedLanguages != null) {
         for (Integer i = 0; i < deserializedLanguages.size(); i++) {
           IdentifiedLanguage currentItem = ret.getLanguages().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('languages_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('languages');
           IdentifiedLanguage newItem = (IdentifiedLanguage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiedLanguage.class);
           newLanguages.add(newItem);
         }
-        ret.languages_serialized_name = newLanguages;
+        ret.languages = newLanguages;
       }
 
       return ret;
@@ -1186,7 +1234,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class IdentifyOptions extends IBMWatsonOptionsModel {
     private String text;
- 
+
     /**
      * Gets the text.
      *
@@ -1212,7 +1260,6 @@ public class IBMLanguageTranslatorV3Models {
     public IdentifyOptionsBuilder newBuilder() {
       return new IdentifyOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1291,7 +1338,6 @@ public class IBMLanguageTranslatorV3Models {
     public ListDocumentsOptionsBuilder newBuilder() {
       return new ListDocumentsOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1348,7 +1394,6 @@ public class IBMLanguageTranslatorV3Models {
     public ListIdentifiableLanguagesOptionsBuilder newBuilder() {
       return new ListIdentifiableLanguagesOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1395,7 +1440,7 @@ public class IBMLanguageTranslatorV3Models {
     private String source;
     private String target;
     private Boolean defaultModels;
- 
+
     /**
      * Gets the source.
      *
@@ -1406,7 +1451,7 @@ public class IBMLanguageTranslatorV3Models {
     public String source() {
       return source;
     }
- 
+
     /**
      * Gets the target.
      *
@@ -1417,7 +1462,7 @@ public class IBMLanguageTranslatorV3Models {
     public String target() {
       return target;
     }
- 
+
     /**
      * Gets the defaultModels.
      *
@@ -1447,6 +1492,11 @@ public class IBMLanguageTranslatorV3Models {
       return new ListModelsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('defaultModels', 'default');
+      return mapping;
+    }
   }
 
   /**
@@ -1536,7 +1586,7 @@ public class IBMLanguageTranslatorV3Models {
     private String source;
     private String target;
     private String documentId;
- 
+
     /**
      * Gets the file.
      *
@@ -1556,12 +1606,14 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the filename.
      *
+     * The filename for file.
+     *
      * @return the filename
      */
     public String filename() {
       return filename;
     }
- 
+
     /**
      * Gets the fileContentType.
      *
@@ -1572,7 +1624,7 @@ public class IBMLanguageTranslatorV3Models {
     public String fileContentType() {
       return fileContentType;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -1583,7 +1635,7 @@ public class IBMLanguageTranslatorV3Models {
     public String modelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -1594,7 +1646,7 @@ public class IBMLanguageTranslatorV3Models {
     public String source() {
       return source;
     }
- 
+
     /**
      * Gets the target.
      *
@@ -1605,7 +1657,7 @@ public class IBMLanguageTranslatorV3Models {
     public String target() {
       return target;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -1640,6 +1692,13 @@ public class IBMLanguageTranslatorV3Models {
       return new TranslateDocumentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('fileContentType', 'file_content_type');
+      mapping.put('modelId', 'model_id');
+      mapping.put('documentId', 'document_id');
+      return mapping;
+    }
   }
 
   /**
@@ -1675,9 +1734,11 @@ public class IBMLanguageTranslatorV3Models {
      * Instantiates a new builder with required properties.
      *
      * @param file the file
+     * @param filename the filename
      */
-    public TranslateDocumentOptionsBuilder(IBMWatsonFile file) {
+    public TranslateDocumentOptionsBuilder(IBMWatsonFile file, String filename) {
       this.file = file;
+      this.filename = filename;
     }
 
     /**
@@ -1787,7 +1848,7 @@ public class IBMLanguageTranslatorV3Models {
     private String modelId;
     private String source;
     private String target;
- 
+
     /**
      * Gets the text.
      *
@@ -1798,7 +1859,7 @@ public class IBMLanguageTranslatorV3Models {
     public List<String> text() {
       return text;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -1809,7 +1870,7 @@ public class IBMLanguageTranslatorV3Models {
     public String modelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -1820,7 +1881,7 @@ public class IBMLanguageTranslatorV3Models {
     public String source() {
       return source;
     }
- 
+
     /**
      * Gets the target.
      *
@@ -1850,6 +1911,11 @@ public class IBMLanguageTranslatorV3Models {
       return new TranslateOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('modelId', 'model_id');
+      return mapping;
+    }
   }
 
   /**
@@ -1970,7 +2036,7 @@ public class IBMLanguageTranslatorV3Models {
    * Translation.
    */
   public class Translation extends IBMWatsonGenericModel {
-    private String translation_serialized_name;
+    private String translationOutput;
  
     /**
      * Gets the translationOutput.
@@ -1981,7 +2047,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getTranslationOutput() {
-      return translation_serialized_name;
+      return translationOutput;
     }
 
     /**
@@ -1990,25 +2056,30 @@ public class IBMLanguageTranslatorV3Models {
      * @param translationOutput the new translationOutput
      */
     public void setTranslationOutput(final String translationOutput) {
-      this.translation_serialized_name = translationOutput;
+      this.translationOutput = translationOutput;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('translation', 'translationOutput');
+      return mapping;
+    }
   }
 
   /**
    * Response payload for models.
    */
   public class TranslationModel extends IBMWatsonResponseModel {
-    private String model_id_serialized_name;
-    private String name_serialized_name;
-    private String source_serialized_name;
-    private String target_serialized_name;
-    private String base_model_id_serialized_name;
-    private String domain_serialized_name;
-    private Boolean customizable_serialized_name;
-    private Boolean default_model_serialized_name;
-    private String owner_serialized_name;
-    private String status_serialized_name;
+    private String modelId;
+    private String name;
+    private String source;
+    private String target;
+    private String baseModelId;
+    private String domain;
+    private Boolean customizable;
+    private Boolean defaultModel;
+    private String owner;
+    private String status;
  
     /**
      * Gets the modelId.
@@ -2019,7 +2090,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getModelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
  
     /**
@@ -2031,7 +2102,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -2043,7 +2114,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getSource() {
-      return source_serialized_name;
+      return source;
     }
  
     /**
@@ -2055,7 +2126,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getTarget() {
-      return target_serialized_name;
+      return target;
     }
  
     /**
@@ -2068,7 +2139,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getBaseModelId() {
-      return base_model_id_serialized_name;
+      return baseModelId;
     }
  
     /**
@@ -2080,7 +2151,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getDomain() {
-      return domain_serialized_name;
+      return domain;
     }
  
     /**
@@ -2093,7 +2164,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Boolean getCustomizable() {
-      return customizable_serialized_name;
+      return customizable;
     }
  
     /**
@@ -2106,7 +2177,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Boolean getDefaultModel() {
-      return default_model_serialized_name;
+      return defaultModel;
     }
  
     /**
@@ -2119,7 +2190,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getOwner() {
-      return owner_serialized_name;
+      return owner;
     }
  
     /**
@@ -2131,7 +2202,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
 
     /**
@@ -2140,7 +2211,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param modelId the new modelId
      */
     public void setModelId(final String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -2149,7 +2220,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -2158,7 +2229,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param source the new source
      */
     public void setSource(final String source) {
-      this.source_serialized_name = source;
+      this.source = source;
     }
 
     /**
@@ -2167,7 +2238,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param target the new target
      */
     public void setTarget(final String target) {
-      this.target_serialized_name = target;
+      this.target = target;
     }
 
     /**
@@ -2176,7 +2247,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param baseModelId the new baseModelId
      */
     public void setBaseModelId(final String baseModelId) {
-      this.base_model_id_serialized_name = baseModelId;
+      this.baseModelId = baseModelId;
     }
 
     /**
@@ -2185,7 +2256,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param domain the new domain
      */
     public void setDomain(final String domain) {
-      this.domain_serialized_name = domain;
+      this.domain = domain;
     }
 
     /**
@@ -2194,7 +2265,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param customizable the new customizable
      */
     public void setCustomizable(final Boolean customizable) {
-      this.customizable_serialized_name = customizable;
+      this.customizable = customizable;
     }
 
     /**
@@ -2203,7 +2274,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param defaultModel the new defaultModel
      */
     public void setDefaultModel(final Boolean defaultModel) {
-      this.default_model_serialized_name = defaultModel;
+      this.defaultModel = defaultModel;
     }
 
     /**
@@ -2212,7 +2283,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param owner the new owner
      */
     public void setOwner(final String owner) {
-      this.owner_serialized_name = owner;
+      this.owner = owner;
     }
 
     /**
@@ -2221,16 +2292,23 @@ public class IBMLanguageTranslatorV3Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('model_id', 'modelId');
+      mapping.put('base_model_id', 'baseModelId');
+      mapping.put('default_model', 'defaultModel');
+      return mapping;
+    }
   }
 
   /**
    * The response type for listing existing translation models.
    */
   public class TranslationModels extends IBMWatsonResponseModel {
-    private List<TranslationModel> models_serialized_name;
+    private List<TranslationModel> models;
  
     /**
      * Gets the models.
@@ -2241,7 +2319,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public List<TranslationModel> getModels() {
-      return models_serialized_name;
+      return models;
     }
 
     /**
@@ -2250,7 +2328,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param models the new models
      */
     public void setModels(final List<TranslationModel> models) {
-      this.models_serialized_name = models;
+      this.models = models;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2266,14 +2344,22 @@ public class IBMLanguageTranslatorV3Models {
       if (deserializedModels != null) {
         for (Integer i = 0; i < deserializedModels.size(); i++) {
           TranslationModel currentItem = ret.getModels().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('models_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('models');
           TranslationModel newItem = (TranslationModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TranslationModel.class);
           newModels.add(newItem);
         }
-        ret.models_serialized_name = newModels;
+        ret.models = newModels;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (models != null && models[0] != null) {
+        mapping.putAll(models[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2281,9 +2367,9 @@ public class IBMLanguageTranslatorV3Models {
    * TranslationResult.
    */
   public class TranslationResult extends IBMWatsonResponseModel {
-    private Long word_count_serialized_name;
-    private Long character_count_serialized_name;
-    private List<Translation> translations_serialized_name;
+    private Long wordCount;
+    private Long characterCount;
+    private List<Translation> translations;
  
     /**
      * Gets the wordCount.
@@ -2294,7 +2380,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Long getWordCount() {
-      return word_count_serialized_name;
+      return wordCount;
     }
  
     /**
@@ -2306,7 +2392,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public Long getCharacterCount() {
-      return character_count_serialized_name;
+      return characterCount;
     }
  
     /**
@@ -2318,7 +2404,7 @@ public class IBMLanguageTranslatorV3Models {
      */
     @AuraEnabled
     public List<Translation> getTranslations() {
-      return translations_serialized_name;
+      return translations;
     }
 
     /**
@@ -2327,7 +2413,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param wordCount the new wordCount
      */
     public void setWordCount(final long wordCount) {
-      this.word_count_serialized_name = wordCount;
+      this.wordCount = wordCount;
     }
 
     /**
@@ -2336,7 +2422,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param characterCount the new characterCount
      */
     public void setCharacterCount(final long characterCount) {
-      this.character_count_serialized_name = characterCount;
+      this.characterCount = characterCount;
     }
 
     /**
@@ -2345,7 +2431,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param translations the new translations
      */
     public void setTranslations(final List<Translation> translations) {
-      this.translations_serialized_name = translations;
+      this.translations = translations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2361,14 +2447,24 @@ public class IBMLanguageTranslatorV3Models {
       if (deserializedTranslations != null) {
         for (Integer i = 0; i < deserializedTranslations.size(); i++) {
           Translation currentItem = ret.getTranslations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('translations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('translations');
           Translation newItem = (Translation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Translation.class);
           newTranslations.add(newItem);
         }
-        ret.translations_serialized_name = newTranslations;
+        ret.translations = newTranslations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('word_count', 'wordCount');
+      mapping.put('character_count', 'characterCount');
+      if (translations != null && translations[0] != null) {
+        mapping.putAll(translations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 

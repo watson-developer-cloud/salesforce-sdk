@@ -3,8 +3,14 @@ public class IBMAssistantV1Models {
    * A recognized capture group for a pattern-based entity.
    */
   public class CaptureGroup extends IBMWatsonGenericModel {
-    private String group_serialized_name;
-    private List<Long> location_serialized_name;
+    private String xgroup;
+    private List<Long> location;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public CaptureGroup() { }
  
     /**
      * Gets the xgroup.
@@ -15,7 +21,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getXgroup() {
-      return group_serialized_name;
+      return xgroup;
     }
  
     /**
@@ -27,37 +33,126 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Long> getLocation() {
-      return location_serialized_name;
+      return location;
+    }
+  
+    private CaptureGroup(CaptureGroupBuilder builder) {
+      IBMWatsonValidator.notNull(builder.xgroup, 'xgroup cannot be null');
+      this.xgroup = builder.xgroup;
+      this.location = builder.location;
     }
 
     /**
-     * Sets the xgroup.
+     * New builder.
      *
-     * @param xgroup the new xgroup
+     * @return a CaptureGroup builder
      */
-    public void setXgroup(final String xgroup) {
-      this.group_serialized_name = xgroup;
+    public CaptureGroupBuilder newBuilder() {
+      return new CaptureGroupBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xgroup', 'group');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('group', 'xgroup');
+      return mapping;
+    }
+  }
+
+  /**
+   * CaptureGroup Builder.
+   */
+  public class CaptureGroupBuilder {
+    private String xgroup;
+    private List<Long> location;
+
+    private CaptureGroupBuilder(CaptureGroup captureGroup) {
+      this.xgroup = captureGroup.xgroup;
+      this.location = captureGroup.location;
     }
 
     /**
-     * Sets the location.
+     * Instantiates a new builder.
+     */
+    public CaptureGroupBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param xgroup the xgroup
+     */
+    public CaptureGroupBuilder(String xgroup) {
+      this.xgroup = xgroup;
+    }
+
+    /**
+     * Builds a CaptureGroup.
+     *
+     * @return the captureGroup
+     */
+    public CaptureGroup build() {
+      return new CaptureGroup(this);
+    }
+
+    /**
+     * Adds an location to location.
      *
      * @param location the new location
+     * @return the CaptureGroup builder
      */
-    public void setLocation(final List<Long> location) {
-      this.location_serialized_name = location;
+    public CaptureGroupBuilder addLocation(Long location) {
+      IBMWatsonValidator.notNull(location, 'location cannot be null');
+      if (this.location == null) {
+        this.location = new List<Long>();
+      }
+      this.location.add(location);
+      return this;
     }
 
+    /**
+     * Set the xgroup.
+     *
+     * @param xgroup the xgroup
+     * @return the CaptureGroup builder
+     */
+    public CaptureGroupBuilder setXgroup(String xgroup) {
+      this.xgroup = xgroup;
+      return this;
+    }
+
+    /**
+     * Set the location.
+     * Existing location will be replaced.
+     *
+     * @param location the location
+     * @return the CaptureGroup builder
+     */
+    public CaptureGroupBuilder setLocation(List<Long> location) {
+      this.location = location;
+      return this;
+    }
   }
 
   /**
    * State information for the conversation. To maintain state, include the context from the previous response.
    */
   public class Context extends IBMWatsonDynamicModel {
-    private String conversation_id_serialized_name;
-    private SystemResponse system_serialized_name;
-    private MessageContextMetadata metadata_serialized_name;
+    private String conversationId;
+    private SystemResponse xsystem;
+    private MessageContextMetadata metadata;
     private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Context() { }
 
     /**
      * Gets the conversationId.
@@ -66,7 +161,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getConversationId() {
-      return conversation_id_serialized_name;
+      return conversationId;
     }
 
     /**
@@ -76,7 +171,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public SystemResponse getXsystem() {
-      return system_serialized_name;
+      return xsystem;
     }
 
     /**
@@ -86,7 +181,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public MessageContextMetadata getMetadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
 
     /**
@@ -99,31 +194,19 @@ public class IBMAssistantV1Models {
       return this.getDynamicProperties();
     }
 
-    /**
-     * Sets the conversationId.
-     *
-     * @param conversationId the new conversationId
-     */
-    public void setConversationId(final String conversationId) {
-      this.conversation_id_serialized_name = conversationId;
+    private Context(ContextBuilder builder) {
+      this.conversationId = builder.conversationId;
+      this.xsystem = builder.xsystem;
+      this.metadata = builder.metadata;
     }
 
     /**
-     * Sets the xsystem.
+     * New builder.
      *
-     * @param xsystem the new xsystem
+     * @return a Context builder
      */
-    public void setXsystem(final SystemResponse xsystem) {
-      this.system_serialized_name = xsystem;
-    }
-
-    /**
-     * Sets the metadata.
-     *
-     * @param metadata the new metadata
-     */
-    public void setMetadata(final MessageContextMetadata metadata) {
-      this.metadata_serialized_name = metadata;
+    public ContextBuilder newBuilder() {
+      return new ContextBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -132,24 +215,108 @@ public class IBMAssistantV1Models {
       }
 
       Context ret = (Context) super.deserialize(jsonString, jsonMap, classType);
+      ContextBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for xsystem
-      SystemResponse newXsystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(ret.getXsystem()), (Map<String, Object>) jsonMap.get('system_serialized_name'), SystemResponse.class);
-      ret.setXsystem(newXsystem);
+      SystemResponse newXsystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(ret.getXsystem()), (Map<String, Object>) jsonMap.get('xsystem'), SystemResponse.class);
+      retBuilder.setXsystem(newXsystem);
 
       // calling custom deserializer for metadata
-      MessageContextMetadata newMetadata = (MessageContextMetadata) new MessageContextMetadata().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), MessageContextMetadata.class);
-      ret.setMetadata(newMetadata);
+      MessageContextMetadata newMetadata = (MessageContextMetadata) new MessageContextMetadata().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), MessageContextMetadata.class);
+      retBuilder.setMetadata(newMetadata);
 
+      Context builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
+          builderResult.put(key, jsonMap.get(key));
         }
       }
 
-      return ret;
+      return builderResult;
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('conversationId', 'conversation_id');
+      mapping.put('xsystem', 'system');
+      if (metadata != null) {
+        mapping.putAll(metadata.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('conversation_id', 'conversationId');
+      mapping.put('system', 'xsystem');
+      if (metadata != null) {
+        mapping.putAll(metadata.getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * Context Builder.
+   */
+  public class ContextBuilder {
+    private String conversationId;
+    private SystemResponse xsystem;
+    private MessageContextMetadata metadata;
+
+    private ContextBuilder(Context context) {
+      this.conversationId = context.conversationId;
+      this.xsystem = context.xsystem;
+      this.metadata = context.metadata;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ContextBuilder() { }
+
+    /**
+     * Builds a Context.
+     *
+     * @return the context
+     */
+    public Context build() {
+      return new Context(this);
+    }
+
+    /**
+     * Set the conversationId.
+     *
+     * @param conversationId the conversationId
+     * @return the Context builder
+     */
+    public ContextBuilder setConversationId(String conversationId) {
+      this.conversationId = conversationId;
+      return this;
+    }
+
+    /**
+     * Set the xsystem.
+     *
+     * @param xsystem the xsystem
+     * @return the Context builder
+     */
+    public ContextBuilder setXsystem(SystemResponse xsystem) {
+      this.xsystem = xsystem;
+      return this;
+    }
+
+    /**
+     * Set the metadata.
+     *
+     * @param metadata the metadata
+     * @return the Context builder
+     */
+    public ContextBuilder setMetadata(MessageContextMetadata metadata) {
+      this.metadata = metadata;
+      return this;
     }
   }
 
@@ -157,9 +324,9 @@ public class IBMAssistantV1Models {
    * Counterexample.
    */
   public class Counterexample extends IBMWatsonResponseModel {
-    private String text_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
+    private String text;
+    private Datetime created;
+    private Datetime updated;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -178,7 +345,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -190,7 +357,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -202,14 +369,14 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
   
     private Counterexample(CounterexampleBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      this.text_serialized_name = builder.text;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
+      this.text = builder.text;
+      this.created = builder.created;
+      this.updated = builder.updated;
     }
 
     /**
@@ -220,7 +387,6 @@ public class IBMAssistantV1Models {
     public CounterexampleBuilder newBuilder() {
       return new CounterexampleBuilder(this);
     }
-
   }
 
   /**
@@ -232,9 +398,9 @@ public class IBMAssistantV1Models {
     private Datetime updated;
 
     private CounterexampleBuilder(Counterexample counterexample) {
-      this.text = counterexample.text_serialized_name;
-      this.created = counterexample.created_serialized_name;
-      this.updated = counterexample.updated_serialized_name;
+      this.text = counterexample.text;
+      this.created = counterexample.created;
+      this.updated = counterexample.updated;
     }
 
     /**
@@ -299,8 +465,8 @@ public class IBMAssistantV1Models {
    * CounterexampleCollection.
    */
   public class CounterexampleCollection extends IBMWatsonResponseModel {
-    private List<Counterexample> counterexamples_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<Counterexample> counterexamples;
+    private Pagination pagination;
  
     /**
      * Gets the counterexamples.
@@ -311,7 +477,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Counterexample> getCounterexamples() {
-      return counterexamples_serialized_name;
+      return counterexamples;
     }
  
     /**
@@ -323,7 +489,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -332,7 +498,7 @@ public class IBMAssistantV1Models {
      * @param counterexamples the new counterexamples
      */
     public void setCounterexamples(final List<Counterexample> counterexamples) {
-      this.counterexamples_serialized_name = counterexamples;
+      this.counterexamples = counterexamples;
     }
 
     /**
@@ -341,7 +507,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -357,18 +523,26 @@ public class IBMAssistantV1Models {
       if (deserializedCounterexamples != null) {
         for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
           Counterexample currentItem = ret.getCounterexamples().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples');
           Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
           newCounterexamples.add(newItem);
         }
-        ret.counterexamples_serialized_name = newCounterexamples;
+        ret.counterexamples = newCounterexamples;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -378,7 +552,7 @@ public class IBMAssistantV1Models {
   public class CreateCounterexampleOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String text;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -389,7 +563,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -420,6 +594,11 @@ public class IBMAssistantV1Models {
       return new CreateCounterexampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -530,7 +709,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -541,7 +720,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -553,7 +732,7 @@ public class IBMAssistantV1Models {
     public String dialogNode() {
       return dialogNode;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -564,7 +743,7 @@ public class IBMAssistantV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the conditions.
      *
@@ -576,7 +755,7 @@ public class IBMAssistantV1Models {
     public String conditions() {
       return conditions;
     }
- 
+
     /**
      * Gets the parent.
      *
@@ -587,7 +766,7 @@ public class IBMAssistantV1Models {
     public String parent() {
       return parent;
     }
- 
+
     /**
      * Gets the previousSibling.
      *
@@ -598,7 +777,7 @@ public class IBMAssistantV1Models {
     public String previousSibling() {
       return previousSibling;
     }
- 
+
     /**
      * Gets the output.
      *
@@ -610,7 +789,7 @@ public class IBMAssistantV1Models {
     public DialogNodeOutput output() {
       return output;
     }
- 
+
     /**
      * Gets the context.
      *
@@ -621,7 +800,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel context() {
       return context;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -632,7 +811,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the nextStep.
      *
@@ -643,7 +822,7 @@ public class IBMAssistantV1Models {
     public DialogNodeNextStep nextStep() {
       return nextStep;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -655,7 +834,7 @@ public class IBMAssistantV1Models {
     public String title() {
       return title;
     }
- 
+
     /**
      * Gets the nodeType.
      *
@@ -666,7 +845,7 @@ public class IBMAssistantV1Models {
     public String nodeType() {
       return nodeType;
     }
- 
+
     /**
      * Gets the eventName.
      *
@@ -677,7 +856,7 @@ public class IBMAssistantV1Models {
     public String eventName() {
       return eventName;
     }
- 
+
     /**
      * Gets the variable.
      *
@@ -688,7 +867,7 @@ public class IBMAssistantV1Models {
     public String variable() {
       return variable;
     }
- 
+
     /**
      * Gets the actions.
      *
@@ -699,7 +878,7 @@ public class IBMAssistantV1Models {
     public List<DialogNodeAction> actions() {
       return actions;
     }
- 
+
     /**
      * Gets the digressIn.
      *
@@ -710,7 +889,7 @@ public class IBMAssistantV1Models {
     public String digressIn() {
       return digressIn;
     }
- 
+
     /**
      * Gets the digressOut.
      *
@@ -721,7 +900,7 @@ public class IBMAssistantV1Models {
     public String digressOut() {
       return digressOut;
     }
- 
+
     /**
      * Gets the digressOutSlots.
      *
@@ -732,7 +911,7 @@ public class IBMAssistantV1Models {
     public String digressOutSlots() {
       return digressOutSlots;
     }
- 
+
     /**
      * Gets the userLabel.
      *
@@ -778,6 +957,29 @@ public class IBMAssistantV1Models {
       return new CreateDialogNodeOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('dialogNode', 'dialog_node');
+      mapping.put('previousSibling', 'previous_sibling');
+      if (output != null) {
+        mapping.putAll(output.getSdkToApiMapping());
+      }
+      mapping.put('nextStep', 'next_step');
+      if (nextStep != null) {
+        mapping.putAll(nextStep.getSdkToApiMapping());
+      }
+      mapping.put('nodeType', 'type');
+      mapping.put('eventName', 'event_name');
+      if (actions != null && actions[0] != null) {
+        mapping.putAll(actions[0].getSdkToApiMapping());
+      }
+      mapping.put('digressIn', 'digress_in');
+      mapping.put('digressOut', 'digress_out');
+      mapping.put('digressOutSlots', 'digress_out_slots');
+      mapping.put('userLabel', 'user_label');
+      return mapping;
+    }
   }
 
   /**
@@ -1122,14 +1324,14 @@ public class IBMAssistantV1Models {
   /**
    * CreateEntity.
    */
-  public class CreateEntity {
-    private String entity_serialized_name;
-    private String description_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private Boolean fuzzy_match_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private List<CreateValue> values_serialized_name;
+  public class CreateEntity extends IBMWatsonGenericModel {
+    private String entity;
+    private String description;
+    private IBMWatsonMapModel metadata;
+    private Boolean fuzzyMatch;
+    private Datetime created;
+    private Datetime updated;
+    private List<CreateValue> values;
  
     /**
      * Gets the entity.
@@ -1142,7 +1344,7 @@ public class IBMAssistantV1Models {
      * @return the entity
      */
     public String entity() {
-      return entity_serialized_name;
+      return entity;
     }
  
     /**
@@ -1153,7 +1355,7 @@ public class IBMAssistantV1Models {
      * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -1164,7 +1366,7 @@ public class IBMAssistantV1Models {
      * @return the metadata
      */
     public IBMWatsonMapModel metadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
  
     /**
@@ -1175,7 +1377,7 @@ public class IBMAssistantV1Models {
      * @return the fuzzyMatch
      */
     public Boolean fuzzyMatch() {
-      return fuzzy_match_serialized_name;
+      return fuzzyMatch;
     }
  
     /**
@@ -1186,7 +1388,7 @@ public class IBMAssistantV1Models {
      * @return the created
      */
     public Datetime created() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -1197,7 +1399,7 @@ public class IBMAssistantV1Models {
      * @return the updated
      */
     public Datetime updated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -1208,18 +1410,18 @@ public class IBMAssistantV1Models {
      * @return the values
      */
     public List<CreateValue> values() {
-      return values_serialized_name;
+      return values;
     }
   
     private CreateEntity(CreateEntityBuilder builder) {
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
-      this.entity_serialized_name = builder.entity;
-      this.description_serialized_name = builder.description;
-      this.metadata_serialized_name = builder.metadata;
-      this.fuzzy_match_serialized_name = builder.fuzzyMatch;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
-      this.values_serialized_name = builder.values;
+      this.entity = builder.entity;
+      this.description = builder.description;
+      this.metadata = builder.metadata;
+      this.fuzzyMatch = builder.fuzzyMatch;
+      this.created = builder.created;
+      this.updated = builder.updated;
+      this.values = builder.values;
     }
 
     /**
@@ -1231,6 +1433,14 @@ public class IBMAssistantV1Models {
       return new CreateEntityBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('fuzzyMatch', 'fuzzy_match');
+      if (values != null && values[0] != null) {
+        mapping.putAll(values[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -1246,13 +1456,13 @@ public class IBMAssistantV1Models {
     private List<CreateValue> values;
 
     private CreateEntityBuilder(CreateEntity createEntity) {
-      this.entity = createEntity.entity_serialized_name;
-      this.description = createEntity.description_serialized_name;
-      this.metadata = createEntity.metadata_serialized_name;
-      this.fuzzyMatch = createEntity.fuzzy_match_serialized_name;
-      this.created = createEntity.created_serialized_name;
-      this.updated = createEntity.updated_serialized_name;
-      this.values = createEntity.values_serialized_name;
+      this.entity = createEntity.entity;
+      this.description = createEntity.description;
+      this.metadata = createEntity.metadata;
+      this.fuzzyMatch = createEntity.fuzzyMatch;
+      this.created = createEntity.created;
+      this.updated = createEntity.updated;
+      this.values = createEntity.values;
     }
 
     /**
@@ -1383,7 +1593,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private Boolean fuzzyMatch;
     private List<CreateValue> values;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -1394,7 +1604,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -1408,7 +1618,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -1419,7 +1629,7 @@ public class IBMAssistantV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -1430,7 +1640,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the fuzzyMatch.
      *
@@ -1441,7 +1651,7 @@ public class IBMAssistantV1Models {
     public Boolean fuzzyMatch() {
       return fuzzyMatch;
     }
- 
+
     /**
      * Gets the values.
      *
@@ -1474,6 +1684,15 @@ public class IBMAssistantV1Models {
       return new CreateEntityOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('fuzzyMatch', 'fuzzy_match');
+      if (values != null && values[0] != null) {
+        mapping.putAll(values[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -1626,7 +1845,7 @@ public class IBMAssistantV1Models {
     private String intent;
     private String text;
     private List<Mention> mentions;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -1637,7 +1856,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -1648,7 +1867,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -1661,7 +1880,7 @@ public class IBMAssistantV1Models {
     public String text() {
       return text;
     }
- 
+
     /**
      * Gets the mentions.
      *
@@ -1693,6 +1912,11 @@ public class IBMAssistantV1Models {
       return new CreateExampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -1828,12 +2052,12 @@ public class IBMAssistantV1Models {
   /**
    * CreateIntent.
    */
-  public class CreateIntent {
-    private String intent_serialized_name;
-    private String description_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private List<Example> examples_serialized_name;
+  public class CreateIntent extends IBMWatsonGenericModel {
+    private String intent;
+    private String description;
+    private Datetime created;
+    private Datetime updated;
+    private List<Example> examples;
  
     /**
      * Gets the intent.
@@ -1845,7 +2069,7 @@ public class IBMAssistantV1Models {
      * @return the intent
      */
     public String intent() {
-      return intent_serialized_name;
+      return intent;
     }
  
     /**
@@ -1856,7 +2080,7 @@ public class IBMAssistantV1Models {
      * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -1867,7 +2091,7 @@ public class IBMAssistantV1Models {
      * @return the created
      */
     public Datetime created() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -1878,7 +2102,7 @@ public class IBMAssistantV1Models {
      * @return the updated
      */
     public Datetime updated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -1889,16 +2113,16 @@ public class IBMAssistantV1Models {
      * @return the examples
      */
     public List<Example> examples() {
-      return examples_serialized_name;
+      return examples;
     }
   
     private CreateIntent(CreateIntentBuilder builder) {
       IBMWatsonValidator.notNull(builder.intent, 'intent cannot be null');
-      this.intent_serialized_name = builder.intent;
-      this.description_serialized_name = builder.description;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
-      this.examples_serialized_name = builder.examples;
+      this.intent = builder.intent;
+      this.description = builder.description;
+      this.created = builder.created;
+      this.updated = builder.updated;
+      this.examples = builder.examples;
     }
 
     /**
@@ -1909,7 +2133,6 @@ public class IBMAssistantV1Models {
     public CreateIntentBuilder newBuilder() {
       return new CreateIntentBuilder(this);
     }
-
   }
 
   /**
@@ -1923,11 +2146,11 @@ public class IBMAssistantV1Models {
     private List<Example> examples;
 
     private CreateIntentBuilder(CreateIntent createIntent) {
-      this.intent = createIntent.intent_serialized_name;
-      this.description = createIntent.description_serialized_name;
-      this.created = createIntent.created_serialized_name;
-      this.updated = createIntent.updated_serialized_name;
-      this.examples = createIntent.examples_serialized_name;
+      this.intent = createIntent.intent;
+      this.description = createIntent.description;
+      this.created = createIntent.created;
+      this.updated = createIntent.updated;
+      this.examples = createIntent.examples;
     }
 
     /**
@@ -2034,7 +2257,7 @@ public class IBMAssistantV1Models {
     private String intent;
     private String description;
     private List<Example> examples;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -2045,7 +2268,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -2058,7 +2281,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -2069,7 +2292,7 @@ public class IBMAssistantV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the examples.
      *
@@ -2100,6 +2323,11 @@ public class IBMAssistantV1Models {
       return new CreateIntentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -2226,7 +2454,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private String synonym;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -2237,7 +2465,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -2248,7 +2476,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -2259,7 +2487,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the synonym.
      *
@@ -2294,6 +2522,11 @@ public class IBMAssistantV1Models {
       return new CreateSynonymOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -2415,19 +2648,13 @@ public class IBMAssistantV1Models {
    * CreateValue.
    */
   public class CreateValue extends IBMWatsonGenericModel {
-    private String value_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private String type_serialized_name;
-    private List<String> synonyms_serialized_name;
-    private List<String> patterns_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-
-    /**
-     * This constructor is strictly for internal serialization/deserialization purposes
-     * and should not be called by the client.
-     */
-    public CreateValue() { }
+    private String value;
+    private IBMWatsonMapModel metadata;
+    private String valueType;
+    private List<String> synonyms;
+    private List<String> patterns;
+    private Datetime created;
+    private Datetime updated;
  
     /**
      * Gets the value.
@@ -2438,9 +2665,8 @@ public class IBMAssistantV1Models {
      *
      * @return the value
      */
-    @AuraEnabled
-    public String getValue() {
-      return value_serialized_name;
+    public String value() {
+      return value;
     }
  
     /**
@@ -2450,9 +2676,8 @@ public class IBMAssistantV1Models {
      *
      * @return the metadata
      */
-    @AuraEnabled
-    public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
+    public IBMWatsonMapModel metadata() {
+      return metadata;
     }
  
     /**
@@ -2462,9 +2687,8 @@ public class IBMAssistantV1Models {
      *
      * @return the valueType
      */
-    @AuraEnabled
-    public String getValueType() {
-      return type_serialized_name;
+    public String valueType() {
+      return valueType;
     }
  
     /**
@@ -2477,9 +2701,8 @@ public class IBMAssistantV1Models {
      *
      * @return the synonyms
      */
-    @AuraEnabled
-    public List<String> getSynonyms() {
-      return synonyms_serialized_name;
+    public List<String> synonyms() {
+      return synonyms;
     }
  
     /**
@@ -2492,9 +2715,8 @@ public class IBMAssistantV1Models {
      *
      * @return the patterns
      */
-    @AuraEnabled
-    public List<String> getPatterns() {
-      return patterns_serialized_name;
+    public List<String> patterns() {
+      return patterns;
     }
  
     /**
@@ -2504,9 +2726,8 @@ public class IBMAssistantV1Models {
      *
      * @return the created
      */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
+    public Datetime created() {
+      return created;
     }
  
     /**
@@ -2516,20 +2737,19 @@ public class IBMAssistantV1Models {
      *
      * @return the updated
      */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
+    public Datetime updated() {
+      return updated;
     }
   
     private CreateValue(CreateValueBuilder builder) {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
-      this.value_serialized_name = builder.value;
-      this.metadata_serialized_name = builder.metadata;
-      this.type_serialized_name = builder.valueType;
-      this.synonyms_serialized_name = builder.synonyms;
-      this.patterns_serialized_name = builder.patterns;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
+      this.value = builder.value;
+      this.metadata = builder.metadata;
+      this.valueType = builder.valueType;
+      this.synonyms = builder.synonyms;
+      this.patterns = builder.patterns;
+      this.created = builder.created;
+      this.updated = builder.updated;
     }
 
     /**
@@ -2541,19 +2761,10 @@ public class IBMAssistantV1Models {
       return new CreateValueBuilder(this);
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      CreateValue ret = (CreateValue) super.deserialize(jsonString, jsonMap, classType);
-      CreateValueBuilder retBuilder = ret.newBuilder();
-
-      // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
-      retBuilder.metadata(newMetadata);
-
-      return retBuilder.build();
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('valueType', 'type');
+      return mapping;
     }
   }
 
@@ -2570,13 +2781,13 @@ public class IBMAssistantV1Models {
     private Datetime updated;
 
     private CreateValueBuilder(CreateValue createValue) {
-      this.value = createValue.value_serialized_name;
-      this.metadata = createValue.metadata_serialized_name;
-      this.valueType = createValue.type_serialized_name;
-      this.synonyms = createValue.synonyms_serialized_name;
-      this.patterns = createValue.patterns_serialized_name;
-      this.created = createValue.created_serialized_name;
-      this.updated = createValue.updated_serialized_name;
+      this.value = createValue.value;
+      this.metadata = createValue.metadata;
+      this.valueType = createValue.valueType;
+      this.synonyms = createValue.synonyms;
+      this.patterns = createValue.patterns;
+      this.created = createValue.created;
+      this.updated = createValue.updated;
     }
 
     /**
@@ -2724,7 +2935,7 @@ public class IBMAssistantV1Models {
     private String valueType;
     private List<String> synonyms;
     private List<String> patterns;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -2735,7 +2946,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -2746,7 +2957,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -2759,7 +2970,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -2770,7 +2981,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the valueType.
      *
@@ -2781,7 +2992,7 @@ public class IBMAssistantV1Models {
     public String valueType() {
       return valueType;
     }
- 
+
     /**
      * Gets the synonyms.
      *
@@ -2795,7 +3006,7 @@ public class IBMAssistantV1Models {
     public List<String> synonyms() {
       return synonyms;
     }
- 
+
     /**
      * Gets the patterns.
      *
@@ -2833,6 +3044,12 @@ public class IBMAssistantV1Models {
       return new CreateValueOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('valueType', 'type');
+      return mapping;
+    }
   }
 
   /**
@@ -2996,21 +3213,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the createValue.
-     *
-     * @param createValue the createValue
-     * @return the CreateValueOptions builder
-     */
-    public CreateValueOptionsBuilder createValue(CreateValue createValue) {
-      this.value = createValue.getValue();
-      this.metadata = createValue.getMetadata();
-      this.valueType = createValue.getValueType();
-      this.synonyms = createValue.getSynonyms();
-      this.patterns = createValue.getPatterns();
-      return this;
-    }
-
-    /**
      * Add a request header.
      *
      * @param name the header name
@@ -3037,7 +3239,7 @@ public class IBMAssistantV1Models {
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
- 
+
     /**
      * Gets the name.
      *
@@ -3048,7 +3250,7 @@ public class IBMAssistantV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -3059,7 +3261,7 @@ public class IBMAssistantV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -3070,7 +3272,7 @@ public class IBMAssistantV1Models {
     public String language() {
       return language;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -3081,7 +3283,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the learningOptOut.
      *
@@ -3093,7 +3295,7 @@ public class IBMAssistantV1Models {
     public Boolean learningOptOut() {
       return learningOptOut;
     }
- 
+
     /**
      * Gets the systemSettings.
      *
@@ -3104,7 +3306,7 @@ public class IBMAssistantV1Models {
     public WorkspaceSystemSettings systemSettings() {
       return systemSettings;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -3115,7 +3317,7 @@ public class IBMAssistantV1Models {
     public List<CreateIntent> intents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -3126,7 +3328,7 @@ public class IBMAssistantV1Models {
     public List<CreateEntity> entities() {
       return entities;
     }
- 
+
     /**
      * Gets the dialogNodes.
      *
@@ -3137,7 +3339,7 @@ public class IBMAssistantV1Models {
     public List<DialogNode> dialogNodes() {
       return dialogNodes;
     }
- 
+
     /**
      * Gets the counterexamples.
      *
@@ -3172,6 +3374,22 @@ public class IBMAssistantV1Models {
       return new CreateWorkspaceOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('learningOptOut', 'learning_opt_out');
+      mapping.put('systemSettings', 'system_settings');
+      if (systemSettings != null) {
+        mapping.putAll(systemSettings.getSdkToApiMapping());
+      }
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getSdkToApiMapping());
+      }
+      mapping.put('dialogNodes', 'dialog_nodes');
+      if (dialogNodes != null && dialogNodes[0] != null) {
+        mapping.putAll(dialogNodes[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -3411,7 +3629,7 @@ public class IBMAssistantV1Models {
   public class DeleteCounterexampleOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String text;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -3422,7 +3640,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -3451,6 +3669,11 @@ public class IBMAssistantV1Models {
       return new DeleteCounterexampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -3533,7 +3756,7 @@ public class IBMAssistantV1Models {
   public class DeleteDialogNodeOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String dialogNode;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -3544,7 +3767,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -3573,6 +3796,12 @@ public class IBMAssistantV1Models {
       return new DeleteDialogNodeOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('dialogNode', 'dialog_node');
+      return mapping;
+    }
   }
 
   /**
@@ -3655,7 +3884,7 @@ public class IBMAssistantV1Models {
   public class DeleteEntityOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -3666,7 +3895,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -3695,6 +3924,11 @@ public class IBMAssistantV1Models {
       return new DeleteEntityOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -3778,7 +4012,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String intent;
     private String text;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -3789,7 +4023,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -3800,7 +4034,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -3831,6 +4065,11 @@ public class IBMAssistantV1Models {
       return new DeleteExampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -3928,7 +4167,7 @@ public class IBMAssistantV1Models {
   public class DeleteIntentOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String intent;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -3939,7 +4178,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -3968,6 +4207,11 @@ public class IBMAssistantV1Models {
       return new DeleteIntentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4052,7 +4296,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private String synonym;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -4063,7 +4307,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -4074,7 +4318,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -4085,7 +4329,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the synonym.
      *
@@ -4118,6 +4362,11 @@ public class IBMAssistantV1Models {
       return new DeleteSynonymOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4229,7 +4478,7 @@ public class IBMAssistantV1Models {
    */
   public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
     private String customerId;
- 
+
     /**
      * Gets the customerId.
      *
@@ -4256,6 +4505,11 @@ public class IBMAssistantV1Models {
       return new DeleteUserDataOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customerId', 'customer_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4324,7 +4578,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String entity;
     private String value;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -4335,7 +4589,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -4346,7 +4600,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -4377,6 +4631,11 @@ public class IBMAssistantV1Models {
       return new DeleteValueOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4473,7 +4732,7 @@ public class IBMAssistantV1Models {
    */
   public class DeleteWorkspaceOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -4500,6 +4759,11 @@ public class IBMAssistantV1Models {
       return new DeleteWorkspaceOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4565,27 +4829,27 @@ public class IBMAssistantV1Models {
    * DialogNode.
    */
   public class DialogNode extends IBMWatsonResponseModel {
-    private String dialog_node_serialized_name;
-    private String description_serialized_name;
-    private String conditions_serialized_name;
-    private String parent_serialized_name;
-    private String previous_sibling_serialized_name;
-    private DialogNodeOutput output_serialized_name;
-    private IBMWatsonMapModel context_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private DialogNodeNextStep next_step_serialized_name;
-    private String title_serialized_name;
-    private String type_serialized_name;
-    private String event_name_serialized_name;
-    private String variable_serialized_name;
-    private List<DialogNodeAction> actions_serialized_name;
-    private String digress_in_serialized_name;
-    private String digress_out_serialized_name;
-    private String digress_out_slots_serialized_name;
-    private String user_label_serialized_name;
-    private Boolean disabled_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
+    private String dialogNode;
+    private String description;
+    private String conditions;
+    private String parent;
+    private String previousSibling;
+    private DialogNodeOutput output;
+    private IBMWatsonMapModel context;
+    private IBMWatsonMapModel metadata;
+    private DialogNodeNextStep nextStep;
+    private String title;
+    private String nodeType;
+    private String eventName;
+    private String variable;
+    private List<DialogNodeAction> actions;
+    private String digressIn;
+    private String digressOut;
+    private String digressOutSlots;
+    private String userLabel;
+    private Boolean disabled;
+    private Datetime created;
+    private Datetime updated;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -4603,7 +4867,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDialogNode() {
-      return dialog_node_serialized_name;
+      return dialogNode;
     }
  
     /**
@@ -4615,7 +4879,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -4628,7 +4892,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getConditions() {
-      return conditions_serialized_name;
+      return conditions;
     }
  
     /**
@@ -4640,7 +4904,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getParent() {
-      return parent_serialized_name;
+      return parent;
     }
  
     /**
@@ -4652,7 +4916,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getPreviousSibling() {
-      return previous_sibling_serialized_name;
+      return previousSibling;
     }
  
     /**
@@ -4665,7 +4929,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public DialogNodeOutput getOutput() {
-      return output_serialized_name;
+      return output;
     }
  
     /**
@@ -4677,7 +4941,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getContext() {
-      return context_serialized_name;
+      return context;
     }
  
     /**
@@ -4689,7 +4953,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
  
     /**
@@ -4701,7 +4965,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public DialogNodeNextStep getNextStep() {
-      return next_step_serialized_name;
+      return nextStep;
     }
  
     /**
@@ -4714,7 +4978,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -4726,7 +4990,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getNodeType() {
-      return type_serialized_name;
+      return nodeType;
     }
  
     /**
@@ -4738,7 +5002,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getEventName() {
-      return event_name_serialized_name;
+      return eventName;
     }
  
     /**
@@ -4750,7 +5014,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getVariable() {
-      return variable_serialized_name;
+      return variable;
     }
  
     /**
@@ -4762,7 +5026,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNodeAction> getActions() {
-      return actions_serialized_name;
+      return actions;
     }
  
     /**
@@ -4774,7 +5038,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDigressIn() {
-      return digress_in_serialized_name;
+      return digressIn;
     }
  
     /**
@@ -4786,7 +5050,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDigressOut() {
-      return digress_out_serialized_name;
+      return digressOut;
     }
  
     /**
@@ -4798,7 +5062,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDigressOutSlots() {
-      return digress_out_slots_serialized_name;
+      return digressOutSlots;
     }
  
     /**
@@ -4810,7 +5074,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getUserLabel() {
-      return user_label_serialized_name;
+      return userLabel;
     }
  
     /**
@@ -4822,7 +5086,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getDisabled() {
-      return disabled_serialized_name;
+      return disabled;
     }
  
     /**
@@ -4834,7 +5098,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -4846,32 +5110,32 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
   
     private DialogNode(DialogNodeBuilder builder) {
       IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
-      this.dialog_node_serialized_name = builder.dialogNode;
-      this.description_serialized_name = builder.description;
-      this.conditions_serialized_name = builder.conditions;
-      this.parent_serialized_name = builder.parent;
-      this.previous_sibling_serialized_name = builder.previousSibling;
-      this.output_serialized_name = builder.output;
-      this.context_serialized_name = builder.context;
-      this.metadata_serialized_name = builder.metadata;
-      this.next_step_serialized_name = builder.nextStep;
-      this.title_serialized_name = builder.title;
-      this.type_serialized_name = builder.nodeType;
-      this.event_name_serialized_name = builder.eventName;
-      this.variable_serialized_name = builder.variable;
-      this.actions_serialized_name = builder.actions;
-      this.digress_in_serialized_name = builder.digressIn;
-      this.digress_out_serialized_name = builder.digressOut;
-      this.digress_out_slots_serialized_name = builder.digressOutSlots;
-      this.user_label_serialized_name = builder.userLabel;
-      this.disabled_serialized_name = builder.disabled;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
+      this.dialogNode = builder.dialogNode;
+      this.description = builder.description;
+      this.conditions = builder.conditions;
+      this.parent = builder.parent;
+      this.previousSibling = builder.previousSibling;
+      this.output = builder.output;
+      this.context = builder.context;
+      this.metadata = builder.metadata;
+      this.nextStep = builder.nextStep;
+      this.title = builder.title;
+      this.nodeType = builder.nodeType;
+      this.eventName = builder.eventName;
+      this.variable = builder.variable;
+      this.actions = builder.actions;
+      this.digressIn = builder.digressIn;
+      this.digressOut = builder.digressOut;
+      this.digressOutSlots = builder.digressOutSlots;
+      this.userLabel = builder.userLabel;
+      this.disabled = builder.disabled;
+      this.created = builder.created;
+      this.updated = builder.updated;
     }
 
     /**
@@ -4892,19 +5156,19 @@ public class IBMAssistantV1Models {
       DialogNodeBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for output
-      DialogNodeOutput newOutput = (DialogNodeOutput) new DialogNodeOutput().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), DialogNodeOutput.class);
+      DialogNodeOutput newOutput = (DialogNodeOutput) new DialogNodeOutput().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'), DialogNodeOutput.class);
       retBuilder.output(newOutput);
 
       // calling custom deserializer for context
-      IBMWatsonMapModel newContext = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newContext = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context'), IBMWatsonMapModel.class);
       retBuilder.context(newContext);
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
       retBuilder.metadata(newMetadata);
 
       // calling custom deserializer for nextStep
-      DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(ret.getNextStep()), (Map<String, Object>) jsonMap.get('next_step_serialized_name'), DialogNodeNextStep.class);
+      DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(ret.getNextStep()), (Map<String, Object>) jsonMap.get('nextStep'), DialogNodeNextStep.class);
       retBuilder.nextStep(newNextStep);
 
       // calling custom deserializer for actions
@@ -4913,7 +5177,7 @@ public class IBMAssistantV1Models {
       if (deserializedActions != null) {
         for (Integer i = 0; i < deserializedActions.size(); i++) {
           DialogNodeAction currentItem = ret.getActions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('actions_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('actions');
           DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
@@ -4921,6 +5185,52 @@ public class IBMAssistantV1Models {
       }
 
       return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('dialogNode', 'dialog_node');
+      mapping.put('previousSibling', 'previous_sibling');
+      if (output != null) {
+        mapping.putAll(output.getSdkToApiMapping());
+      }
+      mapping.put('nextStep', 'next_step');
+      if (nextStep != null) {
+        mapping.putAll(nextStep.getSdkToApiMapping());
+      }
+      mapping.put('nodeType', 'type');
+      mapping.put('eventName', 'event_name');
+      if (actions != null && actions[0] != null) {
+        mapping.putAll(actions[0].getSdkToApiMapping());
+      }
+      mapping.put('digressIn', 'digress_in');
+      mapping.put('digressOut', 'digress_out');
+      mapping.put('digressOutSlots', 'digress_out_slots');
+      mapping.put('userLabel', 'user_label');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('dialog_node', 'dialogNode');
+      mapping.put('previous_sibling', 'previousSibling');
+      if (output != null) {
+        mapping.putAll(output.getApiToSdkMapping());
+      }
+      mapping.put('next_step', 'nextStep');
+      if (nextStep != null) {
+        mapping.putAll(nextStep.getApiToSdkMapping());
+      }
+      mapping.put('type', 'nodeType');
+      mapping.put('event_name', 'eventName');
+      if (actions != null && actions[0] != null) {
+        mapping.putAll(actions[0].getApiToSdkMapping());
+      }
+      mapping.put('digress_in', 'digressIn');
+      mapping.put('digress_out', 'digressOut');
+      mapping.put('digress_out_slots', 'digressOutSlots');
+      mapping.put('user_label', 'userLabel');
+      return mapping;
     }
   }
 
@@ -4951,27 +5261,27 @@ public class IBMAssistantV1Models {
     private Datetime updated;
 
     private DialogNodeBuilder(DialogNode dialogNode) {
-      this.dialogNode = dialogNode.dialog_node_serialized_name;
-      this.description = dialogNode.description_serialized_name;
-      this.conditions = dialogNode.conditions_serialized_name;
-      this.parent = dialogNode.parent_serialized_name;
-      this.previousSibling = dialogNode.previous_sibling_serialized_name;
-      this.output = dialogNode.output_serialized_name;
-      this.context = dialogNode.context_serialized_name;
-      this.metadata = dialogNode.metadata_serialized_name;
-      this.nextStep = dialogNode.next_step_serialized_name;
-      this.title = dialogNode.title_serialized_name;
-      this.nodeType = dialogNode.type_serialized_name;
-      this.eventName = dialogNode.event_name_serialized_name;
-      this.variable = dialogNode.variable_serialized_name;
-      this.actions = dialogNode.actions_serialized_name;
-      this.digressIn = dialogNode.digress_in_serialized_name;
-      this.digressOut = dialogNode.digress_out_serialized_name;
-      this.digressOutSlots = dialogNode.digress_out_slots_serialized_name;
-      this.userLabel = dialogNode.user_label_serialized_name;
-      this.disabled = dialogNode.disabled_serialized_name;
-      this.created = dialogNode.created_serialized_name;
-      this.updated = dialogNode.updated_serialized_name;
+      this.dialogNode = dialogNode.dialogNode;
+      this.description = dialogNode.description;
+      this.conditions = dialogNode.conditions;
+      this.parent = dialogNode.parent;
+      this.previousSibling = dialogNode.previousSibling;
+      this.output = dialogNode.output;
+      this.context = dialogNode.context;
+      this.metadata = dialogNode.metadata;
+      this.nextStep = dialogNode.nextStep;
+      this.title = dialogNode.title;
+      this.nodeType = dialogNode.nodeType;
+      this.eventName = dialogNode.eventName;
+      this.variable = dialogNode.variable;
+      this.actions = dialogNode.actions;
+      this.digressIn = dialogNode.digressIn;
+      this.digressOut = dialogNode.digressOut;
+      this.digressOutSlots = dialogNode.digressOutSlots;
+      this.userLabel = dialogNode.userLabel;
+      this.disabled = dialogNode.disabled;
+      this.created = dialogNode.created;
+      this.updated = dialogNode.updated;
     }
 
     /**
@@ -5250,11 +5560,17 @@ public class IBMAssistantV1Models {
    * DialogNodeAction.
    */
   public class DialogNodeAction extends IBMWatsonGenericModel {
-    private String name_serialized_name;
-    private String type_serialized_name;
-    private IBMWatsonMapModel parameters_serialized_name;
-    private String result_variable_serialized_name;
-    private String credentials_serialized_name;
+    private String name;
+    private String actionType;
+    private IBMWatsonMapModel parameters;
+    private String resultVariable;
+    private String credentials;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeAction() { }
  
     /**
      * Gets the name.
@@ -5265,7 +5581,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -5277,7 +5593,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getActionType() {
-      return type_serialized_name;
+      return actionType;
     }
  
     /**
@@ -5289,7 +5605,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getParameters() {
-      return parameters_serialized_name;
+      return parameters;
     }
  
     /**
@@ -5301,7 +5617,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getResultVariable() {
-      return result_variable_serialized_name;
+      return resultVariable;
     }
  
     /**
@@ -5313,52 +5629,26 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getCredentials() {
-      return credentials_serialized_name;
+      return credentials;
+    }
+  
+    private DialogNodeAction(DialogNodeActionBuilder builder) {
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      IBMWatsonValidator.notNull(builder.resultVariable, 'resultVariable cannot be null');
+      this.name = builder.name;
+      this.actionType = builder.actionType;
+      this.parameters = builder.parameters;
+      this.resultVariable = builder.resultVariable;
+      this.credentials = builder.credentials;
     }
 
     /**
-     * Sets the name.
+     * New builder.
      *
-     * @param name the new name
+     * @return a DialogNodeAction builder
      */
-    public void setName(final String name) {
-      this.name_serialized_name = name;
-    }
-
-    /**
-     * Sets the actionType.
-     *
-     * @param actionType the new actionType
-     */
-    public void setActionType(final String actionType) {
-      this.type_serialized_name = actionType;
-    }
-
-    /**
-     * Sets the parameters.
-     *
-     * @param parameters the new parameters
-     */
-    public void setParameters(final IBMWatsonMapModel parameters) {
-      this.parameters_serialized_name = parameters;
-    }
-
-    /**
-     * Sets the resultVariable.
-     *
-     * @param resultVariable the new resultVariable
-     */
-    public void setResultVariable(final String resultVariable) {
-      this.result_variable_serialized_name = resultVariable;
-    }
-
-    /**
-     * Sets the credentials.
-     *
-     * @param credentials the new credentials
-     */
-    public void setCredentials(final String credentials) {
-      this.credentials_serialized_name = credentials;
+    public DialogNodeActionBuilder newBuilder() {
+      return new DialogNodeActionBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5367,12 +5657,127 @@ public class IBMAssistantV1Models {
       }
 
       DialogNodeAction ret = (DialogNodeAction) super.deserialize(jsonString, jsonMap, classType);
+      DialogNodeActionBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for parameters
-      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getParameters()), (Map<String, Object>) jsonMap.get('parameters_serialized_name'), IBMWatsonMapModel.class);
-      ret.setParameters(newParameters);
+      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getParameters()), (Map<String, Object>) jsonMap.get('parameters'), IBMWatsonMapModel.class);
+      retBuilder.setParameters(newParameters);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('actionType', 'type');
+      mapping.put('resultVariable', 'result_variable');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'actionType');
+      mapping.put('result_variable', 'resultVariable');
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogNodeAction Builder.
+   */
+  public class DialogNodeActionBuilder {
+    private String name;
+    private String actionType;
+    private IBMWatsonMapModel parameters;
+    private String resultVariable;
+    private String credentials;
+
+    private DialogNodeActionBuilder(DialogNodeAction dialogNodeAction) {
+      this.name = dialogNodeAction.name;
+      this.actionType = dialogNodeAction.actionType;
+      this.parameters = dialogNodeAction.parameters;
+      this.resultVariable = dialogNodeAction.resultVariable;
+      this.credentials = dialogNodeAction.credentials;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogNodeActionBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param name the name
+     * @param resultVariable the resultVariable
+     */
+    public DialogNodeActionBuilder(String name, String resultVariable) {
+      this.name = name;
+      this.resultVariable = resultVariable;
+    }
+
+    /**
+     * Builds a DialogNodeAction.
+     *
+     * @return the dialogNodeAction
+     */
+    public DialogNodeAction build() {
+      return new DialogNodeAction(this);
+    }
+
+    /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the DialogNodeAction builder
+     */
+    public DialogNodeActionBuilder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
+     * Set the actionType.
+     *
+     * @param actionType the actionType
+     * @return the DialogNodeAction builder
+     */
+    public DialogNodeActionBuilder setActionType(String actionType) {
+      this.actionType = actionType;
+      return this;
+    }
+
+    /**
+     * Set the parameters.
+     *
+     * @param parameters the parameters
+     * @return the DialogNodeAction builder
+     */
+    public DialogNodeActionBuilder setParameters(IBMWatsonMapModel parameters) {
+      this.parameters = parameters;
+      return this;
+    }
+
+    /**
+     * Set the resultVariable.
+     *
+     * @param resultVariable the resultVariable
+     * @return the DialogNodeAction builder
+     */
+    public DialogNodeActionBuilder setResultVariable(String resultVariable) {
+      this.resultVariable = resultVariable;
+      return this;
+    }
+
+    /**
+     * Set the credentials.
+     *
+     * @param credentials the credentials
+     * @return the DialogNodeAction builder
+     */
+    public DialogNodeActionBuilder setCredentials(String credentials) {
+      this.credentials = credentials;
+      return this;
     }
   }
 
@@ -5380,8 +5785,8 @@ public class IBMAssistantV1Models {
    * An array of dialog nodes.
    */
   public class DialogNodeCollection extends IBMWatsonResponseModel {
-    private List<DialogNode> dialog_nodes_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<DialogNode> dialogNodes;
+    private Pagination pagination;
  
     /**
      * Gets the dialogNodes.
@@ -5392,7 +5797,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNode> getDialogNodes() {
-      return dialog_nodes_serialized_name;
+      return dialogNodes;
     }
  
     /**
@@ -5404,7 +5809,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -5413,7 +5818,7 @@ public class IBMAssistantV1Models {
      * @param dialogNodes the new dialogNodes
      */
     public void setDialogNodes(final List<DialogNode> dialogNodes) {
-      this.dialog_nodes_serialized_name = dialogNodes;
+      this.dialogNodes = dialogNodes;
     }
 
     /**
@@ -5422,7 +5827,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5438,18 +5843,30 @@ public class IBMAssistantV1Models {
       if (deserializedDialogNodes != null) {
         for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
           DialogNode currentItem = ret.getDialogNodes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('dialog_nodes_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('dialogNodes');
           DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
           newDialogNodes.add(newItem);
         }
-        ret.dialog_nodes_serialized_name = newDialogNodes;
+        ret.dialogNodes = newDialogNodes;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('dialog_nodes', 'dialogNodes');
+      if (dialogNodes != null && dialogNodes[0] != null) {
+        mapping.putAll(dialogNodes[0].getApiToSdkMapping());
+      }
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5457,9 +5874,15 @@ public class IBMAssistantV1Models {
    * The next step to execute following this dialog node.
    */
   public class DialogNodeNextStep extends IBMWatsonGenericModel {
-    private String behavior_serialized_name;
-    private String dialog_node_serialized_name;
-    private String selector_serialized_name;
+    private String behavior;
+    private String dialogNode;
+    private String selector;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeNextStep() { }
  
     /**
      * Gets the behavior.
@@ -5489,7 +5912,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getBehavior() {
-      return behavior_serialized_name;
+      return behavior;
     }
  
     /**
@@ -5501,7 +5924,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDialogNode() {
-      return dialog_node_serialized_name;
+      return dialogNode;
     }
  
     /**
@@ -5513,45 +5936,123 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getSelector() {
-      return selector_serialized_name;
+      return selector;
+    }
+  
+    private DialogNodeNextStep(DialogNodeNextStepBuilder builder) {
+      IBMWatsonValidator.notNull(builder.behavior, 'behavior cannot be null');
+      this.behavior = builder.behavior;
+      this.dialogNode = builder.dialogNode;
+      this.selector = builder.selector;
     }
 
     /**
-     * Sets the behavior.
+     * New builder.
      *
-     * @param behavior the new behavior
+     * @return a DialogNodeNextStep builder
      */
-    public void setBehavior(final String behavior) {
-      this.behavior_serialized_name = behavior;
+    public DialogNodeNextStepBuilder newBuilder() {
+      return new DialogNodeNextStepBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('dialogNode', 'dialog_node');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('dialog_node', 'dialogNode');
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogNodeNextStep Builder.
+   */
+  public class DialogNodeNextStepBuilder {
+    private String behavior;
+    private String dialogNode;
+    private String selector;
+
+    private DialogNodeNextStepBuilder(DialogNodeNextStep dialogNodeNextStep) {
+      this.behavior = dialogNodeNextStep.behavior;
+      this.dialogNode = dialogNodeNextStep.dialogNode;
+      this.selector = dialogNodeNextStep.selector;
     }
 
     /**
-     * Sets the dialogNode.
-     *
-     * @param dialogNode the new dialogNode
+     * Instantiates a new builder.
      */
-    public void setDialogNode(final String dialogNode) {
-      this.dialog_node_serialized_name = dialogNode;
+    public DialogNodeNextStepBuilder() {
     }
 
     /**
-     * Sets the selector.
+     * Instantiates a new builder with required properties.
      *
-     * @param selector the new selector
+     * @param behavior the behavior
      */
-    public void setSelector(final String selector) {
-      this.selector_serialized_name = selector;
+    public DialogNodeNextStepBuilder(String behavior) {
+      this.behavior = behavior;
     }
 
+    /**
+     * Builds a DialogNodeNextStep.
+     *
+     * @return the dialogNodeNextStep
+     */
+    public DialogNodeNextStep build() {
+      return new DialogNodeNextStep(this);
+    }
+
+    /**
+     * Set the behavior.
+     *
+     * @param behavior the behavior
+     * @return the DialogNodeNextStep builder
+     */
+    public DialogNodeNextStepBuilder setBehavior(String behavior) {
+      this.behavior = behavior;
+      return this;
+    }
+
+    /**
+     * Set the dialogNode.
+     *
+     * @param dialogNode the dialogNode
+     * @return the DialogNodeNextStep builder
+     */
+    public DialogNodeNextStepBuilder setDialogNode(String dialogNode) {
+      this.dialogNode = dialogNode;
+      return this;
+    }
+
+    /**
+     * Set the selector.
+     *
+     * @param selector the selector
+     * @return the DialogNodeNextStep builder
+     */
+    public DialogNodeNextStepBuilder setSelector(String selector) {
+      this.selector = selector;
+      return this;
+    }
   }
 
   /**
    * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
    */
   public class DialogNodeOutput extends IBMWatsonDynamicModel {
-    private List<DialogNodeOutputGeneric> generic_serialized_name;
-    private DialogNodeOutputModifiers modifiers_serialized_name;
+    private List<DialogNodeOutputGeneric> generic;
+    private DialogNodeOutputModifiers modifiers;
     private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeOutput() { }
 
     /**
      * Gets the generic.
@@ -5560,7 +6061,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNodeOutputGeneric> getGeneric() {
-      return generic_serialized_name;
+      return generic;
     }
 
     /**
@@ -5570,7 +6071,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public DialogNodeOutputModifiers getModifiers() {
-      return modifiers_serialized_name;
+      return modifiers;
     }
 
     /**
@@ -5583,22 +6084,18 @@ public class IBMAssistantV1Models {
       return this.getDynamicProperties();
     }
 
-    /**
-     * Sets the generic.
-     *
-     * @param generic the new generic
-     */
-    public void setGeneric(final List<DialogNodeOutputGeneric> generic) {
-      this.generic_serialized_name = generic;
+    private DialogNodeOutput(DialogNodeOutputBuilder builder) {
+      this.generic = builder.generic;
+      this.modifiers = builder.modifiers;
     }
 
     /**
-     * Sets the modifiers.
+     * New builder.
      *
-     * @param modifiers the new modifiers
+     * @return a DialogNodeOutput builder
      */
-    public void setModifiers(final DialogNodeOutputModifiers modifiers) {
-      this.modifiers_serialized_name = modifiers;
+    public DialogNodeOutputBuilder newBuilder() {
+      return new DialogNodeOutputBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5607,6 +6104,7 @@ public class IBMAssistantV1Models {
       }
 
       DialogNodeOutput ret = (DialogNodeOutput) super.deserialize(jsonString, jsonMap, classType);
+      DialogNodeOutputBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for generic
       List<DialogNodeOutputGeneric> newGeneric = new List<DialogNodeOutputGeneric>();
@@ -5614,26 +6112,108 @@ public class IBMAssistantV1Models {
       if (deserializedGeneric != null) {
         for (Integer i = 0; i < deserializedGeneric.size(); i++) {
           DialogNodeOutputGeneric currentItem = ret.getGeneric().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('generic_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
           DialogNodeOutputGeneric newItem = (DialogNodeOutputGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputGeneric.class);
           newGeneric.add(newItem);
         }
-        ret.setGeneric(newGeneric);
+        retBuilder.setGeneric(newGeneric);
       }
 
       // calling custom deserializer for modifiers
-      DialogNodeOutputModifiers newModifiers = (DialogNodeOutputModifiers) new DialogNodeOutputModifiers().deserialize(JSON.serialize(ret.getModifiers()), (Map<String, Object>) jsonMap.get('modifiers_serialized_name'), DialogNodeOutputModifiers.class);
-      ret.setModifiers(newModifiers);
+      DialogNodeOutputModifiers newModifiers = (DialogNodeOutputModifiers) new DialogNodeOutputModifiers().deserialize(JSON.serialize(ret.getModifiers()), (Map<String, Object>) jsonMap.get('modifiers'), DialogNodeOutputModifiers.class);
+      retBuilder.setModifiers(newModifiers);
 
+      DialogNodeOutput builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
+          builderResult.put(key, jsonMap.get(key));
         }
       }
 
-      return ret;
+      return builderResult;
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (generic != null && generic[0] != null) {
+        mapping.putAll(generic[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (generic != null && generic[0] != null) {
+        mapping.putAll(generic[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogNodeOutput Builder.
+   */
+  public class DialogNodeOutputBuilder {
+    private List<DialogNodeOutputGeneric> generic;
+    private DialogNodeOutputModifiers modifiers;
+
+    private DialogNodeOutputBuilder(DialogNodeOutput dialogNodeOutput) {
+      this.generic = dialogNodeOutput.generic;
+      this.modifiers = dialogNodeOutput.modifiers;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogNodeOutputBuilder() { }
+
+    /**
+     * Builds a DialogNodeOutput.
+     *
+     * @return the dialogNodeOutput
+     */
+    public DialogNodeOutput build() {
+      return new DialogNodeOutput(this);
+    }
+
+    /**
+     * Adds an generic to generic.
+     *
+     * @param generic the new generic
+     * @return the DialogNodeOutput builder
+     */
+    public DialogNodeOutputBuilder addGeneric(DialogNodeOutputGeneric generic) {
+      IBMWatsonValidator.notNull(generic, 'generic cannot be null');
+      if (this.generic == null) {
+        this.generic = new List<DialogNodeOutputGeneric>();
+      }
+      this.generic.add(generic);
+      return this;
+    }
+
+    /**
+     * Set the generic.
+     * Existing generic will be replaced.
+     *
+     * @param generic the generic
+     * @return the DialogNodeOutput builder
+     */
+    public DialogNodeOutputBuilder setGeneric(List<DialogNodeOutputGeneric> generic) {
+      this.generic = generic;
+      return this;
+    }
+
+    /**
+     * Set the modifiers.
+     *
+     * @param modifiers the modifiers
+     * @return the DialogNodeOutput builder
+     */
+    public DialogNodeOutputBuilder setModifiers(DialogNodeOutputModifiers modifiers) {
+      this.modifiers = modifiers;
+      return this;
     }
   }
 
@@ -5641,18 +6221,24 @@ public class IBMAssistantV1Models {
    * DialogNodeOutputGeneric.
    */
   public class DialogNodeOutputGeneric extends IBMWatsonGenericModel {
-    private String response_type_serialized_name;
-    private List<DialogNodeOutputTextValuesElement> values_serialized_name;
-    private String selection_policy_serialized_name;
-    private String delimiter_serialized_name;
-    private Long time_serialized_name;
-    private Boolean typing_serialized_name;
-    private String source_serialized_name;
-    private String title_serialized_name;
-    private String description_serialized_name;
-    private String preference_serialized_name;
-    private List<DialogNodeOutputOptionsElement> options_serialized_name;
-    private String message_to_human_agent_serialized_name;
+    private String responseType;
+    private List<DialogNodeOutputTextValuesElement> values;
+    private String selectionPolicy;
+    private String delimiter;
+    private Long xtime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeOutputGeneric() { }
  
     /**
      * Gets the responseType.
@@ -5664,7 +6250,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getResponseType() {
-      return response_type_serialized_name;
+      return responseType;
     }
  
     /**
@@ -5676,7 +6262,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNodeOutputTextValuesElement> getValues() {
-      return values_serialized_name;
+      return values;
     }
  
     /**
@@ -5689,7 +6275,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getSelectionPolicy() {
-      return selection_policy_serialized_name;
+      return selectionPolicy;
     }
  
     /**
@@ -5701,7 +6287,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDelimiter() {
-      return delimiter_serialized_name;
+      return delimiter;
     }
  
     /**
@@ -5714,7 +6300,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Long getXtime() {
-      return time_serialized_name;
+      return xtime;
     }
  
     /**
@@ -5727,7 +6313,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getTyping() {
-      return typing_serialized_name;
+      return typing;
     }
  
     /**
@@ -5739,7 +6325,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getSource() {
-      return source_serialized_name;
+      return source;
     }
  
     /**
@@ -5751,7 +6337,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -5763,7 +6349,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -5776,7 +6362,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getPreference() {
-      return preference_serialized_name;
+      return preference;
     }
  
     /**
@@ -5789,7 +6375,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNodeOutputOptionsElement> getOptions() {
-      return options_serialized_name;
+      return options;
     }
  
     /**
@@ -5802,115 +6388,32 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getMessageToHumanAgent() {
-      return message_to_human_agent_serialized_name;
+      return messageToHumanAgent;
+    }
+  
+    private DialogNodeOutputGeneric(DialogNodeOutputGenericBuilder builder) {
+      IBMWatsonValidator.notNull(builder.responseType, 'responseType cannot be null');
+      this.responseType = builder.responseType;
+      this.values = builder.values;
+      this.selectionPolicy = builder.selectionPolicy;
+      this.delimiter = builder.delimiter;
+      this.xtime = builder.xtime;
+      this.typing = builder.typing;
+      this.source = builder.source;
+      this.title = builder.title;
+      this.description = builder.description;
+      this.preference = builder.preference;
+      this.options = builder.options;
+      this.messageToHumanAgent = builder.messageToHumanAgent;
     }
 
     /**
-     * Sets the responseType.
+     * New builder.
      *
-     * @param responseType the new responseType
+     * @return a DialogNodeOutputGeneric builder
      */
-    public void setResponseType(final String responseType) {
-      this.response_type_serialized_name = responseType;
-    }
-
-    /**
-     * Sets the values.
-     *
-     * @param values the new values
-     */
-    public void setValues(final List<DialogNodeOutputTextValuesElement> values) {
-      this.values_serialized_name = values;
-    }
-
-    /**
-     * Sets the selectionPolicy.
-     *
-     * @param selectionPolicy the new selectionPolicy
-     */
-    public void setSelectionPolicy(final String selectionPolicy) {
-      this.selection_policy_serialized_name = selectionPolicy;
-    }
-
-    /**
-     * Sets the delimiter.
-     *
-     * @param delimiter the new delimiter
-     */
-    public void setDelimiter(final String delimiter) {
-      this.delimiter_serialized_name = delimiter;
-    }
-
-    /**
-     * Sets the xtime.
-     *
-     * @param xtime the new xtime
-     */
-    public void setXtime(final long xtime) {
-      this.time_serialized_name = xtime;
-    }
-
-    /**
-     * Sets the typing.
-     *
-     * @param typing the new typing
-     */
-    public void setTyping(final Boolean typing) {
-      this.typing_serialized_name = typing;
-    }
-
-    /**
-     * Sets the source.
-     *
-     * @param source the new source
-     */
-    public void setSource(final String source) {
-      this.source_serialized_name = source;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title_serialized_name = title;
-    }
-
-    /**
-     * Sets the description.
-     *
-     * @param description the new description
-     */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the preference.
-     *
-     * @param preference the new preference
-     */
-    public void setPreference(final String preference) {
-      this.preference_serialized_name = preference;
-    }
-
-    /**
-     * Sets the options.
-     *
-     * @param options the new options
-     */
-    public void setOptions(final List<DialogNodeOutputOptionsElement> options) {
-      this.options_serialized_name = options;
-    }
-
-    /**
-     * Sets the messageToHumanAgent.
-     *
-     * @param messageToHumanAgent the new messageToHumanAgent
-     */
-    public void setMessageToHumanAgent(final String messageToHumanAgent) {
-      this.message_to_human_agent_serialized_name = messageToHumanAgent;
+    public DialogNodeOutputGenericBuilder newBuilder() {
+      return new DialogNodeOutputGenericBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5919,6 +6422,7 @@ public class IBMAssistantV1Models {
       }
 
       DialogNodeOutputGeneric ret = (DialogNodeOutputGeneric) super.deserialize(jsonString, jsonMap, classType);
+      DialogNodeOutputGenericBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for values
       List<DialogNodeOutputTextValuesElement> newValues = new List<DialogNodeOutputTextValuesElement>();
@@ -5926,11 +6430,11 @@ public class IBMAssistantV1Models {
       if (deserializedValues != null) {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           DialogNodeOutputTextValuesElement currentItem = ret.getValues().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('values');
           DialogNodeOutputTextValuesElement newItem = (DialogNodeOutputTextValuesElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputTextValuesElement.class);
           newValues.add(newItem);
         }
-        ret.values_serialized_name = newValues;
+        retBuilder.setValues(newValues);
       }
 
       // calling custom deserializer for options
@@ -5939,14 +6443,259 @@ public class IBMAssistantV1Models {
       if (deserializedOptions != null) {
         for (Integer i = 0; i < deserializedOptions.size(); i++) {
           DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('options_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('options');
           DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
-        ret.options_serialized_name = newOptions;
+        retBuilder.setOptions(newOptions);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('responseType', 'response_type');
+      mapping.put('selectionPolicy', 'selection_policy');
+      mapping.put('xtime', 'time');
+      if (options != null && options[0] != null) {
+        mapping.putAll(options[0].getSdkToApiMapping());
+      }
+      mapping.put('messageToHumanAgent', 'message_to_human_agent');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('response_type', 'responseType');
+      mapping.put('selection_policy', 'selectionPolicy');
+      mapping.put('time', 'xtime');
+      if (options != null && options[0] != null) {
+        mapping.putAll(options[0].getApiToSdkMapping());
+      }
+      mapping.put('message_to_human_agent', 'messageToHumanAgent');
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogNodeOutputGeneric Builder.
+   */
+  public class DialogNodeOutputGenericBuilder {
+    private String responseType;
+    private List<DialogNodeOutputTextValuesElement> values;
+    private String selectionPolicy;
+    private String delimiter;
+    private Long xtime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+
+    private DialogNodeOutputGenericBuilder(DialogNodeOutputGeneric dialogNodeOutputGeneric) {
+      this.responseType = dialogNodeOutputGeneric.responseType;
+      this.values = dialogNodeOutputGeneric.values;
+      this.selectionPolicy = dialogNodeOutputGeneric.selectionPolicy;
+      this.delimiter = dialogNodeOutputGeneric.delimiter;
+      this.xtime = dialogNodeOutputGeneric.xtime;
+      this.typing = dialogNodeOutputGeneric.typing;
+      this.source = dialogNodeOutputGeneric.source;
+      this.title = dialogNodeOutputGeneric.title;
+      this.description = dialogNodeOutputGeneric.description;
+      this.preference = dialogNodeOutputGeneric.preference;
+      this.options = dialogNodeOutputGeneric.options;
+      this.messageToHumanAgent = dialogNodeOutputGeneric.messageToHumanAgent;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogNodeOutputGenericBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param responseType the responseType
+     */
+    public DialogNodeOutputGenericBuilder(String responseType) {
+      this.responseType = responseType;
+    }
+
+    /**
+     * Builds a DialogNodeOutputGeneric.
+     *
+     * @return the dialogNodeOutputGeneric
+     */
+    public DialogNodeOutputGeneric build() {
+      return new DialogNodeOutputGeneric(this);
+    }
+
+    /**
+     * Adds an values to values.
+     *
+     * @param values the new values
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder addValues(DialogNodeOutputTextValuesElement values) {
+      IBMWatsonValidator.notNull(values, 'values cannot be null');
+      if (this.values == null) {
+        this.values = new List<DialogNodeOutputTextValuesElement>();
+      }
+      this.values.add(values);
+      return this;
+    }
+
+    /**
+     * Adds an options to options.
+     *
+     * @param options the new options
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder addOptions(DialogNodeOutputOptionsElement options) {
+      IBMWatsonValidator.notNull(options, 'options cannot be null');
+      if (this.options == null) {
+        this.options = new List<DialogNodeOutputOptionsElement>();
+      }
+      this.options.add(options);
+      return this;
+    }
+
+    /**
+     * Set the responseType.
+     *
+     * @param responseType the responseType
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setResponseType(String responseType) {
+      this.responseType = responseType;
+      return this;
+    }
+
+    /**
+     * Set the values.
+     * Existing values will be replaced.
+     *
+     * @param values the values
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setValues(List<DialogNodeOutputTextValuesElement> values) {
+      this.values = values;
+      return this;
+    }
+
+    /**
+     * Set the selectionPolicy.
+     *
+     * @param selectionPolicy the selectionPolicy
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setSelectionPolicy(String selectionPolicy) {
+      this.selectionPolicy = selectionPolicy;
+      return this;
+    }
+
+    /**
+     * Set the delimiter.
+     *
+     * @param delimiter the delimiter
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setDelimiter(String delimiter) {
+      this.delimiter = delimiter;
+      return this;
+    }
+
+    /**
+     * Set the xtime.
+     *
+     * @param xtime the xtime
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setXtime(Long xtime) {
+      this.xtime = xtime;
+      return this;
+    }
+
+    /**
+     * Set the typing.
+     *
+     * @param typing the typing
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setTyping(Boolean typing) {
+      this.typing = typing;
+      return this;
+    }
+
+    /**
+     * Set the source.
+     *
+     * @param source the source
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setSource(String source) {
+      this.source = source;
+      return this;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param title the title
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setTitle(String title) {
+      this.title = title;
+      return this;
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the preference.
+     *
+     * @param preference the preference
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setPreference(String preference) {
+      this.preference = preference;
+      return this;
+    }
+
+    /**
+     * Set the options.
+     * Existing options will be replaced.
+     *
+     * @param options the options
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setOptions(List<DialogNodeOutputOptionsElement> options) {
+      this.options = options;
+      return this;
+    }
+
+    /**
+     * Set the messageToHumanAgent.
+     *
+     * @param messageToHumanAgent the messageToHumanAgent
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder setMessageToHumanAgent(String messageToHumanAgent) {
+      this.messageToHumanAgent = messageToHumanAgent;
+      return this;
     }
   }
 
@@ -5954,7 +6703,13 @@ public class IBMAssistantV1Models {
    * Options that modify how specified output is handled.
    */
   public class DialogNodeOutputModifiers extends IBMWatsonGenericModel {
-    private Boolean overwrite_serialized_name;
+    private Boolean overwrite;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeOutputModifiers() { }
  
     /**
      * Gets the overwrite.
@@ -5966,26 +6721,72 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getOverwrite() {
-      return overwrite_serialized_name;
+      return overwrite;
+    }
+  
+    private DialogNodeOutputModifiers(DialogNodeOutputModifiersBuilder builder) {
+      this.overwrite = builder.overwrite;
     }
 
     /**
-     * Sets the overwrite.
+     * New builder.
      *
-     * @param overwrite the new overwrite
+     * @return a DialogNodeOutputModifiers builder
      */
-    public void setOverwrite(final Boolean overwrite) {
-      this.overwrite_serialized_name = overwrite;
+    public DialogNodeOutputModifiersBuilder newBuilder() {
+      return new DialogNodeOutputModifiersBuilder(this);
+    }
+  }
+
+  /**
+   * DialogNodeOutputModifiers Builder.
+   */
+  public class DialogNodeOutputModifiersBuilder {
+    private Boolean overwrite;
+
+    private DialogNodeOutputModifiersBuilder(DialogNodeOutputModifiers dialogNodeOutputModifiers) {
+      this.overwrite = dialogNodeOutputModifiers.overwrite;
     }
 
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogNodeOutputModifiersBuilder() {
+    }
+
+    /**
+     * Builds a DialogNodeOutputModifiers.
+     *
+     * @return the dialogNodeOutputModifiers
+     */
+    public DialogNodeOutputModifiers build() {
+      return new DialogNodeOutputModifiers(this);
+    }
+
+    /**
+     * Set the overwrite.
+     *
+     * @param overwrite the overwrite
+     * @return the DialogNodeOutputModifiers builder
+     */
+    public DialogNodeOutputModifiersBuilder setOverwrite(Boolean overwrite) {
+      this.overwrite = overwrite;
+      return this;
+    }
   }
 
   /**
    * DialogNodeOutputOptionsElement.
    */
   public class DialogNodeOutputOptionsElement extends IBMWatsonGenericModel {
-    private String label_serialized_name;
-    private DialogNodeOutputOptionsElementValue value_serialized_name;
+    private String label;
+    private DialogNodeOutputOptionsElementValue value;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeOutputOptionsElement() { }
  
     /**
      * Gets the label.
@@ -5996,7 +6797,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getLabel() {
-      return label_serialized_name;
+      return label;
     }
  
     /**
@@ -6009,25 +6810,23 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public DialogNodeOutputOptionsElementValue getValue() {
-      return value_serialized_name;
+      return value;
+    }
+  
+    private DialogNodeOutputOptionsElement(DialogNodeOutputOptionsElementBuilder builder) {
+      IBMWatsonValidator.notNull(builder.label, 'label cannot be null');
+      IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
+      this.label = builder.label;
+      this.value = builder.value;
     }
 
     /**
-     * Sets the label.
+     * New builder.
      *
-     * @param label the new label
+     * @return a DialogNodeOutputOptionsElement builder
      */
-    public void setLabel(final String label) {
-      this.label_serialized_name = label;
-    }
-
-    /**
-     * Sets the value.
-     *
-     * @param value the new value
-     */
-    public void setValue(final DialogNodeOutputOptionsElementValue value) {
-      this.value_serialized_name = value;
+    public DialogNodeOutputOptionsElementBuilder newBuilder() {
+      return new DialogNodeOutputOptionsElementBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6036,12 +6835,90 @@ public class IBMAssistantV1Models {
       }
 
       DialogNodeOutputOptionsElement ret = (DialogNodeOutputOptionsElement) super.deserialize(jsonString, jsonMap, classType);
+      DialogNodeOutputOptionsElementBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for value
-      DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), DialogNodeOutputOptionsElementValue.class);
-      ret.setValue(newValue);
+      DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value'), DialogNodeOutputOptionsElementValue.class);
+      retBuilder.setValue(newValue);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (value != null) {
+        mapping.putAll(value.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (value != null) {
+        mapping.putAll(value.getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogNodeOutputOptionsElement Builder.
+   */
+  public class DialogNodeOutputOptionsElementBuilder {
+    private String label;
+    private DialogNodeOutputOptionsElementValue value;
+
+    private DialogNodeOutputOptionsElementBuilder(DialogNodeOutputOptionsElement dialogNodeOutputOptionsElement) {
+      this.label = dialogNodeOutputOptionsElement.label;
+      this.value = dialogNodeOutputOptionsElement.value;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogNodeOutputOptionsElementBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param label the label
+     * @param value the value
+     */
+    public DialogNodeOutputOptionsElementBuilder(String label, DialogNodeOutputOptionsElementValue value) {
+      this.label = label;
+      this.value = value;
+    }
+
+    /**
+     * Builds a DialogNodeOutputOptionsElement.
+     *
+     * @return the dialogNodeOutputOptionsElement
+     */
+    public DialogNodeOutputOptionsElement build() {
+      return new DialogNodeOutputOptionsElement(this);
+    }
+
+    /**
+     * Set the label.
+     *
+     * @param label the label
+     * @return the DialogNodeOutputOptionsElement builder
+     */
+    public DialogNodeOutputOptionsElementBuilder setLabel(String label) {
+      this.label = label;
+      return this;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the DialogNodeOutputOptionsElement builder
+     */
+    public DialogNodeOutputOptionsElementBuilder setValue(DialogNodeOutputOptionsElementValue value) {
+      this.value = value;
+      return this;
     }
   }
 
@@ -6050,9 +6927,15 @@ public class IBMAssistantV1Models {
    * corresponding option.
    */
   public class DialogNodeOutputOptionsElementValue extends IBMWatsonGenericModel {
-    private MessageInput input_serialized_name;
-    private List<RuntimeIntent> intents_serialized_name;
-    private List<RuntimeEntity> entities_serialized_name;
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeOutputOptionsElementValue() { }
  
     /**
      * Gets the input.
@@ -6063,7 +6946,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public MessageInput getInput() {
-      return input_serialized_name;
+      return input;
     }
  
     /**
@@ -6078,7 +6961,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<RuntimeIntent> getIntents() {
-      return intents_serialized_name;
+      return intents;
     }
  
     /**
@@ -6093,34 +6976,22 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<RuntimeEntity> getEntities() {
-      return entities_serialized_name;
+      return entities;
+    }
+  
+    private DialogNodeOutputOptionsElementValue(DialogNodeOutputOptionsElementValueBuilder builder) {
+      this.input = builder.input;
+      this.intents = builder.intents;
+      this.entities = builder.entities;
     }
 
     /**
-     * Sets the input.
+     * New builder.
      *
-     * @param input the new input
+     * @return a DialogNodeOutputOptionsElementValue builder
      */
-    public void setInput(final MessageInput input) {
-      this.input_serialized_name = input;
-    }
-
-    /**
-     * Sets the intents.
-     *
-     * @param intents the new intents
-     */
-    public void setIntents(final List<RuntimeIntent> intents) {
-      this.intents_serialized_name = intents;
-    }
-
-    /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<RuntimeEntity> entities) {
-      this.entities_serialized_name = entities;
+    public DialogNodeOutputOptionsElementValueBuilder newBuilder() {
+      return new DialogNodeOutputOptionsElementValueBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6129,10 +7000,11 @@ public class IBMAssistantV1Models {
       }
 
       DialogNodeOutputOptionsElementValue ret = (DialogNodeOutputOptionsElementValue) super.deserialize(jsonString, jsonMap, classType);
+      DialogNodeOutputOptionsElementValueBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for input
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
-      ret.setInput(newInput);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
+      retBuilder.setInput(newInput);
 
       // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
@@ -6140,11 +7012,11 @@ public class IBMAssistantV1Models {
       if (deserializedIntents != null) {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        ret.intents_serialized_name = newIntents;
+        retBuilder.setIntents(newIntents);
       }
 
       // calling custom deserializer for entities
@@ -6153,14 +7025,125 @@ public class IBMAssistantV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        retBuilder.setEntities(newEntities);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogNodeOutputOptionsElementValue Builder.
+   */
+  public class DialogNodeOutputOptionsElementValueBuilder {
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+
+    private DialogNodeOutputOptionsElementValueBuilder(DialogNodeOutputOptionsElementValue dialogNodeOutputOptionsElementValue) {
+      this.input = dialogNodeOutputOptionsElementValue.input;
+      this.intents = dialogNodeOutputOptionsElementValue.intents;
+      this.entities = dialogNodeOutputOptionsElementValue.entities;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogNodeOutputOptionsElementValueBuilder() {
+    }
+
+    /**
+     * Builds a DialogNodeOutputOptionsElementValue.
+     *
+     * @return the dialogNodeOutputOptionsElementValue
+     */
+    public DialogNodeOutputOptionsElementValue build() {
+      return new DialogNodeOutputOptionsElementValue(this);
+    }
+
+    /**
+     * Adds an intents to intents.
+     *
+     * @param intents the new intents
+     * @return the DialogNodeOutputOptionsElementValue builder
+     */
+    public DialogNodeOutputOptionsElementValueBuilder addIntents(RuntimeIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
+      if (this.intents == null) {
+        this.intents = new List<RuntimeIntent>();
+      }
+      this.intents.add(intents);
+      return this;
+    }
+
+    /**
+     * Adds an entities to entities.
+     *
+     * @param entities the new entities
+     * @return the DialogNodeOutputOptionsElementValue builder
+     */
+    public DialogNodeOutputOptionsElementValueBuilder addEntities(RuntimeEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
+      if (this.entities == null) {
+        this.entities = new List<RuntimeEntity>();
+      }
+      this.entities.add(entities);
+      return this;
+    }
+
+    /**
+     * Set the input.
+     *
+     * @param input the input
+     * @return the DialogNodeOutputOptionsElementValue builder
+     */
+    public DialogNodeOutputOptionsElementValueBuilder setInput(MessageInput input) {
+      this.input = input;
+      return this;
+    }
+
+    /**
+     * Set the intents.
+     * Existing intents will be replaced.
+     *
+     * @param intents the intents
+     * @return the DialogNodeOutputOptionsElementValue builder
+     */
+    public DialogNodeOutputOptionsElementValueBuilder setIntents(List<RuntimeIntent> intents) {
+      this.intents = intents;
+      return this;
+    }
+
+    /**
+     * Set the entities.
+     * Existing entities will be replaced.
+     *
+     * @param entities the entities
+     * @return the DialogNodeOutputOptionsElementValue builder
+     */
+    public DialogNodeOutputOptionsElementValueBuilder setEntities(List<RuntimeEntity> entities) {
+      this.entities = entities;
+      return this;
     }
   }
 
@@ -6168,7 +7151,13 @@ public class IBMAssistantV1Models {
    * DialogNodeOutputTextValuesElement.
    */
   public class DialogNodeOutputTextValuesElement extends IBMWatsonGenericModel {
-    private String text_serialized_name;
+    private String text;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeOutputTextValuesElement() { }
  
     /**
      * Gets the text.
@@ -6180,27 +7169,73 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
+    }
+  
+    private DialogNodeOutputTextValuesElement(DialogNodeOutputTextValuesElementBuilder builder) {
+      this.text = builder.text;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a DialogNodeOutputTextValuesElement builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
+    public DialogNodeOutputTextValuesElementBuilder newBuilder() {
+      return new DialogNodeOutputTextValuesElementBuilder(this);
+    }
+  }
+
+  /**
+   * DialogNodeOutputTextValuesElement Builder.
+   */
+  public class DialogNodeOutputTextValuesElementBuilder {
+    private String text;
+
+    private DialogNodeOutputTextValuesElementBuilder(DialogNodeOutputTextValuesElement dialogNodeOutputTextValuesElement) {
+      this.text = dialogNodeOutputTextValuesElement.text;
     }
 
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogNodeOutputTextValuesElementBuilder() {
+    }
+
+    /**
+     * Builds a DialogNodeOutputTextValuesElement.
+     *
+     * @return the dialogNodeOutputTextValuesElement
+     */
+    public DialogNodeOutputTextValuesElement build() {
+      return new DialogNodeOutputTextValuesElement(this);
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the DialogNodeOutputTextValuesElement builder
+     */
+    public DialogNodeOutputTextValuesElementBuilder setText(String text) {
+      this.text = text;
+      return this;
+    }
   }
 
   /**
    * DialogNodeVisitedDetails.
    */
   public class DialogNodeVisitedDetails extends IBMWatsonGenericModel {
-    private String dialog_node_serialized_name;
-    private String title_serialized_name;
-    private String conditions_serialized_name;
+    private String dialogNode;
+    private String title;
+    private String conditions;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNodeVisitedDetails() { }
  
     /**
      * Gets the dialogNode.
@@ -6211,7 +7246,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDialogNode() {
-      return dialog_node_serialized_name;
+      return dialogNode;
     }
  
     /**
@@ -6223,7 +7258,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -6235,55 +7270,123 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getConditions() {
-      return conditions_serialized_name;
+      return conditions;
+    }
+  
+    private DialogNodeVisitedDetails(DialogNodeVisitedDetailsBuilder builder) {
+      this.dialogNode = builder.dialogNode;
+      this.title = builder.title;
+      this.conditions = builder.conditions;
     }
 
     /**
-     * Sets the dialogNode.
+     * New builder.
      *
-     * @param dialogNode the new dialogNode
+     * @return a DialogNodeVisitedDetails builder
      */
-    public void setDialogNode(final String dialogNode) {
-      this.dialog_node_serialized_name = dialogNode;
+    public DialogNodeVisitedDetailsBuilder newBuilder() {
+      return new DialogNodeVisitedDetailsBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('dialogNode', 'dialog_node');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('dialog_node', 'dialogNode');
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogNodeVisitedDetails Builder.
+   */
+  public class DialogNodeVisitedDetailsBuilder {
+    private String dialogNode;
+    private String title;
+    private String conditions;
+
+    private DialogNodeVisitedDetailsBuilder(DialogNodeVisitedDetails dialogNodeVisitedDetails) {
+      this.dialogNode = dialogNodeVisitedDetails.dialogNode;
+      this.title = dialogNodeVisitedDetails.title;
+      this.conditions = dialogNodeVisitedDetails.conditions;
     }
 
     /**
-     * Sets the title.
-     *
-     * @param title the new title
+     * Instantiates a new builder.
      */
-    public void setTitle(final String title) {
-      this.title_serialized_name = title;
+    public DialogNodeVisitedDetailsBuilder() {
     }
 
     /**
-     * Sets the conditions.
+     * Builds a DialogNodeVisitedDetails.
      *
-     * @param conditions the new conditions
+     * @return the dialogNodeVisitedDetails
      */
-    public void setConditions(final String conditions) {
-      this.conditions_serialized_name = conditions;
+    public DialogNodeVisitedDetails build() {
+      return new DialogNodeVisitedDetails(this);
     }
 
+    /**
+     * Set the dialogNode.
+     *
+     * @param dialogNode the dialogNode
+     * @return the DialogNodeVisitedDetails builder
+     */
+    public DialogNodeVisitedDetailsBuilder setDialogNode(String dialogNode) {
+      this.dialogNode = dialogNode;
+      return this;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param title the title
+     * @return the DialogNodeVisitedDetails builder
+     */
+    public DialogNodeVisitedDetailsBuilder setTitle(String title) {
+      this.title = title;
+      return this;
+    }
+
+    /**
+     * Set the conditions.
+     *
+     * @param conditions the conditions
+     * @return the DialogNodeVisitedDetails builder
+     */
+    public DialogNodeVisitedDetailsBuilder setConditions(String conditions) {
+      this.conditions = conditions;
+      return this;
+    }
   }
 
   /**
    * DialogRuntimeResponseGeneric.
    */
   public class DialogRuntimeResponseGeneric extends IBMWatsonGenericModel {
-    private String response_type_serialized_name;
-    private String text_serialized_name;
-    private Long time_serialized_name;
-    private Boolean typing_serialized_name;
-    private String source_serialized_name;
-    private String title_serialized_name;
-    private String description_serialized_name;
-    private String preference_serialized_name;
-    private List<DialogNodeOutputOptionsElement> options_serialized_name;
-    private String message_to_human_agent_serialized_name;
-    private String topic_serialized_name;
-    private String dialog_node_serialized_name;
-    private List<DialogSuggestion> suggestions_serialized_name;
+    private String responseType;
+    private String text;
+    private Long xtime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+    private String topic;
+    private String dialogNode;
+    private List<DialogSuggestion> suggestions;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogRuntimeResponseGeneric() { }
  
     /**
      * Gets the responseType.
@@ -6298,7 +7401,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getResponseType() {
-      return response_type_serialized_name;
+      return responseType;
     }
  
     /**
@@ -6310,7 +7413,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -6322,7 +7425,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Long getXtime() {
-      return time_serialized_name;
+      return xtime;
     }
  
     /**
@@ -6334,7 +7437,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getTyping() {
-      return typing_serialized_name;
+      return typing;
     }
  
     /**
@@ -6346,7 +7449,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getSource() {
-      return source_serialized_name;
+      return source;
     }
  
     /**
@@ -6358,7 +7461,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -6370,7 +7473,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -6382,7 +7485,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getPreference() {
-      return preference_serialized_name;
+      return preference;
     }
  
     /**
@@ -6394,7 +7497,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNodeOutputOptionsElement> getOptions() {
-      return options_serialized_name;
+      return options;
     }
  
     /**
@@ -6406,7 +7509,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getMessageToHumanAgent() {
-      return message_to_human_agent_serialized_name;
+      return messageToHumanAgent;
     }
  
     /**
@@ -6418,7 +7521,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getTopic() {
-      return topic_serialized_name;
+      return topic;
     }
  
     /**
@@ -6431,7 +7534,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDialogNode() {
-      return dialog_node_serialized_name;
+      return dialogNode;
     }
  
     /**
@@ -6446,115 +7549,33 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogSuggestion> getSuggestions() {
-      return suggestions_serialized_name;
+      return suggestions;
+    }
+  
+    private DialogRuntimeResponseGeneric(DialogRuntimeResponseGenericBuilder builder) {
+      IBMWatsonValidator.notNull(builder.responseType, 'responseType cannot be null');
+      this.responseType = builder.responseType;
+      this.text = builder.text;
+      this.xtime = builder.xtime;
+      this.typing = builder.typing;
+      this.source = builder.source;
+      this.title = builder.title;
+      this.description = builder.description;
+      this.preference = builder.preference;
+      this.options = builder.options;
+      this.messageToHumanAgent = builder.messageToHumanAgent;
+      this.topic = builder.topic;
+      this.dialogNode = builder.dialogNode;
+      this.suggestions = builder.suggestions;
     }
 
     /**
-     * Sets the responseType.
+     * New builder.
      *
-     * @param responseType the new responseType
+     * @return a DialogRuntimeResponseGeneric builder
      */
-    public void setResponseType(final String responseType) {
-      this.response_type_serialized_name = responseType;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
-    }
-
-    /**
-     * Sets the xtime.
-     *
-     * @param xtime the new xtime
-     */
-    public void setXtime(final long xtime) {
-      this.time_serialized_name = xtime;
-    }
-
-    /**
-     * Sets the typing.
-     *
-     * @param typing the new typing
-     */
-    public void setTyping(final Boolean typing) {
-      this.typing_serialized_name = typing;
-    }
-
-    /**
-     * Sets the source.
-     *
-     * @param source the new source
-     */
-    public void setSource(final String source) {
-      this.source_serialized_name = source;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title_serialized_name = title;
-    }
-
-    /**
-     * Sets the description.
-     *
-     * @param description the new description
-     */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the preference.
-     *
-     * @param preference the new preference
-     */
-    public void setPreference(final String preference) {
-      this.preference_serialized_name = preference;
-    }
-
-    /**
-     * Sets the options.
-     *
-     * @param options the new options
-     */
-    public void setOptions(final List<DialogNodeOutputOptionsElement> options) {
-      this.options_serialized_name = options;
-    }
-
-    /**
-     * Sets the messageToHumanAgent.
-     *
-     * @param messageToHumanAgent the new messageToHumanAgent
-     */
-    public void setMessageToHumanAgent(final String messageToHumanAgent) {
-      this.message_to_human_agent_serialized_name = messageToHumanAgent;
-    }
-
-    /**
-     * Sets the dialogNode.
-     *
-     * @param dialogNode the new dialogNode
-     */
-    public void setDialogNode(final String dialogNode) {
-      this.dialog_node_serialized_name = dialogNode;
-    }
-
-    /**
-     * Sets the suggestions.
-     *
-     * @param suggestions the new suggestions
-     */
-    public void setSuggestions(final List<DialogSuggestion> suggestions) {
-      this.suggestions_serialized_name = suggestions;
+    public DialogRuntimeResponseGenericBuilder newBuilder() {
+      return new DialogRuntimeResponseGenericBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6563,6 +7584,7 @@ public class IBMAssistantV1Models {
       }
 
       DialogRuntimeResponseGeneric ret = (DialogRuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
+      DialogRuntimeResponseGenericBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for options
       List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
@@ -6570,11 +7592,11 @@ public class IBMAssistantV1Models {
       if (deserializedOptions != null) {
         for (Integer i = 0; i < deserializedOptions.size(); i++) {
           DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('options_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('options');
           DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
-        ret.options_serialized_name = newOptions;
+        retBuilder.setOptions(newOptions);
       }
 
       // calling custom deserializer for suggestions
@@ -6583,14 +7605,278 @@ public class IBMAssistantV1Models {
       if (deserializedSuggestions != null) {
         for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
           DialogSuggestion currentItem = ret.getSuggestions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions');
           DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
           newSuggestions.add(newItem);
         }
-        ret.suggestions_serialized_name = newSuggestions;
+        retBuilder.setSuggestions(newSuggestions);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('responseType', 'response_type');
+      mapping.put('xtime', 'time');
+      if (options != null && options[0] != null) {
+        mapping.putAll(options[0].getSdkToApiMapping());
+      }
+      mapping.put('messageToHumanAgent', 'message_to_human_agent');
+      mapping.put('dialogNode', 'dialog_node');
+      if (suggestions != null && suggestions[0] != null) {
+        mapping.putAll(suggestions[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('response_type', 'responseType');
+      mapping.put('time', 'xtime');
+      if (options != null && options[0] != null) {
+        mapping.putAll(options[0].getApiToSdkMapping());
+      }
+      mapping.put('message_to_human_agent', 'messageToHumanAgent');
+      mapping.put('dialog_node', 'dialogNode');
+      if (suggestions != null && suggestions[0] != null) {
+        mapping.putAll(suggestions[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogRuntimeResponseGeneric Builder.
+   */
+  public class DialogRuntimeResponseGenericBuilder {
+    private String responseType;
+    private String text;
+    private Long xtime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+    private String topic;
+    private String dialogNode;
+    private List<DialogSuggestion> suggestions;
+
+    private DialogRuntimeResponseGenericBuilder(DialogRuntimeResponseGeneric dialogRuntimeResponseGeneric) {
+      this.responseType = dialogRuntimeResponseGeneric.responseType;
+      this.text = dialogRuntimeResponseGeneric.text;
+      this.xtime = dialogRuntimeResponseGeneric.xtime;
+      this.typing = dialogRuntimeResponseGeneric.typing;
+      this.source = dialogRuntimeResponseGeneric.source;
+      this.title = dialogRuntimeResponseGeneric.title;
+      this.description = dialogRuntimeResponseGeneric.description;
+      this.preference = dialogRuntimeResponseGeneric.preference;
+      this.options = dialogRuntimeResponseGeneric.options;
+      this.messageToHumanAgent = dialogRuntimeResponseGeneric.messageToHumanAgent;
+      this.topic = dialogRuntimeResponseGeneric.topic;
+      this.dialogNode = dialogRuntimeResponseGeneric.dialogNode;
+      this.suggestions = dialogRuntimeResponseGeneric.suggestions;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogRuntimeResponseGenericBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param responseType the responseType
+     */
+    public DialogRuntimeResponseGenericBuilder(String responseType) {
+      this.responseType = responseType;
+    }
+
+    /**
+     * Builds a DialogRuntimeResponseGeneric.
+     *
+     * @return the dialogRuntimeResponseGeneric
+     */
+    public DialogRuntimeResponseGeneric build() {
+      return new DialogRuntimeResponseGeneric(this);
+    }
+
+    /**
+     * Adds an options to options.
+     *
+     * @param options the new options
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder addOptions(DialogNodeOutputOptionsElement options) {
+      IBMWatsonValidator.notNull(options, 'options cannot be null');
+      if (this.options == null) {
+        this.options = new List<DialogNodeOutputOptionsElement>();
+      }
+      this.options.add(options);
+      return this;
+    }
+
+    /**
+     * Adds an suggestions to suggestions.
+     *
+     * @param suggestions the new suggestions
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder addSuggestions(DialogSuggestion suggestions) {
+      IBMWatsonValidator.notNull(suggestions, 'suggestions cannot be null');
+      if (this.suggestions == null) {
+        this.suggestions = new List<DialogSuggestion>();
+      }
+      this.suggestions.add(suggestions);
+      return this;
+    }
+
+    /**
+     * Set the responseType.
+     *
+     * @param responseType the responseType
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setResponseType(String responseType) {
+      this.responseType = responseType;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setText(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the xtime.
+     *
+     * @param xtime the xtime
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setXtime(Long xtime) {
+      this.xtime = xtime;
+      return this;
+    }
+
+    /**
+     * Set the typing.
+     *
+     * @param typing the typing
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setTyping(Boolean typing) {
+      this.typing = typing;
+      return this;
+    }
+
+    /**
+     * Set the source.
+     *
+     * @param source the source
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setSource(String source) {
+      this.source = source;
+      return this;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param title the title
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setTitle(String title) {
+      this.title = title;
+      return this;
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the preference.
+     *
+     * @param preference the preference
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setPreference(String preference) {
+      this.preference = preference;
+      return this;
+    }
+
+    /**
+     * Set the options.
+     * Existing options will be replaced.
+     *
+     * @param options the options
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setOptions(List<DialogNodeOutputOptionsElement> options) {
+      this.options = options;
+      return this;
+    }
+
+    /**
+     * Set the messageToHumanAgent.
+     *
+     * @param messageToHumanAgent the messageToHumanAgent
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setMessageToHumanAgent(String messageToHumanAgent) {
+      this.messageToHumanAgent = messageToHumanAgent;
+      return this;
+    }
+
+    /**
+     * Set the topic.
+     *
+     * @param topic the topic
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setTopic(String topic) {
+      this.topic = topic;
+      return this;
+    }
+
+    /**
+     * Set the dialogNode.
+     *
+     * @param dialogNode the dialogNode
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setDialogNode(String dialogNode) {
+      this.dialogNode = dialogNode;
+      return this;
+    }
+
+    /**
+     * Set the suggestions.
+     * Existing suggestions will be replaced.
+     *
+     * @param suggestions the suggestions
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder setSuggestions(List<DialogSuggestion> suggestions) {
+      this.suggestions = suggestions;
+      return this;
     }
   }
 
@@ -6598,10 +7884,16 @@ public class IBMAssistantV1Models {
    * DialogSuggestion.
    */
   public class DialogSuggestion extends IBMWatsonGenericModel {
-    private String label_serialized_name;
-    private DialogSuggestionValue value_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
-    private String dialog_node_serialized_name;
+    private String label;
+    private DialogSuggestionValue value;
+    private IBMWatsonMapModel output;
+    private String dialogNode;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogSuggestion() { }
  
     /**
      * Gets the label.
@@ -6613,7 +7905,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getLabel() {
-      return label_serialized_name;
+      return label;
     }
  
     /**
@@ -6626,7 +7918,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public DialogSuggestionValue getValue() {
-      return value_serialized_name;
+      return value;
     }
  
     /**
@@ -6639,7 +7931,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getOutput() {
-      return output_serialized_name;
+      return output;
     }
  
     /**
@@ -6652,43 +7944,25 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDialogNode() {
-      return dialog_node_serialized_name;
+      return dialogNode;
+    }
+  
+    private DialogSuggestion(DialogSuggestionBuilder builder) {
+      IBMWatsonValidator.notNull(builder.label, 'label cannot be null');
+      IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
+      this.label = builder.label;
+      this.value = builder.value;
+      this.output = builder.output;
+      this.dialogNode = builder.dialogNode;
     }
 
     /**
-     * Sets the label.
+     * New builder.
      *
-     * @param label the new label
+     * @return a DialogSuggestion builder
      */
-    public void setLabel(final String label) {
-      this.label_serialized_name = label;
-    }
-
-    /**
-     * Sets the value.
-     *
-     * @param value the new value
-     */
-    public void setValue(final DialogSuggestionValue value) {
-      this.value_serialized_name = value;
-    }
-
-    /**
-     * Sets the output.
-     *
-     * @param output the new output
-     */
-    public void setOutput(final IBMWatsonMapModel output) {
-      this.output_serialized_name = output;
-    }
-
-    /**
-     * Sets the dialogNode.
-     *
-     * @param dialogNode the new dialogNode
-     */
-    public void setDialogNode(final String dialogNode) {
-      this.dialog_node_serialized_name = dialogNode;
+    public DialogSuggestionBuilder newBuilder() {
+      return new DialogSuggestionBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6697,16 +7971,122 @@ public class IBMAssistantV1Models {
       }
 
       DialogSuggestion ret = (DialogSuggestion) super.deserialize(jsonString, jsonMap, classType);
+      DialogSuggestionBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for value
-      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), DialogSuggestionValue.class);
-      ret.setValue(newValue);
+      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value'), DialogSuggestionValue.class);
+      retBuilder.setValue(newValue);
 
       // calling custom deserializer for output
-      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), IBMWatsonMapModel.class);
-      ret.setOutput(newOutput);
+      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'), IBMWatsonMapModel.class);
+      retBuilder.setOutput(newOutput);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (value != null) {
+        mapping.putAll(value.getSdkToApiMapping());
+      }
+      mapping.put('dialogNode', 'dialog_node');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (value != null) {
+        mapping.putAll(value.getApiToSdkMapping());
+      }
+      mapping.put('dialog_node', 'dialogNode');
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogSuggestion Builder.
+   */
+  public class DialogSuggestionBuilder {
+    private String label;
+    private DialogSuggestionValue value;
+    private IBMWatsonMapModel output;
+    private String dialogNode;
+
+    private DialogSuggestionBuilder(DialogSuggestion dialogSuggestion) {
+      this.label = dialogSuggestion.label;
+      this.value = dialogSuggestion.value;
+      this.output = dialogSuggestion.output;
+      this.dialogNode = dialogSuggestion.dialogNode;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogSuggestionBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param label the label
+     * @param value the value
+     */
+    public DialogSuggestionBuilder(String label, DialogSuggestionValue value) {
+      this.label = label;
+      this.value = value;
+    }
+
+    /**
+     * Builds a DialogSuggestion.
+     *
+     * @return the dialogSuggestion
+     */
+    public DialogSuggestion build() {
+      return new DialogSuggestion(this);
+    }
+
+    /**
+     * Set the label.
+     *
+     * @param label the label
+     * @return the DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder setLabel(String label) {
+      this.label = label;
+      return this;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder setValue(DialogSuggestionValue value) {
+      this.value = value;
+      return this;
+    }
+
+    /**
+     * Set the output.
+     *
+     * @param output the output
+     * @return the DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder setOutput(IBMWatsonMapModel output) {
+      this.output = output;
+      return this;
+    }
+
+    /**
+     * Set the dialogNode.
+     *
+     * @param dialogNode the dialogNode
+     * @return the DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder setDialogNode(String dialogNode) {
+      this.dialogNode = dialogNode;
+      return this;
     }
   }
 
@@ -6715,9 +8095,15 @@ public class IBMAssistantV1Models {
    * selects the corresponding disambiguation option.
    */
   public class DialogSuggestionValue extends IBMWatsonGenericModel {
-    private MessageInput input_serialized_name;
-    private List<RuntimeIntent> intents_serialized_name;
-    private List<RuntimeEntity> entities_serialized_name;
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogSuggestionValue() { }
  
     /**
      * Gets the input.
@@ -6728,7 +8114,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public MessageInput getInput() {
-      return input_serialized_name;
+      return input;
     }
  
     /**
@@ -6740,7 +8126,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<RuntimeIntent> getIntents() {
-      return intents_serialized_name;
+      return intents;
     }
  
     /**
@@ -6752,34 +8138,22 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<RuntimeEntity> getEntities() {
-      return entities_serialized_name;
+      return entities;
+    }
+  
+    private DialogSuggestionValue(DialogSuggestionValueBuilder builder) {
+      this.input = builder.input;
+      this.intents = builder.intents;
+      this.entities = builder.entities;
     }
 
     /**
-     * Sets the input.
+     * New builder.
      *
-     * @param input the new input
+     * @return a DialogSuggestionValue builder
      */
-    public void setInput(final MessageInput input) {
-      this.input_serialized_name = input;
-    }
-
-    /**
-     * Sets the intents.
-     *
-     * @param intents the new intents
-     */
-    public void setIntents(final List<RuntimeIntent> intents) {
-      this.intents_serialized_name = intents;
-    }
-
-    /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<RuntimeEntity> entities) {
-      this.entities_serialized_name = entities;
+    public DialogSuggestionValueBuilder newBuilder() {
+      return new DialogSuggestionValueBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6788,10 +8162,11 @@ public class IBMAssistantV1Models {
       }
 
       DialogSuggestionValue ret = (DialogSuggestionValue) super.deserialize(jsonString, jsonMap, classType);
+      DialogSuggestionValueBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for input
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
-      ret.setInput(newInput);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
+      retBuilder.setInput(newInput);
 
       // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
@@ -6799,11 +8174,11 @@ public class IBMAssistantV1Models {
       if (deserializedIntents != null) {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        ret.intents_serialized_name = newIntents;
+        retBuilder.setIntents(newIntents);
       }
 
       // calling custom deserializer for entities
@@ -6812,14 +8187,125 @@ public class IBMAssistantV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        retBuilder.setEntities(newEntities);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * DialogSuggestionValue Builder.
+   */
+  public class DialogSuggestionValueBuilder {
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+
+    private DialogSuggestionValueBuilder(DialogSuggestionValue dialogSuggestionValue) {
+      this.input = dialogSuggestionValue.input;
+      this.intents = dialogSuggestionValue.intents;
+      this.entities = dialogSuggestionValue.entities;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogSuggestionValueBuilder() {
+    }
+
+    /**
+     * Builds a DialogSuggestionValue.
+     *
+     * @return the dialogSuggestionValue
+     */
+    public DialogSuggestionValue build() {
+      return new DialogSuggestionValue(this);
+    }
+
+    /**
+     * Adds an intents to intents.
+     *
+     * @param intents the new intents
+     * @return the DialogSuggestionValue builder
+     */
+    public DialogSuggestionValueBuilder addIntents(RuntimeIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
+      if (this.intents == null) {
+        this.intents = new List<RuntimeIntent>();
+      }
+      this.intents.add(intents);
+      return this;
+    }
+
+    /**
+     * Adds an entities to entities.
+     *
+     * @param entities the new entities
+     * @return the DialogSuggestionValue builder
+     */
+    public DialogSuggestionValueBuilder addEntities(RuntimeEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
+      if (this.entities == null) {
+        this.entities = new List<RuntimeEntity>();
+      }
+      this.entities.add(entities);
+      return this;
+    }
+
+    /**
+     * Set the input.
+     *
+     * @param input the input
+     * @return the DialogSuggestionValue builder
+     */
+    public DialogSuggestionValueBuilder setInput(MessageInput input) {
+      this.input = input;
+      return this;
+    }
+
+    /**
+     * Set the intents.
+     * Existing intents will be replaced.
+     *
+     * @param intents the intents
+     * @return the DialogSuggestionValue builder
+     */
+    public DialogSuggestionValueBuilder setIntents(List<RuntimeIntent> intents) {
+      this.intents = intents;
+      return this;
+    }
+
+    /**
+     * Set the entities.
+     * Existing entities will be replaced.
+     *
+     * @param entities the entities
+     * @return the DialogSuggestionValue builder
+     */
+    public DialogSuggestionValueBuilder setEntities(List<RuntimeEntity> entities) {
+      this.entities = entities;
+      return this;
     }
   }
 
@@ -6827,13 +8313,13 @@ public class IBMAssistantV1Models {
    * Entity.
    */
   public class Entity extends IBMWatsonResponseModel {
-    private String entity_serialized_name;
-    private String description_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private Boolean fuzzy_match_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private List<Value> values_serialized_name;
+    private String entity;
+    private String description;
+    private IBMWatsonMapModel metadata;
+    private Boolean fuzzyMatch;
+    private Datetime created;
+    private Datetime updated;
+    private List<Value> values;
  
     /**
      * Gets the entity.
@@ -6847,7 +8333,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getEntity() {
-      return entity_serialized_name;
+      return entity;
     }
  
     /**
@@ -6859,7 +8345,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -6871,7 +8357,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
  
     /**
@@ -6883,7 +8369,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getFuzzyMatch() {
-      return fuzzy_match_serialized_name;
+      return fuzzyMatch;
     }
  
     /**
@@ -6895,7 +8381,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -6907,7 +8393,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -6919,7 +8405,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Value> getValues() {
-      return values_serialized_name;
+      return values;
     }
 
     /**
@@ -6928,7 +8414,7 @@ public class IBMAssistantV1Models {
      * @param entity the new entity
      */
     public void setEntity(final String entity) {
-      this.entity_serialized_name = entity;
+      this.entity = entity;
     }
 
     /**
@@ -6937,7 +8423,7 @@ public class IBMAssistantV1Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     /**
@@ -6946,7 +8432,7 @@ public class IBMAssistantV1Models {
      * @param metadata the new metadata
      */
     public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
+      this.metadata = metadata;
     }
 
     /**
@@ -6955,7 +8441,7 @@ public class IBMAssistantV1Models {
      * @param fuzzyMatch the new fuzzyMatch
      */
     public void setFuzzyMatch(final Boolean fuzzyMatch) {
-      this.fuzzy_match_serialized_name = fuzzyMatch;
+      this.fuzzyMatch = fuzzyMatch;
     }
 
     /**
@@ -6964,7 +8450,7 @@ public class IBMAssistantV1Models {
      * @param values the new values
      */
     public void setValues(final List<Value> values) {
-      this.values_serialized_name = values;
+      this.values = values;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6975,7 +8461,7 @@ public class IBMAssistantV1Models {
       Entity ret = (Entity) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for values
@@ -6984,14 +8470,23 @@ public class IBMAssistantV1Models {
       if (deserializedValues != null) {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           Value currentItem = ret.getValues().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('values');
           Value newItem = (Value) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
           newValues.add(newItem);
         }
-        ret.values_serialized_name = newValues;
+        ret.values = newValues;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('fuzzy_match', 'fuzzyMatch');
+      if (values != null && values[0] != null) {
+        mapping.putAll(values[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -6999,8 +8494,8 @@ public class IBMAssistantV1Models {
    * An array of objects describing the entities for the workspace.
    */
   public class EntityCollection extends IBMWatsonResponseModel {
-    private List<Entity> entities_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<Entity> entities;
+    private Pagination pagination;
  
     /**
      * Gets the entities.
@@ -7011,7 +8506,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Entity> getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
  
     /**
@@ -7023,7 +8518,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -7032,7 +8527,7 @@ public class IBMAssistantV1Models {
      * @param entities the new entities
      */
     public void setEntities(final List<Entity> entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
     }
 
     /**
@@ -7041,7 +8536,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7057,18 +8552,29 @@ public class IBMAssistantV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           Entity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           Entity newItem = (Entity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Entity.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        ret.entities = newEntities;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7076,9 +8582,9 @@ public class IBMAssistantV1Models {
    * An object describing a contextual entity mention.
    */
   public class EntityMention extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private String intent_serialized_name;
-    private List<Long> location_serialized_name;
+    private String text;
+    private String intent;
+    private List<Long> location;
  
     /**
      * Gets the text.
@@ -7089,7 +8595,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -7101,7 +8607,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getIntent() {
-      return intent_serialized_name;
+      return intent;
     }
  
     /**
@@ -7113,7 +8619,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Long> getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -7122,7 +8628,7 @@ public class IBMAssistantV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -7131,7 +8637,7 @@ public class IBMAssistantV1Models {
      * @param intent the new intent
      */
     public void setIntent(final String intent) {
-      this.intent_serialized_name = intent;
+      this.intent = intent;
     }
 
     /**
@@ -7140,17 +8646,16 @@ public class IBMAssistantV1Models {
      * @param location the new location
      */
     public void setLocation(final List<Long> location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
-
   }
 
   /**
    * EntityMentionCollection.
    */
   public class EntityMentionCollection extends IBMWatsonResponseModel {
-    private List<EntityMention> examples_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<EntityMention> examples;
+    private Pagination pagination;
  
     /**
      * Gets the examples.
@@ -7161,7 +8666,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<EntityMention> getExamples() {
-      return examples_serialized_name;
+      return examples;
     }
  
     /**
@@ -7173,7 +8678,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -7182,7 +8687,7 @@ public class IBMAssistantV1Models {
      * @param examples the new examples
      */
     public void setExamples(final List<EntityMention> examples) {
-      this.examples_serialized_name = examples;
+      this.examples = examples;
     }
 
     /**
@@ -7191,7 +8696,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7207,18 +8712,26 @@ public class IBMAssistantV1Models {
       if (deserializedExamples != null) {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           EntityMention currentItem = ret.getExamples().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
           EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
           newExamples.add(newItem);
         }
-        ret.examples_serialized_name = newExamples;
+        ret.examples = newExamples;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7226,10 +8739,10 @@ public class IBMAssistantV1Models {
    * Example.
    */
   public class Example extends IBMWatsonResponseModel {
-    private String text_serialized_name;
-    private List<Mention> mentions_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
+    private String text;
+    private List<Mention> mentions;
+    private Datetime created;
+    private Datetime updated;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -7248,7 +8761,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -7260,7 +8773,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Mention> getMentions() {
-      return mentions_serialized_name;
+      return mentions;
     }
  
     /**
@@ -7272,7 +8785,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -7284,15 +8797,15 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
   
     private Example(ExampleBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      this.text_serialized_name = builder.text;
-      this.mentions_serialized_name = builder.mentions;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
+      this.text = builder.text;
+      this.mentions = builder.mentions;
+      this.created = builder.created;
+      this.updated = builder.updated;
     }
 
     /**
@@ -7318,7 +8831,7 @@ public class IBMAssistantV1Models {
       if (deserializedMentions != null) {
         for (Integer i = 0; i < deserializedMentions.size(); i++) {
           Mention currentItem = ret.getMentions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('mentions_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('mentions');
           Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mention.class);
           newMentions.add(newItem);
         }
@@ -7339,10 +8852,10 @@ public class IBMAssistantV1Models {
     private Datetime updated;
 
     private ExampleBuilder(Example example) {
-      this.text = example.text_serialized_name;
-      this.mentions = example.mentions_serialized_name;
-      this.created = example.created_serialized_name;
-      this.updated = example.updated_serialized_name;
+      this.text = example.text;
+      this.mentions = example.mentions;
+      this.created = example.created;
+      this.updated = example.updated;
     }
 
     /**
@@ -7434,8 +8947,8 @@ public class IBMAssistantV1Models {
    * ExampleCollection.
    */
   public class ExampleCollection extends IBMWatsonResponseModel {
-    private List<Example> examples_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<Example> examples;
+    private Pagination pagination;
  
     /**
      * Gets the examples.
@@ -7446,7 +8959,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Example> getExamples() {
-      return examples_serialized_name;
+      return examples;
     }
  
     /**
@@ -7458,7 +8971,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -7467,7 +8980,7 @@ public class IBMAssistantV1Models {
      * @param examples the new examples
      */
     public void setExamples(final List<Example> examples) {
-      this.examples_serialized_name = examples;
+      this.examples = examples;
     }
 
     /**
@@ -7476,7 +8989,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7492,18 +9005,26 @@ public class IBMAssistantV1Models {
       if (deserializedExamples != null) {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           Example currentItem = ret.getExamples().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
           Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Example.class);
           newExamples.add(newItem);
         }
-        ret.examples_serialized_name = newExamples;
+        ret.examples = newExamples;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7514,7 +9035,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String text;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -7525,7 +9046,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -7536,7 +9057,7 @@ public class IBMAssistantV1Models {
     public String text() {
       return text;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -7566,6 +9087,12 @@ public class IBMAssistantV1Models {
       return new GetCounterexampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -7662,7 +9189,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String dialogNode;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -7673,7 +9200,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -7684,7 +9211,7 @@ public class IBMAssistantV1Models {
     public String dialogNode() {
       return dialogNode;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -7714,6 +9241,13 @@ public class IBMAssistantV1Models {
       return new GetDialogNodeOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('dialogNode', 'dialog_node');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -7811,7 +9345,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private Boolean xexport;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -7822,7 +9356,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -7833,7 +9367,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the xexport.
      *
@@ -7845,7 +9379,7 @@ public class IBMAssistantV1Models {
     public Boolean xexport() {
       return xexport;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -7876,6 +9410,13 @@ public class IBMAssistantV1Models {
       return new GetEntityOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xexport', 'export');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -7986,7 +9527,7 @@ public class IBMAssistantV1Models {
     private String intent;
     private String text;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -7997,7 +9538,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -8008,7 +9549,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -8019,7 +9560,7 @@ public class IBMAssistantV1Models {
     public String text() {
       return text;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -8051,6 +9592,12 @@ public class IBMAssistantV1Models {
       return new GetExampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -8163,7 +9710,7 @@ public class IBMAssistantV1Models {
     private String intent;
     private Boolean xexport;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -8174,7 +9721,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -8185,7 +9732,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the xexport.
      *
@@ -8197,7 +9744,7 @@ public class IBMAssistantV1Models {
     public Boolean xexport() {
       return xexport;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -8228,6 +9775,13 @@ public class IBMAssistantV1Models {
       return new GetIntentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xexport', 'export');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -8339,7 +9893,7 @@ public class IBMAssistantV1Models {
     private String value;
     private String synonym;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -8350,7 +9904,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -8361,7 +9915,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -8372,7 +9926,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the synonym.
      *
@@ -8383,7 +9937,7 @@ public class IBMAssistantV1Models {
     public String synonym() {
       return synonym;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -8417,6 +9971,12 @@ public class IBMAssistantV1Models {
       return new GetSynonymOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -8545,7 +10105,7 @@ public class IBMAssistantV1Models {
     private String value;
     private Boolean xexport;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -8556,7 +10116,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -8567,7 +10127,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -8578,7 +10138,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the xexport.
      *
@@ -8590,7 +10150,7 @@ public class IBMAssistantV1Models {
     public Boolean xexport() {
       return xexport;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -8623,6 +10183,13 @@ public class IBMAssistantV1Models {
       return new GetValueOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xexport', 'export');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -8748,7 +10315,7 @@ public class IBMAssistantV1Models {
     private Boolean xexport;
     private Boolean includeAudit;
     private String xsort;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -8759,7 +10326,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the xexport.
      *
@@ -8771,7 +10338,7 @@ public class IBMAssistantV1Models {
     public Boolean xexport() {
       return xexport;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -8782,7 +10349,7 @@ public class IBMAssistantV1Models {
     public Boolean includeAudit() {
       return includeAudit;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -8813,6 +10380,14 @@ public class IBMAssistantV1Models {
       return new GetWorkspaceOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xexport', 'export');
+      mapping.put('includeAudit', 'include_audit');
+      mapping.put('xsort', 'sort');
+      return mapping;
+    }
   }
 
   /**
@@ -8917,11 +10492,11 @@ public class IBMAssistantV1Models {
    * Intent.
    */
   public class Intent extends IBMWatsonResponseModel {
-    private String intent_serialized_name;
-    private String description_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private List<Example> examples_serialized_name;
+    private String intent;
+    private String description;
+    private Datetime created;
+    private Datetime updated;
+    private List<Example> examples;
  
     /**
      * Gets the intent.
@@ -8934,7 +10509,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getIntent() {
-      return intent_serialized_name;
+      return intent;
     }
  
     /**
@@ -8946,7 +10521,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -8958,7 +10533,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -8970,7 +10545,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -8982,7 +10557,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Example> getExamples() {
-      return examples_serialized_name;
+      return examples;
     }
 
     /**
@@ -8991,7 +10566,7 @@ public class IBMAssistantV1Models {
      * @param intent the new intent
      */
     public void setIntent(final String intent) {
-      this.intent_serialized_name = intent;
+      this.intent = intent;
     }
 
     /**
@@ -9000,7 +10575,7 @@ public class IBMAssistantV1Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     /**
@@ -9009,7 +10584,7 @@ public class IBMAssistantV1Models {
      * @param examples the new examples
      */
     public void setExamples(final List<Example> examples) {
-      this.examples_serialized_name = examples;
+      this.examples = examples;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9025,11 +10600,11 @@ public class IBMAssistantV1Models {
       if (deserializedExamples != null) {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           Example currentItem = ret.getExamples().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
           Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Example.class);
           newExamples.add(newItem);
         }
-        ret.examples_serialized_name = newExamples;
+        ret.examples = newExamples;
       }
 
       return ret;
@@ -9040,8 +10615,8 @@ public class IBMAssistantV1Models {
    * IntentCollection.
    */
   public class IntentCollection extends IBMWatsonResponseModel {
-    private List<Intent> intents_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<Intent> intents;
+    private Pagination pagination;
  
     /**
      * Gets the intents.
@@ -9052,7 +10627,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Intent> getIntents() {
-      return intents_serialized_name;
+      return intents;
     }
  
     /**
@@ -9064,7 +10639,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -9073,7 +10648,7 @@ public class IBMAssistantV1Models {
      * @param intents the new intents
      */
     public void setIntents(final List<Intent> intents) {
-      this.intents_serialized_name = intents;
+      this.intents = intents;
     }
 
     /**
@@ -9082,7 +10657,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9098,18 +10673,26 @@ public class IBMAssistantV1Models {
       if (deserializedIntents != null) {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           Intent currentItem = ret.getIntents().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
           Intent newItem = (Intent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Intent.class);
           newIntents.add(newItem);
         }
-        ret.intents_serialized_name = newIntents;
+        ret.intents = newIntents;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -9121,7 +10704,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private Long pageLimit;
     private String cursor;
- 
+
     /**
      * Gets the filter.
      *
@@ -9135,7 +10718,7 @@ public class IBMAssistantV1Models {
     public String filter() {
       return filter;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -9147,7 +10730,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -9158,7 +10741,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -9188,6 +10771,12 @@ public class IBMAssistantV1Models {
       return new ListAllLogsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xsort', 'sort');
+      mapping.put('pageLimit', 'page_limit');
+      return mapping;
+    }
   }
 
   /**
@@ -9298,7 +10887,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private String cursor;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -9309,7 +10898,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -9320,7 +10909,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the includeCount.
      *
@@ -9331,7 +10920,7 @@ public class IBMAssistantV1Models {
     public Boolean includeCount() {
       return includeCount;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -9343,7 +10932,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -9354,7 +10943,7 @@ public class IBMAssistantV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -9386,6 +10975,15 @@ public class IBMAssistantV1Models {
       return new ListCounterexamplesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('includeCount', 'include_count');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -9522,7 +11120,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private String cursor;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -9533,7 +11131,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -9544,7 +11142,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the includeCount.
      *
@@ -9555,7 +11153,7 @@ public class IBMAssistantV1Models {
     public Boolean includeCount() {
       return includeCount;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -9567,7 +11165,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -9578,7 +11176,7 @@ public class IBMAssistantV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -9610,6 +11208,15 @@ public class IBMAssistantV1Models {
       return new ListDialogNodesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('includeCount', 'include_count');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -9747,7 +11354,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private String cursor;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -9758,7 +11365,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the xexport.
      *
@@ -9770,7 +11377,7 @@ public class IBMAssistantV1Models {
     public Boolean xexport() {
       return xexport;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -9781,7 +11388,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the includeCount.
      *
@@ -9792,7 +11399,7 @@ public class IBMAssistantV1Models {
     public Boolean includeCount() {
       return includeCount;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -9804,7 +11411,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -9815,7 +11422,7 @@ public class IBMAssistantV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -9848,6 +11455,16 @@ public class IBMAssistantV1Models {
       return new ListEntitiesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xexport', 'export');
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('includeCount', 'include_count');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -9998,7 +11615,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private String cursor;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -10009,7 +11626,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -10020,7 +11637,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -10031,7 +11648,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the includeCount.
      *
@@ -10042,7 +11659,7 @@ public class IBMAssistantV1Models {
     public Boolean includeCount() {
       return includeCount;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -10054,7 +11671,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -10065,7 +11682,7 @@ public class IBMAssistantV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -10099,6 +11716,15 @@ public class IBMAssistantV1Models {
       return new ListExamplesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('includeCount', 'include_count');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -10251,7 +11877,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private String cursor;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -10262,7 +11888,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the xexport.
      *
@@ -10274,7 +11900,7 @@ public class IBMAssistantV1Models {
     public Boolean xexport() {
       return xexport;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -10285,7 +11911,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the includeCount.
      *
@@ -10296,7 +11922,7 @@ public class IBMAssistantV1Models {
     public Boolean includeCount() {
       return includeCount;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -10308,7 +11934,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -10319,7 +11945,7 @@ public class IBMAssistantV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -10352,6 +11978,16 @@ public class IBMAssistantV1Models {
       return new ListIntentsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xexport', 'export');
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('includeCount', 'include_count');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -10500,7 +12136,7 @@ public class IBMAssistantV1Models {
     private String filter;
     private Long pageLimit;
     private String cursor;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -10511,7 +12147,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -10523,7 +12159,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the filter.
      *
@@ -10536,7 +12172,7 @@ public class IBMAssistantV1Models {
     public String filter() {
       return filter;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -10547,7 +12183,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -10578,6 +12214,13 @@ public class IBMAssistantV1Models {
       return new ListLogsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xsort', 'sort');
+      mapping.put('pageLimit', 'page_limit');
+      return mapping;
+    }
   }
 
   /**
@@ -10699,7 +12342,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private Boolean xexport;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -10710,7 +12353,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -10721,7 +12364,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the xexport.
      *
@@ -10733,7 +12376,7 @@ public class IBMAssistantV1Models {
     public Boolean xexport() {
       return xexport;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -10764,6 +12407,13 @@ public class IBMAssistantV1Models {
       return new ListMentionsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xexport', 'export');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -10878,7 +12528,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private String cursor;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -10889,7 +12539,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -10900,7 +12550,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -10911,7 +12561,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -10922,7 +12572,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the includeCount.
      *
@@ -10933,7 +12583,7 @@ public class IBMAssistantV1Models {
     public Boolean includeCount() {
       return includeCount;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -10945,7 +12595,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -10956,7 +12606,7 @@ public class IBMAssistantV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -10992,6 +12642,15 @@ public class IBMAssistantV1Models {
       return new ListSynonymsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('includeCount', 'include_count');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -11160,7 +12819,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private String cursor;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -11171,7 +12830,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -11182,7 +12841,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the xexport.
      *
@@ -11194,7 +12853,7 @@ public class IBMAssistantV1Models {
     public Boolean xexport() {
       return xexport;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -11205,7 +12864,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the includeCount.
      *
@@ -11216,7 +12875,7 @@ public class IBMAssistantV1Models {
     public Boolean includeCount() {
       return includeCount;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -11228,7 +12887,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -11239,7 +12898,7 @@ public class IBMAssistantV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -11274,6 +12933,16 @@ public class IBMAssistantV1Models {
       return new ListValuesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('xexport', 'export');
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('includeCount', 'include_count');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -11437,7 +13106,7 @@ public class IBMAssistantV1Models {
     private String xsort;
     private String cursor;
     private Boolean includeAudit;
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -11448,7 +13117,7 @@ public class IBMAssistantV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the includeCount.
      *
@@ -11459,7 +13128,7 @@ public class IBMAssistantV1Models {
     public Boolean includeCount() {
       return includeCount;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -11471,7 +13140,7 @@ public class IBMAssistantV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -11482,7 +13151,7 @@ public class IBMAssistantV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the includeAudit.
      *
@@ -11512,6 +13181,14 @@ public class IBMAssistantV1Models {
       return new ListWorkspacesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('includeCount', 'include_count');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeAudit', 'include_audit');
+      return mapping;
+    }
   }
 
   /**
@@ -11620,13 +13297,13 @@ public class IBMAssistantV1Models {
    * Log.
    */
   public class Log extends IBMWatsonGenericModel {
-    private MessageRequest request_serialized_name;
-    private MessageResponse response_serialized_name;
-    private String log_id_serialized_name;
-    private String request_timestamp_serialized_name;
-    private String response_timestamp_serialized_name;
-    private String workspace_id_serialized_name;
-    private String language_serialized_name;
+    private MessageRequest request;
+    private MessageResponse response;
+    private String logId;
+    private String requestTimestamp;
+    private String responseTimestamp;
+    private String workspaceId;
+    private String language;
  
     /**
      * Gets the request.
@@ -11637,7 +13314,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public MessageRequest getRequest() {
-      return request_serialized_name;
+      return request;
     }
  
     /**
@@ -11649,7 +13326,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public MessageResponse getResponse() {
-      return response_serialized_name;
+      return response;
     }
  
     /**
@@ -11661,7 +13338,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getLogId() {
-      return log_id_serialized_name;
+      return logId;
     }
  
     /**
@@ -11673,7 +13350,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getRequestTimestamp() {
-      return request_timestamp_serialized_name;
+      return requestTimestamp;
     }
  
     /**
@@ -11685,7 +13362,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getResponseTimestamp() {
-      return response_timestamp_serialized_name;
+      return responseTimestamp;
     }
  
     /**
@@ -11697,7 +13374,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getWorkspaceId() {
-      return workspace_id_serialized_name;
+      return workspaceId;
     }
  
     /**
@@ -11709,7 +13386,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
 
     /**
@@ -11718,7 +13395,7 @@ public class IBMAssistantV1Models {
      * @param request the new request
      */
     public void setRequest(final MessageRequest request) {
-      this.request_serialized_name = request;
+      this.request = request;
     }
 
     /**
@@ -11727,7 +13404,7 @@ public class IBMAssistantV1Models {
      * @param response the new response
      */
     public void setResponse(final MessageResponse response) {
-      this.response_serialized_name = response;
+      this.response = response;
     }
 
     /**
@@ -11736,7 +13413,7 @@ public class IBMAssistantV1Models {
      * @param logId the new logId
      */
     public void setLogId(final String logId) {
-      this.log_id_serialized_name = logId;
+      this.logId = logId;
     }
 
     /**
@@ -11745,7 +13422,7 @@ public class IBMAssistantV1Models {
      * @param requestTimestamp the new requestTimestamp
      */
     public void setRequestTimestamp(final String requestTimestamp) {
-      this.request_timestamp_serialized_name = requestTimestamp;
+      this.requestTimestamp = requestTimestamp;
     }
 
     /**
@@ -11754,7 +13431,7 @@ public class IBMAssistantV1Models {
      * @param responseTimestamp the new responseTimestamp
      */
     public void setResponseTimestamp(final String responseTimestamp) {
-      this.response_timestamp_serialized_name = responseTimestamp;
+      this.responseTimestamp = responseTimestamp;
     }
 
     /**
@@ -11763,7 +13440,7 @@ public class IBMAssistantV1Models {
      * @param workspaceId the new workspaceId
      */
     public void setWorkspaceId(final String workspaceId) {
-      this.workspace_id_serialized_name = workspaceId;
+      this.workspaceId = workspaceId;
     }
 
     /**
@@ -11772,7 +13449,7 @@ public class IBMAssistantV1Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -11783,14 +13460,29 @@ public class IBMAssistantV1Models {
       Log ret = (Log) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for request
-      MessageRequest newRequest = (MessageRequest) new MessageRequest().deserialize(JSON.serialize(ret.getRequest()), (Map<String, Object>) jsonMap.get('request_serialized_name'), MessageRequest.class);
+      MessageRequest newRequest = (MessageRequest) new MessageRequest().deserialize(JSON.serialize(ret.getRequest()), (Map<String, Object>) jsonMap.get('request'), MessageRequest.class);
       ret.setRequest(newRequest);
 
       // calling custom deserializer for response
-      MessageResponse newResponse = (MessageResponse) new MessageResponse().deserialize(JSON.serialize(ret.getResponse()), (Map<String, Object>) jsonMap.get('response_serialized_name'), MessageResponse.class);
+      MessageResponse newResponse = (MessageResponse) new MessageResponse().deserialize(JSON.serialize(ret.getResponse()), (Map<String, Object>) jsonMap.get('response'), MessageResponse.class);
       ret.setResponse(newResponse);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (request != null) {
+        mapping.putAll(request.getApiToSdkMapping());
+      }
+      if (response != null) {
+        mapping.putAll(response.getApiToSdkMapping());
+      }
+      mapping.put('log_id', 'logId');
+      mapping.put('request_timestamp', 'requestTimestamp');
+      mapping.put('response_timestamp', 'responseTimestamp');
+      mapping.put('workspace_id', 'workspaceId');
+      return mapping;
     }
   }
 
@@ -11798,8 +13490,8 @@ public class IBMAssistantV1Models {
    * LogCollection.
    */
   public class LogCollection extends IBMWatsonResponseModel {
-    private List<Log> logs_serialized_name;
-    private LogPagination pagination_serialized_name;
+    private List<Log> logs;
+    private LogPagination pagination;
  
     /**
      * Gets the logs.
@@ -11810,7 +13502,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Log> getLogs() {
-      return logs_serialized_name;
+      return logs;
     }
  
     /**
@@ -11822,7 +13514,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public LogPagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -11831,7 +13523,7 @@ public class IBMAssistantV1Models {
      * @param logs the new logs
      */
     public void setLogs(final List<Log> logs) {
-      this.logs_serialized_name = logs;
+      this.logs = logs;
     }
 
     /**
@@ -11840,7 +13532,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final LogPagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -11856,18 +13548,29 @@ public class IBMAssistantV1Models {
       if (deserializedLogs != null) {
         for (Integer i = 0; i < deserializedLogs.size(); i++) {
           Log currentItem = ret.getLogs().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('logs_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('logs');
           Log newItem = (Log) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Log.class);
           newLogs.add(newItem);
         }
-        ret.logs_serialized_name = newLogs;
+        ret.logs = newLogs;
       }
 
       // calling custom deserializer for pagination
-      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), LogPagination.class);
+      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), LogPagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (logs != null && logs[0] != null) {
+        mapping.putAll(logs[0].getApiToSdkMapping());
+      }
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -11875,9 +13578,15 @@ public class IBMAssistantV1Models {
    * Log message details.
    */
   public class LogMessage extends IBMWatsonDynamicModel {
-    private String level_serialized_name;
-    private String msg_serialized_name;
+    private String level;
+    private String msg;
     private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public LogMessage() { }
 
     /**
      * Gets the level.
@@ -11886,7 +13595,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getLevel() {
-      return level_serialized_name;
+      return level;
     }
 
     /**
@@ -11896,7 +13605,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getMsg() {
-      return msg_serialized_name;
+      return msg;
     }
 
     /**
@@ -11909,22 +13618,20 @@ public class IBMAssistantV1Models {
       return this.getDynamicProperties();
     }
 
-    /**
-     * Sets the level.
-     *
-     * @param level the new level
-     */
-    public void setLevel(final String level) {
-      this.level_serialized_name = level;
+    private LogMessage(LogMessageBuilder builder) {
+      IBMWatsonValidator.notNull(builder.level, 'level cannot be null');
+      IBMWatsonValidator.notNull(builder.msg, 'msg cannot be null');
+      this.level = builder.level;
+      this.msg = builder.msg;
     }
 
     /**
-     * Sets the msg.
+     * New builder.
      *
-     * @param msg the new msg
+     * @return a LogMessage builder
      */
-    public void setMsg(final String msg) {
-      this.msg_serialized_name = msg;
+    public LogMessageBuilder newBuilder() {
+      return new LogMessageBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -11933,16 +13640,78 @@ public class IBMAssistantV1Models {
       }
 
       LogMessage ret = (LogMessage) super.deserialize(jsonString, jsonMap, classType);
+      LogMessageBuilder retBuilder = ret.newBuilder();
 
+      LogMessage builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
+          builderResult.put(key, jsonMap.get(key));
         }
       }
 
-      return ret;
+      return builderResult;
+    }
+  }
+
+  /**
+   * LogMessage Builder.
+   */
+  public class LogMessageBuilder {
+    private String level;
+    private String msg;
+
+    private LogMessageBuilder(LogMessage logMessage) {
+      this.level = logMessage.level;
+      this.msg = logMessage.msg;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public LogMessageBuilder() { }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param level the level
+     * @param msg the msg
+     */
+    public LogMessageBuilder(String level, String msg) {
+      this.level = level;
+      this.msg = msg;
+    }
+
+    /**
+     * Builds a LogMessage.
+     *
+     * @return the logMessage
+     */
+    public LogMessage build() {
+      return new LogMessage(this);
+    }
+
+    /**
+     * Set the level.
+     *
+     * @param level the level
+     * @return the LogMessage builder
+     */
+    public LogMessageBuilder setLevel(String level) {
+      this.level = level;
+      return this;
+    }
+
+    /**
+     * Set the msg.
+     *
+     * @param msg the msg
+     * @return the LogMessage builder
+     */
+    public LogMessageBuilder setMsg(String msg) {
+      this.msg = msg;
+      return this;
     }
   }
 
@@ -11950,9 +13719,9 @@ public class IBMAssistantV1Models {
    * The pagination data for the returned objects.
    */
   public class LogPagination extends IBMWatsonGenericModel {
-    private String next_url_serialized_name;
-    private Long matched_serialized_name;
-    private String next_cursor_serialized_name;
+    private String nextUrl;
+    private Long matched;
+    private String nextCursor;
  
     /**
      * Gets the nextUrl.
@@ -11963,7 +13732,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getNextUrl() {
-      return next_url_serialized_name;
+      return nextUrl;
     }
  
     /**
@@ -11975,7 +13744,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Long getMatched() {
-      return matched_serialized_name;
+      return matched;
     }
  
     /**
@@ -11987,7 +13756,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getNextCursor() {
-      return next_cursor_serialized_name;
+      return nextCursor;
     }
 
     /**
@@ -11996,7 +13765,7 @@ public class IBMAssistantV1Models {
      * @param nextUrl the new nextUrl
      */
     public void setNextUrl(final String nextUrl) {
-      this.next_url_serialized_name = nextUrl;
+      this.nextUrl = nextUrl;
     }
 
     /**
@@ -12005,7 +13774,7 @@ public class IBMAssistantV1Models {
      * @param matched the new matched
      */
     public void setMatched(final long matched) {
-      this.matched_serialized_name = matched;
+      this.matched = matched;
     }
 
     /**
@@ -12014,17 +13783,29 @@ public class IBMAssistantV1Models {
      * @param nextCursor the new nextCursor
      */
     public void setNextCursor(final String nextCursor) {
-      this.next_cursor_serialized_name = nextCursor;
+      this.nextCursor = nextCursor;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('next_url', 'nextUrl');
+      mapping.put('next_cursor', 'nextCursor');
+      return mapping;
+    }
   }
 
   /**
    * A mention of a contextual entity.
    */
   public class Mention extends IBMWatsonGenericModel {
-    private String entity_serialized_name;
-    private List<Long> location_serialized_name;
+    private String entity;
+    private List<Long> location;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Mention() { }
  
     /**
      * Gets the entity.
@@ -12035,7 +13816,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getEntity() {
-      return entity_serialized_name;
+      return entity;
     }
  
     /**
@@ -12047,35 +13828,115 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Long> getLocation() {
-      return location_serialized_name;
+      return location;
+    }
+  
+    private Mention(MentionBuilder builder) {
+      IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
+      IBMWatsonValidator.notNull(builder.location, 'location cannot be null');
+      this.entity = builder.entity;
+      this.location = builder.location;
     }
 
     /**
-     * Sets the entity.
+     * New builder.
      *
-     * @param entity the new entity
+     * @return a Mention builder
      */
-    public void setEntity(final String entity) {
-      this.entity_serialized_name = entity;
+    public MentionBuilder newBuilder() {
+      return new MentionBuilder(this);
+    }
+  }
+
+  /**
+   * Mention Builder.
+   */
+  public class MentionBuilder {
+    private String entity;
+    private List<Long> location;
+
+    private MentionBuilder(Mention mention) {
+      this.entity = mention.entity;
+      this.location = mention.location;
     }
 
     /**
-     * Sets the location.
+     * Instantiates a new builder.
+     */
+    public MentionBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param entity the entity
+     * @param location the location
+     */
+    public MentionBuilder(String entity, List<Long> location) {
+      this.entity = entity;
+      this.location = location;
+    }
+
+    /**
+     * Builds a Mention.
+     *
+     * @return the mention
+     */
+    public Mention build() {
+      return new Mention(this);
+    }
+
+    /**
+     * Adds an location to location.
      *
      * @param location the new location
+     * @return the Mention builder
      */
-    public void setLocation(final List<Long> location) {
-      this.location_serialized_name = location;
+    public MentionBuilder addLocation(Long location) {
+      IBMWatsonValidator.notNull(location, 'location cannot be null');
+      if (this.location == null) {
+        this.location = new List<Long>();
+      }
+      this.location.add(location);
+      return this;
     }
 
+    /**
+     * Set the entity.
+     *
+     * @param entity the entity
+     * @return the Mention builder
+     */
+    public MentionBuilder setEntity(String entity) {
+      this.entity = entity;
+      return this;
+    }
+
+    /**
+     * Set the location.
+     * Existing location will be replaced.
+     *
+     * @param location the location
+     * @return the Mention builder
+     */
+    public MentionBuilder setLocation(List<Long> location) {
+      this.location = location;
+      return this;
+    }
   }
 
   /**
    * Metadata related to the message.
    */
   public class MessageContextMetadata extends IBMWatsonGenericModel {
-    private String deployment_serialized_name;
-    private String user_id_serialized_name;
+    private String deployment;
+    private String userId;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public MessageContextMetadata() { }
  
     /**
      * Gets the deployment.
@@ -12087,7 +13948,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDeployment() {
-      return deployment_serialized_name;
+      return deployment;
     }
  
     /**
@@ -12102,34 +13963,91 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getUserId() {
-      return user_id_serialized_name;
+      return userId;
+    }
+  
+    private MessageContextMetadata(MessageContextMetadataBuilder builder) {
+      this.deployment = builder.deployment;
+      this.userId = builder.userId;
     }
 
     /**
-     * Sets the deployment.
+     * New builder.
      *
-     * @param deployment the new deployment
+     * @return a MessageContextMetadata builder
      */
-    public void setDeployment(final String deployment) {
-      this.deployment_serialized_name = deployment;
+    public MessageContextMetadataBuilder newBuilder() {
+      return new MessageContextMetadataBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('userId', 'user_id');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('user_id', 'userId');
+      return mapping;
+    }
+  }
+
+  /**
+   * MessageContextMetadata Builder.
+   */
+  public class MessageContextMetadataBuilder {
+    private String deployment;
+    private String userId;
+
+    private MessageContextMetadataBuilder(MessageContextMetadata messageContextMetadata) {
+      this.deployment = messageContextMetadata.deployment;
+      this.userId = messageContextMetadata.userId;
     }
 
     /**
-     * Sets the userId.
-     *
-     * @param userId the new userId
+     * Instantiates a new builder.
      */
-    public void setUserId(final String userId) {
-      this.user_id_serialized_name = userId;
+    public MessageContextMetadataBuilder() {
     }
 
+    /**
+     * Builds a MessageContextMetadata.
+     *
+     * @return the messageContextMetadata
+     */
+    public MessageContextMetadata build() {
+      return new MessageContextMetadata(this);
+    }
+
+    /**
+     * Set the deployment.
+     *
+     * @param deployment the deployment
+     * @return the MessageContextMetadata builder
+     */
+    public MessageContextMetadataBuilder setDeployment(String deployment) {
+      this.deployment = deployment;
+      return this;
+    }
+
+    /**
+     * Set the userId.
+     *
+     * @param userId the userId
+     * @return the MessageContextMetadata builder
+     */
+    public MessageContextMetadataBuilder setUserId(String userId) {
+      this.userId = userId;
+      return this;
+    }
   }
 
   /**
    * An input object that includes the input text.
    */
   public class MessageInput extends IBMWatsonDynamicModel {
-    private String text_serialized_name;
+    private String text;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -12145,7 +14063,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
 
     /**
@@ -12159,7 +14077,7 @@ public class IBMAssistantV1Models {
     }
 
     private MessageInput(MessageInputBuilder builder) {
-      this.text_serialized_name = builder.text;
+      this.text = builder.text;
     }
 
     /**
@@ -12199,7 +14117,7 @@ public class IBMAssistantV1Models {
     private String text;
 
     private MessageInputBuilder(MessageInput messageInput) {
-      this.text = messageInput.text_serialized_name;
+      this.text = messageInput.text;
     }
 
     /**
@@ -12240,7 +14158,7 @@ public class IBMAssistantV1Models {
     private Context context;
     private OutputData output;
     private Boolean nodesVisitedDetails;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -12251,7 +14169,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the input.
      *
@@ -12262,7 +14180,7 @@ public class IBMAssistantV1Models {
     public MessageInput input() {
       return input;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -12274,7 +14192,7 @@ public class IBMAssistantV1Models {
     public List<RuntimeIntent> intents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -12286,7 +14204,7 @@ public class IBMAssistantV1Models {
     public List<RuntimeEntity> entities() {
       return entities;
     }
- 
+
     /**
      * Gets the alternateIntents.
      *
@@ -12297,7 +14215,7 @@ public class IBMAssistantV1Models {
     public Boolean alternateIntents() {
       return alternateIntents;
     }
- 
+
     /**
      * Gets the context.
      *
@@ -12308,7 +14226,7 @@ public class IBMAssistantV1Models {
     public Context context() {
       return context;
     }
- 
+
     /**
      * Gets the output.
      *
@@ -12320,7 +14238,7 @@ public class IBMAssistantV1Models {
     public OutputData output() {
       return output;
     }
- 
+
     /**
      * Gets the nodesVisitedDetails.
      *
@@ -12355,6 +14273,22 @@ public class IBMAssistantV1Models {
       return new MessageOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getSdkToApiMapping());
+      }
+      mapping.put('alternateIntents', 'alternate_intents');
+      if (context != null) {
+        mapping.putAll(context.getSdkToApiMapping());
+      }
+      if (output != null) {
+        mapping.putAll(output.getSdkToApiMapping());
+      }
+      mapping.put('nodesVisitedDetails', 'nodes_visited_details');
+      return mapping;
+    }
   }
 
   /**
@@ -12559,13 +14493,19 @@ public class IBMAssistantV1Models {
    * A request sent to the workspace, including the user input and context.
    */
   public class MessageRequest extends IBMWatsonGenericModel {
-    private MessageInput input_serialized_name;
-    private List<RuntimeIntent> intents_serialized_name;
-    private List<RuntimeEntity> entities_serialized_name;
-    private Boolean alternate_intents_serialized_name;
-    private Context context_serialized_name;
-    private OutputData output_serialized_name;
-    private List<DialogNodeAction> actions_serialized_name;
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+    private Boolean alternateIntents;
+    private Context context;
+    private OutputData output;
+    private List<DialogNodeAction> actions;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public MessageRequest() { }
  
     /**
      * Gets the input.
@@ -12576,7 +14516,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public MessageInput getInput() {
-      return input_serialized_name;
+      return input;
     }
  
     /**
@@ -12589,7 +14529,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<RuntimeIntent> getIntents() {
-      return intents_serialized_name;
+      return intents;
     }
  
     /**
@@ -12602,7 +14542,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<RuntimeEntity> getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
  
     /**
@@ -12614,7 +14554,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getAlternateIntents() {
-      return alternate_intents_serialized_name;
+      return alternateIntents;
     }
  
     /**
@@ -12626,7 +14566,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Context getContext() {
-      return context_serialized_name;
+      return context;
     }
  
     /**
@@ -12639,7 +14579,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public OutputData getOutput() {
-      return output_serialized_name;
+      return output;
     }
  
     /**
@@ -12651,61 +14591,26 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNodeAction> getActions() {
-      return actions_serialized_name;
+      return actions;
+    }
+  
+    private MessageRequest(MessageRequestBuilder builder) {
+      this.input = builder.input;
+      this.intents = builder.intents;
+      this.entities = builder.entities;
+      this.alternateIntents = builder.alternateIntents;
+      this.context = builder.context;
+      this.output = builder.output;
+      this.actions = builder.actions;
     }
 
     /**
-     * Sets the input.
+     * New builder.
      *
-     * @param input the new input
+     * @return a MessageRequest builder
      */
-    public void setInput(final MessageInput input) {
-      this.input_serialized_name = input;
-    }
-
-    /**
-     * Sets the intents.
-     *
-     * @param intents the new intents
-     */
-    public void setIntents(final List<RuntimeIntent> intents) {
-      this.intents_serialized_name = intents;
-    }
-
-    /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<RuntimeEntity> entities) {
-      this.entities_serialized_name = entities;
-    }
-
-    /**
-     * Sets the alternateIntents.
-     *
-     * @param alternateIntents the new alternateIntents
-     */
-    public void setAlternateIntents(final Boolean alternateIntents) {
-      this.alternate_intents_serialized_name = alternateIntents;
-    }
-
-    /**
-     * Sets the context.
-     *
-     * @param context the new context
-     */
-    public void setContext(final Context context) {
-      this.context_serialized_name = context;
-    }
-
-    /**
-     * Sets the output.
-     *
-     * @param output the new output
-     */
-    public void setOutput(final OutputData output) {
-      this.output_serialized_name = output;
+    public MessageRequestBuilder newBuilder() {
+      return new MessageRequestBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12714,10 +14619,11 @@ public class IBMAssistantV1Models {
       }
 
       MessageRequest ret = (MessageRequest) super.deserialize(jsonString, jsonMap, classType);
+      MessageRequestBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for input
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
-      ret.setInput(newInput);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
+      retBuilder.setInput(newInput);
 
       // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
@@ -12725,11 +14631,11 @@ public class IBMAssistantV1Models {
       if (deserializedIntents != null) {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        ret.intents_serialized_name = newIntents;
+        retBuilder.setIntents(newIntents);
       }
 
       // calling custom deserializer for entities
@@ -12738,20 +14644,20 @@ public class IBMAssistantV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        retBuilder.setEntities(newEntities);
       }
 
       // calling custom deserializer for context
-      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), Context.class);
-      ret.setContext(newContext);
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context'), Context.class);
+      retBuilder.setContext(newContext);
 
       // calling custom deserializer for output
-      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), OutputData.class);
-      ret.setOutput(newOutput);
+      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'), OutputData.class);
+      retBuilder.setOutput(newOutput);
 
       // calling custom deserializer for actions
       List<DialogNodeAction> newActions = new List<DialogNodeAction>();
@@ -12759,14 +14665,213 @@ public class IBMAssistantV1Models {
       if (deserializedActions != null) {
         for (Integer i = 0; i < deserializedActions.size(); i++) {
           DialogNodeAction currentItem = ret.getActions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('actions_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('actions');
           DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
-        ret.actions_serialized_name = newActions;
+        retBuilder.setActions(newActions);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getSdkToApiMapping());
+      }
+      mapping.put('alternateIntents', 'alternate_intents');
+      if (context != null) {
+        mapping.putAll(context.getSdkToApiMapping());
+      }
+      if (output != null) {
+        mapping.putAll(output.getSdkToApiMapping());
+      }
+      if (actions != null && actions[0] != null) {
+        mapping.putAll(actions[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      mapping.put('alternate_intents', 'alternateIntents');
+      if (context != null) {
+        mapping.putAll(context.getApiToSdkMapping());
+      }
+      if (output != null) {
+        mapping.putAll(output.getApiToSdkMapping());
+      }
+      if (actions != null && actions[0] != null) {
+        mapping.putAll(actions[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * MessageRequest Builder.
+   */
+  public class MessageRequestBuilder {
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+    private Boolean alternateIntents;
+    private Context context;
+    private OutputData output;
+    private List<DialogNodeAction> actions;
+
+    private MessageRequestBuilder(MessageRequest messageRequest) {
+      this.input = messageRequest.input;
+      this.intents = messageRequest.intents;
+      this.entities = messageRequest.entities;
+      this.alternateIntents = messageRequest.alternateIntents;
+      this.context = messageRequest.context;
+      this.output = messageRequest.output;
+      this.actions = messageRequest.actions;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public MessageRequestBuilder() {
+    }
+
+    /**
+     * Builds a MessageRequest.
+     *
+     * @return the messageRequest
+     */
+    public MessageRequest build() {
+      return new MessageRequest(this);
+    }
+
+    /**
+     * Adds an intents to intents.
+     *
+     * @param intents the new intents
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder addIntents(RuntimeIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
+      if (this.intents == null) {
+        this.intents = new List<RuntimeIntent>();
+      }
+      this.intents.add(intents);
+      return this;
+    }
+
+    /**
+     * Adds an entities to entities.
+     *
+     * @param entities the new entities
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder addEntities(RuntimeEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
+      if (this.entities == null) {
+        this.entities = new List<RuntimeEntity>();
+      }
+      this.entities.add(entities);
+      return this;
+    }
+
+    /**
+     * Adds an actions to actions.
+     *
+     * @param actions the new actions
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder addActions(DialogNodeAction actions) {
+      IBMWatsonValidator.notNull(actions, 'actions cannot be null');
+      if (this.actions == null) {
+        this.actions = new List<DialogNodeAction>();
+      }
+      this.actions.add(actions);
+      return this;
+    }
+
+    /**
+     * Set the input.
+     *
+     * @param input the input
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder setInput(MessageInput input) {
+      this.input = input;
+      return this;
+    }
+
+    /**
+     * Set the intents.
+     * Existing intents will be replaced.
+     *
+     * @param intents the intents
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder setIntents(List<RuntimeIntent> intents) {
+      this.intents = intents;
+      return this;
+    }
+
+    /**
+     * Set the entities.
+     * Existing entities will be replaced.
+     *
+     * @param entities the entities
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder setEntities(List<RuntimeEntity> entities) {
+      this.entities = entities;
+      return this;
+    }
+
+    /**
+     * Set the alternateIntents.
+     *
+     * @param alternateIntents the alternateIntents
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder setAlternateIntents(Boolean alternateIntents) {
+      this.alternateIntents = alternateIntents;
+      return this;
+    }
+
+    /**
+     * Set the context.
+     *
+     * @param context the context
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder setContext(Context context) {
+      this.context = context;
+      return this;
+    }
+
+    /**
+     * Set the output.
+     *
+     * @param output the output
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder setOutput(OutputData output) {
+      this.output = output;
+      return this;
+    }
+
+    /**
+     * Set the actions.
+     * Existing actions will be replaced.
+     *
+     * @param actions the actions
+     * @return the MessageRequest builder
+     */
+    public MessageRequestBuilder setActions(List<DialogNodeAction> actions) {
+      this.actions = actions;
+      return this;
     }
   }
 
@@ -12774,13 +14879,13 @@ public class IBMAssistantV1Models {
    * The response sent by the workspace, including the output text, detected intents and entities, and context.
    */
   public class MessageResponse extends IBMWatsonResponseModel {
-    private MessageInput input_serialized_name;
-    private List<RuntimeIntent> intents_serialized_name;
-    private List<RuntimeEntity> entities_serialized_name;
-    private Boolean alternate_intents_serialized_name;
-    private Context context_serialized_name;
-    private OutputData output_serialized_name;
-    private List<DialogNodeAction> actions_serialized_name;
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+    private Boolean alternateIntents;
+    private Context context;
+    private OutputData output;
+    private List<DialogNodeAction> actions;
  
     /**
      * Gets the input.
@@ -12791,7 +14896,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public MessageInput getInput() {
-      return input_serialized_name;
+      return input;
     }
  
     /**
@@ -12803,7 +14908,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<RuntimeIntent> getIntents() {
-      return intents_serialized_name;
+      return intents;
     }
  
     /**
@@ -12815,7 +14920,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<RuntimeEntity> getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
  
     /**
@@ -12827,7 +14932,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getAlternateIntents() {
-      return alternate_intents_serialized_name;
+      return alternateIntents;
     }
  
     /**
@@ -12839,7 +14944,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Context getContext() {
-      return context_serialized_name;
+      return context;
     }
  
     /**
@@ -12852,7 +14957,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public OutputData getOutput() {
-      return output_serialized_name;
+      return output;
     }
  
     /**
@@ -12864,7 +14969,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNodeAction> getActions() {
-      return actions_serialized_name;
+      return actions;
     }
 
     /**
@@ -12873,7 +14978,7 @@ public class IBMAssistantV1Models {
      * @param input the new input
      */
     public void setInput(final MessageInput input) {
-      this.input_serialized_name = input;
+      this.input = input;
     }
 
     /**
@@ -12882,7 +14987,7 @@ public class IBMAssistantV1Models {
      * @param intents the new intents
      */
     public void setIntents(final List<RuntimeIntent> intents) {
-      this.intents_serialized_name = intents;
+      this.intents = intents;
     }
 
     /**
@@ -12891,7 +14996,7 @@ public class IBMAssistantV1Models {
      * @param entities the new entities
      */
     public void setEntities(final List<RuntimeEntity> entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
     }
 
     /**
@@ -12900,7 +15005,7 @@ public class IBMAssistantV1Models {
      * @param alternateIntents the new alternateIntents
      */
     public void setAlternateIntents(final Boolean alternateIntents) {
-      this.alternate_intents_serialized_name = alternateIntents;
+      this.alternateIntents = alternateIntents;
     }
 
     /**
@@ -12909,7 +15014,7 @@ public class IBMAssistantV1Models {
      * @param context the new context
      */
     public void setContext(final Context context) {
-      this.context_serialized_name = context;
+      this.context = context;
     }
 
     /**
@@ -12918,7 +15023,7 @@ public class IBMAssistantV1Models {
      * @param output the new output
      */
     public void setOutput(final OutputData output) {
-      this.output_serialized_name = output;
+      this.output = output;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12929,7 +15034,7 @@ public class IBMAssistantV1Models {
       MessageResponse ret = (MessageResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for input
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
       ret.setInput(newInput);
 
       // calling custom deserializer for intents
@@ -12938,11 +15043,11 @@ public class IBMAssistantV1Models {
       if (deserializedIntents != null) {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        ret.intents_serialized_name = newIntents;
+        ret.intents = newIntents;
       }
 
       // calling custom deserializer for entities
@@ -12951,19 +15056,19 @@ public class IBMAssistantV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        ret.entities = newEntities;
       }
 
       // calling custom deserializer for context
-      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), Context.class);
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context'), Context.class);
       ret.setContext(newContext);
 
       // calling custom deserializer for output
-      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), OutputData.class);
+      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'), OutputData.class);
       ret.setOutput(newOutput);
 
       // calling custom deserializer for actions
@@ -12972,14 +15077,32 @@ public class IBMAssistantV1Models {
       if (deserializedActions != null) {
         for (Integer i = 0; i < deserializedActions.size(); i++) {
           DialogNodeAction currentItem = ret.getActions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('actions_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('actions');
           DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
-        ret.actions_serialized_name = newActions;
+        ret.actions = newActions;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      mapping.put('alternate_intents', 'alternateIntents');
+      if (context != null) {
+        mapping.putAll(context.getApiToSdkMapping());
+      }
+      if (output != null) {
+        mapping.putAll(output.getApiToSdkMapping());
+      }
+      if (actions != null && actions[0] != null) {
+        mapping.putAll(actions[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -12987,12 +15110,18 @@ public class IBMAssistantV1Models {
    * An output object that includes the response to the user, the dialog nodes that were triggered, and messages from the log.
    */
   public class OutputData extends IBMWatsonDynamicModel {
-    private List<LogMessage> log_messages_serialized_name;
-    private List<String> text_serialized_name;
-    private List<DialogRuntimeResponseGeneric> generic_serialized_name;
-    private List<String> nodes_visited_serialized_name;
-    private List<DialogNodeVisitedDetails> nodes_visited_details_serialized_name;
+    private List<LogMessage> logMessages;
+    private List<String> text;
+    private List<DialogRuntimeResponseGeneric> generic;
+    private List<String> nodesVisited;
+    private List<DialogNodeVisitedDetails> nodesVisitedDetails;
     private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public OutputData() { }
 
     /**
      * Gets the logMessages.
@@ -13001,7 +15130,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<LogMessage> getLogMessages() {
-      return log_messages_serialized_name;
+      return logMessages;
     }
 
     /**
@@ -13011,7 +15140,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<String> getText() {
-      return text_serialized_name;
+      return text;
     }
 
     /**
@@ -13021,7 +15150,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogRuntimeResponseGeneric> getGeneric() {
-      return generic_serialized_name;
+      return generic;
     }
 
     /**
@@ -13031,7 +15160,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<String> getNodesVisited() {
-      return nodes_visited_serialized_name;
+      return nodesVisited;
     }
 
     /**
@@ -13041,7 +15170,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNodeVisitedDetails> getNodesVisitedDetails() {
-      return nodes_visited_details_serialized_name;
+      return nodesVisitedDetails;
     }
 
     /**
@@ -13054,49 +15183,23 @@ public class IBMAssistantV1Models {
       return this.getDynamicProperties();
     }
 
-    /**
-     * Sets the logMessages.
-     *
-     * @param logMessages the new logMessages
-     */
-    public void setLogMessages(final List<LogMessage> logMessages) {
-      this.log_messages_serialized_name = logMessages;
+    private OutputData(OutputDataBuilder builder) {
+      IBMWatsonValidator.notNull(builder.logMessages, 'logMessages cannot be null');
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      this.logMessages = builder.logMessages;
+      this.text = builder.text;
+      this.generic = builder.generic;
+      this.nodesVisited = builder.nodesVisited;
+      this.nodesVisitedDetails = builder.nodesVisitedDetails;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a OutputData builder
      */
-    public void setText(final List<String> text) {
-      this.text_serialized_name = text;
-    }
-
-    /**
-     * Sets the generic.
-     *
-     * @param generic the new generic
-     */
-    public void setGeneric(final List<DialogRuntimeResponseGeneric> generic) {
-      this.generic_serialized_name = generic;
-    }
-
-    /**
-     * Sets the nodesVisited.
-     *
-     * @param nodesVisited the new nodesVisited
-     */
-    public void setNodesVisited(final List<String> nodesVisited) {
-      this.nodes_visited_serialized_name = nodesVisited;
-    }
-
-    /**
-     * Sets the nodesVisitedDetails.
-     *
-     * @param nodesVisitedDetails the new nodesVisitedDetails
-     */
-    public void setNodesVisitedDetails(final List<DialogNodeVisitedDetails> nodesVisitedDetails) {
-      this.nodes_visited_details_serialized_name = nodesVisitedDetails;
+    public OutputDataBuilder newBuilder() {
+      return new OutputDataBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -13105,6 +15208,7 @@ public class IBMAssistantV1Models {
       }
 
       OutputData ret = (OutputData) super.deserialize(jsonString, jsonMap, classType);
+      OutputDataBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for logMessages
       List<LogMessage> newLogMessages = new List<LogMessage>();
@@ -13112,11 +15216,11 @@ public class IBMAssistantV1Models {
       if (deserializedLogMessages != null) {
         for (Integer i = 0; i < deserializedLogMessages.size(); i++) {
           LogMessage currentItem = ret.getLogMessages().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('log_messages_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('logMessages');
           LogMessage newItem = (LogMessage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogMessage.class);
           newLogMessages.add(newItem);
         }
-        ret.setLogMessages(newLogMessages);
+        retBuilder.setLogMessages(newLogMessages);
       }
 
       // calling custom deserializer for generic
@@ -13125,11 +15229,11 @@ public class IBMAssistantV1Models {
       if (deserializedGeneric != null) {
         for (Integer i = 0; i < deserializedGeneric.size(); i++) {
           DialogRuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('generic_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
           DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
           newGeneric.add(newItem);
         }
-        ret.setGeneric(newGeneric);
+        retBuilder.setGeneric(newGeneric);
       }
 
       // calling custom deserializer for nodesVisitedDetails
@@ -13138,22 +15242,230 @@ public class IBMAssistantV1Models {
       if (deserializedNodesVisitedDetails != null) {
         for (Integer i = 0; i < deserializedNodesVisitedDetails.size(); i++) {
           DialogNodeVisitedDetails currentItem = ret.getNodesVisitedDetails().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('nodes_visited_details_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('nodesVisitedDetails');
           DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeVisitedDetails.class);
           newNodesVisitedDetails.add(newItem);
         }
-        ret.setNodesVisitedDetails(newNodesVisitedDetails);
+        retBuilder.setNodesVisitedDetails(newNodesVisitedDetails);
       }
 
+      OutputData builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
+          builderResult.put(key, jsonMap.get(key));
         }
       }
 
-      return ret;
+      return builderResult;
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('logMessages', 'log_messages');
+      if (generic != null && generic[0] != null) {
+        mapping.putAll(generic[0].getSdkToApiMapping());
+      }
+      mapping.put('nodesVisited', 'nodes_visited');
+      mapping.put('nodesVisitedDetails', 'nodes_visited_details');
+      if (nodesVisitedDetails != null && nodesVisitedDetails[0] != null) {
+        mapping.putAll(nodesVisitedDetails[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('log_messages', 'logMessages');
+      if (generic != null && generic[0] != null) {
+        mapping.putAll(generic[0].getApiToSdkMapping());
+      }
+      mapping.put('nodes_visited', 'nodesVisited');
+      mapping.put('nodes_visited_details', 'nodesVisitedDetails');
+      if (nodesVisitedDetails != null && nodesVisitedDetails[0] != null) {
+        mapping.putAll(nodesVisitedDetails[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * OutputData Builder.
+   */
+  public class OutputDataBuilder {
+    private List<LogMessage> logMessages;
+    private List<String> text;
+    private List<DialogRuntimeResponseGeneric> generic;
+    private List<String> nodesVisited;
+    private List<DialogNodeVisitedDetails> nodesVisitedDetails;
+
+    private OutputDataBuilder(OutputData outputData) {
+      this.logMessages = outputData.logMessages;
+      this.text = outputData.text;
+      this.generic = outputData.generic;
+      this.nodesVisited = outputData.nodesVisited;
+      this.nodesVisitedDetails = outputData.nodesVisitedDetails;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public OutputDataBuilder() { }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param logMessages the logMessages
+     * @param text the text
+     */
+    public OutputDataBuilder(List<LogMessage> logMessages, List<String> text) {
+      this.logMessages = logMessages;
+      this.text = text;
+    }
+
+    /**
+     * Builds a OutputData.
+     *
+     * @return the outputData
+     */
+    public OutputData build() {
+      return new OutputData(this);
+    }
+
+    /**
+     * Adds an logMessages to logMessages.
+     *
+     * @param logMessages the new logMessages
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder addLogMessages(LogMessage logMessages) {
+      IBMWatsonValidator.notNull(logMessages, 'logMessages cannot be null');
+      if (this.logMessages == null) {
+        this.logMessages = new List<LogMessage>();
+      }
+      this.logMessages.add(logMessages);
+      return this;
+    }
+
+    /**
+     * Adds an text to text.
+     *
+     * @param text the new text
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder addText(String text) {
+      IBMWatsonValidator.notNull(text, 'text cannot be null');
+      if (this.text == null) {
+        this.text = new List<String>();
+      }
+      this.text.add(text);
+      return this;
+    }
+
+    /**
+     * Adds an generic to generic.
+     *
+     * @param generic the new generic
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder addGeneric(DialogRuntimeResponseGeneric generic) {
+      IBMWatsonValidator.notNull(generic, 'generic cannot be null');
+      if (this.generic == null) {
+        this.generic = new List<DialogRuntimeResponseGeneric>();
+      }
+      this.generic.add(generic);
+      return this;
+    }
+
+    /**
+     * Adds an nodesVisited to nodesVisited.
+     *
+     * @param nodesVisited the new nodesVisited
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder addNodesVisited(String nodesVisited) {
+      IBMWatsonValidator.notNull(nodesVisited, 'nodesVisited cannot be null');
+      if (this.nodesVisited == null) {
+        this.nodesVisited = new List<String>();
+      }
+      this.nodesVisited.add(nodesVisited);
+      return this;
+    }
+
+    /**
+     * Adds an nodesVisitedDetails to nodesVisitedDetails.
+     *
+     * @param nodesVisitedDetails the new nodesVisitedDetails
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder addNodesVisitedDetails(DialogNodeVisitedDetails nodesVisitedDetails) {
+      IBMWatsonValidator.notNull(nodesVisitedDetails, 'nodesVisitedDetails cannot be null');
+      if (this.nodesVisitedDetails == null) {
+        this.nodesVisitedDetails = new List<DialogNodeVisitedDetails>();
+      }
+      this.nodesVisitedDetails.add(nodesVisitedDetails);
+      return this;
+    }
+
+    /**
+     * Set the logMessages.
+     * Existing logMessages will be replaced.
+     *
+     * @param logMessages the logMessages
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder setLogMessages(List<LogMessage> logMessages) {
+      this.logMessages = logMessages;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     * Existing text will be replaced.
+     *
+     * @param text the text
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder setText(List<String> text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the generic.
+     * Existing generic will be replaced.
+     *
+     * @param generic the generic
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder setGeneric(List<DialogRuntimeResponseGeneric> generic) {
+      this.generic = generic;
+      return this;
+    }
+
+    /**
+     * Set the nodesVisited.
+     * Existing nodesVisited will be replaced.
+     *
+     * @param nodesVisited the nodesVisited
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder setNodesVisited(List<String> nodesVisited) {
+      this.nodesVisited = nodesVisited;
+      return this;
+    }
+
+    /**
+     * Set the nodesVisitedDetails.
+     * Existing nodesVisitedDetails will be replaced.
+     *
+     * @param nodesVisitedDetails the nodesVisitedDetails
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder setNodesVisitedDetails(List<DialogNodeVisitedDetails> nodesVisitedDetails) {
+      this.nodesVisitedDetails = nodesVisitedDetails;
+      return this;
     }
   }
 
@@ -13161,12 +15473,12 @@ public class IBMAssistantV1Models {
    * The pagination data for the returned objects.
    */
   public class Pagination extends IBMWatsonGenericModel {
-    private String refresh_url_serialized_name;
-    private String next_url_serialized_name;
-    private Long total_serialized_name;
-    private Long matched_serialized_name;
-    private String refresh_cursor_serialized_name;
-    private String next_cursor_serialized_name;
+    private String refreshUrl;
+    private String nextUrl;
+    private Long total;
+    private Long matched;
+    private String refreshCursor;
+    private String nextCursor;
  
     /**
      * Gets the refreshUrl.
@@ -13177,7 +15489,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getRefreshUrl() {
-      return refresh_url_serialized_name;
+      return refreshUrl;
     }
  
     /**
@@ -13189,7 +15501,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getNextUrl() {
-      return next_url_serialized_name;
+      return nextUrl;
     }
  
     /**
@@ -13201,7 +15513,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Long getTotal() {
-      return total_serialized_name;
+      return total;
     }
  
     /**
@@ -13213,7 +15525,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Long getMatched() {
-      return matched_serialized_name;
+      return matched;
     }
  
     /**
@@ -13225,7 +15537,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getRefreshCursor() {
-      return refresh_cursor_serialized_name;
+      return refreshCursor;
     }
  
     /**
@@ -13237,7 +15549,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getNextCursor() {
-      return next_cursor_serialized_name;
+      return nextCursor;
     }
 
     /**
@@ -13246,7 +15558,7 @@ public class IBMAssistantV1Models {
      * @param refreshUrl the new refreshUrl
      */
     public void setRefreshUrl(final String refreshUrl) {
-      this.refresh_url_serialized_name = refreshUrl;
+      this.refreshUrl = refreshUrl;
     }
 
     /**
@@ -13255,7 +15567,7 @@ public class IBMAssistantV1Models {
      * @param nextUrl the new nextUrl
      */
     public void setNextUrl(final String nextUrl) {
-      this.next_url_serialized_name = nextUrl;
+      this.nextUrl = nextUrl;
     }
 
     /**
@@ -13264,7 +15576,7 @@ public class IBMAssistantV1Models {
      * @param total the new total
      */
     public void setTotal(final long total) {
-      this.total_serialized_name = total;
+      this.total = total;
     }
 
     /**
@@ -13273,7 +15585,7 @@ public class IBMAssistantV1Models {
      * @param matched the new matched
      */
     public void setMatched(final long matched) {
-      this.matched_serialized_name = matched;
+      this.matched = matched;
     }
 
     /**
@@ -13282,7 +15594,7 @@ public class IBMAssistantV1Models {
      * @param refreshCursor the new refreshCursor
      */
     public void setRefreshCursor(final String refreshCursor) {
-      this.refresh_cursor_serialized_name = refreshCursor;
+      this.refreshCursor = refreshCursor;
     }
 
     /**
@@ -13291,22 +15603,36 @@ public class IBMAssistantV1Models {
      * @param nextCursor the new nextCursor
      */
     public void setNextCursor(final String nextCursor) {
-      this.next_cursor_serialized_name = nextCursor;
+      this.nextCursor = nextCursor;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('refresh_url', 'refreshUrl');
+      mapping.put('next_url', 'nextUrl');
+      mapping.put('refresh_cursor', 'refreshCursor');
+      mapping.put('next_cursor', 'nextCursor');
+      return mapping;
+    }
   }
 
   /**
    * A term from the request that was identified as an entity.
    */
   public class RuntimeEntity extends IBMWatsonDynamicModel {
-    private String entity_serialized_name;
-    private List<Long> location_serialized_name;
-    private String value_serialized_name;
-    private Double confidence_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private List<CaptureGroup> groups_serialized_name;
+    private String entity;
+    private List<Long> location;
+    private String value;
+    private Double confidence;
+    private IBMWatsonMapModel metadata;
+    private List<CaptureGroup> groups;
     private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeEntity() { }
 
     /**
      * Gets the entity.
@@ -13315,7 +15641,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getEntity() {
-      return entity_serialized_name;
+      return entity;
     }
 
     /**
@@ -13325,7 +15651,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Long> getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -13335,7 +15661,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getValue() {
-      return value_serialized_name;
+      return value;
     }
 
     /**
@@ -13345,7 +15671,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
 
     /**
@@ -13355,7 +15681,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
 
     /**
@@ -13365,7 +15691,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<CaptureGroup> getGroups() {
-      return groups_serialized_name;
+      return groups;
     }
 
     /**
@@ -13378,58 +15704,25 @@ public class IBMAssistantV1Models {
       return this.getDynamicProperties();
     }
 
-    /**
-     * Sets the entity.
-     *
-     * @param entity the new entity
-     */
-    public void setEntity(final String entity) {
-      this.entity_serialized_name = entity;
+    private RuntimeEntity(RuntimeEntityBuilder builder) {
+      IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
+      IBMWatsonValidator.notNull(builder.location, 'location cannot be null');
+      IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
+      this.entity = builder.entity;
+      this.location = builder.location;
+      this.value = builder.value;
+      this.confidence = builder.confidence;
+      this.metadata = builder.metadata;
+      this.groups = builder.groups;
     }
 
     /**
-     * Sets the location.
+     * New builder.
      *
-     * @param location the new location
+     * @return a RuntimeEntity builder
      */
-    public void setLocation(final List<Long> location) {
-      this.location_serialized_name = location;
-    }
-
-    /**
-     * Sets the value.
-     *
-     * @param value the new value
-     */
-    public void setValue(final String value) {
-      this.value_serialized_name = value;
-    }
-
-    /**
-     * Sets the confidence.
-     *
-     * @param confidence the new confidence
-     */
-    public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
-    }
-
-    /**
-     * Sets the metadata.
-     *
-     * @param metadata the new metadata
-     */
-    public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
-    }
-
-    /**
-     * Sets the groups.
-     *
-     * @param groups the new groups
-     */
-    public void setGroups(final List<CaptureGroup> groups) {
-      this.groups_serialized_name = groups;
+    public RuntimeEntityBuilder newBuilder() {
+      return new RuntimeEntityBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -13438,10 +15731,11 @@ public class IBMAssistantV1Models {
       }
 
       RuntimeEntity ret = (RuntimeEntity) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeEntityBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
-      ret.setMetadata(newMetadata);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
+      retBuilder.setMetadata(newMetadata);
 
       // calling custom deserializer for groups
       List<CaptureGroup> newGroups = new List<CaptureGroup>();
@@ -13449,22 +15743,185 @@ public class IBMAssistantV1Models {
       if (deserializedGroups != null) {
         for (Integer i = 0; i < deserializedGroups.size(); i++) {
           CaptureGroup currentItem = ret.getGroups().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('groups_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('groups');
           CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CaptureGroup.class);
           newGroups.add(newItem);
         }
-        ret.setGroups(newGroups);
+        retBuilder.setGroups(newGroups);
       }
 
+      RuntimeEntity builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
+          builderResult.put(key, jsonMap.get(key));
         }
       }
 
-      return ret;
+      return builderResult;
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (groups != null && groups[0] != null) {
+        mapping.putAll(groups[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (groups != null && groups[0] != null) {
+        mapping.putAll(groups[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * RuntimeEntity Builder.
+   */
+  public class RuntimeEntityBuilder {
+    private String entity;
+    private List<Long> location;
+    private String value;
+    private Double confidence;
+    private IBMWatsonMapModel metadata;
+    private List<CaptureGroup> groups;
+
+    private RuntimeEntityBuilder(RuntimeEntity runtimeEntity) {
+      this.entity = runtimeEntity.entity;
+      this.location = runtimeEntity.location;
+      this.value = runtimeEntity.value;
+      this.confidence = runtimeEntity.confidence;
+      this.metadata = runtimeEntity.metadata;
+      this.groups = runtimeEntity.groups;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeEntityBuilder() { }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param entity the entity
+     * @param location the location
+     * @param value the value
+     */
+    public RuntimeEntityBuilder(String entity, List<Long> location, String value) {
+      this.entity = entity;
+      this.location = location;
+      this.value = value;
+    }
+
+    /**
+     * Builds a RuntimeEntity.
+     *
+     * @return the runtimeEntity
+     */
+    public RuntimeEntity build() {
+      return new RuntimeEntity(this);
+    }
+
+    /**
+     * Adds an location to location.
+     *
+     * @param location the new location
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder addLocation(Long location) {
+      IBMWatsonValidator.notNull(location, 'location cannot be null');
+      if (this.location == null) {
+        this.location = new List<Long>();
+      }
+      this.location.add(location);
+      return this;
+    }
+
+    /**
+     * Adds an groups to groups.
+     *
+     * @param groups the new groups
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder addGroups(CaptureGroup groups) {
+      IBMWatsonValidator.notNull(groups, 'groups cannot be null');
+      if (this.groups == null) {
+        this.groups = new List<CaptureGroup>();
+      }
+      this.groups.add(groups);
+      return this;
+    }
+
+    /**
+     * Set the entity.
+     *
+     * @param entity the entity
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder setEntity(String entity) {
+      this.entity = entity;
+      return this;
+    }
+
+    /**
+     * Set the location.
+     * Existing location will be replaced.
+     *
+     * @param location the location
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder setLocation(List<Long> location) {
+      this.location = location;
+      return this;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder setValue(String value) {
+      this.value = value;
+      return this;
+    }
+
+    /**
+     * Set the confidence.
+     *
+     * @param confidence the confidence
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder setConfidence(Double confidence) {
+      this.confidence = confidence;
+      return this;
+    }
+
+    /**
+     * Set the metadata.
+     *
+     * @param metadata the metadata
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder setMetadata(IBMWatsonMapModel metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set the groups.
+     * Existing groups will be replaced.
+     *
+     * @param groups the groups
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder setGroups(List<CaptureGroup> groups) {
+      this.groups = groups;
+      return this;
     }
   }
 
@@ -13472,9 +15929,15 @@ public class IBMAssistantV1Models {
    * An intent identified in the user input.
    */
   public class RuntimeIntent extends IBMWatsonDynamicModel {
-    private String intent_serialized_name;
-    private Double confidence_serialized_name;
+    private String intent;
+    private Double confidence;
     private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeIntent() { }
 
     /**
      * Gets the intent.
@@ -13483,7 +15946,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getIntent() {
-      return intent_serialized_name;
+      return intent;
     }
 
     /**
@@ -13493,7 +15956,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
 
     /**
@@ -13506,22 +15969,20 @@ public class IBMAssistantV1Models {
       return this.getDynamicProperties();
     }
 
-    /**
-     * Sets the intent.
-     *
-     * @param intent the new intent
-     */
-    public void setIntent(final String intent) {
-      this.intent_serialized_name = intent;
+    private RuntimeIntent(RuntimeIntentBuilder builder) {
+      IBMWatsonValidator.notNull(builder.intent, 'intent cannot be null');
+      IBMWatsonValidator.notNull(builder.confidence, 'confidence cannot be null');
+      this.intent = builder.intent;
+      this.confidence = builder.confidence;
     }
 
     /**
-     * Sets the confidence.
+     * New builder.
      *
-     * @param confidence the new confidence
+     * @return a RuntimeIntent builder
      */
-    public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+    public RuntimeIntentBuilder newBuilder() {
+      return new RuntimeIntentBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -13530,16 +15991,78 @@ public class IBMAssistantV1Models {
       }
 
       RuntimeIntent ret = (RuntimeIntent) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeIntentBuilder retBuilder = ret.newBuilder();
 
+      RuntimeIntent builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
+          builderResult.put(key, jsonMap.get(key));
         }
       }
 
-      return ret;
+      return builderResult;
+    }
+  }
+
+  /**
+   * RuntimeIntent Builder.
+   */
+  public class RuntimeIntentBuilder {
+    private String intent;
+    private Double confidence;
+
+    private RuntimeIntentBuilder(RuntimeIntent runtimeIntent) {
+      this.intent = runtimeIntent.intent;
+      this.confidence = runtimeIntent.confidence;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeIntentBuilder() { }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param intent the intent
+     * @param confidence the confidence
+     */
+    public RuntimeIntentBuilder(String intent, Double confidence) {
+      this.intent = intent;
+      this.confidence = confidence;
+    }
+
+    /**
+     * Builds a RuntimeIntent.
+     *
+     * @return the runtimeIntent
+     */
+    public RuntimeIntent build() {
+      return new RuntimeIntent(this);
+    }
+
+    /**
+     * Set the intent.
+     *
+     * @param intent the intent
+     * @return the RuntimeIntent builder
+     */
+    public RuntimeIntentBuilder setIntent(String intent) {
+      this.intent = intent;
+      return this;
+    }
+
+    /**
+     * Set the confidence.
+     *
+     * @param confidence the confidence
+     * @return the RuntimeIntent builder
+     */
+    public RuntimeIntentBuilder setConfidence(Double confidence) {
+      this.confidence = confidence;
+      return this;
     }
   }
 
@@ -13547,9 +16070,9 @@ public class IBMAssistantV1Models {
    * Synonym.
    */
   public class Synonym extends IBMWatsonResponseModel {
-    private String synonym_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
+    private String synonym;
+    private Datetime created;
+    private Datetime updated;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -13568,7 +16091,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getSynonym() {
-      return synonym_serialized_name;
+      return synonym;
     }
  
     /**
@@ -13580,7 +16103,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -13592,14 +16115,14 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
   
     private Synonym(SynonymBuilder builder) {
       IBMWatsonValidator.notNull(builder.synonym, 'synonym cannot be null');
-      this.synonym_serialized_name = builder.synonym;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
+      this.synonym = builder.synonym;
+      this.created = builder.created;
+      this.updated = builder.updated;
     }
 
     /**
@@ -13610,7 +16133,6 @@ public class IBMAssistantV1Models {
     public SynonymBuilder newBuilder() {
       return new SynonymBuilder(this);
     }
-
   }
 
   /**
@@ -13622,9 +16144,9 @@ public class IBMAssistantV1Models {
     private Datetime updated;
 
     private SynonymBuilder(Synonym synonym) {
-      this.synonym = synonym.synonym_serialized_name;
-      this.created = synonym.created_serialized_name;
-      this.updated = synonym.updated_serialized_name;
+      this.synonym = synonym.synonym;
+      this.created = synonym.created;
+      this.updated = synonym.updated;
     }
 
     /**
@@ -13689,8 +16211,8 @@ public class IBMAssistantV1Models {
    * SynonymCollection.
    */
   public class SynonymCollection extends IBMWatsonResponseModel {
-    private List<Synonym> synonyms_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<Synonym> synonyms;
+    private Pagination pagination;
  
     /**
      * Gets the synonyms.
@@ -13701,7 +16223,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Synonym> getSynonyms() {
-      return synonyms_serialized_name;
+      return synonyms;
     }
  
     /**
@@ -13713,7 +16235,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -13722,7 +16244,7 @@ public class IBMAssistantV1Models {
      * @param synonyms the new synonyms
      */
     public void setSynonyms(final List<Synonym> synonyms) {
-      this.synonyms_serialized_name = synonyms;
+      this.synonyms = synonyms;
     }
 
     /**
@@ -13731,7 +16253,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -13747,18 +16269,26 @@ public class IBMAssistantV1Models {
       if (deserializedSynonyms != null) {
         for (Integer i = 0; i < deserializedSynonyms.size(); i++) {
           Synonym currentItem = ret.getSynonyms().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('synonyms_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('synonyms');
           Synonym newItem = (Synonym) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Synonym.class);
           newSynonyms.add(newItem);
         }
-        ret.synonyms_serialized_name = newSynonyms;
+        ret.synonyms = newSynonyms;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -13767,6 +16297,12 @@ public class IBMAssistantV1Models {
    */
   public class SystemResponse extends IBMWatsonDynamicModel {
     private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SystemResponse() { }
 
     /**
      * Gets the dynamic properties attached to SystemResponse.
@@ -13778,22 +16314,59 @@ public class IBMAssistantV1Models {
       return this.getDynamicProperties();
     }
 
+    private SystemResponse(SystemResponseBuilder builder) {
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a SystemResponse builder
+     */
+    public SystemResponseBuilder newBuilder() {
+      return new SystemResponseBuilder(this);
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
       SystemResponse ret = (SystemResponse) super.deserialize(jsonString, jsonMap, classType);
+      SystemResponseBuilder retBuilder = ret.newBuilder();
 
+      SystemResponse builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
+          builderResult.put(key, jsonMap.get(key));
         }
       }
 
-      return ret;
+      return builderResult;
+    }
+  }
+
+  /**
+   * SystemResponse Builder.
+   */
+  public class SystemResponseBuilder {
+
+    private SystemResponseBuilder(SystemResponse systemResponse) {
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public SystemResponseBuilder() { }
+
+    /**
+     * Builds a SystemResponse.
+     *
+     * @return the systemResponse
+     */
+    public SystemResponse build() {
+      return new SystemResponse(this);
     }
   }
 
@@ -13804,7 +16377,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String text;
     private String newText;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -13815,7 +16388,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -13826,7 +16399,7 @@ public class IBMAssistantV1Models {
     public String text() {
       return text;
     }
- 
+
     /**
      * Gets the newText.
      *
@@ -13858,6 +16431,12 @@ public class IBMAssistantV1Models {
       return new UpdateCounterexampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('newText', 'new_text');
+      return mapping;
+    }
   }
 
   /**
@@ -13971,7 +16550,7 @@ public class IBMAssistantV1Models {
     private String newDigressOut;
     private String newDigressOutSlots;
     private String newUserLabel;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -13982,7 +16561,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -13993,7 +16572,7 @@ public class IBMAssistantV1Models {
     public String dialogNode() {
       return dialogNode;
     }
- 
+
     /**
      * Gets the newDialogNode.
      *
@@ -14005,7 +16584,7 @@ public class IBMAssistantV1Models {
     public String newDialogNode() {
       return newDialogNode;
     }
- 
+
     /**
      * Gets the newDescription.
      *
@@ -14016,7 +16595,7 @@ public class IBMAssistantV1Models {
     public String newDescription() {
       return newDescription;
     }
- 
+
     /**
      * Gets the newConditions.
      *
@@ -14028,7 +16607,7 @@ public class IBMAssistantV1Models {
     public String newConditions() {
       return newConditions;
     }
- 
+
     /**
      * Gets the newParent.
      *
@@ -14039,7 +16618,7 @@ public class IBMAssistantV1Models {
     public String newParent() {
       return newParent;
     }
- 
+
     /**
      * Gets the newPreviousSibling.
      *
@@ -14050,7 +16629,7 @@ public class IBMAssistantV1Models {
     public String newPreviousSibling() {
       return newPreviousSibling;
     }
- 
+
     /**
      * Gets the newOutput.
      *
@@ -14062,7 +16641,7 @@ public class IBMAssistantV1Models {
     public DialogNodeOutput newOutput() {
       return newOutput;
     }
- 
+
     /**
      * Gets the newContext.
      *
@@ -14073,7 +16652,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel newContext() {
       return newContext;
     }
- 
+
     /**
      * Gets the newMetadata.
      *
@@ -14084,7 +16663,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel newMetadata() {
       return newMetadata;
     }
- 
+
     /**
      * Gets the newNextStep.
      *
@@ -14095,7 +16674,7 @@ public class IBMAssistantV1Models {
     public DialogNodeNextStep newNextStep() {
       return newNextStep;
     }
- 
+
     /**
      * Gets the newTitle.
      *
@@ -14107,7 +16686,7 @@ public class IBMAssistantV1Models {
     public String newTitle() {
       return newTitle;
     }
- 
+
     /**
      * Gets the nodeType.
      *
@@ -14118,7 +16697,7 @@ public class IBMAssistantV1Models {
     public String nodeType() {
       return nodeType;
     }
- 
+
     /**
      * Gets the newEventName.
      *
@@ -14129,7 +16708,7 @@ public class IBMAssistantV1Models {
     public String newEventName() {
       return newEventName;
     }
- 
+
     /**
      * Gets the newVariable.
      *
@@ -14140,7 +16719,7 @@ public class IBMAssistantV1Models {
     public String newVariable() {
       return newVariable;
     }
- 
+
     /**
      * Gets the newActions.
      *
@@ -14151,7 +16730,7 @@ public class IBMAssistantV1Models {
     public List<DialogNodeAction> newActions() {
       return newActions;
     }
- 
+
     /**
      * Gets the newDigressIn.
      *
@@ -14162,7 +16741,7 @@ public class IBMAssistantV1Models {
     public String newDigressIn() {
       return newDigressIn;
     }
- 
+
     /**
      * Gets the newDigressOut.
      *
@@ -14173,7 +16752,7 @@ public class IBMAssistantV1Models {
     public String newDigressOut() {
       return newDigressOut;
     }
- 
+
     /**
      * Gets the newDigressOutSlots.
      *
@@ -14184,7 +16763,7 @@ public class IBMAssistantV1Models {
     public String newDigressOutSlots() {
       return newDigressOutSlots;
     }
- 
+
     /**
      * Gets the newUserLabel.
      *
@@ -14231,6 +16810,39 @@ public class IBMAssistantV1Models {
       return new UpdateDialogNodeOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('dialogNode', 'dialog_node');
+      mapping.put('newDialogNode', 'new_dialog_node');
+      mapping.put('newDescription', 'new_description');
+      mapping.put('newConditions', 'new_conditions');
+      mapping.put('newParent', 'new_parent');
+      mapping.put('newPreviousSibling', 'new_previous_sibling');
+      mapping.put('newOutput', 'new_output');
+      if (newOutput != null) {
+        mapping.putAll(newOutput.getSdkToApiMapping());
+      }
+      mapping.put('newContext', 'new_context');
+      mapping.put('newMetadata', 'new_metadata');
+      mapping.put('newNextStep', 'new_next_step');
+      if (newNextStep != null) {
+        mapping.putAll(newNextStep.getSdkToApiMapping());
+      }
+      mapping.put('newTitle', 'new_title');
+      mapping.put('nodeType', 'new_type');
+      mapping.put('newEventName', 'new_event_name');
+      mapping.put('newVariable', 'new_variable');
+      mapping.put('newActions', 'new_actions');
+      if (newActions != null && newActions[0] != null) {
+        mapping.putAll(newActions[0].getSdkToApiMapping());
+      }
+      mapping.put('newDigressIn', 'new_digress_in');
+      mapping.put('newDigressOut', 'new_digress_out');
+      mapping.put('newDigressOutSlots', 'new_digress_out_slots');
+      mapping.put('newUserLabel', 'new_user_label');
+      return mapping;
+    }
   }
 
   /**
@@ -14568,7 +17180,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel newMetadata;
     private Boolean newFuzzyMatch;
     private List<CreateValue> newValues;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -14579,7 +17191,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -14590,7 +17202,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the newEntity.
      *
@@ -14603,7 +17215,7 @@ public class IBMAssistantV1Models {
     public String newEntity() {
       return newEntity;
     }
- 
+
     /**
      * Gets the newDescription.
      *
@@ -14614,7 +17226,7 @@ public class IBMAssistantV1Models {
     public String newDescription() {
       return newDescription;
     }
- 
+
     /**
      * Gets the newMetadata.
      *
@@ -14625,7 +17237,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel newMetadata() {
       return newMetadata;
     }
- 
+
     /**
      * Gets the newFuzzyMatch.
      *
@@ -14636,7 +17248,7 @@ public class IBMAssistantV1Models {
     public Boolean newFuzzyMatch() {
       return newFuzzyMatch;
     }
- 
+
     /**
      * Gets the newValues.
      *
@@ -14670,6 +17282,19 @@ public class IBMAssistantV1Models {
       return new UpdateEntityOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('newEntity', 'new_entity');
+      mapping.put('newDescription', 'new_description');
+      mapping.put('newMetadata', 'new_metadata');
+      mapping.put('newFuzzyMatch', 'new_fuzzy_match');
+      mapping.put('newValues', 'new_values');
+      if (newValues != null && newValues[0] != null) {
+        mapping.putAll(newValues[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -14836,7 +17461,7 @@ public class IBMAssistantV1Models {
     private String text;
     private String newText;
     private List<Mention> newMentions;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -14847,7 +17472,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -14858,7 +17483,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -14869,7 +17494,7 @@ public class IBMAssistantV1Models {
     public String text() {
       return text;
     }
- 
+
     /**
      * Gets the newText.
      *
@@ -14882,7 +17507,7 @@ public class IBMAssistantV1Models {
     public String newText() {
       return newText;
     }
- 
+
     /**
      * Gets the newMentions.
      *
@@ -14915,6 +17540,13 @@ public class IBMAssistantV1Models {
       return new UpdateExampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('newText', 'new_text');
+      mapping.put('newMentions', 'new_mentions');
+      return mapping;
+    }
   }
 
   /**
@@ -15057,7 +17689,7 @@ public class IBMAssistantV1Models {
     private String newIntent;
     private String newDescription;
     private List<Example> newExamples;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -15068,7 +17700,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -15079,7 +17711,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the newIntent.
      *
@@ -15092,7 +17724,7 @@ public class IBMAssistantV1Models {
     public String newIntent() {
       return newIntent;
     }
- 
+
     /**
      * Gets the newDescription.
      *
@@ -15103,7 +17735,7 @@ public class IBMAssistantV1Models {
     public String newDescription() {
       return newDescription;
     }
- 
+
     /**
      * Gets the newExamples.
      *
@@ -15135,6 +17767,14 @@ public class IBMAssistantV1Models {
       return new UpdateIntentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('newIntent', 'new_intent');
+      mapping.put('newDescription', 'new_description');
+      mapping.put('newExamples', 'new_examples');
+      return mapping;
+    }
   }
 
   /**
@@ -15275,7 +17915,7 @@ public class IBMAssistantV1Models {
     private String value;
     private String synonym;
     private String newSynonym;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -15286,7 +17926,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -15297,7 +17937,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -15308,7 +17948,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the synonym.
      *
@@ -15319,7 +17959,7 @@ public class IBMAssistantV1Models {
     public String synonym() {
       return synonym;
     }
- 
+
     /**
      * Gets the newSynonym.
      *
@@ -15355,6 +17995,12 @@ public class IBMAssistantV1Models {
       return new UpdateSynonymOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('newSynonym', 'new_synonym');
+      return mapping;
+    }
   }
 
   /**
@@ -15486,7 +18132,7 @@ public class IBMAssistantV1Models {
     private String valueType;
     private List<String> newSynonyms;
     private List<String> newPatterns;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -15497,7 +18143,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -15508,7 +18154,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -15519,7 +18165,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the newValue.
      *
@@ -15532,7 +18178,7 @@ public class IBMAssistantV1Models {
     public String newValue() {
       return newValue;
     }
- 
+
     /**
      * Gets the newMetadata.
      *
@@ -15543,7 +18189,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel newMetadata() {
       return newMetadata;
     }
- 
+
     /**
      * Gets the valueType.
      *
@@ -15554,7 +18200,7 @@ public class IBMAssistantV1Models {
     public String valueType() {
       return valueType;
     }
- 
+
     /**
      * Gets the newSynonyms.
      *
@@ -15568,7 +18214,7 @@ public class IBMAssistantV1Models {
     public List<String> newSynonyms() {
       return newSynonyms;
     }
- 
+
     /**
      * Gets the newPatterns.
      *
@@ -15607,6 +18253,16 @@ public class IBMAssistantV1Models {
       return new UpdateValueOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('newValue', 'new_value');
+      mapping.put('newMetadata', 'new_metadata');
+      mapping.put('valueType', 'new_type');
+      mapping.put('newSynonyms', 'new_synonyms');
+      mapping.put('newPatterns', 'new_patterns');
+      return mapping;
+    }
   }
 
   /**
@@ -15811,7 +18467,7 @@ public class IBMAssistantV1Models {
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
     private Boolean append;
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -15822,7 +18478,7 @@ public class IBMAssistantV1Models {
     public String workspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -15833,7 +18489,7 @@ public class IBMAssistantV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -15844,7 +18500,7 @@ public class IBMAssistantV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -15855,7 +18511,7 @@ public class IBMAssistantV1Models {
     public String language() {
       return language;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -15866,7 +18522,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the learningOptOut.
      *
@@ -15878,7 +18534,7 @@ public class IBMAssistantV1Models {
     public Boolean learningOptOut() {
       return learningOptOut;
     }
- 
+
     /**
      * Gets the systemSettings.
      *
@@ -15889,7 +18545,7 @@ public class IBMAssistantV1Models {
     public WorkspaceSystemSettings systemSettings() {
       return systemSettings;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -15900,7 +18556,7 @@ public class IBMAssistantV1Models {
     public List<CreateIntent> intents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -15911,7 +18567,7 @@ public class IBMAssistantV1Models {
     public List<CreateEntity> entities() {
       return entities;
     }
- 
+
     /**
      * Gets the dialogNodes.
      *
@@ -15922,7 +18578,7 @@ public class IBMAssistantV1Models {
     public List<DialogNode> dialogNodes() {
       return dialogNodes;
     }
- 
+
     /**
      * Gets the counterexamples.
      *
@@ -15933,7 +18589,7 @@ public class IBMAssistantV1Models {
     public List<Counterexample> counterexamples() {
       return counterexamples;
     }
- 
+
     /**
      * Gets the append.
      *
@@ -15977,6 +18633,23 @@ public class IBMAssistantV1Models {
       return new UpdateWorkspaceOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('workspaceId', 'workspace_id');
+      mapping.put('learningOptOut', 'learning_opt_out');
+      mapping.put('systemSettings', 'system_settings');
+      if (systemSettings != null) {
+        mapping.putAll(systemSettings.getSdkToApiMapping());
+      }
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getSdkToApiMapping());
+      }
+      mapping.put('dialogNodes', 'dialog_nodes');
+      if (dialogNodes != null && dialogNodes[0] != null) {
+        mapping.putAll(dialogNodes[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -16249,13 +18922,13 @@ public class IBMAssistantV1Models {
    * Value.
    */
   public class Value extends IBMWatsonResponseModel {
-    private String value_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private String type_serialized_name;
-    private List<String> synonyms_serialized_name;
-    private List<String> patterns_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
+    private String value;
+    private IBMWatsonMapModel metadata;
+    private String valueType;
+    private List<String> synonyms;
+    private List<String> patterns;
+    private Datetime created;
+    private Datetime updated;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -16274,7 +18947,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getValue() {
-      return value_serialized_name;
+      return value;
     }
  
     /**
@@ -16286,7 +18959,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
  
     /**
@@ -16298,7 +18971,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getValueType() {
-      return type_serialized_name;
+      return valueType;
     }
  
     /**
@@ -16313,7 +18986,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<String> getSynonyms() {
-      return synonyms_serialized_name;
+      return synonyms;
     }
  
     /**
@@ -16328,7 +19001,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<String> getPatterns() {
-      return patterns_serialized_name;
+      return patterns;
     }
  
     /**
@@ -16340,7 +19013,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -16352,19 +19025,19 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
   
     private Value(ValueBuilder builder) {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
       IBMWatsonValidator.notNull(builder.valueType, 'valueType cannot be null');
-      this.value_serialized_name = builder.value;
-      this.metadata_serialized_name = builder.metadata;
-      this.type_serialized_name = builder.valueType;
-      this.synonyms_serialized_name = builder.synonyms;
-      this.patterns_serialized_name = builder.patterns;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
+      this.value = builder.value;
+      this.metadata = builder.metadata;
+      this.valueType = builder.valueType;
+      this.synonyms = builder.synonyms;
+      this.patterns = builder.patterns;
+      this.created = builder.created;
+      this.updated = builder.updated;
     }
 
     /**
@@ -16385,10 +19058,16 @@ public class IBMAssistantV1Models {
       ValueBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
       retBuilder.metadata(newMetadata);
 
       return retBuilder.build();
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'valueType');
+      return mapping;
     }
   }
 
@@ -16405,13 +19084,13 @@ public class IBMAssistantV1Models {
     private Datetime updated;
 
     private ValueBuilder(Value value) {
-      this.value = value.value_serialized_name;
-      this.metadata = value.metadata_serialized_name;
-      this.valueType = value.type_serialized_name;
-      this.synonyms = value.synonyms_serialized_name;
-      this.patterns = value.patterns_serialized_name;
-      this.created = value.created_serialized_name;
-      this.updated = value.updated_serialized_name;
+      this.value = value.value;
+      this.metadata = value.metadata;
+      this.valueType = value.valueType;
+      this.synonyms = value.synonyms;
+      this.patterns = value.patterns;
+      this.created = value.created;
+      this.updated = value.updated;
     }
 
     /**
@@ -16554,8 +19233,8 @@ public class IBMAssistantV1Models {
    * ValueCollection.
    */
   public class ValueCollection extends IBMWatsonResponseModel {
-    private List<Value> values_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<Value> values;
+    private Pagination pagination;
  
     /**
      * Gets the values.
@@ -16566,7 +19245,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Value> getValues() {
-      return values_serialized_name;
+      return values;
     }
  
     /**
@@ -16578,7 +19257,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -16587,7 +19266,7 @@ public class IBMAssistantV1Models {
      * @param values the new values
      */
     public void setValues(final List<Value> values) {
-      this.values_serialized_name = values;
+      this.values = values;
     }
 
     /**
@@ -16596,7 +19275,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -16612,18 +19291,29 @@ public class IBMAssistantV1Models {
       if (deserializedValues != null) {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           Value currentItem = ret.getValues().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('values');
           Value newItem = (Value) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
           newValues.add(newItem);
         }
-        ret.values_serialized_name = newValues;
+        ret.values = newValues;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (values != null && values[0] != null) {
+        mapping.putAll(values[0].getApiToSdkMapping());
+      }
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -16631,20 +19321,20 @@ public class IBMAssistantV1Models {
    * Workspace.
    */
   public class Workspace extends IBMWatsonResponseModel {
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String language_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private Boolean learning_opt_out_serialized_name;
-    private WorkspaceSystemSettings system_settings_serialized_name;
-    private String workspace_id_serialized_name;
-    private String status_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private List<Intent> intents_serialized_name;
-    private List<Entity> entities_serialized_name;
-    private List<DialogNode> dialog_nodes_serialized_name;
-    private List<Counterexample> counterexamples_serialized_name;
+    private String name;
+    private String description;
+    private String language;
+    private IBMWatsonMapModel metadata;
+    private Boolean learningOptOut;
+    private WorkspaceSystemSettings systemSettings;
+    private String workspaceId;
+    private String status;
+    private Datetime created;
+    private Datetime updated;
+    private List<Intent> intents;
+    private List<Entity> entities;
+    private List<DialogNode> dialogNodes;
+    private List<Counterexample> counterexamples;
  
     /**
      * Gets the name.
@@ -16655,7 +19345,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -16667,7 +19357,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -16679,7 +19369,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
  
     /**
@@ -16691,7 +19381,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
  
     /**
@@ -16704,7 +19394,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getLearningOptOut() {
-      return learning_opt_out_serialized_name;
+      return learningOptOut;
     }
  
     /**
@@ -16716,7 +19406,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public WorkspaceSystemSettings getSystemSettings() {
-      return system_settings_serialized_name;
+      return systemSettings;
     }
  
     /**
@@ -16728,7 +19418,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getWorkspaceId() {
-      return workspace_id_serialized_name;
+      return workspaceId;
     }
  
     /**
@@ -16740,7 +19430,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -16752,7 +19442,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -16764,7 +19454,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -16776,7 +19466,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Intent> getIntents() {
-      return intents_serialized_name;
+      return intents;
     }
  
     /**
@@ -16788,7 +19478,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Entity> getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
  
     /**
@@ -16800,7 +19490,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<DialogNode> getDialogNodes() {
-      return dialog_nodes_serialized_name;
+      return dialogNodes;
     }
  
     /**
@@ -16812,7 +19502,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Counterexample> getCounterexamples() {
-      return counterexamples_serialized_name;
+      return counterexamples;
     }
 
     /**
@@ -16821,7 +19511,7 @@ public class IBMAssistantV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -16830,7 +19520,7 @@ public class IBMAssistantV1Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     /**
@@ -16839,7 +19529,7 @@ public class IBMAssistantV1Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
     /**
@@ -16848,7 +19538,7 @@ public class IBMAssistantV1Models {
      * @param metadata the new metadata
      */
     public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
+      this.metadata = metadata;
     }
 
     /**
@@ -16857,7 +19547,7 @@ public class IBMAssistantV1Models {
      * @param learningOptOut the new learningOptOut
      */
     public void setLearningOptOut(final Boolean learningOptOut) {
-      this.learning_opt_out_serialized_name = learningOptOut;
+      this.learningOptOut = learningOptOut;
     }
 
     /**
@@ -16866,7 +19556,7 @@ public class IBMAssistantV1Models {
      * @param systemSettings the new systemSettings
      */
     public void setSystemSettings(final WorkspaceSystemSettings systemSettings) {
-      this.system_settings_serialized_name = systemSettings;
+      this.systemSettings = systemSettings;
     }
 
     /**
@@ -16875,7 +19565,7 @@ public class IBMAssistantV1Models {
      * @param intents the new intents
      */
     public void setIntents(final List<Intent> intents) {
-      this.intents_serialized_name = intents;
+      this.intents = intents;
     }
 
     /**
@@ -16884,7 +19574,7 @@ public class IBMAssistantV1Models {
      * @param entities the new entities
      */
     public void setEntities(final List<Entity> entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
     }
 
     /**
@@ -16893,7 +19583,7 @@ public class IBMAssistantV1Models {
      * @param dialogNodes the new dialogNodes
      */
     public void setDialogNodes(final List<DialogNode> dialogNodes) {
-      this.dialog_nodes_serialized_name = dialogNodes;
+      this.dialogNodes = dialogNodes;
     }
 
     /**
@@ -16902,7 +19592,7 @@ public class IBMAssistantV1Models {
      * @param counterexamples the new counterexamples
      */
     public void setCounterexamples(final List<Counterexample> counterexamples) {
-      this.counterexamples_serialized_name = counterexamples;
+      this.counterexamples = counterexamples;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -16913,11 +19603,11 @@ public class IBMAssistantV1Models {
       Workspace ret = (Workspace) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for systemSettings
-      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(ret.getSystemSettings()), (Map<String, Object>) jsonMap.get('system_settings_serialized_name'), WorkspaceSystemSettings.class);
+      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(ret.getSystemSettings()), (Map<String, Object>) jsonMap.get('systemSettings'), WorkspaceSystemSettings.class);
       ret.setSystemSettings(newSystemSettings);
 
       // calling custom deserializer for intents
@@ -16926,11 +19616,11 @@ public class IBMAssistantV1Models {
       if (deserializedIntents != null) {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           Intent currentItem = ret.getIntents().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
           Intent newItem = (Intent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Intent.class);
           newIntents.add(newItem);
         }
-        ret.intents_serialized_name = newIntents;
+        ret.intents = newIntents;
       }
 
       // calling custom deserializer for entities
@@ -16939,11 +19629,11 @@ public class IBMAssistantV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           Entity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           Entity newItem = (Entity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Entity.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        ret.entities = newEntities;
       }
 
       // calling custom deserializer for dialogNodes
@@ -16952,11 +19642,11 @@ public class IBMAssistantV1Models {
       if (deserializedDialogNodes != null) {
         for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
           DialogNode currentItem = ret.getDialogNodes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('dialog_nodes_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('dialogNodes');
           DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
           newDialogNodes.add(newItem);
         }
-        ret.dialog_nodes_serialized_name = newDialogNodes;
+        ret.dialogNodes = newDialogNodes;
       }
 
       // calling custom deserializer for counterexamples
@@ -16965,14 +19655,32 @@ public class IBMAssistantV1Models {
       if (deserializedCounterexamples != null) {
         for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
           Counterexample currentItem = ret.getCounterexamples().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples');
           Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
           newCounterexamples.add(newItem);
         }
-        ret.counterexamples_serialized_name = newCounterexamples;
+        ret.counterexamples = newCounterexamples;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('learning_opt_out', 'learningOptOut');
+      mapping.put('system_settings', 'systemSettings');
+      if (systemSettings != null) {
+        mapping.putAll(systemSettings.getApiToSdkMapping());
+      }
+      mapping.put('workspace_id', 'workspaceId');
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      mapping.put('dialog_nodes', 'dialogNodes');
+      if (dialogNodes != null && dialogNodes[0] != null) {
+        mapping.putAll(dialogNodes[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -16980,8 +19688,8 @@ public class IBMAssistantV1Models {
    * WorkspaceCollection.
    */
   public class WorkspaceCollection extends IBMWatsonResponseModel {
-    private List<Workspace> workspaces_serialized_name;
-    private Pagination pagination_serialized_name;
+    private List<Workspace> workspaces;
+    private Pagination pagination;
  
     /**
      * Gets the workspaces.
@@ -16992,7 +19700,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public List<Workspace> getWorkspaces() {
-      return workspaces_serialized_name;
+      return workspaces;
     }
  
     /**
@@ -17004,7 +19712,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -17013,7 +19721,7 @@ public class IBMAssistantV1Models {
      * @param workspaces the new workspaces
      */
     public void setWorkspaces(final List<Workspace> workspaces) {
-      this.workspaces_serialized_name = workspaces;
+      this.workspaces = workspaces;
     }
 
     /**
@@ -17022,7 +19730,7 @@ public class IBMAssistantV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -17038,18 +19746,29 @@ public class IBMAssistantV1Models {
       if (deserializedWorkspaces != null) {
         for (Integer i = 0; i < deserializedWorkspaces.size(); i++) {
           Workspace currentItem = ret.getWorkspaces().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('workspaces_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('workspaces');
           Workspace newItem = (Workspace) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Workspace.class);
           newWorkspaces.add(newItem);
         }
-        ret.workspaces_serialized_name = newWorkspaces;
+        ret.workspaces = newWorkspaces;
       }
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (workspaces != null && workspaces[0] != null) {
+        mapping.putAll(workspaces[0].getApiToSdkMapping());
+      }
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -17057,9 +19776,15 @@ public class IBMAssistantV1Models {
    * Global settings for the workspace.
    */
   public class WorkspaceSystemSettings extends IBMWatsonGenericModel {
-    private WorkspaceSystemSettingsTooling tooling_serialized_name;
-    private WorkspaceSystemSettingsDisambiguation disambiguation_serialized_name;
-    private IBMWatsonMapModel human_agent_assist_serialized_name;
+    private WorkspaceSystemSettingsTooling tooling;
+    private WorkspaceSystemSettingsDisambiguation disambiguation;
+    private IBMWatsonMapModel humanAgentAssist;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WorkspaceSystemSettings() { }
  
     /**
      * Gets the tooling.
@@ -17070,7 +19795,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public WorkspaceSystemSettingsTooling getTooling() {
-      return tooling_serialized_name;
+      return tooling;
     }
  
     /**
@@ -17084,7 +19809,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public WorkspaceSystemSettingsDisambiguation getDisambiguation() {
-      return disambiguation_serialized_name;
+      return disambiguation;
     }
  
     /**
@@ -17096,34 +19821,22 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getHumanAgentAssist() {
-      return human_agent_assist_serialized_name;
+      return humanAgentAssist;
+    }
+  
+    private WorkspaceSystemSettings(WorkspaceSystemSettingsBuilder builder) {
+      this.tooling = builder.tooling;
+      this.disambiguation = builder.disambiguation;
+      this.humanAgentAssist = builder.humanAgentAssist;
     }
 
     /**
-     * Sets the tooling.
+     * New builder.
      *
-     * @param tooling the new tooling
+     * @return a WorkspaceSystemSettings builder
      */
-    public void setTooling(final WorkspaceSystemSettingsTooling tooling) {
-      this.tooling_serialized_name = tooling;
-    }
-
-    /**
-     * Sets the disambiguation.
-     *
-     * @param disambiguation the new disambiguation
-     */
-    public void setDisambiguation(final WorkspaceSystemSettingsDisambiguation disambiguation) {
-      this.disambiguation_serialized_name = disambiguation;
-    }
-
-    /**
-     * Sets the humanAgentAssist.
-     *
-     * @param humanAgentAssist the new humanAgentAssist
-     */
-    public void setHumanAgentAssist(final IBMWatsonMapModel humanAgentAssist) {
-      this.human_agent_assist_serialized_name = humanAgentAssist;
+    public WorkspaceSystemSettingsBuilder newBuilder() {
+      return new WorkspaceSystemSettingsBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -17132,20 +19845,108 @@ public class IBMAssistantV1Models {
       }
 
       WorkspaceSystemSettings ret = (WorkspaceSystemSettings) super.deserialize(jsonString, jsonMap, classType);
+      WorkspaceSystemSettingsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for tooling
-      WorkspaceSystemSettingsTooling newTooling = (WorkspaceSystemSettingsTooling) new WorkspaceSystemSettingsTooling().deserialize(JSON.serialize(ret.getTooling()), (Map<String, Object>) jsonMap.get('tooling_serialized_name'), WorkspaceSystemSettingsTooling.class);
-      ret.setTooling(newTooling);
+      WorkspaceSystemSettingsTooling newTooling = (WorkspaceSystemSettingsTooling) new WorkspaceSystemSettingsTooling().deserialize(JSON.serialize(ret.getTooling()), (Map<String, Object>) jsonMap.get('tooling'), WorkspaceSystemSettingsTooling.class);
+      retBuilder.setTooling(newTooling);
 
       // calling custom deserializer for disambiguation
-      WorkspaceSystemSettingsDisambiguation newDisambiguation = (WorkspaceSystemSettingsDisambiguation) new WorkspaceSystemSettingsDisambiguation().deserialize(JSON.serialize(ret.getDisambiguation()), (Map<String, Object>) jsonMap.get('disambiguation_serialized_name'), WorkspaceSystemSettingsDisambiguation.class);
-      ret.setDisambiguation(newDisambiguation);
+      WorkspaceSystemSettingsDisambiguation newDisambiguation = (WorkspaceSystemSettingsDisambiguation) new WorkspaceSystemSettingsDisambiguation().deserialize(JSON.serialize(ret.getDisambiguation()), (Map<String, Object>) jsonMap.get('disambiguation'), WorkspaceSystemSettingsDisambiguation.class);
+      retBuilder.setDisambiguation(newDisambiguation);
 
       // calling custom deserializer for humanAgentAssist
-      IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getHumanAgentAssist()), (Map<String, Object>) jsonMap.get('human_agent_assist_serialized_name'), IBMWatsonMapModel.class);
-      ret.setHumanAgentAssist(newHumanAgentAssist);
+      IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getHumanAgentAssist()), (Map<String, Object>) jsonMap.get('humanAgentAssist'), IBMWatsonMapModel.class);
+      retBuilder.setHumanAgentAssist(newHumanAgentAssist);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (tooling != null) {
+        mapping.putAll(tooling.getSdkToApiMapping());
+      }
+      if (disambiguation != null) {
+        mapping.putAll(disambiguation.getSdkToApiMapping());
+      }
+      mapping.put('humanAgentAssist', 'human_agent_assist');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (tooling != null) {
+        mapping.putAll(tooling.getApiToSdkMapping());
+      }
+      if (disambiguation != null) {
+        mapping.putAll(disambiguation.getApiToSdkMapping());
+      }
+      mapping.put('human_agent_assist', 'humanAgentAssist');
+      return mapping;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettings Builder.
+   */
+  public class WorkspaceSystemSettingsBuilder {
+    private WorkspaceSystemSettingsTooling tooling;
+    private WorkspaceSystemSettingsDisambiguation disambiguation;
+    private IBMWatsonMapModel humanAgentAssist;
+
+    private WorkspaceSystemSettingsBuilder(WorkspaceSystemSettings workspaceSystemSettings) {
+      this.tooling = workspaceSystemSettings.tooling;
+      this.disambiguation = workspaceSystemSettings.disambiguation;
+      this.humanAgentAssist = workspaceSystemSettings.humanAgentAssist;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WorkspaceSystemSettingsBuilder() {
+    }
+
+    /**
+     * Builds a WorkspaceSystemSettings.
+     *
+     * @return the workspaceSystemSettings
+     */
+    public WorkspaceSystemSettings build() {
+      return new WorkspaceSystemSettings(this);
+    }
+
+    /**
+     * Set the tooling.
+     *
+     * @param tooling the tooling
+     * @return the WorkspaceSystemSettings builder
+     */
+    public WorkspaceSystemSettingsBuilder setTooling(WorkspaceSystemSettingsTooling tooling) {
+      this.tooling = tooling;
+      return this;
+    }
+
+    /**
+     * Set the disambiguation.
+     *
+     * @param disambiguation the disambiguation
+     * @return the WorkspaceSystemSettings builder
+     */
+    public WorkspaceSystemSettingsBuilder setDisambiguation(WorkspaceSystemSettingsDisambiguation disambiguation) {
+      this.disambiguation = disambiguation;
+      return this;
+    }
+
+    /**
+     * Set the humanAgentAssist.
+     *
+     * @param humanAgentAssist the humanAgentAssist
+     * @return the WorkspaceSystemSettings builder
+     */
+    public WorkspaceSystemSettingsBuilder setHumanAgentAssist(IBMWatsonMapModel humanAgentAssist) {
+      this.humanAgentAssist = humanAgentAssist;
+      return this;
     }
   }
 
@@ -17155,10 +19956,16 @@ public class IBMAssistantV1Models {
    * **Note:** This feature is available only to Premium users.
    */
   public class WorkspaceSystemSettingsDisambiguation extends IBMWatsonGenericModel {
-    private String prompt_serialized_name;
-    private String none_of_the_above_prompt_serialized_name;
-    private Boolean enabled_serialized_name;
-    private String sensitivity_serialized_name;
+    private String prompt;
+    private String noneOfTheAbovePrompt;
+    private Boolean enabled;
+    private String sensitivity;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WorkspaceSystemSettingsDisambiguation() { }
  
     /**
      * Gets the prompt.
@@ -17169,7 +19976,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getPrompt() {
-      return prompt_serialized_name;
+      return prompt;
     }
  
     /**
@@ -17182,7 +19989,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getNoneOfTheAbovePrompt() {
-      return none_of_the_above_prompt_serialized_name;
+      return noneOfTheAbovePrompt;
     }
  
     /**
@@ -17194,7 +20001,7 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getEnabled() {
-      return enabled_serialized_name;
+      return enabled;
     }
  
     /**
@@ -17207,52 +20014,125 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public String getSensitivity() {
-      return sensitivity_serialized_name;
+      return sensitivity;
+    }
+  
+    private WorkspaceSystemSettingsDisambiguation(WorkspaceSystemSettingsDisambiguationBuilder builder) {
+      this.prompt = builder.prompt;
+      this.noneOfTheAbovePrompt = builder.noneOfTheAbovePrompt;
+      this.enabled = builder.enabled;
+      this.sensitivity = builder.sensitivity;
     }
 
     /**
-     * Sets the prompt.
+     * New builder.
      *
-     * @param prompt the new prompt
+     * @return a WorkspaceSystemSettingsDisambiguation builder
      */
-    public void setPrompt(final String prompt) {
-      this.prompt_serialized_name = prompt;
+    public WorkspaceSystemSettingsDisambiguationBuilder newBuilder() {
+      return new WorkspaceSystemSettingsDisambiguationBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('noneOfTheAbovePrompt', 'none_of_the_above_prompt');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('none_of_the_above_prompt', 'noneOfTheAbovePrompt');
+      return mapping;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsDisambiguation Builder.
+   */
+  public class WorkspaceSystemSettingsDisambiguationBuilder {
+    private String prompt;
+    private String noneOfTheAbovePrompt;
+    private Boolean enabled;
+    private String sensitivity;
+
+    private WorkspaceSystemSettingsDisambiguationBuilder(WorkspaceSystemSettingsDisambiguation workspaceSystemSettingsDisambiguation) {
+      this.prompt = workspaceSystemSettingsDisambiguation.prompt;
+      this.noneOfTheAbovePrompt = workspaceSystemSettingsDisambiguation.noneOfTheAbovePrompt;
+      this.enabled = workspaceSystemSettingsDisambiguation.enabled;
+      this.sensitivity = workspaceSystemSettingsDisambiguation.sensitivity;
     }
 
     /**
-     * Sets the noneOfTheAbovePrompt.
-     *
-     * @param noneOfTheAbovePrompt the new noneOfTheAbovePrompt
+     * Instantiates a new builder.
      */
-    public void setNoneOfTheAbovePrompt(final String noneOfTheAbovePrompt) {
-      this.none_of_the_above_prompt_serialized_name = noneOfTheAbovePrompt;
+    public WorkspaceSystemSettingsDisambiguationBuilder() {
     }
 
     /**
-     * Sets the enabled.
+     * Builds a WorkspaceSystemSettingsDisambiguation.
      *
-     * @param enabled the new enabled
+     * @return the workspaceSystemSettingsDisambiguation
      */
-    public void setEnabled(final Boolean enabled) {
-      this.enabled_serialized_name = enabled;
+    public WorkspaceSystemSettingsDisambiguation build() {
+      return new WorkspaceSystemSettingsDisambiguation(this);
     }
 
     /**
-     * Sets the sensitivity.
+     * Set the prompt.
      *
-     * @param sensitivity the new sensitivity
+     * @param prompt the prompt
+     * @return the WorkspaceSystemSettingsDisambiguation builder
      */
-    public void setSensitivity(final String sensitivity) {
-      this.sensitivity_serialized_name = sensitivity;
+    public WorkspaceSystemSettingsDisambiguationBuilder setPrompt(String prompt) {
+      this.prompt = prompt;
+      return this;
     }
 
+    /**
+     * Set the noneOfTheAbovePrompt.
+     *
+     * @param noneOfTheAbovePrompt the noneOfTheAbovePrompt
+     * @return the WorkspaceSystemSettingsDisambiguation builder
+     */
+    public WorkspaceSystemSettingsDisambiguationBuilder setNoneOfTheAbovePrompt(String noneOfTheAbovePrompt) {
+      this.noneOfTheAbovePrompt = noneOfTheAbovePrompt;
+      return this;
+    }
+
+    /**
+     * Set the enabled.
+     *
+     * @param enabled the enabled
+     * @return the WorkspaceSystemSettingsDisambiguation builder
+     */
+    public WorkspaceSystemSettingsDisambiguationBuilder setEnabled(Boolean enabled) {
+      this.enabled = enabled;
+      return this;
+    }
+
+    /**
+     * Set the sensitivity.
+     *
+     * @param sensitivity the sensitivity
+     * @return the WorkspaceSystemSettingsDisambiguation builder
+     */
+    public WorkspaceSystemSettingsDisambiguationBuilder setSensitivity(String sensitivity) {
+      this.sensitivity = sensitivity;
+      return this;
+    }
   }
 
   /**
    * Workspace settings related to the Watson Assistant user interface.
    */
   public class WorkspaceSystemSettingsTooling extends IBMWatsonGenericModel {
-    private Boolean store_generic_responses_serialized_name;
+    private Boolean storeGenericResponses;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WorkspaceSystemSettingsTooling() { }
  
     /**
      * Gets the storeGenericResponses.
@@ -17263,18 +20143,70 @@ public class IBMAssistantV1Models {
      */
     @AuraEnabled
     public Boolean getStoreGenericResponses() {
-      return store_generic_responses_serialized_name;
+      return storeGenericResponses;
+    }
+  
+    private WorkspaceSystemSettingsTooling(WorkspaceSystemSettingsToolingBuilder builder) {
+      this.storeGenericResponses = builder.storeGenericResponses;
     }
 
     /**
-     * Sets the storeGenericResponses.
+     * New builder.
      *
-     * @param storeGenericResponses the new storeGenericResponses
+     * @return a WorkspaceSystemSettingsTooling builder
      */
-    public void setStoreGenericResponses(final Boolean storeGenericResponses) {
-      this.store_generic_responses_serialized_name = storeGenericResponses;
+    public WorkspaceSystemSettingsToolingBuilder newBuilder() {
+      return new WorkspaceSystemSettingsToolingBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('storeGenericResponses', 'store_generic_responses');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('store_generic_responses', 'storeGenericResponses');
+      return mapping;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsTooling Builder.
+   */
+  public class WorkspaceSystemSettingsToolingBuilder {
+    private Boolean storeGenericResponses;
+
+    private WorkspaceSystemSettingsToolingBuilder(WorkspaceSystemSettingsTooling workspaceSystemSettingsTooling) {
+      this.storeGenericResponses = workspaceSystemSettingsTooling.storeGenericResponses;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WorkspaceSystemSettingsToolingBuilder() {
+    }
+
+    /**
+     * Builds a WorkspaceSystemSettingsTooling.
+     *
+     * @return the workspaceSystemSettingsTooling
+     */
+    public WorkspaceSystemSettingsTooling build() {
+      return new WorkspaceSystemSettingsTooling(this);
+    }
+
+    /**
+     * Set the storeGenericResponses.
+     *
+     * @param storeGenericResponses the storeGenericResponses
+     * @return the WorkspaceSystemSettingsTooling builder
+     */
+    public WorkspaceSystemSettingsToolingBuilder setStoreGenericResponses(Boolean storeGenericResponses) {
+      this.storeGenericResponses = storeGenericResponses;
+      return this;
+    }
   }
 
 }

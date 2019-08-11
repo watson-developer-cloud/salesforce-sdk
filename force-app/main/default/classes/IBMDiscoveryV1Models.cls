@@ -9,7 +9,7 @@ public class IBMDiscoveryV1Models {
     private String filename;
     private String fileContentType;
     private String metadata;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -20,7 +20,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -31,7 +31,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the file.
      *
@@ -44,7 +44,7 @@ public class IBMDiscoveryV1Models {
     public IBMWatsonFile file() {
       return file;
     }
- 
+
     /**
      * Gets the filename.
      *
@@ -55,7 +55,7 @@ public class IBMDiscoveryV1Models {
     public String filename() {
       return filename;
     }
- 
+
     /**
      * Gets the fileContentType.
      *
@@ -66,7 +66,7 @@ public class IBMDiscoveryV1Models {
     public String fileContentType() {
       return fileContentType;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -104,6 +104,13 @@ public class IBMDiscoveryV1Models {
       return new AddDocumentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('fileContentType', 'file_content_type');
+      return mapping;
+    }
   }
 
   /**
@@ -241,7 +248,7 @@ public class IBMDiscoveryV1Models {
     private String naturalLanguageQuery;
     private String filter;
     private List<TrainingExample> examples;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -252,7 +259,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -263,7 +270,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the naturalLanguageQuery.
      *
@@ -274,7 +281,7 @@ public class IBMDiscoveryV1Models {
     public String naturalLanguageQuery() {
       return naturalLanguageQuery;
     }
- 
+
     /**
      * Gets the filter.
      *
@@ -285,7 +292,7 @@ public class IBMDiscoveryV1Models {
     public String filter() {
       return filter;
     }
- 
+
     /**
      * Gets the examples.
      *
@@ -317,6 +324,16 @@ public class IBMDiscoveryV1Models {
       return new AddTrainingDataOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('naturalLanguageQuery', 'natural_language_query');
+      if (examples != null && examples[0] != null) {
+        mapping.putAll(examples[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -452,9 +469,9 @@ public class IBMDiscoveryV1Models {
    * AggregationResult.
    */
   public class AggregationResult extends IBMWatsonGenericModel {
-    private String key_serialized_name;
-    private Long matching_results_serialized_name;
-    private List<QueryAggregation> aggregations_serialized_name;
+    private String key;
+    private Long matchingResults;
+    private List<QueryAggregation> aggregations;
  
     /**
      * Gets the key.
@@ -465,7 +482,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getKey() {
-      return key_serialized_name;
+      return key;
     }
  
     /**
@@ -477,7 +494,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMatchingResults() {
-      return matching_results_serialized_name;
+      return matchingResults;
     }
  
     /**
@@ -489,7 +506,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
-      return aggregations_serialized_name;
+      return aggregations;
     }
 
     /**
@@ -498,7 +515,7 @@ public class IBMDiscoveryV1Models {
      * @param key the new key
      */
     public void setKey(final String key) {
-      this.key_serialized_name = key;
+      this.key = key;
     }
 
     /**
@@ -507,7 +524,7 @@ public class IBMDiscoveryV1Models {
      * @param matchingResults the new matchingResults
      */
     public void setMatchingResults(final long matchingResults) {
-      this.matching_results_serialized_name = matchingResults;
+      this.matchingResults = matchingResults;
     }
 
     /**
@@ -516,7 +533,7 @@ public class IBMDiscoveryV1Models {
      * @param aggregations the new aggregations
      */
     public void setAggregations(final List<QueryAggregation> aggregations) {
-      this.aggregations_serialized_name = aggregations;
+      this.aggregations = aggregations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -532,14 +549,23 @@ public class IBMDiscoveryV1Models {
       if (deserializedAggregations != null) {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
           QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.aggregations_serialized_name = newAggregations;
+        ret.aggregations = newAggregations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('matching_results', 'matchingResults');
+      if (aggregations != null && aggregations[0] != null) {
+        mapping.putAll(aggregations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -547,19 +573,19 @@ public class IBMDiscoveryV1Models {
    * A collection for storing documents.
    */
   public class Collection extends IBMWatsonResponseModel {
-    private String collection_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private String status_serialized_name;
-    private String configuration_id_serialized_name;
-    private String language_serialized_name;
-    private DocumentCounts document_counts_serialized_name;
-    private CollectionDiskUsage disk_usage_serialized_name;
-    private TrainingStatus training_status_serialized_name;
-    private CollectionCrawlStatus crawl_status_serialized_name;
-    private SduStatus smart_document_understanding_serialized_name;
+    private String collectionId;
+    private String name;
+    private String description;
+    private Datetime created;
+    private Datetime updated;
+    private String status;
+    private String configurationId;
+    private String language;
+    private DocumentCounts documentCounts;
+    private CollectionDiskUsage diskUsage;
+    private TrainingStatus trainingStatus;
+    private CollectionCrawlStatus crawlStatus;
+    private SduStatus smartDocumentUnderstanding;
  
     /**
      * Gets the collectionId.
@@ -570,7 +596,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
  
     /**
@@ -582,7 +608,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -594,7 +620,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -606,7 +632,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -618,7 +644,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -630,7 +656,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -642,7 +668,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getConfigurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
  
     /**
@@ -655,7 +681,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
  
     /**
@@ -665,7 +691,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public DocumentCounts getDocumentCounts() {
-      return document_counts_serialized_name;
+      return documentCounts;
     }
  
     /**
@@ -677,7 +703,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public CollectionDiskUsage getDiskUsage() {
-      return disk_usage_serialized_name;
+      return diskUsage;
     }
  
     /**
@@ -687,7 +713,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public TrainingStatus getTrainingStatus() {
-      return training_status_serialized_name;
+      return trainingStatus;
     }
  
     /**
@@ -699,7 +725,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public CollectionCrawlStatus getCrawlStatus() {
-      return crawl_status_serialized_name;
+      return crawlStatus;
     }
  
     /**
@@ -711,7 +737,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public SduStatus getSmartDocumentUnderstanding() {
-      return smart_document_understanding_serialized_name;
+      return smartDocumentUnderstanding;
     }
 
     /**
@@ -720,7 +746,7 @@ public class IBMDiscoveryV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -729,7 +755,7 @@ public class IBMDiscoveryV1Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     /**
@@ -738,7 +764,7 @@ public class IBMDiscoveryV1Models {
      * @param configurationId the new configurationId
      */
     public void setConfigurationId(final String configurationId) {
-      this.configuration_id_serialized_name = configurationId;
+      this.configurationId = configurationId;
     }
 
     /**
@@ -747,7 +773,7 @@ public class IBMDiscoveryV1Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
     /**
@@ -756,7 +782,7 @@ public class IBMDiscoveryV1Models {
      * @param documentCounts the new documentCounts
      */
     public void setDocumentCounts(final DocumentCounts documentCounts) {
-      this.document_counts_serialized_name = documentCounts;
+      this.documentCounts = documentCounts;
     }
 
     /**
@@ -765,7 +791,7 @@ public class IBMDiscoveryV1Models {
      * @param diskUsage the new diskUsage
      */
     public void setDiskUsage(final CollectionDiskUsage diskUsage) {
-      this.disk_usage_serialized_name = diskUsage;
+      this.diskUsage = diskUsage;
     }
 
     /**
@@ -774,7 +800,7 @@ public class IBMDiscoveryV1Models {
      * @param trainingStatus the new trainingStatus
      */
     public void setTrainingStatus(final TrainingStatus trainingStatus) {
-      this.training_status_serialized_name = trainingStatus;
+      this.trainingStatus = trainingStatus;
     }
 
     /**
@@ -783,7 +809,7 @@ public class IBMDiscoveryV1Models {
      * @param crawlStatus the new crawlStatus
      */
     public void setCrawlStatus(final CollectionCrawlStatus crawlStatus) {
-      this.crawl_status_serialized_name = crawlStatus;
+      this.crawlStatus = crawlStatus;
     }
 
     /**
@@ -792,7 +818,7 @@ public class IBMDiscoveryV1Models {
      * @param smartDocumentUnderstanding the new smartDocumentUnderstanding
      */
     public void setSmartDocumentUnderstanding(final SduStatus smartDocumentUnderstanding) {
-      this.smart_document_understanding_serialized_name = smartDocumentUnderstanding;
+      this.smartDocumentUnderstanding = smartDocumentUnderstanding;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -800,30 +826,53 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Map<String, Object> trainingStatus = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
-      Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
+      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentCounts
-      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
+      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('documentCounts'), DocumentCounts.class);
       ret.setDocumentCounts(newDocumentCounts);
 
       // calling custom deserializer for diskUsage
-      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'), CollectionDiskUsage.class);
+      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('diskUsage'), CollectionDiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for trainingStatus
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('trainingStatus'), TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       // calling custom deserializer for crawlStatus
-      CollectionCrawlStatus newCrawlStatus = (CollectionCrawlStatus) new CollectionCrawlStatus().deserialize(JSON.serialize(ret.getCrawlStatus()), (Map<String, Object>) jsonMap.get('crawl_status_serialized_name'), CollectionCrawlStatus.class);
+      CollectionCrawlStatus newCrawlStatus = (CollectionCrawlStatus) new CollectionCrawlStatus().deserialize(JSON.serialize(ret.getCrawlStatus()), (Map<String, Object>) jsonMap.get('crawlStatus'), CollectionCrawlStatus.class);
       ret.setCrawlStatus(newCrawlStatus);
 
       // calling custom deserializer for smartDocumentUnderstanding
-      SduStatus newSmartDocumentUnderstanding = (SduStatus) new SduStatus().deserialize(JSON.serialize(ret.getSmartDocumentUnderstanding()), (Map<String, Object>) jsonMap.get('smart_document_understanding_serialized_name'), SduStatus.class);
+      SduStatus newSmartDocumentUnderstanding = (SduStatus) new SduStatus().deserialize(JSON.serialize(ret.getSmartDocumentUnderstanding()), (Map<String, Object>) jsonMap.get('smartDocumentUnderstanding'), SduStatus.class);
       ret.setSmartDocumentUnderstanding(newSmartDocumentUnderstanding);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('collection_id', 'collectionId');
+      mapping.put('configuration_id', 'configurationId');
+      mapping.put('document_counts', 'documentCounts');
+      mapping.put('disk_usage', 'diskUsage');
+      if (diskUsage != null) {
+        mapping.putAll(diskUsage.getApiToSdkMapping());
+      }
+      mapping.put('training_status', 'trainingStatus');
+      if (trainingStatus != null) {
+        mapping.putAll(trainingStatus.getApiToSdkMapping());
+      }
+      mapping.put('crawl_status', 'crawlStatus');
+      if (crawlStatus != null) {
+        mapping.putAll(crawlStatus.getApiToSdkMapping());
+      }
+      mapping.put('smart_document_understanding', 'smartDocumentUnderstanding');
+      if (smartDocumentUnderstanding != null) {
+        mapping.putAll(smartDocumentUnderstanding.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -831,7 +880,7 @@ public class IBMDiscoveryV1Models {
    * Object containing information about the crawl status of this collection.
    */
   public class CollectionCrawlStatus extends IBMWatsonGenericModel {
-    private SourceStatus source_crawl_serialized_name;
+    private SourceStatus sourceCrawl;
  
     /**
      * Gets the sourceCrawl.
@@ -840,8 +889,9 @@ public class IBMDiscoveryV1Models {
      *
      * @return the sourceCrawl
      */
+    @AuraEnabled
     public SourceStatus getSourceCrawl() {
-      return source_crawl_serialized_name;
+      return sourceCrawl;
     }
 
     /**
@@ -850,7 +900,7 @@ public class IBMDiscoveryV1Models {
      * @param sourceCrawl the new sourceCrawl
      */
     public void setSourceCrawl(final SourceStatus sourceCrawl) {
-      this.source_crawl_serialized_name = sourceCrawl;
+      this.sourceCrawl = sourceCrawl;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -861,10 +911,19 @@ public class IBMDiscoveryV1Models {
       CollectionCrawlStatus ret = (CollectionCrawlStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for sourceCrawl
-      SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(ret.getSourceCrawl()), (Map<String, Object>) jsonMap.get('source_crawl_serialized_name'), SourceStatus.class);
+      SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(ret.getSourceCrawl()), (Map<String, Object>) jsonMap.get('sourceCrawl'), SourceStatus.class);
       ret.setSourceCrawl(newSourceCrawl);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('source_crawl', 'sourceCrawl');
+      if (sourceCrawl != null) {
+        mapping.putAll(sourceCrawl.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -872,7 +931,7 @@ public class IBMDiscoveryV1Models {
    * Summary of the disk usage statistics for this collection.
    */
   public class CollectionDiskUsage extends IBMWatsonGenericModel {
-    private Long used_bytes_serialized_name;
+    private Long usedBytes;
  
     /**
      * Gets the usedBytes.
@@ -883,17 +942,22 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getUsedBytes() {
-      return used_bytes_serialized_name;
+      return usedBytes;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('used_bytes', 'usedBytes');
+      return mapping;
+    }
   }
 
   /**
    * Summary of the collection usage in the environment.
    */
   public class CollectionUsage extends IBMWatsonGenericModel {
-    private Long available_serialized_name;
-    private Long maximum_allowed_serialized_name;
+    private Long available;
+    private Long maximumAllowed;
  
     /**
      * Gets the available.
@@ -904,7 +968,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getAvailable() {
-      return available_serialized_name;
+      return available;
     }
  
     /**
@@ -916,24 +980,35 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMaximumAllowed() {
-      return maximum_allowed_serialized_name;
+      return maximumAllowed;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('maximum_allowed', 'maximumAllowed');
+      return mapping;
+    }
   }
 
   /**
    * A custom configuration for the environment.
    */
   public class Configuration extends IBMWatsonResponseModel {
-    private String configuration_id_serialized_name;
-    private String name_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private String description_serialized_name;
-    private Conversions conversions_serialized_name;
-    private List<Enrichment> enrichments_serialized_name;
-    private List<NormalizationOperation> normalizations_serialized_name;
-    private Source source_serialized_name;
+    private String configurationId;
+    private String name;
+    private Datetime created;
+    private Datetime updated;
+    private String description;
+    private Conversions conversions;
+    private List<Enrichment> enrichments;
+    private List<NormalizationOperation> normalizations;
+    private Source source;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Configuration() { }
  
     /**
      * Gets the configurationId.
@@ -944,7 +1019,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getConfigurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
  
     /**
@@ -956,7 +1031,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -968,7 +1043,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -980,7 +1055,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -992,7 +1067,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -1004,7 +1079,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Conversions getConversions() {
-      return conversions_serialized_name;
+      return conversions;
     }
  
     /**
@@ -1016,7 +1091,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Enrichment> getEnrichments() {
-      return enrichments_serialized_name;
+      return enrichments;
     }
  
     /**
@@ -1029,7 +1104,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<NormalizationOperation> getNormalizations() {
-      return normalizations_serialized_name;
+      return normalizations;
     }
  
     /**
@@ -1041,61 +1116,29 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Source getSource() {
-      return source_serialized_name;
+      return source;
+    }
+  
+    private Configuration(ConfigurationBuilder builder) {
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      this.configurationId = builder.configurationId;
+      this.name = builder.name;
+      this.created = builder.created;
+      this.updated = builder.updated;
+      this.description = builder.description;
+      this.conversions = builder.conversions;
+      this.enrichments = builder.enrichments;
+      this.normalizations = builder.normalizations;
+      this.source = builder.source;
     }
 
     /**
-     * Sets the name.
+     * New builder.
      *
-     * @param name the new name
+     * @return a Configuration builder
      */
-    public void setName(final String name) {
-      this.name_serialized_name = name;
-    }
-
-    /**
-     * Sets the description.
-     *
-     * @param description the new description
-     */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the conversions.
-     *
-     * @param conversions the new conversions
-     */
-    public void setConversions(final Conversions conversions) {
-      this.conversions_serialized_name = conversions;
-    }
-
-    /**
-     * Sets the enrichments.
-     *
-     * @param enrichments the new enrichments
-     */
-    public void setEnrichments(final List<Enrichment> enrichments) {
-      this.enrichments_serialized_name = enrichments;
-    }
-
-    /**
-     * Sets the normalizations.
-     *
-     * @param normalizations the new normalizations
-     */
-    public void setNormalizations(final List<NormalizationOperation> normalizations) {
-      this.normalizations_serialized_name = normalizations;
-    }
-
-    /**
-     * Sets the source.
-     *
-     * @param source the new source
-     */
-    public void setSource(final Source source) {
-      this.source_serialized_name = source;
+    public ConfigurationBuilder newBuilder() {
+      return new ConfigurationBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1104,10 +1147,11 @@ public class IBMDiscoveryV1Models {
       }
 
       Configuration ret = (Configuration) super.deserialize(jsonString, jsonMap, classType);
+      ConfigurationBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for conversions
-      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(ret.getConversions()), (Map<String, Object>) jsonMap.get('conversions_serialized_name'), Conversions.class);
-      ret.setConversions(newConversions);
+      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(ret.getConversions()), (Map<String, Object>) jsonMap.get('conversions'), Conversions.class);
+      retBuilder.setConversions(newConversions);
 
       // calling custom deserializer for enrichments
       List<Enrichment> newEnrichments = new List<Enrichment>();
@@ -1115,11 +1159,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedEnrichments != null) {
         for (Integer i = 0; i < deserializedEnrichments.size(); i++) {
           Enrichment currentItem = ret.getEnrichments().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('enrichments_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('enrichments');
           Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Enrichment.class);
           newEnrichments.add(newItem);
         }
-        ret.enrichments_serialized_name = newEnrichments;
+        retBuilder.setEnrichments(newEnrichments);
       }
 
       // calling custom deserializer for normalizations
@@ -1128,18 +1172,236 @@ public class IBMDiscoveryV1Models {
       if (deserializedNormalizations != null) {
         for (Integer i = 0; i < deserializedNormalizations.size(); i++) {
           NormalizationOperation currentItem = ret.getNormalizations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('normalizations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('normalizations');
           NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newNormalizations.add(newItem);
         }
-        ret.normalizations_serialized_name = newNormalizations;
+        retBuilder.setNormalizations(newNormalizations);
       }
 
       // calling custom deserializer for source
-      Source newSource = (Source) new Source().deserialize(JSON.serialize(ret.getSource()), (Map<String, Object>) jsonMap.get('source_serialized_name'), Source.class);
-      ret.setSource(newSource);
+      Source newSource = (Source) new Source().deserialize(JSON.serialize(ret.getSource()), (Map<String, Object>) jsonMap.get('source'), Source.class);
+      retBuilder.setSource(newSource);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('configurationId', 'configuration_id');
+      if (conversions != null) {
+        mapping.putAll(conversions.getSdkToApiMapping());
+      }
+      if (enrichments != null && enrichments[0] != null) {
+        mapping.putAll(enrichments[0].getSdkToApiMapping());
+      }
+      if (normalizations != null && normalizations[0] != null) {
+        mapping.putAll(normalizations[0].getSdkToApiMapping());
+      }
+      if (source != null) {
+        mapping.putAll(source.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('configuration_id', 'configurationId');
+      if (conversions != null) {
+        mapping.putAll(conversions.getApiToSdkMapping());
+      }
+      if (enrichments != null && enrichments[0] != null) {
+        mapping.putAll(enrichments[0].getApiToSdkMapping());
+      }
+      if (normalizations != null && normalizations[0] != null) {
+        mapping.putAll(normalizations[0].getApiToSdkMapping());
+      }
+      if (source != null) {
+        mapping.putAll(source.getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * Configuration Builder.
+   */
+  public class ConfigurationBuilder {
+    private String configurationId;
+    private String name;
+    private Datetime created;
+    private Datetime updated;
+    private String description;
+    private Conversions conversions;
+    private List<Enrichment> enrichments;
+    private List<NormalizationOperation> normalizations;
+    private Source source;
+
+    private ConfigurationBuilder(Configuration configuration) {
+      this.configurationId = configuration.configurationId;
+      this.name = configuration.name;
+      this.created = configuration.created;
+      this.updated = configuration.updated;
+      this.description = configuration.description;
+      this.conversions = configuration.conversions;
+      this.enrichments = configuration.enrichments;
+      this.normalizations = configuration.normalizations;
+      this.source = configuration.source;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ConfigurationBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param name the name
+     */
+    public ConfigurationBuilder(String name) {
+      this.name = name;
+    }
+
+    /**
+     * Builds a Configuration.
+     *
+     * @return the configuration
+     */
+    public Configuration build() {
+      return new Configuration(this);
+    }
+
+    /**
+     * Adds an enrichments to enrichments.
+     *
+     * @param enrichments the new enrichments
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder addEnrichments(Enrichment enrichments) {
+      IBMWatsonValidator.notNull(enrichments, 'enrichments cannot be null');
+      if (this.enrichments == null) {
+        this.enrichments = new List<Enrichment>();
+      }
+      this.enrichments.add(enrichments);
+      return this;
+    }
+
+    /**
+     * Adds an normalizations to normalizations.
+     *
+     * @param normalizations the new normalizations
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder addNormalizations(NormalizationOperation normalizations) {
+      IBMWatsonValidator.notNull(normalizations, 'normalizations cannot be null');
+      if (this.normalizations == null) {
+        this.normalizations = new List<NormalizationOperation>();
+      }
+      this.normalizations.add(normalizations);
+      return this;
+    }
+
+    /**
+     * Set the configurationId.
+     *
+     * @param configurationId the configurationId
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setConfigurationId(String configurationId) {
+      this.configurationId = configurationId;
+      return this;
+    }
+
+    /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
+     * Set the created.
+     *
+     * @param created the created
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setCreated(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setUpdated(Datetime updated) {
+      this.updated = updated;
+      return this;
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the conversions.
+     *
+     * @param conversions the conversions
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setConversions(Conversions conversions) {
+      this.conversions = conversions;
+      return this;
+    }
+
+    /**
+     * Set the enrichments.
+     * Existing enrichments will be replaced.
+     *
+     * @param enrichments the enrichments
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setEnrichments(List<Enrichment> enrichments) {
+      this.enrichments = enrichments;
+      return this;
+    }
+
+    /**
+     * Set the normalizations.
+     * Existing normalizations will be replaced.
+     *
+     * @param normalizations the normalizations
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setNormalizations(List<NormalizationOperation> normalizations) {
+      this.normalizations = normalizations;
+      return this;
+    }
+
+    /**
+     * Set the source.
+     *
+     * @param source the source
+     * @return the Configuration builder
+     */
+    public ConfigurationBuilder setSource(Source source) {
+      this.source = source;
+      return this;
     }
   }
 
@@ -1147,12 +1409,18 @@ public class IBMDiscoveryV1Models {
    * Document conversion settings.
    */
   public class Conversions extends IBMWatsonGenericModel {
-    private PdfSettings pdf_serialized_name;
-    private WordSettings word_serialized_name;
-    private HtmlSettings html_serialized_name;
-    private SegmentSettings segment_serialized_name;
-    private List<NormalizationOperation> json_normalizations_serialized_name;
-    private Boolean image_text_recognition_serialized_name;
+    private PdfSettings pdf;
+    private WordSettings word;
+    private HtmlSettings html;
+    private SegmentSettings segment;
+    private List<NormalizationOperation> jsonNormalizations;
+    private Boolean imageTextRecognition;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Conversions() { }
  
     /**
      * Gets the pdf.
@@ -1163,7 +1431,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public PdfSettings getPdf() {
-      return pdf_serialized_name;
+      return pdf;
     }
  
     /**
@@ -1175,7 +1443,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public WordSettings getWord() {
-      return word_serialized_name;
+      return word;
     }
  
     /**
@@ -1187,7 +1455,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public HtmlSettings getHtml() {
-      return html_serialized_name;
+      return html;
     }
  
     /**
@@ -1199,7 +1467,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public SegmentSettings getSegment() {
-      return segment_serialized_name;
+      return segment;
     }
  
     /**
@@ -1212,7 +1480,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<NormalizationOperation> getJsonNormalizations() {
-      return json_normalizations_serialized_name;
+      return jsonNormalizations;
     }
  
     /**
@@ -1227,61 +1495,25 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getImageTextRecognition() {
-      return image_text_recognition_serialized_name;
+      return imageTextRecognition;
+    }
+  
+    private Conversions(ConversionsBuilder builder) {
+      this.pdf = builder.pdf;
+      this.word = builder.word;
+      this.html = builder.html;
+      this.segment = builder.segment;
+      this.jsonNormalizations = builder.jsonNormalizations;
+      this.imageTextRecognition = builder.imageTextRecognition;
     }
 
     /**
-     * Sets the pdf.
+     * New builder.
      *
-     * @param pdf the new pdf
+     * @return a Conversions builder
      */
-    public void setPdf(final PdfSettings pdf) {
-      this.pdf_serialized_name = pdf;
-    }
-
-    /**
-     * Sets the word.
-     *
-     * @param word the new word
-     */
-    public void setWord(final WordSettings word) {
-      this.word_serialized_name = word;
-    }
-
-    /**
-     * Sets the html.
-     *
-     * @param html the new html
-     */
-    public void setHtml(final HtmlSettings html) {
-      this.html_serialized_name = html;
-    }
-
-    /**
-     * Sets the segment.
-     *
-     * @param segment the new segment
-     */
-    public void setSegment(final SegmentSettings segment) {
-      this.segment_serialized_name = segment;
-    }
-
-    /**
-     * Sets the jsonNormalizations.
-     *
-     * @param jsonNormalizations the new jsonNormalizations
-     */
-    public void setJsonNormalizations(final List<NormalizationOperation> jsonNormalizations) {
-      this.json_normalizations_serialized_name = jsonNormalizations;
-    }
-
-    /**
-     * Sets the imageTextRecognition.
-     *
-     * @param imageTextRecognition the new imageTextRecognition
-     */
-    public void setImageTextRecognition(final Boolean imageTextRecognition) {
-      this.image_text_recognition_serialized_name = imageTextRecognition;
+    public ConversionsBuilder newBuilder() {
+      return new ConversionsBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1290,22 +1522,23 @@ public class IBMDiscoveryV1Models {
       }
 
       Conversions ret = (Conversions) super.deserialize(jsonString, jsonMap, classType);
+      ConversionsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for pdf
-      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(ret.getPdf()), (Map<String, Object>) jsonMap.get('pdf_serialized_name'), PdfSettings.class);
-      ret.setPdf(newPdf);
+      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(ret.getPdf()), (Map<String, Object>) jsonMap.get('pdf'), PdfSettings.class);
+      retBuilder.setPdf(newPdf);
 
       // calling custom deserializer for word
-      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(ret.getWord()), (Map<String, Object>) jsonMap.get('word_serialized_name'), WordSettings.class);
-      ret.setWord(newWord);
+      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(ret.getWord()), (Map<String, Object>) jsonMap.get('word'), WordSettings.class);
+      retBuilder.setWord(newWord);
 
       // calling custom deserializer for html
-      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html_serialized_name'), HtmlSettings.class);
-      ret.setHtml(newHtml);
+      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html'), HtmlSettings.class);
+      retBuilder.setHtml(newHtml);
 
       // calling custom deserializer for segment
-      SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(ret.getSegment()), (Map<String, Object>) jsonMap.get('segment_serialized_name'), SegmentSettings.class);
-      ret.setSegment(newSegment);
+      SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(ret.getSegment()), (Map<String, Object>) jsonMap.get('segment'), SegmentSettings.class);
+      retBuilder.setSegment(newSegment);
 
       // calling custom deserializer for jsonNormalizations
       List<NormalizationOperation> newJsonNormalizations = new List<NormalizationOperation>();
@@ -1313,14 +1546,176 @@ public class IBMDiscoveryV1Models {
       if (deserializedJsonNormalizations != null) {
         for (Integer i = 0; i < deserializedJsonNormalizations.size(); i++) {
           NormalizationOperation currentItem = ret.getJsonNormalizations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('json_normalizations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('jsonNormalizations');
           NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newJsonNormalizations.add(newItem);
         }
-        ret.json_normalizations_serialized_name = newJsonNormalizations;
+        retBuilder.setJsonNormalizations(newJsonNormalizations);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (pdf != null) {
+        mapping.putAll(pdf.getSdkToApiMapping());
+      }
+      if (word != null) {
+        mapping.putAll(word.getSdkToApiMapping());
+      }
+      if (html != null) {
+        mapping.putAll(html.getSdkToApiMapping());
+      }
+      if (segment != null) {
+        mapping.putAll(segment.getSdkToApiMapping());
+      }
+      mapping.put('jsonNormalizations', 'json_normalizations');
+      if (jsonNormalizations != null && jsonNormalizations[0] != null) {
+        mapping.putAll(jsonNormalizations[0].getSdkToApiMapping());
+      }
+      mapping.put('imageTextRecognition', 'image_text_recognition');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (pdf != null) {
+        mapping.putAll(pdf.getApiToSdkMapping());
+      }
+      if (word != null) {
+        mapping.putAll(word.getApiToSdkMapping());
+      }
+      if (html != null) {
+        mapping.putAll(html.getApiToSdkMapping());
+      }
+      if (segment != null) {
+        mapping.putAll(segment.getApiToSdkMapping());
+      }
+      mapping.put('json_normalizations', 'jsonNormalizations');
+      if (jsonNormalizations != null && jsonNormalizations[0] != null) {
+        mapping.putAll(jsonNormalizations[0].getApiToSdkMapping());
+      }
+      mapping.put('image_text_recognition', 'imageTextRecognition');
+      return mapping;
+    }
+  }
+
+  /**
+   * Conversions Builder.
+   */
+  public class ConversionsBuilder {
+    private PdfSettings pdf;
+    private WordSettings word;
+    private HtmlSettings html;
+    private SegmentSettings segment;
+    private List<NormalizationOperation> jsonNormalizations;
+    private Boolean imageTextRecognition;
+
+    private ConversionsBuilder(Conversions conversions) {
+      this.pdf = conversions.pdf;
+      this.word = conversions.word;
+      this.html = conversions.html;
+      this.segment = conversions.segment;
+      this.jsonNormalizations = conversions.jsonNormalizations;
+      this.imageTextRecognition = conversions.imageTextRecognition;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ConversionsBuilder() {
+    }
+
+    /**
+     * Builds a Conversions.
+     *
+     * @return the conversions
+     */
+    public Conversions build() {
+      return new Conversions(this);
+    }
+
+    /**
+     * Adds an jsonNormalizations to jsonNormalizations.
+     *
+     * @param jsonNormalizations the new jsonNormalizations
+     * @return the Conversions builder
+     */
+    public ConversionsBuilder addJsonNormalizations(NormalizationOperation jsonNormalizations) {
+      IBMWatsonValidator.notNull(jsonNormalizations, 'jsonNormalizations cannot be null');
+      if (this.jsonNormalizations == null) {
+        this.jsonNormalizations = new List<NormalizationOperation>();
+      }
+      this.jsonNormalizations.add(jsonNormalizations);
+      return this;
+    }
+
+    /**
+     * Set the pdf.
+     *
+     * @param pdf the pdf
+     * @return the Conversions builder
+     */
+    public ConversionsBuilder setPdf(PdfSettings pdf) {
+      this.pdf = pdf;
+      return this;
+    }
+
+    /**
+     * Set the word.
+     *
+     * @param word the word
+     * @return the Conversions builder
+     */
+    public ConversionsBuilder setWord(WordSettings word) {
+      this.word = word;
+      return this;
+    }
+
+    /**
+     * Set the html.
+     *
+     * @param html the html
+     * @return the Conversions builder
+     */
+    public ConversionsBuilder setHtml(HtmlSettings html) {
+      this.html = html;
+      return this;
+    }
+
+    /**
+     * Set the segment.
+     *
+     * @param segment the segment
+     * @return the Conversions builder
+     */
+    public ConversionsBuilder setSegment(SegmentSettings segment) {
+      this.segment = segment;
+      return this;
+    }
+
+    /**
+     * Set the jsonNormalizations.
+     * Existing jsonNormalizations will be replaced.
+     *
+     * @param jsonNormalizations the jsonNormalizations
+     * @return the Conversions builder
+     */
+    public ConversionsBuilder setJsonNormalizations(List<NormalizationOperation> jsonNormalizations) {
+      this.jsonNormalizations = jsonNormalizations;
+      return this;
+    }
+
+    /**
+     * Set the imageTextRecognition.
+     *
+     * @param imageTextRecognition the imageTextRecognition
+     * @return the Conversions builder
+     */
+    public ConversionsBuilder setImageTextRecognition(Boolean imageTextRecognition) {
+      this.imageTextRecognition = imageTextRecognition;
+      return this;
     }
   }
 
@@ -1333,7 +1728,7 @@ public class IBMDiscoveryV1Models {
     private String description;
     private String configurationId;
     private String language;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -1344,7 +1739,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -1355,7 +1750,7 @@ public class IBMDiscoveryV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -1366,7 +1761,7 @@ public class IBMDiscoveryV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -1377,7 +1772,7 @@ public class IBMDiscoveryV1Models {
     public String configurationId() {
       return configurationId;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -1409,6 +1804,12 @@ public class IBMDiscoveryV1Models {
       return new CreateCollectionOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('configurationId', 'configuration_id');
+      return mapping;
+    }
   }
 
   /**
@@ -1535,7 +1936,7 @@ public class IBMDiscoveryV1Models {
     private List<Enrichment> enrichments;
     private List<NormalizationOperation> normalizations;
     private Source source;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -1546,7 +1947,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -1557,7 +1958,7 @@ public class IBMDiscoveryV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -1568,7 +1969,7 @@ public class IBMDiscoveryV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the conversions.
      *
@@ -1579,7 +1980,7 @@ public class IBMDiscoveryV1Models {
     public Conversions conversions() {
       return conversions;
     }
- 
+
     /**
      * Gets the enrichments.
      *
@@ -1590,7 +1991,7 @@ public class IBMDiscoveryV1Models {
     public List<Enrichment> enrichments() {
       return enrichments;
     }
- 
+
     /**
      * Gets the normalizations.
      *
@@ -1602,7 +2003,7 @@ public class IBMDiscoveryV1Models {
     public List<NormalizationOperation> normalizations() {
       return normalizations;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -1636,6 +2037,23 @@ public class IBMDiscoveryV1Models {
       return new CreateConfigurationOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      if (conversions != null) {
+        mapping.putAll(conversions.getSdkToApiMapping());
+      }
+      if (enrichments != null && enrichments[0] != null) {
+        mapping.putAll(enrichments[0].getSdkToApiMapping());
+      }
+      if (normalizations != null && normalizations[0] != null) {
+        mapping.putAll(normalizations[0].getSdkToApiMapping());
+      }
+      if (source != null) {
+        mapping.putAll(source.getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -1833,7 +2251,7 @@ public class IBMDiscoveryV1Models {
     private String sourceType;
     private CredentialDetails credentialDetails;
     private String status;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -1844,7 +2262,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the sourceType.
      *
@@ -1860,7 +2278,7 @@ public class IBMDiscoveryV1Models {
     public String sourceType() {
       return sourceType;
     }
- 
+
     /**
      * Gets the credentialDetails.
      *
@@ -1873,7 +2291,7 @@ public class IBMDiscoveryV1Models {
     public CredentialDetails credentialDetails() {
       return credentialDetails;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -1905,6 +2323,16 @@ public class IBMDiscoveryV1Models {
       return new CreateCredentialsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('sourceType', 'source_type');
+      mapping.put('credentialDetails', 'credential_details');
+      if (credentialDetails != null) {
+        mapping.putAll(credentialDetails.getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -2025,7 +2453,7 @@ public class IBMDiscoveryV1Models {
     private String name;
     private String description;
     private String size;
- 
+
     /**
      * Gets the name.
      *
@@ -2036,7 +2464,7 @@ public class IBMDiscoveryV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -2047,7 +2475,7 @@ public class IBMDiscoveryV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the size.
      *
@@ -2076,7 +2504,6 @@ public class IBMDiscoveryV1Models {
     public CreateEnvironmentOptionsBuilder newBuilder() {
       return new CreateEnvironmentOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -2170,7 +2597,7 @@ public class IBMDiscoveryV1Models {
   public class CreateEventOptions extends IBMWatsonOptionsModel {
     private String xtype;
     private EventData data;
- 
+
     /**
      * Gets the xtype.
      *
@@ -2181,7 +2608,7 @@ public class IBMDiscoveryV1Models {
     public String xtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the data.
      *
@@ -2210,6 +2637,14 @@ public class IBMDiscoveryV1Models {
       return new CreateEventOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xtype', 'type');
+      if (data != null) {
+        mapping.putAll(data.getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -2290,8 +2725,8 @@ public class IBMDiscoveryV1Models {
    * An object defining the event being created.
    */
   public class CreateEventResponse extends IBMWatsonResponseModel {
-    private String type_serialized_name;
-    private EventData data_serialized_name;
+    private String xtype;
+    private EventData data;
  
     /**
      * Gets the xtype.
@@ -2302,7 +2737,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -2314,7 +2749,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public EventData getData() {
-      return data_serialized_name;
+      return data;
     }
 
     /**
@@ -2323,7 +2758,7 @@ public class IBMDiscoveryV1Models {
      * @param xtype the new xtype
      */
     public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+      this.xtype = xtype;
     }
 
     /**
@@ -2332,7 +2767,7 @@ public class IBMDiscoveryV1Models {
      * @param data the new data
      */
     public void setData(final EventData data) {
-      this.data_serialized_name = data;
+      this.data = data;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2343,10 +2778,19 @@ public class IBMDiscoveryV1Models {
       CreateEventResponse ret = (CreateEventResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for data
-      EventData newData = (EventData) new EventData().deserialize(JSON.serialize(ret.getData()), (Map<String, Object>) jsonMap.get('data_serialized_name'), EventData.class);
+      EventData newData = (EventData) new EventData().deserialize(JSON.serialize(ret.getData()), (Map<String, Object>) jsonMap.get('data'), EventData.class);
       ret.setData(newData);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      if (data != null) {
+        mapping.putAll(data.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2357,7 +2801,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String collectionId;
     private List<Expansion> expansions;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -2368,7 +2812,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -2379,7 +2823,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the expansions.
      *
@@ -2422,6 +2866,15 @@ public class IBMDiscoveryV1Models {
       return new CreateExpansionsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      if (expansions != null && expansions[0] != null) {
+        mapping.putAll(expansions[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -2546,7 +2999,7 @@ public class IBMDiscoveryV1Models {
   public class CreateGatewayOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String name;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -2557,7 +3010,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -2585,6 +3038,11 @@ public class IBMDiscoveryV1Models {
       return new CreateGatewayOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      return mapping;
+    }
   }
 
   /**
@@ -2667,7 +3125,7 @@ public class IBMDiscoveryV1Models {
     private String collectionId;
     private IBMWatsonFile stopwordFile;
     private String stopwordFilename;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -2678,7 +3136,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -2689,7 +3147,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the stopwordFile.
      *
@@ -2700,7 +3158,7 @@ public class IBMDiscoveryV1Models {
     public IBMWatsonFile stopwordFile() {
       return stopwordFile;
     }
- 
+
     /**
      * Gets the stopwordFilename.
      *
@@ -2733,6 +3191,14 @@ public class IBMDiscoveryV1Models {
       return new CreateStopwordListOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('stopwordFile', 'stopword_file');
+      mapping.put('stopwordFilename', 'stopword_filename');
+      return mapping;
+    }
   }
 
   /**
@@ -2846,7 +3312,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String collectionId;
     private List<TokenDictRule> tokenizationRules;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -2857,7 +3323,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -2868,7 +3334,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the tokenizationRules.
      *
@@ -2899,6 +3365,16 @@ public class IBMDiscoveryV1Models {
       return new CreateTokenizationDictionaryOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('tokenizationRules', 'tokenization_rules');
+      if (tokenizationRules != null && tokenizationRules[0] != null) {
+        mapping.putAll(tokenizationRules[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -3014,7 +3490,7 @@ public class IBMDiscoveryV1Models {
     private String documentId;
     private String crossReference;
     private Long relevance;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -3025,7 +3501,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -3036,7 +3512,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -3047,7 +3523,7 @@ public class IBMDiscoveryV1Models {
     public String queryId() {
       return queryId;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -3058,7 +3534,7 @@ public class IBMDiscoveryV1Models {
     public String documentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the crossReference.
      *
@@ -3069,7 +3545,7 @@ public class IBMDiscoveryV1Models {
     public String crossReference() {
       return crossReference;
     }
- 
+
     /**
      * Gets the relevance.
      *
@@ -3103,6 +3579,15 @@ public class IBMDiscoveryV1Models {
       return new CreateTrainingExampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('queryId', 'query_id');
+      mapping.put('documentId', 'document_id');
+      mapping.put('crossReference', 'cross_reference');
+      return mapping;
+    }
   }
 
   /**
@@ -3252,25 +3737,31 @@ public class IBMDiscoveryV1Models {
    * Obtain credentials for your source from the administrator of the source.
    */
   public class CredentialDetails extends IBMWatsonGenericModel {
-    private String credential_type_serialized_name;
-    private String client_id_serialized_name;
-    private String enterprise_id_serialized_name;
-    private String url_serialized_name;
-    private String username_serialized_name;
-    private String organization_url_serialized_name;
-    private String site_collection_path_serialized_name;
-    private String client_secret_serialized_name;
-    private String public_key_id_serialized_name;
-    private String private_key_serialized_name;
-    private String passphrase_serialized_name;
-    private String password_serialized_name;
-    private String gateway_id_serialized_name;
-    private String source_version_serialized_name;
-    private String web_application_url_serialized_name;
-    private String domain_serialized_name;
-    private String endpoint_serialized_name;
-    private String access_key_id_serialized_name;
-    private String secret_access_key_serialized_name;
+    private String credentialType;
+    private String clientId;
+    private String enterpriseId;
+    private String url;
+    private String username;
+    private String organizationUrl;
+    private String siteCollectionPath;
+    private String clientSecret;
+    private String publicKeyId;
+    private String privateKey;
+    private String passphrase;
+    private String password;
+    private String gatewayId;
+    private String sourceVersion;
+    private String webApplicationUrl;
+    private String domain;
+    private String endpoint;
+    private String accessKeyId;
+    private String secretAccessKey;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public CredentialDetails() { }
  
     /**
      * Gets the credentialType.
@@ -3289,7 +3780,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCredentialType() {
-      return credential_type_serialized_name;
+      return credentialType;
     }
  
     /**
@@ -3302,7 +3793,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getClientId() {
-      return client_id_serialized_name;
+      return clientId;
     }
  
     /**
@@ -3315,7 +3806,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEnterpriseId() {
-      return enterprise_id_serialized_name;
+      return enterpriseId;
     }
  
     /**
@@ -3328,7 +3819,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getUrl() {
-      return url_serialized_name;
+      return url;
     }
  
     /**
@@ -3341,7 +3832,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getUsername() {
-      return username_serialized_name;
+      return username;
     }
  
     /**
@@ -3354,7 +3845,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getOrganizationUrl() {
-      return organization_url_serialized_name;
+      return organizationUrl;
     }
  
     /**
@@ -3367,7 +3858,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSiteCollectionPath() {
-      return site_collection_path_serialized_name;
+      return siteCollectionPath;
     }
  
     /**
@@ -3381,7 +3872,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getClientSecret() {
-      return client_secret_serialized_name;
+      return clientSecret;
     }
  
     /**
@@ -3395,7 +3886,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getPublicKeyId() {
-      return public_key_id_serialized_name;
+      return publicKeyId;
     }
  
     /**
@@ -3409,7 +3900,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getPrivateKey() {
-      return private_key_serialized_name;
+      return privateKey;
     }
  
     /**
@@ -3423,7 +3914,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getPassphrase() {
-      return passphrase_serialized_name;
+      return passphrase;
     }
  
     /**
@@ -3440,7 +3931,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getPassword() {
-      return password_serialized_name;
+      return password;
     }
  
     /**
@@ -3454,7 +3945,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getGatewayId() {
-      return gateway_id_serialized_name;
+      return gatewayId;
     }
  
     /**
@@ -3467,7 +3958,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSourceVersion() {
-      return source_version_serialized_name;
+      return sourceVersion;
     }
  
     /**
@@ -3480,7 +3971,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getWebApplicationUrl() {
-      return web_application_url_serialized_name;
+      return webApplicationUrl;
     }
  
     /**
@@ -3493,7 +3984,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDomain() {
-      return domain_serialized_name;
+      return domain;
     }
  
     /**
@@ -3506,7 +3997,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEndpoint() {
-      return endpoint_serialized_name;
+      return endpoint;
     }
  
     /**
@@ -3521,7 +4012,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getAccessKeyId() {
-      return access_key_id_serialized_name;
+      return accessKeyId;
     }
  
     /**
@@ -3536,190 +4027,362 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSecretAccessKey() {
-      return secret_access_key_serialized_name;
+      return secretAccessKey;
+    }
+  
+    private CredentialDetails(CredentialDetailsBuilder builder) {
+      this.credentialType = builder.credentialType;
+      this.clientId = builder.clientId;
+      this.enterpriseId = builder.enterpriseId;
+      this.url = builder.url;
+      this.username = builder.username;
+      this.organizationUrl = builder.organizationUrl;
+      this.siteCollectionPath = builder.siteCollectionPath;
+      this.clientSecret = builder.clientSecret;
+      this.publicKeyId = builder.publicKeyId;
+      this.privateKey = builder.privateKey;
+      this.passphrase = builder.passphrase;
+      this.password = builder.password;
+      this.gatewayId = builder.gatewayId;
+      this.sourceVersion = builder.sourceVersion;
+      this.webApplicationUrl = builder.webApplicationUrl;
+      this.domain = builder.domain;
+      this.endpoint = builder.endpoint;
+      this.accessKeyId = builder.accessKeyId;
+      this.secretAccessKey = builder.secretAccessKey;
     }
 
     /**
-     * Sets the credentialType.
+     * New builder.
      *
-     * @param credentialType the new credentialType
+     * @return a CredentialDetails builder
      */
-    public void setCredentialType(final String credentialType) {
-      this.credential_type_serialized_name = credentialType;
+    public CredentialDetailsBuilder newBuilder() {
+      return new CredentialDetailsBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('credentialType', 'credential_type');
+      mapping.put('clientId', 'client_id');
+      mapping.put('enterpriseId', 'enterprise_id');
+      mapping.put('organizationUrl', 'organization_url');
+      mapping.put('siteCollectionPath', 'site_collection.path');
+      mapping.put('clientSecret', 'client_secret');
+      mapping.put('publicKeyId', 'public_key_id');
+      mapping.put('privateKey', 'private_key');
+      mapping.put('gatewayId', 'gateway_id');
+      mapping.put('sourceVersion', 'source_version');
+      mapping.put('webApplicationUrl', 'web_application_url');
+      mapping.put('accessKeyId', 'access_key_id');
+      mapping.put('secretAccessKey', 'secret_access_key');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('credential_type', 'credentialType');
+      mapping.put('client_id', 'clientId');
+      mapping.put('enterprise_id', 'enterpriseId');
+      mapping.put('organization_url', 'organizationUrl');
+      mapping.put('site_collection.path', 'siteCollectionPath');
+      mapping.put('client_secret', 'clientSecret');
+      mapping.put('public_key_id', 'publicKeyId');
+      mapping.put('private_key', 'privateKey');
+      mapping.put('gateway_id', 'gatewayId');
+      mapping.put('source_version', 'sourceVersion');
+      mapping.put('web_application_url', 'webApplicationUrl');
+      mapping.put('access_key_id', 'accessKeyId');
+      mapping.put('secret_access_key', 'secretAccessKey');
+      return mapping;
+    }
+  }
+
+  /**
+   * CredentialDetails Builder.
+   */
+  public class CredentialDetailsBuilder {
+    private String credentialType;
+    private String clientId;
+    private String enterpriseId;
+    private String url;
+    private String username;
+    private String organizationUrl;
+    private String siteCollectionPath;
+    private String clientSecret;
+    private String publicKeyId;
+    private String privateKey;
+    private String passphrase;
+    private String password;
+    private String gatewayId;
+    private String sourceVersion;
+    private String webApplicationUrl;
+    private String domain;
+    private String endpoint;
+    private String accessKeyId;
+    private String secretAccessKey;
+
+    private CredentialDetailsBuilder(CredentialDetails credentialDetails) {
+      this.credentialType = credentialDetails.credentialType;
+      this.clientId = credentialDetails.clientId;
+      this.enterpriseId = credentialDetails.enterpriseId;
+      this.url = credentialDetails.url;
+      this.username = credentialDetails.username;
+      this.organizationUrl = credentialDetails.organizationUrl;
+      this.siteCollectionPath = credentialDetails.siteCollectionPath;
+      this.clientSecret = credentialDetails.clientSecret;
+      this.publicKeyId = credentialDetails.publicKeyId;
+      this.privateKey = credentialDetails.privateKey;
+      this.passphrase = credentialDetails.passphrase;
+      this.password = credentialDetails.password;
+      this.gatewayId = credentialDetails.gatewayId;
+      this.sourceVersion = credentialDetails.sourceVersion;
+      this.webApplicationUrl = credentialDetails.webApplicationUrl;
+      this.domain = credentialDetails.domain;
+      this.endpoint = credentialDetails.endpoint;
+      this.accessKeyId = credentialDetails.accessKeyId;
+      this.secretAccessKey = credentialDetails.secretAccessKey;
     }
 
     /**
-     * Sets the clientId.
-     *
-     * @param clientId the new clientId
+     * Instantiates a new builder.
      */
-    public void setClientId(final String clientId) {
-      this.client_id_serialized_name = clientId;
+    public CredentialDetailsBuilder() {
     }
 
     /**
-     * Sets the enterpriseId.
+     * Builds a CredentialDetails.
      *
-     * @param enterpriseId the new enterpriseId
+     * @return the credentialDetails
      */
-    public void setEnterpriseId(final String enterpriseId) {
-      this.enterprise_id_serialized_name = enterpriseId;
+    public CredentialDetails build() {
+      return new CredentialDetails(this);
     }
 
     /**
-     * Sets the url.
+     * Set the credentialType.
      *
-     * @param url the new url
+     * @param credentialType the credentialType
+     * @return the CredentialDetails builder
      */
-    public void setUrl(final String url) {
-      this.url_serialized_name = url;
+    public CredentialDetailsBuilder setCredentialType(String credentialType) {
+      this.credentialType = credentialType;
+      return this;
     }
 
     /**
-     * Sets the username.
+     * Set the clientId.
      *
-     * @param username the new username
+     * @param clientId the clientId
+     * @return the CredentialDetails builder
      */
-    public void setUsername(final String username) {
-      this.username_serialized_name = username;
+    public CredentialDetailsBuilder setClientId(String clientId) {
+      this.clientId = clientId;
+      return this;
     }
 
     /**
-     * Sets the organizationUrl.
+     * Set the enterpriseId.
      *
-     * @param organizationUrl the new organizationUrl
+     * @param enterpriseId the enterpriseId
+     * @return the CredentialDetails builder
      */
-    public void setOrganizationUrl(final String organizationUrl) {
-      this.organization_url_serialized_name = organizationUrl;
+    public CredentialDetailsBuilder setEnterpriseId(String enterpriseId) {
+      this.enterpriseId = enterpriseId;
+      return this;
     }
 
     /**
-     * Sets the siteCollectionPath.
+     * Set the url.
      *
-     * @param siteCollectionPath the new siteCollectionPath
+     * @param url the url
+     * @return the CredentialDetails builder
      */
-    public void setSiteCollectionPath(final String siteCollectionPath) {
-      this.site_collection_path_serialized_name = siteCollectionPath;
+    public CredentialDetailsBuilder setUrl(String url) {
+      this.url = url;
+      return this;
     }
 
     /**
-     * Sets the clientSecret.
+     * Set the username.
      *
-     * @param clientSecret the new clientSecret
+     * @param username the username
+     * @return the CredentialDetails builder
      */
-    public void setClientSecret(final String clientSecret) {
-      this.client_secret_serialized_name = clientSecret;
+    public CredentialDetailsBuilder setUsername(String username) {
+      this.username = username;
+      return this;
     }
 
     /**
-     * Sets the publicKeyId.
+     * Set the organizationUrl.
      *
-     * @param publicKeyId the new publicKeyId
+     * @param organizationUrl the organizationUrl
+     * @return the CredentialDetails builder
      */
-    public void setPublicKeyId(final String publicKeyId) {
-      this.public_key_id_serialized_name = publicKeyId;
+    public CredentialDetailsBuilder setOrganizationUrl(String organizationUrl) {
+      this.organizationUrl = organizationUrl;
+      return this;
     }
 
     /**
-     * Sets the privateKey.
+     * Set the siteCollectionPath.
      *
-     * @param privateKey the new privateKey
+     * @param siteCollectionPath the siteCollectionPath
+     * @return the CredentialDetails builder
      */
-    public void setPrivateKey(final String privateKey) {
-      this.private_key_serialized_name = privateKey;
+    public CredentialDetailsBuilder setSiteCollectionPath(String siteCollectionPath) {
+      this.siteCollectionPath = siteCollectionPath;
+      return this;
     }
 
     /**
-     * Sets the passphrase.
+     * Set the clientSecret.
      *
-     * @param passphrase the new passphrase
+     * @param clientSecret the clientSecret
+     * @return the CredentialDetails builder
      */
-    public void setPassphrase(final String passphrase) {
-      this.passphrase_serialized_name = passphrase;
+    public CredentialDetailsBuilder setClientSecret(String clientSecret) {
+      this.clientSecret = clientSecret;
+      return this;
     }
 
     /**
-     * Sets the password.
+     * Set the publicKeyId.
      *
-     * @param password the new password
+     * @param publicKeyId the publicKeyId
+     * @return the CredentialDetails builder
      */
-    public void setPassword(final String password) {
-      this.password_serialized_name = password;
+    public CredentialDetailsBuilder setPublicKeyId(String publicKeyId) {
+      this.publicKeyId = publicKeyId;
+      return this;
     }
 
     /**
-     * Sets the gatewayId.
+     * Set the privateKey.
      *
-     * @param gatewayId the new gatewayId
+     * @param privateKey the privateKey
+     * @return the CredentialDetails builder
      */
-    public void setGatewayId(final String gatewayId) {
-      this.gateway_id_serialized_name = gatewayId;
+    public CredentialDetailsBuilder setPrivateKey(String privateKey) {
+      this.privateKey = privateKey;
+      return this;
     }
 
     /**
-     * Sets the sourceVersion.
+     * Set the passphrase.
      *
-     * @param sourceVersion the new sourceVersion
+     * @param passphrase the passphrase
+     * @return the CredentialDetails builder
      */
-    public void setSourceVersion(final String sourceVersion) {
-      this.source_version_serialized_name = sourceVersion;
+    public CredentialDetailsBuilder setPassphrase(String passphrase) {
+      this.passphrase = passphrase;
+      return this;
     }
 
     /**
-     * Sets the webApplicationUrl.
+     * Set the password.
      *
-     * @param webApplicationUrl the new webApplicationUrl
+     * @param password the password
+     * @return the CredentialDetails builder
      */
-    public void setWebApplicationUrl(final String webApplicationUrl) {
-      this.web_application_url_serialized_name = webApplicationUrl;
+    public CredentialDetailsBuilder setPassword(String password) {
+      this.password = password;
+      return this;
     }
 
     /**
-     * Sets the domain.
+     * Set the gatewayId.
      *
-     * @param domain the new domain
+     * @param gatewayId the gatewayId
+     * @return the CredentialDetails builder
      */
-    public void setDomain(final String domain) {
-      this.domain_serialized_name = domain;
+    public CredentialDetailsBuilder setGatewayId(String gatewayId) {
+      this.gatewayId = gatewayId;
+      return this;
     }
 
     /**
-     * Sets the endpoint.
+     * Set the sourceVersion.
      *
-     * @param endpoint the new endpoint
+     * @param sourceVersion the sourceVersion
+     * @return the CredentialDetails builder
      */
-    public void setEndpoint(final String endpoint) {
-      this.endpoint_serialized_name = endpoint;
+    public CredentialDetailsBuilder setSourceVersion(String sourceVersion) {
+      this.sourceVersion = sourceVersion;
+      return this;
     }
 
     /**
-     * Sets the accessKeyId.
+     * Set the webApplicationUrl.
      *
-     * @param accessKeyId the new accessKeyId
+     * @param webApplicationUrl the webApplicationUrl
+     * @return the CredentialDetails builder
      */
-    public void setAccessKeyId(final String accessKeyId) {
-      this.access_key_id_serialized_name = accessKeyId;
+    public CredentialDetailsBuilder setWebApplicationUrl(String webApplicationUrl) {
+      this.webApplicationUrl = webApplicationUrl;
+      return this;
     }
 
     /**
-     * Sets the secretAccessKey.
+     * Set the domain.
      *
-     * @param secretAccessKey the new secretAccessKey
+     * @param domain the domain
+     * @return the CredentialDetails builder
      */
-    public void setSecretAccessKey(final String secretAccessKey) {
-      this.secret_access_key_serialized_name = secretAccessKey;
+    public CredentialDetailsBuilder setDomain(String domain) {
+      this.domain = domain;
+      return this;
     }
 
+    /**
+     * Set the endpoint.
+     *
+     * @param endpoint the endpoint
+     * @return the CredentialDetails builder
+     */
+    public CredentialDetailsBuilder setEndpoint(String endpoint) {
+      this.endpoint = endpoint;
+      return this;
+    }
+
+    /**
+     * Set the accessKeyId.
+     *
+     * @param accessKeyId the accessKeyId
+     * @return the CredentialDetails builder
+     */
+    public CredentialDetailsBuilder setAccessKeyId(String accessKeyId) {
+      this.accessKeyId = accessKeyId;
+      return this;
+    }
+
+    /**
+     * Set the secretAccessKey.
+     *
+     * @param secretAccessKey the secretAccessKey
+     * @return the CredentialDetails builder
+     */
+    public CredentialDetailsBuilder setSecretAccessKey(String secretAccessKey) {
+      this.secretAccessKey = secretAccessKey;
+      return this;
+    }
   }
 
   /**
    * Object containing credential information.
    */
   public class Credentials extends IBMWatsonResponseModel {
-    private String credential_id_serialized_name;
-    private String source_type_serialized_name;
-    private CredentialDetails credential_details_serialized_name;
-    private String status_serialized_name;
+    private String credentialId;
+    private String sourceType;
+    private CredentialDetails credentialDetails;
+    private String status;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Credentials() { }
  
     /**
      * Gets the credentialId.
@@ -3730,7 +4393,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCredentialId() {
-      return credential_id_serialized_name;
+      return credentialId;
     }
  
     /**
@@ -3747,7 +4410,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSourceType() {
-      return source_type_serialized_name;
+      return sourceType;
     }
  
     /**
@@ -3761,7 +4424,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public CredentialDetails getCredentialDetails() {
-      return credential_details_serialized_name;
+      return credentialDetails;
     }
  
     /**
@@ -3775,34 +4438,23 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
+    }
+  
+    private Credentials(CredentialsBuilder builder) {
+      this.credentialId = builder.credentialId;
+      this.sourceType = builder.sourceType;
+      this.credentialDetails = builder.credentialDetails;
+      this.status = builder.status;
     }
 
     /**
-     * Sets the sourceType.
+     * New builder.
      *
-     * @param sourceType the new sourceType
+     * @return a Credentials builder
      */
-    public void setSourceType(final String sourceType) {
-      this.source_type_serialized_name = sourceType;
-    }
-
-    /**
-     * Sets the credentialDetails.
-     *
-     * @param credentialDetails the new credentialDetails
-     */
-    public void setCredentialDetails(final CredentialDetails credentialDetails) {
-      this.credential_details_serialized_name = credentialDetails;
-    }
-
-    /**
-     * Sets the status.
-     *
-     * @param status the new status
-     */
-    public void setStatus(final String status) {
-      this.status_serialized_name = status;
+    public CredentialsBuilder newBuilder() {
+      return new CredentialsBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3811,12 +4463,111 @@ public class IBMDiscoveryV1Models {
       }
 
       Credentials ret = (Credentials) super.deserialize(jsonString, jsonMap, classType);
+      CredentialsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for credentialDetails
-      CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(ret.getCredentialDetails()), (Map<String, Object>) jsonMap.get('credential_details_serialized_name'), CredentialDetails.class);
-      ret.setCredentialDetails(newCredentialDetails);
+      CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(ret.getCredentialDetails()), (Map<String, Object>) jsonMap.get('credentialDetails'), CredentialDetails.class);
+      retBuilder.setCredentialDetails(newCredentialDetails);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('credentialId', 'credential_id');
+      mapping.put('sourceType', 'source_type');
+      mapping.put('credentialDetails', 'credential_details');
+      if (credentialDetails != null) {
+        mapping.putAll(credentialDetails.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('credential_id', 'credentialId');
+      mapping.put('source_type', 'sourceType');
+      mapping.put('credential_details', 'credentialDetails');
+      if (credentialDetails != null) {
+        mapping.putAll(credentialDetails.getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * Credentials Builder.
+   */
+  public class CredentialsBuilder {
+    private String credentialId;
+    private String sourceType;
+    private CredentialDetails credentialDetails;
+    private String status;
+
+    private CredentialsBuilder(Credentials credentials) {
+      this.credentialId = credentials.credentialId;
+      this.sourceType = credentials.sourceType;
+      this.credentialDetails = credentials.credentialDetails;
+      this.status = credentials.status;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public CredentialsBuilder() {
+    }
+
+    /**
+     * Builds a Credentials.
+     *
+     * @return the credentials
+     */
+    public Credentials build() {
+      return new Credentials(this);
+    }
+
+    /**
+     * Set the credentialId.
+     *
+     * @param credentialId the credentialId
+     * @return the Credentials builder
+     */
+    public CredentialsBuilder setCredentialId(String credentialId) {
+      this.credentialId = credentialId;
+      return this;
+    }
+
+    /**
+     * Set the sourceType.
+     *
+     * @param sourceType the sourceType
+     * @return the Credentials builder
+     */
+    public CredentialsBuilder setSourceType(String sourceType) {
+      this.sourceType = sourceType;
+      return this;
+    }
+
+    /**
+     * Set the credentialDetails.
+     *
+     * @param credentialDetails the credentialDetails
+     * @return the Credentials builder
+     */
+    public CredentialsBuilder setCredentialDetails(CredentialDetails credentialDetails) {
+      this.credentialDetails = credentialDetails;
+      return this;
+    }
+
+    /**
+     * Set the status.
+     *
+     * @param status the status
+     * @return the Credentials builder
+     */
+    public CredentialsBuilder setStatus(String status) {
+      this.status = status;
+      return this;
     }
   }
 
@@ -3824,7 +4575,7 @@ public class IBMDiscoveryV1Models {
    * CredentialsList.
    */
   public class CredentialsList extends IBMWatsonResponseModel {
-    private List<Credentials> credentials_serialized_name;
+    private List<Credentials> credentials;
  
     /**
      * Gets the credentials.
@@ -3835,7 +4586,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Credentials> getCredentials() {
-      return credentials_serialized_name;
+      return credentials;
     }
 
     /**
@@ -3844,7 +4595,7 @@ public class IBMDiscoveryV1Models {
      * @param credentials the new credentials
      */
     public void setCredentials(final List<Credentials> credentials) {
-      this.credentials_serialized_name = credentials;
+      this.credentials = credentials;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3860,14 +4611,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedCredentials != null) {
         for (Integer i = 0; i < deserializedCredentials.size(); i++) {
           Credentials currentItem = ret.getCredentials().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('credentials_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('credentials');
           Credentials newItem = (Credentials) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Credentials.class);
           newCredentials.add(newItem);
         }
-        ret.credentials_serialized_name = newCredentials;
+        ret.credentials = newCredentials;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (credentials != null && credentials[0] != null) {
+        mapping.putAll(credentials[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -3877,7 +4636,7 @@ public class IBMDiscoveryV1Models {
   public class DeleteAllTrainingDataOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -3888,7 +4647,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -3917,6 +4676,12 @@ public class IBMDiscoveryV1Models {
       return new DeleteAllTrainingDataOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -3999,7 +4764,7 @@ public class IBMDiscoveryV1Models {
   public class DeleteCollectionOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4010,7 +4775,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -4039,6 +4804,12 @@ public class IBMDiscoveryV1Models {
       return new DeleteCollectionOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4121,7 +4892,7 @@ public class IBMDiscoveryV1Models {
   public class DeleteConfigurationOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String configurationId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4132,7 +4903,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -4161,6 +4932,12 @@ public class IBMDiscoveryV1Models {
       return new DeleteConfigurationOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('configurationId', 'configuration_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4243,7 +5020,7 @@ public class IBMDiscoveryV1Models {
   public class DeleteCredentialsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String credentialId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4254,7 +5031,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the credentialId.
      *
@@ -4283,6 +5060,12 @@ public class IBMDiscoveryV1Models {
       return new DeleteCredentialsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('credentialId', 'credential_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4366,7 +5149,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String collectionId;
     private String documentId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4377,7 +5160,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -4388,7 +5171,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -4419,6 +5202,13 @@ public class IBMDiscoveryV1Models {
       return new DeleteDocumentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('documentId', 'document_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4515,7 +5305,7 @@ public class IBMDiscoveryV1Models {
    */
   public class DeleteEnvironmentOptions extends IBMWatsonOptionsModel {
     private String environmentId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4542,6 +5332,11 @@ public class IBMDiscoveryV1Models {
       return new DeleteEnvironmentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4609,7 +5404,7 @@ public class IBMDiscoveryV1Models {
   public class DeleteExpansionsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4620,7 +5415,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -4649,6 +5444,12 @@ public class IBMDiscoveryV1Models {
       return new DeleteExpansionsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4731,7 +5532,7 @@ public class IBMDiscoveryV1Models {
   public class DeleteGatewayOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String gatewayId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4742,7 +5543,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the gatewayId.
      *
@@ -4771,6 +5572,12 @@ public class IBMDiscoveryV1Models {
       return new DeleteGatewayOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('gatewayId', 'gateway_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4853,7 +5660,7 @@ public class IBMDiscoveryV1Models {
   public class DeleteStopwordListOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4864,7 +5671,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -4893,6 +5700,12 @@ public class IBMDiscoveryV1Models {
       return new DeleteStopwordListOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -4975,7 +5788,7 @@ public class IBMDiscoveryV1Models {
   public class DeleteTokenizationDictionaryOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -4986,7 +5799,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -5015,6 +5828,12 @@ public class IBMDiscoveryV1Models {
       return new DeleteTokenizationDictionaryOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -5098,7 +5917,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String collectionId;
     private String queryId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -5109,7 +5928,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -5120,7 +5939,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -5151,6 +5970,13 @@ public class IBMDiscoveryV1Models {
       return new DeleteTrainingDataOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('queryId', 'query_id');
+      return mapping;
+    }
   }
 
   /**
@@ -5250,7 +6076,7 @@ public class IBMDiscoveryV1Models {
     private String collectionId;
     private String queryId;
     private String exampleId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -5261,7 +6087,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -5272,7 +6098,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -5283,7 +6109,7 @@ public class IBMDiscoveryV1Models {
     public String queryId() {
       return queryId;
     }
- 
+
     /**
      * Gets the exampleId.
      *
@@ -5316,6 +6142,14 @@ public class IBMDiscoveryV1Models {
       return new DeleteTrainingExampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('queryId', 'query_id');
+      mapping.put('exampleId', 'example_id');
+      return mapping;
+    }
   }
 
   /**
@@ -5427,7 +6261,7 @@ public class IBMDiscoveryV1Models {
    */
   public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
     private String customerId;
- 
+
     /**
      * Gets the customerId.
      *
@@ -5454,6 +6288,11 @@ public class IBMDiscoveryV1Models {
       return new DeleteUserDataOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('customerId', 'customer_id');
+      return mapping;
+    }
   }
 
   /**
@@ -5519,8 +6358,8 @@ public class IBMDiscoveryV1Models {
    * Summary of the disk usage statistics for the environment.
    */
   public class DiskUsage extends IBMWatsonGenericModel {
-    private Long used_bytes_serialized_name;
-    private Long maximum_allowed_bytes_serialized_name;
+    private Long usedBytes;
+    private Long maximumAllowedBytes;
  
     /**
      * Gets the usedBytes.
@@ -5531,7 +6370,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getUsedBytes() {
-      return used_bytes_serialized_name;
+      return usedBytes;
     }
  
     /**
@@ -5543,18 +6382,24 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMaximumAllowedBytes() {
-      return maximum_allowed_bytes_serialized_name;
+      return maximumAllowedBytes;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('used_bytes', 'usedBytes');
+      mapping.put('maximum_allowed_bytes', 'maximumAllowedBytes');
+      return mapping;
+    }
   }
 
   /**
    * DocumentAccepted.
    */
   public class DocumentAccepted extends IBMWatsonResponseModel {
-    private String document_id_serialized_name;
-    private String status_serialized_name;
-    private List<Notice> notices_serialized_name;
+    private String documentId;
+    private String status;
+    private List<Notice> notices;
  
     /**
      * Gets the documentId.
@@ -5565,7 +6410,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -5578,7 +6423,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -5590,7 +6435,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Notice> getNotices() {
-      return notices_serialized_name;
+      return notices;
     }
 
     /**
@@ -5599,7 +6444,7 @@ public class IBMDiscoveryV1Models {
      * @param documentId the new documentId
      */
     public void setDocumentId(final String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
     }
 
     /**
@@ -5608,7 +6453,7 @@ public class IBMDiscoveryV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -5617,7 +6462,7 @@ public class IBMDiscoveryV1Models {
      * @param notices the new notices
      */
     public void setNotices(final List<Notice> notices) {
-      this.notices_serialized_name = notices;
+      this.notices = notices;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5633,14 +6478,23 @@ public class IBMDiscoveryV1Models {
       if (deserializedNotices != null) {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('notices_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
           Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
-        ret.notices_serialized_name = newNotices;
+        ret.notices = newNotices;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_id', 'documentId');
+      if (notices != null && notices[0] != null) {
+        mapping.putAll(notices[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5648,10 +6502,10 @@ public class IBMDiscoveryV1Models {
    * DocumentCounts.
    */
   public class DocumentCounts extends IBMWatsonGenericModel {
-    private Long available_serialized_name;
-    private Long processing_serialized_name;
-    private Long failed_serialized_name;
-    private Long pending_serialized_name;
+    private Long available;
+    private Long processing;
+    private Long failed;
+    private Long pending;
  
     /**
      * Gets the available.
@@ -5662,7 +6516,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getAvailable() {
-      return available_serialized_name;
+      return available;
     }
  
     /**
@@ -5674,7 +6528,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getProcessing() {
-      return processing_serialized_name;
+      return processing;
     }
  
     /**
@@ -5686,7 +6540,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getFailed() {
-      return failed_serialized_name;
+      return failed;
     }
  
     /**
@@ -5698,17 +6552,16 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getPending() {
-      return pending_serialized_name;
+      return pending;
     }
-
   }
 
   /**
    * DocumentSnapshot.
    */
   public class DocumentSnapshot extends IBMWatsonGenericModel {
-    private String step_serialized_name;
-    private IBMWatsonMapModel snapshot_serialized_name;
+    private String step;
+    private IBMWatsonMapModel snapshot;
  
     /**
      * Gets the step.
@@ -5719,7 +6572,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStep() {
-      return step_serialized_name;
+      return step;
     }
  
     /**
@@ -5731,7 +6584,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getSnapshot() {
-      return snapshot_serialized_name;
+      return snapshot;
     }
 
     /**
@@ -5740,7 +6593,7 @@ public class IBMDiscoveryV1Models {
      * @param step the new step
      */
     public void setStep(final String step) {
-      this.step_serialized_name = step;
+      this.step = step;
     }
 
     /**
@@ -5749,7 +6602,7 @@ public class IBMDiscoveryV1Models {
      * @param snapshot the new snapshot
      */
     public void setSnapshot(final IBMWatsonMapModel snapshot) {
-      this.snapshot_serialized_name = snapshot;
+      this.snapshot = snapshot;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5760,7 +6613,7 @@ public class IBMDiscoveryV1Models {
       DocumentSnapshot ret = (DocumentSnapshot) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for snapshot
-      IBMWatsonMapModel newSnapshot = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getSnapshot()), (Map<String, Object>) jsonMap.get('snapshot_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newSnapshot = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getSnapshot()), (Map<String, Object>) jsonMap.get('snapshot'), IBMWatsonMapModel.class);
       ret.setSnapshot(newSnapshot);
 
       return ret;
@@ -5771,14 +6624,14 @@ public class IBMDiscoveryV1Models {
    * Status information about a submitted document.
    */
   public class DocumentStatus extends IBMWatsonResponseModel {
-    private String document_id_serialized_name;
-    private String configuration_id_serialized_name;
-    private String status_serialized_name;
-    private String status_description_serialized_name;
-    private String filename_serialized_name;
-    private String file_type_serialized_name;
-    private String sha1_serialized_name;
-    private List<Notice> notices_serialized_name;
+    private String documentId;
+    private String configurationId;
+    private String status;
+    private String statusDescription;
+    private String filename;
+    private String fileType;
+    private String sha1;
+    private List<Notice> notices;
  
     /**
      * Gets the documentId.
@@ -5789,7 +6642,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -5801,7 +6654,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getConfigurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
  
     /**
@@ -5813,7 +6666,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -5825,7 +6678,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatusDescription() {
-      return status_description_serialized_name;
+      return statusDescription;
     }
  
     /**
@@ -5837,7 +6690,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFilename() {
-      return filename_serialized_name;
+      return filename;
     }
  
     /**
@@ -5849,7 +6702,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFileType() {
-      return file_type_serialized_name;
+      return fileType;
     }
  
     /**
@@ -5861,7 +6714,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSha1() {
-      return sha1_serialized_name;
+      return sha1;
     }
  
     /**
@@ -5873,7 +6726,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Notice> getNotices() {
-      return notices_serialized_name;
+      return notices;
     }
 
     /**
@@ -5882,7 +6735,7 @@ public class IBMDiscoveryV1Models {
      * @param filename the new filename
      */
     public void setFilename(final String filename) {
-      this.filename_serialized_name = filename;
+      this.filename = filename;
     }
 
     /**
@@ -5891,7 +6744,7 @@ public class IBMDiscoveryV1Models {
      * @param fileType the new fileType
      */
     public void setFileType(final String fileType) {
-      this.file_type_serialized_name = fileType;
+      this.fileType = fileType;
     }
 
     /**
@@ -5900,7 +6753,7 @@ public class IBMDiscoveryV1Models {
      * @param sha1 the new sha1
      */
     public void setSha1(final String sha1) {
-      this.sha1_serialized_name = sha1;
+      this.sha1 = sha1;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5916,14 +6769,26 @@ public class IBMDiscoveryV1Models {
       if (deserializedNotices != null) {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('notices_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
           Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
-        ret.notices_serialized_name = newNotices;
+        ret.notices = newNotices;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_id', 'documentId');
+      mapping.put('configuration_id', 'configurationId');
+      mapping.put('status_description', 'statusDescription');
+      mapping.put('file_type', 'fileType');
+      if (notices != null && notices[0] != null) {
+        mapping.putAll(notices[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5931,13 +6796,19 @@ public class IBMDiscoveryV1Models {
    * Enrichment.
    */
   public class Enrichment extends IBMWatsonGenericModel {
-    private String description_serialized_name;
-    private String destination_field_serialized_name;
-    private String source_field_serialized_name;
-    private Boolean overwrite_serialized_name;
-    private String enrichment_serialized_name;
-    private Boolean ignore_downstream_errors_serialized_name;
-    private EnrichmentOptions options_serialized_name;
+    private String description;
+    private String destinationField;
+    private String sourceField;
+    private Boolean overwrite;
+    private String enrichmentName;
+    private Boolean ignoreDownstreamErrors;
+    private EnrichmentOptions options;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Enrichment() { }
  
     /**
      * Gets the description.
@@ -5948,7 +6819,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -5962,7 +6833,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDestinationField() {
-      return destination_field_serialized_name;
+      return destinationField;
     }
  
     /**
@@ -5977,7 +6848,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSourceField() {
-      return source_field_serialized_name;
+      return sourceField;
     }
  
     /**
@@ -5989,7 +6860,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getOverwrite() {
-      return overwrite_serialized_name;
+      return overwrite;
     }
  
     /**
@@ -6009,7 +6880,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEnrichmentName() {
-      return enrichment_serialized_name;
+      return enrichmentName;
     }
  
     /**
@@ -6022,7 +6893,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getIgnoreDownstreamErrors() {
-      return ignore_downstream_errors_serialized_name;
+      return ignoreDownstreamErrors;
     }
  
     /**
@@ -6034,70 +6905,29 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public EnrichmentOptions getOptions() {
-      return options_serialized_name;
+      return options;
+    }
+  
+    private Enrichment(EnrichmentBuilder builder) {
+      IBMWatsonValidator.notNull(builder.destinationField, 'destinationField cannot be null');
+      IBMWatsonValidator.notNull(builder.sourceField, 'sourceField cannot be null');
+      IBMWatsonValidator.notNull(builder.enrichmentName, 'enrichmentName cannot be null');
+      this.description = builder.description;
+      this.destinationField = builder.destinationField;
+      this.sourceField = builder.sourceField;
+      this.overwrite = builder.overwrite;
+      this.enrichmentName = builder.enrichmentName;
+      this.ignoreDownstreamErrors = builder.ignoreDownstreamErrors;
+      this.options = builder.options;
     }
 
     /**
-     * Sets the description.
+     * New builder.
      *
-     * @param description the new description
+     * @return a Enrichment builder
      */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the destinationField.
-     *
-     * @param destinationField the new destinationField
-     */
-    public void setDestinationField(final String destinationField) {
-      this.destination_field_serialized_name = destinationField;
-    }
-
-    /**
-     * Sets the sourceField.
-     *
-     * @param sourceField the new sourceField
-     */
-    public void setSourceField(final String sourceField) {
-      this.source_field_serialized_name = sourceField;
-    }
-
-    /**
-     * Sets the overwrite.
-     *
-     * @param overwrite the new overwrite
-     */
-    public void setOverwrite(final Boolean overwrite) {
-      this.overwrite_serialized_name = overwrite;
-    }
-
-    /**
-     * Sets the enrichmentName.
-     *
-     * @param enrichmentName the new enrichmentName
-     */
-    public void setEnrichmentName(final String enrichmentName) {
-      this.enrichment_serialized_name = enrichmentName;
-    }
-
-    /**
-     * Sets the ignoreDownstreamErrors.
-     *
-     * @param ignoreDownstreamErrors the new ignoreDownstreamErrors
-     */
-    public void setIgnoreDownstreamErrors(final Boolean ignoreDownstreamErrors) {
-      this.ignore_downstream_errors_serialized_name = ignoreDownstreamErrors;
-    }
-
-    /**
-     * Sets the options.
-     *
-     * @param options the new options
-     */
-    public void setOptions(final EnrichmentOptions options) {
-      this.options_serialized_name = options;
+    public EnrichmentBuilder newBuilder() {
+      return new EnrichmentBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6106,12 +6936,165 @@ public class IBMDiscoveryV1Models {
       }
 
       Enrichment ret = (Enrichment) super.deserialize(jsonString, jsonMap, classType);
+      EnrichmentBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for options
-      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options_serialized_name'), EnrichmentOptions.class);
-      ret.setOptions(newOptions);
+      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options'), EnrichmentOptions.class);
+      retBuilder.setOptions(newOptions);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('destinationField', 'destination_field');
+      mapping.put('sourceField', 'source_field');
+      mapping.put('enrichmentName', 'enrichment');
+      mapping.put('ignoreDownstreamErrors', 'ignore_downstream_errors');
+      if (options != null) {
+        mapping.putAll(options.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('destination_field', 'destinationField');
+      mapping.put('source_field', 'sourceField');
+      mapping.put('enrichment', 'enrichmentName');
+      mapping.put('ignore_downstream_errors', 'ignoreDownstreamErrors');
+      if (options != null) {
+        mapping.putAll(options.getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * Enrichment Builder.
+   */
+  public class EnrichmentBuilder {
+    private String description;
+    private String destinationField;
+    private String sourceField;
+    private Boolean overwrite;
+    private String enrichmentName;
+    private Boolean ignoreDownstreamErrors;
+    private EnrichmentOptions options;
+
+    private EnrichmentBuilder(Enrichment enrichment) {
+      this.description = enrichment.description;
+      this.destinationField = enrichment.destinationField;
+      this.sourceField = enrichment.sourceField;
+      this.overwrite = enrichment.overwrite;
+      this.enrichmentName = enrichment.enrichmentName;
+      this.ignoreDownstreamErrors = enrichment.ignoreDownstreamErrors;
+      this.options = enrichment.options;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public EnrichmentBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param destinationField the destinationField
+     * @param sourceField the sourceField
+     * @param enrichmentName the enrichmentName
+     */
+    public EnrichmentBuilder(String destinationField, String sourceField, String enrichmentName) {
+      this.destinationField = destinationField;
+      this.sourceField = sourceField;
+      this.enrichmentName = enrichmentName;
+    }
+
+    /**
+     * Builds a Enrichment.
+     *
+     * @return the enrichment
+     */
+    public Enrichment build() {
+      return new Enrichment(this);
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the Enrichment builder
+     */
+    public EnrichmentBuilder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the destinationField.
+     *
+     * @param destinationField the destinationField
+     * @return the Enrichment builder
+     */
+    public EnrichmentBuilder setDestinationField(String destinationField) {
+      this.destinationField = destinationField;
+      return this;
+    }
+
+    /**
+     * Set the sourceField.
+     *
+     * @param sourceField the sourceField
+     * @return the Enrichment builder
+     */
+    public EnrichmentBuilder setSourceField(String sourceField) {
+      this.sourceField = sourceField;
+      return this;
+    }
+
+    /**
+     * Set the overwrite.
+     *
+     * @param overwrite the overwrite
+     * @return the Enrichment builder
+     */
+    public EnrichmentBuilder setOverwrite(Boolean overwrite) {
+      this.overwrite = overwrite;
+      return this;
+    }
+
+    /**
+     * Set the enrichmentName.
+     *
+     * @param enrichmentName the enrichmentName
+     * @return the Enrichment builder
+     */
+    public EnrichmentBuilder setEnrichmentName(String enrichmentName) {
+      this.enrichmentName = enrichmentName;
+      return this;
+    }
+
+    /**
+     * Set the ignoreDownstreamErrors.
+     *
+     * @param ignoreDownstreamErrors the ignoreDownstreamErrors
+     * @return the Enrichment builder
+     */
+    public EnrichmentBuilder setIgnoreDownstreamErrors(Boolean ignoreDownstreamErrors) {
+      this.ignoreDownstreamErrors = ignoreDownstreamErrors;
+      return this;
+    }
+
+    /**
+     * Set the options.
+     *
+     * @param options the options
+     * @return the Enrichment builder
+     */
+    public EnrichmentBuilder setOptions(EnrichmentOptions options) {
+      this.options = options;
+      return this;
     }
   }
 
@@ -6119,9 +7102,9 @@ public class IBMDiscoveryV1Models {
    * Options which are specific to a particular enrichment.
    */
   public class EnrichmentOptions extends IBMWatsonGenericModel {
-    private NluEnrichmentFeatures features_serialized_name;
-    private String language_serialized_name;
-    private String model_serialized_name;
+    private NluEnrichmentFeatures features;
+    private String language;
+    private String model;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -6136,7 +7119,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentFeatures getFeatures() {
-      return features_serialized_name;
+      return features;
     }
  
     /**
@@ -6151,7 +7134,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
  
     /**
@@ -6164,13 +7147,13 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getModel() {
-      return model_serialized_name;
+      return model;
     }
   
     private EnrichmentOptions(EnrichmentOptionsBuilder builder) {
-      this.features_serialized_name = builder.features;
-      this.language_serialized_name = builder.language;
-      this.model_serialized_name = builder.model;
+      this.features = builder.features;
+      this.language = builder.language;
+      this.model = builder.model;
     }
 
     /**
@@ -6191,10 +7174,26 @@ public class IBMDiscoveryV1Models {
       EnrichmentOptionsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for features
-      NluEnrichmentFeatures newFeatures = (NluEnrichmentFeatures) new NluEnrichmentFeatures().deserialize(JSON.serialize(ret.getFeatures()), (Map<String, Object>) jsonMap.get('features_serialized_name'), NluEnrichmentFeatures.class);
+      NluEnrichmentFeatures newFeatures = (NluEnrichmentFeatures) new NluEnrichmentFeatures().deserialize(JSON.serialize(ret.getFeatures()), (Map<String, Object>) jsonMap.get('features'), NluEnrichmentFeatures.class);
       retBuilder.features(newFeatures);
 
       return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (features != null) {
+        mapping.putAll(features.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (features != null) {
+        mapping.putAll(features.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -6207,9 +7206,9 @@ public class IBMDiscoveryV1Models {
     private String model;
 
     private EnrichmentOptionsBuilder(EnrichmentOptions enrichmentOptions) {
-      this.features = enrichmentOptions.features_serialized_name;
-      this.language = enrichmentOptions.language_serialized_name;
-      this.model = enrichmentOptions.model_serialized_name;
+      this.features = enrichmentOptions.features;
+      this.language = enrichmentOptions.language;
+      this.model = enrichmentOptions.model;
     }
 
     /**
@@ -6265,17 +7264,17 @@ public class IBMDiscoveryV1Models {
    * Details about an environment.
    */
   public class Environment extends IBMWatsonResponseModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private String status_serialized_name;
-    private Boolean read_only_serialized_name;
-    private String size_serialized_name;
-    private String requested_size_serialized_name;
-    private IndexCapacity index_capacity_serialized_name;
-    private SearchStatus search_status_serialized_name;
+    private String environmentId;
+    private String name;
+    private String description;
+    private Datetime created;
+    private Datetime updated;
+    private String status;
+    private Boolean readOnly;
+    private String size;
+    private String requestedSize;
+    private IndexCapacity indexCapacity;
+    private SearchStatus searchStatus;
  
     /**
      * Gets the environmentId.
@@ -6286,7 +7285,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEnvironmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
  
     /**
@@ -6298,7 +7297,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -6310,7 +7309,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
  
     /**
@@ -6322,7 +7321,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -6334,7 +7333,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
  
     /**
@@ -6347,7 +7346,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -6359,7 +7358,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getReadOnly() {
-      return read_only_serialized_name;
+      return readOnly;
     }
  
     /**
@@ -6371,7 +7370,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSize() {
-      return size_serialized_name;
+      return size;
     }
  
     /**
@@ -6385,7 +7384,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getRequestedSize() {
-      return requested_size_serialized_name;
+      return requestedSize;
     }
  
     /**
@@ -6397,7 +7396,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public IndexCapacity getIndexCapacity() {
-      return index_capacity_serialized_name;
+      return indexCapacity;
     }
  
     /**
@@ -6409,7 +7408,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public SearchStatus getSearchStatus() {
-      return search_status_serialized_name;
+      return searchStatus;
     }
 
     /**
@@ -6418,7 +7417,7 @@ public class IBMDiscoveryV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -6427,7 +7426,7 @@ public class IBMDiscoveryV1Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     /**
@@ -6436,7 +7435,7 @@ public class IBMDiscoveryV1Models {
      * @param size the new size
      */
     public void setSize(final String size) {
-      this.size_serialized_name = size;
+      this.size = size;
     }
 
     /**
@@ -6445,7 +7444,7 @@ public class IBMDiscoveryV1Models {
      * @param requestedSize the new requestedSize
      */
     public void setRequestedSize(final String requestedSize) {
-      this.requested_size_serialized_name = requestedSize;
+      this.requestedSize = requestedSize;
     }
 
     /**
@@ -6454,7 +7453,7 @@ public class IBMDiscoveryV1Models {
      * @param indexCapacity the new indexCapacity
      */
     public void setIndexCapacity(final IndexCapacity indexCapacity) {
-      this.index_capacity_serialized_name = indexCapacity;
+      this.indexCapacity = indexCapacity;
     }
 
     /**
@@ -6463,7 +7462,7 @@ public class IBMDiscoveryV1Models {
      * @param searchStatus the new searchStatus
      */
     public void setSearchStatus(final SearchStatus searchStatus) {
-      this.search_status_serialized_name = searchStatus;
+      this.searchStatus = searchStatus;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6471,19 +7470,33 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      jsonString = jsonString.replace('"last_trained_serialized_name":"",', '');
-      jsonString = jsonString.replace('"last_trained_serialized_name":""', '');
       Environment ret = (Environment) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for indexCapacity
-      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(ret.getIndexCapacity()), (Map<String, Object>) jsonMap.get('index_capacity_serialized_name'), IndexCapacity.class);
+      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(ret.getIndexCapacity()), (Map<String, Object>) jsonMap.get('indexCapacity'), IndexCapacity.class);
       ret.setIndexCapacity(newIndexCapacity);
 
       // calling custom deserializer for searchStatus
-      SearchStatus newSearchStatus = (SearchStatus) new SearchStatus().deserialize(JSON.serialize(ret.getSearchStatus()), (Map<String, Object>) jsonMap.get('search_status_serialized_name'), SearchStatus.class);
+      SearchStatus newSearchStatus = (SearchStatus) new SearchStatus().deserialize(JSON.serialize(ret.getSearchStatus()), (Map<String, Object>) jsonMap.get('searchStatus'), SearchStatus.class);
       ret.setSearchStatus(newSearchStatus);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environment_id', 'environmentId');
+      mapping.put('read_only', 'readOnly');
+      mapping.put('requested_size', 'requestedSize');
+      mapping.put('index_capacity', 'indexCapacity');
+      if (indexCapacity != null) {
+        mapping.putAll(indexCapacity.getApiToSdkMapping());
+      }
+      mapping.put('search_status', 'searchStatus');
+      if (searchStatus != null) {
+        mapping.putAll(searchStatus.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -6491,8 +7504,8 @@ public class IBMDiscoveryV1Models {
    * Summary of the document usage statistics for the environment.
    */
   public class EnvironmentDocuments extends IBMWatsonGenericModel {
-    private Long indexed_serialized_name;
-    private Long maximum_allowed_serialized_name;
+    private Long indexed;
+    private Long maximumAllowed;
  
     /**
      * Gets the indexed.
@@ -6503,7 +7516,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getIndexed() {
-      return indexed_serialized_name;
+      return indexed;
     }
  
     /**
@@ -6515,22 +7528,33 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMaximumAllowed() {
-      return maximum_allowed_serialized_name;
+      return maximumAllowed;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('maximum_allowed', 'maximumAllowed');
+      return mapping;
+    }
   }
 
   /**
    * Query event data object.
    */
   public class EventData extends IBMWatsonGenericModel {
-    private String environment_id_serialized_name;
-    private String session_token_serialized_name;
-    private Datetime client_timestamp_serialized_name;
-    private Long display_rank_serialized_name;
-    private String collection_id_serialized_name;
-    private String document_id_serialized_name;
-    private String query_id_serialized_name;
+    private String environmentId;
+    private String sessionToken;
+    private Datetime clientTimestamp;
+    private Long displayRank;
+    private String collectionId;
+    private String documentId;
+    private String queryId;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public EventData() { }
  
     /**
      * Gets the environmentId.
@@ -6541,7 +7565,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEnvironmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
  
     /**
@@ -6553,7 +7577,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSessionToken() {
-      return session_token_serialized_name;
+      return sessionToken;
     }
  
     /**
@@ -6566,7 +7590,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getClientTimestamp() {
-      return client_timestamp_serialized_name;
+      return clientTimestamp;
     }
  
     /**
@@ -6578,7 +7602,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getDisplayRank() {
-      return display_rank_serialized_name;
+      return displayRank;
     }
  
     /**
@@ -6590,7 +7614,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
  
     /**
@@ -6602,7 +7626,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -6615,63 +7639,185 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getQueryId() {
-      return query_id_serialized_name;
+      return queryId;
+    }
+  
+    private EventData(EventDataBuilder builder) {
+      IBMWatsonValidator.notNull(builder.environmentId, 'environmentId cannot be null');
+      IBMWatsonValidator.notNull(builder.sessionToken, 'sessionToken cannot be null');
+      IBMWatsonValidator.notNull(builder.collectionId, 'collectionId cannot be null');
+      IBMWatsonValidator.notNull(builder.documentId, 'documentId cannot be null');
+      this.environmentId = builder.environmentId;
+      this.sessionToken = builder.sessionToken;
+      this.clientTimestamp = builder.clientTimestamp;
+      this.displayRank = builder.displayRank;
+      this.collectionId = builder.collectionId;
+      this.documentId = builder.documentId;
+      this.queryId = builder.queryId;
     }
 
     /**
-     * Sets the environmentId.
+     * New builder.
      *
-     * @param environmentId the new environmentId
+     * @return a EventData builder
      */
-    public void setEnvironmentId(final String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+    public EventDataBuilder newBuilder() {
+      return new EventDataBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('sessionToken', 'session_token');
+      mapping.put('clientTimestamp', 'client_timestamp');
+      mapping.put('displayRank', 'display_rank');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('documentId', 'document_id');
+      mapping.put('queryId', 'query_id');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environment_id', 'environmentId');
+      mapping.put('session_token', 'sessionToken');
+      mapping.put('client_timestamp', 'clientTimestamp');
+      mapping.put('display_rank', 'displayRank');
+      mapping.put('collection_id', 'collectionId');
+      mapping.put('document_id', 'documentId');
+      mapping.put('query_id', 'queryId');
+      return mapping;
+    }
+  }
+
+  /**
+   * EventData Builder.
+   */
+  public class EventDataBuilder {
+    private String environmentId;
+    private String sessionToken;
+    private Datetime clientTimestamp;
+    private Long displayRank;
+    private String collectionId;
+    private String documentId;
+    private String queryId;
+
+    private EventDataBuilder(EventData eventData) {
+      this.environmentId = eventData.environmentId;
+      this.sessionToken = eventData.sessionToken;
+      this.clientTimestamp = eventData.clientTimestamp;
+      this.displayRank = eventData.displayRank;
+      this.collectionId = eventData.collectionId;
+      this.documentId = eventData.documentId;
+      this.queryId = eventData.queryId;
     }
 
     /**
-     * Sets the sessionToken.
-     *
-     * @param sessionToken the new sessionToken
+     * Instantiates a new builder.
      */
-    public void setSessionToken(final String sessionToken) {
-      this.session_token_serialized_name = sessionToken;
+    public EventDataBuilder() {
     }
 
     /**
-     * Sets the clientTimestamp.
+     * Instantiates a new builder with required properties.
      *
-     * @param clientTimestamp the new clientTimestamp
+     * @param environmentId the environmentId
+     * @param sessionToken the sessionToken
+     * @param collectionId the collectionId
+     * @param documentId the documentId
      */
-    public void setClientTimestamp(final Datetime clientTimestamp) {
-      this.client_timestamp_serialized_name = clientTimestamp;
+    public EventDataBuilder(String environmentId, String sessionToken, String collectionId, String documentId) {
+      this.environmentId = environmentId;
+      this.sessionToken = sessionToken;
+      this.collectionId = collectionId;
+      this.documentId = documentId;
     }
 
     /**
-     * Sets the displayRank.
+     * Builds a EventData.
      *
-     * @param displayRank the new displayRank
+     * @return the eventData
      */
-    public void setDisplayRank(final long displayRank) {
-      this.display_rank_serialized_name = displayRank;
+    public EventData build() {
+      return new EventData(this);
     }
 
     /**
-     * Sets the collectionId.
+     * Set the environmentId.
      *
-     * @param collectionId the new collectionId
+     * @param environmentId the environmentId
+     * @return the EventData builder
      */
-    public void setCollectionId(final String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+    public EventDataBuilder setEnvironmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
     }
 
     /**
-     * Sets the documentId.
+     * Set the sessionToken.
      *
-     * @param documentId the new documentId
+     * @param sessionToken the sessionToken
+     * @return the EventData builder
      */
-    public void setDocumentId(final String documentId) {
-      this.document_id_serialized_name = documentId;
+    public EventDataBuilder setSessionToken(String sessionToken) {
+      this.sessionToken = sessionToken;
+      return this;
     }
 
+    /**
+     * Set the clientTimestamp.
+     *
+     * @param clientTimestamp the clientTimestamp
+     * @return the EventData builder
+     */
+    public EventDataBuilder setClientTimestamp(Datetime clientTimestamp) {
+      this.clientTimestamp = clientTimestamp;
+      return this;
+    }
+
+    /**
+     * Set the displayRank.
+     *
+     * @param displayRank the displayRank
+     * @return the EventData builder
+     */
+    public EventDataBuilder setDisplayRank(Long displayRank) {
+      this.displayRank = displayRank;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the EventData builder
+     */
+    public EventDataBuilder setCollectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the documentId.
+     *
+     * @param documentId the documentId
+     * @return the EventData builder
+     */
+    public EventDataBuilder setDocumentId(String documentId) {
+      this.documentId = documentId;
+      return this;
+    }
+
+    /**
+     * Set the queryId.
+     *
+     * @param queryId the queryId
+     * @return the EventData builder
+     */
+    public EventDataBuilder setQueryId(String queryId) {
+      this.queryId = queryId;
+      return this;
+    }
   }
 
   /**
@@ -6679,8 +7825,14 @@ public class IBMDiscoveryV1Models {
    * expansions for the word `hot` in one object, and expansions for the word `cold` in another.
    */
   public class Expansion extends IBMWatsonGenericModel {
-    private List<String> input_terms_serialized_name;
-    private List<String> expanded_terms_serialized_name;
+    private List<String> inputTerms;
+    private List<String> expandedTerms;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Expansion() { }
  
     /**
      * Gets the inputTerms.
@@ -6691,7 +7843,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getInputTerms() {
-      return input_terms_serialized_name;
+      return inputTerms;
     }
  
     /**
@@ -6704,34 +7856,141 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getExpandedTerms() {
-      return expanded_terms_serialized_name;
+      return expandedTerms;
+    }
+  
+    private Expansion(ExpansionBuilder builder) {
+      IBMWatsonValidator.notNull(builder.expandedTerms, 'expandedTerms cannot be null');
+      this.inputTerms = builder.inputTerms;
+      this.expandedTerms = builder.expandedTerms;
     }
 
     /**
-     * Sets the inputTerms.
+     * New builder.
+     *
+     * @return a Expansion builder
+     */
+    public ExpansionBuilder newBuilder() {
+      return new ExpansionBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('inputTerms', 'input_terms');
+      mapping.put('expandedTerms', 'expanded_terms');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('input_terms', 'inputTerms');
+      mapping.put('expanded_terms', 'expandedTerms');
+      return mapping;
+    }
+  }
+
+  /**
+   * Expansion Builder.
+   */
+  public class ExpansionBuilder {
+    private List<String> inputTerms;
+    private List<String> expandedTerms;
+
+    private ExpansionBuilder(Expansion expansion) {
+      this.inputTerms = expansion.inputTerms;
+      this.expandedTerms = expansion.expandedTerms;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ExpansionBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param expandedTerms the expandedTerms
+     */
+    public ExpansionBuilder(List<String> expandedTerms) {
+      this.expandedTerms = expandedTerms;
+    }
+
+    /**
+     * Builds a Expansion.
+     *
+     * @return the expansion
+     */
+    public Expansion build() {
+      return new Expansion(this);
+    }
+
+    /**
+     * Adds an inputTerms to inputTerms.
      *
      * @param inputTerms the new inputTerms
+     * @return the Expansion builder
      */
-    public void setInputTerms(final List<String> inputTerms) {
-      this.input_terms_serialized_name = inputTerms;
+    public ExpansionBuilder addInputTerms(String inputTerms) {
+      IBMWatsonValidator.notNull(inputTerms, 'inputTerms cannot be null');
+      if (this.inputTerms == null) {
+        this.inputTerms = new List<String>();
+      }
+      this.inputTerms.add(inputTerms);
+      return this;
     }
 
     /**
-     * Sets the expandedTerms.
+     * Adds an expandedTerms to expandedTerms.
      *
      * @param expandedTerms the new expandedTerms
+     * @return the Expansion builder
      */
-    public void setExpandedTerms(final List<String> expandedTerms) {
-      this.expanded_terms_serialized_name = expandedTerms;
+    public ExpansionBuilder addExpandedTerms(String expandedTerms) {
+      IBMWatsonValidator.notNull(expandedTerms, 'expandedTerms cannot be null');
+      if (this.expandedTerms == null) {
+        this.expandedTerms = new List<String>();
+      }
+      this.expandedTerms.add(expandedTerms);
+      return this;
     }
 
+    /**
+     * Set the inputTerms.
+     * Existing inputTerms will be replaced.
+     *
+     * @param inputTerms the inputTerms
+     * @return the Expansion builder
+     */
+    public ExpansionBuilder setInputTerms(List<String> inputTerms) {
+      this.inputTerms = inputTerms;
+      return this;
+    }
+
+    /**
+     * Set the expandedTerms.
+     * Existing expandedTerms will be replaced.
+     *
+     * @param expandedTerms the expandedTerms
+     * @return the Expansion builder
+     */
+    public ExpansionBuilder setExpandedTerms(List<String> expandedTerms) {
+      this.expandedTerms = expandedTerms;
+      return this;
+    }
   }
 
   /**
    * The query expansion definitions for the specified collection.
    */
   public class Expansions extends IBMWatsonResponseModel {
-    private List<Expansion> expansions_serialized_name;
+    private List<Expansion> expansions;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Expansions() { }
  
     /**
      * Gets the expansions.
@@ -6754,16 +8013,21 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Expansion> getExpansions() {
-      return expansions_serialized_name;
+      return expansions;
+    }
+  
+    private Expansions(ExpansionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.expansions, 'expansions cannot be null');
+      this.expansions = builder.expansions;
     }
 
     /**
-     * Sets the expansions.
+     * New builder.
      *
-     * @param expansions the new expansions
+     * @return a Expansions builder
      */
-    public void setExpansions(final List<Expansion> expansions) {
-      this.expansions_serialized_name = expansions;
+    public ExpansionsBuilder newBuilder() {
+      return new ExpansionsBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6772,6 +8036,7 @@ public class IBMDiscoveryV1Models {
       }
 
       Expansions ret = (Expansions) super.deserialize(jsonString, jsonMap, classType);
+      ExpansionsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for expansions
       List<Expansion> newExpansions = new List<Expansion>();
@@ -6779,14 +8044,92 @@ public class IBMDiscoveryV1Models {
       if (deserializedExpansions != null) {
         for (Integer i = 0; i < deserializedExpansions.size(); i++) {
           Expansion currentItem = ret.getExpansions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('expansions_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('expansions');
           Expansion newItem = (Expansion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Expansion.class);
           newExpansions.add(newItem);
         }
-        ret.expansions_serialized_name = newExpansions;
+        retBuilder.setExpansions(newExpansions);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (expansions != null && expansions[0] != null) {
+        mapping.putAll(expansions[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (expansions != null && expansions[0] != null) {
+        mapping.putAll(expansions[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * Expansions Builder.
+   */
+  public class ExpansionsBuilder {
+    private List<Expansion> expansions;
+
+    private ExpansionsBuilder(Expansions expansions) {
+      this.expansions = expansions.expansions;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ExpansionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param expansions the expansions
+     */
+    public ExpansionsBuilder(List<Expansion> expansions) {
+      this.expansions = expansions;
+    }
+
+    /**
+     * Builds a Expansions.
+     *
+     * @return the expansions
+     */
+    public Expansions build() {
+      return new Expansions(this);
+    }
+
+    /**
+     * Adds an expansions to expansions.
+     *
+     * @param expansions the new expansions
+     * @return the Expansions builder
+     */
+    public ExpansionsBuilder addExpansions(Expansion expansions) {
+      IBMWatsonValidator.notNull(expansions, 'expansions cannot be null');
+      if (this.expansions == null) {
+        this.expansions = new List<Expansion>();
+      }
+      this.expansions.add(expansions);
+      return this;
+    }
+
+    /**
+     * Set the expansions.
+     * Existing expansions will be replaced.
+     *
+     * @param expansions the expansions
+     * @return the Expansions builder
+     */
+    public ExpansionsBuilder setExpansions(List<Expansion> expansions) {
+      this.expansions = expansions;
+      return this;
     }
   }
 
@@ -6809,7 +8152,7 @@ public class IBMDiscoveryV1Models {
     private Boolean similar;
     private List<String> similarDocumentIds;
     private List<String> similarFields;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -6820,7 +8163,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionIds.
      *
@@ -6831,7 +8174,7 @@ public class IBMDiscoveryV1Models {
     public List<String> collectionIds() {
       return collectionIds;
     }
- 
+
     /**
      * Gets the filter.
      *
@@ -6843,7 +8186,7 @@ public class IBMDiscoveryV1Models {
     public String filter() {
       return filter;
     }
- 
+
     /**
      * Gets the query.
      *
@@ -6855,7 +8198,7 @@ public class IBMDiscoveryV1Models {
     public String query() {
       return query;
     }
- 
+
     /**
      * Gets the naturalLanguageQuery.
      *
@@ -6867,7 +8210,7 @@ public class IBMDiscoveryV1Models {
     public String naturalLanguageQuery() {
       return naturalLanguageQuery;
     }
- 
+
     /**
      * Gets the aggregation.
      *
@@ -6880,7 +8223,7 @@ public class IBMDiscoveryV1Models {
     public String aggregation() {
       return aggregation;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -6892,7 +8235,7 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count;
     }
- 
+
     /**
      * Gets the returnFields.
      *
@@ -6903,7 +8246,7 @@ public class IBMDiscoveryV1Models {
     public List<String> returnFields() {
       return returnFields;
     }
- 
+
     /**
      * Gets the offset.
      *
@@ -6916,7 +8259,7 @@ public class IBMDiscoveryV1Models {
     public Long offset() {
       return offset;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -6929,7 +8272,7 @@ public class IBMDiscoveryV1Models {
     public List<String> xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the highlight.
      *
@@ -6941,7 +8284,7 @@ public class IBMDiscoveryV1Models {
     public Boolean highlight() {
       return highlight;
     }
- 
+
     /**
      * Gets the deduplicateField.
      *
@@ -6954,7 +8297,7 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicateField;
     }
- 
+
     /**
      * Gets the similar.
      *
@@ -6966,7 +8309,7 @@ public class IBMDiscoveryV1Models {
     public Boolean similar() {
       return similar;
     }
- 
+
     /**
      * Gets the similarDocumentIds.
      *
@@ -6981,7 +8324,7 @@ public class IBMDiscoveryV1Models {
     public List<String> similarDocumentIds() {
       return similarDocumentIds;
     }
- 
+
     /**
      * Gets the similarFields.
      *
@@ -7024,6 +8367,18 @@ public class IBMDiscoveryV1Models {
       return new FederatedQueryNoticesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionIds', 'collection_ids');
+      mapping.put('naturalLanguageQuery', 'natural_language_query');
+      mapping.put('returnFields', 'return');
+      mapping.put('xsort', 'sort');
+      mapping.put('deduplicateField', 'deduplicate.field');
+      mapping.put('similarDocumentIds', 'similar.document_ids');
+      mapping.put('similarFields', 'similar.fields');
+      return mapping;
+    }
   }
 
   /**
@@ -7375,7 +8730,7 @@ public class IBMDiscoveryV1Models {
     private String similarFields;
     private String bias;
     private Boolean loggingOptOut;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -7386,7 +8741,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the filter.
      *
@@ -7398,7 +8753,7 @@ public class IBMDiscoveryV1Models {
     public String filter() {
       return filter;
     }
- 
+
     /**
      * Gets the query.
      *
@@ -7410,7 +8765,7 @@ public class IBMDiscoveryV1Models {
     public String query() {
       return query;
     }
- 
+
     /**
      * Gets the naturalLanguageQuery.
      *
@@ -7422,7 +8777,7 @@ public class IBMDiscoveryV1Models {
     public String naturalLanguageQuery() {
       return naturalLanguageQuery;
     }
- 
+
     /**
      * Gets the passages.
      *
@@ -7433,7 +8788,7 @@ public class IBMDiscoveryV1Models {
     public Boolean passages() {
       return passages;
     }
- 
+
     /**
      * Gets the aggregation.
      *
@@ -7446,7 +8801,7 @@ public class IBMDiscoveryV1Models {
     public String aggregation() {
       return aggregation;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -7457,7 +8812,7 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count;
     }
- 
+
     /**
      * Gets the returnFields.
      *
@@ -7468,7 +8823,7 @@ public class IBMDiscoveryV1Models {
     public String returnFields() {
       return returnFields;
     }
- 
+
     /**
      * Gets the offset.
      *
@@ -7480,7 +8835,7 @@ public class IBMDiscoveryV1Models {
     public Long offset() {
       return offset;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -7493,7 +8848,7 @@ public class IBMDiscoveryV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the highlight.
      *
@@ -7505,7 +8860,7 @@ public class IBMDiscoveryV1Models {
     public Boolean highlight() {
       return highlight;
     }
- 
+
     /**
      * Gets the passagesFields.
      *
@@ -7517,7 +8872,7 @@ public class IBMDiscoveryV1Models {
     public String passagesFields() {
       return passagesFields;
     }
- 
+
     /**
      * Gets the passagesCount.
      *
@@ -7529,7 +8884,7 @@ public class IBMDiscoveryV1Models {
     public Long passagesCount() {
       return passagesCount;
     }
- 
+
     /**
      * Gets the passagesCharacters.
      *
@@ -7540,7 +8895,7 @@ public class IBMDiscoveryV1Models {
     public Long passagesCharacters() {
       return passagesCharacters;
     }
- 
+
     /**
      * Gets the deduplicate.
      *
@@ -7553,7 +8908,7 @@ public class IBMDiscoveryV1Models {
     public Boolean deduplicate() {
       return deduplicate;
     }
- 
+
     /**
      * Gets the deduplicateField.
      *
@@ -7566,7 +8921,7 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicateField;
     }
- 
+
     /**
      * Gets the collectionIds.
      *
@@ -7578,7 +8933,7 @@ public class IBMDiscoveryV1Models {
     public String collectionIds() {
       return collectionIds;
     }
- 
+
     /**
      * Gets the similar.
      *
@@ -7590,7 +8945,7 @@ public class IBMDiscoveryV1Models {
     public Boolean similar() {
       return similar;
     }
- 
+
     /**
      * Gets the similarDocumentIds.
      *
@@ -7605,7 +8960,7 @@ public class IBMDiscoveryV1Models {
     public String similarDocumentIds() {
       return similarDocumentIds;
     }
- 
+
     /**
      * Gets the similarFields.
      *
@@ -7617,7 +8972,7 @@ public class IBMDiscoveryV1Models {
     public String similarFields() {
       return similarFields;
     }
- 
+
     /**
      * Gets the bias.
      *
@@ -7631,7 +8986,7 @@ public class IBMDiscoveryV1Models {
     public String bias() {
       return bias;
     }
- 
+
     /**
      * Gets the loggingOptOut.
      *
@@ -7679,6 +9034,22 @@ public class IBMDiscoveryV1Models {
       return new FederatedQueryOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('naturalLanguageQuery', 'natural_language_query');
+      mapping.put('returnFields', 'return');
+      mapping.put('xsort', 'sort');
+      mapping.put('passagesFields', 'passages.fields');
+      mapping.put('passagesCount', 'passages.count');
+      mapping.put('passagesCharacters', 'passages.characters');
+      mapping.put('deduplicateField', 'deduplicate.field');
+      mapping.put('collectionIds', 'collection_ids');
+      mapping.put('similarDocumentIds', 'similar.document_ids');
+      mapping.put('similarFields', 'similar.fields');
+      mapping.put('loggingOptOut', 'X-Watson-Logging-Opt-Out');
+      return mapping;
+    }
   }
 
   /**
@@ -8017,8 +9388,8 @@ public class IBMDiscoveryV1Models {
    * Field.
    */
   public class Field extends IBMWatsonGenericModel {
-    private String field_serialized_name;
-    private String type_serialized_name;
+    private String fieldName;
+    private String fieldType;
  
     /**
      * Gets the fieldName.
@@ -8029,7 +9400,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFieldName() {
-      return field_serialized_name;
+      return fieldName;
     }
  
     /**
@@ -8041,21 +9412,33 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFieldType() {
-      return type_serialized_name;
+      return fieldType;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('field', 'fieldName');
+      mapping.put('type', 'fieldType');
+      return mapping;
+    }
   }
 
   /**
    * FontSetting.
    */
   public class FontSetting extends IBMWatsonGenericModel {
-    private Long level_serialized_name;
-    private Long min_size_serialized_name;
-    private Long max_size_serialized_name;
-    private Boolean bold_serialized_name;
-    private Boolean italic_serialized_name;
-    private String name_serialized_name;
+    private Long level;
+    private Long minSize;
+    private Long maxSize;
+    private Boolean bold;
+    private Boolean italic;
+    private String name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public FontSetting() { }
  
     /**
      * Gets the level.
@@ -8066,7 +9449,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getLevel() {
-      return level_serialized_name;
+      return level;
     }
  
     /**
@@ -8078,7 +9461,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMinSize() {
-      return min_size_serialized_name;
+      return minSize;
     }
  
     /**
@@ -8090,7 +9473,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMaxSize() {
-      return max_size_serialized_name;
+      return maxSize;
     }
  
     /**
@@ -8102,7 +9485,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getBold() {
-      return bold_serialized_name;
+      return bold;
     }
  
     /**
@@ -8114,7 +9497,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getItalic() {
-      return italic_serialized_name;
+      return italic;
     }
  
     /**
@@ -8126,74 +9509,153 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
+    }
+  
+    private FontSetting(FontSettingBuilder builder) {
+      this.level = builder.level;
+      this.minSize = builder.minSize;
+      this.maxSize = builder.maxSize;
+      this.bold = builder.bold;
+      this.italic = builder.italic;
+      this.name = builder.name;
     }
 
     /**
-     * Sets the level.
+     * New builder.
      *
-     * @param level the new level
+     * @return a FontSetting builder
      */
-    public void setLevel(final long level) {
-      this.level_serialized_name = level;
+    public FontSettingBuilder newBuilder() {
+      return new FontSettingBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('minSize', 'min_size');
+      mapping.put('maxSize', 'max_size');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('min_size', 'minSize');
+      mapping.put('max_size', 'maxSize');
+      return mapping;
+    }
+  }
+
+  /**
+   * FontSetting Builder.
+   */
+  public class FontSettingBuilder {
+    private Long level;
+    private Long minSize;
+    private Long maxSize;
+    private Boolean bold;
+    private Boolean italic;
+    private String name;
+
+    private FontSettingBuilder(FontSetting fontSetting) {
+      this.level = fontSetting.level;
+      this.minSize = fontSetting.minSize;
+      this.maxSize = fontSetting.maxSize;
+      this.bold = fontSetting.bold;
+      this.italic = fontSetting.italic;
+      this.name = fontSetting.name;
     }
 
     /**
-     * Sets the minSize.
-     *
-     * @param minSize the new minSize
+     * Instantiates a new builder.
      */
-    public void setMinSize(final long minSize) {
-      this.min_size_serialized_name = minSize;
+    public FontSettingBuilder() {
     }
 
     /**
-     * Sets the maxSize.
+     * Builds a FontSetting.
      *
-     * @param maxSize the new maxSize
+     * @return the fontSetting
      */
-    public void setMaxSize(final long maxSize) {
-      this.max_size_serialized_name = maxSize;
+    public FontSetting build() {
+      return new FontSetting(this);
     }
 
     /**
-     * Sets the bold.
+     * Set the level.
      *
-     * @param bold the new bold
+     * @param level the level
+     * @return the FontSetting builder
      */
-    public void setBold(final Boolean bold) {
-      this.bold_serialized_name = bold;
+    public FontSettingBuilder setLevel(Long level) {
+      this.level = level;
+      return this;
     }
 
     /**
-     * Sets the italic.
+     * Set the minSize.
      *
-     * @param italic the new italic
+     * @param minSize the minSize
+     * @return the FontSetting builder
      */
-    public void setItalic(final Boolean italic) {
-      this.italic_serialized_name = italic;
+    public FontSettingBuilder setMinSize(Long minSize) {
+      this.minSize = minSize;
+      return this;
     }
 
     /**
-     * Sets the name.
+     * Set the maxSize.
      *
-     * @param name the new name
+     * @param maxSize the maxSize
+     * @return the FontSetting builder
      */
-    public void setName(final String name) {
-      this.name_serialized_name = name;
+    public FontSettingBuilder setMaxSize(Long maxSize) {
+      this.maxSize = maxSize;
+      return this;
     }
 
+    /**
+     * Set the bold.
+     *
+     * @param bold the bold
+     * @return the FontSetting builder
+     */
+    public FontSettingBuilder setBold(Boolean bold) {
+      this.bold = bold;
+      return this;
+    }
+
+    /**
+     * Set the italic.
+     *
+     * @param italic the italic
+     * @return the FontSetting builder
+     */
+    public FontSettingBuilder setItalic(Boolean italic) {
+      this.italic = italic;
+      return this;
+    }
+
+    /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the FontSetting builder
+     */
+    public FontSettingBuilder setName(String name) {
+      this.name = name;
+      return this;
+    }
   }
 
   /**
    * Object describing a specific gateway.
    */
   public class Gateway extends IBMWatsonResponseModel {
-    private String gateway_id_serialized_name;
-    private String name_serialized_name;
-    private String status_serialized_name;
-    private String token_serialized_name;
-    private String token_id_serialized_name;
+    private String gatewayId;
+    private String name;
+    private String status;
+    private String token;
+    private String tokenId;
  
     /**
      * Gets the gatewayId.
@@ -8204,7 +9666,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getGatewayId() {
-      return gateway_id_serialized_name;
+      return gatewayId;
     }
  
     /**
@@ -8216,7 +9678,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -8229,7 +9691,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -8242,7 +9704,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getToken() {
-      return token_serialized_name;
+      return token;
     }
  
     /**
@@ -8255,7 +9717,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getTokenId() {
-      return token_id_serialized_name;
+      return tokenId;
     }
 
     /**
@@ -8264,7 +9726,7 @@ public class IBMDiscoveryV1Models {
      * @param gatewayId the new gatewayId
      */
     public void setGatewayId(final String gatewayId) {
-      this.gateway_id_serialized_name = gatewayId;
+      this.gatewayId = gatewayId;
     }
 
     /**
@@ -8273,7 +9735,7 @@ public class IBMDiscoveryV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -8282,7 +9744,7 @@ public class IBMDiscoveryV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -8291,7 +9753,7 @@ public class IBMDiscoveryV1Models {
      * @param token the new token
      */
     public void setToken(final String token) {
-      this.token_serialized_name = token;
+      this.token = token;
     }
 
     /**
@@ -8300,16 +9762,22 @@ public class IBMDiscoveryV1Models {
      * @param tokenId the new tokenId
      */
     public void setTokenId(final String tokenId) {
-      this.token_id_serialized_name = tokenId;
+      this.tokenId = tokenId;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('gateway_id', 'gatewayId');
+      mapping.put('token_id', 'tokenId');
+      return mapping;
+    }
   }
 
   /**
    * Object containing gateways array.
    */
   public class GatewayList extends IBMWatsonResponseModel {
-    private List<Gateway> gateways_serialized_name;
+    private List<Gateway> gateways;
  
     /**
      * Gets the gateways.
@@ -8320,7 +9788,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Gateway> getGateways() {
-      return gateways_serialized_name;
+      return gateways;
     }
 
     /**
@@ -8329,7 +9797,7 @@ public class IBMDiscoveryV1Models {
      * @param gateways the new gateways
      */
     public void setGateways(final List<Gateway> gateways) {
-      this.gateways_serialized_name = gateways;
+      this.gateways = gateways;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8345,14 +9813,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedGateways != null) {
         for (Integer i = 0; i < deserializedGateways.size(); i++) {
           Gateway currentItem = ret.getGateways().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('gateways_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('gateways');
           Gateway newItem = (Gateway) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Gateway.class);
           newGateways.add(newItem);
         }
-        ret.gateways_serialized_name = newGateways;
+        ret.gateways = newGateways;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (gateways != null && gateways[0] != null) {
+        mapping.putAll(gateways[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -8362,7 +9838,7 @@ public class IBMDiscoveryV1Models {
   public class GetCollectionOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -8373,7 +9849,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -8402,6 +9878,12 @@ public class IBMDiscoveryV1Models {
       return new GetCollectionOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -8484,7 +9966,7 @@ public class IBMDiscoveryV1Models {
   public class GetConfigurationOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String configurationId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -8495,7 +9977,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -8524,6 +10006,12 @@ public class IBMDiscoveryV1Models {
       return new GetConfigurationOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('configurationId', 'configuration_id');
+      return mapping;
+    }
   }
 
   /**
@@ -8606,7 +10094,7 @@ public class IBMDiscoveryV1Models {
   public class GetCredentialsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String credentialId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -8617,7 +10105,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the credentialId.
      *
@@ -8646,6 +10134,12 @@ public class IBMDiscoveryV1Models {
       return new GetCredentialsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('credentialId', 'credential_id');
+      return mapping;
+    }
   }
 
   /**
@@ -8729,7 +10223,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String collectionId;
     private String documentId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -8740,7 +10234,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -8751,7 +10245,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -8782,6 +10276,13 @@ public class IBMDiscoveryV1Models {
       return new GetDocumentStatusOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('documentId', 'document_id');
+      return mapping;
+    }
   }
 
   /**
@@ -8878,7 +10379,7 @@ public class IBMDiscoveryV1Models {
    */
   public class GetEnvironmentOptions extends IBMWatsonOptionsModel {
     private String environmentId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -8905,6 +10406,11 @@ public class IBMDiscoveryV1Models {
       return new GetEnvironmentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      return mapping;
+    }
   }
 
   /**
@@ -8972,7 +10478,7 @@ public class IBMDiscoveryV1Models {
   public class GetGatewayOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String gatewayId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -8983,7 +10489,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the gatewayId.
      *
@@ -9012,6 +10518,12 @@ public class IBMDiscoveryV1Models {
       return new GetGatewayOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('gatewayId', 'gateway_id');
+      return mapping;
+    }
   }
 
   /**
@@ -9095,7 +10607,7 @@ public class IBMDiscoveryV1Models {
     private Datetime startTime;
     private Datetime endTime;
     private String resultType;
- 
+
     /**
      * Gets the startTime.
      *
@@ -9106,7 +10618,7 @@ public class IBMDiscoveryV1Models {
     public Datetime startTime() {
       return startTime;
     }
- 
+
     /**
      * Gets the endTime.
      *
@@ -9117,7 +10629,7 @@ public class IBMDiscoveryV1Models {
     public Datetime endTime() {
       return endTime;
     }
- 
+
     /**
      * Gets the resultType.
      *
@@ -9145,6 +10657,13 @@ public class IBMDiscoveryV1Models {
       return new GetMetricsEventRateOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('startTime', 'start_time');
+      mapping.put('endTime', 'end_time');
+      mapping.put('resultType', 'result_type');
+      return mapping;
+    }
   }
 
   /**
@@ -9230,7 +10749,7 @@ public class IBMDiscoveryV1Models {
     private Datetime startTime;
     private Datetime endTime;
     private String resultType;
- 
+
     /**
      * Gets the startTime.
      *
@@ -9241,7 +10760,7 @@ public class IBMDiscoveryV1Models {
     public Datetime startTime() {
       return startTime;
     }
- 
+
     /**
      * Gets the endTime.
      *
@@ -9252,7 +10771,7 @@ public class IBMDiscoveryV1Models {
     public Datetime endTime() {
       return endTime;
     }
- 
+
     /**
      * Gets the resultType.
      *
@@ -9280,6 +10799,13 @@ public class IBMDiscoveryV1Models {
       return new GetMetricsQueryEventOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('startTime', 'start_time');
+      mapping.put('endTime', 'end_time');
+      mapping.put('resultType', 'result_type');
+      return mapping;
+    }
   }
 
   /**
@@ -9365,7 +10891,7 @@ public class IBMDiscoveryV1Models {
     private Datetime startTime;
     private Datetime endTime;
     private String resultType;
- 
+
     /**
      * Gets the startTime.
      *
@@ -9376,7 +10902,7 @@ public class IBMDiscoveryV1Models {
     public Datetime startTime() {
       return startTime;
     }
- 
+
     /**
      * Gets the endTime.
      *
@@ -9387,7 +10913,7 @@ public class IBMDiscoveryV1Models {
     public Datetime endTime() {
       return endTime;
     }
- 
+
     /**
      * Gets the resultType.
      *
@@ -9415,6 +10941,13 @@ public class IBMDiscoveryV1Models {
       return new GetMetricsQueryNoResultsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('startTime', 'start_time');
+      mapping.put('endTime', 'end_time');
+      mapping.put('resultType', 'result_type');
+      return mapping;
+    }
   }
 
   /**
@@ -9500,7 +11033,7 @@ public class IBMDiscoveryV1Models {
     private Datetime startTime;
     private Datetime endTime;
     private String resultType;
- 
+
     /**
      * Gets the startTime.
      *
@@ -9511,7 +11044,7 @@ public class IBMDiscoveryV1Models {
     public Datetime startTime() {
       return startTime;
     }
- 
+
     /**
      * Gets the endTime.
      *
@@ -9522,7 +11055,7 @@ public class IBMDiscoveryV1Models {
     public Datetime endTime() {
       return endTime;
     }
- 
+
     /**
      * Gets the resultType.
      *
@@ -9550,6 +11083,13 @@ public class IBMDiscoveryV1Models {
       return new GetMetricsQueryOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('startTime', 'start_time');
+      mapping.put('endTime', 'end_time');
+      mapping.put('resultType', 'result_type');
+      return mapping;
+    }
   }
 
   /**
@@ -9633,7 +11173,7 @@ public class IBMDiscoveryV1Models {
    */
   public class GetMetricsQueryTokenEventOptions extends IBMWatsonOptionsModel {
     private Long count;
- 
+
     /**
      * Gets the count.
      *
@@ -9659,7 +11199,6 @@ public class IBMDiscoveryV1Models {
     public GetMetricsQueryTokenEventOptionsBuilder newBuilder() {
       return new GetMetricsQueryTokenEventOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -9718,7 +11257,7 @@ public class IBMDiscoveryV1Models {
   public class GetStopwordListStatusOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -9729,7 +11268,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -9758,6 +11297,12 @@ public class IBMDiscoveryV1Models {
       return new GetStopwordListStatusOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -9840,7 +11385,7 @@ public class IBMDiscoveryV1Models {
   public class GetTokenizationDictionaryStatusOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -9851,7 +11396,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -9880,6 +11425,12 @@ public class IBMDiscoveryV1Models {
       return new GetTokenizationDictionaryStatusOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -9963,7 +11514,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String collectionId;
     private String queryId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -9974,7 +11525,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -9985,7 +11536,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -10016,6 +11567,13 @@ public class IBMDiscoveryV1Models {
       return new GetTrainingDataOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('queryId', 'query_id');
+      return mapping;
+    }
   }
 
   /**
@@ -10115,7 +11673,7 @@ public class IBMDiscoveryV1Models {
     private String collectionId;
     private String queryId;
     private String exampleId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -10126,7 +11684,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -10137,7 +11695,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -10148,7 +11706,7 @@ public class IBMDiscoveryV1Models {
     public String queryId() {
       return queryId;
     }
- 
+
     /**
      * Gets the exampleId.
      *
@@ -10181,6 +11739,14 @@ public class IBMDiscoveryV1Models {
       return new GetTrainingExampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('queryId', 'query_id');
+      mapping.put('exampleId', 'example_id');
+      return mapping;
+    }
   }
 
   /**
@@ -10291,12 +11857,18 @@ public class IBMDiscoveryV1Models {
    * A list of HTML conversion settings.
    */
   public class HtmlSettings extends IBMWatsonGenericModel {
-    private List<String> exclude_tags_completely_serialized_name;
-    private List<String> exclude_tags_keep_content_serialized_name;
-    private XPathPatterns keep_content_serialized_name;
-    private XPathPatterns exclude_content_serialized_name;
-    private List<String> keep_tag_attributes_serialized_name;
-    private List<String> exclude_tag_attributes_serialized_name;
+    private List<String> excludeTagsCompletely;
+    private List<String> excludeTagsKeepContent;
+    private XPathPatterns keepContent;
+    private XPathPatterns excludeContent;
+    private List<String> keepTagAttributes;
+    private List<String> excludeTagAttributes;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public HtmlSettings() { }
  
     /**
      * Gets the excludeTagsCompletely.
@@ -10307,7 +11879,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getExcludeTagsCompletely() {
-      return exclude_tags_completely_serialized_name;
+      return excludeTagsCompletely;
     }
  
     /**
@@ -10319,7 +11891,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getExcludeTagsKeepContent() {
-      return exclude_tags_keep_content_serialized_name;
+      return excludeTagsKeepContent;
     }
  
     /**
@@ -10329,7 +11901,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public XPathPatterns getKeepContent() {
-      return keep_content_serialized_name;
+      return keepContent;
     }
  
     /**
@@ -10339,7 +11911,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public XPathPatterns getExcludeContent() {
-      return exclude_content_serialized_name;
+      return excludeContent;
     }
  
     /**
@@ -10351,7 +11923,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getKeepTagAttributes() {
-      return keep_tag_attributes_serialized_name;
+      return keepTagAttributes;
     }
  
     /**
@@ -10363,61 +11935,25 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getExcludeTagAttributes() {
-      return exclude_tag_attributes_serialized_name;
+      return excludeTagAttributes;
+    }
+  
+    private HtmlSettings(HtmlSettingsBuilder builder) {
+      this.excludeTagsCompletely = builder.excludeTagsCompletely;
+      this.excludeTagsKeepContent = builder.excludeTagsKeepContent;
+      this.keepContent = builder.keepContent;
+      this.excludeContent = builder.excludeContent;
+      this.keepTagAttributes = builder.keepTagAttributes;
+      this.excludeTagAttributes = builder.excludeTagAttributes;
     }
 
     /**
-     * Sets the excludeTagsCompletely.
+     * New builder.
      *
-     * @param excludeTagsCompletely the new excludeTagsCompletely
+     * @return a HtmlSettings builder
      */
-    public void setExcludeTagsCompletely(final List<String> excludeTagsCompletely) {
-      this.exclude_tags_completely_serialized_name = excludeTagsCompletely;
-    }
-
-    /**
-     * Sets the excludeTagsKeepContent.
-     *
-     * @param excludeTagsKeepContent the new excludeTagsKeepContent
-     */
-    public void setExcludeTagsKeepContent(final List<String> excludeTagsKeepContent) {
-      this.exclude_tags_keep_content_serialized_name = excludeTagsKeepContent;
-    }
-
-    /**
-     * Sets the keepContent.
-     *
-     * @param keepContent the new keepContent
-     */
-    public void setKeepContent(final XPathPatterns keepContent) {
-      this.keep_content_serialized_name = keepContent;
-    }
-
-    /**
-     * Sets the excludeContent.
-     *
-     * @param excludeContent the new excludeContent
-     */
-    public void setExcludeContent(final XPathPatterns excludeContent) {
-      this.exclude_content_serialized_name = excludeContent;
-    }
-
-    /**
-     * Sets the keepTagAttributes.
-     *
-     * @param keepTagAttributes the new keepTagAttributes
-     */
-    public void setKeepTagAttributes(final List<String> keepTagAttributes) {
-      this.keep_tag_attributes_serialized_name = keepTagAttributes;
-    }
-
-    /**
-     * Sets the excludeTagAttributes.
-     *
-     * @param excludeTagAttributes the new excludeTagAttributes
-     */
-    public void setExcludeTagAttributes(final List<String> excludeTagAttributes) {
-      this.exclude_tag_attributes_serialized_name = excludeTagAttributes;
+    public HtmlSettingsBuilder newBuilder() {
+      return new HtmlSettingsBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10426,16 +11962,205 @@ public class IBMDiscoveryV1Models {
       }
 
       HtmlSettings ret = (HtmlSettings) super.deserialize(jsonString, jsonMap, classType);
+      HtmlSettingsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for keepContent
-      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getKeepContent()), (Map<String, Object>) jsonMap.get('keep_content_serialized_name'), XPathPatterns.class);
-      ret.setKeepContent(newKeepContent);
+      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getKeepContent()), (Map<String, Object>) jsonMap.get('keepContent'), XPathPatterns.class);
+      retBuilder.setKeepContent(newKeepContent);
 
       // calling custom deserializer for excludeContent
-      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getExcludeContent()), (Map<String, Object>) jsonMap.get('exclude_content_serialized_name'), XPathPatterns.class);
-      ret.setExcludeContent(newExcludeContent);
+      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getExcludeContent()), (Map<String, Object>) jsonMap.get('excludeContent'), XPathPatterns.class);
+      retBuilder.setExcludeContent(newExcludeContent);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('excludeTagsCompletely', 'exclude_tags_completely');
+      mapping.put('excludeTagsKeepContent', 'exclude_tags_keep_content');
+      mapping.put('keepContent', 'keep_content');
+      mapping.put('excludeContent', 'exclude_content');
+      mapping.put('keepTagAttributes', 'keep_tag_attributes');
+      mapping.put('excludeTagAttributes', 'exclude_tag_attributes');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('exclude_tags_completely', 'excludeTagsCompletely');
+      mapping.put('exclude_tags_keep_content', 'excludeTagsKeepContent');
+      mapping.put('keep_content', 'keepContent');
+      mapping.put('exclude_content', 'excludeContent');
+      mapping.put('keep_tag_attributes', 'keepTagAttributes');
+      mapping.put('exclude_tag_attributes', 'excludeTagAttributes');
+      return mapping;
+    }
+  }
+
+  /**
+   * HtmlSettings Builder.
+   */
+  public class HtmlSettingsBuilder {
+    private List<String> excludeTagsCompletely;
+    private List<String> excludeTagsKeepContent;
+    private XPathPatterns keepContent;
+    private XPathPatterns excludeContent;
+    private List<String> keepTagAttributes;
+    private List<String> excludeTagAttributes;
+
+    private HtmlSettingsBuilder(HtmlSettings htmlSettings) {
+      this.excludeTagsCompletely = htmlSettings.excludeTagsCompletely;
+      this.excludeTagsKeepContent = htmlSettings.excludeTagsKeepContent;
+      this.keepContent = htmlSettings.keepContent;
+      this.excludeContent = htmlSettings.excludeContent;
+      this.keepTagAttributes = htmlSettings.keepTagAttributes;
+      this.excludeTagAttributes = htmlSettings.excludeTagAttributes;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public HtmlSettingsBuilder() {
+    }
+
+    /**
+     * Builds a HtmlSettings.
+     *
+     * @return the htmlSettings
+     */
+    public HtmlSettings build() {
+      return new HtmlSettings(this);
+    }
+
+    /**
+     * Adds an excludeTagsCompletely to excludeTagsCompletely.
+     *
+     * @param excludeTagsCompletely the new excludeTagsCompletely
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder addExcludeTagsCompletely(String excludeTagsCompletely) {
+      IBMWatsonValidator.notNull(excludeTagsCompletely, 'excludeTagsCompletely cannot be null');
+      if (this.excludeTagsCompletely == null) {
+        this.excludeTagsCompletely = new List<String>();
+      }
+      this.excludeTagsCompletely.add(excludeTagsCompletely);
+      return this;
+    }
+
+    /**
+     * Adds an excludeTagsKeepContent to excludeTagsKeepContent.
+     *
+     * @param excludeTagsKeepContent the new excludeTagsKeepContent
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder addExcludeTagsKeepContent(String excludeTagsKeepContent) {
+      IBMWatsonValidator.notNull(excludeTagsKeepContent, 'excludeTagsKeepContent cannot be null');
+      if (this.excludeTagsKeepContent == null) {
+        this.excludeTagsKeepContent = new List<String>();
+      }
+      this.excludeTagsKeepContent.add(excludeTagsKeepContent);
+      return this;
+    }
+
+    /**
+     * Adds an keepTagAttributes to keepTagAttributes.
+     *
+     * @param keepTagAttributes the new keepTagAttributes
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder addKeepTagAttributes(String keepTagAttributes) {
+      IBMWatsonValidator.notNull(keepTagAttributes, 'keepTagAttributes cannot be null');
+      if (this.keepTagAttributes == null) {
+        this.keepTagAttributes = new List<String>();
+      }
+      this.keepTagAttributes.add(keepTagAttributes);
+      return this;
+    }
+
+    /**
+     * Adds an excludeTagAttributes to excludeTagAttributes.
+     *
+     * @param excludeTagAttributes the new excludeTagAttributes
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder addExcludeTagAttributes(String excludeTagAttributes) {
+      IBMWatsonValidator.notNull(excludeTagAttributes, 'excludeTagAttributes cannot be null');
+      if (this.excludeTagAttributes == null) {
+        this.excludeTagAttributes = new List<String>();
+      }
+      this.excludeTagAttributes.add(excludeTagAttributes);
+      return this;
+    }
+
+    /**
+     * Set the excludeTagsCompletely.
+     * Existing excludeTagsCompletely will be replaced.
+     *
+     * @param excludeTagsCompletely the excludeTagsCompletely
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder setExcludeTagsCompletely(List<String> excludeTagsCompletely) {
+      this.excludeTagsCompletely = excludeTagsCompletely;
+      return this;
+    }
+
+    /**
+     * Set the excludeTagsKeepContent.
+     * Existing excludeTagsKeepContent will be replaced.
+     *
+     * @param excludeTagsKeepContent the excludeTagsKeepContent
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder setExcludeTagsKeepContent(List<String> excludeTagsKeepContent) {
+      this.excludeTagsKeepContent = excludeTagsKeepContent;
+      return this;
+    }
+
+    /**
+     * Set the keepContent.
+     *
+     * @param keepContent the keepContent
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder setKeepContent(XPathPatterns keepContent) {
+      this.keepContent = keepContent;
+      return this;
+    }
+
+    /**
+     * Set the excludeContent.
+     *
+     * @param excludeContent the excludeContent
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder setExcludeContent(XPathPatterns excludeContent) {
+      this.excludeContent = excludeContent;
+      return this;
+    }
+
+    /**
+     * Set the keepTagAttributes.
+     * Existing keepTagAttributes will be replaced.
+     *
+     * @param keepTagAttributes the keepTagAttributes
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder setKeepTagAttributes(List<String> keepTagAttributes) {
+      this.keepTagAttributes = keepTagAttributes;
+      return this;
+    }
+
+    /**
+     * Set the excludeTagAttributes.
+     * Existing excludeTagAttributes will be replaced.
+     *
+     * @param excludeTagAttributes the excludeTagAttributes
+     * @return the HtmlSettings builder
+     */
+    public HtmlSettingsBuilder setExcludeTagAttributes(List<String> excludeTagAttributes) {
+      this.excludeTagAttributes = excludeTagAttributes;
+      return this;
     }
   }
 
@@ -10443,9 +12168,9 @@ public class IBMDiscoveryV1Models {
    * Details about the resource usage and capacity of the environment.
    */
   public class IndexCapacity extends IBMWatsonGenericModel {
-    private EnvironmentDocuments documents_serialized_name;
-    private DiskUsage disk_usage_serialized_name;
-    private CollectionUsage collections_serialized_name;
+    private EnvironmentDocuments documents;
+    private DiskUsage diskUsage;
+    private CollectionUsage collections;
  
     /**
      * Gets the documents.
@@ -10456,7 +12181,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public EnvironmentDocuments getDocuments() {
-      return documents_serialized_name;
+      return documents;
     }
  
     /**
@@ -10468,7 +12193,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public DiskUsage getDiskUsage() {
-      return disk_usage_serialized_name;
+      return diskUsage;
     }
  
     /**
@@ -10480,7 +12205,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public CollectionUsage getCollections() {
-      return collections_serialized_name;
+      return collections;
     }
 
     /**
@@ -10489,7 +12214,7 @@ public class IBMDiscoveryV1Models {
      * @param documents the new documents
      */
     public void setDocuments(final EnvironmentDocuments documents) {
-      this.documents_serialized_name = documents;
+      this.documents = documents;
     }
 
     /**
@@ -10498,7 +12223,7 @@ public class IBMDiscoveryV1Models {
      * @param diskUsage the new diskUsage
      */
     public void setDiskUsage(final DiskUsage diskUsage) {
-      this.disk_usage_serialized_name = diskUsage;
+      this.diskUsage = diskUsage;
     }
 
     /**
@@ -10507,7 +12232,7 @@ public class IBMDiscoveryV1Models {
      * @param collections the new collections
      */
     public void setCollections(final CollectionUsage collections) {
-      this.collections_serialized_name = collections;
+      this.collections = collections;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10518,18 +12243,33 @@ public class IBMDiscoveryV1Models {
       IndexCapacity ret = (IndexCapacity) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documents
-      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(ret.getDocuments()), (Map<String, Object>) jsonMap.get('documents_serialized_name'), EnvironmentDocuments.class);
+      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(ret.getDocuments()), (Map<String, Object>) jsonMap.get('documents'), EnvironmentDocuments.class);
       ret.setDocuments(newDocuments);
 
       // calling custom deserializer for diskUsage
-      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'), DiskUsage.class);
+      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('diskUsage'), DiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for collections
-      CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(ret.getCollections()), (Map<String, Object>) jsonMap.get('collections_serialized_name'), CollectionUsage.class);
+      CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(ret.getCollections()), (Map<String, Object>) jsonMap.get('collections'), CollectionUsage.class);
       ret.setCollections(newCollections);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (documents != null) {
+        mapping.putAll(documents.getApiToSdkMapping());
+      }
+      mapping.put('disk_usage', 'diskUsage');
+      if (diskUsage != null) {
+        mapping.putAll(diskUsage.getApiToSdkMapping());
+      }
+      if (collections != null) {
+        mapping.putAll(collections.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -10539,7 +12279,7 @@ public class IBMDiscoveryV1Models {
   public class ListCollectionFieldsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -10550,7 +12290,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -10579,6 +12319,12 @@ public class IBMDiscoveryV1Models {
       return new ListCollectionFieldsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -10670,7 +12416,7 @@ public class IBMDiscoveryV1Models {
    * `v5-fullnews-t3-2016.mappings.text.properties.author`).
    */
   public class ListCollectionFieldsResponse extends IBMWatsonResponseModel {
-    private List<Field> fields_serialized_name;
+    private List<Field> fields;
  
     /**
      * Gets the fields.
@@ -10681,7 +12427,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Field> getFields() {
-      return fields_serialized_name;
+      return fields;
     }
 
     /**
@@ -10690,7 +12436,7 @@ public class IBMDiscoveryV1Models {
      * @param fields the new fields
      */
     public void setFields(final List<Field> fields) {
-      this.fields_serialized_name = fields;
+      this.fields = fields;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10706,14 +12452,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedFields != null) {
         for (Integer i = 0; i < deserializedFields.size(); i++) {
           Field currentItem = ret.getFields().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('fields_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('fields');
           Field newItem = (Field) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Field.class);
           newFields.add(newItem);
         }
-        ret.fields_serialized_name = newFields;
+        ret.fields = newFields;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (fields != null && fields[0] != null) {
+        mapping.putAll(fields[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -10723,7 +12477,7 @@ public class IBMDiscoveryV1Models {
   public class ListCollectionsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String name;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -10734,7 +12488,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -10762,6 +12516,11 @@ public class IBMDiscoveryV1Models {
       return new ListCollectionsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      return mapping;
+    }
   }
 
   /**
@@ -10840,7 +12599,7 @@ public class IBMDiscoveryV1Models {
    * ListCollectionsResponse.
    */
   public class ListCollectionsResponse extends IBMWatsonResponseModel {
-    private List<Collection> collections_serialized_name;
+    private List<Collection> collections;
  
     /**
      * Gets the collections.
@@ -10851,7 +12610,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Collection> getCollections() {
-      return collections_serialized_name;
+      return collections;
     }
 
     /**
@@ -10860,7 +12619,7 @@ public class IBMDiscoveryV1Models {
      * @param collections the new collections
      */
     public void setCollections(final List<Collection> collections) {
-      this.collections_serialized_name = collections;
+      this.collections = collections;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10876,14 +12635,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedCollections != null) {
         for (Integer i = 0; i < deserializedCollections.size(); i++) {
           Collection currentItem = ret.getCollections().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('collections_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('collections');
           Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Collection.class);
           newCollections.add(newItem);
         }
-        ret.collections_serialized_name = newCollections;
+        ret.collections = newCollections;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (collections != null && collections[0] != null) {
+        mapping.putAll(collections[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -10893,7 +12660,7 @@ public class IBMDiscoveryV1Models {
   public class ListConfigurationsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String name;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -10904,7 +12671,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -10932,6 +12699,11 @@ public class IBMDiscoveryV1Models {
       return new ListConfigurationsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      return mapping;
+    }
   }
 
   /**
@@ -11010,7 +12782,7 @@ public class IBMDiscoveryV1Models {
    * ListConfigurationsResponse.
    */
   public class ListConfigurationsResponse extends IBMWatsonResponseModel {
-    private List<Configuration> configurations_serialized_name;
+    private List<Configuration> configurations;
  
     /**
      * Gets the configurations.
@@ -11021,7 +12793,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Configuration> getConfigurations() {
-      return configurations_serialized_name;
+      return configurations;
     }
 
     /**
@@ -11030,7 +12802,7 @@ public class IBMDiscoveryV1Models {
      * @param configurations the new configurations
      */
     public void setConfigurations(final List<Configuration> configurations) {
-      this.configurations_serialized_name = configurations;
+      this.configurations = configurations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -11046,14 +12818,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedConfigurations != null) {
         for (Integer i = 0; i < deserializedConfigurations.size(); i++) {
           Configuration currentItem = ret.getConfigurations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('configurations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('configurations');
           Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Configuration.class);
           newConfigurations.add(newItem);
         }
-        ret.configurations_serialized_name = newConfigurations;
+        ret.configurations = newConfigurations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (configurations != null && configurations[0] != null) {
+        mapping.putAll(configurations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -11062,7 +12842,7 @@ public class IBMDiscoveryV1Models {
    */
   public class ListCredentialsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -11089,6 +12869,11 @@ public class IBMDiscoveryV1Models {
       return new ListCredentialsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      return mapping;
+    }
   }
 
   /**
@@ -11155,7 +12940,7 @@ public class IBMDiscoveryV1Models {
    */
   public class ListEnvironmentsOptions extends IBMWatsonOptionsModel {
     private String name;
- 
+
     /**
      * Gets the name.
      *
@@ -11180,7 +12965,6 @@ public class IBMDiscoveryV1Models {
     public ListEnvironmentsOptionsBuilder newBuilder() {
       return new ListEnvironmentsOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -11237,7 +13021,7 @@ public class IBMDiscoveryV1Models {
    * ListEnvironmentsResponse.
    */
   public class ListEnvironmentsResponse extends IBMWatsonResponseModel {
-    private List<Environment> environments_serialized_name;
+    private List<Environment> environments;
  
     /**
      * Gets the environments.
@@ -11248,7 +13032,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Environment> getEnvironments() {
-      return environments_serialized_name;
+      return environments;
     }
 
     /**
@@ -11257,7 +13041,7 @@ public class IBMDiscoveryV1Models {
      * @param environments the new environments
      */
     public void setEnvironments(final List<Environment> environments) {
-      this.environments_serialized_name = environments;
+      this.environments = environments;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -11273,14 +13057,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedEnvironments != null) {
         for (Integer i = 0; i < deserializedEnvironments.size(); i++) {
           Environment currentItem = ret.getEnvironments().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('environments_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('environments');
           Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Environment.class);
           newEnvironments.add(newItem);
         }
-        ret.environments_serialized_name = newEnvironments;
+        ret.environments = newEnvironments;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (environments != null && environments[0] != null) {
+        mapping.putAll(environments[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -11290,7 +13082,7 @@ public class IBMDiscoveryV1Models {
   public class ListExpansionsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -11301,7 +13093,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -11330,6 +13122,12 @@ public class IBMDiscoveryV1Models {
       return new ListExpansionsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -11412,7 +13210,7 @@ public class IBMDiscoveryV1Models {
   public class ListFieldsOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private List<String> collectionIds;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -11423,7 +13221,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionIds.
      *
@@ -11452,6 +13250,12 @@ public class IBMDiscoveryV1Models {
       return new ListFieldsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionIds', 'collection_ids');
+      return mapping;
+    }
   }
 
   /**
@@ -11549,7 +13353,7 @@ public class IBMDiscoveryV1Models {
    */
   public class ListGatewaysOptions extends IBMWatsonOptionsModel {
     private String environmentId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -11576,6 +13380,11 @@ public class IBMDiscoveryV1Models {
       return new ListGatewaysOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      return mapping;
+    }
   }
 
   /**
@@ -11643,7 +13452,7 @@ public class IBMDiscoveryV1Models {
   public class ListTrainingDataOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String collectionId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -11654,7 +13463,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -11683,6 +13492,12 @@ public class IBMDiscoveryV1Models {
       return new ListTrainingDataOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      return mapping;
+    }
   }
 
   /**
@@ -11766,7 +13581,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String collectionId;
     private String queryId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -11777,7 +13592,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -11788,7 +13603,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -11819,6 +13634,13 @@ public class IBMDiscoveryV1Models {
       return new ListTrainingExamplesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('queryId', 'query_id');
+      return mapping;
+    }
   }
 
   /**
@@ -11914,8 +13736,8 @@ public class IBMDiscoveryV1Models {
    * Object containing results that match the requested **logs** query.
    */
   public class LogQueryResponse extends IBMWatsonResponseModel {
-    private Long matching_results_serialized_name;
-    private List<LogQueryResponseResult> results_serialized_name;
+    private Long matchingResults;
+    private List<LogQueryResponseResult> results;
  
     /**
      * Gets the matchingResults.
@@ -11926,7 +13748,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMatchingResults() {
-      return matching_results_serialized_name;
+      return matchingResults;
     }
  
     /**
@@ -11938,7 +13760,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<LogQueryResponseResult> getResults() {
-      return results_serialized_name;
+      return results;
     }
 
     /**
@@ -11947,7 +13769,7 @@ public class IBMDiscoveryV1Models {
      * @param matchingResults the new matchingResults
      */
     public void setMatchingResults(final long matchingResults) {
-      this.matching_results_serialized_name = matchingResults;
+      this.matchingResults = matchingResults;
     }
 
     /**
@@ -11956,7 +13778,7 @@ public class IBMDiscoveryV1Models {
      * @param results the new results
      */
     public void setResults(final List<LogQueryResponseResult> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -11972,14 +13794,23 @@ public class IBMDiscoveryV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           LogQueryResponseResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           LogQueryResponseResult newItem = (LogQueryResponseResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResult.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('matching_results', 'matchingResults');
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -11988,20 +13819,20 @@ public class IBMDiscoveryV1Models {
    * an event that is associated with a query.
    */
   public class LogQueryResponseResult extends IBMWatsonGenericModel {
-    private String environment_id_serialized_name;
-    private String customer_id_serialized_name;
-    private String document_type_serialized_name;
-    private String natural_language_query_serialized_name;
-    private LogQueryResponseResultDocuments document_results_serialized_name;
-    private Datetime created_timestamp_serialized_name;
-    private Datetime client_timestamp_serialized_name;
-    private String query_id_serialized_name;
-    private String session_token_serialized_name;
-    private String collection_id_serialized_name;
-    private Long display_rank_serialized_name;
-    private String document_id_serialized_name;
-    private String event_type_serialized_name;
-    private String result_type_serialized_name;
+    private String environmentId;
+    private String customerId;
+    private String documentType;
+    private String naturalLanguageQuery;
+    private LogQueryResponseResultDocuments documentResults;
+    private Datetime createdTimestamp;
+    private Datetime clientTimestamp;
+    private String queryId;
+    private String sessionToken;
+    private String collectionId;
+    private Long displayRank;
+    private String documentId;
+    private String eventType;
+    private String resultType;
  
     /**
      * Gets the environmentId.
@@ -12012,7 +13843,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEnvironmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
  
     /**
@@ -12025,7 +13856,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCustomerId() {
-      return customer_id_serialized_name;
+      return customerId;
     }
  
     /**
@@ -12041,7 +13872,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentType() {
-      return document_type_serialized_name;
+      return documentType;
     }
  
     /**
@@ -12057,7 +13888,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getNaturalLanguageQuery() {
-      return natural_language_query_serialized_name;
+      return naturalLanguageQuery;
     }
  
     /**
@@ -12070,7 +13901,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public LogQueryResponseResultDocuments getDocumentResults() {
-      return document_results_serialized_name;
+      return documentResults;
     }
  
     /**
@@ -12082,7 +13913,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getCreatedTimestamp() {
-      return created_timestamp_serialized_name;
+      return createdTimestamp;
     }
  
     /**
@@ -12095,7 +13926,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getClientTimestamp() {
-      return client_timestamp_serialized_name;
+      return clientTimestamp;
     }
  
     /**
@@ -12110,7 +13941,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getQueryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
  
     /**
@@ -12129,7 +13960,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSessionToken() {
-      return session_token_serialized_name;
+      return sessionToken;
     }
  
     /**
@@ -12141,7 +13972,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
  
     /**
@@ -12153,7 +13984,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getDisplayRank() {
-      return display_rank_serialized_name;
+      return displayRank;
     }
  
     /**
@@ -12165,7 +13996,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -12181,7 +14012,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEventType() {
-      return event_type_serialized_name;
+      return eventType;
     }
  
     /**
@@ -12193,7 +14024,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getResultType() {
-      return result_type_serialized_name;
+      return resultType;
     }
 
     /**
@@ -12202,7 +14033,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the new environmentId
      */
     public void setEnvironmentId(final String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -12211,7 +14042,7 @@ public class IBMDiscoveryV1Models {
      * @param customerId the new customerId
      */
     public void setCustomerId(final String customerId) {
-      this.customer_id_serialized_name = customerId;
+      this.customerId = customerId;
     }
 
     /**
@@ -12220,7 +14051,7 @@ public class IBMDiscoveryV1Models {
      * @param documentType the new documentType
      */
     public void setDocumentType(final String documentType) {
-      this.document_type_serialized_name = documentType;
+      this.documentType = documentType;
     }
 
     /**
@@ -12229,7 +14060,7 @@ public class IBMDiscoveryV1Models {
      * @param naturalLanguageQuery the new naturalLanguageQuery
      */
     public void setNaturalLanguageQuery(final String naturalLanguageQuery) {
-      this.natural_language_query_serialized_name = naturalLanguageQuery;
+      this.naturalLanguageQuery = naturalLanguageQuery;
     }
 
     /**
@@ -12238,7 +14069,7 @@ public class IBMDiscoveryV1Models {
      * @param documentResults the new documentResults
      */
     public void setDocumentResults(final LogQueryResponseResultDocuments documentResults) {
-      this.document_results_serialized_name = documentResults;
+      this.documentResults = documentResults;
     }
 
     /**
@@ -12247,7 +14078,7 @@ public class IBMDiscoveryV1Models {
      * @param createdTimestamp the new createdTimestamp
      */
     public void setCreatedTimestamp(final Datetime createdTimestamp) {
-      this.created_timestamp_serialized_name = createdTimestamp;
+      this.createdTimestamp = createdTimestamp;
     }
 
     /**
@@ -12256,7 +14087,7 @@ public class IBMDiscoveryV1Models {
      * @param clientTimestamp the new clientTimestamp
      */
     public void setClientTimestamp(final Datetime clientTimestamp) {
-      this.client_timestamp_serialized_name = clientTimestamp;
+      this.clientTimestamp = clientTimestamp;
     }
 
     /**
@@ -12265,7 +14096,7 @@ public class IBMDiscoveryV1Models {
      * @param queryId the new queryId
      */
     public void setQueryId(final String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
     }
 
     /**
@@ -12274,7 +14105,7 @@ public class IBMDiscoveryV1Models {
      * @param sessionToken the new sessionToken
      */
     public void setSessionToken(final String sessionToken) {
-      this.session_token_serialized_name = sessionToken;
+      this.sessionToken = sessionToken;
     }
 
     /**
@@ -12283,7 +14114,7 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the new collectionId
      */
     public void setCollectionId(final String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -12292,7 +14123,7 @@ public class IBMDiscoveryV1Models {
      * @param displayRank the new displayRank
      */
     public void setDisplayRank(final long displayRank) {
-      this.display_rank_serialized_name = displayRank;
+      this.displayRank = displayRank;
     }
 
     /**
@@ -12301,7 +14132,7 @@ public class IBMDiscoveryV1Models {
      * @param documentId the new documentId
      */
     public void setDocumentId(final String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
     }
 
     /**
@@ -12310,7 +14141,7 @@ public class IBMDiscoveryV1Models {
      * @param eventType the new eventType
      */
     public void setEventType(final String eventType) {
-      this.event_type_serialized_name = eventType;
+      this.eventType = eventType;
     }
 
     /**
@@ -12319,7 +14150,7 @@ public class IBMDiscoveryV1Models {
      * @param resultType the new resultType
      */
     public void setResultType(final String resultType) {
-      this.result_type_serialized_name = resultType;
+      this.resultType = resultType;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12330,10 +14161,32 @@ public class IBMDiscoveryV1Models {
       LogQueryResponseResult ret = (LogQueryResponseResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentResults
-      LogQueryResponseResultDocuments newDocumentResults = (LogQueryResponseResultDocuments) new LogQueryResponseResultDocuments().deserialize(JSON.serialize(ret.getDocumentResults()), (Map<String, Object>) jsonMap.get('document_results_serialized_name'), LogQueryResponseResultDocuments.class);
+      LogQueryResponseResultDocuments newDocumentResults = (LogQueryResponseResultDocuments) new LogQueryResponseResultDocuments().deserialize(JSON.serialize(ret.getDocumentResults()), (Map<String, Object>) jsonMap.get('documentResults'), LogQueryResponseResultDocuments.class);
       ret.setDocumentResults(newDocumentResults);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environment_id', 'environmentId');
+      mapping.put('customer_id', 'customerId');
+      mapping.put('document_type', 'documentType');
+      mapping.put('natural_language_query', 'naturalLanguageQuery');
+      mapping.put('document_results', 'documentResults');
+      if (documentResults != null) {
+        mapping.putAll(documentResults.getApiToSdkMapping());
+      }
+      mapping.put('created_timestamp', 'createdTimestamp');
+      mapping.put('client_timestamp', 'clientTimestamp');
+      mapping.put('query_id', 'queryId');
+      mapping.put('session_token', 'sessionToken');
+      mapping.put('collection_id', 'collectionId');
+      mapping.put('display_rank', 'displayRank');
+      mapping.put('document_id', 'documentId');
+      mapping.put('event_type', 'eventType');
+      mapping.put('result_type', 'resultType');
+      return mapping;
     }
   }
 
@@ -12342,8 +14195,8 @@ public class IBMDiscoveryV1Models {
    * with logs of type `query`.
    */
   public class LogQueryResponseResultDocuments extends IBMWatsonGenericModel {
-    private List<LogQueryResponseResultDocumentsResult> results_serialized_name;
-    private Long count_serialized_name;
+    private List<LogQueryResponseResultDocumentsResult> results;
+    private Long count;
  
     /**
      * Gets the results.
@@ -12354,7 +14207,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<LogQueryResponseResultDocumentsResult> getResults() {
-      return results_serialized_name;
+      return results;
     }
  
     /**
@@ -12366,7 +14219,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getCount() {
-      return count_serialized_name;
+      return count;
     }
 
     /**
@@ -12375,7 +14228,7 @@ public class IBMDiscoveryV1Models {
      * @param results the new results
      */
     public void setResults(final List<LogQueryResponseResultDocumentsResult> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     /**
@@ -12384,7 +14237,7 @@ public class IBMDiscoveryV1Models {
      * @param count the new count
      */
     public void setCount(final long count) {
-      this.count_serialized_name = count;
+      this.count = count;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12400,14 +14253,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           LogQueryResponseResultDocumentsResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           LogQueryResponseResultDocumentsResult newItem = (LogQueryResponseResultDocumentsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResultDocumentsResult.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -12415,11 +14276,11 @@ public class IBMDiscoveryV1Models {
    * Each object in the **results** array corresponds to an individual document returned by the original query.
    */
   public class LogQueryResponseResultDocumentsResult extends IBMWatsonGenericModel {
-    private Long position_serialized_name;
-    private String document_id_serialized_name;
-    private Double score_serialized_name;
-    private Double confidence_serialized_name;
-    private String collection_id_serialized_name;
+    private Long position;
+    private String documentId;
+    private Double score;
+    private Double confidence;
+    private String collectionId;
  
     /**
      * Gets the position.
@@ -12430,7 +14291,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getPosition() {
-      return position_serialized_name;
+      return position;
     }
  
     /**
@@ -12442,7 +14303,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -12454,7 +14315,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return score_serialized_name;
+      return score;
     }
  
     /**
@@ -12466,7 +14327,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
  
     /**
@@ -12478,7 +14339,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
 
     /**
@@ -12487,7 +14348,7 @@ public class IBMDiscoveryV1Models {
      * @param position the new position
      */
     public void setPosition(final long position) {
-      this.position_serialized_name = position;
+      this.position = position;
     }
 
     /**
@@ -12496,7 +14357,7 @@ public class IBMDiscoveryV1Models {
      * @param documentId the new documentId
      */
     public void setDocumentId(final String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
     }
 
     /**
@@ -12505,7 +14366,7 @@ public class IBMDiscoveryV1Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.score_serialized_name = score;
+      this.score = score;
     }
 
     /**
@@ -12514,7 +14375,7 @@ public class IBMDiscoveryV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+      this.confidence = confidence;
     }
 
     /**
@@ -12523,18 +14384,24 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the new collectionId
      */
     public void setCollectionId(final String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_id', 'documentId');
+      mapping.put('collection_id', 'collectionId');
+      return mapping;
+    }
   }
 
   /**
    * An aggregation analyzing log information for queries and events.
    */
   public class MetricAggregation extends IBMWatsonGenericModel {
-    private String interval_serialized_name;
-    private String event_type_serialized_name;
-    private List<MetricAggregationResult> results_serialized_name;
+    private String interval;
+    private String eventType;
+    private List<MetricAggregationResult> results;
  
     /**
      * Gets the interval.
@@ -12545,7 +14412,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getInterval() {
-      return interval_serialized_name;
+      return interval;
     }
  
     /**
@@ -12557,7 +14424,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEventType() {
-      return event_type_serialized_name;
+      return eventType;
     }
  
     /**
@@ -12569,7 +14436,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<MetricAggregationResult> getResults() {
-      return results_serialized_name;
+      return results;
     }
 
     /**
@@ -12578,7 +14445,7 @@ public class IBMDiscoveryV1Models {
      * @param interval the new interval
      */
     public void setInterval(final String interval) {
-      this.interval_serialized_name = interval;
+      this.interval = interval;
     }
 
     /**
@@ -12587,7 +14454,7 @@ public class IBMDiscoveryV1Models {
      * @param eventType the new eventType
      */
     public void setEventType(final String eventType) {
-      this.event_type_serialized_name = eventType;
+      this.eventType = eventType;
     }
 
     /**
@@ -12596,7 +14463,7 @@ public class IBMDiscoveryV1Models {
      * @param results the new results
      */
     public void setResults(final List<MetricAggregationResult> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12612,14 +14479,23 @@ public class IBMDiscoveryV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           MetricAggregationResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           MetricAggregationResult newItem = (MetricAggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregationResult.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('event_type', 'eventType');
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -12627,10 +14503,10 @@ public class IBMDiscoveryV1Models {
    * Aggregation result data for the requested metric.
    */
   public class MetricAggregationResult extends IBMWatsonGenericModel {
-    private Datetime key_as_string_serialized_name;
-    private Long key_serialized_name;
-    private Long matching_results_serialized_name;
-    private Double event_rate_serialized_name;
+    private Datetime keyAsString;
+    private Long key;
+    private Long matchingResults;
+    private Double eventRate;
  
     /**
      * Gets the keyAsString.
@@ -12641,7 +14517,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getKeyAsString() {
-      return key_as_string_serialized_name;
+      return keyAsString;
     }
  
     /**
@@ -12653,7 +14529,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getKey() {
-      return key_serialized_name;
+      return key;
     }
  
     /**
@@ -12665,7 +14541,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMatchingResults() {
-      return matching_results_serialized_name;
+      return matchingResults;
     }
  
     /**
@@ -12678,7 +14554,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Double getEventRate() {
-      return event_rate_serialized_name;
+      return eventRate;
     }
 
     /**
@@ -12687,7 +14563,7 @@ public class IBMDiscoveryV1Models {
      * @param keyAsString the new keyAsString
      */
     public void setKeyAsString(final Datetime keyAsString) {
-      this.key_as_string_serialized_name = keyAsString;
+      this.keyAsString = keyAsString;
     }
 
     /**
@@ -12696,7 +14572,7 @@ public class IBMDiscoveryV1Models {
      * @param key the new key
      */
     public void setKey(final long key) {
-      this.key_serialized_name = key;
+      this.key = key;
     }
 
     /**
@@ -12705,7 +14581,7 @@ public class IBMDiscoveryV1Models {
      * @param matchingResults the new matchingResults
      */
     public void setMatchingResults(final long matchingResults) {
-      this.matching_results_serialized_name = matchingResults;
+      this.matchingResults = matchingResults;
     }
 
     /**
@@ -12714,16 +14590,23 @@ public class IBMDiscoveryV1Models {
      * @param eventRate the new eventRate
      */
     public void setEventRate(final Double eventRate) {
-      this.event_rate_serialized_name = eventRate;
+      this.eventRate = eventRate;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('key_as_string', 'keyAsString');
+      mapping.put('matching_results', 'matchingResults');
+      mapping.put('event_rate', 'eventRate');
+      return mapping;
+    }
   }
 
   /**
    * The response generated from a call to a **metrics** method.
    */
   public class MetricResponse extends IBMWatsonResponseModel {
-    private List<MetricAggregation> aggregations_serialized_name;
+    private List<MetricAggregation> aggregations;
  
     /**
      * Gets the aggregations.
@@ -12734,7 +14617,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<MetricAggregation> getAggregations() {
-      return aggregations_serialized_name;
+      return aggregations;
     }
 
     /**
@@ -12743,7 +14626,7 @@ public class IBMDiscoveryV1Models {
      * @param aggregations the new aggregations
      */
     public void setAggregations(final List<MetricAggregation> aggregations) {
-      this.aggregations_serialized_name = aggregations;
+      this.aggregations = aggregations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12759,14 +14642,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedAggregations != null) {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           MetricAggregation currentItem = ret.getAggregations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
           MetricAggregation newItem = (MetricAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.aggregations_serialized_name = newAggregations;
+        ret.aggregations = newAggregations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (aggregations != null && aggregations[0] != null) {
+        mapping.putAll(aggregations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -12774,8 +14665,8 @@ public class IBMDiscoveryV1Models {
    * An aggregation analyzing log information for queries and events.
    */
   public class MetricTokenAggregation extends IBMWatsonGenericModel {
-    private String event_type_serialized_name;
-    private List<MetricTokenAggregationResult> results_serialized_name;
+    private String eventType;
+    private List<MetricTokenAggregationResult> results;
  
     /**
      * Gets the eventType.
@@ -12786,7 +14677,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEventType() {
-      return event_type_serialized_name;
+      return eventType;
     }
  
     /**
@@ -12798,7 +14689,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<MetricTokenAggregationResult> getResults() {
-      return results_serialized_name;
+      return results;
     }
 
     /**
@@ -12807,7 +14698,7 @@ public class IBMDiscoveryV1Models {
      * @param eventType the new eventType
      */
     public void setEventType(final String eventType) {
-      this.event_type_serialized_name = eventType;
+      this.eventType = eventType;
     }
 
     /**
@@ -12816,7 +14707,7 @@ public class IBMDiscoveryV1Models {
      * @param results the new results
      */
     public void setResults(final List<MetricTokenAggregationResult> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12832,14 +14723,23 @@ public class IBMDiscoveryV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           MetricTokenAggregationResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           MetricTokenAggregationResult newItem = (MetricTokenAggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregationResult.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('event_type', 'eventType');
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -12847,9 +14747,9 @@ public class IBMDiscoveryV1Models {
    * Aggregation result data for the requested metric.
    */
   public class MetricTokenAggregationResult extends IBMWatsonGenericModel {
-    private String key_serialized_name;
-    private Long matching_results_serialized_name;
-    private Double event_rate_serialized_name;
+    private String key;
+    private Long matchingResults;
+    private Double eventRate;
  
     /**
      * Gets the key.
@@ -12860,7 +14760,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getKey() {
-      return key_serialized_name;
+      return key;
     }
  
     /**
@@ -12872,7 +14772,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMatchingResults() {
-      return matching_results_serialized_name;
+      return matchingResults;
     }
  
     /**
@@ -12885,7 +14785,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Double getEventRate() {
-      return event_rate_serialized_name;
+      return eventRate;
     }
 
     /**
@@ -12894,7 +14794,7 @@ public class IBMDiscoveryV1Models {
      * @param key the new key
      */
     public void setKey(final String key) {
-      this.key_serialized_name = key;
+      this.key = key;
     }
 
     /**
@@ -12903,7 +14803,7 @@ public class IBMDiscoveryV1Models {
      * @param matchingResults the new matchingResults
      */
     public void setMatchingResults(final long matchingResults) {
-      this.matching_results_serialized_name = matchingResults;
+      this.matchingResults = matchingResults;
     }
 
     /**
@@ -12912,16 +14812,22 @@ public class IBMDiscoveryV1Models {
      * @param eventRate the new eventRate
      */
     public void setEventRate(final Double eventRate) {
-      this.event_rate_serialized_name = eventRate;
+      this.eventRate = eventRate;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('matching_results', 'matchingResults');
+      mapping.put('event_rate', 'eventRate');
+      return mapping;
+    }
   }
 
   /**
    * The response generated from a call to a **metrics** method that evaluates tokens.
    */
   public class MetricTokenResponse extends IBMWatsonResponseModel {
-    private List<MetricTokenAggregation> aggregations_serialized_name;
+    private List<MetricTokenAggregation> aggregations;
  
     /**
      * Gets the aggregations.
@@ -12932,7 +14838,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<MetricTokenAggregation> getAggregations() {
-      return aggregations_serialized_name;
+      return aggregations;
     }
 
     /**
@@ -12941,7 +14847,7 @@ public class IBMDiscoveryV1Models {
      * @param aggregations the new aggregations
      */
     public void setAggregations(final List<MetricTokenAggregation> aggregations) {
-      this.aggregations_serialized_name = aggregations;
+      this.aggregations = aggregations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12957,14 +14863,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedAggregations != null) {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           MetricTokenAggregation currentItem = ret.getAggregations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
           MetricTokenAggregation newItem = (MetricTokenAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.aggregations_serialized_name = newAggregations;
+        ret.aggregations = newAggregations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (aggregations != null && aggregations[0] != null) {
+        mapping.putAll(aggregations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -12973,6 +14887,12 @@ public class IBMDiscoveryV1Models {
    */
   public class NluEnrichmentCategories extends IBMWatsonDynamicModel {
     private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public NluEnrichmentCategories() { }
 
     /**
      * Gets the dynamic properties attached to NluEnrichmentCategories.
@@ -12984,22 +14904,59 @@ public class IBMDiscoveryV1Models {
       return this.getDynamicProperties();
     }
 
+    private NluEnrichmentCategories(NluEnrichmentCategoriesBuilder builder) {
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a NluEnrichmentCategories builder
+     */
+    public NluEnrichmentCategoriesBuilder newBuilder() {
+      return new NluEnrichmentCategoriesBuilder(this);
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
       NluEnrichmentCategories ret = (NluEnrichmentCategories) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentCategoriesBuilder retBuilder = ret.newBuilder();
 
+      NluEnrichmentCategories builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
+          builderResult.put(key, jsonMap.get(key));
         }
       }
 
-      return ret;
+      return builderResult;
+    }
+  }
+
+  /**
+   * NluEnrichmentCategories Builder.
+   */
+  public class NluEnrichmentCategoriesBuilder {
+
+    private NluEnrichmentCategoriesBuilder(NluEnrichmentCategories nluEnrichmentCategories) {
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public NluEnrichmentCategoriesBuilder() { }
+
+    /**
+     * Builds a NluEnrichmentCategories.
+     *
+     * @return the nluEnrichmentCategories
+     */
+    public NluEnrichmentCategories build() {
+      return new NluEnrichmentCategories(this);
     }
   }
 
@@ -13007,7 +14964,13 @@ public class IBMDiscoveryV1Models {
    * An object specifiying the concepts enrichment and related parameters.
    */
   public class NluEnrichmentConcepts extends IBMWatsonGenericModel {
-    private Long limit_serialized_name;
+    private Long xlimit;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public NluEnrichmentConcepts() { }
  
     /**
      * Gets the xlimit.
@@ -13018,26 +14981,78 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getXlimit() {
-      return limit_serialized_name;
+      return xlimit;
+    }
+  
+    private NluEnrichmentConcepts(NluEnrichmentConceptsBuilder builder) {
+      this.xlimit = builder.xlimit;
     }
 
     /**
-     * Sets the xlimit.
+     * New builder.
      *
-     * @param xlimit the new xlimit
+     * @return a NluEnrichmentConcepts builder
      */
-    public void setXlimit(final long xlimit) {
-      this.limit_serialized_name = xlimit;
+    public NluEnrichmentConceptsBuilder newBuilder() {
+      return new NluEnrichmentConceptsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xlimit', 'limit');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('limit', 'xlimit');
+      return mapping;
+    }
+  }
+
+  /**
+   * NluEnrichmentConcepts Builder.
+   */
+  public class NluEnrichmentConceptsBuilder {
+    private Long xlimit;
+
+    private NluEnrichmentConceptsBuilder(NluEnrichmentConcepts nluEnrichmentConcepts) {
+      this.xlimit = nluEnrichmentConcepts.xlimit;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public NluEnrichmentConceptsBuilder() {
+    }
+
+    /**
+     * Builds a NluEnrichmentConcepts.
+     *
+     * @return the nluEnrichmentConcepts
+     */
+    public NluEnrichmentConcepts build() {
+      return new NluEnrichmentConcepts(this);
+    }
+
+    /**
+     * Set the xlimit.
+     *
+     * @param xlimit the xlimit
+     * @return the NluEnrichmentConcepts builder
+     */
+    public NluEnrichmentConceptsBuilder setXlimit(Long xlimit) {
+      this.xlimit = xlimit;
+      return this;
+    }
   }
 
   /**
    * An object specifying the emotion detection enrichment and related parameters.
    */
   public class NluEnrichmentEmotion extends IBMWatsonGenericModel {
-    private Boolean document_serialized_name;
-    private List<String> targets_serialized_name;
+    private Boolean document;
+    private List<String> targets;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -13054,7 +15069,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getDocument() {
-      return document_serialized_name;
+      return document;
     }
  
     /**
@@ -13066,12 +15081,12 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getTargets() {
-      return targets_serialized_name;
+      return targets;
     }
   
     private NluEnrichmentEmotion(NluEnrichmentEmotionBuilder builder) {
-      this.document_serialized_name = builder.document;
-      this.targets_serialized_name = builder.targets;
+      this.document = builder.document;
+      this.targets = builder.targets;
     }
 
     /**
@@ -13082,7 +15097,6 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentEmotionBuilder newBuilder() {
       return new NluEnrichmentEmotionBuilder(this);
     }
-
   }
 
   /**
@@ -13093,8 +15107,8 @@ public class IBMDiscoveryV1Models {
     private List<String> targets;
 
     private NluEnrichmentEmotionBuilder(NluEnrichmentEmotion nluEnrichmentEmotion) {
-      this.document = nluEnrichmentEmotion.document_serialized_name;
-      this.targets = nluEnrichmentEmotion.targets_serialized_name;
+      this.document = nluEnrichmentEmotion.document;
+      this.targets = nluEnrichmentEmotion.targets;
     }
 
     /**
@@ -13155,13 +15169,13 @@ public class IBMDiscoveryV1Models {
    * An object speficying the Entities enrichment and related parameters.
    */
   public class NluEnrichmentEntities extends IBMWatsonGenericModel {
-    private Boolean sentiment_serialized_name;
-    private Boolean emotion_serialized_name;
-    private Long limit_serialized_name;
-    private Boolean mentions_serialized_name;
-    private Boolean mention_types_serialized_name;
-    private Boolean sentence_locations_serialized_name;
-    private String model_serialized_name;
+    private Boolean sentiment;
+    private Boolean emotion;
+    private Long xlimit;
+    private Boolean mentions;
+    private Boolean mentionTypes;
+    private Boolean sentenceLocations;
+    private String model;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -13178,7 +15192,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getSentiment() {
-      return sentiment_serialized_name;
+      return sentiment;
     }
  
     /**
@@ -13190,7 +15204,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getEmotion() {
-      return emotion_serialized_name;
+      return emotion;
     }
  
     /**
@@ -13202,7 +15216,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getXlimit() {
-      return limit_serialized_name;
+      return xlimit;
     }
  
     /**
@@ -13214,7 +15228,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getMentions() {
-      return mentions_serialized_name;
+      return mentions;
     }
  
     /**
@@ -13226,7 +15240,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getMentionTypes() {
-      return mention_types_serialized_name;
+      return mentionTypes;
     }
  
     /**
@@ -13239,7 +15253,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getSentenceLocations() {
-      return sentence_locations_serialized_name;
+      return sentenceLocations;
     }
  
     /**
@@ -13252,17 +15266,17 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getModel() {
-      return model_serialized_name;
+      return model;
     }
   
     private NluEnrichmentEntities(NluEnrichmentEntitiesBuilder builder) {
-      this.sentiment_serialized_name = builder.sentiment;
-      this.emotion_serialized_name = builder.emotion;
-      this.limit_serialized_name = builder.xlimit;
-      this.mentions_serialized_name = builder.mentions;
-      this.mention_types_serialized_name = builder.mentionTypes;
-      this.sentence_locations_serialized_name = builder.sentenceLocations;
-      this.model_serialized_name = builder.model;
+      this.sentiment = builder.sentiment;
+      this.emotion = builder.emotion;
+      this.xlimit = builder.xlimit;
+      this.mentions = builder.mentions;
+      this.mentionTypes = builder.mentionTypes;
+      this.sentenceLocations = builder.sentenceLocations;
+      this.model = builder.model;
     }
 
     /**
@@ -13274,6 +15288,21 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentEntitiesBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xlimit', 'limit');
+      mapping.put('mentionTypes', 'mention_types');
+      mapping.put('sentenceLocations', 'sentence_locations');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('limit', 'xlimit');
+      mapping.put('mention_types', 'mentionTypes');
+      mapping.put('sentence_locations', 'sentenceLocations');
+      return mapping;
+    }
   }
 
   /**
@@ -13289,13 +15318,13 @@ public class IBMDiscoveryV1Models {
     private String model;
 
     private NluEnrichmentEntitiesBuilder(NluEnrichmentEntities nluEnrichmentEntities) {
-      this.sentiment = nluEnrichmentEntities.sentiment_serialized_name;
-      this.emotion = nluEnrichmentEntities.emotion_serialized_name;
-      this.xlimit = nluEnrichmentEntities.limit_serialized_name;
-      this.mentions = nluEnrichmentEntities.mentions_serialized_name;
-      this.mentionTypes = nluEnrichmentEntities.mention_types_serialized_name;
-      this.sentenceLocations = nluEnrichmentEntities.sentence_locations_serialized_name;
-      this.model = nluEnrichmentEntities.model_serialized_name;
+      this.sentiment = nluEnrichmentEntities.sentiment;
+      this.emotion = nluEnrichmentEntities.emotion;
+      this.xlimit = nluEnrichmentEntities.xlimit;
+      this.mentions = nluEnrichmentEntities.mentions;
+      this.mentionTypes = nluEnrichmentEntities.mentionTypes;
+      this.sentenceLocations = nluEnrichmentEntities.sentenceLocations;
+      this.model = nluEnrichmentEntities.model;
     }
 
     /**
@@ -13395,14 +15424,14 @@ public class IBMDiscoveryV1Models {
    * NluEnrichmentFeatures.
    */
   public class NluEnrichmentFeatures extends IBMWatsonGenericModel {
-    private NluEnrichmentKeywords keywords_serialized_name;
-    private NluEnrichmentEntities entities_serialized_name;
-    private NluEnrichmentSentiment sentiment_serialized_name;
-    private NluEnrichmentEmotion emotion_serialized_name;
-    private NluEnrichmentCategories categories_serialized_name;
-    private NluEnrichmentSemanticRoles semantic_roles_serialized_name;
-    private NluEnrichmentRelations relations_serialized_name;
-    private NluEnrichmentConcepts concepts_serialized_name;
+    private NluEnrichmentKeywords keywords;
+    private NluEnrichmentEntities entities;
+    private NluEnrichmentSentiment sentiment;
+    private NluEnrichmentEmotion emotion;
+    private NluEnrichmentCategories categories;
+    private NluEnrichmentSemanticRoles semanticRoles;
+    private NluEnrichmentRelations relations;
+    private NluEnrichmentConcepts concepts;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -13419,7 +15448,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentKeywords getKeywords() {
-      return keywords_serialized_name;
+      return keywords;
     }
  
     /**
@@ -13431,7 +15460,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentEntities getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
  
     /**
@@ -13443,7 +15472,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentSentiment getSentiment() {
-      return sentiment_serialized_name;
+      return sentiment;
     }
  
     /**
@@ -13455,7 +15484,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentEmotion getEmotion() {
-      return emotion_serialized_name;
+      return emotion;
     }
  
     /**
@@ -13467,7 +15496,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentCategories getCategories() {
-      return categories_serialized_name;
+      return categories;
     }
  
     /**
@@ -13479,7 +15508,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentSemanticRoles getSemanticRoles() {
-      return semantic_roles_serialized_name;
+      return semanticRoles;
     }
  
     /**
@@ -13491,7 +15520,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentRelations getRelations() {
-      return relations_serialized_name;
+      return relations;
     }
  
     /**
@@ -13503,18 +15532,18 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public NluEnrichmentConcepts getConcepts() {
-      return concepts_serialized_name;
+      return concepts;
     }
   
     private NluEnrichmentFeatures(NluEnrichmentFeaturesBuilder builder) {
-      this.keywords_serialized_name = builder.keywords;
-      this.entities_serialized_name = builder.entities;
-      this.sentiment_serialized_name = builder.sentiment;
-      this.emotion_serialized_name = builder.emotion;
-      this.categories_serialized_name = builder.categories;
-      this.semantic_roles_serialized_name = builder.semanticRoles;
-      this.relations_serialized_name = builder.relations;
-      this.concepts_serialized_name = builder.concepts;
+      this.keywords = builder.keywords;
+      this.entities = builder.entities;
+      this.sentiment = builder.sentiment;
+      this.emotion = builder.emotion;
+      this.categories = builder.categories;
+      this.semanticRoles = builder.semanticRoles;
+      this.relations = builder.relations;
+      this.concepts = builder.concepts;
     }
 
     /**
@@ -13535,38 +15564,74 @@ public class IBMDiscoveryV1Models {
       NluEnrichmentFeaturesBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for keywords
-      NluEnrichmentKeywords newKeywords = (NluEnrichmentKeywords) new NluEnrichmentKeywords().deserialize(JSON.serialize(ret.getKeywords()), (Map<String, Object>) jsonMap.get('keywords_serialized_name'), NluEnrichmentKeywords.class);
+      NluEnrichmentKeywords newKeywords = (NluEnrichmentKeywords) new NluEnrichmentKeywords().deserialize(JSON.serialize(ret.getKeywords()), (Map<String, Object>) jsonMap.get('keywords'), NluEnrichmentKeywords.class);
       retBuilder.keywords(newKeywords);
 
       // calling custom deserializer for entities
-      NluEnrichmentEntities newEntities = (NluEnrichmentEntities) new NluEnrichmentEntities().deserialize(JSON.serialize(ret.getEntities()), (Map<String, Object>) jsonMap.get('entities_serialized_name'), NluEnrichmentEntities.class);
+      NluEnrichmentEntities newEntities = (NluEnrichmentEntities) new NluEnrichmentEntities().deserialize(JSON.serialize(ret.getEntities()), (Map<String, Object>) jsonMap.get('entities'), NluEnrichmentEntities.class);
       retBuilder.entities(newEntities);
 
       // calling custom deserializer for sentiment
-      NluEnrichmentSentiment newSentiment = (NluEnrichmentSentiment) new NluEnrichmentSentiment().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment_serialized_name'), NluEnrichmentSentiment.class);
+      NluEnrichmentSentiment newSentiment = (NluEnrichmentSentiment) new NluEnrichmentSentiment().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment'), NluEnrichmentSentiment.class);
       retBuilder.sentiment(newSentiment);
 
       // calling custom deserializer for emotion
-      NluEnrichmentEmotion newEmotion = (NluEnrichmentEmotion) new NluEnrichmentEmotion().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion_serialized_name'), NluEnrichmentEmotion.class);
+      NluEnrichmentEmotion newEmotion = (NluEnrichmentEmotion) new NluEnrichmentEmotion().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion'), NluEnrichmentEmotion.class);
       retBuilder.emotion(newEmotion);
 
       // calling custom deserializer for categories
-      NluEnrichmentCategories newCategories = (NluEnrichmentCategories) new NluEnrichmentCategories().deserialize(JSON.serialize(ret.getCategories()), (Map<String, Object>) jsonMap.get('categories_serialized_name'), NluEnrichmentCategories.class);
+      NluEnrichmentCategories newCategories = (NluEnrichmentCategories) new NluEnrichmentCategories().deserialize(JSON.serialize(ret.getCategories()), (Map<String, Object>) jsonMap.get('categories'), NluEnrichmentCategories.class);
       retBuilder.categories(newCategories);
 
       // calling custom deserializer for semanticRoles
-      NluEnrichmentSemanticRoles newSemanticRoles = (NluEnrichmentSemanticRoles) new NluEnrichmentSemanticRoles().deserialize(JSON.serialize(ret.getSemanticRoles()), (Map<String, Object>) jsonMap.get('semantic_roles_serialized_name'), NluEnrichmentSemanticRoles.class);
+      NluEnrichmentSemanticRoles newSemanticRoles = (NluEnrichmentSemanticRoles) new NluEnrichmentSemanticRoles().deserialize(JSON.serialize(ret.getSemanticRoles()), (Map<String, Object>) jsonMap.get('semanticRoles'), NluEnrichmentSemanticRoles.class);
       retBuilder.semanticRoles(newSemanticRoles);
 
       // calling custom deserializer for relations
-      NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(ret.getRelations()), (Map<String, Object>) jsonMap.get('relations_serialized_name'), NluEnrichmentRelations.class);
+      NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(ret.getRelations()), (Map<String, Object>) jsonMap.get('relations'), NluEnrichmentRelations.class);
       retBuilder.relations(newRelations);
 
       // calling custom deserializer for concepts
-      NluEnrichmentConcepts newConcepts = (NluEnrichmentConcepts) new NluEnrichmentConcepts().deserialize(JSON.serialize(ret.getConcepts()), (Map<String, Object>) jsonMap.get('concepts_serialized_name'), NluEnrichmentConcepts.class);
+      NluEnrichmentConcepts newConcepts = (NluEnrichmentConcepts) new NluEnrichmentConcepts().deserialize(JSON.serialize(ret.getConcepts()), (Map<String, Object>) jsonMap.get('concepts'), NluEnrichmentConcepts.class);
       retBuilder.concepts(newConcepts);
 
       return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (keywords != null) {
+        mapping.putAll(keywords.getSdkToApiMapping());
+      }
+      if (entities != null) {
+        mapping.putAll(entities.getSdkToApiMapping());
+      }
+      mapping.put('semanticRoles', 'semantic_roles');
+      if (semanticRoles != null) {
+        mapping.putAll(semanticRoles.getSdkToApiMapping());
+      }
+      if (concepts != null) {
+        mapping.putAll(concepts.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (keywords != null) {
+        mapping.putAll(keywords.getApiToSdkMapping());
+      }
+      if (entities != null) {
+        mapping.putAll(entities.getApiToSdkMapping());
+      }
+      mapping.put('semantic_roles', 'semanticRoles');
+      if (semanticRoles != null) {
+        mapping.putAll(semanticRoles.getApiToSdkMapping());
+      }
+      if (concepts != null) {
+        mapping.putAll(concepts.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -13584,14 +15649,14 @@ public class IBMDiscoveryV1Models {
     private NluEnrichmentConcepts concepts;
 
     private NluEnrichmentFeaturesBuilder(NluEnrichmentFeatures nluEnrichmentFeatures) {
-      this.keywords = nluEnrichmentFeatures.keywords_serialized_name;
-      this.entities = nluEnrichmentFeatures.entities_serialized_name;
-      this.sentiment = nluEnrichmentFeatures.sentiment_serialized_name;
-      this.emotion = nluEnrichmentFeatures.emotion_serialized_name;
-      this.categories = nluEnrichmentFeatures.categories_serialized_name;
-      this.semanticRoles = nluEnrichmentFeatures.semantic_roles_serialized_name;
-      this.relations = nluEnrichmentFeatures.relations_serialized_name;
-      this.concepts = nluEnrichmentFeatures.concepts_serialized_name;
+      this.keywords = nluEnrichmentFeatures.keywords;
+      this.entities = nluEnrichmentFeatures.entities;
+      this.sentiment = nluEnrichmentFeatures.sentiment;
+      this.emotion = nluEnrichmentFeatures.emotion;
+      this.categories = nluEnrichmentFeatures.categories;
+      this.semanticRoles = nluEnrichmentFeatures.semanticRoles;
+      this.relations = nluEnrichmentFeatures.relations;
+      this.concepts = nluEnrichmentFeatures.concepts;
     }
 
     /**
@@ -13702,9 +15767,9 @@ public class IBMDiscoveryV1Models {
    * An object specifying the Keyword enrichment and related parameters.
    */
   public class NluEnrichmentKeywords extends IBMWatsonGenericModel {
-    private Boolean sentiment_serialized_name;
-    private Boolean emotion_serialized_name;
-    private Long limit_serialized_name;
+    private Boolean sentiment;
+    private Boolean emotion;
+    private Long xlimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -13721,7 +15786,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getSentiment() {
-      return sentiment_serialized_name;
+      return sentiment;
     }
  
     /**
@@ -13733,7 +15798,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getEmotion() {
-      return emotion_serialized_name;
+      return emotion;
     }
  
     /**
@@ -13745,13 +15810,13 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getXlimit() {
-      return limit_serialized_name;
+      return xlimit;
     }
   
     private NluEnrichmentKeywords(NluEnrichmentKeywordsBuilder builder) {
-      this.sentiment_serialized_name = builder.sentiment;
-      this.emotion_serialized_name = builder.emotion;
-      this.limit_serialized_name = builder.xlimit;
+      this.sentiment = builder.sentiment;
+      this.emotion = builder.emotion;
+      this.xlimit = builder.xlimit;
     }
 
     /**
@@ -13763,6 +15828,17 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentKeywordsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xlimit', 'limit');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('limit', 'xlimit');
+      return mapping;
+    }
   }
 
   /**
@@ -13774,9 +15850,9 @@ public class IBMDiscoveryV1Models {
     private Long xlimit;
 
     private NluEnrichmentKeywordsBuilder(NluEnrichmentKeywords nluEnrichmentKeywords) {
-      this.sentiment = nluEnrichmentKeywords.sentiment_serialized_name;
-      this.emotion = nluEnrichmentKeywords.emotion_serialized_name;
-      this.xlimit = nluEnrichmentKeywords.limit_serialized_name;
+      this.sentiment = nluEnrichmentKeywords.sentiment;
+      this.emotion = nluEnrichmentKeywords.emotion;
+      this.xlimit = nluEnrichmentKeywords.xlimit;
     }
 
     /**
@@ -13832,7 +15908,13 @@ public class IBMDiscoveryV1Models {
    * An object specifying the relations enrichment and related parameters.
    */
   public class NluEnrichmentRelations extends IBMWatsonGenericModel {
-    private String model_serialized_name;
+    private String model;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public NluEnrichmentRelations() { }
  
     /**
      * Gets the model.
@@ -13845,27 +15927,67 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getModel() {
-      return model_serialized_name;
+      return model;
+    }
+  
+    private NluEnrichmentRelations(NluEnrichmentRelationsBuilder builder) {
+      this.model = builder.model;
     }
 
     /**
-     * Sets the model.
+     * New builder.
      *
-     * @param model the new model
+     * @return a NluEnrichmentRelations builder
      */
-    public void setModel(final String model) {
-      this.model_serialized_name = model;
+    public NluEnrichmentRelationsBuilder newBuilder() {
+      return new NluEnrichmentRelationsBuilder(this);
+    }
+  }
+
+  /**
+   * NluEnrichmentRelations Builder.
+   */
+  public class NluEnrichmentRelationsBuilder {
+    private String model;
+
+    private NluEnrichmentRelationsBuilder(NluEnrichmentRelations nluEnrichmentRelations) {
+      this.model = nluEnrichmentRelations.model;
     }
 
+    /**
+     * Instantiates a new builder.
+     */
+    public NluEnrichmentRelationsBuilder() {
+    }
+
+    /**
+     * Builds a NluEnrichmentRelations.
+     *
+     * @return the nluEnrichmentRelations
+     */
+    public NluEnrichmentRelations build() {
+      return new NluEnrichmentRelations(this);
+    }
+
+    /**
+     * Set the model.
+     *
+     * @param model the model
+     * @return the NluEnrichmentRelations builder
+     */
+    public NluEnrichmentRelationsBuilder setModel(String model) {
+      this.model = model;
+      return this;
+    }
   }
 
   /**
    * An object specifiying the semantic roles enrichment and related parameters.
    */
   public class NluEnrichmentSemanticRoles extends IBMWatsonGenericModel {
-    private Boolean entities_serialized_name;
-    private Boolean keywords_serialized_name;
-    private Long limit_serialized_name;
+    private Boolean entities;
+    private Boolean keywords;
+    private Long xlimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -13882,7 +16004,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
  
     /**
@@ -13894,7 +16016,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getKeywords() {
-      return keywords_serialized_name;
+      return keywords;
     }
  
     /**
@@ -13906,13 +16028,13 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getXlimit() {
-      return limit_serialized_name;
+      return xlimit;
     }
   
     private NluEnrichmentSemanticRoles(NluEnrichmentSemanticRolesBuilder builder) {
-      this.entities_serialized_name = builder.entities;
-      this.keywords_serialized_name = builder.keywords;
-      this.limit_serialized_name = builder.xlimit;
+      this.entities = builder.entities;
+      this.keywords = builder.keywords;
+      this.xlimit = builder.xlimit;
     }
 
     /**
@@ -13924,6 +16046,17 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentSemanticRolesBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xlimit', 'limit');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('limit', 'xlimit');
+      return mapping;
+    }
   }
 
   /**
@@ -13935,9 +16068,9 @@ public class IBMDiscoveryV1Models {
     private Long xlimit;
 
     private NluEnrichmentSemanticRolesBuilder(NluEnrichmentSemanticRoles nluEnrichmentSemanticRoles) {
-      this.entities = nluEnrichmentSemanticRoles.entities_serialized_name;
-      this.keywords = nluEnrichmentSemanticRoles.keywords_serialized_name;
-      this.xlimit = nluEnrichmentSemanticRoles.limit_serialized_name;
+      this.entities = nluEnrichmentSemanticRoles.entities;
+      this.keywords = nluEnrichmentSemanticRoles.keywords;
+      this.xlimit = nluEnrichmentSemanticRoles.xlimit;
     }
 
     /**
@@ -13993,8 +16126,8 @@ public class IBMDiscoveryV1Models {
    * An object specifying the sentiment extraction enrichment and related parameters.
    */
   public class NluEnrichmentSentiment extends IBMWatsonGenericModel {
-    private Boolean document_serialized_name;
-    private List<String> targets_serialized_name;
+    private Boolean document;
+    private List<String> targets;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -14011,7 +16144,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getDocument() {
-      return document_serialized_name;
+      return document;
     }
  
     /**
@@ -14023,12 +16156,12 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getTargets() {
-      return targets_serialized_name;
+      return targets;
     }
   
     private NluEnrichmentSentiment(NluEnrichmentSentimentBuilder builder) {
-      this.document_serialized_name = builder.document;
-      this.targets_serialized_name = builder.targets;
+      this.document = builder.document;
+      this.targets = builder.targets;
     }
 
     /**
@@ -14039,7 +16172,6 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentSentimentBuilder newBuilder() {
       return new NluEnrichmentSentimentBuilder(this);
     }
-
   }
 
   /**
@@ -14050,8 +16182,8 @@ public class IBMDiscoveryV1Models {
     private List<String> targets;
 
     private NluEnrichmentSentimentBuilder(NluEnrichmentSentiment nluEnrichmentSentiment) {
-      this.document = nluEnrichmentSentiment.document_serialized_name;
-      this.targets = nluEnrichmentSentiment.targets_serialized_name;
+      this.document = nluEnrichmentSentiment.document;
+      this.targets = nluEnrichmentSentiment.targets;
     }
 
     /**
@@ -14112,9 +16244,15 @@ public class IBMDiscoveryV1Models {
    * NormalizationOperation.
    */
   public class NormalizationOperation extends IBMWatsonGenericModel {
-    private String operation_serialized_name;
-    private String source_field_serialized_name;
-    private String destination_field_serialized_name;
+    private String operation;
+    private String sourceField;
+    private String destinationField;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public NormalizationOperation() { }
  
     /**
      * Gets the operation.
@@ -14148,7 +16286,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getOperation() {
-      return operation_serialized_name;
+      return operation;
     }
  
     /**
@@ -14160,7 +16298,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSourceField() {
-      return source_field_serialized_name;
+      return sourceField;
     }
  
     /**
@@ -14172,49 +16310,113 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDestinationField() {
-      return destination_field_serialized_name;
+      return destinationField;
+    }
+  
+    private NormalizationOperation(NormalizationOperationBuilder builder) {
+      this.operation = builder.operation;
+      this.sourceField = builder.sourceField;
+      this.destinationField = builder.destinationField;
     }
 
     /**
-     * Sets the operation.
+     * New builder.
      *
-     * @param operation the new operation
+     * @return a NormalizationOperation builder
      */
-    public void setOperation(final String operation) {
-      this.operation_serialized_name = operation;
+    public NormalizationOperationBuilder newBuilder() {
+      return new NormalizationOperationBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('sourceField', 'source_field');
+      mapping.put('destinationField', 'destination_field');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('source_field', 'sourceField');
+      mapping.put('destination_field', 'destinationField');
+      return mapping;
+    }
+  }
+
+  /**
+   * NormalizationOperation Builder.
+   */
+  public class NormalizationOperationBuilder {
+    private String operation;
+    private String sourceField;
+    private String destinationField;
+
+    private NormalizationOperationBuilder(NormalizationOperation normalizationOperation) {
+      this.operation = normalizationOperation.operation;
+      this.sourceField = normalizationOperation.sourceField;
+      this.destinationField = normalizationOperation.destinationField;
     }
 
     /**
-     * Sets the sourceField.
-     *
-     * @param sourceField the new sourceField
+     * Instantiates a new builder.
      */
-    public void setSourceField(final String sourceField) {
-      this.source_field_serialized_name = sourceField;
+    public NormalizationOperationBuilder() {
     }
 
     /**
-     * Sets the destinationField.
+     * Builds a NormalizationOperation.
      *
-     * @param destinationField the new destinationField
+     * @return the normalizationOperation
      */
-    public void setDestinationField(final String destinationField) {
-      this.destination_field_serialized_name = destinationField;
+    public NormalizationOperation build() {
+      return new NormalizationOperation(this);
     }
 
+    /**
+     * Set the operation.
+     *
+     * @param operation the operation
+     * @return the NormalizationOperation builder
+     */
+    public NormalizationOperationBuilder setOperation(String operation) {
+      this.operation = operation;
+      return this;
+    }
+
+    /**
+     * Set the sourceField.
+     *
+     * @param sourceField the sourceField
+     * @return the NormalizationOperation builder
+     */
+    public NormalizationOperationBuilder setSourceField(String sourceField) {
+      this.sourceField = sourceField;
+      return this;
+    }
+
+    /**
+     * Set the destinationField.
+     *
+     * @param destinationField the destinationField
+     * @return the NormalizationOperation builder
+     */
+    public NormalizationOperationBuilder setDestinationField(String destinationField) {
+      this.destinationField = destinationField;
+      return this;
+    }
   }
 
   /**
    * A notice produced for the collection.
    */
   public class Notice extends IBMWatsonGenericModel {
-    private String notice_id_serialized_name;
-    private Datetime created_serialized_name;
-    private String document_id_serialized_name;
-    private String query_id_serialized_name;
-    private String severity_serialized_name;
-    private String step_serialized_name;
-    private String description_serialized_name;
+    private String noticeId;
+    private Datetime created;
+    private String documentId;
+    private String queryId;
+    private String severity;
+    private String step;
+    private String description;
  
     /**
      * Gets the noticeId.
@@ -14233,7 +16435,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getNoticeId() {
-      return notice_id_serialized_name;
+      return noticeId;
     }
  
     /**
@@ -14245,7 +16447,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -14257,7 +16459,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -14269,7 +16471,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getQueryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
  
     /**
@@ -14281,7 +16483,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSeverity() {
-      return severity_serialized_name;
+      return severity;
     }
  
     /**
@@ -14295,7 +16497,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStep() {
-      return step_serialized_name;
+      return step;
     }
  
     /**
@@ -14307,16 +16509,29 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('notice_id', 'noticeId');
+      mapping.put('document_id', 'documentId');
+      mapping.put('query_id', 'queryId');
+      return mapping;
+    }
   }
 
   /**
    * PdfHeadingDetection.
    */
   public class PdfHeadingDetection extends IBMWatsonGenericModel {
-    private List<FontSetting> fonts_serialized_name;
+    private List<FontSetting> fonts;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public PdfHeadingDetection() { }
  
     /**
      * Gets the fonts.
@@ -14325,16 +16540,20 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<FontSetting> getFonts() {
-      return fonts_serialized_name;
+      return fonts;
+    }
+  
+    private PdfHeadingDetection(PdfHeadingDetectionBuilder builder) {
+      this.fonts = builder.fonts;
     }
 
     /**
-     * Sets the fonts.
+     * New builder.
      *
-     * @param fonts the new fonts
+     * @return a PdfHeadingDetection builder
      */
-    public void setFonts(final List<FontSetting> fonts) {
-      this.fonts_serialized_name = fonts;
+    public PdfHeadingDetectionBuilder newBuilder() {
+      return new PdfHeadingDetectionBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -14343,6 +16562,7 @@ public class IBMDiscoveryV1Models {
       }
 
       PdfHeadingDetection ret = (PdfHeadingDetection) super.deserialize(jsonString, jsonMap, classType);
+      PdfHeadingDetectionBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for fonts
       List<FontSetting> newFonts = new List<FontSetting>();
@@ -14350,14 +16570,83 @@ public class IBMDiscoveryV1Models {
       if (deserializedFonts != null) {
         for (Integer i = 0; i < deserializedFonts.size(); i++) {
           FontSetting currentItem = ret.getFonts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('fonts_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('fonts');
           FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
-        ret.fonts_serialized_name = newFonts;
+        retBuilder.setFonts(newFonts);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (fonts != null && fonts[0] != null) {
+        mapping.putAll(fonts[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (fonts != null && fonts[0] != null) {
+        mapping.putAll(fonts[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * PdfHeadingDetection Builder.
+   */
+  public class PdfHeadingDetectionBuilder {
+    private List<FontSetting> fonts;
+
+    private PdfHeadingDetectionBuilder(PdfHeadingDetection pdfHeadingDetection) {
+      this.fonts = pdfHeadingDetection.fonts;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public PdfHeadingDetectionBuilder() {
+    }
+
+    /**
+     * Builds a PdfHeadingDetection.
+     *
+     * @return the pdfHeadingDetection
+     */
+    public PdfHeadingDetection build() {
+      return new PdfHeadingDetection(this);
+    }
+
+    /**
+     * Adds an fonts to fonts.
+     *
+     * @param fonts the new fonts
+     * @return the PdfHeadingDetection builder
+     */
+    public PdfHeadingDetectionBuilder addFonts(FontSetting fonts) {
+      IBMWatsonValidator.notNull(fonts, 'fonts cannot be null');
+      if (this.fonts == null) {
+        this.fonts = new List<FontSetting>();
+      }
+      this.fonts.add(fonts);
+      return this;
+    }
+
+    /**
+     * Set the fonts.
+     * Existing fonts will be replaced.
+     *
+     * @param fonts the fonts
+     * @return the PdfHeadingDetection builder
+     */
+    public PdfHeadingDetectionBuilder setFonts(List<FontSetting> fonts) {
+      this.fonts = fonts;
+      return this;
     }
   }
 
@@ -14365,7 +16654,13 @@ public class IBMDiscoveryV1Models {
    * A list of PDF conversion settings.
    */
   public class PdfSettings extends IBMWatsonGenericModel {
-    private PdfHeadingDetection heading_serialized_name;
+    private PdfHeadingDetection heading;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public PdfSettings() { }
  
     /**
      * Gets the heading.
@@ -14374,16 +16669,20 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public PdfHeadingDetection getHeading() {
-      return heading_serialized_name;
+      return heading;
+    }
+  
+    private PdfSettings(PdfSettingsBuilder builder) {
+      this.heading = builder.heading;
     }
 
     /**
-     * Sets the heading.
+     * New builder.
      *
-     * @param heading the new heading
+     * @return a PdfSettings builder
      */
-    public void setHeading(final PdfHeadingDetection heading) {
-      this.heading_serialized_name = heading;
+    public PdfSettingsBuilder newBuilder() {
+      return new PdfSettingsBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -14392,12 +16691,66 @@ public class IBMDiscoveryV1Models {
       }
 
       PdfSettings ret = (PdfSettings) super.deserialize(jsonString, jsonMap, classType);
+      PdfSettingsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for heading
-      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading_serialized_name'), PdfHeadingDetection.class);
-      ret.setHeading(newHeading);
+      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading'), PdfHeadingDetection.class);
+      retBuilder.setHeading(newHeading);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (heading != null) {
+        mapping.putAll(heading.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (heading != null) {
+        mapping.putAll(heading.getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * PdfSettings Builder.
+   */
+  public class PdfSettingsBuilder {
+    private PdfHeadingDetection heading;
+
+    private PdfSettingsBuilder(PdfSettings pdfSettings) {
+      this.heading = pdfSettings.heading;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public PdfSettingsBuilder() {
+    }
+
+    /**
+     * Builds a PdfSettings.
+     *
+     * @return the pdfSettings
+     */
+    public PdfSettings build() {
+      return new PdfSettings(this);
+    }
+
+    /**
+     * Set the heading.
+     *
+     * @param heading the heading
+     * @return the PdfSettings builder
+     */
+    public PdfSettingsBuilder setHeading(PdfHeadingDetection heading) {
+      this.heading = heading;
+      return this;
     }
   }
 
@@ -14405,20 +16758,20 @@ public class IBMDiscoveryV1Models {
    * An aggregation produced by  Discovery to analyze the input provided.
    */
   public class QueryAggregation extends IBMWatsonGenericModel {
-    private String type_serialized_name;
-    private List<AggregationResult> results_serialized_name;
-    private Long matching_results_serialized_name;
-    private List<QueryAggregation> aggregations_serialized_name;
-    private String field_serialized_name;
-    private Long histogram_interval_serialized_name;
-    private Double value_serialized_name;
-    private Long count_serialized_name;
-    private String match_serialized_name;
-    private String path_serialized_name;
-    private String timeslice_interval_serialized_name;
-    private Boolean anomaly_serialized_name;
-    private Long size_serialized_name;
-    private TopHitsResults hits_serialized_name;
+    private String xtype;
+    private List<AggregationResult> results;
+    private Long matchingResults;
+    private List<QueryAggregation> aggregations;
+    private String field;
+    private Long histogramInterval;
+    private Double value;
+    private Long count;
+    private String match;
+    private String path;
+    private String timesliceInterval;
+    private Boolean anomaly;
+    private Long size;
+    private TopHitsResults hits;
  
     /**
      * Gets the xtype.
@@ -14429,7 +16782,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -14441,7 +16794,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<AggregationResult> getResults() {
-      return results_serialized_name;
+      return results;
     }
  
     /**
@@ -14453,7 +16806,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMatchingResults() {
-      return matching_results_serialized_name;
+      return matchingResults;
     }
  
     /**
@@ -14465,7 +16818,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
-      return aggregations_serialized_name;
+      return aggregations;
     }
  
     /**
@@ -14477,7 +16830,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getField() {
-      return field_serialized_name;
+      return field;
     }
  
     /**
@@ -14489,7 +16842,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getHistogramInterval() {
-      return histogram_interval_serialized_name;
+      return histogramInterval;
     }
  
     /**
@@ -14501,7 +16854,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Double getValue() {
-      return value_serialized_name;
+      return value;
     }
  
     /**
@@ -14511,7 +16864,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getCount() {
-      return count_serialized_name;
+      return count;
     }
  
     /**
@@ -14523,7 +16876,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getMatch() {
-      return match_serialized_name;
+      return match;
     }
  
     /**
@@ -14535,7 +16888,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getPath() {
-      return path_serialized_name;
+      return path;
     }
  
     /**
@@ -14548,7 +16901,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getTimesliceInterval() {
-      return timeslice_interval_serialized_name;
+      return timesliceInterval;
     }
  
     /**
@@ -14561,7 +16914,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getAnomaly() {
-      return anomaly_serialized_name;
+      return anomaly;
     }
  
     /**
@@ -14573,7 +16926,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getSize() {
-      return size_serialized_name;
+      return size;
     }
  
     /**
@@ -14583,7 +16936,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public TopHitsResults getHits() {
-      return hits_serialized_name;
+      return hits;
     }
 
     /**
@@ -14592,7 +16945,7 @@ public class IBMDiscoveryV1Models {
      * @param xtype the new xtype
      */
     public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+      this.xtype = xtype;
     }
 
     /**
@@ -14601,7 +16954,7 @@ public class IBMDiscoveryV1Models {
      * @param results the new results
      */
     public void setResults(final List<AggregationResult> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     /**
@@ -14610,7 +16963,7 @@ public class IBMDiscoveryV1Models {
      * @param matchingResults the new matchingResults
      */
     public void setMatchingResults(final long matchingResults) {
-      this.matching_results_serialized_name = matchingResults;
+      this.matchingResults = matchingResults;
     }
 
     /**
@@ -14619,7 +16972,7 @@ public class IBMDiscoveryV1Models {
      * @param aggregations the new aggregations
      */
     public void setAggregations(final List<QueryAggregation> aggregations) {
-      this.aggregations_serialized_name = aggregations;
+      this.aggregations = aggregations;
     }
 
     /**
@@ -14628,7 +16981,7 @@ public class IBMDiscoveryV1Models {
      * @param field the new field
      */
     public void setField(final String field) {
-      this.field_serialized_name = field;
+      this.field = field;
     }
 
     /**
@@ -14637,7 +16990,7 @@ public class IBMDiscoveryV1Models {
      * @param histogramInterval the new histogramInterval
      */
     public void setHistogramInterval(final long histogramInterval) {
-      this.histogram_interval_serialized_name = histogramInterval;
+      this.histogramInterval = histogramInterval;
     }
 
     /**
@@ -14646,7 +16999,7 @@ public class IBMDiscoveryV1Models {
      * @param value the new value
      */
     public void setValue(final Double value) {
-      this.value_serialized_name = value;
+      this.value = value;
     }
 
     /**
@@ -14655,7 +17008,7 @@ public class IBMDiscoveryV1Models {
      * @param count the new count
      */
     public void setCount(final long count) {
-      this.count_serialized_name = count;
+      this.count = count;
     }
 
     /**
@@ -14664,7 +17017,7 @@ public class IBMDiscoveryV1Models {
      * @param match the new match
      */
     public void setMatch(final String match) {
-      this.match_serialized_name = match;
+      this.match = match;
     }
 
     /**
@@ -14673,7 +17026,7 @@ public class IBMDiscoveryV1Models {
      * @param path the new path
      */
     public void setPath(final String path) {
-      this.path_serialized_name = path;
+      this.path = path;
     }
 
     /**
@@ -14682,7 +17035,7 @@ public class IBMDiscoveryV1Models {
      * @param timesliceInterval the new timesliceInterval
      */
     public void setTimesliceInterval(final String timesliceInterval) {
-      this.timeslice_interval_serialized_name = timesliceInterval;
+      this.timesliceInterval = timesliceInterval;
     }
 
     /**
@@ -14691,7 +17044,7 @@ public class IBMDiscoveryV1Models {
      * @param anomaly the new anomaly
      */
     public void setAnomaly(final Boolean anomaly) {
-      this.anomaly_serialized_name = anomaly;
+      this.anomaly = anomaly;
     }
 
     /**
@@ -14700,7 +17053,7 @@ public class IBMDiscoveryV1Models {
      * @param size the new size
      */
     public void setSize(final long size) {
-      this.size_serialized_name = size;
+      this.size = size;
     }
 
     /**
@@ -14709,7 +17062,7 @@ public class IBMDiscoveryV1Models {
      * @param hits the new hits
      */
     public void setHits(final TopHitsResults hits) {
-      this.hits_serialized_name = hits;
+      this.hits = hits;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -14725,11 +17078,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           AggregationResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AggregationResult.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       // calling custom deserializer for aggregations
@@ -14738,18 +17091,36 @@ public class IBMDiscoveryV1Models {
       if (deserializedAggregations != null) {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
           QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.aggregations_serialized_name = newAggregations;
+        ret.aggregations = newAggregations;
       }
 
       // calling custom deserializer for hits
-      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(ret.getHits()), (Map<String, Object>) jsonMap.get('hits_serialized_name'), TopHitsResults.class);
+      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(ret.getHits()), (Map<String, Object>) jsonMap.get('hits'), TopHitsResults.class);
       ret.setHits(newHits);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      mapping.put('matching_results', 'matchingResults');
+      if (aggregations != null && aggregations[0] != null) {
+        mapping.putAll(aggregations[0].getApiToSdkMapping());
+      }
+      mapping.put('histogram_interval', 'histogramInterval');
+      mapping.put('timeslice_interval', 'timesliceInterval');
+      if (hits != null) {
+        mapping.putAll(hits.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -14757,8 +17128,8 @@ public class IBMDiscoveryV1Models {
    * Entity text to provide context for the queried entity and rank based on that association. For example, if you
    * wanted to query the city of London in England your query would look for `London` with the context of `England`.
    */
-  public class QueryEntitiesContext {
-    private String text_serialized_name;
+  public class QueryEntitiesContext extends IBMWatsonGenericModel {
+    private String text;
  
     /**
      * Gets the text.
@@ -14769,26 +17140,72 @@ public class IBMDiscoveryV1Models {
      * @return the text
      */
     public String getText() {
-      return text_serialized_name;
+      return text;
+    }
+  
+    private QueryEntitiesContext(QueryEntitiesContextBuilder builder) {
+      this.text = builder.text;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a QueryEntitiesContext builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
+    public QueryEntitiesContextBuilder newBuilder() {
+      return new QueryEntitiesContextBuilder(this);
+    }
+  }
+
+  /**
+   * QueryEntitiesContext Builder.
+   */
+  public class QueryEntitiesContextBuilder {
+    private String text;
+
+    private QueryEntitiesContextBuilder(QueryEntitiesContext queryEntitiesContext) {
+      this.text = queryEntitiesContext.text;
     }
 
+    /**
+     * Instantiates a new builder.
+     */
+    public QueryEntitiesContextBuilder() {
+    }
+
+    /**
+     * Builds a QueryEntitiesContext.
+     *
+     * @return the queryEntitiesContext
+     */
+    public QueryEntitiesContext build() {
+      return new QueryEntitiesContext(this);
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the QueryEntitiesContext builder
+     */
+    public QueryEntitiesContextBuilder setText(String text) {
+      this.text = text;
+      return this;
+    }
   }
 
   /**
    * A text string that appears within the entity text field.
    */
   public class QueryEntitiesEntity extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private String type_serialized_name;
+    private String text;
+    private String xtype;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public QueryEntitiesEntity() { }
  
     /**
      * Gets the text.
@@ -14799,7 +17216,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -14811,27 +17228,84 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
+    }
+  
+    private QueryEntitiesEntity(QueryEntitiesEntityBuilder builder) {
+      this.text = builder.text;
+      this.xtype = builder.xtype;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a QueryEntitiesEntity builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
+    public QueryEntitiesEntityBuilder newBuilder() {
+      return new QueryEntitiesEntityBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xtype', 'type');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      return mapping;
+    }
+  }
+
+  /**
+   * QueryEntitiesEntity Builder.
+   */
+  public class QueryEntitiesEntityBuilder {
+    private String text;
+    private String xtype;
+
+    private QueryEntitiesEntityBuilder(QueryEntitiesEntity queryEntitiesEntity) {
+      this.text = queryEntitiesEntity.text;
+      this.xtype = queryEntitiesEntity.xtype;
     }
 
     /**
-     * Sets the xtype.
-     *
-     * @param xtype the new xtype
+     * Instantiates a new builder.
      */
-    public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+    public QueryEntitiesEntityBuilder() {
     }
 
+    /**
+     * Builds a QueryEntitiesEntity.
+     *
+     * @return the queryEntitiesEntity
+     */
+    public QueryEntitiesEntity build() {
+      return new QueryEntitiesEntity(this);
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the QueryEntitiesEntity builder
+     */
+    public QueryEntitiesEntityBuilder setText(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the xtype.
+     *
+     * @param xtype the xtype
+     * @return the QueryEntitiesEntity builder
+     */
+    public QueryEntitiesEntityBuilder setXtype(String xtype) {
+      this.xtype = xtype;
+      return this;
+    }
   }
 
   /**
@@ -14845,7 +17319,7 @@ public class IBMDiscoveryV1Models {
     private QueryEntitiesContext context;
     private Long count;
     private Long evidenceCount;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -14856,7 +17330,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -14867,7 +17341,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the feature.
      *
@@ -14878,7 +17352,7 @@ public class IBMDiscoveryV1Models {
     public String feature() {
       return feature;
     }
- 
+
     /**
      * Gets the entity.
      *
@@ -14889,7 +17363,7 @@ public class IBMDiscoveryV1Models {
     public QueryEntitiesEntity entity() {
       return entity;
     }
- 
+
     /**
      * Gets the context.
      *
@@ -14901,7 +17375,7 @@ public class IBMDiscoveryV1Models {
     public QueryEntitiesContext context() {
       return context;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -14912,7 +17386,7 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count;
     }
- 
+
     /**
      * Gets the evidenceCount.
      *
@@ -14947,6 +17421,16 @@ public class IBMDiscoveryV1Models {
       return new QueryEntitiesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      if (entity != null) {
+        mapping.putAll(entity.getSdkToApiMapping());
+      }
+      mapping.put('evidenceCount', 'evidence_count');
+      return mapping;
+    }
   }
 
   /**
@@ -15092,7 +17576,7 @@ public class IBMDiscoveryV1Models {
    * An object that contains an array of entities resulting from the query.
    */
   public class QueryEntitiesResponse extends IBMWatsonResponseModel {
-    private List<QueryEntitiesResponseItem> entities_serialized_name;
+    private List<QueryEntitiesResponseItem> entities;
  
     /**
      * Gets the entities.
@@ -15103,7 +17587,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryEntitiesResponseItem> getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
 
     /**
@@ -15112,7 +17596,7 @@ public class IBMDiscoveryV1Models {
      * @param entities the new entities
      */
     public void setEntities(final List<QueryEntitiesResponseItem> entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -15128,14 +17612,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           QueryEntitiesResponseItem currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           QueryEntitiesResponseItem newItem = (QueryEntitiesResponseItem) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesResponseItem.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        ret.entities = newEntities;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -15143,9 +17635,9 @@ public class IBMDiscoveryV1Models {
    * Object containing Entity query response information.
    */
   public class QueryEntitiesResponseItem extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private String type_serialized_name;
-    private List<QueryEvidence> evidence_serialized_name;
+    private String text;
+    private String xtype;
+    private List<QueryEvidence> evidence;
  
     /**
      * Gets the text.
@@ -15156,7 +17648,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -15168,7 +17660,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -15180,7 +17672,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryEvidence> getEvidence() {
-      return evidence_serialized_name;
+      return evidence;
     }
 
     /**
@@ -15189,7 +17681,7 @@ public class IBMDiscoveryV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -15198,7 +17690,7 @@ public class IBMDiscoveryV1Models {
      * @param xtype the new xtype
      */
     public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+      this.xtype = xtype;
     }
 
     /**
@@ -15207,7 +17699,7 @@ public class IBMDiscoveryV1Models {
      * @param evidence the new evidence
      */
     public void setEvidence(final List<QueryEvidence> evidence) {
-      this.evidence_serialized_name = evidence;
+      this.evidence = evidence;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -15223,14 +17715,23 @@ public class IBMDiscoveryV1Models {
       if (deserializedEvidence != null) {
         for (Integer i = 0; i < deserializedEvidence.size(); i++) {
           QueryEvidence currentItem = ret.getEvidence().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('evidence_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('evidence');
           QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
           newEvidence.add(newItem);
         }
-        ret.evidence_serialized_name = newEvidence;
+        ret.evidence = newEvidence;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      if (evidence != null && evidence[0] != null) {
+        mapping.putAll(evidence[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -15238,11 +17739,11 @@ public class IBMDiscoveryV1Models {
    * Description of evidence location supporting Knoweldge Graph query result.
    */
   public class QueryEvidence extends IBMWatsonGenericModel {
-    private String document_id_serialized_name;
-    private String field_serialized_name;
-    private Long start_offset_serialized_name;
-    private Long end_offset_serialized_name;
-    private List<QueryEvidenceEntity> entities_serialized_name;
+    private String documentId;
+    private String field;
+    private Long startOffset;
+    private Long endOffset;
+    private List<QueryEvidenceEntity> entities;
  
     /**
      * Gets the documentId.
@@ -15253,7 +17754,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -15265,7 +17766,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getField() {
-      return field_serialized_name;
+      return field;
     }
  
     /**
@@ -15277,7 +17778,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getStartOffset() {
-      return start_offset_serialized_name;
+      return startOffset;
     }
  
     /**
@@ -15289,7 +17790,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getEndOffset() {
-      return end_offset_serialized_name;
+      return endOffset;
     }
  
     /**
@@ -15301,7 +17802,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryEvidenceEntity> getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
 
     /**
@@ -15310,7 +17811,7 @@ public class IBMDiscoveryV1Models {
      * @param documentId the new documentId
      */
     public void setDocumentId(final String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
     }
 
     /**
@@ -15319,7 +17820,7 @@ public class IBMDiscoveryV1Models {
      * @param field the new field
      */
     public void setField(final String field) {
-      this.field_serialized_name = field;
+      this.field = field;
     }
 
     /**
@@ -15328,7 +17829,7 @@ public class IBMDiscoveryV1Models {
      * @param startOffset the new startOffset
      */
     public void setStartOffset(final long startOffset) {
-      this.start_offset_serialized_name = startOffset;
+      this.startOffset = startOffset;
     }
 
     /**
@@ -15337,7 +17838,7 @@ public class IBMDiscoveryV1Models {
      * @param endOffset the new endOffset
      */
     public void setEndOffset(final long endOffset) {
-      this.end_offset_serialized_name = endOffset;
+      this.endOffset = endOffset;
     }
 
     /**
@@ -15346,7 +17847,7 @@ public class IBMDiscoveryV1Models {
      * @param entities the new entities
      */
     public void setEntities(final List<QueryEvidenceEntity> entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -15362,14 +17863,25 @@ public class IBMDiscoveryV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           QueryEvidenceEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           QueryEvidenceEntity newItem = (QueryEvidenceEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidenceEntity.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        ret.entities = newEntities;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_id', 'documentId');
+      mapping.put('start_offset', 'startOffset');
+      mapping.put('end_offset', 'endOffset');
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -15377,10 +17889,10 @@ public class IBMDiscoveryV1Models {
    * Entity description and location within evidence field.
    */
   public class QueryEvidenceEntity extends IBMWatsonGenericModel {
-    private String type_serialized_name;
-    private String text_serialized_name;
-    private Long start_offset_serialized_name;
-    private Long end_offset_serialized_name;
+    private String xtype;
+    private String text;
+    private Long startOffset;
+    private Long endOffset;
  
     /**
      * Gets the xtype.
@@ -15391,7 +17903,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -15403,7 +17915,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -15415,7 +17927,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getStartOffset() {
-      return start_offset_serialized_name;
+      return startOffset;
     }
  
     /**
@@ -15427,7 +17939,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getEndOffset() {
-      return end_offset_serialized_name;
+      return endOffset;
     }
 
     /**
@@ -15436,7 +17948,7 @@ public class IBMDiscoveryV1Models {
      * @param xtype the new xtype
      */
     public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+      this.xtype = xtype;
     }
 
     /**
@@ -15445,7 +17957,7 @@ public class IBMDiscoveryV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -15454,7 +17966,7 @@ public class IBMDiscoveryV1Models {
      * @param startOffset the new startOffset
      */
     public void setStartOffset(final long startOffset) {
-      this.start_offset_serialized_name = startOffset;
+      this.startOffset = startOffset;
     }
 
     /**
@@ -15463,17 +17975,24 @@ public class IBMDiscoveryV1Models {
      * @param endOffset the new endOffset
      */
     public void setEndOffset(final long endOffset) {
-      this.end_offset_serialized_name = endOffset;
+      this.endOffset = endOffset;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      mapping.put('start_offset', 'startOffset');
+      mapping.put('end_offset', 'endOffset');
+      return mapping;
+    }
   }
 
   /**
    * QueryFilterType.
    */
-  public class QueryFilterType {
-    private List<String> exclude_serialized_name;
-    private List<String> include_serialized_name;
+  public class QueryFilterType extends IBMWatsonGenericModel {
+    private List<String> exclude;
+    private List<String> include;
  
     /**
      * Gets the exclude.
@@ -15483,7 +18002,7 @@ public class IBMDiscoveryV1Models {
      * @return the exclude
      */
     public List<String> getExclude() {
-      return exclude_serialized_name;
+      return exclude;
     }
  
     /**
@@ -15494,27 +18013,104 @@ public class IBMDiscoveryV1Models {
      * @return the include
      */
     public List<String> getInclude() {
-      return include_serialized_name;
+      return include;
+    }
+  
+    private QueryFilterType(QueryFilterTypeBuilder builder) {
+      this.exclude = builder.exclude;
+      this.include = builder.include;
     }
 
     /**
-     * Sets the exclude.
+     * New builder.
+     *
+     * @return a QueryFilterType builder
+     */
+    public QueryFilterTypeBuilder newBuilder() {
+      return new QueryFilterTypeBuilder(this);
+    }
+  }
+
+  /**
+   * QueryFilterType Builder.
+   */
+  public class QueryFilterTypeBuilder {
+    private List<String> exclude;
+    private List<String> include;
+
+    private QueryFilterTypeBuilder(QueryFilterType queryFilterType) {
+      this.exclude = queryFilterType.exclude;
+      this.include = queryFilterType.include;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public QueryFilterTypeBuilder() {
+    }
+
+    /**
+     * Builds a QueryFilterType.
+     *
+     * @return the queryFilterType
+     */
+    public QueryFilterType build() {
+      return new QueryFilterType(this);
+    }
+
+    /**
+     * Adds an exclude to exclude.
      *
      * @param exclude the new exclude
+     * @return the QueryFilterType builder
      */
-    public void setExclude(final List<String> exclude) {
-      this.exclude_serialized_name = exclude;
+    public QueryFilterTypeBuilder addExclude(String exclude) {
+      IBMWatsonValidator.notNull(exclude, 'exclude cannot be null');
+      if (this.exclude == null) {
+        this.exclude = new List<String>();
+      }
+      this.exclude.add(exclude);
+      return this;
     }
 
     /**
-     * Sets the include.
+     * Adds an include to include.
      *
      * @param include the new include
+     * @return the QueryFilterType builder
      */
-    public void setInclude(final List<String> include) {
-      this.include_serialized_name = include;
+    public QueryFilterTypeBuilder addInclude(String include) {
+      IBMWatsonValidator.notNull(include, 'include cannot be null');
+      if (this.include == null) {
+        this.include = new List<String>();
+      }
+      this.include.add(include);
+      return this;
     }
 
+    /**
+     * Set the exclude.
+     * Existing exclude will be replaced.
+     *
+     * @param exclude the exclude
+     * @return the QueryFilterType builder
+     */
+    public QueryFilterTypeBuilder setExclude(List<String> exclude) {
+      this.exclude = exclude;
+      return this;
+    }
+
+    /**
+     * Set the include.
+     * Existing include will be replaced.
+     *
+     * @param include the include
+     * @return the QueryFilterType builder
+     */
+    public QueryFilterTypeBuilder setInclude(List<String> include) {
+      this.include = include;
+      return this;
+    }
   }
 
   /**
@@ -15526,7 +18122,7 @@ public class IBMDiscoveryV1Models {
     private Long count;
     private Long offset;
     private List<String> xsort;
- 
+
     /**
      * Gets the filter.
      *
@@ -15538,7 +18134,7 @@ public class IBMDiscoveryV1Models {
     public String filter() {
       return filter;
     }
- 
+
     /**
      * Gets the query.
      *
@@ -15550,7 +18146,7 @@ public class IBMDiscoveryV1Models {
     public String query() {
       return query;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -15562,7 +18158,7 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count;
     }
- 
+
     /**
      * Gets the offset.
      *
@@ -15575,7 +18171,7 @@ public class IBMDiscoveryV1Models {
     public Long offset() {
       return offset;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -15607,6 +18203,11 @@ public class IBMDiscoveryV1Models {
       return new QueryLogOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xsort', 'sort');
+      return mapping;
+    }
   }
 
   /**
@@ -15750,7 +18351,7 @@ public class IBMDiscoveryV1Models {
     private Boolean similar;
     private List<String> similarDocumentIds;
     private List<String> similarFields;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -15761,7 +18362,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -15772,7 +18373,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the filter.
      *
@@ -15784,7 +18385,7 @@ public class IBMDiscoveryV1Models {
     public String filter() {
       return filter;
     }
- 
+
     /**
      * Gets the query.
      *
@@ -15796,7 +18397,7 @@ public class IBMDiscoveryV1Models {
     public String query() {
       return query;
     }
- 
+
     /**
      * Gets the naturalLanguageQuery.
      *
@@ -15808,7 +18409,7 @@ public class IBMDiscoveryV1Models {
     public String naturalLanguageQuery() {
       return naturalLanguageQuery;
     }
- 
+
     /**
      * Gets the passages.
      *
@@ -15819,7 +18420,7 @@ public class IBMDiscoveryV1Models {
     public Boolean passages() {
       return passages;
     }
- 
+
     /**
      * Gets the aggregation.
      *
@@ -15832,7 +18433,7 @@ public class IBMDiscoveryV1Models {
     public String aggregation() {
       return aggregation;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -15844,7 +18445,7 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count;
     }
- 
+
     /**
      * Gets the returnFields.
      *
@@ -15855,7 +18456,7 @@ public class IBMDiscoveryV1Models {
     public List<String> returnFields() {
       return returnFields;
     }
- 
+
     /**
      * Gets the offset.
      *
@@ -15868,7 +18469,7 @@ public class IBMDiscoveryV1Models {
     public Long offset() {
       return offset;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -15881,7 +18482,7 @@ public class IBMDiscoveryV1Models {
     public List<String> xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the highlight.
      *
@@ -15893,7 +18494,7 @@ public class IBMDiscoveryV1Models {
     public Boolean highlight() {
       return highlight;
     }
- 
+
     /**
      * Gets the passagesFields.
      *
@@ -15905,7 +18506,7 @@ public class IBMDiscoveryV1Models {
     public List<String> passagesFields() {
       return passagesFields;
     }
- 
+
     /**
      * Gets the passagesCount.
      *
@@ -15916,7 +18517,7 @@ public class IBMDiscoveryV1Models {
     public Long passagesCount() {
       return passagesCount;
     }
- 
+
     /**
      * Gets the passagesCharacters.
      *
@@ -15927,7 +18528,7 @@ public class IBMDiscoveryV1Models {
     public Long passagesCharacters() {
       return passagesCharacters;
     }
- 
+
     /**
      * Gets the deduplicateField.
      *
@@ -15940,7 +18541,7 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicateField;
     }
- 
+
     /**
      * Gets the similar.
      *
@@ -15952,7 +18553,7 @@ public class IBMDiscoveryV1Models {
     public Boolean similar() {
       return similar;
     }
- 
+
     /**
      * Gets the similarDocumentIds.
      *
@@ -15967,7 +18568,7 @@ public class IBMDiscoveryV1Models {
     public List<String> similarDocumentIds() {
       return similarDocumentIds;
     }
- 
+
     /**
      * Gets the similarFields.
      *
@@ -16014,6 +18615,21 @@ public class IBMDiscoveryV1Models {
       return new QueryNoticesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('naturalLanguageQuery', 'natural_language_query');
+      mapping.put('returnFields', 'return');
+      mapping.put('xsort', 'sort');
+      mapping.put('passagesFields', 'passages.fields');
+      mapping.put('passagesCount', 'passages.count');
+      mapping.put('passagesCharacters', 'passages.characters');
+      mapping.put('deduplicateField', 'deduplicate.field');
+      mapping.put('similarDocumentIds', 'similar.document_ids');
+      mapping.put('similarFields', 'similar.fields');
+      return mapping;
+    }
   }
 
   /**
@@ -16395,11 +19011,11 @@ public class IBMDiscoveryV1Models {
    * QueryNoticesResponse.
    */
   public class QueryNoticesResponse extends IBMWatsonResponseModel {
-    private Long matching_results_serialized_name;
-    private List<QueryNoticesResult> results_serialized_name;
-    private List<QueryAggregation> aggregations_serialized_name;
-    private List<QueryPassages> passages_serialized_name;
-    private Long duplicates_removed_serialized_name;
+    private Long matchingResults;
+    private List<QueryNoticesResult> results;
+    private List<QueryAggregation> aggregations;
+    private List<QueryPassages> passages;
+    private Long duplicatesRemoved;
  
     /**
      * Gets the matchingResults.
@@ -16410,7 +19026,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMatchingResults() {
-      return matching_results_serialized_name;
+      return matchingResults;
     }
  
     /**
@@ -16422,7 +19038,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryNoticesResult> getResults() {
-      return results_serialized_name;
+      return results;
     }
  
     /**
@@ -16434,7 +19050,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
-      return aggregations_serialized_name;
+      return aggregations;
     }
  
     /**
@@ -16446,7 +19062,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryPassages> getPassages() {
-      return passages_serialized_name;
+      return passages;
     }
  
     /**
@@ -16458,7 +19074,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getDuplicatesRemoved() {
-      return duplicates_removed_serialized_name;
+      return duplicatesRemoved;
     }
 
     /**
@@ -16467,7 +19083,7 @@ public class IBMDiscoveryV1Models {
      * @param matchingResults the new matchingResults
      */
     public void setMatchingResults(final long matchingResults) {
-      this.matching_results_serialized_name = matchingResults;
+      this.matchingResults = matchingResults;
     }
 
     /**
@@ -16476,7 +19092,7 @@ public class IBMDiscoveryV1Models {
      * @param results the new results
      */
     public void setResults(final List<QueryNoticesResult> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     /**
@@ -16485,7 +19101,7 @@ public class IBMDiscoveryV1Models {
      * @param aggregations the new aggregations
      */
     public void setAggregations(final List<QueryAggregation> aggregations) {
-      this.aggregations_serialized_name = aggregations;
+      this.aggregations = aggregations;
     }
 
     /**
@@ -16494,7 +19110,7 @@ public class IBMDiscoveryV1Models {
      * @param passages the new passages
      */
     public void setPassages(final List<QueryPassages> passages) {
-      this.passages_serialized_name = passages;
+      this.passages = passages;
     }
 
     /**
@@ -16503,7 +19119,7 @@ public class IBMDiscoveryV1Models {
      * @param duplicatesRemoved the new duplicatesRemoved
      */
     public void setDuplicatesRemoved(final long duplicatesRemoved) {
-      this.duplicates_removed_serialized_name = duplicatesRemoved;
+      this.duplicatesRemoved = duplicatesRemoved;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -16519,11 +19135,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryNoticesResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryNoticesResult.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       // calling custom deserializer for aggregations
@@ -16532,11 +19148,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedAggregations != null) {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
           QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.aggregations_serialized_name = newAggregations;
+        ret.aggregations = newAggregations;
       }
 
       // calling custom deserializer for passages
@@ -16545,14 +19161,30 @@ public class IBMDiscoveryV1Models {
       if (deserializedPassages != null) {
         for (Integer i = 0; i < deserializedPassages.size(); i++) {
           QueryPassages currentItem = ret.getPassages().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('passages_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('passages');
           QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
           newPassages.add(newItem);
         }
-        ret.passages_serialized_name = newPassages;
+        ret.passages = newPassages;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('matching_results', 'matchingResults');
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      if (aggregations != null && aggregations[0] != null) {
+        mapping.putAll(aggregations[0].getApiToSdkMapping());
+      }
+      if (passages != null && passages[0] != null) {
+        mapping.putAll(passages[0].getApiToSdkMapping());
+      }
+      mapping.put('duplicates_removed', 'duplicatesRemoved');
+      return mapping;
     }
   }
 
@@ -16560,16 +19192,16 @@ public class IBMDiscoveryV1Models {
    * QueryNoticesResult.
    */
   public class QueryNoticesResult extends IBMWatsonDynamicModel {
-    private String id_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private String collection_id_serialized_name;
-    private QueryResultMetadata result_metadata_serialized_name;
-    private String title_serialized_name;
-    private Long code_serialized_name;
-    private String filename_serialized_name;
-    private String file_type_serialized_name;
-    private String sha1_serialized_name;
-    private List<Notice> notices_serialized_name;
+    private String id;
+    private IBMWatsonMapModel metadata;
+    private String collectionId;
+    private QueryResultMetadata resultMetadata;
+    private String title;
+    private Long code;
+    private String filename;
+    private String fileType;
+    private String sha1;
+    private List<Notice> notices;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -16579,7 +19211,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getId() {
-      return id_serialized_name;
+      return id;
     }
 
     /**
@@ -16589,7 +19221,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
 
     /**
@@ -16599,7 +19231,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
 
     /**
@@ -16609,7 +19241,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public QueryResultMetadata getResultMetadata() {
-      return result_metadata_serialized_name;
+      return resultMetadata;
     }
 
     /**
@@ -16619,7 +19251,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
 
     /**
@@ -16629,7 +19261,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getCode() {
-      return code_serialized_name;
+      return code;
     }
 
     /**
@@ -16639,7 +19271,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFilename() {
-      return filename_serialized_name;
+      return filename;
     }
 
     /**
@@ -16649,7 +19281,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFileType() {
-      return file_type_serialized_name;
+      return fileType;
     }
 
     /**
@@ -16659,7 +19291,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSha1() {
-      return sha1_serialized_name;
+      return sha1;
     }
 
     /**
@@ -16669,7 +19301,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Notice> getNotices() {
-      return notices_serialized_name;
+      return notices;
     }
 
     /**
@@ -16688,7 +19320,7 @@ public class IBMDiscoveryV1Models {
      * @param id the new id
      */
     public void setId(final String id) {
-      this.id_serialized_name = id;
+      this.id = id;
     }
 
     /**
@@ -16697,7 +19329,7 @@ public class IBMDiscoveryV1Models {
      * @param metadata the new metadata
      */
     public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
+      this.metadata = metadata;
     }
 
     /**
@@ -16706,7 +19338,7 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the new collectionId
      */
     public void setCollectionId(final String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -16715,7 +19347,7 @@ public class IBMDiscoveryV1Models {
      * @param resultMetadata the new resultMetadata
      */
     public void setResultMetadata(final QueryResultMetadata resultMetadata) {
-      this.result_metadata_serialized_name = resultMetadata;
+      this.resultMetadata = resultMetadata;
     }
 
     /**
@@ -16724,7 +19356,7 @@ public class IBMDiscoveryV1Models {
      * @param title the new title
      */
     public void setTitle(final String title) {
-      this.title_serialized_name = title;
+      this.title = title;
     }
 
     /**
@@ -16733,7 +19365,7 @@ public class IBMDiscoveryV1Models {
      * @param code the new code
      */
     public void setCode(final Long code) {
-      this.code_serialized_name = code;
+      this.code = code;
     }
 
     /**
@@ -16742,7 +19374,7 @@ public class IBMDiscoveryV1Models {
      * @param filename the new filename
      */
     public void setFilename(final String filename) {
-      this.filename_serialized_name = filename;
+      this.filename = filename;
     }
 
     /**
@@ -16751,7 +19383,7 @@ public class IBMDiscoveryV1Models {
      * @param fileType the new fileType
      */
     public void setFileType(final String fileType) {
-      this.file_type_serialized_name = fileType;
+      this.fileType = fileType;
     }
 
     /**
@@ -16760,7 +19392,7 @@ public class IBMDiscoveryV1Models {
      * @param sha1 the new sha1
      */
     public void setSha1(final String sha1) {
-      this.sha1_serialized_name = sha1;
+      this.sha1 = sha1;
     }
 
     /**
@@ -16769,7 +19401,7 @@ public class IBMDiscoveryV1Models {
      * @param notices the new notices
      */
     public void setNotices(final List<Notice> notices) {
-      this.notices_serialized_name = notices;
+      this.notices = notices;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -16780,11 +19412,11 @@ public class IBMDiscoveryV1Models {
       QueryNoticesResult ret = (QueryNoticesResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for resultMetadata
-      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), QueryResultMetadata.class);
+      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('resultMetadata'), QueryResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
       // calling custom deserializer for notices
@@ -16793,7 +19425,7 @@ public class IBMDiscoveryV1Models {
       if (deserializedNotices != null) {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('notices_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
           Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
@@ -16809,6 +19441,17 @@ public class IBMDiscoveryV1Models {
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('collection_id', 'collectionId');
+      mapping.put('result_metadata', 'resultMetadata');
+      mapping.put('file_type', 'fileType');
+      if (notices != null && notices[0] != null) {
+        mapping.putAll(notices[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -16839,7 +19482,7 @@ public class IBMDiscoveryV1Models {
     private String similarFields;
     private String bias;
     private Boolean loggingOptOut;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -16850,7 +19493,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -16861,7 +19504,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the filter.
      *
@@ -16873,7 +19516,7 @@ public class IBMDiscoveryV1Models {
     public String filter() {
       return filter;
     }
- 
+
     /**
      * Gets the query.
      *
@@ -16885,7 +19528,7 @@ public class IBMDiscoveryV1Models {
     public String query() {
       return query;
     }
- 
+
     /**
      * Gets the naturalLanguageQuery.
      *
@@ -16897,7 +19540,7 @@ public class IBMDiscoveryV1Models {
     public String naturalLanguageQuery() {
       return naturalLanguageQuery;
     }
- 
+
     /**
      * Gets the passages.
      *
@@ -16908,7 +19551,7 @@ public class IBMDiscoveryV1Models {
     public Boolean passages() {
       return passages;
     }
- 
+
     /**
      * Gets the aggregation.
      *
@@ -16921,7 +19564,7 @@ public class IBMDiscoveryV1Models {
     public String aggregation() {
       return aggregation;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -16932,7 +19575,7 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count;
     }
- 
+
     /**
      * Gets the returnFields.
      *
@@ -16943,7 +19586,7 @@ public class IBMDiscoveryV1Models {
     public String returnFields() {
       return returnFields;
     }
- 
+
     /**
      * Gets the offset.
      *
@@ -16955,7 +19598,7 @@ public class IBMDiscoveryV1Models {
     public Long offset() {
       return offset;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -16968,7 +19611,7 @@ public class IBMDiscoveryV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the highlight.
      *
@@ -16980,7 +19623,7 @@ public class IBMDiscoveryV1Models {
     public Boolean highlight() {
       return highlight;
     }
- 
+
     /**
      * Gets the passagesFields.
      *
@@ -16992,7 +19635,7 @@ public class IBMDiscoveryV1Models {
     public String passagesFields() {
       return passagesFields;
     }
- 
+
     /**
      * Gets the passagesCount.
      *
@@ -17004,7 +19647,7 @@ public class IBMDiscoveryV1Models {
     public Long passagesCount() {
       return passagesCount;
     }
- 
+
     /**
      * Gets the passagesCharacters.
      *
@@ -17015,7 +19658,7 @@ public class IBMDiscoveryV1Models {
     public Long passagesCharacters() {
       return passagesCharacters;
     }
- 
+
     /**
      * Gets the deduplicate.
      *
@@ -17028,7 +19671,7 @@ public class IBMDiscoveryV1Models {
     public Boolean deduplicate() {
       return deduplicate;
     }
- 
+
     /**
      * Gets the deduplicateField.
      *
@@ -17041,7 +19684,7 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicateField;
     }
- 
+
     /**
      * Gets the collectionIds.
      *
@@ -17053,7 +19696,7 @@ public class IBMDiscoveryV1Models {
     public String collectionIds() {
       return collectionIds;
     }
- 
+
     /**
      * Gets the similar.
      *
@@ -17065,7 +19708,7 @@ public class IBMDiscoveryV1Models {
     public Boolean similar() {
       return similar;
     }
- 
+
     /**
      * Gets the similarDocumentIds.
      *
@@ -17080,7 +19723,7 @@ public class IBMDiscoveryV1Models {
     public String similarDocumentIds() {
       return similarDocumentIds;
     }
- 
+
     /**
      * Gets the similarFields.
      *
@@ -17092,7 +19735,7 @@ public class IBMDiscoveryV1Models {
     public String similarFields() {
       return similarFields;
     }
- 
+
     /**
      * Gets the bias.
      *
@@ -17106,7 +19749,7 @@ public class IBMDiscoveryV1Models {
     public String bias() {
       return bias;
     }
- 
+
     /**
      * Gets the loggingOptOut.
      *
@@ -17156,6 +19799,23 @@ public class IBMDiscoveryV1Models {
       return new QueryOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('naturalLanguageQuery', 'natural_language_query');
+      mapping.put('returnFields', 'return');
+      mapping.put('xsort', 'sort');
+      mapping.put('passagesFields', 'passages.fields');
+      mapping.put('passagesCount', 'passages.count');
+      mapping.put('passagesCharacters', 'passages.characters');
+      mapping.put('deduplicateField', 'deduplicate.field');
+      mapping.put('collectionIds', 'collection_ids');
+      mapping.put('similarDocumentIds', 'similar.document_ids');
+      mapping.put('similarFields', 'similar.fields');
+      mapping.put('loggingOptOut', 'X-Watson-Logging-Opt-Out');
+      return mapping;
+    }
   }
 
   /**
@@ -17509,12 +20169,12 @@ public class IBMDiscoveryV1Models {
    * QueryPassages.
    */
   public class QueryPassages extends IBMWatsonGenericModel {
-    private String document_id_serialized_name;
-    private Double passage_score_serialized_name;
-    private String passage_text_serialized_name;
-    private Long start_offset_serialized_name;
-    private Long end_offset_serialized_name;
-    private String field_serialized_name;
+    private String documentId;
+    private Double passageScore;
+    private String passageText;
+    private Long startOffset;
+    private Long endOffset;
+    private String field;
  
     /**
      * Gets the documentId.
@@ -17525,7 +20185,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -17537,7 +20197,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Double getPassageScore() {
-      return passage_score_serialized_name;
+      return passageScore;
     }
  
     /**
@@ -17549,7 +20209,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getPassageText() {
-      return passage_text_serialized_name;
+      return passageText;
     }
  
     /**
@@ -17561,7 +20221,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getStartOffset() {
-      return start_offset_serialized_name;
+      return startOffset;
     }
  
     /**
@@ -17573,7 +20233,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getEndOffset() {
-      return end_offset_serialized_name;
+      return endOffset;
     }
  
     /**
@@ -17585,7 +20245,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getField() {
-      return field_serialized_name;
+      return field;
     }
 
     /**
@@ -17594,7 +20254,7 @@ public class IBMDiscoveryV1Models {
      * @param documentId the new documentId
      */
     public void setDocumentId(final String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
     }
 
     /**
@@ -17603,7 +20263,7 @@ public class IBMDiscoveryV1Models {
      * @param passageScore the new passageScore
      */
     public void setPassageScore(final Double passageScore) {
-      this.passage_score_serialized_name = passageScore;
+      this.passageScore = passageScore;
     }
 
     /**
@@ -17612,7 +20272,7 @@ public class IBMDiscoveryV1Models {
      * @param passageText the new passageText
      */
     public void setPassageText(final String passageText) {
-      this.passage_text_serialized_name = passageText;
+      this.passageText = passageText;
     }
 
     /**
@@ -17621,7 +20281,7 @@ public class IBMDiscoveryV1Models {
      * @param startOffset the new startOffset
      */
     public void setStartOffset(final long startOffset) {
-      this.start_offset_serialized_name = startOffset;
+      this.startOffset = startOffset;
     }
 
     /**
@@ -17630,7 +20290,7 @@ public class IBMDiscoveryV1Models {
      * @param endOffset the new endOffset
      */
     public void setEndOffset(final long endOffset) {
-      this.end_offset_serialized_name = endOffset;
+      this.endOffset = endOffset;
     }
 
     /**
@@ -17639,16 +20299,25 @@ public class IBMDiscoveryV1Models {
      * @param field the new field
      */
     public void setField(final String field) {
-      this.field_serialized_name = field;
+      this.field = field;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_id', 'documentId');
+      mapping.put('passage_score', 'passageScore');
+      mapping.put('passage_text', 'passageText');
+      mapping.put('start_offset', 'startOffset');
+      mapping.put('end_offset', 'endOffset');
+      return mapping;
+    }
   }
 
   /**
    * QueryRelationsArgument.
    */
   public class QueryRelationsArgument extends IBMWatsonGenericModel {
-    private List<QueryEntitiesEntity> entities_serialized_name;
+    private List<QueryEntitiesEntity> entities;
  
     /**
      * Gets the entities.
@@ -17659,7 +20328,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryEntitiesEntity> getEntities() {
-      return entities_serialized_name;
+      return entities;
     }
 
     /**
@@ -17668,7 +20337,7 @@ public class IBMDiscoveryV1Models {
      * @param entities the new entities
      */
     public void setEntities(final List<QueryEntitiesEntity> entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -17684,24 +20353,32 @@ public class IBMDiscoveryV1Models {
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           QueryEntitiesEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
           QueryEntitiesEntity newItem = (QueryEntitiesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesEntity.class);
           newEntities.add(newItem);
         }
-        ret.entities_serialized_name = newEntities;
+        ret.entities = newEntities;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
   /**
    * QueryRelationsEntity.
    */
-  public class QueryRelationsEntity {
-    private String text_serialized_name;
-    private String type_serialized_name;
-    private Boolean exact_serialized_name;
+  public class QueryRelationsEntity extends IBMWatsonGenericModel {
+    private String text;
+    private String xtype;
+    private Boolean exact;
  
     /**
      * Gets the text.
@@ -17711,7 +20388,7 @@ public class IBMDiscoveryV1Models {
      * @return the text
      */
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -17722,7 +20399,7 @@ public class IBMDiscoveryV1Models {
      * @return the xtype
      */
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -17733,45 +20410,101 @@ public class IBMDiscoveryV1Models {
      * @return the exact
      */
     public Boolean getExact() {
-      return exact_serialized_name;
+      return exact;
+    }
+  
+    private QueryRelationsEntity(QueryRelationsEntityBuilder builder) {
+      this.text = builder.text;
+      this.xtype = builder.xtype;
+      this.exact = builder.exact;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a QueryRelationsEntity builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
+    public QueryRelationsEntityBuilder newBuilder() {
+      return new QueryRelationsEntityBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xtype', 'type');
+      return mapping;
+    }
+  }
+
+  /**
+   * QueryRelationsEntity Builder.
+   */
+  public class QueryRelationsEntityBuilder {
+    private String text;
+    private String xtype;
+    private Boolean exact;
+
+    private QueryRelationsEntityBuilder(QueryRelationsEntity queryRelationsEntity) {
+      this.text = queryRelationsEntity.text;
+      this.xtype = queryRelationsEntity.xtype;
+      this.exact = queryRelationsEntity.exact;
     }
 
     /**
-     * Sets the xtype.
-     *
-     * @param xtype the new xtype
+     * Instantiates a new builder.
      */
-    public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+    public QueryRelationsEntityBuilder() {
     }
 
     /**
-     * Sets the exact.
+     * Builds a QueryRelationsEntity.
      *
-     * @param exact the new exact
+     * @return the queryRelationsEntity
      */
-    public void setExact(final Boolean exact) {
-      this.exact_serialized_name = exact;
+    public QueryRelationsEntity build() {
+      return new QueryRelationsEntity(this);
     }
 
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the QueryRelationsEntity builder
+     */
+    public QueryRelationsEntityBuilder setText(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the xtype.
+     *
+     * @param xtype the xtype
+     * @return the QueryRelationsEntity builder
+     */
+    public QueryRelationsEntityBuilder setXtype(String xtype) {
+      this.xtype = xtype;
+      return this;
+    }
+
+    /**
+     * Set the exact.
+     *
+     * @param exact the exact
+     * @return the QueryRelationsEntity builder
+     */
+    public QueryRelationsEntityBuilder setExact(Boolean exact) {
+      this.exact = exact;
+      return this;
+    }
   }
 
   /**
    * QueryRelationsFilter.
    */
-  public class QueryRelationsFilter {
-    private QueryFilterType relation_types_serialized_name;
-    private QueryFilterType entity_types_serialized_name;
-    private List<String> document_ids_serialized_name;
+  public class QueryRelationsFilter extends IBMWatsonGenericModel {
+    private QueryFilterType relationTypes;
+    private QueryFilterType entityTypes;
+    private List<String> documentIds;
  
     /**
      * Gets the relationTypes.
@@ -17779,7 +20512,7 @@ public class IBMDiscoveryV1Models {
      * @return the relationTypes
      */
     public QueryFilterType getRelationTypes() {
-      return relation_types_serialized_name;
+      return relationTypes;
     }
  
     /**
@@ -17788,7 +20521,7 @@ public class IBMDiscoveryV1Models {
      * @return the entityTypes
      */
     public QueryFilterType getEntityTypes() {
-      return entity_types_serialized_name;
+      return entityTypes;
     }
  
     /**
@@ -17799,36 +20532,110 @@ public class IBMDiscoveryV1Models {
      * @return the documentIds
      */
     public List<String> getDocumentIds() {
-      return document_ids_serialized_name;
+      return documentIds;
+    }
+  
+    private QueryRelationsFilter(QueryRelationsFilterBuilder builder) {
+      this.relationTypes = builder.relationTypes;
+      this.entityTypes = builder.entityTypes;
+      this.documentIds = builder.documentIds;
     }
 
     /**
-     * Sets the relationTypes.
+     * New builder.
      *
-     * @param relationTypes the new relationTypes
+     * @return a QueryRelationsFilter builder
      */
-    public void setRelationTypes(final QueryFilterType relationTypes) {
-      this.relation_types_serialized_name = relationTypes;
+    public QueryRelationsFilterBuilder newBuilder() {
+      return new QueryRelationsFilterBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('relationTypes', 'relation_types');
+      mapping.put('entityTypes', 'entity_types');
+      mapping.put('documentIds', 'document_ids');
+      return mapping;
+    }
+  }
+
+  /**
+   * QueryRelationsFilter Builder.
+   */
+  public class QueryRelationsFilterBuilder {
+    private QueryFilterType relationTypes;
+    private QueryFilterType entityTypes;
+    private List<String> documentIds;
+
+    private QueryRelationsFilterBuilder(QueryRelationsFilter queryRelationsFilter) {
+      this.relationTypes = queryRelationsFilter.relationTypes;
+      this.entityTypes = queryRelationsFilter.entityTypes;
+      this.documentIds = queryRelationsFilter.documentIds;
     }
 
     /**
-     * Sets the entityTypes.
+     * Instantiates a new builder.
+     */
+    public QueryRelationsFilterBuilder() {
+    }
+
+    /**
+     * Builds a QueryRelationsFilter.
      *
-     * @param entityTypes the new entityTypes
+     * @return the queryRelationsFilter
      */
-    public void setEntityTypes(final QueryFilterType entityTypes) {
-      this.entity_types_serialized_name = entityTypes;
+    public QueryRelationsFilter build() {
+      return new QueryRelationsFilter(this);
     }
 
     /**
-     * Sets the documentIds.
+     * Adds an documentIds to documentIds.
      *
      * @param documentIds the new documentIds
+     * @return the QueryRelationsFilter builder
      */
-    public void setDocumentIds(final List<String> documentIds) {
-      this.document_ids_serialized_name = documentIds;
+    public QueryRelationsFilterBuilder addDocumentIds(String documentIds) {
+      IBMWatsonValidator.notNull(documentIds, 'documentIds cannot be null');
+      if (this.documentIds == null) {
+        this.documentIds = new List<String>();
+      }
+      this.documentIds.add(documentIds);
+      return this;
     }
 
+    /**
+     * Set the relationTypes.
+     *
+     * @param relationTypes the relationTypes
+     * @return the QueryRelationsFilter builder
+     */
+    public QueryRelationsFilterBuilder setRelationTypes(QueryFilterType relationTypes) {
+      this.relationTypes = relationTypes;
+      return this;
+    }
+
+    /**
+     * Set the entityTypes.
+     *
+     * @param entityTypes the entityTypes
+     * @return the QueryRelationsFilter builder
+     */
+    public QueryRelationsFilterBuilder setEntityTypes(QueryFilterType entityTypes) {
+      this.entityTypes = entityTypes;
+      return this;
+    }
+
+    /**
+     * Set the documentIds.
+     * Existing documentIds will be replaced.
+     *
+     * @param documentIds the documentIds
+     * @return the QueryRelationsFilter builder
+     */
+    public QueryRelationsFilterBuilder setDocumentIds(List<String> documentIds) {
+      this.documentIds = documentIds;
+      return this;
+    }
   }
 
   /**
@@ -17843,7 +20650,7 @@ public class IBMDiscoveryV1Models {
     private QueryRelationsFilter filter;
     private Long count;
     private Long evidenceCount;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -17854,7 +20661,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -17865,7 +20672,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -17876,7 +20683,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryRelationsEntity> entities() {
       return entities;
     }
- 
+
     /**
      * Gets the context.
      *
@@ -17888,7 +20695,7 @@ public class IBMDiscoveryV1Models {
     public QueryEntitiesContext context() {
       return context;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -17901,7 +20708,7 @@ public class IBMDiscoveryV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the filter.
      *
@@ -17910,7 +20717,7 @@ public class IBMDiscoveryV1Models {
     public QueryRelationsFilter filter() {
       return filter;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -17921,7 +20728,7 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count;
     }
- 
+
     /**
      * Gets the evidenceCount.
      *
@@ -17957,6 +20764,20 @@ public class IBMDiscoveryV1Models {
       return new QueryRelationsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      if (entities != null && entities[0] != null) {
+        mapping.putAll(entities[0].getSdkToApiMapping());
+      }
+      mapping.put('xsort', 'sort');
+      if (filter != null) {
+        mapping.putAll(filter.getSdkToApiMapping());
+      }
+      mapping.put('evidenceCount', 'evidence_count');
+      return mapping;
+    }
   }
 
   /**
@@ -18131,10 +20952,10 @@ public class IBMDiscoveryV1Models {
    * QueryRelationsRelationship.
    */
   public class QueryRelationsRelationship extends IBMWatsonGenericModel {
-    private String type_serialized_name;
-    private Long frequency_serialized_name;
-    private List<QueryRelationsArgument> arguments_serialized_name;
-    private List<QueryEvidence> evidence_serialized_name;
+    private String xtype;
+    private Long frequency;
+    private List<QueryRelationsArgument> arguments;
+    private List<QueryEvidence> evidence;
  
     /**
      * Gets the xtype.
@@ -18145,7 +20966,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -18157,7 +20978,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getFrequency() {
-      return frequency_serialized_name;
+      return frequency;
     }
  
     /**
@@ -18169,7 +20990,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryRelationsArgument> getArguments() {
-      return arguments_serialized_name;
+      return arguments;
     }
  
     /**
@@ -18181,7 +21002,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryEvidence> getEvidence() {
-      return evidence_serialized_name;
+      return evidence;
     }
 
     /**
@@ -18190,7 +21011,7 @@ public class IBMDiscoveryV1Models {
      * @param xtype the new xtype
      */
     public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+      this.xtype = xtype;
     }
 
     /**
@@ -18199,7 +21020,7 @@ public class IBMDiscoveryV1Models {
      * @param frequency the new frequency
      */
     public void setFrequency(final long frequency) {
-      this.frequency_serialized_name = frequency;
+      this.frequency = frequency;
     }
 
     /**
@@ -18208,7 +21029,7 @@ public class IBMDiscoveryV1Models {
      * @param arguments the new arguments
      */
     public void setArguments(final List<QueryRelationsArgument> arguments) {
-      this.arguments_serialized_name = arguments;
+      this.arguments = arguments;
     }
 
     /**
@@ -18217,7 +21038,7 @@ public class IBMDiscoveryV1Models {
      * @param evidence the new evidence
      */
     public void setEvidence(final List<QueryEvidence> evidence) {
-      this.evidence_serialized_name = evidence;
+      this.evidence = evidence;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -18233,11 +21054,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedArguments != null) {
         for (Integer i = 0; i < deserializedArguments.size(); i++) {
           QueryRelationsArgument currentItem = ret.getArguments().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('arguments_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('arguments');
           QueryRelationsArgument newItem = (QueryRelationsArgument) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsArgument.class);
           newArguments.add(newItem);
         }
-        ret.arguments_serialized_name = newArguments;
+        ret.arguments = newArguments;
       }
 
       // calling custom deserializer for evidence
@@ -18246,14 +21067,26 @@ public class IBMDiscoveryV1Models {
       if (deserializedEvidence != null) {
         for (Integer i = 0; i < deserializedEvidence.size(); i++) {
           QueryEvidence currentItem = ret.getEvidence().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('evidence_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('evidence');
           QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
           newEvidence.add(newItem);
         }
-        ret.evidence_serialized_name = newEvidence;
+        ret.evidence = newEvidence;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      if (arguments != null && arguments[0] != null) {
+        mapping.putAll(arguments[0].getApiToSdkMapping());
+      }
+      if (evidence != null && evidence[0] != null) {
+        mapping.putAll(evidence[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -18261,7 +21094,7 @@ public class IBMDiscoveryV1Models {
    * QueryRelationsResponse.
    */
   public class QueryRelationsResponse extends IBMWatsonResponseModel {
-    private List<QueryRelationsRelationship> relations_serialized_name;
+    private List<QueryRelationsRelationship> relations;
  
     /**
      * Gets the relations.
@@ -18272,7 +21105,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryRelationsRelationship> getRelations() {
-      return relations_serialized_name;
+      return relations;
     }
 
     /**
@@ -18281,7 +21114,7 @@ public class IBMDiscoveryV1Models {
      * @param relations the new relations
      */
     public void setRelations(final List<QueryRelationsRelationship> relations) {
-      this.relations_serialized_name = relations;
+      this.relations = relations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -18297,14 +21130,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedRelations != null) {
         for (Integer i = 0; i < deserializedRelations.size(); i++) {
           QueryRelationsRelationship currentItem = ret.getRelations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('relations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('relations');
           QueryRelationsRelationship newItem = (QueryRelationsRelationship) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsRelationship.class);
           newRelations.add(newItem);
         }
-        ret.relations_serialized_name = newRelations;
+        ret.relations = newRelations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (relations != null && relations[0] != null) {
+        mapping.putAll(relations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -18312,13 +21153,13 @@ public class IBMDiscoveryV1Models {
    * A response containing the documents and aggregations for the query.
    */
   public class QueryResponse extends IBMWatsonResponseModel {
-    private Long matching_results_serialized_name;
-    private List<QueryResult> results_serialized_name;
-    private List<QueryAggregation> aggregations_serialized_name;
-    private List<QueryPassages> passages_serialized_name;
-    private Long duplicates_removed_serialized_name;
-    private String session_token_serialized_name;
-    private RetrievalDetails retrieval_details_serialized_name;
+    private Long matchingResults;
+    private List<QueryResult> results;
+    private List<QueryAggregation> aggregations;
+    private List<QueryPassages> passages;
+    private Long duplicatesRemoved;
+    private String sessionToken;
+    private RetrievalDetails retrievalDetails;
  
     /**
      * Gets the matchingResults.
@@ -18329,7 +21170,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMatchingResults() {
-      return matching_results_serialized_name;
+      return matchingResults;
     }
  
     /**
@@ -18341,7 +21182,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryResult> getResults() {
-      return results_serialized_name;
+      return results;
     }
  
     /**
@@ -18353,7 +21194,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
-      return aggregations_serialized_name;
+      return aggregations;
     }
  
     /**
@@ -18365,7 +21206,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryPassages> getPassages() {
-      return passages_serialized_name;
+      return passages;
     }
  
     /**
@@ -18377,7 +21218,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getDuplicatesRemoved() {
-      return duplicates_removed_serialized_name;
+      return duplicatesRemoved;
     }
  
     /**
@@ -18392,7 +21233,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSessionToken() {
-      return session_token_serialized_name;
+      return sessionToken;
     }
  
     /**
@@ -18404,7 +21245,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public RetrievalDetails getRetrievalDetails() {
-      return retrieval_details_serialized_name;
+      return retrievalDetails;
     }
 
     /**
@@ -18413,7 +21254,7 @@ public class IBMDiscoveryV1Models {
      * @param matchingResults the new matchingResults
      */
     public void setMatchingResults(final long matchingResults) {
-      this.matching_results_serialized_name = matchingResults;
+      this.matchingResults = matchingResults;
     }
 
     /**
@@ -18422,7 +21263,7 @@ public class IBMDiscoveryV1Models {
      * @param results the new results
      */
     public void setResults(final List<QueryResult> results) {
-      this.results_serialized_name = results;
+      this.results = results;
     }
 
     /**
@@ -18431,7 +21272,7 @@ public class IBMDiscoveryV1Models {
      * @param aggregations the new aggregations
      */
     public void setAggregations(final List<QueryAggregation> aggregations) {
-      this.aggregations_serialized_name = aggregations;
+      this.aggregations = aggregations;
     }
 
     /**
@@ -18440,7 +21281,7 @@ public class IBMDiscoveryV1Models {
      * @param passages the new passages
      */
     public void setPassages(final List<QueryPassages> passages) {
-      this.passages_serialized_name = passages;
+      this.passages = passages;
     }
 
     /**
@@ -18449,7 +21290,7 @@ public class IBMDiscoveryV1Models {
      * @param duplicatesRemoved the new duplicatesRemoved
      */
     public void setDuplicatesRemoved(final long duplicatesRemoved) {
-      this.duplicates_removed_serialized_name = duplicatesRemoved;
+      this.duplicatesRemoved = duplicatesRemoved;
     }
 
     /**
@@ -18458,7 +21299,7 @@ public class IBMDiscoveryV1Models {
      * @param sessionToken the new sessionToken
      */
     public void setSessionToken(final String sessionToken) {
-      this.session_token_serialized_name = sessionToken;
+      this.sessionToken = sessionToken;
     }
 
     /**
@@ -18467,7 +21308,7 @@ public class IBMDiscoveryV1Models {
      * @param retrievalDetails the new retrievalDetails
      */
     public void setRetrievalDetails(final RetrievalDetails retrievalDetails) {
-      this.retrieval_details_serialized_name = retrievalDetails;
+      this.retrievalDetails = retrievalDetails;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -18483,11 +21324,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
           QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
           newResults.add(newItem);
         }
-        ret.results_serialized_name = newResults;
+        ret.results = newResults;
       }
 
       // calling custom deserializer for aggregations
@@ -18496,11 +21337,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedAggregations != null) {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
           QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.aggregations_serialized_name = newAggregations;
+        ret.aggregations = newAggregations;
       }
 
       // calling custom deserializer for passages
@@ -18509,18 +21350,39 @@ public class IBMDiscoveryV1Models {
       if (deserializedPassages != null) {
         for (Integer i = 0; i < deserializedPassages.size(); i++) {
           QueryPassages currentItem = ret.getPassages().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('passages_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('passages');
           QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
           newPassages.add(newItem);
         }
-        ret.passages_serialized_name = newPassages;
+        ret.passages = newPassages;
       }
 
       // calling custom deserializer for retrievalDetails
-      RetrievalDetails newRetrievalDetails = (RetrievalDetails) new RetrievalDetails().deserialize(JSON.serialize(ret.getRetrievalDetails()), (Map<String, Object>) jsonMap.get('retrieval_details_serialized_name'), RetrievalDetails.class);
+      RetrievalDetails newRetrievalDetails = (RetrievalDetails) new RetrievalDetails().deserialize(JSON.serialize(ret.getRetrievalDetails()), (Map<String, Object>) jsonMap.get('retrievalDetails'), RetrievalDetails.class);
       ret.setRetrievalDetails(newRetrievalDetails);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('matching_results', 'matchingResults');
+      if (results != null && results[0] != null) {
+        mapping.putAll(results[0].getApiToSdkMapping());
+      }
+      if (aggregations != null && aggregations[0] != null) {
+        mapping.putAll(aggregations[0].getApiToSdkMapping());
+      }
+      if (passages != null && passages[0] != null) {
+        mapping.putAll(passages[0].getApiToSdkMapping());
+      }
+      mapping.put('duplicates_removed', 'duplicatesRemoved');
+      mapping.put('session_token', 'sessionToken');
+      mapping.put('retrieval_details', 'retrievalDetails');
+      if (retrievalDetails != null) {
+        mapping.putAll(retrievalDetails.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -18528,11 +21390,11 @@ public class IBMDiscoveryV1Models {
    * QueryResult.
    */
   public class QueryResult extends IBMWatsonDynamicModel {
-    private String id_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private String collection_id_serialized_name;
-    private QueryResultMetadata result_metadata_serialized_name;
-    private String title_serialized_name;
+    private String id;
+    private IBMWatsonMapModel metadata;
+    private String collectionId;
+    private QueryResultMetadata resultMetadata;
+    private String title;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -18542,7 +21404,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getId() {
-      return id_serialized_name;
+      return id;
     }
 
     /**
@@ -18552,7 +21414,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
 
     /**
@@ -18562,7 +21424,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
 
     /**
@@ -18572,7 +21434,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public QueryResultMetadata getResultMetadata() {
-      return result_metadata_serialized_name;
+      return resultMetadata;
     }
 
     /**
@@ -18582,7 +21444,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
 
     /**
@@ -18601,7 +21463,7 @@ public class IBMDiscoveryV1Models {
      * @param id the new id
      */
     public void setId(final String id) {
-      this.id_serialized_name = id;
+      this.id = id;
     }
 
     /**
@@ -18610,7 +21472,7 @@ public class IBMDiscoveryV1Models {
      * @param metadata the new metadata
      */
     public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
+      this.metadata = metadata;
     }
 
     /**
@@ -18619,7 +21481,7 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the new collectionId
      */
     public void setCollectionId(final String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -18628,7 +21490,7 @@ public class IBMDiscoveryV1Models {
      * @param resultMetadata the new resultMetadata
      */
     public void setResultMetadata(final QueryResultMetadata resultMetadata) {
-      this.result_metadata_serialized_name = resultMetadata;
+      this.resultMetadata = resultMetadata;
     }
 
     /**
@@ -18637,7 +21499,7 @@ public class IBMDiscoveryV1Models {
      * @param title the new title
      */
     public void setTitle(final String title) {
-      this.title_serialized_name = title;
+      this.title = title;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -18648,11 +21510,11 @@ public class IBMDiscoveryV1Models {
       QueryResult ret = (QueryResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for resultMetadata
-      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), QueryResultMetadata.class);
+      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('resultMetadata'), QueryResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
@@ -18665,14 +21527,21 @@ public class IBMDiscoveryV1Models {
 
       return ret;
     }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('collection_id', 'collectionId');
+      mapping.put('result_metadata', 'resultMetadata');
+      return mapping;
+    }
   }
 
   /**
    * Metadata of a query result.
    */
   public class QueryResultMetadata extends IBMWatsonGenericModel {
-    private Double score_serialized_name;
-    private Double confidence_serialized_name;
+    private Double score;
+    private Double confidence;
  
     /**
      * Gets the score.
@@ -18684,7 +21553,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return score_serialized_name;
+      return score;
     }
  
     /**
@@ -18699,7 +21568,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
 
     /**
@@ -18708,7 +21577,7 @@ public class IBMDiscoveryV1Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.score_serialized_name = score;
+      this.score = score;
     }
 
     /**
@@ -18717,16 +21586,15 @@ public class IBMDiscoveryV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+      this.confidence = confidence;
     }
-
   }
 
   /**
    * An object contain retrieval type information.
    */
   public class RetrievalDetails extends IBMWatsonGenericModel {
-    private String document_retrieval_strategy_serialized_name;
+    private String documentRetrievalStrategy;
  
     /**
      * Gets the documentRetrievalStrategy.
@@ -18743,7 +21611,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentRetrievalStrategy() {
-      return document_retrieval_strategy_serialized_name;
+      return documentRetrievalStrategy;
     }
 
     /**
@@ -18752,20 +21620,25 @@ public class IBMDiscoveryV1Models {
      * @param documentRetrievalStrategy the new documentRetrievalStrategy
      */
     public void setDocumentRetrievalStrategy(final String documentRetrievalStrategy) {
-      this.document_retrieval_strategy_serialized_name = documentRetrievalStrategy;
+      this.documentRetrievalStrategy = documentRetrievalStrategy;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_retrieval_strategy', 'documentRetrievalStrategy');
+      return mapping;
+    }
   }
 
   /**
    * Object containing smart document understanding information for this collection.
    */
   public class SduStatus extends IBMWatsonGenericModel {
-    private Boolean enabled_serialized_name;
-    private Long total_annotated_pages_serialized_name;
-    private Long total_pages_serialized_name;
-    private Long total_documents_serialized_name;
-    private SduStatusCustomFields custom_fields_serialized_name;
+    private Boolean enabled;
+    private Long totalAnnotatedPages;
+    private Long totalPages;
+    private Long totalDocuments;
+    private SduStatusCustomFields customFields;
  
     /**
      * Gets the enabled.
@@ -18779,7 +21652,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getEnabled() {
-      return enabled_serialized_name;
+      return enabled;
     }
  
     /**
@@ -18791,7 +21664,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getTotalAnnotatedPages() {
-      return total_annotated_pages_serialized_name;
+      return totalAnnotatedPages;
     }
  
     /**
@@ -18804,7 +21677,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getTotalPages() {
-      return total_pages_serialized_name;
+      return totalPages;
     }
  
     /**
@@ -18820,7 +21693,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getTotalDocuments() {
-      return total_documents_serialized_name;
+      return totalDocuments;
     }
  
     /**
@@ -18832,7 +21705,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public SduStatusCustomFields getCustomFields() {
-      return custom_fields_serialized_name;
+      return customFields;
     }
 
     /**
@@ -18841,7 +21714,7 @@ public class IBMDiscoveryV1Models {
      * @param enabled the new enabled
      */
     public void setEnabled(final Boolean enabled) {
-      this.enabled_serialized_name = enabled;
+      this.enabled = enabled;
     }
 
     /**
@@ -18850,7 +21723,7 @@ public class IBMDiscoveryV1Models {
      * @param totalAnnotatedPages the new totalAnnotatedPages
      */
     public void setTotalAnnotatedPages(final long totalAnnotatedPages) {
-      this.total_annotated_pages_serialized_name = totalAnnotatedPages;
+      this.totalAnnotatedPages = totalAnnotatedPages;
     }
 
     /**
@@ -18859,7 +21732,7 @@ public class IBMDiscoveryV1Models {
      * @param totalPages the new totalPages
      */
     public void setTotalPages(final long totalPages) {
-      this.total_pages_serialized_name = totalPages;
+      this.totalPages = totalPages;
     }
 
     /**
@@ -18868,7 +21741,7 @@ public class IBMDiscoveryV1Models {
      * @param totalDocuments the new totalDocuments
      */
     public void setTotalDocuments(final long totalDocuments) {
-      this.total_documents_serialized_name = totalDocuments;
+      this.totalDocuments = totalDocuments;
     }
 
     /**
@@ -18877,7 +21750,7 @@ public class IBMDiscoveryV1Models {
      * @param customFields the new customFields
      */
     public void setCustomFields(final SduStatusCustomFields customFields) {
-      this.custom_fields_serialized_name = customFields;
+      this.customFields = customFields;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -18888,10 +21761,22 @@ public class IBMDiscoveryV1Models {
       SduStatus ret = (SduStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for customFields
-      SduStatusCustomFields newCustomFields = (SduStatusCustomFields) new SduStatusCustomFields().deserialize(JSON.serialize(ret.getCustomFields()), (Map<String, Object>) jsonMap.get('custom_fields_serialized_name'), SduStatusCustomFields.class);
+      SduStatusCustomFields newCustomFields = (SduStatusCustomFields) new SduStatusCustomFields().deserialize(JSON.serialize(ret.getCustomFields()), (Map<String, Object>) jsonMap.get('customFields'), SduStatusCustomFields.class);
       ret.setCustomFields(newCustomFields);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('total_annotated_pages', 'totalAnnotatedPages');
+      mapping.put('total_pages', 'totalPages');
+      mapping.put('total_documents', 'totalDocuments');
+      mapping.put('custom_fields', 'customFields');
+      if (customFields != null) {
+        mapping.putAll(customFields.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -18899,8 +21784,8 @@ public class IBMDiscoveryV1Models {
    * Information about custom smart document understanding fields that exist in this collection.
    */
   public class SduStatusCustomFields extends IBMWatsonGenericModel {
-    private Long defined_serialized_name;
-    private Long maximum_allowed_serialized_name;
+    private Long defined;
+    private Long maximumAllowed;
  
     /**
      * Gets the defined.
@@ -18909,8 +21794,9 @@ public class IBMDiscoveryV1Models {
      *
      * @return the defined
      */
+    @AuraEnabled
     public Long getDefined() {
-      return defined_serialized_name;
+      return defined;
     }
  
     /**
@@ -18920,8 +21806,9 @@ public class IBMDiscoveryV1Models {
      *
      * @return the maximumAllowed
      */
+    @AuraEnabled
     public Long getMaximumAllowed() {
-      return maximum_allowed_serialized_name;
+      return maximumAllowed;
     }
 
     /**
@@ -18930,7 +21817,7 @@ public class IBMDiscoveryV1Models {
      * @param defined the new defined
      */
     public void setDefined(final long defined) {
-      this.defined_serialized_name = defined;
+      this.defined = defined;
     }
 
     /**
@@ -18939,19 +21826,24 @@ public class IBMDiscoveryV1Models {
      * @param maximumAllowed the new maximumAllowed
      */
     public void setMaximumAllowed(final long maximumAllowed) {
-      this.maximum_allowed_serialized_name = maximumAllowed;
+      this.maximumAllowed = maximumAllowed;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('maximum_allowed', 'maximumAllowed');
+      return mapping;
+    }
   }
 
   /**
    * Information about the Continuous Relevancy Training for this environment.
    */
   public class SearchStatus extends IBMWatsonGenericModel {
-    private String scope_serialized_name;
-    private String status_serialized_name;
-    private String status_description_serialized_name;
-    private Datetime last_trained_serialized_name;
+    private String scope;
+    private String status;
+    private String statusDescription;
+    private Datetime lastTrained;
  
     /**
      * Gets the scope.
@@ -18962,7 +21854,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getScope() {
-      return scope_serialized_name;
+      return scope;
     }
  
     /**
@@ -18974,7 +21866,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -18986,7 +21878,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatusDescription() {
-      return status_description_serialized_name;
+      return statusDescription;
     }
  
     /**
@@ -18998,7 +21890,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getLastTrained() {
-      return last_trained_serialized_name;
+      return lastTrained;
     }
 
     /**
@@ -19007,7 +21899,7 @@ public class IBMDiscoveryV1Models {
      * @param scope the new scope
      */
     public void setScope(final String scope) {
-      this.scope_serialized_name = scope;
+      this.scope = scope;
     }
 
     /**
@@ -19016,7 +21908,7 @@ public class IBMDiscoveryV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -19025,7 +21917,7 @@ public class IBMDiscoveryV1Models {
      * @param statusDescription the new statusDescription
      */
     public void setStatusDescription(final String statusDescription) {
-      this.status_description_serialized_name = statusDescription;
+      this.statusDescription = statusDescription;
     }
 
     /**
@@ -19034,18 +21926,30 @@ public class IBMDiscoveryV1Models {
      * @param lastTrained the new lastTrained
      */
     public void setLastTrained(final Datetime lastTrained) {
-      this.last_trained_serialized_name = lastTrained;
+      this.lastTrained = lastTrained;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('status_description', 'statusDescription');
+      mapping.put('last_trained', 'lastTrained');
+      return mapping;
+    }
   }
 
   /**
    * A list of Document Segmentation settings.
    */
   public class SegmentSettings extends IBMWatsonGenericModel {
-    private Boolean enabled_serialized_name;
-    private List<String> selector_tags_serialized_name;
-    private List<String> annotated_fields_serialized_name;
+    private Boolean enabled;
+    private List<String> selectorTags;
+    private List<String> annotatedFields;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SegmentSettings() { }
  
     /**
      * Gets the enabled.
@@ -19056,7 +21960,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getEnabled() {
-      return enabled_serialized_name;
+      return enabled;
     }
  
     /**
@@ -19071,7 +21975,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getSelectorTags() {
-      return selector_tags_serialized_name;
+      return selectorTags;
     }
  
     /**
@@ -19089,46 +21993,148 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getAnnotatedFields() {
-      return annotated_fields_serialized_name;
+      return annotatedFields;
+    }
+  
+    private SegmentSettings(SegmentSettingsBuilder builder) {
+      this.enabled = builder.enabled;
+      this.selectorTags = builder.selectorTags;
+      this.annotatedFields = builder.annotatedFields;
     }
 
     /**
-     * Sets the enabled.
+     * New builder.
      *
-     * @param enabled the new enabled
+     * @return a SegmentSettings builder
      */
-    public void setEnabled(final Boolean enabled) {
-      this.enabled_serialized_name = enabled;
+    public SegmentSettingsBuilder newBuilder() {
+      return new SegmentSettingsBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('selectorTags', 'selector_tags');
+      mapping.put('annotatedFields', 'annotated_fields');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('selector_tags', 'selectorTags');
+      mapping.put('annotated_fields', 'annotatedFields');
+      return mapping;
+    }
+  }
+
+  /**
+   * SegmentSettings Builder.
+   */
+  public class SegmentSettingsBuilder {
+    private Boolean enabled;
+    private List<String> selectorTags;
+    private List<String> annotatedFields;
+
+    private SegmentSettingsBuilder(SegmentSettings segmentSettings) {
+      this.enabled = segmentSettings.enabled;
+      this.selectorTags = segmentSettings.selectorTags;
+      this.annotatedFields = segmentSettings.annotatedFields;
     }
 
     /**
-     * Sets the selectorTags.
+     * Instantiates a new builder.
+     */
+    public SegmentSettingsBuilder() {
+    }
+
+    /**
+     * Builds a SegmentSettings.
+     *
+     * @return the segmentSettings
+     */
+    public SegmentSettings build() {
+      return new SegmentSettings(this);
+    }
+
+    /**
+     * Adds an selectorTags to selectorTags.
      *
      * @param selectorTags the new selectorTags
+     * @return the SegmentSettings builder
      */
-    public void setSelectorTags(final List<String> selectorTags) {
-      this.selector_tags_serialized_name = selectorTags;
+    public SegmentSettingsBuilder addSelectorTags(String selectorTags) {
+      IBMWatsonValidator.notNull(selectorTags, 'selectorTags cannot be null');
+      if (this.selectorTags == null) {
+        this.selectorTags = new List<String>();
+      }
+      this.selectorTags.add(selectorTags);
+      return this;
     }
 
     /**
-     * Sets the annotatedFields.
+     * Adds an annotatedFields to annotatedFields.
      *
      * @param annotatedFields the new annotatedFields
+     * @return the SegmentSettings builder
      */
-    public void setAnnotatedFields(final List<String> annotatedFields) {
-      this.annotated_fields_serialized_name = annotatedFields;
+    public SegmentSettingsBuilder addAnnotatedFields(String annotatedFields) {
+      IBMWatsonValidator.notNull(annotatedFields, 'annotatedFields cannot be null');
+      if (this.annotatedFields == null) {
+        this.annotatedFields = new List<String>();
+      }
+      this.annotatedFields.add(annotatedFields);
+      return this;
     }
 
+    /**
+     * Set the enabled.
+     *
+     * @param enabled the enabled
+     * @return the SegmentSettings builder
+     */
+    public SegmentSettingsBuilder setEnabled(Boolean enabled) {
+      this.enabled = enabled;
+      return this;
+    }
+
+    /**
+     * Set the selectorTags.
+     * Existing selectorTags will be replaced.
+     *
+     * @param selectorTags the selectorTags
+     * @return the SegmentSettings builder
+     */
+    public SegmentSettingsBuilder setSelectorTags(List<String> selectorTags) {
+      this.selectorTags = selectorTags;
+      return this;
+    }
+
+    /**
+     * Set the annotatedFields.
+     * Existing annotatedFields will be replaced.
+     *
+     * @param annotatedFields the annotatedFields
+     * @return the SegmentSettings builder
+     */
+    public SegmentSettingsBuilder setAnnotatedFields(List<String> annotatedFields) {
+      this.annotatedFields = annotatedFields;
+      return this;
+    }
   }
 
   /**
    * Object containing source parameters for the configuration.
    */
   public class Source extends IBMWatsonGenericModel {
-    private String type_serialized_name;
-    private String credential_id_serialized_name;
-    private SourceSchedule schedule_serialized_name;
-    private SourceOptions options_serialized_name;
+    private String xtype;
+    private String credentialId;
+    private SourceSchedule schedule;
+    private SourceOptions options;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Source() { }
  
     /**
      * Gets the xtype.
@@ -19144,7 +22150,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -19158,7 +22164,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCredentialId() {
-      return credential_id_serialized_name;
+      return credentialId;
     }
  
     /**
@@ -19170,7 +22176,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public SourceSchedule getSchedule() {
-      return schedule_serialized_name;
+      return schedule;
     }
  
     /**
@@ -19182,43 +22188,23 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public SourceOptions getOptions() {
-      return options_serialized_name;
+      return options;
+    }
+  
+    private Source(SourceBuilder builder) {
+      this.xtype = builder.xtype;
+      this.credentialId = builder.credentialId;
+      this.schedule = builder.schedule;
+      this.options = builder.options;
     }
 
     /**
-     * Sets the xtype.
+     * New builder.
      *
-     * @param xtype the new xtype
+     * @return a Source builder
      */
-    public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
-    }
-
-    /**
-     * Sets the credentialId.
-     *
-     * @param credentialId the new credentialId
-     */
-    public void setCredentialId(final String credentialId) {
-      this.credential_id_serialized_name = credentialId;
-    }
-
-    /**
-     * Sets the schedule.
-     *
-     * @param schedule the new schedule
-     */
-    public void setSchedule(final SourceSchedule schedule) {
-      this.schedule_serialized_name = schedule;
-    }
-
-    /**
-     * Sets the options.
-     *
-     * @param options the new options
-     */
-    public void setOptions(final SourceOptions options) {
-      this.options_serialized_name = options;
+    public SourceBuilder newBuilder() {
+      return new SourceBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -19227,16 +22213,119 @@ public class IBMDiscoveryV1Models {
       }
 
       Source ret = (Source) super.deserialize(jsonString, jsonMap, classType);
+      SourceBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for schedule
-      SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(ret.getSchedule()), (Map<String, Object>) jsonMap.get('schedule_serialized_name'), SourceSchedule.class);
-      ret.setSchedule(newSchedule);
+      SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(ret.getSchedule()), (Map<String, Object>) jsonMap.get('schedule'), SourceSchedule.class);
+      retBuilder.setSchedule(newSchedule);
 
       // calling custom deserializer for options
-      SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options_serialized_name'), SourceOptions.class);
-      ret.setOptions(newOptions);
+      SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options'), SourceOptions.class);
+      retBuilder.setOptions(newOptions);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xtype', 'type');
+      mapping.put('credentialId', 'credential_id');
+      if (schedule != null) {
+        mapping.putAll(schedule.getSdkToApiMapping());
+      }
+      if (options != null) {
+        mapping.putAll(options.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      mapping.put('credential_id', 'credentialId');
+      if (schedule != null) {
+        mapping.putAll(schedule.getApiToSdkMapping());
+      }
+      if (options != null) {
+        mapping.putAll(options.getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * Source Builder.
+   */
+  public class SourceBuilder {
+    private String xtype;
+    private String credentialId;
+    private SourceSchedule schedule;
+    private SourceOptions options;
+
+    private SourceBuilder(Source source) {
+      this.xtype = source.xtype;
+      this.credentialId = source.credentialId;
+      this.schedule = source.schedule;
+      this.options = source.options;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public SourceBuilder() {
+    }
+
+    /**
+     * Builds a Source.
+     *
+     * @return the source
+     */
+    public Source build() {
+      return new Source(this);
+    }
+
+    /**
+     * Set the xtype.
+     *
+     * @param xtype the xtype
+     * @return the Source builder
+     */
+    public SourceBuilder setXtype(String xtype) {
+      this.xtype = xtype;
+      return this;
+    }
+
+    /**
+     * Set the credentialId.
+     *
+     * @param credentialId the credentialId
+     * @return the Source builder
+     */
+    public SourceBuilder setCredentialId(String credentialId) {
+      this.credentialId = credentialId;
+      return this;
+    }
+
+    /**
+     * Set the schedule.
+     *
+     * @param schedule the schedule
+     * @return the Source builder
+     */
+    public SourceBuilder setSchedule(SourceSchedule schedule) {
+      this.schedule = schedule;
+      return this;
+    }
+
+    /**
+     * Set the options.
+     *
+     * @param options the options
+     * @return the Source builder
+     */
+    public SourceBuilder setOptions(SourceOptions options) {
+      this.options = options;
+      return this;
     }
   }
 
@@ -19244,12 +22333,18 @@ public class IBMDiscoveryV1Models {
    * The **options** object defines which items to crawl from the source system.
    */
   public class SourceOptions extends IBMWatsonGenericModel {
-    private List<SourceOptionsFolder> folders_serialized_name;
-    private List<SourceOptionsObject> objects_serialized_name;
-    private List<SourceOptionsSiteColl> site_collections_serialized_name;
-    private List<SourceOptionsWebCrawl> urls_serialized_name;
-    private List<SourceOptionsBuckets> buckets_serialized_name;
-    private Boolean crawl_all_buckets_serialized_name;
+    private List<SourceOptionsFolder> folders;
+    private List<SourceOptionsObject> objects;
+    private List<SourceOptionsSiteColl> siteCollections;
+    private List<SourceOptionsWebCrawl> urls;
+    private List<SourceOptionsBuckets> buckets;
+    private Boolean crawlAllBuckets;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SourceOptions() { }
  
     /**
      * Gets the folders.
@@ -19261,7 +22356,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<SourceOptionsFolder> getFolders() {
-      return folders_serialized_name;
+      return folders;
     }
  
     /**
@@ -19274,7 +22369,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<SourceOptionsObject> getObjects() {
-      return objects_serialized_name;
+      return objects;
     }
  
     /**
@@ -19287,7 +22382,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<SourceOptionsSiteColl> getSiteCollections() {
-      return site_collections_serialized_name;
+      return siteCollections;
     }
  
     /**
@@ -19300,7 +22395,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<SourceOptionsWebCrawl> getUrls() {
-      return urls_serialized_name;
+      return urls;
     }
  
     /**
@@ -19314,7 +22409,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<SourceOptionsBuckets> getBuckets() {
-      return buckets_serialized_name;
+      return buckets;
     }
  
     /**
@@ -19327,61 +22422,25 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getCrawlAllBuckets() {
-      return crawl_all_buckets_serialized_name;
+      return crawlAllBuckets;
+    }
+  
+    private SourceOptions(SourceOptionsBuilder builder) {
+      this.folders = builder.folders;
+      this.objects = builder.objects;
+      this.siteCollections = builder.siteCollections;
+      this.urls = builder.urls;
+      this.buckets = builder.buckets;
+      this.crawlAllBuckets = builder.crawlAllBuckets;
     }
 
     /**
-     * Sets the folders.
+     * New builder.
      *
-     * @param folders the new folders
+     * @return a SourceOptions builder
      */
-    public void setFolders(final List<SourceOptionsFolder> folders) {
-      this.folders_serialized_name = folders;
-    }
-
-    /**
-     * Sets the objects.
-     *
-     * @param objects the new objects
-     */
-    public void setObjects(final List<SourceOptionsObject> objects) {
-      this.objects_serialized_name = objects;
-    }
-
-    /**
-     * Sets the siteCollections.
-     *
-     * @param siteCollections the new siteCollections
-     */
-    public void setSiteCollections(final List<SourceOptionsSiteColl> siteCollections) {
-      this.site_collections_serialized_name = siteCollections;
-    }
-
-    /**
-     * Sets the urls.
-     *
-     * @param urls the new urls
-     */
-    public void setUrls(final List<SourceOptionsWebCrawl> urls) {
-      this.urls_serialized_name = urls;
-    }
-
-    /**
-     * Sets the buckets.
-     *
-     * @param buckets the new buckets
-     */
-    public void setBuckets(final List<SourceOptionsBuckets> buckets) {
-      this.buckets_serialized_name = buckets;
-    }
-
-    /**
-     * Sets the crawlAllBuckets.
-     *
-     * @param crawlAllBuckets the new crawlAllBuckets
-     */
-    public void setCrawlAllBuckets(final Boolean crawlAllBuckets) {
-      this.crawl_all_buckets_serialized_name = crawlAllBuckets;
+    public SourceOptionsBuilder newBuilder() {
+      return new SourceOptionsBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -19390,6 +22449,7 @@ public class IBMDiscoveryV1Models {
       }
 
       SourceOptions ret = (SourceOptions) super.deserialize(jsonString, jsonMap, classType);
+      SourceOptionsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for folders
       List<SourceOptionsFolder> newFolders = new List<SourceOptionsFolder>();
@@ -19397,11 +22457,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedFolders != null) {
         for (Integer i = 0; i < deserializedFolders.size(); i++) {
           SourceOptionsFolder currentItem = ret.getFolders().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('folders_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('folders');
           SourceOptionsFolder newItem = (SourceOptionsFolder) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsFolder.class);
           newFolders.add(newItem);
         }
-        ret.folders_serialized_name = newFolders;
+        retBuilder.setFolders(newFolders);
       }
 
       // calling custom deserializer for objects
@@ -19410,11 +22470,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedObjects != null) {
         for (Integer i = 0; i < deserializedObjects.size(); i++) {
           SourceOptionsObject currentItem = ret.getObjects().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('objects_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('objects');
           SourceOptionsObject newItem = (SourceOptionsObject) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsObject.class);
           newObjects.add(newItem);
         }
-        ret.objects_serialized_name = newObjects;
+        retBuilder.setObjects(newObjects);
       }
 
       // calling custom deserializer for siteCollections
@@ -19423,11 +22483,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedSiteCollections != null) {
         for (Integer i = 0; i < deserializedSiteCollections.size(); i++) {
           SourceOptionsSiteColl currentItem = ret.getSiteCollections().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('site_collections_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('siteCollections');
           SourceOptionsSiteColl newItem = (SourceOptionsSiteColl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsSiteColl.class);
           newSiteCollections.add(newItem);
         }
-        ret.site_collections_serialized_name = newSiteCollections;
+        retBuilder.setSiteCollections(newSiteCollections);
       }
 
       // calling custom deserializer for urls
@@ -19436,11 +22496,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedUrls != null) {
         for (Integer i = 0; i < deserializedUrls.size(); i++) {
           SourceOptionsWebCrawl currentItem = ret.getUrls().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('urls_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('urls');
           SourceOptionsWebCrawl newItem = (SourceOptionsWebCrawl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsWebCrawl.class);
           newUrls.add(newItem);
         }
-        ret.urls_serialized_name = newUrls;
+        retBuilder.setUrls(newUrls);
       }
 
       // calling custom deserializer for buckets
@@ -19449,14 +22509,240 @@ public class IBMDiscoveryV1Models {
       if (deserializedBuckets != null) {
         for (Integer i = 0; i < deserializedBuckets.size(); i++) {
           SourceOptionsBuckets currentItem = ret.getBuckets().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('buckets_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('buckets');
           SourceOptionsBuckets newItem = (SourceOptionsBuckets) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsBuckets.class);
           newBuckets.add(newItem);
         }
-        ret.buckets_serialized_name = newBuckets;
+        retBuilder.setBuckets(newBuckets);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (folders != null && folders[0] != null) {
+        mapping.putAll(folders[0].getSdkToApiMapping());
+      }
+      if (objects != null && objects[0] != null) {
+        mapping.putAll(objects[0].getSdkToApiMapping());
+      }
+      mapping.put('siteCollections', 'site_collections');
+      if (siteCollections != null && siteCollections[0] != null) {
+        mapping.putAll(siteCollections[0].getSdkToApiMapping());
+      }
+      if (urls != null && urls[0] != null) {
+        mapping.putAll(urls[0].getSdkToApiMapping());
+      }
+      if (buckets != null && buckets[0] != null) {
+        mapping.putAll(buckets[0].getSdkToApiMapping());
+      }
+      mapping.put('crawlAllBuckets', 'crawl_all_buckets');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (folders != null && folders[0] != null) {
+        mapping.putAll(folders[0].getApiToSdkMapping());
+      }
+      if (objects != null && objects[0] != null) {
+        mapping.putAll(objects[0].getApiToSdkMapping());
+      }
+      mapping.put('site_collections', 'siteCollections');
+      if (siteCollections != null && siteCollections[0] != null) {
+        mapping.putAll(siteCollections[0].getApiToSdkMapping());
+      }
+      if (urls != null && urls[0] != null) {
+        mapping.putAll(urls[0].getApiToSdkMapping());
+      }
+      if (buckets != null && buckets[0] != null) {
+        mapping.putAll(buckets[0].getApiToSdkMapping());
+      }
+      mapping.put('crawl_all_buckets', 'crawlAllBuckets');
+      return mapping;
+    }
+  }
+
+  /**
+   * SourceOptions Builder.
+   */
+  public class SourceOptionsBuilder {
+    private List<SourceOptionsFolder> folders;
+    private List<SourceOptionsObject> objects;
+    private List<SourceOptionsSiteColl> siteCollections;
+    private List<SourceOptionsWebCrawl> urls;
+    private List<SourceOptionsBuckets> buckets;
+    private Boolean crawlAllBuckets;
+
+    private SourceOptionsBuilder(SourceOptions sourceOptions) {
+      this.folders = sourceOptions.folders;
+      this.objects = sourceOptions.objects;
+      this.siteCollections = sourceOptions.siteCollections;
+      this.urls = sourceOptions.urls;
+      this.buckets = sourceOptions.buckets;
+      this.crawlAllBuckets = sourceOptions.crawlAllBuckets;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public SourceOptionsBuilder() {
+    }
+
+    /**
+     * Builds a SourceOptions.
+     *
+     * @return the sourceOptions
+     */
+    public SourceOptions build() {
+      return new SourceOptions(this);
+    }
+
+    /**
+     * Adds an folders to folders.
+     *
+     * @param folders the new folders
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder addFolders(SourceOptionsFolder folders) {
+      IBMWatsonValidator.notNull(folders, 'folders cannot be null');
+      if (this.folders == null) {
+        this.folders = new List<SourceOptionsFolder>();
+      }
+      this.folders.add(folders);
+      return this;
+    }
+
+    /**
+     * Adds an objects to objects.
+     *
+     * @param objects the new objects
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder addObjects(SourceOptionsObject objects) {
+      IBMWatsonValidator.notNull(objects, 'objects cannot be null');
+      if (this.objects == null) {
+        this.objects = new List<SourceOptionsObject>();
+      }
+      this.objects.add(objects);
+      return this;
+    }
+
+    /**
+     * Adds an siteCollections to siteCollections.
+     *
+     * @param siteCollections the new siteCollections
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder addSiteCollections(SourceOptionsSiteColl siteCollections) {
+      IBMWatsonValidator.notNull(siteCollections, 'siteCollections cannot be null');
+      if (this.siteCollections == null) {
+        this.siteCollections = new List<SourceOptionsSiteColl>();
+      }
+      this.siteCollections.add(siteCollections);
+      return this;
+    }
+
+    /**
+     * Adds an urls to urls.
+     *
+     * @param urls the new urls
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder addUrls(SourceOptionsWebCrawl urls) {
+      IBMWatsonValidator.notNull(urls, 'urls cannot be null');
+      if (this.urls == null) {
+        this.urls = new List<SourceOptionsWebCrawl>();
+      }
+      this.urls.add(urls);
+      return this;
+    }
+
+    /**
+     * Adds an buckets to buckets.
+     *
+     * @param buckets the new buckets
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder addBuckets(SourceOptionsBuckets buckets) {
+      IBMWatsonValidator.notNull(buckets, 'buckets cannot be null');
+      if (this.buckets == null) {
+        this.buckets = new List<SourceOptionsBuckets>();
+      }
+      this.buckets.add(buckets);
+      return this;
+    }
+
+    /**
+     * Set the folders.
+     * Existing folders will be replaced.
+     *
+     * @param folders the folders
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder setFolders(List<SourceOptionsFolder> folders) {
+      this.folders = folders;
+      return this;
+    }
+
+    /**
+     * Set the objects.
+     * Existing objects will be replaced.
+     *
+     * @param objects the objects
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder setObjects(List<SourceOptionsObject> objects) {
+      this.objects = objects;
+      return this;
+    }
+
+    /**
+     * Set the siteCollections.
+     * Existing siteCollections will be replaced.
+     *
+     * @param siteCollections the siteCollections
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder setSiteCollections(List<SourceOptionsSiteColl> siteCollections) {
+      this.siteCollections = siteCollections;
+      return this;
+    }
+
+    /**
+     * Set the urls.
+     * Existing urls will be replaced.
+     *
+     * @param urls the urls
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder setUrls(List<SourceOptionsWebCrawl> urls) {
+      this.urls = urls;
+      return this;
+    }
+
+    /**
+     * Set the buckets.
+     * Existing buckets will be replaced.
+     *
+     * @param buckets the buckets
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder setBuckets(List<SourceOptionsBuckets> buckets) {
+      this.buckets = buckets;
+      return this;
+    }
+
+    /**
+     * Set the crawlAllBuckets.
+     *
+     * @param crawlAllBuckets the crawlAllBuckets
+     * @return the SourceOptions builder
+     */
+    public SourceOptionsBuilder setCrawlAllBuckets(Boolean crawlAllBuckets) {
+      this.crawlAllBuckets = crawlAllBuckets;
+      return this;
     }
   }
 
@@ -19464,8 +22750,14 @@ public class IBMDiscoveryV1Models {
    * Object defining a cloud object store bucket to crawl.
    */
   public class SourceOptionsBuckets extends IBMWatsonGenericModel {
-    private String name_serialized_name;
-    private Long limit_serialized_name;
+    private String name;
+    private Long xlimit;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SourceOptionsBuckets() { }
  
     /**
      * Gets the name.
@@ -19476,7 +22768,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -19489,36 +22781,109 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getXlimit() {
-      return limit_serialized_name;
+      return xlimit;
+    }
+  
+    private SourceOptionsBuckets(SourceOptionsBucketsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      this.name = builder.name;
+      this.xlimit = builder.xlimit;
     }
 
     /**
-     * Sets the name.
+     * New builder.
      *
-     * @param name the new name
+     * @return a SourceOptionsBuckets builder
      */
-    public void setName(final String name) {
-      this.name_serialized_name = name;
+    public SourceOptionsBucketsBuilder newBuilder() {
+      return new SourceOptionsBucketsBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xlimit', 'limit');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('limit', 'xlimit');
+      return mapping;
+    }
+  }
+
+  /**
+   * SourceOptionsBuckets Builder.
+   */
+  public class SourceOptionsBucketsBuilder {
+    private String name;
+    private Long xlimit;
+
+    private SourceOptionsBucketsBuilder(SourceOptionsBuckets sourceOptionsBuckets) {
+      this.name = sourceOptionsBuckets.name;
+      this.xlimit = sourceOptionsBuckets.xlimit;
     }
 
     /**
-     * Sets the xlimit.
-     *
-     * @param xlimit the new xlimit
+     * Instantiates a new builder.
      */
-    public void setXlimit(final long xlimit) {
-      this.limit_serialized_name = xlimit;
+    public SourceOptionsBucketsBuilder() {
     }
 
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param name the name
+     */
+    public SourceOptionsBucketsBuilder(String name) {
+      this.name = name;
+    }
+
+    /**
+     * Builds a SourceOptionsBuckets.
+     *
+     * @return the sourceOptionsBuckets
+     */
+    public SourceOptionsBuckets build() {
+      return new SourceOptionsBuckets(this);
+    }
+
+    /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the SourceOptionsBuckets builder
+     */
+    public SourceOptionsBucketsBuilder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
+     * Set the xlimit.
+     *
+     * @param xlimit the xlimit
+     * @return the SourceOptionsBuckets builder
+     */
+    public SourceOptionsBucketsBuilder setXlimit(Long xlimit) {
+      this.xlimit = xlimit;
+      return this;
+    }
   }
 
   /**
    * Object that defines a box folder to crawl with this configuration.
    */
   public class SourceOptionsFolder extends IBMWatsonGenericModel {
-    private String owner_user_id_serialized_name;
-    private String folder_id_serialized_name;
-    private Long limit_serialized_name;
+    private String ownerUserId;
+    private String folderId;
+    private Long xlimit;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SourceOptionsFolder() { }
  
     /**
      * Gets the ownerUserId.
@@ -19529,7 +22894,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getOwnerUserId() {
-      return owner_user_id_serialized_name;
+      return ownerUserId;
     }
  
     /**
@@ -19541,7 +22906,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFolderId() {
-      return folder_id_serialized_name;
+      return folderId;
     }
  
     /**
@@ -19553,44 +22918,129 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getXlimit() {
-      return limit_serialized_name;
+      return xlimit;
+    }
+  
+    private SourceOptionsFolder(SourceOptionsFolderBuilder builder) {
+      IBMWatsonValidator.notNull(builder.ownerUserId, 'ownerUserId cannot be null');
+      IBMWatsonValidator.notNull(builder.folderId, 'folderId cannot be null');
+      this.ownerUserId = builder.ownerUserId;
+      this.folderId = builder.folderId;
+      this.xlimit = builder.xlimit;
     }
 
     /**
-     * Sets the ownerUserId.
+     * New builder.
      *
-     * @param ownerUserId the new ownerUserId
+     * @return a SourceOptionsFolder builder
      */
-    public void setOwnerUserId(final String ownerUserId) {
-      this.owner_user_id_serialized_name = ownerUserId;
+    public SourceOptionsFolderBuilder newBuilder() {
+      return new SourceOptionsFolderBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('ownerUserId', 'owner_user_id');
+      mapping.put('folderId', 'folder_id');
+      mapping.put('xlimit', 'limit');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('owner_user_id', 'ownerUserId');
+      mapping.put('folder_id', 'folderId');
+      mapping.put('limit', 'xlimit');
+      return mapping;
+    }
+  }
+
+  /**
+   * SourceOptionsFolder Builder.
+   */
+  public class SourceOptionsFolderBuilder {
+    private String ownerUserId;
+    private String folderId;
+    private Long xlimit;
+
+    private SourceOptionsFolderBuilder(SourceOptionsFolder sourceOptionsFolder) {
+      this.ownerUserId = sourceOptionsFolder.ownerUserId;
+      this.folderId = sourceOptionsFolder.folderId;
+      this.xlimit = sourceOptionsFolder.xlimit;
     }
 
     /**
-     * Sets the folderId.
-     *
-     * @param folderId the new folderId
+     * Instantiates a new builder.
      */
-    public void setFolderId(final String folderId) {
-      this.folder_id_serialized_name = folderId;
+    public SourceOptionsFolderBuilder() {
     }
 
     /**
-     * Sets the xlimit.
+     * Instantiates a new builder with required properties.
      *
-     * @param xlimit the new xlimit
+     * @param ownerUserId the ownerUserId
+     * @param folderId the folderId
      */
-    public void setXlimit(final long xlimit) {
-      this.limit_serialized_name = xlimit;
+    public SourceOptionsFolderBuilder(String ownerUserId, String folderId) {
+      this.ownerUserId = ownerUserId;
+      this.folderId = folderId;
     }
 
+    /**
+     * Builds a SourceOptionsFolder.
+     *
+     * @return the sourceOptionsFolder
+     */
+    public SourceOptionsFolder build() {
+      return new SourceOptionsFolder(this);
+    }
+
+    /**
+     * Set the ownerUserId.
+     *
+     * @param ownerUserId the ownerUserId
+     * @return the SourceOptionsFolder builder
+     */
+    public SourceOptionsFolderBuilder setOwnerUserId(String ownerUserId) {
+      this.ownerUserId = ownerUserId;
+      return this;
+    }
+
+    /**
+     * Set the folderId.
+     *
+     * @param folderId the folderId
+     * @return the SourceOptionsFolder builder
+     */
+    public SourceOptionsFolderBuilder setFolderId(String folderId) {
+      this.folderId = folderId;
+      return this;
+    }
+
+    /**
+     * Set the xlimit.
+     *
+     * @param xlimit the xlimit
+     * @return the SourceOptionsFolder builder
+     */
+    public SourceOptionsFolderBuilder setXlimit(Long xlimit) {
+      this.xlimit = xlimit;
+      return this;
+    }
   }
 
   /**
    * Object that defines a Salesforce document object type crawl with this configuration.
    */
   public class SourceOptionsObject extends IBMWatsonGenericModel {
-    private String name_serialized_name;
-    private Long limit_serialized_name;
+    private String name;
+    private Long xlimit;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SourceOptionsObject() { }
  
     /**
      * Gets the name.
@@ -19601,7 +23051,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -19614,35 +23064,108 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getXlimit() {
-      return limit_serialized_name;
+      return xlimit;
+    }
+  
+    private SourceOptionsObject(SourceOptionsObjectBuilder builder) {
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      this.name = builder.name;
+      this.xlimit = builder.xlimit;
     }
 
     /**
-     * Sets the name.
+     * New builder.
      *
-     * @param name the new name
+     * @return a SourceOptionsObject builder
      */
-    public void setName(final String name) {
-      this.name_serialized_name = name;
+    public SourceOptionsObjectBuilder newBuilder() {
+      return new SourceOptionsObjectBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xlimit', 'limit');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('limit', 'xlimit');
+      return mapping;
+    }
+  }
+
+  /**
+   * SourceOptionsObject Builder.
+   */
+  public class SourceOptionsObjectBuilder {
+    private String name;
+    private Long xlimit;
+
+    private SourceOptionsObjectBuilder(SourceOptionsObject sourceOptionsObject) {
+      this.name = sourceOptionsObject.name;
+      this.xlimit = sourceOptionsObject.xlimit;
     }
 
     /**
-     * Sets the xlimit.
-     *
-     * @param xlimit the new xlimit
+     * Instantiates a new builder.
      */
-    public void setXlimit(final long xlimit) {
-      this.limit_serialized_name = xlimit;
+    public SourceOptionsObjectBuilder() {
     }
 
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param name the name
+     */
+    public SourceOptionsObjectBuilder(String name) {
+      this.name = name;
+    }
+
+    /**
+     * Builds a SourceOptionsObject.
+     *
+     * @return the sourceOptionsObject
+     */
+    public SourceOptionsObject build() {
+      return new SourceOptionsObject(this);
+    }
+
+    /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the SourceOptionsObject builder
+     */
+    public SourceOptionsObjectBuilder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
+     * Set the xlimit.
+     *
+     * @param xlimit the xlimit
+     * @return the SourceOptionsObject builder
+     */
+    public SourceOptionsObjectBuilder setXlimit(Long xlimit) {
+      this.xlimit = xlimit;
+      return this;
+    }
   }
 
   /**
    * Object that defines a Microsoft SharePoint site collection to crawl with this configuration.
    */
   public class SourceOptionsSiteColl extends IBMWatsonGenericModel {
-    private String site_collection_path_serialized_name;
-    private Long limit_serialized_name;
+    private String siteCollectionPath;
+    private Long xlimit;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SourceOptionsSiteColl() { }
  
     /**
      * Gets the siteCollectionPath.
@@ -19654,7 +23177,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSiteCollectionPath() {
-      return site_collection_path_serialized_name;
+      return siteCollectionPath;
     }
  
     /**
@@ -19667,41 +23190,116 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getXlimit() {
-      return limit_serialized_name;
+      return xlimit;
+    }
+  
+    private SourceOptionsSiteColl(SourceOptionsSiteCollBuilder builder) {
+      IBMWatsonValidator.notNull(builder.siteCollectionPath, 'siteCollectionPath cannot be null');
+      this.siteCollectionPath = builder.siteCollectionPath;
+      this.xlimit = builder.xlimit;
     }
 
     /**
-     * Sets the siteCollectionPath.
+     * New builder.
      *
-     * @param siteCollectionPath the new siteCollectionPath
+     * @return a SourceOptionsSiteColl builder
      */
-    public void setSiteCollectionPath(final String siteCollectionPath) {
-      this.site_collection_path_serialized_name = siteCollectionPath;
+    public SourceOptionsSiteCollBuilder newBuilder() {
+      return new SourceOptionsSiteCollBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('siteCollectionPath', 'site_collection_path');
+      mapping.put('xlimit', 'limit');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('site_collection_path', 'siteCollectionPath');
+      mapping.put('limit', 'xlimit');
+      return mapping;
+    }
+  }
+
+  /**
+   * SourceOptionsSiteColl Builder.
+   */
+  public class SourceOptionsSiteCollBuilder {
+    private String siteCollectionPath;
+    private Long xlimit;
+
+    private SourceOptionsSiteCollBuilder(SourceOptionsSiteColl sourceOptionsSiteColl) {
+      this.siteCollectionPath = sourceOptionsSiteColl.siteCollectionPath;
+      this.xlimit = sourceOptionsSiteColl.xlimit;
     }
 
     /**
-     * Sets the xlimit.
-     *
-     * @param xlimit the new xlimit
+     * Instantiates a new builder.
      */
-    public void setXlimit(final long xlimit) {
-      this.limit_serialized_name = xlimit;
+    public SourceOptionsSiteCollBuilder() {
     }
 
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param siteCollectionPath the siteCollectionPath
+     */
+    public SourceOptionsSiteCollBuilder(String siteCollectionPath) {
+      this.siteCollectionPath = siteCollectionPath;
+    }
+
+    /**
+     * Builds a SourceOptionsSiteColl.
+     *
+     * @return the sourceOptionsSiteColl
+     */
+    public SourceOptionsSiteColl build() {
+      return new SourceOptionsSiteColl(this);
+    }
+
+    /**
+     * Set the siteCollectionPath.
+     *
+     * @param siteCollectionPath the siteCollectionPath
+     * @return the SourceOptionsSiteColl builder
+     */
+    public SourceOptionsSiteCollBuilder setSiteCollectionPath(String siteCollectionPath) {
+      this.siteCollectionPath = siteCollectionPath;
+      return this;
+    }
+
+    /**
+     * Set the xlimit.
+     *
+     * @param xlimit the xlimit
+     * @return the SourceOptionsSiteColl builder
+     */
+    public SourceOptionsSiteCollBuilder setXlimit(Long xlimit) {
+      this.xlimit = xlimit;
+      return this;
+    }
   }
 
   /**
    * Object defining which URL to crawl and how to crawl it.
    */
   public class SourceOptionsWebCrawl extends IBMWatsonGenericModel {
-    private String url_serialized_name;
-    private Boolean limit_to_starting_hosts_serialized_name;
-    private String crawl_speed_serialized_name;
-    private Boolean allow_untrusted_certificate_serialized_name;
-    private Long maximum_hops_serialized_name;
-    private Long request_timeout_serialized_name;
-    private Boolean override_robots_txt_serialized_name;
-    private List<String> blacklist_serialized_name;
+    private String url;
+    private Boolean limitToStartingHosts;
+    private String crawlSpeed;
+    private Boolean allowUntrustedCertificate;
+    private Long maximumHops;
+    private Long requestTimeout;
+    private Boolean overrideRobotsTxt;
+    private List<String> blacklist;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SourceOptionsWebCrawl() { }
  
     /**
      * Gets the url.
@@ -19712,7 +23310,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getUrl() {
-      return url_serialized_name;
+      return url;
     }
  
     /**
@@ -19724,7 +23322,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getLimitToStartingHosts() {
-      return limit_to_starting_hosts_serialized_name;
+      return limitToStartingHosts;
     }
  
     /**
@@ -19738,7 +23336,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCrawlSpeed() {
-      return crawl_speed_serialized_name;
+      return crawlSpeed;
     }
  
     /**
@@ -19750,7 +23348,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getAllowUntrustedCertificate() {
-      return allow_untrusted_certificate_serialized_name;
+      return allowUntrustedCertificate;
     }
  
     /**
@@ -19764,7 +23362,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMaximumHops() {
-      return maximum_hops_serialized_name;
+      return maximumHops;
     }
  
     /**
@@ -19776,7 +23374,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getRequestTimeout() {
-      return request_timeout_serialized_name;
+      return requestTimeout;
     }
  
     /**
@@ -19790,7 +23388,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getOverrideRobotsTxt() {
-      return override_robots_txt_serialized_name;
+      return overrideRobotsTxt;
     }
  
     /**
@@ -19803,90 +23401,219 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getBlacklist() {
-      return blacklist_serialized_name;
+      return blacklist;
+    }
+  
+    private SourceOptionsWebCrawl(SourceOptionsWebCrawlBuilder builder) {
+      IBMWatsonValidator.notNull(builder.url, 'url cannot be null');
+      this.url = builder.url;
+      this.limitToStartingHosts = builder.limitToStartingHosts;
+      this.crawlSpeed = builder.crawlSpeed;
+      this.allowUntrustedCertificate = builder.allowUntrustedCertificate;
+      this.maximumHops = builder.maximumHops;
+      this.requestTimeout = builder.requestTimeout;
+      this.overrideRobotsTxt = builder.overrideRobotsTxt;
+      this.blacklist = builder.blacklist;
     }
 
     /**
-     * Sets the url.
+     * New builder.
      *
-     * @param url the new url
+     * @return a SourceOptionsWebCrawl builder
      */
-    public void setUrl(final String url) {
-      this.url_serialized_name = url;
+    public SourceOptionsWebCrawlBuilder newBuilder() {
+      return new SourceOptionsWebCrawlBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('limitToStartingHosts', 'limit_to_starting_hosts');
+      mapping.put('crawlSpeed', 'crawl_speed');
+      mapping.put('allowUntrustedCertificate', 'allow_untrusted_certificate');
+      mapping.put('maximumHops', 'maximum_hops');
+      mapping.put('requestTimeout', 'request_timeout');
+      mapping.put('overrideRobotsTxt', 'override_robots_txt');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('limit_to_starting_hosts', 'limitToStartingHosts');
+      mapping.put('crawl_speed', 'crawlSpeed');
+      mapping.put('allow_untrusted_certificate', 'allowUntrustedCertificate');
+      mapping.put('maximum_hops', 'maximumHops');
+      mapping.put('request_timeout', 'requestTimeout');
+      mapping.put('override_robots_txt', 'overrideRobotsTxt');
+      return mapping;
+    }
+  }
+
+  /**
+   * SourceOptionsWebCrawl Builder.
+   */
+  public class SourceOptionsWebCrawlBuilder {
+    private String url;
+    private Boolean limitToStartingHosts;
+    private String crawlSpeed;
+    private Boolean allowUntrustedCertificate;
+    private Long maximumHops;
+    private Long requestTimeout;
+    private Boolean overrideRobotsTxt;
+    private List<String> blacklist;
+
+    private SourceOptionsWebCrawlBuilder(SourceOptionsWebCrawl sourceOptionsWebCrawl) {
+      this.url = sourceOptionsWebCrawl.url;
+      this.limitToStartingHosts = sourceOptionsWebCrawl.limitToStartingHosts;
+      this.crawlSpeed = sourceOptionsWebCrawl.crawlSpeed;
+      this.allowUntrustedCertificate = sourceOptionsWebCrawl.allowUntrustedCertificate;
+      this.maximumHops = sourceOptionsWebCrawl.maximumHops;
+      this.requestTimeout = sourceOptionsWebCrawl.requestTimeout;
+      this.overrideRobotsTxt = sourceOptionsWebCrawl.overrideRobotsTxt;
+      this.blacklist = sourceOptionsWebCrawl.blacklist;
     }
 
     /**
-     * Sets the limitToStartingHosts.
+     * Instantiates a new builder.
+     */
+    public SourceOptionsWebCrawlBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
      *
-     * @param limitToStartingHosts the new limitToStartingHosts
+     * @param url the url
      */
-    public void setLimitToStartingHosts(final Boolean limitToStartingHosts) {
-      this.limit_to_starting_hosts_serialized_name = limitToStartingHosts;
+    public SourceOptionsWebCrawlBuilder(String url) {
+      this.url = url;
     }
 
     /**
-     * Sets the crawlSpeed.
+     * Builds a SourceOptionsWebCrawl.
      *
-     * @param crawlSpeed the new crawlSpeed
+     * @return the sourceOptionsWebCrawl
      */
-    public void setCrawlSpeed(final String crawlSpeed) {
-      this.crawl_speed_serialized_name = crawlSpeed;
+    public SourceOptionsWebCrawl build() {
+      return new SourceOptionsWebCrawl(this);
     }
 
     /**
-     * Sets the allowUntrustedCertificate.
-     *
-     * @param allowUntrustedCertificate the new allowUntrustedCertificate
-     */
-    public void setAllowUntrustedCertificate(final Boolean allowUntrustedCertificate) {
-      this.allow_untrusted_certificate_serialized_name = allowUntrustedCertificate;
-    }
-
-    /**
-     * Sets the maximumHops.
-     *
-     * @param maximumHops the new maximumHops
-     */
-    public void setMaximumHops(final long maximumHops) {
-      this.maximum_hops_serialized_name = maximumHops;
-    }
-
-    /**
-     * Sets the requestTimeout.
-     *
-     * @param requestTimeout the new requestTimeout
-     */
-    public void setRequestTimeout(final long requestTimeout) {
-      this.request_timeout_serialized_name = requestTimeout;
-    }
-
-    /**
-     * Sets the overrideRobotsTxt.
-     *
-     * @param overrideRobotsTxt the new overrideRobotsTxt
-     */
-    public void setOverrideRobotsTxt(final Boolean overrideRobotsTxt) {
-      this.override_robots_txt_serialized_name = overrideRobotsTxt;
-    }
-
-    /**
-     * Sets the blacklist.
+     * Adds an blacklist to blacklist.
      *
      * @param blacklist the new blacklist
+     * @return the SourceOptionsWebCrawl builder
      */
-    public void setBlacklist(final List<String> blacklist) {
-      this.blacklist_serialized_name = blacklist;
+    public SourceOptionsWebCrawlBuilder addBlacklist(String blacklist) {
+      IBMWatsonValidator.notNull(blacklist, 'blacklist cannot be null');
+      if (this.blacklist == null) {
+        this.blacklist = new List<String>();
+      }
+      this.blacklist.add(blacklist);
+      return this;
     }
 
+    /**
+     * Set the url.
+     *
+     * @param url the url
+     * @return the SourceOptionsWebCrawl builder
+     */
+    public SourceOptionsWebCrawlBuilder setUrl(String url) {
+      this.url = url;
+      return this;
+    }
+
+    /**
+     * Set the limitToStartingHosts.
+     *
+     * @param limitToStartingHosts the limitToStartingHosts
+     * @return the SourceOptionsWebCrawl builder
+     */
+    public SourceOptionsWebCrawlBuilder setLimitToStartingHosts(Boolean limitToStartingHosts) {
+      this.limitToStartingHosts = limitToStartingHosts;
+      return this;
+    }
+
+    /**
+     * Set the crawlSpeed.
+     *
+     * @param crawlSpeed the crawlSpeed
+     * @return the SourceOptionsWebCrawl builder
+     */
+    public SourceOptionsWebCrawlBuilder setCrawlSpeed(String crawlSpeed) {
+      this.crawlSpeed = crawlSpeed;
+      return this;
+    }
+
+    /**
+     * Set the allowUntrustedCertificate.
+     *
+     * @param allowUntrustedCertificate the allowUntrustedCertificate
+     * @return the SourceOptionsWebCrawl builder
+     */
+    public SourceOptionsWebCrawlBuilder setAllowUntrustedCertificate(Boolean allowUntrustedCertificate) {
+      this.allowUntrustedCertificate = allowUntrustedCertificate;
+      return this;
+    }
+
+    /**
+     * Set the maximumHops.
+     *
+     * @param maximumHops the maximumHops
+     * @return the SourceOptionsWebCrawl builder
+     */
+    public SourceOptionsWebCrawlBuilder setMaximumHops(Long maximumHops) {
+      this.maximumHops = maximumHops;
+      return this;
+    }
+
+    /**
+     * Set the requestTimeout.
+     *
+     * @param requestTimeout the requestTimeout
+     * @return the SourceOptionsWebCrawl builder
+     */
+    public SourceOptionsWebCrawlBuilder setRequestTimeout(Long requestTimeout) {
+      this.requestTimeout = requestTimeout;
+      return this;
+    }
+
+    /**
+     * Set the overrideRobotsTxt.
+     *
+     * @param overrideRobotsTxt the overrideRobotsTxt
+     * @return the SourceOptionsWebCrawl builder
+     */
+    public SourceOptionsWebCrawlBuilder setOverrideRobotsTxt(Boolean overrideRobotsTxt) {
+      this.overrideRobotsTxt = overrideRobotsTxt;
+      return this;
+    }
+
+    /**
+     * Set the blacklist.
+     * Existing blacklist will be replaced.
+     *
+     * @param blacklist the blacklist
+     * @return the SourceOptionsWebCrawl builder
+     */
+    public SourceOptionsWebCrawlBuilder setBlacklist(List<String> blacklist) {
+      this.blacklist = blacklist;
+      return this;
+    }
   }
 
   /**
    * Object containing the schedule information for the source.
    */
   public class SourceSchedule extends IBMWatsonGenericModel {
-    private Boolean enabled_serialized_name;
-    private String time_zone_serialized_name;
-    private String frequency_serialized_name;
+    private Boolean enabled;
+    private String timeZone;
+    private String frequency;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public SourceSchedule() { }
  
     /**
      * Gets the enabled.
@@ -19898,7 +23625,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getEnabled() {
-      return enabled_serialized_name;
+      return enabled;
     }
  
     /**
@@ -19911,7 +23638,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getTimeZone() {
-      return time_zone_serialized_name;
+      return timeZone;
     }
  
     /**
@@ -19929,44 +23656,106 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFrequency() {
-      return frequency_serialized_name;
+      return frequency;
+    }
+  
+    private SourceSchedule(SourceScheduleBuilder builder) {
+      this.enabled = builder.enabled;
+      this.timeZone = builder.timeZone;
+      this.frequency = builder.frequency;
     }
 
     /**
-     * Sets the enabled.
+     * New builder.
      *
-     * @param enabled the new enabled
+     * @return a SourceSchedule builder
      */
-    public void setEnabled(final Boolean enabled) {
-      this.enabled_serialized_name = enabled;
+    public SourceScheduleBuilder newBuilder() {
+      return new SourceScheduleBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('timeZone', 'time_zone');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('time_zone', 'timeZone');
+      return mapping;
+    }
+  }
+
+  /**
+   * SourceSchedule Builder.
+   */
+  public class SourceScheduleBuilder {
+    private Boolean enabled;
+    private String timeZone;
+    private String frequency;
+
+    private SourceScheduleBuilder(SourceSchedule sourceSchedule) {
+      this.enabled = sourceSchedule.enabled;
+      this.timeZone = sourceSchedule.timeZone;
+      this.frequency = sourceSchedule.frequency;
     }
 
     /**
-     * Sets the timeZone.
-     *
-     * @param timeZone the new timeZone
+     * Instantiates a new builder.
      */
-    public void setTimeZone(final String timeZone) {
-      this.time_zone_serialized_name = timeZone;
+    public SourceScheduleBuilder() {
     }
 
     /**
-     * Sets the frequency.
+     * Builds a SourceSchedule.
      *
-     * @param frequency the new frequency
+     * @return the sourceSchedule
      */
-    public void setFrequency(final String frequency) {
-      this.frequency_serialized_name = frequency;
+    public SourceSchedule build() {
+      return new SourceSchedule(this);
     }
 
+    /**
+     * Set the enabled.
+     *
+     * @param enabled the enabled
+     * @return the SourceSchedule builder
+     */
+    public SourceScheduleBuilder setEnabled(Boolean enabled) {
+      this.enabled = enabled;
+      return this;
+    }
+
+    /**
+     * Set the timeZone.
+     *
+     * @param timeZone the timeZone
+     * @return the SourceSchedule builder
+     */
+    public SourceScheduleBuilder setTimeZone(String timeZone) {
+      this.timeZone = timeZone;
+      return this;
+    }
+
+    /**
+     * Set the frequency.
+     *
+     * @param frequency the frequency
+     * @return the SourceSchedule builder
+     */
+    public SourceScheduleBuilder setFrequency(String frequency) {
+      this.frequency = frequency;
+      return this;
+    }
   }
 
   /**
    * Object containing source crawl status information.
    */
   public class SourceStatus extends IBMWatsonGenericModel {
-    private String status_serialized_name;
-    private Datetime next_crawl_serialized_name;
+    private String status;
+    private Datetime nextCrawl;
  
     /**
      * Gets the status.
@@ -19983,7 +23772,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -19995,7 +23784,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getNextCrawl() {
-      return next_crawl_serialized_name;
+      return nextCrawl;
     }
 
     /**
@@ -20004,7 +23793,7 @@ public class IBMDiscoveryV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -20013,9 +23802,14 @@ public class IBMDiscoveryV1Models {
      * @param nextCrawl the new nextCrawl
      */
     public void setNextCrawl(final Datetime nextCrawl) {
-      this.next_crawl_serialized_name = nextCrawl;
+      this.nextCrawl = nextCrawl;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('next_crawl', 'nextCrawl');
+      return mapping;
+    }
   }
 
   /**
@@ -20030,7 +23824,7 @@ public class IBMDiscoveryV1Models {
     private String metadata;
     private String step;
     private String configurationId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -20041,7 +23835,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the configuration.
      *
@@ -20056,7 +23850,7 @@ public class IBMDiscoveryV1Models {
     public String configuration() {
       return configuration;
     }
- 
+
     /**
      * Gets the file.
      *
@@ -20069,7 +23863,7 @@ public class IBMDiscoveryV1Models {
     public IBMWatsonFile file() {
       return file;
     }
- 
+
     /**
      * Gets the filename.
      *
@@ -20080,7 +23874,7 @@ public class IBMDiscoveryV1Models {
     public String filename() {
       return filename;
     }
- 
+
     /**
      * Gets the fileContentType.
      *
@@ -20091,7 +23885,7 @@ public class IBMDiscoveryV1Models {
     public String fileContentType() {
       return fileContentType;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -20106,7 +23900,7 @@ public class IBMDiscoveryV1Models {
     public String metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the step.
      *
@@ -20118,7 +23912,7 @@ public class IBMDiscoveryV1Models {
     public String step() {
       return step;
     }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -20154,6 +23948,13 @@ public class IBMDiscoveryV1Models {
       return new TestConfigurationInEnvironmentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('fileContentType', 'file_content_type');
+      mapping.put('configurationId', 'configuration_id');
+      return mapping;
+    }
   }
 
   /**
@@ -20310,12 +24111,12 @@ public class IBMDiscoveryV1Models {
    * TestDocument.
    */
   public class TestDocument extends IBMWatsonResponseModel {
-    private String configuration_id_serialized_name;
-    private String status_serialized_name;
-    private Long enriched_field_units_serialized_name;
-    private String original_media_type_serialized_name;
-    private List<DocumentSnapshot> snapshots_serialized_name;
-    private List<Notice> notices_serialized_name;
+    private String configurationId;
+    private String status;
+    private Long enrichedFieldUnits;
+    private String originalMediaType;
+    private List<DocumentSnapshot> snapshots;
+    private List<Notice> notices;
  
     /**
      * Gets the configurationId.
@@ -20326,7 +24127,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getConfigurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
  
     /**
@@ -20338,7 +24139,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -20351,7 +24152,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getEnrichedFieldUnits() {
-      return enriched_field_units_serialized_name;
+      return enrichedFieldUnits;
     }
  
     /**
@@ -20363,7 +24164,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getOriginalMediaType() {
-      return original_media_type_serialized_name;
+      return originalMediaType;
     }
  
     /**
@@ -20375,7 +24176,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<DocumentSnapshot> getSnapshots() {
-      return snapshots_serialized_name;
+      return snapshots;
     }
  
     /**
@@ -20387,7 +24188,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<Notice> getNotices() {
-      return notices_serialized_name;
+      return notices;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -20403,11 +24204,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedSnapshots != null) {
         for (Integer i = 0; i < deserializedSnapshots.size(); i++) {
           DocumentSnapshot currentItem = ret.getSnapshots().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('snapshots_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('snapshots');
           DocumentSnapshot newItem = (DocumentSnapshot) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentSnapshot.class);
           newSnapshots.add(newItem);
         }
-        ret.snapshots_serialized_name = newSnapshots;
+        ret.snapshots = newSnapshots;
       }
 
       // calling custom deserializer for notices
@@ -20416,25 +24217,36 @@ public class IBMDiscoveryV1Models {
       if (deserializedNotices != null) {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('notices_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
           Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
-        ret.notices_serialized_name = newNotices;
+        ret.notices = newNotices;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('configuration_id', 'configurationId');
+      mapping.put('enriched_field_units', 'enrichedFieldUnits');
+      mapping.put('original_media_type', 'originalMediaType');
+      if (notices != null && notices[0] != null) {
+        mapping.putAll(notices[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
   /**
    * An object defining a single tokenizaion rule.
    */
-  public class TokenDictRule {
-    private String text_serialized_name;
-    private List<String> tokens_serialized_name;
-    private List<String> readings_serialized_name;
-    private String part_of_speech_serialized_name;
+  public class TokenDictRule extends IBMWatsonGenericModel {
+    private String text;
+    private List<String> tokens;
+    private List<String> readings;
+    private String partOfSpeech;
  
     /**
      * Gets the text.
@@ -20444,7 +24256,7 @@ public class IBMDiscoveryV1Models {
      * @return the text
      */
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -20455,7 +24267,7 @@ public class IBMDiscoveryV1Models {
      * @return the tokens
      */
     public List<String> getTokens() {
-      return tokens_serialized_name;
+      return tokens;
     }
  
     /**
@@ -20466,7 +24278,7 @@ public class IBMDiscoveryV1Models {
      * @return the readings
      */
     public List<String> getReadings() {
-      return readings_serialized_name;
+      return readings;
     }
  
     /**
@@ -20478,53 +24290,162 @@ public class IBMDiscoveryV1Models {
      * @return the partOfSpeech
      */
     public String getPartOfSpeech() {
-      return part_of_speech_serialized_name;
+      return partOfSpeech;
+    }
+  
+    private TokenDictRule(TokenDictRuleBuilder builder) {
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      IBMWatsonValidator.notNull(builder.tokens, 'tokens cannot be null');
+      IBMWatsonValidator.notNull(builder.partOfSpeech, 'partOfSpeech cannot be null');
+      this.text = builder.text;
+      this.tokens = builder.tokens;
+      this.readings = builder.readings;
+      this.partOfSpeech = builder.partOfSpeech;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a TokenDictRule builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
+    public TokenDictRuleBuilder newBuilder() {
+      return new TokenDictRuleBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('partOfSpeech', 'part_of_speech');
+      return mapping;
+    }
+  }
+
+  /**
+   * TokenDictRule Builder.
+   */
+  public class TokenDictRuleBuilder {
+    private String text;
+    private List<String> tokens;
+    private List<String> readings;
+    private String partOfSpeech;
+
+    private TokenDictRuleBuilder(TokenDictRule tokenDictRule) {
+      this.text = tokenDictRule.text;
+      this.tokens = tokenDictRule.tokens;
+      this.readings = tokenDictRule.readings;
+      this.partOfSpeech = tokenDictRule.partOfSpeech;
     }
 
     /**
-     * Sets the tokens.
+     * Instantiates a new builder.
+     */
+    public TokenDictRuleBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param text the text
+     * @param tokens the tokens
+     * @param partOfSpeech the partOfSpeech
+     */
+    public TokenDictRuleBuilder(String text, List<String> tokens, String partOfSpeech) {
+      this.text = text;
+      this.tokens = tokens;
+      this.partOfSpeech = partOfSpeech;
+    }
+
+    /**
+     * Builds a TokenDictRule.
+     *
+     * @return the tokenDictRule
+     */
+    public TokenDictRule build() {
+      return new TokenDictRule(this);
+    }
+
+    /**
+     * Adds an tokens to tokens.
      *
      * @param tokens the new tokens
+     * @return the TokenDictRule builder
      */
-    public void setTokens(final List<String> tokens) {
-      this.tokens_serialized_name = tokens;
+    public TokenDictRuleBuilder addTokens(String tokens) {
+      IBMWatsonValidator.notNull(tokens, 'tokens cannot be null');
+      if (this.tokens == null) {
+        this.tokens = new List<String>();
+      }
+      this.tokens.add(tokens);
+      return this;
     }
 
     /**
-     * Sets the readings.
+     * Adds an readings to readings.
      *
      * @param readings the new readings
+     * @return the TokenDictRule builder
      */
-    public void setReadings(final List<String> readings) {
-      this.readings_serialized_name = readings;
+    public TokenDictRuleBuilder addReadings(String readings) {
+      IBMWatsonValidator.notNull(readings, 'readings cannot be null');
+      if (this.readings == null) {
+        this.readings = new List<String>();
+      }
+      this.readings.add(readings);
+      return this;
     }
 
     /**
-     * Sets the partOfSpeech.
+     * Set the text.
      *
-     * @param partOfSpeech the new partOfSpeech
+     * @param text the text
+     * @return the TokenDictRule builder
      */
-    public void setPartOfSpeech(final String partOfSpeech) {
-      this.part_of_speech_serialized_name = partOfSpeech;
+    public TokenDictRuleBuilder setText(String text) {
+      this.text = text;
+      return this;
     }
 
+    /**
+     * Set the tokens.
+     * Existing tokens will be replaced.
+     *
+     * @param tokens the tokens
+     * @return the TokenDictRule builder
+     */
+    public TokenDictRuleBuilder setTokens(List<String> tokens) {
+      this.tokens = tokens;
+      return this;
+    }
+
+    /**
+     * Set the readings.
+     * Existing readings will be replaced.
+     *
+     * @param readings the readings
+     * @return the TokenDictRule builder
+     */
+    public TokenDictRuleBuilder setReadings(List<String> readings) {
+      this.readings = readings;
+      return this;
+    }
+
+    /**
+     * Set the partOfSpeech.
+     *
+     * @param partOfSpeech the partOfSpeech
+     * @return the TokenDictRule builder
+     */
+    public TokenDictRuleBuilder setPartOfSpeech(String partOfSpeech) {
+      this.partOfSpeech = partOfSpeech;
+      return this;
+    }
   }
 
   /**
    * Object describing the current status of the wordlist.
    */
   public class TokenDictStatusResponse extends IBMWatsonResponseModel {
-    private String status_serialized_name;
-    private String type_serialized_name;
+    private String status;
+    private String xtype;
  
     /**
      * Gets the status.
@@ -20535,7 +24456,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -20547,7 +24468,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
 
     /**
@@ -20556,7 +24477,7 @@ public class IBMDiscoveryV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -20565,17 +24486,22 @@ public class IBMDiscoveryV1Models {
      * @param xtype the new xtype
      */
     public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+      this.xtype = xtype;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      return mapping;
+    }
   }
 
   /**
    * TopHitsResults.
    */
   public class TopHitsResults extends IBMWatsonGenericModel {
-    private Long matching_results_serialized_name;
-    private List<QueryResult> hits_serialized_name;
+    private Long matchingResults;
+    private List<QueryResult> hits;
  
     /**
      * Gets the matchingResults.
@@ -20586,7 +24512,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getMatchingResults() {
-      return matching_results_serialized_name;
+      return matchingResults;
     }
  
     /**
@@ -20598,7 +24524,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<QueryResult> getHits() {
-      return hits_serialized_name;
+      return hits;
     }
 
     /**
@@ -20607,7 +24533,7 @@ public class IBMDiscoveryV1Models {
      * @param matchingResults the new matchingResults
      */
     public void setMatchingResults(final long matchingResults) {
-      this.matching_results_serialized_name = matchingResults;
+      this.matchingResults = matchingResults;
     }
 
     /**
@@ -20616,7 +24542,7 @@ public class IBMDiscoveryV1Models {
      * @param hits the new hits
      */
     public void setHits(final List<QueryResult> hits) {
-      this.hits_serialized_name = hits;
+      this.hits = hits;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -20632,14 +24558,23 @@ public class IBMDiscoveryV1Models {
       if (deserializedHits != null) {
         for (Integer i = 0; i < deserializedHits.size(); i++) {
           QueryResult currentItem = ret.getHits().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('hits_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('hits');
           QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
           newHits.add(newItem);
         }
-        ret.hits_serialized_name = newHits;
+        ret.hits = newHits;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('matching_results', 'matchingResults');
+      if (hits != null && hits[0] != null) {
+        mapping.putAll(hits[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -20647,9 +24582,9 @@ public class IBMDiscoveryV1Models {
    * TrainingDataSet.
    */
   public class TrainingDataSet extends IBMWatsonResponseModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private List<TrainingQuery> queries_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private List<TrainingQuery> queries;
  
     /**
      * Gets the environmentId.
@@ -20660,7 +24595,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getEnvironmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
  
     /**
@@ -20672,7 +24607,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
  
     /**
@@ -20684,7 +24619,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<TrainingQuery> getQueries() {
-      return queries_serialized_name;
+      return queries;
     }
 
     /**
@@ -20693,7 +24628,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the new environmentId
      */
     public void setEnvironmentId(final String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -20702,7 +24637,7 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the new collectionId
      */
     public void setCollectionId(final String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -20711,7 +24646,7 @@ public class IBMDiscoveryV1Models {
      * @param queries the new queries
      */
     public void setQueries(final List<TrainingQuery> queries) {
-      this.queries_serialized_name = queries;
+      this.queries = queries;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -20727,14 +24662,24 @@ public class IBMDiscoveryV1Models {
       if (deserializedQueries != null) {
         for (Integer i = 0; i < deserializedQueries.size(); i++) {
           TrainingQuery currentItem = ret.getQueries().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('queries_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('queries');
           TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingQuery.class);
           newQueries.add(newItem);
         }
-        ret.queries_serialized_name = newQueries;
+        ret.queries = newQueries;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environment_id', 'environmentId');
+      mapping.put('collection_id', 'collectionId');
+      if (queries != null && queries[0] != null) {
+        mapping.putAll(queries[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -20742,9 +24687,15 @@ public class IBMDiscoveryV1Models {
    * TrainingExample.
    */
   public class TrainingExample extends IBMWatsonResponseModel {
-    private String document_id_serialized_name;
-    private String cross_reference_serialized_name;
-    private Long relevance_serialized_name;
+    private String documentId;
+    private String crossReference;
+    private Long relevance;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public TrainingExample() { }
  
     /**
      * Gets the documentId.
@@ -20755,7 +24706,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getDocumentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
  
     /**
@@ -20767,7 +24718,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getCrossReference() {
-      return cross_reference_serialized_name;
+      return crossReference;
     }
  
     /**
@@ -20779,43 +24730,107 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getRelevance() {
-      return relevance_serialized_name;
+      return relevance;
+    }
+  
+    private TrainingExample(TrainingExampleBuilder builder) {
+      this.documentId = builder.documentId;
+      this.crossReference = builder.crossReference;
+      this.relevance = builder.relevance;
     }
 
     /**
-     * Sets the documentId.
+     * New builder.
      *
-     * @param documentId the new documentId
+     * @return a TrainingExample builder
      */
-    public void setDocumentId(final String documentId) {
-      this.document_id_serialized_name = documentId;
+    public TrainingExampleBuilder newBuilder() {
+      return new TrainingExampleBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('documentId', 'document_id');
+      mapping.put('crossReference', 'cross_reference');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_id', 'documentId');
+      mapping.put('cross_reference', 'crossReference');
+      return mapping;
+    }
+  }
+
+  /**
+   * TrainingExample Builder.
+   */
+  public class TrainingExampleBuilder {
+    private String documentId;
+    private String crossReference;
+    private Long relevance;
+
+    private TrainingExampleBuilder(TrainingExample trainingExample) {
+      this.documentId = trainingExample.documentId;
+      this.crossReference = trainingExample.crossReference;
+      this.relevance = trainingExample.relevance;
     }
 
     /**
-     * Sets the crossReference.
-     *
-     * @param crossReference the new crossReference
+     * Instantiates a new builder.
      */
-    public void setCrossReference(final String crossReference) {
-      this.cross_reference_serialized_name = crossReference;
+    public TrainingExampleBuilder() {
     }
 
     /**
-     * Sets the relevance.
+     * Builds a TrainingExample.
      *
-     * @param relevance the new relevance
+     * @return the trainingExample
      */
-    public void setRelevance(final long relevance) {
-      this.relevance_serialized_name = relevance;
+    public TrainingExample build() {
+      return new TrainingExample(this);
     }
 
+    /**
+     * Set the documentId.
+     *
+     * @param documentId the documentId
+     * @return the TrainingExample builder
+     */
+    public TrainingExampleBuilder setDocumentId(String documentId) {
+      this.documentId = documentId;
+      return this;
+    }
+
+    /**
+     * Set the crossReference.
+     *
+     * @param crossReference the crossReference
+     * @return the TrainingExample builder
+     */
+    public TrainingExampleBuilder setCrossReference(String crossReference) {
+      this.crossReference = crossReference;
+      return this;
+    }
+
+    /**
+     * Set the relevance.
+     *
+     * @param relevance the relevance
+     * @return the TrainingExample builder
+     */
+    public TrainingExampleBuilder setRelevance(Long relevance) {
+      this.relevance = relevance;
+      return this;
+    }
   }
 
   /**
    * TrainingExampleList.
    */
   public class TrainingExampleList extends IBMWatsonResponseModel {
-    private List<TrainingExample> examples_serialized_name;
+    private List<TrainingExample> examples;
  
     /**
      * Gets the examples.
@@ -20826,7 +24841,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<TrainingExample> getExamples() {
-      return examples_serialized_name;
+      return examples;
     }
 
     /**
@@ -20835,7 +24850,7 @@ public class IBMDiscoveryV1Models {
      * @param examples the new examples
      */
     public void setExamples(final List<TrainingExample> examples) {
-      this.examples_serialized_name = examples;
+      this.examples = examples;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -20851,14 +24866,22 @@ public class IBMDiscoveryV1Models {
       if (deserializedExamples != null) {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           TrainingExample currentItem = ret.getExamples().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
           TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
           newExamples.add(newItem);
         }
-        ret.examples_serialized_name = newExamples;
+        ret.examples = newExamples;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (examples != null && examples[0] != null) {
+        mapping.putAll(examples[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -20866,10 +24889,10 @@ public class IBMDiscoveryV1Models {
    * TrainingQuery.
    */
   public class TrainingQuery extends IBMWatsonResponseModel {
-    private String query_id_serialized_name;
-    private String natural_language_query_serialized_name;
-    private String filter_serialized_name;
-    private List<TrainingExample> examples_serialized_name;
+    private String queryId;
+    private String naturalLanguageQuery;
+    private String filter;
+    private List<TrainingExample> examples;
  
     /**
      * Gets the queryId.
@@ -20880,7 +24903,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getQueryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
  
     /**
@@ -20892,7 +24915,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getNaturalLanguageQuery() {
-      return natural_language_query_serialized_name;
+      return naturalLanguageQuery;
     }
  
     /**
@@ -20904,7 +24927,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getFilter() {
-      return filter_serialized_name;
+      return filter;
     }
  
     /**
@@ -20916,7 +24939,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<TrainingExample> getExamples() {
-      return examples_serialized_name;
+      return examples;
     }
 
     /**
@@ -20925,7 +24948,7 @@ public class IBMDiscoveryV1Models {
      * @param queryId the new queryId
      */
     public void setQueryId(final String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
     }
 
     /**
@@ -20934,7 +24957,7 @@ public class IBMDiscoveryV1Models {
      * @param naturalLanguageQuery the new naturalLanguageQuery
      */
     public void setNaturalLanguageQuery(final String naturalLanguageQuery) {
-      this.natural_language_query_serialized_name = naturalLanguageQuery;
+      this.naturalLanguageQuery = naturalLanguageQuery;
     }
 
     /**
@@ -20943,7 +24966,7 @@ public class IBMDiscoveryV1Models {
      * @param filter the new filter
      */
     public void setFilter(final String filter) {
-      this.filter_serialized_name = filter;
+      this.filter = filter;
     }
 
     /**
@@ -20952,7 +24975,7 @@ public class IBMDiscoveryV1Models {
      * @param examples the new examples
      */
     public void setExamples(final List<TrainingExample> examples) {
-      this.examples_serialized_name = examples;
+      this.examples = examples;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -20968,14 +24991,24 @@ public class IBMDiscoveryV1Models {
       if (deserializedExamples != null) {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           TrainingExample currentItem = ret.getExamples().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
           TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
           newExamples.add(newItem);
         }
-        ret.examples_serialized_name = newExamples;
+        ret.examples = newExamples;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('query_id', 'queryId');
+      mapping.put('natural_language_query', 'naturalLanguageQuery');
+      if (examples != null && examples[0] != null) {
+        mapping.putAll(examples[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -20983,15 +25016,15 @@ public class IBMDiscoveryV1Models {
    * TrainingStatus.
    */
   public class TrainingStatus extends IBMWatsonGenericModel {
-    private Long total_examples_serialized_name;
-    private Boolean available_serialized_name;
-    private Boolean processing_serialized_name;
-    private Boolean minimum_queries_added_serialized_name;
-    private Boolean minimum_examples_added_serialized_name;
-    private Boolean sufficient_label_diversity_serialized_name;
-    private Long notices_serialized_name;
-    private Datetime successfully_trained_serialized_name;
-    private Datetime data_updated_serialized_name;
+    private Long totalExamples;
+    private Boolean available;
+    private Boolean processing;
+    private Boolean minimumQueriesAdded;
+    private Boolean minimumExamplesAdded;
+    private Boolean sufficientLabelDiversity;
+    private Long notices;
+    private Datetime successfullyTrained;
+    private Datetime dataUpdated;
  
     /**
      * Gets the totalExamples.
@@ -21002,7 +25035,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getTotalExamples() {
-      return total_examples_serialized_name;
+      return totalExamples;
     }
  
     /**
@@ -21014,7 +25047,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getAvailable() {
-      return available_serialized_name;
+      return available;
     }
  
     /**
@@ -21026,7 +25059,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getProcessing() {
-      return processing_serialized_name;
+      return processing;
     }
  
     /**
@@ -21038,7 +25071,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getMinimumQueriesAdded() {
-      return minimum_queries_added_serialized_name;
+      return minimumQueriesAdded;
     }
  
     /**
@@ -21050,7 +25083,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getMinimumExamplesAdded() {
-      return minimum_examples_added_serialized_name;
+      return minimumExamplesAdded;
     }
  
     /**
@@ -21062,7 +25095,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Boolean getSufficientLabelDiversity() {
-      return sufficient_label_diversity_serialized_name;
+      return sufficientLabelDiversity;
     }
  
     /**
@@ -21074,7 +25107,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getNotices() {
-      return notices_serialized_name;
+      return notices;
     }
  
     /**
@@ -21086,7 +25119,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getSuccessfullyTrained() {
-      return successfully_trained_serialized_name;
+      return successfullyTrained;
     }
  
     /**
@@ -21098,7 +25131,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Datetime getDataUpdated() {
-      return data_updated_serialized_name;
+      return dataUpdated;
     }
 
     /**
@@ -21107,7 +25140,7 @@ public class IBMDiscoveryV1Models {
      * @param totalExamples the new totalExamples
      */
     public void setTotalExamples(final long totalExamples) {
-      this.total_examples_serialized_name = totalExamples;
+      this.totalExamples = totalExamples;
     }
 
     /**
@@ -21116,7 +25149,7 @@ public class IBMDiscoveryV1Models {
      * @param available the new available
      */
     public void setAvailable(final Boolean available) {
-      this.available_serialized_name = available;
+      this.available = available;
     }
 
     /**
@@ -21125,7 +25158,7 @@ public class IBMDiscoveryV1Models {
      * @param processing the new processing
      */
     public void setProcessing(final Boolean processing) {
-      this.processing_serialized_name = processing;
+      this.processing = processing;
     }
 
     /**
@@ -21134,7 +25167,7 @@ public class IBMDiscoveryV1Models {
      * @param minimumQueriesAdded the new minimumQueriesAdded
      */
     public void setMinimumQueriesAdded(final Boolean minimumQueriesAdded) {
-      this.minimum_queries_added_serialized_name = minimumQueriesAdded;
+      this.minimumQueriesAdded = minimumQueriesAdded;
     }
 
     /**
@@ -21143,7 +25176,7 @@ public class IBMDiscoveryV1Models {
      * @param minimumExamplesAdded the new minimumExamplesAdded
      */
     public void setMinimumExamplesAdded(final Boolean minimumExamplesAdded) {
-      this.minimum_examples_added_serialized_name = minimumExamplesAdded;
+      this.minimumExamplesAdded = minimumExamplesAdded;
     }
 
     /**
@@ -21152,7 +25185,7 @@ public class IBMDiscoveryV1Models {
      * @param sufficientLabelDiversity the new sufficientLabelDiversity
      */
     public void setSufficientLabelDiversity(final Boolean sufficientLabelDiversity) {
-      this.sufficient_label_diversity_serialized_name = sufficientLabelDiversity;
+      this.sufficientLabelDiversity = sufficientLabelDiversity;
     }
 
     /**
@@ -21161,7 +25194,7 @@ public class IBMDiscoveryV1Models {
      * @param notices the new notices
      */
     public void setNotices(final long notices) {
-      this.notices_serialized_name = notices;
+      this.notices = notices;
     }
 
     /**
@@ -21170,7 +25203,7 @@ public class IBMDiscoveryV1Models {
      * @param successfullyTrained the new successfullyTrained
      */
     public void setSuccessfullyTrained(final Datetime successfullyTrained) {
-      this.successfully_trained_serialized_name = successfullyTrained;
+      this.successfullyTrained = successfullyTrained;
     }
 
     /**
@@ -21179,9 +25212,19 @@ public class IBMDiscoveryV1Models {
      * @param dataUpdated the new dataUpdated
      */
     public void setDataUpdated(final Datetime dataUpdated) {
-      this.data_updated_serialized_name = dataUpdated;
+      this.dataUpdated = dataUpdated;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('total_examples', 'totalExamples');
+      mapping.put('minimum_queries_added', 'minimumQueriesAdded');
+      mapping.put('minimum_examples_added', 'minimumExamplesAdded');
+      mapping.put('sufficient_label_diversity', 'sufficientLabelDiversity');
+      mapping.put('successfully_trained', 'successfullyTrained');
+      mapping.put('data_updated', 'dataUpdated');
+      return mapping;
+    }
   }
 
   /**
@@ -21193,7 +25236,7 @@ public class IBMDiscoveryV1Models {
     private String name;
     private String description;
     private String configurationId;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -21204,7 +25247,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -21215,7 +25258,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -21226,7 +25269,7 @@ public class IBMDiscoveryV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -21237,7 +25280,7 @@ public class IBMDiscoveryV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -21269,6 +25312,13 @@ public class IBMDiscoveryV1Models {
       return new UpdateCollectionOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('configurationId', 'configuration_id');
+      return mapping;
+    }
   }
 
   /**
@@ -21396,7 +25446,7 @@ public class IBMDiscoveryV1Models {
     private List<Enrichment> enrichments;
     private List<NormalizationOperation> normalizations;
     private Source source;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -21407,7 +25457,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -21418,7 +25468,7 @@ public class IBMDiscoveryV1Models {
     public String configurationId() {
       return configurationId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -21429,7 +25479,7 @@ public class IBMDiscoveryV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -21440,7 +25490,7 @@ public class IBMDiscoveryV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the conversions.
      *
@@ -21451,7 +25501,7 @@ public class IBMDiscoveryV1Models {
     public Conversions conversions() {
       return conversions;
     }
- 
+
     /**
      * Gets the enrichments.
      *
@@ -21462,7 +25512,7 @@ public class IBMDiscoveryV1Models {
     public List<Enrichment> enrichments() {
       return enrichments;
     }
- 
+
     /**
      * Gets the normalizations.
      *
@@ -21474,7 +25524,7 @@ public class IBMDiscoveryV1Models {
     public List<NormalizationOperation> normalizations() {
       return normalizations;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -21510,6 +25560,24 @@ public class IBMDiscoveryV1Models {
       return new UpdateConfigurationOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('configurationId', 'configuration_id');
+      if (conversions != null) {
+        mapping.putAll(conversions.getSdkToApiMapping());
+      }
+      if (enrichments != null && enrichments[0] != null) {
+        mapping.putAll(enrichments[0].getSdkToApiMapping());
+      }
+      if (normalizations != null && normalizations[0] != null) {
+        mapping.putAll(normalizations[0].getSdkToApiMapping());
+      }
+      if (source != null) {
+        mapping.putAll(source.getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -21723,7 +25791,7 @@ public class IBMDiscoveryV1Models {
     private String sourceType;
     private CredentialDetails credentialDetails;
     private String status;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -21734,7 +25802,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the credentialId.
      *
@@ -21745,7 +25813,7 @@ public class IBMDiscoveryV1Models {
     public String credentialId() {
       return credentialId;
     }
- 
+
     /**
      * Gets the sourceType.
      *
@@ -21761,7 +25829,7 @@ public class IBMDiscoveryV1Models {
     public String sourceType() {
       return sourceType;
     }
- 
+
     /**
      * Gets the credentialDetails.
      *
@@ -21774,7 +25842,7 @@ public class IBMDiscoveryV1Models {
     public CredentialDetails credentialDetails() {
       return credentialDetails;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -21808,6 +25876,17 @@ public class IBMDiscoveryV1Models {
       return new UpdateCredentialsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('credentialId', 'credential_id');
+      mapping.put('sourceType', 'source_type');
+      mapping.put('credentialDetails', 'credential_details');
+      if (credentialDetails != null) {
+        mapping.putAll(credentialDetails.getSdkToApiMapping());
+      }
+      return mapping;
+    }
   }
 
   /**
@@ -21947,7 +26026,7 @@ public class IBMDiscoveryV1Models {
     private String filename;
     private String fileContentType;
     private String metadata;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -21958,7 +26037,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -21969,7 +26048,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -21980,7 +26059,7 @@ public class IBMDiscoveryV1Models {
     public String documentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the file.
      *
@@ -21993,7 +26072,7 @@ public class IBMDiscoveryV1Models {
     public IBMWatsonFile file() {
       return file;
     }
- 
+
     /**
      * Gets the filename.
      *
@@ -22004,7 +26083,7 @@ public class IBMDiscoveryV1Models {
     public String filename() {
       return filename;
     }
- 
+
     /**
      * Gets the fileContentType.
      *
@@ -22015,7 +26094,7 @@ public class IBMDiscoveryV1Models {
     public String fileContentType() {
       return fileContentType;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -22055,6 +26134,14 @@ public class IBMDiscoveryV1Models {
       return new UpdateDocumentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('documentId', 'document_id');
+      mapping.put('fileContentType', 'file_content_type');
+      return mapping;
+    }
   }
 
   /**
@@ -22206,7 +26293,7 @@ public class IBMDiscoveryV1Models {
     private String name;
     private String description;
     private String size;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -22217,7 +26304,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -22228,7 +26315,7 @@ public class IBMDiscoveryV1Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -22239,7 +26326,7 @@ public class IBMDiscoveryV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the size.
      *
@@ -22270,6 +26357,11 @@ public class IBMDiscoveryV1Models {
       return new UpdateEnvironmentOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      return mapping;
+    }
   }
 
   /**
@@ -22380,7 +26472,7 @@ public class IBMDiscoveryV1Models {
     private String exampleId;
     private String crossReference;
     private Long relevance;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -22391,7 +26483,7 @@ public class IBMDiscoveryV1Models {
     public String environmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -22402,7 +26494,7 @@ public class IBMDiscoveryV1Models {
     public String collectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -22413,7 +26505,7 @@ public class IBMDiscoveryV1Models {
     public String queryId() {
       return queryId;
     }
- 
+
     /**
      * Gets the exampleId.
      *
@@ -22424,7 +26516,7 @@ public class IBMDiscoveryV1Models {
     public String exampleId() {
       return exampleId;
     }
- 
+
     /**
      * Gets the crossReference.
      *
@@ -22435,7 +26527,7 @@ public class IBMDiscoveryV1Models {
     public String crossReference() {
       return crossReference;
     }
- 
+
     /**
      * Gets the relevance.
      *
@@ -22470,6 +26562,15 @@ public class IBMDiscoveryV1Models {
       return new UpdateTrainingExampleOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('environmentId', 'environment_id');
+      mapping.put('collectionId', 'collection_id');
+      mapping.put('queryId', 'query_id');
+      mapping.put('exampleId', 'example_id');
+      mapping.put('crossReference', 'cross_reference');
+      return mapping;
+    }
   }
 
   /**
@@ -22606,8 +26707,14 @@ public class IBMDiscoveryV1Models {
    * WordHeadingDetection.
    */
   public class WordHeadingDetection extends IBMWatsonGenericModel {
-    private List<FontSetting> fonts_serialized_name;
-    private List<WordStyle> styles_serialized_name;
+    private List<FontSetting> fonts;
+    private List<WordStyle> styles;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WordHeadingDetection() { }
  
     /**
      * Gets the fonts.
@@ -22616,7 +26723,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<FontSetting> getFonts() {
-      return fonts_serialized_name;
+      return fonts;
     }
  
     /**
@@ -22626,25 +26733,21 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<WordStyle> getStyles() {
-      return styles_serialized_name;
+      return styles;
+    }
+  
+    private WordHeadingDetection(WordHeadingDetectionBuilder builder) {
+      this.fonts = builder.fonts;
+      this.styles = builder.styles;
     }
 
     /**
-     * Sets the fonts.
+     * New builder.
      *
-     * @param fonts the new fonts
+     * @return a WordHeadingDetection builder
      */
-    public void setFonts(final List<FontSetting> fonts) {
-      this.fonts_serialized_name = fonts;
-    }
-
-    /**
-     * Sets the styles.
-     *
-     * @param styles the new styles
-     */
-    public void setStyles(final List<WordStyle> styles) {
-      this.styles_serialized_name = styles;
+    public WordHeadingDetectionBuilder newBuilder() {
+      return new WordHeadingDetectionBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -22653,6 +26756,7 @@ public class IBMDiscoveryV1Models {
       }
 
       WordHeadingDetection ret = (WordHeadingDetection) super.deserialize(jsonString, jsonMap, classType);
+      WordHeadingDetectionBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for fonts
       List<FontSetting> newFonts = new List<FontSetting>();
@@ -22660,11 +26764,11 @@ public class IBMDiscoveryV1Models {
       if (deserializedFonts != null) {
         for (Integer i = 0; i < deserializedFonts.size(); i++) {
           FontSetting currentItem = ret.getFonts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('fonts_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('fonts');
           FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
-        ret.fonts_serialized_name = newFonts;
+        retBuilder.setFonts(newFonts);
       }
 
       // calling custom deserializer for styles
@@ -22673,14 +26777,112 @@ public class IBMDiscoveryV1Models {
       if (deserializedStyles != null) {
         for (Integer i = 0; i < deserializedStyles.size(); i++) {
           WordStyle currentItem = ret.getStyles().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('styles_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('styles');
           WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordStyle.class);
           newStyles.add(newItem);
         }
-        ret.styles_serialized_name = newStyles;
+        retBuilder.setStyles(newStyles);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (fonts != null && fonts[0] != null) {
+        mapping.putAll(fonts[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (fonts != null && fonts[0] != null) {
+        mapping.putAll(fonts[0].getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * WordHeadingDetection Builder.
+   */
+  public class WordHeadingDetectionBuilder {
+    private List<FontSetting> fonts;
+    private List<WordStyle> styles;
+
+    private WordHeadingDetectionBuilder(WordHeadingDetection wordHeadingDetection) {
+      this.fonts = wordHeadingDetection.fonts;
+      this.styles = wordHeadingDetection.styles;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WordHeadingDetectionBuilder() {
+    }
+
+    /**
+     * Builds a WordHeadingDetection.
+     *
+     * @return the wordHeadingDetection
+     */
+    public WordHeadingDetection build() {
+      return new WordHeadingDetection(this);
+    }
+
+    /**
+     * Adds an fonts to fonts.
+     *
+     * @param fonts the new fonts
+     * @return the WordHeadingDetection builder
+     */
+    public WordHeadingDetectionBuilder addFonts(FontSetting fonts) {
+      IBMWatsonValidator.notNull(fonts, 'fonts cannot be null');
+      if (this.fonts == null) {
+        this.fonts = new List<FontSetting>();
+      }
+      this.fonts.add(fonts);
+      return this;
+    }
+
+    /**
+     * Adds an styles to styles.
+     *
+     * @param styles the new styles
+     * @return the WordHeadingDetection builder
+     */
+    public WordHeadingDetectionBuilder addStyles(WordStyle styles) {
+      IBMWatsonValidator.notNull(styles, 'styles cannot be null');
+      if (this.styles == null) {
+        this.styles = new List<WordStyle>();
+      }
+      this.styles.add(styles);
+      return this;
+    }
+
+    /**
+     * Set the fonts.
+     * Existing fonts will be replaced.
+     *
+     * @param fonts the fonts
+     * @return the WordHeadingDetection builder
+     */
+    public WordHeadingDetectionBuilder setFonts(List<FontSetting> fonts) {
+      this.fonts = fonts;
+      return this;
+    }
+
+    /**
+     * Set the styles.
+     * Existing styles will be replaced.
+     *
+     * @param styles the styles
+     * @return the WordHeadingDetection builder
+     */
+    public WordHeadingDetectionBuilder setStyles(List<WordStyle> styles) {
+      this.styles = styles;
+      return this;
     }
   }
 
@@ -22688,7 +26890,13 @@ public class IBMDiscoveryV1Models {
    * A list of Word conversion settings.
    */
   public class WordSettings extends IBMWatsonGenericModel {
-    private WordHeadingDetection heading_serialized_name;
+    private WordHeadingDetection heading;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WordSettings() { }
  
     /**
      * Gets the heading.
@@ -22697,16 +26905,20 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public WordHeadingDetection getHeading() {
-      return heading_serialized_name;
+      return heading;
+    }
+  
+    private WordSettings(WordSettingsBuilder builder) {
+      this.heading = builder.heading;
     }
 
     /**
-     * Sets the heading.
+     * New builder.
      *
-     * @param heading the new heading
+     * @return a WordSettings builder
      */
-    public void setHeading(final WordHeadingDetection heading) {
-      this.heading_serialized_name = heading;
+    public WordSettingsBuilder newBuilder() {
+      return new WordSettingsBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -22715,12 +26927,66 @@ public class IBMDiscoveryV1Models {
       }
 
       WordSettings ret = (WordSettings) super.deserialize(jsonString, jsonMap, classType);
+      WordSettingsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for heading
-      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading_serialized_name'), WordHeadingDetection.class);
-      ret.setHeading(newHeading);
+      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading'), WordHeadingDetection.class);
+      retBuilder.setHeading(newHeading);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (heading != null) {
+        mapping.putAll(heading.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (heading != null) {
+        mapping.putAll(heading.getApiToSdkMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * WordSettings Builder.
+   */
+  public class WordSettingsBuilder {
+    private WordHeadingDetection heading;
+
+    private WordSettingsBuilder(WordSettings wordSettings) {
+      this.heading = wordSettings.heading;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WordSettingsBuilder() {
+    }
+
+    /**
+     * Builds a WordSettings.
+     *
+     * @return the wordSettings
+     */
+    public WordSettings build() {
+      return new WordSettings(this);
+    }
+
+    /**
+     * Set the heading.
+     *
+     * @param heading the heading
+     * @return the WordSettings builder
+     */
+    public WordSettingsBuilder setHeading(WordHeadingDetection heading) {
+      this.heading = heading;
+      return this;
     }
   }
 
@@ -22728,8 +26994,14 @@ public class IBMDiscoveryV1Models {
    * WordStyle.
    */
   public class WordStyle extends IBMWatsonGenericModel {
-    private Long level_serialized_name;
-    private List<String> names_serialized_name;
+    private Long level;
+    private List<String> names;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WordStyle() { }
  
     /**
      * Gets the level.
@@ -22740,7 +27012,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public Long getLevel() {
-      return level_serialized_name;
+      return level;
     }
  
     /**
@@ -22752,34 +27024,101 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getNames() {
-      return names_serialized_name;
+      return names;
+    }
+  
+    private WordStyle(WordStyleBuilder builder) {
+      this.level = builder.level;
+      this.names = builder.names;
     }
 
     /**
-     * Sets the level.
+     * New builder.
      *
-     * @param level the new level
+     * @return a WordStyle builder
      */
-    public void setLevel(final long level) {
-      this.level_serialized_name = level;
+    public WordStyleBuilder newBuilder() {
+      return new WordStyleBuilder(this);
+    }
+  }
+
+  /**
+   * WordStyle Builder.
+   */
+  public class WordStyleBuilder {
+    private Long level;
+    private List<String> names;
+
+    private WordStyleBuilder(WordStyle wordStyle) {
+      this.level = wordStyle.level;
+      this.names = wordStyle.names;
     }
 
     /**
-     * Sets the names.
+     * Instantiates a new builder.
+     */
+    public WordStyleBuilder() {
+    }
+
+    /**
+     * Builds a WordStyle.
+     *
+     * @return the wordStyle
+     */
+    public WordStyle build() {
+      return new WordStyle(this);
+    }
+
+    /**
+     * Adds an names to names.
      *
      * @param names the new names
+     * @return the WordStyle builder
      */
-    public void setNames(final List<String> names) {
-      this.names_serialized_name = names;
+    public WordStyleBuilder addNames(String names) {
+      IBMWatsonValidator.notNull(names, 'names cannot be null');
+      if (this.names == null) {
+        this.names = new List<String>();
+      }
+      this.names.add(names);
+      return this;
     }
 
+    /**
+     * Set the level.
+     *
+     * @param level the level
+     * @return the WordStyle builder
+     */
+    public WordStyleBuilder setLevel(Long level) {
+      this.level = level;
+      return this;
+    }
+
+    /**
+     * Set the names.
+     * Existing names will be replaced.
+     *
+     * @param names the names
+     * @return the WordStyle builder
+     */
+    public WordStyleBuilder setNames(List<String> names) {
+      this.names = names;
+      return this;
+    }
   }
 
   /**
    * XPathPatterns.
    */
   public class XPathPatterns extends IBMWatsonGenericModel {
-    private List<String> xpaths_serialized_name;
+    private List<String> xpaths;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public XPathPatterns() { }
  
     /**
      * Gets the xpaths.
@@ -22790,18 +27129,74 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public List<String> getXpaths() {
-      return xpaths_serialized_name;
+      return xpaths;
+    }
+  
+    private XPathPatterns(XPathPatternsBuilder builder) {
+      this.xpaths = builder.xpaths;
     }
 
     /**
-     * Sets the xpaths.
+     * New builder.
      *
-     * @param xpaths the new xpaths
+     * @return a XPathPatterns builder
      */
-    public void setXpaths(final List<String> xpaths) {
-      this.xpaths_serialized_name = xpaths;
+    public XPathPatternsBuilder newBuilder() {
+      return new XPathPatternsBuilder(this);
+    }
+  }
+
+  /**
+   * XPathPatterns Builder.
+   */
+  public class XPathPatternsBuilder {
+    private List<String> xpaths;
+
+    private XPathPatternsBuilder(XPathPatterns xPathPatterns) {
+      this.xpaths = xPathPatterns.xpaths;
     }
 
+    /**
+     * Instantiates a new builder.
+     */
+    public XPathPatternsBuilder() {
+    }
+
+    /**
+     * Builds a XPathPatterns.
+     *
+     * @return the xPathPatterns
+     */
+    public XPathPatterns build() {
+      return new XPathPatterns(this);
+    }
+
+    /**
+     * Adds an xpaths to xpaths.
+     *
+     * @param xpaths the new xpaths
+     * @return the XPathPatterns builder
+     */
+    public XPathPatternsBuilder addXpaths(String xpaths) {
+      IBMWatsonValidator.notNull(xpaths, 'xpaths cannot be null');
+      if (this.xpaths == null) {
+        this.xpaths = new List<String>();
+      }
+      this.xpaths.add(xpaths);
+      return this;
+    }
+
+    /**
+     * Set the xpaths.
+     * Existing xpaths will be replaced.
+     *
+     * @param xpaths the xpaths
+     * @return the XPathPatterns builder
+     */
+    public XPathPatternsBuilder setXpaths(List<String> xpaths) {
+      this.xpaths = xpaths;
+      return this;
+    }
   }
 
 }

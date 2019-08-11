@@ -6,7 +6,7 @@ public class IBMCompareComplyV1Models {
     private FeedbackDataInput feedbackData;
     private String userId;
     private String comment;
- 
+
     /**
      * Gets the feedbackData.
      *
@@ -17,7 +17,7 @@ public class IBMCompareComplyV1Models {
     public FeedbackDataInput feedbackData() {
       return feedbackData;
     }
- 
+
     /**
      * Gets the userId.
      *
@@ -28,7 +28,7 @@ public class IBMCompareComplyV1Models {
     public String userId() {
       return userId;
     }
- 
+
     /**
      * Gets the comment.
      *
@@ -57,6 +57,15 @@ public class IBMCompareComplyV1Models {
       return new AddFeedbackOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('feedbackData', 'feedback_data');
+      if (feedbackData != null) {
+        mapping.putAll(feedbackData.getSdkToApiMapping());
+      }
+      mapping.put('userId', 'user_id');
+      return mapping;
+    }
   }
 
   /**
@@ -148,8 +157,8 @@ public class IBMCompareComplyV1Models {
    * A party's address.
    */
   public class Address extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private Location location_serialized_name;
+    private String text;
+    private Location location;
  
     /**
      * Gets the text.
@@ -160,7 +169,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -173,7 +182,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -182,7 +191,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -191,7 +200,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -202,10 +211,18 @@ public class IBMCompareComplyV1Models {
       Address ret = (Address) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -213,10 +230,10 @@ public class IBMCompareComplyV1Models {
    * AlignedElement.
    */
   public class AlignedElement extends IBMWatsonGenericModel {
-    private List<ElementPair> element_pair_serialized_name;
-    private Boolean identical_text_serialized_name;
-    private List<String> provenance_ids_serialized_name;
-    private Boolean significant_elements_serialized_name;
+    private List<ElementPair> elementPair;
+    private Boolean identicalText;
+    private List<String> provenanceIds;
+    private Boolean significantElements;
  
     /**
      * Gets the elementPair.
@@ -227,7 +244,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ElementPair> getElementPair() {
-      return element_pair_serialized_name;
+      return elementPair;
     }
  
     /**
@@ -241,7 +258,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Boolean getIdenticalText() {
-      return identical_text_serialized_name;
+      return identicalText;
     }
  
     /**
@@ -253,7 +270,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
     }
  
     /**
@@ -265,7 +282,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Boolean getSignificantElements() {
-      return significant_elements_serialized_name;
+      return significantElements;
     }
 
     /**
@@ -274,7 +291,7 @@ public class IBMCompareComplyV1Models {
      * @param elementPair the new elementPair
      */
     public void setElementPair(final List<ElementPair> elementPair) {
-      this.element_pair_serialized_name = elementPair;
+      this.elementPair = elementPair;
     }
 
     /**
@@ -283,7 +300,7 @@ public class IBMCompareComplyV1Models {
      * @param identicalText the new identicalText
      */
     public void setIdenticalText(final Boolean identicalText) {
-      this.identical_text_serialized_name = identicalText;
+      this.identicalText = identicalText;
     }
 
     /**
@@ -292,7 +309,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the new provenanceIds
      */
     public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+      this.provenanceIds = provenanceIds;
     }
 
     /**
@@ -301,7 +318,7 @@ public class IBMCompareComplyV1Models {
      * @param significantElements the new significantElements
      */
     public void setSignificantElements(final Boolean significantElements) {
-      this.significant_elements_serialized_name = significantElements;
+      this.significantElements = significantElements;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -317,14 +334,26 @@ public class IBMCompareComplyV1Models {
       if (deserializedElementPair != null) {
         for (Integer i = 0; i < deserializedElementPair.size(); i++) {
           ElementPair currentItem = ret.getElementPair().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('element_pair_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('elementPair');
           ElementPair newItem = (ElementPair) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementPair.class);
           newElementPair.add(newItem);
         }
-        ret.element_pair_serialized_name = newElementPair;
+        ret.elementPair = newElementPair;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('element_pair', 'elementPair');
+      if (elementPair != null && elementPair[0] != null) {
+        mapping.putAll(elementPair[0].getApiToSdkMapping());
+      }
+      mapping.put('identical_text', 'identicalText');
+      mapping.put('provenance_ids', 'provenanceIds');
+      mapping.put('significant_elements', 'significantElements');
+      return mapping;
     }
   }
 
@@ -332,9 +361,9 @@ public class IBMCompareComplyV1Models {
    * List of document attributes.
    */
   public class Attribute extends IBMWatsonGenericModel {
-    private String type_serialized_name;
-    private String text_serialized_name;
-    private Location location_serialized_name;
+    private String xtype;
+    private String text;
+    private Location location;
  
     /**
      * Gets the xtype.
@@ -345,7 +374,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getXtype() {
-      return type_serialized_name;
+      return xtype;
     }
  
     /**
@@ -357,7 +386,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -370,7 +399,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -379,7 +408,7 @@ public class IBMCompareComplyV1Models {
      * @param xtype the new xtype
      */
     public void setXtype(final String xtype) {
-      this.type_serialized_name = xtype;
+      this.xtype = xtype;
     }
 
     /**
@@ -388,7 +417,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -397,7 +426,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -408,10 +437,19 @@ public class IBMCompareComplyV1Models {
       Attribute ret = (Attribute) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('type', 'xtype');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -419,16 +457,16 @@ public class IBMCompareComplyV1Models {
    * The batch-request status.
    */
   public class BatchStatus extends IBMWatsonResponseModel {
-    private String function_serialized_name;
-    private String input_bucket_location_serialized_name;
-    private String input_bucket_name_serialized_name;
-    private String output_bucket_location_serialized_name;
-    private String output_bucket_name_serialized_name;
-    private String batch_id_serialized_name;
-    private DocCounts document_counts_serialized_name;
-    private String status_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
+    private String function;
+    private String inputBucketLocation;
+    private String inputBucketName;
+    private String outputBucketLocation;
+    private String outputBucketName;
+    private String batchId;
+    private DocCounts documentCounts;
+    private String status;
+    private Datetime created;
+    private Datetime updated;
  
     /**
      * Gets the function.
@@ -440,7 +478,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getFunction() {
-      return function_serialized_name;
+      return function;
     }
  
     /**
@@ -453,7 +491,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getInputBucketLocation() {
-      return input_bucket_location_serialized_name;
+      return inputBucketLocation;
     }
  
     /**
@@ -465,7 +503,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getInputBucketName() {
-      return input_bucket_name_serialized_name;
+      return inputBucketName;
     }
  
     /**
@@ -478,7 +516,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getOutputBucketLocation() {
-      return output_bucket_location_serialized_name;
+      return outputBucketLocation;
     }
  
     /**
@@ -490,7 +528,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getOutputBucketName() {
-      return output_bucket_name_serialized_name;
+      return outputBucketName;
     }
  
     /**
@@ -502,7 +540,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getBatchId() {
-      return batch_id_serialized_name;
+      return batchId;
     }
  
     /**
@@ -514,7 +552,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public DocCounts getDocumentCounts() {
-      return document_counts_serialized_name;
+      return documentCounts;
     }
  
     /**
@@ -526,7 +564,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
  
     /**
@@ -538,7 +576,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -550,7 +588,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
 
     /**
@@ -559,7 +597,7 @@ public class IBMCompareComplyV1Models {
      * @param function the new function
      */
     public void setFunction(final String function) {
-      this.function_serialized_name = function;
+      this.function = function;
     }
 
     /**
@@ -568,7 +606,7 @@ public class IBMCompareComplyV1Models {
      * @param inputBucketLocation the new inputBucketLocation
      */
     public void setInputBucketLocation(final String inputBucketLocation) {
-      this.input_bucket_location_serialized_name = inputBucketLocation;
+      this.inputBucketLocation = inputBucketLocation;
     }
 
     /**
@@ -577,7 +615,7 @@ public class IBMCompareComplyV1Models {
      * @param inputBucketName the new inputBucketName
      */
     public void setInputBucketName(final String inputBucketName) {
-      this.input_bucket_name_serialized_name = inputBucketName;
+      this.inputBucketName = inputBucketName;
     }
 
     /**
@@ -586,7 +624,7 @@ public class IBMCompareComplyV1Models {
      * @param outputBucketLocation the new outputBucketLocation
      */
     public void setOutputBucketLocation(final String outputBucketLocation) {
-      this.output_bucket_location_serialized_name = outputBucketLocation;
+      this.outputBucketLocation = outputBucketLocation;
     }
 
     /**
@@ -595,7 +633,7 @@ public class IBMCompareComplyV1Models {
      * @param outputBucketName the new outputBucketName
      */
     public void setOutputBucketName(final String outputBucketName) {
-      this.output_bucket_name_serialized_name = outputBucketName;
+      this.outputBucketName = outputBucketName;
     }
 
     /**
@@ -604,7 +642,7 @@ public class IBMCompareComplyV1Models {
      * @param batchId the new batchId
      */
     public void setBatchId(final String batchId) {
-      this.batch_id_serialized_name = batchId;
+      this.batchId = batchId;
     }
 
     /**
@@ -613,7 +651,7 @@ public class IBMCompareComplyV1Models {
      * @param documentCounts the new documentCounts
      */
     public void setDocumentCounts(final DocCounts documentCounts) {
-      this.document_counts_serialized_name = documentCounts;
+      this.documentCounts = documentCounts;
     }
 
     /**
@@ -622,7 +660,7 @@ public class IBMCompareComplyV1Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -631,7 +669,7 @@ public class IBMCompareComplyV1Models {
      * @param created the new created
      */
     public void setCreated(final Datetime created) {
-      this.created_serialized_name = created;
+      this.created = created;
     }
 
     /**
@@ -640,7 +678,7 @@ public class IBMCompareComplyV1Models {
      * @param updated the new updated
      */
     public void setUpdated(final Datetime updated) {
-      this.updated_serialized_name = updated;
+      this.updated = updated;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -651,10 +689,21 @@ public class IBMCompareComplyV1Models {
       BatchStatus ret = (BatchStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentCounts
-      DocCounts newDocumentCounts = (DocCounts) new DocCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocCounts.class);
+      DocCounts newDocumentCounts = (DocCounts) new DocCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('documentCounts'), DocCounts.class);
       ret.setDocumentCounts(newDocumentCounts);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('input_bucket_location', 'inputBucketLocation');
+      mapping.put('input_bucket_name', 'inputBucketName');
+      mapping.put('output_bucket_location', 'outputBucketLocation');
+      mapping.put('output_bucket_name', 'outputBucketName');
+      mapping.put('batch_id', 'batchId');
+      mapping.put('document_counts', 'documentCounts');
+      return mapping;
     }
   }
 
@@ -662,7 +711,7 @@ public class IBMCompareComplyV1Models {
    * The results of a successful **List Batches** request.
    */
   public class Batches extends IBMWatsonResponseModel {
-    private List<BatchStatus> batches_serialized_name;
+    private List<BatchStatus> batches;
  
     /**
      * Gets the batches.
@@ -673,7 +722,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<BatchStatus> getBatches() {
-      return batches_serialized_name;
+      return batches;
     }
 
     /**
@@ -682,7 +731,7 @@ public class IBMCompareComplyV1Models {
      * @param batches the new batches
      */
     public void setBatches(final List<BatchStatus> batches) {
-      this.batches_serialized_name = batches;
+      this.batches = batches;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -698,14 +747,22 @@ public class IBMCompareComplyV1Models {
       if (deserializedBatches != null) {
         for (Integer i = 0; i < deserializedBatches.size(); i++) {
           BatchStatus currentItem = ret.getBatches().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('batches_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('batches');
           BatchStatus newItem = (BatchStatus) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BatchStatus.class);
           newBatches.add(newItem);
         }
-        ret.batches_serialized_name = newBatches;
+        ret.batches = newBatches;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (batches != null && batches[0] != null) {
+        mapping.putAll(batches[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -713,20 +770,20 @@ public class IBMCompareComplyV1Models {
    * Cells that are not table header, column header, or row header cells.
    */
   public class BodyCells extends IBMWatsonGenericModel {
-    private String cell_id_serialized_name;
-    private Location location_serialized_name;
-    private String text_serialized_name;
-    private Long row_index_begin_serialized_name;
-    private Long row_index_end_serialized_name;
-    private Long column_index_begin_serialized_name;
-    private Long column_index_end_serialized_name;
-    private List<RowHeaderIds> row_header_ids_serialized_name;
-    private List<RowHeaderTexts> row_header_texts_serialized_name;
-    private List<RowHeaderTextsNormalized> row_header_texts_normalized_serialized_name;
-    private List<ColumnHeaderIds> column_header_ids_serialized_name;
-    private List<ColumnHeaderTexts> column_header_texts_serialized_name;
-    private List<ColumnHeaderTextsNormalized> column_header_texts_normalized_serialized_name;
-    private List<Attribute> attributes_serialized_name;
+    private String cellId;
+    private Location location;
+    private String text;
+    private Long rowIndexBegin;
+    private Long rowIndexEnd;
+    private Long columnIndexBegin;
+    private Long columnIndexEnd;
+    private List<RowHeaderIds> rowHeaderIds;
+    private List<RowHeaderTexts> rowHeaderTexts;
+    private List<RowHeaderTextsNormalized> rowHeaderTextsNormalized;
+    private List<ColumnHeaderIds> columnHeaderIds;
+    private List<ColumnHeaderTexts> columnHeaderTexts;
+    private List<ColumnHeaderTextsNormalized> columnHeaderTextsNormalized;
+    private List<Attribute> attributes;
  
     /**
      * Gets the cellId.
@@ -737,7 +794,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getCellId() {
-      return cell_id_serialized_name;
+      return cellId;
     }
  
     /**
@@ -750,7 +807,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -762,7 +819,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -774,7 +831,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getRowIndexBegin() {
-      return row_index_begin_serialized_name;
+      return rowIndexBegin;
     }
  
     /**
@@ -786,7 +843,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getRowIndexEnd() {
-      return row_index_end_serialized_name;
+      return rowIndexEnd;
     }
  
     /**
@@ -798,7 +855,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getColumnIndexBegin() {
-      return column_index_begin_serialized_name;
+      return columnIndexBegin;
     }
  
     /**
@@ -810,7 +867,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getColumnIndexEnd() {
-      return column_index_end_serialized_name;
+      return columnIndexEnd;
     }
  
     /**
@@ -820,7 +877,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<RowHeaderIds> getRowHeaderIds() {
-      return row_header_ids_serialized_name;
+      return rowHeaderIds;
     }
  
     /**
@@ -830,7 +887,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<RowHeaderTexts> getRowHeaderTexts() {
-      return row_header_texts_serialized_name;
+      return rowHeaderTexts;
     }
  
     /**
@@ -840,7 +897,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<RowHeaderTextsNormalized> getRowHeaderTextsNormalized() {
-      return row_header_texts_normalized_serialized_name;
+      return rowHeaderTextsNormalized;
     }
  
     /**
@@ -850,7 +907,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ColumnHeaderIds> getColumnHeaderIds() {
-      return column_header_ids_serialized_name;
+      return columnHeaderIds;
     }
  
     /**
@@ -860,7 +917,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ColumnHeaderTexts> getColumnHeaderTexts() {
-      return column_header_texts_serialized_name;
+      return columnHeaderTexts;
     }
  
     /**
@@ -870,7 +927,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ColumnHeaderTextsNormalized> getColumnHeaderTextsNormalized() {
-      return column_header_texts_normalized_serialized_name;
+      return columnHeaderTextsNormalized;
     }
  
     /**
@@ -880,7 +937,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Attribute> getAttributes() {
-      return attributes_serialized_name;
+      return attributes;
     }
 
     /**
@@ -889,7 +946,7 @@ public class IBMCompareComplyV1Models {
      * @param cellId the new cellId
      */
     public void setCellId(final String cellId) {
-      this.cell_id_serialized_name = cellId;
+      this.cellId = cellId;
     }
 
     /**
@@ -898,7 +955,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -907,7 +964,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -916,7 +973,7 @@ public class IBMCompareComplyV1Models {
      * @param rowIndexBegin the new rowIndexBegin
      */
     public void setRowIndexBegin(final long rowIndexBegin) {
-      this.row_index_begin_serialized_name = rowIndexBegin;
+      this.rowIndexBegin = rowIndexBegin;
     }
 
     /**
@@ -925,7 +982,7 @@ public class IBMCompareComplyV1Models {
      * @param rowIndexEnd the new rowIndexEnd
      */
     public void setRowIndexEnd(final long rowIndexEnd) {
-      this.row_index_end_serialized_name = rowIndexEnd;
+      this.rowIndexEnd = rowIndexEnd;
     }
 
     /**
@@ -934,7 +991,7 @@ public class IBMCompareComplyV1Models {
      * @param columnIndexBegin the new columnIndexBegin
      */
     public void setColumnIndexBegin(final long columnIndexBegin) {
-      this.column_index_begin_serialized_name = columnIndexBegin;
+      this.columnIndexBegin = columnIndexBegin;
     }
 
     /**
@@ -943,7 +1000,7 @@ public class IBMCompareComplyV1Models {
      * @param columnIndexEnd the new columnIndexEnd
      */
     public void setColumnIndexEnd(final long columnIndexEnd) {
-      this.column_index_end_serialized_name = columnIndexEnd;
+      this.columnIndexEnd = columnIndexEnd;
     }
 
     /**
@@ -952,7 +1009,7 @@ public class IBMCompareComplyV1Models {
      * @param rowHeaderIds the new rowHeaderIds
      */
     public void setRowHeaderIds(final List<RowHeaderIds> rowHeaderIds) {
-      this.row_header_ids_serialized_name = rowHeaderIds;
+      this.rowHeaderIds = rowHeaderIds;
     }
 
     /**
@@ -961,7 +1018,7 @@ public class IBMCompareComplyV1Models {
      * @param rowHeaderTexts the new rowHeaderTexts
      */
     public void setRowHeaderTexts(final List<RowHeaderTexts> rowHeaderTexts) {
-      this.row_header_texts_serialized_name = rowHeaderTexts;
+      this.rowHeaderTexts = rowHeaderTexts;
     }
 
     /**
@@ -970,7 +1027,7 @@ public class IBMCompareComplyV1Models {
      * @param rowHeaderTextsNormalized the new rowHeaderTextsNormalized
      */
     public void setRowHeaderTextsNormalized(final List<RowHeaderTextsNormalized> rowHeaderTextsNormalized) {
-      this.row_header_texts_normalized_serialized_name = rowHeaderTextsNormalized;
+      this.rowHeaderTextsNormalized = rowHeaderTextsNormalized;
     }
 
     /**
@@ -979,7 +1036,7 @@ public class IBMCompareComplyV1Models {
      * @param columnHeaderIds the new columnHeaderIds
      */
     public void setColumnHeaderIds(final List<ColumnHeaderIds> columnHeaderIds) {
-      this.column_header_ids_serialized_name = columnHeaderIds;
+      this.columnHeaderIds = columnHeaderIds;
     }
 
     /**
@@ -988,7 +1045,7 @@ public class IBMCompareComplyV1Models {
      * @param columnHeaderTexts the new columnHeaderTexts
      */
     public void setColumnHeaderTexts(final List<ColumnHeaderTexts> columnHeaderTexts) {
-      this.column_header_texts_serialized_name = columnHeaderTexts;
+      this.columnHeaderTexts = columnHeaderTexts;
     }
 
     /**
@@ -997,7 +1054,7 @@ public class IBMCompareComplyV1Models {
      * @param columnHeaderTextsNormalized the new columnHeaderTextsNormalized
      */
     public void setColumnHeaderTextsNormalized(final List<ColumnHeaderTextsNormalized> columnHeaderTextsNormalized) {
-      this.column_header_texts_normalized_serialized_name = columnHeaderTextsNormalized;
+      this.columnHeaderTextsNormalized = columnHeaderTextsNormalized;
     }
 
     /**
@@ -1006,7 +1063,7 @@ public class IBMCompareComplyV1Models {
      * @param attributes the new attributes
      */
     public void setAttributes(final List<Attribute> attributes) {
-      this.attributes_serialized_name = attributes;
+      this.attributes = attributes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1017,7 +1074,7 @@ public class IBMCompareComplyV1Models {
       BodyCells ret = (BodyCells) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for rowHeaderIds
@@ -1026,11 +1083,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedRowHeaderIds != null) {
         for (Integer i = 0; i < deserializedRowHeaderIds.size(); i++) {
           RowHeaderIds currentItem = ret.getRowHeaderIds().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_ids_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaderIds');
           RowHeaderIds newItem = (RowHeaderIds) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderIds.class);
           newRowHeaderIds.add(newItem);
         }
-        ret.row_header_ids_serialized_name = newRowHeaderIds;
+        ret.rowHeaderIds = newRowHeaderIds;
       }
 
       // calling custom deserializer for rowHeaderTexts
@@ -1039,11 +1096,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedRowHeaderTexts != null) {
         for (Integer i = 0; i < deserializedRowHeaderTexts.size(); i++) {
           RowHeaderTexts currentItem = ret.getRowHeaderTexts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_texts_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaderTexts');
           RowHeaderTexts newItem = (RowHeaderTexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderTexts.class);
           newRowHeaderTexts.add(newItem);
         }
-        ret.row_header_texts_serialized_name = newRowHeaderTexts;
+        ret.rowHeaderTexts = newRowHeaderTexts;
       }
 
       // calling custom deserializer for rowHeaderTextsNormalized
@@ -1052,11 +1109,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedRowHeaderTextsNormalized != null) {
         for (Integer i = 0; i < deserializedRowHeaderTextsNormalized.size(); i++) {
           RowHeaderTextsNormalized currentItem = ret.getRowHeaderTextsNormalized().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_texts_normalized_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaderTextsNormalized');
           RowHeaderTextsNormalized newItem = (RowHeaderTextsNormalized) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderTextsNormalized.class);
           newRowHeaderTextsNormalized.add(newItem);
         }
-        ret.row_header_texts_normalized_serialized_name = newRowHeaderTextsNormalized;
+        ret.rowHeaderTextsNormalized = newRowHeaderTextsNormalized;
       }
 
       // calling custom deserializer for columnHeaderIds
@@ -1065,11 +1122,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedColumnHeaderIds != null) {
         for (Integer i = 0; i < deserializedColumnHeaderIds.size(); i++) {
           ColumnHeaderIds currentItem = ret.getColumnHeaderIds().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_ids_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaderIds');
           ColumnHeaderIds newItem = (ColumnHeaderIds) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderIds.class);
           newColumnHeaderIds.add(newItem);
         }
-        ret.column_header_ids_serialized_name = newColumnHeaderIds;
+        ret.columnHeaderIds = newColumnHeaderIds;
       }
 
       // calling custom deserializer for columnHeaderTexts
@@ -1078,11 +1135,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedColumnHeaderTexts != null) {
         for (Integer i = 0; i < deserializedColumnHeaderTexts.size(); i++) {
           ColumnHeaderTexts currentItem = ret.getColumnHeaderTexts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_texts_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaderTexts');
           ColumnHeaderTexts newItem = (ColumnHeaderTexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderTexts.class);
           newColumnHeaderTexts.add(newItem);
         }
-        ret.column_header_texts_serialized_name = newColumnHeaderTexts;
+        ret.columnHeaderTexts = newColumnHeaderTexts;
       }
 
       // calling custom deserializer for columnHeaderTextsNormalized
@@ -1091,11 +1148,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedColumnHeaderTextsNormalized != null) {
         for (Integer i = 0; i < deserializedColumnHeaderTextsNormalized.size(); i++) {
           ColumnHeaderTextsNormalized currentItem = ret.getColumnHeaderTextsNormalized().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_texts_normalized_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaderTextsNormalized');
           ColumnHeaderTextsNormalized newItem = (ColumnHeaderTextsNormalized) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderTextsNormalized.class);
           newColumnHeaderTextsNormalized.add(newItem);
         }
-        ret.column_header_texts_normalized_serialized_name = newColumnHeaderTextsNormalized;
+        ret.columnHeaderTextsNormalized = newColumnHeaderTextsNormalized;
       }
 
       // calling custom deserializer for attributes
@@ -1104,14 +1161,42 @@ public class IBMCompareComplyV1Models {
       if (deserializedAttributes != null) {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
           Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
-        ret.attributes_serialized_name = newAttributes;
+        ret.attributes = newAttributes;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('cell_id', 'cellId');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      mapping.put('row_index_begin', 'rowIndexBegin');
+      mapping.put('row_index_end', 'rowIndexEnd');
+      mapping.put('column_index_begin', 'columnIndexBegin');
+      mapping.put('column_index_end', 'columnIndexEnd');
+      mapping.put('row_header_ids', 'rowHeaderIds');
+      mapping.put('row_header_texts', 'rowHeaderTexts');
+      mapping.put('row_header_texts_normalized', 'rowHeaderTextsNormalized');
+      if (rowHeaderTextsNormalized != null && rowHeaderTextsNormalized[0] != null) {
+        mapping.putAll(rowHeaderTextsNormalized[0].getApiToSdkMapping());
+      }
+      mapping.put('column_header_ids', 'columnHeaderIds');
+      mapping.put('column_header_texts', 'columnHeaderTexts');
+      mapping.put('column_header_texts_normalized', 'columnHeaderTextsNormalized');
+      if (columnHeaderTextsNormalized != null && columnHeaderTextsNormalized[0] != null) {
+        mapping.putAll(columnHeaderTextsNormalized[0].getApiToSdkMapping());
+      }
+      if (attributes != null && attributes[0] != null) {
+        mapping.putAll(attributes[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -1119,8 +1204,14 @@ public class IBMCompareComplyV1Models {
    * Information defining an element's subject matter.
    */
   public class Category extends IBMWatsonGenericModel {
-    private String label_serialized_name;
-    private List<String> provenance_ids_serialized_name;
+    private String label;
+    private List<String> provenanceIds;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Category() { }
  
     /**
      * Gets the label.
@@ -1131,7 +1222,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getLabel() {
-      return label_serialized_name;
+      return label;
     }
  
     /**
@@ -1143,34 +1234,107 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
+    }
+  
+    private Category(CategoryBuilder builder) {
+      this.label = builder.label;
+      this.provenanceIds = builder.provenanceIds;
     }
 
     /**
-     * Sets the label.
+     * New builder.
      *
-     * @param label the new label
+     * @return a Category builder
      */
-    public void setLabel(final String label) {
-      this.label_serialized_name = label;
+    public CategoryBuilder newBuilder() {
+      return new CategoryBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('provenanceIds', 'provenance_ids');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('provenance_ids', 'provenanceIds');
+      return mapping;
+    }
+  }
+
+  /**
+   * Category Builder.
+   */
+  public class CategoryBuilder {
+    private String label;
+    private List<String> provenanceIds;
+
+    private CategoryBuilder(Category category) {
+      this.label = category.label;
+      this.provenanceIds = category.provenanceIds;
     }
 
     /**
-     * Sets the provenanceIds.
+     * Instantiates a new builder.
+     */
+    public CategoryBuilder() {
+    }
+
+    /**
+     * Builds a Category.
+     *
+     * @return the category
+     */
+    public Category build() {
+      return new Category(this);
+    }
+
+    /**
+     * Adds an provenanceIds to provenanceIds.
      *
      * @param provenanceIds the new provenanceIds
+     * @return the Category builder
      */
-    public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+    public CategoryBuilder addProvenanceIds(String provenanceIds) {
+      IBMWatsonValidator.notNull(provenanceIds, 'provenanceIds cannot be null');
+      if (this.provenanceIds == null) {
+        this.provenanceIds = new List<String>();
+      }
+      this.provenanceIds.add(provenanceIds);
+      return this;
     }
 
+    /**
+     * Set the label.
+     *
+     * @param label the label
+     * @return the Category builder
+     */
+    public CategoryBuilder setLabel(String label) {
+      this.label = label;
+      return this;
+    }
+
+    /**
+     * Set the provenanceIds.
+     * Existing provenanceIds will be replaced.
+     *
+     * @param provenanceIds the provenanceIds
+     * @return the Category builder
+     */
+    public CategoryBuilder setProvenanceIds(List<String> provenanceIds) {
+      this.provenanceIds = provenanceIds;
+      return this;
+    }
   }
 
   /**
    * Information defining an element's subject matter.
    */
   public class CategoryComparison extends IBMWatsonGenericModel {
-    private String label_serialized_name;
+    private String label;
  
     /**
      * Gets the label.
@@ -1181,7 +1345,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getLabel() {
-      return label_serialized_name;
+      return label;
     }
 
     /**
@@ -1190,9 +1354,8 @@ public class IBMCompareComplyV1Models {
      * @param label the new label
      */
     public void setLabel(final String label) {
-      this.label_serialized_name = label;
+      this.label = label;
     }
-
   }
 
   /**
@@ -1202,7 +1365,7 @@ public class IBMCompareComplyV1Models {
     private IBMWatsonFile file;
     private String fileContentType;
     private String model;
- 
+
     /**
      * Gets the file.
      *
@@ -1213,7 +1376,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonFile file() {
       return file;
     }
- 
+
     /**
      * Gets the fileContentType.
      *
@@ -1224,7 +1387,7 @@ public class IBMCompareComplyV1Models {
     public String fileContentType() {
       return fileContentType;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -1255,6 +1418,11 @@ public class IBMCompareComplyV1Models {
       return new ClassifyElementsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('fileContentType', 'file_content_type');
+      return mapping;
+    }
   }
 
   /**
@@ -1346,19 +1514,19 @@ public class IBMCompareComplyV1Models {
    * The analysis of objects returned by the **Element classification** method.
    */
   public class ClassifyReturn extends IBMWatsonResponseModel {
-    private Document document_serialized_name;
-    private String model_id_serialized_name;
-    private String model_version_serialized_name;
-    private List<Element> elements_serialized_name;
-    private List<EffectiveDates> effective_dates_serialized_name;
-    private List<ContractAmts> contract_amounts_serialized_name;
-    private List<TerminationDates> termination_dates_serialized_name;
-    private List<ContractTypes> contract_types_serialized_name;
-    private List<ContractTerms> contract_terms_serialized_name;
-    private List<PaymentTerms> payment_terms_serialized_name;
-    private List<Tables> tables_serialized_name;
-    private DocStructure document_structure_serialized_name;
-    private List<Parties> parties_serialized_name;
+    private Document document;
+    private String modelId;
+    private String modelVersion;
+    private List<Element> elements;
+    private List<EffectiveDates> effectiveDates;
+    private List<ContractAmts> contractAmounts;
+    private List<TerminationDates> terminationDates;
+    private List<ContractTypes> contractTypes;
+    private List<ContractTerms> contractTerms;
+    private List<PaymentTerms> paymentTerms;
+    private List<Tables> tables;
+    private DocStructure documentStructure;
+    private List<Parties> parties;
  
     /**
      * Gets the document.
@@ -1369,7 +1537,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Document getDocument() {
-      return document_serialized_name;
+      return document;
     }
  
     /**
@@ -1382,7 +1550,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
  
     /**
@@ -1394,7 +1562,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModelVersion() {
-      return model_version_serialized_name;
+      return modelVersion;
     }
  
     /**
@@ -1406,7 +1574,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Element> getElements() {
-      return elements_serialized_name;
+      return elements;
     }
  
     /**
@@ -1418,7 +1586,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<EffectiveDates> getEffectiveDates() {
-      return effective_dates_serialized_name;
+      return effectiveDates;
     }
  
     /**
@@ -1431,7 +1599,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ContractAmts> getContractAmounts() {
-      return contract_amounts_serialized_name;
+      return contractAmounts;
     }
  
     /**
@@ -1443,7 +1611,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<TerminationDates> getTerminationDates() {
-      return termination_dates_serialized_name;
+      return terminationDates;
     }
  
     /**
@@ -1455,7 +1623,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ContractTypes> getContractTypes() {
-      return contract_types_serialized_name;
+      return contractTypes;
     }
  
     /**
@@ -1467,7 +1635,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ContractTerms> getContractTerms() {
-      return contract_terms_serialized_name;
+      return contractTerms;
     }
  
     /**
@@ -1479,7 +1647,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<PaymentTerms> getPaymentTerms() {
-      return payment_terms_serialized_name;
+      return paymentTerms;
     }
  
     /**
@@ -1491,7 +1659,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Tables> getTables() {
-      return tables_serialized_name;
+      return tables;
     }
  
     /**
@@ -1503,7 +1671,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public DocStructure getDocumentStructure() {
-      return document_structure_serialized_name;
+      return documentStructure;
     }
  
     /**
@@ -1515,7 +1683,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Parties> getParties() {
-      return parties_serialized_name;
+      return parties;
     }
 
     /**
@@ -1524,7 +1692,7 @@ public class IBMCompareComplyV1Models {
      * @param document the new document
      */
     public void setDocument(final Document document) {
-      this.document_serialized_name = document;
+      this.document = document;
     }
 
     /**
@@ -1533,7 +1701,7 @@ public class IBMCompareComplyV1Models {
      * @param modelId the new modelId
      */
     public void setModelId(final String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -1542,7 +1710,7 @@ public class IBMCompareComplyV1Models {
      * @param modelVersion the new modelVersion
      */
     public void setModelVersion(final String modelVersion) {
-      this.model_version_serialized_name = modelVersion;
+      this.modelVersion = modelVersion;
     }
 
     /**
@@ -1551,7 +1719,7 @@ public class IBMCompareComplyV1Models {
      * @param elements the new elements
      */
     public void setElements(final List<Element> elements) {
-      this.elements_serialized_name = elements;
+      this.elements = elements;
     }
 
     /**
@@ -1560,7 +1728,7 @@ public class IBMCompareComplyV1Models {
      * @param effectiveDates the new effectiveDates
      */
     public void setEffectiveDates(final List<EffectiveDates> effectiveDates) {
-      this.effective_dates_serialized_name = effectiveDates;
+      this.effectiveDates = effectiveDates;
     }
 
     /**
@@ -1569,7 +1737,7 @@ public class IBMCompareComplyV1Models {
      * @param contractAmounts the new contractAmounts
      */
     public void setContractAmounts(final List<ContractAmts> contractAmounts) {
-      this.contract_amounts_serialized_name = contractAmounts;
+      this.contractAmounts = contractAmounts;
     }
 
     /**
@@ -1578,7 +1746,7 @@ public class IBMCompareComplyV1Models {
      * @param terminationDates the new terminationDates
      */
     public void setTerminationDates(final List<TerminationDates> terminationDates) {
-      this.termination_dates_serialized_name = terminationDates;
+      this.terminationDates = terminationDates;
     }
 
     /**
@@ -1587,7 +1755,7 @@ public class IBMCompareComplyV1Models {
      * @param contractTypes the new contractTypes
      */
     public void setContractTypes(final List<ContractTypes> contractTypes) {
-      this.contract_types_serialized_name = contractTypes;
+      this.contractTypes = contractTypes;
     }
 
     /**
@@ -1596,7 +1764,7 @@ public class IBMCompareComplyV1Models {
      * @param contractTerms the new contractTerms
      */
     public void setContractTerms(final List<ContractTerms> contractTerms) {
-      this.contract_terms_serialized_name = contractTerms;
+      this.contractTerms = contractTerms;
     }
 
     /**
@@ -1605,7 +1773,7 @@ public class IBMCompareComplyV1Models {
      * @param paymentTerms the new paymentTerms
      */
     public void setPaymentTerms(final List<PaymentTerms> paymentTerms) {
-      this.payment_terms_serialized_name = paymentTerms;
+      this.paymentTerms = paymentTerms;
     }
 
     /**
@@ -1614,7 +1782,7 @@ public class IBMCompareComplyV1Models {
      * @param tables the new tables
      */
     public void setTables(final List<Tables> tables) {
-      this.tables_serialized_name = tables;
+      this.tables = tables;
     }
 
     /**
@@ -1623,7 +1791,7 @@ public class IBMCompareComplyV1Models {
      * @param documentStructure the new documentStructure
      */
     public void setDocumentStructure(final DocStructure documentStructure) {
-      this.document_structure_serialized_name = documentStructure;
+      this.documentStructure = documentStructure;
     }
 
     /**
@@ -1632,7 +1800,7 @@ public class IBMCompareComplyV1Models {
      * @param parties the new parties
      */
     public void setParties(final List<Parties> parties) {
-      this.parties_serialized_name = parties;
+      this.parties = parties;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1643,7 +1811,7 @@ public class IBMCompareComplyV1Models {
       ClassifyReturn ret = (ClassifyReturn) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document
-      Document newDocument = (Document) new Document().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document_serialized_name'), Document.class);
+      Document newDocument = (Document) new Document().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document'), Document.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for elements
@@ -1652,11 +1820,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedElements != null) {
         for (Integer i = 0; i < deserializedElements.size(); i++) {
           Element currentItem = ret.getElements().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('elements_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('elements');
           Element newItem = (Element) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Element.class);
           newElements.add(newItem);
         }
-        ret.elements_serialized_name = newElements;
+        ret.elements = newElements;
       }
 
       // calling custom deserializer for effectiveDates
@@ -1665,11 +1833,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedEffectiveDates != null) {
         for (Integer i = 0; i < deserializedEffectiveDates.size(); i++) {
           EffectiveDates currentItem = ret.getEffectiveDates().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('effective_dates_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('effectiveDates');
           EffectiveDates newItem = (EffectiveDates) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EffectiveDates.class);
           newEffectiveDates.add(newItem);
         }
-        ret.effective_dates_serialized_name = newEffectiveDates;
+        ret.effectiveDates = newEffectiveDates;
       }
 
       // calling custom deserializer for contractAmounts
@@ -1678,11 +1846,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedContractAmounts != null) {
         for (Integer i = 0; i < deserializedContractAmounts.size(); i++) {
           ContractAmts currentItem = ret.getContractAmounts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_amounts_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contractAmounts');
           ContractAmts newItem = (ContractAmts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractAmts.class);
           newContractAmounts.add(newItem);
         }
-        ret.contract_amounts_serialized_name = newContractAmounts;
+        ret.contractAmounts = newContractAmounts;
       }
 
       // calling custom deserializer for terminationDates
@@ -1691,11 +1859,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedTerminationDates != null) {
         for (Integer i = 0; i < deserializedTerminationDates.size(); i++) {
           TerminationDates currentItem = ret.getTerminationDates().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('termination_dates_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('terminationDates');
           TerminationDates newItem = (TerminationDates) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TerminationDates.class);
           newTerminationDates.add(newItem);
         }
-        ret.termination_dates_serialized_name = newTerminationDates;
+        ret.terminationDates = newTerminationDates;
       }
 
       // calling custom deserializer for contractTypes
@@ -1704,11 +1872,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedContractTypes != null) {
         for (Integer i = 0; i < deserializedContractTypes.size(); i++) {
           ContractTypes currentItem = ret.getContractTypes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_types_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contractTypes');
           ContractTypes newItem = (ContractTypes) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTypes.class);
           newContractTypes.add(newItem);
         }
-        ret.contract_types_serialized_name = newContractTypes;
+        ret.contractTypes = newContractTypes;
       }
 
       // calling custom deserializer for contractTerms
@@ -1717,11 +1885,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedContractTerms != null) {
         for (Integer i = 0; i < deserializedContractTerms.size(); i++) {
           ContractTerms currentItem = ret.getContractTerms().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_terms_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contractTerms');
           ContractTerms newItem = (ContractTerms) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTerms.class);
           newContractTerms.add(newItem);
         }
-        ret.contract_terms_serialized_name = newContractTerms;
+        ret.contractTerms = newContractTerms;
       }
 
       // calling custom deserializer for paymentTerms
@@ -1730,11 +1898,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedPaymentTerms != null) {
         for (Integer i = 0; i < deserializedPaymentTerms.size(); i++) {
           PaymentTerms currentItem = ret.getPaymentTerms().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('payment_terms_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('paymentTerms');
           PaymentTerms newItem = (PaymentTerms) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), PaymentTerms.class);
           newPaymentTerms.add(newItem);
         }
-        ret.payment_terms_serialized_name = newPaymentTerms;
+        ret.paymentTerms = newPaymentTerms;
       }
 
       // calling custom deserializer for tables
@@ -1743,15 +1911,15 @@ public class IBMCompareComplyV1Models {
       if (deserializedTables != null) {
         for (Integer i = 0; i < deserializedTables.size(); i++) {
           Tables currentItem = ret.getTables().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tables_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tables');
           Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
           newTables.add(newItem);
         }
-        ret.tables_serialized_name = newTables;
+        ret.tables = newTables;
       }
 
       // calling custom deserializer for documentStructure
-      DocStructure newDocumentStructure = (DocStructure) new DocStructure().deserialize(JSON.serialize(ret.getDocumentStructure()), (Map<String, Object>) jsonMap.get('document_structure_serialized_name'), DocStructure.class);
+      DocStructure newDocumentStructure = (DocStructure) new DocStructure().deserialize(JSON.serialize(ret.getDocumentStructure()), (Map<String, Object>) jsonMap.get('documentStructure'), DocStructure.class);
       ret.setDocumentStructure(newDocumentStructure);
 
       // calling custom deserializer for parties
@@ -1760,14 +1928,58 @@ public class IBMCompareComplyV1Models {
       if (deserializedParties != null) {
         for (Integer i = 0; i < deserializedParties.size(); i++) {
           Parties currentItem = ret.getParties().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('parties_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('parties');
           Parties newItem = (Parties) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Parties.class);
           newParties.add(newItem);
         }
-        ret.parties_serialized_name = newParties;
+        ret.parties = newParties;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('model_id', 'modelId');
+      mapping.put('model_version', 'modelVersion');
+      if (elements != null && elements[0] != null) {
+        mapping.putAll(elements[0].getApiToSdkMapping());
+      }
+      mapping.put('effective_dates', 'effectiveDates');
+      if (effectiveDates != null && effectiveDates[0] != null) {
+        mapping.putAll(effectiveDates[0].getApiToSdkMapping());
+      }
+      mapping.put('contract_amounts', 'contractAmounts');
+      if (contractAmounts != null && contractAmounts[0] != null) {
+        mapping.putAll(contractAmounts[0].getApiToSdkMapping());
+      }
+      mapping.put('termination_dates', 'terminationDates');
+      if (terminationDates != null && terminationDates[0] != null) {
+        mapping.putAll(terminationDates[0].getApiToSdkMapping());
+      }
+      mapping.put('contract_types', 'contractTypes');
+      if (contractTypes != null && contractTypes[0] != null) {
+        mapping.putAll(contractTypes[0].getApiToSdkMapping());
+      }
+      mapping.put('contract_terms', 'contractTerms');
+      if (contractTerms != null && contractTerms[0] != null) {
+        mapping.putAll(contractTerms[0].getApiToSdkMapping());
+      }
+      mapping.put('payment_terms', 'paymentTerms');
+      if (paymentTerms != null && paymentTerms[0] != null) {
+        mapping.putAll(paymentTerms[0].getApiToSdkMapping());
+      }
+      if (tables != null && tables[0] != null) {
+        mapping.putAll(tables[0].getApiToSdkMapping());
+      }
+      mapping.put('document_structure', 'documentStructure');
+      if (documentStructure != null) {
+        mapping.putAll(documentStructure.getApiToSdkMapping());
+      }
+      if (parties != null && parties[0] != null) {
+        mapping.putAll(parties[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -1775,7 +1987,7 @@ public class IBMCompareComplyV1Models {
    * An array of values, each being the `id` value of a column header that is applicable to the current cell.
    */
   public class ColumnHeaderIds extends IBMWatsonGenericModel {
-    private String id_serialized_name;
+    private String id;
  
     /**
      * Gets the id.
@@ -1786,7 +1998,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getId() {
-      return id_serialized_name;
+      return id;
     }
 
     /**
@@ -1795,16 +2007,15 @@ public class IBMCompareComplyV1Models {
      * @param id the new id
      */
     public void setId(final String id) {
-      this.id_serialized_name = id;
+      this.id = id;
     }
-
   }
 
   /**
    * An array of values, each being the `text` value of a column header that is applicable to the current cell.
    */
   public class ColumnHeaderTexts extends IBMWatsonGenericModel {
-    private String text_serialized_name;
+    private String text;
  
     /**
      * Gets the text.
@@ -1815,7 +2026,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
 
     /**
@@ -1824,9 +2035,8 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
-
   }
 
   /**
@@ -1834,7 +2044,7 @@ public class IBMCompareComplyV1Models {
    * customization; otherwise, the same value as `column_header_texts`.
    */
   public class ColumnHeaderTextsNormalized extends IBMWatsonGenericModel {
-    private String text_normalized_serialized_name;
+    private String textNormalized;
  
     /**
      * Gets the textNormalized.
@@ -1845,7 +2055,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
 
     /**
@@ -1854,23 +2064,28 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('text_normalized', 'textNormalized');
+      return mapping;
+    }
   }
 
   /**
    * Column-level cells, each applicable as a header to other cells in the same column as itself, of the current table.
    */
   public class ColumnHeaders extends IBMWatsonGenericModel {
-    private String cell_id_serialized_name;
-    private IBMWatsonMapModel location_serialized_name;
-    private String text_serialized_name;
-    private String text_normalized_serialized_name;
-    private Long row_index_begin_serialized_name;
-    private Long row_index_end_serialized_name;
-    private Long column_index_begin_serialized_name;
-    private Long column_index_end_serialized_name;
+    private String cellId;
+    private IBMWatsonMapModel location;
+    private String text;
+    private String textNormalized;
+    private Long rowIndexBegin;
+    private Long rowIndexEnd;
+    private Long columnIndexBegin;
+    private Long columnIndexEnd;
  
     /**
      * Gets the cellId.
@@ -1881,7 +2096,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getCellId() {
-      return cell_id_serialized_name;
+      return cellId;
     }
  
     /**
@@ -1894,7 +2109,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -1906,7 +2121,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -1919,7 +2134,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
  
     /**
@@ -1931,7 +2146,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getRowIndexBegin() {
-      return row_index_begin_serialized_name;
+      return rowIndexBegin;
     }
  
     /**
@@ -1943,7 +2158,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getRowIndexEnd() {
-      return row_index_end_serialized_name;
+      return rowIndexEnd;
     }
  
     /**
@@ -1955,7 +2170,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getColumnIndexBegin() {
-      return column_index_begin_serialized_name;
+      return columnIndexBegin;
     }
  
     /**
@@ -1967,7 +2182,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getColumnIndexEnd() {
-      return column_index_end_serialized_name;
+      return columnIndexEnd;
     }
 
     /**
@@ -1976,7 +2191,7 @@ public class IBMCompareComplyV1Models {
      * @param cellId the new cellId
      */
     public void setCellId(final String cellId) {
-      this.cell_id_serialized_name = cellId;
+      this.cellId = cellId;
     }
 
     /**
@@ -1985,7 +2200,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final IBMWatsonMapModel location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -1994,7 +2209,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -2003,7 +2218,7 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
     /**
@@ -2012,7 +2227,7 @@ public class IBMCompareComplyV1Models {
      * @param rowIndexBegin the new rowIndexBegin
      */
     public void setRowIndexBegin(final long rowIndexBegin) {
-      this.row_index_begin_serialized_name = rowIndexBegin;
+      this.rowIndexBegin = rowIndexBegin;
     }
 
     /**
@@ -2021,7 +2236,7 @@ public class IBMCompareComplyV1Models {
      * @param rowIndexEnd the new rowIndexEnd
      */
     public void setRowIndexEnd(final long rowIndexEnd) {
-      this.row_index_end_serialized_name = rowIndexEnd;
+      this.rowIndexEnd = rowIndexEnd;
     }
 
     /**
@@ -2030,7 +2245,7 @@ public class IBMCompareComplyV1Models {
      * @param columnIndexBegin the new columnIndexBegin
      */
     public void setColumnIndexBegin(final long columnIndexBegin) {
-      this.column_index_begin_serialized_name = columnIndexBegin;
+      this.columnIndexBegin = columnIndexBegin;
     }
 
     /**
@@ -2039,7 +2254,7 @@ public class IBMCompareComplyV1Models {
      * @param columnIndexEnd the new columnIndexEnd
      */
     public void setColumnIndexEnd(final long columnIndexEnd) {
-      this.column_index_end_serialized_name = columnIndexEnd;
+      this.columnIndexEnd = columnIndexEnd;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2050,10 +2265,21 @@ public class IBMCompareComplyV1Models {
       ColumnHeaders ret = (ColumnHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('cell_id', 'cellId');
+      mapping.put('text_normalized', 'textNormalized');
+      mapping.put('row_index_begin', 'rowIndexBegin');
+      mapping.put('row_index_end', 'rowIndexEnd');
+      mapping.put('column_index_begin', 'columnIndexBegin');
+      mapping.put('column_index_end', 'columnIndexEnd');
+      return mapping;
     }
   }
 
@@ -2068,7 +2294,7 @@ public class IBMCompareComplyV1Models {
     private String file1Label;
     private String file2Label;
     private String model;
- 
+
     /**
      * Gets the file1.
      *
@@ -2079,7 +2305,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonFile file1() {
       return file1;
     }
- 
+
     /**
      * Gets the file2.
      *
@@ -2090,7 +2316,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonFile file2() {
       return file2;
     }
- 
+
     /**
      * Gets the file1ContentType.
      *
@@ -2101,7 +2327,7 @@ public class IBMCompareComplyV1Models {
     public String file1ContentType() {
       return file1ContentType;
     }
- 
+
     /**
      * Gets the file2ContentType.
      *
@@ -2112,7 +2338,7 @@ public class IBMCompareComplyV1Models {
     public String file2ContentType() {
       return file2ContentType;
     }
- 
+
     /**
      * Gets the file1Label.
      *
@@ -2123,7 +2349,7 @@ public class IBMCompareComplyV1Models {
     public String file1Label() {
       return file1Label;
     }
- 
+
     /**
      * Gets the file2Label.
      *
@@ -2134,7 +2360,7 @@ public class IBMCompareComplyV1Models {
     public String file2Label() {
       return file2Label;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -2170,6 +2396,16 @@ public class IBMCompareComplyV1Models {
       return new CompareDocumentsOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('file1', 'file_1');
+      mapping.put('file2', 'file_2');
+      mapping.put('file1ContentType', 'file_1_content_type');
+      mapping.put('file2ContentType', 'file_2_content_type');
+      mapping.put('file1Label', 'file_1_label');
+      mapping.put('file2Label', 'file_2_label');
+      return mapping;
+    }
   }
 
   /**
@@ -2315,11 +2551,11 @@ public class IBMCompareComplyV1Models {
    * The comparison of the two submitted documents.
    */
   public class CompareReturn extends IBMWatsonResponseModel {
-    private String model_id_serialized_name;
-    private String model_version_serialized_name;
-    private List<Document> documents_serialized_name;
-    private List<AlignedElement> aligned_elements_serialized_name;
-    private List<UnalignedElement> unaligned_elements_serialized_name;
+    private String modelId;
+    private String modelVersion;
+    private List<Document> documents;
+    private List<AlignedElement> alignedElements;
+    private List<UnalignedElement> unalignedElements;
  
     /**
      * Gets the modelId.
@@ -2331,7 +2567,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
  
     /**
@@ -2343,7 +2579,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModelVersion() {
-      return model_version_serialized_name;
+      return modelVersion;
     }
  
     /**
@@ -2355,7 +2591,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Document> getDocuments() {
-      return documents_serialized_name;
+      return documents;
     }
  
     /**
@@ -2367,7 +2603,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<AlignedElement> getAlignedElements() {
-      return aligned_elements_serialized_name;
+      return alignedElements;
     }
  
     /**
@@ -2379,7 +2615,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<UnalignedElement> getUnalignedElements() {
-      return unaligned_elements_serialized_name;
+      return unalignedElements;
     }
 
     /**
@@ -2388,7 +2624,7 @@ public class IBMCompareComplyV1Models {
      * @param modelId the new modelId
      */
     public void setModelId(final String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -2397,7 +2633,7 @@ public class IBMCompareComplyV1Models {
      * @param modelVersion the new modelVersion
      */
     public void setModelVersion(final String modelVersion) {
-      this.model_version_serialized_name = modelVersion;
+      this.modelVersion = modelVersion;
     }
 
     /**
@@ -2406,7 +2642,7 @@ public class IBMCompareComplyV1Models {
      * @param documents the new documents
      */
     public void setDocuments(final List<Document> documents) {
-      this.documents_serialized_name = documents;
+      this.documents = documents;
     }
 
     /**
@@ -2415,7 +2651,7 @@ public class IBMCompareComplyV1Models {
      * @param alignedElements the new alignedElements
      */
     public void setAlignedElements(final List<AlignedElement> alignedElements) {
-      this.aligned_elements_serialized_name = alignedElements;
+      this.alignedElements = alignedElements;
     }
 
     /**
@@ -2424,7 +2660,7 @@ public class IBMCompareComplyV1Models {
      * @param unalignedElements the new unalignedElements
      */
     public void setUnalignedElements(final List<UnalignedElement> unalignedElements) {
-      this.unaligned_elements_serialized_name = unalignedElements;
+      this.unalignedElements = unalignedElements;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2440,11 +2676,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedDocuments != null) {
         for (Integer i = 0; i < deserializedDocuments.size(); i++) {
           Document currentItem = ret.getDocuments().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('documents_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('documents');
           Document newItem = (Document) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Document.class);
           newDocuments.add(newItem);
         }
-        ret.documents_serialized_name = newDocuments;
+        ret.documents = newDocuments;
       }
 
       // calling custom deserializer for alignedElements
@@ -2453,11 +2689,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedAlignedElements != null) {
         for (Integer i = 0; i < deserializedAlignedElements.size(); i++) {
           AlignedElement currentItem = ret.getAlignedElements().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('aligned_elements_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('alignedElements');
           AlignedElement newItem = (AlignedElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AlignedElement.class);
           newAlignedElements.add(newItem);
         }
-        ret.aligned_elements_serialized_name = newAlignedElements;
+        ret.alignedElements = newAlignedElements;
       }
 
       // calling custom deserializer for unalignedElements
@@ -2466,14 +2702,29 @@ public class IBMCompareComplyV1Models {
       if (deserializedUnalignedElements != null) {
         for (Integer i = 0; i < deserializedUnalignedElements.size(); i++) {
           UnalignedElement currentItem = ret.getUnalignedElements().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('unaligned_elements_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('unalignedElements');
           UnalignedElement newItem = (UnalignedElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UnalignedElement.class);
           newUnalignedElements.add(newItem);
         }
-        ret.unaligned_elements_serialized_name = newUnalignedElements;
+        ret.unalignedElements = newUnalignedElements;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('model_id', 'modelId');
+      mapping.put('model_version', 'modelVersion');
+      mapping.put('aligned_elements', 'alignedElements');
+      if (alignedElements != null && alignedElements[0] != null) {
+        mapping.putAll(alignedElements[0].getApiToSdkMapping());
+      }
+      mapping.put('unaligned_elements', 'unalignedElements');
+      if (unalignedElements != null && unalignedElements[0] != null) {
+        mapping.putAll(unalignedElements[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2481,8 +2732,8 @@ public class IBMCompareComplyV1Models {
    * A contact.
    */
   public class Contact extends IBMWatsonGenericModel {
-    private String name_serialized_name;
-    private String role_serialized_name;
+    private String name;
+    private String role;
  
     /**
      * Gets the name.
@@ -2493,7 +2744,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
  
     /**
@@ -2505,7 +2756,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getRole() {
-      return role_serialized_name;
+      return role;
     }
 
     /**
@@ -2514,7 +2765,7 @@ public class IBMCompareComplyV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -2523,17 +2774,16 @@ public class IBMCompareComplyV1Models {
      * @param role the new role
      */
     public void setRole(final String role) {
-      this.role_serialized_name = role;
+      this.role = role;
     }
-
   }
 
   /**
    * Text that is related to the contents of the table and that precedes or follows the current table.
    */
   public class Contexts extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private Location location_serialized_name;
+    private String text;
+    private Location location;
  
     /**
      * Gets the text.
@@ -2544,7 +2794,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -2557,7 +2807,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -2566,7 +2816,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -2575,7 +2825,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2586,10 +2836,18 @@ public class IBMCompareComplyV1Models {
       Contexts ret = (Contexts) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2597,12 +2855,12 @@ public class IBMCompareComplyV1Models {
    * A monetary amount identified in the input document.
    */
   public class ContractAmts extends IBMWatsonGenericModel {
-    private String confidence_level_serialized_name;
-    private String text_serialized_name;
-    private String text_normalized_serialized_name;
-    private Interpretation interpretation_serialized_name;
-    private List<String> provenance_ids_serialized_name;
-    private Location location_serialized_name;
+    private String confidenceLevel;
+    private String text;
+    private String textNormalized;
+    private Interpretation interpretation;
+    private List<String> provenanceIds;
+    private Location location;
  
     /**
      * Gets the confidenceLevel.
@@ -2613,7 +2871,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+      return confidenceLevel;
     }
  
     /**
@@ -2625,7 +2883,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -2638,7 +2896,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
  
     /**
@@ -2651,7 +2909,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Interpretation getInterpretation() {
-      return interpretation_serialized_name;
+      return interpretation;
     }
  
     /**
@@ -2663,7 +2921,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
     }
  
     /**
@@ -2676,7 +2934,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -2685,7 +2943,7 @@ public class IBMCompareComplyV1Models {
      * @param confidenceLevel the new confidenceLevel
      */
     public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+      this.confidenceLevel = confidenceLevel;
     }
 
     /**
@@ -2694,7 +2952,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -2703,7 +2961,7 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
     /**
@@ -2712,7 +2970,7 @@ public class IBMCompareComplyV1Models {
      * @param interpretation the new interpretation
      */
     public void setInterpretation(final Interpretation interpretation) {
-      this.interpretation_serialized_name = interpretation;
+      this.interpretation = interpretation;
     }
 
     /**
@@ -2721,7 +2979,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the new provenanceIds
      */
     public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+      this.provenanceIds = provenanceIds;
     }
 
     /**
@@ -2730,7 +2988,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2741,14 +2999,28 @@ public class IBMCompareComplyV1Models {
       ContractAmts ret = (ContractAmts) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for interpretation
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation_serialized_name'), Interpretation.class);
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation'), Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('confidence_level', 'confidenceLevel');
+      mapping.put('text_normalized', 'textNormalized');
+      if (interpretation != null) {
+        mapping.putAll(interpretation.getApiToSdkMapping());
+      }
+      mapping.put('provenance_ids', 'provenanceIds');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2756,12 +3028,12 @@ public class IBMCompareComplyV1Models {
    * The duration or durations of the contract.
    */
   public class ContractTerms extends IBMWatsonGenericModel {
-    private String confidence_level_serialized_name;
-    private String text_serialized_name;
-    private String text_normalized_serialized_name;
-    private Interpretation interpretation_serialized_name;
-    private List<String> provenance_ids_serialized_name;
-    private Location location_serialized_name;
+    private String confidenceLevel;
+    private String text;
+    private String textNormalized;
+    private Interpretation interpretation;
+    private List<String> provenanceIds;
+    private Location location;
  
     /**
      * Gets the confidenceLevel.
@@ -2772,7 +3044,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+      return confidenceLevel;
     }
  
     /**
@@ -2784,7 +3056,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -2797,7 +3069,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
  
     /**
@@ -2810,7 +3082,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Interpretation getInterpretation() {
-      return interpretation_serialized_name;
+      return interpretation;
     }
  
     /**
@@ -2822,7 +3094,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
     }
  
     /**
@@ -2835,7 +3107,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -2844,7 +3116,7 @@ public class IBMCompareComplyV1Models {
      * @param confidenceLevel the new confidenceLevel
      */
     public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+      this.confidenceLevel = confidenceLevel;
     }
 
     /**
@@ -2853,7 +3125,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -2862,7 +3134,7 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
     /**
@@ -2871,7 +3143,7 @@ public class IBMCompareComplyV1Models {
      * @param interpretation the new interpretation
      */
     public void setInterpretation(final Interpretation interpretation) {
-      this.interpretation_serialized_name = interpretation;
+      this.interpretation = interpretation;
     }
 
     /**
@@ -2880,7 +3152,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the new provenanceIds
      */
     public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+      this.provenanceIds = provenanceIds;
     }
 
     /**
@@ -2889,7 +3161,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2900,14 +3172,28 @@ public class IBMCompareComplyV1Models {
       ContractTerms ret = (ContractTerms) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for interpretation
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation_serialized_name'), Interpretation.class);
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation'), Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('confidence_level', 'confidenceLevel');
+      mapping.put('text_normalized', 'textNormalized');
+      if (interpretation != null) {
+        mapping.putAll(interpretation.getApiToSdkMapping());
+      }
+      mapping.put('provenance_ids', 'provenanceIds');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -2915,10 +3201,10 @@ public class IBMCompareComplyV1Models {
    * The contract type identified in the input document.
    */
   public class ContractTypes extends IBMWatsonGenericModel {
-    private String confidence_level_serialized_name;
-    private String text_serialized_name;
-    private List<String> provenance_ids_serialized_name;
-    private Location location_serialized_name;
+    private String confidenceLevel;
+    private String text;
+    private List<String> provenanceIds;
+    private Location location;
  
     /**
      * Gets the confidenceLevel.
@@ -2929,7 +3215,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+      return confidenceLevel;
     }
  
     /**
@@ -2941,7 +3227,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -2953,7 +3239,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
     }
  
     /**
@@ -2966,7 +3252,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -2975,7 +3261,7 @@ public class IBMCompareComplyV1Models {
      * @param confidenceLevel the new confidenceLevel
      */
     public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+      this.confidenceLevel = confidenceLevel;
     }
 
     /**
@@ -2984,7 +3270,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -2993,7 +3279,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the new provenanceIds
      */
     public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+      this.provenanceIds = provenanceIds;
     }
 
     /**
@@ -3002,7 +3288,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3013,10 +3299,20 @@ public class IBMCompareComplyV1Models {
       ContractTypes ret = (ContractTypes) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('confidence_level', 'confidenceLevel');
+      mapping.put('provenance_ids', 'provenanceIds');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -3028,7 +3324,7 @@ public class IBMCompareComplyV1Models {
     private String filename;
     private String fileContentType;
     private String model;
- 
+
     /**
      * Gets the file.
      *
@@ -3039,7 +3335,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonFile file() {
       return file;
     }
- 
+
     /**
      * Gets the filename.
      *
@@ -3050,7 +3346,7 @@ public class IBMCompareComplyV1Models {
     public String filename() {
       return filename;
     }
- 
+
     /**
      * Gets the fileContentType.
      *
@@ -3061,7 +3357,7 @@ public class IBMCompareComplyV1Models {
     public String fileContentType() {
       return fileContentType;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -3094,6 +3390,11 @@ public class IBMCompareComplyV1Models {
       return new ConvertToHtmlOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('fileContentType', 'file_content_type');
+      return mapping;
+    }
   }
 
   /**
@@ -3208,7 +3509,7 @@ public class IBMCompareComplyV1Models {
     private String outputBucketLocation;
     private String outputBucketName;
     private String model;
- 
+
     /**
      * Gets the function.
      *
@@ -3219,7 +3520,7 @@ public class IBMCompareComplyV1Models {
     public String function() {
       return function;
     }
- 
+
     /**
      * Gets the inputCredentialsFile.
      *
@@ -3231,7 +3532,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonFile inputCredentialsFile() {
       return inputCredentialsFile;
     }
- 
+
     /**
      * Gets the inputBucketLocation.
      *
@@ -3243,7 +3544,7 @@ public class IBMCompareComplyV1Models {
     public String inputBucketLocation() {
       return inputBucketLocation;
     }
- 
+
     /**
      * Gets the inputBucketName.
      *
@@ -3254,7 +3555,7 @@ public class IBMCompareComplyV1Models {
     public String inputBucketName() {
       return inputBucketName;
     }
- 
+
     /**
      * Gets the outputCredentialsFile.
      *
@@ -3266,7 +3567,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonFile outputCredentialsFile() {
       return outputCredentialsFile;
     }
- 
+
     /**
      * Gets the outputBucketLocation.
      *
@@ -3278,7 +3579,7 @@ public class IBMCompareComplyV1Models {
     public String outputBucketLocation() {
       return outputBucketLocation;
     }
- 
+
     /**
      * Gets the outputBucketName.
      *
@@ -3289,7 +3590,7 @@ public class IBMCompareComplyV1Models {
     public String outputBucketName() {
       return outputBucketName;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -3331,6 +3632,16 @@ public class IBMCompareComplyV1Models {
       return new CreateBatchOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('inputCredentialsFile', 'input_credentials_file');
+      mapping.put('inputBucketLocation', 'input_bucket_location');
+      mapping.put('inputBucketName', 'input_bucket_name');
+      mapping.put('outputCredentialsFile', 'output_credentials_file');
+      mapping.put('outputBucketLocation', 'output_bucket_location');
+      mapping.put('outputBucketName', 'output_bucket_name');
+      return mapping;
+    }
   }
 
   /**
@@ -3501,7 +3812,7 @@ public class IBMCompareComplyV1Models {
   public class DeleteFeedbackOptions extends IBMWatsonOptionsModel {
     private String feedbackId;
     private String model;
- 
+
     /**
      * Gets the feedbackId.
      *
@@ -3512,7 +3823,7 @@ public class IBMCompareComplyV1Models {
     public String feedbackId() {
       return feedbackId;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -3542,6 +3853,11 @@ public class IBMCompareComplyV1Models {
       return new DeleteFeedbackOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('feedbackId', 'feedback_id');
+      return mapping;
+    }
   }
 
   /**
@@ -3620,10 +3936,10 @@ public class IBMCompareComplyV1Models {
    * Document counts.
    */
   public class DocCounts extends IBMWatsonGenericModel {
-    private Long total_serialized_name;
-    private Long pending_serialized_name;
-    private Long successful_serialized_name;
-    private Long failed_serialized_name;
+    private Long total;
+    private Long pending;
+    private Long successful;
+    private Long failed;
  
     /**
      * Gets the total.
@@ -3634,7 +3950,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getTotal() {
-      return total_serialized_name;
+      return total;
     }
  
     /**
@@ -3646,7 +3962,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getPending() {
-      return pending_serialized_name;
+      return pending;
     }
  
     /**
@@ -3658,7 +3974,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getSuccessful() {
-      return successful_serialized_name;
+      return successful;
     }
  
     /**
@@ -3670,7 +3986,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getFailed() {
-      return failed_serialized_name;
+      return failed;
     }
 
     /**
@@ -3679,7 +3995,7 @@ public class IBMCompareComplyV1Models {
      * @param total the new total
      */
     public void setTotal(final long total) {
-      this.total_serialized_name = total;
+      this.total = total;
     }
 
     /**
@@ -3688,7 +4004,7 @@ public class IBMCompareComplyV1Models {
      * @param pending the new pending
      */
     public void setPending(final long pending) {
-      this.pending_serialized_name = pending;
+      this.pending = pending;
     }
 
     /**
@@ -3697,7 +4013,7 @@ public class IBMCompareComplyV1Models {
      * @param successful the new successful
      */
     public void setSuccessful(final long successful) {
-      this.successful_serialized_name = successful;
+      this.successful = successful;
     }
 
     /**
@@ -3706,18 +4022,17 @@ public class IBMCompareComplyV1Models {
      * @param failed the new failed
      */
     public void setFailed(final long failed) {
-      this.failed_serialized_name = failed;
+      this.failed = failed;
     }
-
   }
 
   /**
    * Information about the parsed input document.
    */
   public class DocInfo extends IBMWatsonGenericModel {
-    private String html_serialized_name;
-    private String title_serialized_name;
-    private String hash_serialized_name;
+    private String html;
+    private String title;
+    private String hash;
  
     /**
      * Gets the html.
@@ -3728,7 +4043,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getHtml() {
-      return html_serialized_name;
+      return html;
     }
  
     /**
@@ -3740,7 +4055,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -3752,7 +4067,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getHash() {
-      return hash_serialized_name;
+      return hash;
     }
 
     /**
@@ -3761,7 +4076,7 @@ public class IBMCompareComplyV1Models {
      * @param html the new html
      */
     public void setHtml(final String html) {
-      this.html_serialized_name = html;
+      this.html = html;
     }
 
     /**
@@ -3770,7 +4085,7 @@ public class IBMCompareComplyV1Models {
      * @param title the new title
      */
     public void setTitle(final String title) {
-      this.title_serialized_name = title;
+      this.title = title;
     }
 
     /**
@@ -3779,18 +4094,17 @@ public class IBMCompareComplyV1Models {
      * @param hash the new hash
      */
     public void setHash(final String hash) {
-      this.hash_serialized_name = hash;
+      this.hash = hash;
     }
-
   }
 
   /**
    * The structure of the input document.
    */
   public class DocStructure extends IBMWatsonGenericModel {
-    private List<SectionTitles> section_titles_serialized_name;
-    private List<LeadingSentence> leading_sentences_serialized_name;
-    private List<Paragraphs> paragraphs_serialized_name;
+    private List<SectionTitles> sectionTitles;
+    private List<LeadingSentence> leadingSentences;
+    private List<Paragraphs> paragraphs;
  
     /**
      * Gets the sectionTitles.
@@ -3801,7 +4115,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<SectionTitles> getSectionTitles() {
-      return section_titles_serialized_name;
+      return sectionTitles;
     }
  
     /**
@@ -3814,7 +4128,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<LeadingSentence> getLeadingSentences() {
-      return leading_sentences_serialized_name;
+      return leadingSentences;
     }
  
     /**
@@ -3827,7 +4141,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Paragraphs> getParagraphs() {
-      return paragraphs_serialized_name;
+      return paragraphs;
     }
 
     /**
@@ -3836,7 +4150,7 @@ public class IBMCompareComplyV1Models {
      * @param sectionTitles the new sectionTitles
      */
     public void setSectionTitles(final List<SectionTitles> sectionTitles) {
-      this.section_titles_serialized_name = sectionTitles;
+      this.sectionTitles = sectionTitles;
     }
 
     /**
@@ -3845,7 +4159,7 @@ public class IBMCompareComplyV1Models {
      * @param leadingSentences the new leadingSentences
      */
     public void setLeadingSentences(final List<LeadingSentence> leadingSentences) {
-      this.leading_sentences_serialized_name = leadingSentences;
+      this.leadingSentences = leadingSentences;
     }
 
     /**
@@ -3854,7 +4168,7 @@ public class IBMCompareComplyV1Models {
      * @param paragraphs the new paragraphs
      */
     public void setParagraphs(final List<Paragraphs> paragraphs) {
-      this.paragraphs_serialized_name = paragraphs;
+      this.paragraphs = paragraphs;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3870,11 +4184,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedSectionTitles != null) {
         for (Integer i = 0; i < deserializedSectionTitles.size(); i++) {
           SectionTitles currentItem = ret.getSectionTitles().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('section_titles_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('sectionTitles');
           SectionTitles newItem = (SectionTitles) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SectionTitles.class);
           newSectionTitles.add(newItem);
         }
-        ret.section_titles_serialized_name = newSectionTitles;
+        ret.sectionTitles = newSectionTitles;
       }
 
       // calling custom deserializer for leadingSentences
@@ -3883,11 +4197,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedLeadingSentences != null) {
         for (Integer i = 0; i < deserializedLeadingSentences.size(); i++) {
           LeadingSentence currentItem = ret.getLeadingSentences().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('leading_sentences_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('leadingSentences');
           LeadingSentence newItem = (LeadingSentence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LeadingSentence.class);
           newLeadingSentences.add(newItem);
         }
-        ret.leading_sentences_serialized_name = newLeadingSentences;
+        ret.leadingSentences = newLeadingSentences;
       }
 
       // calling custom deserializer for paragraphs
@@ -3896,14 +4210,30 @@ public class IBMCompareComplyV1Models {
       if (deserializedParagraphs != null) {
         for (Integer i = 0; i < deserializedParagraphs.size(); i++) {
           Paragraphs currentItem = ret.getParagraphs().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('paragraphs_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('paragraphs');
           Paragraphs newItem = (Paragraphs) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Paragraphs.class);
           newParagraphs.add(newItem);
         }
-        ret.paragraphs_serialized_name = newParagraphs;
+        ret.paragraphs = newParagraphs;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('section_titles', 'sectionTitles');
+      if (sectionTitles != null && sectionTitles[0] != null) {
+        mapping.putAll(sectionTitles[0].getApiToSdkMapping());
+      }
+      mapping.put('leading_sentences', 'leadingSentences');
+      if (leadingSentences != null && leadingSentences[0] != null) {
+        mapping.putAll(leadingSentences[0].getApiToSdkMapping());
+      }
+      if (paragraphs != null && paragraphs[0] != null) {
+        mapping.putAll(paragraphs[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -3911,10 +4241,10 @@ public class IBMCompareComplyV1Models {
    * Basic information about the input document.
    */
   public class Document extends IBMWatsonGenericModel {
-    private String title_serialized_name;
-    private String html_serialized_name;
-    private String hash_serialized_name;
-    private String label_serialized_name;
+    private String title;
+    private String html;
+    private String hash;
+    private String label;
  
     /**
      * Gets the title.
@@ -3925,7 +4255,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -3937,7 +4267,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getHtml() {
-      return html_serialized_name;
+      return html;
     }
  
     /**
@@ -3949,7 +4279,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getHash() {
-      return hash_serialized_name;
+      return hash;
     }
  
     /**
@@ -3962,7 +4292,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getLabel() {
-      return label_serialized_name;
+      return label;
     }
 
     /**
@@ -3971,7 +4301,7 @@ public class IBMCompareComplyV1Models {
      * @param title the new title
      */
     public void setTitle(final String title) {
-      this.title_serialized_name = title;
+      this.title = title;
     }
 
     /**
@@ -3980,7 +4310,7 @@ public class IBMCompareComplyV1Models {
      * @param html the new html
      */
     public void setHtml(final String html) {
-      this.html_serialized_name = html;
+      this.html = html;
     }
 
     /**
@@ -3989,7 +4319,7 @@ public class IBMCompareComplyV1Models {
      * @param hash the new hash
      */
     public void setHash(final String hash) {
-      this.hash_serialized_name = hash;
+      this.hash = hash;
     }
 
     /**
@@ -3998,20 +4328,19 @@ public class IBMCompareComplyV1Models {
      * @param label the new label
      */
     public void setLabel(final String label) {
-      this.label_serialized_name = label;
+      this.label = label;
     }
-
   }
 
   /**
    * An effective date.
    */
   public class EffectiveDates extends IBMWatsonGenericModel {
-    private String confidence_level_serialized_name;
-    private String text_serialized_name;
-    private String text_normalized_serialized_name;
-    private List<String> provenance_ids_serialized_name;
-    private Location location_serialized_name;
+    private String confidenceLevel;
+    private String text;
+    private String textNormalized;
+    private List<String> provenanceIds;
+    private Location location;
  
     /**
      * Gets the confidenceLevel.
@@ -4022,7 +4351,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+      return confidenceLevel;
     }
  
     /**
@@ -4034,7 +4363,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -4047,7 +4376,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
  
     /**
@@ -4059,7 +4388,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
     }
  
     /**
@@ -4072,7 +4401,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -4081,7 +4410,7 @@ public class IBMCompareComplyV1Models {
      * @param confidenceLevel the new confidenceLevel
      */
     public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+      this.confidenceLevel = confidenceLevel;
     }
 
     /**
@@ -4090,7 +4419,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -4099,7 +4428,7 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
     /**
@@ -4108,7 +4437,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the new provenanceIds
      */
     public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+      this.provenanceIds = provenanceIds;
     }
 
     /**
@@ -4117,7 +4446,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4128,10 +4457,21 @@ public class IBMCompareComplyV1Models {
       EffectiveDates ret = (EffectiveDates) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('confidence_level', 'confidenceLevel');
+      mapping.put('text_normalized', 'textNormalized');
+      mapping.put('provenance_ids', 'provenanceIds');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -4139,11 +4479,11 @@ public class IBMCompareComplyV1Models {
    * A component part of the document.
    */
   public class Element extends IBMWatsonGenericModel {
-    private Location location_serialized_name;
-    private String text_serialized_name;
-    private List<TypeLabel> types_serialized_name;
-    private List<Category> categories_serialized_name;
-    private List<Attribute> attributes_serialized_name;
+    private Location location;
+    private String text;
+    private List<TypeLabel> types;
+    private List<Category> categories;
+    private List<Attribute> attributes;
  
     /**
      * Gets the location.
@@ -4155,7 +4495,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -4167,7 +4507,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -4179,7 +4519,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<TypeLabel> getTypes() {
-      return types_serialized_name;
+      return types;
     }
  
     /**
@@ -4191,7 +4531,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Category> getCategories() {
-      return categories_serialized_name;
+      return categories;
     }
  
     /**
@@ -4203,7 +4543,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Attribute> getAttributes() {
-      return attributes_serialized_name;
+      return attributes;
     }
 
     /**
@@ -4212,7 +4552,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -4221,7 +4561,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -4230,7 +4570,7 @@ public class IBMCompareComplyV1Models {
      * @param types the new types
      */
     public void setTypes(final List<TypeLabel> types) {
-      this.types_serialized_name = types;
+      this.types = types;
     }
 
     /**
@@ -4239,7 +4579,7 @@ public class IBMCompareComplyV1Models {
      * @param categories the new categories
      */
     public void setCategories(final List<Category> categories) {
-      this.categories_serialized_name = categories;
+      this.categories = categories;
     }
 
     /**
@@ -4248,7 +4588,7 @@ public class IBMCompareComplyV1Models {
      * @param attributes the new attributes
      */
     public void setAttributes(final List<Attribute> attributes) {
-      this.attributes_serialized_name = attributes;
+      this.attributes = attributes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4259,7 +4599,7 @@ public class IBMCompareComplyV1Models {
       Element ret = (Element) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -4268,11 +4608,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedTypes != null) {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('types_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('types');
           TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
-        ret.types_serialized_name = newTypes;
+        ret.types = newTypes;
       }
 
       // calling custom deserializer for categories
@@ -4281,11 +4621,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedCategories != null) {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('categories_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
           Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
-        ret.categories_serialized_name = newCategories;
+        ret.categories = newCategories;
       }
 
       // calling custom deserializer for attributes
@@ -4294,14 +4634,31 @@ public class IBMCompareComplyV1Models {
       if (deserializedAttributes != null) {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
           Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
-        ret.attributes_serialized_name = newAttributes;
+        ret.attributes = newAttributes;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      if (types != null && types[0] != null) {
+        mapping.putAll(types[0].getApiToSdkMapping());
+      }
+      if (categories != null && categories[0] != null) {
+        mapping.putAll(categories[0].getApiToSdkMapping());
+      }
+      if (attributes != null && attributes[0] != null) {
+        mapping.putAll(attributes[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -4309,8 +4666,8 @@ public class IBMCompareComplyV1Models {
    * A list of `begin` and `end` indexes that indicate the locations of the elements in the input document.
    */
   public class ElementLocations extends IBMWatsonGenericModel {
-    private Long begin_serialized_name;
-    private Long end_serialized_name;
+    private Long xbegin;
+    private Long xend;
  
     /**
      * Gets the xbegin.
@@ -4321,7 +4678,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getXbegin() {
-      return begin_serialized_name;
+      return xbegin;
     }
  
     /**
@@ -4333,7 +4690,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getXend() {
-      return end_serialized_name;
+      return xend;
     }
 
     /**
@@ -4342,7 +4699,7 @@ public class IBMCompareComplyV1Models {
      * @param xbegin the new xbegin
      */
     public void setXbegin(final long xbegin) {
-      this.begin_serialized_name = xbegin;
+      this.xbegin = xbegin;
     }
 
     /**
@@ -4351,21 +4708,27 @@ public class IBMCompareComplyV1Models {
      * @param xend the new xend
      */
     public void setXend(final long xend) {
-      this.end_serialized_name = xend;
+      this.xend = xend;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('begin', 'xbegin');
+      mapping.put('end', 'xend');
+      return mapping;
+    }
   }
 
   /**
    * Details of semantically aligned elements.
    */
   public class ElementPair extends IBMWatsonGenericModel {
-    private String document_label_serialized_name;
-    private String text_serialized_name;
-    private Location location_serialized_name;
-    private List<TypeLabelComparison> types_serialized_name;
-    private List<CategoryComparison> categories_serialized_name;
-    private List<Attribute> attributes_serialized_name;
+    private String documentLabel;
+    private String text;
+    private Location location;
+    private List<TypeLabelComparison> types;
+    private List<CategoryComparison> categories;
+    private List<Attribute> attributes;
  
     /**
      * Gets the documentLabel.
@@ -4377,7 +4740,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getDocumentLabel() {
-      return document_label_serialized_name;
+      return documentLabel;
     }
  
     /**
@@ -4389,7 +4752,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -4402,7 +4765,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -4414,7 +4777,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<TypeLabelComparison> getTypes() {
-      return types_serialized_name;
+      return types;
     }
  
     /**
@@ -4426,7 +4789,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<CategoryComparison> getCategories() {
-      return categories_serialized_name;
+      return categories;
     }
  
     /**
@@ -4438,7 +4801,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Attribute> getAttributes() {
-      return attributes_serialized_name;
+      return attributes;
     }
 
     /**
@@ -4447,7 +4810,7 @@ public class IBMCompareComplyV1Models {
      * @param documentLabel the new documentLabel
      */
     public void setDocumentLabel(final String documentLabel) {
-      this.document_label_serialized_name = documentLabel;
+      this.documentLabel = documentLabel;
     }
 
     /**
@@ -4456,7 +4819,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -4465,7 +4828,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -4474,7 +4837,7 @@ public class IBMCompareComplyV1Models {
      * @param types the new types
      */
     public void setTypes(final List<TypeLabelComparison> types) {
-      this.types_serialized_name = types;
+      this.types = types;
     }
 
     /**
@@ -4483,7 +4846,7 @@ public class IBMCompareComplyV1Models {
      * @param categories the new categories
      */
     public void setCategories(final List<CategoryComparison> categories) {
-      this.categories_serialized_name = categories;
+      this.categories = categories;
     }
 
     /**
@@ -4492,7 +4855,7 @@ public class IBMCompareComplyV1Models {
      * @param attributes the new attributes
      */
     public void setAttributes(final List<Attribute> attributes) {
-      this.attributes_serialized_name = attributes;
+      this.attributes = attributes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4503,7 +4866,7 @@ public class IBMCompareComplyV1Models {
       ElementPair ret = (ElementPair) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -4512,11 +4875,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedTypes != null) {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabelComparison currentItem = ret.getTypes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('types_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('types');
           TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
           newTypes.add(newItem);
         }
-        ret.types_serialized_name = newTypes;
+        ret.types = newTypes;
       }
 
       // calling custom deserializer for categories
@@ -4525,11 +4888,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedCategories != null) {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           CategoryComparison currentItem = ret.getCategories().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('categories_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
           CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
           newCategories.add(newItem);
         }
-        ret.categories_serialized_name = newCategories;
+        ret.categories = newCategories;
       }
 
       // calling custom deserializer for attributes
@@ -4538,14 +4901,26 @@ public class IBMCompareComplyV1Models {
       if (deserializedAttributes != null) {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
           Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
-        ret.attributes_serialized_name = newAttributes;
+        ret.attributes = newAttributes;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_label', 'documentLabel');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      if (attributes != null && attributes[0] != null) {
+        mapping.putAll(attributes[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -4556,7 +4931,7 @@ public class IBMCompareComplyV1Models {
     private IBMWatsonFile file;
     private String fileContentType;
     private String model;
- 
+
     /**
      * Gets the file.
      *
@@ -4567,7 +4942,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonFile file() {
       return file;
     }
- 
+
     /**
      * Gets the fileContentType.
      *
@@ -4578,7 +4953,7 @@ public class IBMCompareComplyV1Models {
     public String fileContentType() {
       return fileContentType;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -4609,6 +4984,11 @@ public class IBMCompareComplyV1Models {
       return new ExtractTablesOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('fileContentType', 'file_content_type');
+      return mapping;
+    }
   }
 
   /**
@@ -4699,15 +5079,15 @@ public class IBMCompareComplyV1Models {
   /**
    * Feedback data for submission.
    */
-  public class FeedbackDataInput {
-    private String feedback_type_serialized_name;
-    private ShortDoc document_serialized_name;
-    private String model_id_serialized_name;
-    private String model_version_serialized_name;
-    private Location location_serialized_name;
-    private String text_serialized_name;
-    private OriginalLabelsIn original_labels_serialized_name;
-    private UpdatedLabelsIn updated_labels_serialized_name;
+  public class FeedbackDataInput extends IBMWatsonGenericModel {
+    private String feedbackType;
+    private ShortDoc document;
+    private String modelId;
+    private String modelVersion;
+    private Location location;
+    private String text;
+    private OriginalLabelsIn originalLabels;
+    private UpdatedLabelsIn updatedLabels;
  
     /**
      * Gets the feedbackType.
@@ -4717,7 +5097,7 @@ public class IBMCompareComplyV1Models {
      * @return the feedbackType
      */
     public String getFeedbackType() {
-      return feedback_type_serialized_name;
+      return feedbackType;
     }
  
     /**
@@ -4728,7 +5108,7 @@ public class IBMCompareComplyV1Models {
      * @return the document
      */
     public ShortDoc getDocument() {
-      return document_serialized_name;
+      return document;
     }
  
     /**
@@ -4739,7 +5119,7 @@ public class IBMCompareComplyV1Models {
      * @return the modelId
      */
     public String getModelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
  
     /**
@@ -4750,7 +5130,7 @@ public class IBMCompareComplyV1Models {
      * @return the modelVersion
      */
     public String getModelVersion() {
-      return model_version_serialized_name;
+      return modelVersion;
     }
  
     /**
@@ -4762,7 +5142,7 @@ public class IBMCompareComplyV1Models {
      * @return the location
      */
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -4773,7 +5153,7 @@ public class IBMCompareComplyV1Models {
      * @return the text
      */
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -4784,7 +5164,7 @@ public class IBMCompareComplyV1Models {
      * @return the originalLabels
      */
     public OriginalLabelsIn getOriginalLabels() {
-      return original_labels_serialized_name;
+      return originalLabels;
     }
  
     /**
@@ -4795,96 +5175,212 @@ public class IBMCompareComplyV1Models {
      * @return the updatedLabels
      */
     public UpdatedLabelsIn getUpdatedLabels() {
-      return updated_labels_serialized_name;
+      return updatedLabels;
+    }
+  
+    private FeedbackDataInput(FeedbackDataInputBuilder builder) {
+      IBMWatsonValidator.notNull(builder.feedbackType, 'feedbackType cannot be null');
+      IBMWatsonValidator.notNull(builder.location, 'location cannot be null');
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      IBMWatsonValidator.notNull(builder.originalLabels, 'originalLabels cannot be null');
+      IBMWatsonValidator.notNull(builder.updatedLabels, 'updatedLabels cannot be null');
+      this.feedbackType = builder.feedbackType;
+      this.document = builder.document;
+      this.modelId = builder.modelId;
+      this.modelVersion = builder.modelVersion;
+      this.location = builder.location;
+      this.text = builder.text;
+      this.originalLabels = builder.originalLabels;
+      this.updatedLabels = builder.updatedLabels;
     }
 
     /**
-     * Sets the feedbackType.
+     * New builder.
      *
-     * @param feedbackType the new feedbackType
+     * @return a FeedbackDataInput builder
      */
-    public void setFeedbackType(final String feedbackType) {
-      this.feedback_type_serialized_name = feedbackType;
+    public FeedbackDataInputBuilder newBuilder() {
+      return new FeedbackDataInputBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('feedbackType', 'feedback_type');
+      mapping.put('modelId', 'model_id');
+      mapping.put('modelVersion', 'model_version');
+      if (location != null) {
+        mapping.putAll(location.getSdkToApiMapping());
+      }
+      mapping.put('originalLabels', 'original_labels');
+      if (originalLabels != null) {
+        mapping.putAll(originalLabels.getSdkToApiMapping());
+      }
+      mapping.put('updatedLabels', 'updated_labels');
+      if (updatedLabels != null) {
+        mapping.putAll(updatedLabels.getSdkToApiMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * FeedbackDataInput Builder.
+   */
+  public class FeedbackDataInputBuilder {
+    private String feedbackType;
+    private ShortDoc document;
+    private String modelId;
+    private String modelVersion;
+    private Location location;
+    private String text;
+    private OriginalLabelsIn originalLabels;
+    private UpdatedLabelsIn updatedLabels;
+
+    private FeedbackDataInputBuilder(FeedbackDataInput feedbackDataInput) {
+      this.feedbackType = feedbackDataInput.feedbackType;
+      this.document = feedbackDataInput.document;
+      this.modelId = feedbackDataInput.modelId;
+      this.modelVersion = feedbackDataInput.modelVersion;
+      this.location = feedbackDataInput.location;
+      this.text = feedbackDataInput.text;
+      this.originalLabels = feedbackDataInput.originalLabels;
+      this.updatedLabels = feedbackDataInput.updatedLabels;
     }
 
     /**
-     * Sets the document.
-     *
-     * @param document the new document
+     * Instantiates a new builder.
      */
-    public void setDocument(final ShortDoc document) {
-      this.document_serialized_name = document;
+    public FeedbackDataInputBuilder() {
     }
 
     /**
-     * Sets the modelId.
+     * Instantiates a new builder with required properties.
      *
-     * @param modelId the new modelId
+     * @param feedbackType the feedbackType
+     * @param location the location
+     * @param text the text
+     * @param originalLabels the originalLabels
+     * @param updatedLabels the updatedLabels
      */
-    public void setModelId(final String modelId) {
-      this.model_id_serialized_name = modelId;
+    public FeedbackDataInputBuilder(String feedbackType, Location location, String text, OriginalLabelsIn originalLabels, UpdatedLabelsIn updatedLabels) {
+      this.feedbackType = feedbackType;
+      this.location = location;
+      this.text = text;
+      this.originalLabels = originalLabels;
+      this.updatedLabels = updatedLabels;
     }
 
     /**
-     * Sets the modelVersion.
+     * Builds a FeedbackDataInput.
      *
-     * @param modelVersion the new modelVersion
+     * @return the feedbackDataInput
      */
-    public void setModelVersion(final String modelVersion) {
-      this.model_version_serialized_name = modelVersion;
+    public FeedbackDataInput build() {
+      return new FeedbackDataInput(this);
     }
 
     /**
-     * Sets the location.
+     * Set the feedbackType.
      *
-     * @param location the new location
+     * @param feedbackType the feedbackType
+     * @return the FeedbackDataInput builder
      */
-    public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+    public FeedbackDataInputBuilder setFeedbackType(String feedbackType) {
+      this.feedbackType = feedbackType;
+      return this;
     }
 
     /**
-     * Sets the text.
+     * Set the document.
      *
-     * @param text the new text
+     * @param document the document
+     * @return the FeedbackDataInput builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
+    public FeedbackDataInputBuilder setDocument(ShortDoc document) {
+      this.document = document;
+      return this;
     }
 
     /**
-     * Sets the originalLabels.
+     * Set the modelId.
      *
-     * @param originalLabels the new originalLabels
+     * @param modelId the modelId
+     * @return the FeedbackDataInput builder
      */
-    public void setOriginalLabels(final OriginalLabelsIn originalLabels) {
-      this.original_labels_serialized_name = originalLabels;
+    public FeedbackDataInputBuilder setModelId(String modelId) {
+      this.modelId = modelId;
+      return this;
     }
 
     /**
-     * Sets the updatedLabels.
+     * Set the modelVersion.
      *
-     * @param updatedLabels the new updatedLabels
+     * @param modelVersion the modelVersion
+     * @return the FeedbackDataInput builder
      */
-    public void setUpdatedLabels(final UpdatedLabelsIn updatedLabels) {
-      this.updated_labels_serialized_name = updatedLabels;
+    public FeedbackDataInputBuilder setModelVersion(String modelVersion) {
+      this.modelVersion = modelVersion;
+      return this;
     }
 
+    /**
+     * Set the location.
+     *
+     * @param location the location
+     * @return the FeedbackDataInput builder
+     */
+    public FeedbackDataInputBuilder setLocation(Location location) {
+      this.location = location;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the FeedbackDataInput builder
+     */
+    public FeedbackDataInputBuilder setText(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the originalLabels.
+     *
+     * @param originalLabels the originalLabels
+     * @return the FeedbackDataInput builder
+     */
+    public FeedbackDataInputBuilder setOriginalLabels(OriginalLabelsIn originalLabels) {
+      this.originalLabels = originalLabels;
+      return this;
+    }
+
+    /**
+     * Set the updatedLabels.
+     *
+     * @param updatedLabels the updatedLabels
+     * @return the FeedbackDataInput builder
+     */
+    public FeedbackDataInputBuilder setUpdatedLabels(UpdatedLabelsIn updatedLabels) {
+      this.updatedLabels = updatedLabels;
+      return this;
+    }
   }
 
   /**
    * Information returned from the **Add Feedback** method.
    */
   public class FeedbackDataOutput extends IBMWatsonGenericModel {
-    private String feedback_type_serialized_name;
-    private ShortDoc document_serialized_name;
-    private String model_id_serialized_name;
-    private String model_version_serialized_name;
-    private Location location_serialized_name;
-    private String text_serialized_name;
-    private OriginalLabelsOut original_labels_serialized_name;
-    private UpdatedLabelsOut updated_labels_serialized_name;
-    private Pagination pagination_serialized_name;
+    private String feedbackType;
+    private ShortDoc document;
+    private String modelId;
+    private String modelVersion;
+    private Location location;
+    private String text;
+    private OriginalLabelsOut originalLabels;
+    private UpdatedLabelsOut updatedLabels;
+    private Pagination pagination;
  
     /**
      * Gets the feedbackType.
@@ -4895,7 +5391,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getFeedbackType() {
-      return feedback_type_serialized_name;
+      return feedbackType;
     }
  
     /**
@@ -4907,7 +5403,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public ShortDoc getDocument() {
-      return document_serialized_name;
+      return document;
     }
  
     /**
@@ -4919,7 +5415,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
  
     /**
@@ -4931,7 +5427,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModelVersion() {
-      return model_version_serialized_name;
+      return modelVersion;
     }
  
     /**
@@ -4944,7 +5440,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -4956,7 +5452,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -4968,7 +5464,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public OriginalLabelsOut getOriginalLabels() {
-      return original_labels_serialized_name;
+      return originalLabels;
     }
  
     /**
@@ -4980,7 +5476,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public UpdatedLabelsOut getUpdatedLabels() {
-      return updated_labels_serialized_name;
+      return updatedLabels;
     }
  
     /**
@@ -4992,7 +5488,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Pagination getPagination() {
-      return pagination_serialized_name;
+      return pagination;
     }
 
     /**
@@ -5001,7 +5497,7 @@ public class IBMCompareComplyV1Models {
      * @param feedbackType the new feedbackType
      */
     public void setFeedbackType(final String feedbackType) {
-      this.feedback_type_serialized_name = feedbackType;
+      this.feedbackType = feedbackType;
     }
 
     /**
@@ -5010,7 +5506,7 @@ public class IBMCompareComplyV1Models {
      * @param document the new document
      */
     public void setDocument(final ShortDoc document) {
-      this.document_serialized_name = document;
+      this.document = document;
     }
 
     /**
@@ -5019,7 +5515,7 @@ public class IBMCompareComplyV1Models {
      * @param modelId the new modelId
      */
     public void setModelId(final String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -5028,7 +5524,7 @@ public class IBMCompareComplyV1Models {
      * @param modelVersion the new modelVersion
      */
     public void setModelVersion(final String modelVersion) {
-      this.model_version_serialized_name = modelVersion;
+      this.modelVersion = modelVersion;
     }
 
     /**
@@ -5037,7 +5533,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -5046,7 +5542,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -5055,7 +5551,7 @@ public class IBMCompareComplyV1Models {
      * @param originalLabels the new originalLabels
      */
     public void setOriginalLabels(final OriginalLabelsOut originalLabels) {
-      this.original_labels_serialized_name = originalLabels;
+      this.originalLabels = originalLabels;
     }
 
     /**
@@ -5064,7 +5560,7 @@ public class IBMCompareComplyV1Models {
      * @param updatedLabels the new updatedLabels
      */
     public void setUpdatedLabels(final UpdatedLabelsOut updatedLabels) {
-      this.updated_labels_serialized_name = updatedLabels;
+      this.updatedLabels = updatedLabels;
     }
 
     /**
@@ -5073,7 +5569,7 @@ public class IBMCompareComplyV1Models {
      * @param pagination the new pagination
      */
     public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
+      this.pagination = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5084,26 +5580,48 @@ public class IBMCompareComplyV1Models {
       FeedbackDataOutput ret = (FeedbackDataOutput) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document
-      ShortDoc newDocument = (ShortDoc) new ShortDoc().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document_serialized_name'), ShortDoc.class);
+      ShortDoc newDocument = (ShortDoc) new ShortDoc().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document'), ShortDoc.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for originalLabels
-      OriginalLabelsOut newOriginalLabels = (OriginalLabelsOut) new OriginalLabelsOut().deserialize(JSON.serialize(ret.getOriginalLabels()), (Map<String, Object>) jsonMap.get('original_labels_serialized_name'), OriginalLabelsOut.class);
+      OriginalLabelsOut newOriginalLabels = (OriginalLabelsOut) new OriginalLabelsOut().deserialize(JSON.serialize(ret.getOriginalLabels()), (Map<String, Object>) jsonMap.get('originalLabels'), OriginalLabelsOut.class);
       ret.setOriginalLabels(newOriginalLabels);
 
       // calling custom deserializer for updatedLabels
-      UpdatedLabelsOut newUpdatedLabels = (UpdatedLabelsOut) new UpdatedLabelsOut().deserialize(JSON.serialize(ret.getUpdatedLabels()), (Map<String, Object>) jsonMap.get('updated_labels_serialized_name'), UpdatedLabelsOut.class);
+      UpdatedLabelsOut newUpdatedLabels = (UpdatedLabelsOut) new UpdatedLabelsOut().deserialize(JSON.serialize(ret.getUpdatedLabels()), (Map<String, Object>) jsonMap.get('updatedLabels'), UpdatedLabelsOut.class);
       ret.setUpdatedLabels(newUpdatedLabels);
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('feedback_type', 'feedbackType');
+      mapping.put('model_id', 'modelId');
+      mapping.put('model_version', 'modelVersion');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      mapping.put('original_labels', 'originalLabels');
+      if (originalLabels != null) {
+        mapping.putAll(originalLabels.getApiToSdkMapping());
+      }
+      mapping.put('updated_labels', 'updatedLabels');
+      if (updatedLabels != null) {
+        mapping.putAll(updatedLabels.getApiToSdkMapping());
+      }
+      if (pagination != null) {
+        mapping.putAll(pagination.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5111,7 +5629,7 @@ public class IBMCompareComplyV1Models {
    * The results of a successful **List Feedback** request for all feedback.
    */
   public class FeedbackList extends IBMWatsonResponseModel {
-    private List<GetFeedback> feedback_serialized_name;
+    private List<GetFeedback> feedback;
  
     /**
      * Gets the feedback.
@@ -5122,7 +5640,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<GetFeedback> getFeedback() {
-      return feedback_serialized_name;
+      return feedback;
     }
 
     /**
@@ -5131,7 +5649,7 @@ public class IBMCompareComplyV1Models {
      * @param feedback the new feedback
      */
     public void setFeedback(final List<GetFeedback> feedback) {
-      this.feedback_serialized_name = feedback;
+      this.feedback = feedback;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5147,14 +5665,22 @@ public class IBMCompareComplyV1Models {
       if (deserializedFeedback != null) {
         for (Integer i = 0; i < deserializedFeedback.size(); i++) {
           GetFeedback currentItem = ret.getFeedback().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('feedback_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('feedback');
           GetFeedback newItem = (GetFeedback) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), GetFeedback.class);
           newFeedback.add(newItem);
         }
-        ret.feedback_serialized_name = newFeedback;
+        ret.feedback = newFeedback;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (feedback != null && feedback[0] != null) {
+        mapping.putAll(feedback[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5162,11 +5688,11 @@ public class IBMCompareComplyV1Models {
    * Information about the document and the submitted feedback.
    */
   public class FeedbackReturn extends IBMWatsonResponseModel {
-    private String feedback_id_serialized_name;
-    private String user_id_serialized_name;
-    private String comment_serialized_name;
-    private Datetime created_serialized_name;
-    private FeedbackDataOutput feedback_data_serialized_name;
+    private String feedbackId;
+    private String userId;
+    private String comment;
+    private Datetime created;
+    private FeedbackDataOutput feedbackData;
  
     /**
      * Gets the feedbackId.
@@ -5177,7 +5703,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getFeedbackId() {
-      return feedback_id_serialized_name;
+      return feedbackId;
     }
  
     /**
@@ -5189,7 +5715,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getUserId() {
-      return user_id_serialized_name;
+      return userId;
     }
  
     /**
@@ -5201,7 +5727,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getComment() {
-      return comment_serialized_name;
+      return comment;
     }
  
     /**
@@ -5213,7 +5739,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -5225,7 +5751,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public FeedbackDataOutput getFeedbackData() {
-      return feedback_data_serialized_name;
+      return feedbackData;
     }
 
     /**
@@ -5234,7 +5760,7 @@ public class IBMCompareComplyV1Models {
      * @param feedbackId the new feedbackId
      */
     public void setFeedbackId(final String feedbackId) {
-      this.feedback_id_serialized_name = feedbackId;
+      this.feedbackId = feedbackId;
     }
 
     /**
@@ -5243,7 +5769,7 @@ public class IBMCompareComplyV1Models {
      * @param userId the new userId
      */
     public void setUserId(final String userId) {
-      this.user_id_serialized_name = userId;
+      this.userId = userId;
     }
 
     /**
@@ -5252,7 +5778,7 @@ public class IBMCompareComplyV1Models {
      * @param comment the new comment
      */
     public void setComment(final String comment) {
-      this.comment_serialized_name = comment;
+      this.comment = comment;
     }
 
     /**
@@ -5261,7 +5787,7 @@ public class IBMCompareComplyV1Models {
      * @param created the new created
      */
     public void setCreated(final Datetime created) {
-      this.created_serialized_name = created;
+      this.created = created;
     }
 
     /**
@@ -5270,7 +5796,7 @@ public class IBMCompareComplyV1Models {
      * @param feedbackData the new feedbackData
      */
     public void setFeedbackData(final FeedbackDataOutput feedbackData) {
-      this.feedback_data_serialized_name = feedbackData;
+      this.feedbackData = feedbackData;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5281,10 +5807,21 @@ public class IBMCompareComplyV1Models {
       FeedbackReturn ret = (FeedbackReturn) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for feedbackData
-      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(ret.getFeedbackData()), (Map<String, Object>) jsonMap.get('feedback_data_serialized_name'), FeedbackDataOutput.class);
+      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(ret.getFeedbackData()), (Map<String, Object>) jsonMap.get('feedbackData'), FeedbackDataOutput.class);
       ret.setFeedbackData(newFeedbackData);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('feedback_id', 'feedbackId');
+      mapping.put('user_id', 'userId');
+      mapping.put('feedback_data', 'feedbackData');
+      if (feedbackData != null) {
+        mapping.putAll(feedbackData.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5293,7 +5830,7 @@ public class IBMCompareComplyV1Models {
    */
   public class GetBatchOptions extends IBMWatsonOptionsModel {
     private String batchId;
- 
+
     /**
      * Gets the batchId.
      *
@@ -5320,6 +5857,11 @@ public class IBMCompareComplyV1Models {
       return new GetBatchOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('batchId', 'batch_id');
+      return mapping;
+    }
   }
 
   /**
@@ -5385,10 +5927,10 @@ public class IBMCompareComplyV1Models {
    * The results of a successful **Get Feedback** request for a single feedback entry.
    */
   public class GetFeedback extends IBMWatsonResponseModel {
-    private String feedback_id_serialized_name;
-    private Datetime created_serialized_name;
-    private String comment_serialized_name;
-    private FeedbackDataOutput feedback_data_serialized_name;
+    private String feedbackId;
+    private Datetime created;
+    private String comment;
+    private FeedbackDataOutput feedbackData;
  
     /**
      * Gets the feedbackId.
@@ -5399,7 +5941,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getFeedbackId() {
-      return feedback_id_serialized_name;
+      return feedbackId;
     }
  
     /**
@@ -5411,7 +5953,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
  
     /**
@@ -5423,7 +5965,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getComment() {
-      return comment_serialized_name;
+      return comment;
     }
  
     /**
@@ -5435,7 +5977,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public FeedbackDataOutput getFeedbackData() {
-      return feedback_data_serialized_name;
+      return feedbackData;
     }
 
     /**
@@ -5444,7 +5986,7 @@ public class IBMCompareComplyV1Models {
      * @param feedbackId the new feedbackId
      */
     public void setFeedbackId(final String feedbackId) {
-      this.feedback_id_serialized_name = feedbackId;
+      this.feedbackId = feedbackId;
     }
 
     /**
@@ -5453,7 +5995,7 @@ public class IBMCompareComplyV1Models {
      * @param created the new created
      */
     public void setCreated(final Datetime created) {
-      this.created_serialized_name = created;
+      this.created = created;
     }
 
     /**
@@ -5462,7 +6004,7 @@ public class IBMCompareComplyV1Models {
      * @param comment the new comment
      */
     public void setComment(final String comment) {
-      this.comment_serialized_name = comment;
+      this.comment = comment;
     }
 
     /**
@@ -5471,7 +6013,7 @@ public class IBMCompareComplyV1Models {
      * @param feedbackData the new feedbackData
      */
     public void setFeedbackData(final FeedbackDataOutput feedbackData) {
-      this.feedback_data_serialized_name = feedbackData;
+      this.feedbackData = feedbackData;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5482,10 +6024,20 @@ public class IBMCompareComplyV1Models {
       GetFeedback ret = (GetFeedback) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for feedbackData
-      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(ret.getFeedbackData()), (Map<String, Object>) jsonMap.get('feedback_data_serialized_name'), FeedbackDataOutput.class);
+      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(ret.getFeedbackData()), (Map<String, Object>) jsonMap.get('feedbackData'), FeedbackDataOutput.class);
       ret.setFeedbackData(newFeedbackData);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('feedback_id', 'feedbackId');
+      mapping.put('feedback_data', 'feedbackData');
+      if (feedbackData != null) {
+        mapping.putAll(feedbackData.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5495,7 +6047,7 @@ public class IBMCompareComplyV1Models {
   public class GetFeedbackOptions extends IBMWatsonOptionsModel {
     private String feedbackId;
     private String model;
- 
+
     /**
      * Gets the feedbackId.
      *
@@ -5506,7 +6058,7 @@ public class IBMCompareComplyV1Models {
     public String feedbackId() {
       return feedbackId;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -5536,6 +6088,11 @@ public class IBMCompareComplyV1Models {
       return new GetFeedbackOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('feedbackId', 'feedback_id');
+      return mapping;
+    }
   }
 
   /**
@@ -5614,11 +6171,11 @@ public class IBMCompareComplyV1Models {
    * The HTML converted from an input document.
    */
   public class HTMLReturn extends IBMWatsonResponseModel {
-    private String num_pages_serialized_name;
-    private String author_serialized_name;
-    private String publication_date_serialized_name;
-    private String title_serialized_name;
-    private String html_serialized_name;
+    private String numPages;
+    private String author;
+    private String publicationDate;
+    private String title;
+    private String html;
  
     /**
      * Gets the numPages.
@@ -5629,7 +6186,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getNumPages() {
-      return num_pages_serialized_name;
+      return numPages;
     }
  
     /**
@@ -5641,7 +6198,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getAuthor() {
-      return author_serialized_name;
+      return author;
     }
  
     /**
@@ -5653,7 +6210,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getPublicationDate() {
-      return publication_date_serialized_name;
+      return publicationDate;
     }
  
     /**
@@ -5665,7 +6222,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -5677,7 +6234,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getHtml() {
-      return html_serialized_name;
+      return html;
     }
 
     /**
@@ -5686,7 +6243,7 @@ public class IBMCompareComplyV1Models {
      * @param numPages the new numPages
      */
     public void setNumPages(final String numPages) {
-      this.num_pages_serialized_name = numPages;
+      this.numPages = numPages;
     }
 
     /**
@@ -5695,7 +6252,7 @@ public class IBMCompareComplyV1Models {
      * @param author the new author
      */
     public void setAuthor(final String author) {
-      this.author_serialized_name = author;
+      this.author = author;
     }
 
     /**
@@ -5704,7 +6261,7 @@ public class IBMCompareComplyV1Models {
      * @param publicationDate the new publicationDate
      */
     public void setPublicationDate(final String publicationDate) {
-      this.publication_date_serialized_name = publicationDate;
+      this.publicationDate = publicationDate;
     }
 
     /**
@@ -5713,7 +6270,7 @@ public class IBMCompareComplyV1Models {
      * @param title the new title
      */
     public void setTitle(final String title) {
-      this.title_serialized_name = title;
+      this.title = title;
     }
 
     /**
@@ -5722,9 +6279,15 @@ public class IBMCompareComplyV1Models {
      * @param html the new html
      */
     public void setHtml(final String html) {
-      this.html_serialized_name = html;
+      this.html = html;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('num_pages', 'numPages');
+      mapping.put('publication_date', 'publicationDate');
+      return mapping;
+    }
   }
 
   /**
@@ -5732,9 +6295,9 @@ public class IBMCompareComplyV1Models {
    * only if normalized text exists.
    */
   public class Interpretation extends IBMWatsonGenericModel {
-    private String value_serialized_name;
-    private Double numeric_value_serialized_name;
-    private String unit_serialized_name;
+    private String value;
+    private Double numericValue;
+    private String unit;
  
     /**
      * Gets the value.
@@ -5745,7 +6308,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getValue() {
-      return value_serialized_name;
+      return value;
     }
  
     /**
@@ -5757,7 +6320,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Double getNumericValue() {
-      return numeric_value_serialized_name;
+      return numericValue;
     }
  
     /**
@@ -5773,7 +6336,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getUnit() {
-      return unit_serialized_name;
+      return unit;
     }
 
     /**
@@ -5782,7 +6345,7 @@ public class IBMCompareComplyV1Models {
      * @param value the new value
      */
     public void setValue(final String value) {
-      this.value_serialized_name = value;
+      this.value = value;
     }
 
     /**
@@ -5791,7 +6354,7 @@ public class IBMCompareComplyV1Models {
      * @param numericValue the new numericValue
      */
     public void setNumericValue(final Double numericValue) {
-      this.numeric_value_serialized_name = numericValue;
+      this.numericValue = numericValue;
     }
 
     /**
@@ -5800,18 +6363,23 @@ public class IBMCompareComplyV1Models {
      * @param unit the new unit
      */
     public void setUnit(final String unit) {
-      this.unit_serialized_name = unit;
+      this.unit = unit;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('numeric_value', 'numericValue');
+      return mapping;
+    }
   }
 
   /**
    * A key in a key-value pair.
    */
   public class Key extends IBMWatsonGenericModel {
-    private String cell_id_serialized_name;
-    private Location location_serialized_name;
-    private String text_serialized_name;
+    private String cellId;
+    private Location location;
+    private String text;
  
     /**
      * Gets the cellId.
@@ -5822,7 +6390,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getCellId() {
-      return cell_id_serialized_name;
+      return cellId;
     }
  
     /**
@@ -5835,7 +6403,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -5847,7 +6415,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
 
     /**
@@ -5856,7 +6424,7 @@ public class IBMCompareComplyV1Models {
      * @param cellId the new cellId
      */
     public void setCellId(final String cellId) {
-      this.cell_id_serialized_name = cellId;
+      this.cellId = cellId;
     }
 
     /**
@@ -5865,7 +6433,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -5874,7 +6442,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5885,10 +6453,19 @@ public class IBMCompareComplyV1Models {
       Key ret = (Key) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('cell_id', 'cellId');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5896,8 +6473,8 @@ public class IBMCompareComplyV1Models {
    * Key-value pairs detected across cell boundaries.
    */
   public class KeyValuePair extends IBMWatsonGenericModel {
-    private Key key_serialized_name;
-    private Value value_serialized_name;
+    private Key key;
+    private Value value;
  
     /**
      * Gets the key.
@@ -5908,7 +6485,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Key getKey() {
-      return key_serialized_name;
+      return key;
     }
  
     /**
@@ -5920,7 +6497,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Value getValue() {
-      return value_serialized_name;
+      return value;
     }
 
     /**
@@ -5929,7 +6506,7 @@ public class IBMCompareComplyV1Models {
      * @param key the new key
      */
     public void setKey(final Key key) {
-      this.key_serialized_name = key;
+      this.key = key;
     }
 
     /**
@@ -5938,7 +6515,7 @@ public class IBMCompareComplyV1Models {
      * @param value the new value
      */
     public void setValue(final Value value) {
-      this.value_serialized_name = value;
+      this.value = value;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5949,14 +6526,25 @@ public class IBMCompareComplyV1Models {
       KeyValuePair ret = (KeyValuePair) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for key
-      Key newKey = (Key) new Key().deserialize(JSON.serialize(ret.getKey()), (Map<String, Object>) jsonMap.get('key_serialized_name'), Key.class);
+      Key newKey = (Key) new Key().deserialize(JSON.serialize(ret.getKey()), (Map<String, Object>) jsonMap.get('key'), Key.class);
       ret.setKey(newKey);
 
       // calling custom deserializer for value
-      Value newValue = (Value) new Value().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), Value.class);
+      Value newValue = (Value) new Value().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value'), Value.class);
       ret.setValue(newValue);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (key != null) {
+        mapping.putAll(key.getApiToSdkMapping());
+      }
+      if (value != null) {
+        mapping.putAll(value.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -5965,8 +6553,14 @@ public class IBMCompareComplyV1Models {
    * `party`, and the `party` object identifies the affected party.
    */
   public class Label extends IBMWatsonGenericModel {
-    private String nature_serialized_name;
-    private String party_serialized_name;
+    private String nature;
+    private String party;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Label() { }
  
     /**
      * Gets the nature.
@@ -5977,7 +6571,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getNature() {
-      return nature_serialized_name;
+      return nature;
     }
  
     /**
@@ -5989,36 +6583,94 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getParty() {
-      return party_serialized_name;
+      return party;
+    }
+  
+    private Label(LabelBuilder builder) {
+      IBMWatsonValidator.notNull(builder.nature, 'nature cannot be null');
+      IBMWatsonValidator.notNull(builder.party, 'party cannot be null');
+      this.nature = builder.nature;
+      this.party = builder.party;
     }
 
     /**
-     * Sets the nature.
+     * New builder.
      *
-     * @param nature the new nature
+     * @return a Label builder
      */
-    public void setNature(final String nature) {
-      this.nature_serialized_name = nature;
+    public LabelBuilder newBuilder() {
+      return new LabelBuilder(this);
+    }
+  }
+
+  /**
+   * Label Builder.
+   */
+  public class LabelBuilder {
+    private String nature;
+    private String party;
+
+    private LabelBuilder(Label label) {
+      this.nature = label.nature;
+      this.party = label.party;
     }
 
     /**
-     * Sets the party.
-     *
-     * @param party the new party
+     * Instantiates a new builder.
      */
-    public void setParty(final String party) {
-      this.party_serialized_name = party;
+    public LabelBuilder() {
     }
 
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param nature the nature
+     * @param party the party
+     */
+    public LabelBuilder(String nature, String party) {
+      this.nature = nature;
+      this.party = party;
+    }
+
+    /**
+     * Builds a Label.
+     *
+     * @return the label
+     */
+    public Label build() {
+      return new Label(this);
+    }
+
+    /**
+     * Set the nature.
+     *
+     * @param nature the nature
+     * @return the Label builder
+     */
+    public LabelBuilder setNature(String nature) {
+      this.nature = nature;
+      return this;
+    }
+
+    /**
+     * Set the party.
+     *
+     * @param party the party
+     * @return the Label builder
+     */
+    public LabelBuilder setParty(String party) {
+      this.party = party;
+      return this;
+    }
   }
 
   /**
    * The leading sentences in a section or subsection of the input document.
    */
   public class LeadingSentence extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private Location location_serialized_name;
-    private List<ElementLocations> element_locations_serialized_name;
+    private String text;
+    private Location location;
+    private List<ElementLocations> elementLocations;
  
     /**
      * Gets the text.
@@ -6029,7 +6681,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -6042,7 +6694,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -6054,7 +6706,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ElementLocations> getElementLocations() {
-      return element_locations_serialized_name;
+      return elementLocations;
     }
 
     /**
@@ -6063,7 +6715,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -6072,7 +6724,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -6081,7 +6733,7 @@ public class IBMCompareComplyV1Models {
      * @param elementLocations the new elementLocations
      */
     public void setElementLocations(final List<ElementLocations> elementLocations) {
-      this.element_locations_serialized_name = elementLocations;
+      this.elementLocations = elementLocations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6092,7 +6744,7 @@ public class IBMCompareComplyV1Models {
       LeadingSentence ret = (LeadingSentence) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for elementLocations
@@ -6101,14 +6753,26 @@ public class IBMCompareComplyV1Models {
       if (deserializedElementLocations != null) {
         for (Integer i = 0; i < deserializedElementLocations.size(); i++) {
           ElementLocations currentItem = ret.getElementLocations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('element_locations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('elementLocations');
           ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
           newElementLocations.add(newItem);
         }
-        ret.element_locations_serialized_name = newElementLocations;
+        ret.elementLocations = newElementLocations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      mapping.put('element_locations', 'elementLocations');
+      if (elementLocations != null && elementLocations[0] != null) {
+        mapping.putAll(elementLocations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -6129,7 +6793,6 @@ public class IBMCompareComplyV1Models {
     public ListBatchesOptionsBuilder newBuilder() {
       return new ListBatchesOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -6189,7 +6852,7 @@ public class IBMCompareComplyV1Models {
     private String cursor;
     private String xsort;
     private Boolean includeTotal;
- 
+
     /**
      * Gets the feedbackType.
      *
@@ -6201,7 +6864,7 @@ public class IBMCompareComplyV1Models {
     public String feedbackType() {
       return feedbackType;
     }
- 
+
     /**
      * Gets the before.
      *
@@ -6213,7 +6876,7 @@ public class IBMCompareComplyV1Models {
     public Datetime before() {
       return before;
     }
- 
+
     /**
      * Gets the after.
      *
@@ -6225,7 +6888,7 @@ public class IBMCompareComplyV1Models {
     public Datetime after() {
       return after;
     }
- 
+
     /**
      * Gets the documentTitle.
      *
@@ -6237,7 +6900,7 @@ public class IBMCompareComplyV1Models {
     public String documentTitle() {
       return documentTitle;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -6249,7 +6912,7 @@ public class IBMCompareComplyV1Models {
     public String modelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the modelVersion.
      *
@@ -6260,7 +6923,7 @@ public class IBMCompareComplyV1Models {
     public String modelVersion() {
       return modelVersion;
     }
- 
+
     /**
      * Gets the categoryRemoved.
      *
@@ -6272,7 +6935,7 @@ public class IBMCompareComplyV1Models {
     public String categoryRemoved() {
       return categoryRemoved;
     }
- 
+
     /**
      * Gets the categoryAdded.
      *
@@ -6284,7 +6947,7 @@ public class IBMCompareComplyV1Models {
     public String categoryAdded() {
       return categoryAdded;
     }
- 
+
     /**
      * Gets the categoryNotChanged.
      *
@@ -6296,7 +6959,7 @@ public class IBMCompareComplyV1Models {
     public String categoryNotChanged() {
       return categoryNotChanged;
     }
- 
+
     /**
      * Gets the typeRemoved.
      *
@@ -6308,7 +6971,7 @@ public class IBMCompareComplyV1Models {
     public String typeRemoved() {
       return typeRemoved;
     }
- 
+
     /**
      * Gets the typeAdded.
      *
@@ -6320,7 +6983,7 @@ public class IBMCompareComplyV1Models {
     public String typeAdded() {
       return typeAdded;
     }
- 
+
     /**
      * Gets the typeNotChanged.
      *
@@ -6332,7 +6995,7 @@ public class IBMCompareComplyV1Models {
     public String typeNotChanged() {
       return typeNotChanged;
     }
- 
+
     /**
      * Gets the pageLimit.
      *
@@ -6343,7 +7006,7 @@ public class IBMCompareComplyV1Models {
     public Long pageLimit() {
       return pageLimit;
     }
- 
+
     /**
      * Gets the cursor.
      *
@@ -6355,7 +7018,7 @@ public class IBMCompareComplyV1Models {
     public String cursor() {
       return cursor;
     }
- 
+
     /**
      * Gets the xsort.
      *
@@ -6368,7 +7031,7 @@ public class IBMCompareComplyV1Models {
     public String xsort() {
       return xsort;
     }
- 
+
     /**
      * Gets the includeTotal.
      *
@@ -6410,6 +7073,23 @@ public class IBMCompareComplyV1Models {
       return new ListFeedbackOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('feedbackType', 'feedback_type');
+      mapping.put('documentTitle', 'document_title');
+      mapping.put('modelId', 'model_id');
+      mapping.put('modelVersion', 'model_version');
+      mapping.put('categoryRemoved', 'category_removed');
+      mapping.put('categoryAdded', 'category_added');
+      mapping.put('categoryNotChanged', 'category_not_changed');
+      mapping.put('typeRemoved', 'type_removed');
+      mapping.put('typeAdded', 'type_added');
+      mapping.put('typeNotChanged', 'type_not_changed');
+      mapping.put('pageLimit', 'page_limit');
+      mapping.put('xsort', 'sort');
+      mapping.put('includeTotal', 'include_total');
+      return mapping;
+    }
   }
 
   /**
@@ -6662,8 +7342,14 @@ public class IBMCompareComplyV1Models {
    * `end`.
    */
   public class Location extends IBMWatsonGenericModel {
-    private Long begin_serialized_name;
-    private Long end_serialized_name;
+    private Long xbegin;
+    private Long xend;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Location() { }
  
     /**
      * Gets the xbegin.
@@ -6674,7 +7360,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getXbegin() {
-      return begin_serialized_name;
+      return xbegin;
     }
  
     /**
@@ -6686,35 +7372,107 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getXend() {
-      return end_serialized_name;
+      return xend;
+    }
+  
+    private Location(LocationBuilder builder) {
+      IBMWatsonValidator.notNull(builder.xbegin, 'xbegin cannot be null');
+      IBMWatsonValidator.notNull(builder.xend, 'xend cannot be null');
+      this.xbegin = builder.xbegin;
+      this.xend = builder.xend;
     }
 
     /**
-     * Sets the xbegin.
+     * New builder.
      *
-     * @param xbegin the new xbegin
+     * @return a Location builder
      */
-    public void setXbegin(final long xbegin) {
-      this.begin_serialized_name = xbegin;
+    public LocationBuilder newBuilder() {
+      return new LocationBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('xbegin', 'begin');
+      mapping.put('xend', 'end');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('begin', 'xbegin');
+      mapping.put('end', 'xend');
+      return mapping;
+    }
+  }
+
+  /**
+   * Location Builder.
+   */
+  public class LocationBuilder {
+    private Long xbegin;
+    private Long xend;
+
+    private LocationBuilder(Location location) {
+      this.xbegin = location.xbegin;
+      this.xend = location.xend;
     }
 
     /**
-     * Sets the xend.
-     *
-     * @param xend the new xend
+     * Instantiates a new builder.
      */
-    public void setXend(final long xend) {
-      this.end_serialized_name = xend;
+    public LocationBuilder() {
     }
 
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param xbegin the xbegin
+     * @param xend the xend
+     */
+    public LocationBuilder(Long xbegin, Long xend) {
+      this.xbegin = xbegin;
+      this.xend = xend;
+    }
+
+    /**
+     * Builds a Location.
+     *
+     * @return the location
+     */
+    public Location build() {
+      return new Location(this);
+    }
+
+    /**
+     * Set the xbegin.
+     *
+     * @param xbegin the xbegin
+     * @return the Location builder
+     */
+    public LocationBuilder setXbegin(Long xbegin) {
+      this.xbegin = xbegin;
+      return this;
+    }
+
+    /**
+     * Set the xend.
+     *
+     * @param xend the xend
+     * @return the Location builder
+     */
+    public LocationBuilder setXend(Long xend) {
+      this.xend = xend;
+      return this;
+    }
   }
 
   /**
    * A mention of a party.
    */
   public class Mention extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private Location location_serialized_name;
+    private String text;
+    private Location location;
  
     /**
      * Gets the text.
@@ -6725,7 +7483,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -6738,7 +7496,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -6747,7 +7505,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -6756,7 +7514,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6767,19 +7525,27 @@ public class IBMCompareComplyV1Models {
       Mention ret = (Mention) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
   /**
    * The original labeling from the input document, without the submitted feedback.
    */
-  public class OriginalLabelsIn {
-    private List<TypeLabel> types_serialized_name;
-    private List<Category> categories_serialized_name;
+  public class OriginalLabelsIn extends IBMWatsonGenericModel {
+    private List<TypeLabel> types;
+    private List<Category> categories;
  
     /**
      * Gets the types.
@@ -6789,7 +7555,7 @@ public class IBMCompareComplyV1Models {
      * @return the types
      */
     public List<TypeLabel> getTypes() {
-      return types_serialized_name;
+      return types;
     }
  
     /**
@@ -6800,36 +7566,137 @@ public class IBMCompareComplyV1Models {
      * @return the categories
      */
     public List<Category> getCategories() {
-      return categories_serialized_name;
+      return categories;
+    }
+  
+    private OriginalLabelsIn(OriginalLabelsInBuilder builder) {
+      IBMWatsonValidator.notNull(builder.types, 'types cannot be null');
+      IBMWatsonValidator.notNull(builder.categories, 'categories cannot be null');
+      this.types = builder.types;
+      this.categories = builder.categories;
     }
 
     /**
-     * Sets the types.
+     * New builder.
+     *
+     * @return a OriginalLabelsIn builder
+     */
+    public OriginalLabelsInBuilder newBuilder() {
+      return new OriginalLabelsInBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (types != null && types[0] != null) {
+        mapping.putAll(types[0].getSdkToApiMapping());
+      }
+      if (categories != null && categories[0] != null) {
+        mapping.putAll(categories[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * OriginalLabelsIn Builder.
+   */
+  public class OriginalLabelsInBuilder {
+    private List<TypeLabel> types;
+    private List<Category> categories;
+
+    private OriginalLabelsInBuilder(OriginalLabelsIn originalLabelsIn) {
+      this.types = originalLabelsIn.types;
+      this.categories = originalLabelsIn.categories;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public OriginalLabelsInBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param types the types
+     * @param categories the categories
+     */
+    public OriginalLabelsInBuilder(List<TypeLabel> types, List<Category> categories) {
+      this.types = types;
+      this.categories = categories;
+    }
+
+    /**
+     * Builds a OriginalLabelsIn.
+     *
+     * @return the originalLabelsIn
+     */
+    public OriginalLabelsIn build() {
+      return new OriginalLabelsIn(this);
+    }
+
+    /**
+     * Adds an types to types.
      *
      * @param types the new types
+     * @return the OriginalLabelsIn builder
      */
-    public void setTypes(final List<TypeLabel> types) {
-      this.types_serialized_name = types;
+    public OriginalLabelsInBuilder addTypes(TypeLabel types) {
+      IBMWatsonValidator.notNull(types, 'types cannot be null');
+      if (this.types == null) {
+        this.types = new List<TypeLabel>();
+      }
+      this.types.add(types);
+      return this;
     }
 
     /**
-     * Sets the categories.
+     * Adds an categories to categories.
      *
      * @param categories the new categories
+     * @return the OriginalLabelsIn builder
      */
-    public void setCategories(final List<Category> categories) {
-      this.categories_serialized_name = categories;
+    public OriginalLabelsInBuilder addCategories(Category categories) {
+      IBMWatsonValidator.notNull(categories, 'categories cannot be null');
+      if (this.categories == null) {
+        this.categories = new List<Category>();
+      }
+      this.categories.add(categories);
+      return this;
     }
 
+    /**
+     * Set the types.
+     * Existing types will be replaced.
+     *
+     * @param types the types
+     * @return the OriginalLabelsIn builder
+     */
+    public OriginalLabelsInBuilder setTypes(List<TypeLabel> types) {
+      this.types = types;
+      return this;
+    }
+
+    /**
+     * Set the categories.
+     * Existing categories will be replaced.
+     *
+     * @param categories the categories
+     * @return the OriginalLabelsIn builder
+     */
+    public OriginalLabelsInBuilder setCategories(List<Category> categories) {
+      this.categories = categories;
+      return this;
+    }
   }
 
   /**
    * The original labeling from the input document, without the submitted feedback.
    */
   public class OriginalLabelsOut extends IBMWatsonGenericModel {
-    private List<TypeLabel> types_serialized_name;
-    private List<Category> categories_serialized_name;
-    private String modification_serialized_name;
+    private List<TypeLabel> types;
+    private List<Category> categories;
+    private String modification;
  
     /**
      * Gets the types.
@@ -6840,7 +7707,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<TypeLabel> getTypes() {
-      return types_serialized_name;
+      return types;
     }
  
     /**
@@ -6852,7 +7719,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Category> getCategories() {
-      return categories_serialized_name;
+      return categories;
     }
  
     /**
@@ -6865,7 +7732,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModification() {
-      return modification_serialized_name;
+      return modification;
     }
 
     /**
@@ -6874,7 +7741,7 @@ public class IBMCompareComplyV1Models {
      * @param types the new types
      */
     public void setTypes(final List<TypeLabel> types) {
-      this.types_serialized_name = types;
+      this.types = types;
     }
 
     /**
@@ -6883,7 +7750,7 @@ public class IBMCompareComplyV1Models {
      * @param categories the new categories
      */
     public void setCategories(final List<Category> categories) {
-      this.categories_serialized_name = categories;
+      this.categories = categories;
     }
 
     /**
@@ -6892,7 +7759,7 @@ public class IBMCompareComplyV1Models {
      * @param modification the new modification
      */
     public void setModification(final String modification) {
-      this.modification_serialized_name = modification;
+      this.modification = modification;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6908,11 +7775,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedTypes != null) {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('types_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('types');
           TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
-        ret.types_serialized_name = newTypes;
+        ret.types = newTypes;
       }
 
       // calling custom deserializer for categories
@@ -6921,14 +7788,25 @@ public class IBMCompareComplyV1Models {
       if (deserializedCategories != null) {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('categories_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
           Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
-        ret.categories_serialized_name = newCategories;
+        ret.categories = newCategories;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (types != null && types[0] != null) {
+        mapping.putAll(types[0].getApiToSdkMapping());
+      }
+      if (categories != null && categories[0] != null) {
+        mapping.putAll(categories[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -6936,11 +7814,11 @@ public class IBMCompareComplyV1Models {
    * Pagination details, if required by the length of the output.
    */
   public class Pagination extends IBMWatsonGenericModel {
-    private String refresh_cursor_serialized_name;
-    private String next_cursor_serialized_name;
-    private String refresh_url_serialized_name;
-    private String next_url_serialized_name;
-    private Long total_serialized_name;
+    private String refreshCursor;
+    private String nextCursor;
+    private String refreshUrl;
+    private String nextUrl;
+    private Long total;
  
     /**
      * Gets the refreshCursor.
@@ -6951,7 +7829,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getRefreshCursor() {
-      return refresh_cursor_serialized_name;
+      return refreshCursor;
     }
  
     /**
@@ -6963,7 +7841,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getNextCursor() {
-      return next_cursor_serialized_name;
+      return nextCursor;
     }
  
     /**
@@ -6975,7 +7853,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getRefreshUrl() {
-      return refresh_url_serialized_name;
+      return refreshUrl;
     }
  
     /**
@@ -6987,7 +7865,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getNextUrl() {
-      return next_url_serialized_name;
+      return nextUrl;
     }
  
     /**
@@ -6999,7 +7877,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getTotal() {
-      return total_serialized_name;
+      return total;
     }
 
     /**
@@ -7008,7 +7886,7 @@ public class IBMCompareComplyV1Models {
      * @param refreshCursor the new refreshCursor
      */
     public void setRefreshCursor(final String refreshCursor) {
-      this.refresh_cursor_serialized_name = refreshCursor;
+      this.refreshCursor = refreshCursor;
     }
 
     /**
@@ -7017,7 +7895,7 @@ public class IBMCompareComplyV1Models {
      * @param nextCursor the new nextCursor
      */
     public void setNextCursor(final String nextCursor) {
-      this.next_cursor_serialized_name = nextCursor;
+      this.nextCursor = nextCursor;
     }
 
     /**
@@ -7026,7 +7904,7 @@ public class IBMCompareComplyV1Models {
      * @param refreshUrl the new refreshUrl
      */
     public void setRefreshUrl(final String refreshUrl) {
-      this.refresh_url_serialized_name = refreshUrl;
+      this.refreshUrl = refreshUrl;
     }
 
     /**
@@ -7035,7 +7913,7 @@ public class IBMCompareComplyV1Models {
      * @param nextUrl the new nextUrl
      */
     public void setNextUrl(final String nextUrl) {
-      this.next_url_serialized_name = nextUrl;
+      this.nextUrl = nextUrl;
     }
 
     /**
@@ -7044,16 +7922,24 @@ public class IBMCompareComplyV1Models {
      * @param total the new total
      */
     public void setTotal(final long total) {
-      this.total_serialized_name = total;
+      this.total = total;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('refresh_cursor', 'refreshCursor');
+      mapping.put('next_cursor', 'nextCursor');
+      mapping.put('refresh_url', 'refreshUrl');
+      mapping.put('next_url', 'nextUrl');
+      return mapping;
+    }
   }
 
   /**
    * The locations of each paragraph in the input document.
    */
   public class Paragraphs extends IBMWatsonGenericModel {
-    private Location location_serialized_name;
+    private Location location;
  
     /**
      * Gets the location.
@@ -7065,7 +7951,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -7074,7 +7960,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7085,10 +7971,18 @@ public class IBMCompareComplyV1Models {
       Paragraphs ret = (Paragraphs) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7096,12 +7990,12 @@ public class IBMCompareComplyV1Models {
    * A party and its corresponding role, including address and contact information if identified.
    */
   public class Parties extends IBMWatsonGenericModel {
-    private String party_serialized_name;
-    private String role_serialized_name;
-    private String importance_serialized_name;
-    private List<Address> addresses_serialized_name;
-    private List<Contact> contacts_serialized_name;
-    private List<Mention> mentions_serialized_name;
+    private String party;
+    private String role;
+    private String importance;
+    private List<Address> addresses;
+    private List<Contact> contacts;
+    private List<Mention> mentions;
  
     /**
      * Gets the party.
@@ -7112,7 +8006,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getParty() {
-      return party_serialized_name;
+      return party;
     }
  
     /**
@@ -7124,7 +8018,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getRole() {
-      return role_serialized_name;
+      return role;
     }
  
     /**
@@ -7136,7 +8030,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getImportance() {
-      return importance_serialized_name;
+      return importance;
     }
  
     /**
@@ -7148,7 +8042,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Address> getAddresses() {
-      return addresses_serialized_name;
+      return addresses;
     }
  
     /**
@@ -7160,7 +8054,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Contact> getContacts() {
-      return contacts_serialized_name;
+      return contacts;
     }
  
     /**
@@ -7172,7 +8066,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Mention> getMentions() {
-      return mentions_serialized_name;
+      return mentions;
     }
 
     /**
@@ -7181,7 +8075,7 @@ public class IBMCompareComplyV1Models {
      * @param party the new party
      */
     public void setParty(final String party) {
-      this.party_serialized_name = party;
+      this.party = party;
     }
 
     /**
@@ -7190,7 +8084,7 @@ public class IBMCompareComplyV1Models {
      * @param role the new role
      */
     public void setRole(final String role) {
-      this.role_serialized_name = role;
+      this.role = role;
     }
 
     /**
@@ -7199,7 +8093,7 @@ public class IBMCompareComplyV1Models {
      * @param importance the new importance
      */
     public void setImportance(final String importance) {
-      this.importance_serialized_name = importance;
+      this.importance = importance;
     }
 
     /**
@@ -7208,7 +8102,7 @@ public class IBMCompareComplyV1Models {
      * @param addresses the new addresses
      */
     public void setAddresses(final List<Address> addresses) {
-      this.addresses_serialized_name = addresses;
+      this.addresses = addresses;
     }
 
     /**
@@ -7217,7 +8111,7 @@ public class IBMCompareComplyV1Models {
      * @param contacts the new contacts
      */
     public void setContacts(final List<Contact> contacts) {
-      this.contacts_serialized_name = contacts;
+      this.contacts = contacts;
     }
 
     /**
@@ -7226,7 +8120,7 @@ public class IBMCompareComplyV1Models {
      * @param mentions the new mentions
      */
     public void setMentions(final List<Mention> mentions) {
-      this.mentions_serialized_name = mentions;
+      this.mentions = mentions;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7242,11 +8136,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedAddresses != null) {
         for (Integer i = 0; i < deserializedAddresses.size(); i++) {
           Address currentItem = ret.getAddresses().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('addresses_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('addresses');
           Address newItem = (Address) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Address.class);
           newAddresses.add(newItem);
         }
-        ret.addresses_serialized_name = newAddresses;
+        ret.addresses = newAddresses;
       }
 
       // calling custom deserializer for contacts
@@ -7255,11 +8149,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedContacts != null) {
         for (Integer i = 0; i < deserializedContacts.size(); i++) {
           Contact currentItem = ret.getContacts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('contacts_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contacts');
           Contact newItem = (Contact) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contact.class);
           newContacts.add(newItem);
         }
-        ret.contacts_serialized_name = newContacts;
+        ret.contacts = newContacts;
       }
 
       // calling custom deserializer for mentions
@@ -7268,14 +8162,25 @@ public class IBMCompareComplyV1Models {
       if (deserializedMentions != null) {
         for (Integer i = 0; i < deserializedMentions.size(); i++) {
           Mention currentItem = ret.getMentions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('mentions_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('mentions');
           Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mention.class);
           newMentions.add(newItem);
         }
-        ret.mentions_serialized_name = newMentions;
+        ret.mentions = newMentions;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (addresses != null && addresses[0] != null) {
+        mapping.putAll(addresses[0].getApiToSdkMapping());
+      }
+      if (mentions != null && mentions[0] != null) {
+        mapping.putAll(mentions[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7283,12 +8188,12 @@ public class IBMCompareComplyV1Models {
    * The document's payment duration or durations.
    */
   public class PaymentTerms extends IBMWatsonGenericModel {
-    private String confidence_level_serialized_name;
-    private String text_serialized_name;
-    private String text_normalized_serialized_name;
-    private Interpretation interpretation_serialized_name;
-    private List<String> provenance_ids_serialized_name;
-    private Location location_serialized_name;
+    private String confidenceLevel;
+    private String text;
+    private String textNormalized;
+    private Interpretation interpretation;
+    private List<String> provenanceIds;
+    private Location location;
  
     /**
      * Gets the confidenceLevel.
@@ -7299,7 +8204,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+      return confidenceLevel;
     }
  
     /**
@@ -7311,7 +8216,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -7324,7 +8229,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
  
     /**
@@ -7337,7 +8242,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Interpretation getInterpretation() {
-      return interpretation_serialized_name;
+      return interpretation;
     }
  
     /**
@@ -7349,7 +8254,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
     }
  
     /**
@@ -7362,7 +8267,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -7371,7 +8276,7 @@ public class IBMCompareComplyV1Models {
      * @param confidenceLevel the new confidenceLevel
      */
     public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+      this.confidenceLevel = confidenceLevel;
     }
 
     /**
@@ -7380,7 +8285,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -7389,7 +8294,7 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
     /**
@@ -7398,7 +8303,7 @@ public class IBMCompareComplyV1Models {
      * @param interpretation the new interpretation
      */
     public void setInterpretation(final Interpretation interpretation) {
-      this.interpretation_serialized_name = interpretation;
+      this.interpretation = interpretation;
     }
 
     /**
@@ -7407,7 +8312,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the new provenanceIds
      */
     public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+      this.provenanceIds = provenanceIds;
     }
 
     /**
@@ -7416,7 +8321,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7427,14 +8332,28 @@ public class IBMCompareComplyV1Models {
       PaymentTerms ret = (PaymentTerms) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for interpretation
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation_serialized_name'), Interpretation.class);
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation'), Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('confidence_level', 'confidenceLevel');
+      mapping.put('text_normalized', 'textNormalized');
+      if (interpretation != null) {
+        mapping.putAll(interpretation.getApiToSdkMapping());
+      }
+      mapping.put('provenance_ids', 'provenanceIds');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7442,7 +8361,7 @@ public class IBMCompareComplyV1Models {
    * An array of values, each being the `id` value of a row header that is applicable to this body cell.
    */
   public class RowHeaderIds extends IBMWatsonGenericModel {
-    private String id_serialized_name;
+    private String id;
  
     /**
      * Gets the id.
@@ -7453,7 +8372,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getId() {
-      return id_serialized_name;
+      return id;
     }
 
     /**
@@ -7462,16 +8381,15 @@ public class IBMCompareComplyV1Models {
      * @param id the new id
      */
     public void setId(final String id) {
-      this.id_serialized_name = id;
+      this.id = id;
     }
-
   }
 
   /**
    * An array of values, each being the `text` value of a row header that is applicable to this body cell.
    */
   public class RowHeaderTexts extends IBMWatsonGenericModel {
-    private String text_serialized_name;
+    private String text;
  
     /**
      * Gets the text.
@@ -7482,7 +8400,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
 
     /**
@@ -7491,9 +8409,8 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
-
   }
 
   /**
@@ -7501,7 +8418,7 @@ public class IBMCompareComplyV1Models {
    * otherwise, the same value as `row_header_texts`.
    */
   public class RowHeaderTextsNormalized extends IBMWatsonGenericModel {
-    private String text_normalized_serialized_name;
+    private String textNormalized;
  
     /**
      * Gets the textNormalized.
@@ -7512,7 +8429,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
 
     /**
@@ -7521,23 +8438,28 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('text_normalized', 'textNormalized');
+      return mapping;
+    }
   }
 
   /**
    * Row-level cells, each applicable as a header to other cells in the same row as itself, of the current table.
    */
   public class RowHeaders extends IBMWatsonGenericModel {
-    private String cell_id_serialized_name;
-    private Location location_serialized_name;
-    private String text_serialized_name;
-    private String text_normalized_serialized_name;
-    private Long row_index_begin_serialized_name;
-    private Long row_index_end_serialized_name;
-    private Long column_index_begin_serialized_name;
-    private Long column_index_end_serialized_name;
+    private String cellId;
+    private Location location;
+    private String text;
+    private String textNormalized;
+    private Long rowIndexBegin;
+    private Long rowIndexEnd;
+    private Long columnIndexBegin;
+    private Long columnIndexEnd;
  
     /**
      * Gets the cellId.
@@ -7548,7 +8470,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getCellId() {
-      return cell_id_serialized_name;
+      return cellId;
     }
  
     /**
@@ -7561,7 +8483,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -7573,7 +8495,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -7586,7 +8508,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
  
     /**
@@ -7598,7 +8520,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getRowIndexBegin() {
-      return row_index_begin_serialized_name;
+      return rowIndexBegin;
     }
  
     /**
@@ -7610,7 +8532,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getRowIndexEnd() {
-      return row_index_end_serialized_name;
+      return rowIndexEnd;
     }
  
     /**
@@ -7622,7 +8544,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getColumnIndexBegin() {
-      return column_index_begin_serialized_name;
+      return columnIndexBegin;
     }
  
     /**
@@ -7634,7 +8556,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getColumnIndexEnd() {
-      return column_index_end_serialized_name;
+      return columnIndexEnd;
     }
 
     /**
@@ -7643,7 +8565,7 @@ public class IBMCompareComplyV1Models {
      * @param cellId the new cellId
      */
     public void setCellId(final String cellId) {
-      this.cell_id_serialized_name = cellId;
+      this.cellId = cellId;
     }
 
     /**
@@ -7652,7 +8574,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -7661,7 +8583,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -7670,7 +8592,7 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
     /**
@@ -7679,7 +8601,7 @@ public class IBMCompareComplyV1Models {
      * @param rowIndexBegin the new rowIndexBegin
      */
     public void setRowIndexBegin(final long rowIndexBegin) {
-      this.row_index_begin_serialized_name = rowIndexBegin;
+      this.rowIndexBegin = rowIndexBegin;
     }
 
     /**
@@ -7688,7 +8610,7 @@ public class IBMCompareComplyV1Models {
      * @param rowIndexEnd the new rowIndexEnd
      */
     public void setRowIndexEnd(final long rowIndexEnd) {
-      this.row_index_end_serialized_name = rowIndexEnd;
+      this.rowIndexEnd = rowIndexEnd;
     }
 
     /**
@@ -7697,7 +8619,7 @@ public class IBMCompareComplyV1Models {
      * @param columnIndexBegin the new columnIndexBegin
      */
     public void setColumnIndexBegin(final long columnIndexBegin) {
-      this.column_index_begin_serialized_name = columnIndexBegin;
+      this.columnIndexBegin = columnIndexBegin;
     }
 
     /**
@@ -7706,7 +8628,7 @@ public class IBMCompareComplyV1Models {
      * @param columnIndexEnd the new columnIndexEnd
      */
     public void setColumnIndexEnd(final long columnIndexEnd) {
-      this.column_index_end_serialized_name = columnIndexEnd;
+      this.columnIndexEnd = columnIndexEnd;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7717,10 +8639,24 @@ public class IBMCompareComplyV1Models {
       RowHeaders ret = (RowHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('cell_id', 'cellId');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      mapping.put('text_normalized', 'textNormalized');
+      mapping.put('row_index_begin', 'rowIndexBegin');
+      mapping.put('row_index_end', 'rowIndexEnd');
+      mapping.put('column_index_begin', 'columnIndexBegin');
+      mapping.put('column_index_end', 'columnIndexEnd');
+      return mapping;
     }
   }
 
@@ -7728,8 +8664,8 @@ public class IBMCompareComplyV1Models {
    * The table's section title, if identified.
    */
   public class SectionTitle extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private Location location_serialized_name;
+    private String text;
+    private Location location;
  
     /**
      * Gets the text.
@@ -7740,7 +8676,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -7753,7 +8689,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -7762,7 +8698,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -7771,7 +8707,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7782,10 +8718,18 @@ public class IBMCompareComplyV1Models {
       SectionTitle ret = (SectionTitle) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7795,10 +8739,10 @@ public class IBMCompareComplyV1Models {
    * values of the element and the `level` value of the section.
    */
   public class SectionTitles extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private Location location_serialized_name;
-    private Long level_serialized_name;
-    private List<ElementLocations> element_locations_serialized_name;
+    private String text;
+    private Location location;
+    private Long level;
+    private List<ElementLocations> elementLocations;
  
     /**
      * Gets the text.
@@ -7809,7 +8753,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -7822,7 +8766,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -7835,7 +8779,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getLevel() {
-      return level_serialized_name;
+      return level;
     }
  
     /**
@@ -7847,7 +8791,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ElementLocations> getElementLocations() {
-      return element_locations_serialized_name;
+      return elementLocations;
     }
 
     /**
@@ -7856,7 +8800,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -7865,7 +8809,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -7874,7 +8818,7 @@ public class IBMCompareComplyV1Models {
      * @param level the new level
      */
     public void setLevel(final long level) {
-      this.level_serialized_name = level;
+      this.level = level;
     }
 
     /**
@@ -7883,7 +8827,7 @@ public class IBMCompareComplyV1Models {
      * @param elementLocations the new elementLocations
      */
     public void setElementLocations(final List<ElementLocations> elementLocations) {
-      this.element_locations_serialized_name = elementLocations;
+      this.elementLocations = elementLocations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7894,7 +8838,7 @@ public class IBMCompareComplyV1Models {
       SectionTitles ret = (SectionTitles) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for elementLocations
@@ -7903,14 +8847,26 @@ public class IBMCompareComplyV1Models {
       if (deserializedElementLocations != null) {
         for (Integer i = 0; i < deserializedElementLocations.size(); i++) {
           ElementLocations currentItem = ret.getElementLocations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('element_locations_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('elementLocations');
           ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
           newElementLocations.add(newItem);
         }
-        ret.element_locations_serialized_name = newElementLocations;
+        ret.elementLocations = newElementLocations;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      mapping.put('element_locations', 'elementLocations');
+      if (elementLocations != null && elementLocations[0] != null) {
+        mapping.putAll(elementLocations[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -7918,8 +8874,14 @@ public class IBMCompareComplyV1Models {
    * Brief information about the input document.
    */
   public class ShortDoc extends IBMWatsonGenericModel {
-    private String title_serialized_name;
-    private String hash_serialized_name;
+    private String title;
+    private String hash;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public ShortDoc() { }
  
     /**
      * Gets the title.
@@ -7930,7 +8892,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -7942,40 +8904,85 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getHash() {
-      return hash_serialized_name;
+      return hash;
+    }
+  
+    private ShortDoc(ShortDocBuilder builder) {
+      this.title = builder.title;
+      this.hash = builder.hash;
     }
 
     /**
-     * Sets the title.
+     * New builder.
      *
-     * @param title the new title
+     * @return a ShortDoc builder
      */
-    public void setTitle(final String title) {
-      this.title_serialized_name = title;
+    public ShortDocBuilder newBuilder() {
+      return new ShortDocBuilder(this);
+    }
+  }
+
+  /**
+   * ShortDoc Builder.
+   */
+  public class ShortDocBuilder {
+    private String title;
+    private String hash;
+
+    private ShortDocBuilder(ShortDoc shortDoc) {
+      this.title = shortDoc.title;
+      this.hash = shortDoc.hash;
     }
 
     /**
-     * Sets the hash.
-     *
-     * @param hash the new hash
+     * Instantiates a new builder.
      */
-    public void setHash(final String hash) {
-      this.hash_serialized_name = hash;
+    public ShortDocBuilder() {
     }
 
+    /**
+     * Builds a ShortDoc.
+     *
+     * @return the shortDoc
+     */
+    public ShortDoc build() {
+      return new ShortDoc(this);
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param title the title
+     * @return the ShortDoc builder
+     */
+    public ShortDocBuilder setTitle(String title) {
+      this.title = title;
+      return this;
+    }
+
+    /**
+     * Set the hash.
+     *
+     * @param hash the hash
+     * @return the ShortDoc builder
+     */
+    public ShortDocBuilder setHash(String hash) {
+      this.hash = hash;
+      return this;
+    }
   }
 
   /**
    * The contents of the current table's header.
    */
   public class TableHeaders extends IBMWatsonGenericModel {
-    private String cell_id_serialized_name;
-    private IBMWatsonMapModel location_serialized_name;
-    private String text_serialized_name;
-    private Long row_index_begin_serialized_name;
-    private Long row_index_end_serialized_name;
-    private Long column_index_begin_serialized_name;
-    private Long column_index_end_serialized_name;
+    private String cellId;
+    private IBMWatsonMapModel location;
+    private String text;
+    private Long rowIndexBegin;
+    private Long rowIndexEnd;
+    private Long columnIndexBegin;
+    private Long columnIndexEnd;
  
     /**
      * Gets the cellId.
@@ -7986,7 +8993,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getCellId() {
-      return cell_id_serialized_name;
+      return cellId;
     }
  
     /**
@@ -7999,7 +9006,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public IBMWatsonMapModel getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -8011,7 +9018,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -8023,7 +9030,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getRowIndexBegin() {
-      return row_index_begin_serialized_name;
+      return rowIndexBegin;
     }
  
     /**
@@ -8035,7 +9042,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getRowIndexEnd() {
-      return row_index_end_serialized_name;
+      return rowIndexEnd;
     }
  
     /**
@@ -8047,7 +9054,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getColumnIndexBegin() {
-      return column_index_begin_serialized_name;
+      return columnIndexBegin;
     }
  
     /**
@@ -8059,7 +9066,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Long getColumnIndexEnd() {
-      return column_index_end_serialized_name;
+      return columnIndexEnd;
     }
 
     /**
@@ -8068,7 +9075,7 @@ public class IBMCompareComplyV1Models {
      * @param cellId the new cellId
      */
     public void setCellId(final String cellId) {
-      this.cell_id_serialized_name = cellId;
+      this.cellId = cellId;
     }
 
     /**
@@ -8077,7 +9084,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final IBMWatsonMapModel location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -8086,7 +9093,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -8095,7 +9102,7 @@ public class IBMCompareComplyV1Models {
      * @param rowIndexBegin the new rowIndexBegin
      */
     public void setRowIndexBegin(final long rowIndexBegin) {
-      this.row_index_begin_serialized_name = rowIndexBegin;
+      this.rowIndexBegin = rowIndexBegin;
     }
 
     /**
@@ -8104,7 +9111,7 @@ public class IBMCompareComplyV1Models {
      * @param rowIndexEnd the new rowIndexEnd
      */
     public void setRowIndexEnd(final long rowIndexEnd) {
-      this.row_index_end_serialized_name = rowIndexEnd;
+      this.rowIndexEnd = rowIndexEnd;
     }
 
     /**
@@ -8113,7 +9120,7 @@ public class IBMCompareComplyV1Models {
      * @param columnIndexBegin the new columnIndexBegin
      */
     public void setColumnIndexBegin(final long columnIndexBegin) {
-      this.column_index_begin_serialized_name = columnIndexBegin;
+      this.columnIndexBegin = columnIndexBegin;
     }
 
     /**
@@ -8122,7 +9129,7 @@ public class IBMCompareComplyV1Models {
      * @param columnIndexEnd the new columnIndexEnd
      */
     public void setColumnIndexEnd(final long columnIndexEnd) {
-      this.column_index_end_serialized_name = columnIndexEnd;
+      this.columnIndexEnd = columnIndexEnd;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8133,10 +9140,20 @@ public class IBMCompareComplyV1Models {
       TableHeaders ret = (TableHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), IBMWatsonMapModel.class);
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('cell_id', 'cellId');
+      mapping.put('row_index_begin', 'rowIndexBegin');
+      mapping.put('row_index_end', 'rowIndexEnd');
+      mapping.put('column_index_begin', 'columnIndexBegin');
+      mapping.put('column_index_end', 'columnIndexEnd');
+      return mapping;
     }
   }
 
@@ -8144,10 +9161,10 @@ public class IBMCompareComplyV1Models {
    * The analysis of the document's tables.
    */
   public class TableReturn extends IBMWatsonResponseModel {
-    private DocInfo document_serialized_name;
-    private String model_id_serialized_name;
-    private String model_version_serialized_name;
-    private List<Tables> tables_serialized_name;
+    private DocInfo document;
+    private String modelId;
+    private String modelVersion;
+    private List<Tables> tables;
  
     /**
      * Gets the document.
@@ -8158,7 +9175,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public DocInfo getDocument() {
-      return document_serialized_name;
+      return document;
     }
  
     /**
@@ -8170,7 +9187,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
  
     /**
@@ -8182,7 +9199,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModelVersion() {
-      return model_version_serialized_name;
+      return modelVersion;
     }
  
     /**
@@ -8194,7 +9211,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Tables> getTables() {
-      return tables_serialized_name;
+      return tables;
     }
 
     /**
@@ -8203,7 +9220,7 @@ public class IBMCompareComplyV1Models {
      * @param document the new document
      */
     public void setDocument(final DocInfo document) {
-      this.document_serialized_name = document;
+      this.document = document;
     }
 
     /**
@@ -8212,7 +9229,7 @@ public class IBMCompareComplyV1Models {
      * @param modelId the new modelId
      */
     public void setModelId(final String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -8221,7 +9238,7 @@ public class IBMCompareComplyV1Models {
      * @param modelVersion the new modelVersion
      */
     public void setModelVersion(final String modelVersion) {
-      this.model_version_serialized_name = modelVersion;
+      this.modelVersion = modelVersion;
     }
 
     /**
@@ -8230,7 +9247,7 @@ public class IBMCompareComplyV1Models {
      * @param tables the new tables
      */
     public void setTables(final List<Tables> tables) {
-      this.tables_serialized_name = tables;
+      this.tables = tables;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8241,7 +9258,7 @@ public class IBMCompareComplyV1Models {
       TableReturn ret = (TableReturn) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document
-      DocInfo newDocument = (DocInfo) new DocInfo().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document_serialized_name'), DocInfo.class);
+      DocInfo newDocument = (DocInfo) new DocInfo().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document'), DocInfo.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for tables
@@ -8250,14 +9267,24 @@ public class IBMCompareComplyV1Models {
       if (deserializedTables != null) {
         for (Integer i = 0; i < deserializedTables.size(); i++) {
           Tables currentItem = ret.getTables().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tables_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tables');
           Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
           newTables.add(newItem);
         }
-        ret.tables_serialized_name = newTables;
+        ret.tables = newTables;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('model_id', 'modelId');
+      mapping.put('model_version', 'modelVersion');
+      if (tables != null && tables[0] != null) {
+        mapping.putAll(tables[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -8266,8 +9293,8 @@ public class IBMCompareComplyV1Models {
    * identified. When exposed, the `title` is also excluded from the `contexts` array of the same table.
    */
   public class TableTitle extends IBMWatsonGenericModel {
-    private Location location_serialized_name;
-    private String text_serialized_name;
+    private Location location;
+    private String text;
  
     /**
      * Gets the location.
@@ -8279,7 +9306,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -8291,7 +9318,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
 
     /**
@@ -8300,7 +9327,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -8309,7 +9336,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8320,10 +9347,18 @@ public class IBMCompareComplyV1Models {
       TableTitle ret = (TableTitle) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -8331,16 +9366,16 @@ public class IBMCompareComplyV1Models {
    * The contents of the tables extracted from a document.
    */
   public class Tables extends IBMWatsonGenericModel {
-    private Location location_serialized_name;
-    private String text_serialized_name;
-    private SectionTitle section_title_serialized_name;
-    private TableTitle title_serialized_name;
-    private List<TableHeaders> table_headers_serialized_name;
-    private List<RowHeaders> row_headers_serialized_name;
-    private List<ColumnHeaders> column_headers_serialized_name;
-    private List<BodyCells> body_cells_serialized_name;
-    private List<Contexts> contexts_serialized_name;
-    private List<KeyValuePair> key_value_pairs_serialized_name;
+    private Location location;
+    private String text;
+    private SectionTitle sectionTitle;
+    private TableTitle title;
+    private List<TableHeaders> tableHeaders;
+    private List<RowHeaders> rowHeaders;
+    private List<ColumnHeaders> columnHeaders;
+    private List<BodyCells> bodyCells;
+    private List<Contexts> contexts;
+    private List<KeyValuePair> keyValuePairs;
  
     /**
      * Gets the location.
@@ -8352,7 +9387,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -8364,7 +9399,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -8376,7 +9411,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public SectionTitle getSectionTitle() {
-      return section_title_serialized_name;
+      return sectionTitle;
     }
  
     /**
@@ -8389,7 +9424,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public TableTitle getTitle() {
-      return title_serialized_name;
+      return title;
     }
  
     /**
@@ -8401,7 +9436,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<TableHeaders> getTableHeaders() {
-      return table_headers_serialized_name;
+      return tableHeaders;
     }
  
     /**
@@ -8414,7 +9449,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<RowHeaders> getRowHeaders() {
-      return row_headers_serialized_name;
+      return rowHeaders;
     }
  
     /**
@@ -8427,7 +9462,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<ColumnHeaders> getColumnHeaders() {
-      return column_headers_serialized_name;
+      return columnHeaders;
     }
  
     /**
@@ -8440,7 +9475,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<BodyCells> getBodyCells() {
-      return body_cells_serialized_name;
+      return bodyCells;
     }
  
     /**
@@ -8453,7 +9488,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Contexts> getContexts() {
-      return contexts_serialized_name;
+      return contexts;
     }
  
     /**
@@ -8465,7 +9500,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<KeyValuePair> getKeyValuePairs() {
-      return key_value_pairs_serialized_name;
+      return keyValuePairs;
     }
 
     /**
@@ -8474,7 +9509,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -8483,7 +9518,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -8492,7 +9527,7 @@ public class IBMCompareComplyV1Models {
      * @param sectionTitle the new sectionTitle
      */
     public void setSectionTitle(final SectionTitle sectionTitle) {
-      this.section_title_serialized_name = sectionTitle;
+      this.sectionTitle = sectionTitle;
     }
 
     /**
@@ -8501,7 +9536,7 @@ public class IBMCompareComplyV1Models {
      * @param title the new title
      */
     public void setTitle(final TableTitle title) {
-      this.title_serialized_name = title;
+      this.title = title;
     }
 
     /**
@@ -8510,7 +9545,7 @@ public class IBMCompareComplyV1Models {
      * @param tableHeaders the new tableHeaders
      */
     public void setTableHeaders(final List<TableHeaders> tableHeaders) {
-      this.table_headers_serialized_name = tableHeaders;
+      this.tableHeaders = tableHeaders;
     }
 
     /**
@@ -8519,7 +9554,7 @@ public class IBMCompareComplyV1Models {
      * @param rowHeaders the new rowHeaders
      */
     public void setRowHeaders(final List<RowHeaders> rowHeaders) {
-      this.row_headers_serialized_name = rowHeaders;
+      this.rowHeaders = rowHeaders;
     }
 
     /**
@@ -8528,7 +9563,7 @@ public class IBMCompareComplyV1Models {
      * @param columnHeaders the new columnHeaders
      */
     public void setColumnHeaders(final List<ColumnHeaders> columnHeaders) {
-      this.column_headers_serialized_name = columnHeaders;
+      this.columnHeaders = columnHeaders;
     }
 
     /**
@@ -8537,7 +9572,7 @@ public class IBMCompareComplyV1Models {
      * @param bodyCells the new bodyCells
      */
     public void setBodyCells(final List<BodyCells> bodyCells) {
-      this.body_cells_serialized_name = bodyCells;
+      this.bodyCells = bodyCells;
     }
 
     /**
@@ -8546,7 +9581,7 @@ public class IBMCompareComplyV1Models {
      * @param contexts the new contexts
      */
     public void setContexts(final List<Contexts> contexts) {
-      this.contexts_serialized_name = contexts;
+      this.contexts = contexts;
     }
 
     /**
@@ -8555,7 +9590,7 @@ public class IBMCompareComplyV1Models {
      * @param keyValuePairs the new keyValuePairs
      */
     public void setKeyValuePairs(final List<KeyValuePair> keyValuePairs) {
-      this.key_value_pairs_serialized_name = keyValuePairs;
+      this.keyValuePairs = keyValuePairs;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8566,15 +9601,15 @@ public class IBMCompareComplyV1Models {
       Tables ret = (Tables) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for sectionTitle
-      SectionTitle newSectionTitle = (SectionTitle) new SectionTitle().deserialize(JSON.serialize(ret.getSectionTitle()), (Map<String, Object>) jsonMap.get('section_title_serialized_name'), SectionTitle.class);
+      SectionTitle newSectionTitle = (SectionTitle) new SectionTitle().deserialize(JSON.serialize(ret.getSectionTitle()), (Map<String, Object>) jsonMap.get('sectionTitle'), SectionTitle.class);
       ret.setSectionTitle(newSectionTitle);
 
       // calling custom deserializer for title
-      TableTitle newTitle = (TableTitle) new TableTitle().deserialize(JSON.serialize(ret.getTitle()), (Map<String, Object>) jsonMap.get('title_serialized_name'), TableTitle.class);
+      TableTitle newTitle = (TableTitle) new TableTitle().deserialize(JSON.serialize(ret.getTitle()), (Map<String, Object>) jsonMap.get('title'), TableTitle.class);
       ret.setTitle(newTitle);
 
       // calling custom deserializer for tableHeaders
@@ -8583,11 +9618,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedTableHeaders != null) {
         for (Integer i = 0; i < deserializedTableHeaders.size(); i++) {
           TableHeaders currentItem = ret.getTableHeaders().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('table_headers_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tableHeaders');
           TableHeaders newItem = (TableHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TableHeaders.class);
           newTableHeaders.add(newItem);
         }
-        ret.table_headers_serialized_name = newTableHeaders;
+        ret.tableHeaders = newTableHeaders;
       }
 
       // calling custom deserializer for rowHeaders
@@ -8596,11 +9631,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedRowHeaders != null) {
         for (Integer i = 0; i < deserializedRowHeaders.size(); i++) {
           RowHeaders currentItem = ret.getRowHeaders().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('row_headers_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaders');
           RowHeaders newItem = (RowHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaders.class);
           newRowHeaders.add(newItem);
         }
-        ret.row_headers_serialized_name = newRowHeaders;
+        ret.rowHeaders = newRowHeaders;
       }
 
       // calling custom deserializer for columnHeaders
@@ -8609,11 +9644,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedColumnHeaders != null) {
         for (Integer i = 0; i < deserializedColumnHeaders.size(); i++) {
           ColumnHeaders currentItem = ret.getColumnHeaders().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('column_headers_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaders');
           ColumnHeaders newItem = (ColumnHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaders.class);
           newColumnHeaders.add(newItem);
         }
-        ret.column_headers_serialized_name = newColumnHeaders;
+        ret.columnHeaders = newColumnHeaders;
       }
 
       // calling custom deserializer for bodyCells
@@ -8622,11 +9657,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedBodyCells != null) {
         for (Integer i = 0; i < deserializedBodyCells.size(); i++) {
           BodyCells currentItem = ret.getBodyCells().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('body_cells_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('bodyCells');
           BodyCells newItem = (BodyCells) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BodyCells.class);
           newBodyCells.add(newItem);
         }
-        ret.body_cells_serialized_name = newBodyCells;
+        ret.bodyCells = newBodyCells;
       }
 
       // calling custom deserializer for contexts
@@ -8635,11 +9670,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedContexts != null) {
         for (Integer i = 0; i < deserializedContexts.size(); i++) {
           Contexts currentItem = ret.getContexts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('contexts_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contexts');
           Contexts newItem = (Contexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contexts.class);
           newContexts.add(newItem);
         }
-        ret.contexts_serialized_name = newContexts;
+        ret.contexts = newContexts;
       }
 
       // calling custom deserializer for keyValuePairs
@@ -8648,14 +9683,52 @@ public class IBMCompareComplyV1Models {
       if (deserializedKeyValuePairs != null) {
         for (Integer i = 0; i < deserializedKeyValuePairs.size(); i++) {
           KeyValuePair currentItem = ret.getKeyValuePairs().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('key_value_pairs_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('keyValuePairs');
           KeyValuePair newItem = (KeyValuePair) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeyValuePair.class);
           newKeyValuePairs.add(newItem);
         }
-        ret.key_value_pairs_serialized_name = newKeyValuePairs;
+        ret.keyValuePairs = newKeyValuePairs;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      mapping.put('section_title', 'sectionTitle');
+      if (sectionTitle != null) {
+        mapping.putAll(sectionTitle.getApiToSdkMapping());
+      }
+      if (title != null) {
+        mapping.putAll(title.getApiToSdkMapping());
+      }
+      mapping.put('table_headers', 'tableHeaders');
+      if (tableHeaders != null && tableHeaders[0] != null) {
+        mapping.putAll(tableHeaders[0].getApiToSdkMapping());
+      }
+      mapping.put('row_headers', 'rowHeaders');
+      if (rowHeaders != null && rowHeaders[0] != null) {
+        mapping.putAll(rowHeaders[0].getApiToSdkMapping());
+      }
+      mapping.put('column_headers', 'columnHeaders');
+      if (columnHeaders != null && columnHeaders[0] != null) {
+        mapping.putAll(columnHeaders[0].getApiToSdkMapping());
+      }
+      mapping.put('body_cells', 'bodyCells');
+      if (bodyCells != null && bodyCells[0] != null) {
+        mapping.putAll(bodyCells[0].getApiToSdkMapping());
+      }
+      if (contexts != null && contexts[0] != null) {
+        mapping.putAll(contexts[0].getApiToSdkMapping());
+      }
+      mapping.put('key_value_pairs', 'keyValuePairs');
+      if (keyValuePairs != null && keyValuePairs[0] != null) {
+        mapping.putAll(keyValuePairs[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -8663,11 +9736,11 @@ public class IBMCompareComplyV1Models {
    * Termination dates identified in the input document.
    */
   public class TerminationDates extends IBMWatsonGenericModel {
-    private String confidence_level_serialized_name;
-    private String text_serialized_name;
-    private String text_normalized_serialized_name;
-    private List<String> provenance_ids_serialized_name;
-    private Location location_serialized_name;
+    private String confidenceLevel;
+    private String text;
+    private String textNormalized;
+    private List<String> provenanceIds;
+    private Location location;
  
     /**
      * Gets the confidenceLevel.
@@ -8678,7 +9751,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+      return confidenceLevel;
     }
  
     /**
@@ -8690,7 +9763,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -8703,7 +9776,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getTextNormalized() {
-      return text_normalized_serialized_name;
+      return textNormalized;
     }
  
     /**
@@ -8715,7 +9788,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
     }
  
     /**
@@ -8728,7 +9801,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
 
     /**
@@ -8737,7 +9810,7 @@ public class IBMCompareComplyV1Models {
      * @param confidenceLevel the new confidenceLevel
      */
     public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+      this.confidenceLevel = confidenceLevel;
     }
 
     /**
@@ -8746,7 +9819,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -8755,7 +9828,7 @@ public class IBMCompareComplyV1Models {
      * @param textNormalized the new textNormalized
      */
     public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
+      this.textNormalized = textNormalized;
     }
 
     /**
@@ -8764,7 +9837,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the new provenanceIds
      */
     public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+      this.provenanceIds = provenanceIds;
     }
 
     /**
@@ -8773,7 +9846,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8784,10 +9857,21 @@ public class IBMCompareComplyV1Models {
       TerminationDates ret = (TerminationDates) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('confidence_level', 'confidenceLevel');
+      mapping.put('text_normalized', 'textNormalized');
+      mapping.put('provenance_ids', 'provenanceIds');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -8795,8 +9879,14 @@ public class IBMCompareComplyV1Models {
    * Identification of a specific type.
    */
   public class TypeLabel extends IBMWatsonGenericModel {
-    private Label label_serialized_name;
-    private List<String> provenance_ids_serialized_name;
+    private Label label;
+    private List<String> provenanceIds;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public TypeLabel() { }
  
     /**
      * Gets the label.
@@ -8808,7 +9898,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Label getLabel() {
-      return label_serialized_name;
+      return label;
     }
  
     /**
@@ -8820,25 +9910,21 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<String> getProvenanceIds() {
-      return provenance_ids_serialized_name;
+      return provenanceIds;
+    }
+  
+    private TypeLabel(TypeLabelBuilder builder) {
+      this.label = builder.label;
+      this.provenanceIds = builder.provenanceIds;
     }
 
     /**
-     * Sets the label.
+     * New builder.
      *
-     * @param label the new label
+     * @return a TypeLabel builder
      */
-    public void setLabel(final Label label) {
-      this.label_serialized_name = label;
-    }
-
-    /**
-     * Sets the provenanceIds.
-     *
-     * @param provenanceIds the new provenanceIds
-     */
-    public void setProvenanceIds(final List<String> provenanceIds) {
-      this.provenance_ids_serialized_name = provenanceIds;
+    public TypeLabelBuilder newBuilder() {
+      return new TypeLabelBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8847,12 +9933,91 @@ public class IBMCompareComplyV1Models {
       }
 
       TypeLabel ret = (TypeLabel) super.deserialize(jsonString, jsonMap, classType);
+      TypeLabelBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for label
-      Label newLabel = (Label) new Label().deserialize(JSON.serialize(ret.getLabel()), (Map<String, Object>) jsonMap.get('label_serialized_name'), Label.class);
-      ret.setLabel(newLabel);
+      Label newLabel = (Label) new Label().deserialize(JSON.serialize(ret.getLabel()), (Map<String, Object>) jsonMap.get('label'), Label.class);
+      retBuilder.setLabel(newLabel);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('provenanceIds', 'provenance_ids');
+      return mapping;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('provenance_ids', 'provenanceIds');
+      return mapping;
+    }
+  }
+
+  /**
+   * TypeLabel Builder.
+   */
+  public class TypeLabelBuilder {
+    private Label label;
+    private List<String> provenanceIds;
+
+    private TypeLabelBuilder(TypeLabel typeLabel) {
+      this.label = typeLabel.label;
+      this.provenanceIds = typeLabel.provenanceIds;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public TypeLabelBuilder() {
+    }
+
+    /**
+     * Builds a TypeLabel.
+     *
+     * @return the typeLabel
+     */
+    public TypeLabel build() {
+      return new TypeLabel(this);
+    }
+
+    /**
+     * Adds an provenanceIds to provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     * @return the TypeLabel builder
+     */
+    public TypeLabelBuilder addProvenanceIds(String provenanceIds) {
+      IBMWatsonValidator.notNull(provenanceIds, 'provenanceIds cannot be null');
+      if (this.provenanceIds == null) {
+        this.provenanceIds = new List<String>();
+      }
+      this.provenanceIds.add(provenanceIds);
+      return this;
+    }
+
+    /**
+     * Set the label.
+     *
+     * @param label the label
+     * @return the TypeLabel builder
+     */
+    public TypeLabelBuilder setLabel(Label label) {
+      this.label = label;
+      return this;
+    }
+
+    /**
+     * Set the provenanceIds.
+     * Existing provenanceIds will be replaced.
+     *
+     * @param provenanceIds the provenanceIds
+     * @return the TypeLabel builder
+     */
+    public TypeLabelBuilder setProvenanceIds(List<String> provenanceIds) {
+      this.provenanceIds = provenanceIds;
+      return this;
     }
   }
 
@@ -8860,7 +10025,7 @@ public class IBMCompareComplyV1Models {
    * Identification of a specific type.
    */
   public class TypeLabelComparison extends IBMWatsonGenericModel {
-    private Label label_serialized_name;
+    private Label label;
  
     /**
      * Gets the label.
@@ -8872,7 +10037,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Label getLabel() {
-      return label_serialized_name;
+      return label;
     }
 
     /**
@@ -8881,7 +10046,7 @@ public class IBMCompareComplyV1Models {
      * @param label the new label
      */
     public void setLabel(final Label label) {
-      this.label_serialized_name = label;
+      this.label = label;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8892,7 +10057,7 @@ public class IBMCompareComplyV1Models {
       TypeLabelComparison ret = (TypeLabelComparison) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for label
-      Label newLabel = (Label) new Label().deserialize(JSON.serialize(ret.getLabel()), (Map<String, Object>) jsonMap.get('label_serialized_name'), Label.class);
+      Label newLabel = (Label) new Label().deserialize(JSON.serialize(ret.getLabel()), (Map<String, Object>) jsonMap.get('label'), Label.class);
       ret.setLabel(newLabel);
 
       return ret;
@@ -8903,12 +10068,12 @@ public class IBMCompareComplyV1Models {
    * Element that does not align semantically between two compared documents.
    */
   public class UnalignedElement extends IBMWatsonGenericModel {
-    private String document_label_serialized_name;
-    private Location location_serialized_name;
-    private String text_serialized_name;
-    private List<TypeLabelComparison> types_serialized_name;
-    private List<CategoryComparison> categories_serialized_name;
-    private List<Attribute> attributes_serialized_name;
+    private String documentLabel;
+    private Location location;
+    private String text;
+    private List<TypeLabelComparison> types;
+    private List<CategoryComparison> categories;
+    private List<Attribute> attributes;
  
     /**
      * Gets the documentLabel.
@@ -8920,7 +10085,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getDocumentLabel() {
-      return document_label_serialized_name;
+      return documentLabel;
     }
  
     /**
@@ -8933,7 +10098,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -8945,7 +10110,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
  
     /**
@@ -8957,7 +10122,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<TypeLabelComparison> getTypes() {
-      return types_serialized_name;
+      return types;
     }
  
     /**
@@ -8969,7 +10134,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<CategoryComparison> getCategories() {
-      return categories_serialized_name;
+      return categories;
     }
  
     /**
@@ -8981,7 +10146,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Attribute> getAttributes() {
-      return attributes_serialized_name;
+      return attributes;
     }
 
     /**
@@ -8990,7 +10155,7 @@ public class IBMCompareComplyV1Models {
      * @param documentLabel the new documentLabel
      */
     public void setDocumentLabel(final String documentLabel) {
-      this.document_label_serialized_name = documentLabel;
+      this.documentLabel = documentLabel;
     }
 
     /**
@@ -8999,7 +10164,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -9008,7 +10173,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -9017,7 +10182,7 @@ public class IBMCompareComplyV1Models {
      * @param types the new types
      */
     public void setTypes(final List<TypeLabelComparison> types) {
-      this.types_serialized_name = types;
+      this.types = types;
     }
 
     /**
@@ -9026,7 +10191,7 @@ public class IBMCompareComplyV1Models {
      * @param categories the new categories
      */
     public void setCategories(final List<CategoryComparison> categories) {
-      this.categories_serialized_name = categories;
+      this.categories = categories;
     }
 
     /**
@@ -9035,7 +10200,7 @@ public class IBMCompareComplyV1Models {
      * @param attributes the new attributes
      */
     public void setAttributes(final List<Attribute> attributes) {
-      this.attributes_serialized_name = attributes;
+      this.attributes = attributes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9046,7 +10211,7 @@ public class IBMCompareComplyV1Models {
       UnalignedElement ret = (UnalignedElement) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -9055,11 +10220,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedTypes != null) {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabelComparison currentItem = ret.getTypes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('types_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('types');
           TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
           newTypes.add(newItem);
         }
-        ret.types_serialized_name = newTypes;
+        ret.types = newTypes;
       }
 
       // calling custom deserializer for categories
@@ -9068,11 +10233,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedCategories != null) {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           CategoryComparison currentItem = ret.getCategories().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('categories_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
           CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
           newCategories.add(newItem);
         }
-        ret.categories_serialized_name = newCategories;
+        ret.categories = newCategories;
       }
 
       // calling custom deserializer for attributes
@@ -9081,14 +10246,26 @@ public class IBMCompareComplyV1Models {
       if (deserializedAttributes != null) {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
           Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
-        ret.attributes_serialized_name = newAttributes;
+        ret.attributes = newAttributes;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('document_label', 'documentLabel');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      if (attributes != null && attributes[0] != null) {
+        mapping.putAll(attributes[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -9099,7 +10276,7 @@ public class IBMCompareComplyV1Models {
     private String batchId;
     private String action;
     private String model;
- 
+
     /**
      * Gets the batchId.
      *
@@ -9110,7 +10287,7 @@ public class IBMCompareComplyV1Models {
     public String batchId() {
       return batchId;
     }
- 
+
     /**
      * Gets the action.
      *
@@ -9121,7 +10298,7 @@ public class IBMCompareComplyV1Models {
     public String action() {
       return action;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -9153,6 +10330,11 @@ public class IBMCompareComplyV1Models {
       return new UpdateBatchOptionsBuilder(this);
     }
 
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('batchId', 'batch_id');
+      return mapping;
+    }
   }
 
   /**
@@ -9245,9 +10427,9 @@ public class IBMCompareComplyV1Models {
   /**
    * The updated labeling from the input document, accounting for the submitted feedback.
    */
-  public class UpdatedLabelsIn {
-    private List<TypeLabel> types_serialized_name;
-    private List<Category> categories_serialized_name;
+  public class UpdatedLabelsIn extends IBMWatsonGenericModel {
+    private List<TypeLabel> types;
+    private List<Category> categories;
  
     /**
      * Gets the types.
@@ -9257,7 +10439,7 @@ public class IBMCompareComplyV1Models {
      * @return the types
      */
     public List<TypeLabel> getTypes() {
-      return types_serialized_name;
+      return types;
     }
  
     /**
@@ -9268,36 +10450,137 @@ public class IBMCompareComplyV1Models {
      * @return the categories
      */
     public List<Category> getCategories() {
-      return categories_serialized_name;
+      return categories;
+    }
+  
+    private UpdatedLabelsIn(UpdatedLabelsInBuilder builder) {
+      IBMWatsonValidator.notNull(builder.types, 'types cannot be null');
+      IBMWatsonValidator.notNull(builder.categories, 'categories cannot be null');
+      this.types = builder.types;
+      this.categories = builder.categories;
     }
 
     /**
-     * Sets the types.
+     * New builder.
+     *
+     * @return a UpdatedLabelsIn builder
+     */
+    public UpdatedLabelsInBuilder newBuilder() {
+      return new UpdatedLabelsInBuilder(this);
+    }
+
+    public override Map<String, String> getSdkToApiMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (types != null && types[0] != null) {
+        mapping.putAll(types[0].getSdkToApiMapping());
+      }
+      if (categories != null && categories[0] != null) {
+        mapping.putAll(categories[0].getSdkToApiMapping());
+      }
+      return mapping;
+    }
+  }
+
+  /**
+   * UpdatedLabelsIn Builder.
+   */
+  public class UpdatedLabelsInBuilder {
+    private List<TypeLabel> types;
+    private List<Category> categories;
+
+    private UpdatedLabelsInBuilder(UpdatedLabelsIn updatedLabelsIn) {
+      this.types = updatedLabelsIn.types;
+      this.categories = updatedLabelsIn.categories;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public UpdatedLabelsInBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param types the types
+     * @param categories the categories
+     */
+    public UpdatedLabelsInBuilder(List<TypeLabel> types, List<Category> categories) {
+      this.types = types;
+      this.categories = categories;
+    }
+
+    /**
+     * Builds a UpdatedLabelsIn.
+     *
+     * @return the updatedLabelsIn
+     */
+    public UpdatedLabelsIn build() {
+      return new UpdatedLabelsIn(this);
+    }
+
+    /**
+     * Adds an types to types.
      *
      * @param types the new types
+     * @return the UpdatedLabelsIn builder
      */
-    public void setTypes(final List<TypeLabel> types) {
-      this.types_serialized_name = types;
+    public UpdatedLabelsInBuilder addTypes(TypeLabel types) {
+      IBMWatsonValidator.notNull(types, 'types cannot be null');
+      if (this.types == null) {
+        this.types = new List<TypeLabel>();
+      }
+      this.types.add(types);
+      return this;
     }
 
     /**
-     * Sets the categories.
+     * Adds an categories to categories.
      *
      * @param categories the new categories
+     * @return the UpdatedLabelsIn builder
      */
-    public void setCategories(final List<Category> categories) {
-      this.categories_serialized_name = categories;
+    public UpdatedLabelsInBuilder addCategories(Category categories) {
+      IBMWatsonValidator.notNull(categories, 'categories cannot be null');
+      if (this.categories == null) {
+        this.categories = new List<Category>();
+      }
+      this.categories.add(categories);
+      return this;
     }
 
+    /**
+     * Set the types.
+     * Existing types will be replaced.
+     *
+     * @param types the types
+     * @return the UpdatedLabelsIn builder
+     */
+    public UpdatedLabelsInBuilder setTypes(List<TypeLabel> types) {
+      this.types = types;
+      return this;
+    }
+
+    /**
+     * Set the categories.
+     * Existing categories will be replaced.
+     *
+     * @param categories the categories
+     * @return the UpdatedLabelsIn builder
+     */
+    public UpdatedLabelsInBuilder setCategories(List<Category> categories) {
+      this.categories = categories;
+      return this;
+    }
   }
 
   /**
    * The updated labeling from the input document, accounting for the submitted feedback.
    */
   public class UpdatedLabelsOut extends IBMWatsonGenericModel {
-    private List<TypeLabel> types_serialized_name;
-    private List<Category> categories_serialized_name;
-    private String modification_serialized_name;
+    private List<TypeLabel> types;
+    private List<Category> categories;
+    private String modification;
  
     /**
      * Gets the types.
@@ -9308,7 +10591,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<TypeLabel> getTypes() {
-      return types_serialized_name;
+      return types;
     }
  
     /**
@@ -9320,7 +10603,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public List<Category> getCategories() {
-      return categories_serialized_name;
+      return categories;
     }
  
     /**
@@ -9333,7 +10616,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getModification() {
-      return modification_serialized_name;
+      return modification;
     }
 
     /**
@@ -9342,7 +10625,7 @@ public class IBMCompareComplyV1Models {
      * @param types the new types
      */
     public void setTypes(final List<TypeLabel> types) {
-      this.types_serialized_name = types;
+      this.types = types;
     }
 
     /**
@@ -9351,7 +10634,7 @@ public class IBMCompareComplyV1Models {
      * @param categories the new categories
      */
     public void setCategories(final List<Category> categories) {
-      this.categories_serialized_name = categories;
+      this.categories = categories;
     }
 
     /**
@@ -9360,7 +10643,7 @@ public class IBMCompareComplyV1Models {
      * @param modification the new modification
      */
     public void setModification(final String modification) {
-      this.modification_serialized_name = modification;
+      this.modification = modification;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9376,11 +10659,11 @@ public class IBMCompareComplyV1Models {
       if (deserializedTypes != null) {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('types_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('types');
           TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
-        ret.types_serialized_name = newTypes;
+        ret.types = newTypes;
       }
 
       // calling custom deserializer for categories
@@ -9389,14 +10672,25 @@ public class IBMCompareComplyV1Models {
       if (deserializedCategories != null) {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('categories_serialized_name');
+          List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
           Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
-        ret.categories_serialized_name = newCategories;
+        ret.categories = newCategories;
       }
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      if (types != null && types[0] != null) {
+        mapping.putAll(types[0].getApiToSdkMapping());
+      }
+      if (categories != null && categories[0] != null) {
+        mapping.putAll(categories[0].getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 
@@ -9404,9 +10698,9 @@ public class IBMCompareComplyV1Models {
    * A value in a key-value pair.
    */
   public class Value extends IBMWatsonGenericModel {
-    private String cell_id_serialized_name;
-    private Location location_serialized_name;
-    private String text_serialized_name;
+    private String cellId;
+    private Location location;
+    private String text;
  
     /**
      * Gets the cellId.
@@ -9417,7 +10711,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getCellId() {
-      return cell_id_serialized_name;
+      return cellId;
     }
  
     /**
@@ -9430,7 +10724,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public Location getLocation() {
-      return location_serialized_name;
+      return location;
     }
  
     /**
@@ -9442,7 +10736,7 @@ public class IBMCompareComplyV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
 
     /**
@@ -9451,7 +10745,7 @@ public class IBMCompareComplyV1Models {
      * @param cellId the new cellId
      */
     public void setCellId(final String cellId) {
-      this.cell_id_serialized_name = cellId;
+      this.cellId = cellId;
     }
 
     /**
@@ -9460,7 +10754,7 @@ public class IBMCompareComplyV1Models {
      * @param location the new location
      */
     public void setLocation(final Location location) {
-      this.location_serialized_name = location;
+      this.location = location;
     }
 
     /**
@@ -9469,7 +10763,7 @@ public class IBMCompareComplyV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9480,10 +10774,19 @@ public class IBMCompareComplyV1Models {
       Value ret = (Value) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
       ret.setLocation(newLocation);
 
       return ret;
+    }
+
+    public override Map<String, String> getApiToSdkMapping() {
+      Map<String, String> mapping = new Map<String, String>();
+      mapping.put('cell_id', 'cellId');
+      if (location != null) {
+        mapping.putAll(location.getApiToSdkMapping());
+      }
+      return mapping;
     }
   }
 

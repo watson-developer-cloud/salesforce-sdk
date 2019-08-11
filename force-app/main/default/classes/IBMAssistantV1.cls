@@ -100,7 +100,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (messageOptions.output() != null) {
       contentJson.put('output', messageOptions.output());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, messageOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.MessageResponse) createServiceCall(builder.build(), IBMAssistantV1Models.MessageResponse.class);
   }
@@ -198,7 +198,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createWorkspaceOptions.counterexamples() != null) {
       contentJson.put('counterexamples', createWorkspaceOptions.counterexamples());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createWorkspaceOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
   }
@@ -296,7 +296,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateWorkspaceOptions.counterexamples() != null) {
       contentJson.put('counterexamples', updateWorkspaceOptions.counterexamples());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateWorkspaceOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
   }
@@ -405,7 +405,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createIntentOptions.examples() != null) {
       contentJson.put('examples', createIntentOptions.examples());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createIntentOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
   }
@@ -479,7 +479,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateIntentOptions.newExamples() != null) {
       contentJson.put('examples', updateIntentOptions.newExamples());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateIntentOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
   }
@@ -581,7 +581,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createExampleOptions.mentions() != null) {
       contentJson.put('mentions', createExampleOptions.mentions());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createExampleOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
   }
@@ -647,7 +647,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateExampleOptions.newMentions() != null) {
       contentJson.put('mentions', updateExampleOptions.newMentions());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateExampleOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
   }
@@ -746,7 +746,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createCounterexampleOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createCounterexampleOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
   }
@@ -809,7 +809,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateCounterexampleOptions.newText() != null) {
       contentJson.put('text', updateCounterexampleOptions.newText());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateCounterexampleOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
   }
@@ -924,7 +924,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createEntityOptions.values() != null) {
       contentJson.put('values', createEntityOptions.values());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createEntityOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
   }
@@ -1004,7 +1004,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateEntityOptions.newValues() != null) {
       contentJson.put('values', updateEntityOptions.newValues());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateEntityOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
   }
@@ -1151,7 +1151,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createValueOptions.patterns() != null) {
       contentJson.put('patterns', createValueOptions.patterns());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createValueOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
   }
@@ -1230,7 +1230,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateValueOptions.newPatterns() != null) {
       contentJson.put('patterns', updateValueOptions.newPatterns());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateValueOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
   }
@@ -1329,7 +1329,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('synonym', createSynonymOptions.synonym());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createSynonymOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
   }
@@ -1392,7 +1392,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateSynonymOptions.newSynonym() != null) {
       contentJson.put('synonym', updateSynonymOptions.newSynonym());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateSynonymOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
   }
@@ -1542,7 +1542,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createDialogNodeOptions.userLabel() != null) {
       contentJson.put('user_label', createDialogNodeOptions.userLabel());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createDialogNodeOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.DialogNode) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNode.class);
   }
@@ -1656,7 +1656,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateDialogNodeOptions.newUserLabel() != null) {
       contentJson.put('user_label', updateDialogNodeOptions.newUserLabel());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateDialogNodeOptions.getSdkToApiMapping()));
 
     return (IBMAssistantV1Models.DialogNode) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNode.class);
   }

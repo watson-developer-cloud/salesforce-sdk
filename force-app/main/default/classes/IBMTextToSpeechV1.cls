@@ -81,8 +81,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * Get a voice.
    *
    * Gets information about the specified voice. The information includes the name, language, gender, and other details
-   * about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
-   * voice. To list information about all available voices, use the **List voices** method.
+   * about the voice. Specify a customization ID to obtain information for a custom voice model that is defined for the
+   * language of the specified voice. To list information about all available voices, use the **List voices** method.
    *
    * **See also:** [Listing a specific
    * voice](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-voices#listVoice).
@@ -210,7 +210,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', synthesizeOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, synthesizeOptions.getSdkToApiMapping()));
 
     return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
   }
@@ -291,7 +291,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     if (createVoiceModelOptions.description() != null) {
       contentJson.put('description', createVoiceModelOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, createVoiceModelOptions.getSdkToApiMapping()));
 
     return (IBMTextToSpeechV1Models.VoiceModel) createServiceCall(builder.build(), IBMTextToSpeechV1Models.VoiceModel.class);
   }
@@ -382,7 +382,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     if (updateVoiceModelOptions.words() != null) {
       contentJson.put('words', updateVoiceModelOptions.words());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, updateVoiceModelOptions.getSdkToApiMapping()));
 
     createServiceCall(builder.build(), null);
   }
@@ -489,7 +489,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('words', addWordsOptions.words());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, addWordsOptions.getSdkToApiMapping()));
 
     createServiceCall(builder.build(), null);
   }
@@ -570,7 +570,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     if (addWordOptions.partOfSpeech() != null) {
       contentJson.put('part_of_speech', addWordOptions.partOfSpeech());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, addWordOptions.getSdkToApiMapping()));
 
     createServiceCall(builder.build(), null);
   }
