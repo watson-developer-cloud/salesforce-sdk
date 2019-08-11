@@ -20,6 +20,23 @@ public class IBMWatsonJSONUtil {
     return JSON.serialize(jsonMap);
   }
 
+  private static Map<String, Object> replacePropertyNames(Map<String, Object> jsonMap, Map<String, String> propertyNameMapping) {
+    for (String key : jsonMap.keySet()) {
+      Object jsonValue = jsonMap.get(key);
+      String keyToUse = key;
+      if (propertyNameMapping.containsKey(key)) {
+        keyToUse = propertyNameMapping.get(key);
+        jsonMap.put(keyToUse, jsonValue);
+        jsonMap.remove(key);
+      }
+      if (jsonValue instanceof Map<String, Object>) {
+        jsonMap.put(keyToUse, replacePropertyNames((Map<String, Object>) jsonValue, propertyNameMapping));
+      }
+    }
+
+    return jsonMap;
+  }
+
   /**
    * Calls appropriate methods to prepare the JSON response for deserialization. This involves removing empty
    * string values and adding the property suffix to avoid using reserved words.
