@@ -3,20 +3,16 @@
  * scope of the default JSON methods.
  */
 public class IBMWatsonJSONUtil {
+  public static String serialize(Map<String, Object> jsonMap, Map<String, String> propertyNameMapping) {
+    // need to make sure everything inside is of core Apex types so that we can manipulate it properly
+    jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(jsonMap, true));
 
+    // change keys to work with API
+    jsonMap = replacePropertyNames(jsonMap, propertyNameMapping);
 
+    // raise additional properties up a level to play well with API
+    jsonMap = raiseAdditionalProperties(jsonMap);
 
-  /**
-   * Removes '_serialized_name' suffix to match API spec and modifies JSON request string
-   * to properly handle additional properties.
-   *
-   * @param jsonString String representation of the JSON request
-   *
-   * @return String representing our modified JSON request ready to be sent
-   */
-  public static String serialize(String jsonString) {
-    jsonString = jsonString.remove('_serialized_name');
-    Map<String, Object> jsonMap = raiseAdditionalProperties((Map<String, Object>) JSON.deserializeUntyped(jsonString));
     return JSON.serialize(jsonMap);
   }
 
