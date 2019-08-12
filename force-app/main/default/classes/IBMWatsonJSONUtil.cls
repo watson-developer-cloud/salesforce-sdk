@@ -3,6 +3,7 @@
  * scope of the default JSON methods.
  */
 public class IBMWatsonJSONUtil {
+
   public static String serialize(Map<String, Object> jsonMap, Map<String, String> propertyNameMapping) {
     // need to make sure everything inside is of core Apex types so that we can manipulate it properly
     jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(jsonMap, true));
@@ -16,7 +17,7 @@ public class IBMWatsonJSONUtil {
     return JSON.serialize(jsonMap);
   }
 
-  private static Map<String, Object> replacePropertyNames(Map<String, Object> jsonMap, Map<String, String> propertyNameMapping) {
+  public static Map<String, Object> replacePropertyNames(Map<String, Object> jsonMap, Map<String, String> propertyNameMapping) {
     for (String key : jsonMap.keySet()) {
       Object jsonValue = jsonMap.get(key);
       String keyToUse = key;
