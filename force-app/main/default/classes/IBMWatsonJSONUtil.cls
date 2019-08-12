@@ -42,12 +42,12 @@ public class IBMWatsonJSONUtil {
    * @return Map representing the JSON request with moved additional properties
    */
   public static Map<String, Object> raiseAdditionalProperties(Map<String, Object> jsonMap) {
-    Map<String, Object> additionalProperties = (Map<String, Object>) jsonMap.get('additional_properties');
+    Map<String, Object> additionalProperties = (Map<String, Object>) jsonMap.get('additionalProperties');
     if (additionalProperties != null) {
       for (String key : additionalProperties.keySet()) {
         jsonMap.put(key, additionalProperties.get(key));
       }
-      jsonMap.remove('additional_properties');
+      jsonMap.remove('additionalProperties');
     }
 
     for (String key : jsonMap.keySet()) {
