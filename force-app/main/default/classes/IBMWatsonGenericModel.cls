@@ -5,7 +5,7 @@ public virtual class IBMWatsonGenericModel {
    *
    * @return serialized String form of this
    */
-  public override String toString() {
+  public virtual override String toString() {
     // get Map representation and raise additional props
     Map<String, Object> objectMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
     objectMap = IBMWatsonJSONUtil.raiseAdditionalProperties(objectMap);
@@ -47,11 +47,11 @@ public virtual class IBMWatsonGenericModel {
     return ret;
   }
 
-  public virtual Map<String, String> getSdkToApiMapping() {
-    return new Map<String, String>();
+  public virtual Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+    return mapping;
   }
 
-  public virtual Map<String, String> getApiToSdkMapping() {
-    return new Map<String, String>();
+  public virtual Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+    return mapping;
   }
 }
