@@ -115,7 +115,7 @@ public abstract class IBMWatsonService {
         if (String.isNotBlank(responseText)) {
           Object targetObject = targetType.newInstance();
           Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseText);
-          jsonMap = IBMWatsonJSONUtil.replacePropertyNames(jsonMap, ((IBMWatsonResponseModel) targetObject).getApiToSdkMapping());
+          jsonMap = IBMWatsonJSONUtil.replacePropertyNames(jsonMap, ((IBMWatsonResponseModel) targetObject).addToApiToSdkMapping('', new Map<String, String>()));
           String jsonString = JSON.serialize(jsonMap);
           if (targetObject instanceof IBMWatsonDynamicResponseModel) {
             return (IBMWatsonDynamicResponseModel) addResponseHeaders(response, ((IBMWatsonResponseModel) targetObject).deserialize(jsonString, jsonMap, targetType));
