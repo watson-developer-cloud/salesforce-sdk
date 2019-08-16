@@ -1,4 +1,4 @@
-public virtual class IBMWatsonResponseModel {
+public virtual class IBMWatsonResponseModel extends IBMWatsonGenericModel {
   private Map<String, String> headers = new Map<String, String>();
 
   /**
@@ -19,35 +19,6 @@ public virtual class IBMWatsonResponseModel {
   }
 
   /**
-   * Allows comparison of custom models based on their serialized String form.
-   *
-   * @param obj the object this is being compared to
-   *
-   * @return Boolean indicating whether or not the two objects are equal
-   */
-  public Boolean equals(Object obj) {
-    if ((obj == null)) {
-      return false;
-    }
-
-    IBMWatsonResponseModel other = (IBMWatsonResponseModel) obj;
-
-    return this.toString().equals(other.toString());
-  }
-
-  public virtual Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-    Object ret;
-    if (jsonString.equals('null')) {
-      ret = classType.newInstance();
-    }
-    else {
-      ret = JSON.deserialize(jsonString, classType);
-    }
-
-    return ret;
-  }
-
-  /**
    * Gets the response headers attached to this response model.
    */
   public Map<String, String> getHeaders() {
@@ -64,13 +35,5 @@ public virtual class IBMWatsonResponseModel {
       this.headers = new Map<String, String>();
     }
     this.headers.put(name, value);
-  }
-
-  public virtual Map<String, String> getSdkToApiMapping() {
-    return new Map<String, String>();
-  }
-
-  public virtual Map<String, String> getApiToSdkMapping() {
-    return new Map<String, String>();
   }
 }
