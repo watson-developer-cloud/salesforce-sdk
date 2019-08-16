@@ -17,7 +17,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private List<SemanticRolesResult> semanticRoles;
     private SentimentResult sentiment;
     private SyntaxResult syntax;
- 
+
     /**
      * Gets the language.
      *
@@ -29,7 +29,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the analyzedText.
      *
@@ -41,7 +41,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getAnalyzedText() {
       return analyzedText;
     }
- 
+
     /**
      * Gets the retrievedUrl.
      *
@@ -53,7 +53,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getRetrievedUrl() {
       return retrievedUrl;
     }
- 
+
     /**
      * Gets the usage.
      *
@@ -65,7 +65,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public AnalysisResultsUsage getUsage() {
       return usage;
     }
- 
+
     /**
      * Gets the concepts.
      *
@@ -77,7 +77,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<ConceptsResult> getConcepts() {
       return concepts;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -89,7 +89,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<EntitiesResult> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the keywords.
      *
@@ -101,7 +101,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<KeywordsResult> getKeywords() {
       return keywords;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -113,7 +113,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<CategoriesResult> getCategories() {
       return categories;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -125,7 +125,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public EmotionResult getEmotion() {
       return emotion;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -137,7 +137,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public AnalysisResultsMetadata getMetadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the relations.
      *
@@ -149,7 +149,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<RelationsResult> getRelations() {
       return relations;
     }
- 
+
     /**
      * Gets the semanticRoles.
      *
@@ -161,7 +161,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<SemanticRolesResult> getSemanticRoles() {
       return semanticRoles;
     }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -173,7 +173,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public SentimentResult getSentiment() {
       return sentiment;
     }
- 
+
     /**
      * Gets the syntax.
      *
@@ -420,35 +420,18 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('analyzed_text', 'analyzedText');
-      mapping.put('retrieved_url', 'retrievedUrl');
-      if (usage != null) {
-        mapping.putAll(usage.getApiToSdkMapping());
-      }
-      if (concepts != null && concepts[0] != null) {
-        mapping.putAll(concepts[0].getApiToSdkMapping());
-      }
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
-      if (categories != null && categories[0] != null) {
-        mapping.putAll(categories[0].getApiToSdkMapping());
-      }
-      if (metadata != null) {
-        mapping.putAll(metadata.getApiToSdkMapping());
-      }
-      if (relations != null && relations[0] != null) {
-        mapping.putAll(relations[0].getApiToSdkMapping());
-      }
-      mapping.put('semantic_roles', 'semanticRoles');
-      if (semanticRoles != null && semanticRoles[0] != null) {
-        mapping.putAll(semanticRoles[0].getApiToSdkMapping());
-      }
-      if (syntax != null) {
-        mapping.putAll(syntax.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'analyzed_text', 'analyzedText');
+      mapping.put(parentLabel + 'retrieved_url', 'retrievedUrl');
+      mapping.putAll(((IBMWatsonGenericModel) AnalysisResultsUsage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'usage/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) ConceptsResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'concepts/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) EntitiesResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) CategoriesResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'categories/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) AnalysisResultsMetadata.class.newInstance()).addToApiToSdkMapping(parentLabel + 'metadata/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) RelationsResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'relations/', mapping));
+      mapping.put(parentLabel + 'semantic_roles', 'semanticRoles');
+      mapping.putAll(((IBMWatsonGenericModel) SemanticRolesResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'semantic_roles/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) SyntaxResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'syntax/', mapping));
       return mapping;
     }
   }
@@ -462,7 +445,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String title;
     private String image;
     private List<Feed> feeds;
- 
+
     /**
      * Gets the authors.
      *
@@ -474,7 +457,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<Author> getAuthors() {
       return authors;
     }
- 
+
     /**
      * Gets the publicationDate.
      *
@@ -486,7 +469,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getPublicationDate() {
       return publicationDate;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -498,7 +481,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the image.
      *
@@ -510,7 +493,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getImage() {
       return image;
     }
- 
+
     /**
      * Gets the feeds.
      *
@@ -604,9 +587,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('publication_date', 'publicationDate');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'publication_date', 'publicationDate');
       return mapping;
     }
   }
@@ -618,7 +600,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Long features;
     private Long textCharacters;
     private Long textUnits;
- 
+
     /**
      * Gets the features.
      *
@@ -630,7 +612,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long getFeatures() {
       return features;
     }
- 
+
     /**
      * Gets the textCharacters.
      *
@@ -642,7 +624,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long getTextCharacters() {
       return textCharacters;
     }
- 
+
     /**
      * Gets the textUnits.
      *
@@ -682,10 +664,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.textUnits = textUnits;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('text_characters', 'textCharacters');
-      mapping.put('text_units', 'textUnits');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'text_characters', 'textCharacters');
+      mapping.put(parentLabel + 'text_units', 'textUnits');
       return mapping;
     }
   }
@@ -850,7 +831,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public override Map<String, String> getSdkToApiMapping() {
       Map<String, String> mapping = new Map<String, String>();
       if (features != null) {
-        mapping.putAll(features.getSdkToApiMapping());
+        mapping.putAll(features.addToSdkToApiMapping('', mapping));
       }
       mapping.put('fallbackToRaw', 'fallback_to_raw');
       mapping.put('returnAnalyzedText', 'return_analyzed_text');
@@ -1040,7 +1021,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class Author extends IBMWatsonGenericModel {
     private String name;
- 
+
     /**
      * Gets the name.
      *
@@ -1072,7 +1053,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean explanation;
     private Long xlimit;
     private String model;
- 
+
     /**
      * Gets the explanation.
      *
@@ -1084,7 +1065,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Boolean explanation() {
       return explanation;
     }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -1095,7 +1076,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long xlimit() {
       return xlimit;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -1124,9 +1105,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new CategoriesOptionsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
   }
@@ -1199,7 +1179,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class CategoriesRelevantText extends IBMWatsonGenericModel {
     private String text;
- 
+
     /**
      * Gets the text.
      *
@@ -1229,7 +1209,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String label;
     private Double score;
     private CategoriesResultExplanation explanation;
- 
+
     /**
      * Gets the label.
      *
@@ -1244,7 +1224,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getLabel() {
       return label;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -1256,7 +1236,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getScore() {
       return score;
     }
- 
+
     /**
      * Gets the explanation.
      *
@@ -1310,11 +1290,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (explanation != null) {
-        mapping.putAll(explanation.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) CategoriesResultExplanation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'explanation/', mapping));
       return mapping;
     }
   }
@@ -1324,7 +1301,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class CategoriesResultExplanation extends IBMWatsonGenericModel {
     private List<CategoriesRelevantText> relevantText;
- 
+
     /**
      * Gets the relevantText.
      *
@@ -1371,9 +1348,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('relevant_text', 'relevantText');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'relevant_text', 'relevantText');
       return mapping;
     }
   }
@@ -1386,7 +1366,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class ConceptsOptions extends IBMWatsonGenericModel {
     private Long xlimit;
- 
+
     /**
      * Gets the xlimit.
      *
@@ -1411,9 +1391,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new ConceptsOptionsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
   }
@@ -1462,7 +1445,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String text;
     private Double relevance;
     private String dbpediaResource;
- 
+
     /**
      * Gets the text.
      *
@@ -1474,7 +1457,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the relevance.
      *
@@ -1486,7 +1469,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getRelevance() {
       return relevance;
     }
- 
+
     /**
      * Gets the dbpediaResource.
      *
@@ -1526,9 +1509,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.dbpediaResource = dbpediaResource;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dbpedia_resource', 'dbpediaResource');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'dbpedia_resource', 'dbpediaResource');
       return mapping;
     }
   }
@@ -1638,7 +1620,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String name;
     private String dbpediaResource;
     private List<String> subtype;
- 
+
     /**
      * Gets the name.
      *
@@ -1650,7 +1632,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the dbpediaResource.
      *
@@ -1662,7 +1644,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getDbpediaResource() {
       return dbpediaResource;
     }
- 
+
     /**
      * Gets the subtype.
      *
@@ -1702,9 +1684,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.subtype = subtype;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dbpedia_resource', 'dbpediaResource');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'dbpedia_resource', 'dbpediaResource');
       return mapping;
     }
   }
@@ -1714,7 +1695,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class DocumentEmotionResults extends IBMWatsonGenericModel {
     private EmotionScores emotion;
- 
+
     /**
      * Gets the emotion.
      *
@@ -1757,7 +1738,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class DocumentSentimentResults extends IBMWatsonGenericModel {
     private String label;
     private Double score;
- 
+
     /**
      * Gets the label.
      *
@@ -1769,7 +1750,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getLabel() {
       return label;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -1811,7 +1792,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class EmotionOptions extends IBMWatsonGenericModel {
     private Boolean document;
     private List<String> targets;
- 
+
     /**
      * Gets the document.
      *
@@ -1822,7 +1803,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Boolean document() {
       return document;
     }
- 
+
     /**
      * Gets the targets.
      *
@@ -1922,7 +1903,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class EmotionResult extends IBMWatsonGenericModel {
     private DocumentEmotionResults document;
     private List<TargetedEmotionResults> targets;
- 
+
     /**
      * Gets the document.
      *
@@ -1934,7 +1915,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public DocumentEmotionResults getDocument() {
       return document;
     }
- 
+
     /**
      * Gets the targets.
      *
@@ -2002,7 +1983,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Double fear;
     private Double joy;
     private Double sadness;
- 
+
     /**
      * Gets the anger.
      *
@@ -2014,7 +1995,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getAnger() {
       return anger;
     }
- 
+
     /**
      * Gets the disgust.
      *
@@ -2026,7 +2007,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getDisgust() {
       return disgust;
     }
- 
+
     /**
      * Gets the fear.
      *
@@ -2038,7 +2019,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getFear() {
       return fear;
     }
- 
+
     /**
      * Gets the joy.
      *
@@ -2050,7 +2031,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getJoy() {
       return joy;
     }
- 
+
     /**
      * Gets the sadness.
      *
@@ -2122,7 +2103,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String model;
     private Boolean sentiment;
     private Boolean emotion;
- 
+
     /**
      * Gets the xlimit.
      *
@@ -2133,7 +2114,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long xlimit() {
       return xlimit;
     }
- 
+
     /**
      * Gets the mentions.
      *
@@ -2144,7 +2125,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Boolean mentions() {
       return mentions;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -2157,7 +2138,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String model() {
       return model;
     }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -2168,7 +2149,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Boolean sentiment() {
       return sentiment;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -2197,9 +2178,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new EntitiesOptionsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
   }
@@ -2306,7 +2290,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private EmotionScores emotion;
     private FeatureSentimentResults sentiment;
     private DisambiguationResult disambiguation;
- 
+
     /**
      * Gets the xtype.
      *
@@ -2318,7 +2302,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -2330,7 +2314,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the relevance.
      *
@@ -2342,7 +2326,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getRelevance() {
       return relevance;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -2356,7 +2340,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getConfidence() {
       return confidence;
     }
- 
+
     /**
      * Gets the mentions.
      *
@@ -2368,7 +2352,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<EntityMention> getMentions() {
       return mentions;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -2380,7 +2364,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long getCount() {
       return count;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -2392,7 +2376,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public EmotionScores getEmotion() {
       return emotion;
     }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -2404,7 +2388,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public FeatureSentimentResults getSentiment() {
       return sentiment;
     }
- 
+
     /**
      * Gets the disambiguation.
      *
@@ -2533,12 +2517,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      if (disambiguation != null) {
-        mapping.putAll(disambiguation.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.putAll(((IBMWatsonGenericModel) DisambiguationResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'disambiguation/', mapping));
       return mapping;
     }
   }
@@ -2550,7 +2535,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String text;
     private List<Long> location;
     private Double confidence;
- 
+
     /**
      * Gets the text.
      *
@@ -2562,7 +2547,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -2574,7 +2559,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<Long> getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -2622,7 +2607,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class FeatureSentimentResults extends IBMWatsonGenericModel {
     private Double score;
- 
+
     /**
      * Gets the score.
      *
@@ -2659,7 +2644,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private SentimentOptions sentiment;
     private CategoriesOptions categories;
     private SyntaxOptions syntax;
- 
+
     /**
      * Gets the concepts.
      *
@@ -2673,7 +2658,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public ConceptsOptions concepts() {
       return concepts;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -2688,7 +2673,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public EmotionOptions emotion() {
       return emotion;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -2703,7 +2688,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public EntitiesOptions entities() {
       return entities;
     }
- 
+
     /**
      * Gets the keywords.
      *
@@ -2716,7 +2701,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public KeywordsOptions keywords() {
       return keywords;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -2728,7 +2713,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public MetadataOptions metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the relations.
      *
@@ -2744,7 +2729,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public RelationsOptions relations() {
       return relations;
     }
- 
+
     /**
      * Gets the semanticRoles.
      *
@@ -2757,7 +2742,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public SemanticRolesOptions semanticRoles() {
       return semanticRoles;
     }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -2771,7 +2756,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public SentimentOptions sentiment() {
       return sentiment;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -2784,7 +2769,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public CategoriesOptions categories() {
       return categories;
     }
- 
+
     /**
      * Gets the syntax.
      *
@@ -2818,26 +2803,25 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new FeaturesBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (concepts != null) {
-        mapping.putAll(concepts.getSdkToApiMapping());
+        mapping.putAll(concepts.addToSdkToApiMapping(parentLabel + 'concepts/', mapping));
       }
       if (entities != null) {
-        mapping.putAll(entities.getSdkToApiMapping());
+        mapping.putAll(entities.addToSdkToApiMapping(parentLabel + 'entities/', mapping));
       }
       if (keywords != null) {
-        mapping.putAll(keywords.getSdkToApiMapping());
+        mapping.putAll(keywords.addToSdkToApiMapping(parentLabel + 'keywords/', mapping));
       }
-      mapping.put('semanticRoles', 'semantic_roles');
+      mapping.put(parentLabel + 'semanticRoles', 'semantic_roles');
       if (semanticRoles != null) {
-        mapping.putAll(semanticRoles.getSdkToApiMapping());
+        mapping.putAll(semanticRoles.addToSdkToApiMapping(parentLabel + 'semanticRoles/', mapping));
       }
       if (categories != null) {
-        mapping.putAll(categories.getSdkToApiMapping());
+        mapping.putAll(categories.addToSdkToApiMapping(parentLabel + 'categories/', mapping));
       }
       if (syntax != null) {
-        mapping.putAll(syntax.getSdkToApiMapping());
+        mapping.putAll(syntax.addToSdkToApiMapping(parentLabel + 'syntax/', mapping));
       }
       return mapping;
     }
@@ -3002,7 +2986,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class Feed extends IBMWatsonGenericModel {
     private String link;
- 
+
     /**
      * Gets the link.
      *
@@ -3034,7 +3018,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Long xlimit;
     private Boolean sentiment;
     private Boolean emotion;
- 
+
     /**
      * Gets the xlimit.
      *
@@ -3045,7 +3029,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long xlimit() {
       return xlimit;
     }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -3056,7 +3040,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Boolean sentiment() {
       return sentiment;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -3083,9 +3067,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new KeywordsOptionsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
   }
@@ -3162,7 +3149,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String text;
     private EmotionScores emotion;
     private FeatureSentimentResults sentiment;
- 
+
     /**
      * Gets the count.
      *
@@ -3174,7 +3161,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long getCount() {
       return count;
     }
- 
+
     /**
      * Gets the relevance.
      *
@@ -3186,7 +3173,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getRelevance() {
       return relevance;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -3198,7 +3185,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -3210,7 +3197,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public EmotionScores getEmotion() {
       return emotion;
     }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -3348,7 +3335,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class ListModelsResults extends IBMWatsonResponseModel {
     private List<Model> models;
- 
+
     /**
      * Gets the models.
      *
@@ -3393,11 +3380,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (models != null && models[0] != null) {
-        mapping.putAll(models[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Model.class.newInstance()).addToApiToSdkMapping(parentLabel + 'models/', mapping));
       return mapping;
     }
   }
@@ -3457,7 +3441,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String version;
     private String versionDescription;
     private Datetime created;
- 
+
     /**
      * Gets the status.
      *
@@ -3469,7 +3453,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -3481,7 +3465,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getModelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -3493,7 +3477,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -3505,7 +3489,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -3517,7 +3501,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getWorkspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the version.
      *
@@ -3529,7 +3513,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getVersion() {
       return version;
     }
- 
+
     /**
      * Gets the versionDescription.
      *
@@ -3541,7 +3525,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getVersionDescription() {
       return versionDescription;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -3626,11 +3610,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.created = created;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('model_id', 'modelId');
-      mapping.put('workspace_id', 'workspaceId');
-      mapping.put('version_description', 'versionDescription');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'model_id', 'modelId');
+      mapping.put(parentLabel + 'workspace_id', 'workspaceId');
+      mapping.put(parentLabel + 'version_description', 'versionDescription');
       return mapping;
     }
   }
@@ -3642,7 +3625,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private List<RelationEntity> entities;
     private List<Long> location;
     private String text;
- 
+
     /**
      * Gets the entities.
      *
@@ -3654,7 +3637,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<RelationEntity> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -3666,7 +3649,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<Long> getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -3729,11 +3712,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) RelationEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
       return mapping;
     }
   }
@@ -3744,7 +3724,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class RelationEntity extends IBMWatsonGenericModel {
     private String text;
     private String xtype;
- 
+
     /**
      * Gets the text.
      *
@@ -3756,7 +3736,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the xtype.
      *
@@ -3787,9 +3767,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.xtype = xtype;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'type', 'xtype');
       return mapping;
     }
   }
@@ -3804,7 +3783,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class RelationsOptions extends IBMWatsonGenericModel {
     private String model;
- 
+
     /**
      * Gets the model.
      *
@@ -3877,7 +3856,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String sentence;
     private String xtype;
     private List<RelationArgument> arguments;
- 
+
     /**
      * Gets the score.
      *
@@ -3889,7 +3868,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getScore() {
       return score;
     }
- 
+
     /**
      * Gets the sentence.
      *
@@ -3901,7 +3880,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getSentence() {
       return sentence;
     }
- 
+
     /**
      * Gets the xtype.
      *
@@ -3913,7 +3892,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the arguments.
      *
@@ -3985,12 +3964,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      if (arguments != null && arguments[0] != null) {
-        mapping.putAll(arguments[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.putAll(((IBMWatsonGenericModel) RelationArgument.class.newInstance()).addToApiToSdkMapping(parentLabel + 'arguments/', mapping));
       return mapping;
     }
   }
@@ -4001,7 +3977,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SemanticRolesEntity extends IBMWatsonGenericModel {
     private String xtype;
     private String text;
- 
+
     /**
      * Gets the xtype.
      *
@@ -4013,7 +3989,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -4044,9 +4020,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.text = text;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'type', 'xtype');
       return mapping;
     }
   }
@@ -4056,7 +4035,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class SemanticRolesKeyword extends IBMWatsonGenericModel {
     private String text;
- 
+
     /**
      * Gets the text.
      *
@@ -4088,7 +4067,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Long xlimit;
     private Boolean keywords;
     private Boolean entities;
- 
+
     /**
      * Gets the xlimit.
      *
@@ -4099,7 +4078,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long xlimit() {
       return xlimit;
     }
- 
+
     /**
      * Gets the keywords.
      *
@@ -4110,7 +4089,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Boolean keywords() {
       return keywords;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -4137,9 +4116,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SemanticRolesOptionsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
   }
@@ -4215,7 +4197,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private SemanticRolesResultSubject subject;
     private SemanticRolesResultAction action;
     private SemanticRolesResultObject xobject;
- 
+
     /**
      * Gets the sentence.
      *
@@ -4227,7 +4209,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getSentence() {
       return sentence;
     }
- 
+
     /**
      * Gets the subject.
      *
@@ -4239,7 +4221,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public SemanticRolesResultSubject getSubject() {
       return subject;
     }
- 
+
     /**
      * Gets the action.
      *
@@ -4251,7 +4233,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public SemanticRolesResultAction getAction() {
       return action;
     }
- 
+
     /**
      * Gets the xobject.
      *
@@ -4322,12 +4304,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (subject != null) {
-        mapping.putAll(subject.getApiToSdkMapping());
-      }
-      mapping.put('object', 'xobject');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) SemanticRolesResultSubject.class.newInstance()).addToApiToSdkMapping(parentLabel + 'subject/', mapping));
+      mapping.put(parentLabel + 'object', 'xobject');
       return mapping;
     }
   }
@@ -4339,7 +4318,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String text;
     private String normalized;
     private SemanticRolesVerb verb;
- 
+
     /**
      * Gets the text.
      *
@@ -4351,7 +4330,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the normalized.
      *
@@ -4363,7 +4342,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getNormalized() {
       return normalized;
     }
- 
+
     /**
      * Gets the verb.
      *
@@ -4422,7 +4401,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SemanticRolesResultObject extends IBMWatsonGenericModel {
     private String text;
     private List<SemanticRolesKeyword> keywords;
- 
+
     /**
      * Gets the text.
      *
@@ -4434,7 +4413,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the keywords.
      *
@@ -4496,7 +4475,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String text;
     private List<SemanticRolesEntity> entities;
     private List<SemanticRolesKeyword> keywords;
- 
+
     /**
      * Gets the text.
      *
@@ -4508,7 +4487,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -4520,7 +4499,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<SemanticRolesEntity> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the keywords.
      *
@@ -4596,11 +4575,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) SemanticRolesEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
       return mapping;
     }
   }
@@ -4611,7 +4587,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SemanticRolesVerb extends IBMWatsonGenericModel {
     private String text;
     private String tense;
- 
+
     /**
      * Gets the text.
      *
@@ -4623,7 +4599,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the tense.
      *
@@ -4661,7 +4637,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SentenceResult extends IBMWatsonGenericModel {
     private String text;
     private List<Long> location;
- 
+
     /**
      * Gets the text.
      *
@@ -4673,7 +4649,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -4714,7 +4690,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SentimentOptions extends IBMWatsonGenericModel {
     private Boolean document;
     private List<String> targets;
- 
+
     /**
      * Gets the document.
      *
@@ -4725,7 +4701,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Boolean document() {
       return document;
     }
- 
+
     /**
      * Gets the targets.
      *
@@ -4824,7 +4800,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SentimentResult extends IBMWatsonGenericModel {
     private DocumentSentimentResults document;
     private List<TargetedSentimentResults> targets;
- 
+
     /**
      * Gets the document.
      *
@@ -4836,7 +4812,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public DocumentSentimentResults getDocument() {
       return document;
     }
- 
+
     /**
      * Gets the targets.
      *
@@ -4901,7 +4877,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SyntaxOptions extends IBMWatsonGenericModel {
     private SyntaxOptionsTokens tokens;
     private Boolean sentences;
- 
+
     /**
      * Gets the tokens.
      *
@@ -4912,7 +4888,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public SyntaxOptionsTokens tokens() {
       return tokens;
     }
- 
+
     /**
      * Gets the sentences.
      *
@@ -4938,10 +4914,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SyntaxOptionsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (tokens != null) {
-        mapping.putAll(tokens.getSdkToApiMapping());
+        mapping.putAll(tokens.addToSdkToApiMapping(parentLabel + 'tokens/', mapping));
       }
       return mapping;
     }
@@ -5003,7 +4978,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SyntaxOptionsTokens extends IBMWatsonGenericModel {
     private Boolean lemma;
     private Boolean partOfSpeech;
- 
+
     /**
      * Gets the lemma.
      *
@@ -5014,7 +4989,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Boolean getLemma() {
       return lemma;
     }
- 
+
     /**
      * Gets the partOfSpeech.
      *
@@ -5040,9 +5015,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SyntaxOptionsTokensBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('partOfSpeech', 'part_of_speech');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'partOfSpeech', 'part_of_speech');
       return mapping;
     }
   }
@@ -5080,7 +5054,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * @param lemma the lemma
      * @return the SyntaxOptionsTokens builder
      */
-    public SyntaxOptionsTokensBuilder setLemma(Boolean lemma) {
+    public SyntaxOptionsTokensBuilder lemma(Boolean lemma) {
       this.lemma = lemma;
       return this;
     }
@@ -5091,7 +5065,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * @param partOfSpeech the partOfSpeech
      * @return the SyntaxOptionsTokens builder
      */
-    public SyntaxOptionsTokensBuilder setPartOfSpeech(Boolean partOfSpeech) {
+    public SyntaxOptionsTokensBuilder partOfSpeech(Boolean partOfSpeech) {
       this.partOfSpeech = partOfSpeech;
       return this;
     }
@@ -5103,7 +5077,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class SyntaxResult extends IBMWatsonGenericModel {
     private List<TokenResult> tokens;
     private List<SentenceResult> sentences;
- 
+
     /**
      * Gets the tokens.
      *
@@ -5113,7 +5087,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<TokenResult> getTokens() {
       return tokens;
     }
- 
+
     /**
      * Gets the sentences.
      *
@@ -5178,11 +5152,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (tokens != null && tokens[0] != null) {
-        mapping.putAll(tokens[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) TokenResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tokens/', mapping));
       return mapping;
     }
   }
@@ -5193,7 +5164,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class TargetedEmotionResults extends IBMWatsonGenericModel {
     private String text;
     private EmotionScores emotion;
- 
+
     /**
      * Gets the text.
      *
@@ -5205,7 +5176,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -5257,7 +5228,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class TargetedSentimentResults extends IBMWatsonGenericModel {
     private String text;
     private Double score;
- 
+
     /**
      * Gets the text.
      *
@@ -5269,7 +5240,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -5309,7 +5280,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String partOfSpeech;
     private List<Long> location;
     private String lemma;
- 
+
     /**
      * Gets the text.
      *
@@ -5321,7 +5292,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the partOfSpeech.
      *
@@ -5334,7 +5305,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getPartOfSpeech() {
       return partOfSpeech;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -5346,7 +5317,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public List<Long> getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the lemma.
      *
@@ -5395,9 +5366,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.lemma = lemma;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('part_of_speech', 'partOfSpeech');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'part_of_speech', 'partOfSpeech');
       return mapping;
     }
   }

@@ -11,7 +11,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public CaptureGroup() { }
- 
+
     /**
      * Gets the xgroup.
      *
@@ -23,7 +23,7 @@ public class IBMAssistantV1Models {
     public String getXgroup() {
       return xgroup;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -51,15 +51,21 @@ public class IBMAssistantV1Models {
       return new CaptureGroupBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xgroup', 'group');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xgroup', 'group');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('group', 'xgroup');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'group', 'xgroup');
       return mapping;
     }
   }
@@ -121,7 +127,7 @@ public class IBMAssistantV1Models {
      * @param xgroup the xgroup
      * @return the CaptureGroup builder
      */
-    public CaptureGroupBuilder setXgroup(String xgroup) {
+    public CaptureGroupBuilder xgroup(String xgroup) {
       this.xgroup = xgroup;
       return this;
     }
@@ -133,7 +139,7 @@ public class IBMAssistantV1Models {
      * @param location the location
      * @return the CaptureGroup builder
      */
-    public CaptureGroupBuilder setLocation(List<Long> location) {
+    public CaptureGroupBuilder location(List<Long> location) {
       this.location = location;
       return this;
     }
@@ -146,7 +152,7 @@ public class IBMAssistantV1Models {
     private String conversationId;
     private SystemResponse xsystem;
     private MessageContextMetadata metadata;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -219,11 +225,11 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for xsystem
       SystemResponse newXsystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(ret.getXsystem()), (Map<String, Object>) jsonMap.get('xsystem'), SystemResponse.class);
-      retBuilder.setXsystem(newXsystem);
+      retBuilder.xsystem(newXsystem);
 
       // calling custom deserializer for metadata
       MessageContextMetadata newMetadata = (MessageContextMetadata) new MessageContextMetadata().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), MessageContextMetadata.class);
-      retBuilder.setMetadata(newMetadata);
+      retBuilder.metadata(newMetadata);
 
       Context builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
@@ -237,23 +243,27 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('conversationId', 'conversation_id');
-      mapping.put('xsystem', 'system');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'conversationId', 'conversation_id');
+      mapping.put(parentLabel + 'xsystem', 'system');
       if (metadata != null) {
-        mapping.putAll(metadata.getSdkToApiMapping());
+        mapping.putAll(metadata.addToSdkToApiMapping(parentLabel + 'metadata/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('conversation_id', 'conversationId');
-      mapping.put('system', 'xsystem');
-      if (metadata != null) {
-        mapping.putAll(metadata.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'conversation_id', 'conversationId');
+      mapping.put(parentLabel + 'system', 'xsystem');
+      mapping.putAll(((IBMWatsonGenericModel) MessageContextMetadata.class.newInstance()).addToApiToSdkMapping(parentLabel + 'metadata/', mapping));
       return mapping;
     }
   }
@@ -292,7 +302,7 @@ public class IBMAssistantV1Models {
      * @param conversationId the conversationId
      * @return the Context builder
      */
-    public ContextBuilder setConversationId(String conversationId) {
+    public ContextBuilder conversationId(String conversationId) {
       this.conversationId = conversationId;
       return this;
     }
@@ -303,7 +313,7 @@ public class IBMAssistantV1Models {
      * @param xsystem the xsystem
      * @return the Context builder
      */
-    public ContextBuilder setXsystem(SystemResponse xsystem) {
+    public ContextBuilder xsystem(SystemResponse xsystem) {
       this.xsystem = xsystem;
       return this;
     }
@@ -314,7 +324,7 @@ public class IBMAssistantV1Models {
      * @param metadata the metadata
      * @return the Context builder
      */
-    public ContextBuilder setMetadata(MessageContextMetadata metadata) {
+    public ContextBuilder metadata(MessageContextMetadata metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -333,7 +343,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public Counterexample() { }
- 
+
     /**
      * Gets the text.
      *
@@ -347,7 +357,7 @@ public class IBMAssistantV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -359,7 +369,7 @@ public class IBMAssistantV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -467,7 +477,7 @@ public class IBMAssistantV1Models {
   public class CounterexampleCollection extends IBMWatsonResponseModel {
     private List<Counterexample> counterexamples;
     private Pagination pagination;
- 
+
     /**
      * Gets the counterexamples.
      *
@@ -479,7 +489,7 @@ public class IBMAssistantV1Models {
     public List<Counterexample> getCounterexamples() {
       return counterexamples;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -537,11 +547,8 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -963,16 +970,16 @@ public class IBMAssistantV1Models {
       mapping.put('dialogNode', 'dialog_node');
       mapping.put('previousSibling', 'previous_sibling');
       if (output != null) {
-        mapping.putAll(output.getSdkToApiMapping());
+        mapping.putAll(output.addToSdkToApiMapping('', mapping));
       }
       mapping.put('nextStep', 'next_step');
       if (nextStep != null) {
-        mapping.putAll(nextStep.getSdkToApiMapping());
+        mapping.putAll(nextStep.addToSdkToApiMapping('', mapping));
       }
       mapping.put('nodeType', 'type');
       mapping.put('eventName', 'event_name');
       if (actions != null && actions[0] != null) {
-        mapping.putAll(actions[0].getSdkToApiMapping());
+        mapping.putAll(actions[0].addToSdkToApiMapping('', mapping));
       }
       mapping.put('digressIn', 'digress_in');
       mapping.put('digressOut', 'digress_out');
@@ -1332,7 +1339,7 @@ public class IBMAssistantV1Models {
     private Datetime created;
     private Datetime updated;
     private List<CreateValue> values;
- 
+
     /**
      * Gets the entity.
      *
@@ -1346,7 +1353,7 @@ public class IBMAssistantV1Models {
     public String entity() {
       return entity;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -1357,7 +1364,7 @@ public class IBMAssistantV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -1368,7 +1375,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the fuzzyMatch.
      *
@@ -1379,7 +1386,7 @@ public class IBMAssistantV1Models {
     public Boolean fuzzyMatch() {
       return fuzzyMatch;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -1390,7 +1397,7 @@ public class IBMAssistantV1Models {
     public Datetime created() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -1401,7 +1408,7 @@ public class IBMAssistantV1Models {
     public Datetime updated() {
       return updated;
     }
- 
+
     /**
      * Gets the values.
      *
@@ -1433,11 +1440,10 @@ public class IBMAssistantV1Models {
       return new CreateEntityBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('fuzzyMatch', 'fuzzy_match');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'fuzzyMatch', 'fuzzy_match');
       if (values != null && values[0] != null) {
-        mapping.putAll(values[0].getSdkToApiMapping());
+        mapping.putAll(values[0].addToSdkToApiMapping(parentLabel + 'values/', mapping));
       }
       return mapping;
     }
@@ -1689,7 +1695,7 @@ public class IBMAssistantV1Models {
       mapping.put('workspaceId', 'workspace_id');
       mapping.put('fuzzyMatch', 'fuzzy_match');
       if (values != null && values[0] != null) {
-        mapping.putAll(values[0].getSdkToApiMapping());
+        mapping.putAll(values[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -2058,7 +2064,7 @@ public class IBMAssistantV1Models {
     private Datetime created;
     private Datetime updated;
     private List<Example> examples;
- 
+
     /**
      * Gets the intent.
      *
@@ -2071,7 +2077,7 @@ public class IBMAssistantV1Models {
     public String intent() {
       return intent;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -2082,7 +2088,7 @@ public class IBMAssistantV1Models {
     public String description() {
       return description;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -2093,7 +2099,7 @@ public class IBMAssistantV1Models {
     public Datetime created() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -2104,7 +2110,7 @@ public class IBMAssistantV1Models {
     public Datetime updated() {
       return updated;
     }
- 
+
     /**
      * Gets the examples.
      *
@@ -2655,7 +2661,7 @@ public class IBMAssistantV1Models {
     private List<String> patterns;
     private Datetime created;
     private Datetime updated;
- 
+
     /**
      * Gets the value.
      *
@@ -2668,7 +2674,7 @@ public class IBMAssistantV1Models {
     public String value() {
       return value;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -2679,7 +2685,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the valueType.
      *
@@ -2690,7 +2696,7 @@ public class IBMAssistantV1Models {
     public String valueType() {
       return valueType;
     }
- 
+
     /**
      * Gets the synonyms.
      *
@@ -2704,7 +2710,7 @@ public class IBMAssistantV1Models {
     public List<String> synonyms() {
       return synonyms;
     }
- 
+
     /**
      * Gets the patterns.
      *
@@ -2718,7 +2724,7 @@ public class IBMAssistantV1Models {
     public List<String> patterns() {
       return patterns;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -2729,7 +2735,7 @@ public class IBMAssistantV1Models {
     public Datetime created() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -2761,9 +2767,8 @@ public class IBMAssistantV1Models {
       return new CreateValueBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('valueType', 'type');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'valueType', 'type');
       return mapping;
     }
   }
@@ -3379,14 +3384,14 @@ public class IBMAssistantV1Models {
       mapping.put('learningOptOut', 'learning_opt_out');
       mapping.put('systemSettings', 'system_settings');
       if (systemSettings != null) {
-        mapping.putAll(systemSettings.getSdkToApiMapping());
+        mapping.putAll(systemSettings.addToSdkToApiMapping('', mapping));
       }
       if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getSdkToApiMapping());
+        mapping.putAll(entities[0].addToSdkToApiMapping('', mapping));
       }
       mapping.put('dialogNodes', 'dialog_nodes');
       if (dialogNodes != null && dialogNodes[0] != null) {
-        mapping.putAll(dialogNodes[0].getSdkToApiMapping());
+        mapping.putAll(dialogNodes[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -4856,7 +4861,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogNode() { }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -4869,7 +4874,7 @@ public class IBMAssistantV1Models {
     public String getDialogNode() {
       return dialogNode;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -4881,7 +4886,7 @@ public class IBMAssistantV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the conditions.
      *
@@ -4894,7 +4899,7 @@ public class IBMAssistantV1Models {
     public String getConditions() {
       return conditions;
     }
- 
+
     /**
      * Gets the parent.
      *
@@ -4906,7 +4911,7 @@ public class IBMAssistantV1Models {
     public String getParent() {
       return parent;
     }
- 
+
     /**
      * Gets the previousSibling.
      *
@@ -4918,7 +4923,7 @@ public class IBMAssistantV1Models {
     public String getPreviousSibling() {
       return previousSibling;
     }
- 
+
     /**
      * Gets the output.
      *
@@ -4931,7 +4936,7 @@ public class IBMAssistantV1Models {
     public DialogNodeOutput getOutput() {
       return output;
     }
- 
+
     /**
      * Gets the context.
      *
@@ -4943,7 +4948,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getContext() {
       return context;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -4955,7 +4960,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getMetadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the nextStep.
      *
@@ -4967,7 +4972,7 @@ public class IBMAssistantV1Models {
     public DialogNodeNextStep getNextStep() {
       return nextStep;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -4980,7 +4985,7 @@ public class IBMAssistantV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the nodeType.
      *
@@ -4992,7 +4997,7 @@ public class IBMAssistantV1Models {
     public String getNodeType() {
       return nodeType;
     }
- 
+
     /**
      * Gets the eventName.
      *
@@ -5004,7 +5009,7 @@ public class IBMAssistantV1Models {
     public String getEventName() {
       return eventName;
     }
- 
+
     /**
      * Gets the variable.
      *
@@ -5016,7 +5021,7 @@ public class IBMAssistantV1Models {
     public String getVariable() {
       return variable;
     }
- 
+
     /**
      * Gets the actions.
      *
@@ -5028,7 +5033,7 @@ public class IBMAssistantV1Models {
     public List<DialogNodeAction> getActions() {
       return actions;
     }
- 
+
     /**
      * Gets the digressIn.
      *
@@ -5040,7 +5045,7 @@ public class IBMAssistantV1Models {
     public String getDigressIn() {
       return digressIn;
     }
- 
+
     /**
      * Gets the digressOut.
      *
@@ -5052,7 +5057,7 @@ public class IBMAssistantV1Models {
     public String getDigressOut() {
       return digressOut;
     }
- 
+
     /**
      * Gets the digressOutSlots.
      *
@@ -5064,7 +5069,7 @@ public class IBMAssistantV1Models {
     public String getDigressOutSlots() {
       return digressOutSlots;
     }
- 
+
     /**
      * Gets the userLabel.
      *
@@ -5076,7 +5081,7 @@ public class IBMAssistantV1Models {
     public String getUserLabel() {
       return userLabel;
     }
- 
+
     /**
      * Gets the disabled.
      *
@@ -5088,7 +5093,7 @@ public class IBMAssistantV1Models {
     public Boolean getDisabled() {
       return disabled;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -5100,7 +5105,7 @@ public class IBMAssistantV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -5187,49 +5192,49 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dialogNode', 'dialog_node');
-      mapping.put('previousSibling', 'previous_sibling');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'dialogNode', 'dialog_node');
+      mapping.put(parentLabel + 'previousSibling', 'previous_sibling');
       if (output != null) {
-        mapping.putAll(output.getSdkToApiMapping());
+        mapping.putAll(output.addToSdkToApiMapping(parentLabel + 'output/', mapping));
       }
-      mapping.put('nextStep', 'next_step');
+      mapping.put(parentLabel + 'nextStep', 'next_step');
       if (nextStep != null) {
-        mapping.putAll(nextStep.getSdkToApiMapping());
+        mapping.putAll(nextStep.addToSdkToApiMapping(parentLabel + 'nextStep/', mapping));
       }
-      mapping.put('nodeType', 'type');
-      mapping.put('eventName', 'event_name');
+      mapping.put(parentLabel + 'nodeType', 'type');
+      mapping.put(parentLabel + 'eventName', 'event_name');
       if (actions != null && actions[0] != null) {
-        mapping.putAll(actions[0].getSdkToApiMapping());
+        mapping.putAll(actions[0].addToSdkToApiMapping(parentLabel + 'actions/', mapping));
       }
-      mapping.put('digressIn', 'digress_in');
-      mapping.put('digressOut', 'digress_out');
-      mapping.put('digressOutSlots', 'digress_out_slots');
-      mapping.put('userLabel', 'user_label');
+      mapping.put(parentLabel + 'digressIn', 'digress_in');
+      mapping.put(parentLabel + 'digressOut', 'digress_out');
+      mapping.put(parentLabel + 'digressOutSlots', 'digress_out_slots');
+      mapping.put(parentLabel + 'userLabel', 'user_label');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dialog_node', 'dialogNode');
-      mapping.put('previous_sibling', 'previousSibling');
-      if (output != null) {
-        mapping.putAll(output.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('next_step', 'nextStep');
-      if (nextStep != null) {
-        mapping.putAll(nextStep.getApiToSdkMapping());
-      }
-      mapping.put('type', 'nodeType');
-      mapping.put('event_name', 'eventName');
-      if (actions != null && actions[0] != null) {
-        mapping.putAll(actions[0].getApiToSdkMapping());
-      }
-      mapping.put('digress_in', 'digressIn');
-      mapping.put('digress_out', 'digressOut');
-      mapping.put('digress_out_slots', 'digressOutSlots');
-      mapping.put('user_label', 'userLabel');
+      mapping.put(parentLabel + 'dialog_node', 'dialogNode');
+      mapping.put(parentLabel + 'previous_sibling', 'previousSibling');
+      mapping.putAll(((IBMWatsonDynamicModel) DialogNodeOutput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'output/', mapping));
+      mapping.put(parentLabel + 'next_step', 'nextStep');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeNextStep.class.newInstance()).addToApiToSdkMapping(parentLabel + 'next_step/', mapping));
+      mapping.put(parentLabel + 'type', 'nodeType');
+      mapping.put(parentLabel + 'event_name', 'eventName');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeAction.class.newInstance()).addToApiToSdkMapping(parentLabel + 'actions/', mapping));
+      mapping.put(parentLabel + 'digress_in', 'digressIn');
+      mapping.put(parentLabel + 'digress_out', 'digressOut');
+      mapping.put(parentLabel + 'digress_out_slots', 'digressOutSlots');
+      mapping.put(parentLabel + 'user_label', 'userLabel');
       return mapping;
     }
   }
@@ -5571,7 +5576,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogNodeAction() { }
- 
+
     /**
      * Gets the name.
      *
@@ -5583,7 +5588,7 @@ public class IBMAssistantV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the actionType.
      *
@@ -5595,7 +5600,7 @@ public class IBMAssistantV1Models {
     public String getActionType() {
       return actionType;
     }
- 
+
     /**
      * Gets the parameters.
      *
@@ -5607,7 +5612,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getParameters() {
       return parameters;
     }
- 
+
     /**
      * Gets the resultVariable.
      *
@@ -5619,7 +5624,7 @@ public class IBMAssistantV1Models {
     public String getResultVariable() {
       return resultVariable;
     }
- 
+
     /**
      * Gets the credentials.
      *
@@ -5661,22 +5666,20 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for parameters
       IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getParameters()), (Map<String, Object>) jsonMap.get('parameters'), IBMWatsonMapModel.class);
-      retBuilder.setParameters(newParameters);
+      retBuilder.parameters(newParameters);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('actionType', 'type');
-      mapping.put('resultVariable', 'result_variable');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'actionType', 'type');
+      mapping.put(parentLabel + 'resultVariable', 'result_variable');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'actionType');
-      mapping.put('result_variable', 'resultVariable');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'type', 'actionType');
+      mapping.put(parentLabel + 'result_variable', 'resultVariable');
       return mapping;
     }
   }
@@ -5731,7 +5734,7 @@ public class IBMAssistantV1Models {
      * @param name the name
      * @return the DialogNodeAction builder
      */
-    public DialogNodeActionBuilder setName(String name) {
+    public DialogNodeActionBuilder name(String name) {
       this.name = name;
       return this;
     }
@@ -5742,7 +5745,7 @@ public class IBMAssistantV1Models {
      * @param actionType the actionType
      * @return the DialogNodeAction builder
      */
-    public DialogNodeActionBuilder setActionType(String actionType) {
+    public DialogNodeActionBuilder actionType(String actionType) {
       this.actionType = actionType;
       return this;
     }
@@ -5753,7 +5756,7 @@ public class IBMAssistantV1Models {
      * @param parameters the parameters
      * @return the DialogNodeAction builder
      */
-    public DialogNodeActionBuilder setParameters(IBMWatsonMapModel parameters) {
+    public DialogNodeActionBuilder parameters(IBMWatsonMapModel parameters) {
       this.parameters = parameters;
       return this;
     }
@@ -5764,7 +5767,7 @@ public class IBMAssistantV1Models {
      * @param resultVariable the resultVariable
      * @return the DialogNodeAction builder
      */
-    public DialogNodeActionBuilder setResultVariable(String resultVariable) {
+    public DialogNodeActionBuilder resultVariable(String resultVariable) {
       this.resultVariable = resultVariable;
       return this;
     }
@@ -5775,7 +5778,7 @@ public class IBMAssistantV1Models {
      * @param credentials the credentials
      * @return the DialogNodeAction builder
      */
-    public DialogNodeActionBuilder setCredentials(String credentials) {
+    public DialogNodeActionBuilder credentials(String credentials) {
       this.credentials = credentials;
       return this;
     }
@@ -5787,7 +5790,7 @@ public class IBMAssistantV1Models {
   public class DialogNodeCollection extends IBMWatsonResponseModel {
     private List<DialogNode> dialogNodes;
     private Pagination pagination;
- 
+
     /**
      * Gets the dialogNodes.
      *
@@ -5799,7 +5802,7 @@ public class IBMAssistantV1Models {
     public List<DialogNode> getDialogNodes() {
       return dialogNodes;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -5857,15 +5860,14 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dialog_nodes', 'dialogNodes');
-      if (dialogNodes != null && dialogNodes[0] != null) {
-        mapping.putAll(dialogNodes[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'dialog_nodes', 'dialogNodes');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNode.class.newInstance()).addToApiToSdkMapping(parentLabel + 'dialog_nodes/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -5883,7 +5885,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogNodeNextStep() { }
- 
+
     /**
      * Gets the behavior.
      *
@@ -5914,7 +5916,7 @@ public class IBMAssistantV1Models {
     public String getBehavior() {
       return behavior;
     }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -5926,7 +5928,7 @@ public class IBMAssistantV1Models {
     public String getDialogNode() {
       return dialogNode;
     }
- 
+
     /**
      * Gets the selector.
      *
@@ -5955,15 +5957,13 @@ public class IBMAssistantV1Models {
       return new DialogNodeNextStepBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dialogNode', 'dialog_node');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'dialogNode', 'dialog_node');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dialog_node', 'dialogNode');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'dialog_node', 'dialogNode');
       return mapping;
     }
   }
@@ -6012,7 +6012,7 @@ public class IBMAssistantV1Models {
      * @param behavior the behavior
      * @return the DialogNodeNextStep builder
      */
-    public DialogNodeNextStepBuilder setBehavior(String behavior) {
+    public DialogNodeNextStepBuilder behavior(String behavior) {
       this.behavior = behavior;
       return this;
     }
@@ -6023,7 +6023,7 @@ public class IBMAssistantV1Models {
      * @param dialogNode the dialogNode
      * @return the DialogNodeNextStep builder
      */
-    public DialogNodeNextStepBuilder setDialogNode(String dialogNode) {
+    public DialogNodeNextStepBuilder dialogNode(String dialogNode) {
       this.dialogNode = dialogNode;
       return this;
     }
@@ -6034,7 +6034,7 @@ public class IBMAssistantV1Models {
      * @param selector the selector
      * @return the DialogNodeNextStep builder
      */
-    public DialogNodeNextStepBuilder setSelector(String selector) {
+    public DialogNodeNextStepBuilder selector(String selector) {
       this.selector = selector;
       return this;
     }
@@ -6046,7 +6046,7 @@ public class IBMAssistantV1Models {
   public class DialogNodeOutput extends IBMWatsonDynamicModel {
     private List<DialogNodeOutputGeneric> generic;
     private DialogNodeOutputModifiers modifiers;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -6116,12 +6116,12 @@ public class IBMAssistantV1Models {
           DialogNodeOutputGeneric newItem = (DialogNodeOutputGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputGeneric.class);
           newGeneric.add(newItem);
         }
-        retBuilder.setGeneric(newGeneric);
+        retBuilder.generic(newGeneric);
       }
 
       // calling custom deserializer for modifiers
       DialogNodeOutputModifiers newModifiers = (DialogNodeOutputModifiers) new DialogNodeOutputModifiers().deserialize(JSON.serialize(ret.getModifiers()), (Map<String, Object>) jsonMap.get('modifiers'), DialogNodeOutputModifiers.class);
-      retBuilder.setModifiers(newModifiers);
+      retBuilder.modifiers(newModifiers);
 
       DialogNodeOutput builderResult = retBuilder.build();
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
@@ -6135,19 +6135,15 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (generic != null && generic[0] != null) {
-        mapping.putAll(generic[0].getSdkToApiMapping());
+        mapping.putAll(generic[0].addToSdkToApiMapping(parentLabel + 'generic/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (generic != null && generic[0] != null) {
-        mapping.putAll(generic[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeOutputGeneric.class.newInstance()).addToApiToSdkMapping(parentLabel + 'generic/', mapping));
       return mapping;
     }
   }
@@ -6200,7 +6196,7 @@ public class IBMAssistantV1Models {
      * @param generic the generic
      * @return the DialogNodeOutput builder
      */
-    public DialogNodeOutputBuilder setGeneric(List<DialogNodeOutputGeneric> generic) {
+    public DialogNodeOutputBuilder generic(List<DialogNodeOutputGeneric> generic) {
       this.generic = generic;
       return this;
     }
@@ -6211,7 +6207,7 @@ public class IBMAssistantV1Models {
      * @param modifiers the modifiers
      * @return the DialogNodeOutput builder
      */
-    public DialogNodeOutputBuilder setModifiers(DialogNodeOutputModifiers modifiers) {
+    public DialogNodeOutputBuilder modifiers(DialogNodeOutputModifiers modifiers) {
       this.modifiers = modifiers;
       return this;
     }
@@ -6233,18 +6229,25 @@ public class IBMAssistantV1Models {
     private String preference;
     private List<DialogNodeOutputOptionsElement> options;
     private String messageToHumanAgent;
+    private String query;
+    private String queryType;
+    private String filter;
+    private String discoveryVersion;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
      * and should not be called by the client.
      */
     public DialogNodeOutputGeneric() { }
- 
+
     /**
      * Gets the responseType.
      *
      * The type of response returned by the dialog node. The specified response type must be supported by the client
      * application or channel.
+     *
+     * **Note:** The **search_skill** response type is available only for Plus and Premium users, and is used only by
+     * the v2 runtime API.
      *
      * @return the responseType
      */
@@ -6252,7 +6255,7 @@ public class IBMAssistantV1Models {
     public String getResponseType() {
       return responseType;
     }
- 
+
     /**
      * Gets the values.
      *
@@ -6264,7 +6267,7 @@ public class IBMAssistantV1Models {
     public List<DialogNodeOutputTextValuesElement> getValues() {
       return values;
     }
- 
+
     /**
      * Gets the selectionPolicy.
      *
@@ -6277,7 +6280,7 @@ public class IBMAssistantV1Models {
     public String getSelectionPolicy() {
       return selectionPolicy;
     }
- 
+
     /**
      * Gets the delimiter.
      *
@@ -6289,7 +6292,7 @@ public class IBMAssistantV1Models {
     public String getDelimiter() {
       return delimiter;
     }
- 
+
     /**
      * Gets the xtime.
      *
@@ -6302,7 +6305,7 @@ public class IBMAssistantV1Models {
     public Long getXtime() {
       return xtime;
     }
- 
+
     /**
      * Gets the typing.
      *
@@ -6315,7 +6318,7 @@ public class IBMAssistantV1Models {
     public Boolean getTyping() {
       return typing;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -6327,7 +6330,7 @@ public class IBMAssistantV1Models {
     public String getSource() {
       return source;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -6339,7 +6342,7 @@ public class IBMAssistantV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -6351,7 +6354,7 @@ public class IBMAssistantV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the preference.
      *
@@ -6364,7 +6367,7 @@ public class IBMAssistantV1Models {
     public String getPreference() {
       return preference;
     }
- 
+
     /**
      * Gets the options.
      *
@@ -6377,7 +6380,7 @@ public class IBMAssistantV1Models {
     public List<DialogNodeOutputOptionsElement> getOptions() {
       return options;
     }
- 
+
     /**
      * Gets the messageToHumanAgent.
      *
@@ -6389,6 +6392,60 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public String getMessageToHumanAgent() {
       return messageToHumanAgent;
+    }
+
+    /**
+     * Gets the query.
+     *
+     * The text of the search query. This can be either a natural-language query or a query that uses the Discovery
+     * query language syntax, depending on the value of the **query_type** property. For more information, see the
+     * [Discovery service
+     * documentation](https://cloud.ibm.com/docs/services/discovery/query-operators.html#query-operators). Required when
+     * **response_type**=`search_skill`.
+     *
+     * @return the query
+     */
+    @AuraEnabled
+    public String getQuery() {
+      return query;
+    }
+
+    /**
+     * Gets the queryType.
+     *
+     * The type of the search query. Required when **response_type**=`search_skill`.
+     *
+     * @return the queryType
+     */
+    @AuraEnabled
+    public String getQueryType() {
+      return queryType;
+    }
+
+    /**
+     * Gets the filter.
+     *
+     * An optional filter that narrows the set of documents to be searched. For more information, see the [Discovery
+     * service documentation]([Discovery service
+     * documentation](https://cloud.ibm.com/docs/services/discovery/query-parameters.html#filter).
+     *
+     * @return the filter
+     */
+    @AuraEnabled
+    public String getFilter() {
+      return filter;
+    }
+
+    /**
+     * Gets the discoveryVersion.
+     *
+     * The version of the Discovery service API to use for the query.
+     *
+     * @return the discoveryVersion
+     */
+    @AuraEnabled
+    public String getDiscoveryVersion() {
+      return discoveryVersion;
     }
   
     private DialogNodeOutputGeneric(DialogNodeOutputGenericBuilder builder) {
@@ -6405,6 +6462,10 @@ public class IBMAssistantV1Models {
       this.preference = builder.preference;
       this.options = builder.options;
       this.messageToHumanAgent = builder.messageToHumanAgent;
+      this.query = builder.query;
+      this.queryType = builder.queryType;
+      this.filter = builder.filter;
+      this.discoveryVersion = builder.discoveryVersion;
     }
 
     /**
@@ -6434,7 +6495,7 @@ public class IBMAssistantV1Models {
           DialogNodeOutputTextValuesElement newItem = (DialogNodeOutputTextValuesElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputTextValuesElement.class);
           newValues.add(newItem);
         }
-        retBuilder.setValues(newValues);
+        retBuilder.values(newValues);
       }
 
       // calling custom deserializer for options
@@ -6447,33 +6508,41 @@ public class IBMAssistantV1Models {
           DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
-        retBuilder.setOptions(newOptions);
+        retBuilder.options(newOptions);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('responseType', 'response_type');
-      mapping.put('selectionPolicy', 'selection_policy');
-      mapping.put('xtime', 'time');
-      if (options != null && options[0] != null) {
-        mapping.putAll(options[0].getSdkToApiMapping());
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('messageToHumanAgent', 'message_to_human_agent');
+      mapping.put(parentLabel + 'responseType', 'response_type');
+      mapping.put(parentLabel + 'selectionPolicy', 'selection_policy');
+      mapping.put(parentLabel + 'xtime', 'time');
+      if (options != null && options[0] != null) {
+        mapping.putAll(options[0].addToSdkToApiMapping(parentLabel + 'options/', mapping));
+      }
+      mapping.put(parentLabel + 'messageToHumanAgent', 'message_to_human_agent');
+      mapping.put(parentLabel + 'queryType', 'query_type');
+      mapping.put(parentLabel + 'discoveryVersion', 'discovery_version');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('response_type', 'responseType');
-      mapping.put('selection_policy', 'selectionPolicy');
-      mapping.put('time', 'xtime');
-      if (options != null && options[0] != null) {
-        mapping.putAll(options[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('message_to_human_agent', 'messageToHumanAgent');
+      mapping.put(parentLabel + 'response_type', 'responseType');
+      mapping.put(parentLabel + 'selection_policy', 'selectionPolicy');
+      mapping.put(parentLabel + 'time', 'xtime');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeOutputOptionsElement.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
+      mapping.put(parentLabel + 'message_to_human_agent', 'messageToHumanAgent');
+      mapping.put(parentLabel + 'query_type', 'queryType');
+      mapping.put(parentLabel + 'discovery_version', 'discoveryVersion');
       return mapping;
     }
   }
@@ -6494,6 +6563,10 @@ public class IBMAssistantV1Models {
     private String preference;
     private List<DialogNodeOutputOptionsElement> options;
     private String messageToHumanAgent;
+    private String query;
+    private String queryType;
+    private String filter;
+    private String discoveryVersion;
 
     private DialogNodeOutputGenericBuilder(DialogNodeOutputGeneric dialogNodeOutputGeneric) {
       this.responseType = dialogNodeOutputGeneric.responseType;
@@ -6508,6 +6581,10 @@ public class IBMAssistantV1Models {
       this.preference = dialogNodeOutputGeneric.preference;
       this.options = dialogNodeOutputGeneric.options;
       this.messageToHumanAgent = dialogNodeOutputGeneric.messageToHumanAgent;
+      this.query = dialogNodeOutputGeneric.query;
+      this.queryType = dialogNodeOutputGeneric.queryType;
+      this.filter = dialogNodeOutputGeneric.filter;
+      this.discoveryVersion = dialogNodeOutputGeneric.discoveryVersion;
     }
 
     /**
@@ -6570,7 +6647,7 @@ public class IBMAssistantV1Models {
      * @param responseType the responseType
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setResponseType(String responseType) {
+    public DialogNodeOutputGenericBuilder responseType(String responseType) {
       this.responseType = responseType;
       return this;
     }
@@ -6582,7 +6659,7 @@ public class IBMAssistantV1Models {
      * @param values the values
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setValues(List<DialogNodeOutputTextValuesElement> values) {
+    public DialogNodeOutputGenericBuilder values(List<DialogNodeOutputTextValuesElement> values) {
       this.values = values;
       return this;
     }
@@ -6593,7 +6670,7 @@ public class IBMAssistantV1Models {
      * @param selectionPolicy the selectionPolicy
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setSelectionPolicy(String selectionPolicy) {
+    public DialogNodeOutputGenericBuilder selectionPolicy(String selectionPolicy) {
       this.selectionPolicy = selectionPolicy;
       return this;
     }
@@ -6604,7 +6681,7 @@ public class IBMAssistantV1Models {
      * @param delimiter the delimiter
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setDelimiter(String delimiter) {
+    public DialogNodeOutputGenericBuilder delimiter(String delimiter) {
       this.delimiter = delimiter;
       return this;
     }
@@ -6615,7 +6692,7 @@ public class IBMAssistantV1Models {
      * @param xtime the xtime
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setXtime(Long xtime) {
+    public DialogNodeOutputGenericBuilder xtime(Long xtime) {
       this.xtime = xtime;
       return this;
     }
@@ -6626,7 +6703,7 @@ public class IBMAssistantV1Models {
      * @param typing the typing
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setTyping(Boolean typing) {
+    public DialogNodeOutputGenericBuilder typing(Boolean typing) {
       this.typing = typing;
       return this;
     }
@@ -6637,7 +6714,7 @@ public class IBMAssistantV1Models {
      * @param source the source
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setSource(String source) {
+    public DialogNodeOutputGenericBuilder source(String source) {
       this.source = source;
       return this;
     }
@@ -6648,7 +6725,7 @@ public class IBMAssistantV1Models {
      * @param title the title
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setTitle(String title) {
+    public DialogNodeOutputGenericBuilder title(String title) {
       this.title = title;
       return this;
     }
@@ -6659,7 +6736,7 @@ public class IBMAssistantV1Models {
      * @param description the description
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setDescription(String description) {
+    public DialogNodeOutputGenericBuilder description(String description) {
       this.description = description;
       return this;
     }
@@ -6670,7 +6747,7 @@ public class IBMAssistantV1Models {
      * @param preference the preference
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setPreference(String preference) {
+    public DialogNodeOutputGenericBuilder preference(String preference) {
       this.preference = preference;
       return this;
     }
@@ -6682,7 +6759,7 @@ public class IBMAssistantV1Models {
      * @param options the options
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setOptions(List<DialogNodeOutputOptionsElement> options) {
+    public DialogNodeOutputGenericBuilder options(List<DialogNodeOutputOptionsElement> options) {
       this.options = options;
       return this;
     }
@@ -6693,8 +6770,52 @@ public class IBMAssistantV1Models {
      * @param messageToHumanAgent the messageToHumanAgent
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder setMessageToHumanAgent(String messageToHumanAgent) {
+    public DialogNodeOutputGenericBuilder messageToHumanAgent(String messageToHumanAgent) {
       this.messageToHumanAgent = messageToHumanAgent;
+      return this;
+    }
+
+    /**
+     * Set the query.
+     *
+     * @param query the query
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder query(String query) {
+      this.query = query;
+      return this;
+    }
+
+    /**
+     * Set the queryType.
+     *
+     * @param queryType the queryType
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder queryType(String queryType) {
+      this.queryType = queryType;
+      return this;
+    }
+
+    /**
+     * Set the filter.
+     *
+     * @param filter the filter
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder filter(String filter) {
+      this.filter = filter;
+      return this;
+    }
+
+    /**
+     * Set the discoveryVersion.
+     *
+     * @param discoveryVersion the discoveryVersion
+     * @return the DialogNodeOutputGeneric builder
+     */
+    public DialogNodeOutputGenericBuilder discoveryVersion(String discoveryVersion) {
+      this.discoveryVersion = discoveryVersion;
       return this;
     }
   }
@@ -6710,7 +6831,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogNodeOutputModifiers() { }
- 
+
     /**
      * Gets the overwrite.
      *
@@ -6769,7 +6890,7 @@ public class IBMAssistantV1Models {
      * @param overwrite the overwrite
      * @return the DialogNodeOutputModifiers builder
      */
-    public DialogNodeOutputModifiersBuilder setOverwrite(Boolean overwrite) {
+    public DialogNodeOutputModifiersBuilder overwrite(Boolean overwrite) {
       this.overwrite = overwrite;
       return this;
     }
@@ -6787,7 +6908,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogNodeOutputOptionsElement() { }
- 
+
     /**
      * Gets the label.
      *
@@ -6799,7 +6920,7 @@ public class IBMAssistantV1Models {
     public String getLabel() {
       return label;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -6839,24 +6960,20 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for value
       DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value'), DialogNodeOutputOptionsElementValue.class);
-      retBuilder.setValue(newValue);
+      retBuilder.value(newValue);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (value != null) {
-        mapping.putAll(value.getSdkToApiMapping());
+        mapping.putAll(value.addToSdkToApiMapping(parentLabel + 'value/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (value != null) {
-        mapping.putAll(value.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeOutputOptionsElementValue.class.newInstance()).addToApiToSdkMapping(parentLabel + 'value/', mapping));
       return mapping;
     }
   }
@@ -6905,7 +7022,7 @@ public class IBMAssistantV1Models {
      * @param label the label
      * @return the DialogNodeOutputOptionsElement builder
      */
-    public DialogNodeOutputOptionsElementBuilder setLabel(String label) {
+    public DialogNodeOutputOptionsElementBuilder label(String label) {
       this.label = label;
       return this;
     }
@@ -6916,7 +7033,7 @@ public class IBMAssistantV1Models {
      * @param value the value
      * @return the DialogNodeOutputOptionsElement builder
      */
-    public DialogNodeOutputOptionsElementBuilder setValue(DialogNodeOutputOptionsElementValue value) {
+    public DialogNodeOutputOptionsElementBuilder value(DialogNodeOutputOptionsElementValue value) {
       this.value = value;
       return this;
     }
@@ -6936,7 +7053,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogNodeOutputOptionsElementValue() { }
- 
+
     /**
      * Gets the input.
      *
@@ -6948,7 +7065,7 @@ public class IBMAssistantV1Models {
     public MessageInput getInput() {
       return input;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -6963,7 +7080,7 @@ public class IBMAssistantV1Models {
     public List<RuntimeIntent> getIntents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -7004,7 +7121,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for input
       MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
-      retBuilder.setInput(newInput);
+      retBuilder.input(newInput);
 
       // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
@@ -7016,7 +7133,7 @@ public class IBMAssistantV1Models {
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        retBuilder.setIntents(newIntents);
+        retBuilder.intents(newIntents);
       }
 
       // calling custom deserializer for entities
@@ -7029,25 +7146,21 @@ public class IBMAssistantV1Models {
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        retBuilder.setEntities(newEntities);
+        retBuilder.entities(newEntities);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getSdkToApiMapping());
+        mapping.putAll(entities[0].addToSdkToApiMapping(parentLabel + 'entities/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) RuntimeEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
       return mapping;
     }
   }
@@ -7117,7 +7230,7 @@ public class IBMAssistantV1Models {
      * @param input the input
      * @return the DialogNodeOutputOptionsElementValue builder
      */
-    public DialogNodeOutputOptionsElementValueBuilder setInput(MessageInput input) {
+    public DialogNodeOutputOptionsElementValueBuilder input(MessageInput input) {
       this.input = input;
       return this;
     }
@@ -7129,7 +7242,7 @@ public class IBMAssistantV1Models {
      * @param intents the intents
      * @return the DialogNodeOutputOptionsElementValue builder
      */
-    public DialogNodeOutputOptionsElementValueBuilder setIntents(List<RuntimeIntent> intents) {
+    public DialogNodeOutputOptionsElementValueBuilder intents(List<RuntimeIntent> intents) {
       this.intents = intents;
       return this;
     }
@@ -7141,7 +7254,7 @@ public class IBMAssistantV1Models {
      * @param entities the entities
      * @return the DialogNodeOutputOptionsElementValue builder
      */
-    public DialogNodeOutputOptionsElementValueBuilder setEntities(List<RuntimeEntity> entities) {
+    public DialogNodeOutputOptionsElementValueBuilder entities(List<RuntimeEntity> entities) {
       this.entities = entities;
       return this;
     }
@@ -7158,7 +7271,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogNodeOutputTextValuesElement() { }
- 
+
     /**
      * Gets the text.
      *
@@ -7217,7 +7330,7 @@ public class IBMAssistantV1Models {
      * @param text the text
      * @return the DialogNodeOutputTextValuesElement builder
      */
-    public DialogNodeOutputTextValuesElementBuilder setText(String text) {
+    public DialogNodeOutputTextValuesElementBuilder text(String text) {
       this.text = text;
       return this;
     }
@@ -7236,7 +7349,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogNodeVisitedDetails() { }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -7248,7 +7361,7 @@ public class IBMAssistantV1Models {
     public String getDialogNode() {
       return dialogNode;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -7260,7 +7373,7 @@ public class IBMAssistantV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the conditions.
      *
@@ -7288,15 +7401,21 @@ public class IBMAssistantV1Models {
       return new DialogNodeVisitedDetailsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dialogNode', 'dialog_node');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'dialogNode', 'dialog_node');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dialog_node', 'dialogNode');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'dialog_node', 'dialogNode');
       return mapping;
     }
   }
@@ -7336,7 +7455,7 @@ public class IBMAssistantV1Models {
      * @param dialogNode the dialogNode
      * @return the DialogNodeVisitedDetails builder
      */
-    public DialogNodeVisitedDetailsBuilder setDialogNode(String dialogNode) {
+    public DialogNodeVisitedDetailsBuilder dialogNode(String dialogNode) {
       this.dialogNode = dialogNode;
       return this;
     }
@@ -7347,7 +7466,7 @@ public class IBMAssistantV1Models {
      * @param title the title
      * @return the DialogNodeVisitedDetails builder
      */
-    public DialogNodeVisitedDetailsBuilder setTitle(String title) {
+    public DialogNodeVisitedDetailsBuilder title(String title) {
       this.title = title;
       return this;
     }
@@ -7358,7 +7477,7 @@ public class IBMAssistantV1Models {
      * @param conditions the conditions
      * @return the DialogNodeVisitedDetails builder
      */
-    public DialogNodeVisitedDetailsBuilder setConditions(String conditions) {
+    public DialogNodeVisitedDetailsBuilder conditions(String conditions) {
       this.conditions = conditions;
       return this;
     }
@@ -7387,7 +7506,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogRuntimeResponseGeneric() { }
- 
+
     /**
      * Gets the responseType.
      *
@@ -7395,7 +7514,7 @@ public class IBMAssistantV1Models {
      * application or channel.
      *
      * **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
-     * Premium users.
+     * Plus and Premium users.
      *
      * @return the responseType
      */
@@ -7403,7 +7522,7 @@ public class IBMAssistantV1Models {
     public String getResponseType() {
       return responseType;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -7415,7 +7534,7 @@ public class IBMAssistantV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the xtime.
      *
@@ -7427,7 +7546,7 @@ public class IBMAssistantV1Models {
     public Long getXtime() {
       return xtime;
     }
- 
+
     /**
      * Gets the typing.
      *
@@ -7439,7 +7558,7 @@ public class IBMAssistantV1Models {
     public Boolean getTyping() {
       return typing;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -7451,7 +7570,7 @@ public class IBMAssistantV1Models {
     public String getSource() {
       return source;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -7463,7 +7582,7 @@ public class IBMAssistantV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -7475,7 +7594,7 @@ public class IBMAssistantV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the preference.
      *
@@ -7487,7 +7606,7 @@ public class IBMAssistantV1Models {
     public String getPreference() {
       return preference;
     }
- 
+
     /**
      * Gets the options.
      *
@@ -7499,7 +7618,7 @@ public class IBMAssistantV1Models {
     public List<DialogNodeOutputOptionsElement> getOptions() {
       return options;
     }
- 
+
     /**
      * Gets the messageToHumanAgent.
      *
@@ -7511,7 +7630,7 @@ public class IBMAssistantV1Models {
     public String getMessageToHumanAgent() {
       return messageToHumanAgent;
     }
- 
+
     /**
      * Gets the topic.
      *
@@ -7523,7 +7642,7 @@ public class IBMAssistantV1Models {
     public String getTopic() {
       return topic;
     }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -7536,7 +7655,7 @@ public class IBMAssistantV1Models {
     public String getDialogNode() {
       return dialogNode;
     }
- 
+
     /**
      * Gets the suggestions.
      *
@@ -7596,7 +7715,7 @@ public class IBMAssistantV1Models {
           DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
-        retBuilder.setOptions(newOptions);
+        retBuilder.options(newOptions);
       }
 
       // calling custom deserializer for suggestions
@@ -7609,39 +7728,41 @@ public class IBMAssistantV1Models {
           DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
           newSuggestions.add(newItem);
         }
-        retBuilder.setSuggestions(newSuggestions);
+        retBuilder.suggestions(newSuggestions);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('responseType', 'response_type');
-      mapping.put('xtime', 'time');
-      if (options != null && options[0] != null) {
-        mapping.putAll(options[0].getSdkToApiMapping());
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('messageToHumanAgent', 'message_to_human_agent');
-      mapping.put('dialogNode', 'dialog_node');
+      mapping.put(parentLabel + 'responseType', 'response_type');
+      mapping.put(parentLabel + 'xtime', 'time');
+      if (options != null && options[0] != null) {
+        mapping.putAll(options[0].addToSdkToApiMapping(parentLabel + 'options/', mapping));
+      }
+      mapping.put(parentLabel + 'messageToHumanAgent', 'message_to_human_agent');
+      mapping.put(parentLabel + 'dialogNode', 'dialog_node');
       if (suggestions != null && suggestions[0] != null) {
-        mapping.putAll(suggestions[0].getSdkToApiMapping());
+        mapping.putAll(suggestions[0].addToSdkToApiMapping(parentLabel + 'suggestions/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('response_type', 'responseType');
-      mapping.put('time', 'xtime');
-      if (options != null && options[0] != null) {
-        mapping.putAll(options[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('message_to_human_agent', 'messageToHumanAgent');
-      mapping.put('dialog_node', 'dialogNode');
-      if (suggestions != null && suggestions[0] != null) {
-        mapping.putAll(suggestions[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'response_type', 'responseType');
+      mapping.put(parentLabel + 'time', 'xtime');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeOutputOptionsElement.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
+      mapping.put(parentLabel + 'message_to_human_agent', 'messageToHumanAgent');
+      mapping.put(parentLabel + 'dialog_node', 'dialogNode');
+      mapping.putAll(((IBMWatsonGenericModel) DialogSuggestion.class.newInstance()).addToApiToSdkMapping(parentLabel + 'suggestions/', mapping));
       return mapping;
     }
   }
@@ -7740,7 +7861,7 @@ public class IBMAssistantV1Models {
      * @param responseType the responseType
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setResponseType(String responseType) {
+    public DialogRuntimeResponseGenericBuilder responseType(String responseType) {
       this.responseType = responseType;
       return this;
     }
@@ -7751,7 +7872,7 @@ public class IBMAssistantV1Models {
      * @param text the text
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setText(String text) {
+    public DialogRuntimeResponseGenericBuilder text(String text) {
       this.text = text;
       return this;
     }
@@ -7762,7 +7883,7 @@ public class IBMAssistantV1Models {
      * @param xtime the xtime
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setXtime(Long xtime) {
+    public DialogRuntimeResponseGenericBuilder xtime(Long xtime) {
       this.xtime = xtime;
       return this;
     }
@@ -7773,7 +7894,7 @@ public class IBMAssistantV1Models {
      * @param typing the typing
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setTyping(Boolean typing) {
+    public DialogRuntimeResponseGenericBuilder typing(Boolean typing) {
       this.typing = typing;
       return this;
     }
@@ -7784,7 +7905,7 @@ public class IBMAssistantV1Models {
      * @param source the source
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setSource(String source) {
+    public DialogRuntimeResponseGenericBuilder source(String source) {
       this.source = source;
       return this;
     }
@@ -7795,7 +7916,7 @@ public class IBMAssistantV1Models {
      * @param title the title
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setTitle(String title) {
+    public DialogRuntimeResponseGenericBuilder title(String title) {
       this.title = title;
       return this;
     }
@@ -7806,7 +7927,7 @@ public class IBMAssistantV1Models {
      * @param description the description
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setDescription(String description) {
+    public DialogRuntimeResponseGenericBuilder description(String description) {
       this.description = description;
       return this;
     }
@@ -7817,7 +7938,7 @@ public class IBMAssistantV1Models {
      * @param preference the preference
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setPreference(String preference) {
+    public DialogRuntimeResponseGenericBuilder preference(String preference) {
       this.preference = preference;
       return this;
     }
@@ -7829,7 +7950,7 @@ public class IBMAssistantV1Models {
      * @param options the options
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setOptions(List<DialogNodeOutputOptionsElement> options) {
+    public DialogRuntimeResponseGenericBuilder options(List<DialogNodeOutputOptionsElement> options) {
       this.options = options;
       return this;
     }
@@ -7840,7 +7961,7 @@ public class IBMAssistantV1Models {
      * @param messageToHumanAgent the messageToHumanAgent
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setMessageToHumanAgent(String messageToHumanAgent) {
+    public DialogRuntimeResponseGenericBuilder messageToHumanAgent(String messageToHumanAgent) {
       this.messageToHumanAgent = messageToHumanAgent;
       return this;
     }
@@ -7851,7 +7972,7 @@ public class IBMAssistantV1Models {
      * @param topic the topic
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setTopic(String topic) {
+    public DialogRuntimeResponseGenericBuilder topic(String topic) {
       this.topic = topic;
       return this;
     }
@@ -7862,7 +7983,7 @@ public class IBMAssistantV1Models {
      * @param dialogNode the dialogNode
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setDialogNode(String dialogNode) {
+    public DialogRuntimeResponseGenericBuilder dialogNode(String dialogNode) {
       this.dialogNode = dialogNode;
       return this;
     }
@@ -7874,7 +7995,7 @@ public class IBMAssistantV1Models {
      * @param suggestions the suggestions
      * @return the DialogRuntimeResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder setSuggestions(List<DialogSuggestion> suggestions) {
+    public DialogRuntimeResponseGenericBuilder suggestions(List<DialogSuggestion> suggestions) {
       this.suggestions = suggestions;
       return this;
     }
@@ -7894,7 +8015,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogSuggestion() { }
- 
+
     /**
      * Gets the label.
      *
@@ -7907,7 +8028,7 @@ public class IBMAssistantV1Models {
     public String getLabel() {
       return label;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -7920,7 +8041,7 @@ public class IBMAssistantV1Models {
     public DialogSuggestionValue getValue() {
       return value;
     }
- 
+
     /**
      * Gets the output.
      *
@@ -7933,7 +8054,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getOutput() {
       return output;
     }
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -7975,30 +8096,26 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for value
       DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value'), DialogSuggestionValue.class);
-      retBuilder.setValue(newValue);
+      retBuilder.value(newValue);
 
       // calling custom deserializer for output
       IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'), IBMWatsonMapModel.class);
-      retBuilder.setOutput(newOutput);
+      retBuilder.output(newOutput);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (value != null) {
-        mapping.putAll(value.getSdkToApiMapping());
+        mapping.putAll(value.addToSdkToApiMapping(parentLabel + 'value/', mapping));
       }
-      mapping.put('dialogNode', 'dialog_node');
+      mapping.put(parentLabel + 'dialogNode', 'dialog_node');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (value != null) {
-        mapping.putAll(value.getApiToSdkMapping());
-      }
-      mapping.put('dialog_node', 'dialogNode');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) DialogSuggestionValue.class.newInstance()).addToApiToSdkMapping(parentLabel + 'value/', mapping));
+      mapping.put(parentLabel + 'dialog_node', 'dialogNode');
       return mapping;
     }
   }
@@ -8051,7 +8168,7 @@ public class IBMAssistantV1Models {
      * @param label the label
      * @return the DialogSuggestion builder
      */
-    public DialogSuggestionBuilder setLabel(String label) {
+    public DialogSuggestionBuilder label(String label) {
       this.label = label;
       return this;
     }
@@ -8062,7 +8179,7 @@ public class IBMAssistantV1Models {
      * @param value the value
      * @return the DialogSuggestion builder
      */
-    public DialogSuggestionBuilder setValue(DialogSuggestionValue value) {
+    public DialogSuggestionBuilder value(DialogSuggestionValue value) {
       this.value = value;
       return this;
     }
@@ -8073,7 +8190,7 @@ public class IBMAssistantV1Models {
      * @param output the output
      * @return the DialogSuggestion builder
      */
-    public DialogSuggestionBuilder setOutput(IBMWatsonMapModel output) {
+    public DialogSuggestionBuilder output(IBMWatsonMapModel output) {
       this.output = output;
       return this;
     }
@@ -8084,7 +8201,7 @@ public class IBMAssistantV1Models {
      * @param dialogNode the dialogNode
      * @return the DialogSuggestion builder
      */
-    public DialogSuggestionBuilder setDialogNode(String dialogNode) {
+    public DialogSuggestionBuilder dialogNode(String dialogNode) {
       this.dialogNode = dialogNode;
       return this;
     }
@@ -8104,7 +8221,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public DialogSuggestionValue() { }
- 
+
     /**
      * Gets the input.
      *
@@ -8116,7 +8233,7 @@ public class IBMAssistantV1Models {
     public MessageInput getInput() {
       return input;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -8128,7 +8245,7 @@ public class IBMAssistantV1Models {
     public List<RuntimeIntent> getIntents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -8166,7 +8283,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for input
       MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
-      retBuilder.setInput(newInput);
+      retBuilder.input(newInput);
 
       // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
@@ -8178,7 +8295,7 @@ public class IBMAssistantV1Models {
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        retBuilder.setIntents(newIntents);
+        retBuilder.intents(newIntents);
       }
 
       // calling custom deserializer for entities
@@ -8191,25 +8308,21 @@ public class IBMAssistantV1Models {
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        retBuilder.setEntities(newEntities);
+        retBuilder.entities(newEntities);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getSdkToApiMapping());
+        mapping.putAll(entities[0].addToSdkToApiMapping(parentLabel + 'entities/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) RuntimeEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
       return mapping;
     }
   }
@@ -8279,7 +8392,7 @@ public class IBMAssistantV1Models {
      * @param input the input
      * @return the DialogSuggestionValue builder
      */
-    public DialogSuggestionValueBuilder setInput(MessageInput input) {
+    public DialogSuggestionValueBuilder input(MessageInput input) {
       this.input = input;
       return this;
     }
@@ -8291,7 +8404,7 @@ public class IBMAssistantV1Models {
      * @param intents the intents
      * @return the DialogSuggestionValue builder
      */
-    public DialogSuggestionValueBuilder setIntents(List<RuntimeIntent> intents) {
+    public DialogSuggestionValueBuilder intents(List<RuntimeIntent> intents) {
       this.intents = intents;
       return this;
     }
@@ -8303,7 +8416,7 @@ public class IBMAssistantV1Models {
      * @param entities the entities
      * @return the DialogSuggestionValue builder
      */
-    public DialogSuggestionValueBuilder setEntities(List<RuntimeEntity> entities) {
+    public DialogSuggestionValueBuilder entities(List<RuntimeEntity> entities) {
       this.entities = entities;
       return this;
     }
@@ -8320,7 +8433,7 @@ public class IBMAssistantV1Models {
     private Datetime created;
     private Datetime updated;
     private List<Value> values;
- 
+
     /**
      * Gets the entity.
      *
@@ -8335,7 +8448,7 @@ public class IBMAssistantV1Models {
     public String getEntity() {
       return entity;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -8347,7 +8460,7 @@ public class IBMAssistantV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -8359,7 +8472,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getMetadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the fuzzyMatch.
      *
@@ -8371,7 +8484,7 @@ public class IBMAssistantV1Models {
     public Boolean getFuzzyMatch() {
       return fuzzyMatch;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -8383,7 +8496,7 @@ public class IBMAssistantV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -8395,7 +8508,7 @@ public class IBMAssistantV1Models {
     public Datetime getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the values.
      *
@@ -8480,12 +8593,9 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('fuzzy_match', 'fuzzyMatch');
-      if (values != null && values[0] != null) {
-        mapping.putAll(values[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'fuzzy_match', 'fuzzyMatch');
+      mapping.putAll(((IBMWatsonGenericModel) Value.class.newInstance()).addToApiToSdkMapping(parentLabel + 'values/', mapping));
       return mapping;
     }
   }
@@ -8496,7 +8606,7 @@ public class IBMAssistantV1Models {
   public class EntityCollection extends IBMWatsonResponseModel {
     private List<Entity> entities;
     private Pagination pagination;
- 
+
     /**
      * Gets the entities.
      *
@@ -8508,7 +8618,7 @@ public class IBMAssistantV1Models {
     public List<Entity> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -8566,14 +8676,9 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Entity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -8585,7 +8690,7 @@ public class IBMAssistantV1Models {
     private String text;
     private String intent;
     private List<Long> location;
- 
+
     /**
      * Gets the text.
      *
@@ -8597,7 +8702,7 @@ public class IBMAssistantV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the intent.
      *
@@ -8609,7 +8714,7 @@ public class IBMAssistantV1Models {
     public String getIntent() {
       return intent;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -8656,7 +8761,7 @@ public class IBMAssistantV1Models {
   public class EntityMentionCollection extends IBMWatsonResponseModel {
     private List<EntityMention> examples;
     private Pagination pagination;
- 
+
     /**
      * Gets the examples.
      *
@@ -8668,7 +8773,7 @@ public class IBMAssistantV1Models {
     public List<EntityMention> getExamples() {
       return examples;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -8726,11 +8831,8 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -8749,7 +8851,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public Example() { }
- 
+
     /**
      * Gets the text.
      *
@@ -8763,7 +8865,7 @@ public class IBMAssistantV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the mentions.
      *
@@ -8775,7 +8877,7 @@ public class IBMAssistantV1Models {
     public List<Mention> getMentions() {
       return mentions;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -8787,7 +8889,7 @@ public class IBMAssistantV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -8949,7 +9051,7 @@ public class IBMAssistantV1Models {
   public class ExampleCollection extends IBMWatsonResponseModel {
     private List<Example> examples;
     private Pagination pagination;
- 
+
     /**
      * Gets the examples.
      *
@@ -8961,7 +9063,7 @@ public class IBMAssistantV1Models {
     public List<Example> getExamples() {
       return examples;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -9019,11 +9121,8 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -10497,7 +10596,7 @@ public class IBMAssistantV1Models {
     private Datetime created;
     private Datetime updated;
     private List<Example> examples;
- 
+
     /**
      * Gets the intent.
      *
@@ -10511,7 +10610,7 @@ public class IBMAssistantV1Models {
     public String getIntent() {
       return intent;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -10523,7 +10622,7 @@ public class IBMAssistantV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -10535,7 +10634,7 @@ public class IBMAssistantV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -10547,7 +10646,7 @@ public class IBMAssistantV1Models {
     public Datetime getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the examples.
      *
@@ -10617,7 +10716,7 @@ public class IBMAssistantV1Models {
   public class IntentCollection extends IBMWatsonResponseModel {
     private List<Intent> intents;
     private Pagination pagination;
- 
+
     /**
      * Gets the intents.
      *
@@ -10629,7 +10728,7 @@ public class IBMAssistantV1Models {
     public List<Intent> getIntents() {
       return intents;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -10687,11 +10786,8 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -13304,7 +13400,7 @@ public class IBMAssistantV1Models {
     private String responseTimestamp;
     private String workspaceId;
     private String language;
- 
+
     /**
      * Gets the request.
      *
@@ -13316,7 +13412,7 @@ public class IBMAssistantV1Models {
     public MessageRequest getRequest() {
       return request;
     }
- 
+
     /**
      * Gets the response.
      *
@@ -13328,7 +13424,7 @@ public class IBMAssistantV1Models {
     public MessageResponse getResponse() {
       return response;
     }
- 
+
     /**
      * Gets the logId.
      *
@@ -13340,7 +13436,7 @@ public class IBMAssistantV1Models {
     public String getLogId() {
       return logId;
     }
- 
+
     /**
      * Gets the requestTimestamp.
      *
@@ -13352,7 +13448,7 @@ public class IBMAssistantV1Models {
     public String getRequestTimestamp() {
       return requestTimestamp;
     }
- 
+
     /**
      * Gets the responseTimestamp.
      *
@@ -13364,7 +13460,7 @@ public class IBMAssistantV1Models {
     public String getResponseTimestamp() {
       return responseTimestamp;
     }
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -13376,7 +13472,7 @@ public class IBMAssistantV1Models {
     public String getWorkspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -13470,18 +13566,13 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (request != null) {
-        mapping.putAll(request.getApiToSdkMapping());
-      }
-      if (response != null) {
-        mapping.putAll(response.getApiToSdkMapping());
-      }
-      mapping.put('log_id', 'logId');
-      mapping.put('request_timestamp', 'requestTimestamp');
-      mapping.put('response_timestamp', 'responseTimestamp');
-      mapping.put('workspace_id', 'workspaceId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) MessageRequest.class.newInstance()).addToApiToSdkMapping(parentLabel + 'request/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) MessageResponse.class.newInstance()).addToApiToSdkMapping(parentLabel + 'response/', mapping));
+      mapping.put(parentLabel + 'log_id', 'logId');
+      mapping.put(parentLabel + 'request_timestamp', 'requestTimestamp');
+      mapping.put(parentLabel + 'response_timestamp', 'responseTimestamp');
+      mapping.put(parentLabel + 'workspace_id', 'workspaceId');
       return mapping;
     }
   }
@@ -13492,7 +13583,7 @@ public class IBMAssistantV1Models {
   public class LogCollection extends IBMWatsonResponseModel {
     private List<Log> logs;
     private LogPagination pagination;
- 
+
     /**
      * Gets the logs.
      *
@@ -13504,7 +13595,7 @@ public class IBMAssistantV1Models {
     public List<Log> getLogs() {
       return logs;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -13562,14 +13653,9 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (logs != null && logs[0] != null) {
-        mapping.putAll(logs[0].getApiToSdkMapping());
-      }
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Log.class.newInstance()).addToApiToSdkMapping(parentLabel + 'logs/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) LogPagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -13580,7 +13666,7 @@ public class IBMAssistantV1Models {
   public class LogMessage extends IBMWatsonDynamicModel {
     private String level;
     private String msg;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -13698,7 +13784,7 @@ public class IBMAssistantV1Models {
      * @param level the level
      * @return the LogMessage builder
      */
-    public LogMessageBuilder setLevel(String level) {
+    public LogMessageBuilder level(String level) {
       this.level = level;
       return this;
     }
@@ -13709,7 +13795,7 @@ public class IBMAssistantV1Models {
      * @param msg the msg
      * @return the LogMessage builder
      */
-    public LogMessageBuilder setMsg(String msg) {
+    public LogMessageBuilder msg(String msg) {
       this.msg = msg;
       return this;
     }
@@ -13722,7 +13808,7 @@ public class IBMAssistantV1Models {
     private String nextUrl;
     private Long matched;
     private String nextCursor;
- 
+
     /**
      * Gets the nextUrl.
      *
@@ -13734,7 +13820,7 @@ public class IBMAssistantV1Models {
     public String getNextUrl() {
       return nextUrl;
     }
- 
+
     /**
      * Gets the matched.
      *
@@ -13746,7 +13832,7 @@ public class IBMAssistantV1Models {
     public Long getMatched() {
       return matched;
     }
- 
+
     /**
      * Gets the nextCursor.
      *
@@ -13786,10 +13872,13 @@ public class IBMAssistantV1Models {
       this.nextCursor = nextCursor;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('next_url', 'nextUrl');
-      mapping.put('next_cursor', 'nextCursor');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'next_url', 'nextUrl');
+      mapping.put(parentLabel + 'next_cursor', 'nextCursor');
       return mapping;
     }
   }
@@ -13806,7 +13895,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public Mention() { }
- 
+
     /**
      * Gets the entity.
      *
@@ -13818,7 +13907,7 @@ public class IBMAssistantV1Models {
     public String getEntity() {
       return entity;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -13907,7 +13996,7 @@ public class IBMAssistantV1Models {
      * @param entity the entity
      * @return the Mention builder
      */
-    public MentionBuilder setEntity(String entity) {
+    public MentionBuilder entity(String entity) {
       this.entity = entity;
       return this;
     }
@@ -13919,7 +14008,7 @@ public class IBMAssistantV1Models {
      * @param location the location
      * @return the Mention builder
      */
-    public MentionBuilder setLocation(List<Long> location) {
+    public MentionBuilder location(List<Long> location) {
       this.location = location;
       return this;
     }
@@ -13937,7 +14026,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public MessageContextMetadata() { }
- 
+
     /**
      * Gets the deployment.
      *
@@ -13950,7 +14039,7 @@ public class IBMAssistantV1Models {
     public String getDeployment() {
       return deployment;
     }
- 
+
     /**
      * Gets the userId.
      *
@@ -13980,15 +14069,13 @@ public class IBMAssistantV1Models {
       return new MessageContextMetadataBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('userId', 'user_id');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'userId', 'user_id');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('user_id', 'userId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'user_id', 'userId');
       return mapping;
     }
   }
@@ -14026,7 +14113,7 @@ public class IBMAssistantV1Models {
      * @param deployment the deployment
      * @return the MessageContextMetadata builder
      */
-    public MessageContextMetadataBuilder setDeployment(String deployment) {
+    public MessageContextMetadataBuilder deployment(String deployment) {
       this.deployment = deployment;
       return this;
     }
@@ -14037,7 +14124,7 @@ public class IBMAssistantV1Models {
      * @param userId the userId
      * @return the MessageContextMetadata builder
      */
-    public MessageContextMetadataBuilder setUserId(String userId) {
+    public MessageContextMetadataBuilder userId(String userId) {
       this.userId = userId;
       return this;
     }
@@ -14048,7 +14135,7 @@ public class IBMAssistantV1Models {
    */
   public class MessageInput extends IBMWatsonDynamicModel {
     private String text;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -14277,14 +14364,14 @@ public class IBMAssistantV1Models {
       Map<String, String> mapping = new Map<String, String>();
       mapping.put('workspaceId', 'workspace_id');
       if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getSdkToApiMapping());
+        mapping.putAll(entities[0].addToSdkToApiMapping('', mapping));
       }
       mapping.put('alternateIntents', 'alternate_intents');
       if (context != null) {
-        mapping.putAll(context.getSdkToApiMapping());
+        mapping.putAll(context.addToSdkToApiMapping('', mapping));
       }
       if (output != null) {
-        mapping.putAll(output.getSdkToApiMapping());
+        mapping.putAll(output.addToSdkToApiMapping('', mapping));
       }
       mapping.put('nodesVisitedDetails', 'nodes_visited_details');
       return mapping;
@@ -14506,7 +14593,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public MessageRequest() { }
- 
+
     /**
      * Gets the input.
      *
@@ -14518,7 +14605,7 @@ public class IBMAssistantV1Models {
     public MessageInput getInput() {
       return input;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -14531,7 +14618,7 @@ public class IBMAssistantV1Models {
     public List<RuntimeIntent> getIntents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -14544,7 +14631,7 @@ public class IBMAssistantV1Models {
     public List<RuntimeEntity> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the alternateIntents.
      *
@@ -14556,7 +14643,7 @@ public class IBMAssistantV1Models {
     public Boolean getAlternateIntents() {
       return alternateIntents;
     }
- 
+
     /**
      * Gets the context.
      *
@@ -14568,7 +14655,7 @@ public class IBMAssistantV1Models {
     public Context getContext() {
       return context;
     }
- 
+
     /**
      * Gets the output.
      *
@@ -14581,7 +14668,7 @@ public class IBMAssistantV1Models {
     public OutputData getOutput() {
       return output;
     }
- 
+
     /**
      * Gets the actions.
      *
@@ -14623,7 +14710,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for input
       MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
-      retBuilder.setInput(newInput);
+      retBuilder.input(newInput);
 
       // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
@@ -14635,7 +14722,7 @@ public class IBMAssistantV1Models {
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        retBuilder.setIntents(newIntents);
+        retBuilder.intents(newIntents);
       }
 
       // calling custom deserializer for entities
@@ -14648,16 +14735,16 @@ public class IBMAssistantV1Models {
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        retBuilder.setEntities(newEntities);
+        retBuilder.entities(newEntities);
       }
 
       // calling custom deserializer for context
       Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context'), Context.class);
-      retBuilder.setContext(newContext);
+      retBuilder.context(newContext);
 
       // calling custom deserializer for output
       OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'), OutputData.class);
-      retBuilder.setOutput(newOutput);
+      retBuilder.output(newOutput);
 
       // calling custom deserializer for actions
       List<DialogNodeAction> newActions = new List<DialogNodeAction>();
@@ -14669,45 +14756,35 @@ public class IBMAssistantV1Models {
           DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
-        retBuilder.setActions(newActions);
+        retBuilder.actions(newActions);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getSdkToApiMapping());
+        mapping.putAll(entities[0].addToSdkToApiMapping(parentLabel + 'entities/', mapping));
       }
-      mapping.put('alternateIntents', 'alternate_intents');
+      mapping.put(parentLabel + 'alternateIntents', 'alternate_intents');
       if (context != null) {
-        mapping.putAll(context.getSdkToApiMapping());
+        mapping.putAll(context.addToSdkToApiMapping(parentLabel + 'context/', mapping));
       }
       if (output != null) {
-        mapping.putAll(output.getSdkToApiMapping());
+        mapping.putAll(output.addToSdkToApiMapping(parentLabel + 'output/', mapping));
       }
       if (actions != null && actions[0] != null) {
-        mapping.putAll(actions[0].getSdkToApiMapping());
+        mapping.putAll(actions[0].addToSdkToApiMapping(parentLabel + 'actions/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
-      mapping.put('alternate_intents', 'alternateIntents');
-      if (context != null) {
-        mapping.putAll(context.getApiToSdkMapping());
-      }
-      if (output != null) {
-        mapping.putAll(output.getApiToSdkMapping());
-      }
-      if (actions != null && actions[0] != null) {
-        mapping.putAll(actions[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) RuntimeEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
+      mapping.put(parentLabel + 'alternate_intents', 'alternateIntents');
+      mapping.putAll(((IBMWatsonDynamicModel) Context.class.newInstance()).addToApiToSdkMapping(parentLabel + 'context/', mapping));
+      mapping.putAll(((IBMWatsonDynamicModel) OutputData.class.newInstance()).addToApiToSdkMapping(parentLabel + 'output/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeAction.class.newInstance()).addToApiToSdkMapping(parentLabel + 'actions/', mapping));
       return mapping;
     }
   }
@@ -14800,7 +14877,7 @@ public class IBMAssistantV1Models {
      * @param input the input
      * @return the MessageRequest builder
      */
-    public MessageRequestBuilder setInput(MessageInput input) {
+    public MessageRequestBuilder input(MessageInput input) {
       this.input = input;
       return this;
     }
@@ -14812,7 +14889,7 @@ public class IBMAssistantV1Models {
      * @param intents the intents
      * @return the MessageRequest builder
      */
-    public MessageRequestBuilder setIntents(List<RuntimeIntent> intents) {
+    public MessageRequestBuilder intents(List<RuntimeIntent> intents) {
       this.intents = intents;
       return this;
     }
@@ -14824,7 +14901,7 @@ public class IBMAssistantV1Models {
      * @param entities the entities
      * @return the MessageRequest builder
      */
-    public MessageRequestBuilder setEntities(List<RuntimeEntity> entities) {
+    public MessageRequestBuilder entities(List<RuntimeEntity> entities) {
       this.entities = entities;
       return this;
     }
@@ -14835,7 +14912,7 @@ public class IBMAssistantV1Models {
      * @param alternateIntents the alternateIntents
      * @return the MessageRequest builder
      */
-    public MessageRequestBuilder setAlternateIntents(Boolean alternateIntents) {
+    public MessageRequestBuilder alternateIntents(Boolean alternateIntents) {
       this.alternateIntents = alternateIntents;
       return this;
     }
@@ -14846,7 +14923,7 @@ public class IBMAssistantV1Models {
      * @param context the context
      * @return the MessageRequest builder
      */
-    public MessageRequestBuilder setContext(Context context) {
+    public MessageRequestBuilder context(Context context) {
       this.context = context;
       return this;
     }
@@ -14857,7 +14934,7 @@ public class IBMAssistantV1Models {
      * @param output the output
      * @return the MessageRequest builder
      */
-    public MessageRequestBuilder setOutput(OutputData output) {
+    public MessageRequestBuilder output(OutputData output) {
       this.output = output;
       return this;
     }
@@ -14869,7 +14946,7 @@ public class IBMAssistantV1Models {
      * @param actions the actions
      * @return the MessageRequest builder
      */
-    public MessageRequestBuilder setActions(List<DialogNodeAction> actions) {
+    public MessageRequestBuilder actions(List<DialogNodeAction> actions) {
       this.actions = actions;
       return this;
     }
@@ -14886,7 +14963,7 @@ public class IBMAssistantV1Models {
     private Context context;
     private OutputData output;
     private List<DialogNodeAction> actions;
- 
+
     /**
      * Gets the input.
      *
@@ -14898,7 +14975,7 @@ public class IBMAssistantV1Models {
     public MessageInput getInput() {
       return input;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -14910,7 +14987,7 @@ public class IBMAssistantV1Models {
     public List<RuntimeIntent> getIntents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -14922,7 +14999,7 @@ public class IBMAssistantV1Models {
     public List<RuntimeEntity> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the alternateIntents.
      *
@@ -14934,7 +15011,7 @@ public class IBMAssistantV1Models {
     public Boolean getAlternateIntents() {
       return alternateIntents;
     }
- 
+
     /**
      * Gets the context.
      *
@@ -14946,7 +15023,7 @@ public class IBMAssistantV1Models {
     public Context getContext() {
       return context;
     }
- 
+
     /**
      * Gets the output.
      *
@@ -14959,7 +15036,7 @@ public class IBMAssistantV1Models {
     public OutputData getOutput() {
       return output;
     }
- 
+
     /**
      * Gets the actions.
      *
@@ -15087,21 +15164,12 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
-      mapping.put('alternate_intents', 'alternateIntents');
-      if (context != null) {
-        mapping.putAll(context.getApiToSdkMapping());
-      }
-      if (output != null) {
-        mapping.putAll(output.getApiToSdkMapping());
-      }
-      if (actions != null && actions[0] != null) {
-        mapping.putAll(actions[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) RuntimeEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
+      mapping.put(parentLabel + 'alternate_intents', 'alternateIntents');
+      mapping.putAll(((IBMWatsonDynamicModel) Context.class.newInstance()).addToApiToSdkMapping(parentLabel + 'context/', mapping));
+      mapping.putAll(((IBMWatsonDynamicModel) OutputData.class.newInstance()).addToApiToSdkMapping(parentLabel + 'output/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeAction.class.newInstance()).addToApiToSdkMapping(parentLabel + 'actions/', mapping));
       return mapping;
     }
   }
@@ -15115,7 +15183,7 @@ public class IBMAssistantV1Models {
     private List<DialogRuntimeResponseGeneric> generic;
     private List<String> nodesVisited;
     private List<DialogNodeVisitedDetails> nodesVisitedDetails;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -15220,7 +15288,7 @@ public class IBMAssistantV1Models {
           LogMessage newItem = (LogMessage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogMessage.class);
           newLogMessages.add(newItem);
         }
-        retBuilder.setLogMessages(newLogMessages);
+        retBuilder.logMessages(newLogMessages);
       }
 
       // calling custom deserializer for generic
@@ -15233,7 +15301,7 @@ public class IBMAssistantV1Models {
           DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
           newGeneric.add(newItem);
         }
-        retBuilder.setGeneric(newGeneric);
+        retBuilder.generic(newGeneric);
       }
 
       // calling custom deserializer for nodesVisitedDetails
@@ -15246,7 +15314,7 @@ public class IBMAssistantV1Models {
           DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeVisitedDetails.class);
           newNodesVisitedDetails.add(newItem);
         }
-        retBuilder.setNodesVisitedDetails(newNodesVisitedDetails);
+        retBuilder.nodesVisitedDetails(newNodesVisitedDetails);
       }
 
       OutputData builderResult = retBuilder.build();
@@ -15261,31 +15329,33 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('logMessages', 'log_messages');
-      if (generic != null && generic[0] != null) {
-        mapping.putAll(generic[0].getSdkToApiMapping());
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('nodesVisited', 'nodes_visited');
-      mapping.put('nodesVisitedDetails', 'nodes_visited_details');
+      mapping.put(parentLabel + 'logMessages', 'log_messages');
+      if (generic != null && generic[0] != null) {
+        mapping.putAll(generic[0].addToSdkToApiMapping(parentLabel + 'generic/', mapping));
+      }
+      mapping.put(parentLabel + 'nodesVisited', 'nodes_visited');
+      mapping.put(parentLabel + 'nodesVisitedDetails', 'nodes_visited_details');
       if (nodesVisitedDetails != null && nodesVisitedDetails[0] != null) {
-        mapping.putAll(nodesVisitedDetails[0].getSdkToApiMapping());
+        mapping.putAll(nodesVisitedDetails[0].addToSdkToApiMapping(parentLabel + 'nodesVisitedDetails/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('log_messages', 'logMessages');
-      if (generic != null && generic[0] != null) {
-        mapping.putAll(generic[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('nodes_visited', 'nodesVisited');
-      mapping.put('nodes_visited_details', 'nodesVisitedDetails');
-      if (nodesVisitedDetails != null && nodesVisitedDetails[0] != null) {
-        mapping.putAll(nodesVisitedDetails[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'log_messages', 'logMessages');
+      mapping.putAll(((IBMWatsonGenericModel) DialogRuntimeResponseGeneric.class.newInstance()).addToApiToSdkMapping(parentLabel + 'generic/', mapping));
+      mapping.put(parentLabel + 'nodes_visited', 'nodesVisited');
+      mapping.put(parentLabel + 'nodes_visited_details', 'nodesVisitedDetails');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeVisitedDetails.class.newInstance()).addToApiToSdkMapping(parentLabel + 'nodes_visited_details/', mapping));
       return mapping;
     }
   }
@@ -15415,7 +15485,7 @@ public class IBMAssistantV1Models {
      * @param logMessages the logMessages
      * @return the OutputData builder
      */
-    public OutputDataBuilder setLogMessages(List<LogMessage> logMessages) {
+    public OutputDataBuilder logMessages(List<LogMessage> logMessages) {
       this.logMessages = logMessages;
       return this;
     }
@@ -15427,7 +15497,7 @@ public class IBMAssistantV1Models {
      * @param text the text
      * @return the OutputData builder
      */
-    public OutputDataBuilder setText(List<String> text) {
+    public OutputDataBuilder text(List<String> text) {
       this.text = text;
       return this;
     }
@@ -15439,7 +15509,7 @@ public class IBMAssistantV1Models {
      * @param generic the generic
      * @return the OutputData builder
      */
-    public OutputDataBuilder setGeneric(List<DialogRuntimeResponseGeneric> generic) {
+    public OutputDataBuilder generic(List<DialogRuntimeResponseGeneric> generic) {
       this.generic = generic;
       return this;
     }
@@ -15451,7 +15521,7 @@ public class IBMAssistantV1Models {
      * @param nodesVisited the nodesVisited
      * @return the OutputData builder
      */
-    public OutputDataBuilder setNodesVisited(List<String> nodesVisited) {
+    public OutputDataBuilder nodesVisited(List<String> nodesVisited) {
       this.nodesVisited = nodesVisited;
       return this;
     }
@@ -15463,7 +15533,7 @@ public class IBMAssistantV1Models {
      * @param nodesVisitedDetails the nodesVisitedDetails
      * @return the OutputData builder
      */
-    public OutputDataBuilder setNodesVisitedDetails(List<DialogNodeVisitedDetails> nodesVisitedDetails) {
+    public OutputDataBuilder nodesVisitedDetails(List<DialogNodeVisitedDetails> nodesVisitedDetails) {
       this.nodesVisitedDetails = nodesVisitedDetails;
       return this;
     }
@@ -15479,7 +15549,7 @@ public class IBMAssistantV1Models {
     private Long matched;
     private String refreshCursor;
     private String nextCursor;
- 
+
     /**
      * Gets the refreshUrl.
      *
@@ -15491,7 +15561,7 @@ public class IBMAssistantV1Models {
     public String getRefreshUrl() {
       return refreshUrl;
     }
- 
+
     /**
      * Gets the nextUrl.
      *
@@ -15503,7 +15573,7 @@ public class IBMAssistantV1Models {
     public String getNextUrl() {
       return nextUrl;
     }
- 
+
     /**
      * Gets the total.
      *
@@ -15515,7 +15585,7 @@ public class IBMAssistantV1Models {
     public Long getTotal() {
       return total;
     }
- 
+
     /**
      * Gets the matched.
      *
@@ -15527,7 +15597,7 @@ public class IBMAssistantV1Models {
     public Long getMatched() {
       return matched;
     }
- 
+
     /**
      * Gets the refreshCursor.
      *
@@ -15539,7 +15609,7 @@ public class IBMAssistantV1Models {
     public String getRefreshCursor() {
       return refreshCursor;
     }
- 
+
     /**
      * Gets the nextCursor.
      *
@@ -15606,12 +15676,15 @@ public class IBMAssistantV1Models {
       this.nextCursor = nextCursor;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('refresh_url', 'refreshUrl');
-      mapping.put('next_url', 'nextUrl');
-      mapping.put('refresh_cursor', 'refreshCursor');
-      mapping.put('next_cursor', 'nextCursor');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'refresh_url', 'refreshUrl');
+      mapping.put(parentLabel + 'next_url', 'nextUrl');
+      mapping.put(parentLabel + 'refresh_cursor', 'refreshCursor');
+      mapping.put(parentLabel + 'next_cursor', 'nextCursor');
       return mapping;
     }
   }
@@ -15626,7 +15699,7 @@ public class IBMAssistantV1Models {
     private Double confidence;
     private IBMWatsonMapModel metadata;
     private List<CaptureGroup> groups;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -15735,7 +15808,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for metadata
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
-      retBuilder.setMetadata(newMetadata);
+      retBuilder.metadata(newMetadata);
 
       // calling custom deserializer for groups
       List<CaptureGroup> newGroups = new List<CaptureGroup>();
@@ -15747,7 +15820,7 @@ public class IBMAssistantV1Models {
           CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CaptureGroup.class);
           newGroups.add(newItem);
         }
-        retBuilder.setGroups(newGroups);
+        retBuilder.groups(newGroups);
       }
 
       RuntimeEntity builderResult = retBuilder.build();
@@ -15762,19 +15835,15 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (groups != null && groups[0] != null) {
-        mapping.putAll(groups[0].getSdkToApiMapping());
+        mapping.putAll(groups[0].addToSdkToApiMapping(parentLabel + 'groups/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (groups != null && groups[0] != null) {
-        mapping.putAll(groups[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) CaptureGroup.class.newInstance()).addToApiToSdkMapping(parentLabel + 'groups/', mapping));
       return mapping;
     }
   }
@@ -15862,7 +15931,7 @@ public class IBMAssistantV1Models {
      * @param entity the entity
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setEntity(String entity) {
+    public RuntimeEntityBuilder entity(String entity) {
       this.entity = entity;
       return this;
     }
@@ -15874,7 +15943,7 @@ public class IBMAssistantV1Models {
      * @param location the location
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setLocation(List<Long> location) {
+    public RuntimeEntityBuilder location(List<Long> location) {
       this.location = location;
       return this;
     }
@@ -15885,7 +15954,7 @@ public class IBMAssistantV1Models {
      * @param value the value
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setValue(String value) {
+    public RuntimeEntityBuilder value(String value) {
       this.value = value;
       return this;
     }
@@ -15896,7 +15965,7 @@ public class IBMAssistantV1Models {
      * @param confidence the confidence
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setConfidence(Double confidence) {
+    public RuntimeEntityBuilder confidence(Double confidence) {
       this.confidence = confidence;
       return this;
     }
@@ -15907,7 +15976,7 @@ public class IBMAssistantV1Models {
      * @param metadata the metadata
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setMetadata(IBMWatsonMapModel metadata) {
+    public RuntimeEntityBuilder metadata(IBMWatsonMapModel metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -15919,7 +15988,7 @@ public class IBMAssistantV1Models {
      * @param groups the groups
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setGroups(List<CaptureGroup> groups) {
+    public RuntimeEntityBuilder groups(List<CaptureGroup> groups) {
       this.groups = groups;
       return this;
     }
@@ -15931,7 +16000,7 @@ public class IBMAssistantV1Models {
   public class RuntimeIntent extends IBMWatsonDynamicModel {
     private String intent;
     private Double confidence;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -16049,7 +16118,7 @@ public class IBMAssistantV1Models {
      * @param intent the intent
      * @return the RuntimeIntent builder
      */
-    public RuntimeIntentBuilder setIntent(String intent) {
+    public RuntimeIntentBuilder intent(String intent) {
       this.intent = intent;
       return this;
     }
@@ -16060,7 +16129,7 @@ public class IBMAssistantV1Models {
      * @param confidence the confidence
      * @return the RuntimeIntent builder
      */
-    public RuntimeIntentBuilder setConfidence(Double confidence) {
+    public RuntimeIntentBuilder confidence(Double confidence) {
       this.confidence = confidence;
       return this;
     }
@@ -16079,7 +16148,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public Synonym() { }
- 
+
     /**
      * Gets the synonym.
      *
@@ -16093,7 +16162,7 @@ public class IBMAssistantV1Models {
     public String getSynonym() {
       return synonym;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -16105,7 +16174,7 @@ public class IBMAssistantV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -16213,7 +16282,7 @@ public class IBMAssistantV1Models {
   public class SynonymCollection extends IBMWatsonResponseModel {
     private List<Synonym> synonyms;
     private Pagination pagination;
- 
+
     /**
      * Gets the synonyms.
      *
@@ -16225,7 +16294,7 @@ public class IBMAssistantV1Models {
     public List<Synonym> getSynonyms() {
       return synonyms;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -16283,11 +16352,8 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -16296,7 +16362,7 @@ public class IBMAssistantV1Models {
    * For internal use only.
    */
   public class SystemResponse extends IBMWatsonDynamicModel {
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -16821,13 +16887,13 @@ public class IBMAssistantV1Models {
       mapping.put('newPreviousSibling', 'new_previous_sibling');
       mapping.put('newOutput', 'new_output');
       if (newOutput != null) {
-        mapping.putAll(newOutput.getSdkToApiMapping());
+        mapping.putAll(newOutput.addToSdkToApiMapping('', mapping));
       }
       mapping.put('newContext', 'new_context');
       mapping.put('newMetadata', 'new_metadata');
       mapping.put('newNextStep', 'new_next_step');
       if (newNextStep != null) {
-        mapping.putAll(newNextStep.getSdkToApiMapping());
+        mapping.putAll(newNextStep.addToSdkToApiMapping('', mapping));
       }
       mapping.put('newTitle', 'new_title');
       mapping.put('nodeType', 'new_type');
@@ -16835,7 +16901,7 @@ public class IBMAssistantV1Models {
       mapping.put('newVariable', 'new_variable');
       mapping.put('newActions', 'new_actions');
       if (newActions != null && newActions[0] != null) {
-        mapping.putAll(newActions[0].getSdkToApiMapping());
+        mapping.putAll(newActions[0].addToSdkToApiMapping('', mapping));
       }
       mapping.put('newDigressIn', 'new_digress_in');
       mapping.put('newDigressOut', 'new_digress_out');
@@ -17291,7 +17357,7 @@ public class IBMAssistantV1Models {
       mapping.put('newFuzzyMatch', 'new_fuzzy_match');
       mapping.put('newValues', 'new_values');
       if (newValues != null && newValues[0] != null) {
-        mapping.putAll(newValues[0].getSdkToApiMapping());
+        mapping.putAll(newValues[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -18639,14 +18705,14 @@ public class IBMAssistantV1Models {
       mapping.put('learningOptOut', 'learning_opt_out');
       mapping.put('systemSettings', 'system_settings');
       if (systemSettings != null) {
-        mapping.putAll(systemSettings.getSdkToApiMapping());
+        mapping.putAll(systemSettings.addToSdkToApiMapping('', mapping));
       }
       if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getSdkToApiMapping());
+        mapping.putAll(entities[0].addToSdkToApiMapping('', mapping));
       }
       mapping.put('dialogNodes', 'dialog_nodes');
       if (dialogNodes != null && dialogNodes[0] != null) {
-        mapping.putAll(dialogNodes[0].getSdkToApiMapping());
+        mapping.putAll(dialogNodes[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -18935,7 +19001,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public Value() { }
- 
+
     /**
      * Gets the value.
      *
@@ -18949,7 +19015,7 @@ public class IBMAssistantV1Models {
     public String getValue() {
       return value;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -18961,7 +19027,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getMetadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the valueType.
      *
@@ -18973,7 +19039,7 @@ public class IBMAssistantV1Models {
     public String getValueType() {
       return valueType;
     }
- 
+
     /**
      * Gets the synonyms.
      *
@@ -18988,7 +19054,7 @@ public class IBMAssistantV1Models {
     public List<String> getSynonyms() {
       return synonyms;
     }
- 
+
     /**
      * Gets the patterns.
      *
@@ -19003,7 +19069,7 @@ public class IBMAssistantV1Models {
     public List<String> getPatterns() {
       return patterns;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -19015,7 +19081,7 @@ public class IBMAssistantV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -19064,9 +19130,8 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'valueType');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'type', 'valueType');
       return mapping;
     }
   }
@@ -19235,7 +19300,7 @@ public class IBMAssistantV1Models {
   public class ValueCollection extends IBMWatsonResponseModel {
     private List<Value> values;
     private Pagination pagination;
- 
+
     /**
      * Gets the values.
      *
@@ -19247,7 +19312,7 @@ public class IBMAssistantV1Models {
     public List<Value> getValues() {
       return values;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -19305,14 +19370,9 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (values != null && values[0] != null) {
-        mapping.putAll(values[0].getApiToSdkMapping());
-      }
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Value.class.newInstance()).addToApiToSdkMapping(parentLabel + 'values/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -19335,7 +19395,7 @@ public class IBMAssistantV1Models {
     private List<Entity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
- 
+
     /**
      * Gets the name.
      *
@@ -19347,7 +19407,7 @@ public class IBMAssistantV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -19359,7 +19419,7 @@ public class IBMAssistantV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -19371,7 +19431,7 @@ public class IBMAssistantV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -19383,7 +19443,7 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getMetadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the learningOptOut.
      *
@@ -19396,7 +19456,7 @@ public class IBMAssistantV1Models {
     public Boolean getLearningOptOut() {
       return learningOptOut;
     }
- 
+
     /**
      * Gets the systemSettings.
      *
@@ -19408,7 +19468,7 @@ public class IBMAssistantV1Models {
     public WorkspaceSystemSettings getSystemSettings() {
       return systemSettings;
     }
- 
+
     /**
      * Gets the workspaceId.
      *
@@ -19420,7 +19480,7 @@ public class IBMAssistantV1Models {
     public String getWorkspaceId() {
       return workspaceId;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -19432,7 +19492,7 @@ public class IBMAssistantV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -19444,7 +19504,7 @@ public class IBMAssistantV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -19456,7 +19516,7 @@ public class IBMAssistantV1Models {
     public Datetime getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -19468,7 +19528,7 @@ public class IBMAssistantV1Models {
     public List<Intent> getIntents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -19480,7 +19540,7 @@ public class IBMAssistantV1Models {
     public List<Entity> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the dialogNodes.
      *
@@ -19492,7 +19552,7 @@ public class IBMAssistantV1Models {
     public List<DialogNode> getDialogNodes() {
       return dialogNodes;
     }
- 
+
     /**
      * Gets the counterexamples.
      *
@@ -19665,21 +19725,14 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('learning_opt_out', 'learningOptOut');
-      mapping.put('system_settings', 'systemSettings');
-      if (systemSettings != null) {
-        mapping.putAll(systemSettings.getApiToSdkMapping());
-      }
-      mapping.put('workspace_id', 'workspaceId');
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
-      mapping.put('dialog_nodes', 'dialogNodes');
-      if (dialogNodes != null && dialogNodes[0] != null) {
-        mapping.putAll(dialogNodes[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'learning_opt_out', 'learningOptOut');
+      mapping.put(parentLabel + 'system_settings', 'systemSettings');
+      mapping.putAll(((IBMWatsonGenericModel) WorkspaceSystemSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'system_settings/', mapping));
+      mapping.put(parentLabel + 'workspace_id', 'workspaceId');
+      mapping.putAll(((IBMWatsonGenericModel) Entity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
+      mapping.put(parentLabel + 'dialog_nodes', 'dialogNodes');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNode.class.newInstance()).addToApiToSdkMapping(parentLabel + 'dialog_nodes/', mapping));
       return mapping;
     }
   }
@@ -19690,7 +19743,7 @@ public class IBMAssistantV1Models {
   public class WorkspaceCollection extends IBMWatsonResponseModel {
     private List<Workspace> workspaces;
     private Pagination pagination;
- 
+
     /**
      * Gets the workspaces.
      *
@@ -19702,7 +19755,7 @@ public class IBMAssistantV1Models {
     public List<Workspace> getWorkspaces() {
       return workspaces;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -19760,14 +19813,9 @@ public class IBMAssistantV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (workspaces != null && workspaces[0] != null) {
-        mapping.putAll(workspaces[0].getApiToSdkMapping());
-      }
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Workspace.class.newInstance()).addToApiToSdkMapping(parentLabel + 'workspaces/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -19785,7 +19833,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public WorkspaceSystemSettings() { }
- 
+
     /**
      * Gets the tooling.
      *
@@ -19797,7 +19845,7 @@ public class IBMAssistantV1Models {
     public WorkspaceSystemSettingsTooling getTooling() {
       return tooling;
     }
- 
+
     /**
      * Gets the disambiguation.
      *
@@ -19811,7 +19859,7 @@ public class IBMAssistantV1Models {
     public WorkspaceSystemSettingsDisambiguation getDisambiguation() {
       return disambiguation;
     }
- 
+
     /**
      * Gets the humanAgentAssist.
      *
@@ -19849,40 +19897,34 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for tooling
       WorkspaceSystemSettingsTooling newTooling = (WorkspaceSystemSettingsTooling) new WorkspaceSystemSettingsTooling().deserialize(JSON.serialize(ret.getTooling()), (Map<String, Object>) jsonMap.get('tooling'), WorkspaceSystemSettingsTooling.class);
-      retBuilder.setTooling(newTooling);
+      retBuilder.tooling(newTooling);
 
       // calling custom deserializer for disambiguation
       WorkspaceSystemSettingsDisambiguation newDisambiguation = (WorkspaceSystemSettingsDisambiguation) new WorkspaceSystemSettingsDisambiguation().deserialize(JSON.serialize(ret.getDisambiguation()), (Map<String, Object>) jsonMap.get('disambiguation'), WorkspaceSystemSettingsDisambiguation.class);
-      retBuilder.setDisambiguation(newDisambiguation);
+      retBuilder.disambiguation(newDisambiguation);
 
       // calling custom deserializer for humanAgentAssist
       IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getHumanAgentAssist()), (Map<String, Object>) jsonMap.get('humanAgentAssist'), IBMWatsonMapModel.class);
-      retBuilder.setHumanAgentAssist(newHumanAgentAssist);
+      retBuilder.humanAgentAssist(newHumanAgentAssist);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (tooling != null) {
-        mapping.putAll(tooling.getSdkToApiMapping());
+        mapping.putAll(tooling.addToSdkToApiMapping(parentLabel + 'tooling/', mapping));
       }
       if (disambiguation != null) {
-        mapping.putAll(disambiguation.getSdkToApiMapping());
+        mapping.putAll(disambiguation.addToSdkToApiMapping(parentLabel + 'disambiguation/', mapping));
       }
-      mapping.put('humanAgentAssist', 'human_agent_assist');
+      mapping.put(parentLabel + 'humanAgentAssist', 'human_agent_assist');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (tooling != null) {
-        mapping.putAll(tooling.getApiToSdkMapping());
-      }
-      if (disambiguation != null) {
-        mapping.putAll(disambiguation.getApiToSdkMapping());
-      }
-      mapping.put('human_agent_assist', 'humanAgentAssist');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) WorkspaceSystemSettingsTooling.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tooling/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) WorkspaceSystemSettingsDisambiguation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'disambiguation/', mapping));
+      mapping.put(parentLabel + 'human_agent_assist', 'humanAgentAssist');
       return mapping;
     }
   }
@@ -19922,7 +19964,7 @@ public class IBMAssistantV1Models {
      * @param tooling the tooling
      * @return the WorkspaceSystemSettings builder
      */
-    public WorkspaceSystemSettingsBuilder setTooling(WorkspaceSystemSettingsTooling tooling) {
+    public WorkspaceSystemSettingsBuilder tooling(WorkspaceSystemSettingsTooling tooling) {
       this.tooling = tooling;
       return this;
     }
@@ -19933,7 +19975,7 @@ public class IBMAssistantV1Models {
      * @param disambiguation the disambiguation
      * @return the WorkspaceSystemSettings builder
      */
-    public WorkspaceSystemSettingsBuilder setDisambiguation(WorkspaceSystemSettingsDisambiguation disambiguation) {
+    public WorkspaceSystemSettingsBuilder disambiguation(WorkspaceSystemSettingsDisambiguation disambiguation) {
       this.disambiguation = disambiguation;
       return this;
     }
@@ -19944,7 +19986,7 @@ public class IBMAssistantV1Models {
      * @param humanAgentAssist the humanAgentAssist
      * @return the WorkspaceSystemSettings builder
      */
-    public WorkspaceSystemSettingsBuilder setHumanAgentAssist(IBMWatsonMapModel humanAgentAssist) {
+    public WorkspaceSystemSettingsBuilder humanAgentAssist(IBMWatsonMapModel humanAgentAssist) {
       this.humanAgentAssist = humanAgentAssist;
       return this;
     }
@@ -19966,7 +20008,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public WorkspaceSystemSettingsDisambiguation() { }
- 
+
     /**
      * Gets the prompt.
      *
@@ -19978,7 +20020,7 @@ public class IBMAssistantV1Models {
     public String getPrompt() {
       return prompt;
     }
- 
+
     /**
      * Gets the noneOfTheAbovePrompt.
      *
@@ -19991,7 +20033,7 @@ public class IBMAssistantV1Models {
     public String getNoneOfTheAbovePrompt() {
       return noneOfTheAbovePrompt;
     }
- 
+
     /**
      * Gets the enabled.
      *
@@ -20003,7 +20045,7 @@ public class IBMAssistantV1Models {
     public Boolean getEnabled() {
       return enabled;
     }
- 
+
     /**
      * Gets the sensitivity.
      *
@@ -20033,15 +20075,13 @@ public class IBMAssistantV1Models {
       return new WorkspaceSystemSettingsDisambiguationBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('noneOfTheAbovePrompt', 'none_of_the_above_prompt');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'noneOfTheAbovePrompt', 'none_of_the_above_prompt');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('none_of_the_above_prompt', 'noneOfTheAbovePrompt');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'none_of_the_above_prompt', 'noneOfTheAbovePrompt');
       return mapping;
     }
   }
@@ -20083,7 +20123,7 @@ public class IBMAssistantV1Models {
      * @param prompt the prompt
      * @return the WorkspaceSystemSettingsDisambiguation builder
      */
-    public WorkspaceSystemSettingsDisambiguationBuilder setPrompt(String prompt) {
+    public WorkspaceSystemSettingsDisambiguationBuilder prompt(String prompt) {
       this.prompt = prompt;
       return this;
     }
@@ -20094,7 +20134,7 @@ public class IBMAssistantV1Models {
      * @param noneOfTheAbovePrompt the noneOfTheAbovePrompt
      * @return the WorkspaceSystemSettingsDisambiguation builder
      */
-    public WorkspaceSystemSettingsDisambiguationBuilder setNoneOfTheAbovePrompt(String noneOfTheAbovePrompt) {
+    public WorkspaceSystemSettingsDisambiguationBuilder noneOfTheAbovePrompt(String noneOfTheAbovePrompt) {
       this.noneOfTheAbovePrompt = noneOfTheAbovePrompt;
       return this;
     }
@@ -20105,7 +20145,7 @@ public class IBMAssistantV1Models {
      * @param enabled the enabled
      * @return the WorkspaceSystemSettingsDisambiguation builder
      */
-    public WorkspaceSystemSettingsDisambiguationBuilder setEnabled(Boolean enabled) {
+    public WorkspaceSystemSettingsDisambiguationBuilder enabled(Boolean enabled) {
       this.enabled = enabled;
       return this;
     }
@@ -20116,7 +20156,7 @@ public class IBMAssistantV1Models {
      * @param sensitivity the sensitivity
      * @return the WorkspaceSystemSettingsDisambiguation builder
      */
-    public WorkspaceSystemSettingsDisambiguationBuilder setSensitivity(String sensitivity) {
+    public WorkspaceSystemSettingsDisambiguationBuilder sensitivity(String sensitivity) {
       this.sensitivity = sensitivity;
       return this;
     }
@@ -20133,7 +20173,7 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public WorkspaceSystemSettingsTooling() { }
- 
+
     /**
      * Gets the storeGenericResponses.
      *
@@ -20159,15 +20199,21 @@ public class IBMAssistantV1Models {
       return new WorkspaceSystemSettingsToolingBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('storeGenericResponses', 'store_generic_responses');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'storeGenericResponses', 'store_generic_responses');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('store_generic_responses', 'storeGenericResponses');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'store_generic_responses', 'storeGenericResponses');
       return mapping;
     }
   }
@@ -20203,7 +20249,7 @@ public class IBMAssistantV1Models {
      * @param storeGenericResponses the storeGenericResponses
      * @return the WorkspaceSystemSettingsTooling builder
      */
-    public WorkspaceSystemSettingsToolingBuilder setStoreGenericResponses(Boolean storeGenericResponses) {
+    public WorkspaceSystemSettingsToolingBuilder storeGenericResponses(Boolean storeGenericResponses) {
       this.storeGenericResponses = storeGenericResponses;
       return this;
     }

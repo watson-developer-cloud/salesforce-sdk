@@ -141,11 +141,17 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    * Create a classifier.
    *
    * Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or
-   * negative examples. Include at least two sets of examples, either two positive example files or one positive and one
-   * negative file. You can upload a maximum of 256 MB per call.
+   * negative example training images. Include at least two sets of examples, either two positive example files or one
+   * positive and one negative file. You can upload a maximum of 256 MB per call.
    *
-   * Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
-   * names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+   * **Tips when creating:**
+   *
+   * - If you set the **X-Watson-Learning-Opt-Out** header parameter to `true` when you create a classifier, the example
+   * training images are not stored. Save your training images locally. For more information, see [Data
+   * collection](#data-collection).
+   *
+   * - Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
+   * class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
    *
    * @param createClassifierOptions the {@link IBMVisualRecognitionV3Models.CreateClassifierOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifier} with the response
@@ -239,8 +245,14 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    * Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
    * names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
    *
-   * **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests
-   * in parallel, the last request overwrites the previous requests. The retrained property shows the last time the
+   * **Tips about retraining:**
+   *
+   * - You can't update the classifier if the **X-Watson-Learning-Opt-Out** header parameter was set to `true` when the
+   * classifier was created. Training images are not stored in that case. Instead, create another classifier. For more
+   * information, see [Data collection](#data-collection).
+   *
+   * - Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in
+   * parallel, the last request overwrites the previous requests. The `retrained` property shows the last time the
    * classifier retraining finished.
    *
    * @param updateClassifierOptions the {@link IBMVisualRecognitionV3Models.UpdateClassifierOptions} containing the options for the call

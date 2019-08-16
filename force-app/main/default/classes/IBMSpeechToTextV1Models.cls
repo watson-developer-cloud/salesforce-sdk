@@ -15,7 +15,7 @@ public class IBMSpeechToTextV1Models {
     private String status;
     private Long progress;
     private String warnings;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -28,7 +28,7 @@ public class IBMSpeechToTextV1Models {
     public String getCustomizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -41,7 +41,7 @@ public class IBMSpeechToTextV1Models {
     public String getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -55,7 +55,7 @@ public class IBMSpeechToTextV1Models {
     public String getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -67,7 +67,7 @@ public class IBMSpeechToTextV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the versions.
      *
@@ -81,7 +81,7 @@ public class IBMSpeechToTextV1Models {
     public List<String> getVersions() {
       return versions;
     }
- 
+
     /**
      * Gets the owner.
      *
@@ -93,7 +93,7 @@ public class IBMSpeechToTextV1Models {
     public String getOwner() {
       return owner;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -105,7 +105,7 @@ public class IBMSpeechToTextV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -117,7 +117,7 @@ public class IBMSpeechToTextV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the baseModelName.
      *
@@ -129,7 +129,7 @@ public class IBMSpeechToTextV1Models {
     public String getBaseModelName() {
       return baseModelName;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -149,7 +149,7 @@ public class IBMSpeechToTextV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the progress.
      *
@@ -163,7 +163,7 @@ public class IBMSpeechToTextV1Models {
     public Long getProgress() {
       return progress;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -285,10 +285,13 @@ public class IBMSpeechToTextV1Models {
       this.warnings = warnings;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customization_id', 'customizationId');
-      mapping.put('base_model_name', 'baseModelName');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'customization_id', 'customizationId');
+      mapping.put(parentLabel + 'base_model_name', 'baseModelName');
       return mapping;
     }
   }
@@ -298,7 +301,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class AcousticModels extends IBMWatsonResponseModel {
     private List<AcousticModel> customizations;
- 
+
     /**
      * Gets the customizations.
      *
@@ -345,11 +348,8 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (customizations != null && customizations[0] != null) {
-        mapping.putAll(customizations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) AcousticModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'customizations/', mapping));
       return mapping;
     }
   }
@@ -1357,7 +1357,7 @@ public class IBMSpeechToTextV1Models {
       Map<String, String> mapping = new Map<String, String>();
       mapping.put('customizationId', 'customization_id');
       if (words != null && words[0] != null) {
-        mapping.putAll(words[0].getSdkToApiMapping());
+        mapping.putAll(words[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -1461,7 +1461,7 @@ public class IBMSpeechToTextV1Models {
     private String codec;
     private Long frequency;
     private String compression;
- 
+
     /**
      * Gets the xtype.
      *
@@ -1477,7 +1477,7 @@ public class IBMSpeechToTextV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the codec.
      *
@@ -1489,7 +1489,7 @@ public class IBMSpeechToTextV1Models {
     public String getCodec() {
       return codec;
     }
- 
+
     /**
      * Gets the frequency.
      *
@@ -1502,7 +1502,7 @@ public class IBMSpeechToTextV1Models {
     public Long getFrequency() {
       return frequency;
     }
- 
+
     /**
      * Gets the compression.
      *
@@ -1555,9 +1555,12 @@ public class IBMSpeechToTextV1Models {
       this.compression = compression;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'type', 'xtype');
       return mapping;
     }
   }
@@ -1572,7 +1575,7 @@ public class IBMSpeechToTextV1Models {
     private String status;
     private AudioResource container;
     private List<AudioResource> audio;
- 
+
     /**
      * Gets the duration.
      *
@@ -1585,7 +1588,7 @@ public class IBMSpeechToTextV1Models {
     public Long getDuration() {
       return duration;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -1597,7 +1600,7 @@ public class IBMSpeechToTextV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the details.
      *
@@ -1610,7 +1613,7 @@ public class IBMSpeechToTextV1Models {
     public AudioDetails getDetails() {
       return details;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -1629,7 +1632,7 @@ public class IBMSpeechToTextV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the container.
      *
@@ -1642,7 +1645,7 @@ public class IBMSpeechToTextV1Models {
     public AudioResource getContainer() {
       return container;
     }
- 
+
     /**
      * Gets the audio.
      *
@@ -1741,17 +1744,10 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (details != null) {
-        mapping.putAll(details.getApiToSdkMapping());
-      }
-      if (container != null) {
-        mapping.putAll(container.getApiToSdkMapping());
-      }
-      if (audio != null && audio[0] != null) {
-        mapping.putAll(audio[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) AudioDetails.class.newInstance()).addToApiToSdkMapping(parentLabel + 'details/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) AudioResource.class.newInstance()).addToApiToSdkMapping(parentLabel + 'container/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) AudioResource.class.newInstance()).addToApiToSdkMapping(parentLabel + 'audio/', mapping));
       return mapping;
     }
   }
@@ -1762,7 +1758,7 @@ public class IBMSpeechToTextV1Models {
   public class AudioMetrics extends IBMWatsonGenericModel {
     private Double samplingInterval;
     private AudioMetricsDetails accumulated;
- 
+
     /**
      * Gets the samplingInterval.
      *
@@ -1776,7 +1772,7 @@ public class IBMSpeechToTextV1Models {
     public Double getSamplingInterval() {
       return samplingInterval;
     }
- 
+
     /**
      * Gets the accumulated.
      *
@@ -1821,12 +1817,13 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('sampling_interval', 'samplingInterval');
-      if (accumulated != null) {
-        mapping.putAll(accumulated.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'sampling_interval', 'samplingInterval');
+      mapping.putAll(((IBMWatsonGenericModel) AudioMetricsDetails.class.newInstance()).addToApiToSdkMapping(parentLabel + 'accumulated/', mapping));
       return mapping;
     }
   }
@@ -1844,7 +1841,7 @@ public class IBMSpeechToTextV1Models {
     private List<AudioMetricsHistogramBin> clippingRate;
     private List<AudioMetricsHistogramBin> speechLevel;
     private List<AudioMetricsHistogramBin> nonSpeechLevel;
- 
+
     /**
      * Gets the xfinal.
      *
@@ -1858,7 +1855,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean getXfinal() {
       return xfinal;
     }
- 
+
     /**
      * Gets the endTime.
      *
@@ -1870,7 +1867,7 @@ public class IBMSpeechToTextV1Models {
     public Double getEndTime() {
       return endTime;
     }
- 
+
     /**
      * Gets the signalToNoiseRatio.
      *
@@ -1884,7 +1881,7 @@ public class IBMSpeechToTextV1Models {
     public Double getSignalToNoiseRatio() {
       return signalToNoiseRatio;
     }
- 
+
     /**
      * Gets the speechRatio.
      *
@@ -1896,7 +1893,7 @@ public class IBMSpeechToTextV1Models {
     public Double getSpeechRatio() {
       return speechRatio;
     }
- 
+
     /**
      * Gets the highFrequencyLoss.
      *
@@ -1912,7 +1909,7 @@ public class IBMSpeechToTextV1Models {
     public Double getHighFrequencyLoss() {
       return highFrequencyLoss;
     }
- 
+
     /**
      * Gets the directCurrentOffset.
      *
@@ -1925,7 +1922,7 @@ public class IBMSpeechToTextV1Models {
     public List<AudioMetricsHistogramBin> getDirectCurrentOffset() {
       return directCurrentOffset;
     }
- 
+
     /**
      * Gets the clippingRate.
      *
@@ -1941,7 +1938,7 @@ public class IBMSpeechToTextV1Models {
     public List<AudioMetricsHistogramBin> getClippingRate() {
       return clippingRate;
     }
- 
+
     /**
      * Gets the speechLevel.
      *
@@ -1955,7 +1952,7 @@ public class IBMSpeechToTextV1Models {
     public List<AudioMetricsHistogramBin> getSpeechLevel() {
       return speechLevel;
     }
- 
+
     /**
      * Gets the nonSpeechLevel.
      *
@@ -2113,29 +2110,24 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('final', 'xfinal');
-      mapping.put('end_time', 'endTime');
-      mapping.put('signal_to_noise_ratio', 'signalToNoiseRatio');
-      mapping.put('speech_ratio', 'speechRatio');
-      mapping.put('high_frequency_loss', 'highFrequencyLoss');
-      mapping.put('direct_current_offset', 'directCurrentOffset');
-      if (directCurrentOffset != null && directCurrentOffset[0] != null) {
-        mapping.putAll(directCurrentOffset[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('clipping_rate', 'clippingRate');
-      if (clippingRate != null && clippingRate[0] != null) {
-        mapping.putAll(clippingRate[0].getApiToSdkMapping());
-      }
-      mapping.put('speech_level', 'speechLevel');
-      if (speechLevel != null && speechLevel[0] != null) {
-        mapping.putAll(speechLevel[0].getApiToSdkMapping());
-      }
-      mapping.put('non_speech_level', 'nonSpeechLevel');
-      if (nonSpeechLevel != null && nonSpeechLevel[0] != null) {
-        mapping.putAll(nonSpeechLevel[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'final', 'xfinal');
+      mapping.put(parentLabel + 'end_time', 'endTime');
+      mapping.put(parentLabel + 'signal_to_noise_ratio', 'signalToNoiseRatio');
+      mapping.put(parentLabel + 'speech_ratio', 'speechRatio');
+      mapping.put(parentLabel + 'high_frequency_loss', 'highFrequencyLoss');
+      mapping.put(parentLabel + 'direct_current_offset', 'directCurrentOffset');
+      mapping.putAll(((IBMWatsonGenericModel) AudioMetricsHistogramBin.class.newInstance()).addToApiToSdkMapping(parentLabel + 'direct_current_offset/', mapping));
+      mapping.put(parentLabel + 'clipping_rate', 'clippingRate');
+      mapping.putAll(((IBMWatsonGenericModel) AudioMetricsHistogramBin.class.newInstance()).addToApiToSdkMapping(parentLabel + 'clipping_rate/', mapping));
+      mapping.put(parentLabel + 'speech_level', 'speechLevel');
+      mapping.putAll(((IBMWatsonGenericModel) AudioMetricsHistogramBin.class.newInstance()).addToApiToSdkMapping(parentLabel + 'speech_level/', mapping));
+      mapping.put(parentLabel + 'non_speech_level', 'nonSpeechLevel');
+      mapping.putAll(((IBMWatsonGenericModel) AudioMetricsHistogramBin.class.newInstance()).addToApiToSdkMapping(parentLabel + 'non_speech_level/', mapping));
       return mapping;
     }
   }
@@ -2149,7 +2141,7 @@ public class IBMSpeechToTextV1Models {
     private Double xbegin;
     private Double xend;
     private Long count;
- 
+
     /**
      * Gets the xbegin.
      *
@@ -2161,7 +2153,7 @@ public class IBMSpeechToTextV1Models {
     public Double getXbegin() {
       return xbegin;
     }
- 
+
     /**
      * Gets the xend.
      *
@@ -2173,7 +2165,7 @@ public class IBMSpeechToTextV1Models {
     public Double getXend() {
       return xend;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -2213,10 +2205,13 @@ public class IBMSpeechToTextV1Models {
       this.count = count;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('begin', 'xbegin');
-      mapping.put('end', 'xend');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'begin', 'xbegin');
+      mapping.put(parentLabel + 'end', 'xend');
       return mapping;
     }
   }
@@ -2229,7 +2224,7 @@ public class IBMSpeechToTextV1Models {
     private String name;
     private AudioDetails details;
     private String status;
- 
+
     /**
      * Gets the duration.
      *
@@ -2241,7 +2236,7 @@ public class IBMSpeechToTextV1Models {
     public Long getDuration() {
       return duration;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -2256,7 +2251,7 @@ public class IBMSpeechToTextV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the details.
      *
@@ -2269,7 +2264,7 @@ public class IBMSpeechToTextV1Models {
     public AudioDetails getDetails() {
       return details;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -2338,11 +2333,8 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (details != null) {
-        mapping.putAll(details.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) AudioDetails.class.newInstance()).addToApiToSdkMapping(parentLabel + 'details/', mapping));
       return mapping;
     }
   }
@@ -2353,7 +2345,7 @@ public class IBMSpeechToTextV1Models {
   public class AudioResources extends IBMWatsonResponseModel {
     private Double totalMinutesOfAudio;
     private List<AudioResource> audio;
- 
+
     /**
      * Gets the totalMinutesOfAudio.
      *
@@ -2367,7 +2359,7 @@ public class IBMSpeechToTextV1Models {
     public Double getTotalMinutesOfAudio() {
       return totalMinutesOfAudio;
     }
- 
+
     /**
      * Gets the audio.
      *
@@ -2422,12 +2414,13 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('total_minutes_of_audio', 'totalMinutesOfAudio');
-      if (audio != null && audio[0] != null) {
-        mapping.putAll(audio[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'total_minutes_of_audio', 'totalMinutesOfAudio');
+      mapping.putAll(((IBMWatsonGenericModel) AudioResource.class.newInstance()).addToApiToSdkMapping(parentLabel + 'audio/', mapping));
       return mapping;
     }
   }
@@ -2586,7 +2579,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class Corpora extends IBMWatsonResponseModel {
     private List<Corpus> corpora;
- 
+
     /**
      * Gets the corpora.
      *
@@ -2632,11 +2625,8 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (corpora != null && corpora[0] != null) {
-        mapping.putAll(corpora[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Corpus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'corpora/', mapping));
       return mapping;
     }
   }
@@ -2650,7 +2640,7 @@ public class IBMSpeechToTextV1Models {
     private Long outOfVocabularyWords;
     private String status;
     private String error;
- 
+
     /**
      * Gets the name.
      *
@@ -2662,7 +2652,7 @@ public class IBMSpeechToTextV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the totalWords.
      *
@@ -2674,7 +2664,7 @@ public class IBMSpeechToTextV1Models {
     public Long getTotalWords() {
       return totalWords;
     }
- 
+
     /**
      * Gets the outOfVocabularyWords.
      *
@@ -2686,7 +2676,7 @@ public class IBMSpeechToTextV1Models {
     public Long getOutOfVocabularyWords() {
       return outOfVocabularyWords;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -2704,7 +2694,7 @@ public class IBMSpeechToTextV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -2763,10 +2753,9 @@ public class IBMSpeechToTextV1Models {
       this.error = error;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('total_words', 'totalWords');
-      mapping.put('out_of_vocabulary_words', 'outOfVocabularyWords');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'total_words', 'totalWords');
+      mapping.put(parentLabel + 'out_of_vocabulary_words', 'outOfVocabularyWords');
       return mapping;
     }
   }
@@ -3273,9 +3262,9 @@ public class IBMSpeechToTextV1Models {
      * multi-person exchange. By default, the service returns no speaker labels. Setting `speaker_labels` to `true`
      * forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
      *
-     * **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
-     * supports speaker labels, you can also use the **Get a model** method and check that the attribute
-     * `speaker_labels` is set to `true`.
+     * **Note:** Applies to US English, Japanese, and Spanish (both broadband and narrowband models) and UK English
+     * (narrowband model) transcription only. To determine whether a language model supports speaker labels, you can
+     * also use the **Get a model** method and check that the attribute `speaker_labels` is set to `true`.
      *
      * See [Speaker
      * labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
@@ -3903,15 +3892,22 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the dialect.
      *
-     * The dialect of the specified language that is to be used with the custom language model. The parameter is
-     * meaningful only for Spanish models, for which the service creates a custom language model that is suited for
-     * speech in one of the following dialects:
-     * * `es-ES` for Castilian Spanish (the default)
-     * * `es-LA` for Latin American Spanish
-     * * `es-US` for North American (Mexican) Spanish
+     * The dialect of the specified language that is to be used with the custom language model. For most languages, the
+     * dialect matches the language of the base model by default. For example, `en-US` is used for either of the US
+     * English language models.
      *
-     * A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
-     * model; for example, `en-US` for either of the US English language models.
+     * For a Spanish language, the service creates a custom language model that is suited for speech in one of the
+     * following dialects:
+     * * `es-ES` for Castilian Spanish (`es-ES` models)
+     * * `es-LA` for Latin American Spanish (`es-AR`, `es-CL`, `es-CO`, and `es-PE` models)
+     * * `es-US` for Mexican (North American) Spanish (`es-MX` models)
+     *
+     * The parameter is meaningful only for Spanish models, for which you can always safely omit the parameter to have
+     * the service create the correct mapping.
+     *
+     * If you specify the `dialect` parameter for non-Spanish language models, its value must match the language of the
+     * base model. If you specify the `dialect` for Spanish language models, its value must match one of the defined
+     * mappings as indicated (`es-ES`, `es-LA`, or `es-MX`). All dialect values are case-insensitive.
      *
      * @return the dialect
      */
@@ -4064,7 +4060,7 @@ public class IBMSpeechToTextV1Models {
     private String word;
     private List<String> soundsLike;
     private String displayAs;
- 
+
     /**
      * Gets the word.
      *
@@ -4079,7 +4075,7 @@ public class IBMSpeechToTextV1Models {
     public String getWord() {
       return word;
     }
- 
+
     /**
      * Gets the soundsLike.
      *
@@ -4099,7 +4095,7 @@ public class IBMSpeechToTextV1Models {
     public List<String> getSoundsLike() {
       return soundsLike;
     }
- 
+
     /**
      * Gets the displayAs.
      *
@@ -4128,10 +4124,9 @@ public class IBMSpeechToTextV1Models {
       return new CustomWordBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('soundsLike', 'sounds_like');
-      mapping.put('displayAs', 'display_as');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'soundsLike', 'sounds_like');
+      mapping.put(parentLabel + 'displayAs', 'display_as');
       return mapping;
     }
   }
@@ -4186,7 +4181,7 @@ public class IBMSpeechToTextV1Models {
      * @param word the word
      * @return the CustomWord builder
      */
-    public CustomWordBuilder setWord(String word) {
+    public CustomWordBuilder word(String word) {
       this.word = word;
       return this;
     }
@@ -4198,7 +4193,7 @@ public class IBMSpeechToTextV1Models {
      * @param soundsLike the soundsLike
      * @return the CustomWord builder
      */
-    public CustomWordBuilder setSoundsLike(List<String> soundsLike) {
+    public CustomWordBuilder soundsLike(List<String> soundsLike) {
       this.soundsLike = soundsLike;
       return this;
     }
@@ -4209,7 +4204,7 @@ public class IBMSpeechToTextV1Models {
      * @param displayAs the displayAs
      * @return the CustomWord builder
      */
-    public CustomWordBuilder setDisplayAs(String displayAs) {
+    public CustomWordBuilder displayAs(String displayAs) {
       this.displayAs = displayAs;
       return this;
     }
@@ -5944,7 +5939,7 @@ public class IBMSpeechToTextV1Models {
     private Long outOfVocabularyWords;
     private String status;
     private String error;
- 
+
     /**
      * Gets the name.
      *
@@ -5956,7 +5951,7 @@ public class IBMSpeechToTextV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the outOfVocabularyWords.
      *
@@ -5968,7 +5963,7 @@ public class IBMSpeechToTextV1Models {
     public Long getOutOfVocabularyWords() {
       return outOfVocabularyWords;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -5986,7 +5981,7 @@ public class IBMSpeechToTextV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -6037,9 +6032,8 @@ public class IBMSpeechToTextV1Models {
       this.error = error;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('out_of_vocabulary_words', 'outOfVocabularyWords');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'out_of_vocabulary_words', 'outOfVocabularyWords');
       return mapping;
     }
   }
@@ -6049,7 +6043,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class Grammars extends IBMWatsonResponseModel {
     private List<Grammar> grammars;
- 
+
     /**
      * Gets the grammars.
      *
@@ -6095,11 +6089,8 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (grammars != null && grammars[0] != null) {
-        mapping.putAll(grammars[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Grammar.class.newInstance()).addToApiToSdkMapping(parentLabel + 'grammars/', mapping));
       return mapping;
     }
   }
@@ -6112,7 +6103,7 @@ public class IBMSpeechToTextV1Models {
     private Double startTime;
     private Double endTime;
     private Double confidence;
- 
+
     /**
      * Gets the normalizedText.
      *
@@ -6124,7 +6115,7 @@ public class IBMSpeechToTextV1Models {
     public String getNormalizedText() {
       return normalizedText;
     }
- 
+
     /**
      * Gets the startTime.
      *
@@ -6136,7 +6127,7 @@ public class IBMSpeechToTextV1Models {
     public Double getStartTime() {
       return startTime;
     }
- 
+
     /**
      * Gets the endTime.
      *
@@ -6148,7 +6139,7 @@ public class IBMSpeechToTextV1Models {
     public Double getEndTime() {
       return endTime;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -6196,6 +6187,13 @@ public class IBMSpeechToTextV1Models {
     public void setConfidence(final Double confidence) {
       this.confidence = confidence;
     }
+
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'normalized_text', 'normalizedText');
+      mapping.put(parentLabel + 'start_time', 'startTime');
+      mapping.put(parentLabel + 'end_time', 'endTime');
+      return mapping;
+    }
   }
 
   /**
@@ -6216,7 +6214,7 @@ public class IBMSpeechToTextV1Models {
     private Long progress;
     private String error;
     private String warnings;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -6229,7 +6227,7 @@ public class IBMSpeechToTextV1Models {
     public String getCustomizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -6242,7 +6240,7 @@ public class IBMSpeechToTextV1Models {
     public String getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -6256,7 +6254,7 @@ public class IBMSpeechToTextV1Models {
     public String getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -6268,16 +6266,18 @@ public class IBMSpeechToTextV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the dialect.
      *
-     * The dialect of the language for the custom language model. By default, the dialect matches the language of the
-     * base model; for example, `en-US` for either of the US English language models. For Spanish models, the field
-     * indicates the dialect for which the model was created:
-     * * `es-ES` for Castilian Spanish (the default)
-     * * `es-LA` for Latin American Spanish
-     * * `es-US` for North American (Mexican) Spanish.
+     * The dialect of the language for the custom language model. For non-Spanish models, the field matches the language
+     * of the base model; for example, `en-US` for either of the US English language models. For Spanish models, the
+     * field indicates the dialect for which the model was created:
+     * * `es-ES` for Castilian Spanish (`es-ES` models)
+     * * `es-LA` for Latin American Spanish (`es-AR`, `es-CL`, `es-CO`, and `es-PE` models)
+     * * `es-US` for Mexican (North American) Spanish (`es-MX` models)
+     *
+     * Dialect values are case-insensitive.
      *
      * @return the dialect
      */
@@ -6285,7 +6285,7 @@ public class IBMSpeechToTextV1Models {
     public String getDialect() {
       return dialect;
     }
- 
+
     /**
      * Gets the versions.
      *
@@ -6299,7 +6299,7 @@ public class IBMSpeechToTextV1Models {
     public List<String> getVersions() {
       return versions;
     }
- 
+
     /**
      * Gets the owner.
      *
@@ -6311,7 +6311,7 @@ public class IBMSpeechToTextV1Models {
     public String getOwner() {
       return owner;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -6323,7 +6323,7 @@ public class IBMSpeechToTextV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -6335,7 +6335,7 @@ public class IBMSpeechToTextV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the baseModelName.
      *
@@ -6347,7 +6347,7 @@ public class IBMSpeechToTextV1Models {
     public String getBaseModelName() {
       return baseModelName;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -6367,7 +6367,7 @@ public class IBMSpeechToTextV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the progress.
      *
@@ -6381,7 +6381,7 @@ public class IBMSpeechToTextV1Models {
     public Long getProgress() {
       return progress;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -6395,7 +6395,7 @@ public class IBMSpeechToTextV1Models {
     public String getError() {
       return error;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -6535,10 +6535,13 @@ public class IBMSpeechToTextV1Models {
       this.warnings = warnings;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customization_id', 'customizationId');
-      mapping.put('base_model_name', 'baseModelName');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'customization_id', 'customizationId');
+      mapping.put(parentLabel + 'base_model_name', 'baseModelName');
       return mapping;
     }
   }
@@ -6548,7 +6551,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class LanguageModels extends IBMWatsonResponseModel {
     private List<LanguageModel> customizations;
- 
+
     /**
      * Gets the customizations.
      *
@@ -6595,11 +6598,8 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (customizations != null && customizations[0] != null) {
-        mapping.putAll(customizations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) LanguageModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'customizations/', mapping));
       return mapping;
     }
   }
@@ -7295,7 +7295,7 @@ public class IBMSpeechToTextV1Models {
     private Double seenByEngine;
     private Double transcription;
     private Double speakerLabels;
- 
+
     /**
      * Gets the received.
      *
@@ -7310,7 +7310,7 @@ public class IBMSpeechToTextV1Models {
     public Double getReceived() {
       return received;
     }
- 
+
     /**
      * Gets the seenByEngine.
      *
@@ -7326,7 +7326,7 @@ public class IBMSpeechToTextV1Models {
     public Double getSeenByEngine() {
       return seenByEngine;
     }
- 
+
     /**
      * Gets the transcription.
      *
@@ -7338,7 +7338,7 @@ public class IBMSpeechToTextV1Models {
     public Double getTranscription() {
       return transcription;
     }
- 
+
     /**
      * Gets the speakerLabels.
      *
@@ -7390,10 +7390,9 @@ public class IBMSpeechToTextV1Models {
       this.speakerLabels = speakerLabels;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('seen_by_engine', 'seenByEngine');
-      mapping.put('speaker_labels', 'speakerLabels');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'seen_by_engine', 'seenByEngine');
+      mapping.put(parentLabel + 'speaker_labels', 'speakerLabels');
       return mapping;
     }
   }
@@ -7406,7 +7405,7 @@ public class IBMSpeechToTextV1Models {
     private ProcessedAudio processedAudio;
     private Double wallClockSinceFirstByteReceived;
     private Boolean periodic;
- 
+
     /**
      * Gets the processedAudio.
      *
@@ -7418,7 +7417,7 @@ public class IBMSpeechToTextV1Models {
     public ProcessedAudio getProcessedAudio() {
       return processedAudio;
     }
- 
+
     /**
      * Gets the wallClockSinceFirstByteReceived.
      *
@@ -7435,7 +7434,7 @@ public class IBMSpeechToTextV1Models {
     public Double getWallClockSinceFirstByteReceived() {
       return wallClockSinceFirstByteReceived;
     }
- 
+
     /**
      * Gets the periodic.
      *
@@ -7495,13 +7494,14 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('processed_audio', 'processedAudio');
-      if (processedAudio != null) {
-        mapping.putAll(processedAudio.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('wall_clock_since_first_byte_received', 'wallClockSinceFirstByteReceived');
+      mapping.put(parentLabel + 'processed_audio', 'processedAudio');
+      mapping.putAll(((IBMWatsonGenericModel) ProcessedAudio.class.newInstance()).addToApiToSdkMapping(parentLabel + 'processed_audio/', mapping));
+      mapping.put(parentLabel + 'wall_clock_since_first_byte_received', 'wallClockSinceFirstByteReceived');
       return mapping;
     }
   }
@@ -7518,7 +7518,7 @@ public class IBMSpeechToTextV1Models {
     private String userToken;
     private List<SpeechRecognitionResults> results;
     private List<String> warnings;
- 
+
     /**
      * Gets the id.
      *
@@ -7530,7 +7530,7 @@ public class IBMSpeechToTextV1Models {
     public String getId() {
       return id;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -7550,7 +7550,7 @@ public class IBMSpeechToTextV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -7563,7 +7563,7 @@ public class IBMSpeechToTextV1Models {
     public String getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -7577,7 +7577,7 @@ public class IBMSpeechToTextV1Models {
     public String getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -7590,7 +7590,7 @@ public class IBMSpeechToTextV1Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the userToken.
      *
@@ -7603,7 +7603,7 @@ public class IBMSpeechToTextV1Models {
     public String getUserToken() {
       return userToken;
     }
- 
+
     /**
      * Gets the results.
      *
@@ -7616,7 +7616,7 @@ public class IBMSpeechToTextV1Models {
     public List<SpeechRecognitionResults> getResults() {
       return results;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -7727,12 +7727,9 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('user_token', 'userToken');
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'user_token', 'userToken');
+      mapping.putAll(((IBMWatsonGenericModel) SpeechRecognitionResults.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
       return mapping;
     }
   }
@@ -7742,7 +7739,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class RecognitionJobs extends IBMWatsonResponseModel {
     private List<RecognitionJob> recognitions;
- 
+
     /**
      * Gets the recognitions.
      *
@@ -7788,11 +7785,8 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (recognitions != null && recognitions[0] != null) {
-        mapping.putAll(recognitions[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) RecognitionJob.class.newInstance()).addToApiToSdkMapping(parentLabel + 'recognitions/', mapping));
       return mapping;
     }
   }
@@ -8065,9 +8059,9 @@ public class IBMSpeechToTextV1Models {
      * multi-person exchange. By default, the service returns no speaker labels. Setting `speaker_labels` to `true`
      * forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
      *
-     * **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
-     * supports speaker labels, you can also use the **Get a model** method and check that the attribute
-     * `speaker_labels` is set to `true`.
+     * **Note:** Applies to US English, Japanese, and Spanish (both broadband and narrowband models) and UK English
+     * (narrowband model) transcription only. To determine whether a language model supports speaker labels, you can
+     * also use the **Get a model** method and check that the attribute `speaker_labels` is set to `true`.
      *
      * See [Speaker
      * labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
@@ -8668,7 +8662,7 @@ public class IBMSpeechToTextV1Models {
   public class RegisterStatus extends IBMWatsonResponseModel {
     private String status;
     private String url;
- 
+
     /**
      * Gets the status.
      *
@@ -8682,7 +8676,7 @@ public class IBMSpeechToTextV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -8921,7 +8915,7 @@ public class IBMSpeechToTextV1Models {
     private Long speaker;
     private Double confidence;
     private Boolean finalResults;
- 
+
     /**
      * Gets the xfrom.
      *
@@ -8934,7 +8928,7 @@ public class IBMSpeechToTextV1Models {
     public Double getXfrom() {
       return xfrom;
     }
- 
+
     /**
      * Gets the to.
      *
@@ -8946,7 +8940,7 @@ public class IBMSpeechToTextV1Models {
     public Double getTo() {
       return to;
     }
- 
+
     /**
      * Gets the speaker.
      *
@@ -8960,7 +8954,7 @@ public class IBMSpeechToTextV1Models {
     public Long getSpeaker() {
       return speaker;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -8972,7 +8966,7 @@ public class IBMSpeechToTextV1Models {
     public Double getConfidence() {
       return confidence;
     }
- 
+
     /**
      * Gets the finalResults.
      *
@@ -9032,10 +9026,13 @@ public class IBMSpeechToTextV1Models {
       this.finalResults = finalResults;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('from', 'xfrom');
-      mapping.put('final', 'finalResults');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'from', 'xfrom');
+      mapping.put(parentLabel + 'final', 'finalResults');
       return mapping;
     }
   }
@@ -9050,7 +9047,7 @@ public class IBMSpeechToTextV1Models {
     private String url;
     private SupportedFeatures supportedFeatures;
     private String description;
- 
+
     /**
      * Gets the name.
      *
@@ -9062,7 +9059,7 @@ public class IBMSpeechToTextV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -9074,7 +9071,7 @@ public class IBMSpeechToTextV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the rate.
      *
@@ -9086,7 +9083,7 @@ public class IBMSpeechToTextV1Models {
     public Long getRate() {
       return rate;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -9098,7 +9095,7 @@ public class IBMSpeechToTextV1Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the supportedFeatures.
      *
@@ -9110,7 +9107,7 @@ public class IBMSpeechToTextV1Models {
     public SupportedFeatures getSupportedFeatures() {
       return supportedFeatures;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -9191,12 +9188,9 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('supported_features', 'supportedFeatures');
-      if (supportedFeatures != null) {
-        mapping.putAll(supportedFeatures.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'supported_features', 'supportedFeatures');
+      mapping.putAll(((IBMWatsonGenericModel) SupportedFeatures.class.newInstance()).addToApiToSdkMapping(parentLabel + 'supported_features/', mapping));
       return mapping;
     }
   }
@@ -9206,7 +9200,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class SpeechModels extends IBMWatsonResponseModel {
     private List<SpeechModel> models;
- 
+
     /**
      * Gets the models.
      *
@@ -9251,11 +9245,8 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (models != null && models[0] != null) {
-        mapping.putAll(models[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) SpeechModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'models/', mapping));
       return mapping;
     }
   }
@@ -9266,9 +9257,9 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript;
     private Double confidence;
-    private List<String> timestamps;
-    private List<String> wordConfidence;
- 
+    private List<List<String>> timestamps;
+    private List<List<String>> wordConfidence;
+
     /**
      * Gets the transcript.
      *
@@ -9280,7 +9271,7 @@ public class IBMSpeechToTextV1Models {
     public String getTranscript() {
       return transcript;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -9293,7 +9284,7 @@ public class IBMSpeechToTextV1Models {
     public Double getConfidence() {
       return confidence;
     }
- 
+
     /**
      * Gets the timestamps.
      *
@@ -9304,10 +9295,10 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<String> getTimestamps() {
+    public List<List<String>> getTimestamps() {
       return timestamps;
     }
- 
+
     /**
      * Gets the wordConfidence.
      *
@@ -9318,7 +9309,7 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<String> getWordConfidence() {
+    public List<List<String>> getWordConfidence() {
       return wordConfidence;
     }
 
@@ -9345,7 +9336,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<String> timestamps) {
+    public void setTimestamps(final List<List<String>> timestamps) {
       this.timestamps = timestamps;
     }
 
@@ -9354,13 +9345,12 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<String> wordConfidence) {
+    public void setWordConfidence(final List<List<String>> wordConfidence) {
       this.wordConfidence = wordConfidence;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('word_confidence', 'wordConfidence');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'word_confidence', 'wordConfidence');
       return mapping;
     }
   }
@@ -9371,9 +9361,9 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionResult extends IBMWatsonGenericModel {
     private Boolean finalResults;
     private List<SpeechRecognitionAlternative> alternatives;
-    private IBMWatsonMapModel keywordsResult;
+    private Map<String, List<KeywordResult>> keywordsResult;
     private List<WordAlternativeResults> wordAlternatives;
- 
+
     /**
      * Gets the finalResults.
      *
@@ -9386,7 +9376,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean getFinalResults() {
       return finalResults;
     }
- 
+
     /**
      * Gets the alternatives.
      *
@@ -9399,7 +9389,7 @@ public class IBMSpeechToTextV1Models {
     public List<SpeechRecognitionAlternative> getAlternatives() {
       return alternatives;
     }
- 
+
     /**
      * Gets the keywordsResult.
      *
@@ -9411,10 +9401,10 @@ public class IBMSpeechToTextV1Models {
      * @return the keywordsResult
      */
     @AuraEnabled
-    public IBMWatsonMapModel getKeywordsResult() {
+    public Map<String, List<KeywordResult>> getKeywordsResult() {
       return keywordsResult;
     }
- 
+
     /**
      * Gets the wordAlternatives.
      *
@@ -9451,7 +9441,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param keywordsResult the new keywordsResult
      */
-    public void setKeywordsResult(final IBMWatsonMapModel keywordsResult) {
+    public void setKeywordsResult(final Map<String, List<KeywordResult>> keywordsResult) {
       this.keywordsResult = keywordsResult;
     }
 
@@ -9485,8 +9475,23 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywordsResult
-      IBMWatsonMapModel newKeywordsResult = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywordsResult'), IBMWatsonMapModel.class);
-      ret.setKeywordsResult(newKeywordsResult);
+      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
+      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
+      if (deserializedKeywordsResult != null) {
+        for (String key : deserializedKeywordsResult.keySet()) {
+          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
+          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
+          for (Integer i = 0; i < keywordResultList.size(); i++) {
+            KeywordResult currentItem = keywordResultList.get(i);
+            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywordsResult');
+            Object innerObject = ((List<Object>) itemInMap.get(key)).get(i);
+            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerObject)), KeywordResult.class);
+            newKeywordResult.add(newItem);
+          }
+          newKeywordsResult.put(key, newKeywordResult);
+        }
+        ret.setKeywordsResult(newKeywordsResult);
+      }
 
       // calling custom deserializer for wordAlternatives
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
@@ -9504,17 +9509,17 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('final', 'finalResults');
-      if (alternatives != null && alternatives[0] != null) {
-        mapping.putAll(alternatives[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('keywords_result', 'keywordsResult');
-      mapping.put('word_alternatives', 'wordAlternatives');
-      if (wordAlternatives != null && wordAlternatives[0] != null) {
-        mapping.putAll(wordAlternatives[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'final', 'finalResults');
+      mapping.putAll(((IBMWatsonGenericModel) SpeechRecognitionAlternative.class.newInstance()).addToApiToSdkMapping(parentLabel + 'alternatives/', mapping));
+      mapping.put(parentLabel + 'keywords_result', 'keywordsResult');
+      mapping.putAll(((IBMWatsonGenericModel) KeywordResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'keywords_result/keyword/', mapping));
+      mapping.put(parentLabel + 'word_alternatives', 'wordAlternatives');
+      mapping.putAll(((IBMWatsonGenericModel) WordAlternativeResults.class.newInstance()).addToApiToSdkMapping(parentLabel + 'word_alternatives/', mapping));
       return mapping;
     }
   }
@@ -9529,7 +9534,7 @@ public class IBMSpeechToTextV1Models {
     private ProcessingMetrics processingMetrics;
     private AudioMetrics audioMetrics;
     private List<String> warnings;
- 
+
     /**
      * Gets the results.
      *
@@ -9545,7 +9550,7 @@ public class IBMSpeechToTextV1Models {
     public List<SpeechRecognitionResult> getResults() {
       return results;
     }
- 
+
     /**
      * Gets the resultIndex.
      *
@@ -9558,7 +9563,7 @@ public class IBMSpeechToTextV1Models {
     public Long getResultIndex() {
       return resultIndex;
     }
- 
+
     /**
      * Gets the speakerLabels.
      *
@@ -9573,7 +9578,7 @@ public class IBMSpeechToTextV1Models {
     public List<SpeakerLabelsResult> getSpeakerLabels() {
       return speakerLabels;
     }
- 
+
     /**
      * Gets the processingMetrics.
      *
@@ -9586,7 +9591,7 @@ public class IBMSpeechToTextV1Models {
     public ProcessingMetrics getProcessingMetrics() {
       return processingMetrics;
     }
- 
+
     /**
      * Gets the audioMetrics.
      *
@@ -9598,7 +9603,7 @@ public class IBMSpeechToTextV1Models {
     public AudioMetrics getAudioMetrics() {
       return audioMetrics;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -9719,24 +9724,15 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
-      }
-      mapping.put('result_index', 'resultIndex');
-      mapping.put('speaker_labels', 'speakerLabels');
-      if (speakerLabels != null && speakerLabels[0] != null) {
-        mapping.putAll(speakerLabels[0].getApiToSdkMapping());
-      }
-      mapping.put('processing_metrics', 'processingMetrics');
-      if (processingMetrics != null) {
-        mapping.putAll(processingMetrics.getApiToSdkMapping());
-      }
-      mapping.put('audio_metrics', 'audioMetrics');
-      if (audioMetrics != null) {
-        mapping.putAll(audioMetrics.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) SpeechRecognitionResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
+      mapping.put(parentLabel + 'result_index', 'resultIndex');
+      mapping.put(parentLabel + 'speaker_labels', 'speakerLabels');
+      mapping.putAll(((IBMWatsonGenericModel) SpeakerLabelsResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'speaker_labels/', mapping));
+      mapping.put(parentLabel + 'processing_metrics', 'processingMetrics');
+      mapping.putAll(((IBMWatsonGenericModel) ProcessingMetrics.class.newInstance()).addToApiToSdkMapping(parentLabel + 'processing_metrics/', mapping));
+      mapping.put(parentLabel + 'audio_metrics', 'audioMetrics');
+      mapping.putAll(((IBMWatsonGenericModel) AudioMetrics.class.newInstance()).addToApiToSdkMapping(parentLabel + 'audio_metrics/', mapping));
       return mapping;
     }
   }
@@ -9747,7 +9743,7 @@ public class IBMSpeechToTextV1Models {
   public class SupportedFeatures extends IBMWatsonGenericModel {
     private Boolean customLanguageModel;
     private Boolean speakerLabels;
- 
+
     /**
      * Gets the customLanguageModel.
      *
@@ -9760,7 +9756,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean getCustomLanguageModel() {
       return customLanguageModel;
     }
- 
+
     /**
      * Gets the speakerLabels.
      *
@@ -9791,10 +9787,13 @@ public class IBMSpeechToTextV1Models {
       this.speakerLabels = speakerLabels;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('custom_language_model', 'customLanguageModel');
-      mapping.put('speaker_labels', 'speakerLabels');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'custom_language_model', 'customLanguageModel');
+      mapping.put(parentLabel + 'speaker_labels', 'speakerLabels');
       return mapping;
     }
   }
@@ -10100,7 +10099,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class TrainingResponse extends IBMWatsonResponseModel {
     private List<TrainingWarning> warnings;
- 
+
     /**
      * Gets the warnings.
      *
@@ -10154,7 +10153,7 @@ public class IBMSpeechToTextV1Models {
   public class TrainingWarning extends IBMWatsonGenericModel {
     private String code;
     private String message;
- 
+
     /**
      * Gets the code.
      *
@@ -10166,7 +10165,7 @@ public class IBMSpeechToTextV1Models {
     public String getCode() {
       return code;
     }
- 
+
     /**
      * Gets the message.
      *
@@ -10565,7 +10564,7 @@ public class IBMSpeechToTextV1Models {
     private Long count;
     private List<String> source;
     private List<WordError> error;
- 
+
     /**
      * Gets the word.
      *
@@ -10577,7 +10576,7 @@ public class IBMSpeechToTextV1Models {
     public String getWord() {
       return word;
     }
- 
+
     /**
      * Gets the soundsLike.
      *
@@ -10591,7 +10590,7 @@ public class IBMSpeechToTextV1Models {
     public List<String> getSoundsLike() {
       return soundsLike;
     }
- 
+
     /**
      * Gets the displayAs.
      *
@@ -10604,7 +10603,7 @@ public class IBMSpeechToTextV1Models {
     public String getDisplayAs() {
       return displayAs;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -10619,7 +10618,7 @@ public class IBMSpeechToTextV1Models {
     public Long getCount() {
       return count;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -10633,7 +10632,7 @@ public class IBMSpeechToTextV1Models {
     public List<String> getSource() {
       return source;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -10724,10 +10723,9 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('sounds_like', 'soundsLike');
-      mapping.put('display_as', 'displayAs');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'sounds_like', 'soundsLike');
+      mapping.put(parentLabel + 'display_as', 'displayAs');
       return mapping;
     }
   }
@@ -10738,7 +10736,7 @@ public class IBMSpeechToTextV1Models {
   public class WordAlternativeResult extends IBMWatsonGenericModel {
     private Double confidence;
     private String word;
- 
+
     /**
      * Gets the confidence.
      *
@@ -10750,7 +10748,7 @@ public class IBMSpeechToTextV1Models {
     public Double getConfidence() {
       return confidence;
     }
- 
+
     /**
      * Gets the word.
      *
@@ -10789,7 +10787,7 @@ public class IBMSpeechToTextV1Models {
     private Double startTime;
     private Double endTime;
     private List<WordAlternativeResult> alternatives;
- 
+
     /**
      * Gets the startTime.
      *
@@ -10801,7 +10799,7 @@ public class IBMSpeechToTextV1Models {
     public Double getStartTime() {
       return startTime;
     }
- 
+
     /**
      * Gets the endTime.
      *
@@ -10813,7 +10811,7 @@ public class IBMSpeechToTextV1Models {
     public Double getEndTime() {
       return endTime;
     }
- 
+
     /**
      * Gets the alternatives.
      *
@@ -10876,10 +10874,13 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('start_time', 'startTime');
-      mapping.put('end_time', 'endTime');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'start_time', 'startTime');
+      mapping.put(parentLabel + 'end_time', 'endTime');
       return mapping;
     }
   }
@@ -10889,7 +10890,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class WordError extends IBMWatsonGenericModel {
     private String element;
- 
+
     /**
      * Gets the element.
      *
@@ -10921,7 +10922,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class Words extends IBMWatsonResponseModel {
     private List<Word> words;
- 
+
     /**
      * Gets the words.
      *
@@ -10967,11 +10968,8 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (words != null && words[0] != null) {
-        mapping.putAll(words[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Word.class.newInstance()).addToApiToSdkMapping(parentLabel + 'words/', mapping));
       return mapping;
     }
   }

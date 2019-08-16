@@ -4,7 +4,7 @@ public class IBMVisualRecognitionV3Models {
    */
   public class ModelClass extends IBMWatsonGenericModel {
     private String className;
- 
+
     /**
      * Gets the className.
      *
@@ -26,9 +26,12 @@ public class IBMVisualRecognitionV3Models {
       this.className = className;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('class', 'className');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'class', 'className');
       return mapping;
     }
   }
@@ -40,7 +43,7 @@ public class IBMVisualRecognitionV3Models {
     private String className;
     private Double score;
     private String typeHierarchy;
- 
+
     /**
      * Gets the className.
      *
@@ -57,7 +60,7 @@ public class IBMVisualRecognitionV3Models {
     public String getClassName() {
       return className;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -70,7 +73,7 @@ public class IBMVisualRecognitionV3Models {
     public Double getScore() {
       return score;
     }
- 
+
     /**
      * Gets the typeHierarchy.
      *
@@ -111,10 +114,13 @@ public class IBMVisualRecognitionV3Models {
       this.typeHierarchy = typeHierarchy;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('class', 'className');
-      mapping.put('type_hierarchy', 'typeHierarchy');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'class', 'className');
+      mapping.put(parentLabel + 'type_hierarchy', 'typeHierarchy');
       return mapping;
     }
   }
@@ -128,7 +134,7 @@ public class IBMVisualRecognitionV3Models {
     private String image;
     private ErrorInfo error;
     private List<ClassifierResult> classifiers;
- 
+
     /**
      * Gets the sourceUrl.
      *
@@ -140,7 +146,7 @@ public class IBMVisualRecognitionV3Models {
     public String getSourceUrl() {
       return sourceUrl;
     }
- 
+
     /**
      * Gets the resolvedUrl.
      *
@@ -152,7 +158,7 @@ public class IBMVisualRecognitionV3Models {
     public String getResolvedUrl() {
       return resolvedUrl;
     }
- 
+
     /**
      * Gets the image.
      *
@@ -164,7 +170,7 @@ public class IBMVisualRecognitionV3Models {
     public String getImage() {
       return image;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -177,7 +183,7 @@ public class IBMVisualRecognitionV3Models {
     public ErrorInfo getError() {
       return error;
     }
- 
+
     /**
      * Gets the classifiers.
      *
@@ -262,16 +268,15 @@ public class IBMVisualRecognitionV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('source_url', 'sourceUrl');
-      mapping.put('resolved_url', 'resolvedUrl');
-      if (error != null) {
-        mapping.putAll(error.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (classifiers != null && classifiers[0] != null) {
-        mapping.putAll(classifiers[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'source_url', 'sourceUrl');
+      mapping.put(parentLabel + 'resolved_url', 'resolvedUrl');
+      mapping.putAll(((IBMWatsonGenericModel) ErrorInfo.class.newInstance()).addToApiToSdkMapping(parentLabel + 'error/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) ClassifierResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classifiers/', mapping));
       return mapping;
     }
   }
@@ -284,7 +289,7 @@ public class IBMVisualRecognitionV3Models {
     private Long imagesProcessed;
     private List<ClassifiedImage> images;
     private List<WarningInfo> warnings;
- 
+
     /**
      * Gets the customClasses.
      *
@@ -296,7 +301,7 @@ public class IBMVisualRecognitionV3Models {
     public Long getCustomClasses() {
       return customClasses;
     }
- 
+
     /**
      * Gets the imagesProcessed.
      *
@@ -308,7 +313,7 @@ public class IBMVisualRecognitionV3Models {
     public Long getImagesProcessed() {
       return imagesProcessed;
     }
- 
+
     /**
      * Gets the images.
      *
@@ -320,7 +325,7 @@ public class IBMVisualRecognitionV3Models {
     public List<ClassifiedImage> getImages() {
       return images;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -407,16 +412,15 @@ public class IBMVisualRecognitionV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('custom_classes', 'customClasses');
-      mapping.put('images_processed', 'imagesProcessed');
-      if (images != null && images[0] != null) {
-        mapping.putAll(images[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (warnings != null && warnings[0] != null) {
-        mapping.putAll(warnings[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'custom_classes', 'customClasses');
+      mapping.put(parentLabel + 'images_processed', 'imagesProcessed');
+      mapping.putAll(((IBMWatsonGenericModel) ClassifiedImage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'images/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) WarningInfo.class.newInstance()).addToApiToSdkMapping(parentLabel + 'warnings/', mapping));
       return mapping;
     }
   }
@@ -435,7 +439,7 @@ public class IBMVisualRecognitionV3Models {
     private List<ModelClass> classes;
     private Datetime retrained;
     private Datetime updated;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -447,7 +451,7 @@ public class IBMVisualRecognitionV3Models {
     public String getClassifierId() {
       return classifierId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -459,7 +463,7 @@ public class IBMVisualRecognitionV3Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the owner.
      *
@@ -471,7 +475,7 @@ public class IBMVisualRecognitionV3Models {
     public String getOwner() {
       return owner;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -483,7 +487,7 @@ public class IBMVisualRecognitionV3Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the coreMlEnabled.
      *
@@ -495,7 +499,7 @@ public class IBMVisualRecognitionV3Models {
     public Boolean getCoreMlEnabled() {
       return coreMlEnabled;
     }
- 
+
     /**
      * Gets the explanation.
      *
@@ -507,7 +511,7 @@ public class IBMVisualRecognitionV3Models {
     public String getExplanation() {
       return explanation;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -519,7 +523,7 @@ public class IBMVisualRecognitionV3Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the classes.
      *
@@ -531,7 +535,7 @@ public class IBMVisualRecognitionV3Models {
     public List<ModelClass> getClasses() {
       return classes;
     }
- 
+
     /**
      * Gets the retrained.
      *
@@ -544,7 +548,7 @@ public class IBMVisualRecognitionV3Models {
     public Datetime getRetrained() {
       return retrained;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -671,13 +675,14 @@ public class IBMVisualRecognitionV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifier_id', 'classifierId');
-      mapping.put('core_ml_enabled', 'coreMlEnabled');
-      if (classes != null && classes[0] != null) {
-        mapping.putAll(classes[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'classifier_id', 'classifierId');
+      mapping.put(parentLabel + 'core_ml_enabled', 'coreMlEnabled');
+      mapping.putAll(((IBMWatsonGenericModel) ModelClass.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classes/', mapping));
       return mapping;
     }
   }
@@ -689,7 +694,7 @@ public class IBMVisualRecognitionV3Models {
     private String name;
     private String classifierId;
     private List<ClassResult> classes;
- 
+
     /**
      * Gets the name.
      *
@@ -701,7 +706,7 @@ public class IBMVisualRecognitionV3Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the classifierId.
      *
@@ -713,7 +718,7 @@ public class IBMVisualRecognitionV3Models {
     public String getClassifierId() {
       return classifierId;
     }
- 
+
     /**
      * Gets the classes.
      *
@@ -776,12 +781,9 @@ public class IBMVisualRecognitionV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifier_id', 'classifierId');
-      if (classes != null && classes[0] != null) {
-        mapping.putAll(classes[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'classifier_id', 'classifierId');
+      mapping.putAll(((IBMWatsonGenericModel) ClassResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classes/', mapping));
       return mapping;
     }
   }
@@ -791,7 +793,7 @@ public class IBMVisualRecognitionV3Models {
    */
   public class Classifiers extends IBMWatsonResponseModel {
     private List<Classifier> classifiers;
- 
+
     /**
      * Gets the classifiers.
      *
@@ -836,11 +838,8 @@ public class IBMVisualRecognitionV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (classifiers != null && classifiers[0] != null) {
-        mapping.putAll(classifiers[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Classifier.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classifiers/', mapping));
       return mapping;
     }
   }
@@ -1793,7 +1792,7 @@ public class IBMVisualRecognitionV3Models {
     private Long imagesProcessed;
     private List<ImageWithFaces> images;
     private List<WarningInfo> warnings;
- 
+
     /**
      * Gets the imagesProcessed.
      *
@@ -1805,7 +1804,7 @@ public class IBMVisualRecognitionV3Models {
     public Long getImagesProcessed() {
       return imagesProcessed;
     }
- 
+
     /**
      * Gets the images.
      *
@@ -1817,7 +1816,7 @@ public class IBMVisualRecognitionV3Models {
     public List<ImageWithFaces> getImages() {
       return images;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -1895,15 +1894,14 @@ public class IBMVisualRecognitionV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('images_processed', 'imagesProcessed');
-      if (images != null && images[0] != null) {
-        mapping.putAll(images[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (warnings != null && warnings[0] != null) {
-        mapping.putAll(warnings[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'images_processed', 'imagesProcessed');
+      mapping.putAll(((IBMWatsonGenericModel) ImageWithFaces.class.newInstance()).addToApiToSdkMapping(parentLabel + 'images/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) WarningInfo.class.newInstance()).addToApiToSdkMapping(parentLabel + 'warnings/', mapping));
       return mapping;
     }
   }
@@ -1916,7 +1914,7 @@ public class IBMVisualRecognitionV3Models {
     private Long code;
     private String description;
     private String errorId;
- 
+
     /**
      * Gets the code.
      *
@@ -1928,7 +1926,7 @@ public class IBMVisualRecognitionV3Models {
     public Long getCode() {
       return code;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -1940,7 +1938,7 @@ public class IBMVisualRecognitionV3Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the errorId.
      *
@@ -1980,9 +1978,8 @@ public class IBMVisualRecognitionV3Models {
       this.errorId = errorId;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('error_id', 'errorId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'error_id', 'errorId');
       return mapping;
     }
   }
@@ -1994,7 +1991,7 @@ public class IBMVisualRecognitionV3Models {
     private FaceAge age;
     private FaceGender gender;
     private FaceLocation faceLocation;
- 
+
     /**
      * Gets the age.
      *
@@ -2006,7 +2003,7 @@ public class IBMVisualRecognitionV3Models {
     public FaceAge getAge() {
       return age;
     }
- 
+
     /**
      * Gets the gender.
      *
@@ -2018,7 +2015,7 @@ public class IBMVisualRecognitionV3Models {
     public FaceGender getGender() {
       return gender;
     }
- 
+
     /**
      * Gets the faceLocation.
      *
@@ -2080,12 +2077,9 @@ public class IBMVisualRecognitionV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (gender != null) {
-        mapping.putAll(gender.getApiToSdkMapping());
-      }
-      mapping.put('face_location', 'faceLocation');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) FaceGender.class.newInstance()).addToApiToSdkMapping(parentLabel + 'gender/', mapping));
+      mapping.put(parentLabel + 'face_location', 'faceLocation');
       return mapping;
     }
   }
@@ -2097,7 +2091,7 @@ public class IBMVisualRecognitionV3Models {
     private Long min;
     private Long max;
     private Double score;
- 
+
     /**
      * Gets the min.
      *
@@ -2109,7 +2103,7 @@ public class IBMVisualRecognitionV3Models {
     public Long getMin() {
       return min;
     }
- 
+
     /**
      * Gets the max.
      *
@@ -2121,7 +2115,7 @@ public class IBMVisualRecognitionV3Models {
     public Long getMax() {
       return max;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -2170,7 +2164,7 @@ public class IBMVisualRecognitionV3Models {
     private String gender;
     private String genderLabel;
     private Double score;
- 
+
     /**
      * Gets the gender.
      *
@@ -2182,7 +2176,7 @@ public class IBMVisualRecognitionV3Models {
     public String getGender() {
       return gender;
     }
- 
+
     /**
      * Gets the genderLabel.
      *
@@ -2194,7 +2188,7 @@ public class IBMVisualRecognitionV3Models {
     public String getGenderLabel() {
       return genderLabel;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -2235,9 +2229,8 @@ public class IBMVisualRecognitionV3Models {
       this.score = score;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('gender_label', 'genderLabel');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'gender_label', 'genderLabel');
       return mapping;
     }
   }
@@ -2250,7 +2243,7 @@ public class IBMVisualRecognitionV3Models {
     private Double height;
     private Double left;
     private Double top;
- 
+
     /**
      * Gets the width.
      *
@@ -2262,7 +2255,7 @@ public class IBMVisualRecognitionV3Models {
     public Double getWidth() {
       return width;
     }
- 
+
     /**
      * Gets the height.
      *
@@ -2274,7 +2267,7 @@ public class IBMVisualRecognitionV3Models {
     public Double getHeight() {
       return height;
     }
- 
+
     /**
      * Gets the left.
      *
@@ -2286,7 +2279,7 @@ public class IBMVisualRecognitionV3Models {
     public Double getLeft() {
       return left;
     }
- 
+
     /**
      * Gets the top.
      *
@@ -2541,7 +2534,7 @@ public class IBMVisualRecognitionV3Models {
     private String sourceUrl;
     private String resolvedUrl;
     private ErrorInfo error;
- 
+
     /**
      * Gets the faces.
      *
@@ -2553,7 +2546,7 @@ public class IBMVisualRecognitionV3Models {
     public List<Face> getFaces() {
       return faces;
     }
- 
+
     /**
      * Gets the image.
      *
@@ -2565,7 +2558,7 @@ public class IBMVisualRecognitionV3Models {
     public String getImage() {
       return image;
     }
- 
+
     /**
      * Gets the sourceUrl.
      *
@@ -2577,7 +2570,7 @@ public class IBMVisualRecognitionV3Models {
     public String getSourceUrl() {
       return sourceUrl;
     }
- 
+
     /**
      * Gets the resolvedUrl.
      *
@@ -2589,7 +2582,7 @@ public class IBMVisualRecognitionV3Models {
     public String getResolvedUrl() {
       return resolvedUrl;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -2675,16 +2668,11 @@ public class IBMVisualRecognitionV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (faces != null && faces[0] != null) {
-        mapping.putAll(faces[0].getApiToSdkMapping());
-      }
-      mapping.put('source_url', 'sourceUrl');
-      mapping.put('resolved_url', 'resolvedUrl');
-      if (error != null) {
-        mapping.putAll(error.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Face.class.newInstance()).addToApiToSdkMapping(parentLabel + 'faces/', mapping));
+      mapping.put(parentLabel + 'source_url', 'sourceUrl');
+      mapping.put(parentLabel + 'resolved_url', 'resolvedUrl');
+      mapping.putAll(((IBMWatsonGenericModel) ErrorInfo.class.newInstance()).addToApiToSdkMapping(parentLabel + 'error/', mapping));
       return mapping;
     }
   }
@@ -2988,7 +2976,7 @@ public class IBMVisualRecognitionV3Models {
   public class WarningInfo extends IBMWatsonGenericModel {
     private String warningId;
     private String description;
- 
+
     /**
      * Gets the warningId.
      *
@@ -3000,7 +2988,7 @@ public class IBMVisualRecognitionV3Models {
     public String getWarningId() {
       return warningId;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -3031,9 +3019,12 @@ public class IBMVisualRecognitionV3Models {
       this.description = description;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('warning_id', 'warningId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'warning_id', 'warningId');
       return mapping;
     }
   }

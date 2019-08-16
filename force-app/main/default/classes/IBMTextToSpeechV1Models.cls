@@ -257,7 +257,7 @@ public class IBMTextToSpeechV1Models {
       Map<String, String> mapping = new Map<String, String>();
       mapping.put('customizationId', 'customization_id');
       if (words != null && words[0] != null) {
-        mapping.putAll(words[0].getSdkToApiMapping());
+        mapping.putAll(words[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -1611,7 +1611,7 @@ public class IBMTextToSpeechV1Models {
    */
   public class Pronunciation extends IBMWatsonResponseModel {
     private String pronunciation;
- 
+
     /**
      * Gets the pronunciation.
      *
@@ -1641,7 +1641,7 @@ public class IBMTextToSpeechV1Models {
   public class SupportedFeatures extends IBMWatsonGenericModel {
     private Boolean customPronunciation;
     private Boolean voiceTransformation;
- 
+
     /**
      * Gets the customPronunciation.
      *
@@ -1653,7 +1653,7 @@ public class IBMTextToSpeechV1Models {
     public Boolean getCustomPronunciation() {
       return customPronunciation;
     }
- 
+
     /**
      * Gets the voiceTransformation.
      *
@@ -1685,10 +1685,13 @@ public class IBMTextToSpeechV1Models {
       this.voiceTransformation = voiceTransformation;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('custom_pronunciation', 'customPronunciation');
-      mapping.put('voice_transformation', 'voiceTransformation');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'custom_pronunciation', 'customPronunciation');
+      mapping.put(parentLabel + 'voice_transformation', 'voiceTransformation');
       return mapping;
     }
   }
@@ -1887,7 +1890,7 @@ public class IBMTextToSpeechV1Models {
      * and should not be called by the client.
      */
     public Translation() { }
- 
+
     /**
      * Gets the translation.
      *
@@ -1901,7 +1904,7 @@ public class IBMTextToSpeechV1Models {
     public String getTranslation() {
       return translation;
     }
- 
+
     /**
      * Gets the partOfSpeech.
      *
@@ -1933,15 +1936,13 @@ public class IBMTextToSpeechV1Models {
       return new TranslationBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('partOfSpeech', 'part_of_speech');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'partOfSpeech', 'part_of_speech');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('part_of_speech', 'partOfSpeech');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'part_of_speech', 'partOfSpeech');
       return mapping;
     }
   }
@@ -1988,7 +1989,7 @@ public class IBMTextToSpeechV1Models {
      * @param translation the translation
      * @return the Translation builder
      */
-    public TranslationBuilder setTranslation(String translation) {
+    public TranslationBuilder translation(String translation) {
       this.translation = translation;
       return this;
     }
@@ -1999,7 +2000,7 @@ public class IBMTextToSpeechV1Models {
      * @param partOfSpeech the partOfSpeech
      * @return the Translation builder
      */
-    public TranslationBuilder setPartOfSpeech(String partOfSpeech) {
+    public TranslationBuilder partOfSpeech(String partOfSpeech) {
       this.partOfSpeech = partOfSpeech;
       return this;
     }
@@ -2082,7 +2083,7 @@ public class IBMTextToSpeechV1Models {
       Map<String, String> mapping = new Map<String, String>();
       mapping.put('customizationId', 'customization_id');
       if (words != null && words[0] != null) {
-        mapping.putAll(words[0].getSdkToApiMapping());
+        mapping.putAll(words[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -2214,7 +2215,7 @@ public class IBMTextToSpeechV1Models {
     private Boolean customizable;
     private SupportedFeatures supportedFeatures;
     private VoiceModel customization;
- 
+
     /**
      * Gets the url.
      *
@@ -2226,7 +2227,7 @@ public class IBMTextToSpeechV1Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the gender.
      *
@@ -2238,7 +2239,7 @@ public class IBMTextToSpeechV1Models {
     public String getGender() {
       return gender;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -2250,7 +2251,7 @@ public class IBMTextToSpeechV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -2262,7 +2263,7 @@ public class IBMTextToSpeechV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -2274,7 +2275,7 @@ public class IBMTextToSpeechV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the customizable.
      *
@@ -2287,7 +2288,7 @@ public class IBMTextToSpeechV1Models {
     public Boolean getCustomizable() {
       return customizable;
     }
- 
+
     /**
      * Gets the supportedFeatures.
      *
@@ -2299,7 +2300,7 @@ public class IBMTextToSpeechV1Models {
     public SupportedFeatures getSupportedFeatures() {
       return supportedFeatures;
     }
- 
+
     /**
      * Gets the customization.
      *
@@ -2403,15 +2404,10 @@ public class IBMTextToSpeechV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('supported_features', 'supportedFeatures');
-      if (supportedFeatures != null) {
-        mapping.putAll(supportedFeatures.getApiToSdkMapping());
-      }
-      if (customization != null) {
-        mapping.putAll(customization.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'supported_features', 'supportedFeatures');
+      mapping.putAll(((IBMWatsonGenericModel) SupportedFeatures.class.newInstance()).addToApiToSdkMapping(parentLabel + 'supported_features/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) VoiceModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'customization/', mapping));
       return mapping;
     }
   }
@@ -2428,7 +2424,7 @@ public class IBMTextToSpeechV1Models {
     private String lastModified;
     private String description;
     private List<Word> words;
- 
+
     /**
      * Gets the customizationId.
      *
@@ -2441,7 +2437,7 @@ public class IBMTextToSpeechV1Models {
     public String getCustomizationId() {
       return customizationId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -2453,7 +2449,7 @@ public class IBMTextToSpeechV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -2465,7 +2461,7 @@ public class IBMTextToSpeechV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the owner.
      *
@@ -2477,7 +2473,7 @@ public class IBMTextToSpeechV1Models {
     public String getOwner() {
       return owner;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -2490,7 +2486,7 @@ public class IBMTextToSpeechV1Models {
     public String getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the lastModified.
      *
@@ -2504,7 +2500,7 @@ public class IBMTextToSpeechV1Models {
     public String getLastModified() {
       return lastModified;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -2516,7 +2512,7 @@ public class IBMTextToSpeechV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the words.
      *
@@ -2627,13 +2623,14 @@ public class IBMTextToSpeechV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customization_id', 'customizationId');
-      mapping.put('last_modified', 'lastModified');
-      if (words != null && words[0] != null) {
-        mapping.putAll(words[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'customization_id', 'customizationId');
+      mapping.put(parentLabel + 'last_modified', 'lastModified');
+      mapping.putAll(((IBMWatsonGenericModel) Word.class.newInstance()).addToApiToSdkMapping(parentLabel + 'words/', mapping));
       return mapping;
     }
   }
@@ -2643,7 +2640,7 @@ public class IBMTextToSpeechV1Models {
    */
   public class VoiceModels extends IBMWatsonResponseModel {
     private List<VoiceModel> customizations;
- 
+
     /**
      * Gets the customizations.
      *
@@ -2690,11 +2687,8 @@ public class IBMTextToSpeechV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (customizations != null && customizations[0] != null) {
-        mapping.putAll(customizations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) VoiceModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'customizations/', mapping));
       return mapping;
     }
   }
@@ -2704,7 +2698,7 @@ public class IBMTextToSpeechV1Models {
    */
   public class Voices extends IBMWatsonResponseModel {
     private List<Voice> voices;
- 
+
     /**
      * Gets the voices.
      *
@@ -2749,11 +2743,8 @@ public class IBMTextToSpeechV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (voices != null && voices[0] != null) {
-        mapping.putAll(voices[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Voice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'voices/', mapping));
       return mapping;
     }
   }
@@ -2771,7 +2762,7 @@ public class IBMTextToSpeechV1Models {
      * and should not be called by the client.
      */
     public Word() { }
- 
+
     /**
      * Gets the word.
      *
@@ -2783,7 +2774,7 @@ public class IBMTextToSpeechV1Models {
     public String getWord() {
       return word;
     }
- 
+
     /**
      * Gets the translation.
      *
@@ -2797,7 +2788,7 @@ public class IBMTextToSpeechV1Models {
     public String getTranslation() {
       return translation;
     }
- 
+
     /**
      * Gets the partOfSpeech.
      *
@@ -2831,15 +2822,13 @@ public class IBMTextToSpeechV1Models {
       return new WordBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('partOfSpeech', 'part_of_speech');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'partOfSpeech', 'part_of_speech');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('part_of_speech', 'partOfSpeech');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'part_of_speech', 'partOfSpeech');
       return mapping;
     }
   }
@@ -2890,7 +2879,7 @@ public class IBMTextToSpeechV1Models {
      * @param word the word
      * @return the Word builder
      */
-    public WordBuilder setWord(String word) {
+    public WordBuilder word(String word) {
       this.word = word;
       return this;
     }
@@ -2901,7 +2890,7 @@ public class IBMTextToSpeechV1Models {
      * @param translation the translation
      * @return the Word builder
      */
-    public WordBuilder setTranslation(String translation) {
+    public WordBuilder translation(String translation) {
       this.translation = translation;
       return this;
     }
@@ -2912,7 +2901,7 @@ public class IBMTextToSpeechV1Models {
      * @param partOfSpeech the partOfSpeech
      * @return the Word builder
      */
-    public WordBuilder setPartOfSpeech(String partOfSpeech) {
+    public WordBuilder partOfSpeech(String partOfSpeech) {
       this.partOfSpeech = partOfSpeech;
       return this;
     }
@@ -2932,7 +2921,7 @@ public class IBMTextToSpeechV1Models {
      * and should not be called by the client.
      */
     public Words() { }
- 
+
     /**
      * Gets the words.
      *
@@ -2982,25 +2971,21 @@ public class IBMTextToSpeechV1Models {
           Word newItem = (Word) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
           newWords.add(newItem);
         }
-        retBuilder.setWords(newWords);
+        retBuilder.words(newWords);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (words != null && words[0] != null) {
-        mapping.putAll(words[0].getSdkToApiMapping());
+        mapping.putAll(words[0].addToSdkToApiMapping(parentLabel + 'words/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (words != null && words[0] != null) {
-        mapping.putAll(words[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Word.class.newInstance()).addToApiToSdkMapping(parentLabel + 'words/', mapping));
       return mapping;
     }
   }
@@ -3061,7 +3046,7 @@ public class IBMTextToSpeechV1Models {
      * @param words the words
      * @return the Words builder
      */
-    public WordsBuilder setWords(List<Word> words) {
+    public WordsBuilder words(List<Word> words) {
       this.words = words;
       return this;
     }

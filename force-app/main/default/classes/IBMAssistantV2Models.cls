@@ -11,7 +11,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public CaptureGroup() { }
- 
+
     /**
      * Gets the xgroup.
      *
@@ -23,7 +23,7 @@ public class IBMAssistantV2Models {
     public String getXgroup() {
       return xgroup;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -51,15 +51,21 @@ public class IBMAssistantV2Models {
       return new CaptureGroupBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xgroup', 'group');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xgroup', 'group');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('group', 'xgroup');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'group', 'xgroup');
       return mapping;
     }
   }
@@ -121,7 +127,7 @@ public class IBMAssistantV2Models {
      * @param xgroup the xgroup
      * @return the CaptureGroup builder
      */
-    public CaptureGroupBuilder setXgroup(String xgroup) {
+    public CaptureGroupBuilder xgroup(String xgroup) {
       this.xgroup = xgroup;
       return this;
     }
@@ -133,7 +139,7 @@ public class IBMAssistantV2Models {
      * @param location the location
      * @return the CaptureGroup builder
      */
-    public CaptureGroupBuilder setLocation(List<Long> location) {
+    public CaptureGroupBuilder location(List<Long> location) {
       this.location = location;
       return this;
     }
@@ -379,7 +385,7 @@ public class IBMAssistantV2Models {
   public class DialogLogMessage extends IBMWatsonGenericModel {
     private String level;
     private String message;
- 
+
     /**
      * Gets the level.
      *
@@ -391,7 +397,7 @@ public class IBMAssistantV2Models {
     public String getLevel() {
       return level;
     }
- 
+
     /**
      * Gets the message.
      *
@@ -432,7 +438,7 @@ public class IBMAssistantV2Models {
     private IBMWatsonMapModel parameters;
     private String resultVariable;
     private String credentials;
- 
+
     /**
      * Gets the name.
      *
@@ -444,7 +450,7 @@ public class IBMAssistantV2Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the actionType.
      *
@@ -456,7 +462,7 @@ public class IBMAssistantV2Models {
     public String getActionType() {
       return actionType;
     }
- 
+
     /**
      * Gets the parameters.
      *
@@ -468,7 +474,7 @@ public class IBMAssistantV2Models {
     public IBMWatsonMapModel getParameters() {
       return parameters;
     }
- 
+
     /**
      * Gets the resultVariable.
      *
@@ -480,7 +486,7 @@ public class IBMAssistantV2Models {
     public String getResultVariable() {
       return resultVariable;
     }
- 
+
     /**
      * Gets the credentials.
      *
@@ -552,10 +558,9 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'actionType');
-      mapping.put('result_variable', 'resultVariable');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'type', 'actionType');
+      mapping.put(parentLabel + 'result_variable', 'resultVariable');
       return mapping;
     }
   }
@@ -566,7 +571,7 @@ public class IBMAssistantV2Models {
   public class DialogNodeOutputOptionsElement extends IBMWatsonGenericModel {
     private String label;
     private DialogNodeOutputOptionsElementValue value;
- 
+
     /**
      * Gets the label.
      *
@@ -578,7 +583,7 @@ public class IBMAssistantV2Models {
     public String getLabel() {
       return label;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -623,11 +628,8 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (value != null) {
-        mapping.putAll(value.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeOutputOptionsElementValue.class.newInstance()).addToApiToSdkMapping(parentLabel + 'value/', mapping));
       return mapping;
     }
   }
@@ -637,7 +639,7 @@ public class IBMAssistantV2Models {
    */
   public class DialogNodeOutputOptionsElementValue extends IBMWatsonGenericModel {
     private MessageInput input;
- 
+
     /**
      * Gets the input.
      *
@@ -673,11 +675,8 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (input != null) {
-        mapping.putAll(input.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) MessageInput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'input/', mapping));
       return mapping;
     }
   }
@@ -689,7 +688,7 @@ public class IBMAssistantV2Models {
     private String dialogNode;
     private String title;
     private String conditions;
- 
+
     /**
      * Gets the dialogNode.
      *
@@ -701,7 +700,7 @@ public class IBMAssistantV2Models {
     public String getDialogNode() {
       return dialogNode;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -713,7 +712,7 @@ public class IBMAssistantV2Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the conditions.
      *
@@ -753,9 +752,12 @@ public class IBMAssistantV2Models {
       this.conditions = conditions;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('dialog_node', 'dialogNode');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'dialog_node', 'dialogNode');
       return mapping;
     }
   }
@@ -784,7 +786,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public DialogRuntimeResponseGeneric() { }
- 
+
     /**
      * Gets the responseType.
      *
@@ -800,7 +802,7 @@ public class IBMAssistantV2Models {
     public String getResponseType() {
       return responseType;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -812,7 +814,7 @@ public class IBMAssistantV2Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the xtime.
      *
@@ -824,7 +826,7 @@ public class IBMAssistantV2Models {
     public Long getXtime() {
       return xtime;
     }
- 
+
     /**
      * Gets the typing.
      *
@@ -836,7 +838,7 @@ public class IBMAssistantV2Models {
     public Boolean getTyping() {
       return typing;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -848,7 +850,7 @@ public class IBMAssistantV2Models {
     public String getSource() {
       return source;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -860,7 +862,7 @@ public class IBMAssistantV2Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -872,7 +874,7 @@ public class IBMAssistantV2Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the preference.
      *
@@ -884,7 +886,7 @@ public class IBMAssistantV2Models {
     public String getPreference() {
       return preference;
     }
- 
+
     /**
      * Gets the options.
      *
@@ -896,7 +898,7 @@ public class IBMAssistantV2Models {
     public List<DialogNodeOutputOptionsElement> getOptions() {
       return options;
     }
- 
+
     /**
      * Gets the messageToHumanAgent.
      *
@@ -908,7 +910,7 @@ public class IBMAssistantV2Models {
     public String getMessageToHumanAgent() {
       return messageToHumanAgent;
     }
- 
+
     /**
      * Gets the topic.
      *
@@ -920,7 +922,7 @@ public class IBMAssistantV2Models {
     public String getTopic() {
       return topic;
     }
- 
+
     /**
      * Gets the suggestions.
      *
@@ -935,7 +937,7 @@ public class IBMAssistantV2Models {
     public List<DialogSuggestion> getSuggestions() {
       return suggestions;
     }
- 
+
     /**
      * Gets the header.
      *
@@ -948,7 +950,7 @@ public class IBMAssistantV2Models {
     public String getHeader() {
       return header;
     }
- 
+
     /**
      * Gets the results.
      *
@@ -1038,20 +1040,17 @@ public class IBMAssistantV2Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('response_type', 'responseType');
-      mapping.put('time', 'xtime');
-      if (options != null && options[0] != null) {
-        mapping.putAll(options[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('message_to_human_agent', 'messageToHumanAgent');
-      if (suggestions != null && suggestions[0] != null) {
-        mapping.putAll(suggestions[0].getApiToSdkMapping());
-      }
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'response_type', 'responseType');
+      mapping.put(parentLabel + 'time', 'xtime');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeOutputOptionsElement.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
+      mapping.put(parentLabel + 'message_to_human_agent', 'messageToHumanAgent');
+      mapping.putAll(((IBMWatsonGenericModel) DialogSuggestion.class.newInstance()).addToApiToSdkMapping(parentLabel + 'suggestions/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) SearchResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
       return mapping;
     }
   }
@@ -1326,7 +1325,7 @@ public class IBMAssistantV2Models {
     private String label;
     private DialogSuggestionValue value;
     private IBMWatsonMapModel output;
- 
+
     /**
      * Gets the label.
      *
@@ -1339,7 +1338,7 @@ public class IBMAssistantV2Models {
     public String getLabel() {
       return label;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -1352,7 +1351,7 @@ public class IBMAssistantV2Models {
     public DialogSuggestionValue getValue() {
       return value;
     }
- 
+
     /**
      * Gets the output.
      *
@@ -1411,11 +1410,8 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (value != null) {
-        mapping.putAll(value.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) DialogSuggestionValue.class.newInstance()).addToApiToSdkMapping(parentLabel + 'value/', mapping));
       return mapping;
     }
   }
@@ -1426,7 +1422,7 @@ public class IBMAssistantV2Models {
    */
   public class DialogSuggestionValue extends IBMWatsonGenericModel {
     private MessageInput input;
- 
+
     /**
      * Gets the input.
      *
@@ -1462,11 +1458,8 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (input != null) {
-        mapping.putAll(input.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) MessageInput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'input/', mapping));
       return mapping;
     }
   }
@@ -1483,7 +1476,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public MessageContext() { }
- 
+
     /**
      * Gets the xglobal.
      *
@@ -1495,7 +1488,7 @@ public class IBMAssistantV2Models {
     public MessageContextGlobal getXglobal() {
       return xglobal;
     }
- 
+
     /**
      * Gets the skills.
      *
@@ -1535,30 +1528,34 @@ public class IBMAssistantV2Models {
 
       // calling custom deserializer for xglobal
       MessageContextGlobal newXglobal = (MessageContextGlobal) new MessageContextGlobal().deserialize(JSON.serialize(ret.getXglobal()), (Map<String, Object>) jsonMap.get('xglobal'), MessageContextGlobal.class);
-      retBuilder.setXglobal(newXglobal);
+      retBuilder.xglobal(newXglobal);
 
       // calling custom deserializer for skills
       MessageContextSkills newSkills = (MessageContextSkills) new MessageContextSkills().deserialize(JSON.serialize(ret.getSkills()), (Map<String, Object>) jsonMap.get('skills'), MessageContextSkills.class);
-      retBuilder.setSkills(newSkills);
+      retBuilder.skills(newSkills);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xglobal', 'global');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xglobal', 'global');
       if (xglobal != null) {
-        mapping.putAll(xglobal.getSdkToApiMapping());
+        mapping.putAll(xglobal.addToSdkToApiMapping(parentLabel + 'xglobal/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('global', 'xglobal');
-      if (xglobal != null) {
-        mapping.putAll(xglobal.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'global', 'xglobal');
+      mapping.putAll(((IBMWatsonGenericModel) MessageContextGlobal.class.newInstance()).addToApiToSdkMapping(parentLabel + 'global/', mapping));
       return mapping;
     }
   }
@@ -1596,7 +1593,7 @@ public class IBMAssistantV2Models {
      * @param xglobal the xglobal
      * @return the MessageContext builder
      */
-    public MessageContextBuilder setXglobal(MessageContextGlobal xglobal) {
+    public MessageContextBuilder xglobal(MessageContextGlobal xglobal) {
       this.xglobal = xglobal;
       return this;
     }
@@ -1607,7 +1604,7 @@ public class IBMAssistantV2Models {
      * @param skills the skills
      * @return the MessageContext builder
      */
-    public MessageContextBuilder setSkills(MessageContextSkills skills) {
+    public MessageContextBuilder skills(MessageContextSkills skills) {
       this.skills = skills;
       return this;
     }
@@ -1624,7 +1621,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public MessageContextGlobal() { }
- 
+
     /**
      * Gets the xsystem.
      *
@@ -1660,26 +1657,30 @@ public class IBMAssistantV2Models {
 
       // calling custom deserializer for xsystem
       MessageContextGlobalSystem newXsystem = (MessageContextGlobalSystem) new MessageContextGlobalSystem().deserialize(JSON.serialize(ret.getXsystem()), (Map<String, Object>) jsonMap.get('xsystem'), MessageContextGlobalSystem.class);
-      retBuilder.setXsystem(newXsystem);
+      retBuilder.xsystem(newXsystem);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xsystem', 'system');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xsystem', 'system');
       if (xsystem != null) {
-        mapping.putAll(xsystem.getSdkToApiMapping());
+        mapping.putAll(xsystem.addToSdkToApiMapping(parentLabel + 'xsystem/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('system', 'xsystem');
-      if (xsystem != null) {
-        mapping.putAll(xsystem.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'system', 'xsystem');
+      mapping.putAll(((IBMWatsonGenericModel) MessageContextGlobalSystem.class.newInstance()).addToApiToSdkMapping(parentLabel + 'system/', mapping));
       return mapping;
     }
   }
@@ -1715,7 +1716,7 @@ public class IBMAssistantV2Models {
      * @param xsystem the xsystem
      * @return the MessageContextGlobal builder
      */
-    public MessageContextGlobalBuilder setXsystem(MessageContextGlobalSystem xsystem) {
+    public MessageContextGlobalBuilder xsystem(MessageContextGlobalSystem xsystem) {
       this.xsystem = xsystem;
       return this;
     }
@@ -1734,7 +1735,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public MessageContextGlobalSystem() { }
- 
+
     /**
      * Gets the timezone.
      *
@@ -1746,7 +1747,7 @@ public class IBMAssistantV2Models {
     public String getTimezone() {
       return timezone;
     }
- 
+
     /**
      * Gets the userId.
      *
@@ -1761,7 +1762,7 @@ public class IBMAssistantV2Models {
     public String getUserId() {
       return userId;
     }
- 
+
     /**
      * Gets the turnCount.
      *
@@ -1791,17 +1792,15 @@ public class IBMAssistantV2Models {
       return new MessageContextGlobalSystemBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('userId', 'user_id');
-      mapping.put('turnCount', 'turn_count');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'userId', 'user_id');
+      mapping.put(parentLabel + 'turnCount', 'turn_count');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('user_id', 'userId');
-      mapping.put('turn_count', 'turnCount');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'user_id', 'userId');
+      mapping.put(parentLabel + 'turn_count', 'turnCount');
       return mapping;
     }
   }
@@ -1841,7 +1840,7 @@ public class IBMAssistantV2Models {
      * @param timezone the timezone
      * @return the MessageContextGlobalSystem builder
      */
-    public MessageContextGlobalSystemBuilder setTimezone(String timezone) {
+    public MessageContextGlobalSystemBuilder timezone(String timezone) {
       this.timezone = timezone;
       return this;
     }
@@ -1852,7 +1851,7 @@ public class IBMAssistantV2Models {
      * @param userId the userId
      * @return the MessageContextGlobalSystem builder
      */
-    public MessageContextGlobalSystemBuilder setUserId(String userId) {
+    public MessageContextGlobalSystemBuilder userId(String userId) {
       this.userId = userId;
       return this;
     }
@@ -1863,7 +1862,7 @@ public class IBMAssistantV2Models {
      * @param turnCount the turnCount
      * @return the MessageContextGlobalSystem builder
      */
-    public MessageContextGlobalSystemBuilder setTurnCount(Long turnCount) {
+    public MessageContextGlobalSystemBuilder turnCount(Long turnCount) {
       this.turnCount = turnCount;
       return this;
     }
@@ -1880,7 +1879,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public MessageContextSkill() { }
- 
+
     /**
      * Gets the userDefined.
      *
@@ -1916,20 +1915,26 @@ public class IBMAssistantV2Models {
 
       // calling custom deserializer for userDefined
       IBMWatsonMapModel newUserDefined = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getUserDefined()), (Map<String, Object>) jsonMap.get('userDefined'), IBMWatsonMapModel.class);
-      retBuilder.setUserDefined(newUserDefined);
+      retBuilder.userDefined(newUserDefined);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('userDefined', 'user_defined');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'userDefined', 'user_defined');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('user_defined', 'userDefined');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'user_defined', 'userDefined');
       return mapping;
     }
   }
@@ -1965,7 +1970,7 @@ public class IBMAssistantV2Models {
      * @param userDefined the userDefined
      * @return the MessageContextSkill builder
      */
-    public MessageContextSkillBuilder setUserDefined(IBMWatsonMapModel userDefined) {
+    public MessageContextSkillBuilder userDefined(IBMWatsonMapModel userDefined) {
       this.userDefined = userDefined;
       return this;
     }
@@ -1977,7 +1982,7 @@ public class IBMAssistantV2Models {
 **Note:** Currently, only a single property named `main skill` is supported. This object contains variables that apply to the dialog skill used by the assistant.
    */
   public class MessageContextSkills extends IBMWatsonDynamicModel {
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -2067,7 +2072,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public MessageInput() { }
- 
+
     /**
      * Gets the messageType.
      *
@@ -2079,7 +2084,7 @@ public class IBMAssistantV2Models {
     public String getMessageType() {
       return messageType;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -2091,7 +2096,7 @@ public class IBMAssistantV2Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the options.
      *
@@ -2103,7 +2108,7 @@ public class IBMAssistantV2Models {
     public MessageInputOptions getOptions() {
       return options;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -2116,7 +2121,7 @@ public class IBMAssistantV2Models {
     public List<RuntimeIntent> getIntents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -2129,7 +2134,7 @@ public class IBMAssistantV2Models {
     public List<RuntimeEntity> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the suggestionId.
      *
@@ -2201,29 +2206,31 @@ public class IBMAssistantV2Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('messageType', 'message_type');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'messageType', 'message_type');
       if (options != null) {
-        mapping.putAll(options.getSdkToApiMapping());
+        mapping.putAll(options.addToSdkToApiMapping(parentLabel + 'options/', mapping));
       }
       if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getSdkToApiMapping());
+        mapping.putAll(entities[0].addToSdkToApiMapping(parentLabel + 'entities/', mapping));
       }
-      mapping.put('suggestionId', 'suggestion_id');
+      mapping.put(parentLabel + 'suggestionId', 'suggestion_id');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('message_type', 'messageType');
-      if (options != null) {
-        mapping.putAll(options.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
-      mapping.put('suggestion_id', 'suggestionId');
+      mapping.put(parentLabel + 'message_type', 'messageType');
+      mapping.putAll(((IBMWatsonGenericModel) MessageInputOptions.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) RuntimeEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
+      mapping.put(parentLabel + 'suggestion_id', 'suggestionId');
       return mapping;
     }
   }
@@ -2376,7 +2383,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public MessageInputOptions() { }
- 
+
     /**
      * Gets the debug.
      *
@@ -2389,7 +2396,7 @@ public class IBMAssistantV2Models {
     public Boolean getDebug() {
       return debug;
     }
- 
+
     /**
      * Gets the restart.
      *
@@ -2402,7 +2409,7 @@ public class IBMAssistantV2Models {
     public Boolean getRestart() {
       return restart;
     }
- 
+
     /**
      * Gets the alternateIntents.
      *
@@ -2414,7 +2421,7 @@ public class IBMAssistantV2Models {
     public Boolean getAlternateIntents() {
       return alternateIntents;
     }
- 
+
     /**
      * Gets the returnContext.
      *
@@ -2444,17 +2451,15 @@ public class IBMAssistantV2Models {
       return new MessageInputOptionsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('alternateIntents', 'alternate_intents');
-      mapping.put('returnContext', 'return_context');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'alternateIntents', 'alternate_intents');
+      mapping.put(parentLabel + 'returnContext', 'return_context');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('alternate_intents', 'alternateIntents');
-      mapping.put('return_context', 'returnContext');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'alternate_intents', 'alternateIntents');
+      mapping.put(parentLabel + 'return_context', 'returnContext');
       return mapping;
     }
   }
@@ -2496,7 +2501,7 @@ public class IBMAssistantV2Models {
      * @param debug the debug
      * @return the MessageInputOptions builder
      */
-    public MessageInputOptionsBuilder setDebug(Boolean debug) {
+    public MessageInputOptionsBuilder debug(Boolean debug) {
       this.debug = debug;
       return this;
     }
@@ -2507,7 +2512,7 @@ public class IBMAssistantV2Models {
      * @param restart the restart
      * @return the MessageInputOptions builder
      */
-    public MessageInputOptionsBuilder setRestart(Boolean restart) {
+    public MessageInputOptionsBuilder restart(Boolean restart) {
       this.restart = restart;
       return this;
     }
@@ -2518,7 +2523,7 @@ public class IBMAssistantV2Models {
      * @param alternateIntents the alternateIntents
      * @return the MessageInputOptions builder
      */
-    public MessageInputOptionsBuilder setAlternateIntents(Boolean alternateIntents) {
+    public MessageInputOptionsBuilder alternateIntents(Boolean alternateIntents) {
       this.alternateIntents = alternateIntents;
       return this;
     }
@@ -2529,7 +2534,7 @@ public class IBMAssistantV2Models {
      * @param returnContext the returnContext
      * @return the MessageInputOptions builder
      */
-    public MessageInputOptionsBuilder setReturnContext(Boolean returnContext) {
+    public MessageInputOptionsBuilder returnContext(Boolean returnContext) {
       this.returnContext = returnContext;
       return this;
     }
@@ -2617,10 +2622,10 @@ public class IBMAssistantV2Models {
       mapping.put('assistantId', 'assistant_id');
       mapping.put('sessionId', 'session_id');
       if (input != null) {
-        mapping.putAll(input.getSdkToApiMapping());
+        mapping.putAll(input.addToSdkToApiMapping('', mapping));
       }
       if (context != null) {
-        mapping.putAll(context.getSdkToApiMapping());
+        mapping.putAll(context.addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -2736,7 +2741,7 @@ public class IBMAssistantV2Models {
     private List<DialogNodeAction> actions;
     private MessageOutputDebug debug;
     private IBMWatsonMapModel userDefined;
- 
+
     /**
      * Gets the generic.
      *
@@ -2749,7 +2754,7 @@ public class IBMAssistantV2Models {
     public List<DialogRuntimeResponseGeneric> getGeneric() {
       return generic;
     }
- 
+
     /**
      * Gets the intents.
      *
@@ -2761,7 +2766,7 @@ public class IBMAssistantV2Models {
     public List<RuntimeIntent> getIntents() {
       return intents;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -2773,7 +2778,7 @@ public class IBMAssistantV2Models {
     public List<RuntimeEntity> getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the actions.
      *
@@ -2785,7 +2790,7 @@ public class IBMAssistantV2Models {
     public List<DialogNodeAction> getActions() {
       return actions;
     }
- 
+
     /**
      * Gets the debug.
      *
@@ -2797,7 +2802,7 @@ public class IBMAssistantV2Models {
     public MessageOutputDebug getDebug() {
       return debug;
     }
- 
+
     /**
      * Gets the userDefined.
      *
@@ -2935,21 +2940,12 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (generic != null && generic[0] != null) {
-        mapping.putAll(generic[0].getApiToSdkMapping());
-      }
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
-      if (actions != null && actions[0] != null) {
-        mapping.putAll(actions[0].getApiToSdkMapping());
-      }
-      if (debug != null) {
-        mapping.putAll(debug.getApiToSdkMapping());
-      }
-      mapping.put('user_defined', 'userDefined');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) DialogRuntimeResponseGeneric.class.newInstance()).addToApiToSdkMapping(parentLabel + 'generic/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) RuntimeEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodeAction.class.newInstance()).addToApiToSdkMapping(parentLabel + 'actions/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) MessageOutputDebug.class.newInstance()).addToApiToSdkMapping(parentLabel + 'debug/', mapping));
+      mapping.put(parentLabel + 'user_defined', 'userDefined');
       return mapping;
     }
   }
@@ -2962,7 +2958,7 @@ public class IBMAssistantV2Models {
     private List<DialogLogMessage> logMessages;
     private Boolean branchExited;
     private String branchExitedReason;
- 
+
     /**
      * Gets the nodesVisited.
      *
@@ -2975,7 +2971,7 @@ public class IBMAssistantV2Models {
     public List<DialogNodesVisited> getNodesVisited() {
       return nodesVisited;
     }
- 
+
     /**
      * Gets the logMessages.
      *
@@ -2987,7 +2983,7 @@ public class IBMAssistantV2Models {
     public List<DialogLogMessage> getLogMessages() {
       return logMessages;
     }
- 
+
     /**
      * Gets the branchExited.
      *
@@ -2999,7 +2995,7 @@ public class IBMAssistantV2Models {
     public Boolean getBranchExited() {
       return branchExited;
     }
- 
+
     /**
      * Gets the branchExitedReason.
      *
@@ -3085,15 +3081,16 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('nodes_visited', 'nodesVisited');
-      if (nodesVisited != null && nodesVisited[0] != null) {
-        mapping.putAll(nodesVisited[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('log_messages', 'logMessages');
-      mapping.put('branch_exited', 'branchExited');
-      mapping.put('branch_exited_reason', 'branchExitedReason');
+      mapping.put(parentLabel + 'nodes_visited', 'nodesVisited');
+      mapping.putAll(((IBMWatsonGenericModel) DialogNodesVisited.class.newInstance()).addToApiToSdkMapping(parentLabel + 'nodes_visited/', mapping));
+      mapping.put(parentLabel + 'log_messages', 'logMessages');
+      mapping.put(parentLabel + 'branch_exited', 'branchExited');
+      mapping.put(parentLabel + 'branch_exited_reason', 'branchExitedReason');
       return mapping;
     }
   }
@@ -3104,7 +3101,7 @@ public class IBMAssistantV2Models {
   public class MessageResponse extends IBMWatsonResponseModel {
     private MessageOutput output;
     private MessageContext context;
- 
+
     /**
      * Gets the output.
      *
@@ -3116,7 +3113,7 @@ public class IBMAssistantV2Models {
     public MessageOutput getOutput() {
       return output;
     }
- 
+
     /**
      * Gets the context.
      *
@@ -3168,14 +3165,9 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (output != null) {
-        mapping.putAll(output.getApiToSdkMapping());
-      }
-      if (context != null) {
-        mapping.putAll(context.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) MessageOutput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'output/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) MessageContext.class.newInstance()).addToApiToSdkMapping(parentLabel + 'context/', mapping));
       return mapping;
     }
   }
@@ -3196,7 +3188,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public RuntimeEntity() { }
- 
+
     /**
      * Gets the entity.
      *
@@ -3208,7 +3200,7 @@ public class IBMAssistantV2Models {
     public String getEntity() {
       return entity;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -3221,7 +3213,7 @@ public class IBMAssistantV2Models {
     public List<Long> getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -3233,7 +3225,7 @@ public class IBMAssistantV2Models {
     public String getValue() {
       return value;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -3245,7 +3237,7 @@ public class IBMAssistantV2Models {
     public Double getConfidence() {
       return confidence;
     }
- 
+
     /**
      * Gets the metadata.
      *
@@ -3257,7 +3249,7 @@ public class IBMAssistantV2Models {
     public IBMWatsonMapModel getMetadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the groups.
      *
@@ -3301,7 +3293,7 @@ public class IBMAssistantV2Models {
 
       // calling custom deserializer for metadata
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
-      retBuilder.setMetadata(newMetadata);
+      retBuilder.metadata(newMetadata);
 
       // calling custom deserializer for groups
       List<CaptureGroup> newGroups = new List<CaptureGroup>();
@@ -3313,25 +3305,21 @@ public class IBMAssistantV2Models {
           CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CaptureGroup.class);
           newGroups.add(newItem);
         }
-        retBuilder.setGroups(newGroups);
+        retBuilder.groups(newGroups);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (groups != null && groups[0] != null) {
-        mapping.putAll(groups[0].getSdkToApiMapping());
+        mapping.putAll(groups[0].addToSdkToApiMapping(parentLabel + 'groups/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (groups != null && groups[0] != null) {
-        mapping.putAll(groups[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) CaptureGroup.class.newInstance()).addToApiToSdkMapping(parentLabel + 'groups/', mapping));
       return mapping;
     }
   }
@@ -3420,7 +3408,7 @@ public class IBMAssistantV2Models {
      * @param entity the entity
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setEntity(String entity) {
+    public RuntimeEntityBuilder entity(String entity) {
       this.entity = entity;
       return this;
     }
@@ -3432,7 +3420,7 @@ public class IBMAssistantV2Models {
      * @param location the location
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setLocation(List<Long> location) {
+    public RuntimeEntityBuilder location(List<Long> location) {
       this.location = location;
       return this;
     }
@@ -3443,7 +3431,7 @@ public class IBMAssistantV2Models {
      * @param value the value
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setValue(String value) {
+    public RuntimeEntityBuilder value(String value) {
       this.value = value;
       return this;
     }
@@ -3454,7 +3442,7 @@ public class IBMAssistantV2Models {
      * @param confidence the confidence
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setConfidence(Double confidence) {
+    public RuntimeEntityBuilder confidence(Double confidence) {
       this.confidence = confidence;
       return this;
     }
@@ -3465,7 +3453,7 @@ public class IBMAssistantV2Models {
      * @param metadata the metadata
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setMetadata(IBMWatsonMapModel metadata) {
+    public RuntimeEntityBuilder metadata(IBMWatsonMapModel metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -3477,7 +3465,7 @@ public class IBMAssistantV2Models {
      * @param groups the groups
      * @return the RuntimeEntity builder
      */
-    public RuntimeEntityBuilder setGroups(List<CaptureGroup> groups) {
+    public RuntimeEntityBuilder groups(List<CaptureGroup> groups) {
       this.groups = groups;
       return this;
     }
@@ -3495,7 +3483,7 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public RuntimeIntent() { }
- 
+
     /**
      * Gets the intent.
      *
@@ -3507,7 +3495,7 @@ public class IBMAssistantV2Models {
     public String getIntent() {
       return intent;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -3581,7 +3569,7 @@ public class IBMAssistantV2Models {
      * @param intent the intent
      * @return the RuntimeIntent builder
      */
-    public RuntimeIntentBuilder setIntent(String intent) {
+    public RuntimeIntentBuilder intent(String intent) {
       this.intent = intent;
       return this;
     }
@@ -3592,7 +3580,7 @@ public class IBMAssistantV2Models {
      * @param confidence the confidence
      * @return the RuntimeIntent builder
      */
-    public RuntimeIntentBuilder setConfidence(Double confidence) {
+    public RuntimeIntentBuilder confidence(Double confidence) {
       this.confidence = confidence;
       return this;
     }
@@ -3608,7 +3596,7 @@ public class IBMAssistantV2Models {
     private String title;
     private String url;
     private SearchResultHighlight highlight;
- 
+
     /**
      * Gets the id.
      *
@@ -3623,7 +3611,7 @@ public class IBMAssistantV2Models {
     public String getId() {
       return id;
     }
- 
+
     /**
      * Gets the resultMetadata.
      *
@@ -3635,7 +3623,7 @@ public class IBMAssistantV2Models {
     public SearchResultMetadata getResultMetadata() {
       return resultMetadata;
     }
- 
+
     /**
      * Gets the body.
      *
@@ -3648,7 +3636,7 @@ public class IBMAssistantV2Models {
     public String getBody() {
       return body;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -3661,7 +3649,7 @@ public class IBMAssistantV2Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -3673,7 +3661,7 @@ public class IBMAssistantV2Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the highlight.
      *
@@ -3759,9 +3747,8 @@ public class IBMAssistantV2Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('result_metadata', 'resultMetadata');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'result_metadata', 'resultMetadata');
       return mapping;
     }
   }
@@ -3773,7 +3760,7 @@ public class IBMAssistantV2Models {
     private List<String> body;
     private List<String> title;
     private List<String> url;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * Gets the body.
@@ -3867,7 +3854,7 @@ public class IBMAssistantV2Models {
   public class SearchResultMetadata extends IBMWatsonGenericModel {
     private Double confidence;
     private Double score;
- 
+
     /**
      * Gets the confidence.
      *
@@ -3880,7 +3867,7 @@ public class IBMAssistantV2Models {
     public Double getConfidence() {
       return confidence;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -3918,7 +3905,7 @@ public class IBMAssistantV2Models {
    */
   public class SessionResponse extends IBMWatsonResponseModel {
     private String sessionId;
- 
+
     /**
      * Gets the sessionId.
      *
@@ -3940,9 +3927,12 @@ public class IBMAssistantV2Models {
       this.sessionId = sessionId;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('session_id', 'sessionId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'session_id', 'sessionId');
       return mapping;
     }
   }

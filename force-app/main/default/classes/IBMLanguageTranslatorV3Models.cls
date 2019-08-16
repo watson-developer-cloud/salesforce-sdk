@@ -385,7 +385,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class DocumentList extends IBMWatsonResponseModel {
     private List<DocumentStatus> documents;
- 
+
     /**
      * Gets the documents.
      *
@@ -430,11 +430,8 @@ public class IBMLanguageTranslatorV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (documents != null && documents[0] != null) {
-        mapping.putAll(documents[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) DocumentStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'documents/', mapping));
       return mapping;
     }
   }
@@ -454,7 +451,7 @@ public class IBMLanguageTranslatorV3Models {
     private Datetime completed;
     private Long wordCount;
     private Long characterCount;
- 
+
     /**
      * Gets the documentId.
      *
@@ -466,7 +463,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the filename.
      *
@@ -479,7 +476,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getFilename() {
       return filename;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -491,7 +488,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -503,7 +500,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getModelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the baseModelId.
      *
@@ -516,7 +513,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getBaseModelId() {
       return baseModelId;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -528,7 +525,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getSource() {
       return source;
     }
- 
+
     /**
      * Gets the target.
      *
@@ -540,7 +537,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getTarget() {
       return target;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -552,7 +549,7 @@ public class IBMLanguageTranslatorV3Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the completed.
      *
@@ -564,7 +561,7 @@ public class IBMLanguageTranslatorV3Models {
     public Datetime getCompleted() {
       return completed;
     }
- 
+
     /**
      * Gets the wordCount.
      *
@@ -576,7 +573,7 @@ public class IBMLanguageTranslatorV3Models {
     public Long getWordCount() {
       return wordCount;
     }
- 
+
     /**
      * Gets the characterCount.
      *
@@ -688,13 +685,16 @@ public class IBMLanguageTranslatorV3Models {
       this.characterCount = characterCount;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_id', 'documentId');
-      mapping.put('model_id', 'modelId');
-      mapping.put('base_model_id', 'baseModelId');
-      mapping.put('word_count', 'wordCount');
-      mapping.put('character_count', 'characterCount');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'model_id', 'modelId');
+      mapping.put(parentLabel + 'base_model_id', 'baseModelId');
+      mapping.put(parentLabel + 'word_count', 'wordCount');
+      mapping.put(parentLabel + 'character_count', 'characterCount');
       return mapping;
     }
   }
@@ -1033,7 +1033,7 @@ public class IBMLanguageTranslatorV3Models {
   public class IdentifiableLanguage extends IBMWatsonGenericModel {
     private String language;
     private String name;
- 
+
     /**
      * Gets the language.
      *
@@ -1045,7 +1045,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -1082,7 +1082,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class IdentifiableLanguages extends IBMWatsonResponseModel {
     private List<IdentifiableLanguage> languages;
- 
+
     /**
      * Gets the languages.
      *
@@ -1134,7 +1134,7 @@ public class IBMLanguageTranslatorV3Models {
   public class IdentifiedLanguage extends IBMWatsonGenericModel {
     private String language;
     private Double confidence;
- 
+
     /**
      * Gets the language.
      *
@@ -1146,7 +1146,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -1183,7 +1183,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class IdentifiedLanguages extends IBMWatsonResponseModel {
     private List<IdentifiedLanguage> languages;
- 
+
     /**
      * Gets the languages.
      *
@@ -2037,7 +2037,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class Translation extends IBMWatsonGenericModel {
     private String translationOutput;
- 
+
     /**
      * Gets the translationOutput.
      *
@@ -2059,9 +2059,12 @@ public class IBMLanguageTranslatorV3Models {
       this.translationOutput = translationOutput;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('translation', 'translationOutput');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'translation', 'translationOutput');
       return mapping;
     }
   }
@@ -2080,7 +2083,7 @@ public class IBMLanguageTranslatorV3Models {
     private Boolean defaultModel;
     private String owner;
     private String status;
- 
+
     /**
      * Gets the modelId.
      *
@@ -2092,7 +2095,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getModelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -2104,7 +2107,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -2116,7 +2119,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getSource() {
       return source;
     }
- 
+
     /**
      * Gets the target.
      *
@@ -2128,7 +2131,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getTarget() {
       return target;
     }
- 
+
     /**
      * Gets the baseModelId.
      *
@@ -2141,7 +2144,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getBaseModelId() {
       return baseModelId;
     }
- 
+
     /**
      * Gets the domain.
      *
@@ -2153,7 +2156,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getDomain() {
       return domain;
     }
- 
+
     /**
      * Gets the customizable.
      *
@@ -2166,7 +2169,7 @@ public class IBMLanguageTranslatorV3Models {
     public Boolean getCustomizable() {
       return customizable;
     }
- 
+
     /**
      * Gets the defaultModel.
      *
@@ -2179,7 +2182,7 @@ public class IBMLanguageTranslatorV3Models {
     public Boolean getDefaultModel() {
       return defaultModel;
     }
- 
+
     /**
      * Gets the owner.
      *
@@ -2192,7 +2195,7 @@ public class IBMLanguageTranslatorV3Models {
     public String getOwner() {
       return owner;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -2295,11 +2298,14 @@ public class IBMLanguageTranslatorV3Models {
       this.status = status;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('model_id', 'modelId');
-      mapping.put('base_model_id', 'baseModelId');
-      mapping.put('default_model', 'defaultModel');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'model_id', 'modelId');
+      mapping.put(parentLabel + 'base_model_id', 'baseModelId');
+      mapping.put(parentLabel + 'default_model', 'defaultModel');
       return mapping;
     }
   }
@@ -2309,7 +2315,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class TranslationModels extends IBMWatsonResponseModel {
     private List<TranslationModel> models;
- 
+
     /**
      * Gets the models.
      *
@@ -2354,11 +2360,8 @@ public class IBMLanguageTranslatorV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (models != null && models[0] != null) {
-        mapping.putAll(models[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) TranslationModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'models/', mapping));
       return mapping;
     }
   }
@@ -2370,7 +2373,7 @@ public class IBMLanguageTranslatorV3Models {
     private Long wordCount;
     private Long characterCount;
     private List<Translation> translations;
- 
+
     /**
      * Gets the wordCount.
      *
@@ -2382,7 +2385,7 @@ public class IBMLanguageTranslatorV3Models {
     public Long getWordCount() {
       return wordCount;
     }
- 
+
     /**
      * Gets the characterCount.
      *
@@ -2394,7 +2397,7 @@ public class IBMLanguageTranslatorV3Models {
     public Long getCharacterCount() {
       return characterCount;
     }
- 
+
     /**
      * Gets the translations.
      *
@@ -2457,13 +2460,14 @@ public class IBMLanguageTranslatorV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('word_count', 'wordCount');
-      mapping.put('character_count', 'characterCount');
-      if (translations != null && translations[0] != null) {
-        mapping.putAll(translations[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'word_count', 'wordCount');
+      mapping.put(parentLabel + 'character_count', 'characterCount');
+      mapping.putAll(((IBMWatsonGenericModel) Translation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'translations/', mapping));
       return mapping;
     }
   }

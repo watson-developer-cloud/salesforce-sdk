@@ -61,7 +61,7 @@ public class IBMCompareComplyV1Models {
       Map<String, String> mapping = new Map<String, String>();
       mapping.put('feedbackData', 'feedback_data');
       if (feedbackData != null) {
-        mapping.putAll(feedbackData.getSdkToApiMapping());
+        mapping.putAll(feedbackData.addToSdkToApiMapping('', mapping));
       }
       mapping.put('userId', 'user_id');
       return mapping;
@@ -159,7 +159,7 @@ public class IBMCompareComplyV1Models {
   public class Address extends IBMWatsonGenericModel {
     private String text;
     private Location location;
- 
+
     /**
      * Gets the text.
      *
@@ -171,7 +171,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -217,11 +217,8 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -234,7 +231,7 @@ public class IBMCompareComplyV1Models {
     private Boolean identicalText;
     private List<String> provenanceIds;
     private Boolean significantElements;
- 
+
     /**
      * Gets the elementPair.
      *
@@ -246,7 +243,7 @@ public class IBMCompareComplyV1Models {
     public List<ElementPair> getElementPair() {
       return elementPair;
     }
- 
+
     /**
      * Gets the identicalText.
      *
@@ -260,11 +257,11 @@ public class IBMCompareComplyV1Models {
     public Boolean getIdenticalText() {
       return identicalText;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hashed values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -272,7 +269,7 @@ public class IBMCompareComplyV1Models {
     public List<String> getProvenanceIds() {
       return provenanceIds;
     }
- 
+
     /**
      * Gets the significantElements.
      *
@@ -344,15 +341,16 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('element_pair', 'elementPair');
-      if (elementPair != null && elementPair[0] != null) {
-        mapping.putAll(elementPair[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('identical_text', 'identicalText');
-      mapping.put('provenance_ids', 'provenanceIds');
-      mapping.put('significant_elements', 'significantElements');
+      mapping.put(parentLabel + 'element_pair', 'elementPair');
+      mapping.putAll(((IBMWatsonGenericModel) ElementPair.class.newInstance()).addToApiToSdkMapping(parentLabel + 'element_pair/', mapping));
+      mapping.put(parentLabel + 'identical_text', 'identicalText');
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
+      mapping.put(parentLabel + 'significant_elements', 'significantElements');
       return mapping;
     }
   }
@@ -364,7 +362,7 @@ public class IBMCompareComplyV1Models {
     private String xtype;
     private String text;
     private Location location;
- 
+
     /**
      * Gets the xtype.
      *
@@ -376,7 +374,7 @@ public class IBMCompareComplyV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -388,7 +386,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -443,12 +441,13 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -467,7 +466,7 @@ public class IBMCompareComplyV1Models {
     private String status;
     private Datetime created;
     private Datetime updated;
- 
+
     /**
      * Gets the function.
      *
@@ -480,7 +479,7 @@ public class IBMCompareComplyV1Models {
     public String getFunction() {
       return function;
     }
- 
+
     /**
      * Gets the inputBucketLocation.
      *
@@ -493,7 +492,7 @@ public class IBMCompareComplyV1Models {
     public String getInputBucketLocation() {
       return inputBucketLocation;
     }
- 
+
     /**
      * Gets the inputBucketName.
      *
@@ -505,7 +504,7 @@ public class IBMCompareComplyV1Models {
     public String getInputBucketName() {
       return inputBucketName;
     }
- 
+
     /**
      * Gets the outputBucketLocation.
      *
@@ -518,7 +517,7 @@ public class IBMCompareComplyV1Models {
     public String getOutputBucketLocation() {
       return outputBucketLocation;
     }
- 
+
     /**
      * Gets the outputBucketName.
      *
@@ -530,7 +529,7 @@ public class IBMCompareComplyV1Models {
     public String getOutputBucketName() {
       return outputBucketName;
     }
- 
+
     /**
      * Gets the batchId.
      *
@@ -542,7 +541,7 @@ public class IBMCompareComplyV1Models {
     public String getBatchId() {
       return batchId;
     }
- 
+
     /**
      * Gets the documentCounts.
      *
@@ -554,7 +553,7 @@ public class IBMCompareComplyV1Models {
     public DocCounts getDocumentCounts() {
       return documentCounts;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -566,7 +565,7 @@ public class IBMCompareComplyV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -578,7 +577,7 @@ public class IBMCompareComplyV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -695,14 +694,13 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('input_bucket_location', 'inputBucketLocation');
-      mapping.put('input_bucket_name', 'inputBucketName');
-      mapping.put('output_bucket_location', 'outputBucketLocation');
-      mapping.put('output_bucket_name', 'outputBucketName');
-      mapping.put('batch_id', 'batchId');
-      mapping.put('document_counts', 'documentCounts');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'input_bucket_location', 'inputBucketLocation');
+      mapping.put(parentLabel + 'input_bucket_name', 'inputBucketName');
+      mapping.put(parentLabel + 'output_bucket_location', 'outputBucketLocation');
+      mapping.put(parentLabel + 'output_bucket_name', 'outputBucketName');
+      mapping.put(parentLabel + 'batch_id', 'batchId');
+      mapping.put(parentLabel + 'document_counts', 'documentCounts');
       return mapping;
     }
   }
@@ -712,7 +710,7 @@ public class IBMCompareComplyV1Models {
    */
   public class Batches extends IBMWatsonResponseModel {
     private List<BatchStatus> batches;
- 
+
     /**
      * Gets the batches.
      *
@@ -757,11 +755,8 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (batches != null && batches[0] != null) {
-        mapping.putAll(batches[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) BatchStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'batches/', mapping));
       return mapping;
     }
   }
@@ -784,7 +779,7 @@ public class IBMCompareComplyV1Models {
     private List<ColumnHeaderTexts> columnHeaderTexts;
     private List<ColumnHeaderTextsNormalized> columnHeaderTextsNormalized;
     private List<Attribute> attributes;
- 
+
     /**
      * Gets the cellId.
      *
@@ -796,7 +791,7 @@ public class IBMCompareComplyV1Models {
     public String getCellId() {
       return cellId;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -809,7 +804,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -821,7 +816,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the rowIndexBegin.
      *
@@ -833,7 +828,7 @@ public class IBMCompareComplyV1Models {
     public Long getRowIndexBegin() {
       return rowIndexBegin;
     }
- 
+
     /**
      * Gets the rowIndexEnd.
      *
@@ -845,7 +840,7 @@ public class IBMCompareComplyV1Models {
     public Long getRowIndexEnd() {
       return rowIndexEnd;
     }
- 
+
     /**
      * Gets the columnIndexBegin.
      *
@@ -857,7 +852,7 @@ public class IBMCompareComplyV1Models {
     public Long getColumnIndexBegin() {
       return columnIndexBegin;
     }
- 
+
     /**
      * Gets the columnIndexEnd.
      *
@@ -869,7 +864,7 @@ public class IBMCompareComplyV1Models {
     public Long getColumnIndexEnd() {
       return columnIndexEnd;
     }
- 
+
     /**
      * Gets the rowHeaderIds.
      *
@@ -879,7 +874,7 @@ public class IBMCompareComplyV1Models {
     public List<RowHeaderIds> getRowHeaderIds() {
       return rowHeaderIds;
     }
- 
+
     /**
      * Gets the rowHeaderTexts.
      *
@@ -889,7 +884,7 @@ public class IBMCompareComplyV1Models {
     public List<RowHeaderTexts> getRowHeaderTexts() {
       return rowHeaderTexts;
     }
- 
+
     /**
      * Gets the rowHeaderTextsNormalized.
      *
@@ -899,7 +894,7 @@ public class IBMCompareComplyV1Models {
     public List<RowHeaderTextsNormalized> getRowHeaderTextsNormalized() {
       return rowHeaderTextsNormalized;
     }
- 
+
     /**
      * Gets the columnHeaderIds.
      *
@@ -909,7 +904,7 @@ public class IBMCompareComplyV1Models {
     public List<ColumnHeaderIds> getColumnHeaderIds() {
       return columnHeaderIds;
     }
- 
+
     /**
      * Gets the columnHeaderTexts.
      *
@@ -919,7 +914,7 @@ public class IBMCompareComplyV1Models {
     public List<ColumnHeaderTexts> getColumnHeaderTexts() {
       return columnHeaderTexts;
     }
- 
+
     /**
      * Gets the columnHeaderTextsNormalized.
      *
@@ -929,7 +924,7 @@ public class IBMCompareComplyV1Models {
     public List<ColumnHeaderTextsNormalized> getColumnHeaderTextsNormalized() {
       return columnHeaderTextsNormalized;
     }
- 
+
     /**
      * Gets the attributes.
      *
@@ -1171,31 +1166,26 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('cell_id', 'cellId');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('row_index_begin', 'rowIndexBegin');
-      mapping.put('row_index_end', 'rowIndexEnd');
-      mapping.put('column_index_begin', 'columnIndexBegin');
-      mapping.put('column_index_end', 'columnIndexEnd');
-      mapping.put('row_header_ids', 'rowHeaderIds');
-      mapping.put('row_header_texts', 'rowHeaderTexts');
-      mapping.put('row_header_texts_normalized', 'rowHeaderTextsNormalized');
-      if (rowHeaderTextsNormalized != null && rowHeaderTextsNormalized[0] != null) {
-        mapping.putAll(rowHeaderTextsNormalized[0].getApiToSdkMapping());
-      }
-      mapping.put('column_header_ids', 'columnHeaderIds');
-      mapping.put('column_header_texts', 'columnHeaderTexts');
-      mapping.put('column_header_texts_normalized', 'columnHeaderTextsNormalized');
-      if (columnHeaderTextsNormalized != null && columnHeaderTextsNormalized[0] != null) {
-        mapping.putAll(columnHeaderTextsNormalized[0].getApiToSdkMapping());
-      }
-      if (attributes != null && attributes[0] != null) {
-        mapping.putAll(attributes[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'cell_id', 'cellId');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.put(parentLabel + 'row_index_begin', 'rowIndexBegin');
+      mapping.put(parentLabel + 'row_index_end', 'rowIndexEnd');
+      mapping.put(parentLabel + 'column_index_begin', 'columnIndexBegin');
+      mapping.put(parentLabel + 'column_index_end', 'columnIndexEnd');
+      mapping.put(parentLabel + 'row_header_ids', 'rowHeaderIds');
+      mapping.put(parentLabel + 'row_header_texts', 'rowHeaderTexts');
+      mapping.put(parentLabel + 'row_header_texts_normalized', 'rowHeaderTextsNormalized');
+      mapping.putAll(((IBMWatsonGenericModel) RowHeaderTextsNormalized.class.newInstance()).addToApiToSdkMapping(parentLabel + 'row_header_texts_normalized/', mapping));
+      mapping.put(parentLabel + 'column_header_ids', 'columnHeaderIds');
+      mapping.put(parentLabel + 'column_header_texts', 'columnHeaderTexts');
+      mapping.put(parentLabel + 'column_header_texts_normalized', 'columnHeaderTextsNormalized');
+      mapping.putAll(((IBMWatsonGenericModel) ColumnHeaderTextsNormalized.class.newInstance()).addToApiToSdkMapping(parentLabel + 'column_header_texts_normalized/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Attribute.class.newInstance()).addToApiToSdkMapping(parentLabel + 'attributes/', mapping));
       return mapping;
     }
   }
@@ -1212,7 +1202,7 @@ public class IBMCompareComplyV1Models {
      * and should not be called by the client.
      */
     public Category() { }
- 
+
     /**
      * Gets the label.
      *
@@ -1224,11 +1214,11 @@ public class IBMCompareComplyV1Models {
     public String getLabel() {
       return label;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hashed values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -1251,15 +1241,13 @@ public class IBMCompareComplyV1Models {
       return new CategoryBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('provenanceIds', 'provenance_ids');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'provenanceIds', 'provenance_ids');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('provenance_ids', 'provenanceIds');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
       return mapping;
     }
   }
@@ -1312,7 +1300,7 @@ public class IBMCompareComplyV1Models {
      * @param label the label
      * @return the Category builder
      */
-    public CategoryBuilder setLabel(String label) {
+    public CategoryBuilder label(String label) {
       this.label = label;
       return this;
     }
@@ -1324,7 +1312,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the provenanceIds
      * @return the Category builder
      */
-    public CategoryBuilder setProvenanceIds(List<String> provenanceIds) {
+    public CategoryBuilder provenanceIds(List<String> provenanceIds) {
       this.provenanceIds = provenanceIds;
       return this;
     }
@@ -1335,7 +1323,7 @@ public class IBMCompareComplyV1Models {
    */
   public class CategoryComparison extends IBMWatsonGenericModel {
     private String label;
- 
+
     /**
      * Gets the label.
      *
@@ -1524,10 +1512,11 @@ public class IBMCompareComplyV1Models {
     private List<ContractTypes> contractTypes;
     private List<ContractTerms> contractTerms;
     private List<PaymentTerms> paymentTerms;
+    private List<ContractCurrencies> contractCurrencies;
     private List<Tables> tables;
     private DocStructure documentStructure;
     private List<Parties> parties;
- 
+
     /**
      * Gets the document.
      *
@@ -1539,7 +1528,7 @@ public class IBMCompareComplyV1Models {
     public Document getDocument() {
       return document;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -1552,7 +1541,7 @@ public class IBMCompareComplyV1Models {
     public String getModelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the modelVersion.
      *
@@ -1564,7 +1553,7 @@ public class IBMCompareComplyV1Models {
     public String getModelVersion() {
       return modelVersion;
     }
- 
+
     /**
      * Gets the elements.
      *
@@ -1576,7 +1565,7 @@ public class IBMCompareComplyV1Models {
     public List<Element> getElements() {
       return elements;
     }
- 
+
     /**
      * Gets the effectiveDates.
      *
@@ -1588,7 +1577,7 @@ public class IBMCompareComplyV1Models {
     public List<EffectiveDates> getEffectiveDates() {
       return effectiveDates;
     }
- 
+
     /**
      * Gets the contractAmounts.
      *
@@ -1601,11 +1590,11 @@ public class IBMCompareComplyV1Models {
     public List<ContractAmts> getContractAmounts() {
       return contractAmounts;
     }
- 
+
     /**
      * Gets the terminationDates.
      *
-     * The date or dates on which the document is to be terminated.
+     * The dates on which the document is to be terminated.
      *
      * @return the terminationDates
      */
@@ -1613,11 +1602,11 @@ public class IBMCompareComplyV1Models {
     public List<TerminationDates> getTerminationDates() {
       return terminationDates;
     }
- 
+
     /**
      * Gets the contractTypes.
      *
-     * The document's contract type or types as declared in the document.
+     * The contract type as declared in the document.
      *
      * @return the contractTypes
      */
@@ -1625,11 +1614,11 @@ public class IBMCompareComplyV1Models {
     public List<ContractTypes> getContractTypes() {
       return contractTypes;
     }
- 
+
     /**
      * Gets the contractTerms.
      *
-     * The duration or durations of the contract.
+     * The durations of the contract.
      *
      * @return the contractTerms
      */
@@ -1637,11 +1626,11 @@ public class IBMCompareComplyV1Models {
     public List<ContractTerms> getContractTerms() {
       return contractTerms;
     }
- 
+
     /**
      * Gets the paymentTerms.
      *
-     * The document's payment duration or durations.
+     * The document's payment durations.
      *
      * @return the paymentTerms
      */
@@ -1649,7 +1638,19 @@ public class IBMCompareComplyV1Models {
     public List<PaymentTerms> getPaymentTerms() {
       return paymentTerms;
     }
- 
+
+    /**
+     * Gets the contractCurrencies.
+     *
+     * The contract currencies as declared in the document.
+     *
+     * @return the contractCurrencies
+     */
+    @AuraEnabled
+    public List<ContractCurrencies> getContractCurrencies() {
+      return contractCurrencies;
+    }
+
     /**
      * Gets the tables.
      *
@@ -1661,7 +1662,7 @@ public class IBMCompareComplyV1Models {
     public List<Tables> getTables() {
       return tables;
     }
- 
+
     /**
      * Gets the documentStructure.
      *
@@ -1673,7 +1674,7 @@ public class IBMCompareComplyV1Models {
     public DocStructure getDocumentStructure() {
       return documentStructure;
     }
- 
+
     /**
      * Gets the parties.
      *
@@ -1774,6 +1775,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setPaymentTerms(final List<PaymentTerms> paymentTerms) {
       this.paymentTerms = paymentTerms;
+    }
+
+    /**
+     * Sets the contractCurrencies.
+     *
+     * @param contractCurrencies the new contractCurrencies
+     */
+    public void setContractCurrencies(final List<ContractCurrencies> contractCurrencies) {
+      this.contractCurrencies = contractCurrencies;
     }
 
     /**
@@ -1905,6 +1915,19 @@ public class IBMCompareComplyV1Models {
         ret.paymentTerms = newPaymentTerms;
       }
 
+      // calling custom deserializer for contractCurrencies
+      List<ContractCurrencies> newContractCurrencies = new List<ContractCurrencies>();
+      List<ContractCurrencies> deserializedContractCurrencies = ret.getContractCurrencies();
+      if (deserializedContractCurrencies != null) {
+        for (Integer i = 0; i < deserializedContractCurrencies.size(); i++) {
+          ContractCurrencies currentItem = ret.getContractCurrencies().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contractCurrencies');
+          ContractCurrencies newItem = (ContractCurrencies) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractCurrencies.class);
+          newContractCurrencies.add(newItem);
+        }
+        ret.contractCurrencies = newContractCurrencies;
+      }
+
       // calling custom deserializer for tables
       List<Tables> newTables = new List<Tables>();
       List<Tables> deserializedTables = ret.getTables();
@@ -1938,47 +1961,28 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('model_id', 'modelId');
-      mapping.put('model_version', 'modelVersion');
-      if (elements != null && elements[0] != null) {
-        mapping.putAll(elements[0].getApiToSdkMapping());
-      }
-      mapping.put('effective_dates', 'effectiveDates');
-      if (effectiveDates != null && effectiveDates[0] != null) {
-        mapping.putAll(effectiveDates[0].getApiToSdkMapping());
-      }
-      mapping.put('contract_amounts', 'contractAmounts');
-      if (contractAmounts != null && contractAmounts[0] != null) {
-        mapping.putAll(contractAmounts[0].getApiToSdkMapping());
-      }
-      mapping.put('termination_dates', 'terminationDates');
-      if (terminationDates != null && terminationDates[0] != null) {
-        mapping.putAll(terminationDates[0].getApiToSdkMapping());
-      }
-      mapping.put('contract_types', 'contractTypes');
-      if (contractTypes != null && contractTypes[0] != null) {
-        mapping.putAll(contractTypes[0].getApiToSdkMapping());
-      }
-      mapping.put('contract_terms', 'contractTerms');
-      if (contractTerms != null && contractTerms[0] != null) {
-        mapping.putAll(contractTerms[0].getApiToSdkMapping());
-      }
-      mapping.put('payment_terms', 'paymentTerms');
-      if (paymentTerms != null && paymentTerms[0] != null) {
-        mapping.putAll(paymentTerms[0].getApiToSdkMapping());
-      }
-      if (tables != null && tables[0] != null) {
-        mapping.putAll(tables[0].getApiToSdkMapping());
-      }
-      mapping.put('document_structure', 'documentStructure');
-      if (documentStructure != null) {
-        mapping.putAll(documentStructure.getApiToSdkMapping());
-      }
-      if (parties != null && parties[0] != null) {
-        mapping.putAll(parties[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'model_id', 'modelId');
+      mapping.put(parentLabel + 'model_version', 'modelVersion');
+      mapping.putAll(((IBMWatsonGenericModel) Element.class.newInstance()).addToApiToSdkMapping(parentLabel + 'elements/', mapping));
+      mapping.put(parentLabel + 'effective_dates', 'effectiveDates');
+      mapping.putAll(((IBMWatsonGenericModel) EffectiveDates.class.newInstance()).addToApiToSdkMapping(parentLabel + 'effective_dates/', mapping));
+      mapping.put(parentLabel + 'contract_amounts', 'contractAmounts');
+      mapping.putAll(((IBMWatsonGenericModel) ContractAmts.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contract_amounts/', mapping));
+      mapping.put(parentLabel + 'termination_dates', 'terminationDates');
+      mapping.putAll(((IBMWatsonGenericModel) TerminationDates.class.newInstance()).addToApiToSdkMapping(parentLabel + 'termination_dates/', mapping));
+      mapping.put(parentLabel + 'contract_types', 'contractTypes');
+      mapping.putAll(((IBMWatsonGenericModel) ContractTypes.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contract_types/', mapping));
+      mapping.put(parentLabel + 'contract_terms', 'contractTerms');
+      mapping.putAll(((IBMWatsonGenericModel) ContractTerms.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contract_terms/', mapping));
+      mapping.put(parentLabel + 'payment_terms', 'paymentTerms');
+      mapping.putAll(((IBMWatsonGenericModel) PaymentTerms.class.newInstance()).addToApiToSdkMapping(parentLabel + 'payment_terms/', mapping));
+      mapping.put(parentLabel + 'contract_currencies', 'contractCurrencies');
+      mapping.putAll(((IBMWatsonGenericModel) ContractCurrencies.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contract_currencies/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Tables.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tables/', mapping));
+      mapping.put(parentLabel + 'document_structure', 'documentStructure');
+      mapping.putAll(((IBMWatsonGenericModel) DocStructure.class.newInstance()).addToApiToSdkMapping(parentLabel + 'document_structure/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Parties.class.newInstance()).addToApiToSdkMapping(parentLabel + 'parties/', mapping));
       return mapping;
     }
   }
@@ -1988,7 +1992,7 @@ public class IBMCompareComplyV1Models {
    */
   public class ColumnHeaderIds extends IBMWatsonGenericModel {
     private String id;
- 
+
     /**
      * Gets the id.
      *
@@ -2016,7 +2020,7 @@ public class IBMCompareComplyV1Models {
    */
   public class ColumnHeaderTexts extends IBMWatsonGenericModel {
     private String text;
- 
+
     /**
      * Gets the text.
      *
@@ -2045,7 +2049,7 @@ public class IBMCompareComplyV1Models {
    */
   public class ColumnHeaderTextsNormalized extends IBMWatsonGenericModel {
     private String textNormalized;
- 
+
     /**
      * Gets the textNormalized.
      *
@@ -2067,9 +2071,12 @@ public class IBMCompareComplyV1Models {
       this.textNormalized = textNormalized;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('text_normalized', 'textNormalized');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
       return mapping;
     }
   }
@@ -2086,7 +2093,7 @@ public class IBMCompareComplyV1Models {
     private Long rowIndexEnd;
     private Long columnIndexBegin;
     private Long columnIndexEnd;
- 
+
     /**
      * Gets the cellId.
      *
@@ -2098,7 +2105,7 @@ public class IBMCompareComplyV1Models {
     public String getCellId() {
       return cellId;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -2111,7 +2118,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonMapModel getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -2123,7 +2130,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the textNormalized.
      *
@@ -2136,7 +2143,7 @@ public class IBMCompareComplyV1Models {
     public String getTextNormalized() {
       return textNormalized;
     }
- 
+
     /**
      * Gets the rowIndexBegin.
      *
@@ -2148,7 +2155,7 @@ public class IBMCompareComplyV1Models {
     public Long getRowIndexBegin() {
       return rowIndexBegin;
     }
- 
+
     /**
      * Gets the rowIndexEnd.
      *
@@ -2160,7 +2167,7 @@ public class IBMCompareComplyV1Models {
     public Long getRowIndexEnd() {
       return rowIndexEnd;
     }
- 
+
     /**
      * Gets the columnIndexBegin.
      *
@@ -2172,7 +2179,7 @@ public class IBMCompareComplyV1Models {
     public Long getColumnIndexBegin() {
       return columnIndexBegin;
     }
- 
+
     /**
      * Gets the columnIndexEnd.
      *
@@ -2271,14 +2278,17 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('cell_id', 'cellId');
-      mapping.put('text_normalized', 'textNormalized');
-      mapping.put('row_index_begin', 'rowIndexBegin');
-      mapping.put('row_index_end', 'rowIndexEnd');
-      mapping.put('column_index_begin', 'columnIndexBegin');
-      mapping.put('column_index_end', 'columnIndexEnd');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'cell_id', 'cellId');
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
+      mapping.put(parentLabel + 'row_index_begin', 'rowIndexBegin');
+      mapping.put(parentLabel + 'row_index_end', 'rowIndexEnd');
+      mapping.put(parentLabel + 'column_index_begin', 'columnIndexBegin');
+      mapping.put(parentLabel + 'column_index_end', 'columnIndexEnd');
       return mapping;
     }
   }
@@ -2556,7 +2566,7 @@ public class IBMCompareComplyV1Models {
     private List<Document> documents;
     private List<AlignedElement> alignedElements;
     private List<UnalignedElement> unalignedElements;
- 
+
     /**
      * Gets the modelId.
      *
@@ -2569,7 +2579,7 @@ public class IBMCompareComplyV1Models {
     public String getModelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the modelVersion.
      *
@@ -2581,7 +2591,7 @@ public class IBMCompareComplyV1Models {
     public String getModelVersion() {
       return modelVersion;
     }
- 
+
     /**
      * Gets the documents.
      *
@@ -2593,7 +2603,7 @@ public class IBMCompareComplyV1Models {
     public List<Document> getDocuments() {
       return documents;
     }
- 
+
     /**
      * Gets the alignedElements.
      *
@@ -2605,7 +2615,7 @@ public class IBMCompareComplyV1Models {
     public List<AlignedElement> getAlignedElements() {
       return alignedElements;
     }
- 
+
     /**
      * Gets the unalignedElements.
      *
@@ -2712,18 +2722,17 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('model_id', 'modelId');
-      mapping.put('model_version', 'modelVersion');
-      mapping.put('aligned_elements', 'alignedElements');
-      if (alignedElements != null && alignedElements[0] != null) {
-        mapping.putAll(alignedElements[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('unaligned_elements', 'unalignedElements');
-      if (unalignedElements != null && unalignedElements[0] != null) {
-        mapping.putAll(unalignedElements[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'model_id', 'modelId');
+      mapping.put(parentLabel + 'model_version', 'modelVersion');
+      mapping.put(parentLabel + 'aligned_elements', 'alignedElements');
+      mapping.putAll(((IBMWatsonGenericModel) AlignedElement.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aligned_elements/', mapping));
+      mapping.put(parentLabel + 'unaligned_elements', 'unalignedElements');
+      mapping.putAll(((IBMWatsonGenericModel) UnalignedElement.class.newInstance()).addToApiToSdkMapping(parentLabel + 'unaligned_elements/', mapping));
       return mapping;
     }
   }
@@ -2734,7 +2743,7 @@ public class IBMCompareComplyV1Models {
   public class Contact extends IBMWatsonGenericModel {
     private String name;
     private String role;
- 
+
     /**
      * Gets the name.
      *
@@ -2746,7 +2755,7 @@ public class IBMCompareComplyV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the role.
      *
@@ -2784,7 +2793,7 @@ public class IBMCompareComplyV1Models {
   public class Contexts extends IBMWatsonGenericModel {
     private String text;
     private Location location;
- 
+
     /**
      * Gets the text.
      *
@@ -2796,7 +2805,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -2842,11 +2851,8 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -2861,7 +2867,7 @@ public class IBMCompareComplyV1Models {
     private Interpretation interpretation;
     private List<String> provenanceIds;
     private Location location;
- 
+
     /**
      * Gets the confidenceLevel.
      *
@@ -2873,7 +2879,7 @@ public class IBMCompareComplyV1Models {
     public String getConfidenceLevel() {
       return confidenceLevel;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -2885,12 +2891,12 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the amount, which is listed as a string. This element is optional; that is, the service
-     * output lists it only if normalized text exists.
+     * The normalized form of the amount, which is listed as a string. This element is optional; it is returned only if
+     * normalized text exists.
      *
      * @return the textNormalized
      */
@@ -2898,12 +2904,12 @@ public class IBMCompareComplyV1Models {
     public String getTextNormalized() {
       return textNormalized;
     }
- 
+
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -2911,11 +2917,11 @@ public class IBMCompareComplyV1Models {
     public Interpretation getInterpretation() {
       return interpretation;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -2923,7 +2929,7 @@ public class IBMCompareComplyV1Models {
     public List<String> getProvenanceIds() {
       return provenanceIds;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -3009,17 +3015,161 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('confidence_level', 'confidenceLevel');
-      mapping.put('text_normalized', 'textNormalized');
-      if (interpretation != null) {
-        mapping.putAll(interpretation.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('provenance_ids', 'provenanceIds');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
+      mapping.putAll(((IBMWatsonGenericModel) Interpretation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'interpretation/', mapping));
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      return mapping;
+    }
+  }
+
+  /**
+   * The contract currencies that are declared in the document.
+   */
+  public class ContractCurrencies extends IBMWatsonGenericModel {
+    private String confidenceLevel;
+    private String text;
+    private String textNormalized;
+    private List<String> provenanceIds;
+    private Location location;
+
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the contract currency.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidenceLevel;
+    }
+
+    /**
+     * Gets the text.
+     *
+     * The contract currency.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text;
+    }
+
+    /**
+     * Gets the textNormalized.
+     *
+     * The normalized form of the contract currency, which is listed as a string in
+     * [ISO-4217](https://www.iso.org/iso-4217-currency-codes.html) format. This element is optional; it is returned
+     * only if normalized text exists.
+     *
+     * @return the textNormalized
+     */
+    @AuraEnabled
+    public String getTextNormalized() {
+      return textNormalized;
+    }
+
+    /**
+     * Gets the provenanceIds.
+     *
+     * Hashed values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenanceIds;
+    }
+
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidenceLevel = confidenceLevel;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text = text;
+    }
+
+    /**
+     * Sets the textNormalized.
+     *
+     * @param textNormalized the new textNormalized
+     */
+    public void setTextNormalized(final String textNormalized) {
+      this.textNormalized = textNormalized;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenanceIds = provenanceIds;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
+
+      ContractCurrencies ret = (ContractCurrencies) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -3034,7 +3184,7 @@ public class IBMCompareComplyV1Models {
     private Interpretation interpretation;
     private List<String> provenanceIds;
     private Location location;
- 
+
     /**
      * Gets the confidenceLevel.
      *
@@ -3046,7 +3196,7 @@ public class IBMCompareComplyV1Models {
     public String getConfidenceLevel() {
       return confidenceLevel;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -3058,12 +3208,12 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the contract term, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the contract term, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -3071,12 +3221,12 @@ public class IBMCompareComplyV1Models {
     public String getTextNormalized() {
       return textNormalized;
     }
- 
+
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -3084,11 +3234,11 @@ public class IBMCompareComplyV1Models {
     public Interpretation getInterpretation() {
       return interpretation;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -3096,7 +3246,7 @@ public class IBMCompareComplyV1Models {
     public List<String> getProvenanceIds() {
       return provenanceIds;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -3182,17 +3332,16 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('confidence_level', 'confidenceLevel');
-      mapping.put('text_normalized', 'textNormalized');
-      if (interpretation != null) {
-        mapping.putAll(interpretation.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('provenance_ids', 'provenanceIds');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
+      mapping.putAll(((IBMWatsonGenericModel) Interpretation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'interpretation/', mapping));
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -3205,7 +3354,7 @@ public class IBMCompareComplyV1Models {
     private String text;
     private List<String> provenanceIds;
     private Location location;
- 
+
     /**
      * Gets the confidenceLevel.
      *
@@ -3217,7 +3366,7 @@ public class IBMCompareComplyV1Models {
     public String getConfidenceLevel() {
       return confidenceLevel;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -3229,11 +3378,11 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -3241,7 +3390,7 @@ public class IBMCompareComplyV1Models {
     public List<String> getProvenanceIds() {
       return provenanceIds;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -3305,13 +3454,14 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('confidence_level', 'confidenceLevel');
-      mapping.put('provenance_ids', 'provenanceIds');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -3940,7 +4090,7 @@ public class IBMCompareComplyV1Models {
     private Long pending;
     private Long successful;
     private Long failed;
- 
+
     /**
      * Gets the total.
      *
@@ -3952,7 +4102,7 @@ public class IBMCompareComplyV1Models {
     public Long getTotal() {
       return total;
     }
- 
+
     /**
      * Gets the pending.
      *
@@ -3964,7 +4114,7 @@ public class IBMCompareComplyV1Models {
     public Long getPending() {
       return pending;
     }
- 
+
     /**
      * Gets the successful.
      *
@@ -3976,7 +4126,7 @@ public class IBMCompareComplyV1Models {
     public Long getSuccessful() {
       return successful;
     }
- 
+
     /**
      * Gets the failed.
      *
@@ -4033,7 +4183,7 @@ public class IBMCompareComplyV1Models {
     private String html;
     private String title;
     private String hash;
- 
+
     /**
      * Gets the html.
      *
@@ -4045,7 +4195,7 @@ public class IBMCompareComplyV1Models {
     public String getHtml() {
       return html;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -4057,7 +4207,7 @@ public class IBMCompareComplyV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the hash.
      *
@@ -4105,7 +4255,7 @@ public class IBMCompareComplyV1Models {
     private List<SectionTitles> sectionTitles;
     private List<LeadingSentence> leadingSentences;
     private List<Paragraphs> paragraphs;
- 
+
     /**
      * Gets the sectionTitles.
      *
@@ -4117,7 +4267,7 @@ public class IBMCompareComplyV1Models {
     public List<SectionTitles> getSectionTitles() {
       return sectionTitles;
     }
- 
+
     /**
      * Gets the leadingSentences.
      *
@@ -4130,7 +4280,7 @@ public class IBMCompareComplyV1Models {
     public List<LeadingSentence> getLeadingSentences() {
       return leadingSentences;
     }
- 
+
     /**
      * Gets the paragraphs.
      *
@@ -4220,19 +4370,16 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('section_titles', 'sectionTitles');
-      if (sectionTitles != null && sectionTitles[0] != null) {
-        mapping.putAll(sectionTitles[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('leading_sentences', 'leadingSentences');
-      if (leadingSentences != null && leadingSentences[0] != null) {
-        mapping.putAll(leadingSentences[0].getApiToSdkMapping());
-      }
-      if (paragraphs != null && paragraphs[0] != null) {
-        mapping.putAll(paragraphs[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'section_titles', 'sectionTitles');
+      mapping.putAll(((IBMWatsonGenericModel) SectionTitles.class.newInstance()).addToApiToSdkMapping(parentLabel + 'section_titles/', mapping));
+      mapping.put(parentLabel + 'leading_sentences', 'leadingSentences');
+      mapping.putAll(((IBMWatsonGenericModel) LeadingSentence.class.newInstance()).addToApiToSdkMapping(parentLabel + 'leading_sentences/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Paragraphs.class.newInstance()).addToApiToSdkMapping(parentLabel + 'paragraphs/', mapping));
       return mapping;
     }
   }
@@ -4245,7 +4392,7 @@ public class IBMCompareComplyV1Models {
     private String html;
     private String hash;
     private String label;
- 
+
     /**
      * Gets the title.
      *
@@ -4257,7 +4404,7 @@ public class IBMCompareComplyV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the html.
      *
@@ -4269,7 +4416,7 @@ public class IBMCompareComplyV1Models {
     public String getHtml() {
       return html;
     }
- 
+
     /**
      * Gets the hash.
      *
@@ -4281,7 +4428,7 @@ public class IBMCompareComplyV1Models {
     public String getHash() {
       return hash;
     }
- 
+
     /**
      * Gets the label.
      *
@@ -4341,7 +4488,7 @@ public class IBMCompareComplyV1Models {
     private String textNormalized;
     private List<String> provenanceIds;
     private Location location;
- 
+
     /**
      * Gets the confidenceLevel.
      *
@@ -4353,7 +4500,7 @@ public class IBMCompareComplyV1Models {
     public String getConfidenceLevel() {
       return confidenceLevel;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -4365,12 +4512,12 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the effective date, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the effective date, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -4378,11 +4525,11 @@ public class IBMCompareComplyV1Models {
     public String getTextNormalized() {
       return textNormalized;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -4390,7 +4537,7 @@ public class IBMCompareComplyV1Models {
     public List<String> getProvenanceIds() {
       return provenanceIds;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -4463,14 +4610,15 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('confidence_level', 'confidenceLevel');
-      mapping.put('text_normalized', 'textNormalized');
-      mapping.put('provenance_ids', 'provenanceIds');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -4484,7 +4632,7 @@ public class IBMCompareComplyV1Models {
     private List<TypeLabel> types;
     private List<Category> categories;
     private List<Attribute> attributes;
- 
+
     /**
      * Gets the location.
      *
@@ -4497,7 +4645,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -4509,7 +4657,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the types.
      *
@@ -4521,7 +4669,7 @@ public class IBMCompareComplyV1Models {
     public List<TypeLabel> getTypes() {
       return types;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -4533,7 +4681,7 @@ public class IBMCompareComplyV1Models {
     public List<Category> getCategories() {
       return categories;
     }
- 
+
     /**
      * Gets the attributes.
      *
@@ -4644,20 +4792,11 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
-      if (types != null && types[0] != null) {
-        mapping.putAll(types[0].getApiToSdkMapping());
-      }
-      if (categories != null && categories[0] != null) {
-        mapping.putAll(categories[0].getApiToSdkMapping());
-      }
-      if (attributes != null && attributes[0] != null) {
-        mapping.putAll(attributes[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) TypeLabel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'types/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Category.class.newInstance()).addToApiToSdkMapping(parentLabel + 'categories/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Attribute.class.newInstance()).addToApiToSdkMapping(parentLabel + 'attributes/', mapping));
       return mapping;
     }
   }
@@ -4668,7 +4807,7 @@ public class IBMCompareComplyV1Models {
   public class ElementLocations extends IBMWatsonGenericModel {
     private Long xbegin;
     private Long xend;
- 
+
     /**
      * Gets the xbegin.
      *
@@ -4680,7 +4819,7 @@ public class IBMCompareComplyV1Models {
     public Long getXbegin() {
       return xbegin;
     }
- 
+
     /**
      * Gets the xend.
      *
@@ -4711,10 +4850,13 @@ public class IBMCompareComplyV1Models {
       this.xend = xend;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('begin', 'xbegin');
-      mapping.put('end', 'xend');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'begin', 'xbegin');
+      mapping.put(parentLabel + 'end', 'xend');
       return mapping;
     }
   }
@@ -4729,7 +4871,7 @@ public class IBMCompareComplyV1Models {
     private List<TypeLabelComparison> types;
     private List<CategoryComparison> categories;
     private List<Attribute> attributes;
- 
+
     /**
      * Gets the documentLabel.
      *
@@ -4742,7 +4884,7 @@ public class IBMCompareComplyV1Models {
     public String getDocumentLabel() {
       return documentLabel;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -4754,7 +4896,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -4767,7 +4909,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the types.
      *
@@ -4779,7 +4921,7 @@ public class IBMCompareComplyV1Models {
     public List<TypeLabelComparison> getTypes() {
       return types;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -4791,7 +4933,7 @@ public class IBMCompareComplyV1Models {
     public List<CategoryComparison> getCategories() {
       return categories;
     }
- 
+
     /**
      * Gets the attributes.
      *
@@ -4911,15 +5053,14 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_label', 'documentLabel');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (attributes != null && attributes[0] != null) {
-        mapping.putAll(attributes[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'document_label', 'documentLabel');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Attribute.class.newInstance()).addToApiToSdkMapping(parentLabel + 'attributes/', mapping));
       return mapping;
     }
   }
@@ -5088,7 +5229,7 @@ public class IBMCompareComplyV1Models {
     private String text;
     private OriginalLabelsIn originalLabels;
     private UpdatedLabelsIn updatedLabels;
- 
+
     /**
      * Gets the feedbackType.
      *
@@ -5099,7 +5240,7 @@ public class IBMCompareComplyV1Models {
     public String getFeedbackType() {
       return feedbackType;
     }
- 
+
     /**
      * Gets the document.
      *
@@ -5110,7 +5251,7 @@ public class IBMCompareComplyV1Models {
     public ShortDoc getDocument() {
       return document;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -5121,7 +5262,7 @@ public class IBMCompareComplyV1Models {
     public String getModelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the modelVersion.
      *
@@ -5132,7 +5273,7 @@ public class IBMCompareComplyV1Models {
     public String getModelVersion() {
       return modelVersion;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -5144,7 +5285,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -5155,7 +5296,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the originalLabels.
      *
@@ -5166,7 +5307,7 @@ public class IBMCompareComplyV1Models {
     public OriginalLabelsIn getOriginalLabels() {
       return originalLabels;
     }
- 
+
     /**
      * Gets the updatedLabels.
      *
@@ -5203,21 +5344,24 @@ public class IBMCompareComplyV1Models {
       return new FeedbackDataInputBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('feedbackType', 'feedback_type');
-      mapping.put('modelId', 'model_id');
-      mapping.put('modelVersion', 'model_version');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'feedbackType', 'feedback_type');
+      mapping.put(parentLabel + 'modelId', 'model_id');
+      mapping.put(parentLabel + 'modelVersion', 'model_version');
       if (location != null) {
-        mapping.putAll(location.getSdkToApiMapping());
+        mapping.putAll(location.addToSdkToApiMapping(parentLabel + 'location/', mapping));
       }
-      mapping.put('originalLabels', 'original_labels');
+      mapping.put(parentLabel + 'originalLabels', 'original_labels');
       if (originalLabels != null) {
-        mapping.putAll(originalLabels.getSdkToApiMapping());
+        mapping.putAll(originalLabels.addToSdkToApiMapping(parentLabel + 'originalLabels/', mapping));
       }
-      mapping.put('updatedLabels', 'updated_labels');
+      mapping.put(parentLabel + 'updatedLabels', 'updated_labels');
       if (updatedLabels != null) {
-        mapping.putAll(updatedLabels.getSdkToApiMapping());
+        mapping.putAll(updatedLabels.addToSdkToApiMapping(parentLabel + 'updatedLabels/', mapping));
       }
       return mapping;
     }
@@ -5285,7 +5429,7 @@ public class IBMCompareComplyV1Models {
      * @param feedbackType the feedbackType
      * @return the FeedbackDataInput builder
      */
-    public FeedbackDataInputBuilder setFeedbackType(String feedbackType) {
+    public FeedbackDataInputBuilder feedbackType(String feedbackType) {
       this.feedbackType = feedbackType;
       return this;
     }
@@ -5296,7 +5440,7 @@ public class IBMCompareComplyV1Models {
      * @param document the document
      * @return the FeedbackDataInput builder
      */
-    public FeedbackDataInputBuilder setDocument(ShortDoc document) {
+    public FeedbackDataInputBuilder document(ShortDoc document) {
       this.document = document;
       return this;
     }
@@ -5307,7 +5451,7 @@ public class IBMCompareComplyV1Models {
      * @param modelId the modelId
      * @return the FeedbackDataInput builder
      */
-    public FeedbackDataInputBuilder setModelId(String modelId) {
+    public FeedbackDataInputBuilder modelId(String modelId) {
       this.modelId = modelId;
       return this;
     }
@@ -5318,7 +5462,7 @@ public class IBMCompareComplyV1Models {
      * @param modelVersion the modelVersion
      * @return the FeedbackDataInput builder
      */
-    public FeedbackDataInputBuilder setModelVersion(String modelVersion) {
+    public FeedbackDataInputBuilder modelVersion(String modelVersion) {
       this.modelVersion = modelVersion;
       return this;
     }
@@ -5329,7 +5473,7 @@ public class IBMCompareComplyV1Models {
      * @param location the location
      * @return the FeedbackDataInput builder
      */
-    public FeedbackDataInputBuilder setLocation(Location location) {
+    public FeedbackDataInputBuilder location(Location location) {
       this.location = location;
       return this;
     }
@@ -5340,7 +5484,7 @@ public class IBMCompareComplyV1Models {
      * @param text the text
      * @return the FeedbackDataInput builder
      */
-    public FeedbackDataInputBuilder setText(String text) {
+    public FeedbackDataInputBuilder text(String text) {
       this.text = text;
       return this;
     }
@@ -5351,7 +5495,7 @@ public class IBMCompareComplyV1Models {
      * @param originalLabels the originalLabels
      * @return the FeedbackDataInput builder
      */
-    public FeedbackDataInputBuilder setOriginalLabels(OriginalLabelsIn originalLabels) {
+    public FeedbackDataInputBuilder originalLabels(OriginalLabelsIn originalLabels) {
       this.originalLabels = originalLabels;
       return this;
     }
@@ -5362,7 +5506,7 @@ public class IBMCompareComplyV1Models {
      * @param updatedLabels the updatedLabels
      * @return the FeedbackDataInput builder
      */
-    public FeedbackDataInputBuilder setUpdatedLabels(UpdatedLabelsIn updatedLabels) {
+    public FeedbackDataInputBuilder updatedLabels(UpdatedLabelsIn updatedLabels) {
       this.updatedLabels = updatedLabels;
       return this;
     }
@@ -5381,7 +5525,7 @@ public class IBMCompareComplyV1Models {
     private OriginalLabelsOut originalLabels;
     private UpdatedLabelsOut updatedLabels;
     private Pagination pagination;
- 
+
     /**
      * Gets the feedbackType.
      *
@@ -5393,7 +5537,7 @@ public class IBMCompareComplyV1Models {
     public String getFeedbackType() {
       return feedbackType;
     }
- 
+
     /**
      * Gets the document.
      *
@@ -5405,7 +5549,7 @@ public class IBMCompareComplyV1Models {
     public ShortDoc getDocument() {
       return document;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -5417,7 +5561,7 @@ public class IBMCompareComplyV1Models {
     public String getModelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the modelVersion.
      *
@@ -5429,7 +5573,7 @@ public class IBMCompareComplyV1Models {
     public String getModelVersion() {
       return modelVersion;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -5442,7 +5586,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -5454,7 +5598,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the originalLabels.
      *
@@ -5466,7 +5610,7 @@ public class IBMCompareComplyV1Models {
     public OriginalLabelsOut getOriginalLabels() {
       return originalLabels;
     }
- 
+
     /**
      * Gets the updatedLabels.
      *
@@ -5478,7 +5622,7 @@ public class IBMCompareComplyV1Models {
     public UpdatedLabelsOut getUpdatedLabels() {
       return updatedLabels;
     }
- 
+
     /**
      * Gets the pagination.
      *
@@ -5602,25 +5746,20 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('feedback_type', 'feedbackType');
-      mapping.put('model_id', 'modelId');
-      mapping.put('model_version', 'modelVersion');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('original_labels', 'originalLabels');
-      if (originalLabels != null) {
-        mapping.putAll(originalLabels.getApiToSdkMapping());
-      }
-      mapping.put('updated_labels', 'updatedLabels');
-      if (updatedLabels != null) {
-        mapping.putAll(updatedLabels.getApiToSdkMapping());
-      }
-      if (pagination != null) {
-        mapping.putAll(pagination.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'feedback_type', 'feedbackType');
+      mapping.put(parentLabel + 'model_id', 'modelId');
+      mapping.put(parentLabel + 'model_version', 'modelVersion');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.put(parentLabel + 'original_labels', 'originalLabels');
+      mapping.putAll(((IBMWatsonGenericModel) OriginalLabelsOut.class.newInstance()).addToApiToSdkMapping(parentLabel + 'original_labels/', mapping));
+      mapping.put(parentLabel + 'updated_labels', 'updatedLabels');
+      mapping.putAll(((IBMWatsonGenericModel) UpdatedLabelsOut.class.newInstance()).addToApiToSdkMapping(parentLabel + 'updated_labels/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
       return mapping;
     }
   }
@@ -5630,7 +5769,7 @@ public class IBMCompareComplyV1Models {
    */
   public class FeedbackList extends IBMWatsonResponseModel {
     private List<GetFeedback> feedback;
- 
+
     /**
      * Gets the feedback.
      *
@@ -5675,11 +5814,8 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (feedback != null && feedback[0] != null) {
-        mapping.putAll(feedback[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) GetFeedback.class.newInstance()).addToApiToSdkMapping(parentLabel + 'feedback/', mapping));
       return mapping;
     }
   }
@@ -5693,7 +5829,7 @@ public class IBMCompareComplyV1Models {
     private String comment;
     private Datetime created;
     private FeedbackDataOutput feedbackData;
- 
+
     /**
      * Gets the feedbackId.
      *
@@ -5705,7 +5841,7 @@ public class IBMCompareComplyV1Models {
     public String getFeedbackId() {
       return feedbackId;
     }
- 
+
     /**
      * Gets the userId.
      *
@@ -5717,7 +5853,7 @@ public class IBMCompareComplyV1Models {
     public String getUserId() {
       return userId;
     }
- 
+
     /**
      * Gets the comment.
      *
@@ -5729,7 +5865,7 @@ public class IBMCompareComplyV1Models {
     public String getComment() {
       return comment;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -5741,7 +5877,7 @@ public class IBMCompareComplyV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the feedbackData.
      *
@@ -5813,14 +5949,15 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('feedback_id', 'feedbackId');
-      mapping.put('user_id', 'userId');
-      mapping.put('feedback_data', 'feedbackData');
-      if (feedbackData != null) {
-        mapping.putAll(feedbackData.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'feedback_id', 'feedbackId');
+      mapping.put(parentLabel + 'user_id', 'userId');
+      mapping.put(parentLabel + 'feedback_data', 'feedbackData');
+      mapping.putAll(((IBMWatsonGenericModel) FeedbackDataOutput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'feedback_data/', mapping));
       return mapping;
     }
   }
@@ -5931,7 +6068,7 @@ public class IBMCompareComplyV1Models {
     private Datetime created;
     private String comment;
     private FeedbackDataOutput feedbackData;
- 
+
     /**
      * Gets the feedbackId.
      *
@@ -5943,7 +6080,7 @@ public class IBMCompareComplyV1Models {
     public String getFeedbackId() {
       return feedbackId;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -5955,7 +6092,7 @@ public class IBMCompareComplyV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the comment.
      *
@@ -5967,7 +6104,7 @@ public class IBMCompareComplyV1Models {
     public String getComment() {
       return comment;
     }
- 
+
     /**
      * Gets the feedbackData.
      *
@@ -6030,13 +6167,14 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('feedback_id', 'feedbackId');
-      mapping.put('feedback_data', 'feedbackData');
-      if (feedbackData != null) {
-        mapping.putAll(feedbackData.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'feedback_id', 'feedbackId');
+      mapping.put(parentLabel + 'feedback_data', 'feedbackData');
+      mapping.putAll(((IBMWatsonGenericModel) FeedbackDataOutput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'feedback_data/', mapping));
       return mapping;
     }
   }
@@ -6176,7 +6314,7 @@ public class IBMCompareComplyV1Models {
     private String publicationDate;
     private String title;
     private String html;
- 
+
     /**
      * Gets the numPages.
      *
@@ -6188,7 +6326,7 @@ public class IBMCompareComplyV1Models {
     public String getNumPages() {
       return numPages;
     }
- 
+
     /**
      * Gets the author.
      *
@@ -6200,7 +6338,7 @@ public class IBMCompareComplyV1Models {
     public String getAuthor() {
       return author;
     }
- 
+
     /**
      * Gets the publicationDate.
      *
@@ -6212,7 +6350,7 @@ public class IBMCompareComplyV1Models {
     public String getPublicationDate() {
       return publicationDate;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -6224,7 +6362,7 @@ public class IBMCompareComplyV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the html.
      *
@@ -6282,23 +6420,26 @@ public class IBMCompareComplyV1Models {
       this.html = html;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('num_pages', 'numPages');
-      mapping.put('publication_date', 'publicationDate');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'num_pages', 'numPages');
+      mapping.put(parentLabel + 'publication_date', 'publicationDate');
       return mapping;
     }
   }
 
   /**
-   * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-   * only if normalized text exists.
+   * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized text
+   * exists.
    */
   public class Interpretation extends IBMWatsonGenericModel {
     private String value;
     private Double numericValue;
     private String unit;
- 
+
     /**
      * Gets the value.
      *
@@ -6310,7 +6451,7 @@ public class IBMCompareComplyV1Models {
     public String getValue() {
       return value;
     }
- 
+
     /**
      * Gets the numericValue.
      *
@@ -6322,7 +6463,7 @@ public class IBMCompareComplyV1Models {
     public Double getNumericValue() {
       return numericValue;
     }
- 
+
     /**
      * Gets the unit.
      *
@@ -6366,9 +6507,8 @@ public class IBMCompareComplyV1Models {
       this.unit = unit;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('numeric_value', 'numericValue');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'numeric_value', 'numericValue');
       return mapping;
     }
   }
@@ -6380,7 +6520,7 @@ public class IBMCompareComplyV1Models {
     private String cellId;
     private Location location;
     private String text;
- 
+
     /**
      * Gets the cellId.
      *
@@ -6392,7 +6532,7 @@ public class IBMCompareComplyV1Models {
     public String getCellId() {
       return cellId;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -6405,7 +6545,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -6459,12 +6599,13 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('cell_id', 'cellId');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'cell_id', 'cellId');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -6474,8 +6615,8 @@ public class IBMCompareComplyV1Models {
    */
   public class KeyValuePair extends IBMWatsonGenericModel {
     private Key key;
-    private Value value;
- 
+    private List<Value> value;
+
     /**
      * Gets the key.
      *
@@ -6487,16 +6628,16 @@ public class IBMCompareComplyV1Models {
     public Key getKey() {
       return key;
     }
- 
+
     /**
      * Gets the value.
      *
-     * A value in a key-value pair.
+     * A list of values in a key-value pair.
      *
      * @return the value
      */
     @AuraEnabled
-    public Value getValue() {
+    public List<Value> getValue() {
       return value;
     }
 
@@ -6514,7 +6655,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param value the new value
      */
-    public void setValue(final Value value) {
+    public void setValue(final List<Value> value) {
       this.value = value;
     }
 
@@ -6530,20 +6671,24 @@ public class IBMCompareComplyV1Models {
       ret.setKey(newKey);
 
       // calling custom deserializer for value
-      Value newValue = (Value) new Value().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value'), Value.class);
-      ret.setValue(newValue);
+      List<Value> newValue = new List<Value>();
+      List<Value> deserializedValue = ret.getValue();
+      if (deserializedValue != null) {
+        for (Integer i = 0; i < deserializedValue.size(); i++) {
+          Value currentItem = ret.getValue().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('value');
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
+          newValue.add(newItem);
+        }
+        ret.value = newValue;
+      }
 
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (key != null) {
-        mapping.putAll(key.getApiToSdkMapping());
-      }
-      if (value != null) {
-        mapping.putAll(value.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Key.class.newInstance()).addToApiToSdkMapping(parentLabel + 'key/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Value.class.newInstance()).addToApiToSdkMapping(parentLabel + 'value/', mapping));
       return mapping;
     }
   }
@@ -6561,7 +6706,7 @@ public class IBMCompareComplyV1Models {
      * and should not be called by the client.
      */
     public Label() { }
- 
+
     /**
      * Gets the nature.
      *
@@ -6573,7 +6718,7 @@ public class IBMCompareComplyV1Models {
     public String getNature() {
       return nature;
     }
- 
+
     /**
      * Gets the party.
      *
@@ -6647,7 +6792,7 @@ public class IBMCompareComplyV1Models {
      * @param nature the nature
      * @return the Label builder
      */
-    public LabelBuilder setNature(String nature) {
+    public LabelBuilder nature(String nature) {
       this.nature = nature;
       return this;
     }
@@ -6658,7 +6803,7 @@ public class IBMCompareComplyV1Models {
      * @param party the party
      * @return the Label builder
      */
-    public LabelBuilder setParty(String party) {
+    public LabelBuilder party(String party) {
       this.party = party;
       return this;
     }
@@ -6671,7 +6816,7 @@ public class IBMCompareComplyV1Models {
     private String text;
     private Location location;
     private List<ElementLocations> elementLocations;
- 
+
     /**
      * Gets the text.
      *
@@ -6683,7 +6828,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -6696,7 +6841,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the elementLocations.
      *
@@ -6763,15 +6908,10 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
-      mapping.put('element_locations', 'elementLocations');
-      if (elementLocations != null && elementLocations[0] != null) {
-        mapping.putAll(elementLocations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.put(parentLabel + 'element_locations', 'elementLocations');
+      mapping.putAll(((IBMWatsonGenericModel) ElementLocations.class.newInstance()).addToApiToSdkMapping(parentLabel + 'element_locations/', mapping));
       return mapping;
     }
   }
@@ -6927,7 +7067,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the categoryRemoved.
      *
-     * An optional string in the form of a comma-separated list of categories. If this is specified, the service filters
+     * An optional string in the form of a comma-separated list of categories. If it is specified, the service filters
      * the output to include only feedback that has at least one category from the list removed.
      *
      * @return the categoryRemoved
@@ -7350,7 +7490,7 @@ public class IBMCompareComplyV1Models {
      * and should not be called by the client.
      */
     public Location() { }
- 
+
     /**
      * Gets the xbegin.
      *
@@ -7362,7 +7502,7 @@ public class IBMCompareComplyV1Models {
     public Long getXbegin() {
       return xbegin;
     }
- 
+
     /**
      * Gets the xend.
      *
@@ -7391,17 +7531,23 @@ public class IBMCompareComplyV1Models {
       return new LocationBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xbegin', 'begin');
-      mapping.put('xend', 'end');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xbegin', 'begin');
+      mapping.put(parentLabel + 'xend', 'end');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('begin', 'xbegin');
-      mapping.put('end', 'xend');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'begin', 'xbegin');
+      mapping.put(parentLabel + 'end', 'xend');
       return mapping;
     }
   }
@@ -7450,7 +7596,7 @@ public class IBMCompareComplyV1Models {
      * @param xbegin the xbegin
      * @return the Location builder
      */
-    public LocationBuilder setXbegin(Long xbegin) {
+    public LocationBuilder xbegin(Long xbegin) {
       this.xbegin = xbegin;
       return this;
     }
@@ -7461,7 +7607,7 @@ public class IBMCompareComplyV1Models {
      * @param xend the xend
      * @return the Location builder
      */
-    public LocationBuilder setXend(Long xend) {
+    public LocationBuilder xend(Long xend) {
       this.xend = xend;
       return this;
     }
@@ -7473,7 +7619,7 @@ public class IBMCompareComplyV1Models {
   public class Mention extends IBMWatsonGenericModel {
     private String text;
     private Location location;
- 
+
     /**
      * Gets the text.
      *
@@ -7485,7 +7631,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -7531,11 +7677,8 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -7546,7 +7689,7 @@ public class IBMCompareComplyV1Models {
   public class OriginalLabelsIn extends IBMWatsonGenericModel {
     private List<TypeLabel> types;
     private List<Category> categories;
- 
+
     /**
      * Gets the types.
      *
@@ -7557,7 +7700,7 @@ public class IBMCompareComplyV1Models {
     public List<TypeLabel> getTypes() {
       return types;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -7585,13 +7728,12 @@ public class IBMCompareComplyV1Models {
       return new OriginalLabelsInBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (types != null && types[0] != null) {
-        mapping.putAll(types[0].getSdkToApiMapping());
+        mapping.putAll(types[0].addToSdkToApiMapping(parentLabel + 'types/', mapping));
       }
       if (categories != null && categories[0] != null) {
-        mapping.putAll(categories[0].getSdkToApiMapping());
+        mapping.putAll(categories[0].addToSdkToApiMapping(parentLabel + 'categories/', mapping));
       }
       return mapping;
     }
@@ -7672,7 +7814,7 @@ public class IBMCompareComplyV1Models {
      * @param types the types
      * @return the OriginalLabelsIn builder
      */
-    public OriginalLabelsInBuilder setTypes(List<TypeLabel> types) {
+    public OriginalLabelsInBuilder types(List<TypeLabel> types) {
       this.types = types;
       return this;
     }
@@ -7684,7 +7826,7 @@ public class IBMCompareComplyV1Models {
      * @param categories the categories
      * @return the OriginalLabelsIn builder
      */
-    public OriginalLabelsInBuilder setCategories(List<Category> categories) {
+    public OriginalLabelsInBuilder categories(List<Category> categories) {
       this.categories = categories;
       return this;
     }
@@ -7697,7 +7839,7 @@ public class IBMCompareComplyV1Models {
     private List<TypeLabel> types;
     private List<Category> categories;
     private String modification;
- 
+
     /**
      * Gets the types.
      *
@@ -7709,7 +7851,7 @@ public class IBMCompareComplyV1Models {
     public List<TypeLabel> getTypes() {
       return types;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -7721,7 +7863,7 @@ public class IBMCompareComplyV1Models {
     public List<Category> getCategories() {
       return categories;
     }
- 
+
     /**
      * Gets the modification.
      *
@@ -7798,14 +7940,9 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (types != null && types[0] != null) {
-        mapping.putAll(types[0].getApiToSdkMapping());
-      }
-      if (categories != null && categories[0] != null) {
-        mapping.putAll(categories[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) TypeLabel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'types/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Category.class.newInstance()).addToApiToSdkMapping(parentLabel + 'categories/', mapping));
       return mapping;
     }
   }
@@ -7819,7 +7956,7 @@ public class IBMCompareComplyV1Models {
     private String refreshUrl;
     private String nextUrl;
     private Long total;
- 
+
     /**
      * Gets the refreshCursor.
      *
@@ -7831,7 +7968,7 @@ public class IBMCompareComplyV1Models {
     public String getRefreshCursor() {
       return refreshCursor;
     }
- 
+
     /**
      * Gets the nextCursor.
      *
@@ -7843,7 +7980,7 @@ public class IBMCompareComplyV1Models {
     public String getNextCursor() {
       return nextCursor;
     }
- 
+
     /**
      * Gets the refreshUrl.
      *
@@ -7855,7 +7992,7 @@ public class IBMCompareComplyV1Models {
     public String getRefreshUrl() {
       return refreshUrl;
     }
- 
+
     /**
      * Gets the nextUrl.
      *
@@ -7867,7 +8004,7 @@ public class IBMCompareComplyV1Models {
     public String getNextUrl() {
       return nextUrl;
     }
- 
+
     /**
      * Gets the total.
      *
@@ -7925,12 +8062,15 @@ public class IBMCompareComplyV1Models {
       this.total = total;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('refresh_cursor', 'refreshCursor');
-      mapping.put('next_cursor', 'nextCursor');
-      mapping.put('refresh_url', 'refreshUrl');
-      mapping.put('next_url', 'nextUrl');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'refresh_cursor', 'refreshCursor');
+      mapping.put(parentLabel + 'next_cursor', 'nextCursor');
+      mapping.put(parentLabel + 'refresh_url', 'refreshUrl');
+      mapping.put(parentLabel + 'next_url', 'nextUrl');
       return mapping;
     }
   }
@@ -7940,7 +8080,7 @@ public class IBMCompareComplyV1Models {
    */
   public class Paragraphs extends IBMWatsonGenericModel {
     private Location location;
- 
+
     /**
      * Gets the location.
      *
@@ -7977,11 +8117,8 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -7996,7 +8133,7 @@ public class IBMCompareComplyV1Models {
     private List<Address> addresses;
     private List<Contact> contacts;
     private List<Mention> mentions;
- 
+
     /**
      * Gets the party.
      *
@@ -8008,7 +8145,7 @@ public class IBMCompareComplyV1Models {
     public String getParty() {
       return party;
     }
- 
+
     /**
      * Gets the role.
      *
@@ -8020,7 +8157,7 @@ public class IBMCompareComplyV1Models {
     public String getRole() {
       return role;
     }
- 
+
     /**
      * Gets the importance.
      *
@@ -8032,7 +8169,7 @@ public class IBMCompareComplyV1Models {
     public String getImportance() {
       return importance;
     }
- 
+
     /**
      * Gets the addresses.
      *
@@ -8044,7 +8181,7 @@ public class IBMCompareComplyV1Models {
     public List<Address> getAddresses() {
       return addresses;
     }
- 
+
     /**
      * Gets the contacts.
      *
@@ -8056,7 +8193,7 @@ public class IBMCompareComplyV1Models {
     public List<Contact> getContacts() {
       return contacts;
     }
- 
+
     /**
      * Gets the mentions.
      *
@@ -8172,14 +8309,9 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (addresses != null && addresses[0] != null) {
-        mapping.putAll(addresses[0].getApiToSdkMapping());
-      }
-      if (mentions != null && mentions[0] != null) {
-        mapping.putAll(mentions[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Address.class.newInstance()).addToApiToSdkMapping(parentLabel + 'addresses/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Mention.class.newInstance()).addToApiToSdkMapping(parentLabel + 'mentions/', mapping));
       return mapping;
     }
   }
@@ -8194,7 +8326,7 @@ public class IBMCompareComplyV1Models {
     private Interpretation interpretation;
     private List<String> provenanceIds;
     private Location location;
- 
+
     /**
      * Gets the confidenceLevel.
      *
@@ -8206,7 +8338,7 @@ public class IBMCompareComplyV1Models {
     public String getConfidenceLevel() {
       return confidenceLevel;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -8218,12 +8350,12 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the payment term, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the payment term, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -8231,12 +8363,12 @@ public class IBMCompareComplyV1Models {
     public String getTextNormalized() {
       return textNormalized;
     }
- 
+
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -8244,11 +8376,11 @@ public class IBMCompareComplyV1Models {
     public Interpretation getInterpretation() {
       return interpretation;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -8256,7 +8388,7 @@ public class IBMCompareComplyV1Models {
     public List<String> getProvenanceIds() {
       return provenanceIds;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -8342,17 +8474,16 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('confidence_level', 'confidenceLevel');
-      mapping.put('text_normalized', 'textNormalized');
-      if (interpretation != null) {
-        mapping.putAll(interpretation.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('provenance_ids', 'provenanceIds');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
+      mapping.putAll(((IBMWatsonGenericModel) Interpretation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'interpretation/', mapping));
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -8362,7 +8493,7 @@ public class IBMCompareComplyV1Models {
    */
   public class RowHeaderIds extends IBMWatsonGenericModel {
     private String id;
- 
+
     /**
      * Gets the id.
      *
@@ -8390,7 +8521,7 @@ public class IBMCompareComplyV1Models {
    */
   public class RowHeaderTexts extends IBMWatsonGenericModel {
     private String text;
- 
+
     /**
      * Gets the text.
      *
@@ -8419,7 +8550,7 @@ public class IBMCompareComplyV1Models {
    */
   public class RowHeaderTextsNormalized extends IBMWatsonGenericModel {
     private String textNormalized;
- 
+
     /**
      * Gets the textNormalized.
      *
@@ -8441,9 +8572,12 @@ public class IBMCompareComplyV1Models {
       this.textNormalized = textNormalized;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('text_normalized', 'textNormalized');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
       return mapping;
     }
   }
@@ -8460,7 +8594,7 @@ public class IBMCompareComplyV1Models {
     private Long rowIndexEnd;
     private Long columnIndexBegin;
     private Long columnIndexEnd;
- 
+
     /**
      * Gets the cellId.
      *
@@ -8472,7 +8606,7 @@ public class IBMCompareComplyV1Models {
     public String getCellId() {
       return cellId;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -8485,7 +8619,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -8497,7 +8631,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the textNormalized.
      *
@@ -8510,7 +8644,7 @@ public class IBMCompareComplyV1Models {
     public String getTextNormalized() {
       return textNormalized;
     }
- 
+
     /**
      * Gets the rowIndexBegin.
      *
@@ -8522,7 +8656,7 @@ public class IBMCompareComplyV1Models {
     public Long getRowIndexBegin() {
       return rowIndexBegin;
     }
- 
+
     /**
      * Gets the rowIndexEnd.
      *
@@ -8534,7 +8668,7 @@ public class IBMCompareComplyV1Models {
     public Long getRowIndexEnd() {
       return rowIndexEnd;
     }
- 
+
     /**
      * Gets the columnIndexBegin.
      *
@@ -8546,7 +8680,7 @@ public class IBMCompareComplyV1Models {
     public Long getColumnIndexBegin() {
       return columnIndexBegin;
     }
- 
+
     /**
      * Gets the columnIndexEnd.
      *
@@ -8645,17 +8779,18 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('cell_id', 'cellId');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('text_normalized', 'textNormalized');
-      mapping.put('row_index_begin', 'rowIndexBegin');
-      mapping.put('row_index_end', 'rowIndexEnd');
-      mapping.put('column_index_begin', 'columnIndexBegin');
-      mapping.put('column_index_end', 'columnIndexEnd');
+      mapping.put(parentLabel + 'cell_id', 'cellId');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
+      mapping.put(parentLabel + 'row_index_begin', 'rowIndexBegin');
+      mapping.put(parentLabel + 'row_index_end', 'rowIndexEnd');
+      mapping.put(parentLabel + 'column_index_begin', 'columnIndexBegin');
+      mapping.put(parentLabel + 'column_index_end', 'columnIndexEnd');
       return mapping;
     }
   }
@@ -8666,7 +8801,7 @@ public class IBMCompareComplyV1Models {
   public class SectionTitle extends IBMWatsonGenericModel {
     private String text;
     private Location location;
- 
+
     /**
      * Gets the text.
      *
@@ -8678,7 +8813,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -8724,11 +8859,8 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -8743,7 +8875,7 @@ public class IBMCompareComplyV1Models {
     private Location location;
     private Long level;
     private List<ElementLocations> elementLocations;
- 
+
     /**
      * Gets the text.
      *
@@ -8755,7 +8887,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -8768,7 +8900,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the level.
      *
@@ -8781,7 +8913,7 @@ public class IBMCompareComplyV1Models {
     public Long getLevel() {
       return level;
     }
- 
+
     /**
      * Gets the elementLocations.
      *
@@ -8857,15 +8989,10 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
-      mapping.put('element_locations', 'elementLocations');
-      if (elementLocations != null && elementLocations[0] != null) {
-        mapping.putAll(elementLocations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.put(parentLabel + 'element_locations', 'elementLocations');
+      mapping.putAll(((IBMWatsonGenericModel) ElementLocations.class.newInstance()).addToApiToSdkMapping(parentLabel + 'element_locations/', mapping));
       return mapping;
     }
   }
@@ -8882,7 +9009,7 @@ public class IBMCompareComplyV1Models {
      * and should not be called by the client.
      */
     public ShortDoc() { }
- 
+
     /**
      * Gets the title.
      *
@@ -8894,7 +9021,7 @@ public class IBMCompareComplyV1Models {
     public String getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the hash.
      *
@@ -8955,7 +9082,7 @@ public class IBMCompareComplyV1Models {
      * @param title the title
      * @return the ShortDoc builder
      */
-    public ShortDocBuilder setTitle(String title) {
+    public ShortDocBuilder title(String title) {
       this.title = title;
       return this;
     }
@@ -8966,7 +9093,7 @@ public class IBMCompareComplyV1Models {
      * @param hash the hash
      * @return the ShortDoc builder
      */
-    public ShortDocBuilder setHash(String hash) {
+    public ShortDocBuilder hash(String hash) {
       this.hash = hash;
       return this;
     }
@@ -8983,7 +9110,7 @@ public class IBMCompareComplyV1Models {
     private Long rowIndexEnd;
     private Long columnIndexBegin;
     private Long columnIndexEnd;
- 
+
     /**
      * Gets the cellId.
      *
@@ -8995,7 +9122,7 @@ public class IBMCompareComplyV1Models {
     public String getCellId() {
       return cellId;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -9008,7 +9135,7 @@ public class IBMCompareComplyV1Models {
     public IBMWatsonMapModel getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -9020,7 +9147,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the rowIndexBegin.
      *
@@ -9032,7 +9159,7 @@ public class IBMCompareComplyV1Models {
     public Long getRowIndexBegin() {
       return rowIndexBegin;
     }
- 
+
     /**
      * Gets the rowIndexEnd.
      *
@@ -9044,7 +9171,7 @@ public class IBMCompareComplyV1Models {
     public Long getRowIndexEnd() {
       return rowIndexEnd;
     }
- 
+
     /**
      * Gets the columnIndexBegin.
      *
@@ -9056,7 +9183,7 @@ public class IBMCompareComplyV1Models {
     public Long getColumnIndexBegin() {
       return columnIndexBegin;
     }
- 
+
     /**
      * Gets the columnIndexEnd.
      *
@@ -9146,13 +9273,16 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('cell_id', 'cellId');
-      mapping.put('row_index_begin', 'rowIndexBegin');
-      mapping.put('row_index_end', 'rowIndexEnd');
-      mapping.put('column_index_begin', 'columnIndexBegin');
-      mapping.put('column_index_end', 'columnIndexEnd');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'cell_id', 'cellId');
+      mapping.put(parentLabel + 'row_index_begin', 'rowIndexBegin');
+      mapping.put(parentLabel + 'row_index_end', 'rowIndexEnd');
+      mapping.put(parentLabel + 'column_index_begin', 'columnIndexBegin');
+      mapping.put(parentLabel + 'column_index_end', 'columnIndexEnd');
       return mapping;
     }
   }
@@ -9165,7 +9295,7 @@ public class IBMCompareComplyV1Models {
     private String modelId;
     private String modelVersion;
     private List<Tables> tables;
- 
+
     /**
      * Gets the document.
      *
@@ -9177,7 +9307,7 @@ public class IBMCompareComplyV1Models {
     public DocInfo getDocument() {
       return document;
     }
- 
+
     /**
      * Gets the modelId.
      *
@@ -9189,7 +9319,7 @@ public class IBMCompareComplyV1Models {
     public String getModelId() {
       return modelId;
     }
- 
+
     /**
      * Gets the modelVersion.
      *
@@ -9201,7 +9331,7 @@ public class IBMCompareComplyV1Models {
     public String getModelVersion() {
       return modelVersion;
     }
- 
+
     /**
      * Gets the tables.
      *
@@ -9277,13 +9407,10 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('model_id', 'modelId');
-      mapping.put('model_version', 'modelVersion');
-      if (tables != null && tables[0] != null) {
-        mapping.putAll(tables[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'model_id', 'modelId');
+      mapping.put(parentLabel + 'model_version', 'modelVersion');
+      mapping.putAll(((IBMWatsonGenericModel) Tables.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tables/', mapping));
       return mapping;
     }
   }
@@ -9295,7 +9422,7 @@ public class IBMCompareComplyV1Models {
   public class TableTitle extends IBMWatsonGenericModel {
     private Location location;
     private String text;
- 
+
     /**
      * Gets the location.
      *
@@ -9308,7 +9435,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -9353,11 +9480,8 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -9376,7 +9500,7 @@ public class IBMCompareComplyV1Models {
     private List<BodyCells> bodyCells;
     private List<Contexts> contexts;
     private List<KeyValuePair> keyValuePairs;
- 
+
     /**
      * Gets the location.
      *
@@ -9389,7 +9513,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -9401,7 +9525,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the sectionTitle.
      *
@@ -9413,7 +9537,7 @@ public class IBMCompareComplyV1Models {
     public SectionTitle getSectionTitle() {
       return sectionTitle;
     }
- 
+
     /**
      * Gets the title.
      *
@@ -9426,7 +9550,7 @@ public class IBMCompareComplyV1Models {
     public TableTitle getTitle() {
       return title;
     }
- 
+
     /**
      * Gets the tableHeaders.
      *
@@ -9438,7 +9562,7 @@ public class IBMCompareComplyV1Models {
     public List<TableHeaders> getTableHeaders() {
       return tableHeaders;
     }
- 
+
     /**
      * Gets the rowHeaders.
      *
@@ -9451,7 +9575,7 @@ public class IBMCompareComplyV1Models {
     public List<RowHeaders> getRowHeaders() {
       return rowHeaders;
     }
- 
+
     /**
      * Gets the columnHeaders.
      *
@@ -9464,7 +9588,7 @@ public class IBMCompareComplyV1Models {
     public List<ColumnHeaders> getColumnHeaders() {
       return columnHeaders;
     }
- 
+
     /**
      * Gets the bodyCells.
      *
@@ -9477,7 +9601,7 @@ public class IBMCompareComplyV1Models {
     public List<BodyCells> getBodyCells() {
       return bodyCells;
     }
- 
+
     /**
      * Gets the contexts.
      *
@@ -9490,7 +9614,7 @@ public class IBMCompareComplyV1Models {
     public List<Contexts> getContexts() {
       return contexts;
     }
- 
+
     /**
      * Gets the keyValuePairs.
      *
@@ -9693,41 +9817,22 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
-      }
-      mapping.put('section_title', 'sectionTitle');
-      if (sectionTitle != null) {
-        mapping.putAll(sectionTitle.getApiToSdkMapping());
-      }
-      if (title != null) {
-        mapping.putAll(title.getApiToSdkMapping());
-      }
-      mapping.put('table_headers', 'tableHeaders');
-      if (tableHeaders != null && tableHeaders[0] != null) {
-        mapping.putAll(tableHeaders[0].getApiToSdkMapping());
-      }
-      mapping.put('row_headers', 'rowHeaders');
-      if (rowHeaders != null && rowHeaders[0] != null) {
-        mapping.putAll(rowHeaders[0].getApiToSdkMapping());
-      }
-      mapping.put('column_headers', 'columnHeaders');
-      if (columnHeaders != null && columnHeaders[0] != null) {
-        mapping.putAll(columnHeaders[0].getApiToSdkMapping());
-      }
-      mapping.put('body_cells', 'bodyCells');
-      if (bodyCells != null && bodyCells[0] != null) {
-        mapping.putAll(bodyCells[0].getApiToSdkMapping());
-      }
-      if (contexts != null && contexts[0] != null) {
-        mapping.putAll(contexts[0].getApiToSdkMapping());
-      }
-      mapping.put('key_value_pairs', 'keyValuePairs');
-      if (keyValuePairs != null && keyValuePairs[0] != null) {
-        mapping.putAll(keyValuePairs[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.put(parentLabel + 'section_title', 'sectionTitle');
+      mapping.putAll(((IBMWatsonGenericModel) SectionTitle.class.newInstance()).addToApiToSdkMapping(parentLabel + 'section_title/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) TableTitle.class.newInstance()).addToApiToSdkMapping(parentLabel + 'title/', mapping));
+      mapping.put(parentLabel + 'table_headers', 'tableHeaders');
+      mapping.putAll(((IBMWatsonGenericModel) TableHeaders.class.newInstance()).addToApiToSdkMapping(parentLabel + 'table_headers/', mapping));
+      mapping.put(parentLabel + 'row_headers', 'rowHeaders');
+      mapping.putAll(((IBMWatsonGenericModel) RowHeaders.class.newInstance()).addToApiToSdkMapping(parentLabel + 'row_headers/', mapping));
+      mapping.put(parentLabel + 'column_headers', 'columnHeaders');
+      mapping.putAll(((IBMWatsonGenericModel) ColumnHeaders.class.newInstance()).addToApiToSdkMapping(parentLabel + 'column_headers/', mapping));
+      mapping.put(parentLabel + 'body_cells', 'bodyCells');
+      mapping.putAll(((IBMWatsonGenericModel) BodyCells.class.newInstance()).addToApiToSdkMapping(parentLabel + 'body_cells/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Contexts.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contexts/', mapping));
+      mapping.put(parentLabel + 'key_value_pairs', 'keyValuePairs');
+      mapping.putAll(((IBMWatsonGenericModel) KeyValuePair.class.newInstance()).addToApiToSdkMapping(parentLabel + 'key_value_pairs/', mapping));
       return mapping;
     }
   }
@@ -9741,7 +9846,7 @@ public class IBMCompareComplyV1Models {
     private String textNormalized;
     private List<String> provenanceIds;
     private Location location;
- 
+
     /**
      * Gets the confidenceLevel.
      *
@@ -9753,7 +9858,7 @@ public class IBMCompareComplyV1Models {
     public String getConfidenceLevel() {
       return confidenceLevel;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -9765,12 +9870,12 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the termination date, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the termination date, which is listed as a string. This element is optional; it is
+     * returned only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -9778,11 +9883,11 @@ public class IBMCompareComplyV1Models {
     public String getTextNormalized() {
       return textNormalized;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -9790,7 +9895,7 @@ public class IBMCompareComplyV1Models {
     public List<String> getProvenanceIds() {
       return provenanceIds;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -9863,14 +9968,15 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('confidence_level', 'confidenceLevel');
-      mapping.put('text_normalized', 'textNormalized');
-      mapping.put('provenance_ids', 'provenanceIds');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
+      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }
@@ -9887,7 +9993,7 @@ public class IBMCompareComplyV1Models {
      * and should not be called by the client.
      */
     public TypeLabel() { }
- 
+
     /**
      * Gets the label.
      *
@@ -9900,11 +10006,11 @@ public class IBMCompareComplyV1Models {
     public Label getLabel() {
       return label;
     }
- 
+
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -9937,20 +10043,18 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for label
       Label newLabel = (Label) new Label().deserialize(JSON.serialize(ret.getLabel()), (Map<String, Object>) jsonMap.get('label'), Label.class);
-      retBuilder.setLabel(newLabel);
+      retBuilder.label(newLabel);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('provenanceIds', 'provenance_ids');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'provenanceIds', 'provenance_ids');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('provenance_ids', 'provenanceIds');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
       return mapping;
     }
   }
@@ -10003,7 +10107,7 @@ public class IBMCompareComplyV1Models {
      * @param label the label
      * @return the TypeLabel builder
      */
-    public TypeLabelBuilder setLabel(Label label) {
+    public TypeLabelBuilder label(Label label) {
       this.label = label;
       return this;
     }
@@ -10015,7 +10119,7 @@ public class IBMCompareComplyV1Models {
      * @param provenanceIds the provenanceIds
      * @return the TypeLabel builder
      */
-    public TypeLabelBuilder setProvenanceIds(List<String> provenanceIds) {
+    public TypeLabelBuilder provenanceIds(List<String> provenanceIds) {
       this.provenanceIds = provenanceIds;
       return this;
     }
@@ -10026,7 +10130,7 @@ public class IBMCompareComplyV1Models {
    */
   public class TypeLabelComparison extends IBMWatsonGenericModel {
     private Label label;
- 
+
     /**
      * Gets the label.
      *
@@ -10074,7 +10178,7 @@ public class IBMCompareComplyV1Models {
     private List<TypeLabelComparison> types;
     private List<CategoryComparison> categories;
     private List<Attribute> attributes;
- 
+
     /**
      * Gets the documentLabel.
      *
@@ -10087,7 +10191,7 @@ public class IBMCompareComplyV1Models {
     public String getDocumentLabel() {
       return documentLabel;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -10100,7 +10204,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -10112,7 +10216,7 @@ public class IBMCompareComplyV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the types.
      *
@@ -10124,7 +10228,7 @@ public class IBMCompareComplyV1Models {
     public List<TypeLabelComparison> getTypes() {
       return types;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -10136,7 +10240,7 @@ public class IBMCompareComplyV1Models {
     public List<CategoryComparison> getCategories() {
       return categories;
     }
- 
+
     /**
      * Gets the attributes.
      *
@@ -10256,15 +10360,14 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_label', 'documentLabel');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (attributes != null && attributes[0] != null) {
-        mapping.putAll(attributes[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'document_label', 'documentLabel');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Attribute.class.newInstance()).addToApiToSdkMapping(parentLabel + 'attributes/', mapping));
       return mapping;
     }
   }
@@ -10430,7 +10533,7 @@ public class IBMCompareComplyV1Models {
   public class UpdatedLabelsIn extends IBMWatsonGenericModel {
     private List<TypeLabel> types;
     private List<Category> categories;
- 
+
     /**
      * Gets the types.
      *
@@ -10441,7 +10544,7 @@ public class IBMCompareComplyV1Models {
     public List<TypeLabel> getTypes() {
       return types;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -10469,13 +10572,12 @@ public class IBMCompareComplyV1Models {
       return new UpdatedLabelsInBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (types != null && types[0] != null) {
-        mapping.putAll(types[0].getSdkToApiMapping());
+        mapping.putAll(types[0].addToSdkToApiMapping(parentLabel + 'types/', mapping));
       }
       if (categories != null && categories[0] != null) {
-        mapping.putAll(categories[0].getSdkToApiMapping());
+        mapping.putAll(categories[0].addToSdkToApiMapping(parentLabel + 'categories/', mapping));
       }
       return mapping;
     }
@@ -10556,7 +10658,7 @@ public class IBMCompareComplyV1Models {
      * @param types the types
      * @return the UpdatedLabelsIn builder
      */
-    public UpdatedLabelsInBuilder setTypes(List<TypeLabel> types) {
+    public UpdatedLabelsInBuilder types(List<TypeLabel> types) {
       this.types = types;
       return this;
     }
@@ -10568,7 +10670,7 @@ public class IBMCompareComplyV1Models {
      * @param categories the categories
      * @return the UpdatedLabelsIn builder
      */
-    public UpdatedLabelsInBuilder setCategories(List<Category> categories) {
+    public UpdatedLabelsInBuilder categories(List<Category> categories) {
       this.categories = categories;
       return this;
     }
@@ -10581,7 +10683,7 @@ public class IBMCompareComplyV1Models {
     private List<TypeLabel> types;
     private List<Category> categories;
     private String modification;
- 
+
     /**
      * Gets the types.
      *
@@ -10593,7 +10695,7 @@ public class IBMCompareComplyV1Models {
     public List<TypeLabel> getTypes() {
       return types;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -10605,7 +10707,7 @@ public class IBMCompareComplyV1Models {
     public List<Category> getCategories() {
       return categories;
     }
- 
+
     /**
      * Gets the modification.
      *
@@ -10682,14 +10784,9 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (types != null && types[0] != null) {
-        mapping.putAll(types[0].getApiToSdkMapping());
-      }
-      if (categories != null && categories[0] != null) {
-        mapping.putAll(categories[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) TypeLabel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'types/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Category.class.newInstance()).addToApiToSdkMapping(parentLabel + 'categories/', mapping));
       return mapping;
     }
   }
@@ -10701,7 +10798,7 @@ public class IBMCompareComplyV1Models {
     private String cellId;
     private Location location;
     private String text;
- 
+
     /**
      * Gets the cellId.
      *
@@ -10713,7 +10810,7 @@ public class IBMCompareComplyV1Models {
     public String getCellId() {
       return cellId;
     }
- 
+
     /**
      * Gets the location.
      *
@@ -10726,7 +10823,7 @@ public class IBMCompareComplyV1Models {
     public Location getLocation() {
       return location;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -10780,12 +10877,13 @@ public class IBMCompareComplyV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('cell_id', 'cellId');
-      if (location != null) {
-        mapping.putAll(location.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'cell_id', 'cellId');
+      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
       return mapping;
     }
   }

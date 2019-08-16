@@ -8,7 +8,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     private String text;
     private String topClass;
     private List<ClassifiedClass> classes;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -20,7 +20,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getClassifierId() {
       return classifierId;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -32,7 +32,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -44,7 +44,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the topClass.
      *
@@ -56,7 +56,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getTopClass() {
       return topClass;
     }
- 
+
     /**
      * Gets the classes.
      *
@@ -137,13 +137,14 @@ public class IBMNaturalLanguageClassifierV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifier_id', 'classifierId');
-      mapping.put('top_class', 'topClass');
-      if (classes != null && classes[0] != null) {
-        mapping.putAll(classes[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'classifier_id', 'classifierId');
+      mapping.put(parentLabel + 'top_class', 'topClass');
+      mapping.putAll(((IBMWatsonGenericModel) ClassifiedClass.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classes/', mapping));
       return mapping;
     }
   }
@@ -155,7 +156,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     private String classifierId;
     private String url;
     private List<CollectionItem> collection;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -167,7 +168,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getClassifierId() {
       return classifierId;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -179,7 +180,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the collection.
      *
@@ -242,12 +243,13 @@ public class IBMNaturalLanguageClassifierV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifier_id', 'classifierId');
-      if (collection != null && collection[0] != null) {
-        mapping.putAll(collection[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'classifier_id', 'classifierId');
+      mapping.putAll(((IBMWatsonGenericModel) CollectionItem.class.newInstance()).addToApiToSdkMapping(parentLabel + 'collection/', mapping));
       return mapping;
     }
   }
@@ -258,7 +260,7 @@ public class IBMNaturalLanguageClassifierV1Models {
   public class ClassifiedClass extends IBMWatsonGenericModel {
     private Double confidence;
     private String className;
- 
+
     /**
      * Gets the confidence.
      *
@@ -271,7 +273,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public Double getConfidence() {
       return confidence;
     }
- 
+
     /**
      * Gets the className.
      *
@@ -302,9 +304,8 @@ public class IBMNaturalLanguageClassifierV1Models {
       this.className = className;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('class_name', 'className');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'class_name', 'className');
       return mapping;
     }
   }
@@ -320,7 +321,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     private Datetime created;
     private String statusDescription;
     private String language;
- 
+
     /**
      * Gets the name.
      *
@@ -332,7 +333,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -344,7 +345,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -356,7 +357,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the classifierId.
      *
@@ -368,7 +369,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getClassifierId() {
       return classifierId;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -380,7 +381,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the statusDescription.
      *
@@ -392,7 +393,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getStatusDescription() {
       return statusDescription;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -441,10 +442,9 @@ public class IBMNaturalLanguageClassifierV1Models {
       this.language = language;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifier_id', 'classifierId');
-      mapping.put('status_description', 'statusDescription');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'classifier_id', 'classifierId');
+      mapping.put(parentLabel + 'status_description', 'statusDescription');
       return mapping;
     }
   }
@@ -454,7 +454,7 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class ClassifierList extends IBMWatsonResponseModel {
     private List<Classifier> classifiers;
- 
+
     /**
      * Gets the classifiers.
      *
@@ -499,11 +499,8 @@ public class IBMNaturalLanguageClassifierV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (classifiers != null && classifiers[0] != null) {
-        mapping.putAll(classifiers[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Classifier.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classifiers/', mapping));
       return mapping;
     }
   }
@@ -656,7 +653,7 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class ClassifyInput extends IBMWatsonGenericModel {
     private String text;
- 
+
     /**
      * Gets the text.
      *
@@ -723,7 +720,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param text the text
      * @return the ClassifyInput builder
      */
-    public ClassifyInputBuilder setText(String text) {
+    public ClassifyInputBuilder text(String text) {
       this.text = text;
       return this;
     }
@@ -863,7 +860,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     private String text;
     private String topClass;
     private List<ClassifiedClass> classes;
- 
+
     /**
      * Gets the text.
      *
@@ -875,7 +872,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the topClass.
      *
@@ -887,7 +884,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String getTopClass() {
       return topClass;
     }
- 
+
     /**
      * Gets the classes.
      *
@@ -950,12 +947,9 @@ public class IBMNaturalLanguageClassifierV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('top_class', 'topClass');
-      if (classes != null && classes[0] != null) {
-        mapping.putAll(classes[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'top_class', 'topClass');
+      mapping.putAll(((IBMWatsonGenericModel) ClassifiedClass.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classes/', mapping));
       return mapping;
     }
   }

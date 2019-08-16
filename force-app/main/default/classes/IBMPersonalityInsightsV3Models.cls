@@ -7,7 +7,7 @@ public class IBMPersonalityInsightsV3Models {
     private String name;
     private String category;
     private Double percentage;
- 
+
     /**
      * Gets the traitId.
      *
@@ -20,7 +20,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getTraitId() {
       return traitId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -32,7 +32,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the category.
      *
@@ -44,7 +44,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getCategory() {
       return category;
     }
- 
+
     /**
      * Gets the percentage.
      *
@@ -94,9 +94,12 @@ public class IBMPersonalityInsightsV3Models {
       this.percentage = percentage;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('trait_id', 'traitId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'trait_id', 'traitId');
       return mapping;
     }
   }
@@ -108,7 +111,7 @@ public class IBMPersonalityInsightsV3Models {
     private String consumptionPreferenceId;
     private String name;
     private Double score;
- 
+
     /**
      * Gets the consumptionPreferenceId.
      *
@@ -121,7 +124,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getConsumptionPreferenceId() {
       return consumptionPreferenceId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -133,7 +136,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -179,9 +182,12 @@ public class IBMPersonalityInsightsV3Models {
       this.score = score;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('consumption_preference_id', 'consumptionPreferenceId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'consumption_preference_id', 'consumptionPreferenceId');
       return mapping;
     }
   }
@@ -193,7 +199,7 @@ public class IBMPersonalityInsightsV3Models {
     private String consumptionPreferenceCategoryId;
     private String name;
     private List<ConsumptionPreferences> consumptionPreferences;
- 
+
     /**
      * Gets the consumptionPreferenceCategoryId.
      *
@@ -206,7 +212,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getConsumptionPreferenceCategoryId() {
       return consumptionPreferenceCategoryId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -218,7 +224,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the consumptionPreferences.
      *
@@ -281,13 +287,14 @@ public class IBMPersonalityInsightsV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('consumption_preference_category_id', 'consumptionPreferenceCategoryId');
-      mapping.put('consumption_preferences', 'consumptionPreferences');
-      if (consumptionPreferences != null && consumptionPreferences[0] != null) {
-        mapping.putAll(consumptionPreferences[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'consumption_preference_category_id', 'consumptionPreferenceCategoryId');
+      mapping.put(parentLabel + 'consumption_preferences', 'consumptionPreferences');
+      mapping.putAll(((IBMWatsonGenericModel) ConsumptionPreferences.class.newInstance()).addToApiToSdkMapping(parentLabel + 'consumption_preferences/', mapping));
       return mapping;
     }
   }
@@ -297,7 +304,7 @@ public class IBMPersonalityInsightsV3Models {
    */
   public class Content extends IBMWatsonGenericModel {
     private List<ContentItem> contentItems;
- 
+
     /**
      * Gets the contentItems.
      *
@@ -399,7 +406,7 @@ public class IBMPersonalityInsightsV3Models {
     private String parentid;
     private Boolean reply;
     private Boolean forward;
- 
+
     /**
      * Gets the content.
      *
@@ -411,7 +418,7 @@ public class IBMPersonalityInsightsV3Models {
     public String content() {
       return content;
     }
- 
+
     /**
      * Gets the id.
      *
@@ -422,7 +429,7 @@ public class IBMPersonalityInsightsV3Models {
     public String id() {
       return id;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -434,7 +441,7 @@ public class IBMPersonalityInsightsV3Models {
     public Long created() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -446,7 +453,7 @@ public class IBMPersonalityInsightsV3Models {
     public Long updated() {
       return updated;
     }
- 
+
     /**
      * Gets the contenttype.
      *
@@ -458,7 +465,7 @@ public class IBMPersonalityInsightsV3Models {
     public String contenttype() {
       return contenttype;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -474,7 +481,7 @@ public class IBMPersonalityInsightsV3Models {
     public String language() {
       return language;
     }
- 
+
     /**
      * Gets the parentid.
      *
@@ -486,7 +493,7 @@ public class IBMPersonalityInsightsV3Models {
     public String parentid() {
       return parentid;
     }
- 
+
     /**
      * Gets the reply.
      *
@@ -497,7 +504,7 @@ public class IBMPersonalityInsightsV3Models {
     public Boolean reply() {
       return reply;
     }
- 
+
     /**
      * Gets the forward.
      *
@@ -695,7 +702,7 @@ public class IBMPersonalityInsightsV3Models {
     private List<Behavior> behavior;
     private List<ConsumptionPreferencesCategory> consumptionPreferences;
     private List<Warning> warnings;
- 
+
     /**
      * Gets the processedLanguage.
      *
@@ -707,7 +714,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getProcessedLanguage() {
       return processedLanguage;
     }
- 
+
     /**
      * Gets the wordCount.
      *
@@ -719,7 +726,7 @@ public class IBMPersonalityInsightsV3Models {
     public Long getWordCount() {
       return wordCount;
     }
- 
+
     /**
      * Gets the wordCountMessage.
      *
@@ -732,7 +739,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getWordCountMessage() {
       return wordCountMessage;
     }
- 
+
     /**
      * Gets the personality.
      *
@@ -745,7 +752,7 @@ public class IBMPersonalityInsightsV3Models {
     public List<Trait> getPersonality() {
       return personality;
     }
- 
+
     /**
      * Gets the needs.
      *
@@ -757,7 +764,7 @@ public class IBMPersonalityInsightsV3Models {
     public List<Trait> getNeeds() {
       return needs;
     }
- 
+
     /**
      * Gets the values.
      *
@@ -769,7 +776,7 @@ public class IBMPersonalityInsightsV3Models {
     public List<Trait> getValues() {
       return values;
     }
- 
+
     /**
      * Gets the behavior.
      *
@@ -783,7 +790,7 @@ public class IBMPersonalityInsightsV3Models {
     public List<Behavior> getBehavior() {
       return behavior;
     }
- 
+
     /**
      * Gets the consumptionPreferences.
      *
@@ -797,7 +804,7 @@ public class IBMPersonalityInsightsV3Models {
     public List<ConsumptionPreferencesCategory> getConsumptionPreferences() {
       return consumptionPreferences;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -980,30 +987,21 @@ public class IBMPersonalityInsightsV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('processed_language', 'processedLanguage');
-      mapping.put('word_count', 'wordCount');
-      mapping.put('word_count_message', 'wordCountMessage');
-      if (personality != null && personality[0] != null) {
-        mapping.putAll(personality[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (needs != null && needs[0] != null) {
-        mapping.putAll(needs[0].getApiToSdkMapping());
-      }
-      if (values != null && values[0] != null) {
-        mapping.putAll(values[0].getApiToSdkMapping());
-      }
-      if (behavior != null && behavior[0] != null) {
-        mapping.putAll(behavior[0].getApiToSdkMapping());
-      }
-      mapping.put('consumption_preferences', 'consumptionPreferences');
-      if (consumptionPreferences != null && consumptionPreferences[0] != null) {
-        mapping.putAll(consumptionPreferences[0].getApiToSdkMapping());
-      }
-      if (warnings != null && warnings[0] != null) {
-        mapping.putAll(warnings[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'processed_language', 'processedLanguage');
+      mapping.put(parentLabel + 'word_count', 'wordCount');
+      mapping.put(parentLabel + 'word_count_message', 'wordCountMessage');
+      mapping.putAll(((IBMWatsonGenericModel) Trait.class.newInstance()).addToApiToSdkMapping(parentLabel + 'personality/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Trait.class.newInstance()).addToApiToSdkMapping(parentLabel + 'needs/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Trait.class.newInstance()).addToApiToSdkMapping(parentLabel + 'values/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Behavior.class.newInstance()).addToApiToSdkMapping(parentLabel + 'behavior/', mapping));
+      mapping.put(parentLabel + 'consumption_preferences', 'consumptionPreferences');
+      mapping.putAll(((IBMWatsonGenericModel) ConsumptionPreferencesCategory.class.newInstance()).addToApiToSdkMapping(parentLabel + 'consumption_preferences/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Warning.class.newInstance()).addToApiToSdkMapping(parentLabel + 'warnings/', mapping));
       return mapping;
     }
   }
@@ -1316,7 +1314,7 @@ public class IBMPersonalityInsightsV3Models {
     private Double rawScore;
     private Boolean significant;
     private List<Trait> children;
- 
+
     /**
      * Gets the traitId.
      *
@@ -1332,7 +1330,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getTraitId() {
       return traitId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -1344,7 +1342,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the category.
      *
@@ -1357,7 +1355,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getCategory() {
       return category;
     }
- 
+
     /**
      * Gets the percentile.
      *
@@ -1371,7 +1369,7 @@ public class IBMPersonalityInsightsV3Models {
     public Double getPercentile() {
       return percentile;
     }
- 
+
     /**
      * Gets the rawScore.
      *
@@ -1390,7 +1388,7 @@ public class IBMPersonalityInsightsV3Models {
     public Double getRawScore() {
       return rawScore;
     }
- 
+
     /**
      * Gets the significant.
      *
@@ -1405,7 +1403,7 @@ public class IBMPersonalityInsightsV3Models {
     public Boolean getSignificant() {
       return significant;
     }
- 
+
     /**
      * Gets the children.
      *
@@ -1505,13 +1503,14 @@ public class IBMPersonalityInsightsV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('trait_id', 'traitId');
-      mapping.put('raw_score', 'rawScore');
-      if (children != null && children[0] != null) {
-        mapping.putAll(children[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'trait_id', 'traitId');
+      mapping.put(parentLabel + 'raw_score', 'rawScore');
+      mapping.putAll(((IBMWatsonGenericModel) Trait.class.newInstance()).addToApiToSdkMapping(parentLabel + 'children/', mapping));
       return mapping;
     }
   }
@@ -1522,7 +1521,7 @@ public class IBMPersonalityInsightsV3Models {
   public class Warning extends IBMWatsonGenericModel {
     private String warningId;
     private String message;
- 
+
     /**
      * Gets the warningId.
      *
@@ -1534,7 +1533,7 @@ public class IBMPersonalityInsightsV3Models {
     public String getWarningId() {
       return warningId;
     }
- 
+
     /**
      * Gets the message.
      *
@@ -1575,9 +1574,12 @@ public class IBMPersonalityInsightsV3Models {
       this.message = message;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('warning_id', 'warningId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'warning_id', 'warningId');
       return mapping;
     }
   }

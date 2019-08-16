@@ -330,7 +330,7 @@ public class IBMDiscoveryV1Models {
       mapping.put('collectionId', 'collection_id');
       mapping.put('naturalLanguageQuery', 'natural_language_query');
       if (examples != null && examples[0] != null) {
-        mapping.putAll(examples[0].getSdkToApiMapping());
+        mapping.putAll(examples[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -472,7 +472,7 @@ public class IBMDiscoveryV1Models {
     private String key;
     private Long matchingResults;
     private List<QueryAggregation> aggregations;
- 
+
     /**
      * Gets the key.
      *
@@ -484,7 +484,7 @@ public class IBMDiscoveryV1Models {
     public String getKey() {
       return key;
     }
- 
+
     /**
      * Gets the matchingResults.
      *
@@ -496,7 +496,7 @@ public class IBMDiscoveryV1Models {
     public Long getMatchingResults() {
       return matchingResults;
     }
- 
+
     /**
      * Gets the aggregations.
      *
@@ -559,12 +559,9 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('matching_results', 'matchingResults');
-      if (aggregations != null && aggregations[0] != null) {
-        mapping.putAll(aggregations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'matching_results', 'matchingResults');
+      mapping.putAll(((IBMWatsonGenericModel) QueryAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
       return mapping;
     }
   }
@@ -586,7 +583,7 @@ public class IBMDiscoveryV1Models {
     private TrainingStatus trainingStatus;
     private CollectionCrawlStatus crawlStatus;
     private SduStatus smartDocumentUnderstanding;
- 
+
     /**
      * Gets the collectionId.
      *
@@ -598,7 +595,7 @@ public class IBMDiscoveryV1Models {
     public String getCollectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -610,7 +607,7 @@ public class IBMDiscoveryV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -622,7 +619,7 @@ public class IBMDiscoveryV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -634,7 +631,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -646,7 +643,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -658,7 +655,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -670,7 +667,7 @@ public class IBMDiscoveryV1Models {
     public String getConfigurationId() {
       return configurationId;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -683,7 +680,7 @@ public class IBMDiscoveryV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the documentCounts.
      *
@@ -693,7 +690,7 @@ public class IBMDiscoveryV1Models {
     public DocumentCounts getDocumentCounts() {
       return documentCounts;
     }
- 
+
     /**
      * Gets the diskUsage.
      *
@@ -705,7 +702,7 @@ public class IBMDiscoveryV1Models {
     public CollectionDiskUsage getDiskUsage() {
       return diskUsage;
     }
- 
+
     /**
      * Gets the trainingStatus.
      *
@@ -715,7 +712,7 @@ public class IBMDiscoveryV1Models {
     public TrainingStatus getTrainingStatus() {
       return trainingStatus;
     }
- 
+
     /**
      * Gets the crawlStatus.
      *
@@ -727,7 +724,7 @@ public class IBMDiscoveryV1Models {
     public CollectionCrawlStatus getCrawlStatus() {
       return crawlStatus;
     }
- 
+
     /**
      * Gets the smartDocumentUnderstanding.
      *
@@ -851,27 +848,22 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('collection_id', 'collectionId');
-      mapping.put('configuration_id', 'configurationId');
-      mapping.put('document_counts', 'documentCounts');
-      mapping.put('disk_usage', 'diskUsage');
-      if (diskUsage != null) {
-        mapping.putAll(diskUsage.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('training_status', 'trainingStatus');
-      if (trainingStatus != null) {
-        mapping.putAll(trainingStatus.getApiToSdkMapping());
-      }
-      mapping.put('crawl_status', 'crawlStatus');
-      if (crawlStatus != null) {
-        mapping.putAll(crawlStatus.getApiToSdkMapping());
-      }
-      mapping.put('smart_document_understanding', 'smartDocumentUnderstanding');
-      if (smartDocumentUnderstanding != null) {
-        mapping.putAll(smartDocumentUnderstanding.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'collection_id', 'collectionId');
+      mapping.put(parentLabel + 'configuration_id', 'configurationId');
+      mapping.put(parentLabel + 'document_counts', 'documentCounts');
+      mapping.put(parentLabel + 'disk_usage', 'diskUsage');
+      mapping.putAll(((IBMWatsonGenericModel) CollectionDiskUsage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'disk_usage/', mapping));
+      mapping.put(parentLabel + 'training_status', 'trainingStatus');
+      mapping.putAll(((IBMWatsonGenericModel) TrainingStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'training_status/', mapping));
+      mapping.put(parentLabel + 'crawl_status', 'crawlStatus');
+      mapping.putAll(((IBMWatsonGenericModel) CollectionCrawlStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'crawl_status/', mapping));
+      mapping.put(parentLabel + 'smart_document_understanding', 'smartDocumentUnderstanding');
+      mapping.putAll(((IBMWatsonGenericModel) SduStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'smart_document_understanding/', mapping));
       return mapping;
     }
   }
@@ -881,7 +873,7 @@ public class IBMDiscoveryV1Models {
    */
   public class CollectionCrawlStatus extends IBMWatsonGenericModel {
     private SourceStatus sourceCrawl;
- 
+
     /**
      * Gets the sourceCrawl.
      *
@@ -917,12 +909,13 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('source_crawl', 'sourceCrawl');
-      if (sourceCrawl != null) {
-        mapping.putAll(sourceCrawl.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'source_crawl', 'sourceCrawl');
+      mapping.putAll(((IBMWatsonGenericModel) SourceStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'source_crawl/', mapping));
       return mapping;
     }
   }
@@ -932,7 +925,7 @@ public class IBMDiscoveryV1Models {
    */
   public class CollectionDiskUsage extends IBMWatsonGenericModel {
     private Long usedBytes;
- 
+
     /**
      * Gets the usedBytes.
      *
@@ -945,9 +938,12 @@ public class IBMDiscoveryV1Models {
       return usedBytes;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('used_bytes', 'usedBytes');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'used_bytes', 'usedBytes');
       return mapping;
     }
   }
@@ -958,7 +954,7 @@ public class IBMDiscoveryV1Models {
   public class CollectionUsage extends IBMWatsonGenericModel {
     private Long available;
     private Long maximumAllowed;
- 
+
     /**
      * Gets the available.
      *
@@ -970,7 +966,7 @@ public class IBMDiscoveryV1Models {
     public Long getAvailable() {
       return available;
     }
- 
+
     /**
      * Gets the maximumAllowed.
      *
@@ -983,9 +979,8 @@ public class IBMDiscoveryV1Models {
       return maximumAllowed;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('maximum_allowed', 'maximumAllowed');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'maximum_allowed', 'maximumAllowed');
       return mapping;
     }
   }
@@ -1009,7 +1004,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public Configuration() { }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -1021,7 +1016,7 @@ public class IBMDiscoveryV1Models {
     public String getConfigurationId() {
       return configurationId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -1033,7 +1028,7 @@ public class IBMDiscoveryV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -1045,7 +1040,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -1057,7 +1052,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -1069,7 +1064,7 @@ public class IBMDiscoveryV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the conversions.
      *
@@ -1081,7 +1076,7 @@ public class IBMDiscoveryV1Models {
     public Conversions getConversions() {
       return conversions;
     }
- 
+
     /**
      * Gets the enrichments.
      *
@@ -1093,7 +1088,7 @@ public class IBMDiscoveryV1Models {
     public List<Enrichment> getEnrichments() {
       return enrichments;
     }
- 
+
     /**
      * Gets the normalizations.
      *
@@ -1106,7 +1101,7 @@ public class IBMDiscoveryV1Models {
     public List<NormalizationOperation> getNormalizations() {
       return normalizations;
     }
- 
+
     /**
      * Gets the source.
      *
@@ -1151,7 +1146,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for conversions
       Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(ret.getConversions()), (Map<String, Object>) jsonMap.get('conversions'), Conversions.class);
-      retBuilder.setConversions(newConversions);
+      retBuilder.conversions(newConversions);
 
       // calling custom deserializer for enrichments
       List<Enrichment> newEnrichments = new List<Enrichment>();
@@ -1163,7 +1158,7 @@ public class IBMDiscoveryV1Models {
           Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Enrichment.class);
           newEnrichments.add(newItem);
         }
-        retBuilder.setEnrichments(newEnrichments);
+        retBuilder.enrichments(newEnrichments);
       }
 
       // calling custom deserializer for normalizations
@@ -1176,49 +1171,47 @@ public class IBMDiscoveryV1Models {
           NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newNormalizations.add(newItem);
         }
-        retBuilder.setNormalizations(newNormalizations);
+        retBuilder.normalizations(newNormalizations);
       }
 
       // calling custom deserializer for source
       Source newSource = (Source) new Source().deserialize(JSON.serialize(ret.getSource()), (Map<String, Object>) jsonMap.get('source'), Source.class);
-      retBuilder.setSource(newSource);
+      retBuilder.source(newSource);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('configurationId', 'configuration_id');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'configurationId', 'configuration_id');
       if (conversions != null) {
-        mapping.putAll(conversions.getSdkToApiMapping());
+        mapping.putAll(conversions.addToSdkToApiMapping(parentLabel + 'conversions/', mapping));
       }
       if (enrichments != null && enrichments[0] != null) {
-        mapping.putAll(enrichments[0].getSdkToApiMapping());
+        mapping.putAll(enrichments[0].addToSdkToApiMapping(parentLabel + 'enrichments/', mapping));
       }
       if (normalizations != null && normalizations[0] != null) {
-        mapping.putAll(normalizations[0].getSdkToApiMapping());
+        mapping.putAll(normalizations[0].addToSdkToApiMapping(parentLabel + 'normalizations/', mapping));
       }
       if (source != null) {
-        mapping.putAll(source.getSdkToApiMapping());
+        mapping.putAll(source.addToSdkToApiMapping(parentLabel + 'source/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('configuration_id', 'configurationId');
-      if (conversions != null) {
-        mapping.putAll(conversions.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (enrichments != null && enrichments[0] != null) {
-        mapping.putAll(enrichments[0].getApiToSdkMapping());
-      }
-      if (normalizations != null && normalizations[0] != null) {
-        mapping.putAll(normalizations[0].getApiToSdkMapping());
-      }
-      if (source != null) {
-        mapping.putAll(source.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'configuration_id', 'configurationId');
+      mapping.putAll(((IBMWatsonGenericModel) Conversions.class.newInstance()).addToApiToSdkMapping(parentLabel + 'conversions/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Enrichment.class.newInstance()).addToApiToSdkMapping(parentLabel + 'enrichments/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) NormalizationOperation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'normalizations/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) Source.class.newInstance()).addToApiToSdkMapping(parentLabel + 'source/', mapping));
       return mapping;
     }
   }
@@ -1309,7 +1302,7 @@ public class IBMDiscoveryV1Models {
      * @param configurationId the configurationId
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setConfigurationId(String configurationId) {
+    public ConfigurationBuilder configurationId(String configurationId) {
       this.configurationId = configurationId;
       return this;
     }
@@ -1320,7 +1313,7 @@ public class IBMDiscoveryV1Models {
      * @param name the name
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setName(String name) {
+    public ConfigurationBuilder name(String name) {
       this.name = name;
       return this;
     }
@@ -1331,7 +1324,7 @@ public class IBMDiscoveryV1Models {
      * @param created the created
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setCreated(Datetime created) {
+    public ConfigurationBuilder created(Datetime created) {
       this.created = created;
       return this;
     }
@@ -1342,7 +1335,7 @@ public class IBMDiscoveryV1Models {
      * @param updated the updated
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setUpdated(Datetime updated) {
+    public ConfigurationBuilder updated(Datetime updated) {
       this.updated = updated;
       return this;
     }
@@ -1353,7 +1346,7 @@ public class IBMDiscoveryV1Models {
      * @param description the description
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setDescription(String description) {
+    public ConfigurationBuilder description(String description) {
       this.description = description;
       return this;
     }
@@ -1364,7 +1357,7 @@ public class IBMDiscoveryV1Models {
      * @param conversions the conversions
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setConversions(Conversions conversions) {
+    public ConfigurationBuilder conversions(Conversions conversions) {
       this.conversions = conversions;
       return this;
     }
@@ -1376,7 +1369,7 @@ public class IBMDiscoveryV1Models {
      * @param enrichments the enrichments
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setEnrichments(List<Enrichment> enrichments) {
+    public ConfigurationBuilder enrichments(List<Enrichment> enrichments) {
       this.enrichments = enrichments;
       return this;
     }
@@ -1388,7 +1381,7 @@ public class IBMDiscoveryV1Models {
      * @param normalizations the normalizations
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setNormalizations(List<NormalizationOperation> normalizations) {
+    public ConfigurationBuilder normalizations(List<NormalizationOperation> normalizations) {
       this.normalizations = normalizations;
       return this;
     }
@@ -1399,7 +1392,7 @@ public class IBMDiscoveryV1Models {
      * @param source the source
      * @return the Configuration builder
      */
-    public ConfigurationBuilder setSource(Source source) {
+    public ConfigurationBuilder source(Source source) {
       this.source = source;
       return this;
     }
@@ -1421,7 +1414,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public Conversions() { }
- 
+
     /**
      * Gets the pdf.
      *
@@ -1433,7 +1426,7 @@ public class IBMDiscoveryV1Models {
     public PdfSettings getPdf() {
       return pdf;
     }
- 
+
     /**
      * Gets the word.
      *
@@ -1445,7 +1438,7 @@ public class IBMDiscoveryV1Models {
     public WordSettings getWord() {
       return word;
     }
- 
+
     /**
      * Gets the html.
      *
@@ -1457,7 +1450,7 @@ public class IBMDiscoveryV1Models {
     public HtmlSettings getHtml() {
       return html;
     }
- 
+
     /**
      * Gets the segment.
      *
@@ -1469,7 +1462,7 @@ public class IBMDiscoveryV1Models {
     public SegmentSettings getSegment() {
       return segment;
     }
- 
+
     /**
      * Gets the jsonNormalizations.
      *
@@ -1482,7 +1475,7 @@ public class IBMDiscoveryV1Models {
     public List<NormalizationOperation> getJsonNormalizations() {
       return jsonNormalizations;
     }
- 
+
     /**
      * Gets the imageTextRecognition.
      *
@@ -1526,19 +1519,19 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for pdf
       PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(ret.getPdf()), (Map<String, Object>) jsonMap.get('pdf'), PdfSettings.class);
-      retBuilder.setPdf(newPdf);
+      retBuilder.pdf(newPdf);
 
       // calling custom deserializer for word
       WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(ret.getWord()), (Map<String, Object>) jsonMap.get('word'), WordSettings.class);
-      retBuilder.setWord(newWord);
+      retBuilder.word(newWord);
 
       // calling custom deserializer for html
       HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html'), HtmlSettings.class);
-      retBuilder.setHtml(newHtml);
+      retBuilder.html(newHtml);
 
       // calling custom deserializer for segment
       SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(ret.getSegment()), (Map<String, Object>) jsonMap.get('segment'), SegmentSettings.class);
-      retBuilder.setSegment(newSegment);
+      retBuilder.segment(newSegment);
 
       // calling custom deserializer for jsonNormalizations
       List<NormalizationOperation> newJsonNormalizations = new List<NormalizationOperation>();
@@ -1550,53 +1543,41 @@ public class IBMDiscoveryV1Models {
           NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newJsonNormalizations.add(newItem);
         }
-        retBuilder.setJsonNormalizations(newJsonNormalizations);
+        retBuilder.jsonNormalizations(newJsonNormalizations);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (pdf != null) {
-        mapping.putAll(pdf.getSdkToApiMapping());
+        mapping.putAll(pdf.addToSdkToApiMapping(parentLabel + 'pdf/', mapping));
       }
       if (word != null) {
-        mapping.putAll(word.getSdkToApiMapping());
+        mapping.putAll(word.addToSdkToApiMapping(parentLabel + 'word/', mapping));
       }
       if (html != null) {
-        mapping.putAll(html.getSdkToApiMapping());
+        mapping.putAll(html.addToSdkToApiMapping(parentLabel + 'html/', mapping));
       }
       if (segment != null) {
-        mapping.putAll(segment.getSdkToApiMapping());
+        mapping.putAll(segment.addToSdkToApiMapping(parentLabel + 'segment/', mapping));
       }
-      mapping.put('jsonNormalizations', 'json_normalizations');
+      mapping.put(parentLabel + 'jsonNormalizations', 'json_normalizations');
       if (jsonNormalizations != null && jsonNormalizations[0] != null) {
-        mapping.putAll(jsonNormalizations[0].getSdkToApiMapping());
+        mapping.putAll(jsonNormalizations[0].addToSdkToApiMapping(parentLabel + 'jsonNormalizations/', mapping));
       }
-      mapping.put('imageTextRecognition', 'image_text_recognition');
+      mapping.put(parentLabel + 'imageTextRecognition', 'image_text_recognition');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (pdf != null) {
-        mapping.putAll(pdf.getApiToSdkMapping());
-      }
-      if (word != null) {
-        mapping.putAll(word.getApiToSdkMapping());
-      }
-      if (html != null) {
-        mapping.putAll(html.getApiToSdkMapping());
-      }
-      if (segment != null) {
-        mapping.putAll(segment.getApiToSdkMapping());
-      }
-      mapping.put('json_normalizations', 'jsonNormalizations');
-      if (jsonNormalizations != null && jsonNormalizations[0] != null) {
-        mapping.putAll(jsonNormalizations[0].getApiToSdkMapping());
-      }
-      mapping.put('image_text_recognition', 'imageTextRecognition');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) PdfSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pdf/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) WordSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'word/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) HtmlSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'html/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) SegmentSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'segment/', mapping));
+      mapping.put(parentLabel + 'json_normalizations', 'jsonNormalizations');
+      mapping.putAll(((IBMWatsonGenericModel) NormalizationOperation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'json_normalizations/', mapping));
+      mapping.put(parentLabel + 'image_text_recognition', 'imageTextRecognition');
       return mapping;
     }
   }
@@ -1657,7 +1638,7 @@ public class IBMDiscoveryV1Models {
      * @param pdf the pdf
      * @return the Conversions builder
      */
-    public ConversionsBuilder setPdf(PdfSettings pdf) {
+    public ConversionsBuilder pdf(PdfSettings pdf) {
       this.pdf = pdf;
       return this;
     }
@@ -1668,7 +1649,7 @@ public class IBMDiscoveryV1Models {
      * @param word the word
      * @return the Conversions builder
      */
-    public ConversionsBuilder setWord(WordSettings word) {
+    public ConversionsBuilder word(WordSettings word) {
       this.word = word;
       return this;
     }
@@ -1679,7 +1660,7 @@ public class IBMDiscoveryV1Models {
      * @param html the html
      * @return the Conversions builder
      */
-    public ConversionsBuilder setHtml(HtmlSettings html) {
+    public ConversionsBuilder html(HtmlSettings html) {
       this.html = html;
       return this;
     }
@@ -1690,7 +1671,7 @@ public class IBMDiscoveryV1Models {
      * @param segment the segment
      * @return the Conversions builder
      */
-    public ConversionsBuilder setSegment(SegmentSettings segment) {
+    public ConversionsBuilder segment(SegmentSettings segment) {
       this.segment = segment;
       return this;
     }
@@ -1702,7 +1683,7 @@ public class IBMDiscoveryV1Models {
      * @param jsonNormalizations the jsonNormalizations
      * @return the Conversions builder
      */
-    public ConversionsBuilder setJsonNormalizations(List<NormalizationOperation> jsonNormalizations) {
+    public ConversionsBuilder jsonNormalizations(List<NormalizationOperation> jsonNormalizations) {
       this.jsonNormalizations = jsonNormalizations;
       return this;
     }
@@ -1713,7 +1694,7 @@ public class IBMDiscoveryV1Models {
      * @param imageTextRecognition the imageTextRecognition
      * @return the Conversions builder
      */
-    public ConversionsBuilder setImageTextRecognition(Boolean imageTextRecognition) {
+    public ConversionsBuilder imageTextRecognition(Boolean imageTextRecognition) {
       this.imageTextRecognition = imageTextRecognition;
       return this;
     }
@@ -2041,16 +2022,16 @@ public class IBMDiscoveryV1Models {
       Map<String, String> mapping = new Map<String, String>();
       mapping.put('environmentId', 'environment_id');
       if (conversions != null) {
-        mapping.putAll(conversions.getSdkToApiMapping());
+        mapping.putAll(conversions.addToSdkToApiMapping('', mapping));
       }
       if (enrichments != null && enrichments[0] != null) {
-        mapping.putAll(enrichments[0].getSdkToApiMapping());
+        mapping.putAll(enrichments[0].addToSdkToApiMapping('', mapping));
       }
       if (normalizations != null && normalizations[0] != null) {
-        mapping.putAll(normalizations[0].getSdkToApiMapping());
+        mapping.putAll(normalizations[0].addToSdkToApiMapping('', mapping));
       }
       if (source != null) {
-        mapping.putAll(source.getSdkToApiMapping());
+        mapping.putAll(source.addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -2329,7 +2310,7 @@ public class IBMDiscoveryV1Models {
       mapping.put('sourceType', 'source_type');
       mapping.put('credentialDetails', 'credential_details');
       if (credentialDetails != null) {
-        mapping.putAll(credentialDetails.getSdkToApiMapping());
+        mapping.putAll(credentialDetails.addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -2641,7 +2622,7 @@ public class IBMDiscoveryV1Models {
       Map<String, String> mapping = new Map<String, String>();
       mapping.put('xtype', 'type');
       if (data != null) {
-        mapping.putAll(data.getSdkToApiMapping());
+        mapping.putAll(data.addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -2727,7 +2708,7 @@ public class IBMDiscoveryV1Models {
   public class CreateEventResponse extends IBMWatsonResponseModel {
     private String xtype;
     private EventData data;
- 
+
     /**
      * Gets the xtype.
      *
@@ -2739,7 +2720,7 @@ public class IBMDiscoveryV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the data.
      *
@@ -2784,12 +2765,13 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      if (data != null) {
-        mapping.putAll(data.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.putAll(((IBMWatsonGenericModel) EventData.class.newInstance()).addToApiToSdkMapping(parentLabel + 'data/', mapping));
       return mapping;
     }
   }
@@ -2871,7 +2853,7 @@ public class IBMDiscoveryV1Models {
       mapping.put('environmentId', 'environment_id');
       mapping.put('collectionId', 'collection_id');
       if (expansions != null && expansions[0] != null) {
-        mapping.putAll(expansions[0].getSdkToApiMapping());
+        mapping.putAll(expansions[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -3371,7 +3353,7 @@ public class IBMDiscoveryV1Models {
       mapping.put('collectionId', 'collection_id');
       mapping.put('tokenizationRules', 'tokenization_rules');
       if (tokenizationRules != null && tokenizationRules[0] != null) {
-        mapping.putAll(tokenizationRules[0].getSdkToApiMapping());
+        mapping.putAll(tokenizationRules[0].addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -3762,7 +3744,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public CredentialDetails() { }
- 
+
     /**
      * Gets the credentialType.
      *
@@ -3782,7 +3764,7 @@ public class IBMDiscoveryV1Models {
     public String getCredentialType() {
       return credentialType;
     }
- 
+
     /**
      * Gets the clientId.
      *
@@ -3795,7 +3777,7 @@ public class IBMDiscoveryV1Models {
     public String getClientId() {
       return clientId;
     }
- 
+
     /**
      * Gets the enterpriseId.
      *
@@ -3808,7 +3790,7 @@ public class IBMDiscoveryV1Models {
     public String getEnterpriseId() {
       return enterpriseId;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -3821,7 +3803,7 @@ public class IBMDiscoveryV1Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the username.
      *
@@ -3834,7 +3816,7 @@ public class IBMDiscoveryV1Models {
     public String getUsername() {
       return username;
     }
- 
+
     /**
      * Gets the organizationUrl.
      *
@@ -3847,7 +3829,7 @@ public class IBMDiscoveryV1Models {
     public String getOrganizationUrl() {
       return organizationUrl;
     }
- 
+
     /**
      * Gets the siteCollectionPath.
      *
@@ -3860,7 +3842,7 @@ public class IBMDiscoveryV1Models {
     public String getSiteCollectionPath() {
       return siteCollectionPath;
     }
- 
+
     /**
      * Gets the clientSecret.
      *
@@ -3874,7 +3856,7 @@ public class IBMDiscoveryV1Models {
     public String getClientSecret() {
       return clientSecret;
     }
- 
+
     /**
      * Gets the publicKeyId.
      *
@@ -3888,7 +3870,7 @@ public class IBMDiscoveryV1Models {
     public String getPublicKeyId() {
       return publicKeyId;
     }
- 
+
     /**
      * Gets the privateKey.
      *
@@ -3902,7 +3884,7 @@ public class IBMDiscoveryV1Models {
     public String getPrivateKey() {
       return privateKey;
     }
- 
+
     /**
      * Gets the passphrase.
      *
@@ -3916,7 +3898,7 @@ public class IBMDiscoveryV1Models {
     public String getPassphrase() {
       return passphrase;
     }
- 
+
     /**
      * Gets the password.
      *
@@ -3933,7 +3915,7 @@ public class IBMDiscoveryV1Models {
     public String getPassword() {
       return password;
     }
- 
+
     /**
      * Gets the gatewayId.
      *
@@ -3947,7 +3929,7 @@ public class IBMDiscoveryV1Models {
     public String getGatewayId() {
       return gatewayId;
     }
- 
+
     /**
      * Gets the sourceVersion.
      *
@@ -3960,7 +3942,7 @@ public class IBMDiscoveryV1Models {
     public String getSourceVersion() {
       return sourceVersion;
     }
- 
+
     /**
      * Gets the webApplicationUrl.
      *
@@ -3973,7 +3955,7 @@ public class IBMDiscoveryV1Models {
     public String getWebApplicationUrl() {
       return webApplicationUrl;
     }
- 
+
     /**
      * Gets the domain.
      *
@@ -3986,7 +3968,7 @@ public class IBMDiscoveryV1Models {
     public String getDomain() {
       return domain;
     }
- 
+
     /**
      * Gets the endpoint.
      *
@@ -3999,7 +3981,7 @@ public class IBMDiscoveryV1Models {
     public String getEndpoint() {
       return endpoint;
     }
- 
+
     /**
      * Gets the accessKeyId.
      *
@@ -4014,7 +3996,7 @@ public class IBMDiscoveryV1Models {
     public String getAccessKeyId() {
       return accessKeyId;
     }
- 
+
     /**
      * Gets the secretAccessKey.
      *
@@ -4061,39 +4043,45 @@ public class IBMDiscoveryV1Models {
       return new CredentialDetailsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('credentialType', 'credential_type');
-      mapping.put('clientId', 'client_id');
-      mapping.put('enterpriseId', 'enterprise_id');
-      mapping.put('organizationUrl', 'organization_url');
-      mapping.put('siteCollectionPath', 'site_collection.path');
-      mapping.put('clientSecret', 'client_secret');
-      mapping.put('publicKeyId', 'public_key_id');
-      mapping.put('privateKey', 'private_key');
-      mapping.put('gatewayId', 'gateway_id');
-      mapping.put('sourceVersion', 'source_version');
-      mapping.put('webApplicationUrl', 'web_application_url');
-      mapping.put('accessKeyId', 'access_key_id');
-      mapping.put('secretAccessKey', 'secret_access_key');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'credentialType', 'credential_type');
+      mapping.put(parentLabel + 'clientId', 'client_id');
+      mapping.put(parentLabel + 'enterpriseId', 'enterprise_id');
+      mapping.put(parentLabel + 'organizationUrl', 'organization_url');
+      mapping.put(parentLabel + 'siteCollectionPath', 'site_collection.path');
+      mapping.put(parentLabel + 'clientSecret', 'client_secret');
+      mapping.put(parentLabel + 'publicKeyId', 'public_key_id');
+      mapping.put(parentLabel + 'privateKey', 'private_key');
+      mapping.put(parentLabel + 'gatewayId', 'gateway_id');
+      mapping.put(parentLabel + 'sourceVersion', 'source_version');
+      mapping.put(parentLabel + 'webApplicationUrl', 'web_application_url');
+      mapping.put(parentLabel + 'accessKeyId', 'access_key_id');
+      mapping.put(parentLabel + 'secretAccessKey', 'secret_access_key');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('credential_type', 'credentialType');
-      mapping.put('client_id', 'clientId');
-      mapping.put('enterprise_id', 'enterpriseId');
-      mapping.put('organization_url', 'organizationUrl');
-      mapping.put('site_collection.path', 'siteCollectionPath');
-      mapping.put('client_secret', 'clientSecret');
-      mapping.put('public_key_id', 'publicKeyId');
-      mapping.put('private_key', 'privateKey');
-      mapping.put('gateway_id', 'gatewayId');
-      mapping.put('source_version', 'sourceVersion');
-      mapping.put('web_application_url', 'webApplicationUrl');
-      mapping.put('access_key_id', 'accessKeyId');
-      mapping.put('secret_access_key', 'secretAccessKey');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'credential_type', 'credentialType');
+      mapping.put(parentLabel + 'client_id', 'clientId');
+      mapping.put(parentLabel + 'enterprise_id', 'enterpriseId');
+      mapping.put(parentLabel + 'organization_url', 'organizationUrl');
+      mapping.put(parentLabel + 'site_collection.path', 'siteCollectionPath');
+      mapping.put(parentLabel + 'client_secret', 'clientSecret');
+      mapping.put(parentLabel + 'public_key_id', 'publicKeyId');
+      mapping.put(parentLabel + 'private_key', 'privateKey');
+      mapping.put(parentLabel + 'gateway_id', 'gatewayId');
+      mapping.put(parentLabel + 'source_version', 'sourceVersion');
+      mapping.put(parentLabel + 'web_application_url', 'webApplicationUrl');
+      mapping.put(parentLabel + 'access_key_id', 'accessKeyId');
+      mapping.put(parentLabel + 'secret_access_key', 'secretAccessKey');
       return mapping;
     }
   }
@@ -4165,7 +4153,7 @@ public class IBMDiscoveryV1Models {
      * @param credentialType the credentialType
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setCredentialType(String credentialType) {
+    public CredentialDetailsBuilder credentialType(String credentialType) {
       this.credentialType = credentialType;
       return this;
     }
@@ -4176,7 +4164,7 @@ public class IBMDiscoveryV1Models {
      * @param clientId the clientId
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setClientId(String clientId) {
+    public CredentialDetailsBuilder clientId(String clientId) {
       this.clientId = clientId;
       return this;
     }
@@ -4187,7 +4175,7 @@ public class IBMDiscoveryV1Models {
      * @param enterpriseId the enterpriseId
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setEnterpriseId(String enterpriseId) {
+    public CredentialDetailsBuilder enterpriseId(String enterpriseId) {
       this.enterpriseId = enterpriseId;
       return this;
     }
@@ -4198,7 +4186,7 @@ public class IBMDiscoveryV1Models {
      * @param url the url
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setUrl(String url) {
+    public CredentialDetailsBuilder url(String url) {
       this.url = url;
       return this;
     }
@@ -4209,7 +4197,7 @@ public class IBMDiscoveryV1Models {
      * @param username the username
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setUsername(String username) {
+    public CredentialDetailsBuilder username(String username) {
       this.username = username;
       return this;
     }
@@ -4220,7 +4208,7 @@ public class IBMDiscoveryV1Models {
      * @param organizationUrl the organizationUrl
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setOrganizationUrl(String organizationUrl) {
+    public CredentialDetailsBuilder organizationUrl(String organizationUrl) {
       this.organizationUrl = organizationUrl;
       return this;
     }
@@ -4231,7 +4219,7 @@ public class IBMDiscoveryV1Models {
      * @param siteCollectionPath the siteCollectionPath
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setSiteCollectionPath(String siteCollectionPath) {
+    public CredentialDetailsBuilder siteCollectionPath(String siteCollectionPath) {
       this.siteCollectionPath = siteCollectionPath;
       return this;
     }
@@ -4242,7 +4230,7 @@ public class IBMDiscoveryV1Models {
      * @param clientSecret the clientSecret
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setClientSecret(String clientSecret) {
+    public CredentialDetailsBuilder clientSecret(String clientSecret) {
       this.clientSecret = clientSecret;
       return this;
     }
@@ -4253,7 +4241,7 @@ public class IBMDiscoveryV1Models {
      * @param publicKeyId the publicKeyId
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setPublicKeyId(String publicKeyId) {
+    public CredentialDetailsBuilder publicKeyId(String publicKeyId) {
       this.publicKeyId = publicKeyId;
       return this;
     }
@@ -4264,7 +4252,7 @@ public class IBMDiscoveryV1Models {
      * @param privateKey the privateKey
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setPrivateKey(String privateKey) {
+    public CredentialDetailsBuilder privateKey(String privateKey) {
       this.privateKey = privateKey;
       return this;
     }
@@ -4275,7 +4263,7 @@ public class IBMDiscoveryV1Models {
      * @param passphrase the passphrase
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setPassphrase(String passphrase) {
+    public CredentialDetailsBuilder passphrase(String passphrase) {
       this.passphrase = passphrase;
       return this;
     }
@@ -4286,7 +4274,7 @@ public class IBMDiscoveryV1Models {
      * @param password the password
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setPassword(String password) {
+    public CredentialDetailsBuilder password(String password) {
       this.password = password;
       return this;
     }
@@ -4297,7 +4285,7 @@ public class IBMDiscoveryV1Models {
      * @param gatewayId the gatewayId
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setGatewayId(String gatewayId) {
+    public CredentialDetailsBuilder gatewayId(String gatewayId) {
       this.gatewayId = gatewayId;
       return this;
     }
@@ -4308,7 +4296,7 @@ public class IBMDiscoveryV1Models {
      * @param sourceVersion the sourceVersion
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setSourceVersion(String sourceVersion) {
+    public CredentialDetailsBuilder sourceVersion(String sourceVersion) {
       this.sourceVersion = sourceVersion;
       return this;
     }
@@ -4319,7 +4307,7 @@ public class IBMDiscoveryV1Models {
      * @param webApplicationUrl the webApplicationUrl
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setWebApplicationUrl(String webApplicationUrl) {
+    public CredentialDetailsBuilder webApplicationUrl(String webApplicationUrl) {
       this.webApplicationUrl = webApplicationUrl;
       return this;
     }
@@ -4330,7 +4318,7 @@ public class IBMDiscoveryV1Models {
      * @param domain the domain
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setDomain(String domain) {
+    public CredentialDetailsBuilder domain(String domain) {
       this.domain = domain;
       return this;
     }
@@ -4341,7 +4329,7 @@ public class IBMDiscoveryV1Models {
      * @param endpoint the endpoint
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setEndpoint(String endpoint) {
+    public CredentialDetailsBuilder endpoint(String endpoint) {
       this.endpoint = endpoint;
       return this;
     }
@@ -4352,7 +4340,7 @@ public class IBMDiscoveryV1Models {
      * @param accessKeyId the accessKeyId
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setAccessKeyId(String accessKeyId) {
+    public CredentialDetailsBuilder accessKeyId(String accessKeyId) {
       this.accessKeyId = accessKeyId;
       return this;
     }
@@ -4363,7 +4351,7 @@ public class IBMDiscoveryV1Models {
      * @param secretAccessKey the secretAccessKey
      * @return the CredentialDetails builder
      */
-    public CredentialDetailsBuilder setSecretAccessKey(String secretAccessKey) {
+    public CredentialDetailsBuilder secretAccessKey(String secretAccessKey) {
       this.secretAccessKey = secretAccessKey;
       return this;
     }
@@ -4383,7 +4371,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public Credentials() { }
- 
+
     /**
      * Gets the credentialId.
      *
@@ -4395,7 +4383,7 @@ public class IBMDiscoveryV1Models {
     public String getCredentialId() {
       return credentialId;
     }
- 
+
     /**
      * Gets the sourceType.
      *
@@ -4412,7 +4400,7 @@ public class IBMDiscoveryV1Models {
     public String getSourceType() {
       return sourceType;
     }
- 
+
     /**
      * Gets the credentialDetails.
      *
@@ -4426,7 +4414,7 @@ public class IBMDiscoveryV1Models {
     public CredentialDetails getCredentialDetails() {
       return credentialDetails;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -4467,30 +4455,34 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for credentialDetails
       CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(ret.getCredentialDetails()), (Map<String, Object>) jsonMap.get('credentialDetails'), CredentialDetails.class);
-      retBuilder.setCredentialDetails(newCredentialDetails);
+      retBuilder.credentialDetails(newCredentialDetails);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('credentialId', 'credential_id');
-      mapping.put('sourceType', 'source_type');
-      mapping.put('credentialDetails', 'credential_details');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'credentialId', 'credential_id');
+      mapping.put(parentLabel + 'sourceType', 'source_type');
+      mapping.put(parentLabel + 'credentialDetails', 'credential_details');
       if (credentialDetails != null) {
-        mapping.putAll(credentialDetails.getSdkToApiMapping());
+        mapping.putAll(credentialDetails.addToSdkToApiMapping(parentLabel + 'credentialDetails/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('credential_id', 'credentialId');
-      mapping.put('source_type', 'sourceType');
-      mapping.put('credential_details', 'credentialDetails');
-      if (credentialDetails != null) {
-        mapping.putAll(credentialDetails.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'credential_id', 'credentialId');
+      mapping.put(parentLabel + 'source_type', 'sourceType');
+      mapping.put(parentLabel + 'credential_details', 'credentialDetails');
+      mapping.putAll(((IBMWatsonGenericModel) CredentialDetails.class.newInstance()).addToApiToSdkMapping(parentLabel + 'credential_details/', mapping));
       return mapping;
     }
   }
@@ -4532,7 +4524,7 @@ public class IBMDiscoveryV1Models {
      * @param credentialId the credentialId
      * @return the Credentials builder
      */
-    public CredentialsBuilder setCredentialId(String credentialId) {
+    public CredentialsBuilder credentialId(String credentialId) {
       this.credentialId = credentialId;
       return this;
     }
@@ -4543,7 +4535,7 @@ public class IBMDiscoveryV1Models {
      * @param sourceType the sourceType
      * @return the Credentials builder
      */
-    public CredentialsBuilder setSourceType(String sourceType) {
+    public CredentialsBuilder sourceType(String sourceType) {
       this.sourceType = sourceType;
       return this;
     }
@@ -4554,7 +4546,7 @@ public class IBMDiscoveryV1Models {
      * @param credentialDetails the credentialDetails
      * @return the Credentials builder
      */
-    public CredentialsBuilder setCredentialDetails(CredentialDetails credentialDetails) {
+    public CredentialsBuilder credentialDetails(CredentialDetails credentialDetails) {
       this.credentialDetails = credentialDetails;
       return this;
     }
@@ -4565,7 +4557,7 @@ public class IBMDiscoveryV1Models {
      * @param status the status
      * @return the Credentials builder
      */
-    public CredentialsBuilder setStatus(String status) {
+    public CredentialsBuilder status(String status) {
       this.status = status;
       return this;
     }
@@ -4576,7 +4568,7 @@ public class IBMDiscoveryV1Models {
    */
   public class CredentialsList extends IBMWatsonResponseModel {
     private List<Credentials> credentials;
- 
+
     /**
      * Gets the credentials.
      *
@@ -4621,11 +4613,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (credentials != null && credentials[0] != null) {
-        mapping.putAll(credentials[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Credentials.class.newInstance()).addToApiToSdkMapping(parentLabel + 'credentials/', mapping));
       return mapping;
     }
   }
@@ -6360,7 +6349,7 @@ public class IBMDiscoveryV1Models {
   public class DiskUsage extends IBMWatsonGenericModel {
     private Long usedBytes;
     private Long maximumAllowedBytes;
- 
+
     /**
      * Gets the usedBytes.
      *
@@ -6372,7 +6361,7 @@ public class IBMDiscoveryV1Models {
     public Long getUsedBytes() {
       return usedBytes;
     }
- 
+
     /**
      * Gets the maximumAllowedBytes.
      *
@@ -6385,10 +6374,13 @@ public class IBMDiscoveryV1Models {
       return maximumAllowedBytes;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('used_bytes', 'usedBytes');
-      mapping.put('maximum_allowed_bytes', 'maximumAllowedBytes');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'used_bytes', 'usedBytes');
+      mapping.put(parentLabel + 'maximum_allowed_bytes', 'maximumAllowedBytes');
       return mapping;
     }
   }
@@ -6400,7 +6392,7 @@ public class IBMDiscoveryV1Models {
     private String documentId;
     private String status;
     private List<Notice> notices;
- 
+
     /**
      * Gets the documentId.
      *
@@ -6412,7 +6404,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -6425,7 +6417,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the notices.
      *
@@ -6488,12 +6480,13 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_id', 'documentId');
-      if (notices != null && notices[0] != null) {
-        mapping.putAll(notices[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.putAll(((IBMWatsonGenericModel) Notice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'notices/', mapping));
       return mapping;
     }
   }
@@ -6506,7 +6499,7 @@ public class IBMDiscoveryV1Models {
     private Long processing;
     private Long failed;
     private Long pending;
- 
+
     /**
      * Gets the available.
      *
@@ -6518,7 +6511,7 @@ public class IBMDiscoveryV1Models {
     public Long getAvailable() {
       return available;
     }
- 
+
     /**
      * Gets the processing.
      *
@@ -6530,7 +6523,7 @@ public class IBMDiscoveryV1Models {
     public Long getProcessing() {
       return processing;
     }
- 
+
     /**
      * Gets the failed.
      *
@@ -6542,7 +6535,7 @@ public class IBMDiscoveryV1Models {
     public Long getFailed() {
       return failed;
     }
- 
+
     /**
      * Gets the pending.
      *
@@ -6562,7 +6555,7 @@ public class IBMDiscoveryV1Models {
   public class DocumentSnapshot extends IBMWatsonGenericModel {
     private String step;
     private IBMWatsonMapModel snapshot;
- 
+
     /**
      * Gets the step.
      *
@@ -6574,7 +6567,7 @@ public class IBMDiscoveryV1Models {
     public String getStep() {
       return step;
     }
- 
+
     /**
      * Gets the snapshot.
      *
@@ -6632,7 +6625,7 @@ public class IBMDiscoveryV1Models {
     private String fileType;
     private String sha1;
     private List<Notice> notices;
- 
+
     /**
      * Gets the documentId.
      *
@@ -6644,7 +6637,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the configurationId.
      *
@@ -6656,7 +6649,7 @@ public class IBMDiscoveryV1Models {
     public String getConfigurationId() {
       return configurationId;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -6668,7 +6661,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the statusDescription.
      *
@@ -6680,7 +6673,7 @@ public class IBMDiscoveryV1Models {
     public String getStatusDescription() {
       return statusDescription;
     }
- 
+
     /**
      * Gets the filename.
      *
@@ -6692,7 +6685,7 @@ public class IBMDiscoveryV1Models {
     public String getFilename() {
       return filename;
     }
- 
+
     /**
      * Gets the fileType.
      *
@@ -6704,7 +6697,7 @@ public class IBMDiscoveryV1Models {
     public String getFileType() {
       return fileType;
     }
- 
+
     /**
      * Gets the sha1.
      *
@@ -6716,7 +6709,7 @@ public class IBMDiscoveryV1Models {
     public String getSha1() {
       return sha1;
     }
- 
+
     /**
      * Gets the notices.
      *
@@ -6779,15 +6772,16 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_id', 'documentId');
-      mapping.put('configuration_id', 'configurationId');
-      mapping.put('status_description', 'statusDescription');
-      mapping.put('file_type', 'fileType');
-      if (notices != null && notices[0] != null) {
-        mapping.putAll(notices[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'configuration_id', 'configurationId');
+      mapping.put(parentLabel + 'status_description', 'statusDescription');
+      mapping.put(parentLabel + 'file_type', 'fileType');
+      mapping.putAll(((IBMWatsonGenericModel) Notice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'notices/', mapping));
       return mapping;
     }
   }
@@ -6809,7 +6803,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public Enrichment() { }
- 
+
     /**
      * Gets the description.
      *
@@ -6821,7 +6815,7 @@ public class IBMDiscoveryV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the destinationField.
      *
@@ -6835,7 +6829,7 @@ public class IBMDiscoveryV1Models {
     public String getDestinationField() {
       return destinationField;
     }
- 
+
     /**
      * Gets the sourceField.
      *
@@ -6850,7 +6844,7 @@ public class IBMDiscoveryV1Models {
     public String getSourceField() {
       return sourceField;
     }
- 
+
     /**
      * Gets the overwrite.
      *
@@ -6862,7 +6856,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getOverwrite() {
       return overwrite;
     }
- 
+
     /**
      * Gets the enrichmentName.
      *
@@ -6882,7 +6876,7 @@ public class IBMDiscoveryV1Models {
     public String getEnrichmentName() {
       return enrichmentName;
     }
- 
+
     /**
      * Gets the ignoreDownstreamErrors.
      *
@@ -6895,7 +6889,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getIgnoreDownstreamErrors() {
       return ignoreDownstreamErrors;
     }
- 
+
     /**
      * Gets the options.
      *
@@ -6940,32 +6934,28 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for options
       EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options'), EnrichmentOptions.class);
-      retBuilder.setOptions(newOptions);
+      retBuilder.options(newOptions);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('destinationField', 'destination_field');
-      mapping.put('sourceField', 'source_field');
-      mapping.put('enrichmentName', 'enrichment');
-      mapping.put('ignoreDownstreamErrors', 'ignore_downstream_errors');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'destinationField', 'destination_field');
+      mapping.put(parentLabel + 'sourceField', 'source_field');
+      mapping.put(parentLabel + 'enrichmentName', 'enrichment');
+      mapping.put(parentLabel + 'ignoreDownstreamErrors', 'ignore_downstream_errors');
       if (options != null) {
-        mapping.putAll(options.getSdkToApiMapping());
+        mapping.putAll(options.addToSdkToApiMapping(parentLabel + 'options/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('destination_field', 'destinationField');
-      mapping.put('source_field', 'sourceField');
-      mapping.put('enrichment', 'enrichmentName');
-      mapping.put('ignore_downstream_errors', 'ignoreDownstreamErrors');
-      if (options != null) {
-        mapping.putAll(options.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'destination_field', 'destinationField');
+      mapping.put(parentLabel + 'source_field', 'sourceField');
+      mapping.put(parentLabel + 'enrichment', 'enrichmentName');
+      mapping.put(parentLabel + 'ignore_downstream_errors', 'ignoreDownstreamErrors');
+      mapping.putAll(((IBMWatsonGenericModel) EnrichmentOptions.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
       return mapping;
     }
   }
@@ -7026,7 +7016,7 @@ public class IBMDiscoveryV1Models {
      * @param description the description
      * @return the Enrichment builder
      */
-    public EnrichmentBuilder setDescription(String description) {
+    public EnrichmentBuilder description(String description) {
       this.description = description;
       return this;
     }
@@ -7037,7 +7027,7 @@ public class IBMDiscoveryV1Models {
      * @param destinationField the destinationField
      * @return the Enrichment builder
      */
-    public EnrichmentBuilder setDestinationField(String destinationField) {
+    public EnrichmentBuilder destinationField(String destinationField) {
       this.destinationField = destinationField;
       return this;
     }
@@ -7048,7 +7038,7 @@ public class IBMDiscoveryV1Models {
      * @param sourceField the sourceField
      * @return the Enrichment builder
      */
-    public EnrichmentBuilder setSourceField(String sourceField) {
+    public EnrichmentBuilder sourceField(String sourceField) {
       this.sourceField = sourceField;
       return this;
     }
@@ -7059,7 +7049,7 @@ public class IBMDiscoveryV1Models {
      * @param overwrite the overwrite
      * @return the Enrichment builder
      */
-    public EnrichmentBuilder setOverwrite(Boolean overwrite) {
+    public EnrichmentBuilder overwrite(Boolean overwrite) {
       this.overwrite = overwrite;
       return this;
     }
@@ -7070,7 +7060,7 @@ public class IBMDiscoveryV1Models {
      * @param enrichmentName the enrichmentName
      * @return the Enrichment builder
      */
-    public EnrichmentBuilder setEnrichmentName(String enrichmentName) {
+    public EnrichmentBuilder enrichmentName(String enrichmentName) {
       this.enrichmentName = enrichmentName;
       return this;
     }
@@ -7081,7 +7071,7 @@ public class IBMDiscoveryV1Models {
      * @param ignoreDownstreamErrors the ignoreDownstreamErrors
      * @return the Enrichment builder
      */
-    public EnrichmentBuilder setIgnoreDownstreamErrors(Boolean ignoreDownstreamErrors) {
+    public EnrichmentBuilder ignoreDownstreamErrors(Boolean ignoreDownstreamErrors) {
       this.ignoreDownstreamErrors = ignoreDownstreamErrors;
       return this;
     }
@@ -7092,7 +7082,7 @@ public class IBMDiscoveryV1Models {
      * @param options the options
      * @return the Enrichment builder
      */
-    public EnrichmentBuilder setOptions(EnrichmentOptions options) {
+    public EnrichmentBuilder options(EnrichmentOptions options) {
       this.options = options;
       return this;
     }
@@ -7111,7 +7101,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public EnrichmentOptions() { }
- 
+
     /**
      * Gets the features.
      *
@@ -7121,7 +7111,7 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentFeatures getFeatures() {
       return features;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -7136,7 +7126,7 @@ public class IBMDiscoveryV1Models {
     public String getLanguage() {
       return language;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -7180,19 +7170,15 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (features != null) {
-        mapping.putAll(features.getSdkToApiMapping());
+        mapping.putAll(features.addToSdkToApiMapping(parentLabel + 'features/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (features != null) {
-        mapping.putAll(features.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentFeatures.class.newInstance()).addToApiToSdkMapping(parentLabel + 'features/', mapping));
       return mapping;
     }
   }
@@ -7275,7 +7261,7 @@ public class IBMDiscoveryV1Models {
     private String requestedSize;
     private IndexCapacity indexCapacity;
     private SearchStatus searchStatus;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -7287,7 +7273,7 @@ public class IBMDiscoveryV1Models {
     public String getEnvironmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -7299,7 +7285,7 @@ public class IBMDiscoveryV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -7311,7 +7297,7 @@ public class IBMDiscoveryV1Models {
     public String getDescription() {
       return description;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -7323,7 +7309,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -7335,7 +7321,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getUpdated() {
       return updated;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -7348,7 +7334,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the readOnly.
      *
@@ -7360,7 +7346,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getReadOnly() {
       return readOnly;
     }
- 
+
     /**
      * Gets the size.
      *
@@ -7372,7 +7358,7 @@ public class IBMDiscoveryV1Models {
     public String getSize() {
       return size;
     }
- 
+
     /**
      * Gets the requestedSize.
      *
@@ -7386,7 +7372,7 @@ public class IBMDiscoveryV1Models {
     public String getRequestedSize() {
       return requestedSize;
     }
- 
+
     /**
      * Gets the indexCapacity.
      *
@@ -7398,7 +7384,7 @@ public class IBMDiscoveryV1Models {
     public IndexCapacity getIndexCapacity() {
       return indexCapacity;
     }
- 
+
     /**
      * Gets the searchStatus.
      *
@@ -7483,19 +7469,18 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environment_id', 'environmentId');
-      mapping.put('read_only', 'readOnly');
-      mapping.put('requested_size', 'requestedSize');
-      mapping.put('index_capacity', 'indexCapacity');
-      if (indexCapacity != null) {
-        mapping.putAll(indexCapacity.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('search_status', 'searchStatus');
-      if (searchStatus != null) {
-        mapping.putAll(searchStatus.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'environment_id', 'environmentId');
+      mapping.put(parentLabel + 'read_only', 'readOnly');
+      mapping.put(parentLabel + 'requested_size', 'requestedSize');
+      mapping.put(parentLabel + 'index_capacity', 'indexCapacity');
+      mapping.putAll(((IBMWatsonGenericModel) IndexCapacity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'index_capacity/', mapping));
+      mapping.put(parentLabel + 'search_status', 'searchStatus');
+      mapping.putAll(((IBMWatsonGenericModel) SearchStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'search_status/', mapping));
       return mapping;
     }
   }
@@ -7506,7 +7491,7 @@ public class IBMDiscoveryV1Models {
   public class EnvironmentDocuments extends IBMWatsonGenericModel {
     private Long indexed;
     private Long maximumAllowed;
- 
+
     /**
      * Gets the indexed.
      *
@@ -7518,7 +7503,7 @@ public class IBMDiscoveryV1Models {
     public Long getIndexed() {
       return indexed;
     }
- 
+
     /**
      * Gets the maximumAllowed.
      *
@@ -7531,9 +7516,8 @@ public class IBMDiscoveryV1Models {
       return maximumAllowed;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('maximum_allowed', 'maximumAllowed');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'maximum_allowed', 'maximumAllowed');
       return mapping;
     }
   }
@@ -7555,7 +7539,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public EventData() { }
- 
+
     /**
      * Gets the environmentId.
      *
@@ -7567,7 +7551,7 @@ public class IBMDiscoveryV1Models {
     public String getEnvironmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the sessionToken.
      *
@@ -7579,7 +7563,7 @@ public class IBMDiscoveryV1Models {
     public String getSessionToken() {
       return sessionToken;
     }
- 
+
     /**
      * Gets the clientTimestamp.
      *
@@ -7592,7 +7576,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getClientTimestamp() {
       return clientTimestamp;
     }
- 
+
     /**
      * Gets the displayRank.
      *
@@ -7604,7 +7588,7 @@ public class IBMDiscoveryV1Models {
     public Long getDisplayRank() {
       return displayRank;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -7616,7 +7600,7 @@ public class IBMDiscoveryV1Models {
     public String getCollectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -7628,7 +7612,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -7665,27 +7649,33 @@ public class IBMDiscoveryV1Models {
       return new EventDataBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('sessionToken', 'session_token');
-      mapping.put('clientTimestamp', 'client_timestamp');
-      mapping.put('displayRank', 'display_rank');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('documentId', 'document_id');
-      mapping.put('queryId', 'query_id');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'environmentId', 'environment_id');
+      mapping.put(parentLabel + 'sessionToken', 'session_token');
+      mapping.put(parentLabel + 'clientTimestamp', 'client_timestamp');
+      mapping.put(parentLabel + 'displayRank', 'display_rank');
+      mapping.put(parentLabel + 'collectionId', 'collection_id');
+      mapping.put(parentLabel + 'documentId', 'document_id');
+      mapping.put(parentLabel + 'queryId', 'query_id');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environment_id', 'environmentId');
-      mapping.put('session_token', 'sessionToken');
-      mapping.put('client_timestamp', 'clientTimestamp');
-      mapping.put('display_rank', 'displayRank');
-      mapping.put('collection_id', 'collectionId');
-      mapping.put('document_id', 'documentId');
-      mapping.put('query_id', 'queryId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'environment_id', 'environmentId');
+      mapping.put(parentLabel + 'session_token', 'sessionToken');
+      mapping.put(parentLabel + 'client_timestamp', 'clientTimestamp');
+      mapping.put(parentLabel + 'display_rank', 'displayRank');
+      mapping.put(parentLabel + 'collection_id', 'collectionId');
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'query_id', 'queryId');
       return mapping;
     }
   }
@@ -7748,7 +7738,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      * @return the EventData builder
      */
-    public EventDataBuilder setEnvironmentId(String environmentId) {
+    public EventDataBuilder environmentId(String environmentId) {
       this.environmentId = environmentId;
       return this;
     }
@@ -7759,7 +7749,7 @@ public class IBMDiscoveryV1Models {
      * @param sessionToken the sessionToken
      * @return the EventData builder
      */
-    public EventDataBuilder setSessionToken(String sessionToken) {
+    public EventDataBuilder sessionToken(String sessionToken) {
       this.sessionToken = sessionToken;
       return this;
     }
@@ -7770,7 +7760,7 @@ public class IBMDiscoveryV1Models {
      * @param clientTimestamp the clientTimestamp
      * @return the EventData builder
      */
-    public EventDataBuilder setClientTimestamp(Datetime clientTimestamp) {
+    public EventDataBuilder clientTimestamp(Datetime clientTimestamp) {
       this.clientTimestamp = clientTimestamp;
       return this;
     }
@@ -7781,7 +7771,7 @@ public class IBMDiscoveryV1Models {
      * @param displayRank the displayRank
      * @return the EventData builder
      */
-    public EventDataBuilder setDisplayRank(Long displayRank) {
+    public EventDataBuilder displayRank(Long displayRank) {
       this.displayRank = displayRank;
       return this;
     }
@@ -7792,7 +7782,7 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      * @return the EventData builder
      */
-    public EventDataBuilder setCollectionId(String collectionId) {
+    public EventDataBuilder collectionId(String collectionId) {
       this.collectionId = collectionId;
       return this;
     }
@@ -7803,7 +7793,7 @@ public class IBMDiscoveryV1Models {
      * @param documentId the documentId
      * @return the EventData builder
      */
-    public EventDataBuilder setDocumentId(String documentId) {
+    public EventDataBuilder documentId(String documentId) {
       this.documentId = documentId;
       return this;
     }
@@ -7814,7 +7804,7 @@ public class IBMDiscoveryV1Models {
      * @param queryId the queryId
      * @return the EventData builder
      */
-    public EventDataBuilder setQueryId(String queryId) {
+    public EventDataBuilder queryId(String queryId) {
       this.queryId = queryId;
       return this;
     }
@@ -7833,7 +7823,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public Expansion() { }
- 
+
     /**
      * Gets the inputTerms.
      *
@@ -7845,7 +7835,7 @@ public class IBMDiscoveryV1Models {
     public List<String> getInputTerms() {
       return inputTerms;
     }
- 
+
     /**
      * Gets the expandedTerms.
      *
@@ -7874,17 +7864,23 @@ public class IBMDiscoveryV1Models {
       return new ExpansionBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('inputTerms', 'input_terms');
-      mapping.put('expandedTerms', 'expanded_terms');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'inputTerms', 'input_terms');
+      mapping.put(parentLabel + 'expandedTerms', 'expanded_terms');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('input_terms', 'inputTerms');
-      mapping.put('expanded_terms', 'expandedTerms');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'input_terms', 'inputTerms');
+      mapping.put(parentLabel + 'expanded_terms', 'expandedTerms');
       return mapping;
     }
   }
@@ -7962,7 +7958,7 @@ public class IBMDiscoveryV1Models {
      * @param inputTerms the inputTerms
      * @return the Expansion builder
      */
-    public ExpansionBuilder setInputTerms(List<String> inputTerms) {
+    public ExpansionBuilder inputTerms(List<String> inputTerms) {
       this.inputTerms = inputTerms;
       return this;
     }
@@ -7974,7 +7970,7 @@ public class IBMDiscoveryV1Models {
      * @param expandedTerms the expandedTerms
      * @return the Expansion builder
      */
-    public ExpansionBuilder setExpandedTerms(List<String> expandedTerms) {
+    public ExpansionBuilder expandedTerms(List<String> expandedTerms) {
       this.expandedTerms = expandedTerms;
       return this;
     }
@@ -7991,7 +7987,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public Expansions() { }
- 
+
     /**
      * Gets the expansions.
      *
@@ -8048,25 +8044,21 @@ public class IBMDiscoveryV1Models {
           Expansion newItem = (Expansion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Expansion.class);
           newExpansions.add(newItem);
         }
-        retBuilder.setExpansions(newExpansions);
+        retBuilder.expansions(newExpansions);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (expansions != null && expansions[0] != null) {
-        mapping.putAll(expansions[0].getSdkToApiMapping());
+        mapping.putAll(expansions[0].addToSdkToApiMapping(parentLabel + 'expansions/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (expansions != null && expansions[0] != null) {
-        mapping.putAll(expansions[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Expansion.class.newInstance()).addToApiToSdkMapping(parentLabel + 'expansions/', mapping));
       return mapping;
     }
   }
@@ -8127,7 +8119,7 @@ public class IBMDiscoveryV1Models {
      * @param expansions the expansions
      * @return the Expansions builder
      */
-    public ExpansionsBuilder setExpansions(List<Expansion> expansions) {
+    public ExpansionsBuilder expansions(List<Expansion> expansions) {
       this.expansions = expansions;
       return this;
     }
@@ -9390,7 +9382,7 @@ public class IBMDiscoveryV1Models {
   public class Field extends IBMWatsonGenericModel {
     private String fieldName;
     private String fieldType;
- 
+
     /**
      * Gets the fieldName.
      *
@@ -9402,7 +9394,7 @@ public class IBMDiscoveryV1Models {
     public String getFieldName() {
       return fieldName;
     }
- 
+
     /**
      * Gets the fieldType.
      *
@@ -9415,10 +9407,13 @@ public class IBMDiscoveryV1Models {
       return fieldType;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('field', 'fieldName');
-      mapping.put('type', 'fieldType');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'field', 'fieldName');
+      mapping.put(parentLabel + 'type', 'fieldType');
       return mapping;
     }
   }
@@ -9439,7 +9434,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public FontSetting() { }
- 
+
     /**
      * Gets the level.
      *
@@ -9451,7 +9446,7 @@ public class IBMDiscoveryV1Models {
     public Long getLevel() {
       return level;
     }
- 
+
     /**
      * Gets the minSize.
      *
@@ -9463,7 +9458,7 @@ public class IBMDiscoveryV1Models {
     public Long getMinSize() {
       return minSize;
     }
- 
+
     /**
      * Gets the maxSize.
      *
@@ -9475,7 +9470,7 @@ public class IBMDiscoveryV1Models {
     public Long getMaxSize() {
       return maxSize;
     }
- 
+
     /**
      * Gets the bold.
      *
@@ -9487,7 +9482,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getBold() {
       return bold;
     }
- 
+
     /**
      * Gets the italic.
      *
@@ -9499,7 +9494,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getItalic() {
       return italic;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -9530,17 +9525,15 @@ public class IBMDiscoveryV1Models {
       return new FontSettingBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('minSize', 'min_size');
-      mapping.put('maxSize', 'max_size');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'minSize', 'min_size');
+      mapping.put(parentLabel + 'maxSize', 'max_size');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('min_size', 'minSize');
-      mapping.put('max_size', 'maxSize');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'min_size', 'minSize');
+      mapping.put(parentLabel + 'max_size', 'maxSize');
       return mapping;
     }
   }
@@ -9586,7 +9579,7 @@ public class IBMDiscoveryV1Models {
      * @param level the level
      * @return the FontSetting builder
      */
-    public FontSettingBuilder setLevel(Long level) {
+    public FontSettingBuilder level(Long level) {
       this.level = level;
       return this;
     }
@@ -9597,7 +9590,7 @@ public class IBMDiscoveryV1Models {
      * @param minSize the minSize
      * @return the FontSetting builder
      */
-    public FontSettingBuilder setMinSize(Long minSize) {
+    public FontSettingBuilder minSize(Long minSize) {
       this.minSize = minSize;
       return this;
     }
@@ -9608,7 +9601,7 @@ public class IBMDiscoveryV1Models {
      * @param maxSize the maxSize
      * @return the FontSetting builder
      */
-    public FontSettingBuilder setMaxSize(Long maxSize) {
+    public FontSettingBuilder maxSize(Long maxSize) {
       this.maxSize = maxSize;
       return this;
     }
@@ -9619,7 +9612,7 @@ public class IBMDiscoveryV1Models {
      * @param bold the bold
      * @return the FontSetting builder
      */
-    public FontSettingBuilder setBold(Boolean bold) {
+    public FontSettingBuilder bold(Boolean bold) {
       this.bold = bold;
       return this;
     }
@@ -9630,7 +9623,7 @@ public class IBMDiscoveryV1Models {
      * @param italic the italic
      * @return the FontSetting builder
      */
-    public FontSettingBuilder setItalic(Boolean italic) {
+    public FontSettingBuilder italic(Boolean italic) {
       this.italic = italic;
       return this;
     }
@@ -9641,7 +9634,7 @@ public class IBMDiscoveryV1Models {
      * @param name the name
      * @return the FontSetting builder
      */
-    public FontSettingBuilder setName(String name) {
+    public FontSettingBuilder name(String name) {
       this.name = name;
       return this;
     }
@@ -9656,7 +9649,7 @@ public class IBMDiscoveryV1Models {
     private String status;
     private String token;
     private String tokenId;
- 
+
     /**
      * Gets the gatewayId.
      *
@@ -9668,7 +9661,7 @@ public class IBMDiscoveryV1Models {
     public String getGatewayId() {
       return gatewayId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -9680,7 +9673,7 @@ public class IBMDiscoveryV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -9693,7 +9686,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the token.
      *
@@ -9706,7 +9699,7 @@ public class IBMDiscoveryV1Models {
     public String getToken() {
       return token;
     }
- 
+
     /**
      * Gets the tokenId.
      *
@@ -9765,10 +9758,13 @@ public class IBMDiscoveryV1Models {
       this.tokenId = tokenId;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('gateway_id', 'gatewayId');
-      mapping.put('token_id', 'tokenId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'gateway_id', 'gatewayId');
+      mapping.put(parentLabel + 'token_id', 'tokenId');
       return mapping;
     }
   }
@@ -9778,7 +9774,7 @@ public class IBMDiscoveryV1Models {
    */
   public class GatewayList extends IBMWatsonResponseModel {
     private List<Gateway> gateways;
- 
+
     /**
      * Gets the gateways.
      *
@@ -9823,11 +9819,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (gateways != null && gateways[0] != null) {
-        mapping.putAll(gateways[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Gateway.class.newInstance()).addToApiToSdkMapping(parentLabel + 'gateways/', mapping));
       return mapping;
     }
   }
@@ -11869,7 +11862,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public HtmlSettings() { }
- 
+
     /**
      * Gets the excludeTagsCompletely.
      *
@@ -11881,7 +11874,7 @@ public class IBMDiscoveryV1Models {
     public List<String> getExcludeTagsCompletely() {
       return excludeTagsCompletely;
     }
- 
+
     /**
      * Gets the excludeTagsKeepContent.
      *
@@ -11893,7 +11886,7 @@ public class IBMDiscoveryV1Models {
     public List<String> getExcludeTagsKeepContent() {
       return excludeTagsKeepContent;
     }
- 
+
     /**
      * Gets the keepContent.
      *
@@ -11903,7 +11896,7 @@ public class IBMDiscoveryV1Models {
     public XPathPatterns getKeepContent() {
       return keepContent;
     }
- 
+
     /**
      * Gets the excludeContent.
      *
@@ -11913,7 +11906,7 @@ public class IBMDiscoveryV1Models {
     public XPathPatterns getExcludeContent() {
       return excludeContent;
     }
- 
+
     /**
      * Gets the keepTagAttributes.
      *
@@ -11925,7 +11918,7 @@ public class IBMDiscoveryV1Models {
     public List<String> getKeepTagAttributes() {
       return keepTagAttributes;
     }
- 
+
     /**
      * Gets the excludeTagAttributes.
      *
@@ -11966,34 +11959,40 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for keepContent
       XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getKeepContent()), (Map<String, Object>) jsonMap.get('keepContent'), XPathPatterns.class);
-      retBuilder.setKeepContent(newKeepContent);
+      retBuilder.keepContent(newKeepContent);
 
       // calling custom deserializer for excludeContent
       XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getExcludeContent()), (Map<String, Object>) jsonMap.get('excludeContent'), XPathPatterns.class);
-      retBuilder.setExcludeContent(newExcludeContent);
+      retBuilder.excludeContent(newExcludeContent);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('excludeTagsCompletely', 'exclude_tags_completely');
-      mapping.put('excludeTagsKeepContent', 'exclude_tags_keep_content');
-      mapping.put('keepContent', 'keep_content');
-      mapping.put('excludeContent', 'exclude_content');
-      mapping.put('keepTagAttributes', 'keep_tag_attributes');
-      mapping.put('excludeTagAttributes', 'exclude_tag_attributes');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'excludeTagsCompletely', 'exclude_tags_completely');
+      mapping.put(parentLabel + 'excludeTagsKeepContent', 'exclude_tags_keep_content');
+      mapping.put(parentLabel + 'keepContent', 'keep_content');
+      mapping.put(parentLabel + 'excludeContent', 'exclude_content');
+      mapping.put(parentLabel + 'keepTagAttributes', 'keep_tag_attributes');
+      mapping.put(parentLabel + 'excludeTagAttributes', 'exclude_tag_attributes');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('exclude_tags_completely', 'excludeTagsCompletely');
-      mapping.put('exclude_tags_keep_content', 'excludeTagsKeepContent');
-      mapping.put('keep_content', 'keepContent');
-      mapping.put('exclude_content', 'excludeContent');
-      mapping.put('keep_tag_attributes', 'keepTagAttributes');
-      mapping.put('exclude_tag_attributes', 'excludeTagAttributes');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'exclude_tags_completely', 'excludeTagsCompletely');
+      mapping.put(parentLabel + 'exclude_tags_keep_content', 'excludeTagsKeepContent');
+      mapping.put(parentLabel + 'keep_content', 'keepContent');
+      mapping.put(parentLabel + 'exclude_content', 'excludeContent');
+      mapping.put(parentLabel + 'keep_tag_attributes', 'keepTagAttributes');
+      mapping.put(parentLabel + 'exclude_tag_attributes', 'excludeTagAttributes');
       return mapping;
     }
   }
@@ -12100,7 +12099,7 @@ public class IBMDiscoveryV1Models {
      * @param excludeTagsCompletely the excludeTagsCompletely
      * @return the HtmlSettings builder
      */
-    public HtmlSettingsBuilder setExcludeTagsCompletely(List<String> excludeTagsCompletely) {
+    public HtmlSettingsBuilder excludeTagsCompletely(List<String> excludeTagsCompletely) {
       this.excludeTagsCompletely = excludeTagsCompletely;
       return this;
     }
@@ -12112,7 +12111,7 @@ public class IBMDiscoveryV1Models {
      * @param excludeTagsKeepContent the excludeTagsKeepContent
      * @return the HtmlSettings builder
      */
-    public HtmlSettingsBuilder setExcludeTagsKeepContent(List<String> excludeTagsKeepContent) {
+    public HtmlSettingsBuilder excludeTagsKeepContent(List<String> excludeTagsKeepContent) {
       this.excludeTagsKeepContent = excludeTagsKeepContent;
       return this;
     }
@@ -12123,7 +12122,7 @@ public class IBMDiscoveryV1Models {
      * @param keepContent the keepContent
      * @return the HtmlSettings builder
      */
-    public HtmlSettingsBuilder setKeepContent(XPathPatterns keepContent) {
+    public HtmlSettingsBuilder keepContent(XPathPatterns keepContent) {
       this.keepContent = keepContent;
       return this;
     }
@@ -12134,7 +12133,7 @@ public class IBMDiscoveryV1Models {
      * @param excludeContent the excludeContent
      * @return the HtmlSettings builder
      */
-    public HtmlSettingsBuilder setExcludeContent(XPathPatterns excludeContent) {
+    public HtmlSettingsBuilder excludeContent(XPathPatterns excludeContent) {
       this.excludeContent = excludeContent;
       return this;
     }
@@ -12146,7 +12145,7 @@ public class IBMDiscoveryV1Models {
      * @param keepTagAttributes the keepTagAttributes
      * @return the HtmlSettings builder
      */
-    public HtmlSettingsBuilder setKeepTagAttributes(List<String> keepTagAttributes) {
+    public HtmlSettingsBuilder keepTagAttributes(List<String> keepTagAttributes) {
       this.keepTagAttributes = keepTagAttributes;
       return this;
     }
@@ -12158,7 +12157,7 @@ public class IBMDiscoveryV1Models {
      * @param excludeTagAttributes the excludeTagAttributes
      * @return the HtmlSettings builder
      */
-    public HtmlSettingsBuilder setExcludeTagAttributes(List<String> excludeTagAttributes) {
+    public HtmlSettingsBuilder excludeTagAttributes(List<String> excludeTagAttributes) {
       this.excludeTagAttributes = excludeTagAttributes;
       return this;
     }
@@ -12171,7 +12170,7 @@ public class IBMDiscoveryV1Models {
     private EnvironmentDocuments documents;
     private DiskUsage diskUsage;
     private CollectionUsage collections;
- 
+
     /**
      * Gets the documents.
      *
@@ -12183,7 +12182,7 @@ public class IBMDiscoveryV1Models {
     public EnvironmentDocuments getDocuments() {
       return documents;
     }
- 
+
     /**
      * Gets the diskUsage.
      *
@@ -12195,7 +12194,7 @@ public class IBMDiscoveryV1Models {
     public DiskUsage getDiskUsage() {
       return diskUsage;
     }
- 
+
     /**
      * Gets the collections.
      *
@@ -12257,18 +12256,11 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (documents != null) {
-        mapping.putAll(documents.getApiToSdkMapping());
-      }
-      mapping.put('disk_usage', 'diskUsage');
-      if (diskUsage != null) {
-        mapping.putAll(diskUsage.getApiToSdkMapping());
-      }
-      if (collections != null) {
-        mapping.putAll(collections.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) EnvironmentDocuments.class.newInstance()).addToApiToSdkMapping(parentLabel + 'documents/', mapping));
+      mapping.put(parentLabel + 'disk_usage', 'diskUsage');
+      mapping.putAll(((IBMWatsonGenericModel) DiskUsage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'disk_usage/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) CollectionUsage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'collections/', mapping));
       return mapping;
     }
   }
@@ -12417,7 +12409,7 @@ public class IBMDiscoveryV1Models {
    */
   public class ListCollectionFieldsResponse extends IBMWatsonResponseModel {
     private List<Field> fields;
- 
+
     /**
      * Gets the fields.
      *
@@ -12462,11 +12454,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (fields != null && fields[0] != null) {
-        mapping.putAll(fields[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Field.class.newInstance()).addToApiToSdkMapping(parentLabel + 'fields/', mapping));
       return mapping;
     }
   }
@@ -12600,7 +12589,7 @@ public class IBMDiscoveryV1Models {
    */
   public class ListCollectionsResponse extends IBMWatsonResponseModel {
     private List<Collection> collections;
- 
+
     /**
      * Gets the collections.
      *
@@ -12645,11 +12634,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (collections != null && collections[0] != null) {
-        mapping.putAll(collections[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Collection.class.newInstance()).addToApiToSdkMapping(parentLabel + 'collections/', mapping));
       return mapping;
     }
   }
@@ -12783,7 +12769,7 @@ public class IBMDiscoveryV1Models {
    */
   public class ListConfigurationsResponse extends IBMWatsonResponseModel {
     private List<Configuration> configurations;
- 
+
     /**
      * Gets the configurations.
      *
@@ -12828,11 +12814,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (configurations != null && configurations[0] != null) {
-        mapping.putAll(configurations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Configuration.class.newInstance()).addToApiToSdkMapping(parentLabel + 'configurations/', mapping));
       return mapping;
     }
   }
@@ -13022,7 +13005,7 @@ public class IBMDiscoveryV1Models {
    */
   public class ListEnvironmentsResponse extends IBMWatsonResponseModel {
     private List<Environment> environments;
- 
+
     /**
      * Gets the environments.
      *
@@ -13067,11 +13050,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (environments != null && environments[0] != null) {
-        mapping.putAll(environments[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) Environment.class.newInstance()).addToApiToSdkMapping(parentLabel + 'environments/', mapping));
       return mapping;
     }
   }
@@ -13738,7 +13718,7 @@ public class IBMDiscoveryV1Models {
   public class LogQueryResponse extends IBMWatsonResponseModel {
     private Long matchingResults;
     private List<LogQueryResponseResult> results;
- 
+
     /**
      * Gets the matchingResults.
      *
@@ -13750,7 +13730,7 @@ public class IBMDiscoveryV1Models {
     public Long getMatchingResults() {
       return matchingResults;
     }
- 
+
     /**
      * Gets the results.
      *
@@ -13804,12 +13784,13 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('matching_results', 'matchingResults');
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'matching_results', 'matchingResults');
+      mapping.putAll(((IBMWatsonGenericModel) LogQueryResponseResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
       return mapping;
     }
   }
@@ -13833,7 +13814,7 @@ public class IBMDiscoveryV1Models {
     private String documentId;
     private String eventType;
     private String resultType;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -13845,7 +13826,7 @@ public class IBMDiscoveryV1Models {
     public String getEnvironmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the customerId.
      *
@@ -13858,7 +13839,7 @@ public class IBMDiscoveryV1Models {
     public String getCustomerId() {
       return customerId;
     }
- 
+
     /**
      * Gets the documentType.
      *
@@ -13874,7 +13855,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentType() {
       return documentType;
     }
- 
+
     /**
      * Gets the naturalLanguageQuery.
      *
@@ -13890,7 +13871,7 @@ public class IBMDiscoveryV1Models {
     public String getNaturalLanguageQuery() {
       return naturalLanguageQuery;
     }
- 
+
     /**
      * Gets the documentResults.
      *
@@ -13903,7 +13884,7 @@ public class IBMDiscoveryV1Models {
     public LogQueryResponseResultDocuments getDocumentResults() {
       return documentResults;
     }
- 
+
     /**
      * Gets the createdTimestamp.
      *
@@ -13915,7 +13896,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getCreatedTimestamp() {
       return createdTimestamp;
     }
- 
+
     /**
      * Gets the clientTimestamp.
      *
@@ -13928,7 +13909,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getClientTimestamp() {
       return clientTimestamp;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -13943,7 +13924,7 @@ public class IBMDiscoveryV1Models {
     public String getQueryId() {
       return queryId;
     }
- 
+
     /**
      * Gets the sessionToken.
      *
@@ -13962,7 +13943,7 @@ public class IBMDiscoveryV1Models {
     public String getSessionToken() {
       return sessionToken;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -13974,7 +13955,7 @@ public class IBMDiscoveryV1Models {
     public String getCollectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the displayRank.
      *
@@ -13986,7 +13967,7 @@ public class IBMDiscoveryV1Models {
     public Long getDisplayRank() {
       return displayRank;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -13998,7 +13979,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the eventType.
      *
@@ -14014,7 +13995,7 @@ public class IBMDiscoveryV1Models {
     public String getEventType() {
       return eventType;
     }
- 
+
     /**
      * Gets the resultType.
      *
@@ -14167,25 +14148,26 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environment_id', 'environmentId');
-      mapping.put('customer_id', 'customerId');
-      mapping.put('document_type', 'documentType');
-      mapping.put('natural_language_query', 'naturalLanguageQuery');
-      mapping.put('document_results', 'documentResults');
-      if (documentResults != null) {
-        mapping.putAll(documentResults.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('created_timestamp', 'createdTimestamp');
-      mapping.put('client_timestamp', 'clientTimestamp');
-      mapping.put('query_id', 'queryId');
-      mapping.put('session_token', 'sessionToken');
-      mapping.put('collection_id', 'collectionId');
-      mapping.put('display_rank', 'displayRank');
-      mapping.put('document_id', 'documentId');
-      mapping.put('event_type', 'eventType');
-      mapping.put('result_type', 'resultType');
+      mapping.put(parentLabel + 'environment_id', 'environmentId');
+      mapping.put(parentLabel + 'customer_id', 'customerId');
+      mapping.put(parentLabel + 'document_type', 'documentType');
+      mapping.put(parentLabel + 'natural_language_query', 'naturalLanguageQuery');
+      mapping.put(parentLabel + 'document_results', 'documentResults');
+      mapping.putAll(((IBMWatsonGenericModel) LogQueryResponseResultDocuments.class.newInstance()).addToApiToSdkMapping(parentLabel + 'document_results/', mapping));
+      mapping.put(parentLabel + 'created_timestamp', 'createdTimestamp');
+      mapping.put(parentLabel + 'client_timestamp', 'clientTimestamp');
+      mapping.put(parentLabel + 'query_id', 'queryId');
+      mapping.put(parentLabel + 'session_token', 'sessionToken');
+      mapping.put(parentLabel + 'collection_id', 'collectionId');
+      mapping.put(parentLabel + 'display_rank', 'displayRank');
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'event_type', 'eventType');
+      mapping.put(parentLabel + 'result_type', 'resultType');
       return mapping;
     }
   }
@@ -14197,7 +14179,7 @@ public class IBMDiscoveryV1Models {
   public class LogQueryResponseResultDocuments extends IBMWatsonGenericModel {
     private List<LogQueryResponseResultDocumentsResult> results;
     private Long count;
- 
+
     /**
      * Gets the results.
      *
@@ -14209,7 +14191,7 @@ public class IBMDiscoveryV1Models {
     public List<LogQueryResponseResultDocumentsResult> getResults() {
       return results;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -14263,11 +14245,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) LogQueryResponseResultDocumentsResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
       return mapping;
     }
   }
@@ -14281,7 +14260,7 @@ public class IBMDiscoveryV1Models {
     private Double score;
     private Double confidence;
     private String collectionId;
- 
+
     /**
      * Gets the position.
      *
@@ -14293,7 +14272,7 @@ public class IBMDiscoveryV1Models {
     public Long getPosition() {
       return position;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -14305,7 +14284,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -14317,7 +14296,7 @@ public class IBMDiscoveryV1Models {
     public Double getScore() {
       return score;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -14329,7 +14308,7 @@ public class IBMDiscoveryV1Models {
     public Double getConfidence() {
       return confidence;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -14387,10 +14366,9 @@ public class IBMDiscoveryV1Models {
       this.collectionId = collectionId;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_id', 'documentId');
-      mapping.put('collection_id', 'collectionId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'collection_id', 'collectionId');
       return mapping;
     }
   }
@@ -14402,7 +14380,7 @@ public class IBMDiscoveryV1Models {
     private String interval;
     private String eventType;
     private List<MetricAggregationResult> results;
- 
+
     /**
      * Gets the interval.
      *
@@ -14414,7 +14392,7 @@ public class IBMDiscoveryV1Models {
     public String getInterval() {
       return interval;
     }
- 
+
     /**
      * Gets the eventType.
      *
@@ -14426,7 +14404,7 @@ public class IBMDiscoveryV1Models {
     public String getEventType() {
       return eventType;
     }
- 
+
     /**
      * Gets the results.
      *
@@ -14489,12 +14467,9 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('event_type', 'eventType');
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'event_type', 'eventType');
+      mapping.putAll(((IBMWatsonGenericModel) MetricAggregationResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
       return mapping;
     }
   }
@@ -14507,7 +14482,7 @@ public class IBMDiscoveryV1Models {
     private Long key;
     private Long matchingResults;
     private Double eventRate;
- 
+
     /**
      * Gets the keyAsString.
      *
@@ -14519,7 +14494,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getKeyAsString() {
       return keyAsString;
     }
- 
+
     /**
      * Gets the key.
      *
@@ -14531,7 +14506,7 @@ public class IBMDiscoveryV1Models {
     public Long getKey() {
       return key;
     }
- 
+
     /**
      * Gets the matchingResults.
      *
@@ -14543,7 +14518,7 @@ public class IBMDiscoveryV1Models {
     public Long getMatchingResults() {
       return matchingResults;
     }
- 
+
     /**
      * Gets the eventRate.
      *
@@ -14593,11 +14568,14 @@ public class IBMDiscoveryV1Models {
       this.eventRate = eventRate;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('key_as_string', 'keyAsString');
-      mapping.put('matching_results', 'matchingResults');
-      mapping.put('event_rate', 'eventRate');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'key_as_string', 'keyAsString');
+      mapping.put(parentLabel + 'matching_results', 'matchingResults');
+      mapping.put(parentLabel + 'event_rate', 'eventRate');
       return mapping;
     }
   }
@@ -14607,7 +14585,7 @@ public class IBMDiscoveryV1Models {
    */
   public class MetricResponse extends IBMWatsonResponseModel {
     private List<MetricAggregation> aggregations;
- 
+
     /**
      * Gets the aggregations.
      *
@@ -14652,11 +14630,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (aggregations != null && aggregations[0] != null) {
-        mapping.putAll(aggregations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) MetricAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
       return mapping;
     }
   }
@@ -14667,7 +14642,7 @@ public class IBMDiscoveryV1Models {
   public class MetricTokenAggregation extends IBMWatsonGenericModel {
     private String eventType;
     private List<MetricTokenAggregationResult> results;
- 
+
     /**
      * Gets the eventType.
      *
@@ -14679,7 +14654,7 @@ public class IBMDiscoveryV1Models {
     public String getEventType() {
       return eventType;
     }
- 
+
     /**
      * Gets the results.
      *
@@ -14733,12 +14708,13 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('event_type', 'eventType');
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'event_type', 'eventType');
+      mapping.putAll(((IBMWatsonGenericModel) MetricTokenAggregationResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
       return mapping;
     }
   }
@@ -14750,7 +14726,7 @@ public class IBMDiscoveryV1Models {
     private String key;
     private Long matchingResults;
     private Double eventRate;
- 
+
     /**
      * Gets the key.
      *
@@ -14762,7 +14738,7 @@ public class IBMDiscoveryV1Models {
     public String getKey() {
       return key;
     }
- 
+
     /**
      * Gets the matchingResults.
      *
@@ -14774,7 +14750,7 @@ public class IBMDiscoveryV1Models {
     public Long getMatchingResults() {
       return matchingResults;
     }
- 
+
     /**
      * Gets the eventRate.
      *
@@ -14815,10 +14791,9 @@ public class IBMDiscoveryV1Models {
       this.eventRate = eventRate;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('matching_results', 'matchingResults');
-      mapping.put('event_rate', 'eventRate');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'matching_results', 'matchingResults');
+      mapping.put(parentLabel + 'event_rate', 'eventRate');
       return mapping;
     }
   }
@@ -14828,7 +14803,7 @@ public class IBMDiscoveryV1Models {
    */
   public class MetricTokenResponse extends IBMWatsonResponseModel {
     private List<MetricTokenAggregation> aggregations;
- 
+
     /**
      * Gets the aggregations.
      *
@@ -14873,11 +14848,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (aggregations != null && aggregations[0] != null) {
-        mapping.putAll(aggregations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) MetricTokenAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
       return mapping;
     }
   }
@@ -14886,7 +14858,7 @@ public class IBMDiscoveryV1Models {
    * An object that indicates the Categories enrichment will be applied to the specified field.
    */
   public class NluEnrichmentCategories extends IBMWatsonDynamicModel {
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -14971,7 +14943,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentConcepts() { }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -14997,15 +14969,21 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentConceptsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('limit', 'xlimit');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'limit', 'xlimit');
       return mapping;
     }
   }
@@ -15041,7 +15019,7 @@ public class IBMDiscoveryV1Models {
      * @param xlimit the xlimit
      * @return the NluEnrichmentConcepts builder
      */
-    public NluEnrichmentConceptsBuilder setXlimit(Long xlimit) {
+    public NluEnrichmentConceptsBuilder xlimit(Long xlimit) {
       this.xlimit = xlimit;
       return this;
     }
@@ -15059,7 +15037,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentEmotion() { }
- 
+
     /**
      * Gets the document.
      *
@@ -15071,7 +15049,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getDocument() {
       return document;
     }
- 
+
     /**
      * Gets the targets.
      *
@@ -15182,7 +15160,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentEntities() { }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -15194,7 +15172,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getSentiment() {
       return sentiment;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -15206,7 +15184,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getEmotion() {
       return emotion;
     }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -15218,7 +15196,7 @@ public class IBMDiscoveryV1Models {
     public Long getXlimit() {
       return xlimit;
     }
- 
+
     /**
      * Gets the mentions.
      *
@@ -15230,7 +15208,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getMentions() {
       return mentions;
     }
- 
+
     /**
      * Gets the mentionTypes.
      *
@@ -15242,7 +15220,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getMentionTypes() {
       return mentionTypes;
     }
- 
+
     /**
      * Gets the sentenceLocations.
      *
@@ -15255,7 +15233,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getSentenceLocations() {
       return sentenceLocations;
     }
- 
+
     /**
      * Gets the model.
      *
@@ -15288,19 +15266,17 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentEntitiesBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
-      mapping.put('mentionTypes', 'mention_types');
-      mapping.put('sentenceLocations', 'sentence_locations');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'xlimit', 'limit');
+      mapping.put(parentLabel + 'mentionTypes', 'mention_types');
+      mapping.put(parentLabel + 'sentenceLocations', 'sentence_locations');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('limit', 'xlimit');
-      mapping.put('mention_types', 'mentionTypes');
-      mapping.put('sentence_locations', 'sentenceLocations');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'limit', 'xlimit');
+      mapping.put(parentLabel + 'mention_types', 'mentionTypes');
+      mapping.put(parentLabel + 'sentence_locations', 'sentenceLocations');
       return mapping;
     }
   }
@@ -15438,7 +15414,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentFeatures() { }
- 
+
     /**
      * Gets the keywords.
      *
@@ -15450,7 +15426,7 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentKeywords getKeywords() {
       return keywords;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -15462,7 +15438,7 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentEntities getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -15474,7 +15450,7 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentSentiment getSentiment() {
       return sentiment;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -15486,7 +15462,7 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentEmotion getEmotion() {
       return emotion;
     }
- 
+
     /**
      * Gets the categories.
      *
@@ -15498,7 +15474,7 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentCategories getCategories() {
       return categories;
     }
- 
+
     /**
      * Gets the semanticRoles.
      *
@@ -15510,7 +15486,7 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentSemanticRoles getSemanticRoles() {
       return semanticRoles;
     }
- 
+
     /**
      * Gets the relations.
      *
@@ -15522,7 +15498,7 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentRelations getRelations() {
       return relations;
     }
- 
+
     /**
      * Gets the concepts.
      *
@@ -15598,39 +15574,29 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (keywords != null) {
-        mapping.putAll(keywords.getSdkToApiMapping());
+        mapping.putAll(keywords.addToSdkToApiMapping(parentLabel + 'keywords/', mapping));
       }
       if (entities != null) {
-        mapping.putAll(entities.getSdkToApiMapping());
+        mapping.putAll(entities.addToSdkToApiMapping(parentLabel + 'entities/', mapping));
       }
-      mapping.put('semanticRoles', 'semantic_roles');
+      mapping.put(parentLabel + 'semanticRoles', 'semantic_roles');
       if (semanticRoles != null) {
-        mapping.putAll(semanticRoles.getSdkToApiMapping());
+        mapping.putAll(semanticRoles.addToSdkToApiMapping(parentLabel + 'semanticRoles/', mapping));
       }
       if (concepts != null) {
-        mapping.putAll(concepts.getSdkToApiMapping());
+        mapping.putAll(concepts.addToSdkToApiMapping(parentLabel + 'concepts/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (keywords != null) {
-        mapping.putAll(keywords.getApiToSdkMapping());
-      }
-      if (entities != null) {
-        mapping.putAll(entities.getApiToSdkMapping());
-      }
-      mapping.put('semantic_roles', 'semanticRoles');
-      if (semanticRoles != null) {
-        mapping.putAll(semanticRoles.getApiToSdkMapping());
-      }
-      if (concepts != null) {
-        mapping.putAll(concepts.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentKeywords.class.newInstance()).addToApiToSdkMapping(parentLabel + 'keywords/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentEntities.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
+      mapping.put(parentLabel + 'semantic_roles', 'semanticRoles');
+      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentSemanticRoles.class.newInstance()).addToApiToSdkMapping(parentLabel + 'semantic_roles/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentConcepts.class.newInstance()).addToApiToSdkMapping(parentLabel + 'concepts/', mapping));
       return mapping;
     }
   }
@@ -15776,7 +15742,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentKeywords() { }
- 
+
     /**
      * Gets the sentiment.
      *
@@ -15788,7 +15754,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getSentiment() {
       return sentiment;
     }
- 
+
     /**
      * Gets the emotion.
      *
@@ -15800,7 +15766,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getEmotion() {
       return emotion;
     }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -15828,15 +15794,13 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentKeywordsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('limit', 'xlimit');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'limit', 'xlimit');
       return mapping;
     }
   }
@@ -15915,7 +15879,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentRelations() { }
- 
+
     /**
      * Gets the model.
      *
@@ -15975,7 +15939,7 @@ public class IBMDiscoveryV1Models {
      * @param model the model
      * @return the NluEnrichmentRelations builder
      */
-    public NluEnrichmentRelationsBuilder setModel(String model) {
+    public NluEnrichmentRelationsBuilder model(String model) {
       this.model = model;
       return this;
     }
@@ -15994,7 +15958,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentSemanticRoles() { }
- 
+
     /**
      * Gets the entities.
      *
@@ -16006,7 +15970,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getEntities() {
       return entities;
     }
- 
+
     /**
      * Gets the keywords.
      *
@@ -16018,7 +15982,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getKeywords() {
       return keywords;
     }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -16046,15 +16010,13 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentSemanticRolesBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('limit', 'xlimit');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'limit', 'xlimit');
       return mapping;
     }
   }
@@ -16134,7 +16096,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentSentiment() { }
- 
+
     /**
      * Gets the document.
      *
@@ -16146,7 +16108,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getDocument() {
       return document;
     }
- 
+
     /**
      * Gets the targets.
      *
@@ -16253,7 +16215,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NormalizationOperation() { }
- 
+
     /**
      * Gets the operation.
      *
@@ -16288,7 +16250,7 @@ public class IBMDiscoveryV1Models {
     public String getOperation() {
       return operation;
     }
- 
+
     /**
      * Gets the sourceField.
      *
@@ -16300,7 +16262,7 @@ public class IBMDiscoveryV1Models {
     public String getSourceField() {
       return sourceField;
     }
- 
+
     /**
      * Gets the destinationField.
      *
@@ -16328,17 +16290,15 @@ public class IBMDiscoveryV1Models {
       return new NormalizationOperationBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('sourceField', 'source_field');
-      mapping.put('destinationField', 'destination_field');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'sourceField', 'source_field');
+      mapping.put(parentLabel + 'destinationField', 'destination_field');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('source_field', 'sourceField');
-      mapping.put('destination_field', 'destinationField');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'source_field', 'sourceField');
+      mapping.put(parentLabel + 'destination_field', 'destinationField');
       return mapping;
     }
   }
@@ -16378,7 +16338,7 @@ public class IBMDiscoveryV1Models {
      * @param operation the operation
      * @return the NormalizationOperation builder
      */
-    public NormalizationOperationBuilder setOperation(String operation) {
+    public NormalizationOperationBuilder operation(String operation) {
       this.operation = operation;
       return this;
     }
@@ -16389,7 +16349,7 @@ public class IBMDiscoveryV1Models {
      * @param sourceField the sourceField
      * @return the NormalizationOperation builder
      */
-    public NormalizationOperationBuilder setSourceField(String sourceField) {
+    public NormalizationOperationBuilder sourceField(String sourceField) {
       this.sourceField = sourceField;
       return this;
     }
@@ -16400,7 +16360,7 @@ public class IBMDiscoveryV1Models {
      * @param destinationField the destinationField
      * @return the NormalizationOperation builder
      */
-    public NormalizationOperationBuilder setDestinationField(String destinationField) {
+    public NormalizationOperationBuilder destinationField(String destinationField) {
       this.destinationField = destinationField;
       return this;
     }
@@ -16417,7 +16377,7 @@ public class IBMDiscoveryV1Models {
     private String severity;
     private String step;
     private String description;
- 
+
     /**
      * Gets the noticeId.
      *
@@ -16437,7 +16397,7 @@ public class IBMDiscoveryV1Models {
     public String getNoticeId() {
       return noticeId;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -16449,7 +16409,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getCreated() {
       return created;
     }
- 
+
     /**
      * Gets the documentId.
      *
@@ -16461,7 +16421,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the queryId.
      *
@@ -16473,7 +16433,7 @@ public class IBMDiscoveryV1Models {
     public String getQueryId() {
       return queryId;
     }
- 
+
     /**
      * Gets the severity.
      *
@@ -16485,7 +16445,7 @@ public class IBMDiscoveryV1Models {
     public String getSeverity() {
       return severity;
     }
- 
+
     /**
      * Gets the step.
      *
@@ -16499,7 +16459,7 @@ public class IBMDiscoveryV1Models {
     public String getStep() {
       return step;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -16512,11 +16472,14 @@ public class IBMDiscoveryV1Models {
       return description;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('notice_id', 'noticeId');
-      mapping.put('document_id', 'documentId');
-      mapping.put('query_id', 'queryId');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'notice_id', 'noticeId');
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'query_id', 'queryId');
       return mapping;
     }
   }
@@ -16532,7 +16495,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public PdfHeadingDetection() { }
- 
+
     /**
      * Gets the fonts.
      *
@@ -16574,25 +16537,21 @@ public class IBMDiscoveryV1Models {
           FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
-        retBuilder.setFonts(newFonts);
+        retBuilder.fonts(newFonts);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (fonts != null && fonts[0] != null) {
-        mapping.putAll(fonts[0].getSdkToApiMapping());
+        mapping.putAll(fonts[0].addToSdkToApiMapping(parentLabel + 'fonts/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (fonts != null && fonts[0] != null) {
-        mapping.putAll(fonts[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) FontSetting.class.newInstance()).addToApiToSdkMapping(parentLabel + 'fonts/', mapping));
       return mapping;
     }
   }
@@ -16644,7 +16603,7 @@ public class IBMDiscoveryV1Models {
      * @param fonts the fonts
      * @return the PdfHeadingDetection builder
      */
-    public PdfHeadingDetectionBuilder setFonts(List<FontSetting> fonts) {
+    public PdfHeadingDetectionBuilder fonts(List<FontSetting> fonts) {
       this.fonts = fonts;
       return this;
     }
@@ -16661,7 +16620,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public PdfSettings() { }
- 
+
     /**
      * Gets the heading.
      *
@@ -16695,24 +16654,20 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for heading
       PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading'), PdfHeadingDetection.class);
-      retBuilder.setHeading(newHeading);
+      retBuilder.heading(newHeading);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (heading != null) {
-        mapping.putAll(heading.getSdkToApiMapping());
+        mapping.putAll(heading.addToSdkToApiMapping(parentLabel + 'heading/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (heading != null) {
-        mapping.putAll(heading.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) PdfHeadingDetection.class.newInstance()).addToApiToSdkMapping(parentLabel + 'heading/', mapping));
       return mapping;
     }
   }
@@ -16748,7 +16703,7 @@ public class IBMDiscoveryV1Models {
      * @param heading the heading
      * @return the PdfSettings builder
      */
-    public PdfSettingsBuilder setHeading(PdfHeadingDetection heading) {
+    public PdfSettingsBuilder heading(PdfHeadingDetection heading) {
       this.heading = heading;
       return this;
     }
@@ -16772,7 +16727,7 @@ public class IBMDiscoveryV1Models {
     private Boolean anomaly;
     private Long size;
     private TopHitsResults hits;
- 
+
     /**
      * Gets the xtype.
      *
@@ -16784,7 +16739,7 @@ public class IBMDiscoveryV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the results.
      *
@@ -16796,7 +16751,7 @@ public class IBMDiscoveryV1Models {
     public List<AggregationResult> getResults() {
       return results;
     }
- 
+
     /**
      * Gets the matchingResults.
      *
@@ -16808,7 +16763,7 @@ public class IBMDiscoveryV1Models {
     public Long getMatchingResults() {
       return matchingResults;
     }
- 
+
     /**
      * Gets the aggregations.
      *
@@ -16820,7 +16775,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryAggregation> getAggregations() {
       return aggregations;
     }
- 
+
     /**
      * Gets the field.
      *
@@ -16832,7 +16787,7 @@ public class IBMDiscoveryV1Models {
     public String getField() {
       return field;
     }
- 
+
     /**
      * Gets the histogramInterval.
      *
@@ -16844,7 +16799,7 @@ public class IBMDiscoveryV1Models {
     public Long getHistogramInterval() {
       return histogramInterval;
     }
- 
+
     /**
      * Gets the value.
      *
@@ -16856,7 +16811,7 @@ public class IBMDiscoveryV1Models {
     public Double getValue() {
       return value;
     }
- 
+
     /**
      * Gets the count.
      *
@@ -16866,7 +16821,7 @@ public class IBMDiscoveryV1Models {
     public Long getCount() {
       return count;
     }
- 
+
     /**
      * Gets the match.
      *
@@ -16878,7 +16833,7 @@ public class IBMDiscoveryV1Models {
     public String getMatch() {
       return match;
     }
- 
+
     /**
      * Gets the path.
      *
@@ -16890,7 +16845,7 @@ public class IBMDiscoveryV1Models {
     public String getPath() {
       return path;
     }
- 
+
     /**
      * Gets the timesliceInterval.
      *
@@ -16903,7 +16858,7 @@ public class IBMDiscoveryV1Models {
     public String getTimesliceInterval() {
       return timesliceInterval;
     }
- 
+
     /**
      * Gets the anomaly.
      *
@@ -16916,7 +16871,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getAnomaly() {
       return anomaly;
     }
- 
+
     /**
      * Gets the size.
      *
@@ -16928,7 +16883,7 @@ public class IBMDiscoveryV1Models {
     public Long getSize() {
       return size;
     }
- 
+
     /**
      * Gets the hits.
      *
@@ -17105,21 +17060,18 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('matching_results', 'matchingResults');
-      if (aggregations != null && aggregations[0] != null) {
-        mapping.putAll(aggregations[0].getApiToSdkMapping());
-      }
-      mapping.put('histogram_interval', 'histogramInterval');
-      mapping.put('timeslice_interval', 'timesliceInterval');
-      if (hits != null) {
-        mapping.putAll(hits.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.putAll(((IBMWatsonGenericModel) AggregationResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
+      mapping.put(parentLabel + 'matching_results', 'matchingResults');
+      mapping.putAll(((IBMWatsonGenericModel) QueryAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
+      mapping.put(parentLabel + 'histogram_interval', 'histogramInterval');
+      mapping.put(parentLabel + 'timeslice_interval', 'timesliceInterval');
+      mapping.putAll(((IBMWatsonGenericModel) TopHitsResults.class.newInstance()).addToApiToSdkMapping(parentLabel + 'hits/', mapping));
       return mapping;
     }
   }
@@ -17130,7 +17082,7 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryEntitiesContext extends IBMWatsonGenericModel {
     private String text;
- 
+
     /**
      * Gets the text.
      *
@@ -17188,7 +17140,7 @@ public class IBMDiscoveryV1Models {
      * @param text the text
      * @return the QueryEntitiesContext builder
      */
-    public QueryEntitiesContextBuilder setText(String text) {
+    public QueryEntitiesContextBuilder text(String text) {
       this.text = text;
       return this;
     }
@@ -17206,7 +17158,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public QueryEntitiesEntity() { }
- 
+
     /**
      * Gets the text.
      *
@@ -17218,7 +17170,7 @@ public class IBMDiscoveryV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the xtype.
      *
@@ -17245,15 +17197,13 @@ public class IBMDiscoveryV1Models {
       return new QueryEntitiesEntityBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xtype', 'type');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'xtype', 'type');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'type', 'xtype');
       return mapping;
     }
   }
@@ -17291,7 +17241,7 @@ public class IBMDiscoveryV1Models {
      * @param text the text
      * @return the QueryEntitiesEntity builder
      */
-    public QueryEntitiesEntityBuilder setText(String text) {
+    public QueryEntitiesEntityBuilder text(String text) {
       this.text = text;
       return this;
     }
@@ -17302,7 +17252,7 @@ public class IBMDiscoveryV1Models {
      * @param xtype the xtype
      * @return the QueryEntitiesEntity builder
      */
-    public QueryEntitiesEntityBuilder setXtype(String xtype) {
+    public QueryEntitiesEntityBuilder xtype(String xtype) {
       this.xtype = xtype;
       return this;
     }
@@ -17426,7 +17376,7 @@ public class IBMDiscoveryV1Models {
       mapping.put('environmentId', 'environment_id');
       mapping.put('collectionId', 'collection_id');
       if (entity != null) {
-        mapping.putAll(entity.getSdkToApiMapping());
+        mapping.putAll(entity.addToSdkToApiMapping('', mapping));
       }
       mapping.put('evidenceCount', 'evidence_count');
       return mapping;
@@ -17577,7 +17527,7 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryEntitiesResponse extends IBMWatsonResponseModel {
     private List<QueryEntitiesResponseItem> entities;
- 
+
     /**
      * Gets the entities.
      *
@@ -17622,11 +17572,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) QueryEntitiesResponseItem.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
       return mapping;
     }
   }
@@ -17638,7 +17585,7 @@ public class IBMDiscoveryV1Models {
     private String text;
     private String xtype;
     private List<QueryEvidence> evidence;
- 
+
     /**
      * Gets the text.
      *
@@ -17650,7 +17597,7 @@ public class IBMDiscoveryV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the xtype.
      *
@@ -17662,7 +17609,7 @@ public class IBMDiscoveryV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the evidence.
      *
@@ -17725,12 +17672,9 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      if (evidence != null && evidence[0] != null) {
-        mapping.putAll(evidence[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.putAll(((IBMWatsonGenericModel) QueryEvidence.class.newInstance()).addToApiToSdkMapping(parentLabel + 'evidence/', mapping));
       return mapping;
     }
   }
@@ -17744,7 +17688,7 @@ public class IBMDiscoveryV1Models {
     private Long startOffset;
     private Long endOffset;
     private List<QueryEvidenceEntity> entities;
- 
+
     /**
      * Gets the documentId.
      *
@@ -17756,7 +17700,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the field.
      *
@@ -17768,7 +17712,7 @@ public class IBMDiscoveryV1Models {
     public String getField() {
       return field;
     }
- 
+
     /**
      * Gets the startOffset.
      *
@@ -17780,7 +17724,7 @@ public class IBMDiscoveryV1Models {
     public Long getStartOffset() {
       return startOffset;
     }
- 
+
     /**
      * Gets the endOffset.
      *
@@ -17792,7 +17736,7 @@ public class IBMDiscoveryV1Models {
     public Long getEndOffset() {
       return endOffset;
     }
- 
+
     /**
      * Gets the entities.
      *
@@ -17873,14 +17817,15 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_id', 'documentId');
-      mapping.put('start_offset', 'startOffset');
-      mapping.put('end_offset', 'endOffset');
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'start_offset', 'startOffset');
+      mapping.put(parentLabel + 'end_offset', 'endOffset');
+      mapping.putAll(((IBMWatsonGenericModel) QueryEvidenceEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
       return mapping;
     }
   }
@@ -17893,7 +17838,7 @@ public class IBMDiscoveryV1Models {
     private String text;
     private Long startOffset;
     private Long endOffset;
- 
+
     /**
      * Gets the xtype.
      *
@@ -17905,7 +17850,7 @@ public class IBMDiscoveryV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -17917,7 +17862,7 @@ public class IBMDiscoveryV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the startOffset.
      *
@@ -17929,7 +17874,7 @@ public class IBMDiscoveryV1Models {
     public Long getStartOffset() {
       return startOffset;
     }
- 
+
     /**
      * Gets the endOffset.
      *
@@ -17978,11 +17923,14 @@ public class IBMDiscoveryV1Models {
       this.endOffset = endOffset;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      mapping.put('start_offset', 'startOffset');
-      mapping.put('end_offset', 'endOffset');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.put(parentLabel + 'start_offset', 'startOffset');
+      mapping.put(parentLabel + 'end_offset', 'endOffset');
       return mapping;
     }
   }
@@ -17993,7 +17941,7 @@ public class IBMDiscoveryV1Models {
   public class QueryFilterType extends IBMWatsonGenericModel {
     private List<String> exclude;
     private List<String> include;
- 
+
     /**
      * Gets the exclude.
      *
@@ -18004,7 +17952,7 @@ public class IBMDiscoveryV1Models {
     public List<String> getExclude() {
       return exclude;
     }
- 
+
     /**
      * Gets the include.
      *
@@ -18095,7 +18043,7 @@ public class IBMDiscoveryV1Models {
      * @param exclude the exclude
      * @return the QueryFilterType builder
      */
-    public QueryFilterTypeBuilder setExclude(List<String> exclude) {
+    public QueryFilterTypeBuilder exclude(List<String> exclude) {
       this.exclude = exclude;
       return this;
     }
@@ -18107,7 +18055,7 @@ public class IBMDiscoveryV1Models {
      * @param include the include
      * @return the QueryFilterType builder
      */
-    public QueryFilterTypeBuilder setInclude(List<String> include) {
+    public QueryFilterTypeBuilder include(List<String> include) {
       this.include = include;
       return this;
     }
@@ -19016,7 +18964,7 @@ public class IBMDiscoveryV1Models {
     private List<QueryAggregation> aggregations;
     private List<QueryPassages> passages;
     private Long duplicatesRemoved;
- 
+
     /**
      * Gets the matchingResults.
      *
@@ -19028,7 +18976,7 @@ public class IBMDiscoveryV1Models {
     public Long getMatchingResults() {
       return matchingResults;
     }
- 
+
     /**
      * Gets the results.
      *
@@ -19040,7 +18988,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryNoticesResult> getResults() {
       return results;
     }
- 
+
     /**
      * Gets the aggregations.
      *
@@ -19052,7 +19000,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryAggregation> getAggregations() {
       return aggregations;
     }
- 
+
     /**
      * Gets the passages.
      *
@@ -19064,7 +19012,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryPassages> getPassages() {
       return passages;
     }
- 
+
     /**
      * Gets the duplicatesRemoved.
      *
@@ -19171,19 +19119,16 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('matching_results', 'matchingResults');
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (aggregations != null && aggregations[0] != null) {
-        mapping.putAll(aggregations[0].getApiToSdkMapping());
-      }
-      if (passages != null && passages[0] != null) {
-        mapping.putAll(passages[0].getApiToSdkMapping());
-      }
-      mapping.put('duplicates_removed', 'duplicatesRemoved');
+      mapping.put(parentLabel + 'matching_results', 'matchingResults');
+      mapping.putAll(((IBMWatsonGenericModel) QueryNoticesResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) QueryAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) QueryPassages.class.newInstance()).addToApiToSdkMapping(parentLabel + 'passages/', mapping));
+      mapping.put(parentLabel + 'duplicates_removed', 'duplicatesRemoved');
       return mapping;
     }
   }
@@ -19202,7 +19147,7 @@ public class IBMDiscoveryV1Models {
     private String fileType;
     private String sha1;
     private List<Notice> notices;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * Gets the id.
@@ -19443,14 +19388,11 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('collection_id', 'collectionId');
-      mapping.put('result_metadata', 'resultMetadata');
-      mapping.put('file_type', 'fileType');
-      if (notices != null && notices[0] != null) {
-        mapping.putAll(notices[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'collection_id', 'collectionId');
+      mapping.put(parentLabel + 'result_metadata', 'resultMetadata');
+      mapping.put(parentLabel + 'file_type', 'fileType');
+      mapping.putAll(((IBMWatsonGenericModel) Notice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'notices/', mapping));
       return mapping;
     }
   }
@@ -20175,7 +20117,7 @@ public class IBMDiscoveryV1Models {
     private Long startOffset;
     private Long endOffset;
     private String field;
- 
+
     /**
      * Gets the documentId.
      *
@@ -20187,7 +20129,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the passageScore.
      *
@@ -20199,7 +20141,7 @@ public class IBMDiscoveryV1Models {
     public Double getPassageScore() {
       return passageScore;
     }
- 
+
     /**
      * Gets the passageText.
      *
@@ -20211,7 +20153,7 @@ public class IBMDiscoveryV1Models {
     public String getPassageText() {
       return passageText;
     }
- 
+
     /**
      * Gets the startOffset.
      *
@@ -20223,7 +20165,7 @@ public class IBMDiscoveryV1Models {
     public Long getStartOffset() {
       return startOffset;
     }
- 
+
     /**
      * Gets the endOffset.
      *
@@ -20235,7 +20177,7 @@ public class IBMDiscoveryV1Models {
     public Long getEndOffset() {
       return endOffset;
     }
- 
+
     /**
      * Gets the field.
      *
@@ -20302,13 +20244,16 @@ public class IBMDiscoveryV1Models {
       this.field = field;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_id', 'documentId');
-      mapping.put('passage_score', 'passageScore');
-      mapping.put('passage_text', 'passageText');
-      mapping.put('start_offset', 'startOffset');
-      mapping.put('end_offset', 'endOffset');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'passage_score', 'passageScore');
+      mapping.put(parentLabel + 'passage_text', 'passageText');
+      mapping.put(parentLabel + 'start_offset', 'startOffset');
+      mapping.put(parentLabel + 'end_offset', 'endOffset');
       return mapping;
     }
   }
@@ -20318,7 +20263,7 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryRelationsArgument extends IBMWatsonGenericModel {
     private List<QueryEntitiesEntity> entities;
- 
+
     /**
      * Gets the entities.
      *
@@ -20363,11 +20308,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) QueryEntitiesEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
       return mapping;
     }
   }
@@ -20379,7 +20321,7 @@ public class IBMDiscoveryV1Models {
     private String text;
     private String xtype;
     private Boolean exact;
- 
+
     /**
      * Gets the text.
      *
@@ -20390,7 +20332,7 @@ public class IBMDiscoveryV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the xtype.
      *
@@ -20401,7 +20343,7 @@ public class IBMDiscoveryV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the exact.
      *
@@ -20428,9 +20370,8 @@ public class IBMDiscoveryV1Models {
       return new QueryRelationsEntityBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xtype', 'type');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'xtype', 'type');
       return mapping;
     }
   }
@@ -20470,7 +20411,7 @@ public class IBMDiscoveryV1Models {
      * @param text the text
      * @return the QueryRelationsEntity builder
      */
-    public QueryRelationsEntityBuilder setText(String text) {
+    public QueryRelationsEntityBuilder text(String text) {
       this.text = text;
       return this;
     }
@@ -20481,7 +20422,7 @@ public class IBMDiscoveryV1Models {
      * @param xtype the xtype
      * @return the QueryRelationsEntity builder
      */
-    public QueryRelationsEntityBuilder setXtype(String xtype) {
+    public QueryRelationsEntityBuilder xtype(String xtype) {
       this.xtype = xtype;
       return this;
     }
@@ -20492,7 +20433,7 @@ public class IBMDiscoveryV1Models {
      * @param exact the exact
      * @return the QueryRelationsEntity builder
      */
-    public QueryRelationsEntityBuilder setExact(Boolean exact) {
+    public QueryRelationsEntityBuilder exact(Boolean exact) {
       this.exact = exact;
       return this;
     }
@@ -20505,7 +20446,7 @@ public class IBMDiscoveryV1Models {
     private QueryFilterType relationTypes;
     private QueryFilterType entityTypes;
     private List<String> documentIds;
- 
+
     /**
      * Gets the relationTypes.
      *
@@ -20514,7 +20455,7 @@ public class IBMDiscoveryV1Models {
     public QueryFilterType getRelationTypes() {
       return relationTypes;
     }
- 
+
     /**
      * Gets the entityTypes.
      *
@@ -20523,7 +20464,7 @@ public class IBMDiscoveryV1Models {
     public QueryFilterType getEntityTypes() {
       return entityTypes;
     }
- 
+
     /**
      * Gets the documentIds.
      *
@@ -20550,11 +20491,14 @@ public class IBMDiscoveryV1Models {
       return new QueryRelationsFilterBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('relationTypes', 'relation_types');
-      mapping.put('entityTypes', 'entity_types');
-      mapping.put('documentIds', 'document_ids');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'relationTypes', 'relation_types');
+      mapping.put(parentLabel + 'entityTypes', 'entity_types');
+      mapping.put(parentLabel + 'documentIds', 'document_ids');
       return mapping;
     }
   }
@@ -20609,7 +20553,7 @@ public class IBMDiscoveryV1Models {
      * @param relationTypes the relationTypes
      * @return the QueryRelationsFilter builder
      */
-    public QueryRelationsFilterBuilder setRelationTypes(QueryFilterType relationTypes) {
+    public QueryRelationsFilterBuilder relationTypes(QueryFilterType relationTypes) {
       this.relationTypes = relationTypes;
       return this;
     }
@@ -20620,7 +20564,7 @@ public class IBMDiscoveryV1Models {
      * @param entityTypes the entityTypes
      * @return the QueryRelationsFilter builder
      */
-    public QueryRelationsFilterBuilder setEntityTypes(QueryFilterType entityTypes) {
+    public QueryRelationsFilterBuilder entityTypes(QueryFilterType entityTypes) {
       this.entityTypes = entityTypes;
       return this;
     }
@@ -20632,7 +20576,7 @@ public class IBMDiscoveryV1Models {
      * @param documentIds the documentIds
      * @return the QueryRelationsFilter builder
      */
-    public QueryRelationsFilterBuilder setDocumentIds(List<String> documentIds) {
+    public QueryRelationsFilterBuilder documentIds(List<String> documentIds) {
       this.documentIds = documentIds;
       return this;
     }
@@ -20769,11 +20713,11 @@ public class IBMDiscoveryV1Models {
       mapping.put('environmentId', 'environment_id');
       mapping.put('collectionId', 'collection_id');
       if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].getSdkToApiMapping());
+        mapping.putAll(entities[0].addToSdkToApiMapping('', mapping));
       }
       mapping.put('xsort', 'sort');
       if (filter != null) {
-        mapping.putAll(filter.getSdkToApiMapping());
+        mapping.putAll(filter.addToSdkToApiMapping('', mapping));
       }
       mapping.put('evidenceCount', 'evidence_count');
       return mapping;
@@ -20956,7 +20900,7 @@ public class IBMDiscoveryV1Models {
     private Long frequency;
     private List<QueryRelationsArgument> arguments;
     private List<QueryEvidence> evidence;
- 
+
     /**
      * Gets the xtype.
      *
@@ -20968,7 +20912,7 @@ public class IBMDiscoveryV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the frequency.
      *
@@ -20980,7 +20924,7 @@ public class IBMDiscoveryV1Models {
     public Long getFrequency() {
       return frequency;
     }
- 
+
     /**
      * Gets the arguments.
      *
@@ -20992,7 +20936,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryRelationsArgument> getArguments() {
       return arguments;
     }
- 
+
     /**
      * Gets the evidence.
      *
@@ -21077,15 +21021,14 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      if (arguments != null && arguments[0] != null) {
-        mapping.putAll(arguments[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (evidence != null && evidence[0] != null) {
-        mapping.putAll(evidence[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.putAll(((IBMWatsonGenericModel) QueryRelationsArgument.class.newInstance()).addToApiToSdkMapping(parentLabel + 'arguments/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) QueryEvidence.class.newInstance()).addToApiToSdkMapping(parentLabel + 'evidence/', mapping));
       return mapping;
     }
   }
@@ -21095,7 +21038,7 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryRelationsResponse extends IBMWatsonResponseModel {
     private List<QueryRelationsRelationship> relations;
- 
+
     /**
      * Gets the relations.
      *
@@ -21140,11 +21083,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (relations != null && relations[0] != null) {
-        mapping.putAll(relations[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) QueryRelationsRelationship.class.newInstance()).addToApiToSdkMapping(parentLabel + 'relations/', mapping));
       return mapping;
     }
   }
@@ -21160,7 +21100,7 @@ public class IBMDiscoveryV1Models {
     private Long duplicatesRemoved;
     private String sessionToken;
     private RetrievalDetails retrievalDetails;
- 
+
     /**
      * Gets the matchingResults.
      *
@@ -21172,7 +21112,7 @@ public class IBMDiscoveryV1Models {
     public Long getMatchingResults() {
       return matchingResults;
     }
- 
+
     /**
      * Gets the results.
      *
@@ -21184,7 +21124,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryResult> getResults() {
       return results;
     }
- 
+
     /**
      * Gets the aggregations.
      *
@@ -21196,7 +21136,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryAggregation> getAggregations() {
       return aggregations;
     }
- 
+
     /**
      * Gets the passages.
      *
@@ -21208,7 +21148,7 @@ public class IBMDiscoveryV1Models {
     public List<QueryPassages> getPassages() {
       return passages;
     }
- 
+
     /**
      * Gets the duplicatesRemoved.
      *
@@ -21220,7 +21160,7 @@ public class IBMDiscoveryV1Models {
     public Long getDuplicatesRemoved() {
       return duplicatesRemoved;
     }
- 
+
     /**
      * Gets the sessionToken.
      *
@@ -21235,7 +21175,7 @@ public class IBMDiscoveryV1Models {
     public String getSessionToken() {
       return sessionToken;
     }
- 
+
     /**
      * Gets the retrievalDetails.
      *
@@ -21364,24 +21304,19 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('matching_results', 'matchingResults');
-      if (results != null && results[0] != null) {
-        mapping.putAll(results[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (aggregations != null && aggregations[0] != null) {
-        mapping.putAll(aggregations[0].getApiToSdkMapping());
-      }
-      if (passages != null && passages[0] != null) {
-        mapping.putAll(passages[0].getApiToSdkMapping());
-      }
-      mapping.put('duplicates_removed', 'duplicatesRemoved');
-      mapping.put('session_token', 'sessionToken');
-      mapping.put('retrieval_details', 'retrievalDetails');
-      if (retrievalDetails != null) {
-        mapping.putAll(retrievalDetails.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'matching_results', 'matchingResults');
+      mapping.putAll(((IBMWatsonGenericModel) QueryResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) QueryAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) QueryPassages.class.newInstance()).addToApiToSdkMapping(parentLabel + 'passages/', mapping));
+      mapping.put(parentLabel + 'duplicates_removed', 'duplicatesRemoved');
+      mapping.put(parentLabel + 'session_token', 'sessionToken');
+      mapping.put(parentLabel + 'retrieval_details', 'retrievalDetails');
+      mapping.putAll(((IBMWatsonGenericModel) RetrievalDetails.class.newInstance()).addToApiToSdkMapping(parentLabel + 'retrieval_details/', mapping));
       return mapping;
     }
   }
@@ -21395,7 +21330,7 @@ public class IBMDiscoveryV1Models {
     private String collectionId;
     private QueryResultMetadata resultMetadata;
     private String title;
-    private Map<String, Object> additional_properties_serialized_name;
+    private Map<String, Object> additionalProperties;
 
     /**
      * Gets the id.
@@ -21528,10 +21463,9 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('collection_id', 'collectionId');
-      mapping.put('result_metadata', 'resultMetadata');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'collection_id', 'collectionId');
+      mapping.put(parentLabel + 'result_metadata', 'resultMetadata');
       return mapping;
     }
   }
@@ -21542,7 +21476,7 @@ public class IBMDiscoveryV1Models {
   public class QueryResultMetadata extends IBMWatsonGenericModel {
     private Double score;
     private Double confidence;
- 
+
     /**
      * Gets the score.
      *
@@ -21555,7 +21489,7 @@ public class IBMDiscoveryV1Models {
     public Double getScore() {
       return score;
     }
- 
+
     /**
      * Gets the confidence.
      *
@@ -21595,7 +21529,7 @@ public class IBMDiscoveryV1Models {
    */
   public class RetrievalDetails extends IBMWatsonGenericModel {
     private String documentRetrievalStrategy;
- 
+
     /**
      * Gets the documentRetrievalStrategy.
      *
@@ -21623,9 +21557,12 @@ public class IBMDiscoveryV1Models {
       this.documentRetrievalStrategy = documentRetrievalStrategy;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_retrieval_strategy', 'documentRetrievalStrategy');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'document_retrieval_strategy', 'documentRetrievalStrategy');
       return mapping;
     }
   }
@@ -21639,7 +21576,7 @@ public class IBMDiscoveryV1Models {
     private Long totalPages;
     private Long totalDocuments;
     private SduStatusCustomFields customFields;
- 
+
     /**
      * Gets the enabled.
      *
@@ -21654,7 +21591,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getEnabled() {
       return enabled;
     }
- 
+
     /**
      * Gets the totalAnnotatedPages.
      *
@@ -21666,7 +21603,7 @@ public class IBMDiscoveryV1Models {
     public Long getTotalAnnotatedPages() {
       return totalAnnotatedPages;
     }
- 
+
     /**
      * Gets the totalPages.
      *
@@ -21679,7 +21616,7 @@ public class IBMDiscoveryV1Models {
     public Long getTotalPages() {
       return totalPages;
     }
- 
+
     /**
      * Gets the totalDocuments.
      *
@@ -21695,7 +21632,7 @@ public class IBMDiscoveryV1Models {
     public Long getTotalDocuments() {
       return totalDocuments;
     }
- 
+
     /**
      * Gets the customFields.
      *
@@ -21767,15 +21704,12 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('total_annotated_pages', 'totalAnnotatedPages');
-      mapping.put('total_pages', 'totalPages');
-      mapping.put('total_documents', 'totalDocuments');
-      mapping.put('custom_fields', 'customFields');
-      if (customFields != null) {
-        mapping.putAll(customFields.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'total_annotated_pages', 'totalAnnotatedPages');
+      mapping.put(parentLabel + 'total_pages', 'totalPages');
+      mapping.put(parentLabel + 'total_documents', 'totalDocuments');
+      mapping.put(parentLabel + 'custom_fields', 'customFields');
+      mapping.putAll(((IBMWatsonGenericModel) SduStatusCustomFields.class.newInstance()).addToApiToSdkMapping(parentLabel + 'custom_fields/', mapping));
       return mapping;
     }
   }
@@ -21786,7 +21720,7 @@ public class IBMDiscoveryV1Models {
   public class SduStatusCustomFields extends IBMWatsonGenericModel {
     private Long defined;
     private Long maximumAllowed;
- 
+
     /**
      * Gets the defined.
      *
@@ -21798,7 +21732,7 @@ public class IBMDiscoveryV1Models {
     public Long getDefined() {
       return defined;
     }
- 
+
     /**
      * Gets the maximumAllowed.
      *
@@ -21829,9 +21763,8 @@ public class IBMDiscoveryV1Models {
       this.maximumAllowed = maximumAllowed;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('maximum_allowed', 'maximumAllowed');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'maximum_allowed', 'maximumAllowed');
       return mapping;
     }
   }
@@ -21844,7 +21777,7 @@ public class IBMDiscoveryV1Models {
     private String status;
     private String statusDescription;
     private Datetime lastTrained;
- 
+
     /**
      * Gets the scope.
      *
@@ -21856,7 +21789,7 @@ public class IBMDiscoveryV1Models {
     public String getScope() {
       return scope;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -21868,7 +21801,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the statusDescription.
      *
@@ -21880,7 +21813,7 @@ public class IBMDiscoveryV1Models {
     public String getStatusDescription() {
       return statusDescription;
     }
- 
+
     /**
      * Gets the lastTrained.
      *
@@ -21929,10 +21862,9 @@ public class IBMDiscoveryV1Models {
       this.lastTrained = lastTrained;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('status_description', 'statusDescription');
-      mapping.put('last_trained', 'lastTrained');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'status_description', 'statusDescription');
+      mapping.put(parentLabel + 'last_trained', 'lastTrained');
       return mapping;
     }
   }
@@ -21950,7 +21882,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public SegmentSettings() { }
- 
+
     /**
      * Gets the enabled.
      *
@@ -21962,7 +21894,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getEnabled() {
       return enabled;
     }
- 
+
     /**
      * Gets the selectorTags.
      *
@@ -21977,7 +21909,7 @@ public class IBMDiscoveryV1Models {
     public List<String> getSelectorTags() {
       return selectorTags;
     }
- 
+
     /**
      * Gets the annotatedFields.
      *
@@ -22011,17 +21943,15 @@ public class IBMDiscoveryV1Models {
       return new SegmentSettingsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('selectorTags', 'selector_tags');
-      mapping.put('annotatedFields', 'annotated_fields');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'selectorTags', 'selector_tags');
+      mapping.put(parentLabel + 'annotatedFields', 'annotated_fields');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('selector_tags', 'selectorTags');
-      mapping.put('annotated_fields', 'annotatedFields');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'selector_tags', 'selectorTags');
+      mapping.put(parentLabel + 'annotated_fields', 'annotatedFields');
       return mapping;
     }
   }
@@ -22091,7 +22021,7 @@ public class IBMDiscoveryV1Models {
      * @param enabled the enabled
      * @return the SegmentSettings builder
      */
-    public SegmentSettingsBuilder setEnabled(Boolean enabled) {
+    public SegmentSettingsBuilder enabled(Boolean enabled) {
       this.enabled = enabled;
       return this;
     }
@@ -22103,7 +22033,7 @@ public class IBMDiscoveryV1Models {
      * @param selectorTags the selectorTags
      * @return the SegmentSettings builder
      */
-    public SegmentSettingsBuilder setSelectorTags(List<String> selectorTags) {
+    public SegmentSettingsBuilder selectorTags(List<String> selectorTags) {
       this.selectorTags = selectorTags;
       return this;
     }
@@ -22115,7 +22045,7 @@ public class IBMDiscoveryV1Models {
      * @param annotatedFields the annotatedFields
      * @return the SegmentSettings builder
      */
-    public SegmentSettingsBuilder setAnnotatedFields(List<String> annotatedFields) {
+    public SegmentSettingsBuilder annotatedFields(List<String> annotatedFields) {
       this.annotatedFields = annotatedFields;
       return this;
     }
@@ -22135,7 +22065,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public Source() { }
- 
+
     /**
      * Gets the xtype.
      *
@@ -22152,7 +22082,7 @@ public class IBMDiscoveryV1Models {
     public String getXtype() {
       return xtype;
     }
- 
+
     /**
      * Gets the credentialId.
      *
@@ -22166,7 +22096,7 @@ public class IBMDiscoveryV1Models {
     public String getCredentialId() {
       return credentialId;
     }
- 
+
     /**
      * Gets the schedule.
      *
@@ -22178,7 +22108,7 @@ public class IBMDiscoveryV1Models {
     public SourceSchedule getSchedule() {
       return schedule;
     }
- 
+
     /**
      * Gets the options.
      *
@@ -22217,38 +22147,40 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for schedule
       SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(ret.getSchedule()), (Map<String, Object>) jsonMap.get('schedule'), SourceSchedule.class);
-      retBuilder.setSchedule(newSchedule);
+      retBuilder.schedule(newSchedule);
 
       // calling custom deserializer for options
       SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options'), SourceOptions.class);
-      retBuilder.setOptions(newOptions);
+      retBuilder.options(newOptions);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xtype', 'type');
-      mapping.put('credentialId', 'credential_id');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'xtype', 'type');
+      mapping.put(parentLabel + 'credentialId', 'credential_id');
       if (schedule != null) {
-        mapping.putAll(schedule.getSdkToApiMapping());
+        mapping.putAll(schedule.addToSdkToApiMapping(parentLabel + 'schedule/', mapping));
       }
       if (options != null) {
-        mapping.putAll(options.getSdkToApiMapping());
+        mapping.putAll(options.addToSdkToApiMapping(parentLabel + 'options/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
-      mapping.put('credential_id', 'credentialId');
-      if (schedule != null) {
-        mapping.putAll(schedule.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      if (options != null) {
-        mapping.putAll(options.getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'type', 'xtype');
+      mapping.put(parentLabel + 'credential_id', 'credentialId');
+      mapping.putAll(((IBMWatsonGenericModel) SourceSchedule.class.newInstance()).addToApiToSdkMapping(parentLabel + 'schedule/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) SourceOptions.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
       return mapping;
     }
   }
@@ -22290,7 +22222,7 @@ public class IBMDiscoveryV1Models {
      * @param xtype the xtype
      * @return the Source builder
      */
-    public SourceBuilder setXtype(String xtype) {
+    public SourceBuilder xtype(String xtype) {
       this.xtype = xtype;
       return this;
     }
@@ -22301,7 +22233,7 @@ public class IBMDiscoveryV1Models {
      * @param credentialId the credentialId
      * @return the Source builder
      */
-    public SourceBuilder setCredentialId(String credentialId) {
+    public SourceBuilder credentialId(String credentialId) {
       this.credentialId = credentialId;
       return this;
     }
@@ -22312,7 +22244,7 @@ public class IBMDiscoveryV1Models {
      * @param schedule the schedule
      * @return the Source builder
      */
-    public SourceBuilder setSchedule(SourceSchedule schedule) {
+    public SourceBuilder schedule(SourceSchedule schedule) {
       this.schedule = schedule;
       return this;
     }
@@ -22323,7 +22255,7 @@ public class IBMDiscoveryV1Models {
      * @param options the options
      * @return the Source builder
      */
-    public SourceBuilder setOptions(SourceOptions options) {
+    public SourceBuilder options(SourceOptions options) {
       this.options = options;
       return this;
     }
@@ -22345,7 +22277,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public SourceOptions() { }
- 
+
     /**
      * Gets the folders.
      *
@@ -22358,7 +22290,7 @@ public class IBMDiscoveryV1Models {
     public List<SourceOptionsFolder> getFolders() {
       return folders;
     }
- 
+
     /**
      * Gets the objects.
      *
@@ -22371,7 +22303,7 @@ public class IBMDiscoveryV1Models {
     public List<SourceOptionsObject> getObjects() {
       return objects;
     }
- 
+
     /**
      * Gets the siteCollections.
      *
@@ -22384,7 +22316,7 @@ public class IBMDiscoveryV1Models {
     public List<SourceOptionsSiteColl> getSiteCollections() {
       return siteCollections;
     }
- 
+
     /**
      * Gets the urls.
      *
@@ -22397,7 +22329,7 @@ public class IBMDiscoveryV1Models {
     public List<SourceOptionsWebCrawl> getUrls() {
       return urls;
     }
- 
+
     /**
      * Gets the buckets.
      *
@@ -22411,7 +22343,7 @@ public class IBMDiscoveryV1Models {
     public List<SourceOptionsBuckets> getBuckets() {
       return buckets;
     }
- 
+
     /**
      * Gets the crawlAllBuckets.
      *
@@ -22461,7 +22393,7 @@ public class IBMDiscoveryV1Models {
           SourceOptionsFolder newItem = (SourceOptionsFolder) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsFolder.class);
           newFolders.add(newItem);
         }
-        retBuilder.setFolders(newFolders);
+        retBuilder.folders(newFolders);
       }
 
       // calling custom deserializer for objects
@@ -22474,7 +22406,7 @@ public class IBMDiscoveryV1Models {
           SourceOptionsObject newItem = (SourceOptionsObject) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsObject.class);
           newObjects.add(newItem);
         }
-        retBuilder.setObjects(newObjects);
+        retBuilder.objects(newObjects);
       }
 
       // calling custom deserializer for siteCollections
@@ -22487,7 +22419,7 @@ public class IBMDiscoveryV1Models {
           SourceOptionsSiteColl newItem = (SourceOptionsSiteColl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsSiteColl.class);
           newSiteCollections.add(newItem);
         }
-        retBuilder.setSiteCollections(newSiteCollections);
+        retBuilder.siteCollections(newSiteCollections);
       }
 
       // calling custom deserializer for urls
@@ -22500,7 +22432,7 @@ public class IBMDiscoveryV1Models {
           SourceOptionsWebCrawl newItem = (SourceOptionsWebCrawl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsWebCrawl.class);
           newUrls.add(newItem);
         }
-        retBuilder.setUrls(newUrls);
+        retBuilder.urls(newUrls);
       }
 
       // calling custom deserializer for buckets
@@ -22513,53 +22445,41 @@ public class IBMDiscoveryV1Models {
           SourceOptionsBuckets newItem = (SourceOptionsBuckets) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsBuckets.class);
           newBuckets.add(newItem);
         }
-        retBuilder.setBuckets(newBuckets);
+        retBuilder.buckets(newBuckets);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (folders != null && folders[0] != null) {
-        mapping.putAll(folders[0].getSdkToApiMapping());
+        mapping.putAll(folders[0].addToSdkToApiMapping(parentLabel + 'folders/', mapping));
       }
       if (objects != null && objects[0] != null) {
-        mapping.putAll(objects[0].getSdkToApiMapping());
+        mapping.putAll(objects[0].addToSdkToApiMapping(parentLabel + 'objects/', mapping));
       }
-      mapping.put('siteCollections', 'site_collections');
+      mapping.put(parentLabel + 'siteCollections', 'site_collections');
       if (siteCollections != null && siteCollections[0] != null) {
-        mapping.putAll(siteCollections[0].getSdkToApiMapping());
+        mapping.putAll(siteCollections[0].addToSdkToApiMapping(parentLabel + 'siteCollections/', mapping));
       }
       if (urls != null && urls[0] != null) {
-        mapping.putAll(urls[0].getSdkToApiMapping());
+        mapping.putAll(urls[0].addToSdkToApiMapping(parentLabel + 'urls/', mapping));
       }
       if (buckets != null && buckets[0] != null) {
-        mapping.putAll(buckets[0].getSdkToApiMapping());
+        mapping.putAll(buckets[0].addToSdkToApiMapping(parentLabel + 'buckets/', mapping));
       }
-      mapping.put('crawlAllBuckets', 'crawl_all_buckets');
+      mapping.put(parentLabel + 'crawlAllBuckets', 'crawl_all_buckets');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (folders != null && folders[0] != null) {
-        mapping.putAll(folders[0].getApiToSdkMapping());
-      }
-      if (objects != null && objects[0] != null) {
-        mapping.putAll(objects[0].getApiToSdkMapping());
-      }
-      mapping.put('site_collections', 'siteCollections');
-      if (siteCollections != null && siteCollections[0] != null) {
-        mapping.putAll(siteCollections[0].getApiToSdkMapping());
-      }
-      if (urls != null && urls[0] != null) {
-        mapping.putAll(urls[0].getApiToSdkMapping());
-      }
-      if (buckets != null && buckets[0] != null) {
-        mapping.putAll(buckets[0].getApiToSdkMapping());
-      }
-      mapping.put('crawl_all_buckets', 'crawlAllBuckets');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsFolder.class.newInstance()).addToApiToSdkMapping(parentLabel + 'folders/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsObject.class.newInstance()).addToApiToSdkMapping(parentLabel + 'objects/', mapping));
+      mapping.put(parentLabel + 'site_collections', 'siteCollections');
+      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsSiteColl.class.newInstance()).addToApiToSdkMapping(parentLabel + 'site_collections/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsWebCrawl.class.newInstance()).addToApiToSdkMapping(parentLabel + 'urls/', mapping));
+      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsBuckets.class.newInstance()).addToApiToSdkMapping(parentLabel + 'buckets/', mapping));
+      mapping.put(parentLabel + 'crawl_all_buckets', 'crawlAllBuckets');
       return mapping;
     }
   }
@@ -22681,7 +22601,7 @@ public class IBMDiscoveryV1Models {
      * @param folders the folders
      * @return the SourceOptions builder
      */
-    public SourceOptionsBuilder setFolders(List<SourceOptionsFolder> folders) {
+    public SourceOptionsBuilder folders(List<SourceOptionsFolder> folders) {
       this.folders = folders;
       return this;
     }
@@ -22693,7 +22613,7 @@ public class IBMDiscoveryV1Models {
      * @param objects the objects
      * @return the SourceOptions builder
      */
-    public SourceOptionsBuilder setObjects(List<SourceOptionsObject> objects) {
+    public SourceOptionsBuilder objects(List<SourceOptionsObject> objects) {
       this.objects = objects;
       return this;
     }
@@ -22705,7 +22625,7 @@ public class IBMDiscoveryV1Models {
      * @param siteCollections the siteCollections
      * @return the SourceOptions builder
      */
-    public SourceOptionsBuilder setSiteCollections(List<SourceOptionsSiteColl> siteCollections) {
+    public SourceOptionsBuilder siteCollections(List<SourceOptionsSiteColl> siteCollections) {
       this.siteCollections = siteCollections;
       return this;
     }
@@ -22717,7 +22637,7 @@ public class IBMDiscoveryV1Models {
      * @param urls the urls
      * @return the SourceOptions builder
      */
-    public SourceOptionsBuilder setUrls(List<SourceOptionsWebCrawl> urls) {
+    public SourceOptionsBuilder urls(List<SourceOptionsWebCrawl> urls) {
       this.urls = urls;
       return this;
     }
@@ -22729,7 +22649,7 @@ public class IBMDiscoveryV1Models {
      * @param buckets the buckets
      * @return the SourceOptions builder
      */
-    public SourceOptionsBuilder setBuckets(List<SourceOptionsBuckets> buckets) {
+    public SourceOptionsBuilder buckets(List<SourceOptionsBuckets> buckets) {
       this.buckets = buckets;
       return this;
     }
@@ -22740,7 +22660,7 @@ public class IBMDiscoveryV1Models {
      * @param crawlAllBuckets the crawlAllBuckets
      * @return the SourceOptions builder
      */
-    public SourceOptionsBuilder setCrawlAllBuckets(Boolean crawlAllBuckets) {
+    public SourceOptionsBuilder crawlAllBuckets(Boolean crawlAllBuckets) {
       this.crawlAllBuckets = crawlAllBuckets;
       return this;
     }
@@ -22758,7 +22678,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public SourceOptionsBuckets() { }
- 
+
     /**
      * Gets the name.
      *
@@ -22770,7 +22690,7 @@ public class IBMDiscoveryV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -22799,15 +22719,13 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsBucketsBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('limit', 'xlimit');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'limit', 'xlimit');
       return mapping;
     }
   }
@@ -22854,7 +22772,7 @@ public class IBMDiscoveryV1Models {
      * @param name the name
      * @return the SourceOptionsBuckets builder
      */
-    public SourceOptionsBucketsBuilder setName(String name) {
+    public SourceOptionsBucketsBuilder name(String name) {
       this.name = name;
       return this;
     }
@@ -22865,7 +22783,7 @@ public class IBMDiscoveryV1Models {
      * @param xlimit the xlimit
      * @return the SourceOptionsBuckets builder
      */
-    public SourceOptionsBucketsBuilder setXlimit(Long xlimit) {
+    public SourceOptionsBucketsBuilder xlimit(Long xlimit) {
       this.xlimit = xlimit;
       return this;
     }
@@ -22884,7 +22802,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public SourceOptionsFolder() { }
- 
+
     /**
      * Gets the ownerUserId.
      *
@@ -22896,7 +22814,7 @@ public class IBMDiscoveryV1Models {
     public String getOwnerUserId() {
       return ownerUserId;
     }
- 
+
     /**
      * Gets the folderId.
      *
@@ -22908,7 +22826,7 @@ public class IBMDiscoveryV1Models {
     public String getFolderId() {
       return folderId;
     }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -22938,19 +22856,25 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsFolderBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('ownerUserId', 'owner_user_id');
-      mapping.put('folderId', 'folder_id');
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'ownerUserId', 'owner_user_id');
+      mapping.put(parentLabel + 'folderId', 'folder_id');
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('owner_user_id', 'ownerUserId');
-      mapping.put('folder_id', 'folderId');
-      mapping.put('limit', 'xlimit');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'owner_user_id', 'ownerUserId');
+      mapping.put(parentLabel + 'folder_id', 'folderId');
+      mapping.put(parentLabel + 'limit', 'xlimit');
       return mapping;
     }
   }
@@ -23001,7 +22925,7 @@ public class IBMDiscoveryV1Models {
      * @param ownerUserId the ownerUserId
      * @return the SourceOptionsFolder builder
      */
-    public SourceOptionsFolderBuilder setOwnerUserId(String ownerUserId) {
+    public SourceOptionsFolderBuilder ownerUserId(String ownerUserId) {
       this.ownerUserId = ownerUserId;
       return this;
     }
@@ -23012,7 +22936,7 @@ public class IBMDiscoveryV1Models {
      * @param folderId the folderId
      * @return the SourceOptionsFolder builder
      */
-    public SourceOptionsFolderBuilder setFolderId(String folderId) {
+    public SourceOptionsFolderBuilder folderId(String folderId) {
       this.folderId = folderId;
       return this;
     }
@@ -23023,7 +22947,7 @@ public class IBMDiscoveryV1Models {
      * @param xlimit the xlimit
      * @return the SourceOptionsFolder builder
      */
-    public SourceOptionsFolderBuilder setXlimit(Long xlimit) {
+    public SourceOptionsFolderBuilder xlimit(Long xlimit) {
       this.xlimit = xlimit;
       return this;
     }
@@ -23041,7 +22965,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public SourceOptionsObject() { }
- 
+
     /**
      * Gets the name.
      *
@@ -23053,7 +22977,7 @@ public class IBMDiscoveryV1Models {
     public String getName() {
       return name;
     }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -23082,15 +23006,13 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsObjectBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('limit', 'xlimit');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'limit', 'xlimit');
       return mapping;
     }
   }
@@ -23137,7 +23059,7 @@ public class IBMDiscoveryV1Models {
      * @param name the name
      * @return the SourceOptionsObject builder
      */
-    public SourceOptionsObjectBuilder setName(String name) {
+    public SourceOptionsObjectBuilder name(String name) {
       this.name = name;
       return this;
     }
@@ -23148,7 +23070,7 @@ public class IBMDiscoveryV1Models {
      * @param xlimit the xlimit
      * @return the SourceOptionsObject builder
      */
-    public SourceOptionsObjectBuilder setXlimit(Long xlimit) {
+    public SourceOptionsObjectBuilder xlimit(Long xlimit) {
       this.xlimit = xlimit;
       return this;
     }
@@ -23166,7 +23088,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public SourceOptionsSiteColl() { }
- 
+
     /**
      * Gets the siteCollectionPath.
      *
@@ -23179,7 +23101,7 @@ public class IBMDiscoveryV1Models {
     public String getSiteCollectionPath() {
       return siteCollectionPath;
     }
- 
+
     /**
      * Gets the xlimit.
      *
@@ -23208,17 +23130,23 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsSiteCollBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('siteCollectionPath', 'site_collection_path');
-      mapping.put('xlimit', 'limit');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'siteCollectionPath', 'site_collection_path');
+      mapping.put(parentLabel + 'xlimit', 'limit');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('site_collection_path', 'siteCollectionPath');
-      mapping.put('limit', 'xlimit');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'site_collection_path', 'siteCollectionPath');
+      mapping.put(parentLabel + 'limit', 'xlimit');
       return mapping;
     }
   }
@@ -23265,7 +23193,7 @@ public class IBMDiscoveryV1Models {
      * @param siteCollectionPath the siteCollectionPath
      * @return the SourceOptionsSiteColl builder
      */
-    public SourceOptionsSiteCollBuilder setSiteCollectionPath(String siteCollectionPath) {
+    public SourceOptionsSiteCollBuilder siteCollectionPath(String siteCollectionPath) {
       this.siteCollectionPath = siteCollectionPath;
       return this;
     }
@@ -23276,7 +23204,7 @@ public class IBMDiscoveryV1Models {
      * @param xlimit the xlimit
      * @return the SourceOptionsSiteColl builder
      */
-    public SourceOptionsSiteCollBuilder setXlimit(Long xlimit) {
+    public SourceOptionsSiteCollBuilder xlimit(Long xlimit) {
       this.xlimit = xlimit;
       return this;
     }
@@ -23300,7 +23228,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public SourceOptionsWebCrawl() { }
- 
+
     /**
      * Gets the url.
      *
@@ -23312,7 +23240,7 @@ public class IBMDiscoveryV1Models {
     public String getUrl() {
       return url;
     }
- 
+
     /**
      * Gets the limitToStartingHosts.
      *
@@ -23324,7 +23252,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getLimitToStartingHosts() {
       return limitToStartingHosts;
     }
- 
+
     /**
      * Gets the crawlSpeed.
      *
@@ -23338,7 +23266,7 @@ public class IBMDiscoveryV1Models {
     public String getCrawlSpeed() {
       return crawlSpeed;
     }
- 
+
     /**
      * Gets the allowUntrustedCertificate.
      *
@@ -23350,7 +23278,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getAllowUntrustedCertificate() {
       return allowUntrustedCertificate;
     }
- 
+
     /**
      * Gets the maximumHops.
      *
@@ -23364,7 +23292,7 @@ public class IBMDiscoveryV1Models {
     public Long getMaximumHops() {
       return maximumHops;
     }
- 
+
     /**
      * Gets the requestTimeout.
      *
@@ -23376,7 +23304,7 @@ public class IBMDiscoveryV1Models {
     public Long getRequestTimeout() {
       return requestTimeout;
     }
- 
+
     /**
      * Gets the overrideRobotsTxt.
      *
@@ -23390,7 +23318,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getOverrideRobotsTxt() {
       return overrideRobotsTxt;
     }
- 
+
     /**
      * Gets the blacklist.
      *
@@ -23425,25 +23353,23 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsWebCrawlBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('limitToStartingHosts', 'limit_to_starting_hosts');
-      mapping.put('crawlSpeed', 'crawl_speed');
-      mapping.put('allowUntrustedCertificate', 'allow_untrusted_certificate');
-      mapping.put('maximumHops', 'maximum_hops');
-      mapping.put('requestTimeout', 'request_timeout');
-      mapping.put('overrideRobotsTxt', 'override_robots_txt');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'limitToStartingHosts', 'limit_to_starting_hosts');
+      mapping.put(parentLabel + 'crawlSpeed', 'crawl_speed');
+      mapping.put(parentLabel + 'allowUntrustedCertificate', 'allow_untrusted_certificate');
+      mapping.put(parentLabel + 'maximumHops', 'maximum_hops');
+      mapping.put(parentLabel + 'requestTimeout', 'request_timeout');
+      mapping.put(parentLabel + 'overrideRobotsTxt', 'override_robots_txt');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('limit_to_starting_hosts', 'limitToStartingHosts');
-      mapping.put('crawl_speed', 'crawlSpeed');
-      mapping.put('allow_untrusted_certificate', 'allowUntrustedCertificate');
-      mapping.put('maximum_hops', 'maximumHops');
-      mapping.put('request_timeout', 'requestTimeout');
-      mapping.put('override_robots_txt', 'overrideRobotsTxt');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'limit_to_starting_hosts', 'limitToStartingHosts');
+      mapping.put(parentLabel + 'crawl_speed', 'crawlSpeed');
+      mapping.put(parentLabel + 'allow_untrusted_certificate', 'allowUntrustedCertificate');
+      mapping.put(parentLabel + 'maximum_hops', 'maximumHops');
+      mapping.put(parentLabel + 'request_timeout', 'requestTimeout');
+      mapping.put(parentLabel + 'override_robots_txt', 'overrideRobotsTxt');
       return mapping;
     }
   }
@@ -23517,7 +23443,7 @@ public class IBMDiscoveryV1Models {
      * @param url the url
      * @return the SourceOptionsWebCrawl builder
      */
-    public SourceOptionsWebCrawlBuilder setUrl(String url) {
+    public SourceOptionsWebCrawlBuilder url(String url) {
       this.url = url;
       return this;
     }
@@ -23528,7 +23454,7 @@ public class IBMDiscoveryV1Models {
      * @param limitToStartingHosts the limitToStartingHosts
      * @return the SourceOptionsWebCrawl builder
      */
-    public SourceOptionsWebCrawlBuilder setLimitToStartingHosts(Boolean limitToStartingHosts) {
+    public SourceOptionsWebCrawlBuilder limitToStartingHosts(Boolean limitToStartingHosts) {
       this.limitToStartingHosts = limitToStartingHosts;
       return this;
     }
@@ -23539,7 +23465,7 @@ public class IBMDiscoveryV1Models {
      * @param crawlSpeed the crawlSpeed
      * @return the SourceOptionsWebCrawl builder
      */
-    public SourceOptionsWebCrawlBuilder setCrawlSpeed(String crawlSpeed) {
+    public SourceOptionsWebCrawlBuilder crawlSpeed(String crawlSpeed) {
       this.crawlSpeed = crawlSpeed;
       return this;
     }
@@ -23550,7 +23476,7 @@ public class IBMDiscoveryV1Models {
      * @param allowUntrustedCertificate the allowUntrustedCertificate
      * @return the SourceOptionsWebCrawl builder
      */
-    public SourceOptionsWebCrawlBuilder setAllowUntrustedCertificate(Boolean allowUntrustedCertificate) {
+    public SourceOptionsWebCrawlBuilder allowUntrustedCertificate(Boolean allowUntrustedCertificate) {
       this.allowUntrustedCertificate = allowUntrustedCertificate;
       return this;
     }
@@ -23561,7 +23487,7 @@ public class IBMDiscoveryV1Models {
      * @param maximumHops the maximumHops
      * @return the SourceOptionsWebCrawl builder
      */
-    public SourceOptionsWebCrawlBuilder setMaximumHops(Long maximumHops) {
+    public SourceOptionsWebCrawlBuilder maximumHops(Long maximumHops) {
       this.maximumHops = maximumHops;
       return this;
     }
@@ -23572,7 +23498,7 @@ public class IBMDiscoveryV1Models {
      * @param requestTimeout the requestTimeout
      * @return the SourceOptionsWebCrawl builder
      */
-    public SourceOptionsWebCrawlBuilder setRequestTimeout(Long requestTimeout) {
+    public SourceOptionsWebCrawlBuilder requestTimeout(Long requestTimeout) {
       this.requestTimeout = requestTimeout;
       return this;
     }
@@ -23583,7 +23509,7 @@ public class IBMDiscoveryV1Models {
      * @param overrideRobotsTxt the overrideRobotsTxt
      * @return the SourceOptionsWebCrawl builder
      */
-    public SourceOptionsWebCrawlBuilder setOverrideRobotsTxt(Boolean overrideRobotsTxt) {
+    public SourceOptionsWebCrawlBuilder overrideRobotsTxt(Boolean overrideRobotsTxt) {
       this.overrideRobotsTxt = overrideRobotsTxt;
       return this;
     }
@@ -23595,7 +23521,7 @@ public class IBMDiscoveryV1Models {
      * @param blacklist the blacklist
      * @return the SourceOptionsWebCrawl builder
      */
-    public SourceOptionsWebCrawlBuilder setBlacklist(List<String> blacklist) {
+    public SourceOptionsWebCrawlBuilder blacklist(List<String> blacklist) {
       this.blacklist = blacklist;
       return this;
     }
@@ -23614,7 +23540,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public SourceSchedule() { }
- 
+
     /**
      * Gets the enabled.
      *
@@ -23627,7 +23553,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getEnabled() {
       return enabled;
     }
- 
+
     /**
      * Gets the timeZone.
      *
@@ -23640,7 +23566,7 @@ public class IBMDiscoveryV1Models {
     public String getTimeZone() {
       return timeZone;
     }
- 
+
     /**
      * Gets the frequency.
      *
@@ -23674,15 +23600,13 @@ public class IBMDiscoveryV1Models {
       return new SourceScheduleBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('timeZone', 'time_zone');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'timeZone', 'time_zone');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('time_zone', 'timeZone');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'time_zone', 'timeZone');
       return mapping;
     }
   }
@@ -23722,7 +23646,7 @@ public class IBMDiscoveryV1Models {
      * @param enabled the enabled
      * @return the SourceSchedule builder
      */
-    public SourceScheduleBuilder setEnabled(Boolean enabled) {
+    public SourceScheduleBuilder enabled(Boolean enabled) {
       this.enabled = enabled;
       return this;
     }
@@ -23733,7 +23657,7 @@ public class IBMDiscoveryV1Models {
      * @param timeZone the timeZone
      * @return the SourceSchedule builder
      */
-    public SourceScheduleBuilder setTimeZone(String timeZone) {
+    public SourceScheduleBuilder timeZone(String timeZone) {
       this.timeZone = timeZone;
       return this;
     }
@@ -23744,7 +23668,7 @@ public class IBMDiscoveryV1Models {
      * @param frequency the frequency
      * @return the SourceSchedule builder
      */
-    public SourceScheduleBuilder setFrequency(String frequency) {
+    public SourceScheduleBuilder frequency(String frequency) {
       this.frequency = frequency;
       return this;
     }
@@ -23756,7 +23680,7 @@ public class IBMDiscoveryV1Models {
   public class SourceStatus extends IBMWatsonGenericModel {
     private String status;
     private Datetime nextCrawl;
- 
+
     /**
      * Gets the status.
      *
@@ -23774,7 +23698,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the nextCrawl.
      *
@@ -23805,9 +23729,8 @@ public class IBMDiscoveryV1Models {
       this.nextCrawl = nextCrawl;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('next_crawl', 'nextCrawl');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'next_crawl', 'nextCrawl');
       return mapping;
     }
   }
@@ -24117,7 +24040,7 @@ public class IBMDiscoveryV1Models {
     private String originalMediaType;
     private List<DocumentSnapshot> snapshots;
     private List<Notice> notices;
- 
+
     /**
      * Gets the configurationId.
      *
@@ -24129,7 +24052,7 @@ public class IBMDiscoveryV1Models {
     public String getConfigurationId() {
       return configurationId;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -24141,7 +24064,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the enrichedFieldUnits.
      *
@@ -24154,7 +24077,7 @@ public class IBMDiscoveryV1Models {
     public Long getEnrichedFieldUnits() {
       return enrichedFieldUnits;
     }
- 
+
     /**
      * Gets the originalMediaType.
      *
@@ -24166,7 +24089,7 @@ public class IBMDiscoveryV1Models {
     public String getOriginalMediaType() {
       return originalMediaType;
     }
- 
+
     /**
      * Gets the snapshots.
      *
@@ -24178,7 +24101,7 @@ public class IBMDiscoveryV1Models {
     public List<DocumentSnapshot> getSnapshots() {
       return snapshots;
     }
- 
+
     /**
      * Gets the notices.
      *
@@ -24227,14 +24150,15 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('configuration_id', 'configurationId');
-      mapping.put('enriched_field_units', 'enrichedFieldUnits');
-      mapping.put('original_media_type', 'originalMediaType');
-      if (notices != null && notices[0] != null) {
-        mapping.putAll(notices[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'configuration_id', 'configurationId');
+      mapping.put(parentLabel + 'enriched_field_units', 'enrichedFieldUnits');
+      mapping.put(parentLabel + 'original_media_type', 'originalMediaType');
+      mapping.putAll(((IBMWatsonGenericModel) Notice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'notices/', mapping));
       return mapping;
     }
   }
@@ -24247,7 +24171,7 @@ public class IBMDiscoveryV1Models {
     private List<String> tokens;
     private List<String> readings;
     private String partOfSpeech;
- 
+
     /**
      * Gets the text.
      *
@@ -24258,7 +24182,7 @@ public class IBMDiscoveryV1Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the tokens.
      *
@@ -24269,7 +24193,7 @@ public class IBMDiscoveryV1Models {
     public List<String> getTokens() {
       return tokens;
     }
- 
+
     /**
      * Gets the readings.
      *
@@ -24280,7 +24204,7 @@ public class IBMDiscoveryV1Models {
     public List<String> getReadings() {
       return readings;
     }
- 
+
     /**
      * Gets the partOfSpeech.
      *
@@ -24312,9 +24236,8 @@ public class IBMDiscoveryV1Models {
       return new TokenDictRuleBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('partOfSpeech', 'part_of_speech');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'partOfSpeech', 'part_of_speech');
       return mapping;
     }
   }
@@ -24399,7 +24322,7 @@ public class IBMDiscoveryV1Models {
      * @param text the text
      * @return the TokenDictRule builder
      */
-    public TokenDictRuleBuilder setText(String text) {
+    public TokenDictRuleBuilder text(String text) {
       this.text = text;
       return this;
     }
@@ -24411,7 +24334,7 @@ public class IBMDiscoveryV1Models {
      * @param tokens the tokens
      * @return the TokenDictRule builder
      */
-    public TokenDictRuleBuilder setTokens(List<String> tokens) {
+    public TokenDictRuleBuilder tokens(List<String> tokens) {
       this.tokens = tokens;
       return this;
     }
@@ -24423,7 +24346,7 @@ public class IBMDiscoveryV1Models {
      * @param readings the readings
      * @return the TokenDictRule builder
      */
-    public TokenDictRuleBuilder setReadings(List<String> readings) {
+    public TokenDictRuleBuilder readings(List<String> readings) {
       this.readings = readings;
       return this;
     }
@@ -24434,7 +24357,7 @@ public class IBMDiscoveryV1Models {
      * @param partOfSpeech the partOfSpeech
      * @return the TokenDictRule builder
      */
-    public TokenDictRuleBuilder setPartOfSpeech(String partOfSpeech) {
+    public TokenDictRuleBuilder partOfSpeech(String partOfSpeech) {
       this.partOfSpeech = partOfSpeech;
       return this;
     }
@@ -24446,7 +24369,7 @@ public class IBMDiscoveryV1Models {
   public class TokenDictStatusResponse extends IBMWatsonResponseModel {
     private String status;
     private String xtype;
- 
+
     /**
      * Gets the status.
      *
@@ -24458,7 +24381,7 @@ public class IBMDiscoveryV1Models {
     public String getStatus() {
       return status;
     }
- 
+
     /**
      * Gets the xtype.
      *
@@ -24489,9 +24412,8 @@ public class IBMDiscoveryV1Models {
       this.xtype = xtype;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('type', 'xtype');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'type', 'xtype');
       return mapping;
     }
   }
@@ -24502,7 +24424,7 @@ public class IBMDiscoveryV1Models {
   public class TopHitsResults extends IBMWatsonGenericModel {
     private Long matchingResults;
     private List<QueryResult> hits;
- 
+
     /**
      * Gets the matchingResults.
      *
@@ -24514,7 +24436,7 @@ public class IBMDiscoveryV1Models {
     public Long getMatchingResults() {
       return matchingResults;
     }
- 
+
     /**
      * Gets the hits.
      *
@@ -24568,12 +24490,13 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('matching_results', 'matchingResults');
-      if (hits != null && hits[0] != null) {
-        mapping.putAll(hits[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'matching_results', 'matchingResults');
+      mapping.putAll(((IBMWatsonGenericModel) QueryResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'hits/', mapping));
       return mapping;
     }
   }
@@ -24585,7 +24508,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String collectionId;
     private List<TrainingQuery> queries;
- 
+
     /**
      * Gets the environmentId.
      *
@@ -24597,7 +24520,7 @@ public class IBMDiscoveryV1Models {
     public String getEnvironmentId() {
       return environmentId;
     }
- 
+
     /**
      * Gets the collectionId.
      *
@@ -24609,7 +24532,7 @@ public class IBMDiscoveryV1Models {
     public String getCollectionId() {
       return collectionId;
     }
- 
+
     /**
      * Gets the queries.
      *
@@ -24672,13 +24595,14 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environment_id', 'environmentId');
-      mapping.put('collection_id', 'collectionId');
-      if (queries != null && queries[0] != null) {
-        mapping.putAll(queries[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'environment_id', 'environmentId');
+      mapping.put(parentLabel + 'collection_id', 'collectionId');
+      mapping.putAll(((IBMWatsonGenericModel) TrainingQuery.class.newInstance()).addToApiToSdkMapping(parentLabel + 'queries/', mapping));
       return mapping;
     }
   }
@@ -24696,7 +24620,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public TrainingExample() { }
- 
+
     /**
      * Gets the documentId.
      *
@@ -24708,7 +24632,7 @@ public class IBMDiscoveryV1Models {
     public String getDocumentId() {
       return documentId;
     }
- 
+
     /**
      * Gets the crossReference.
      *
@@ -24720,7 +24644,7 @@ public class IBMDiscoveryV1Models {
     public String getCrossReference() {
       return crossReference;
     }
- 
+
     /**
      * Gets the relevance.
      *
@@ -24748,17 +24672,23 @@ public class IBMDiscoveryV1Models {
       return new TrainingExampleBuilder(this);
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('documentId', 'document_id');
-      mapping.put('crossReference', 'cross_reference');
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'documentId', 'document_id');
+      mapping.put(parentLabel + 'crossReference', 'cross_reference');
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_id', 'documentId');
-      mapping.put('cross_reference', 'crossReference');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'document_id', 'documentId');
+      mapping.put(parentLabel + 'cross_reference', 'crossReference');
       return mapping;
     }
   }
@@ -24798,7 +24728,7 @@ public class IBMDiscoveryV1Models {
      * @param documentId the documentId
      * @return the TrainingExample builder
      */
-    public TrainingExampleBuilder setDocumentId(String documentId) {
+    public TrainingExampleBuilder documentId(String documentId) {
       this.documentId = documentId;
       return this;
     }
@@ -24809,7 +24739,7 @@ public class IBMDiscoveryV1Models {
      * @param crossReference the crossReference
      * @return the TrainingExample builder
      */
-    public TrainingExampleBuilder setCrossReference(String crossReference) {
+    public TrainingExampleBuilder crossReference(String crossReference) {
       this.crossReference = crossReference;
       return this;
     }
@@ -24820,7 +24750,7 @@ public class IBMDiscoveryV1Models {
      * @param relevance the relevance
      * @return the TrainingExample builder
      */
-    public TrainingExampleBuilder setRelevance(Long relevance) {
+    public TrainingExampleBuilder relevance(Long relevance) {
       this.relevance = relevance;
       return this;
     }
@@ -24831,7 +24761,7 @@ public class IBMDiscoveryV1Models {
    */
   public class TrainingExampleList extends IBMWatsonResponseModel {
     private List<TrainingExample> examples;
- 
+
     /**
      * Gets the examples.
      *
@@ -24876,11 +24806,8 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (examples != null && examples[0] != null) {
-        mapping.putAll(examples[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) TrainingExample.class.newInstance()).addToApiToSdkMapping(parentLabel + 'examples/', mapping));
       return mapping;
     }
   }
@@ -24893,7 +24820,7 @@ public class IBMDiscoveryV1Models {
     private String naturalLanguageQuery;
     private String filter;
     private List<TrainingExample> examples;
- 
+
     /**
      * Gets the queryId.
      *
@@ -24905,7 +24832,7 @@ public class IBMDiscoveryV1Models {
     public String getQueryId() {
       return queryId;
     }
- 
+
     /**
      * Gets the naturalLanguageQuery.
      *
@@ -24917,7 +24844,7 @@ public class IBMDiscoveryV1Models {
     public String getNaturalLanguageQuery() {
       return naturalLanguageQuery;
     }
- 
+
     /**
      * Gets the filter.
      *
@@ -24929,7 +24856,7 @@ public class IBMDiscoveryV1Models {
     public String getFilter() {
       return filter;
     }
- 
+
     /**
      * Gets the examples.
      *
@@ -25001,13 +24928,14 @@ public class IBMDiscoveryV1Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('query_id', 'queryId');
-      mapping.put('natural_language_query', 'naturalLanguageQuery');
-      if (examples != null && examples[0] != null) {
-        mapping.putAll(examples[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'query_id', 'queryId');
+      mapping.put(parentLabel + 'natural_language_query', 'naturalLanguageQuery');
+      mapping.putAll(((IBMWatsonGenericModel) TrainingExample.class.newInstance()).addToApiToSdkMapping(parentLabel + 'examples/', mapping));
       return mapping;
     }
   }
@@ -25025,7 +24953,7 @@ public class IBMDiscoveryV1Models {
     private Long notices;
     private Datetime successfullyTrained;
     private Datetime dataUpdated;
- 
+
     /**
      * Gets the totalExamples.
      *
@@ -25037,7 +24965,7 @@ public class IBMDiscoveryV1Models {
     public Long getTotalExamples() {
       return totalExamples;
     }
- 
+
     /**
      * Gets the available.
      *
@@ -25049,7 +24977,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getAvailable() {
       return available;
     }
- 
+
     /**
      * Gets the processing.
      *
@@ -25061,7 +24989,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getProcessing() {
       return processing;
     }
- 
+
     /**
      * Gets the minimumQueriesAdded.
      *
@@ -25073,7 +25001,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getMinimumQueriesAdded() {
       return minimumQueriesAdded;
     }
- 
+
     /**
      * Gets the minimumExamplesAdded.
      *
@@ -25085,7 +25013,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getMinimumExamplesAdded() {
       return minimumExamplesAdded;
     }
- 
+
     /**
      * Gets the sufficientLabelDiversity.
      *
@@ -25097,7 +25025,7 @@ public class IBMDiscoveryV1Models {
     public Boolean getSufficientLabelDiversity() {
       return sufficientLabelDiversity;
     }
- 
+
     /**
      * Gets the notices.
      *
@@ -25109,7 +25037,7 @@ public class IBMDiscoveryV1Models {
     public Long getNotices() {
       return notices;
     }
- 
+
     /**
      * Gets the successfullyTrained.
      *
@@ -25121,7 +25049,7 @@ public class IBMDiscoveryV1Models {
     public Datetime getSuccessfullyTrained() {
       return successfullyTrained;
     }
- 
+
     /**
      * Gets the dataUpdated.
      *
@@ -25215,14 +25143,17 @@ public class IBMDiscoveryV1Models {
       this.dataUpdated = dataUpdated;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('total_examples', 'totalExamples');
-      mapping.put('minimum_queries_added', 'minimumQueriesAdded');
-      mapping.put('minimum_examples_added', 'minimumExamplesAdded');
-      mapping.put('sufficient_label_diversity', 'sufficientLabelDiversity');
-      mapping.put('successfully_trained', 'successfullyTrained');
-      mapping.put('data_updated', 'dataUpdated');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
+      }
+      mapping.put(parentLabel + 'total_examples', 'totalExamples');
+      mapping.put(parentLabel + 'minimum_queries_added', 'minimumQueriesAdded');
+      mapping.put(parentLabel + 'minimum_examples_added', 'minimumExamplesAdded');
+      mapping.put(parentLabel + 'sufficient_label_diversity', 'sufficientLabelDiversity');
+      mapping.put(parentLabel + 'successfully_trained', 'successfullyTrained');
+      mapping.put(parentLabel + 'data_updated', 'dataUpdated');
       return mapping;
     }
   }
@@ -25565,16 +25496,16 @@ public class IBMDiscoveryV1Models {
       mapping.put('environmentId', 'environment_id');
       mapping.put('configurationId', 'configuration_id');
       if (conversions != null) {
-        mapping.putAll(conversions.getSdkToApiMapping());
+        mapping.putAll(conversions.addToSdkToApiMapping('', mapping));
       }
       if (enrichments != null && enrichments[0] != null) {
-        mapping.putAll(enrichments[0].getSdkToApiMapping());
+        mapping.putAll(enrichments[0].addToSdkToApiMapping('', mapping));
       }
       if (normalizations != null && normalizations[0] != null) {
-        mapping.putAll(normalizations[0].getSdkToApiMapping());
+        mapping.putAll(normalizations[0].addToSdkToApiMapping('', mapping));
       }
       if (source != null) {
-        mapping.putAll(source.getSdkToApiMapping());
+        mapping.putAll(source.addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -25883,7 +25814,7 @@ public class IBMDiscoveryV1Models {
       mapping.put('sourceType', 'source_type');
       mapping.put('credentialDetails', 'credential_details');
       if (credentialDetails != null) {
-        mapping.putAll(credentialDetails.getSdkToApiMapping());
+        mapping.putAll(credentialDetails.addToSdkToApiMapping('', mapping));
       }
       return mapping;
     }
@@ -26715,7 +26646,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public WordHeadingDetection() { }
- 
+
     /**
      * Gets the fonts.
      *
@@ -26725,7 +26656,7 @@ public class IBMDiscoveryV1Models {
     public List<FontSetting> getFonts() {
       return fonts;
     }
- 
+
     /**
      * Gets the styles.
      *
@@ -26768,7 +26699,7 @@ public class IBMDiscoveryV1Models {
           FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
-        retBuilder.setFonts(newFonts);
+        retBuilder.fonts(newFonts);
       }
 
       // calling custom deserializer for styles
@@ -26781,25 +26712,21 @@ public class IBMDiscoveryV1Models {
           WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordStyle.class);
           newStyles.add(newItem);
         }
-        retBuilder.setStyles(newStyles);
+        retBuilder.styles(newStyles);
       }
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (fonts != null && fonts[0] != null) {
-        mapping.putAll(fonts[0].getSdkToApiMapping());
+        mapping.putAll(fonts[0].addToSdkToApiMapping(parentLabel + 'fonts/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (fonts != null && fonts[0] != null) {
-        mapping.putAll(fonts[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) FontSetting.class.newInstance()).addToApiToSdkMapping(parentLabel + 'fonts/', mapping));
       return mapping;
     }
   }
@@ -26868,7 +26795,7 @@ public class IBMDiscoveryV1Models {
      * @param fonts the fonts
      * @return the WordHeadingDetection builder
      */
-    public WordHeadingDetectionBuilder setFonts(List<FontSetting> fonts) {
+    public WordHeadingDetectionBuilder fonts(List<FontSetting> fonts) {
       this.fonts = fonts;
       return this;
     }
@@ -26880,7 +26807,7 @@ public class IBMDiscoveryV1Models {
      * @param styles the styles
      * @return the WordHeadingDetection builder
      */
-    public WordHeadingDetectionBuilder setStyles(List<WordStyle> styles) {
+    public WordHeadingDetectionBuilder styles(List<WordStyle> styles) {
       this.styles = styles;
       return this;
     }
@@ -26897,7 +26824,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public WordSettings() { }
- 
+
     /**
      * Gets the heading.
      *
@@ -26931,24 +26858,20 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for heading
       WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading'), WordHeadingDetection.class);
-      retBuilder.setHeading(newHeading);
+      retBuilder.heading(newHeading);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
+    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
       if (heading != null) {
-        mapping.putAll(heading.getSdkToApiMapping());
+        mapping.putAll(heading.addToSdkToApiMapping(parentLabel + 'heading/', mapping));
       }
       return mapping;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (heading != null) {
-        mapping.putAll(heading.getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) WordHeadingDetection.class.newInstance()).addToApiToSdkMapping(parentLabel + 'heading/', mapping));
       return mapping;
     }
   }
@@ -26984,7 +26907,7 @@ public class IBMDiscoveryV1Models {
      * @param heading the heading
      * @return the WordSettings builder
      */
-    public WordSettingsBuilder setHeading(WordHeadingDetection heading) {
+    public WordSettingsBuilder heading(WordHeadingDetection heading) {
       this.heading = heading;
       return this;
     }
@@ -27002,7 +26925,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public WordStyle() { }
- 
+
     /**
      * Gets the level.
      *
@@ -27014,7 +26937,7 @@ public class IBMDiscoveryV1Models {
     public Long getLevel() {
       return level;
     }
- 
+
     /**
      * Gets the names.
      *
@@ -27090,7 +27013,7 @@ public class IBMDiscoveryV1Models {
      * @param level the level
      * @return the WordStyle builder
      */
-    public WordStyleBuilder setLevel(Long level) {
+    public WordStyleBuilder level(Long level) {
       this.level = level;
       return this;
     }
@@ -27102,7 +27025,7 @@ public class IBMDiscoveryV1Models {
      * @param names the names
      * @return the WordStyle builder
      */
-    public WordStyleBuilder setNames(List<String> names) {
+    public WordStyleBuilder names(List<String> names) {
       this.names = names;
       return this;
     }
@@ -27119,7 +27042,7 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public XPathPatterns() { }
- 
+
     /**
      * Gets the xpaths.
      *
@@ -27193,7 +27116,7 @@ public class IBMDiscoveryV1Models {
      * @param xpaths the xpaths
      * @return the XPathPatterns builder
      */
-    public XPathPatternsBuilder setXpaths(List<String> xpaths) {
+    public XPathPatternsBuilder xpaths(List<String> xpaths) {
       this.xpaths = xpaths;
       return this;
     }

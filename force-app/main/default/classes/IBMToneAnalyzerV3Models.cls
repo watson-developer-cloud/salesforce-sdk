@@ -6,7 +6,7 @@ public class IBMToneAnalyzerV3Models {
     private List<ToneScore> tones;
     private List<ToneCategory> toneCategories;
     private String warning;
- 
+
     /**
      * Gets the tones.
      *
@@ -20,7 +20,7 @@ public class IBMToneAnalyzerV3Models {
     public List<ToneScore> getTones() {
       return tones;
     }
- 
+
     /**
      * Gets the toneCategories.
      *
@@ -34,7 +34,7 @@ public class IBMToneAnalyzerV3Models {
     public List<ToneCategory> getToneCategories() {
       return toneCategories;
     }
- 
+
     /**
      * Gets the warning.
      *
@@ -112,15 +112,10 @@ public class IBMToneAnalyzerV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (tones != null && tones[0] != null) {
-        mapping.putAll(tones[0].getApiToSdkMapping());
-      }
-      mapping.put('tone_categories', 'toneCategories');
-      if (toneCategories != null && toneCategories[0] != null) {
-        mapping.putAll(toneCategories[0].getApiToSdkMapping());
-      }
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) ToneScore.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tones/', mapping));
+      mapping.put(parentLabel + 'tone_categories', 'toneCategories');
+      mapping.putAll(((IBMWatsonGenericModel) ToneCategory.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tone_categories/', mapping));
       return mapping;
     }
   }
@@ -135,7 +130,7 @@ public class IBMToneAnalyzerV3Models {
     private List<ToneCategory> toneCategories;
     private Long inputFrom;
     private Long inputTo;
- 
+
     /**
      * Gets the sentenceId.
      *
@@ -148,7 +143,7 @@ public class IBMToneAnalyzerV3Models {
     public Long getSentenceId() {
       return sentenceId;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -160,7 +155,7 @@ public class IBMToneAnalyzerV3Models {
     public String getText() {
       return text;
     }
- 
+
     /**
      * Gets the tones.
      *
@@ -174,7 +169,7 @@ public class IBMToneAnalyzerV3Models {
     public List<ToneScore> getTones() {
       return tones;
     }
- 
+
     /**
      * Gets the toneCategories.
      *
@@ -188,7 +183,7 @@ public class IBMToneAnalyzerV3Models {
     public List<ToneCategory> getToneCategories() {
       return toneCategories;
     }
- 
+
     /**
      * Gets the inputFrom.
      *
@@ -201,7 +196,7 @@ public class IBMToneAnalyzerV3Models {
     public Long getInputFrom() {
       return inputFrom;
     }
- 
+
     /**
      * Gets the inputTo.
      *
@@ -305,18 +300,17 @@ public class IBMToneAnalyzerV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('sentence_id', 'sentenceId');
-      if (tones != null && tones[0] != null) {
-        mapping.putAll(tones[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('tone_categories', 'toneCategories');
-      if (toneCategories != null && toneCategories[0] != null) {
-        mapping.putAll(toneCategories[0].getApiToSdkMapping());
-      }
-      mapping.put('input_from', 'inputFrom');
-      mapping.put('input_to', 'inputTo');
+      mapping.put(parentLabel + 'sentence_id', 'sentenceId');
+      mapping.putAll(((IBMWatsonGenericModel) ToneScore.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tones/', mapping));
+      mapping.put(parentLabel + 'tone_categories', 'toneCategories');
+      mapping.putAll(((IBMWatsonGenericModel) ToneCategory.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tone_categories/', mapping));
+      mapping.put(parentLabel + 'input_from', 'inputFrom');
+      mapping.put(parentLabel + 'input_to', 'inputTo');
       return mapping;
     }
   }
@@ -327,7 +321,7 @@ public class IBMToneAnalyzerV3Models {
   public class ToneAnalysis extends IBMWatsonResponseModel {
     private DocumentAnalysis documentTone;
     private List<SentenceAnalysis> sentencesTone;
- 
+
     /**
      * Gets the documentTone.
      *
@@ -339,7 +333,7 @@ public class IBMToneAnalyzerV3Models {
     public DocumentAnalysis getDocumentTone() {
       return documentTone;
     }
- 
+
     /**
      * Gets the sentencesTone.
      *
@@ -399,16 +393,15 @@ public class IBMToneAnalyzerV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('document_tone', 'documentTone');
-      if (documentTone != null) {
-        mapping.putAll(documentTone.getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
-      mapping.put('sentences_tone', 'sentencesTone');
-      if (sentencesTone != null && sentencesTone[0] != null) {
-        mapping.putAll(sentencesTone[0].getApiToSdkMapping());
-      }
+      mapping.put(parentLabel + 'document_tone', 'documentTone');
+      mapping.putAll(((IBMWatsonGenericModel) DocumentAnalysis.class.newInstance()).addToApiToSdkMapping(parentLabel + 'document_tone/', mapping));
+      mapping.put(parentLabel + 'sentences_tone', 'sentencesTone');
+      mapping.putAll(((IBMWatsonGenericModel) SentenceAnalysis.class.newInstance()).addToApiToSdkMapping(parentLabel + 'sentences_tone/', mapping));
       return mapping;
     }
   }
@@ -420,7 +413,7 @@ public class IBMToneAnalyzerV3Models {
     private List<ToneScore> tones;
     private String categoryId;
     private String categoryName;
- 
+
     /**
      * Gets the tones.
      *
@@ -432,7 +425,7 @@ public class IBMToneAnalyzerV3Models {
     public List<ToneScore> getTones() {
       return tones;
     }
- 
+
     /**
      * Gets the categoryId.
      *
@@ -445,7 +438,7 @@ public class IBMToneAnalyzerV3Models {
     public String getCategoryId() {
       return categoryId;
     }
- 
+
     /**
      * Gets the categoryName.
      *
@@ -508,13 +501,10 @@ public class IBMToneAnalyzerV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (tones != null && tones[0] != null) {
-        mapping.putAll(tones[0].getApiToSdkMapping());
-      }
-      mapping.put('category_id', 'categoryId');
-      mapping.put('category_name', 'categoryName');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.putAll(((IBMWatsonGenericModel) ToneScore.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tones/', mapping));
+      mapping.put(parentLabel + 'category_id', 'categoryId');
+      mapping.put(parentLabel + 'category_name', 'categoryName');
       return mapping;
     }
   }
@@ -700,7 +690,7 @@ public class IBMToneAnalyzerV3Models {
     private Double score;
     private String toneId;
     private String toneName;
- 
+
     /**
      * Gets the score.
      *
@@ -713,7 +703,7 @@ public class IBMToneAnalyzerV3Models {
     public Double getScore() {
       return score;
     }
- 
+
     /**
      * Gets the toneId.
      *
@@ -726,7 +716,7 @@ public class IBMToneAnalyzerV3Models {
     public String getToneId() {
       return toneId;
     }
- 
+
     /**
      * Gets the toneName.
      *
@@ -766,10 +756,9 @@ public class IBMToneAnalyzerV3Models {
       this.toneName = toneName;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('tone_id', 'toneId');
-      mapping.put('tone_name', 'toneName');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'tone_id', 'toneId');
+      mapping.put(parentLabel + 'tone_name', 'toneName');
       return mapping;
     }
   }
@@ -779,7 +768,7 @@ public class IBMToneAnalyzerV3Models {
    */
   public class ToneInput extends IBMWatsonGenericModel {
     private String text;
- 
+
     /**
      * Gets the text.
      *
@@ -1141,7 +1130,7 @@ public class IBMToneAnalyzerV3Models {
     private Double score;
     private String toneId;
     private String toneName;
- 
+
     /**
      * Gets the score.
      *
@@ -1158,7 +1147,7 @@ public class IBMToneAnalyzerV3Models {
     public Double getScore() {
       return score;
     }
- 
+
     /**
      * Gets the toneId.
      *
@@ -1178,7 +1167,7 @@ public class IBMToneAnalyzerV3Models {
     public String getToneId() {
       return toneId;
     }
- 
+
     /**
      * Gets the toneName.
      *
@@ -1218,10 +1207,9 @@ public class IBMToneAnalyzerV3Models {
       this.toneName = toneName;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('tone_id', 'toneId');
-      mapping.put('tone_name', 'toneName');
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      mapping.put(parentLabel + 'tone_id', 'toneId');
+      mapping.put(parentLabel + 'tone_name', 'toneName');
       return mapping;
     }
   }
@@ -1232,7 +1220,7 @@ public class IBMToneAnalyzerV3Models {
   public class Utterance extends IBMWatsonGenericModel {
     private String text;
     private String user;
- 
+
     /**
      * Gets the text.
      *
@@ -1244,7 +1232,7 @@ public class IBMToneAnalyzerV3Models {
     public String text() {
       return text;
     }
- 
+
     /**
      * Gets the user.
      *
@@ -1337,7 +1325,7 @@ public class IBMToneAnalyzerV3Models {
   public class UtteranceAnalyses extends IBMWatsonResponseModel {
     private List<UtteranceAnalysis> utterancesTone;
     private String warning;
- 
+
     /**
      * Gets the utterancesTone.
      *
@@ -1349,7 +1337,7 @@ public class IBMToneAnalyzerV3Models {
     public List<UtteranceAnalysis> getUtterancesTone() {
       return utterancesTone;
     }
- 
+
     /**
      * Gets the warning.
      *
@@ -1404,12 +1392,13 @@ public class IBMToneAnalyzerV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('utterances_tone', 'utterancesTone');
-      if (utterancesTone != null && utterancesTone[0] != null) {
-        mapping.putAll(utterancesTone[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'utterances_tone', 'utterancesTone');
+      mapping.putAll(((IBMWatsonGenericModel) UtteranceAnalysis.class.newInstance()).addToApiToSdkMapping(parentLabel + 'utterances_tone/', mapping));
       return mapping;
     }
   }
@@ -1422,7 +1411,7 @@ public class IBMToneAnalyzerV3Models {
     private String utteranceText;
     private List<ToneChatScore> tones;
     private String error;
- 
+
     /**
      * Gets the utteranceId.
      *
@@ -1435,7 +1424,7 @@ public class IBMToneAnalyzerV3Models {
     public Long getUtteranceId() {
       return utteranceId;
     }
- 
+
     /**
      * Gets the utteranceText.
      *
@@ -1447,7 +1436,7 @@ public class IBMToneAnalyzerV3Models {
     public String getUtteranceText() {
       return utteranceText;
     }
- 
+
     /**
      * Gets the tones.
      *
@@ -1461,7 +1450,7 @@ public class IBMToneAnalyzerV3Models {
     public List<ToneChatScore> getTones() {
       return tones;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -1534,13 +1523,14 @@ public class IBMToneAnalyzerV3Models {
       return ret;
     }
 
-    public override Map<String, String> getApiToSdkMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('utterance_id', 'utteranceId');
-      mapping.put('utterance_text', 'utteranceText');
-      if (tones != null && tones[0] != null) {
-        mapping.putAll(tones[0].getApiToSdkMapping());
+    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
+      // break out of property loop
+      if (parentLabel.split('/').size() > 10) {
+        return mapping;
       }
+      mapping.put(parentLabel + 'utterance_id', 'utteranceId');
+      mapping.put(parentLabel + 'utterance_text', 'utteranceText');
+      mapping.putAll(((IBMWatsonGenericModel) ToneChatScore.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tones/', mapping));
       return mapping;
     }
   }
