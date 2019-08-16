@@ -746,7 +746,11 @@ public class IBMWatsonMockResponses {
                 '],' +
                 '"entities": [' +
                 '{' +
-                  '"entity": "test_entity"' +
+                  '"entity": "test_entity",' +
+                  '"location": [' +
+                    '10' +
+                  '],' +
+                  '"value": "Value of test_entity"' +
                 '}' +
                 ']' +
               '},' +
@@ -3320,14 +3324,14 @@ public class IBMWatsonMockResponses {
               '},' +
               '"text": "text"' +
             '},' +
-            '"value": {' +
+            '"value": [{' +
               '"cell_id": "cell_id",' +
               '"location": {' +
                 '"begin": 0,' +
                 '"end": 1' +
               '},' +
               '"text": "text"' +
-            '}' +
+            '}]' +
           '}' +
           '],' +
           '"title": {' +
@@ -3972,14 +3976,14 @@ public class IBMWatsonMockResponses {
               '},' +
               '"text": "text"' +
             '},' +
-            '"value": {' +
+            '"value": [{' +
               '"cell_id": "cell_id",' +
               '"location": {' +
                 '"begin": 0,' +
                 '"end": 1' +
               '},' +
               '"text": "text"' +
-            '}' +
+            '}]' +
           '}' +
           ']' +
         '}' +

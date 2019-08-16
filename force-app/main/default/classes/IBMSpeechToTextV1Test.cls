@@ -394,13 +394,14 @@ private class IBMSpeechToTextV1Test {
       speechToText.setUsernameAndPassword(username, password);
     }
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
-    IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWord();
-    customWord.setWord('tornado');
-    customWord.setSoundsLike(new List<String>{'tornado', 'hurricane'});
-    customWord.setDisplayAs('tornado');
+    IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWordBuilder()
+      .word('tornado')
+      .soundsLike(new List<String> { 'tornado', 'hurricane' })
+      .displayAs('tornado')
+      .build();
     IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions = new IBMSpeechToTextV1Models.AddWordsOptionsBuilder()
       .customizationId(customizationId)
-      .words(new List<IBMSpeechToTextV1Models.CustomWord>{ customWord })
+      .words(new List<IBMSpeechToTextV1Models.CustomWord> { customWord })
       .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.addWords(addWordsOptions);

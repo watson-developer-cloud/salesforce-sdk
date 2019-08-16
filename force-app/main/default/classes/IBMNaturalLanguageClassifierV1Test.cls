@@ -56,12 +56,14 @@ private class IBMNaturalLanguageClassifierV1Test {
     service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
     service.setUsernameAndPassword('username', 'password');
     String classifierId = '10D41B-nlc-1';
-    IBMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
     String text1 = 'How hot will it be today?';
-    input1.setText(text1);
-    IBMNaturalLanguageClassifierV1Models.ClassifyInput input2 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
     String text2 = 'Is it hot outside?';
-    input2.setText(text2);
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
+      .text(text1)
+      .build();
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput input2 = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
+      .text(text2)
+      .build();
     List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> inputCollection = new List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> {
       input1,
       input2

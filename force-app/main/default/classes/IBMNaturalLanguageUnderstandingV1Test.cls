@@ -88,7 +88,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .xlimit(12L)
       .explanation(true)
       .build();
-    IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
+    IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptionsBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.SyntaxOptions syntax = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.Features features = new IBMNaturalLanguageUnderstandingV1Models.FeaturesBuilder()
       .concepts(concepts)
@@ -191,9 +191,10 @@ private class IBMNaturalLanguageUnderstandingV1Test {
   }
 
   static testMethod void testSytntaxOptions() {
-    IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens token = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens();
-    token.setLemma(true);
-    token.setPartOfSpeech(true);
+    IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens token = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokensBuilder()
+      .lemma(true)
+      .partOfSpeech(true)
+      .build();
     IBMNaturalLanguageUnderstandingV1Models.SyntaxOptions options = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsBuilder()
       .sentences(true)
       .tokens(token)

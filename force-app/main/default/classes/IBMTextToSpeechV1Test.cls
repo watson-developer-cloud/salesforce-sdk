@@ -189,9 +189,10 @@ private class IBMTextToSpeechV1Test {
       textToSpeech.setEndPoint(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
-    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
-    word.setWord('Hello');
-    word.setTranslation('de-DE');
+    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.WordBuilder()
+      .word('Hello')
+      .translation('de-DE')
+      .build();
     IBMTextToSpeechV1Models.UpdateVoiceModelOptions options = new IBMTextToSpeechV1Models.UpdateVoiceModelOptionsBuilder()
       .customizationId('customizationId')
       .addWords(word)
@@ -217,9 +218,10 @@ private class IBMTextToSpeechV1Test {
       textToSpeech.setEndPoint(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
-    IBMTextToSpeechV1Models.Translation translation = new IBMTextToSpeechV1Models.Translation();
-    translation.setTranslation('de-DE');
-    translation.setPartOfSpeech('Josi');
+    IBMTextToSpeechV1Models.Translation translation = new IBMTextToSpeechV1Models.TranslationBuilder()
+      .translation('de-DE')
+      .partOfSpeech('Josi')
+      .build();
     IBMTextToSpeechV1Models.AddWordOptions options = new IBMTextToSpeechV1Models.AddWordOptionsBuilder()
       .customizationId('customizationId')
       .word('World')
@@ -248,10 +250,11 @@ private class IBMTextToSpeechV1Test {
       textToSpeech.setEndPoint(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
-    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
-    word.setWord('Again');
-    word.setTranslation('de-DE');
-    word.setPartOfSpeech('Josi');
+    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.WordBuilder()
+      .word('Again')
+      .translation('de-DE')
+      .partOfSpeech('Josi')
+      .build();
     List<IBMTextToSpeechV1Models.Word> words = new List<IBMTextToSpeechV1Models.Word>{ word };
     IBMTextToSpeechV1Models.AddWordsOptions options = new IBMTextToSpeechV1Models.AddWordsOptionsBuilder('customizationId', words)
       .customizationId('customizationId')

@@ -67,14 +67,12 @@ public class IBMWatsonICP4DTokenResponse extends IBMWatsonGenericModel {
     this.message = message;
   }
 
-  public override Map<String, String> getSdkToApiMapping() {
-    Map<String, String> mapping = new Map<String, String>();
+  public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
     mapping.put('accessToken', 'access_token');
     return mapping;
   }
 
-  public override Map<String, String> getApiToSdkMapping() {
-    Map<String, String> mapping = new Map<String, String>();
+  public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
     mapping.put('access_token', 'accessToken');
     return mapping;
   }

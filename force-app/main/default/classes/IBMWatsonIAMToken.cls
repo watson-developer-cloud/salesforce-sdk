@@ -28,8 +28,7 @@ public class IBMWatsonIAMToken extends IBMWatsonGenericModel {
     return expiration;
   }
 
-  public override Map<String, String> getSdkToApiMapping() {
-    Map<String, String> mapping = new Map<String, String>();
+  public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
     mapping.put('accessToken', 'access_token');
     mapping.put('refreshToken', 'refresh_token');
     mapping.put('tokenType', 'token_type');
@@ -37,8 +36,7 @@ public class IBMWatsonIAMToken extends IBMWatsonGenericModel {
     return mapping;
   }
 
-  public override Map<String, String> getApiToSdkMapping() {
-    Map<String, String> mapping = new Map<String, String>();
+  public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
     mapping.put('access_token', 'accessToken');
     mapping.put('refresh_token', 'refreshToken');
     mapping.put('token_type', 'tokenType');
