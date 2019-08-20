@@ -8,4 +8,6 @@ public class IBMWatsonNoauthAuthenticator implements IBMWatsonAuthenticator {
   public void authenticate(IBMWatsonRequest.Builder requestBuilder) {
     // do nothing
   }
+
+  public void validate() {}
 }
