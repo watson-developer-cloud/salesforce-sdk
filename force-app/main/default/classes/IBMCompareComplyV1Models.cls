@@ -247,7 +247,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hashed values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -1073,7 +1073,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hashed values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -1374,7 +1374,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the terminationDates.
      *
-     * The date or dates on which the document is to be terminated.
+     * The dates on which the document is to be terminated.
      *
      * @return the terminationDates
      */
@@ -1386,7 +1386,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the contractTypes.
      *
-     * The document's contract type or types as declared in the document.
+     * The contract type as declared in the document.
      *
      * @return the contractTypes
      */
@@ -1398,7 +1398,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the contractTerms.
      *
-     * The duration or durations of the contract.
+     * The durations of the contract.
      *
      * @return the contractTerms
      */
@@ -1410,7 +1410,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the paymentTerms.
      *
-     * The document's payment duration or durations.
+     * The document's payment durations.
      *
      * @return the paymentTerms
      */
@@ -2514,8 +2514,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the amount, which is listed as a string. This element is optional; that is, the service
-     * output lists it only if normalized text exists.
+     * The normalized form of the amount, which is listed as a string. This element is optional; it is returned only if
+     * normalized text exists.
      *
      * @return the textNormalized
      */
@@ -2527,8 +2527,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -2540,7 +2540,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -2806,8 +2806,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the contract term, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the contract term, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -2819,8 +2819,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -2832,7 +2832,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -2963,7 +2963,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -4056,8 +4056,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the effective date, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the effective date, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -4069,7 +4069,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -6289,7 +6289,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the categoryRemoved.
      *
-     * An optional string in the form of a comma-separated list of categories. If this is specified, the service filters
+     * An optional string in the form of a comma-separated list of categories. If it is specified, the service filters
      * the output to include only feedback that has at least one category from the list removed.
      *
      * @return the categoryRemoved
@@ -7342,8 +7342,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the payment term, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the payment term, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -7355,8 +7355,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -7368,7 +7368,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -8633,8 +8633,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the termination date, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the termination date, which is listed as a string. This element is optional; it is
+     * returned only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -8646,7 +8646,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -8751,7 +8751,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
