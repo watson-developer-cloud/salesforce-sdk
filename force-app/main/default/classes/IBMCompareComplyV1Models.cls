@@ -1292,6 +1292,7 @@ public class IBMCompareComplyV1Models {
     private List<ContractTypes> contract_types_serialized_name;
     private List<ContractTerms> contract_terms_serialized_name;
     private List<PaymentTerms> payment_terms_serialized_name;
+    private List<ContractCurrencies> contract_currencies_serialized_name;
     private List<Tables> tables_serialized_name;
     private DocStructure document_structure_serialized_name;
     private List<Parties> parties_serialized_name;
@@ -1416,6 +1417,18 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public List<PaymentTerms> getPaymentTerms() {
       return payment_terms_serialized_name;
+    }
+ 
+    /**
+     * Gets the contractCurrencies.
+     *
+     * The contract currencies as declared in the document.
+     *
+     * @return the contractCurrencies
+     */
+    @AuraEnabled
+    public List<ContractCurrencies> getContractCurrencies() {
+      return contract_currencies_serialized_name;
     }
  
     /**
@@ -1545,6 +1558,15 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Sets the contractCurrencies.
+     *
+     * @param contractCurrencies the new contractCurrencies
+     */
+    public void setContractCurrencies(final List<ContractCurrencies> contractCurrencies) {
+      this.contract_currencies_serialized_name = contractCurrencies;
+    }
+
+    /**
      * Sets the tables.
      *
      * @param tables the new tables
@@ -1671,6 +1693,19 @@ public class IBMCompareComplyV1Models {
           newPaymentTerms.add(newItem);
         }
         ret.payment_terms_serialized_name = newPaymentTerms;
+      }
+
+      // calling custom deserializer for contractCurrencies
+      List<ContractCurrencies> newContractCurrencies = new List<ContractCurrencies>();
+      List<ContractCurrencies> deserializedContractCurrencies = ret.getContractCurrencies();
+      if (deserializedContractCurrencies != null) {
+        for (Integer i = 0; i < deserializedContractCurrencies.size(); i++) {
+          ContractCurrencies currentItem = ret.getContractCurrencies().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_currencies_serialized_name');
+          ContractCurrencies newItem = (ContractCurrencies) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractCurrencies.class);
+          newContractCurrencies.add(newItem);
+        }
+        ret.setContractCurrencies(newContractCurrencies);
       }
 
       // calling custom deserializer for tables
@@ -2591,6 +2626,139 @@ public class IBMCompareComplyV1Models {
       // calling custom deserializer for interpretation
       Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation_serialized_name'), Interpretation.class);
       ret.setInterpretation(newInterpretation);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
+   * The contract currencies that are declared in the document.
+   */
+  public class ContractCurrencies extends IBMWatsonGenericModel {
+    private String confidence_level_serialized_name;
+    private String text_serialized_name;
+    private String text_normalized_serialized_name;
+    private List<String> provenance_ids_serialized_name;
+    private Location location_serialized_name;
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the contract currency.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
+ 
+    /**
+     * Gets the text.
+     *
+     * The contract currency.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the textNormalized.
+     *
+     * The normalized form of the contract currency, which is listed as a string in
+     * [ISO-4217](https://www.iso.org/iso-4217-currency-codes.html) format. This element is optional; it is returned
+     * only if normalized text exists.
+     *
+     * @return the textNormalized
+     */
+    @AuraEnabled
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+ 
+    /**
+     * Gets the provenanceIds.
+     *
+     * Hashed values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenance_ids_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the textNormalized.
+     *
+     * @param textNormalized the new textNormalized
+     */
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenance_ids_serialized_name = provenanceIds;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ContractCurrencies ret = (ContractCurrencies) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
       Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);

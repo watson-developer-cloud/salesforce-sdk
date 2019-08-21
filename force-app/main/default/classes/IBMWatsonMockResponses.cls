@@ -3502,6 +3502,20 @@ public class IBMWatsonMockResponses {
             '"end": 1' +
           '}' +
         '}' +
+      '],' +
+      '"contract_currencies": [' +
+        '{' +
+          '"confidence_level": "High",' +
+          '"text": "text",' +
+          '"text_normalized": "text_normalized",' +
+          '"provenance_ids": [' +
+            '"provenance_id"' +
+          '],' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '}' +
+        '}' +
       ']' +
     '}';
   }

@@ -727,6 +727,12 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(PROVENANCE_ID, response.getPaymentTerms().get(0).getProvenanceIds().get(0));
     System.assertEquals(TEST_BEGIN, response.getPaymentTerms().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getPaymentTerms().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getContractCurrencies().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT, response.getContractCurrencies().get(0).getText());
+    System.assertEquals(TEXT_NORMALIZED, response.getContractCurrencies().get(0).getTextNormalized());
+    System.assertEquals(PROVENANCE_ID, response.getContractCurrencies().get(0).getProvenanceIds().get(0));
+    System.assertEquals(TEST_BEGIN, response.getContractCurrencies().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getContractCurrencies().get(0).getLocation().getXend());
     Test.stopTest();
   }
 
