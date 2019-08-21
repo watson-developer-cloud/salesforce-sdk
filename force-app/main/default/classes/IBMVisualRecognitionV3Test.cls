@@ -1,25 +1,24 @@
 @isTest
 private class IBMVisualRecognitionV3Test {
-  // Make sure the named credentials below is defined
-  private static String NAMED_CREDENTIALS = 'callout:watson_visual_recognition_v3';
-  private static String API_KEY = '80bc2e663293e8d13564c260cdb4cbf891b606c0';
+  private static IBMVisualRecognitionV3 service;
+
+  static {
+    service = new IBMVisualRecognitionV3('2016-05-20', new IBMWatsonNoauthAuthenticator());
+  }
+
   static testMethod void testClassify() {
     String body = IBMWatsonMockResponses.classifiedImages();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api');
+
     IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
       .url('http://www.indya101.com/gallery/Actors_TV/Sumeet_Sachdev/2011/12/27/Sumeet_Sachdevjpg_3_arnem.jpg')
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
+    IBMVisualRecognitionV3Models.ClassifiedImages resp = service.classify(options);
     System.assertEquals(resp.getImagesProcessed(),0);
     System.assertEquals(resp.getImages()[0].getSourceUrl(), 'string');
     System.assertEquals(resp.getImages()[0].getResolvedUrl(), 'string');
@@ -44,10 +43,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
+
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -64,7 +60,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
+    IBMVisualRecognitionV3Models.ClassifiedImages resp = service.classify(options);
      System.assertEquals(resp.getImagesProcessed(),0);
     System.assertEquals(resp.getImages()[0].getSourceUrl(), 'string');
     System.assertEquals(resp.getImages()[0].getResolvedUrl(), 'string');
@@ -79,11 +75,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -103,7 +95,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMVisualRecognitionV3Models.DetectedFaces resp = visualRecognition.detectFaces(options);
+    IBMVisualRecognitionV3Models.DetectedFaces resp = service.detectFaces(options);
     System.assertEquals(resp.getImagesProcessed(),0);
     System.assertEquals(resp.getImages()[0].getImage(), 'string');
     System.assertEquals(resp.getImages()[0].getSourceUrl(), 'string');
@@ -130,11 +122,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -159,7 +147,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.createClassifier(options);
+    IBMVisualRecognitionV3Models.Classifier resp = service.createClassifier(options);
     System.assertEquals(resp.getClassifierId(), 'string');
     System.assertEquals(resp.getName(), 'string');
     System.assertEquals(resp.getOwner(), 'string');
@@ -177,11 +165,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -198,7 +182,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.getClassifier(options);
+    IBMVisualRecognitionV3Models.Classifier resp = service.getClassifier(options);
     System.assertEquals(resp.getClassifierId(), 'string');
     Test.stopTest();
   }
@@ -211,11 +195,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -240,7 +220,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.updateClassifier(options);
+    IBMVisualRecognitionV3Models.Classifier resp = service.updateClassifier(options);
     System.assertEquals(resp.getClassifierId(), 'string');
     Test.stopTest();
   }
@@ -253,11 +233,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -274,7 +250,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    visualRecognition.deleteClassifier(options);
+    service.deleteClassifier(options);
     Test.stopTest();
   }
   /**
@@ -286,18 +262,14 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+
     IBMVisualRecognitionV3Models.ListClassifiersOptions options = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
       .verbose(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMVisualRecognitionV3Models.Classifiers resp = visualRecognition.listClassifiers(options);
+    IBMVisualRecognitionV3Models.Classifiers resp = service.listClassifiers(options);
     System.assertEquals(resp.getClassifiers()[0].getClassifierId(), 'string');
     Test.stopTest();
   }
@@ -312,12 +284,6 @@ private class IBMVisualRecognitionV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
-
     String customerId = 'salesforce_sdk_test_id';
     IBMVisualRecognitionV3Models.DeleteUserDataOptions deleteOptions = new IBMVisualRecognitionV3Models.DeleteUserDataOptionsBuilder()
       .customerId(customerId)
@@ -325,7 +291,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    visualRecognition.deleteUserData(deleteOptions);
+    service.deleteUserData(deleteOptions);
 
     Test.stopTest();
   }

@@ -1,5 +1,5 @@
 public class IBMWatsonNoauthAuthenticator implements IBMWatsonAuthenticator {
-  public IBMWatsonNoauthAuthenticator(IBMWatsonNoauthConfig config) { }
+  public IBMWatsonNoauthAuthenticator() {}
 
   public String authenticationType() {
     return IBMWatsonCredentialUtils.AUTHTYPE_NOAUTH;

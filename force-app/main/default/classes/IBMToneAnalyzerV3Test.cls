@@ -1,5 +1,11 @@
 @isTest
 private class IBMToneAnalyzerV3Test {
+  private static IBMToneAnalyzerV3 service;
+
+  static {
+    service = new IBMToneAnalyzerV3('2017-09-21', new IBMWatsonNoauthAuthenticator());
+  }
+
   /**
    *  Test Analyze general purpose tone.
    *
@@ -9,11 +15,7 @@ private class IBMToneAnalyzerV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21', iamOptions);
-    toneAnalyzer.setEndPoint('https://gateway.watsonplatform.net/tone-analyzer/api');
+
     IBMToneAnalyzerV3Models.ToneInput toneInput = new IBMToneAnalyzerV3Models.ToneInputBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
       .build();
@@ -32,7 +34,7 @@ private class IBMToneAnalyzerV3Test {
     .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMToneAnalyzerV3Models.ToneAnalysis resp = toneAnalyzer.tone(options);
+    IBMToneAnalyzerV3Models.ToneAnalysis resp = service.tone(options);
     System.assertEquals(resp.getDocumentTone().getWarning(), 'string');
     System.assertEquals(resp.getDocumentTone().getTones()[0].getScore(),0);
     System.assertEquals(resp.getDocumentTone().getTones()[0].getToneId(), 'string');
@@ -55,8 +57,7 @@ private class IBMToneAnalyzerV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21', 'username', 'password');
-    toneAnalyzer.setEndPoint('https://gateway.watsonplatform.net/tone-analyzer/api');
+
     IBMToneAnalyzerV3Models.Utterance utterance = new IBMToneAnalyzerV3Models.UtteranceBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
       .user('test user')
@@ -71,7 +72,7 @@ private class IBMToneAnalyzerV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMToneAnalyzerV3Models.UtteranceAnalyses resp = toneAnalyzer.toneChat(options);
+    IBMToneAnalyzerV3Models.UtteranceAnalyses resp = service.toneChat(options);
     System.assertEquals(resp.getWarning(), 'string');
     System.assertEquals(resp.getUtterancesTone()[0].getUtteranceId(), 0);
     System.assertEquals(resp.getUtterancesTone()[0].getUtteranceText(), 'string');
@@ -79,20 +80,6 @@ private class IBMToneAnalyzerV3Test {
     System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getScore(),0);
     System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getToneId(), 'string');
     System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getToneName(), 'string');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test exception
-   *
-   */
-  static testMethod void testException() {
-    Test.startTest();
-    try {
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('');
-    } catch(Exception ex) {
-      System.assertEquals(ex.getMessage(), 'versionDate cannot be null.');
-    }
     Test.stopTest();
   }
 }

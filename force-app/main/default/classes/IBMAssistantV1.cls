@@ -12,44 +12,19 @@ public class IBMAssistantV1 extends IBMWatsonService {
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMAssistantV1`.
+   * Instantiates a new `IBMAssistantV1` with the specified authentication configuration.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
+   * @param authenticator the authentication configuration for this service
    */
-  public IBMAssistantV1(String versionDate) {
-    super('assistant', 'v1');
+  public IBMAssistantV1(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super('assistant', 'v1', authenticator);
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMAssistantV1` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMAssistantV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMAssistantV1(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMAssistantV1` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMAssistantV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**
