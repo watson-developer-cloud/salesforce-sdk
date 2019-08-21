@@ -3308,14 +3308,14 @@ public class IBMWatsonMockResponses {
               '},' +
               '"text": "text"' +
             '},' +
-            '"value": {' +
+            '"value": [{' +
               '"cell_id": "cell_id",' +
               '"location": {' +
                 '"begin": 0,' +
                 '"end": 1' +
               '},' +
               '"text": "text"' +
-            '}' +
+            '}]' +
           '}' +
           '],' +
           '"title": {' +
@@ -3948,14 +3948,14 @@ public class IBMWatsonMockResponses {
               '},' +
               '"text": "text"' +
             '},' +
-            '"value": {' +
+            '"value": [{' +
               '"cell_id": "cell_id",' +
               '"location": {' +
                 '"begin": 0,' +
                 '"end": 1' +
               '},' +
               '"text": "text"' +
-            '}' +
+            '}]' +
           '}' +
           ']' +
         '}' +

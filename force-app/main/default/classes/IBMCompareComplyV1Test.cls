@@ -645,7 +645,7 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().getCellId());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getCellId());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
@@ -818,7 +818,7 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().getCellId());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getCellId());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());

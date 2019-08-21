@@ -5745,7 +5745,7 @@ public class IBMCompareComplyV1Models {
    */
   public class KeyValuePair extends IBMWatsonGenericModel {
     private Key key_serialized_name;
-    private Value value_serialized_name;
+    private List<Value> value_serialized_name;
  
     /**
      * Gets the key.
@@ -5762,12 +5762,12 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the value.
      *
-     * A value in a key-value pair.
+     * A list of values in a key-value pair.
      *
      * @return the value
      */
     @AuraEnabled
-    public Value getValue() {
+    public List<Value> getValue() {
       return value_serialized_name;
     }
 
@@ -5785,7 +5785,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param value the new value
      */
-    public void setValue(final Value value) {
+    public void setValue(final List<Value> value) {
       this.value_serialized_name = value;
     }
 
@@ -5801,8 +5801,17 @@ public class IBMCompareComplyV1Models {
       ret.setKey(newKey);
 
       // calling custom deserializer for value
-      Value newValue = (Value) new Value().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), Value.class);
-      ret.setValue(newValue);
+      List<Value> newValue = new List<Value>();
+      List<Value> deserializedValue = ret.getValue();
+      if (deserializedValue != null) {
+        for (Integer i = 0; i < deserializedValue.size(); i++) {
+          Value currentItem = ret.getValue().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('value_serialized_name');
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
+          newValue.add(newItem);
+        }
+        ret.setValue(newValue);
+      }
 
       return ret;
     }
