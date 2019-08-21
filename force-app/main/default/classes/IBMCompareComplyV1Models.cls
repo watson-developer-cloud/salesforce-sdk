@@ -247,7 +247,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hashed values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -720,12 +720,12 @@ public class IBMCompareComplyV1Models {
     private Long row_index_end_serialized_name;
     private Long column_index_begin_serialized_name;
     private Long column_index_end_serialized_name;
-    private List<RowHeaderIds> row_header_ids_serialized_name;
-    private List<RowHeaderTexts> row_header_texts_serialized_name;
-    private List<RowHeaderTextsNormalized> row_header_texts_normalized_serialized_name;
-    private List<ColumnHeaderIds> column_header_ids_serialized_name;
-    private List<ColumnHeaderTexts> column_header_texts_serialized_name;
-    private List<ColumnHeaderTextsNormalized> column_header_texts_normalized_serialized_name;
+    private List<String> row_header_ids_serialized_name;
+    private List<String> row_header_texts_serialized_name;
+    private List<String> row_header_texts_normalized_serialized_name;
+    private List<String> column_header_ids_serialized_name;
+    private List<String> column_header_texts_serialized_name;
+    private List<String> column_header_texts_normalized_serialized_name;
     private List<Attribute> attributes_serialized_name;
  
     /**
@@ -816,60 +816,74 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the rowHeaderIds.
      *
+     * An array that contains the `id` value of a row header that is applicable to this body cell.
+     *
      * @return the rowHeaderIds
      */
     @AuraEnabled
-    public List<RowHeaderIds> getRowHeaderIds() {
+    public List<String> getRowHeaderIds() {
       return row_header_ids_serialized_name;
     }
  
     /**
      * Gets the rowHeaderTexts.
      *
+     * An array that contains the `text` value of a row header that is applicable to this body cell.
+     *
      * @return the rowHeaderTexts
      */
     @AuraEnabled
-    public List<RowHeaderTexts> getRowHeaderTexts() {
+    public List<String> getRowHeaderTexts() {
       return row_header_texts_serialized_name;
     }
  
     /**
      * Gets the rowHeaderTextsNormalized.
      *
+     * If you provide customization input, the normalized version of the row header texts according to the
+     * customization; otherwise, the same value as `row_header_texts`.
+     *
      * @return the rowHeaderTextsNormalized
      */
     @AuraEnabled
-    public List<RowHeaderTextsNormalized> getRowHeaderTextsNormalized() {
+    public List<String> getRowHeaderTextsNormalized() {
       return row_header_texts_normalized_serialized_name;
     }
  
     /**
      * Gets the columnHeaderIds.
      *
+     * An array that contains the `id` value of a column header that is applicable to the current cell.
+     *
      * @return the columnHeaderIds
      */
     @AuraEnabled
-    public List<ColumnHeaderIds> getColumnHeaderIds() {
+    public List<String> getColumnHeaderIds() {
       return column_header_ids_serialized_name;
     }
  
     /**
      * Gets the columnHeaderTexts.
      *
+     * An array that contains the `text` value of a column header that is applicable to the current cell.
+     *
      * @return the columnHeaderTexts
      */
     @AuraEnabled
-    public List<ColumnHeaderTexts> getColumnHeaderTexts() {
+    public List<String> getColumnHeaderTexts() {
       return column_header_texts_serialized_name;
     }
  
     /**
      * Gets the columnHeaderTextsNormalized.
      *
+     * If you provide customization input, the normalized version of the column header texts according to the
+     * customization; otherwise, the same value as `column_header_texts`.
+     *
      * @return the columnHeaderTextsNormalized
      */
     @AuraEnabled
-    public List<ColumnHeaderTextsNormalized> getColumnHeaderTextsNormalized() {
+    public List<String> getColumnHeaderTextsNormalized() {
       return column_header_texts_normalized_serialized_name;
     }
  
@@ -951,7 +965,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderIds the new rowHeaderIds
      */
-    public void setRowHeaderIds(final List<RowHeaderIds> rowHeaderIds) {
+    public void setRowHeaderIds(final List<String> rowHeaderIds) {
       this.row_header_ids_serialized_name = rowHeaderIds;
     }
 
@@ -960,7 +974,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderTexts the new rowHeaderTexts
      */
-    public void setRowHeaderTexts(final List<RowHeaderTexts> rowHeaderTexts) {
+    public void setRowHeaderTexts(final List<String> rowHeaderTexts) {
       this.row_header_texts_serialized_name = rowHeaderTexts;
     }
 
@@ -969,7 +983,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderTextsNormalized the new rowHeaderTextsNormalized
      */
-    public void setRowHeaderTextsNormalized(final List<RowHeaderTextsNormalized> rowHeaderTextsNormalized) {
+    public void setRowHeaderTextsNormalized(final List<String> rowHeaderTextsNormalized) {
       this.row_header_texts_normalized_serialized_name = rowHeaderTextsNormalized;
     }
 
@@ -978,7 +992,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderIds the new columnHeaderIds
      */
-    public void setColumnHeaderIds(final List<ColumnHeaderIds> columnHeaderIds) {
+    public void setColumnHeaderIds(final List<String> columnHeaderIds) {
       this.column_header_ids_serialized_name = columnHeaderIds;
     }
 
@@ -987,7 +1001,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderTexts the new columnHeaderTexts
      */
-    public void setColumnHeaderTexts(final List<ColumnHeaderTexts> columnHeaderTexts) {
+    public void setColumnHeaderTexts(final List<String> columnHeaderTexts) {
       this.column_header_texts_serialized_name = columnHeaderTexts;
     }
 
@@ -996,7 +1010,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderTextsNormalized the new columnHeaderTextsNormalized
      */
-    public void setColumnHeaderTextsNormalized(final List<ColumnHeaderTextsNormalized> columnHeaderTextsNormalized) {
+    public void setColumnHeaderTextsNormalized(final List<String> columnHeaderTextsNormalized) {
       this.column_header_texts_normalized_serialized_name = columnHeaderTextsNormalized;
     }
 
@@ -1019,84 +1033,6 @@ public class IBMCompareComplyV1Models {
       // calling custom deserializer for location
       Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
       ret.setLocation(newLocation);
-
-      // calling custom deserializer for rowHeaderIds
-      List<RowHeaderIds> newRowHeaderIds = new List<RowHeaderIds>();
-      List<RowHeaderIds> deserializedRowHeaderIds = ret.getRowHeaderIds();
-      if (deserializedRowHeaderIds != null) {
-        for (Integer i = 0; i < deserializedRowHeaderIds.size(); i++) {
-          RowHeaderIds currentItem = ret.getRowHeaderIds().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_ids_serialized_name');
-          RowHeaderIds newItem = (RowHeaderIds) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderIds.class);
-          newRowHeaderIds.add(newItem);
-        }
-        ret.row_header_ids_serialized_name = newRowHeaderIds;
-      }
-
-      // calling custom deserializer for rowHeaderTexts
-      List<RowHeaderTexts> newRowHeaderTexts = new List<RowHeaderTexts>();
-      List<RowHeaderTexts> deserializedRowHeaderTexts = ret.getRowHeaderTexts();
-      if (deserializedRowHeaderTexts != null) {
-        for (Integer i = 0; i < deserializedRowHeaderTexts.size(); i++) {
-          RowHeaderTexts currentItem = ret.getRowHeaderTexts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_texts_serialized_name');
-          RowHeaderTexts newItem = (RowHeaderTexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderTexts.class);
-          newRowHeaderTexts.add(newItem);
-        }
-        ret.row_header_texts_serialized_name = newRowHeaderTexts;
-      }
-
-      // calling custom deserializer for rowHeaderTextsNormalized
-      List<RowHeaderTextsNormalized> newRowHeaderTextsNormalized = new List<RowHeaderTextsNormalized>();
-      List<RowHeaderTextsNormalized> deserializedRowHeaderTextsNormalized = ret.getRowHeaderTextsNormalized();
-      if (deserializedRowHeaderTextsNormalized != null) {
-        for (Integer i = 0; i < deserializedRowHeaderTextsNormalized.size(); i++) {
-          RowHeaderTextsNormalized currentItem = ret.getRowHeaderTextsNormalized().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_texts_normalized_serialized_name');
-          RowHeaderTextsNormalized newItem = (RowHeaderTextsNormalized) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderTextsNormalized.class);
-          newRowHeaderTextsNormalized.add(newItem);
-        }
-        ret.row_header_texts_normalized_serialized_name = newRowHeaderTextsNormalized;
-      }
-
-      // calling custom deserializer for columnHeaderIds
-      List<ColumnHeaderIds> newColumnHeaderIds = new List<ColumnHeaderIds>();
-      List<ColumnHeaderIds> deserializedColumnHeaderIds = ret.getColumnHeaderIds();
-      if (deserializedColumnHeaderIds != null) {
-        for (Integer i = 0; i < deserializedColumnHeaderIds.size(); i++) {
-          ColumnHeaderIds currentItem = ret.getColumnHeaderIds().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_ids_serialized_name');
-          ColumnHeaderIds newItem = (ColumnHeaderIds) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderIds.class);
-          newColumnHeaderIds.add(newItem);
-        }
-        ret.column_header_ids_serialized_name = newColumnHeaderIds;
-      }
-
-      // calling custom deserializer for columnHeaderTexts
-      List<ColumnHeaderTexts> newColumnHeaderTexts = new List<ColumnHeaderTexts>();
-      List<ColumnHeaderTexts> deserializedColumnHeaderTexts = ret.getColumnHeaderTexts();
-      if (deserializedColumnHeaderTexts != null) {
-        for (Integer i = 0; i < deserializedColumnHeaderTexts.size(); i++) {
-          ColumnHeaderTexts currentItem = ret.getColumnHeaderTexts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_texts_serialized_name');
-          ColumnHeaderTexts newItem = (ColumnHeaderTexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderTexts.class);
-          newColumnHeaderTexts.add(newItem);
-        }
-        ret.column_header_texts_serialized_name = newColumnHeaderTexts;
-      }
-
-      // calling custom deserializer for columnHeaderTextsNormalized
-      List<ColumnHeaderTextsNormalized> newColumnHeaderTextsNormalized = new List<ColumnHeaderTextsNormalized>();
-      List<ColumnHeaderTextsNormalized> deserializedColumnHeaderTextsNormalized = ret.getColumnHeaderTextsNormalized();
-      if (deserializedColumnHeaderTextsNormalized != null) {
-        for (Integer i = 0; i < deserializedColumnHeaderTextsNormalized.size(); i++) {
-          ColumnHeaderTextsNormalized currentItem = ret.getColumnHeaderTextsNormalized().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_texts_normalized_serialized_name');
-          ColumnHeaderTextsNormalized newItem = (ColumnHeaderTextsNormalized) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderTextsNormalized.class);
-          newColumnHeaderTextsNormalized.add(newItem);
-        }
-        ret.column_header_texts_normalized_serialized_name = newColumnHeaderTextsNormalized;
-      }
 
       // calling custom deserializer for attributes
       List<Attribute> newAttributes = new List<Attribute>();
@@ -1137,7 +1073,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hashed values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -1356,6 +1292,7 @@ public class IBMCompareComplyV1Models {
     private List<ContractTypes> contract_types_serialized_name;
     private List<ContractTerms> contract_terms_serialized_name;
     private List<PaymentTerms> payment_terms_serialized_name;
+    private List<ContractCurrencies> contract_currencies_serialized_name;
     private List<Tables> tables_serialized_name;
     private DocStructure document_structure_serialized_name;
     private List<Parties> parties_serialized_name;
@@ -1437,7 +1374,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the terminationDates.
      *
-     * The date or dates on which the document is to be terminated.
+     * The dates on which the document is to be terminated.
      *
      * @return the terminationDates
      */
@@ -1449,7 +1386,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the contractTypes.
      *
-     * The document's contract type or types as declared in the document.
+     * The contract type as declared in the document.
      *
      * @return the contractTypes
      */
@@ -1461,7 +1398,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the contractTerms.
      *
-     * The duration or durations of the contract.
+     * The durations of the contract.
      *
      * @return the contractTerms
      */
@@ -1473,13 +1410,25 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the paymentTerms.
      *
-     * The document's payment duration or durations.
+     * The document's payment durations.
      *
      * @return the paymentTerms
      */
     @AuraEnabled
     public List<PaymentTerms> getPaymentTerms() {
       return payment_terms_serialized_name;
+    }
+ 
+    /**
+     * Gets the contractCurrencies.
+     *
+     * The contract currencies as declared in the document.
+     *
+     * @return the contractCurrencies
+     */
+    @AuraEnabled
+    public List<ContractCurrencies> getContractCurrencies() {
+      return contract_currencies_serialized_name;
     }
  
     /**
@@ -1606,6 +1555,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setPaymentTerms(final List<PaymentTerms> paymentTerms) {
       this.payment_terms_serialized_name = paymentTerms;
+    }
+
+    /**
+     * Sets the contractCurrencies.
+     *
+     * @param contractCurrencies the new contractCurrencies
+     */
+    public void setContractCurrencies(final List<ContractCurrencies> contractCurrencies) {
+      this.contract_currencies_serialized_name = contractCurrencies;
     }
 
     /**
@@ -1737,6 +1695,19 @@ public class IBMCompareComplyV1Models {
         ret.payment_terms_serialized_name = newPaymentTerms;
       }
 
+      // calling custom deserializer for contractCurrencies
+      List<ContractCurrencies> newContractCurrencies = new List<ContractCurrencies>();
+      List<ContractCurrencies> deserializedContractCurrencies = ret.getContractCurrencies();
+      if (deserializedContractCurrencies != null) {
+        for (Integer i = 0; i < deserializedContractCurrencies.size(); i++) {
+          ContractCurrencies currentItem = ret.getContractCurrencies().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_currencies_serialized_name');
+          ContractCurrencies newItem = (ContractCurrencies) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractCurrencies.class);
+          newContractCurrencies.add(newItem);
+        }
+        ret.setContractCurrencies(newContractCurrencies);
+      }
+
       // calling custom deserializer for tables
       List<Tables> newTables = new List<Tables>();
       List<Tables> deserializedTables = ret.getTables();
@@ -1769,94 +1740,6 @@ public class IBMCompareComplyV1Models {
 
       return ret;
     }
-  }
-
-  /**
-   * An array of values, each being the `id` value of a column header that is applicable to the current cell.
-   */
-  public class ColumnHeaderIds extends IBMWatsonGenericModel {
-    private String id_serialized_name;
- 
-    /**
-     * Gets the id.
-     *
-     * The `id` value of a column header.
-     *
-     * @return the id
-     */
-    @AuraEnabled
-    public String getId() {
-      return id_serialized_name;
-    }
-
-    /**
-     * Sets the id.
-     *
-     * @param id the new id
-     */
-    public void setId(final String id) {
-      this.id_serialized_name = id;
-    }
-
-  }
-
-  /**
-   * An array of values, each being the `text` value of a column header that is applicable to the current cell.
-   */
-  public class ColumnHeaderTexts extends IBMWatsonGenericModel {
-    private String text_serialized_name;
- 
-    /**
-     * Gets the text.
-     *
-     * The `text` value of a column header.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text_serialized_name;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
-    }
-
-  }
-
-  /**
-   * If you provide customization input, the normalized version of the column header texts according to the
-   * customization; otherwise, the same value as `column_header_texts`.
-   */
-  public class ColumnHeaderTextsNormalized extends IBMWatsonGenericModel {
-    private String text_normalized_serialized_name;
- 
-    /**
-     * Gets the textNormalized.
-     *
-     * The normalized version of a column header text.
-     *
-     * @return the textNormalized
-     */
-    @AuraEnabled
-    public String getTextNormalized() {
-      return text_normalized_serialized_name;
-    }
-
-    /**
-     * Sets the textNormalized.
-     *
-     * @param textNormalized the new textNormalized
-     */
-    public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
-    }
-
   }
 
   /**
@@ -2631,8 +2514,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the amount, which is listed as a string. This element is optional; that is, the service
-     * output lists it only if normalized text exists.
+     * The normalized form of the amount, which is listed as a string. This element is optional; it is returned only if
+     * normalized text exists.
      *
      * @return the textNormalized
      */
@@ -2644,8 +2527,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -2657,7 +2540,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -2753,6 +2636,139 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
+   * The contract currencies that are declared in the document.
+   */
+  public class ContractCurrencies extends IBMWatsonGenericModel {
+    private String confidence_level_serialized_name;
+    private String text_serialized_name;
+    private String text_normalized_serialized_name;
+    private List<String> provenance_ids_serialized_name;
+    private Location location_serialized_name;
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the contract currency.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
+ 
+    /**
+     * Gets the text.
+     *
+     * The contract currency.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the textNormalized.
+     *
+     * The normalized form of the contract currency, which is listed as a string in
+     * [ISO-4217](https://www.iso.org/iso-4217-currency-codes.html) format. This element is optional; it is returned
+     * only if normalized text exists.
+     *
+     * @return the textNormalized
+     */
+    @AuraEnabled
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+ 
+    /**
+     * Gets the provenanceIds.
+     *
+     * Hashed values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenance_ids_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the textNormalized.
+     *
+     * @param textNormalized the new textNormalized
+     */
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenance_ids_serialized_name = provenanceIds;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ContractCurrencies ret = (ContractCurrencies) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
    * The duration or durations of the contract.
    */
   public class ContractTerms extends IBMWatsonGenericModel {
@@ -2790,8 +2806,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the contract term, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the contract term, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -2803,8 +2819,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -2816,7 +2832,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -2947,7 +2963,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -4040,8 +4056,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the effective date, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the effective date, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -4053,7 +4069,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -5897,7 +5913,7 @@ public class IBMCompareComplyV1Models {
    */
   public class KeyValuePair extends IBMWatsonGenericModel {
     private Key key_serialized_name;
-    private Value value_serialized_name;
+    private List<Value> value_serialized_name;
  
     /**
      * Gets the key.
@@ -5914,12 +5930,12 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the value.
      *
-     * A value in a key-value pair.
+     * A list of values in a key-value pair.
      *
      * @return the value
      */
     @AuraEnabled
-    public Value getValue() {
+    public List<Value> getValue() {
       return value_serialized_name;
     }
 
@@ -5937,7 +5953,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param value the new value
      */
-    public void setValue(final Value value) {
+    public void setValue(final List<Value> value) {
       this.value_serialized_name = value;
     }
 
@@ -5953,8 +5969,17 @@ public class IBMCompareComplyV1Models {
       ret.setKey(newKey);
 
       // calling custom deserializer for value
-      Value newValue = (Value) new Value().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), Value.class);
-      ret.setValue(newValue);
+      List<Value> newValue = new List<Value>();
+      List<Value> deserializedValue = ret.getValue();
+      if (deserializedValue != null) {
+        for (Integer i = 0; i < deserializedValue.size(); i++) {
+          Value currentItem = ret.getValue().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('value_serialized_name');
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
+          newValue.add(newItem);
+        }
+        ret.setValue(newValue);
+      }
 
       return ret;
     }
@@ -6264,7 +6289,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the categoryRemoved.
      *
-     * An optional string in the form of a comma-separated list of categories. If this is specified, the service filters
+     * An optional string in the form of a comma-separated list of categories. If it is specified, the service filters
      * the output to include only feedback that has at least one category from the list removed.
      *
      * @return the categoryRemoved
@@ -7317,8 +7342,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the payment term, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the payment term, which is listed as a string. This element is optional; it is returned
+     * only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -7330,8 +7355,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the interpretation.
      *
-     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
-     * only if normalized text exists.
+     * The details of the normalized text, if applicable. This element is optional; it is returned only if normalized
+     * text exists.
      *
      * @return the interpretation
      */
@@ -7343,7 +7368,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -7436,94 +7461,6 @@ public class IBMCompareComplyV1Models {
 
       return ret;
     }
-  }
-
-  /**
-   * An array of values, each being the `id` value of a row header that is applicable to this body cell.
-   */
-  public class RowHeaderIds extends IBMWatsonGenericModel {
-    private String id_serialized_name;
- 
-    /**
-     * Gets the id.
-     *
-     * The `id` values of a row header.
-     *
-     * @return the id
-     */
-    @AuraEnabled
-    public String getId() {
-      return id_serialized_name;
-    }
-
-    /**
-     * Sets the id.
-     *
-     * @param id the new id
-     */
-    public void setId(final String id) {
-      this.id_serialized_name = id;
-    }
-
-  }
-
-  /**
-   * An array of values, each being the `text` value of a row header that is applicable to this body cell.
-   */
-  public class RowHeaderTexts extends IBMWatsonGenericModel {
-    private String text_serialized_name;
- 
-    /**
-     * Gets the text.
-     *
-     * The `text` value of a row header.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text_serialized_name;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
-    }
-
-  }
-
-  /**
-   * If you provide customization input, the normalized version of the row header texts according to the customization;
-   * otherwise, the same value as `row_header_texts`.
-   */
-  public class RowHeaderTextsNormalized extends IBMWatsonGenericModel {
-    private String text_normalized_serialized_name;
- 
-    /**
-     * Gets the textNormalized.
-     *
-     * The normalized version of a row header text.
-     *
-     * @return the textNormalized
-     */
-    @AuraEnabled
-    public String getTextNormalized() {
-      return text_normalized_serialized_name;
-    }
-
-    /**
-     * Sets the textNormalized.
-     *
-     * @param textNormalized the new textNormalized
-     */
-    public void setTextNormalized(final String textNormalized) {
-      this.text_normalized_serialized_name = textNormalized;
-    }
-
   }
 
   /**
@@ -8696,8 +8633,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the textNormalized.
      *
-     * The normalized form of the termination date, which is listed as a string. This element is optional; that is, the
-     * service output lists it only if normalized text exists.
+     * The normalized form of the termination date, which is listed as a string. This element is optional; it is
+     * returned only if normalized text exists.
      *
      * @return the textNormalized
      */
@@ -8709,7 +8646,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */
@@ -8814,7 +8751,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the provenanceIds.
      *
-     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     * Hashed values that you can send to IBM to provide feedback or receive support.
      *
      * @return the provenanceIds
      */

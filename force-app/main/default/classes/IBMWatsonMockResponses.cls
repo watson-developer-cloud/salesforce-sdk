@@ -3269,34 +3269,22 @@ public class IBMWatsonMockResponses {
               '"column_index_begin": 4000,' +
               '"column_index_end": 5000,' +
               '"row_header_ids": [' +
-                '{' +
-                  '"id": "id"' +
-                '}' +
+                '"id"' +
               '],' +
               '"row_header_texts": [' +
-                '{' +
-                  '"text": "text"' +
-                '}' +
+                '"text"' +
               '],' +
               '"row_header_texts_normalized": [' +
-                '{' +
-                  '"text_normalized": "text_normalized"' +
-                '}' +
+                '"text_normalized"' +
               '],' +
               '"column_header_ids": [' +
-                '{' +
-                  '"id": "id"' +
-                '}' +
+                '"id"' +
               '],' +
               '"column_header_texts": [' +
-                '{' +
-                  '"text": "text"' +
-                '}' +
+                '"text"' +
               '],' +
               '"column_header_texts_normalized": [' +
-                '{' +
-                  '"text_normalized": "text_normalized"' +
-                '}' +
+                '"text_normalized"' +
               '],' +
               '"attributes": [' +
               '  {' +
@@ -3320,14 +3308,14 @@ public class IBMWatsonMockResponses {
               '},' +
               '"text": "text"' +
             '},' +
-            '"value": {' +
+            '"value": [{' +
               '"cell_id": "cell_id",' +
               '"location": {' +
                 '"begin": 0,' +
                 '"end": 1' +
               '},' +
               '"text": "text"' +
-            '}' +
+            '}]' +
           '}' +
           '],' +
           '"title": {' +
@@ -3506,6 +3494,20 @@ public class IBMWatsonMockResponses {
             '"numeric_value": 21,' +
             '"unit": "unit"' +
           '},' +
+          '"provenance_ids": [' +
+            '"provenance_id"' +
+          '],' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '}' +
+        '}' +
+      '],' +
+      '"contract_currencies": [' +
+        '{' +
+          '"confidence_level": "High",' +
+          '"text": "text",' +
+          '"text_normalized": "text_normalized",' +
           '"provenance_ids": [' +
             '"provenance_id"' +
           '],' +
@@ -3921,34 +3923,22 @@ public class IBMWatsonMockResponses {
               '"column_index_begin": 4000,' +
               '"column_index_end": 5000,' +
               '"row_header_ids": [' +
-                '{' +
-                  '"id": "id"' +
-                '}' +
+                '"id"' +
               '],' +
               '"row_header_texts": [' +
-                '{' +
-                  '"text": "text"' +
-                '}' +
+                '"text"' +
               '],' +
               '"row_header_texts_normalized": [' +
-                '{' +
-                  '"text_normalized": "text_normalized"' +
-                '}' +
+                '"text_normalized"' +
               '],' +
               '"column_header_ids": [' +
-                '{' +
-                  '"id": "id"' +
-                '}' +
+                '"id"' +
               '],' +
               '"column_header_texts": [' +
-                '{' +
-                  '"text": "text"' +
-                '}' +
+                '"text"' +
               '],' +
               '"column_header_texts_normalized": [' +
-                '{' +
-                  '"text_normalized": "text_normalized"' +
-                '}' +
+                '"text_normalized"' +
               '],' +
               '"attributes": [' +
               '  {' +
@@ -3972,14 +3962,14 @@ public class IBMWatsonMockResponses {
               '},' +
               '"text": "text"' +
             '},' +
-            '"value": {' +
+            '"value": [{' +
               '"cell_id": "cell_id",' +
               '"location": {' +
                 '"begin": 0,' +
                 '"end": 1' +
               '},' +
               '"text": "text"' +
-            '}' +
+            '}]' +
           '}' +
           ']' +
         '}' +
