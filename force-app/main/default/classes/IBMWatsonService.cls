@@ -6,7 +6,6 @@ public abstract class IBMWatsonService {
   private IBMWatsonAuthenticator authenticator;
   private Map<String, String> defaultHeaders = null;
 
-  private static final String CALLOUT = 'callout:';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk-{0} {1}';
   private static final String SDK_VERSION = '4.3.0';
   private static final String ERRORMSG_NO_AUTHENTICATOR = 'Authentication information was not properly configured.';
@@ -33,14 +32,11 @@ public abstract class IBMWatsonService {
     }
     this.authenticator = authenticator;
 
-    // use endpoint from credential file if it exists, otherwise, try pulling from named credentials
+    // use endpoint from credential file if it exists
     Map<String, String> props = IBMWatsonCredentialUtils.getFileCredentialsAsMap(name);
     String url = props.get(IBMWatsonCredentialUtils.PROP_NAME_URL);
     if (String.isNotBlank(url)) {
       setEndPoint(url);
-    } else {
-      String namedCredentialsKey = String.format('watson_{0}_{1}', new String[]{ name, version });
-      setEndPoint(CALLOUT + namedCredentialsKey);
     }
   }
 
