@@ -180,7 +180,7 @@ public abstract class IBMWatsonService {
     IBMWatsonRequest.Builder builder = request.newBuilder();
     setDefaultHeaders(builder);
 
-    if (String.isNotBlank(endpoint) && !endPoint.startsWith(CALLOUT)) {
+    if (String.isNotBlank(endpoint)) {
       setAuthentication(builder);
     }
 
