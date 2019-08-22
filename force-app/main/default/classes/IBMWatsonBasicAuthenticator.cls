@@ -42,6 +42,14 @@ public class IBMWatsonBasicAuthenticator extends IBMWatsonAuthenticatorBase impl
     this.authHeader = constructBasicAuthHeader(username, password);
   }
 
+  public String getUsername() {
+    return this.username;
+  }
+
+  public String getPassword() {
+    return this.password;
+  }
+
   public String authenticationType() {
     return IBMWatsonCredentialUtils.AUTHTYPE_BASIC;
   }

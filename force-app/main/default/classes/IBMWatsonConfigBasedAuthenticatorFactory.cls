@@ -34,7 +34,7 @@ public class IBMWatsonConfigBasedAuthenticatorFactory {
    * @param props a Map containing configuration properties
    * @return an IBMWatsonAuthenticator instance
    */
-  private static IBMWatsonAuthenticator createAuthenticator(Map<String, String> props) {
+  public static IBMWatsonAuthenticator createAuthenticator(Map<String, String> props) {
     IBMWatsonAuthenticator authenticator = null;
 
     // If auth type was not specified, we'll use "iam" as the default.
@@ -44,7 +44,7 @@ public class IBMWatsonConfigBasedAuthenticatorFactory {
     }
 
     if (authType.equals(IBMWatsonCredentialUtils.AUTHTYPE_NOAUTH)) {
-      authenticator = new IBMWatsonNoauthAuthenticator(props);
+      authenticator = new IBMWatsonNoauthAuthenticator();
     } else if (authType.equals(IBMWatsonCredentialUtils.AUTHTYPE_BASIC)) {
       authenticator = new IBMWatsonBasicAuthenticator(props);
     } else if (authType.equals(IBMWatsonCredentialUtils.AUTHTYPE_IAM)) {

@@ -8,7 +8,7 @@ public virtual class IBMWatsonAuthenticatorBase {
    */
   public static final String ERRORMSG_PROP_MISSING = 'The {0} property is required but was not specified.';
   public static final String ERRORMSG_PROP_INVALID =
-      'The {0} property is invalid. Please remove any surrounding {, }, or \" characters.';
+      'The {0} property is invalid. Please remove any surrounding \'{\', \'}\', or \" characters.';
   public static final String ERRORMSG_REQ_FAILED = 'Error while fetching access token from token service.';
 
   /**

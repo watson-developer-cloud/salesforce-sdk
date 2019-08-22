@@ -70,7 +70,7 @@ public class IBMWatsonCredentialUtils {
         String credentialType = lowercaseKey.substring(serviceNameLength + 1);
         String credentialValue = keyAndVal[1];
         if (String.isNotBlank(credentialType) && String.isNotBlank(credentialValue)) {
-          props.put(credentialType, credentialValue);
+          props.put(credentialType.toUpperCase(), credentialValue);
         }
       }
     }
