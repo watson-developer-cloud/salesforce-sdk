@@ -68,8 +68,8 @@ private class IBMWatsonCP4DAuthenticatorTest {
   static testMethod void testMissingUsernameMap() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_URL, URL);
-    props.put(IBMWatsonCredentialUtils.PROPNAME_PASSWORD, PASSWORD);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_URL, URL);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD, PASSWORD);
     try {
       IBMWatsonCloudPakForDataAuthenticator authenticator = new IBMWatsonCloudPakForDataAuthenticator(props);
     } catch (IBMWatsonServiceExceptions.IllegalArgumentException e) {
@@ -81,9 +81,9 @@ private class IBMWatsonCP4DAuthenticatorTest {
   static testMethod void testEmptyUsernameMap() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_URL, URL);
-    props.put(IBMWatsonCredentialUtils.PROPNAME_USERNAME, '');
-    props.put(IBMWatsonCredentialUtils.PROPNAME_PASSWORD, PASSWORD);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_URL, URL);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_USERNAME, '');
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD, PASSWORD);
     try {
       IBMWatsonCloudPakForDataAuthenticator authenticator = new IBMWatsonCloudPakForDataAuthenticator(props);
     } catch (IBMWatsonServiceExceptions.IllegalArgumentException e) {
@@ -95,12 +95,12 @@ private class IBMWatsonCP4DAuthenticatorTest {
   static testMethod void testCorrectConfigMap() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_URL, URL);
-    props.put(IBMWatsonCredentialUtils.PROPNAME_USERNAME, USERNAME);
-    props.put(IBMWatsonCredentialUtils.PROPNAME_PASSWORD, PASSWORD);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_URL, URL);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_USERNAME, USERNAME);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD, PASSWORD);
     IBMWatsonCloudPakForDataAuthenticator authenticator = new IBMWatsonCloudPakForDataAuthenticator(props);
 
-    System.assertEquals(IBMWatsonCredentialUtils.AUTHTYPE_CP4D, authenticator.authenticationType());
+    System.assertEquals(IBMWatsonCredentialUtils.AUTH_TYPE_CP4D, authenticator.authenticationType());
     System.assertEquals(URL, authenticator.getUrl());
     System.assertEquals(USERNAME, authenticator.getUsername());
     System.assertEquals(PASSWORD, authenticator.getPassword());

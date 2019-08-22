@@ -38,20 +38,20 @@ public class IBMWatsonConfigBasedAuthenticatorFactory {
     IBMWatsonAuthenticator authenticator = null;
 
     // If auth type was not specified, we'll use "iam" as the default.
-    String authType = props.get(IBMWatsonCredentialUtils.PROPNAME_AUTH_TYPE);
+    String authType = props.get(IBMWatsonCredentialUtils.PROP_NAME_AUTH_TYPE);
     if (String.isBlank(authType)) {
-      authType = IBMWatsonCredentialUtils.AUTHTYPE_IAM;
+      authType = IBMWatsonCredentialUtils.AUTH_TYPE_IAM;
     }
 
-    if (authType.equals(IBMWatsonCredentialUtils.AUTHTYPE_NOAUTH)) {
-      authenticator = new IBMWatsonNoauthAuthenticator();
-    } else if (authType.equals(IBMWatsonCredentialUtils.AUTHTYPE_BASIC)) {
+    if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_NO_AUTH)) {
+      authenticator = new IBMWatsonNoAuthAuthenticator();
+    } else if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_BASIC)) {
       authenticator = new IBMWatsonBasicAuthenticator(props);
-    } else if (authType.equals(IBMWatsonCredentialUtils.AUTHTYPE_IAM)) {
+    } else if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_IAM)) {
       authenticator = new IBMWatsonIAMAuthenticator(props);
-    } else if (authType.equals(IBMWatsonCredentialUtils.AUTHTYPE_CP4D)) {
+    } else if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_CP4D)) {
       authenticator = new IBMWatsonCloudPakForDataAuthenticator(props);
-    } else if (authType.equals(IBMWatsonCredentialUtils.AUTHTYPE_BEARER_TOKEN)) {
+    } else if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_BEARER_TOKEN)) {
       authenticator = new IBMWatsonBearerTokenAuthenticator(props);
     }
 

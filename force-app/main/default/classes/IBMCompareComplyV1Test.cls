@@ -149,7 +149,7 @@ private class IBMCompareComplyV1Test {
     UNIT = 'unit';
     NUMERIC_VALUE = 21.0;
 
-    service = new IBMCompareComplyV1(VERSION, new IBMWatsonNoauthAuthenticator());
+    service = new IBMCompareComplyV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testAddFeedbackOptions() {

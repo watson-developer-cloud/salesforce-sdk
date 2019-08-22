@@ -3,7 +3,7 @@ private class IBMToneAnalyzerV3Test {
   private static IBMToneAnalyzerV3 service;
 
   static {
-    service = new IBMToneAnalyzerV3('2017-09-21', new IBMWatsonNoauthAuthenticator());
+    service = new IBMToneAnalyzerV3('2017-09-21', new IBMWatsonNoAuthAuthenticator());
   }
 
   /**

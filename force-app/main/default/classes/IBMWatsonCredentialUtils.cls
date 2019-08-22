@@ -5,23 +5,23 @@ public class IBMWatsonCredentialUtils {
   /**
    * Valid authentication types.
    */
-  public static final String AUTHTYPE_BASIC = 'basic';
-  public static final String AUTHTYPE_NOAUTH = 'noauth';
-  public static final String AUTHTYPE_IAM = 'iam';
-  public static final String AUTHTYPE_CP4D = 'cp4d';
-  public static final String AUTHTYPE_BEARER_TOKEN = 'bearerToken';
+  public static final String AUTH_TYPE_BASIC = 'basic';
+  public static final String AUTH_TYPE_NO_AUTH = 'noauth';
+  public static final String AUTH_TYPE_IAM = 'iam';
+  public static final String AUTH_TYPE_CP4D = 'cp4d';
+  public static final String AUTH_TYPE_BEARER_TOKEN = 'bearerToken';
 
   /**
    * Constants which define the names of external config properties (e.g. credential file).
    */
-  public static final String PROPNAME_AUTH_TYPE = 'AUTH_TYPE';
-  public static final String PROPNAME_USERNAME = 'USERNAME';
-  public static final String PROPNAME_PASSWORD = 'PASSWORD';
-  public static final String PROPNAME_BEARER_TOKEN = 'BEARER_TOKEN';
-  public static final String PROPNAME_URL = 'AUTH_URL';
-  public static final String PROPNAME_APIKEY = 'APIKEY';
-  public static final String PROPNAME_CLIENT_ID = 'CLIENT_ID';
-  public static final String PROPNAME_CLIENT_SECRET = 'CLIENT_SECRET';
+  public static final String PROP_NAME_AUTH_TYPE = 'AUTH_TYPE';
+  public static final String PROP_NAME_USERNAME = 'USERNAME';
+  public static final String PROP_NAME_PASSWORD = 'PASSWORD';
+  public static final String PROP_NAME_BEARER_TOKEN = 'BEARER_TOKEN';
+  public static final String PROP_NAME_URL = 'AUTH_URL';
+  public static final String PROP_NAME_APIKEY = 'APIKEY';
+  public static final String PROP_NAME_CLIENT_ID = 'CLIENT_ID';
+  public static final String PROP_NAME_CLIENT_SECRET = 'CLIENT_SECRET';
 
 
   private IBMWatsonCredentialUtils() {

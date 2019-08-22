@@ -3,7 +3,7 @@ private class IBMNaturalLanguageClassifierV1Test {
   private static IBMNaturalLanguageClassifierV1 service;
 
   static {
-    service = new IBMNaturalLanguageClassifierV1(new IBMWatsonNoauthAuthenticator());
+    service = new IBMNaturalLanguageClassifierV1(new IBMWatsonNoAuthAuthenticator());
   }
 
   /**

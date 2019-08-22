@@ -35,7 +35,7 @@ private class IBMLanguageTranslatorV3Test {
     dateValue = (Datetime) JSON.deserialize(dateString, Datetime.class);
     status = 'available';
 
-    service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthAuthenticator());
+    service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoAuthAuthenticator());
   }
 
   /**

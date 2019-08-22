@@ -15,7 +15,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     CONFIDENCE = 0.5;
     LOCATION = 0L;
 
-    service = new IBMNaturalLanguageUnderstandingV1('2017-02-27', new IBMWatsonNoauthAuthenticator());
+    service = new IBMNaturalLanguageUnderstandingV1('2017-02-27', new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testCategoriesOptions() {

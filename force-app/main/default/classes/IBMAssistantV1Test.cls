@@ -158,7 +158,7 @@ private class IBMAssistantV1Test {
     messageToHumanAgent = 'message_to_human_agent';
     topic = 'topic';
 
-    service = new IBMAssistantV1('2018-02-16', new IBMWatsonNoauthAuthenticator());
+    service = new IBMAssistantV1('2018-02-16', new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testCreateWorkspace() {

@@ -7,7 +7,7 @@ private class IBMDiscoveryV1Test {
   private static IBMDiscoveryV1 service;
 
   static {
-    service = new IBMDiscoveryV1(VERSION, new IBMWatsonNoauthAuthenticator());
+    service = new IBMDiscoveryV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testNluEnrichmentConcepts() {

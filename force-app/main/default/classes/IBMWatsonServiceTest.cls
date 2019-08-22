@@ -6,7 +6,7 @@ private class IBMWatsonServiceTest {
    */
   class TestService extends IBMWatsonService {
     public TestService() {
-      super('service', 'v1', new IBMWatsonNoauthAuthenticator());
+      super('service', 'v1', new IBMWatsonNoAuthAuthenticator());
     }
 
     public TestClass testingMethod() {

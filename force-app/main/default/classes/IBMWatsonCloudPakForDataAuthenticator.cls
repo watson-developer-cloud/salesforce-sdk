@@ -48,8 +48,8 @@ public class IBMWatsonCloudPakForDataAuthenticator extends IBMWatsonTokenRequest
    * @param config a map containing the configuration properties
    */
   public IBMWatsonCloudPakForDataAuthenticator(Map<String, String> config) {
-    init(config.get(IBMWatsonCredentialUtils.PROPNAME_URL), config.get(IBMWatsonCredentialUtils.PROPNAME_USERNAME),
-      config.get(IBMWatsonCredentialUtils.PROPNAME_PASSWORD), null);
+    init(config.get(IBMWatsonCredentialUtils.PROP_NAME_URL), config.get(IBMWatsonCredentialUtils.PROP_NAME_USERNAME),
+      config.get(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD), null);
   }
 
   /**
@@ -73,7 +73,7 @@ public class IBMWatsonCloudPakForDataAuthenticator extends IBMWatsonTokenRequest
   }
 
   public override String authenticationType() {
-    return IBMWatsonCredentialUtils.AUTHTYPE_CP4D;
+    return IBMWatsonCredentialUtils.AUTH_TYPE_CP4D;
   }
 
   public override void authenticate(IBMWatsonRequest.Builder requestBuilder) {

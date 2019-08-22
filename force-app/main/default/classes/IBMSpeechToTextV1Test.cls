@@ -107,7 +107,7 @@ private class IBMSpeechToTextV1Test {
     warningId = 'warning_id';
     updated = '2019-10-11T19:16:58.547Z';
 
-    service = new IBMSpeechToTextV1(new IBMWatsonNoauthAuthenticator());
+    service = new IBMSpeechToTextV1(new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void getModelTest() {

@@ -29,7 +29,7 @@ public class IBMWatsonBearerTokenAuthenticator extends IBMWatsonAuthenticatorBas
    * @param config a map containing the access token value
    */
   public IBMWatsonBearerTokenAuthenticator(Map<String, String> config) {
-    this.setBearerToken(config.get(IBMWatsonCredentialUtils.PROPNAME_BEARER_TOKEN));
+    this.setBearerToken(config.get(IBMWatsonCredentialUtils.PROP_NAME_BEARER_TOKEN));
   }
 
   /**
@@ -52,7 +52,7 @@ public class IBMWatsonBearerTokenAuthenticator extends IBMWatsonAuthenticatorBas
   }
 
   public String authenticationType() {
-    return IBMWatsonCredentialUtils.AUTHTYPE_BEARER_TOKEN;
+    return IBMWatsonCredentialUtils.AUTH_TYPE_BEARER_TOKEN;
   }
 
   public void authenticate(IBMWatsonRequest.Builder requestBuilder) {

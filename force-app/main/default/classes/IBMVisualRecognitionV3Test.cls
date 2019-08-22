@@ -3,7 +3,7 @@ private class IBMVisualRecognitionV3Test {
   private static IBMVisualRecognitionV3 service;
 
   static {
-    service = new IBMVisualRecognitionV3('2016-05-20', new IBMWatsonNoauthAuthenticator());
+    service = new IBMVisualRecognitionV3('2016-05-20', new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testClassify() {

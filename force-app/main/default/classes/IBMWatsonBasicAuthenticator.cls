@@ -31,7 +31,7 @@ public class IBMWatsonBasicAuthenticator extends IBMWatsonAuthenticatorBase impl
    * @param config a map containing the username and password values
    */
   public IBMWatsonBasicAuthenticator(Map<String, String> config) {
-    init(config.get(IBMWatsonCredentialUtils.PROPNAME_USERNAME), config.get(IBMWatsonCredentialUtils.PROPNAME_PASSWORD));
+    init(config.get(IBMWatsonCredentialUtils.PROP_NAME_USERNAME), config.get(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD));
   }
 
   private void init(String username, String password) {
@@ -51,7 +51,7 @@ public class IBMWatsonBasicAuthenticator extends IBMWatsonAuthenticatorBase impl
   }
 
   public String authenticationType() {
-    return IBMWatsonCredentialUtils.AUTHTYPE_BASIC;
+    return IBMWatsonCredentialUtils.AUTH_TYPE_BASIC;
   }
 
   public void authenticate(IBMWatsonRequest.Builder requestBuilder) {

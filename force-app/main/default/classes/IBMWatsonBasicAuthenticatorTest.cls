@@ -6,7 +6,7 @@ private class IBMWatsonBasicAuthenticatorTest {
     String password = 'test-password';
 
     IBMWatsonBasicAuthenticator authenticator = new IBMWatsonBasicAuthenticator(username, password);
-    System.assertEquals(IBMWatsonCredentialUtils.AUTHTYPE_BASIC, authenticator.authenticationType());
+    System.assertEquals(IBMWatsonCredentialUtils.AUTH_TYPE_BASIC, authenticator.authenticationType());
     System.assertEquals(username, authenticator.getUsername());
     System.assertEquals(password, authenticator.getPassword());
 
@@ -83,7 +83,7 @@ private class IBMWatsonBasicAuthenticatorTest {
   static testMethod void testMissingUsernameMap() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_PASSWORD, 'good-password');
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD, 'good-password');
     try {
       IBMWatsonBasicAuthenticator authenticator = new IBMWatsonBasicAuthenticator(props);
     } catch (IBMWatsonServiceExceptions.IllegalArgumentException e) {
@@ -95,8 +95,8 @@ private class IBMWatsonBasicAuthenticatorTest {
   static testMethod void testInvalidUsernameMap() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_USERNAME, '{bad-username}');
-    props.put(IBMWatsonCredentialUtils.PROPNAME_PASSWORD, 'good-password');
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_USERNAME, '{bad-username}');
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD, 'good-password');
     try {
       IBMWatsonBasicAuthenticator authenticator = new IBMWatsonBasicAuthenticator(props);
     } catch (IBMWatsonServiceExceptions.IllegalArgumentException e) {
@@ -110,10 +110,10 @@ private class IBMWatsonBasicAuthenticatorTest {
     String username = 'good-username';
     String password = 'good-password';
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_USERNAME, username);
-    props.put(IBMWatsonCredentialUtils.PROPNAME_PASSWORD, password);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_USERNAME, username);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD, password);
     IBMWatsonBasicAuthenticator authenticator = new IBMWatsonBasicAuthenticator(props);
-    System.assertEquals(IBMWatsonCredentialUtils.AUTHTYPE_BASIC, authenticator.authenticationType());
+    System.assertEquals(IBMWatsonCredentialUtils.AUTH_TYPE_BASIC, authenticator.authenticationType());
     System.assertEquals(username, authenticator.getUsername());
     System.assertEquals(password, authenticator.getPassword());
     Test.stopTest();

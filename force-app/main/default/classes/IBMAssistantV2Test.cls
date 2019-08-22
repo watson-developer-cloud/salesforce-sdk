@@ -75,7 +75,7 @@ private class IBMAssistantV2Test {
     RESPONSE_TYPE = 'type';
     PREFERENCE = 'preference';
 
-    service = new IBMAssistantV2(VERSION, new IBMWatsonNoauthAuthenticator());
+    service = new IBMAssistantV2(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testCaptureGroup() {

@@ -35,14 +35,14 @@ private class IBMWatsonCredentialUtilsTest {
     String expectedPassword = 'disco_password';
 
     Map<String, String> serviceCredentials = IBMWatsonCredentialUtils.parseCredentialFile('discovery', testCredentialFileContents);
-    System.assertEquals(expectedUsername, serviceCredentials.get(IBMWatsonCredentialUtils.PROPNAME_USERNAME));
-    System.assertEquals(expectedPassword, serviceCredentials.get(IBMWatsonCredentialUtils.PROPNAME_PASSWORD));
+    System.assertEquals(expectedUsername, serviceCredentials.get(IBMWatsonCredentialUtils.PROP_NAME_USERNAME));
+    System.assertEquals(expectedPassword, serviceCredentials.get(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD));
   }
 
   static testMethod void testParsingCredentialFileApikey() {
     String expectedApikey = 'nlc_apikey';
 
     Map<String, String> serviceCredentials = IBMWatsonCredentialUtils.parseCredentialFile('natural_language_classifier', testCredentialFileContents);
-    System.assertEquals(expectedApikey, serviceCredentials.get(IBMWatsonCredentialUtils.PROPNAME_APIKEY));
+    System.assertEquals(expectedApikey, serviceCredentials.get(IBMWatsonCredentialUtils.PROP_NAME_APIKEY));
   }
 }

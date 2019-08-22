@@ -47,12 +47,12 @@ public class IBMWatsonIAMAuthenticator extends IBMWatsonTokenRequestBasedAuthent
    * @param config a map containing the configuration properties
    */
   public IBMWatsonIAMAuthenticator(Map<String, String> config) {
-    String apikey = config.get(IBMWatsonCredentialUtils.PROPNAME_APIKEY);
+    String apikey = config.get(IBMWatsonCredentialUtils.PROP_NAME_APIKEY);
     if (String.isBlank(apikey)) {
       config.get('IAM_APIKEY');
     }
-    init(apikey, config.get(IBMWatsonCredentialUtils.PROPNAME_URL), config.get(IBMWatsonCredentialUtils.PROPNAME_CLIENT_ID),
-      config.get(IBMWatsonCredentialUtils.PROPNAME_CLIENT_SECRET), null);
+    init(apikey, config.get(IBMWatsonCredentialUtils.PROP_NAME_URL), config.get(IBMWatsonCredentialUtils.PROP_NAME_CLIENT_ID),
+      config.get(IBMWatsonCredentialUtils.PROP_NAME_CLIENT_SECRET), null);
   }
 
   /**
@@ -125,7 +125,7 @@ public class IBMWatsonIAMAuthenticator extends IBMWatsonTokenRequestBasedAuthent
   }
 
   public override String authenticationType() {
-    return IBMWatsonCredentialUtils.AUTHTYPE_IAM;
+    return IBMWatsonCredentialUtils.AUTH_TYPE_IAM;
   }
 
   public override void authenticate(IBMWatsonRequest.Builder requestBuilder) {

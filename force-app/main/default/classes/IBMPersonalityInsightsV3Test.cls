@@ -3,7 +3,7 @@ private class IBMPersonalityInsightsV3Test {
   private static IBMPersonalityInsightsV3 service;
 
   static {
-    service = new IBMPersonalityInsightsV3('2017-09-01', new IBMWatsonNoauthAuthenticator());
+    service = new IBMPersonalityInsightsV3('2017-09-01', new IBMWatsonNoAuthAuthenticator());
   }
 
   /**

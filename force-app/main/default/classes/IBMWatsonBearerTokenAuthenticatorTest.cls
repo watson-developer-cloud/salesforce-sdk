@@ -5,7 +5,7 @@ private class IBMWatsonBearerTokenAuthenticatorTest {
     String token = 'abc-123';
 
     IBMWatsonBearerTokenAuthenticator authenticator = new IBMWatsonBearerTokenAuthenticator(token);
-    System.assertEquals(IBMWatsonCredentialUtils.AUTHTYPE_BEARER_TOKEN, authenticator.authenticationType());
+    System.assertEquals(IBMWatsonCredentialUtils.AUTH_TYPE_BEARER_TOKEN, authenticator.authenticationType());
     System.assertEquals(token, authenticator.getBearerToken());
 
     IBMWatsonRequest.Builder builder = new IBMWatsonRequest.Builder().url('https://test.com');
@@ -62,7 +62,7 @@ private class IBMWatsonBearerTokenAuthenticatorTest {
   static testMethod void testEmptyBearerTokenMap() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_BEARER_TOKEN, '');
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_BEARER_TOKEN, '');
     try {
       IBMWatsonBearerTokenAuthenticator authenticator = new IBMWatsonBearerTokenAuthenticator(props);
     } catch (IBMWatsonServiceExceptions.IllegalArgumentException e) {
@@ -75,9 +75,9 @@ private class IBMWatsonBearerTokenAuthenticatorTest {
     Test.startTest();
     String token = 'abc-123';
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_BEARER_TOKEN, token);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_BEARER_TOKEN, token);
     IBMWatsonBearerTokenAuthenticator authenticator = new IBMWatsonBearerTokenAuthenticator(props);
-    System.assertEquals(IBMWatsonCredentialUtils.AUTHTYPE_BEARER_TOKEN, authenticator.authenticationType());
+    System.assertEquals(IBMWatsonCredentialUtils.AUTH_TYPE_BEARER_TOKEN, authenticator.authenticationType());
     System.assertEquals(token, authenticator.getBearerToken());
     Test.stopTest();
   }

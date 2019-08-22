@@ -80,7 +80,7 @@ private class IBMWatsonIAMAuthenticatorTest {
   static testMethod void testEmptyApikeyMap() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_APIKEY, '');
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_APIKEY, '');
     try {
       IBMWatsonIAMAuthenticator authenticator = new IBMWatsonIAMAuthenticator(props);
     } catch (IBMWatsonServiceExceptions.IllegalArgumentException e) {
@@ -100,7 +100,7 @@ private class IBMWatsonIAMAuthenticatorTest {
     testHeaders.put(secondHeaderKey, secondHeaderValue);
     IBMWatsonIAMAuthenticator authenticator = new IBMWatsonIAMAuthenticator(APIKEY, URL, CLIENT_ID, CLIENT_SECRET, testHeaders);
 
-    System.assertEquals(IBMWatsonCredentialUtils.AUTHTYPE_IAM, authenticator.authenticationType());
+    System.assertEquals(IBMWatsonCredentialUtils.AUTH_TYPE_IAM, authenticator.authenticationType());
     System.assertEquals(APIKEY, authenticator.getApiKey());
     System.assertEquals(URL, authenticator.getURL());
     System.assertEquals(CLIENT_ID, authenticator.getClientId());
@@ -114,13 +114,13 @@ private class IBMWatsonIAMAuthenticatorTest {
   static testMethod void testCorrectConfigMap() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_APIKEY, APIKEY);
-    props.put(IBMWatsonCredentialUtils.PROPNAME_URL, URL);
-    props.put(IBMWatsonCredentialUtils.PROPNAME_CLIENT_ID, CLIENT_ID);
-    props.put(IBMWatsonCredentialUtils.PROPNAME_CLIENT_SECRET, CLIENT_SECRET);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_APIKEY, APIKEY);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_URL, URL);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_CLIENT_ID, CLIENT_ID);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_CLIENT_SECRET, CLIENT_SECRET);
     IBMWatsonIAMAuthenticator authenticator = new IBMWatsonIAMAuthenticator(props);
 
-    System.assertEquals(IBMWatsonCredentialUtils.AUTHTYPE_IAM, authenticator.authenticationType());
+    System.assertEquals(IBMWatsonCredentialUtils.AUTH_TYPE_IAM, authenticator.authenticationType());
     System.assertEquals(APIKEY, authenticator.getApiKey());
     System.assertEquals(URL, authenticator.getURL());
     System.assertEquals(CLIENT_ID, authenticator.getClientId());
@@ -132,10 +132,10 @@ private class IBMWatsonIAMAuthenticatorTest {
   static testMethod void testCorrectConfigMapApikey() {
     Test.startTest();
     Map<String, String> props = new Map<String, String>();
-    props.put(IBMWatsonCredentialUtils.PROPNAME_APIKEY, APIKEY);
+    props.put(IBMWatsonCredentialUtils.PROP_NAME_APIKEY, APIKEY);
     IBMWatsonIAMAuthenticator authenticator = new IBMWatsonIAMAuthenticator(props);
 
-    System.assertEquals(IBMWatsonCredentialUtils.AUTHTYPE_IAM, authenticator.authenticationType());
+    System.assertEquals(IBMWatsonCredentialUtils.AUTH_TYPE_IAM, authenticator.authenticationType());
     System.assertEquals(APIKEY, authenticator.getApiKey());
     Test.stopTest();
   }

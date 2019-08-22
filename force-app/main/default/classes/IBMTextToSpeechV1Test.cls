@@ -7,7 +7,7 @@ private class IBMTextToSpeechV1Test {
   private static IBMTextToSpeechV1 service;
 
   static {
-    service = new IBMTextToSpeechV1(new IBMWatsonNoauthAuthenticator());
+    service = new IBMTextToSpeechV1(new IBMWatsonNoAuthAuthenticator());
   }
 
   /**

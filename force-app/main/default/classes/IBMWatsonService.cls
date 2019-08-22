@@ -35,7 +35,7 @@ public abstract class IBMWatsonService {
 
     // use endpoint from credential file if it exists, otherwise, try pulling from named credentials
     Map<String, String> props = IBMWatsonCredentialUtils.getFileCredentialsAsMap(name);
-    String url = props.get(IBMWatsonCredentialUtils.PROPNAME_URL);
+    String url = props.get(IBMWatsonCredentialUtils.PROP_NAME_URL);
     if (String.isNotBlank(url)) {
       setEndPoint(url);
     } else {
