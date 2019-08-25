@@ -36,6 +36,8 @@ private class IBMAssistantV2Test {
   private static String RESPONSE_TYPE;
   private static String PREFERENCE;
 
+  private static IBMAssistantV2 service;
+
   static {
     VERSION = '2018-09-20';
     ASSISTANT_ID = 'assistant_id';
@@ -72,6 +74,8 @@ private class IBMAssistantV2Test {
     USER_DEFINED = 'user_defined';
     RESPONSE_TYPE = 'type';
     PREFERENCE = 'preference';
+
+    service = new IBMAssistantV2(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testCaptureGroup() {
@@ -340,12 +344,6 @@ private class IBMAssistantV2Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV2 service = new IBMAssistantV2(VERSION);
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    service.setIamCredentials(iamOptions);
-
     IBMAssistantV2Models.MessageOptions messageOptions = new IBMAssistantV2Models.MessageOptionsBuilder()
         .assistantId(ASSISTANT_ID)
         .sessionId(SESSION_ID)
@@ -395,12 +393,6 @@ private class IBMAssistantV2Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV2 service = new IBMAssistantV2(VERSION);
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    service.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV2Models.CreateSessionOptions createSessionOptions = new IBMAssistantV2Models.CreateSessionOptionsBuilder()
         .assistantId(ASSISTANT_ID)
         .build();
@@ -416,12 +408,6 @@ private class IBMAssistantV2Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMAssistantV2 service = new IBMAssistantV2(VERSION);
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    service.setUsernameAndPassword('username', 'password');
 
     IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptions = new IBMAssistantV2Models.DeleteSessionOptionsBuilder()
         .assistantId(ASSISTANT_ID)

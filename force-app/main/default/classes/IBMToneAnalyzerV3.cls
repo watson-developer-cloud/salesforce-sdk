@@ -18,44 +18,19 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMToneAnalyzerV3`.
+   * Instantiates a new `IBMToneAnalyzerV3` with the specified authentication configuration.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
+   * @param authenticator the authentication configuration for this service
    */
-  public IBMToneAnalyzerV3(String versionDate) {
-    super('tone_analyzer', 'v3');
+  public IBMToneAnalyzerV3(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super('tone_analyzer', 'v3', authenticator);
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMToneAnalyzerV3` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMToneAnalyzerV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMToneAnalyzerV3(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMToneAnalyzerV3` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMToneAnalyzerV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**

@@ -11,33 +11,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   private static final String URL = 'https://gateway.watsonplatform.net/natural-language-classifier/api';
 
   /**
-   * Instantiates a new `IBMNaturalLanguageClassifierV1`.
-   *
-   */
-  public IBMNaturalLanguageClassifierV1() {
-    super('natural_language_classifier', 'v1');
-  }
-
-  /**
-   * Instantiates a new `IBMNaturalLanguageClassifierV1` with username and password.
-   *
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMNaturalLanguageClassifierV1(IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMNaturalLanguageClassifierV1(String username, String password) {
-    this();
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
    * Instantiates a new `IBMNaturalLanguageClassifierV1` with the specified authentication configuration.
    *
-   * @param authenticatorConfig the authentication configuration for this service
+   * @param authenticator the authentication configuration for this service
    */
-  public IBMNaturalLanguageClassifierV1(IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this();
-    setAuthenticator(authenticatorConfig);
+  public IBMNaturalLanguageClassifierV1(IBMWatsonAuthenticator authenticator) {
+    super('natural_language_classifier', 'v1', authenticator);
   }
 
   /**

@@ -1,7 +1,7 @@
 /**
- * This class models a response received from the ICP4D "get token" API.
+ * This class models a response received from the CP4D "get token" API.
  */
-public class IBMWatsonICP4DTokenResponse extends IBMWatsonGenericModel {
+public class IBMWatsonCP4DTokenResponse extends IBMWatsonGenericModel implements IBMWatsonTokenServerResponse {
   private String username;
   private String role;
   private String[] permissions;

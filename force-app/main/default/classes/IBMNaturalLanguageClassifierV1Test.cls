@@ -1,5 +1,10 @@
 @isTest
 private class IBMNaturalLanguageClassifierV1Test {
+  private static IBMNaturalLanguageClassifierV1 service;
+
+  static {
+    service = new IBMNaturalLanguageClassifierV1(new IBMWatsonNoAuthAuthenticator());
+  }
 
   /**
    *  Test phrase to classify.
@@ -10,11 +15,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1(iamOptions);
-    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
+
     String classifier_id = '10D41B-nlc-1';
     String text = 'How hot will it be today?';
     // this would be the expected top class as defined on the mock response
@@ -52,9 +53,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
-    service.setUsernameAndPassword('username', 'password');
+
     String classifierId = '10D41B-nlc-1';
     String text1 = 'How hot will it be today?';
     String text2 = 'Is it hot outside?';
@@ -92,9 +91,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
-    service.setUsernameAndPassword('username', 'password');
+
     Attachment TrainingMetadata = new Attachment(Body = Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -141,9 +138,6 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
-    service.setUsernameAndPassword('username', 'password');
     String classifier_id = '10D41B-nlc-1';
     IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder()
@@ -162,10 +156,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service = new IBMNaturalLanguageClassifierV1('username', 'password');
     String classifier_id = '10D41B-nlc-1';
-    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
     IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOption =
       new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder()
       .classifierId(classifier_id)
@@ -190,7 +181,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
+
     IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions =
       new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
       .addHeader('Test-Header', 'test_value')

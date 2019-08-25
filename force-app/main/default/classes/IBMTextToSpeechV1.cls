@@ -22,33 +22,12 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   private static final String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
 
   /**
-   * Instantiates a new `IBMTextToSpeechV1`.
-   *
-   */
-  public IBMTextToSpeechV1() {
-    super('text_to_speech', 'v1');
-  }
-
-  /**
-   * Instantiates a new `IBMTextToSpeechV1` with username and password.
-   *
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMTextToSpeechV1(IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMTextToSpeechV1(String username, String password) {
-    this();
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
    * Instantiates a new `IBMTextToSpeechV1` with the specified authentication configuration.
    *
-   * @param authenticatorConfig the authentication configuration for this service
+   * @param authenticator the authentication configuration for this service
    */
-  public IBMTextToSpeechV1(IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this();
-    setAuthenticator(authenticatorConfig);
+  public IBMTextToSpeechV1(IBMWatsonAuthenticator authenticator) {
+    super('text_to_speech', 'v1', authenticator);
   }
 
   /**

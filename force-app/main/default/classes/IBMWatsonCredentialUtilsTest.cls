@@ -2,9 +2,7 @@
 private class IBMWatsonCredentialUtilsTest {
   private static String testCredentialFileContents = 'DISCOVERY_USERNAME=disco_username\r\n'
     + 'DISCOVERY_PASSWORD=disco_password\r\n'
-    + 'DISCOVERY_URL=https://gateway.watsonplatform.net/discovery/api\r\n'
-    + 'NATURAL_LANGUAGE_CLASSIFIER_URL=https://gateway-s.watsonplatform.net/natural-language-classifier/api\r\n'
-    + 'NATURAL_LANGUAGE_CLASSIFIER_IAM_APIKEY=nlc_apikey';
+    + 'NATURAL_LANGUAGE_CLASSIFIER_APIKEY=nlc_apikey';
 
   static testMethod void testHasBadStartOrEndChar() {
     // valid
@@ -28,30 +26,23 @@ private class IBMWatsonCredentialUtilsTest {
   }
 
   static testMethod void testParsingCredentialFileNoService() {
-    IBMWatsonCredentialUtils.ServiceCredentials serviceCredentials
-      = IBMWatsonCredentialUtils.parseCredentialFile('assistant', testCredentialFileContents);
+    Map<String, String> serviceCredentials = IBMWatsonCredentialUtils.parseCredentialFile('assistant', testCredentialFileContents);
     System.assert(serviceCredentials.isEmpty());
   }
 
   static testMethod void testParsingCredentialFileUsernameAndPassword() {
     String expectedUsername = 'disco_username';
     String expectedPassword = 'disco_password';
-    String expectedUrl = 'https://gateway.watsonplatform.net/discovery/api';
 
-    IBMWatsonCredentialUtils.ServiceCredentials serviceCredentials
-      = IBMWatsonCredentialUtils.parseCredentialFile('discovery', testCredentialFileContents);
-    System.assertEquals(expectedUsername, serviceCredentials.getUsername());
-    System.assertEquals(expectedPassword, serviceCredentials.getPassword());
-    System.assertEquals(expectedUrl, serviceCredentials.getUrl());
+    Map<String, String> serviceCredentials = IBMWatsonCredentialUtils.parseCredentialFile('discovery', testCredentialFileContents);
+    System.assertEquals(expectedUsername, serviceCredentials.get(IBMWatsonCredentialUtils.PROP_NAME_USERNAME));
+    System.assertEquals(expectedPassword, serviceCredentials.get(IBMWatsonCredentialUtils.PROP_NAME_PASSWORD));
   }
 
   static testMethod void testParsingCredentialFileApikey() {
     String expectedApikey = 'nlc_apikey';
-    String expectedUrl = 'https://gateway-s.watsonplatform.net/natural-language-classifier/api';
 
-    IBMWatsonCredentialUtils.ServiceCredentials serviceCredentials
-      = IBMWatsonCredentialUtils.parseCredentialFile('natural_language_classifier', testCredentialFileContents);
-    System.assertEquals(expectedApikey, serviceCredentials.getIamApiKey());
-    System.assertEquals(expectedUrl, serviceCredentials.getUrl());
+    Map<String, String> serviceCredentials = IBMWatsonCredentialUtils.parseCredentialFile('natural_language_classifier', testCredentialFileContents);
+    System.assertEquals(expectedApikey, serviceCredentials.get(IBMWatsonCredentialUtils.PROP_NAME_APIKEY));
   }
 }

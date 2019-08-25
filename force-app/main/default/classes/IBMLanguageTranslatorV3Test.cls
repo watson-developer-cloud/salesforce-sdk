@@ -16,6 +16,8 @@ private class IBMLanguageTranslatorV3Test {
   private static Datetime dateValue;
   private static String status;
 
+  private static IBMLanguageTranslatorV3 service;
+
   static {
     headerKey = 'Test-Header';
     headerVal = 'test_value';
@@ -32,6 +34,8 @@ private class IBMLanguageTranslatorV3Test {
     dateString = '"2018-08-24T08:20:30.5Z"';
     dateValue = (Datetime) JSON.deserialize(dateString, Datetime.class);
     status = 'available';
+
+    service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoAuthAuthenticator());
   }
 
   /**
@@ -42,10 +46,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', iamOptions);
+
     String modelId = '3e7dfdbe-f757-4150-afee-458e71eb93fb';
     String source = 'en';
     String target = 'es';
@@ -78,7 +79,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+
     IBMLanguageTranslatorV3Models.IdentifyOptions identifyOptions =
       new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
       .text('sample')
@@ -97,7 +98,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+
     IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions =
       new IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptionsBuilder()
       .addHeader(headerKey, headerVal)
@@ -128,7 +129,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+
     // Forced Glossary
     Attachment forcedGlossaryAttachment = new Attachment(Body = Blob.valueOf('glossary'),
       Name='glossary.txt',
@@ -190,7 +191,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+
     IBMLanguageTranslatorV3Models.DeleteModelOptions deleteModelOptions =
       new IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder()
       .modelId('3e7dfdbe-f757-4150-afee-458e71eb93fb')
@@ -212,7 +213,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+
     IBMLanguageTranslatorV3Models.GetModelOptions getModelOptions =
       new IBMLanguageTranslatorV3Models.GetModelOptionsBuilder()
       .modelId('3e7dfdbe-f757-4150-afee-458e71eb93fb')
@@ -235,7 +236,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+
     IBMLanguageTranslatorV3Models.ListModelsOptions listModelsOptions =
       new IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder()
       .source('en')
@@ -347,8 +348,6 @@ private class IBMLanguageTranslatorV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthConfig());
-
     Attachment documentAttachment = new Attachment(Body = Blob.valueOf('words'),
       Name='document.txt',
       Description='document to be translated',
@@ -384,8 +383,6 @@ private class IBMLanguageTranslatorV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthConfig());
-
     IBMLanguageTranslatorV3Models.ListDocumentsOptions options = new IBMLanguageTranslatorV3Models.ListDocumentsOptionsBuilder().build();
     IBMLanguageTranslatorV3Models.DocumentList response = service.listDocuments(options);
 
@@ -399,8 +396,6 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthConfig());
 
     IBMLanguageTranslatorV3Models.GetDocumentStatusOptions options = new IBMLanguageTranslatorV3Models.GetDocumentStatusOptionsBuilder()
       .documentId(documentId)
@@ -417,8 +412,6 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthConfig());
 
     IBMLanguageTranslatorV3Models.DeleteDocumentOptions options = new IBMLanguageTranslatorV3Models.DeleteDocumentOptionsBuilder()
       .documentId(documentId)
