@@ -8,15 +8,20 @@
  */
 public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'natural_language_classifier';
   private static final String URL = 'https://gateway.watsonplatform.net/natural-language-classifier/api';
 
   /**
-   * Instantiates a new `IBMNaturalLanguageClassifierV1` with the specified authentication configuration.
+   * Instantiates a new `IBMNaturalLanguageClassifierV1`.
    *
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMNaturalLanguageClassifierV1(IBMWatsonAuthenticator authenticator) {
-    super('natural_language_classifier', 'v1', authenticator);
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
   }
 
   /**

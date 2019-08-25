@@ -1,7 +1,7 @@
 /**
  * This class models a response received from the CP4D "get token" API.
  */
-public class IBMWatsonCP4DTokenResponse extends IBMWatsonGenericModel implements IBMWatsonTokenServerResponse {
+public class IBMWatsonCP4DTokenResponse extends IBMWatsonResponseModel implements IBMWatsonTokenServerResponse {
   private String username;
   private String role;
   private String[] permissions;
@@ -79,21 +79,8 @@ public class IBMWatsonCP4DTokenResponse extends IBMWatsonGenericModel implements
     jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
     jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-    IBMWatsonICP4DTokenResponse ret = (IBMWatsonICP4DTokenResponse) super.deserialize(jsonString, jsonMap, classType);
+    IBMWatsonCP4DTokenResponse ret = (IBMWatsonCP4DTokenResponse) super.deserialize(jsonString, jsonMap, classType);
 
     return ret;    
-  }
-
-  public String serialize() {
-    // get map representation of current model
-    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-    // replace any names that are different between the SDK and API
-    Map<String, String> propertyNameMapping = new Map<String, String> {
-      'accessToken' => 'access_token'
-    };
-    jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-    return JSON.serialize(jsonMap);
   }
 }

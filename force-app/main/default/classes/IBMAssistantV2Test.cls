@@ -345,9 +345,9 @@ private class IBMAssistantV2Test {
     Test.startTest();
 
     IBMAssistantV2Models.MessageOptions messageOptions = new IBMAssistantV2Models.MessageOptionsBuilder()
-        .assistantId(ASSISTANT_ID)
-        .sessionId(SESSION_ID)
-        .build();
+      .assistantId(ASSISTANT_ID)
+      .sessionId(SESSION_ID)
+      .build();
     IBMAssistantV2Models.MessageResponse response = service.message(messageOptions);
 
     System.assert(response.getContext() != null);

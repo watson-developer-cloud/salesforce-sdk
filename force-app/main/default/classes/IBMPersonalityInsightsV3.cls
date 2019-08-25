@@ -22,19 +22,24 @@
  */
 public class IBMPersonalityInsightsV3 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'personality_insights';
   private static final String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
 
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMPersonalityInsightsV3` with the specified authentication configuration.
+   * Instantiates a new `IBMPersonalityInsightsV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMPersonalityInsightsV3(String versionDate, IBMWatsonAuthenticator authenticator) {
-    super('personality_insights', 'v3', authenticator);
+    super(SERVICE_NAME, 'v3', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');

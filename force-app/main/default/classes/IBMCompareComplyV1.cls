@@ -7,19 +7,24 @@
  */
 public class IBMCompareComplyV1 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'compare_comply';
   private static final String URL = 'https://gateway.watsonplatform.net/compare-comply/api';
 
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMCompareComplyV1` with the specified authentication configuration.
+   * Instantiates a new `IBMCompareComplyV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMCompareComplyV1(String versionDate, IBMWatsonAuthenticator authenticator) {
-    super('compare_comply', 'v1', authenticator);
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');

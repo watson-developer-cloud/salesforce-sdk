@@ -44,22 +44,6 @@ public class IBMWatsonIAMToken extends IBMWatsonAbstractToken implements IBMWats
     return ret;    
   }
 
-  public String serialize() {
-    // get map representation of current model
-    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-    // replace any names that are different between the SDK and API
-    Map<String, String> propertyNameMapping = new Map<String, String> {
-      'accessToken' => 'access_token',
-      'refreshToken' => 'refresh_token',
-      'tokenType' => 'token_type',
-      'expiresIn' => 'expires_in'
-    };
-    jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-    return JSON.serialize(jsonMap);
-  }
-
   /**
    * Returns true iff this object holds a valid non-expired access token.
    * @return true if token is valid and not expired, false otherwise

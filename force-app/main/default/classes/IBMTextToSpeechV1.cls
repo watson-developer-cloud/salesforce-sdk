@@ -19,15 +19,20 @@
  */
 public class IBMTextToSpeechV1 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'text_to_speech';
   private static final String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
 
   /**
-   * Instantiates a new `IBMTextToSpeechV1` with the specified authentication configuration.
+   * Instantiates a new `IBMTextToSpeechV1`.
    *
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMTextToSpeechV1(IBMWatsonAuthenticator authenticator) {
-    super('text_to_speech', 'v1', authenticator);
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
   }
 
   /**

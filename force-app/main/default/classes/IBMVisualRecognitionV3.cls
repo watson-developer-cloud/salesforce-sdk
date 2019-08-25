@@ -8,19 +8,24 @@
  */
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'visual_recognition';
   private static final String URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
 
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMVisualRecognitionV3` with the specified authentication configuration.
+   * Instantiates a new `IBMVisualRecognitionV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMVisualRecognitionV3(String versionDate, IBMWatsonAuthenticator authenticator) {
-    super('visual_recognition', 'v3', authenticator);
+    super(SERVICE_NAME, 'v3', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');

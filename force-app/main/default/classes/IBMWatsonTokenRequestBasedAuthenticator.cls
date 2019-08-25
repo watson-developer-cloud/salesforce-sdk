@@ -76,9 +76,9 @@ public abstract class IBMWatsonTokenRequestBasedAuthenticator extends IBMWatsonA
 
     if (response.isSuccessful() && String.isNotBlank(response.getBody())) {
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
-      Map<String, Object> safeJsonMap = IBMWatsonJSONUtil.prepareResponse(jsonMap);
-      String jsonString = JSON.serialize(safeJsonMap);
-      return (IBMWatsonTokenServerResponse) JSON.deserialize(jsonString, targetTokenType);
+      String jsonString = JSON.serialize(jsonMap);
+      Object targetObject = targetTokenType.newInstance();
+      return (IBMWatsonTokenServerResponse) ((IBMWatsonResponseModel) targetObject).deserialize(jsonString, jsonMap, targetTokenType);
     } else {
       Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
       String errorMessage = responseMap.get('errorMessage').toString();
