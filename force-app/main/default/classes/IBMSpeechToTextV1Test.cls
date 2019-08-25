@@ -65,6 +65,8 @@ private class IBMSpeechToTextV1Test {
   private static String warningId;
   private static String updated;
 
+  private static IBMSpeechToTextV1 service;
+
   static {
     headerKey = 'Test-Header';
     headerVal = 'test_val';
@@ -104,6 +106,8 @@ private class IBMSpeechToTextV1Test {
     description = 'description';
     warningId = 'warning_id';
     updated = '2019-10-11T19:16:58.547Z';
+
+    service = new IBMSpeechToTextV1(new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void getModelTest() {
@@ -111,16 +115,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1(iamOptions);
-    speechToText.setEndPoint(URL);
+
     IBMSpeechToTextV1Models.GetModelOptions getModelOptions = new IBMSpeechToTextV1Models.GetModelOptionsBuilder('en-US_NarrowbandModel')
       .modelId('en-US_NarrowbandModel')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.SpeechModel speechModel = speechToText.getModel(getModelOptions);
+    IBMSpeechToTextV1Models.SpeechModel speechModel = service.getModel(getModelOptions);
     System.assertEquals(speechModel.getName(), 'en-US_NarrowbandModel');
     System.assertEquals(speechModel.getLanguage(), 'en-US');
     System.assertEquals(speechModel.getUrl(), 'https://stream.watsonplatform.net/speech-to-text/api/v1/models/en-US_NarrowbandModel');
@@ -138,15 +138,11 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.ListModelsOptions listModelsOptions = new IBMSpeechToTextV1Models.ListModelsOptionsBuilder()
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.SpeechModels speechModels = speechToText.listModels(listModelsOptions);
+    IBMSpeechToTextV1Models.SpeechModels speechModels = service.listModels(listModelsOptions);
     System.assertEquals(speechModels.getModels()[0].getName(), 'en-US_NarrowbandModel');
     System.assertEquals(speechModels.getModels()[0].getLanguage(), 'en-US');
     listModelsOptions = listModelsOptions.newBuilder().build();
@@ -158,11 +154,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMWatsonFile audioFile = new IBMWatsonFile.FileBuilder()
       .name('audioTestFile.mp3')
       .description('Test audio file')
@@ -194,7 +186,7 @@ private class IBMSpeechToTextV1Test {
       .baseModelVersion('version')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.RecognitionJob createJob = speechToText.createJob(createJobOptions);
+    IBMSpeechToTextV1Models.RecognitionJob createJob = service.createJob(createJobOptions);
     System.assertEquals(createJob.getUrl(), 'string');
     System.assertEquals(createJob.getId(), 'string');
     System.assertEquals(createJob.getStatus(), 'waiting');
@@ -229,18 +221,14 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.CheckJobOptionsBuilder CheckJobOptionsBuilder = new IBMSpeechToTextV1Models.CheckJobOptionsBuilder();
     IBMSpeechToTextV1Models.CheckJobOptions checkJobOptions = new IBMSpeechToTextV1Models.CheckJobOptionsBuilder('56d09f2c-e020-11e7-9ee3-33bf91161141')
       .id('56d09f2c-e020-11e7-9ee3-33bf91161141')
       .addHeader('Test-Header', 'test_value')
       .build();
     checkJobOptions = checkJobOptions.newBuilder().build();
-    IBMSpeechToTextV1Models.RecognitionJob checkJob = speechToText.checkJob(checkJobOptions);
+    IBMSpeechToTextV1Models.RecognitionJob checkJob = service.checkJob(checkJobOptions);
     System.assertEquals(checkJob.getStatus(), 'failed');
     Test.stopTest();
   }
@@ -250,16 +238,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.CheckJobsOptions checkJobsOptions = new IBMSpeechToTextV1Models.CheckJobsOptionsBuilder()
       .addHeader('Test-Header', 'test_value')
       .build();
     checkJobsOptions = checkJobsOptions.newBuilder().build();
-    IBMSpeechToTextV1Models.RecognitionJobs checkJobs = speechToText.checkJobs(checkJobsOptions);
+    IBMSpeechToTextV1Models.RecognitionJobs checkJobs = service.checkJobs(checkJobsOptions);
     System.assertEquals(checkJobs.getRecognitions()[0].getStatus(), 'completed');
     Test.stopTest();
   }
@@ -269,16 +253,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.DeleteJobOptions deleteJobOptions = new IBMSpeechToTextV1Models.DeleteJobOptionsBuilder('56d09f2c-e020-11e7-9ee3-33bf91161141')
       .id('56d09f2c-e020-11e7-9ee3-33bf91161141')
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.deleteJob(deleteJobOptions);
+    service.deleteJob(deleteJobOptions);
     deleteJobOptions = deleteJobOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -288,17 +268,13 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.RegisterCallbackOptions registerCallbackOptions = new IBMSpeechToTextV1Models.RegisterCallbackOptionsBuilder(callbackBaseURL)
       .callbackUrl(callbackBaseURL)
       .userSecret('UserSecretTest')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.RegisterStatus registerCallback = speechToText.registerCallback(registerCallbackOptions);
+    IBMSpeechToTextV1Models.RegisterStatus registerCallback = service.registerCallback(registerCallbackOptions);
     System.assertEquals(registerCallback.getStatus(), 'created');
     System.assertEquals(registerCallback.getUrl(), 'https://ibmdf17-watson-dxhub.my.salesforce.com/');
     registerCallbackOptions = registerCallbackOptions.newBuilder().build();
@@ -310,16 +286,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.UnregisterCallbackOptions unregisterCallbackOptions = new IBMSpeechToTextV1Models.UnregisterCallbackOptionsBuilder(callbackBaseURL)
       .addHeader('Test-Header', 'test_value')
       .build();
     unregisterCallbackOptions = unregisterCallbackOptions.newBuilder().build();
-    speechToText.unregisterCallback(unregisterCallbackOptions);
+    service.unregisterCallback(unregisterCallbackOptions);
     Test.stopTest();
   }
 
@@ -328,11 +300,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String name = 'custom_model';
     String baseModelName = 'en-US_BroadbandModel';
     IBMSpeechToTextV1Models.CreateLanguageModelOptions createLanguageModelOptions = new IBMSpeechToTextV1Models.CreateLanguageModelOptionsBuilder()
@@ -342,7 +310,7 @@ private class IBMSpeechToTextV1Test {
       .description('model description')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.LanguageModel languageModel = speechToText.createLanguageModel(createLanguageModelOptions);
+    IBMSpeechToTextV1Models.LanguageModel languageModel = service.createLanguageModel(createLanguageModelOptions);
     System.assertEquals(languageModel.getCustomizationId(), '74f4807e-b5ff-4866-824e-6bba1a84fe96');
     System.assertEquals(languageModel.getOwner(), '952e2069-9ece-48d8-96c9-0206b4473819');
     System.assertEquals(languageModel.getBaseModelName(), 'en-US_BroadbandModel');
@@ -362,11 +330,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String wordName = 'tornado';
     IBMSpeechToTextV1Models.AddWordOptions addWordOptions = new IBMSpeechToTextV1Models.AddWordOptionsBuilder()
@@ -378,7 +342,7 @@ private class IBMSpeechToTextV1Test {
       .displayAs('tornado')
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.addWord(addWordOptions);
+    service.addWord(addWordOptions);
     addWordOptions = addWordOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -388,11 +352,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWord();
     customWord.setWord('tornado');
@@ -403,7 +363,7 @@ private class IBMSpeechToTextV1Test {
       .words(new List<IBMSpeechToTextV1Models.CustomWord>{ customWord })
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.addWords(addWordsOptions);
+    service.addWords(addWordsOptions);
     addWordsOptions = addWordsOptions.newBuilder().build();
     System.assertEquals(customWord.getSoundsLike().size(),2);
     System.assertEquals(customWord.getWord(), 'tornado');
@@ -416,11 +376,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String name = 'AccousticModelName';
     String baseModelName = 'en-US_BroadbandModel';
     IBMSpeechToTextV1Models.CreateAcousticModelOptions createAcousticModelOptions = new IBMSpeechToTextV1Models.CreateAcousticModelOptionsBuilder()
@@ -429,7 +385,7 @@ private class IBMSpeechToTextV1Test {
       .description('test')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.AcousticModel AcousticModel = speechToText.createAcousticModel(createAcousticModelOptions);
+    IBMSpeechToTextV1Models.AcousticModel AcousticModel = service.createAcousticModel(createAcousticModelOptions);
     createAcousticModelOptions = createAcousticModelOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -439,16 +395,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.DeleteLanguageModelOptions deleteLanguageModelOptions = new IBMSpeechToTextV1Models.DeleteLanguageModelOptionsBuilder('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .customizationId('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.deleteLanguageModel(deleteLanguageModelOptions);
+    service.deleteLanguageModel(deleteLanguageModelOptions);
     deleteLanguageModelOptions = deleteLanguageModelOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -458,11 +410,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMWatsonFile audio = new IBMWatsonFile.FileBuilder()
       .name('audioTestFile.mp3')
       .description('Test audio file')
@@ -480,7 +428,7 @@ private class IBMSpeechToTextV1Test {
       .allowOverwrite(false)
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.addAudio(addAudioOptions);
+    service.addAudio(addAudioOptions);
     addAudioOptions = addAudioOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -490,16 +438,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.GetLanguageModelOptions getLanguageModelOptions = new IBMSpeechToTextV1Models.GetLanguageModelOptionsBuilder('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .customizationId('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.LanguageModel languageModel = speechToText.getLanguageModel(getLanguageModelOptions);
+    IBMSpeechToTextV1Models.LanguageModel languageModel = service.getLanguageModel(getLanguageModelOptions);
     System.assertEquals(languageModel.getCustomizationId(), 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5');
     System.assertEquals(languageModel.getOwner(), '952e2069-9ece-48d8-96c9-0206b4473819');
     System.assertEquals(languageModel.getBaseModelName(), 'en-US_BroadbandModel');
@@ -521,16 +465,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.ListLanguageModelsOptions listLanguageModelsOptions = new IBMSpeechToTextV1Models.ListLanguageModelsOptionsBuilder()
       .language('en-US')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.LanguageModels languageModels = speechToText.listLanguageModels(listLanguageModelsOptions);
+    IBMSpeechToTextV1Models.LanguageModels languageModels = service.listLanguageModels(listLanguageModelsOptions);
     System.assertEquals(languageModels.getCustomizations()[0].getCustomizationId(), 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5');
     listLanguageModelsOptions = listLanguageModelsOptions.newBuilder().build();
     Test.stopTest();
@@ -541,16 +481,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.ResetLanguageModelOptions resetLanguageModelOptions = new IBMSpeechToTextV1Models.ResetLanguageModelOptionsBuilder('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .customizationId('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.resetLanguageModel(resetLanguageModelOptions);
+    service.resetLanguageModel(resetLanguageModelOptions);
     resetLanguageModelOptions = resetLanguageModelOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -560,15 +496,11 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.TrainLanguageModelOptions trainLanguageModelOptions = new IBMSpeechToTextV1Models.TrainLanguageModelOptionsBuilder()
       .customizationId(customizationId)
       .build();
-    IBMSpeechToTextV1Models.TrainingResponse response = speechToText.trainLanguageModel(trainLanguageModelOptions);
+    IBMSpeechToTextV1Models.TrainingResponse response = service.trainLanguageModel(trainLanguageModelOptions);
 
     Test.stopTest();
   }
@@ -578,15 +510,11 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.TrainAcousticModelOptions options = new IBMSpeechToTextV1Models.TrainAcousticModelOptionsBuilder()
       .customizationId(customizationId)
       .build();
-    IBMSpeechToTextV1Models.TrainingResponse response = speechToText.trainAcousticModel(options);
+    IBMSpeechToTextV1Models.TrainingResponse response = service.trainAcousticModel(options);
 
     Test.stopTest();
   }
@@ -596,17 +524,13 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.UpgradeLanguageModelOptions upgradeLanguageModelOptions = new IBMSpeechToTextV1Models.UpgradeLanguageModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.upgradeLanguageModel(upgradeLanguageModelOptions);
+    service.upgradeLanguageModel(upgradeLanguageModelOptions);
     Test.stopTest();
   }
 
@@ -615,11 +539,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String corpusName = 'custom_corpus';
     IBMWatsonFile corpusFile = new IBMWatsonFile.FileBuilder()
@@ -635,7 +555,7 @@ private class IBMSpeechToTextV1Test {
       .corpusFile(corpusFile)
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.addCorpus(addCorpusOptions);
+    service.addCorpus(addCorpusOptions);
     addCorpusOptions = addCorpusOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -645,11 +565,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String corpusName = 'custom_corpus';
     IBMSpeechToTextV1Models.DeleteCorpusOptions deleteCorpusOptions = new IBMSpeechToTextV1Models.DeleteCorpusOptionsBuilder(customizationId, corpusName)
@@ -657,7 +573,7 @@ private class IBMSpeechToTextV1Test {
       .corpusName(corpusName)
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.deleteCorpus(deleteCorpusOptions);
+    service.deleteCorpus(deleteCorpusOptions);
     deleteCorpusOptions = deleteCorpusOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -667,11 +583,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String corpusName = 'custom_corpus';
     IBMSpeechToTextV1Models.GetCorpusOptions getCorpusOptions = new IBMSpeechToTextV1Models.GetCorpusOptionsBuilder(customizationId, corpusName)
@@ -679,7 +591,7 @@ private class IBMSpeechToTextV1Test {
       .corpusName(corpusName)
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.Corpus corpus = speechToText.getCorpus(getCorpusOptions);
+    IBMSpeechToTextV1Models.Corpus corpus = service.getCorpus(getCorpusOptions);
     System.assertEquals(corpus.getError(), 'none');
     System.assertEquals(corpus.getName(), 'custom_corpus');
     System.assertEquals(corpus.getTotalWords(),160);
@@ -694,16 +606,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.ListCorporaOptions listCorporaOptions = new IBMSpeechToTextV1Models.ListCorporaOptionsBuilder('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .customizationId('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.Corpora corpora = speechToText.listCorpora(listCorporaOptions);
+    IBMSpeechToTextV1Models.Corpora corpora = service.listCorpora(listCorporaOptions);
     System.assertEquals(corpora.getCorpora()[0].getName(), 'custom_corpus');
     listCorporaOptions = listCorporaOptions.newBuilder().build();
     Test.stopTest();
@@ -714,11 +622,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String wordName = 'WatsonSDK';
     IBMSpeechToTextV1Models.DeleteWordOptions deleteWordOptions = new IBMSpeechToTextV1Models.DeleteWordOptionsBuilder(customizationId, wordName)
@@ -726,7 +630,7 @@ private class IBMSpeechToTextV1Test {
       .wordName(wordName)
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.deleteWord(deleteWordOptions);
+    service.deleteWord(deleteWordOptions);
     deleteWordOptions = deleteWordOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -736,11 +640,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String wordName = 'WatsonSDK';
     IBMSpeechToTextV1Models.GetWordOptions getWordOptions = new IBMSpeechToTextV1Models.GetWordOptionsBuilder(customizationId, wordName)
@@ -748,7 +648,7 @@ private class IBMSpeechToTextV1Test {
       .wordName(wordName)
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.Word wordResult =  speechToText.getWord(getWordOptions);
+    IBMSpeechToTextV1Models.Word wordResult =  service.getWord(getWordOptions);
     System.assertEquals(wordResult.getDisplayAs(), 'words matter');
     System.assertEquals(wordResult.getSoundsLike()[0], 'words matter');
     System.assertEquals(wordResult.getSource()[0], 'custom_corpus');
@@ -764,11 +664,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String wordType = 'all';
     String sortField = 'count';
@@ -778,7 +674,7 @@ private class IBMSpeechToTextV1Test {
       .xsort(sortField)
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.Words wordList = speechToText.listWords(listWordsOptions);
+    IBMSpeechToTextV1Models.Words wordList = service.listWords(listWordsOptions);
     System.assertEquals(wordList.getWords()[0].getDisplayAs(), 'words matter');
     listWordsOptions = listWordsOptions.newBuilder().build();
     Test.stopTest();
@@ -789,17 +685,13 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.DeleteAcousticModelOptions deleteAcousticModelOptions = new IBMSpeechToTextV1Models.DeleteAcousticModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.deleteAcousticModel(deleteAcousticModelOptions);
+    service.deleteAcousticModel(deleteAcousticModelOptions);
     deleteAcousticModelOptions = deleteAcousticModelOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -809,17 +701,13 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.GetAcousticModelOptions getAcousticModelOptions = new IBMSpeechToTextV1Models.GetAcousticModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.AcousticModel acousticModel = speechToText.getAcousticModel(getAcousticModelOptions);
+    IBMSpeechToTextV1Models.AcousticModel acousticModel = service.getAcousticModel(getAcousticModelOptions);
     System.assertEquals(acousticModel.getCustomizationId(), '825485d7-af3f-44e7-b1ea-76130dec8a61');
     System.assertEquals(acousticModel.getOwner(), '952e2069-9ece-48d8-96c9-0206b4473819');
     System.assertEquals(acousticModel.getBaseModelName(), 'en-US_BroadbandModel');
@@ -861,12 +749,6 @@ private class IBMSpeechToTextV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
-
     String customizationId = 'customizationId';
     String customLanguageModelId = 'customLanguageModelId';
 
@@ -874,7 +756,7 @@ private class IBMSpeechToTextV1Test {
       .customizationId(customizationId)
       .customLanguageModelId(customLanguageModelId)
       .build();
-    speechToText.upgradeAcousticModel(upgradeAcousticModelOptions);
+    service.upgradeAcousticModel(upgradeAcousticModelOptions);
     Test.stopTest();
   }
 
@@ -883,16 +765,12 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMSpeechToTextV1Models.ListAcousticModelsOptions listAcousticModelsOptions = new IBMSpeechToTextV1Models.ListAcousticModelsOptionsBuilder()
       .language('en-US')
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.AcousticModels acousticModels = speechToText.listAcousticModels(listAcousticModelsOptions);
+    IBMSpeechToTextV1Models.AcousticModels acousticModels = service.listAcousticModels(listAcousticModelsOptions);
     System.assertEquals(acousticModels.getCustomizations()[0].getCustomizationId(), '825485d7-af3f-44e7-b1ea-76130dec8a61');
     listAcousticModelsOptions = listAcousticModelsOptions.newBuilder().build();
     Test.stopTest();
@@ -903,17 +781,13 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.ResetAcousticModelOptions resetAcousticModelOptions = new IBMSpeechToTextV1Models.ResetAcousticModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.resetAcousticModel(resetAcousticModelOptions);
+    service.resetAcousticModel(resetAcousticModelOptions);
     resetAcousticModelOptions = resetAcousticModelOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -923,11 +797,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String audioName = 'WatsonSDKAudio';
     IBMSpeechToTextV1Models.DeleteAudioOptions deleteAudioOptions = new IBMSpeechToTextV1Models.DeleteAudioOptionsBuilder(customizationId, audioName)
@@ -935,7 +805,7 @@ private class IBMSpeechToTextV1Test {
       .audioName(audioName)
       .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.deleteAudio(deleteAudioOptions);
+    service.deleteAudio(deleteAudioOptions);
     deleteAudioOptions = deleteAudioOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -945,11 +815,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     String audioName = 'WatsonSDKAudio';
     IBMSpeechToTextV1Models.GetAudioOptions getAudioOptions = new IBMSpeechToTextV1Models.GetAudioOptionsBuilder(customizationId, audioName)
@@ -957,7 +823,7 @@ private class IBMSpeechToTextV1Test {
       .audioName(audioName)
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.AudioListing audioListing = speechToText.getAudio(getAudioOptions);
+    IBMSpeechToTextV1Models.AudioListing audioListing = service.getAudio(getAudioOptions);
 //    System.assertEquals(audioListing.getTotalMinutesOfAudio(),0);
     System.assertEquals(audioListing.getDuration(),0);
     System.assertEquals(audioListing.getName(), 'string');
@@ -980,17 +846,13 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.ListAudioOptions listAudioOptions = new IBMSpeechToTextV1Models.ListAudioOptionsBuilder(customizationId)
       .customizationId(customizationId)
       .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.AudioResources AudioResources = speechToText.listAudio(listAudioOptions);
+    IBMSpeechToTextV1Models.AudioResources AudioResources = service.listAudio(listAudioOptions);
     listAudioOptions = listAudioOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -1000,11 +862,7 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+
     IBMWatsonFile audio = new IBMWatsonFile.FileBuilder()
       .name('audioTestFile.mp3')
       .description('Test audio file')
@@ -1016,7 +874,7 @@ private class IBMSpeechToTextV1Test {
       .audio(audio)
       .contentType(fileContentType)
       .build();
-    IBMSpeechToTextV1Models.SpeechRecognitionResults speechResults = speechToText.recognize(recognizeOptions);
+    IBMSpeechToTextV1Models.SpeechRecognitionResults speechResults = service.recognize(recognizeOptions);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getStartTime(),0.14);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getEndTime(),0.28);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),1);
@@ -1059,9 +917,6 @@ private class IBMSpeechToTextV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    speechToText.setUsernameAndPassword('username', 'password');
-
     String customerId = 'salesforce_sdk_test_id';
     IBMSpeechToTextV1Models.DeleteUserDataOptions deleteOptions = new IBMSpeechToTextV1Models.DeleteUserDataOptionsBuilder()
       .customerId(customerId)
@@ -1069,7 +924,7 @@ private class IBMSpeechToTextV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    speechToText.deleteUserData(deleteOptions);
+    service.deleteUserData(deleteOptions);
 
     Test.stopTest();
   }
@@ -1112,9 +967,6 @@ private class IBMSpeechToTextV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    speechToText.setUsernameAndPassword('username', 'password');
-
     String customizationId = 'id';
     String grammarName = 'grammar_name';
     IBMWatsonFile testfile= new IBMWatsonFile.FileBuilder()
@@ -1129,7 +981,7 @@ private class IBMSpeechToTextV1Test {
         .grammarFile(testfile)
         .contentType(contentType)
         .build();
-    speechToText.addGrammar(addGrammarOptions);
+    service.addGrammar(addGrammarOptions);
 
     Test.stopTest();
   }
@@ -1154,9 +1006,6 @@ private class IBMSpeechToTextV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    speechToText.setUsernameAndPassword('username', 'password');
-
     String customizationId = 'id';
 
     Long outOfVocabularyWords = 10L;
@@ -1166,7 +1015,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.ListGrammarsOptions listGrammarsOptions = new IBMSpeechToTextV1Models.ListGrammarsOptionsBuilder()
         .customizationId(customizationId)
         .build();
-    IBMSpeechToTextV1Models.Grammars response = speechToText.listGrammars(listGrammarsOptions);
+    IBMSpeechToTextV1Models.Grammars response = service.listGrammars(listGrammarsOptions);
 
     System.assertEquals(outOfVocabularyWords, response.getGrammars().get(0).getOutOfVocabularyWords());
     System.assertEquals(name, response.getGrammars().get(0).getName());
@@ -1199,9 +1048,6 @@ private class IBMSpeechToTextV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    speechToText.setUsernameAndPassword('username', 'password');
-
     String customizationId = 'id';
     String grammarName = 'grammar_name';
 
@@ -1212,7 +1058,7 @@ private class IBMSpeechToTextV1Test {
         .customizationId(customizationId)
         .grammarName(grammarName)
         .build();
-    IBMSpeechToTextV1Models.Grammar response = speechToText.getGrammar(getGrammarOptions);
+    IBMSpeechToTextV1Models.Grammar response = service.getGrammar(getGrammarOptions);
 
     System.assertEquals(outOfVocabularyWords, response.getOutOfVocabularyWords());
     System.assertEquals(grammarName, response.getName());
@@ -1249,9 +1095,6 @@ private class IBMSpeechToTextV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    speechToText.setUsernameAndPassword('username', 'password');
-
     String customizationId = 'id';
     String grammarName = 'grammar_name';
 
@@ -1259,7 +1102,7 @@ private class IBMSpeechToTextV1Test {
         .customizationId(customizationId)
         .grammarName(grammarName)
         .build();
-    speechToText.deleteGrammar(deleteGrammarOptions);
+    service.deleteGrammar(deleteGrammarOptions);
 
     Test.stopTest();
   }

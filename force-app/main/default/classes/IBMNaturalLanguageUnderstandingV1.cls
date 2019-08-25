@@ -17,44 +17,19 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMNaturalLanguageUnderstandingV1`.
+   * Instantiates a new `IBMNaturalLanguageUnderstandingV1` with the specified authentication configuration.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
+   * @param authenticator the authentication configuration for this service
    */
-  public IBMNaturalLanguageUnderstandingV1(String versionDate) {
-    super('natural_language_understanding', 'v1');
+  public IBMNaturalLanguageUnderstandingV1(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super('natural_language_understanding', 'v1', authenticator);
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMNaturalLanguageUnderstandingV1` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMNaturalLanguageUnderstandingV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMNaturalLanguageUnderstandingV1(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMNaturalLanguageUnderstandingV1` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMNaturalLanguageUnderstandingV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**

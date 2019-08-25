@@ -107,7 +107,7 @@ Finally, you can also install or update the SDK using the Ant Build Tool. This m
     Valid service names are all services listed [here](https://cloud.ibm.com/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
 
 ## Authentication
-To access your Watson services through Apex, you'll need to authenticate with your service credentials. There are three ways to do this: [using a credential file](#using-a-credential-file), [using named credentials](#using-named-credentials) or [specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code).
+To access your Watson services through Apex, you'll need to authenticate with your service credentials. There are two ways to do this: [using a credential file](#using-a-credential-file) or [specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code).
 
 **Note:** Previously, it was possible to authenticate using a token in a header called `X-Watson-Authorization-Token`. This method is deprecated. The token continues to work with Cloud Foundry services, but is not supported for services that use Identity and Access Management (IAM) authentication. See [here](#using-iam) for details.
 
@@ -128,114 +128,40 @@ Once you've downloaded your file, you'll need to do the following:
 Once this is done, you're good to go! As an example, if you uploaded a credential file for your Discovery service, you just need to do the following in your code
 
 ```java
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+IBMWatsonAuthenticator authenticator = new IBMWatsonConfigBasedAuthenticatorFactory('discovery');
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', authenticator);
 ```
 
 and you'll be authenticated :white_check_mark:
 
 If you're using more than one service at a time in your code and get two different credetnial files, just put the contents together in one file and upload it to your Static Resources with the same name as above. The SDK will handle assigning credentials to their appropriate services.
 
-### Using `Named Credentials`
-
-`Named Credentials` are the next preferred way of authentication, since they allow you to keep sensitive information out of your code. However, they only work when using a **username and password**, so if you'd like to authenticate with an API key or IAM, you'll need to either use the credential file method [above](#using-a-credential-file) or [set that up in your Apex code](#specifying-credentials-in-the-apex-code).
-
-When creating a service instance like with `new Discovery()`, each service loads the credentials from `Named Credentials`. The SDK will use the service name and API version to build the `Named Credentials` name.
-
-For example
-
-```java
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
-```
-
-Will look for the `watson_discovery_v1` named credentials while:
-
-```java
-IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-```
-
-Will look for `watson_assistant_v1`.
-
-In order to create **Named Credentials**:
-
-1. Go to _Setup_ by clicking on the gear icon on the top right of the Salesforce dashboard
-1. Enter _Named Credentials_ in the quick find box and select the highlighted entry
-1. Click on _New Named Credential_
-1. Enter the following values:
-    * Label: _A unique label that identifies your named credentials_
-    * Name: `watson_<service_name_snake_case>_<api_version>`, e.g: `watson_assistant_v1`
-    * URL: `<SERVICE_URL>`, e.g: `https://gateway.watsonplatform.net/assistant/api`
-    * Identity Type: **Named Principial**
-    * Authentication Protocol: **Password Authentication**
-    * Username: `<USERNAME>`
-    * Password: `<PASSWORD>`
-1. Click on Save.
-
 ### Specifying credentials in the Apex code
 
-If the methods above don't work for you, setting credentials in the code is always an option. You can always set these values directly in the constructor or with a method call after instantiating your service.
-
-_Note: You must set the service endpoint manually when setting your credentials this way. Otherwise, the SDK will default to searching for `Named Credentials` that you won't have set up._
+If the methods above don't work for you, setting credentials in the code is always an option. The examples below just show the minimum required arguments for each `IBMWatsonAuthenticator` implementation, but there are other constructors you can play with for more options.
 
 #### Username and password
 
 ```java
-IBMWatsonBasicAuthConfig config = new IBMWatsonBasicAuthConfig.Builder()
-  .username('USERNAME')
-  .password('PASSWORD')
-  .build();
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', config);
+IBMWatsonAuthenticator authenticator = new IBMWatsonBasicAuthenticator('USERNAME', 'PASSWORD');
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', authenticator);
 discovery.setEndPoint('URL');
 ```
 
 #### Using IAM
 
-When authenticating with IAM, you have the option of passing in:
-  - the IAM API key and, optionally, the IAM service URL
-  - an IAM access token
-
-**Be aware that passing in an access token means that you're assuming responsibility for maintaining that token's lifecycle.** If you instead pass in an IAM API key, the SDK will manage it for you.
-
 ```java
-// letting the SDK manage the IAM token
-IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
-  .apiKey('IAM_API_KEY')
-  .url('IAM_URL') // optional - the default value is https://iam.cloud.ibm.com/identity/token
-  .build();
-IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', options);
-service.setEndPoint('SERVICE_URL');
+IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator('API_KEY');
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
+service.setEndPoint('URL');
 ```
-
-```java
-// assuming control of managing IAM token
-IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
-  .accessToken('ACCESS_TOKEN')
-  .build();
-IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', options);
-service.setEndPoint('SERVICE_URL');
-```
-
-If at any time you would like to let the SDK take over managing your IAM token, simply override your stored IAM credentials with an IAM API key by calling the `setIamCredentials()` method again.
 
 #### ICP
-Like IAM, you can pass in credentials to let the SDK manage an access token for you or directly supply an access token to do it yourself.
 
 ```java
-// letting the SDK manage the token
-IBMWatsonICP4DConfig config = new IBMWatsonICP4DConfig.Builder()
-  .url('ICP TOKEN EXCHANGE BASE URL')
-  .username('USERNAME')
-  .password('PASSWORD')
-  .build();
-IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', config);
-service.setEndPoint('SERVICE ICP URL');
-```
-
-```java
-// assuming control of managing the access token
-IBMWatsonICP4DConfig config = new IBMWatsonICP4DConfig.Builder()
-  .userManagedAccessToken('ACCESS_TOKEN')
-  .build();
-IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', config);
+IBMWatsonAuthenticator authenticator =
+  new IBMWatsonCloudPakForDataAuthenticator('ICP TOKEN EXCHANGE BASE URL', 'USERNAME', 'PASSWORD');
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
 service.setEndPoint('SERVICE ICP URL');
 ```
 
@@ -256,13 +182,13 @@ If you're authenticating with IAM, you'll also need to add your IAM URL in your 
 Getting started using a service is very simple! All services follow the same pattern of service instantiation, option building, and requesting. To get an idea, below is an example of using the Discovery service to get a list of your current environments:
 
 ```java
-// Will load credentials from the `watson_discovery_v1` named credential
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator('API_KEY');
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', authenticator);
 
 // configuring options for listing environments
-IBMDiscoveryV1Models.ListEnvironmentsOptions options = new
-  IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
-  .build();
+IBMDiscoveryV1Models.ListEnvironmentsOptions options =
+  new IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
+    .build();
 
 // making request
 IBMDiscoveryV1Models.ListEnvironmentsResponse environmentList = discovery.listEnvironments(options);
@@ -272,16 +198,16 @@ System.debug(environmentList);
 Similarly, here is an example of creating an intent in the Watson Assistant service:
 
 ```java
-// Will load credentials from the `watson_assistant_v1` named credential
-IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
+IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator('API_KEY');
+IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16', authenticator);
 
 // configuring options for creating intent
-IBMAssistantV1Models.CreateIntentOptions options = new
-  IBMAssistantV1Models.CreateIntentOptionsBuilder()
-  .workspaceId('<workspace_id>')
-  .intentName('MyIntent')
-  .description('This is an example of creating an intent!')
-  .build();
+IBMAssistantV1Models.CreateIntentOptions options =
+  new IBMAssistantV1Models.CreateIntentOptionsBuilder()
+    .workspaceId('<workspace_id>')
+    .intentName('MyIntent')
+    .description('This is an example of creating an intent!')
+    .build();
 
 // making request
 IBMAssistantV1Models.Intent intent = assistant.createIntent(options);
@@ -297,13 +223,13 @@ The SDK supports sending custom headers with any request as well as parsing head
 To send request headers, simply add them as a property when building up your `Options` model. Here's an example in the Discovery service:
 
 ```java
-IBMDiscoveryV1Models.QueryOptions options = new
-  IBMDiscoveryV1Models.QueryOptionsBuilder()
-  .environmentId('<environment_id>')
-  .collectionId('<collection_id>')
-  .naturalLanguageQuery('Articles about the Boston Celtics')
-  .addHeader('Custon-Header', 'custom_value') // custom header added here
-  .build();
+IBMDiscoveryV1Models.QueryOptions options =
+  new IBMDiscoveryV1Models.QueryOptionsBuilder()
+    .environmentId('<environment_id>')
+    .collectionId('<collection_id>')
+    .naturalLanguageQuery('Articles about the Boston Celtics')
+    .addHeader('Custon-Header', 'custom_value') // custom header added here
+    .build();
 ```
 
 To get headers returned by the service, call the `getHeaders()` method on a response model. This is what it looks like to get the headers returned after making the above call:

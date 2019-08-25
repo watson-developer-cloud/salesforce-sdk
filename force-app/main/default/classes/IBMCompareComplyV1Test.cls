@@ -73,6 +73,8 @@ private class IBMCompareComplyV1Test {
   private static String UNIT;
   private static Double NUMERIC_VALUE;
 
+  private static IBMCompareComplyV1 service;
+
   static {
     VERSION = '2018-10-15';
     COMMENT = 'comment';
@@ -146,6 +148,8 @@ private class IBMCompareComplyV1Test {
     VALUE = 'value';
     UNIT = 'unit';
     NUMERIC_VALUE = 21.0;
+
+    service = new IBMCompareComplyV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testAddFeedbackOptions() {
@@ -518,11 +522,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
       .name('test_pdf.pdf')
       .description('Test PDF file')
@@ -555,11 +554,6 @@ private class IBMCompareComplyV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
 
     IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
       .name('test_pdf.pdf')
@@ -740,11 +734,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
       .name('test_pdf.pdf')
       .description('Test PDF file')
@@ -835,11 +824,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
       .name('test_pdf.pdf')
       .description('Test PDF file')
@@ -905,11 +889,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
       .comment(COMMENT)
       .feedbackData(new IBMCompareComplyV1Models.FeedbackDataInput())
@@ -967,11 +946,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
       .feedbackId(FEEDBACK_ID)
       .model(CONTRACTS)
@@ -991,11 +965,6 @@ private class IBMCompareComplyV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
 
     IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
       .feedbackId(FEEDBACK_ID)
@@ -1050,11 +1019,6 @@ private class IBMCompareComplyV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
 
     IBMCompareComplyV1Models.ListFeedbackOptions listFeedbackOptions = new IBMCompareComplyV1Models.ListFeedbackOptionsBuilder()
       .after(TEST_DATE)
@@ -1133,11 +1097,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMWatsonFile testCredentialFile = new IBMWatsonFile.FileBuilder()
       .name('test_credentials.json')
       .description('Test JSON file')
@@ -1171,11 +1130,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMCompareComplyV1Models.GetBatchOptions getBatchOptions = new IBMCompareComplyV1Models.GetBatchOptionsBuilder()
       .batchId(BATCH_ID)
       .addHeader(HEADER_NAME, HEADER_VALUE)
@@ -1196,11 +1150,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptions = new IBMCompareComplyV1Models.ListBatchesOptionsBuilder()
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
@@ -1219,11 +1168,6 @@ private class IBMCompareComplyV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
 
     IBMCompareComplyV1Models.UpdateBatchOptions updateBatchOptions = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
       .action(CANCEL)
