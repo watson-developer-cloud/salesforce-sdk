@@ -56,16 +56,6 @@ public class IBMCompareComplyV1Models {
     public AddFeedbackOptionsBuilder newBuilder() {
       return new AddFeedbackOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('feedbackData', 'feedback_data');
-      if (feedbackData != null) {
-        mapping.putAll(feedbackData.addToSdkToApiMapping('', mapping));
-      }
-      mapping.put('userId', 'user_id');
-      return mapping;
-    }
   }
 
   /**
@@ -211,15 +201,11 @@ public class IBMCompareComplyV1Models {
       Address ret = (Address) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -323,6 +309,16 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'element_pair' => 'elementPair',
+        'identical_text' => 'identicalText',
+        'provenance_ids' => 'provenanceIds',
+        'significant_elements' => 'significantElements'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       AlignedElement ret = (AlignedElement) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for elementPair
@@ -332,26 +328,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedElementPair.size(); i++) {
           ElementPair currentItem = ret.getElementPair().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('elementPair');
-          ElementPair newItem = (ElementPair) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementPair.class);
+          ElementPair newItem = (ElementPair) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementPair.class);
           newElementPair.add(newItem);
         }
         ret.elementPair = newElementPair;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'element_pair', 'elementPair');
-      mapping.putAll(((IBMWatsonGenericModel) ElementPair.class.newInstance()).addToApiToSdkMapping(parentLabel + 'element_pair/', mapping));
-      mapping.put(parentLabel + 'identical_text', 'identicalText');
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      mapping.put(parentLabel + 'significant_elements', 'significantElements');
-      return mapping;
     }
   }
 
@@ -432,23 +415,21 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Attribute ret = (Attribute) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -685,23 +666,26 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'input_bucket_location' => 'inputBucketLocation',
+        'input_bucket_name' => 'inputBucketName',
+        'output_bucket_location' => 'outputBucketLocation',
+        'output_bucket_name' => 'outputBucketName',
+        'batch_id' => 'batchId',
+        'document_counts' => 'documentCounts'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       BatchStatus ret = (BatchStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentCounts
-      DocCounts newDocumentCounts = (DocCounts) new DocCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('documentCounts'), DocCounts.class);
+      Map<String, Object> documentCountsMap = (Map<String, Object>) jsonMap.get('documentCounts');
+      DocCounts newDocumentCounts = (DocCounts) new DocCounts().deserialize(JSON.serialize(documentCountsMap), documentCountsMap, DocCounts.class);
       ret.setDocumentCounts(newDocumentCounts);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'input_bucket_location', 'inputBucketLocation');
-      mapping.put(parentLabel + 'input_bucket_name', 'inputBucketName');
-      mapping.put(parentLabel + 'output_bucket_location', 'outputBucketLocation');
-      mapping.put(parentLabel + 'output_bucket_name', 'outputBucketName');
-      mapping.put(parentLabel + 'batch_id', 'batchId');
-      mapping.put(parentLabel + 'document_counts', 'documentCounts');
-      return mapping;
     }
   }
 
@@ -746,18 +730,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedBatches.size(); i++) {
           BatchStatus currentItem = ret.getBatches().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('batches');
-          BatchStatus newItem = (BatchStatus) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BatchStatus.class);
+          BatchStatus newItem = (BatchStatus) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BatchStatus.class);
           newBatches.add(newItem);
         }
         ret.batches = newBatches;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) BatchStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'batches/', mapping));
-      return mapping;
     }
   }
 
@@ -772,12 +751,12 @@ public class IBMCompareComplyV1Models {
     private Long rowIndexEnd;
     private Long columnIndexBegin;
     private Long columnIndexEnd;
-    private List<RowHeaderIds> rowHeaderIds;
-    private List<RowHeaderTexts> rowHeaderTexts;
-    private List<RowHeaderTextsNormalized> rowHeaderTextsNormalized;
-    private List<ColumnHeaderIds> columnHeaderIds;
-    private List<ColumnHeaderTexts> columnHeaderTexts;
-    private List<ColumnHeaderTextsNormalized> columnHeaderTextsNormalized;
+    private List<String> rowHeaderIds;
+    private List<String> rowHeaderTexts;
+    private List<String> rowHeaderTextsNormalized;
+    private List<String> columnHeaderIds;
+    private List<String> columnHeaderTexts;
+    private List<String> columnHeaderTextsNormalized;
     private List<Attribute> attributes;
 
     /**
@@ -868,60 +847,74 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the rowHeaderIds.
      *
+     * An array that contains the `id` value of a row header that is applicable to this body cell.
+     *
      * @return the rowHeaderIds
      */
     @AuraEnabled
-    public List<RowHeaderIds> getRowHeaderIds() {
+    public List<String> getRowHeaderIds() {
       return rowHeaderIds;
     }
 
     /**
      * Gets the rowHeaderTexts.
      *
+     * An array that contains the `text` value of a row header that is applicable to this body cell.
+     *
      * @return the rowHeaderTexts
      */
     @AuraEnabled
-    public List<RowHeaderTexts> getRowHeaderTexts() {
+    public List<String> getRowHeaderTexts() {
       return rowHeaderTexts;
     }
 
     /**
      * Gets the rowHeaderTextsNormalized.
      *
+     * If you provide customization input, the normalized version of the row header texts according to the
+     * customization; otherwise, the same value as `row_header_texts`.
+     *
      * @return the rowHeaderTextsNormalized
      */
     @AuraEnabled
-    public List<RowHeaderTextsNormalized> getRowHeaderTextsNormalized() {
+    public List<String> getRowHeaderTextsNormalized() {
       return rowHeaderTextsNormalized;
     }
 
     /**
      * Gets the columnHeaderIds.
      *
+     * An array that contains the `id` value of a column header that is applicable to the current cell.
+     *
      * @return the columnHeaderIds
      */
     @AuraEnabled
-    public List<ColumnHeaderIds> getColumnHeaderIds() {
+    public List<String> getColumnHeaderIds() {
       return columnHeaderIds;
     }
 
     /**
      * Gets the columnHeaderTexts.
      *
+     * An array that contains the `text` value of a column header that is applicable to the current cell.
+     *
      * @return the columnHeaderTexts
      */
     @AuraEnabled
-    public List<ColumnHeaderTexts> getColumnHeaderTexts() {
+    public List<String> getColumnHeaderTexts() {
       return columnHeaderTexts;
     }
 
     /**
      * Gets the columnHeaderTextsNormalized.
      *
+     * If you provide customization input, the normalized version of the column header texts according to the
+     * customization; otherwise, the same value as `column_header_texts`.
+     *
      * @return the columnHeaderTextsNormalized
      */
     @AuraEnabled
-    public List<ColumnHeaderTextsNormalized> getColumnHeaderTextsNormalized() {
+    public List<String> getColumnHeaderTextsNormalized() {
       return columnHeaderTextsNormalized;
     }
 
@@ -1003,7 +996,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderIds the new rowHeaderIds
      */
-    public void setRowHeaderIds(final List<RowHeaderIds> rowHeaderIds) {
+    public void setRowHeaderIds(final List<String> rowHeaderIds) {
       this.rowHeaderIds = rowHeaderIds;
     }
 
@@ -1012,7 +1005,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderTexts the new rowHeaderTexts
      */
-    public void setRowHeaderTexts(final List<RowHeaderTexts> rowHeaderTexts) {
+    public void setRowHeaderTexts(final List<String> rowHeaderTexts) {
       this.rowHeaderTexts = rowHeaderTexts;
     }
 
@@ -1021,7 +1014,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderTextsNormalized the new rowHeaderTextsNormalized
      */
-    public void setRowHeaderTextsNormalized(final List<RowHeaderTextsNormalized> rowHeaderTextsNormalized) {
+    public void setRowHeaderTextsNormalized(final List<String> rowHeaderTextsNormalized) {
       this.rowHeaderTextsNormalized = rowHeaderTextsNormalized;
     }
 
@@ -1030,7 +1023,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderIds the new columnHeaderIds
      */
-    public void setColumnHeaderIds(final List<ColumnHeaderIds> columnHeaderIds) {
+    public void setColumnHeaderIds(final List<String> columnHeaderIds) {
       this.columnHeaderIds = columnHeaderIds;
     }
 
@@ -1039,7 +1032,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderTexts the new columnHeaderTexts
      */
-    public void setColumnHeaderTexts(final List<ColumnHeaderTexts> columnHeaderTexts) {
+    public void setColumnHeaderTexts(final List<String> columnHeaderTexts) {
       this.columnHeaderTexts = columnHeaderTexts;
     }
 
@@ -1048,7 +1041,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderTextsNormalized the new columnHeaderTextsNormalized
      */
-    public void setColumnHeaderTextsNormalized(final List<ColumnHeaderTextsNormalized> columnHeaderTextsNormalized) {
+    public void setColumnHeaderTextsNormalized(final List<String> columnHeaderTextsNormalized) {
       this.columnHeaderTextsNormalized = columnHeaderTextsNormalized;
     }
 
@@ -1066,89 +1059,29 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'cell_id' => 'cellId',
+        'row_index_begin' => 'rowIndexBegin',
+        'row_index_end' => 'rowIndexEnd',
+        'column_index_begin' => 'columnIndexBegin',
+        'column_index_end' => 'columnIndexEnd',
+        'row_header_ids' => 'rowHeaderIds',
+        'row_header_texts' => 'rowHeaderTexts',
+        'row_header_texts_normalized' => 'rowHeaderTextsNormalized',
+        'column_header_ids' => 'columnHeaderIds',
+        'column_header_texts' => 'columnHeaderTexts',
+        'column_header_texts_normalized' => 'columnHeaderTextsNormalized'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       BodyCells ret = (BodyCells) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
-
-      // calling custom deserializer for rowHeaderIds
-      List<RowHeaderIds> newRowHeaderIds = new List<RowHeaderIds>();
-      List<RowHeaderIds> deserializedRowHeaderIds = ret.getRowHeaderIds();
-      if (deserializedRowHeaderIds != null) {
-        for (Integer i = 0; i < deserializedRowHeaderIds.size(); i++) {
-          RowHeaderIds currentItem = ret.getRowHeaderIds().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaderIds');
-          RowHeaderIds newItem = (RowHeaderIds) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderIds.class);
-          newRowHeaderIds.add(newItem);
-        }
-        ret.rowHeaderIds = newRowHeaderIds;
-      }
-
-      // calling custom deserializer for rowHeaderTexts
-      List<RowHeaderTexts> newRowHeaderTexts = new List<RowHeaderTexts>();
-      List<RowHeaderTexts> deserializedRowHeaderTexts = ret.getRowHeaderTexts();
-      if (deserializedRowHeaderTexts != null) {
-        for (Integer i = 0; i < deserializedRowHeaderTexts.size(); i++) {
-          RowHeaderTexts currentItem = ret.getRowHeaderTexts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaderTexts');
-          RowHeaderTexts newItem = (RowHeaderTexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderTexts.class);
-          newRowHeaderTexts.add(newItem);
-        }
-        ret.rowHeaderTexts = newRowHeaderTexts;
-      }
-
-      // calling custom deserializer for rowHeaderTextsNormalized
-      List<RowHeaderTextsNormalized> newRowHeaderTextsNormalized = new List<RowHeaderTextsNormalized>();
-      List<RowHeaderTextsNormalized> deserializedRowHeaderTextsNormalized = ret.getRowHeaderTextsNormalized();
-      if (deserializedRowHeaderTextsNormalized != null) {
-        for (Integer i = 0; i < deserializedRowHeaderTextsNormalized.size(); i++) {
-          RowHeaderTextsNormalized currentItem = ret.getRowHeaderTextsNormalized().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaderTextsNormalized');
-          RowHeaderTextsNormalized newItem = (RowHeaderTextsNormalized) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderTextsNormalized.class);
-          newRowHeaderTextsNormalized.add(newItem);
-        }
-        ret.rowHeaderTextsNormalized = newRowHeaderTextsNormalized;
-      }
-
-      // calling custom deserializer for columnHeaderIds
-      List<ColumnHeaderIds> newColumnHeaderIds = new List<ColumnHeaderIds>();
-      List<ColumnHeaderIds> deserializedColumnHeaderIds = ret.getColumnHeaderIds();
-      if (deserializedColumnHeaderIds != null) {
-        for (Integer i = 0; i < deserializedColumnHeaderIds.size(); i++) {
-          ColumnHeaderIds currentItem = ret.getColumnHeaderIds().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaderIds');
-          ColumnHeaderIds newItem = (ColumnHeaderIds) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderIds.class);
-          newColumnHeaderIds.add(newItem);
-        }
-        ret.columnHeaderIds = newColumnHeaderIds;
-      }
-
-      // calling custom deserializer for columnHeaderTexts
-      List<ColumnHeaderTexts> newColumnHeaderTexts = new List<ColumnHeaderTexts>();
-      List<ColumnHeaderTexts> deserializedColumnHeaderTexts = ret.getColumnHeaderTexts();
-      if (deserializedColumnHeaderTexts != null) {
-        for (Integer i = 0; i < deserializedColumnHeaderTexts.size(); i++) {
-          ColumnHeaderTexts currentItem = ret.getColumnHeaderTexts().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaderTexts');
-          ColumnHeaderTexts newItem = (ColumnHeaderTexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderTexts.class);
-          newColumnHeaderTexts.add(newItem);
-        }
-        ret.columnHeaderTexts = newColumnHeaderTexts;
-      }
-
-      // calling custom deserializer for columnHeaderTextsNormalized
-      List<ColumnHeaderTextsNormalized> newColumnHeaderTextsNormalized = new List<ColumnHeaderTextsNormalized>();
-      List<ColumnHeaderTextsNormalized> deserializedColumnHeaderTextsNormalized = ret.getColumnHeaderTextsNormalized();
-      if (deserializedColumnHeaderTextsNormalized != null) {
-        for (Integer i = 0; i < deserializedColumnHeaderTextsNormalized.size(); i++) {
-          ColumnHeaderTextsNormalized currentItem = ret.getColumnHeaderTextsNormalized().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaderTextsNormalized');
-          ColumnHeaderTextsNormalized newItem = (ColumnHeaderTextsNormalized) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderTextsNormalized.class);
-          newColumnHeaderTextsNormalized.add(newItem);
-        }
-        ret.columnHeaderTextsNormalized = newColumnHeaderTextsNormalized;
-      }
 
       // calling custom deserializer for attributes
       List<Attribute> newAttributes = new List<Attribute>();
@@ -1157,36 +1090,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
-          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
         ret.attributes = newAttributes;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'cell_id', 'cellId');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.put(parentLabel + 'row_index_begin', 'rowIndexBegin');
-      mapping.put(parentLabel + 'row_index_end', 'rowIndexEnd');
-      mapping.put(parentLabel + 'column_index_begin', 'columnIndexBegin');
-      mapping.put(parentLabel + 'column_index_end', 'columnIndexEnd');
-      mapping.put(parentLabel + 'row_header_ids', 'rowHeaderIds');
-      mapping.put(parentLabel + 'row_header_texts', 'rowHeaderTexts');
-      mapping.put(parentLabel + 'row_header_texts_normalized', 'rowHeaderTextsNormalized');
-      mapping.putAll(((IBMWatsonGenericModel) RowHeaderTextsNormalized.class.newInstance()).addToApiToSdkMapping(parentLabel + 'row_header_texts_normalized/', mapping));
-      mapping.put(parentLabel + 'column_header_ids', 'columnHeaderIds');
-      mapping.put(parentLabel + 'column_header_texts', 'columnHeaderTexts');
-      mapping.put(parentLabel + 'column_header_texts_normalized', 'columnHeaderTextsNormalized');
-      mapping.putAll(((IBMWatsonGenericModel) ColumnHeaderTextsNormalized.class.newInstance()).addToApiToSdkMapping(parentLabel + 'column_header_texts_normalized/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Attribute.class.newInstance()).addToApiToSdkMapping(parentLabel + 'attributes/', mapping));
-      return mapping;
     }
   }
 
@@ -1241,14 +1151,35 @@ public class IBMCompareComplyV1Models {
       return new CategoryBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'provenanceIds', 'provenance_ids');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Category ret = (Category) super.deserialize(jsonString, jsonMap, classType);
+      CategoryBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'provenanceIds' => 'provenance_ids'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1344,6 +1275,16 @@ public class IBMCompareComplyV1Models {
     public void setLabel(final String label) {
       this.label = label;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CategoryComparison ret = (CategoryComparison) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -1404,12 +1345,6 @@ public class IBMCompareComplyV1Models {
      */
     public ClassifyElementsOptionsBuilder newBuilder() {
       return new ClassifyElementsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('fileContentType', 'file_content_type');
-      return mapping;
     }
   }
 
@@ -1818,10 +1753,27 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'model_id' => 'modelId',
+        'model_version' => 'modelVersion',
+        'effective_dates' => 'effectiveDates',
+        'contract_amounts' => 'contractAmounts',
+        'termination_dates' => 'terminationDates',
+        'contract_types' => 'contractTypes',
+        'contract_terms' => 'contractTerms',
+        'payment_terms' => 'paymentTerms',
+        'contract_currencies' => 'contractCurrencies',
+        'document_structure' => 'documentStructure'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ClassifyReturn ret = (ClassifyReturn) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document
-      Document newDocument = (Document) new Document().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document'), Document.class);
+      Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
+      Document newDocument = (Document) new Document().deserialize(JSON.serialize(documentMap), documentMap, Document.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for elements
@@ -1831,7 +1783,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedElements.size(); i++) {
           Element currentItem = ret.getElements().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('elements');
-          Element newItem = (Element) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Element.class);
+          Element newItem = (Element) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Element.class);
           newElements.add(newItem);
         }
         ret.elements = newElements;
@@ -1844,7 +1796,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedEffectiveDates.size(); i++) {
           EffectiveDates currentItem = ret.getEffectiveDates().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('effectiveDates');
-          EffectiveDates newItem = (EffectiveDates) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EffectiveDates.class);
+          EffectiveDates newItem = (EffectiveDates) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EffectiveDates.class);
           newEffectiveDates.add(newItem);
         }
         ret.effectiveDates = newEffectiveDates;
@@ -1857,7 +1809,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContractAmounts.size(); i++) {
           ContractAmts currentItem = ret.getContractAmounts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contractAmounts');
-          ContractAmts newItem = (ContractAmts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractAmts.class);
+          ContractAmts newItem = (ContractAmts) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractAmts.class);
           newContractAmounts.add(newItem);
         }
         ret.contractAmounts = newContractAmounts;
@@ -1870,7 +1822,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTerminationDates.size(); i++) {
           TerminationDates currentItem = ret.getTerminationDates().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('terminationDates');
-          TerminationDates newItem = (TerminationDates) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TerminationDates.class);
+          TerminationDates newItem = (TerminationDates) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TerminationDates.class);
           newTerminationDates.add(newItem);
         }
         ret.terminationDates = newTerminationDates;
@@ -1883,7 +1835,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContractTypes.size(); i++) {
           ContractTypes currentItem = ret.getContractTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contractTypes');
-          ContractTypes newItem = (ContractTypes) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTypes.class);
+          ContractTypes newItem = (ContractTypes) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTypes.class);
           newContractTypes.add(newItem);
         }
         ret.contractTypes = newContractTypes;
@@ -1896,7 +1848,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContractTerms.size(); i++) {
           ContractTerms currentItem = ret.getContractTerms().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contractTerms');
-          ContractTerms newItem = (ContractTerms) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTerms.class);
+          ContractTerms newItem = (ContractTerms) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTerms.class);
           newContractTerms.add(newItem);
         }
         ret.contractTerms = newContractTerms;
@@ -1909,7 +1861,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedPaymentTerms.size(); i++) {
           PaymentTerms currentItem = ret.getPaymentTerms().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('paymentTerms');
-          PaymentTerms newItem = (PaymentTerms) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), PaymentTerms.class);
+          PaymentTerms newItem = (PaymentTerms) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), PaymentTerms.class);
           newPaymentTerms.add(newItem);
         }
         ret.paymentTerms = newPaymentTerms;
@@ -1922,7 +1874,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContractCurrencies.size(); i++) {
           ContractCurrencies currentItem = ret.getContractCurrencies().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contractCurrencies');
-          ContractCurrencies newItem = (ContractCurrencies) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractCurrencies.class);
+          ContractCurrencies newItem = (ContractCurrencies) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractCurrencies.class);
           newContractCurrencies.add(newItem);
         }
         ret.contractCurrencies = newContractCurrencies;
@@ -1935,14 +1887,15 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTables.size(); i++) {
           Tables currentItem = ret.getTables().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tables');
-          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
+          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
           newTables.add(newItem);
         }
         ret.tables = newTables;
       }
 
       // calling custom deserializer for documentStructure
-      DocStructure newDocumentStructure = (DocStructure) new DocStructure().deserialize(JSON.serialize(ret.getDocumentStructure()), (Map<String, Object>) jsonMap.get('documentStructure'), DocStructure.class);
+      Map<String, Object> documentStructureMap = (Map<String, Object>) jsonMap.get('documentStructure');
+      DocStructure newDocumentStructure = (DocStructure) new DocStructure().deserialize(JSON.serialize(documentStructureMap), documentStructureMap, DocStructure.class);
       ret.setDocumentStructure(newDocumentStructure);
 
       // calling custom deserializer for parties
@@ -1952,132 +1905,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedParties.size(); i++) {
           Parties currentItem = ret.getParties().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('parties');
-          Parties newItem = (Parties) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Parties.class);
+          Parties newItem = (Parties) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Parties.class);
           newParties.add(newItem);
         }
         ret.parties = newParties;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'model_id', 'modelId');
-      mapping.put(parentLabel + 'model_version', 'modelVersion');
-      mapping.putAll(((IBMWatsonGenericModel) Element.class.newInstance()).addToApiToSdkMapping(parentLabel + 'elements/', mapping));
-      mapping.put(parentLabel + 'effective_dates', 'effectiveDates');
-      mapping.putAll(((IBMWatsonGenericModel) EffectiveDates.class.newInstance()).addToApiToSdkMapping(parentLabel + 'effective_dates/', mapping));
-      mapping.put(parentLabel + 'contract_amounts', 'contractAmounts');
-      mapping.putAll(((IBMWatsonGenericModel) ContractAmts.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contract_amounts/', mapping));
-      mapping.put(parentLabel + 'termination_dates', 'terminationDates');
-      mapping.putAll(((IBMWatsonGenericModel) TerminationDates.class.newInstance()).addToApiToSdkMapping(parentLabel + 'termination_dates/', mapping));
-      mapping.put(parentLabel + 'contract_types', 'contractTypes');
-      mapping.putAll(((IBMWatsonGenericModel) ContractTypes.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contract_types/', mapping));
-      mapping.put(parentLabel + 'contract_terms', 'contractTerms');
-      mapping.putAll(((IBMWatsonGenericModel) ContractTerms.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contract_terms/', mapping));
-      mapping.put(parentLabel + 'payment_terms', 'paymentTerms');
-      mapping.putAll(((IBMWatsonGenericModel) PaymentTerms.class.newInstance()).addToApiToSdkMapping(parentLabel + 'payment_terms/', mapping));
-      mapping.put(parentLabel + 'contract_currencies', 'contractCurrencies');
-      mapping.putAll(((IBMWatsonGenericModel) ContractCurrencies.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contract_currencies/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Tables.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tables/', mapping));
-      mapping.put(parentLabel + 'document_structure', 'documentStructure');
-      mapping.putAll(((IBMWatsonGenericModel) DocStructure.class.newInstance()).addToApiToSdkMapping(parentLabel + 'document_structure/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Parties.class.newInstance()).addToApiToSdkMapping(parentLabel + 'parties/', mapping));
-      return mapping;
-    }
-  }
-
-  /**
-   * An array of values, each being the `id` value of a column header that is applicable to the current cell.
-   */
-  public class ColumnHeaderIds extends IBMWatsonGenericModel {
-    private String id;
-
-    /**
-     * Gets the id.
-     *
-     * The `id` value of a column header.
-     *
-     * @return the id
-     */
-    @AuraEnabled
-    public String getId() {
-      return id;
-    }
-
-    /**
-     * Sets the id.
-     *
-     * @param id the new id
-     */
-    public void setId(final String id) {
-      this.id = id;
-    }
-  }
-
-  /**
-   * An array of values, each being the `text` value of a column header that is applicable to the current cell.
-   */
-  public class ColumnHeaderTexts extends IBMWatsonGenericModel {
-    private String text;
-
-    /**
-     * Gets the text.
-     *
-     * The `text` value of a column header.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text = text;
-    }
-  }
-
-  /**
-   * If you provide customization input, the normalized version of the column header texts according to the
-   * customization; otherwise, the same value as `column_header_texts`.
-   */
-  public class ColumnHeaderTextsNormalized extends IBMWatsonGenericModel {
-    private String textNormalized;
-
-    /**
-     * Gets the textNormalized.
-     *
-     * The normalized version of a column header text.
-     *
-     * @return the textNormalized
-     */
-    @AuraEnabled
-    public String getTextNormalized() {
-      return textNormalized;
-    }
-
-    /**
-     * Sets the textNormalized.
-     *
-     * @param textNormalized the new textNormalized
-     */
-    public void setTextNormalized(final String textNormalized) {
-      this.textNormalized = textNormalized;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      return mapping;
     }
   }
 
@@ -2269,27 +2103,26 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'cell_id' => 'cellId',
+        'text_normalized' => 'textNormalized',
+        'row_index_begin' => 'rowIndexBegin',
+        'row_index_end' => 'rowIndexEnd',
+        'column_index_begin' => 'columnIndexBegin',
+        'column_index_end' => 'columnIndexEnd'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ColumnHeaders ret = (ColumnHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), IBMWatsonMapModel.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(locationMap), locationMap, IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'cell_id', 'cellId');
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      mapping.put(parentLabel + 'row_index_begin', 'rowIndexBegin');
-      mapping.put(parentLabel + 'row_index_end', 'rowIndexEnd');
-      mapping.put(parentLabel + 'column_index_begin', 'columnIndexBegin');
-      mapping.put(parentLabel + 'column_index_end', 'columnIndexEnd');
-      return mapping;
     }
   }
 
@@ -2404,17 +2237,6 @@ public class IBMCompareComplyV1Models {
      */
     public CompareDocumentsOptionsBuilder newBuilder() {
       return new CompareDocumentsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('file1', 'file_1');
-      mapping.put('file2', 'file_2');
-      mapping.put('file1ContentType', 'file_1_content_type');
-      mapping.put('file2ContentType', 'file_2_content_type');
-      mapping.put('file1Label', 'file_1_label');
-      mapping.put('file2Label', 'file_2_label');
-      return mapping;
     }
   }
 
@@ -2678,6 +2500,16 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'model_id' => 'modelId',
+        'model_version' => 'modelVersion',
+        'aligned_elements' => 'alignedElements',
+        'unaligned_elements' => 'unalignedElements'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       CompareReturn ret = (CompareReturn) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documents
@@ -2687,7 +2519,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedDocuments.size(); i++) {
           Document currentItem = ret.getDocuments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('documents');
-          Document newItem = (Document) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Document.class);
+          Document newItem = (Document) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Document.class);
           newDocuments.add(newItem);
         }
         ret.documents = newDocuments;
@@ -2700,7 +2532,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAlignedElements.size(); i++) {
           AlignedElement currentItem = ret.getAlignedElements().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('alignedElements');
-          AlignedElement newItem = (AlignedElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AlignedElement.class);
+          AlignedElement newItem = (AlignedElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AlignedElement.class);
           newAlignedElements.add(newItem);
         }
         ret.alignedElements = newAlignedElements;
@@ -2713,27 +2545,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedUnalignedElements.size(); i++) {
           UnalignedElement currentItem = ret.getUnalignedElements().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('unalignedElements');
-          UnalignedElement newItem = (UnalignedElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UnalignedElement.class);
+          UnalignedElement newItem = (UnalignedElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UnalignedElement.class);
           newUnalignedElements.add(newItem);
         }
         ret.unalignedElements = newUnalignedElements;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'model_id', 'modelId');
-      mapping.put(parentLabel + 'model_version', 'modelVersion');
-      mapping.put(parentLabel + 'aligned_elements', 'alignedElements');
-      mapping.putAll(((IBMWatsonGenericModel) AlignedElement.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aligned_elements/', mapping));
-      mapping.put(parentLabel + 'unaligned_elements', 'unalignedElements');
-      mapping.putAll(((IBMWatsonGenericModel) UnalignedElement.class.newInstance()).addToApiToSdkMapping(parentLabel + 'unaligned_elements/', mapping));
-      return mapping;
     }
   }
 
@@ -2784,6 +2602,16 @@ public class IBMCompareComplyV1Models {
      */
     public void setRole(final String role) {
       this.role = role;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Contact ret = (Contact) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -2845,15 +2673,11 @@ public class IBMCompareComplyV1Models {
       Contexts ret = (Contexts) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -3002,30 +2826,28 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'confidence_level' => 'confidenceLevel',
+        'text_normalized' => 'textNormalized',
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ContractAmts ret = (ContractAmts) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for interpretation
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation'), Interpretation.class);
+      Map<String, Object> interpretationMap = (Map<String, Object>) jsonMap.get('interpretation');
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap), interpretationMap, Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      mapping.putAll(((IBMWatsonGenericModel) Interpretation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'interpretation/', mapping));
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -3152,25 +2974,23 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'confidence_level' => 'confidenceLevel',
+        'text_normalized' => 'textNormalized',
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ContractCurrencies ret = (ContractCurrencies) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -3319,30 +3139,28 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'confidence_level' => 'confidenceLevel',
+        'text_normalized' => 'textNormalized',
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ContractTerms ret = (ContractTerms) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for interpretation
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation'), Interpretation.class);
+      Map<String, Object> interpretationMap = (Map<String, Object>) jsonMap.get('interpretation');
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap), interpretationMap, Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      mapping.putAll(((IBMWatsonGenericModel) Interpretation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'interpretation/', mapping));
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -3445,24 +3263,22 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'confidence_level' => 'confidenceLevel',
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ContractTypes ret = (ContractTypes) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -3538,12 +3354,6 @@ public class IBMCompareComplyV1Models {
      */
     public ConvertToHtmlOptionsBuilder newBuilder() {
       return new ConvertToHtmlOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('fileContentType', 'file_content_type');
-      return mapping;
     }
   }
 
@@ -3781,17 +3591,6 @@ public class IBMCompareComplyV1Models {
     public CreateBatchOptionsBuilder newBuilder() {
       return new CreateBatchOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('inputCredentialsFile', 'input_credentials_file');
-      mapping.put('inputBucketLocation', 'input_bucket_location');
-      mapping.put('inputBucketName', 'input_bucket_name');
-      mapping.put('outputCredentialsFile', 'output_credentials_file');
-      mapping.put('outputBucketLocation', 'output_bucket_location');
-      mapping.put('outputBucketName', 'output_bucket_name');
-      return mapping;
-    }
   }
 
   /**
@@ -4002,12 +3801,6 @@ public class IBMCompareComplyV1Models {
     public DeleteFeedbackOptionsBuilder newBuilder() {
       return new DeleteFeedbackOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('feedbackId', 'feedback_id');
-      return mapping;
-    }
   }
 
   /**
@@ -4174,6 +3967,16 @@ public class IBMCompareComplyV1Models {
     public void setFailed(final long failed) {
       this.failed = failed;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocCounts ret = (DocCounts) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -4245,6 +4048,16 @@ public class IBMCompareComplyV1Models {
      */
     public void setHash(final String hash) {
       this.hash = hash;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocInfo ret = (DocInfo) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -4326,6 +4139,14 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'section_titles' => 'sectionTitles',
+        'leading_sentences' => 'leadingSentences'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       DocStructure ret = (DocStructure) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for sectionTitles
@@ -4335,7 +4156,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedSectionTitles.size(); i++) {
           SectionTitles currentItem = ret.getSectionTitles().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('sectionTitles');
-          SectionTitles newItem = (SectionTitles) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SectionTitles.class);
+          SectionTitles newItem = (SectionTitles) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SectionTitles.class);
           newSectionTitles.add(newItem);
         }
         ret.sectionTitles = newSectionTitles;
@@ -4348,7 +4169,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedLeadingSentences.size(); i++) {
           LeadingSentence currentItem = ret.getLeadingSentences().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('leadingSentences');
-          LeadingSentence newItem = (LeadingSentence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LeadingSentence.class);
+          LeadingSentence newItem = (LeadingSentence) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LeadingSentence.class);
           newLeadingSentences.add(newItem);
         }
         ret.leadingSentences = newLeadingSentences;
@@ -4361,26 +4182,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedParagraphs.size(); i++) {
           Paragraphs currentItem = ret.getParagraphs().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('paragraphs');
-          Paragraphs newItem = (Paragraphs) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Paragraphs.class);
+          Paragraphs newItem = (Paragraphs) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Paragraphs.class);
           newParagraphs.add(newItem);
         }
         ret.paragraphs = newParagraphs;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'section_titles', 'sectionTitles');
-      mapping.putAll(((IBMWatsonGenericModel) SectionTitles.class.newInstance()).addToApiToSdkMapping(parentLabel + 'section_titles/', mapping));
-      mapping.put(parentLabel + 'leading_sentences', 'leadingSentences');
-      mapping.putAll(((IBMWatsonGenericModel) LeadingSentence.class.newInstance()).addToApiToSdkMapping(parentLabel + 'leading_sentences/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Paragraphs.class.newInstance()).addToApiToSdkMapping(parentLabel + 'paragraphs/', mapping));
-      return mapping;
     }
   }
 
@@ -4476,6 +4284,16 @@ public class IBMCompareComplyV1Models {
      */
     public void setLabel(final String label) {
       this.label = label;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Document ret = (Document) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -4601,25 +4419,23 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'confidence_level' => 'confidenceLevel',
+        'text_normalized' => 'textNormalized',
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       EffectiveDates ret = (EffectiveDates) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -4747,7 +4563,8 @@ public class IBMCompareComplyV1Models {
       Element ret = (Element) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -4757,7 +4574,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
+          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -4770,7 +4587,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
+          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -4783,21 +4600,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
-          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
         ret.attributes = newAttributes;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) TypeLabel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'types/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Category.class.newInstance()).addToApiToSdkMapping(parentLabel + 'categories/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Attribute.class.newInstance()).addToApiToSdkMapping(parentLabel + 'attributes/', mapping));
-      return mapping;
     }
   }
 
@@ -4850,14 +4659,22 @@ public class IBMCompareComplyV1Models {
       this.xend = xend;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'begin', 'xbegin');
-      mapping.put(parentLabel + 'end', 'xend');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'begin' => 'xbegin',
+        'end' => 'xend'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ElementLocations ret = (ElementLocations) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -5005,10 +4822,18 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_label' => 'documentLabel'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ElementPair ret = (ElementPair) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -5018,7 +4843,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabelComparison currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
+          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -5031,7 +4856,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           CategoryComparison currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
+          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -5044,24 +4869,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
-          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
         ret.attributes = newAttributes;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'document_label', 'documentLabel');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Attribute.class.newInstance()).addToApiToSdkMapping(parentLabel + 'attributes/', mapping));
-      return mapping;
     }
   }
 
@@ -5123,12 +4937,6 @@ public class IBMCompareComplyV1Models {
      */
     public ExtractTablesOptionsBuilder newBuilder() {
       return new ExtractTablesOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('fileContentType', 'file_content_type');
-      return mapping;
     }
   }
 
@@ -5344,26 +5152,61 @@ public class IBMCompareComplyV1Models {
       return new FeedbackDataInputBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'feedbackType' => 'feedback_type',
+        'modelId' => 'model_id',
+        'modelVersion' => 'model_version',
+        'originalLabels' => 'original_labels',
+        'updatedLabels' => 'updated_labels'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for document
+      if (document != null) {
+        String documentJsonString = document.serialize();
+        String documentKey = 'document';
+        if (propertyNameMapping.containsKey(documentKey)) {
+          documentKey = propertyNameMapping.get(documentKey);
+        }
+        jsonMap.put(documentKey, JSON.deserializeUntyped(documentJsonString));
       }
-      mapping.put(parentLabel + 'feedbackType', 'feedback_type');
-      mapping.put(parentLabel + 'modelId', 'model_id');
-      mapping.put(parentLabel + 'modelVersion', 'model_version');
+
+      // calling custom serializer for location
       if (location != null) {
-        mapping.putAll(location.addToSdkToApiMapping(parentLabel + 'location/', mapping));
+        String locationJsonString = location.serialize();
+        String locationKey = 'location';
+        if (propertyNameMapping.containsKey(locationKey)) {
+          locationKey = propertyNameMapping.get(locationKey);
+        }
+        jsonMap.put(locationKey, JSON.deserializeUntyped(locationJsonString));
       }
-      mapping.put(parentLabel + 'originalLabels', 'original_labels');
+
+      // calling custom serializer for originalLabels
       if (originalLabels != null) {
-        mapping.putAll(originalLabels.addToSdkToApiMapping(parentLabel + 'originalLabels/', mapping));
+        String originalLabelsJsonString = originalLabels.serialize();
+        String originalLabelsKey = 'originalLabels';
+        if (propertyNameMapping.containsKey(originalLabelsKey)) {
+          originalLabelsKey = propertyNameMapping.get(originalLabelsKey);
+        }
+        jsonMap.put(originalLabelsKey, JSON.deserializeUntyped(originalLabelsJsonString));
       }
-      mapping.put(parentLabel + 'updatedLabels', 'updated_labels');
+
+      // calling custom serializer for updatedLabels
       if (updatedLabels != null) {
-        mapping.putAll(updatedLabels.addToSdkToApiMapping(parentLabel + 'updatedLabels/', mapping));
+        String updatedLabelsJsonString = updatedLabels.serialize();
+        String updatedLabelsKey = 'updatedLabels';
+        if (propertyNameMapping.containsKey(updatedLabelsKey)) {
+          updatedLabelsKey = propertyNameMapping.get(updatedLabelsKey);
+        }
+        jsonMap.put(updatedLabelsKey, JSON.deserializeUntyped(updatedLabelsJsonString));
       }
-      return mapping;
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -5721,46 +5564,45 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'feedback_type' => 'feedbackType',
+        'model_id' => 'modelId',
+        'model_version' => 'modelVersion',
+        'original_labels' => 'originalLabels',
+        'updated_labels' => 'updatedLabels'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       FeedbackDataOutput ret = (FeedbackDataOutput) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document
-      ShortDoc newDocument = (ShortDoc) new ShortDoc().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document'), ShortDoc.class);
+      Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
+      ShortDoc newDocument = (ShortDoc) new ShortDoc().deserialize(JSON.serialize(documentMap), documentMap, ShortDoc.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for originalLabels
-      OriginalLabelsOut newOriginalLabels = (OriginalLabelsOut) new OriginalLabelsOut().deserialize(JSON.serialize(ret.getOriginalLabels()), (Map<String, Object>) jsonMap.get('originalLabels'), OriginalLabelsOut.class);
+      Map<String, Object> originalLabelsMap = (Map<String, Object>) jsonMap.get('originalLabels');
+      OriginalLabelsOut newOriginalLabels = (OriginalLabelsOut) new OriginalLabelsOut().deserialize(JSON.serialize(originalLabelsMap), originalLabelsMap, OriginalLabelsOut.class);
       ret.setOriginalLabels(newOriginalLabels);
 
       // calling custom deserializer for updatedLabels
-      UpdatedLabelsOut newUpdatedLabels = (UpdatedLabelsOut) new UpdatedLabelsOut().deserialize(JSON.serialize(ret.getUpdatedLabels()), (Map<String, Object>) jsonMap.get('updatedLabels'), UpdatedLabelsOut.class);
+      Map<String, Object> updatedLabelsMap = (Map<String, Object>) jsonMap.get('updatedLabels');
+      UpdatedLabelsOut newUpdatedLabels = (UpdatedLabelsOut) new UpdatedLabelsOut().deserialize(JSON.serialize(updatedLabelsMap), updatedLabelsMap, UpdatedLabelsOut.class);
       ret.setUpdatedLabels(newUpdatedLabels);
 
       // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'), Pagination.class);
+      Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'feedback_type', 'feedbackType');
-      mapping.put(parentLabel + 'model_id', 'modelId');
-      mapping.put(parentLabel + 'model_version', 'modelVersion');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.put(parentLabel + 'original_labels', 'originalLabels');
-      mapping.putAll(((IBMWatsonGenericModel) OriginalLabelsOut.class.newInstance()).addToApiToSdkMapping(parentLabel + 'original_labels/', mapping));
-      mapping.put(parentLabel + 'updated_labels', 'updatedLabels');
-      mapping.putAll(((IBMWatsonGenericModel) UpdatedLabelsOut.class.newInstance()).addToApiToSdkMapping(parentLabel + 'updated_labels/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Pagination.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pagination/', mapping));
-      return mapping;
     }
   }
 
@@ -5805,18 +5647,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedFeedback.size(); i++) {
           GetFeedback currentItem = ret.getFeedback().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('feedback');
-          GetFeedback newItem = (GetFeedback) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), GetFeedback.class);
+          GetFeedback newItem = (GetFeedback) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), GetFeedback.class);
           newFeedback.add(newItem);
         }
         ret.feedback = newFeedback;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) GetFeedback.class.newInstance()).addToApiToSdkMapping(parentLabel + 'feedback/', mapping));
-      return mapping;
     }
   }
 
@@ -5940,25 +5777,23 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'feedback_id' => 'feedbackId',
+        'user_id' => 'userId',
+        'feedback_data' => 'feedbackData'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       FeedbackReturn ret = (FeedbackReturn) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for feedbackData
-      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(ret.getFeedbackData()), (Map<String, Object>) jsonMap.get('feedbackData'), FeedbackDataOutput.class);
+      Map<String, Object> feedbackDataMap = (Map<String, Object>) jsonMap.get('feedbackData');
+      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(feedbackDataMap), feedbackDataMap, FeedbackDataOutput.class);
       ret.setFeedbackData(newFeedbackData);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'feedback_id', 'feedbackId');
-      mapping.put(parentLabel + 'user_id', 'userId');
-      mapping.put(parentLabel + 'feedback_data', 'feedbackData');
-      mapping.putAll(((IBMWatsonGenericModel) FeedbackDataOutput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'feedback_data/', mapping));
-      return mapping;
     }
   }
 
@@ -5992,12 +5827,6 @@ public class IBMCompareComplyV1Models {
      */
     public GetBatchOptionsBuilder newBuilder() {
       return new GetBatchOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('batchId', 'batch_id');
-      return mapping;
     }
   }
 
@@ -6158,24 +5987,22 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'feedback_id' => 'feedbackId',
+        'feedback_data' => 'feedbackData'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       GetFeedback ret = (GetFeedback) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for feedbackData
-      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(ret.getFeedbackData()), (Map<String, Object>) jsonMap.get('feedbackData'), FeedbackDataOutput.class);
+      Map<String, Object> feedbackDataMap = (Map<String, Object>) jsonMap.get('feedbackData');
+      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(feedbackDataMap), feedbackDataMap, FeedbackDataOutput.class);
       ret.setFeedbackData(newFeedbackData);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'feedback_id', 'feedbackId');
-      mapping.put(parentLabel + 'feedback_data', 'feedbackData');
-      mapping.putAll(((IBMWatsonGenericModel) FeedbackDataOutput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'feedback_data/', mapping));
-      return mapping;
     }
   }
 
@@ -6224,12 +6051,6 @@ public class IBMCompareComplyV1Models {
      */
     public GetFeedbackOptionsBuilder newBuilder() {
       return new GetFeedbackOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('feedbackId', 'feedback_id');
-      return mapping;
     }
   }
 
@@ -6420,14 +6241,22 @@ public class IBMCompareComplyV1Models {
       this.html = html;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'num_pages', 'numPages');
-      mapping.put(parentLabel + 'publication_date', 'publicationDate');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'num_pages' => 'numPages',
+        'publication_date' => 'publicationDate'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      HTMLReturn ret = (HTMLReturn) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -6507,9 +6336,21 @@ public class IBMCompareComplyV1Models {
       this.unit = unit;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'numeric_value', 'numericValue');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'numeric_value' => 'numericValue'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Interpretation ret = (Interpretation) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -6590,23 +6431,21 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'cell_id' => 'cellId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Key ret = (Key) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'cell_id', 'cellId');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -6667,7 +6506,8 @@ public class IBMCompareComplyV1Models {
       KeyValuePair ret = (KeyValuePair) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for key
-      Key newKey = (Key) new Key().deserialize(JSON.serialize(ret.getKey()), (Map<String, Object>) jsonMap.get('key'), Key.class);
+      Map<String, Object> keyMap = (Map<String, Object>) jsonMap.get('key');
+      Key newKey = (Key) new Key().deserialize(JSON.serialize(keyMap), keyMap, Key.class);
       ret.setKey(newKey);
 
       // calling custom deserializer for value
@@ -6677,19 +6517,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedValue.size(); i++) {
           Value currentItem = ret.getValue().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('value');
-          Value newItem = (Value) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
           newValue.add(newItem);
         }
         ret.value = newValue;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Key.class.newInstance()).addToApiToSdkMapping(parentLabel + 'key/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Value.class.newInstance()).addToApiToSdkMapping(parentLabel + 'value/', mapping));
-      return mapping;
     }
   }
 
@@ -6745,6 +6579,24 @@ public class IBMCompareComplyV1Models {
      */
     public LabelBuilder newBuilder() {
       return new LabelBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Label ret = (Label) super.deserialize(jsonString, jsonMap, classType);
+      LabelBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -6886,10 +6738,18 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'element_locations' => 'elementLocations'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       LeadingSentence ret = (LeadingSentence) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for elementLocations
@@ -6899,20 +6759,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedElementLocations.size(); i++) {
           ElementLocations currentItem = ret.getElementLocations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('elementLocations');
-          ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
+          ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
           newElementLocations.add(newItem);
         }
         ret.elementLocations = newElementLocations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.put(parentLabel + 'element_locations', 'elementLocations');
-      mapping.putAll(((IBMWatsonGenericModel) ElementLocations.class.newInstance()).addToApiToSdkMapping(parentLabel + 'element_locations/', mapping));
-      return mapping;
     }
   }
 
@@ -7211,24 +7064,6 @@ public class IBMCompareComplyV1Models {
      */
     public ListFeedbackOptionsBuilder newBuilder() {
       return new ListFeedbackOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('feedbackType', 'feedback_type');
-      mapping.put('documentTitle', 'document_title');
-      mapping.put('modelId', 'model_id');
-      mapping.put('modelVersion', 'model_version');
-      mapping.put('categoryRemoved', 'category_removed');
-      mapping.put('categoryAdded', 'category_added');
-      mapping.put('categoryNotChanged', 'category_not_changed');
-      mapping.put('typeRemoved', 'type_removed');
-      mapping.put('typeAdded', 'type_added');
-      mapping.put('typeNotChanged', 'type_not_changed');
-      mapping.put('pageLimit', 'page_limit');
-      mapping.put('xsort', 'sort');
-      mapping.put('includeTotal', 'include_total');
-      return mapping;
     }
   }
 
@@ -7531,24 +7366,37 @@ public class IBMCompareComplyV1Models {
       return new LocationBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'xbegin', 'begin');
-      mapping.put(parentLabel + 'xend', 'end');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'begin' => 'xbegin',
+        'end' => 'xend'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Location ret = (Location) super.deserialize(jsonString, jsonMap, classType);
+      LocationBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'begin', 'xbegin');
-      mapping.put(parentLabel + 'end', 'xend');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xbegin' => 'begin',
+        'xend' => 'end'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -7671,15 +7519,11 @@ public class IBMCompareComplyV1Models {
       Mention ret = (Mention) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -7728,14 +7572,31 @@ public class IBMCompareComplyV1Models {
       return new OriginalLabelsInBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (types != null && types[0] != null) {
-        mapping.putAll(types[0].addToSdkToApiMapping(parentLabel + 'types/', mapping));
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // calling custom serializer for types
+      if (types != null) {
+        List<Object> typesJsonList = new List<Object>();
+        for (TypeLabel listItem : types) {
+          String listItemJsonString = listItem.serialize();
+          typesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('types', typesJsonList);
       }
-      if (categories != null && categories[0] != null) {
-        mapping.putAll(categories[0].addToSdkToApiMapping(parentLabel + 'categories/', mapping));
+
+      // calling custom serializer for categories
+      if (categories != null) {
+        List<Object> categoriesJsonList = new List<Object>();
+        for (Category listItem : categories) {
+          String listItemJsonString = listItem.serialize();
+          categoriesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('categories', categoriesJsonList);
       }
-      return mapping;
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -7918,7 +7779,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
+          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -7931,19 +7792,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
+          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) TypeLabel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'types/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Category.class.newInstance()).addToApiToSdkMapping(parentLabel + 'categories/', mapping));
-      return mapping;
     }
   }
 
@@ -8062,16 +7917,24 @@ public class IBMCompareComplyV1Models {
       this.total = total;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'refresh_cursor', 'refreshCursor');
-      mapping.put(parentLabel + 'next_cursor', 'nextCursor');
-      mapping.put(parentLabel + 'refresh_url', 'refreshUrl');
-      mapping.put(parentLabel + 'next_url', 'nextUrl');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'refresh_cursor' => 'refreshCursor',
+        'next_cursor' => 'nextCursor',
+        'refresh_url' => 'refreshUrl',
+        'next_url' => 'nextUrl'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Pagination ret = (Pagination) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -8111,15 +7974,11 @@ public class IBMCompareComplyV1Models {
       Paragraphs ret = (Paragraphs) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -8274,7 +8133,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAddresses.size(); i++) {
           Address currentItem = ret.getAddresses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('addresses');
-          Address newItem = (Address) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Address.class);
+          Address newItem = (Address) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Address.class);
           newAddresses.add(newItem);
         }
         ret.addresses = newAddresses;
@@ -8287,7 +8146,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContacts.size(); i++) {
           Contact currentItem = ret.getContacts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contacts');
-          Contact newItem = (Contact) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contact.class);
+          Contact newItem = (Contact) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contact.class);
           newContacts.add(newItem);
         }
         ret.contacts = newContacts;
@@ -8300,19 +8159,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedMentions.size(); i++) {
           Mention currentItem = ret.getMentions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('mentions');
-          Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mention.class);
+          Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mention.class);
           newMentions.add(newItem);
         }
         ret.mentions = newMentions;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Address.class.newInstance()).addToApiToSdkMapping(parentLabel + 'addresses/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Mention.class.newInstance()).addToApiToSdkMapping(parentLabel + 'mentions/', mapping));
-      return mapping;
     }
   }
 
@@ -8461,124 +8314,28 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'confidence_level' => 'confidenceLevel',
+        'text_normalized' => 'textNormalized',
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       PaymentTerms ret = (PaymentTerms) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for interpretation
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation'), Interpretation.class);
+      Map<String, Object> interpretationMap = (Map<String, Object>) jsonMap.get('interpretation');
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap), interpretationMap, Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      mapping.putAll(((IBMWatsonGenericModel) Interpretation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'interpretation/', mapping));
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
-    }
-  }
-
-  /**
-   * An array of values, each being the `id` value of a row header that is applicable to this body cell.
-   */
-  public class RowHeaderIds extends IBMWatsonGenericModel {
-    private String id;
-
-    /**
-     * Gets the id.
-     *
-     * The `id` values of a row header.
-     *
-     * @return the id
-     */
-    @AuraEnabled
-    public String getId() {
-      return id;
-    }
-
-    /**
-     * Sets the id.
-     *
-     * @param id the new id
-     */
-    public void setId(final String id) {
-      this.id = id;
-    }
-  }
-
-  /**
-   * An array of values, each being the `text` value of a row header that is applicable to this body cell.
-   */
-  public class RowHeaderTexts extends IBMWatsonGenericModel {
-    private String text;
-
-    /**
-     * Gets the text.
-     *
-     * The `text` value of a row header.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text = text;
-    }
-  }
-
-  /**
-   * If you provide customization input, the normalized version of the row header texts according to the customization;
-   * otherwise, the same value as `row_header_texts`.
-   */
-  public class RowHeaderTextsNormalized extends IBMWatsonGenericModel {
-    private String textNormalized;
-
-    /**
-     * Gets the textNormalized.
-     *
-     * The normalized version of a row header text.
-     *
-     * @return the textNormalized
-     */
-    @AuraEnabled
-    public String getTextNormalized() {
-      return textNormalized;
-    }
-
-    /**
-     * Sets the textNormalized.
-     *
-     * @param textNormalized the new textNormalized
-     */
-    public void setTextNormalized(final String textNormalized) {
-      this.textNormalized = textNormalized;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      return mapping;
     }
   }
 
@@ -8770,28 +8527,26 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'cell_id' => 'cellId',
+        'text_normalized' => 'textNormalized',
+        'row_index_begin' => 'rowIndexBegin',
+        'row_index_end' => 'rowIndexEnd',
+        'column_index_begin' => 'columnIndexBegin',
+        'column_index_end' => 'columnIndexEnd'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       RowHeaders ret = (RowHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'cell_id', 'cellId');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      mapping.put(parentLabel + 'row_index_begin', 'rowIndexBegin');
-      mapping.put(parentLabel + 'row_index_end', 'rowIndexEnd');
-      mapping.put(parentLabel + 'column_index_begin', 'columnIndexBegin');
-      mapping.put(parentLabel + 'column_index_end', 'columnIndexEnd');
-      return mapping;
     }
   }
 
@@ -8853,15 +8608,11 @@ public class IBMCompareComplyV1Models {
       SectionTitle ret = (SectionTitle) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -8967,10 +8718,18 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'element_locations' => 'elementLocations'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       SectionTitles ret = (SectionTitles) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for elementLocations
@@ -8980,20 +8739,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedElementLocations.size(); i++) {
           ElementLocations currentItem = ret.getElementLocations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('elementLocations');
-          ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
+          ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
           newElementLocations.add(newItem);
         }
         ret.elementLocations = newElementLocations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.put(parentLabel + 'element_locations', 'elementLocations');
-      mapping.putAll(((IBMWatsonGenericModel) ElementLocations.class.newInstance()).addToApiToSdkMapping(parentLabel + 'element_locations/', mapping));
-      return mapping;
     }
   }
 
@@ -9046,6 +8798,24 @@ public class IBMCompareComplyV1Models {
      */
     public ShortDocBuilder newBuilder() {
       return new ShortDocBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ShortDoc ret = (ShortDoc) super.deserialize(jsonString, jsonMap, classType);
+      ShortDocBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -9264,26 +9034,25 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'cell_id' => 'cellId',
+        'row_index_begin' => 'rowIndexBegin',
+        'row_index_end' => 'rowIndexEnd',
+        'column_index_begin' => 'columnIndexBegin',
+        'column_index_end' => 'columnIndexEnd'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TableHeaders ret = (TableHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), IBMWatsonMapModel.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(locationMap), locationMap, IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'cell_id', 'cellId');
-      mapping.put(parentLabel + 'row_index_begin', 'rowIndexBegin');
-      mapping.put(parentLabel + 'row_index_end', 'rowIndexEnd');
-      mapping.put(parentLabel + 'column_index_begin', 'columnIndexBegin');
-      mapping.put(parentLabel + 'column_index_end', 'columnIndexEnd');
-      return mapping;
     }
   }
 
@@ -9385,10 +9154,19 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'model_id' => 'modelId',
+        'model_version' => 'modelVersion'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TableReturn ret = (TableReturn) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document
-      DocInfo newDocument = (DocInfo) new DocInfo().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document'), DocInfo.class);
+      Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
+      DocInfo newDocument = (DocInfo) new DocInfo().deserialize(JSON.serialize(documentMap), documentMap, DocInfo.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for tables
@@ -9398,20 +9176,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTables.size(); i++) {
           Tables currentItem = ret.getTables().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tables');
-          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
+          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
           newTables.add(newItem);
         }
         ret.tables = newTables;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'model_id', 'modelId');
-      mapping.put(parentLabel + 'model_version', 'modelVersion');
-      mapping.putAll(((IBMWatsonGenericModel) Tables.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tables/', mapping));
-      return mapping;
     }
   }
 
@@ -9474,15 +9245,11 @@ public class IBMCompareComplyV1Models {
       TableTitle ret = (TableTitle) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -9722,18 +9489,33 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'section_title' => 'sectionTitle',
+        'table_headers' => 'tableHeaders',
+        'row_headers' => 'rowHeaders',
+        'column_headers' => 'columnHeaders',
+        'body_cells' => 'bodyCells',
+        'key_value_pairs' => 'keyValuePairs'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Tables ret = (Tables) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for sectionTitle
-      SectionTitle newSectionTitle = (SectionTitle) new SectionTitle().deserialize(JSON.serialize(ret.getSectionTitle()), (Map<String, Object>) jsonMap.get('sectionTitle'), SectionTitle.class);
+      Map<String, Object> sectionTitleMap = (Map<String, Object>) jsonMap.get('sectionTitle');
+      SectionTitle newSectionTitle = (SectionTitle) new SectionTitle().deserialize(JSON.serialize(sectionTitleMap), sectionTitleMap, SectionTitle.class);
       ret.setSectionTitle(newSectionTitle);
 
       // calling custom deserializer for title
-      TableTitle newTitle = (TableTitle) new TableTitle().deserialize(JSON.serialize(ret.getTitle()), (Map<String, Object>) jsonMap.get('title'), TableTitle.class);
+      Map<String, Object> titleMap = (Map<String, Object>) jsonMap.get('title');
+      TableTitle newTitle = (TableTitle) new TableTitle().deserialize(JSON.serialize(titleMap), titleMap, TableTitle.class);
       ret.setTitle(newTitle);
 
       // calling custom deserializer for tableHeaders
@@ -9743,7 +9525,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTableHeaders.size(); i++) {
           TableHeaders currentItem = ret.getTableHeaders().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tableHeaders');
-          TableHeaders newItem = (TableHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TableHeaders.class);
+          TableHeaders newItem = (TableHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TableHeaders.class);
           newTableHeaders.add(newItem);
         }
         ret.tableHeaders = newTableHeaders;
@@ -9756,7 +9538,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedRowHeaders.size(); i++) {
           RowHeaders currentItem = ret.getRowHeaders().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaders');
-          RowHeaders newItem = (RowHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaders.class);
+          RowHeaders newItem = (RowHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaders.class);
           newRowHeaders.add(newItem);
         }
         ret.rowHeaders = newRowHeaders;
@@ -9769,7 +9551,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedColumnHeaders.size(); i++) {
           ColumnHeaders currentItem = ret.getColumnHeaders().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaders');
-          ColumnHeaders newItem = (ColumnHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaders.class);
+          ColumnHeaders newItem = (ColumnHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaders.class);
           newColumnHeaders.add(newItem);
         }
         ret.columnHeaders = newColumnHeaders;
@@ -9782,7 +9564,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedBodyCells.size(); i++) {
           BodyCells currentItem = ret.getBodyCells().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('bodyCells');
-          BodyCells newItem = (BodyCells) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BodyCells.class);
+          BodyCells newItem = (BodyCells) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BodyCells.class);
           newBodyCells.add(newItem);
         }
         ret.bodyCells = newBodyCells;
@@ -9795,7 +9577,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContexts.size(); i++) {
           Contexts currentItem = ret.getContexts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contexts');
-          Contexts newItem = (Contexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contexts.class);
+          Contexts newItem = (Contexts) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contexts.class);
           newContexts.add(newItem);
         }
         ret.contexts = newContexts;
@@ -9808,32 +9590,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedKeyValuePairs.size(); i++) {
           KeyValuePair currentItem = ret.getKeyValuePairs().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('keyValuePairs');
-          KeyValuePair newItem = (KeyValuePair) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeyValuePair.class);
+          KeyValuePair newItem = (KeyValuePair) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeyValuePair.class);
           newKeyValuePairs.add(newItem);
         }
         ret.keyValuePairs = newKeyValuePairs;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.put(parentLabel + 'section_title', 'sectionTitle');
-      mapping.putAll(((IBMWatsonGenericModel) SectionTitle.class.newInstance()).addToApiToSdkMapping(parentLabel + 'section_title/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) TableTitle.class.newInstance()).addToApiToSdkMapping(parentLabel + 'title/', mapping));
-      mapping.put(parentLabel + 'table_headers', 'tableHeaders');
-      mapping.putAll(((IBMWatsonGenericModel) TableHeaders.class.newInstance()).addToApiToSdkMapping(parentLabel + 'table_headers/', mapping));
-      mapping.put(parentLabel + 'row_headers', 'rowHeaders');
-      mapping.putAll(((IBMWatsonGenericModel) RowHeaders.class.newInstance()).addToApiToSdkMapping(parentLabel + 'row_headers/', mapping));
-      mapping.put(parentLabel + 'column_headers', 'columnHeaders');
-      mapping.putAll(((IBMWatsonGenericModel) ColumnHeaders.class.newInstance()).addToApiToSdkMapping(parentLabel + 'column_headers/', mapping));
-      mapping.put(parentLabel + 'body_cells', 'bodyCells');
-      mapping.putAll(((IBMWatsonGenericModel) BodyCells.class.newInstance()).addToApiToSdkMapping(parentLabel + 'body_cells/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Contexts.class.newInstance()).addToApiToSdkMapping(parentLabel + 'contexts/', mapping));
-      mapping.put(parentLabel + 'key_value_pairs', 'keyValuePairs');
-      mapping.putAll(((IBMWatsonGenericModel) KeyValuePair.class.newInstance()).addToApiToSdkMapping(parentLabel + 'key_value_pairs/', mapping));
-      return mapping;
     }
   }
 
@@ -9959,25 +9722,23 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'confidence_level' => 'confidenceLevel',
+        'text_normalized' => 'textNormalized',
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TerminationDates ret = (TerminationDates) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'confidence_level', 'confidenceLevel');
-      mapping.put(parentLabel + 'text_normalized', 'textNormalized');
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 
@@ -10038,24 +9799,45 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'provenance_ids' => 'provenanceIds'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TypeLabel ret = (TypeLabel) super.deserialize(jsonString, jsonMap, classType);
       TypeLabelBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for label
-      Label newLabel = (Label) new Label().deserialize(JSON.serialize(ret.getLabel()), (Map<String, Object>) jsonMap.get('label'), Label.class);
+      Map<String, Object> labelMap = (Map<String, Object>) jsonMap.get('label');
+      Label newLabel = (Label) new Label().deserialize(JSON.serialize(labelMap), labelMap, Label.class);
       retBuilder.label(newLabel);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'provenanceIds', 'provenance_ids');
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'provenance_ids', 'provenanceIds');
-      return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'provenanceIds' => 'provenance_ids'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for label
+      if (label != null) {
+        String labelJsonString = label.serialize();
+        String labelKey = 'label';
+        if (propertyNameMapping.containsKey(labelKey)) {
+          labelKey = propertyNameMapping.get(labelKey);
+        }
+        jsonMap.put(labelKey, JSON.deserializeUntyped(labelJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -10161,7 +9943,8 @@ public class IBMCompareComplyV1Models {
       TypeLabelComparison ret = (TypeLabelComparison) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for label
-      Label newLabel = (Label) new Label().deserialize(JSON.serialize(ret.getLabel()), (Map<String, Object>) jsonMap.get('label'), Label.class);
+      Map<String, Object> labelMap = (Map<String, Object>) jsonMap.get('label');
+      Label newLabel = (Label) new Label().deserialize(JSON.serialize(labelMap), labelMap, Label.class);
       ret.setLabel(newLabel);
 
       return ret;
@@ -10312,10 +10095,18 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_label' => 'documentLabel'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       UnalignedElement ret = (UnalignedElement) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -10325,7 +10116,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabelComparison currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
+          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -10338,7 +10129,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           CategoryComparison currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
+          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -10351,24 +10142,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
-          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
         ret.attributes = newAttributes;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'document_label', 'documentLabel');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Attribute.class.newInstance()).addToApiToSdkMapping(parentLabel + 'attributes/', mapping));
-      return mapping;
     }
   }
 
@@ -10431,12 +10211,6 @@ public class IBMCompareComplyV1Models {
      */
     public UpdateBatchOptionsBuilder newBuilder() {
       return new UpdateBatchOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('batchId', 'batch_id');
-      return mapping;
     }
   }
 
@@ -10572,14 +10346,31 @@ public class IBMCompareComplyV1Models {
       return new UpdatedLabelsInBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (types != null && types[0] != null) {
-        mapping.putAll(types[0].addToSdkToApiMapping(parentLabel + 'types/', mapping));
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // calling custom serializer for types
+      if (types != null) {
+        List<Object> typesJsonList = new List<Object>();
+        for (TypeLabel listItem : types) {
+          String listItemJsonString = listItem.serialize();
+          typesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('types', typesJsonList);
       }
-      if (categories != null && categories[0] != null) {
-        mapping.putAll(categories[0].addToSdkToApiMapping(parentLabel + 'categories/', mapping));
+
+      // calling custom serializer for categories
+      if (categories != null) {
+        List<Object> categoriesJsonList = new List<Object>();
+        for (Category listItem : categories) {
+          String listItemJsonString = listItem.serialize();
+          categoriesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('categories', categoriesJsonList);
       }
-      return mapping;
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -10762,7 +10553,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
+          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -10775,19 +10566,13 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
+          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) TypeLabel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'types/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Category.class.newInstance()).addToApiToSdkMapping(parentLabel + 'categories/', mapping));
-      return mapping;
     }
   }
 
@@ -10868,23 +10653,21 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'cell_id' => 'cellId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Value ret = (Value) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location'), Location.class);
+      Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'cell_id', 'cellId');
-      mapping.putAll(((IBMWatsonGenericModel) Location.class.newInstance()).addToApiToSdkMapping(parentLabel + 'location/', mapping));
-      return mapping;
     }
   }
 

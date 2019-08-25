@@ -26,13 +26,21 @@ public class IBMVisualRecognitionV3Models {
       this.className = className;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'class', 'className');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'class' => 'className'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ModelClass ret = (ModelClass) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -114,14 +122,22 @@ public class IBMVisualRecognitionV3Models {
       this.typeHierarchy = typeHierarchy;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'class', 'className');
-      mapping.put(parentLabel + 'type_hierarchy', 'typeHierarchy');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'class' => 'className',
+        'type_hierarchy' => 'typeHierarchy'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ClassResult ret = (ClassResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -246,10 +262,19 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'source_url' => 'sourceUrl',
+        'resolved_url' => 'resolvedUrl'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ClassifiedImage ret = (ClassifiedImage) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for error
-      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(ret.getError()), (Map<String, Object>) jsonMap.get('error'), ErrorInfo.class);
+      Map<String, Object> errorMap = (Map<String, Object>) jsonMap.get('error');
+      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(errorMap), errorMap, ErrorInfo.class);
       ret.setError(newError);
 
       // calling custom deserializer for classifiers
@@ -259,25 +284,13 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           ClassifierResult currentItem = ret.getClassifiers().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
-          ClassifierResult newItem = (ClassifierResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifierResult.class);
+          ClassifierResult newItem = (ClassifierResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifierResult.class);
           newClassifiers.add(newItem);
         }
         ret.classifiers = newClassifiers;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'source_url', 'sourceUrl');
-      mapping.put(parentLabel + 'resolved_url', 'resolvedUrl');
-      mapping.putAll(((IBMWatsonGenericModel) ErrorInfo.class.newInstance()).addToApiToSdkMapping(parentLabel + 'error/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) ClassifierResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classifiers/', mapping));
-      return mapping;
     }
   }
 
@@ -381,6 +394,14 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'custom_classes' => 'customClasses',
+        'images_processed' => 'imagesProcessed'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ClassifiedImages ret = (ClassifiedImages) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for images
@@ -390,7 +411,7 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedImages.size(); i++) {
           ClassifiedImage currentItem = ret.getImages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('images');
-          ClassifiedImage newItem = (ClassifiedImage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedImage.class);
+          ClassifiedImage newItem = (ClassifiedImage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedImage.class);
           newImages.add(newItem);
         }
         ret.images = newImages;
@@ -403,25 +424,13 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           WarningInfo currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
+          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'custom_classes', 'customClasses');
-      mapping.put(parentLabel + 'images_processed', 'imagesProcessed');
-      mapping.putAll(((IBMWatsonGenericModel) ClassifiedImage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'images/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) WarningInfo.class.newInstance()).addToApiToSdkMapping(parentLabel + 'warnings/', mapping));
-      return mapping;
     }
   }
 
@@ -657,6 +666,14 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId',
+        'core_ml_enabled' => 'coreMlEnabled'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Classifier ret = (Classifier) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for classes
@@ -666,24 +683,13 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ModelClass currentItem = ret.getClasses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
-          ModelClass newItem = (ModelClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ModelClass.class);
+          ModelClass newItem = (ModelClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ModelClass.class);
           newClasses.add(newItem);
         }
         ret.classes = newClasses;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'classifier_id', 'classifierId');
-      mapping.put(parentLabel + 'core_ml_enabled', 'coreMlEnabled');
-      mapping.putAll(((IBMWatsonGenericModel) ModelClass.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classes/', mapping));
-      return mapping;
     }
   }
 
@@ -763,6 +769,13 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ClassifierResult ret = (ClassifierResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for classes
@@ -772,19 +785,13 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassResult currentItem = ret.getClasses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
-          ClassResult newItem = (ClassResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassResult.class);
+          ClassResult newItem = (ClassResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassResult.class);
           newClasses.add(newItem);
         }
         ret.classes = newClasses;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'classifier_id', 'classifierId');
-      mapping.putAll(((IBMWatsonGenericModel) ClassResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classes/', mapping));
-      return mapping;
     }
   }
 
@@ -829,18 +836,13 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           Classifier currentItem = ret.getClassifiers().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
-          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
+          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
           newClassifiers.add(newItem);
         }
         ret.classifiers = newClassifiers;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Classifier.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classifiers/', mapping));
-      return mapping;
     }
   }
 
@@ -987,16 +989,6 @@ public class IBMVisualRecognitionV3Models {
      */
     public ClassifyOptionsBuilder newBuilder() {
       return new ClassifyOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('imagesFile', 'images_file');
-      mapping.put('imagesFilename', 'images_filename');
-      mapping.put('imagesFileContentType', 'images_file_content_type');
-      mapping.put('classifierIds', 'classifier_ids');
-      mapping.put('acceptLanguage', 'Accept-Language');
-      return mapping;
     }
   }
 
@@ -1257,14 +1249,6 @@ public class IBMVisualRecognitionV3Models {
     public CreateClassifierOptionsBuilder newBuilder() {
       return new CreateClassifierOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('positiveExamples', 'positive_examples');
-      mapping.put('negativeExamples', 'negative_examples');
-      mapping.put('negativeExamplesFilename', 'negative_examples_filename');
-      return mapping;
-    }
   }
 
   /**
@@ -1414,12 +1398,6 @@ public class IBMVisualRecognitionV3Models {
     public DeleteClassifierOptionsBuilder newBuilder() {
       return new DeleteClassifierOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifierId', 'classifier_id');
-      return mapping;
-    }
   }
 
   /**
@@ -1511,12 +1489,6 @@ public class IBMVisualRecognitionV3Models {
      */
     public DeleteUserDataOptionsBuilder newBuilder() {
       return new DeleteUserDataOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customerId', 'customer_id');
-      return mapping;
     }
   }
 
@@ -1671,15 +1643,6 @@ public class IBMVisualRecognitionV3Models {
      */
     public DetectFacesOptionsBuilder newBuilder() {
       return new DetectFacesOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('imagesFile', 'images_file');
-      mapping.put('imagesFilename', 'images_filename');
-      mapping.put('imagesFileContentType', 'images_file_content_type');
-      mapping.put('acceptLanguage', 'Accept-Language');
-      return mapping;
     }
   }
 
@@ -1863,6 +1826,13 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'images_processed' => 'imagesProcessed'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       DetectedFaces ret = (DetectedFaces) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for images
@@ -1872,7 +1842,7 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedImages.size(); i++) {
           ImageWithFaces currentItem = ret.getImages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('images');
-          ImageWithFaces newItem = (ImageWithFaces) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ImageWithFaces.class);
+          ImageWithFaces newItem = (ImageWithFaces) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ImageWithFaces.class);
           newImages.add(newItem);
         }
         ret.images = newImages;
@@ -1885,24 +1855,13 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           WarningInfo currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
+          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'images_processed', 'imagesProcessed');
-      mapping.putAll(((IBMWatsonGenericModel) ImageWithFaces.class.newInstance()).addToApiToSdkMapping(parentLabel + 'images/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) WarningInfo.class.newInstance()).addToApiToSdkMapping(parentLabel + 'warnings/', mapping));
-      return mapping;
     }
   }
 
@@ -1978,9 +1937,21 @@ public class IBMVisualRecognitionV3Models {
       this.errorId = errorId;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'error_id', 'errorId');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'error_id' => 'errorId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ErrorInfo ret = (ErrorInfo) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -2060,27 +2031,31 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'face_location' => 'faceLocation'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Face ret = (Face) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for age
-      FaceAge newAge = (FaceAge) new FaceAge().deserialize(JSON.serialize(ret.getAge()), (Map<String, Object>) jsonMap.get('age'), FaceAge.class);
+      Map<String, Object> ageMap = (Map<String, Object>) jsonMap.get('age');
+      FaceAge newAge = (FaceAge) new FaceAge().deserialize(JSON.serialize(ageMap), ageMap, FaceAge.class);
       ret.setAge(newAge);
 
       // calling custom deserializer for gender
-      FaceGender newGender = (FaceGender) new FaceGender().deserialize(JSON.serialize(ret.getGender()), (Map<String, Object>) jsonMap.get('gender'), FaceGender.class);
+      Map<String, Object> genderMap = (Map<String, Object>) jsonMap.get('gender');
+      FaceGender newGender = (FaceGender) new FaceGender().deserialize(JSON.serialize(genderMap), genderMap, FaceGender.class);
       ret.setGender(newGender);
 
       // calling custom deserializer for faceLocation
-      FaceLocation newFaceLocation = (FaceLocation) new FaceLocation().deserialize(JSON.serialize(ret.getFaceLocation()), (Map<String, Object>) jsonMap.get('faceLocation'), FaceLocation.class);
+      Map<String, Object> faceLocationMap = (Map<String, Object>) jsonMap.get('faceLocation');
+      FaceLocation newFaceLocation = (FaceLocation) new FaceLocation().deserialize(JSON.serialize(faceLocationMap), faceLocationMap, FaceLocation.class);
       ret.setFaceLocation(newFaceLocation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) FaceGender.class.newInstance()).addToApiToSdkMapping(parentLabel + 'gender/', mapping));
-      mapping.put(parentLabel + 'face_location', 'faceLocation');
-      return mapping;
     }
   }
 
@@ -2154,6 +2129,16 @@ public class IBMVisualRecognitionV3Models {
      */
     public void setScore(final Double score) {
       this.score = score;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      FaceAge ret = (FaceAge) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -2229,9 +2214,21 @@ public class IBMVisualRecognitionV3Models {
       this.score = score;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'gender_label', 'genderLabel');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'gender_label' => 'genderLabel'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      FaceGender ret = (FaceGender) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -2327,6 +2324,16 @@ public class IBMVisualRecognitionV3Models {
     public void setTop(final Double top) {
       this.top = top;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      FaceLocation ret = (FaceLocation) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -2359,12 +2366,6 @@ public class IBMVisualRecognitionV3Models {
      */
     public GetClassifierOptionsBuilder newBuilder() {
       return new GetClassifierOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifierId', 'classifier_id');
-      return mapping;
     }
   }
 
@@ -2457,12 +2458,6 @@ public class IBMVisualRecognitionV3Models {
      */
     public GetCoreMlModelOptionsBuilder newBuilder() {
       return new GetCoreMlModelOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifierId', 'classifier_id');
-      return mapping;
     }
   }
 
@@ -2646,6 +2641,14 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'source_url' => 'sourceUrl',
+        'resolved_url' => 'resolvedUrl'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ImageWithFaces ret = (ImageWithFaces) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for faces
@@ -2655,25 +2658,18 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedFaces.size(); i++) {
           Face currentItem = ret.getFaces().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('faces');
-          Face newItem = (Face) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Face.class);
+          Face newItem = (Face) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Face.class);
           newFaces.add(newItem);
         }
         ret.faces = newFaces;
       }
 
       // calling custom deserializer for error
-      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(ret.getError()), (Map<String, Object>) jsonMap.get('error'), ErrorInfo.class);
+      Map<String, Object> errorMap = (Map<String, Object>) jsonMap.get('error');
+      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(errorMap), errorMap, ErrorInfo.class);
       ret.setError(newError);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Face.class.newInstance()).addToApiToSdkMapping(parentLabel + 'faces/', mapping));
-      mapping.put(parentLabel + 'source_url', 'sourceUrl');
-      mapping.put(parentLabel + 'resolved_url', 'resolvedUrl');
-      mapping.putAll(((IBMWatsonGenericModel) ErrorInfo.class.newInstance()).addToApiToSdkMapping(parentLabel + 'error/', mapping));
-      return mapping;
     }
   }
 
@@ -2843,15 +2839,6 @@ public class IBMVisualRecognitionV3Models {
     public UpdateClassifierOptionsBuilder newBuilder() {
       return new UpdateClassifierOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifierId', 'classifier_id');
-      mapping.put('positiveExamples', 'positive_examples');
-      mapping.put('negativeExamples', 'negative_examples');
-      mapping.put('negativeExamplesFilename', 'negative_examples_filename');
-      return mapping;
-    }
   }
 
   /**
@@ -3019,13 +3006,21 @@ public class IBMVisualRecognitionV3Models {
       this.description = description;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'warning_id', 'warningId');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'warning_id' => 'warningId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      WarningInfo ret = (WarningInfo) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 

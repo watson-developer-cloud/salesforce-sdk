@@ -3,7 +3,7 @@
  * dialog editor to create conversation flows between your apps and your users.
  *
  * @version V2
- * @see <a href="http://www.ibm.com/watson/developercloud/assistant.html">Assistant</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/assistant/">Assistant</a>
  */
 public class IBMAssistantV2 extends IBMWatsonService {
 
@@ -126,12 +126,12 @@ public class IBMAssistantV2 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (messageOptions.input() != null) {
-      contentJson.put('input', messageOptions.input());
+      contentJson.put('input', messageOptions.input().serialize());
     }
     if (messageOptions.context() != null) {
-      contentJson.put('context', messageOptions.context());
+      contentJson.put('context', messageOptions.context().serialize());
     }
-    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, messageOptions.getSdkToApiMapping()));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV2Models.MessageResponse) createServiceCall(builder.build(), IBMAssistantV2Models.MessageResponse.class);
   }

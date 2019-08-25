@@ -67,13 +67,33 @@ public class IBMWatsonICP4DTokenResponse extends IBMWatsonGenericModel {
     this.message = message;
   }
 
-  public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-    mapping.put('accessToken', 'access_token');
-    return mapping;
+  public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+    if (jsonMap == null) {
+      return null;
+    }
+
+    // replace any names that are different between the API and SDK
+    Map<String, String> propertyNameMapping = new Map<String, String> {
+      'access_token' => 'accessToken'
+    };
+    jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+    jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+    IBMWatsonICP4DTokenResponse ret = (IBMWatsonICP4DTokenResponse) super.deserialize(jsonString, jsonMap, classType);
+
+    return ret;    
   }
 
-  public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-    mapping.put('access_token', 'accessToken');
-    return mapping;
+  public String serialize() {
+    // get map representation of current model
+    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+    // replace any names that are different between the SDK and API
+    Map<String, String> propertyNameMapping = new Map<String, String> {
+      'accessToken' => 'access_token'
+    };
+    jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+    return JSON.serialize(jsonMap);
   }
 }

@@ -4,7 +4,7 @@
  * that the service can apply those classes to new inputs.
  *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-classifier.html">Natural Language Classifier</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/natural-language-classifier/">Natural Language Classifier</a>
  */
 public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
 
@@ -62,7 +62,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', classifyOptions.text());
-    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, classifyOptions.getSdkToApiMapping()));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMNaturalLanguageClassifierV1Models.Classification) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.Classification.class);
   }
@@ -90,8 +90,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
       }
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('collection', classifyCollectionOptions.collection());
-    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, classifyCollectionOptions.getSdkToApiMapping()));
+    List<Object> collectionList = new List<Object>();
+    for (IBMNaturalLanguageClassifierV1Models.ClassifyInput collectionItem : classifyCollectionOptions.collection()) {
+      collectionList.add(collectionItem.serialize());
+    }
+    contentJson.put('collection', collectionList);
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMNaturalLanguageClassifierV1Models.ClassificationCollection) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.ClassificationCollection.class);
   }

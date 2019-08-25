@@ -51,22 +51,35 @@ public class IBMAssistantV2Models {
       return new CaptureGroupBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'xgroup', 'group');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'group' => 'xgroup'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      CaptureGroup ret = (CaptureGroup) super.deserialize(jsonString, jsonMap, classType);
+      CaptureGroupBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'group', 'xgroup');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xgroup' => 'group'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -180,12 +193,6 @@ public class IBMAssistantV2Models {
     public CreateSessionOptionsBuilder newBuilder() {
       return new CreateSessionOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('assistantId', 'assistant_id');
-      return mapping;
-    }
   }
 
   /**
@@ -295,13 +302,6 @@ public class IBMAssistantV2Models {
      */
     public DeleteSessionOptionsBuilder newBuilder() {
       return new DeleteSessionOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('assistantId', 'assistant_id');
-      mapping.put('sessionId', 'session_id');
-      return mapping;
     }
   }
 
@@ -427,6 +427,16 @@ public class IBMAssistantV2Models {
     public void setMessage(final String message) {
       this.message = message;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogLogMessage ret = (DialogLogMessage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -549,19 +559,22 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'actionType',
+        'result_variable' => 'resultVariable'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       DialogNodeAction ret = (DialogNodeAction) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for parameters
-      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getParameters()), (Map<String, Object>) jsonMap.get('parameters'), IBMWatsonMapModel.class);
+      Map<String, Object> parametersMap = (Map<String, Object>) jsonMap.get('parameters');
+      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(parametersMap), parametersMap, IBMWatsonMapModel.class);
       ret.setParameters(newParameters);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'type', 'actionType');
-      mapping.put(parentLabel + 'result_variable', 'resultVariable');
-      return mapping;
     }
   }
 
@@ -622,15 +635,11 @@ public class IBMAssistantV2Models {
       DialogNodeOutputOptionsElement ret = (DialogNodeOutputOptionsElement) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for value
-      DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value'), DialogNodeOutputOptionsElementValue.class);
+      Map<String, Object> valueMap = (Map<String, Object>) jsonMap.get('value');
+      DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(valueMap), valueMap, DialogNodeOutputOptionsElementValue.class);
       ret.setValue(newValue);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) DialogNodeOutputOptionsElementValue.class.newInstance()).addToApiToSdkMapping(parentLabel + 'value/', mapping));
-      return mapping;
     }
   }
 
@@ -669,15 +678,11 @@ public class IBMAssistantV2Models {
       DialogNodeOutputOptionsElementValue ret = (DialogNodeOutputOptionsElementValue) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for input
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
+      Map<String, Object> inputMap = (Map<String, Object>) jsonMap.get('input');
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap), inputMap, MessageInput.class);
       ret.setInput(newInput);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) MessageInput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'input/', mapping));
-      return mapping;
     }
   }
 
@@ -752,13 +757,21 @@ public class IBMAssistantV2Models {
       this.conditions = conditions;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'dialog_node', 'dialogNode');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'dialog_node' => 'dialogNode'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      DialogNodesVisited ret = (DialogNodesVisited) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -995,6 +1008,15 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'response_type' => 'responseType',
+        'time' => 'xtime',
+        'message_to_human_agent' => 'messageToHumanAgent'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       DialogRuntimeResponseGeneric ret = (DialogRuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
       DialogRuntimeResponseGenericBuilder retBuilder = ret.newBuilder();
 
@@ -1005,7 +1027,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedOptions.size(); i++) {
           DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('options');
-          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
         retBuilder.options(newOptions);
@@ -1018,7 +1040,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
           DialogSuggestion currentItem = ret.getSuggestions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions');
-          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
+          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
           newSuggestions.add(newItem);
         }
         retBuilder.suggestions(newSuggestions);
@@ -1031,27 +1053,13 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           SearchResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          SearchResult newItem = (SearchResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SearchResult.class);
+          SearchResult newItem = (SearchResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SearchResult.class);
           newResults.add(newItem);
         }
         retBuilder.results(newResults);
       }
 
       return retBuilder.build();
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'response_type', 'responseType');
-      mapping.put(parentLabel + 'time', 'xtime');
-      mapping.putAll(((IBMWatsonGenericModel) DialogNodeOutputOptionsElement.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
-      mapping.put(parentLabel + 'message_to_human_agent', 'messageToHumanAgent');
-      mapping.putAll(((IBMWatsonGenericModel) DialogSuggestion.class.newInstance()).addToApiToSdkMapping(parentLabel + 'suggestions/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) SearchResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
-      return mapping;
     }
   }
 
@@ -1400,19 +1408,16 @@ public class IBMAssistantV2Models {
       DialogSuggestion ret = (DialogSuggestion) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for value
-      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value'), DialogSuggestionValue.class);
+      Map<String, Object> valueMap = (Map<String, Object>) jsonMap.get('value');
+      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(valueMap), valueMap, DialogSuggestionValue.class);
       ret.setValue(newValue);
 
       // calling custom deserializer for output
-      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'), IBMWatsonMapModel.class);
+      Map<String, Object> outputMap = (Map<String, Object>) jsonMap.get('output');
+      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(outputMap), outputMap, IBMWatsonMapModel.class);
       ret.setOutput(newOutput);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) DialogSuggestionValue.class.newInstance()).addToApiToSdkMapping(parentLabel + 'value/', mapping));
-      return mapping;
     }
   }
 
@@ -1452,15 +1457,11 @@ public class IBMAssistantV2Models {
       DialogSuggestionValue ret = (DialogSuggestionValue) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for input
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'), MessageInput.class);
+      Map<String, Object> inputMap = (Map<String, Object>) jsonMap.get('input');
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap), inputMap, MessageInput.class);
       ret.setInput(newInput);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) MessageInput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'input/', mapping));
-      return mapping;
     }
   }
 
@@ -1523,40 +1524,60 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'global' => 'xglobal'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       MessageContext ret = (MessageContext) super.deserialize(jsonString, jsonMap, classType);
       MessageContextBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for xglobal
-      MessageContextGlobal newXglobal = (MessageContextGlobal) new MessageContextGlobal().deserialize(JSON.serialize(ret.getXglobal()), (Map<String, Object>) jsonMap.get('xglobal'), MessageContextGlobal.class);
+      Map<String, Object> xglobalMap = (Map<String, Object>) jsonMap.get('xglobal');
+      MessageContextGlobal newXglobal = (MessageContextGlobal) new MessageContextGlobal().deserialize(JSON.serialize(xglobalMap), xglobalMap, MessageContextGlobal.class);
       retBuilder.xglobal(newXglobal);
 
       // calling custom deserializer for skills
-      MessageContextSkills newSkills = (MessageContextSkills) new MessageContextSkills().deserialize(JSON.serialize(ret.getSkills()), (Map<String, Object>) jsonMap.get('skills'), MessageContextSkills.class);
+      Map<String, Object> skillsMap = (Map<String, Object>) jsonMap.get('skills');
+      MessageContextSkills newSkills = (MessageContextSkills) new MessageContextSkills().deserialize(JSON.serialize(skillsMap), skillsMap, MessageContextSkills.class);
       retBuilder.skills(newSkills);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'xglobal', 'global');
-      if (xglobal != null) {
-        mapping.putAll(xglobal.addToSdkToApiMapping(parentLabel + 'xglobal/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xglobal' => 'global'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for xglobal
+      if (xglobal != null) {
+        String xglobalJsonString = xglobal.serialize();
+        String xglobalKey = 'xglobal';
+        if (propertyNameMapping.containsKey(xglobalKey)) {
+          xglobalKey = propertyNameMapping.get(xglobalKey);
+        }
+        jsonMap.put(xglobalKey, JSON.deserializeUntyped(xglobalJsonString));
       }
-      mapping.put(parentLabel + 'global', 'xglobal');
-      mapping.putAll(((IBMWatsonGenericModel) MessageContextGlobal.class.newInstance()).addToApiToSdkMapping(parentLabel + 'global/', mapping));
-      return mapping;
+
+      // calling custom serializer for skills
+      if (skills != null) {
+        String skillsJsonString = skills.serialize();
+        String skillsKey = 'skills';
+        if (propertyNameMapping.containsKey(skillsKey)) {
+          skillsKey = propertyNameMapping.get(skillsKey);
+        }
+        jsonMap.put(skillsKey, JSON.deserializeUntyped(skillsJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1652,36 +1673,45 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'system' => 'xsystem'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       MessageContextGlobal ret = (MessageContextGlobal) super.deserialize(jsonString, jsonMap, classType);
       MessageContextGlobalBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for xsystem
-      MessageContextGlobalSystem newXsystem = (MessageContextGlobalSystem) new MessageContextGlobalSystem().deserialize(JSON.serialize(ret.getXsystem()), (Map<String, Object>) jsonMap.get('xsystem'), MessageContextGlobalSystem.class);
+      Map<String, Object> xsystemMap = (Map<String, Object>) jsonMap.get('xsystem');
+      MessageContextGlobalSystem newXsystem = (MessageContextGlobalSystem) new MessageContextGlobalSystem().deserialize(JSON.serialize(xsystemMap), xsystemMap, MessageContextGlobalSystem.class);
       retBuilder.xsystem(newXsystem);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'xsystem', 'system');
-      if (xsystem != null) {
-        mapping.putAll(xsystem.addToSdkToApiMapping(parentLabel + 'xsystem/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xsystem' => 'system'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for xsystem
+      if (xsystem != null) {
+        String xsystemJsonString = xsystem.serialize();
+        String xsystemKey = 'xsystem';
+        if (propertyNameMapping.containsKey(xsystemKey)) {
+          xsystemKey = propertyNameMapping.get(xsystemKey);
+        }
+        jsonMap.put(xsystemKey, JSON.deserializeUntyped(xsystemJsonString));
       }
-      mapping.put(parentLabel + 'system', 'xsystem');
-      mapping.putAll(((IBMWatsonGenericModel) MessageContextGlobalSystem.class.newInstance()).addToApiToSdkMapping(parentLabel + 'system/', mapping));
-      return mapping;
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1792,16 +1822,37 @@ public class IBMAssistantV2Models {
       return new MessageContextGlobalSystemBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'userId', 'user_id');
-      mapping.put(parentLabel + 'turnCount', 'turn_count');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'user_id' => 'userId',
+        'turn_count' => 'turnCount'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      MessageContextGlobalSystem ret = (MessageContextGlobalSystem) super.deserialize(jsonString, jsonMap, classType);
+      MessageContextGlobalSystemBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'user_id', 'userId');
-      mapping.put(parentLabel + 'turn_count', 'turnCount');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'userId' => 'user_id',
+        'turnCount' => 'turn_count'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1910,32 +1961,45 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'user_defined' => 'userDefined'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       MessageContextSkill ret = (MessageContextSkill) super.deserialize(jsonString, jsonMap, classType);
       MessageContextSkillBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for userDefined
-      IBMWatsonMapModel newUserDefined = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getUserDefined()), (Map<String, Object>) jsonMap.get('userDefined'), IBMWatsonMapModel.class);
+      Map<String, Object> userDefinedMap = (Map<String, Object>) jsonMap.get('userDefined');
+      IBMWatsonMapModel newUserDefined = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(userDefinedMap), userDefinedMap, IBMWatsonMapModel.class);
       retBuilder.userDefined(newUserDefined);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'userDefined', 'user_defined');
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'userDefined' => 'user_defined'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for userDefined
+      if (userDefined != null) {
+        String userDefinedJsonString = userDefined.serialize();
+        String userDefinedKey = 'userDefined';
+        if (propertyNameMapping.containsKey(userDefinedKey)) {
+          userDefinedKey = propertyNameMapping.get(userDefinedKey);
+        }
+        jsonMap.put(userDefinedKey, JSON.deserializeUntyped(userDefinedJsonString));
       }
-      mapping.put(parentLabel + 'user_defined', 'userDefined');
-      return mapping;
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -2030,6 +2094,15 @@ public class IBMAssistantV2Models {
       }
 
       return builderResult;
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -2170,11 +2243,20 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'message_type' => 'messageType',
+        'suggestion_id' => 'suggestionId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       MessageInput ret = (MessageInput) super.deserialize(jsonString, jsonMap, classType);
       MessageInputBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for options
-      MessageInputOptions newOptions = (MessageInputOptions) new MessageInputOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options'), MessageInputOptions.class);
+      Map<String, Object> optionsMap = (Map<String, Object>) jsonMap.get('options');
+      MessageInputOptions newOptions = (MessageInputOptions) new MessageInputOptions().deserialize(JSON.serialize(optionsMap), optionsMap, MessageInputOptions.class);
       retBuilder.options(newOptions);
 
       // calling custom deserializer for intents
@@ -2184,7 +2266,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
-          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
         retBuilder.intents(newIntents);
@@ -2197,7 +2279,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
         retBuilder.entities(newEntities);
@@ -2206,32 +2288,56 @@ public class IBMAssistantV2Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'messageType', 'message_type');
-      if (options != null) {
-        mapping.putAll(options.addToSdkToApiMapping(parentLabel + 'options/', mapping));
-      }
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].addToSdkToApiMapping(parentLabel + 'entities/', mapping));
-      }
-      mapping.put(parentLabel + 'suggestionId', 'suggestion_id');
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'messageType' => 'message_type',
+        'suggestionId' => 'suggestion_id'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for options
+      if (options != null) {
+        String optionsJsonString = options.serialize();
+        String optionsKey = 'options';
+        if (propertyNameMapping.containsKey(optionsKey)) {
+          optionsKey = propertyNameMapping.get(optionsKey);
+        }
+        jsonMap.put(optionsKey, JSON.deserializeUntyped(optionsJsonString));
       }
-      mapping.put(parentLabel + 'message_type', 'messageType');
-      mapping.putAll(((IBMWatsonGenericModel) MessageInputOptions.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) RuntimeEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      mapping.put(parentLabel + 'suggestion_id', 'suggestionId');
-      return mapping;
+
+      // calling custom serializer for intents
+      if (intents != null) {
+        List<Object> intentsJsonList = new List<Object>();
+        for (RuntimeIntent listItem : intents) {
+          String listItemJsonString = listItem.serialize();
+          intentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String intentsKey = 'intents';
+        if (propertyNameMapping.containsKey(intentsKey)) {
+          intentsKey = propertyNameMapping.get(intentsKey);
+        }
+        jsonMap.put(intentsKey, intentsJsonList);
+      }
+
+      // calling custom serializer for entities
+      if (entities != null) {
+        List<Object> entitiesJsonList = new List<Object>();
+        for (RuntimeEntity listItem : entities) {
+          String listItemJsonString = listItem.serialize();
+          entitiesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String entitiesKey = 'entities';
+        if (propertyNameMapping.containsKey(entitiesKey)) {
+          entitiesKey = propertyNameMapping.get(entitiesKey);
+        }
+        jsonMap.put(entitiesKey, entitiesJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -2451,16 +2557,37 @@ public class IBMAssistantV2Models {
       return new MessageInputOptionsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'alternateIntents', 'alternate_intents');
-      mapping.put(parentLabel + 'returnContext', 'return_context');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'alternate_intents' => 'alternateIntents',
+        'return_context' => 'returnContext'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      MessageInputOptions ret = (MessageInputOptions) super.deserialize(jsonString, jsonMap, classType);
+      MessageInputOptionsBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'alternate_intents', 'alternateIntents');
-      mapping.put(parentLabel + 'return_context', 'returnContext');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'alternateIntents' => 'alternate_intents',
+        'returnContext' => 'return_context'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -2615,19 +2742,6 @@ public class IBMAssistantV2Models {
      */
     public MessageOptionsBuilder newBuilder() {
       return new MessageOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('assistantId', 'assistant_id');
-      mapping.put('sessionId', 'session_id');
-      if (input != null) {
-        mapping.putAll(input.addToSdkToApiMapping('', mapping));
-      }
-      if (context != null) {
-        mapping.putAll(context.addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
     }
   }
 
@@ -2875,6 +2989,13 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'user_defined' => 'userDefined'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       MessageOutput ret = (MessageOutput) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for generic
@@ -2884,7 +3005,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedGeneric.size(); i++) {
           DialogRuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
-          DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
+          DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
           newGeneric.add(newItem);
         }
         ret.generic = newGeneric;
@@ -2897,7 +3018,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
-          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
         ret.intents = newIntents;
@@ -2910,7 +3031,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -2923,30 +3044,23 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedActions.size(); i++) {
           DialogNodeAction currentItem = ret.getActions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('actions');
-          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
+          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
         ret.actions = newActions;
       }
 
       // calling custom deserializer for debug
-      MessageOutputDebug newDebug = (MessageOutputDebug) new MessageOutputDebug().deserialize(JSON.serialize(ret.getDebug()), (Map<String, Object>) jsonMap.get('debug'), MessageOutputDebug.class);
+      Map<String, Object> debugMap = (Map<String, Object>) jsonMap.get('debug');
+      MessageOutputDebug newDebug = (MessageOutputDebug) new MessageOutputDebug().deserialize(JSON.serialize(debugMap), debugMap, MessageOutputDebug.class);
       ret.setDebug(newDebug);
 
       // calling custom deserializer for userDefined
-      IBMWatsonMapModel newUserDefined = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getUserDefined()), (Map<String, Object>) jsonMap.get('userDefined'), IBMWatsonMapModel.class);
+      Map<String, Object> userDefinedMap = (Map<String, Object>) jsonMap.get('userDefined');
+      IBMWatsonMapModel newUserDefined = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(userDefinedMap), userDefinedMap, IBMWatsonMapModel.class);
       ret.setUserDefined(newUserDefined);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) DialogRuntimeResponseGeneric.class.newInstance()).addToApiToSdkMapping(parentLabel + 'generic/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) RuntimeEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) DialogNodeAction.class.newInstance()).addToApiToSdkMapping(parentLabel + 'actions/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) MessageOutputDebug.class.newInstance()).addToApiToSdkMapping(parentLabel + 'debug/', mapping));
-      mapping.put(parentLabel + 'user_defined', 'userDefined');
-      return mapping;
     }
   }
 
@@ -3050,6 +3164,16 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'nodes_visited' => 'nodesVisited',
+        'log_messages' => 'logMessages',
+        'branch_exited' => 'branchExited',
+        'branch_exited_reason' => 'branchExitedReason'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       MessageOutputDebug ret = (MessageOutputDebug) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for nodesVisited
@@ -3059,7 +3183,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedNodesVisited.size(); i++) {
           DialogNodesVisited currentItem = ret.getNodesVisited().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('nodesVisited');
-          DialogNodesVisited newItem = (DialogNodesVisited) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodesVisited.class);
+          DialogNodesVisited newItem = (DialogNodesVisited) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodesVisited.class);
           newNodesVisited.add(newItem);
         }
         ret.nodesVisited = newNodesVisited;
@@ -3072,26 +3196,13 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedLogMessages.size(); i++) {
           DialogLogMessage currentItem = ret.getLogMessages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('logMessages');
-          DialogLogMessage newItem = (DialogLogMessage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogLogMessage.class);
+          DialogLogMessage newItem = (DialogLogMessage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogLogMessage.class);
           newLogMessages.add(newItem);
         }
         ret.logMessages = newLogMessages;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'nodes_visited', 'nodesVisited');
-      mapping.putAll(((IBMWatsonGenericModel) DialogNodesVisited.class.newInstance()).addToApiToSdkMapping(parentLabel + 'nodes_visited/', mapping));
-      mapping.put(parentLabel + 'log_messages', 'logMessages');
-      mapping.put(parentLabel + 'branch_exited', 'branchExited');
-      mapping.put(parentLabel + 'branch_exited_reason', 'branchExitedReason');
-      return mapping;
     }
   }
 
@@ -3155,20 +3266,16 @@ public class IBMAssistantV2Models {
       MessageResponse ret = (MessageResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for output
-      MessageOutput newOutput = (MessageOutput) new MessageOutput().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'), MessageOutput.class);
+      Map<String, Object> outputMap = (Map<String, Object>) jsonMap.get('output');
+      MessageOutput newOutput = (MessageOutput) new MessageOutput().deserialize(JSON.serialize(outputMap), outputMap, MessageOutput.class);
       ret.setOutput(newOutput);
 
       // calling custom deserializer for context
-      MessageContext newContext = (MessageContext) new MessageContext().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context'), MessageContext.class);
+      Map<String, Object> contextMap = (Map<String, Object>) jsonMap.get('context');
+      MessageContext newContext = (MessageContext) new MessageContext().deserialize(JSON.serialize(contextMap), contextMap, MessageContext.class);
       ret.setContext(newContext);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) MessageOutput.class.newInstance()).addToApiToSdkMapping(parentLabel + 'output/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) MessageContext.class.newInstance()).addToApiToSdkMapping(parentLabel + 'context/', mapping));
-      return mapping;
     }
   }
 
@@ -3292,7 +3399,8 @@ public class IBMAssistantV2Models {
       RuntimeEntityBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
+      Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
       retBuilder.metadata(newMetadata);
 
       // calling custom deserializer for groups
@@ -3302,7 +3410,7 @@ public class IBMAssistantV2Models {
         for (Integer i = 0; i < deserializedGroups.size(); i++) {
           CaptureGroup currentItem = ret.getGroups().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('groups');
-          CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CaptureGroup.class);
+          CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CaptureGroup.class);
           newGroups.add(newItem);
         }
         retBuilder.groups(newGroups);
@@ -3311,16 +3419,27 @@ public class IBMAssistantV2Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (groups != null && groups[0] != null) {
-        mapping.putAll(groups[0].addToSdkToApiMapping(parentLabel + 'groups/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) CaptureGroup.class.newInstance()).addToApiToSdkMapping(parentLabel + 'groups/', mapping));
-      return mapping;
+      // calling custom serializer for metadata
+      if (metadata != null) {
+        String metadataJsonString = metadata.serialize();
+        jsonMap.put('metadata', JSON.deserializeUntyped(metadataJsonString));
+      }
+
+      // calling custom serializer for groups
+      if (groups != null) {
+        List<Object> groupsJsonList = new List<Object>();
+        for (CaptureGroup listItem : groups) {
+          String listItemJsonString = listItem.serialize();
+          groupsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('groups', groupsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -3522,6 +3641,24 @@ public class IBMAssistantV2Models {
      */
     public RuntimeIntentBuilder newBuilder() {
       return new RuntimeIntentBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RuntimeIntent ret = (RuntimeIntent) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeIntentBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -3734,22 +3871,26 @@ public class IBMAssistantV2Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'result_metadata' => 'resultMetadata'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       SearchResult ret = (SearchResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for resultMetadata
-      SearchResultMetadata newResultMetadata = (SearchResultMetadata) new SearchResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('resultMetadata'), SearchResultMetadata.class);
+      Map<String, Object> resultMetadataMap = (Map<String, Object>) jsonMap.get('resultMetadata');
+      SearchResultMetadata newResultMetadata = (SearchResultMetadata) new SearchResultMetadata().deserialize(JSON.serialize(resultMetadataMap), resultMetadataMap, SearchResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
       // calling custom deserializer for highlight
-      SearchResultHighlight newHighlight = (SearchResultHighlight) new SearchResultHighlight().deserialize(JSON.serialize(ret.getHighlight()), (Map<String, Object>) jsonMap.get('highlight'), SearchResultHighlight.class);
+      Map<String, Object> highlightMap = (Map<String, Object>) jsonMap.get('highlight');
+      SearchResultHighlight newHighlight = (SearchResultHighlight) new SearchResultHighlight().deserialize(JSON.serialize(highlightMap), highlightMap, SearchResultHighlight.class);
       ret.setHighlight(newHighlight);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'result_metadata', 'resultMetadata');
-      return mapping;
     }
   }
 
@@ -3898,6 +4039,16 @@ public class IBMAssistantV2Models {
     public void setScore(final Double score) {
       this.score = score;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SearchResultMetadata ret = (SearchResultMetadata) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -3927,13 +4078,21 @@ public class IBMAssistantV2Models {
       this.sessionId = sessionId;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'session_id', 'sessionId');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'session_id' => 'sessionId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SessionResponse ret = (SessionResponse) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 

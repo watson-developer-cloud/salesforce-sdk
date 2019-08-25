@@ -119,6 +119,14 @@ public class IBMNaturalLanguageClassifierV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId',
+        'top_class' => 'topClass'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Classification ret = (Classification) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for classes
@@ -128,24 +136,13 @@ public class IBMNaturalLanguageClassifierV1Models {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassifiedClass currentItem = ret.getClasses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
-          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
+          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
           newClasses.add(newItem);
         }
         ret.classes = newClasses;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'classifier_id', 'classifierId');
-      mapping.put(parentLabel + 'top_class', 'topClass');
-      mapping.putAll(((IBMWatsonGenericModel) ClassifiedClass.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classes/', mapping));
-      return mapping;
     }
   }
 
@@ -225,6 +222,13 @@ public class IBMNaturalLanguageClassifierV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ClassificationCollection ret = (ClassificationCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for collection
@@ -234,23 +238,13 @@ public class IBMNaturalLanguageClassifierV1Models {
         for (Integer i = 0; i < deserializedCollection.size(); i++) {
           CollectionItem currentItem = ret.getCollection().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('collection');
-          CollectionItem newItem = (CollectionItem) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CollectionItem.class);
+          CollectionItem newItem = (CollectionItem) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CollectionItem.class);
           newCollection.add(newItem);
         }
         ret.collection = newCollection;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'classifier_id', 'classifierId');
-      mapping.putAll(((IBMWatsonGenericModel) CollectionItem.class.newInstance()).addToApiToSdkMapping(parentLabel + 'collection/', mapping));
-      return mapping;
     }
   }
 
@@ -304,9 +298,21 @@ public class IBMNaturalLanguageClassifierV1Models {
       this.className = className;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'class_name', 'className');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'class_name' => 'className'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ClassifiedClass ret = (ClassifiedClass) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -442,10 +448,22 @@ public class IBMNaturalLanguageClassifierV1Models {
       this.language = language;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'classifier_id', 'classifierId');
-      mapping.put(parentLabel + 'status_description', 'statusDescription');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId',
+        'status_description' => 'statusDescription'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Classifier ret = (Classifier) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -490,18 +508,13 @@ public class IBMNaturalLanguageClassifierV1Models {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           Classifier currentItem = ret.getClassifiers().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
-          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
+          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
           newClassifiers.add(newItem);
         }
         ret.classifiers = newClassifiers;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Classifier.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classifiers/', mapping));
-      return mapping;
     }
   }
 
@@ -549,12 +562,6 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     public ClassifyCollectionOptionsBuilder newBuilder() {
       return new ClassifyCollectionOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifierId', 'classifier_id');
-      return mapping;
     }
   }
 
@@ -678,6 +685,13 @@ public class IBMNaturalLanguageClassifierV1Models {
     public ClassifyInputBuilder newBuilder() {
       return new ClassifyInputBuilder(this);
     }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
+    }
   }
 
   /**
@@ -770,12 +784,6 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     public ClassifyOptionsBuilder newBuilder() {
       return new ClassifyOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifierId', 'classifier_id');
-      return mapping;
     }
   }
 
@@ -929,6 +937,13 @@ public class IBMNaturalLanguageClassifierV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'top_class' => 'topClass'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       CollectionItem ret = (CollectionItem) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for classes
@@ -938,19 +953,13 @@ public class IBMNaturalLanguageClassifierV1Models {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassifiedClass currentItem = ret.getClasses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
-          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
+          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
           newClasses.add(newItem);
         }
         ret.classes = newClasses;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'top_class', 'topClass');
-      mapping.putAll(((IBMWatsonGenericModel) ClassifiedClass.class.newInstance()).addToApiToSdkMapping(parentLabel + 'classes/', mapping));
-      return mapping;
     }
   }
 
@@ -1004,13 +1013,6 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     public CreateClassifierOptionsBuilder newBuilder() {
       return new CreateClassifierOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('metadata', 'training_metadata');
-      mapping.put('trainingData', 'training_data');
-      return mapping;
     }
   }
 
@@ -1119,12 +1121,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     public DeleteClassifierOptionsBuilder newBuilder() {
       return new DeleteClassifierOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifierId', 'classifier_id');
-      return mapping;
-    }
   }
 
   /**
@@ -1216,12 +1212,6 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     public GetClassifierOptionsBuilder newBuilder() {
       return new GetClassifierOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('classifierId', 'classifier_id');
-      return mapping;
     }
   }
 

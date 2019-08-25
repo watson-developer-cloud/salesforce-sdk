@@ -317,10 +317,20 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'analyzed_text' => 'analyzedText',
+        'retrieved_url' => 'retrievedUrl',
+        'semantic_roles' => 'semanticRoles'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       AnalysisResults ret = (AnalysisResults) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for usage
-      AnalysisResultsUsage newUsage = (AnalysisResultsUsage) new AnalysisResultsUsage().deserialize(JSON.serialize(ret.getUsage()), (Map<String, Object>) jsonMap.get('usage'), AnalysisResultsUsage.class);
+      Map<String, Object> usageMap = (Map<String, Object>) jsonMap.get('usage');
+      AnalysisResultsUsage newUsage = (AnalysisResultsUsage) new AnalysisResultsUsage().deserialize(JSON.serialize(usageMap), usageMap, AnalysisResultsUsage.class);
       ret.setUsage(newUsage);
 
       // calling custom deserializer for concepts
@@ -330,7 +340,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedConcepts.size(); i++) {
           ConceptsResult currentItem = ret.getConcepts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('concepts');
-          ConceptsResult newItem = (ConceptsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConceptsResult.class);
+          ConceptsResult newItem = (ConceptsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConceptsResult.class);
           newConcepts.add(newItem);
         }
         ret.concepts = newConcepts;
@@ -343,7 +353,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           EntitiesResult currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          EntitiesResult newItem = (EntitiesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntitiesResult.class);
+          EntitiesResult newItem = (EntitiesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntitiesResult.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -356,7 +366,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedKeywords.size(); i++) {
           KeywordsResult currentItem = ret.getKeywords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('keywords');
-          KeywordsResult newItem = (KeywordsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeywordsResult.class);
+          KeywordsResult newItem = (KeywordsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeywordsResult.class);
           newKeywords.add(newItem);
         }
         ret.keywords = newKeywords;
@@ -369,18 +379,20 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           CategoriesResult currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          CategoriesResult newItem = (CategoriesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesResult.class);
+          CategoriesResult newItem = (CategoriesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesResult.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
       }
 
       // calling custom deserializer for emotion
-      EmotionResult newEmotion = (EmotionResult) new EmotionResult().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion'), EmotionResult.class);
+      Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
+      EmotionResult newEmotion = (EmotionResult) new EmotionResult().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionResult.class);
       ret.setEmotion(newEmotion);
 
       // calling custom deserializer for metadata
-      AnalysisResultsMetadata newMetadata = (AnalysisResultsMetadata) new AnalysisResultsMetadata().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), AnalysisResultsMetadata.class);
+      Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
+      AnalysisResultsMetadata newMetadata = (AnalysisResultsMetadata) new AnalysisResultsMetadata().deserialize(JSON.serialize(metadataMap), metadataMap, AnalysisResultsMetadata.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for relations
@@ -390,7 +402,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedRelations.size(); i++) {
           RelationsResult currentItem = ret.getRelations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('relations');
-          RelationsResult newItem = (RelationsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationsResult.class);
+          RelationsResult newItem = (RelationsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationsResult.class);
           newRelations.add(newItem);
         }
         ret.relations = newRelations;
@@ -403,36 +415,23 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedSemanticRoles.size(); i++) {
           SemanticRolesResult currentItem = ret.getSemanticRoles().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('semanticRoles');
-          SemanticRolesResult newItem = (SemanticRolesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesResult.class);
+          SemanticRolesResult newItem = (SemanticRolesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesResult.class);
           newSemanticRoles.add(newItem);
         }
         ret.semanticRoles = newSemanticRoles;
       }
 
       // calling custom deserializer for sentiment
-      SentimentResult newSentiment = (SentimentResult) new SentimentResult().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment'), SentimentResult.class);
+      Map<String, Object> sentimentMap = (Map<String, Object>) jsonMap.get('sentiment');
+      SentimentResult newSentiment = (SentimentResult) new SentimentResult().deserialize(JSON.serialize(sentimentMap), sentimentMap, SentimentResult.class);
       ret.setSentiment(newSentiment);
 
       // calling custom deserializer for syntax
-      SyntaxResult newSyntax = (SyntaxResult) new SyntaxResult().deserialize(JSON.serialize(ret.getSyntax()), (Map<String, Object>) jsonMap.get('syntax'), SyntaxResult.class);
+      Map<String, Object> syntaxMap = (Map<String, Object>) jsonMap.get('syntax');
+      SyntaxResult newSyntax = (SyntaxResult) new SyntaxResult().deserialize(JSON.serialize(syntaxMap), syntaxMap, SyntaxResult.class);
       ret.setSyntax(newSyntax);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'analyzed_text', 'analyzedText');
-      mapping.put(parentLabel + 'retrieved_url', 'retrievedUrl');
-      mapping.putAll(((IBMWatsonGenericModel) AnalysisResultsUsage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'usage/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) ConceptsResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'concepts/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) EntitiesResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) CategoriesResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'categories/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) AnalysisResultsMetadata.class.newInstance()).addToApiToSdkMapping(parentLabel + 'metadata/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) RelationsResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'relations/', mapping));
-      mapping.put(parentLabel + 'semantic_roles', 'semanticRoles');
-      mapping.putAll(((IBMWatsonGenericModel) SemanticRolesResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'semantic_roles/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) SyntaxResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'syntax/', mapping));
-      return mapping;
     }
   }
 
@@ -556,6 +555,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'publication_date' => 'publicationDate'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       AnalysisResultsMetadata ret = (AnalysisResultsMetadata) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for authors
@@ -565,7 +571,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedAuthors.size(); i++) {
           Author currentItem = ret.getAuthors().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('authors');
-          Author newItem = (Author) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Author.class);
+          Author newItem = (Author) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Author.class);
           newAuthors.add(newItem);
         }
         ret.authors = newAuthors;
@@ -578,18 +584,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedFeeds.size(); i++) {
           Feed currentItem = ret.getFeeds().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('feeds');
-          Feed newItem = (Feed) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Feed.class);
+          Feed newItem = (Feed) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Feed.class);
           newFeeds.add(newItem);
         }
         ret.feeds = newFeeds;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'publication_date', 'publicationDate');
-      return mapping;
     }
   }
 
@@ -664,10 +665,22 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.textUnits = textUnits;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'text_characters', 'textCharacters');
-      mapping.put(parentLabel + 'text_units', 'textUnits');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'text_characters' => 'textCharacters',
+        'text_units' => 'textUnits'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      AnalysisResultsUsage ret = (AnalysisResultsUsage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -826,17 +839,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public AnalyzeOptionsBuilder newBuilder() {
       return new AnalyzeOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      if (features != null) {
-        mapping.putAll(features.addToSdkToApiMapping('', mapping));
-      }
-      mapping.put('fallbackToRaw', 'fallback_to_raw');
-      mapping.put('returnAnalyzedText', 'return_analyzed_text');
-      mapping.put('limitTextCharacters', 'limit_text_characters');
-      return mapping;
     }
   }
 
@@ -1042,6 +1044,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public void setName(final String name) {
       this.name = name;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Author ret = (Author) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -1105,9 +1117,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new CategoriesOptionsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1200,6 +1220,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public void setText(final String text) {
       this.text = text;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CategoriesRelevantText ret = (CategoriesRelevantText) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -1284,15 +1314,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       CategoriesResult ret = (CategoriesResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for explanation
-      CategoriesResultExplanation newExplanation = (CategoriesResultExplanation) new CategoriesResultExplanation().deserialize(JSON.serialize(ret.getExplanation()), (Map<String, Object>) jsonMap.get('explanation'), CategoriesResultExplanation.class);
+      Map<String, Object> explanationMap = (Map<String, Object>) jsonMap.get('explanation');
+      CategoriesResultExplanation newExplanation = (CategoriesResultExplanation) new CategoriesResultExplanation().deserialize(JSON.serialize(explanationMap), explanationMap, CategoriesResultExplanation.class);
       ret.setExplanation(newExplanation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) CategoriesResultExplanation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'explanation/', mapping));
-      return mapping;
     }
   }
 
@@ -1330,6 +1356,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'relevant_text' => 'relevantText'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       CategoriesResultExplanation ret = (CategoriesResultExplanation) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for relevantText
@@ -1339,22 +1372,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedRelevantText.size(); i++) {
           CategoriesRelevantText currentItem = ret.getRelevantText().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('relevantText');
-          CategoriesRelevantText newItem = (CategoriesRelevantText) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesRelevantText.class);
+          CategoriesRelevantText newItem = (CategoriesRelevantText) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesRelevantText.class);
           newRelevantText.add(newItem);
         }
         ret.relevantText = newRelevantText;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'relevant_text', 'relevantText');
-      return mapping;
     }
   }
 
@@ -1391,13 +1415,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new ConceptsOptionsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1509,9 +1537,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.dbpediaResource = dbpediaResource;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'dbpedia_resource', 'dbpediaResource');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'dbpedia_resource' => 'dbpediaResource'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ConceptsResult ret = (ConceptsResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -1545,12 +1585,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public DeleteModelOptionsBuilder newBuilder() {
       return new DeleteModelOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('modelId', 'model_id');
-      return mapping;
     }
   }
 
@@ -1684,9 +1718,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.subtype = subtype;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'dbpedia_resource', 'dbpediaResource');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'dbpedia_resource' => 'dbpediaResource'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      DisambiguationResult ret = (DisambiguationResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -1725,7 +1771,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       DocumentEmotionResults ret = (DocumentEmotionResults) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for emotion
-      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion'), EmotionScores.class);
+      Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
+      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionScores.class);
       ret.setEmotion(newEmotion);
 
       return ret;
@@ -1780,6 +1827,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public void setScore(final Double score) {
       this.score = score;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocumentSentimentResults ret = (DocumentSentimentResults) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -1827,6 +1884,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public EmotionOptionsBuilder newBuilder() {
       return new EmotionOptionsBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1954,7 +2018,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       EmotionResult ret = (EmotionResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document
-      DocumentEmotionResults newDocument = (DocumentEmotionResults) new DocumentEmotionResults().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document'), DocumentEmotionResults.class);
+      Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
+      DocumentEmotionResults newDocument = (DocumentEmotionResults) new DocumentEmotionResults().deserialize(JSON.serialize(documentMap), documentMap, DocumentEmotionResults.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for targets
@@ -1964,7 +2029,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedTargets.size(); i++) {
           TargetedEmotionResults currentItem = ret.getTargets().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('targets');
-          TargetedEmotionResults newItem = (TargetedEmotionResults) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TargetedEmotionResults.class);
+          TargetedEmotionResults newItem = (TargetedEmotionResults) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TargetedEmotionResults.class);
           newTargets.add(newItem);
         }
         ret.targets = newTargets;
@@ -2088,6 +2153,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public void setSadness(final Double sadness) {
       this.sadness = sadness;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EmotionScores ret = (EmotionScores) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -2178,13 +2253,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new EntitiesOptionsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -2487,6 +2566,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       EntitiesResult ret = (EntitiesResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for mentions
@@ -2496,35 +2582,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedMentions.size(); i++) {
           EntityMention currentItem = ret.getMentions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('mentions');
-          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
+          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
           newMentions.add(newItem);
         }
         ret.mentions = newMentions;
       }
 
       // calling custom deserializer for emotion
-      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion'), EmotionScores.class);
+      Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
+      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionScores.class);
       ret.setEmotion(newEmotion);
 
       // calling custom deserializer for sentiment
-      FeatureSentimentResults newSentiment = (FeatureSentimentResults) new FeatureSentimentResults().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment'), FeatureSentimentResults.class);
+      Map<String, Object> sentimentMap = (Map<String, Object>) jsonMap.get('sentiment');
+      FeatureSentimentResults newSentiment = (FeatureSentimentResults) new FeatureSentimentResults().deserialize(JSON.serialize(sentimentMap), sentimentMap, FeatureSentimentResults.class);
       ret.setSentiment(newSentiment);
 
       // calling custom deserializer for disambiguation
-      DisambiguationResult newDisambiguation = (DisambiguationResult) new DisambiguationResult().deserialize(JSON.serialize(ret.getDisambiguation()), (Map<String, Object>) jsonMap.get('disambiguation'), DisambiguationResult.class);
+      Map<String, Object> disambiguationMap = (Map<String, Object>) jsonMap.get('disambiguation');
+      DisambiguationResult newDisambiguation = (DisambiguationResult) new DisambiguationResult().deserialize(JSON.serialize(disambiguationMap), disambiguationMap, DisambiguationResult.class);
       ret.setDisambiguation(newDisambiguation);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.putAll(((IBMWatsonGenericModel) DisambiguationResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'disambiguation/', mapping));
-      return mapping;
     }
   }
 
@@ -2600,6 +2679,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public void setConfidence(final Double confidence) {
       this.confidence = confidence;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityMention ret = (EntityMention) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -2627,6 +2716,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public void setScore(final Double score) {
       this.score = score;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      FeatureSentimentResults ret = (FeatureSentimentResults) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -2803,27 +2902,117 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new FeaturesBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'semanticRoles' => 'semantic_roles'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for concepts
       if (concepts != null) {
-        mapping.putAll(concepts.addToSdkToApiMapping(parentLabel + 'concepts/', mapping));
+        String conceptsJsonString = concepts.serialize();
+        String conceptsKey = 'concepts';
+        if (propertyNameMapping.containsKey(conceptsKey)) {
+          conceptsKey = propertyNameMapping.get(conceptsKey);
+        }
+        jsonMap.put(conceptsKey, JSON.deserializeUntyped(conceptsJsonString));
       }
+
+      // calling custom serializer for emotion
+      if (emotion != null) {
+        String emotionJsonString = emotion.serialize();
+        String emotionKey = 'emotion';
+        if (propertyNameMapping.containsKey(emotionKey)) {
+          emotionKey = propertyNameMapping.get(emotionKey);
+        }
+        jsonMap.put(emotionKey, JSON.deserializeUntyped(emotionJsonString));
+      }
+
+      // calling custom serializer for entities
       if (entities != null) {
-        mapping.putAll(entities.addToSdkToApiMapping(parentLabel + 'entities/', mapping));
+        String entitiesJsonString = entities.serialize();
+        String entitiesKey = 'entities';
+        if (propertyNameMapping.containsKey(entitiesKey)) {
+          entitiesKey = propertyNameMapping.get(entitiesKey);
+        }
+        jsonMap.put(entitiesKey, JSON.deserializeUntyped(entitiesJsonString));
       }
+
+      // calling custom serializer for keywords
       if (keywords != null) {
-        mapping.putAll(keywords.addToSdkToApiMapping(parentLabel + 'keywords/', mapping));
+        String keywordsJsonString = keywords.serialize();
+        String keywordsKey = 'keywords';
+        if (propertyNameMapping.containsKey(keywordsKey)) {
+          keywordsKey = propertyNameMapping.get(keywordsKey);
+        }
+        jsonMap.put(keywordsKey, JSON.deserializeUntyped(keywordsJsonString));
       }
-      mapping.put(parentLabel + 'semanticRoles', 'semantic_roles');
+
+      // calling custom serializer for metadata
+      if (metadata != null) {
+        String metadataJsonString = metadata.serialize();
+        String metadataKey = 'metadata';
+        if (propertyNameMapping.containsKey(metadataKey)) {
+          metadataKey = propertyNameMapping.get(metadataKey);
+        }
+        jsonMap.put(metadataKey, JSON.deserializeUntyped(metadataJsonString));
+      }
+
+      // calling custom serializer for relations
+      if (relations != null) {
+        String relationsJsonString = relations.serialize();
+        String relationsKey = 'relations';
+        if (propertyNameMapping.containsKey(relationsKey)) {
+          relationsKey = propertyNameMapping.get(relationsKey);
+        }
+        jsonMap.put(relationsKey, JSON.deserializeUntyped(relationsJsonString));
+      }
+
+      // calling custom serializer for semanticRoles
       if (semanticRoles != null) {
-        mapping.putAll(semanticRoles.addToSdkToApiMapping(parentLabel + 'semanticRoles/', mapping));
+        String semanticRolesJsonString = semanticRoles.serialize();
+        String semanticRolesKey = 'semanticRoles';
+        if (propertyNameMapping.containsKey(semanticRolesKey)) {
+          semanticRolesKey = propertyNameMapping.get(semanticRolesKey);
+        }
+        jsonMap.put(semanticRolesKey, JSON.deserializeUntyped(semanticRolesJsonString));
       }
+
+      // calling custom serializer for sentiment
+      if (sentiment != null) {
+        String sentimentJsonString = sentiment.serialize();
+        String sentimentKey = 'sentiment';
+        if (propertyNameMapping.containsKey(sentimentKey)) {
+          sentimentKey = propertyNameMapping.get(sentimentKey);
+        }
+        jsonMap.put(sentimentKey, JSON.deserializeUntyped(sentimentJsonString));
+      }
+
+      // calling custom serializer for categories
       if (categories != null) {
-        mapping.putAll(categories.addToSdkToApiMapping(parentLabel + 'categories/', mapping));
+        String categoriesJsonString = categories.serialize();
+        String categoriesKey = 'categories';
+        if (propertyNameMapping.containsKey(categoriesKey)) {
+          categoriesKey = propertyNameMapping.get(categoriesKey);
+        }
+        jsonMap.put(categoriesKey, JSON.deserializeUntyped(categoriesJsonString));
       }
+
+      // calling custom serializer for syntax
       if (syntax != null) {
-        mapping.putAll(syntax.addToSdkToApiMapping(parentLabel + 'syntax/', mapping));
+        String syntaxJsonString = syntax.serialize();
+        String syntaxKey = 'syntax';
+        if (propertyNameMapping.containsKey(syntaxKey)) {
+          syntaxKey = propertyNameMapping.get(syntaxKey);
+        }
+        jsonMap.put(syntaxKey, JSON.deserializeUntyped(syntaxJsonString));
       }
-      return mapping;
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -3007,6 +3196,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public void setLink(final String link) {
       this.link = link;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Feed ret = (Feed) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -3067,13 +3266,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new KeywordsOptionsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -3263,11 +3466,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       KeywordsResult ret = (KeywordsResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for emotion
-      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion'), EmotionScores.class);
+      Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
+      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionScores.class);
       ret.setEmotion(newEmotion);
 
       // calling custom deserializer for sentiment
-      FeatureSentimentResults newSentiment = (FeatureSentimentResults) new FeatureSentimentResults().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment'), FeatureSentimentResults.class);
+      Map<String, Object> sentimentMap = (Map<String, Object>) jsonMap.get('sentiment');
+      FeatureSentimentResults newSentiment = (FeatureSentimentResults) new FeatureSentimentResults().deserialize(JSON.serialize(sentimentMap), sentimentMap, FeatureSentimentResults.class);
       ret.setSentiment(newSentiment);
 
       return ret;
@@ -3371,18 +3576,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedModels.size(); i++) {
           Model currentItem = ret.getModels().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('models');
-          Model newItem = (Model) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Model.class);
+          Model newItem = (Model) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Model.class);
           newModels.add(newItem);
         }
         ret.models = newModels;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Model.class.newInstance()).addToApiToSdkMapping(parentLabel + 'models/', mapping));
-      return mapping;
     }
   }
 
@@ -3402,6 +3602,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public MetadataOptionsBuilder newBuilder() {
       return new MetadataOptionsBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -3610,11 +3817,23 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.created = created;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'model_id', 'modelId');
-      mapping.put(parentLabel + 'workspace_id', 'workspaceId');
-      mapping.put(parentLabel + 'version_description', 'versionDescription');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'model_id' => 'modelId',
+        'workspace_id' => 'workspaceId',
+        'version_description' => 'versionDescription'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Model ret = (Model) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -3703,18 +3922,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RelationEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          RelationEntity newItem = (RelationEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationEntity.class);
+          RelationEntity newItem = (RelationEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationEntity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) RelationEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      return mapping;
     }
   }
 
@@ -3767,9 +3981,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.xtype = xtype;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'type', 'xtype');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      RelationEntity ret = (RelationEntity) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -3808,6 +4034,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public RelationsOptionsBuilder newBuilder() {
       return new RelationsOptionsBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -3946,6 +4179,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       RelationsResult ret = (RelationsResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for arguments
@@ -3955,19 +4195,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedArguments.size(); i++) {
           RelationArgument currentItem = ret.getArguments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('arguments');
-          RelationArgument newItem = (RelationArgument) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationArgument.class);
+          RelationArgument newItem = (RelationArgument) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationArgument.class);
           newArguments.add(newItem);
         }
         ret.arguments = newArguments;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.putAll(((IBMWatsonGenericModel) RelationArgument.class.newInstance()).addToApiToSdkMapping(parentLabel + 'arguments/', mapping));
-      return mapping;
     }
   }
 
@@ -4020,13 +4254,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.text = text;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'type', 'xtype');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SemanticRolesEntity ret = (SemanticRolesEntity) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -4055,6 +4297,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public void setText(final String text) {
       this.text = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SemanticRolesKeyword ret = (SemanticRolesKeyword) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -4116,13 +4368,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SemanticRolesOptionsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -4287,27 +4543,31 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'object' => 'xobject'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       SemanticRolesResult ret = (SemanticRolesResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for subject
-      SemanticRolesResultSubject newSubject = (SemanticRolesResultSubject) new SemanticRolesResultSubject().deserialize(JSON.serialize(ret.getSubject()), (Map<String, Object>) jsonMap.get('subject'), SemanticRolesResultSubject.class);
+      Map<String, Object> subjectMap = (Map<String, Object>) jsonMap.get('subject');
+      SemanticRolesResultSubject newSubject = (SemanticRolesResultSubject) new SemanticRolesResultSubject().deserialize(JSON.serialize(subjectMap), subjectMap, SemanticRolesResultSubject.class);
       ret.setSubject(newSubject);
 
       // calling custom deserializer for action
-      SemanticRolesResultAction newAction = (SemanticRolesResultAction) new SemanticRolesResultAction().deserialize(JSON.serialize(ret.getAction()), (Map<String, Object>) jsonMap.get('action'), SemanticRolesResultAction.class);
+      Map<String, Object> actionMap = (Map<String, Object>) jsonMap.get('action');
+      SemanticRolesResultAction newAction = (SemanticRolesResultAction) new SemanticRolesResultAction().deserialize(JSON.serialize(actionMap), actionMap, SemanticRolesResultAction.class);
       ret.setAction(newAction);
 
       // calling custom deserializer for xobject
-      SemanticRolesResultObject newXobject = (SemanticRolesResultObject) new SemanticRolesResultObject().deserialize(JSON.serialize(ret.getXobject()), (Map<String, Object>) jsonMap.get('xobject'), SemanticRolesResultObject.class);
+      Map<String, Object> xobjectMap = (Map<String, Object>) jsonMap.get('xobject');
+      SemanticRolesResultObject newXobject = (SemanticRolesResultObject) new SemanticRolesResultObject().deserialize(JSON.serialize(xobjectMap), xobjectMap, SemanticRolesResultObject.class);
       ret.setXobject(newXobject);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) SemanticRolesResultSubject.class.newInstance()).addToApiToSdkMapping(parentLabel + 'subject/', mapping));
-      mapping.put(parentLabel + 'object', 'xobject');
-      return mapping;
     }
   }
 
@@ -4388,7 +4648,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       SemanticRolesResultAction ret = (SemanticRolesResultAction) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for verb
-      SemanticRolesVerb newVerb = (SemanticRolesVerb) new SemanticRolesVerb().deserialize(JSON.serialize(ret.getVerb()), (Map<String, Object>) jsonMap.get('verb'), SemanticRolesVerb.class);
+      Map<String, Object> verbMap = (Map<String, Object>) jsonMap.get('verb');
+      SemanticRolesVerb newVerb = (SemanticRolesVerb) new SemanticRolesVerb().deserialize(JSON.serialize(verbMap), verbMap, SemanticRolesVerb.class);
       ret.setVerb(newVerb);
 
       return ret;
@@ -4458,7 +4719,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedKeywords.size(); i++) {
           SemanticRolesKeyword currentItem = ret.getKeywords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('keywords');
-          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
+          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
           newKeywords.add(newItem);
         }
         ret.keywords = newKeywords;
@@ -4553,7 +4814,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           SemanticRolesEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          SemanticRolesEntity newItem = (SemanticRolesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesEntity.class);
+          SemanticRolesEntity newItem = (SemanticRolesEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesEntity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -4566,18 +4827,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedKeywords.size(); i++) {
           SemanticRolesKeyword currentItem = ret.getKeywords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('keywords');
-          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
+          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
           newKeywords.add(newItem);
         }
         ret.keywords = newKeywords;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) SemanticRolesEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      return mapping;
     }
   }
 
@@ -4629,6 +4885,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public void setTense(final String tense) {
       this.tense = tense;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SemanticRolesVerb ret = (SemanticRolesVerb) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -4679,6 +4945,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public void setLocation(final List<Long> location) {
       this.location = location;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SentenceResult ret = (SentenceResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -4725,6 +5001,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public SentimentOptionsBuilder newBuilder() {
       return new SentimentOptionsBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -4851,7 +5134,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       SentimentResult ret = (SentimentResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document
-      DocumentSentimentResults newDocument = (DocumentSentimentResults) new DocumentSentimentResults().deserialize(JSON.serialize(ret.getDocument()), (Map<String, Object>) jsonMap.get('document'), DocumentSentimentResults.class);
+      Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
+      DocumentSentimentResults newDocument = (DocumentSentimentResults) new DocumentSentimentResults().deserialize(JSON.serialize(documentMap), documentMap, DocumentSentimentResults.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for targets
@@ -4861,7 +5145,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedTargets.size(); i++) {
           TargetedSentimentResults currentItem = ret.getTargets().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('targets');
-          TargetedSentimentResults newItem = (TargetedSentimentResults) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TargetedSentimentResults.class);
+          TargetedSentimentResults newItem = (TargetedSentimentResults) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TargetedSentimentResults.class);
           newTargets.add(newItem);
         }
         ret.targets = newTargets;
@@ -4914,11 +5198,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SyntaxOptionsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // calling custom serializer for tokens
       if (tokens != null) {
-        mapping.putAll(tokens.addToSdkToApiMapping(parentLabel + 'tokens/', mapping));
+        String tokensJsonString = tokens.serialize();
+        jsonMap.put('tokens', JSON.deserializeUntyped(tokensJsonString));
       }
-      return mapping;
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -5015,9 +5305,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SyntaxOptionsTokensBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'partOfSpeech', 'part_of_speech');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'partOfSpeech' => 'part_of_speech'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -5130,7 +5428,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedTokens.size(); i++) {
           TokenResult currentItem = ret.getTokens().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tokens');
-          TokenResult newItem = (TokenResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TokenResult.class);
+          TokenResult newItem = (TokenResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TokenResult.class);
           newTokens.add(newItem);
         }
         ret.tokens = newTokens;
@@ -5143,18 +5441,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedSentences.size(); i++) {
           SentenceResult currentItem = ret.getSentences().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('sentences');
-          SentenceResult newItem = (SentenceResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceResult.class);
+          SentenceResult newItem = (SentenceResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceResult.class);
           newSentences.add(newItem);
         }
         ret.sentences = newSentences;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) TokenResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tokens/', mapping));
-      return mapping;
     }
   }
 
@@ -5215,7 +5508,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       TargetedEmotionResults ret = (TargetedEmotionResults) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for emotion
-      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion'), EmotionScores.class);
+      Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
+      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionScores.class);
       ret.setEmotion(newEmotion);
 
       return ret;
@@ -5269,6 +5563,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public void setScore(final Double score) {
       this.score = score;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TargetedSentimentResults ret = (TargetedSentimentResults) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -5366,9 +5670,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.lemma = lemma;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'part_of_speech', 'partOfSpeech');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'part_of_speech' => 'partOfSpeech'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TokenResult ret = (TokenResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 

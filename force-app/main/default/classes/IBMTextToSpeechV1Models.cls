@@ -78,13 +78,6 @@ public class IBMTextToSpeechV1Models {
     public AddWordOptionsBuilder newBuilder() {
       return new AddWordOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      mapping.put('partOfSpeech', 'part_of_speech');
-      return mapping;
-    }
   }
 
   /**
@@ -251,15 +244,6 @@ public class IBMTextToSpeechV1Models {
      */
     public AddWordsOptionsBuilder newBuilder() {
       return new AddWordsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      if (words != null && words[0] != null) {
-        mapping.putAll(words[0].addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
     }
   }
 
@@ -539,12 +523,6 @@ public class IBMTextToSpeechV1Models {
     public DeleteUserDataOptionsBuilder newBuilder() {
       return new DeleteUserDataOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customerId', 'customer_id');
-      return mapping;
-    }
   }
 
   /**
@@ -637,12 +615,6 @@ public class IBMTextToSpeechV1Models {
      */
     public DeleteVoiceModelOptionsBuilder newBuilder() {
       return new DeleteVoiceModelOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      return mapping;
     }
   }
 
@@ -750,12 +722,6 @@ public class IBMTextToSpeechV1Models {
      */
     public DeleteWordOptionsBuilder newBuilder() {
       return new DeleteWordOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      return mapping;
     }
   }
 
@@ -909,12 +875,6 @@ public class IBMTextToSpeechV1Models {
     public GetPronunciationOptionsBuilder newBuilder() {
       return new GetPronunciationOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      return mapping;
-    }
   }
 
   /**
@@ -1047,12 +1007,6 @@ public class IBMTextToSpeechV1Models {
     public GetVoiceModelOptionsBuilder newBuilder() {
       return new GetVoiceModelOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      return mapping;
-    }
   }
 
   /**
@@ -1159,12 +1113,6 @@ public class IBMTextToSpeechV1Models {
      */
     public GetVoiceOptionsBuilder newBuilder() {
       return new GetVoiceOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      return mapping;
     }
   }
 
@@ -1285,12 +1233,6 @@ public class IBMTextToSpeechV1Models {
      */
     public GetWordOptionsBuilder newBuilder() {
       return new GetWordOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      return mapping;
     }
   }
 
@@ -1539,12 +1481,6 @@ public class IBMTextToSpeechV1Models {
     public ListWordsOptionsBuilder newBuilder() {
       return new ListWordsOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      return mapping;
-    }
   }
 
   /**
@@ -1633,6 +1569,16 @@ public class IBMTextToSpeechV1Models {
     public void setPronunciation(final String pronunciation) {
       this.pronunciation = pronunciation;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Pronunciation ret = (Pronunciation) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -1685,14 +1631,22 @@ public class IBMTextToSpeechV1Models {
       this.voiceTransformation = voiceTransformation;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'custom_pronunciation', 'customPronunciation');
-      mapping.put(parentLabel + 'voice_transformation', 'voiceTransformation');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'custom_pronunciation' => 'customPronunciation',
+        'voice_transformation' => 'voiceTransformation'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SupportedFeatures ret = (SupportedFeatures) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -1770,13 +1724,6 @@ public class IBMTextToSpeechV1Models {
      */
     public SynthesizeOptionsBuilder newBuilder() {
       return new SynthesizeOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('accept', 'Accept');
-      mapping.put('customizationId', 'customization_id');
-      return mapping;
     }
   }
 
@@ -1936,14 +1883,35 @@ public class IBMTextToSpeechV1Models {
       return new TranslationBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'partOfSpeech', 'part_of_speech');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'part_of_speech' => 'partOfSpeech'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Translation ret = (Translation) super.deserialize(jsonString, jsonMap, classType);
+      TranslationBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'part_of_speech', 'partOfSpeech');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'partOfSpeech' => 'part_of_speech'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -2077,15 +2045,6 @@ public class IBMTextToSpeechV1Models {
      */
     public UpdateVoiceModelOptionsBuilder newBuilder() {
       return new UpdateVoiceModelOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customizationId', 'customization_id');
-      if (words != null && words[0] != null) {
-        mapping.putAll(words[0].addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
     }
   }
 
@@ -2391,24 +2350,26 @@ public class IBMTextToSpeechV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'supported_features' => 'supportedFeatures'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Voice ret = (Voice) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for supportedFeatures
-      SupportedFeatures newSupportedFeatures = (SupportedFeatures) new SupportedFeatures().deserialize(JSON.serialize(ret.getSupportedFeatures()), (Map<String, Object>) jsonMap.get('supportedFeatures'), SupportedFeatures.class);
+      Map<String, Object> supportedFeaturesMap = (Map<String, Object>) jsonMap.get('supportedFeatures');
+      SupportedFeatures newSupportedFeatures = (SupportedFeatures) new SupportedFeatures().deserialize(JSON.serialize(supportedFeaturesMap), supportedFeaturesMap, SupportedFeatures.class);
       ret.setSupportedFeatures(newSupportedFeatures);
 
       // calling custom deserializer for customization
-      VoiceModel newCustomization = (VoiceModel) new VoiceModel().deserialize(JSON.serialize(ret.getCustomization()), (Map<String, Object>) jsonMap.get('customization'), VoiceModel.class);
+      Map<String, Object> customizationMap = (Map<String, Object>) jsonMap.get('customization');
+      VoiceModel newCustomization = (VoiceModel) new VoiceModel().deserialize(JSON.serialize(customizationMap), customizationMap, VoiceModel.class);
       ret.setCustomization(newCustomization);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'supported_features', 'supportedFeatures');
-      mapping.putAll(((IBMWatsonGenericModel) SupportedFeatures.class.newInstance()).addToApiToSdkMapping(parentLabel + 'supported_features/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) VoiceModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'customization/', mapping));
-      return mapping;
     }
   }
 
@@ -2605,6 +2566,14 @@ public class IBMTextToSpeechV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'customization_id' => 'customizationId',
+        'last_modified' => 'lastModified'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       VoiceModel ret = (VoiceModel) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for words
@@ -2614,24 +2583,13 @@ public class IBMTextToSpeechV1Models {
         for (Integer i = 0; i < deserializedWords.size(); i++) {
           Word currentItem = ret.getWords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('words');
-          Word newItem = (Word) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
+          Word newItem = (Word) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
           newWords.add(newItem);
         }
         ret.words = newWords;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'customization_id', 'customizationId');
-      mapping.put(parentLabel + 'last_modified', 'lastModified');
-      mapping.putAll(((IBMWatsonGenericModel) Word.class.newInstance()).addToApiToSdkMapping(parentLabel + 'words/', mapping));
-      return mapping;
     }
   }
 
@@ -2678,18 +2636,13 @@ public class IBMTextToSpeechV1Models {
         for (Integer i = 0; i < deserializedCustomizations.size(); i++) {
           VoiceModel currentItem = ret.getCustomizations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('customizations');
-          VoiceModel newItem = (VoiceModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), VoiceModel.class);
+          VoiceModel newItem = (VoiceModel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), VoiceModel.class);
           newCustomizations.add(newItem);
         }
         ret.customizations = newCustomizations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) VoiceModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'customizations/', mapping));
-      return mapping;
     }
   }
 
@@ -2734,18 +2687,13 @@ public class IBMTextToSpeechV1Models {
         for (Integer i = 0; i < deserializedVoices.size(); i++) {
           Voice currentItem = ret.getVoices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('voices');
-          Voice newItem = (Voice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Voice.class);
+          Voice newItem = (Voice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Voice.class);
           newVoices.add(newItem);
         }
         ret.voices = newVoices;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Voice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'voices/', mapping));
-      return mapping;
     }
   }
 
@@ -2822,14 +2770,35 @@ public class IBMTextToSpeechV1Models {
       return new WordBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'partOfSpeech', 'part_of_speech');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'part_of_speech' => 'partOfSpeech'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Word ret = (Word) super.deserialize(jsonString, jsonMap, classType);
+      WordBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'part_of_speech', 'partOfSpeech');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'partOfSpeech' => 'part_of_speech'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -2968,7 +2937,7 @@ public class IBMTextToSpeechV1Models {
         for (Integer i = 0; i < deserializedWords.size(); i++) {
           Word currentItem = ret.getWords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('words');
-          Word newItem = (Word) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
+          Word newItem = (Word) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
           newWords.add(newItem);
         }
         retBuilder.words(newWords);
@@ -2977,16 +2946,21 @@ public class IBMTextToSpeechV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (words != null && words[0] != null) {
-        mapping.putAll(words[0].addToSdkToApiMapping(parentLabel + 'words/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Word.class.newInstance()).addToApiToSdkMapping(parentLabel + 'words/', mapping));
-      return mapping;
+      // calling custom serializer for words
+      if (words != null) {
+        List<Object> wordsJsonList = new List<Object>();
+        for (Word listItem : words) {
+          String listItemJsonString = listItem.serialize();
+          wordsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('words', wordsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 

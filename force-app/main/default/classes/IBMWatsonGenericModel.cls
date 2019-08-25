@@ -46,12 +46,4 @@ public virtual class IBMWatsonGenericModel {
 
     return ret;
   }
-
-  public virtual Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-    return mapping;
-  }
-
-  public virtual Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-    return mapping;
-  }
 }

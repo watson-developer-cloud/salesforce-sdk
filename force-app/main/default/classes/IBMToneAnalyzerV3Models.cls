@@ -81,6 +81,13 @@ public class IBMToneAnalyzerV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'tone_categories' => 'toneCategories'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       DocumentAnalysis ret = (DocumentAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for tones
@@ -90,7 +97,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
-          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
+          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
         ret.tones = newTones;
@@ -103,20 +110,13 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedToneCategories.size(); i++) {
           ToneCategory currentItem = ret.getToneCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('toneCategories');
-          ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
+          ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
           newToneCategories.add(newItem);
         }
         ret.toneCategories = newToneCategories;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) ToneScore.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tones/', mapping));
-      mapping.put(parentLabel + 'tone_categories', 'toneCategories');
-      mapping.putAll(((IBMWatsonGenericModel) ToneCategory.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tone_categories/', mapping));
-      return mapping;
     }
   }
 
@@ -269,6 +269,16 @@ public class IBMToneAnalyzerV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'sentence_id' => 'sentenceId',
+        'tone_categories' => 'toneCategories',
+        'input_from' => 'inputFrom',
+        'input_to' => 'inputTo'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       SentenceAnalysis ret = (SentenceAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for tones
@@ -278,7 +288,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
-          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
+          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
         ret.tones = newTones;
@@ -291,27 +301,13 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedToneCategories.size(); i++) {
           ToneCategory currentItem = ret.getToneCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('toneCategories');
-          ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
+          ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
           newToneCategories.add(newItem);
         }
         ret.toneCategories = newToneCategories;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'sentence_id', 'sentenceId');
-      mapping.putAll(((IBMWatsonGenericModel) ToneScore.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tones/', mapping));
-      mapping.put(parentLabel + 'tone_categories', 'toneCategories');
-      mapping.putAll(((IBMWatsonGenericModel) ToneCategory.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tone_categories/', mapping));
-      mapping.put(parentLabel + 'input_from', 'inputFrom');
-      mapping.put(parentLabel + 'input_to', 'inputTo');
-      return mapping;
     }
   }
 
@@ -371,10 +367,19 @@ public class IBMToneAnalyzerV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_tone' => 'documentTone',
+        'sentences_tone' => 'sentencesTone'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ToneAnalysis ret = (ToneAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentTone
-      DocumentAnalysis newDocumentTone = (DocumentAnalysis) new DocumentAnalysis().deserialize(JSON.serialize(ret.getDocumentTone()), (Map<String, Object>) jsonMap.get('documentTone'), DocumentAnalysis.class);
+      Map<String, Object> documentToneMap = (Map<String, Object>) jsonMap.get('documentTone');
+      DocumentAnalysis newDocumentTone = (DocumentAnalysis) new DocumentAnalysis().deserialize(JSON.serialize(documentToneMap), documentToneMap, DocumentAnalysis.class);
       ret.setDocumentTone(newDocumentTone);
 
       // calling custom deserializer for sentencesTone
@@ -384,25 +389,13 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedSentencesTone.size(); i++) {
           SentenceAnalysis currentItem = ret.getSentencesTone().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('sentencesTone');
-          SentenceAnalysis newItem = (SentenceAnalysis) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceAnalysis.class);
+          SentenceAnalysis newItem = (SentenceAnalysis) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceAnalysis.class);
           newSentencesTone.add(newItem);
         }
         ret.sentencesTone = newSentencesTone;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'document_tone', 'documentTone');
-      mapping.putAll(((IBMWatsonGenericModel) DocumentAnalysis.class.newInstance()).addToApiToSdkMapping(parentLabel + 'document_tone/', mapping));
-      mapping.put(parentLabel + 'sentences_tone', 'sentencesTone');
-      mapping.putAll(((IBMWatsonGenericModel) SentenceAnalysis.class.newInstance()).addToApiToSdkMapping(parentLabel + 'sentences_tone/', mapping));
-      return mapping;
     }
   }
 
@@ -483,6 +476,14 @@ public class IBMToneAnalyzerV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'category_id' => 'categoryId',
+        'category_name' => 'categoryName'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ToneCategory ret = (ToneCategory) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for tones
@@ -492,20 +493,13 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
-          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
+          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
         ret.tones = newTones;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) ToneScore.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tones/', mapping));
-      mapping.put(parentLabel + 'category_id', 'categoryId');
-      mapping.put(parentLabel + 'category_name', 'categoryName');
-      return mapping;
     }
   }
 
@@ -572,13 +566,6 @@ public class IBMToneAnalyzerV3Models {
      */
     public ToneChatOptionsBuilder newBuilder() {
       return new ToneChatOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('contentLanguage', 'Content-Language');
-      mapping.put('acceptLanguage', 'Accept-Language');
-      return mapping;
     }
   }
 
@@ -756,10 +743,22 @@ public class IBMToneAnalyzerV3Models {
       this.toneName = toneName;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'tone_id', 'toneId');
-      mapping.put(parentLabel + 'tone_name', 'toneName');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'tone_id' => 'toneId',
+        'tone_name' => 'toneName'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ToneChatScore ret = (ToneChatScore) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -792,6 +791,13 @@ public class IBMToneAnalyzerV3Models {
      */
     public ToneInputBuilder newBuilder() {
       return new ToneInputBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -964,15 +970,6 @@ public class IBMToneAnalyzerV3Models {
      */
     public ToneOptionsBuilder newBuilder() {
       return new ToneOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('toneInput', 'tone_input');
-      mapping.put('contentType', 'Content-Type');
-      mapping.put('contentLanguage', 'Content-Language');
-      mapping.put('acceptLanguage', 'Accept-Language');
-      return mapping;
     }
   }
 
@@ -1207,10 +1204,22 @@ public class IBMToneAnalyzerV3Models {
       this.toneName = toneName;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'tone_id', 'toneId');
-      mapping.put(parentLabel + 'tone_name', 'toneName');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'tone_id' => 'toneId',
+        'tone_name' => 'toneName'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ToneScore ret = (ToneScore) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -1257,6 +1266,13 @@ public class IBMToneAnalyzerV3Models {
      */
     public UtteranceBuilder newBuilder() {
       return new UtteranceBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1374,6 +1390,13 @@ public class IBMToneAnalyzerV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'utterances_tone' => 'utterancesTone'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       UtteranceAnalyses ret = (UtteranceAnalyses) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for utterancesTone
@@ -1383,23 +1406,13 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedUtterancesTone.size(); i++) {
           UtteranceAnalysis currentItem = ret.getUtterancesTone().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('utterancesTone');
-          UtteranceAnalysis newItem = (UtteranceAnalysis) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UtteranceAnalysis.class);
+          UtteranceAnalysis newItem = (UtteranceAnalysis) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UtteranceAnalysis.class);
           newUtterancesTone.add(newItem);
         }
         ret.utterancesTone = newUtterancesTone;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'utterances_tone', 'utterancesTone');
-      mapping.putAll(((IBMWatsonGenericModel) UtteranceAnalysis.class.newInstance()).addToApiToSdkMapping(parentLabel + 'utterances_tone/', mapping));
-      return mapping;
     }
   }
 
@@ -1505,6 +1518,14 @@ public class IBMToneAnalyzerV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'utterance_id' => 'utteranceId',
+        'utterance_text' => 'utteranceText'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       UtteranceAnalysis ret = (UtteranceAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for tones
@@ -1514,24 +1535,13 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneChatScore currentItem = ret.getTones().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
-          ToneChatScore newItem = (ToneChatScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneChatScore.class);
+          ToneChatScore newItem = (ToneChatScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneChatScore.class);
           newTones.add(newItem);
         }
         ret.tones = newTones;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'utterance_id', 'utteranceId');
-      mapping.put(parentLabel + 'utterance_text', 'utteranceText');
-      mapping.putAll(((IBMWatsonGenericModel) ToneChatScore.class.newInstance()).addToApiToSdkMapping(parentLabel + 'tones/', mapping));
-      return mapping;
     }
   }
 

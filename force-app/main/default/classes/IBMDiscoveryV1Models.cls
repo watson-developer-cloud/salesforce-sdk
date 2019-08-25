@@ -70,8 +70,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata.
      *
-     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected.
-     * Example:  ``` {
+     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {
      *   "Creator": "Johnny Appleseed",
      *   "Subject": "Apples"
      * } ```.
@@ -102,14 +101,6 @@ public class IBMDiscoveryV1Models {
      */
     public AddDocumentOptionsBuilder newBuilder() {
       return new AddDocumentOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('fileContentType', 'file_content_type');
-      return mapping;
     }
   }
 
@@ -323,17 +314,6 @@ public class IBMDiscoveryV1Models {
     public AddTrainingDataOptionsBuilder newBuilder() {
       return new AddTrainingDataOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('naturalLanguageQuery', 'natural_language_query');
-      if (examples != null && examples[0] != null) {
-        mapping.putAll(examples[0].addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
-    }
   }
 
   /**
@@ -541,6 +521,13 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'matching_results' => 'matchingResults'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       AggregationResult ret = (AggregationResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for aggregations
@@ -550,19 +537,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'matching_results', 'matchingResults');
-      mapping.putAll(((IBMWatsonGenericModel) QueryAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
-      return mapping;
     }
   }
 
@@ -823,48 +804,47 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'collection_id' => 'collectionId',
+        'configuration_id' => 'configurationId',
+        'document_counts' => 'documentCounts',
+        'disk_usage' => 'diskUsage',
+        'training_status' => 'trainingStatus',
+        'crawl_status' => 'crawlStatus',
+        'smart_document_understanding' => 'smartDocumentUnderstanding'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentCounts
-      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('documentCounts'), DocumentCounts.class);
+      Map<String, Object> documentCountsMap = (Map<String, Object>) jsonMap.get('documentCounts');
+      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(documentCountsMap), documentCountsMap, DocumentCounts.class);
       ret.setDocumentCounts(newDocumentCounts);
 
       // calling custom deserializer for diskUsage
-      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('diskUsage'), CollectionDiskUsage.class);
+      Map<String, Object> diskUsageMap = (Map<String, Object>) jsonMap.get('diskUsage');
+      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(diskUsageMap), diskUsageMap, CollectionDiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for trainingStatus
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('trainingStatus'), TrainingStatus.class);
+      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       // calling custom deserializer for crawlStatus
-      CollectionCrawlStatus newCrawlStatus = (CollectionCrawlStatus) new CollectionCrawlStatus().deserialize(JSON.serialize(ret.getCrawlStatus()), (Map<String, Object>) jsonMap.get('crawlStatus'), CollectionCrawlStatus.class);
+      Map<String, Object> crawlStatusMap = (Map<String, Object>) jsonMap.get('crawlStatus');
+      CollectionCrawlStatus newCrawlStatus = (CollectionCrawlStatus) new CollectionCrawlStatus().deserialize(JSON.serialize(crawlStatusMap), crawlStatusMap, CollectionCrawlStatus.class);
       ret.setCrawlStatus(newCrawlStatus);
 
       // calling custom deserializer for smartDocumentUnderstanding
-      SduStatus newSmartDocumentUnderstanding = (SduStatus) new SduStatus().deserialize(JSON.serialize(ret.getSmartDocumentUnderstanding()), (Map<String, Object>) jsonMap.get('smartDocumentUnderstanding'), SduStatus.class);
+      Map<String, Object> smartDocumentUnderstandingMap = (Map<String, Object>) jsonMap.get('smartDocumentUnderstanding');
+      SduStatus newSmartDocumentUnderstanding = (SduStatus) new SduStatus().deserialize(JSON.serialize(smartDocumentUnderstandingMap), smartDocumentUnderstandingMap, SduStatus.class);
       ret.setSmartDocumentUnderstanding(newSmartDocumentUnderstanding);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'collection_id', 'collectionId');
-      mapping.put(parentLabel + 'configuration_id', 'configurationId');
-      mapping.put(parentLabel + 'document_counts', 'documentCounts');
-      mapping.put(parentLabel + 'disk_usage', 'diskUsage');
-      mapping.putAll(((IBMWatsonGenericModel) CollectionDiskUsage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'disk_usage/', mapping));
-      mapping.put(parentLabel + 'training_status', 'trainingStatus');
-      mapping.putAll(((IBMWatsonGenericModel) TrainingStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'training_status/', mapping));
-      mapping.put(parentLabel + 'crawl_status', 'crawlStatus');
-      mapping.putAll(((IBMWatsonGenericModel) CollectionCrawlStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'crawl_status/', mapping));
-      mapping.put(parentLabel + 'smart_document_understanding', 'smartDocumentUnderstanding');
-      mapping.putAll(((IBMWatsonGenericModel) SduStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'smart_document_understanding/', mapping));
-      return mapping;
     }
   }
 
@@ -900,23 +880,21 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'source_crawl' => 'sourceCrawl'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       CollectionCrawlStatus ret = (CollectionCrawlStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for sourceCrawl
-      SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(ret.getSourceCrawl()), (Map<String, Object>) jsonMap.get('sourceCrawl'), SourceStatus.class);
+      Map<String, Object> sourceCrawlMap = (Map<String, Object>) jsonMap.get('sourceCrawl');
+      SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(sourceCrawlMap), sourceCrawlMap, SourceStatus.class);
       ret.setSourceCrawl(newSourceCrawl);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'source_crawl', 'sourceCrawl');
-      mapping.putAll(((IBMWatsonGenericModel) SourceStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'source_crawl/', mapping));
-      return mapping;
     }
   }
 
@@ -938,13 +916,21 @@ public class IBMDiscoveryV1Models {
       return usedBytes;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'used_bytes', 'usedBytes');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'used_bytes' => 'usedBytes'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      CollectionDiskUsage ret = (CollectionDiskUsage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -979,9 +965,21 @@ public class IBMDiscoveryV1Models {
       return maximumAllowed;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'maximum_allowed', 'maximumAllowed');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'maximum_allowed' => 'maximumAllowed'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      CollectionUsage ret = (CollectionUsage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -1141,11 +1139,19 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'configuration_id' => 'configurationId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Configuration ret = (Configuration) super.deserialize(jsonString, jsonMap, classType);
       ConfigurationBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for conversions
-      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(ret.getConversions()), (Map<String, Object>) jsonMap.get('conversions'), Conversions.class);
+      Map<String, Object> conversionsMap = (Map<String, Object>) jsonMap.get('conversions');
+      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(conversionsMap), conversionsMap, Conversions.class);
       retBuilder.conversions(newConversions);
 
       // calling custom deserializer for enrichments
@@ -1155,7 +1161,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEnrichments.size(); i++) {
           Enrichment currentItem = ret.getEnrichments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('enrichments');
-          Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Enrichment.class);
+          Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Enrichment.class);
           newEnrichments.add(newItem);
         }
         retBuilder.enrichments(newEnrichments);
@@ -1168,51 +1174,79 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNormalizations.size(); i++) {
           NormalizationOperation currentItem = ret.getNormalizations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('normalizations');
-          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
+          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newNormalizations.add(newItem);
         }
         retBuilder.normalizations(newNormalizations);
       }
 
       // calling custom deserializer for source
-      Source newSource = (Source) new Source().deserialize(JSON.serialize(ret.getSource()), (Map<String, Object>) jsonMap.get('source'), Source.class);
+      Map<String, Object> sourceMap = (Map<String, Object>) jsonMap.get('source');
+      Source newSource = (Source) new Source().deserialize(JSON.serialize(sourceMap), sourceMap, Source.class);
       retBuilder.source(newSource);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'configurationId', 'configuration_id');
-      if (conversions != null) {
-        mapping.putAll(conversions.addToSdkToApiMapping(parentLabel + 'conversions/', mapping));
-      }
-      if (enrichments != null && enrichments[0] != null) {
-        mapping.putAll(enrichments[0].addToSdkToApiMapping(parentLabel + 'enrichments/', mapping));
-      }
-      if (normalizations != null && normalizations[0] != null) {
-        mapping.putAll(normalizations[0].addToSdkToApiMapping(parentLabel + 'normalizations/', mapping));
-      }
-      if (source != null) {
-        mapping.putAll(source.addToSdkToApiMapping(parentLabel + 'source/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'configurationId' => 'configuration_id'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for conversions
+      if (conversions != null) {
+        String conversionsJsonString = conversions.serialize();
+        String conversionsKey = 'conversions';
+        if (propertyNameMapping.containsKey(conversionsKey)) {
+          conversionsKey = propertyNameMapping.get(conversionsKey);
+        }
+        jsonMap.put(conversionsKey, JSON.deserializeUntyped(conversionsJsonString));
       }
-      mapping.put(parentLabel + 'configuration_id', 'configurationId');
-      mapping.putAll(((IBMWatsonGenericModel) Conversions.class.newInstance()).addToApiToSdkMapping(parentLabel + 'conversions/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Enrichment.class.newInstance()).addToApiToSdkMapping(parentLabel + 'enrichments/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) NormalizationOperation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'normalizations/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Source.class.newInstance()).addToApiToSdkMapping(parentLabel + 'source/', mapping));
-      return mapping;
+
+      // calling custom serializer for enrichments
+      if (enrichments != null) {
+        List<Object> enrichmentsJsonList = new List<Object>();
+        for (Enrichment listItem : enrichments) {
+          String listItemJsonString = listItem.serialize();
+          enrichmentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String enrichmentsKey = 'enrichments';
+        if (propertyNameMapping.containsKey(enrichmentsKey)) {
+          enrichmentsKey = propertyNameMapping.get(enrichmentsKey);
+        }
+        jsonMap.put(enrichmentsKey, enrichmentsJsonList);
+      }
+
+      // calling custom serializer for normalizations
+      if (normalizations != null) {
+        List<Object> normalizationsJsonList = new List<Object>();
+        for (NormalizationOperation listItem : normalizations) {
+          String listItemJsonString = listItem.serialize();
+          normalizationsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String normalizationsKey = 'normalizations';
+        if (propertyNameMapping.containsKey(normalizationsKey)) {
+          normalizationsKey = propertyNameMapping.get(normalizationsKey);
+        }
+        jsonMap.put(normalizationsKey, normalizationsJsonList);
+      }
+
+      // calling custom serializer for source
+      if (source != null) {
+        String sourceJsonString = source.serialize();
+        String sourceKey = 'source';
+        if (propertyNameMapping.containsKey(sourceKey)) {
+          sourceKey = propertyNameMapping.get(sourceKey);
+        }
+        jsonMap.put(sourceKey, JSON.deserializeUntyped(sourceJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1514,23 +1548,35 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'json_normalizations' => 'jsonNormalizations',
+        'image_text_recognition' => 'imageTextRecognition'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Conversions ret = (Conversions) super.deserialize(jsonString, jsonMap, classType);
       ConversionsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for pdf
-      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(ret.getPdf()), (Map<String, Object>) jsonMap.get('pdf'), PdfSettings.class);
+      Map<String, Object> pdfMap = (Map<String, Object>) jsonMap.get('pdf');
+      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(pdfMap), pdfMap, PdfSettings.class);
       retBuilder.pdf(newPdf);
 
       // calling custom deserializer for word
-      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(ret.getWord()), (Map<String, Object>) jsonMap.get('word'), WordSettings.class);
+      Map<String, Object> wordMap = (Map<String, Object>) jsonMap.get('word');
+      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(wordMap), wordMap, WordSettings.class);
       retBuilder.word(newWord);
 
       // calling custom deserializer for html
-      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html'), HtmlSettings.class);
+      Map<String, Object> htmlMap = (Map<String, Object>) jsonMap.get('html');
+      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(htmlMap), htmlMap, HtmlSettings.class);
       retBuilder.html(newHtml);
 
       // calling custom deserializer for segment
-      SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(ret.getSegment()), (Map<String, Object>) jsonMap.get('segment'), SegmentSettings.class);
+      Map<String, Object> segmentMap = (Map<String, Object>) jsonMap.get('segment');
+      SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(segmentMap), segmentMap, SegmentSettings.class);
       retBuilder.segment(newSegment);
 
       // calling custom deserializer for jsonNormalizations
@@ -1540,7 +1586,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedJsonNormalizations.size(); i++) {
           NormalizationOperation currentItem = ret.getJsonNormalizations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('jsonNormalizations');
-          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
+          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newJsonNormalizations.add(newItem);
         }
         retBuilder.jsonNormalizations(newJsonNormalizations);
@@ -1549,36 +1595,72 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (pdf != null) {
-        mapping.putAll(pdf.addToSdkToApiMapping(parentLabel + 'pdf/', mapping));
-      }
-      if (word != null) {
-        mapping.putAll(word.addToSdkToApiMapping(parentLabel + 'word/', mapping));
-      }
-      if (html != null) {
-        mapping.putAll(html.addToSdkToApiMapping(parentLabel + 'html/', mapping));
-      }
-      if (segment != null) {
-        mapping.putAll(segment.addToSdkToApiMapping(parentLabel + 'segment/', mapping));
-      }
-      mapping.put(parentLabel + 'jsonNormalizations', 'json_normalizations');
-      if (jsonNormalizations != null && jsonNormalizations[0] != null) {
-        mapping.putAll(jsonNormalizations[0].addToSdkToApiMapping(parentLabel + 'jsonNormalizations/', mapping));
-      }
-      mapping.put(parentLabel + 'imageTextRecognition', 'image_text_recognition');
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) PdfSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'pdf/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) WordSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'word/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) HtmlSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'html/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) SegmentSettings.class.newInstance()).addToApiToSdkMapping(parentLabel + 'segment/', mapping));
-      mapping.put(parentLabel + 'json_normalizations', 'jsonNormalizations');
-      mapping.putAll(((IBMWatsonGenericModel) NormalizationOperation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'json_normalizations/', mapping));
-      mapping.put(parentLabel + 'image_text_recognition', 'imageTextRecognition');
-      return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'jsonNormalizations' => 'json_normalizations',
+        'imageTextRecognition' => 'image_text_recognition'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for pdf
+      if (pdf != null) {
+        String pdfJsonString = pdf.serialize();
+        String pdfKey = 'pdf';
+        if (propertyNameMapping.containsKey(pdfKey)) {
+          pdfKey = propertyNameMapping.get(pdfKey);
+        }
+        jsonMap.put(pdfKey, JSON.deserializeUntyped(pdfJsonString));
+      }
+
+      // calling custom serializer for word
+      if (word != null) {
+        String wordJsonString = word.serialize();
+        String wordKey = 'word';
+        if (propertyNameMapping.containsKey(wordKey)) {
+          wordKey = propertyNameMapping.get(wordKey);
+        }
+        jsonMap.put(wordKey, JSON.deserializeUntyped(wordJsonString));
+      }
+
+      // calling custom serializer for html
+      if (html != null) {
+        String htmlJsonString = html.serialize();
+        String htmlKey = 'html';
+        if (propertyNameMapping.containsKey(htmlKey)) {
+          htmlKey = propertyNameMapping.get(htmlKey);
+        }
+        jsonMap.put(htmlKey, JSON.deserializeUntyped(htmlJsonString));
+      }
+
+      // calling custom serializer for segment
+      if (segment != null) {
+        String segmentJsonString = segment.serialize();
+        String segmentKey = 'segment';
+        if (propertyNameMapping.containsKey(segmentKey)) {
+          segmentKey = propertyNameMapping.get(segmentKey);
+        }
+        jsonMap.put(segmentKey, JSON.deserializeUntyped(segmentJsonString));
+      }
+
+      // calling custom serializer for jsonNormalizations
+      if (jsonNormalizations != null) {
+        List<Object> jsonNormalizationsJsonList = new List<Object>();
+        for (NormalizationOperation listItem : jsonNormalizations) {
+          String listItemJsonString = listItem.serialize();
+          jsonNormalizationsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String jsonNormalizationsKey = 'jsonNormalizations';
+        if (propertyNameMapping.containsKey(jsonNormalizationsKey)) {
+          jsonNormalizationsKey = propertyNameMapping.get(jsonNormalizationsKey);
+        }
+        jsonMap.put(jsonNormalizationsKey, jsonNormalizationsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -1783,13 +1865,6 @@ public class IBMDiscoveryV1Models {
      */
     public CreateCollectionOptionsBuilder newBuilder() {
       return new CreateCollectionOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('configurationId', 'configuration_id');
-      return mapping;
     }
   }
 
@@ -2016,24 +2091,6 @@ public class IBMDiscoveryV1Models {
      */
     public CreateConfigurationOptionsBuilder newBuilder() {
       return new CreateConfigurationOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      if (conversions != null) {
-        mapping.putAll(conversions.addToSdkToApiMapping('', mapping));
-      }
-      if (enrichments != null && enrichments[0] != null) {
-        mapping.putAll(enrichments[0].addToSdkToApiMapping('', mapping));
-      }
-      if (normalizations != null && normalizations[0] != null) {
-        mapping.putAll(normalizations[0].addToSdkToApiMapping('', mapping));
-      }
-      if (source != null) {
-        mapping.putAll(source.addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
     }
   }
 
@@ -2302,17 +2359,6 @@ public class IBMDiscoveryV1Models {
      */
     public CreateCredentialsOptionsBuilder newBuilder() {
       return new CreateCredentialsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('sourceType', 'source_type');
-      mapping.put('credentialDetails', 'credential_details');
-      if (credentialDetails != null) {
-        mapping.putAll(credentialDetails.addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
     }
   }
 
@@ -2617,15 +2663,6 @@ public class IBMDiscoveryV1Models {
     public CreateEventOptionsBuilder newBuilder() {
       return new CreateEventOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xtype', 'type');
-      if (data != null) {
-        mapping.putAll(data.addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
-    }
   }
 
   /**
@@ -2756,23 +2793,21 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       CreateEventResponse ret = (CreateEventResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for data
-      EventData newData = (EventData) new EventData().deserialize(JSON.serialize(ret.getData()), (Map<String, Object>) jsonMap.get('data'), EventData.class);
+      Map<String, Object> dataMap = (Map<String, Object>) jsonMap.get('data');
+      EventData newData = (EventData) new EventData().deserialize(JSON.serialize(dataMap), dataMap, EventData.class);
       ret.setData(newData);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.putAll(((IBMWatsonGenericModel) EventData.class.newInstance()).addToApiToSdkMapping(parentLabel + 'data/', mapping));
-      return mapping;
     }
   }
 
@@ -2846,16 +2881,6 @@ public class IBMDiscoveryV1Models {
      */
     public CreateExpansionsOptionsBuilder newBuilder() {
       return new CreateExpansionsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      if (expansions != null && expansions[0] != null) {
-        mapping.putAll(expansions[0].addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
     }
   }
 
@@ -3019,12 +3044,6 @@ public class IBMDiscoveryV1Models {
     public CreateGatewayOptionsBuilder newBuilder() {
       return new CreateGatewayOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      return mapping;
-    }
   }
 
   /**
@@ -3171,15 +3190,6 @@ public class IBMDiscoveryV1Models {
      */
     public CreateStopwordListOptionsBuilder newBuilder() {
       return new CreateStopwordListOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('stopwordFile', 'stopword_file');
-      mapping.put('stopwordFilename', 'stopword_filename');
-      return mapping;
     }
   }
 
@@ -3345,17 +3355,6 @@ public class IBMDiscoveryV1Models {
      */
     public CreateTokenizationDictionaryOptionsBuilder newBuilder() {
       return new CreateTokenizationDictionaryOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('tokenizationRules', 'tokenization_rules');
-      if (tokenizationRules != null && tokenizationRules[0] != null) {
-        mapping.putAll(tokenizationRules[0].addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
     }
   }
 
@@ -3559,16 +3558,6 @@ public class IBMDiscoveryV1Models {
      */
     public CreateTrainingExampleOptionsBuilder newBuilder() {
       return new CreateTrainingExampleOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('queryId', 'query_id');
-      mapping.put('documentId', 'document_id');
-      mapping.put('crossReference', 'cross_reference');
-      return mapping;
     }
   }
 
@@ -4043,46 +4032,59 @@ public class IBMDiscoveryV1Models {
       return new CredentialDetailsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'credentialType', 'credential_type');
-      mapping.put(parentLabel + 'clientId', 'client_id');
-      mapping.put(parentLabel + 'enterpriseId', 'enterprise_id');
-      mapping.put(parentLabel + 'organizationUrl', 'organization_url');
-      mapping.put(parentLabel + 'siteCollectionPath', 'site_collection.path');
-      mapping.put(parentLabel + 'clientSecret', 'client_secret');
-      mapping.put(parentLabel + 'publicKeyId', 'public_key_id');
-      mapping.put(parentLabel + 'privateKey', 'private_key');
-      mapping.put(parentLabel + 'gatewayId', 'gateway_id');
-      mapping.put(parentLabel + 'sourceVersion', 'source_version');
-      mapping.put(parentLabel + 'webApplicationUrl', 'web_application_url');
-      mapping.put(parentLabel + 'accessKeyId', 'access_key_id');
-      mapping.put(parentLabel + 'secretAccessKey', 'secret_access_key');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'credential_type' => 'credentialType',
+        'client_id' => 'clientId',
+        'enterprise_id' => 'enterpriseId',
+        'organization_url' => 'organizationUrl',
+        'site_collection.path' => 'siteCollectionPath',
+        'client_secret' => 'clientSecret',
+        'public_key_id' => 'publicKeyId',
+        'private_key' => 'privateKey',
+        'gateway_id' => 'gatewayId',
+        'source_version' => 'sourceVersion',
+        'web_application_url' => 'webApplicationUrl',
+        'access_key_id' => 'accessKeyId',
+        'secret_access_key' => 'secretAccessKey'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      CredentialDetails ret = (CredentialDetails) super.deserialize(jsonString, jsonMap, classType);
+      CredentialDetailsBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'credential_type', 'credentialType');
-      mapping.put(parentLabel + 'client_id', 'clientId');
-      mapping.put(parentLabel + 'enterprise_id', 'enterpriseId');
-      mapping.put(parentLabel + 'organization_url', 'organizationUrl');
-      mapping.put(parentLabel + 'site_collection.path', 'siteCollectionPath');
-      mapping.put(parentLabel + 'client_secret', 'clientSecret');
-      mapping.put(parentLabel + 'public_key_id', 'publicKeyId');
-      mapping.put(parentLabel + 'private_key', 'privateKey');
-      mapping.put(parentLabel + 'gateway_id', 'gatewayId');
-      mapping.put(parentLabel + 'source_version', 'sourceVersion');
-      mapping.put(parentLabel + 'web_application_url', 'webApplicationUrl');
-      mapping.put(parentLabel + 'access_key_id', 'accessKeyId');
-      mapping.put(parentLabel + 'secret_access_key', 'secretAccessKey');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'credentialType' => 'credential_type',
+        'clientId' => 'client_id',
+        'enterpriseId' => 'enterprise_id',
+        'organizationUrl' => 'organization_url',
+        'siteCollectionPath' => 'site_collection.path',
+        'clientSecret' => 'client_secret',
+        'publicKeyId' => 'public_key_id',
+        'privateKey' => 'private_key',
+        'gatewayId' => 'gateway_id',
+        'sourceVersion' => 'source_version',
+        'webApplicationUrl' => 'web_application_url',
+        'accessKeyId' => 'access_key_id',
+        'secretAccessKey' => 'secret_access_key'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -4450,40 +4452,49 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'credential_id' => 'credentialId',
+        'source_type' => 'sourceType',
+        'credential_details' => 'credentialDetails'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Credentials ret = (Credentials) super.deserialize(jsonString, jsonMap, classType);
       CredentialsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for credentialDetails
-      CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(ret.getCredentialDetails()), (Map<String, Object>) jsonMap.get('credentialDetails'), CredentialDetails.class);
+      Map<String, Object> credentialDetailsMap = (Map<String, Object>) jsonMap.get('credentialDetails');
+      CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(credentialDetailsMap), credentialDetailsMap, CredentialDetails.class);
       retBuilder.credentialDetails(newCredentialDetails);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'credentialId', 'credential_id');
-      mapping.put(parentLabel + 'sourceType', 'source_type');
-      mapping.put(parentLabel + 'credentialDetails', 'credential_details');
-      if (credentialDetails != null) {
-        mapping.putAll(credentialDetails.addToSdkToApiMapping(parentLabel + 'credentialDetails/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'credentialId' => 'credential_id',
+        'sourceType' => 'source_type',
+        'credentialDetails' => 'credential_details'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for credentialDetails
+      if (credentialDetails != null) {
+        String credentialDetailsJsonString = credentialDetails.serialize();
+        String credentialDetailsKey = 'credentialDetails';
+        if (propertyNameMapping.containsKey(credentialDetailsKey)) {
+          credentialDetailsKey = propertyNameMapping.get(credentialDetailsKey);
+        }
+        jsonMap.put(credentialDetailsKey, JSON.deserializeUntyped(credentialDetailsJsonString));
       }
-      mapping.put(parentLabel + 'credential_id', 'credentialId');
-      mapping.put(parentLabel + 'source_type', 'sourceType');
-      mapping.put(parentLabel + 'credential_details', 'credentialDetails');
-      mapping.putAll(((IBMWatsonGenericModel) CredentialDetails.class.newInstance()).addToApiToSdkMapping(parentLabel + 'credential_details/', mapping));
-      return mapping;
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -4604,18 +4615,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedCredentials.size(); i++) {
           Credentials currentItem = ret.getCredentials().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('credentials');
-          Credentials newItem = (Credentials) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Credentials.class);
+          Credentials newItem = (Credentials) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Credentials.class);
           newCredentials.add(newItem);
         }
         ret.credentials = newCredentials;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Credentials.class.newInstance()).addToApiToSdkMapping(parentLabel + 'credentials/', mapping));
-      return mapping;
     }
   }
 
@@ -4663,13 +4669,6 @@ public class IBMDiscoveryV1Models {
      */
     public DeleteAllTrainingDataOptionsBuilder newBuilder() {
       return new DeleteAllTrainingDataOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
     }
   }
 
@@ -4792,13 +4791,6 @@ public class IBMDiscoveryV1Models {
     public DeleteCollectionOptionsBuilder newBuilder() {
       return new DeleteCollectionOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
-    }
   }
 
   /**
@@ -4920,13 +4912,6 @@ public class IBMDiscoveryV1Models {
     public DeleteConfigurationOptionsBuilder newBuilder() {
       return new DeleteConfigurationOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('configurationId', 'configuration_id');
-      return mapping;
-    }
   }
 
   /**
@@ -5047,13 +5032,6 @@ public class IBMDiscoveryV1Models {
      */
     public DeleteCredentialsOptionsBuilder newBuilder() {
       return new DeleteCredentialsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('credentialId', 'credential_id');
-      return mapping;
     }
   }
 
@@ -5190,14 +5168,6 @@ public class IBMDiscoveryV1Models {
     public DeleteDocumentOptionsBuilder newBuilder() {
       return new DeleteDocumentOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('documentId', 'document_id');
-      return mapping;
-    }
   }
 
   /**
@@ -5320,12 +5290,6 @@ public class IBMDiscoveryV1Models {
     public DeleteEnvironmentOptionsBuilder newBuilder() {
       return new DeleteEnvironmentOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      return mapping;
-    }
   }
 
   /**
@@ -5431,13 +5395,6 @@ public class IBMDiscoveryV1Models {
      */
     public DeleteExpansionsOptionsBuilder newBuilder() {
       return new DeleteExpansionsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
     }
   }
 
@@ -5560,13 +5517,6 @@ public class IBMDiscoveryV1Models {
     public DeleteGatewayOptionsBuilder newBuilder() {
       return new DeleteGatewayOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('gatewayId', 'gateway_id');
-      return mapping;
-    }
   }
 
   /**
@@ -5688,13 +5638,6 @@ public class IBMDiscoveryV1Models {
     public DeleteStopwordListOptionsBuilder newBuilder() {
       return new DeleteStopwordListOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
-    }
   }
 
   /**
@@ -5815,13 +5758,6 @@ public class IBMDiscoveryV1Models {
      */
     public DeleteTokenizationDictionaryOptionsBuilder newBuilder() {
       return new DeleteTokenizationDictionaryOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
     }
   }
 
@@ -5957,14 +5893,6 @@ public class IBMDiscoveryV1Models {
      */
     public DeleteTrainingDataOptionsBuilder newBuilder() {
       return new DeleteTrainingDataOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('queryId', 'query_id');
-      return mapping;
     }
   }
 
@@ -6130,15 +6058,6 @@ public class IBMDiscoveryV1Models {
     public DeleteTrainingExampleOptionsBuilder newBuilder() {
       return new DeleteTrainingExampleOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('queryId', 'query_id');
-      mapping.put('exampleId', 'example_id');
-      return mapping;
-    }
   }
 
   /**
@@ -6276,12 +6195,6 @@ public class IBMDiscoveryV1Models {
     public DeleteUserDataOptionsBuilder newBuilder() {
       return new DeleteUserDataOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('customerId', 'customer_id');
-      return mapping;
-    }
   }
 
   /**
@@ -6374,14 +6287,22 @@ public class IBMDiscoveryV1Models {
       return maximumAllowedBytes;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'used_bytes', 'usedBytes');
-      mapping.put(parentLabel + 'maximum_allowed_bytes', 'maximumAllowedBytes');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'used_bytes' => 'usedBytes',
+        'maximum_allowed_bytes' => 'maximumAllowedBytes'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      DiskUsage ret = (DiskUsage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -6462,6 +6383,13 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_id' => 'documentId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       DocumentAccepted ret = (DocumentAccepted) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for notices
@@ -6471,23 +6399,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
         ret.notices = newNotices;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.putAll(((IBMWatsonGenericModel) Notice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'notices/', mapping));
-      return mapping;
     }
   }
 
@@ -6546,6 +6464,16 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public Long getPending() {
       return pending;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocumentCounts ret = (DocumentCounts) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -6606,7 +6534,8 @@ public class IBMDiscoveryV1Models {
       DocumentSnapshot ret = (DocumentSnapshot) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for snapshot
-      IBMWatsonMapModel newSnapshot = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getSnapshot()), (Map<String, Object>) jsonMap.get('snapshot'), IBMWatsonMapModel.class);
+      Map<String, Object> snapshotMap = (Map<String, Object>) jsonMap.get('snapshot');
+      IBMWatsonMapModel newSnapshot = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(snapshotMap), snapshotMap, IBMWatsonMapModel.class);
       ret.setSnapshot(newSnapshot);
 
       return ret;
@@ -6754,6 +6683,16 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_id' => 'documentId',
+        'configuration_id' => 'configurationId',
+        'status_description' => 'statusDescription',
+        'file_type' => 'fileType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       DocumentStatus ret = (DocumentStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for notices
@@ -6763,26 +6702,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
         ret.notices = newNotices;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'configuration_id', 'configurationId');
-      mapping.put(parentLabel + 'status_description', 'statusDescription');
-      mapping.put(parentLabel + 'file_type', 'fileType');
-      mapping.putAll(((IBMWatsonGenericModel) Notice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'notices/', mapping));
-      return mapping;
     }
   }
 
@@ -6929,34 +6855,51 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'destination_field' => 'destinationField',
+        'source_field' => 'sourceField',
+        'enrichment' => 'enrichmentName',
+        'ignore_downstream_errors' => 'ignoreDownstreamErrors'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Enrichment ret = (Enrichment) super.deserialize(jsonString, jsonMap, classType);
       EnrichmentBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for options
-      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options'), EnrichmentOptions.class);
+      Map<String, Object> optionsMap = (Map<String, Object>) jsonMap.get('options');
+      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(optionsMap), optionsMap, EnrichmentOptions.class);
       retBuilder.options(newOptions);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'destinationField', 'destination_field');
-      mapping.put(parentLabel + 'sourceField', 'source_field');
-      mapping.put(parentLabel + 'enrichmentName', 'enrichment');
-      mapping.put(parentLabel + 'ignoreDownstreamErrors', 'ignore_downstream_errors');
-      if (options != null) {
-        mapping.putAll(options.addToSdkToApiMapping(parentLabel + 'options/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'destination_field', 'destinationField');
-      mapping.put(parentLabel + 'source_field', 'sourceField');
-      mapping.put(parentLabel + 'enrichment', 'enrichmentName');
-      mapping.put(parentLabel + 'ignore_downstream_errors', 'ignoreDownstreamErrors');
-      mapping.putAll(((IBMWatsonGenericModel) EnrichmentOptions.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
-      return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'destinationField' => 'destination_field',
+        'sourceField' => 'source_field',
+        'enrichmentName' => 'enrichment',
+        'ignoreDownstreamErrors' => 'ignore_downstream_errors'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for options
+      if (options != null) {
+        String optionsJsonString = options.serialize();
+        String optionsKey = 'options';
+        if (propertyNameMapping.containsKey(optionsKey)) {
+          optionsKey = propertyNameMapping.get(optionsKey);
+        }
+        jsonMap.put(optionsKey, JSON.deserializeUntyped(optionsJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -7164,22 +7107,24 @@ public class IBMDiscoveryV1Models {
       EnrichmentOptionsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for features
-      NluEnrichmentFeatures newFeatures = (NluEnrichmentFeatures) new NluEnrichmentFeatures().deserialize(JSON.serialize(ret.getFeatures()), (Map<String, Object>) jsonMap.get('features'), NluEnrichmentFeatures.class);
+      Map<String, Object> featuresMap = (Map<String, Object>) jsonMap.get('features');
+      NluEnrichmentFeatures newFeatures = (NluEnrichmentFeatures) new NluEnrichmentFeatures().deserialize(JSON.serialize(featuresMap), featuresMap, NluEnrichmentFeatures.class);
       retBuilder.features(newFeatures);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (features != null) {
-        mapping.putAll(features.addToSdkToApiMapping(parentLabel + 'features/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentFeatures.class.newInstance()).addToApiToSdkMapping(parentLabel + 'features/', mapping));
-      return mapping;
+      // calling custom serializer for features
+      if (features != null) {
+        String featuresJsonString = features.serialize();
+        jsonMap.put('features', JSON.deserializeUntyped(featuresJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -7456,32 +7401,30 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'environment_id' => 'environmentId',
+        'read_only' => 'readOnly',
+        'requested_size' => 'requestedSize',
+        'index_capacity' => 'indexCapacity',
+        'search_status' => 'searchStatus'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Environment ret = (Environment) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for indexCapacity
-      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(ret.getIndexCapacity()), (Map<String, Object>) jsonMap.get('indexCapacity'), IndexCapacity.class);
+      Map<String, Object> indexCapacityMap = (Map<String, Object>) jsonMap.get('indexCapacity');
+      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(indexCapacityMap), indexCapacityMap, IndexCapacity.class);
       ret.setIndexCapacity(newIndexCapacity);
 
       // calling custom deserializer for searchStatus
-      SearchStatus newSearchStatus = (SearchStatus) new SearchStatus().deserialize(JSON.serialize(ret.getSearchStatus()), (Map<String, Object>) jsonMap.get('searchStatus'), SearchStatus.class);
+      Map<String, Object> searchStatusMap = (Map<String, Object>) jsonMap.get('searchStatus');
+      SearchStatus newSearchStatus = (SearchStatus) new SearchStatus().deserialize(JSON.serialize(searchStatusMap), searchStatusMap, SearchStatus.class);
       ret.setSearchStatus(newSearchStatus);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'environment_id', 'environmentId');
-      mapping.put(parentLabel + 'read_only', 'readOnly');
-      mapping.put(parentLabel + 'requested_size', 'requestedSize');
-      mapping.put(parentLabel + 'index_capacity', 'indexCapacity');
-      mapping.putAll(((IBMWatsonGenericModel) IndexCapacity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'index_capacity/', mapping));
-      mapping.put(parentLabel + 'search_status', 'searchStatus');
-      mapping.putAll(((IBMWatsonGenericModel) SearchStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'search_status/', mapping));
-      return mapping;
     }
   }
 
@@ -7516,9 +7459,21 @@ public class IBMDiscoveryV1Models {
       return maximumAllowed;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'maximum_allowed', 'maximumAllowed');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'maximum_allowed' => 'maximumAllowed'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      EnvironmentDocuments ret = (EnvironmentDocuments) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -7649,34 +7604,47 @@ public class IBMDiscoveryV1Models {
       return new EventDataBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'environmentId', 'environment_id');
-      mapping.put(parentLabel + 'sessionToken', 'session_token');
-      mapping.put(parentLabel + 'clientTimestamp', 'client_timestamp');
-      mapping.put(parentLabel + 'displayRank', 'display_rank');
-      mapping.put(parentLabel + 'collectionId', 'collection_id');
-      mapping.put(parentLabel + 'documentId', 'document_id');
-      mapping.put(parentLabel + 'queryId', 'query_id');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'environment_id' => 'environmentId',
+        'session_token' => 'sessionToken',
+        'client_timestamp' => 'clientTimestamp',
+        'display_rank' => 'displayRank',
+        'collection_id' => 'collectionId',
+        'document_id' => 'documentId',
+        'query_id' => 'queryId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      EventData ret = (EventData) super.deserialize(jsonString, jsonMap, classType);
+      EventDataBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'environment_id', 'environmentId');
-      mapping.put(parentLabel + 'session_token', 'sessionToken');
-      mapping.put(parentLabel + 'client_timestamp', 'clientTimestamp');
-      mapping.put(parentLabel + 'display_rank', 'displayRank');
-      mapping.put(parentLabel + 'collection_id', 'collectionId');
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'query_id', 'queryId');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'environmentId' => 'environment_id',
+        'sessionToken' => 'session_token',
+        'clientTimestamp' => 'client_timestamp',
+        'displayRank' => 'display_rank',
+        'collectionId' => 'collection_id',
+        'documentId' => 'document_id',
+        'queryId' => 'query_id'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -7864,24 +7832,37 @@ public class IBMDiscoveryV1Models {
       return new ExpansionBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'inputTerms', 'input_terms');
-      mapping.put(parentLabel + 'expandedTerms', 'expanded_terms');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'input_terms' => 'inputTerms',
+        'expanded_terms' => 'expandedTerms'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Expansion ret = (Expansion) super.deserialize(jsonString, jsonMap, classType);
+      ExpansionBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'input_terms', 'inputTerms');
-      mapping.put(parentLabel + 'expanded_terms', 'expandedTerms');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'inputTerms' => 'input_terms',
+        'expandedTerms' => 'expanded_terms'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -8041,7 +8022,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedExpansions.size(); i++) {
           Expansion currentItem = ret.getExpansions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('expansions');
-          Expansion newItem = (Expansion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Expansion.class);
+          Expansion newItem = (Expansion) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Expansion.class);
           newExpansions.add(newItem);
         }
         retBuilder.expansions(newExpansions);
@@ -8050,16 +8031,21 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (expansions != null && expansions[0] != null) {
-        mapping.putAll(expansions[0].addToSdkToApiMapping(parentLabel + 'expansions/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Expansion.class.newInstance()).addToApiToSdkMapping(parentLabel + 'expansions/', mapping));
-      return mapping;
+      // calling custom serializer for expansions
+      if (expansions != null) {
+        List<Object> expansionsJsonList = new List<Object>();
+        for (Expansion listItem : expansions) {
+          String listItemJsonString = listItem.serialize();
+          expansionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('expansions', expansionsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -8357,19 +8343,6 @@ public class IBMDiscoveryV1Models {
      */
     public FederatedQueryNoticesOptionsBuilder newBuilder() {
       return new FederatedQueryNoticesOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionIds', 'collection_ids');
-      mapping.put('naturalLanguageQuery', 'natural_language_query');
-      mapping.put('returnFields', 'return');
-      mapping.put('xsort', 'sort');
-      mapping.put('deduplicateField', 'deduplicate.field');
-      mapping.put('similarDocumentIds', 'similar.document_ids');
-      mapping.put('similarFields', 'similar.fields');
-      return mapping;
     }
   }
 
@@ -9025,23 +8998,6 @@ public class IBMDiscoveryV1Models {
     public FederatedQueryOptionsBuilder newBuilder() {
       return new FederatedQueryOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('naturalLanguageQuery', 'natural_language_query');
-      mapping.put('returnFields', 'return');
-      mapping.put('xsort', 'sort');
-      mapping.put('passagesFields', 'passages.fields');
-      mapping.put('passagesCount', 'passages.count');
-      mapping.put('passagesCharacters', 'passages.characters');
-      mapping.put('deduplicateField', 'deduplicate.field');
-      mapping.put('collectionIds', 'collection_ids');
-      mapping.put('similarDocumentIds', 'similar.document_ids');
-      mapping.put('similarFields', 'similar.fields');
-      mapping.put('loggingOptOut', 'X-Watson-Logging-Opt-Out');
-      return mapping;
-    }
   }
 
   /**
@@ -9407,14 +9363,22 @@ public class IBMDiscoveryV1Models {
       return fieldType;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'field', 'fieldName');
-      mapping.put(parentLabel + 'type', 'fieldType');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'field' => 'fieldName',
+        'type' => 'fieldType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Field ret = (Field) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -9525,16 +9489,37 @@ public class IBMDiscoveryV1Models {
       return new FontSettingBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'minSize', 'min_size');
-      mapping.put(parentLabel + 'maxSize', 'max_size');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'min_size' => 'minSize',
+        'max_size' => 'maxSize'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      FontSetting ret = (FontSetting) super.deserialize(jsonString, jsonMap, classType);
+      FontSettingBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'min_size', 'minSize');
-      mapping.put(parentLabel + 'max_size', 'maxSize');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'minSize' => 'min_size',
+        'maxSize' => 'max_size'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -9758,14 +9743,22 @@ public class IBMDiscoveryV1Models {
       this.tokenId = tokenId;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'gateway_id', 'gatewayId');
-      mapping.put(parentLabel + 'token_id', 'tokenId');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'gateway_id' => 'gatewayId',
+        'token_id' => 'tokenId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Gateway ret = (Gateway) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -9810,18 +9803,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedGateways.size(); i++) {
           Gateway currentItem = ret.getGateways().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('gateways');
-          Gateway newItem = (Gateway) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Gateway.class);
+          Gateway newItem = (Gateway) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Gateway.class);
           newGateways.add(newItem);
         }
         ret.gateways = newGateways;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Gateway.class.newInstance()).addToApiToSdkMapping(parentLabel + 'gateways/', mapping));
-      return mapping;
     }
   }
 
@@ -9869,13 +9857,6 @@ public class IBMDiscoveryV1Models {
      */
     public GetCollectionOptionsBuilder newBuilder() {
       return new GetCollectionOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
     }
   }
 
@@ -9998,13 +9979,6 @@ public class IBMDiscoveryV1Models {
     public GetConfigurationOptionsBuilder newBuilder() {
       return new GetConfigurationOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('configurationId', 'configuration_id');
-      return mapping;
-    }
   }
 
   /**
@@ -10125,13 +10099,6 @@ public class IBMDiscoveryV1Models {
      */
     public GetCredentialsOptionsBuilder newBuilder() {
       return new GetCredentialsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('credentialId', 'credential_id');
-      return mapping;
     }
   }
 
@@ -10268,14 +10235,6 @@ public class IBMDiscoveryV1Models {
     public GetDocumentStatusOptionsBuilder newBuilder() {
       return new GetDocumentStatusOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('documentId', 'document_id');
-      return mapping;
-    }
   }
 
   /**
@@ -10398,12 +10357,6 @@ public class IBMDiscoveryV1Models {
     public GetEnvironmentOptionsBuilder newBuilder() {
       return new GetEnvironmentOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      return mapping;
-    }
   }
 
   /**
@@ -10509,13 +10462,6 @@ public class IBMDiscoveryV1Models {
      */
     public GetGatewayOptionsBuilder newBuilder() {
       return new GetGatewayOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('gatewayId', 'gateway_id');
-      return mapping;
     }
   }
 
@@ -10648,14 +10594,6 @@ public class IBMDiscoveryV1Models {
      */
     public GetMetricsEventRateOptionsBuilder newBuilder() {
       return new GetMetricsEventRateOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('startTime', 'start_time');
-      mapping.put('endTime', 'end_time');
-      mapping.put('resultType', 'result_type');
-      return mapping;
     }
   }
 
@@ -10791,14 +10729,6 @@ public class IBMDiscoveryV1Models {
     public GetMetricsQueryEventOptionsBuilder newBuilder() {
       return new GetMetricsQueryEventOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('startTime', 'start_time');
-      mapping.put('endTime', 'end_time');
-      mapping.put('resultType', 'result_type');
-      return mapping;
-    }
   }
 
   /**
@@ -10933,14 +10863,6 @@ public class IBMDiscoveryV1Models {
     public GetMetricsQueryNoResultsOptionsBuilder newBuilder() {
       return new GetMetricsQueryNoResultsOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('startTime', 'start_time');
-      mapping.put('endTime', 'end_time');
-      mapping.put('resultType', 'result_type');
-      return mapping;
-    }
   }
 
   /**
@@ -11074,14 +10996,6 @@ public class IBMDiscoveryV1Models {
      */
     public GetMetricsQueryOptionsBuilder newBuilder() {
       return new GetMetricsQueryOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('startTime', 'start_time');
-      mapping.put('endTime', 'end_time');
-      mapping.put('resultType', 'result_type');
-      return mapping;
     }
   }
 
@@ -11289,13 +11203,6 @@ public class IBMDiscoveryV1Models {
     public GetStopwordListStatusOptionsBuilder newBuilder() {
       return new GetStopwordListStatusOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
-    }
   }
 
   /**
@@ -11416,13 +11323,6 @@ public class IBMDiscoveryV1Models {
      */
     public GetTokenizationDictionaryStatusOptionsBuilder newBuilder() {
       return new GetTokenizationDictionaryStatusOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
     }
   }
 
@@ -11558,14 +11458,6 @@ public class IBMDiscoveryV1Models {
      */
     public GetTrainingDataOptionsBuilder newBuilder() {
       return new GetTrainingDataOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('queryId', 'query_id');
-      return mapping;
     }
   }
 
@@ -11730,15 +11622,6 @@ public class IBMDiscoveryV1Models {
      */
     public GetTrainingExampleOptionsBuilder newBuilder() {
       return new GetTrainingExampleOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('queryId', 'query_id');
-      mapping.put('exampleId', 'example_id');
-      return mapping;
     }
   }
 
@@ -11954,46 +11837,70 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'exclude_tags_completely' => 'excludeTagsCompletely',
+        'exclude_tags_keep_content' => 'excludeTagsKeepContent',
+        'keep_content' => 'keepContent',
+        'exclude_content' => 'excludeContent',
+        'keep_tag_attributes' => 'keepTagAttributes',
+        'exclude_tag_attributes' => 'excludeTagAttributes'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       HtmlSettings ret = (HtmlSettings) super.deserialize(jsonString, jsonMap, classType);
       HtmlSettingsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for keepContent
-      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getKeepContent()), (Map<String, Object>) jsonMap.get('keepContent'), XPathPatterns.class);
+      Map<String, Object> keepContentMap = (Map<String, Object>) jsonMap.get('keepContent');
+      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(keepContentMap), keepContentMap, XPathPatterns.class);
       retBuilder.keepContent(newKeepContent);
 
       // calling custom deserializer for excludeContent
-      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getExcludeContent()), (Map<String, Object>) jsonMap.get('excludeContent'), XPathPatterns.class);
+      Map<String, Object> excludeContentMap = (Map<String, Object>) jsonMap.get('excludeContent');
+      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(excludeContentMap), excludeContentMap, XPathPatterns.class);
       retBuilder.excludeContent(newExcludeContent);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'excludeTagsCompletely', 'exclude_tags_completely');
-      mapping.put(parentLabel + 'excludeTagsKeepContent', 'exclude_tags_keep_content');
-      mapping.put(parentLabel + 'keepContent', 'keep_content');
-      mapping.put(parentLabel + 'excludeContent', 'exclude_content');
-      mapping.put(parentLabel + 'keepTagAttributes', 'keep_tag_attributes');
-      mapping.put(parentLabel + 'excludeTagAttributes', 'exclude_tag_attributes');
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'excludeTagsCompletely' => 'exclude_tags_completely',
+        'excludeTagsKeepContent' => 'exclude_tags_keep_content',
+        'keepContent' => 'keep_content',
+        'excludeContent' => 'exclude_content',
+        'keepTagAttributes' => 'keep_tag_attributes',
+        'excludeTagAttributes' => 'exclude_tag_attributes'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for keepContent
+      if (keepContent != null) {
+        String keepContentJsonString = keepContent.serialize();
+        String keepContentKey = 'keepContent';
+        if (propertyNameMapping.containsKey(keepContentKey)) {
+          keepContentKey = propertyNameMapping.get(keepContentKey);
+        }
+        jsonMap.put(keepContentKey, JSON.deserializeUntyped(keepContentJsonString));
       }
-      mapping.put(parentLabel + 'exclude_tags_completely', 'excludeTagsCompletely');
-      mapping.put(parentLabel + 'exclude_tags_keep_content', 'excludeTagsKeepContent');
-      mapping.put(parentLabel + 'keep_content', 'keepContent');
-      mapping.put(parentLabel + 'exclude_content', 'excludeContent');
-      mapping.put(parentLabel + 'keep_tag_attributes', 'keepTagAttributes');
-      mapping.put(parentLabel + 'exclude_tag_attributes', 'excludeTagAttributes');
-      return mapping;
+
+      // calling custom serializer for excludeContent
+      if (excludeContent != null) {
+        String excludeContentJsonString = excludeContent.serialize();
+        String excludeContentKey = 'excludeContent';
+        if (propertyNameMapping.containsKey(excludeContentKey)) {
+          excludeContentKey = propertyNameMapping.get(excludeContentKey);
+        }
+        jsonMap.put(excludeContentKey, JSON.deserializeUntyped(excludeContentJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -12239,29 +12146,31 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'disk_usage' => 'diskUsage'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       IndexCapacity ret = (IndexCapacity) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documents
-      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(ret.getDocuments()), (Map<String, Object>) jsonMap.get('documents'), EnvironmentDocuments.class);
+      Map<String, Object> documentsMap = (Map<String, Object>) jsonMap.get('documents');
+      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(documentsMap), documentsMap, EnvironmentDocuments.class);
       ret.setDocuments(newDocuments);
 
       // calling custom deserializer for diskUsage
-      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('diskUsage'), DiskUsage.class);
+      Map<String, Object> diskUsageMap = (Map<String, Object>) jsonMap.get('diskUsage');
+      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(diskUsageMap), diskUsageMap, DiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for collections
-      CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(ret.getCollections()), (Map<String, Object>) jsonMap.get('collections'), CollectionUsage.class);
+      Map<String, Object> collectionsMap = (Map<String, Object>) jsonMap.get('collections');
+      CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(collectionsMap), collectionsMap, CollectionUsage.class);
       ret.setCollections(newCollections);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) EnvironmentDocuments.class.newInstance()).addToApiToSdkMapping(parentLabel + 'documents/', mapping));
-      mapping.put(parentLabel + 'disk_usage', 'diskUsage');
-      mapping.putAll(((IBMWatsonGenericModel) DiskUsage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'disk_usage/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) CollectionUsage.class.newInstance()).addToApiToSdkMapping(parentLabel + 'collections/', mapping));
-      return mapping;
     }
   }
 
@@ -12309,13 +12218,6 @@ public class IBMDiscoveryV1Models {
      */
     public ListCollectionFieldsOptionsBuilder newBuilder() {
       return new ListCollectionFieldsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
     }
   }
 
@@ -12445,18 +12347,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedFields.size(); i++) {
           Field currentItem = ret.getFields().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fields');
-          Field newItem = (Field) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Field.class);
+          Field newItem = (Field) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Field.class);
           newFields.add(newItem);
         }
         ret.fields = newFields;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Field.class.newInstance()).addToApiToSdkMapping(parentLabel + 'fields/', mapping));
-      return mapping;
     }
   }
 
@@ -12503,12 +12400,6 @@ public class IBMDiscoveryV1Models {
      */
     public ListCollectionsOptionsBuilder newBuilder() {
       return new ListCollectionsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      return mapping;
     }
   }
 
@@ -12625,18 +12516,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedCollections.size(); i++) {
           Collection currentItem = ret.getCollections().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('collections');
-          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Collection.class);
+          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Collection.class);
           newCollections.add(newItem);
         }
         ret.collections = newCollections;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Collection.class.newInstance()).addToApiToSdkMapping(parentLabel + 'collections/', mapping));
-      return mapping;
     }
   }
 
@@ -12683,12 +12569,6 @@ public class IBMDiscoveryV1Models {
      */
     public ListConfigurationsOptionsBuilder newBuilder() {
       return new ListConfigurationsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      return mapping;
     }
   }
 
@@ -12805,18 +12685,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedConfigurations.size(); i++) {
           Configuration currentItem = ret.getConfigurations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('configurations');
-          Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Configuration.class);
+          Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Configuration.class);
           newConfigurations.add(newItem);
         }
         ret.configurations = newConfigurations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Configuration.class.newInstance()).addToApiToSdkMapping(parentLabel + 'configurations/', mapping));
-      return mapping;
     }
   }
 
@@ -12850,12 +12725,6 @@ public class IBMDiscoveryV1Models {
      */
     public ListCredentialsOptionsBuilder newBuilder() {
       return new ListCredentialsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      return mapping;
     }
   }
 
@@ -13041,18 +12910,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEnvironments.size(); i++) {
           Environment currentItem = ret.getEnvironments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('environments');
-          Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Environment.class);
+          Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Environment.class);
           newEnvironments.add(newItem);
         }
         ret.environments = newEnvironments;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) Environment.class.newInstance()).addToApiToSdkMapping(parentLabel + 'environments/', mapping));
-      return mapping;
     }
   }
 
@@ -13100,13 +12964,6 @@ public class IBMDiscoveryV1Models {
      */
     public ListExpansionsOptionsBuilder newBuilder() {
       return new ListExpansionsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
     }
   }
 
@@ -13228,13 +13085,6 @@ public class IBMDiscoveryV1Models {
      */
     public ListFieldsOptionsBuilder newBuilder() {
       return new ListFieldsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionIds', 'collection_ids');
-      return mapping;
     }
   }
 
@@ -13359,12 +13209,6 @@ public class IBMDiscoveryV1Models {
     public ListGatewaysOptionsBuilder newBuilder() {
       return new ListGatewaysOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      return mapping;
-    }
   }
 
   /**
@@ -13470,13 +13314,6 @@ public class IBMDiscoveryV1Models {
      */
     public ListTrainingDataOptionsBuilder newBuilder() {
       return new ListTrainingDataOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      return mapping;
     }
   }
 
@@ -13612,14 +13449,6 @@ public class IBMDiscoveryV1Models {
      */
     public ListTrainingExamplesOptionsBuilder newBuilder() {
       return new ListTrainingExamplesOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('queryId', 'query_id');
-      return mapping;
     }
   }
 
@@ -13766,6 +13595,13 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'matching_results' => 'matchingResults'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       LogQueryResponse ret = (LogQueryResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results
@@ -13775,23 +13611,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           LogQueryResponseResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          LogQueryResponseResult newItem = (LogQueryResponseResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResult.class);
+          LogQueryResponseResult newItem = (LogQueryResponseResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'matching_results', 'matchingResults');
-      mapping.putAll(((IBMWatsonGenericModel) LogQueryResponseResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
-      return mapping;
     }
   }
 
@@ -14139,36 +13965,34 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'environment_id' => 'environmentId',
+        'customer_id' => 'customerId',
+        'document_type' => 'documentType',
+        'natural_language_query' => 'naturalLanguageQuery',
+        'document_results' => 'documentResults',
+        'created_timestamp' => 'createdTimestamp',
+        'client_timestamp' => 'clientTimestamp',
+        'query_id' => 'queryId',
+        'session_token' => 'sessionToken',
+        'collection_id' => 'collectionId',
+        'display_rank' => 'displayRank',
+        'document_id' => 'documentId',
+        'event_type' => 'eventType',
+        'result_type' => 'resultType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       LogQueryResponseResult ret = (LogQueryResponseResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentResults
-      LogQueryResponseResultDocuments newDocumentResults = (LogQueryResponseResultDocuments) new LogQueryResponseResultDocuments().deserialize(JSON.serialize(ret.getDocumentResults()), (Map<String, Object>) jsonMap.get('documentResults'), LogQueryResponseResultDocuments.class);
+      Map<String, Object> documentResultsMap = (Map<String, Object>) jsonMap.get('documentResults');
+      LogQueryResponseResultDocuments newDocumentResults = (LogQueryResponseResultDocuments) new LogQueryResponseResultDocuments().deserialize(JSON.serialize(documentResultsMap), documentResultsMap, LogQueryResponseResultDocuments.class);
       ret.setDocumentResults(newDocumentResults);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'environment_id', 'environmentId');
-      mapping.put(parentLabel + 'customer_id', 'customerId');
-      mapping.put(parentLabel + 'document_type', 'documentType');
-      mapping.put(parentLabel + 'natural_language_query', 'naturalLanguageQuery');
-      mapping.put(parentLabel + 'document_results', 'documentResults');
-      mapping.putAll(((IBMWatsonGenericModel) LogQueryResponseResultDocuments.class.newInstance()).addToApiToSdkMapping(parentLabel + 'document_results/', mapping));
-      mapping.put(parentLabel + 'created_timestamp', 'createdTimestamp');
-      mapping.put(parentLabel + 'client_timestamp', 'clientTimestamp');
-      mapping.put(parentLabel + 'query_id', 'queryId');
-      mapping.put(parentLabel + 'session_token', 'sessionToken');
-      mapping.put(parentLabel + 'collection_id', 'collectionId');
-      mapping.put(parentLabel + 'display_rank', 'displayRank');
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'event_type', 'eventType');
-      mapping.put(parentLabel + 'result_type', 'resultType');
-      return mapping;
     }
   }
 
@@ -14236,18 +14060,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           LogQueryResponseResultDocumentsResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          LogQueryResponseResultDocumentsResult newItem = (LogQueryResponseResultDocumentsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResultDocumentsResult.class);
+          LogQueryResponseResultDocumentsResult newItem = (LogQueryResponseResultDocumentsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResultDocumentsResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) LogQueryResponseResultDocumentsResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
-      return mapping;
     }
   }
 
@@ -14366,10 +14185,22 @@ public class IBMDiscoveryV1Models {
       this.collectionId = collectionId;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'collection_id', 'collectionId');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_id' => 'documentId',
+        'collection_id' => 'collectionId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      LogQueryResponseResultDocumentsResult ret = (LogQueryResponseResultDocumentsResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -14449,6 +14280,13 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'event_type' => 'eventType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       MetricAggregation ret = (MetricAggregation) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results
@@ -14458,19 +14296,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           MetricAggregationResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          MetricAggregationResult newItem = (MetricAggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregationResult.class);
+          MetricAggregationResult newItem = (MetricAggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregationResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'event_type', 'eventType');
-      mapping.putAll(((IBMWatsonGenericModel) MetricAggregationResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
-      return mapping;
     }
   }
 
@@ -14568,15 +14400,23 @@ public class IBMDiscoveryV1Models {
       this.eventRate = eventRate;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'key_as_string', 'keyAsString');
-      mapping.put(parentLabel + 'matching_results', 'matchingResults');
-      mapping.put(parentLabel + 'event_rate', 'eventRate');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'key_as_string' => 'keyAsString',
+        'matching_results' => 'matchingResults',
+        'event_rate' => 'eventRate'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      MetricAggregationResult ret = (MetricAggregationResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -14621,18 +14461,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           MetricAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          MetricAggregation newItem = (MetricAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregation.class);
+          MetricAggregation newItem = (MetricAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) MetricAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
-      return mapping;
     }
   }
 
@@ -14690,6 +14525,13 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'event_type' => 'eventType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       MetricTokenAggregation ret = (MetricTokenAggregation) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results
@@ -14699,23 +14541,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           MetricTokenAggregationResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          MetricTokenAggregationResult newItem = (MetricTokenAggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregationResult.class);
+          MetricTokenAggregationResult newItem = (MetricTokenAggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregationResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'event_type', 'eventType');
-      mapping.putAll(((IBMWatsonGenericModel) MetricTokenAggregationResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
-      return mapping;
     }
   }
 
@@ -14791,10 +14623,22 @@ public class IBMDiscoveryV1Models {
       this.eventRate = eventRate;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'matching_results', 'matchingResults');
-      mapping.put(parentLabel + 'event_rate', 'eventRate');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'matching_results' => 'matchingResults',
+        'event_rate' => 'eventRate'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      MetricTokenAggregationResult ret = (MetricTokenAggregationResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -14839,18 +14683,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           MetricTokenAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          MetricTokenAggregation newItem = (MetricTokenAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregation.class);
+          MetricTokenAggregation newItem = (MetricTokenAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) MetricTokenAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
-      return mapping;
     }
   }
 
@@ -14906,6 +14745,15 @@ public class IBMDiscoveryV1Models {
       }
 
       return builderResult;
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -14969,22 +14817,35 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentConceptsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'limit' => 'xlimit'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      NluEnrichmentConcepts ret = (NluEnrichmentConcepts) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentConceptsBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'limit', 'xlimit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -15074,6 +14935,24 @@ public class IBMDiscoveryV1Models {
      */
     public NluEnrichmentEmotionBuilder newBuilder() {
       return new NluEnrichmentEmotionBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentEmotion ret = (NluEnrichmentEmotion) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentEmotionBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -15266,18 +15145,39 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentEntitiesBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      mapping.put(parentLabel + 'mentionTypes', 'mention_types');
-      mapping.put(parentLabel + 'sentenceLocations', 'sentence_locations');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'limit' => 'xlimit',
+        'mention_types' => 'mentionTypes',
+        'sentence_locations' => 'sentenceLocations'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      NluEnrichmentEntities ret = (NluEnrichmentEntities) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentEntitiesBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'limit', 'xlimit');
-      mapping.put(parentLabel + 'mention_types', 'mentionTypes');
-      mapping.put(parentLabel + 'sentence_locations', 'sentenceLocations');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit',
+        'mentionTypes' => 'mention_types',
+        'sentenceLocations' => 'sentence_locations'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -15536,68 +15436,150 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'semantic_roles' => 'semanticRoles'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       NluEnrichmentFeatures ret = (NluEnrichmentFeatures) super.deserialize(jsonString, jsonMap, classType);
       NluEnrichmentFeaturesBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for keywords
-      NluEnrichmentKeywords newKeywords = (NluEnrichmentKeywords) new NluEnrichmentKeywords().deserialize(JSON.serialize(ret.getKeywords()), (Map<String, Object>) jsonMap.get('keywords'), NluEnrichmentKeywords.class);
+      Map<String, Object> keywordsMap = (Map<String, Object>) jsonMap.get('keywords');
+      NluEnrichmentKeywords newKeywords = (NluEnrichmentKeywords) new NluEnrichmentKeywords().deserialize(JSON.serialize(keywordsMap), keywordsMap, NluEnrichmentKeywords.class);
       retBuilder.keywords(newKeywords);
 
       // calling custom deserializer for entities
-      NluEnrichmentEntities newEntities = (NluEnrichmentEntities) new NluEnrichmentEntities().deserialize(JSON.serialize(ret.getEntities()), (Map<String, Object>) jsonMap.get('entities'), NluEnrichmentEntities.class);
+      Map<String, Object> entitiesMap = (Map<String, Object>) jsonMap.get('entities');
+      NluEnrichmentEntities newEntities = (NluEnrichmentEntities) new NluEnrichmentEntities().deserialize(JSON.serialize(entitiesMap), entitiesMap, NluEnrichmentEntities.class);
       retBuilder.entities(newEntities);
 
       // calling custom deserializer for sentiment
-      NluEnrichmentSentiment newSentiment = (NluEnrichmentSentiment) new NluEnrichmentSentiment().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment'), NluEnrichmentSentiment.class);
+      Map<String, Object> sentimentMap = (Map<String, Object>) jsonMap.get('sentiment');
+      NluEnrichmentSentiment newSentiment = (NluEnrichmentSentiment) new NluEnrichmentSentiment().deserialize(JSON.serialize(sentimentMap), sentimentMap, NluEnrichmentSentiment.class);
       retBuilder.sentiment(newSentiment);
 
       // calling custom deserializer for emotion
-      NluEnrichmentEmotion newEmotion = (NluEnrichmentEmotion) new NluEnrichmentEmotion().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion'), NluEnrichmentEmotion.class);
+      Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
+      NluEnrichmentEmotion newEmotion = (NluEnrichmentEmotion) new NluEnrichmentEmotion().deserialize(JSON.serialize(emotionMap), emotionMap, NluEnrichmentEmotion.class);
       retBuilder.emotion(newEmotion);
 
       // calling custom deserializer for categories
-      NluEnrichmentCategories newCategories = (NluEnrichmentCategories) new NluEnrichmentCategories().deserialize(JSON.serialize(ret.getCategories()), (Map<String, Object>) jsonMap.get('categories'), NluEnrichmentCategories.class);
+      Map<String, Object> categoriesMap = (Map<String, Object>) jsonMap.get('categories');
+      NluEnrichmentCategories newCategories = (NluEnrichmentCategories) new NluEnrichmentCategories().deserialize(JSON.serialize(categoriesMap), categoriesMap, NluEnrichmentCategories.class);
       retBuilder.categories(newCategories);
 
       // calling custom deserializer for semanticRoles
-      NluEnrichmentSemanticRoles newSemanticRoles = (NluEnrichmentSemanticRoles) new NluEnrichmentSemanticRoles().deserialize(JSON.serialize(ret.getSemanticRoles()), (Map<String, Object>) jsonMap.get('semanticRoles'), NluEnrichmentSemanticRoles.class);
+      Map<String, Object> semanticRolesMap = (Map<String, Object>) jsonMap.get('semanticRoles');
+      NluEnrichmentSemanticRoles newSemanticRoles = (NluEnrichmentSemanticRoles) new NluEnrichmentSemanticRoles().deserialize(JSON.serialize(semanticRolesMap), semanticRolesMap, NluEnrichmentSemanticRoles.class);
       retBuilder.semanticRoles(newSemanticRoles);
 
       // calling custom deserializer for relations
-      NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(ret.getRelations()), (Map<String, Object>) jsonMap.get('relations'), NluEnrichmentRelations.class);
+      Map<String, Object> relationsMap = (Map<String, Object>) jsonMap.get('relations');
+      NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(relationsMap), relationsMap, NluEnrichmentRelations.class);
       retBuilder.relations(newRelations);
 
       // calling custom deserializer for concepts
-      NluEnrichmentConcepts newConcepts = (NluEnrichmentConcepts) new NluEnrichmentConcepts().deserialize(JSON.serialize(ret.getConcepts()), (Map<String, Object>) jsonMap.get('concepts'), NluEnrichmentConcepts.class);
+      Map<String, Object> conceptsMap = (Map<String, Object>) jsonMap.get('concepts');
+      NluEnrichmentConcepts newConcepts = (NluEnrichmentConcepts) new NluEnrichmentConcepts().deserialize(JSON.serialize(conceptsMap), conceptsMap, NluEnrichmentConcepts.class);
       retBuilder.concepts(newConcepts);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (keywords != null) {
-        mapping.putAll(keywords.addToSdkToApiMapping(parentLabel + 'keywords/', mapping));
-      }
-      if (entities != null) {
-        mapping.putAll(entities.addToSdkToApiMapping(parentLabel + 'entities/', mapping));
-      }
-      mapping.put(parentLabel + 'semanticRoles', 'semantic_roles');
-      if (semanticRoles != null) {
-        mapping.putAll(semanticRoles.addToSdkToApiMapping(parentLabel + 'semanticRoles/', mapping));
-      }
-      if (concepts != null) {
-        mapping.putAll(concepts.addToSdkToApiMapping(parentLabel + 'concepts/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentKeywords.class.newInstance()).addToApiToSdkMapping(parentLabel + 'keywords/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentEntities.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      mapping.put(parentLabel + 'semantic_roles', 'semanticRoles');
-      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentSemanticRoles.class.newInstance()).addToApiToSdkMapping(parentLabel + 'semantic_roles/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) NluEnrichmentConcepts.class.newInstance()).addToApiToSdkMapping(parentLabel + 'concepts/', mapping));
-      return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'semanticRoles' => 'semantic_roles'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for keywords
+      if (keywords != null) {
+        String keywordsJsonString = keywords.serialize();
+        String keywordsKey = 'keywords';
+        if (propertyNameMapping.containsKey(keywordsKey)) {
+          keywordsKey = propertyNameMapping.get(keywordsKey);
+        }
+        jsonMap.put(keywordsKey, JSON.deserializeUntyped(keywordsJsonString));
+      }
+
+      // calling custom serializer for entities
+      if (entities != null) {
+        String entitiesJsonString = entities.serialize();
+        String entitiesKey = 'entities';
+        if (propertyNameMapping.containsKey(entitiesKey)) {
+          entitiesKey = propertyNameMapping.get(entitiesKey);
+        }
+        jsonMap.put(entitiesKey, JSON.deserializeUntyped(entitiesJsonString));
+      }
+
+      // calling custom serializer for sentiment
+      if (sentiment != null) {
+        String sentimentJsonString = sentiment.serialize();
+        String sentimentKey = 'sentiment';
+        if (propertyNameMapping.containsKey(sentimentKey)) {
+          sentimentKey = propertyNameMapping.get(sentimentKey);
+        }
+        jsonMap.put(sentimentKey, JSON.deserializeUntyped(sentimentJsonString));
+      }
+
+      // calling custom serializer for emotion
+      if (emotion != null) {
+        String emotionJsonString = emotion.serialize();
+        String emotionKey = 'emotion';
+        if (propertyNameMapping.containsKey(emotionKey)) {
+          emotionKey = propertyNameMapping.get(emotionKey);
+        }
+        jsonMap.put(emotionKey, JSON.deserializeUntyped(emotionJsonString));
+      }
+
+      // calling custom serializer for categories
+      if (categories != null) {
+        String categoriesJsonString = categories.serialize();
+        String categoriesKey = 'categories';
+        if (propertyNameMapping.containsKey(categoriesKey)) {
+          categoriesKey = propertyNameMapping.get(categoriesKey);
+        }
+        jsonMap.put(categoriesKey, JSON.deserializeUntyped(categoriesJsonString));
+      }
+
+      // calling custom serializer for semanticRoles
+      if (semanticRoles != null) {
+        String semanticRolesJsonString = semanticRoles.serialize();
+        String semanticRolesKey = 'semanticRoles';
+        if (propertyNameMapping.containsKey(semanticRolesKey)) {
+          semanticRolesKey = propertyNameMapping.get(semanticRolesKey);
+        }
+        jsonMap.put(semanticRolesKey, JSON.deserializeUntyped(semanticRolesJsonString));
+      }
+
+      // calling custom serializer for relations
+      if (relations != null) {
+        String relationsJsonString = relations.serialize();
+        String relationsKey = 'relations';
+        if (propertyNameMapping.containsKey(relationsKey)) {
+          relationsKey = propertyNameMapping.get(relationsKey);
+        }
+        jsonMap.put(relationsKey, JSON.deserializeUntyped(relationsJsonString));
+      }
+
+      // calling custom serializer for concepts
+      if (concepts != null) {
+        String conceptsJsonString = concepts.serialize();
+        String conceptsKey = 'concepts';
+        if (propertyNameMapping.containsKey(conceptsKey)) {
+          conceptsKey = propertyNameMapping.get(conceptsKey);
+        }
+        jsonMap.put(conceptsKey, JSON.deserializeUntyped(conceptsJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -15794,14 +15776,35 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentKeywordsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'limit' => 'xlimit'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      NluEnrichmentKeywords ret = (NluEnrichmentKeywords) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentKeywordsBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'limit', 'xlimit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -15905,6 +15908,24 @@ public class IBMDiscoveryV1Models {
      */
     public NluEnrichmentRelationsBuilder newBuilder() {
       return new NluEnrichmentRelationsBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentRelations ret = (NluEnrichmentRelations) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentRelationsBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -16010,14 +16031,35 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentSemanticRolesBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'limit' => 'xlimit'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      NluEnrichmentSemanticRoles ret = (NluEnrichmentSemanticRoles) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentSemanticRolesBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'limit', 'xlimit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -16133,6 +16175,24 @@ public class IBMDiscoveryV1Models {
      */
     public NluEnrichmentSentimentBuilder newBuilder() {
       return new NluEnrichmentSentimentBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentSentiment ret = (NluEnrichmentSentiment) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentSentimentBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -16290,16 +16350,37 @@ public class IBMDiscoveryV1Models {
       return new NormalizationOperationBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'sourceField', 'source_field');
-      mapping.put(parentLabel + 'destinationField', 'destination_field');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'source_field' => 'sourceField',
+        'destination_field' => 'destinationField'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      NormalizationOperation ret = (NormalizationOperation) super.deserialize(jsonString, jsonMap, classType);
+      NormalizationOperationBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'source_field', 'sourceField');
-      mapping.put(parentLabel + 'destination_field', 'destinationField');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'sourceField' => 'source_field',
+        'destinationField' => 'destination_field'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -16472,15 +16553,23 @@ public class IBMDiscoveryV1Models {
       return description;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'notice_id', 'noticeId');
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'query_id', 'queryId');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'notice_id' => 'noticeId',
+        'document_id' => 'documentId',
+        'query_id' => 'queryId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Notice ret = (Notice) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -16534,7 +16623,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedFonts.size(); i++) {
           FontSetting currentItem = ret.getFonts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fonts');
-          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
+          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
         retBuilder.fonts(newFonts);
@@ -16543,16 +16632,21 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (fonts != null && fonts[0] != null) {
-        mapping.putAll(fonts[0].addToSdkToApiMapping(parentLabel + 'fonts/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) FontSetting.class.newInstance()).addToApiToSdkMapping(parentLabel + 'fonts/', mapping));
-      return mapping;
+      // calling custom serializer for fonts
+      if (fonts != null) {
+        List<Object> fontsJsonList = new List<Object>();
+        for (FontSetting listItem : fonts) {
+          String listItemJsonString = listItem.serialize();
+          fontsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('fonts', fontsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -16653,22 +16747,24 @@ public class IBMDiscoveryV1Models {
       PdfSettingsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for heading
-      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading'), PdfHeadingDetection.class);
+      Map<String, Object> headingMap = (Map<String, Object>) jsonMap.get('heading');
+      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(headingMap), headingMap, PdfHeadingDetection.class);
       retBuilder.heading(newHeading);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (heading != null) {
-        mapping.putAll(heading.addToSdkToApiMapping(parentLabel + 'heading/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) PdfHeadingDetection.class.newInstance()).addToApiToSdkMapping(parentLabel + 'heading/', mapping));
-      return mapping;
+      // calling custom serializer for heading
+      if (heading != null) {
+        String headingJsonString = heading.serialize();
+        jsonMap.put('heading', JSON.deserializeUntyped(headingJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -17025,6 +17121,16 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype',
+        'matching_results' => 'matchingResults',
+        'histogram_interval' => 'histogramInterval',
+        'timeslice_interval' => 'timesliceInterval'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       QueryAggregation ret = (QueryAggregation) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results
@@ -17034,7 +17140,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           AggregationResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AggregationResult.class);
+          AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AggregationResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -17047,32 +17153,18 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
       }
 
       // calling custom deserializer for hits
-      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(ret.getHits()), (Map<String, Object>) jsonMap.get('hits'), TopHitsResults.class);
+      Map<String, Object> hitsMap = (Map<String, Object>) jsonMap.get('hits');
+      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(hitsMap), hitsMap, TopHitsResults.class);
       ret.setHits(newHits);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.putAll(((IBMWatsonGenericModel) AggregationResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
-      mapping.put(parentLabel + 'matching_results', 'matchingResults');
-      mapping.putAll(((IBMWatsonGenericModel) QueryAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
-      mapping.put(parentLabel + 'histogram_interval', 'histogramInterval');
-      mapping.put(parentLabel + 'timeslice_interval', 'timesliceInterval');
-      mapping.putAll(((IBMWatsonGenericModel) TopHitsResults.class.newInstance()).addToApiToSdkMapping(parentLabel + 'hits/', mapping));
-      return mapping;
     }
   }
 
@@ -17106,6 +17198,13 @@ public class IBMDiscoveryV1Models {
      */
     public QueryEntitiesContextBuilder newBuilder() {
       return new QueryEntitiesContextBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -17197,14 +17296,35 @@ public class IBMDiscoveryV1Models {
       return new QueryEntitiesEntityBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'xtype', 'type');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      QueryEntitiesEntity ret = (QueryEntitiesEntity) super.deserialize(jsonString, jsonMap, classType);
+      QueryEntitiesEntityBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'type', 'xtype');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xtype' => 'type'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -17369,17 +17489,6 @@ public class IBMDiscoveryV1Models {
      */
     public QueryEntitiesOptionsBuilder newBuilder() {
       return new QueryEntitiesOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      if (entity != null) {
-        mapping.putAll(entity.addToSdkToApiMapping('', mapping));
-      }
-      mapping.put('evidenceCount', 'evidence_count');
-      return mapping;
     }
   }
 
@@ -17563,18 +17672,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           QueryEntitiesResponseItem currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          QueryEntitiesResponseItem newItem = (QueryEntitiesResponseItem) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesResponseItem.class);
+          QueryEntitiesResponseItem newItem = (QueryEntitiesResponseItem) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesResponseItem.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) QueryEntitiesResponseItem.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      return mapping;
     }
   }
 
@@ -17654,6 +17758,13 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       QueryEntitiesResponseItem ret = (QueryEntitiesResponseItem) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for evidence
@@ -17663,19 +17774,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEvidence.size(); i++) {
           QueryEvidence currentItem = ret.getEvidence().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('evidence');
-          QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
+          QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
           newEvidence.add(newItem);
         }
         ret.evidence = newEvidence;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.putAll(((IBMWatsonGenericModel) QueryEvidence.class.newInstance()).addToApiToSdkMapping(parentLabel + 'evidence/', mapping));
-      return mapping;
     }
   }
 
@@ -17799,6 +17904,15 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_id' => 'documentId',
+        'start_offset' => 'startOffset',
+        'end_offset' => 'endOffset'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       QueryEvidence ret = (QueryEvidence) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for entities
@@ -17808,25 +17922,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           QueryEvidenceEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          QueryEvidenceEntity newItem = (QueryEvidenceEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidenceEntity.class);
+          QueryEvidenceEntity newItem = (QueryEvidenceEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidenceEntity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'start_offset', 'startOffset');
-      mapping.put(parentLabel + 'end_offset', 'endOffset');
-      mapping.putAll(((IBMWatsonGenericModel) QueryEvidenceEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      return mapping;
     }
   }
 
@@ -17923,15 +18025,23 @@ public class IBMDiscoveryV1Models {
       this.endOffset = endOffset;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.put(parentLabel + 'start_offset', 'startOffset');
-      mapping.put(parentLabel + 'end_offset', 'endOffset');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype',
+        'start_offset' => 'startOffset',
+        'end_offset' => 'endOffset'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      QueryEvidenceEntity ret = (QueryEvidenceEntity) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -17976,6 +18086,13 @@ public class IBMDiscoveryV1Models {
      */
     public QueryFilterTypeBuilder newBuilder() {
       return new QueryFilterTypeBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -18149,12 +18266,6 @@ public class IBMDiscoveryV1Models {
      */
     public QueryLogOptionsBuilder newBuilder() {
       return new QueryLogOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('xsort', 'sort');
-      return mapping;
     }
   }
 
@@ -18561,22 +18672,6 @@ public class IBMDiscoveryV1Models {
      */
     public QueryNoticesOptionsBuilder newBuilder() {
       return new QueryNoticesOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('naturalLanguageQuery', 'natural_language_query');
-      mapping.put('returnFields', 'return');
-      mapping.put('xsort', 'sort');
-      mapping.put('passagesFields', 'passages.fields');
-      mapping.put('passagesCount', 'passages.count');
-      mapping.put('passagesCharacters', 'passages.characters');
-      mapping.put('deduplicateField', 'deduplicate.field');
-      mapping.put('similarDocumentIds', 'similar.document_ids');
-      mapping.put('similarFields', 'similar.fields');
-      return mapping;
     }
   }
 
@@ -19075,6 +19170,14 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'matching_results' => 'matchingResults',
+        'duplicates_removed' => 'duplicatesRemoved'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       QueryNoticesResponse ret = (QueryNoticesResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results
@@ -19084,7 +19187,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryNoticesResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryNoticesResult.class);
+          QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryNoticesResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -19097,7 +19200,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
@@ -19110,26 +19213,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedPassages.size(); i++) {
           QueryPassages currentItem = ret.getPassages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('passages');
-          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
+          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
           newPassages.add(newItem);
         }
         ret.passages = newPassages;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'matching_results', 'matchingResults');
-      mapping.putAll(((IBMWatsonGenericModel) QueryNoticesResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) QueryAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) QueryPassages.class.newInstance()).addToApiToSdkMapping(parentLabel + 'passages/', mapping));
-      mapping.put(parentLabel + 'duplicates_removed', 'duplicatesRemoved');
-      return mapping;
     }
   }
 
@@ -19354,14 +19444,25 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'collection_id' => 'collectionId',
+        'result_metadata' => 'resultMetadata',
+        'file_type' => 'fileType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       QueryNoticesResult ret = (QueryNoticesResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
+      Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for resultMetadata
-      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('resultMetadata'), QueryResultMetadata.class);
+      Map<String, Object> resultMetadataMap = (Map<String, Object>) jsonMap.get('resultMetadata');
+      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(resultMetadataMap), resultMetadataMap, QueryResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
       // calling custom deserializer for notices
@@ -19371,7 +19472,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
         ret.setNotices(newNotices);
@@ -19386,14 +19487,6 @@ public class IBMDiscoveryV1Models {
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'collection_id', 'collectionId');
-      mapping.put(parentLabel + 'result_metadata', 'resultMetadata');
-      mapping.put(parentLabel + 'file_type', 'fileType');
-      mapping.putAll(((IBMWatsonGenericModel) Notice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'notices/', mapping));
-      return mapping;
     }
   }
 
@@ -19739,24 +19832,6 @@ public class IBMDiscoveryV1Models {
      */
     public QueryOptionsBuilder newBuilder() {
       return new QueryOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('naturalLanguageQuery', 'natural_language_query');
-      mapping.put('returnFields', 'return');
-      mapping.put('xsort', 'sort');
-      mapping.put('passagesFields', 'passages.fields');
-      mapping.put('passagesCount', 'passages.count');
-      mapping.put('passagesCharacters', 'passages.characters');
-      mapping.put('deduplicateField', 'deduplicate.field');
-      mapping.put('collectionIds', 'collection_ids');
-      mapping.put('similarDocumentIds', 'similar.document_ids');
-      mapping.put('similarFields', 'similar.fields');
-      mapping.put('loggingOptOut', 'X-Watson-Logging-Opt-Out');
-      return mapping;
     }
   }
 
@@ -20244,17 +20319,25 @@ public class IBMDiscoveryV1Models {
       this.field = field;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'passage_score', 'passageScore');
-      mapping.put(parentLabel + 'passage_text', 'passageText');
-      mapping.put(parentLabel + 'start_offset', 'startOffset');
-      mapping.put(parentLabel + 'end_offset', 'endOffset');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_id' => 'documentId',
+        'passage_score' => 'passageScore',
+        'passage_text' => 'passageText',
+        'start_offset' => 'startOffset',
+        'end_offset' => 'endOffset'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      QueryPassages ret = (QueryPassages) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -20299,18 +20382,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           QueryEntitiesEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          QueryEntitiesEntity newItem = (QueryEntitiesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesEntity.class);
+          QueryEntitiesEntity newItem = (QueryEntitiesEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesEntity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) QueryEntitiesEntity.class.newInstance()).addToApiToSdkMapping(parentLabel + 'entities/', mapping));
-      return mapping;
     }
   }
 
@@ -20370,9 +20448,17 @@ public class IBMDiscoveryV1Models {
       return new QueryRelationsEntityBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'xtype', 'type');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xtype' => 'type'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -20491,15 +20577,39 @@ public class IBMDiscoveryV1Models {
       return new QueryRelationsFilterBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'relationTypes' => 'relation_types',
+        'entityTypes' => 'entity_types',
+        'documentIds' => 'document_ids'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for relationTypes
+      if (relationTypes != null) {
+        String relationTypesJsonString = relationTypes.serialize();
+        String relationTypesKey = 'relationTypes';
+        if (propertyNameMapping.containsKey(relationTypesKey)) {
+          relationTypesKey = propertyNameMapping.get(relationTypesKey);
+        }
+        jsonMap.put(relationTypesKey, JSON.deserializeUntyped(relationTypesJsonString));
       }
-      mapping.put(parentLabel + 'relationTypes', 'relation_types');
-      mapping.put(parentLabel + 'entityTypes', 'entity_types');
-      mapping.put(parentLabel + 'documentIds', 'document_ids');
-      return mapping;
+
+      // calling custom serializer for entityTypes
+      if (entityTypes != null) {
+        String entityTypesJsonString = entityTypes.serialize();
+        String entityTypesKey = 'entityTypes';
+        if (propertyNameMapping.containsKey(entityTypesKey)) {
+          entityTypesKey = propertyNameMapping.get(entityTypesKey);
+        }
+        jsonMap.put(entityTypesKey, JSON.deserializeUntyped(entityTypesJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -20706,21 +20816,6 @@ public class IBMDiscoveryV1Models {
      */
     public QueryRelationsOptionsBuilder newBuilder() {
       return new QueryRelationsOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      if (entities != null && entities[0] != null) {
-        mapping.putAll(entities[0].addToSdkToApiMapping('', mapping));
-      }
-      mapping.put('xsort', 'sort');
-      if (filter != null) {
-        mapping.putAll(filter.addToSdkToApiMapping('', mapping));
-      }
-      mapping.put('evidenceCount', 'evidence_count');
-      return mapping;
     }
   }
 
@@ -20990,6 +21085,13 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       QueryRelationsRelationship ret = (QueryRelationsRelationship) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for arguments
@@ -20999,7 +21101,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedArguments.size(); i++) {
           QueryRelationsArgument currentItem = ret.getArguments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('arguments');
-          QueryRelationsArgument newItem = (QueryRelationsArgument) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsArgument.class);
+          QueryRelationsArgument newItem = (QueryRelationsArgument) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsArgument.class);
           newArguments.add(newItem);
         }
         ret.arguments = newArguments;
@@ -21012,24 +21114,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEvidence.size(); i++) {
           QueryEvidence currentItem = ret.getEvidence().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('evidence');
-          QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
+          QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
           newEvidence.add(newItem);
         }
         ret.evidence = newEvidence;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.putAll(((IBMWatsonGenericModel) QueryRelationsArgument.class.newInstance()).addToApiToSdkMapping(parentLabel + 'arguments/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) QueryEvidence.class.newInstance()).addToApiToSdkMapping(parentLabel + 'evidence/', mapping));
-      return mapping;
     }
   }
 
@@ -21074,18 +21165,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedRelations.size(); i++) {
           QueryRelationsRelationship currentItem = ret.getRelations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('relations');
-          QueryRelationsRelationship newItem = (QueryRelationsRelationship) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsRelationship.class);
+          QueryRelationsRelationship newItem = (QueryRelationsRelationship) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsRelationship.class);
           newRelations.add(newItem);
         }
         ret.relations = newRelations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) QueryRelationsRelationship.class.newInstance()).addToApiToSdkMapping(parentLabel + 'relations/', mapping));
-      return mapping;
     }
   }
 
@@ -21256,6 +21342,16 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'matching_results' => 'matchingResults',
+        'duplicates_removed' => 'duplicatesRemoved',
+        'session_token' => 'sessionToken',
+        'retrieval_details' => 'retrievalDetails'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       QueryResponse ret = (QueryResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results
@@ -21265,7 +21361,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
+          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -21278,7 +21374,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
@@ -21291,33 +21387,18 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedPassages.size(); i++) {
           QueryPassages currentItem = ret.getPassages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('passages');
-          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
+          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
           newPassages.add(newItem);
         }
         ret.passages = newPassages;
       }
 
       // calling custom deserializer for retrievalDetails
-      RetrievalDetails newRetrievalDetails = (RetrievalDetails) new RetrievalDetails().deserialize(JSON.serialize(ret.getRetrievalDetails()), (Map<String, Object>) jsonMap.get('retrievalDetails'), RetrievalDetails.class);
+      Map<String, Object> retrievalDetailsMap = (Map<String, Object>) jsonMap.get('retrievalDetails');
+      RetrievalDetails newRetrievalDetails = (RetrievalDetails) new RetrievalDetails().deserialize(JSON.serialize(retrievalDetailsMap), retrievalDetailsMap, RetrievalDetails.class);
       ret.setRetrievalDetails(newRetrievalDetails);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'matching_results', 'matchingResults');
-      mapping.putAll(((IBMWatsonGenericModel) QueryResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'results/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) QueryAggregation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'aggregations/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) QueryPassages.class.newInstance()).addToApiToSdkMapping(parentLabel + 'passages/', mapping));
-      mapping.put(parentLabel + 'duplicates_removed', 'duplicatesRemoved');
-      mapping.put(parentLabel + 'session_token', 'sessionToken');
-      mapping.put(parentLabel + 'retrieval_details', 'retrievalDetails');
-      mapping.putAll(((IBMWatsonGenericModel) RetrievalDetails.class.newInstance()).addToApiToSdkMapping(parentLabel + 'retrieval_details/', mapping));
-      return mapping;
     }
   }
 
@@ -21442,14 +21523,24 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'collection_id' => 'collectionId',
+        'result_metadata' => 'resultMetadata'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       QueryResult ret = (QueryResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata'), IBMWatsonMapModel.class);
+      Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for resultMetadata
-      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('resultMetadata'), QueryResultMetadata.class);
+      Map<String, Object> resultMetadataMap = (Map<String, Object>) jsonMap.get('resultMetadata');
+      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(resultMetadataMap), resultMetadataMap, QueryResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
@@ -21461,12 +21552,6 @@ public class IBMDiscoveryV1Models {
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'collection_id', 'collectionId');
-      mapping.put(parentLabel + 'result_metadata', 'resultMetadata');
-      return mapping;
     }
   }
 
@@ -21522,6 +21607,16 @@ public class IBMDiscoveryV1Models {
     public void setConfidence(final Double confidence) {
       this.confidence = confidence;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryResultMetadata ret = (QueryResultMetadata) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -21557,13 +21652,21 @@ public class IBMDiscoveryV1Models {
       this.documentRetrievalStrategy = documentRetrievalStrategy;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'document_retrieval_strategy', 'documentRetrievalStrategy');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_retrieval_strategy' => 'documentRetrievalStrategy'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      RetrievalDetails ret = (RetrievalDetails) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -21695,22 +21798,24 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'total_annotated_pages' => 'totalAnnotatedPages',
+        'total_pages' => 'totalPages',
+        'total_documents' => 'totalDocuments',
+        'custom_fields' => 'customFields'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       SduStatus ret = (SduStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for customFields
-      SduStatusCustomFields newCustomFields = (SduStatusCustomFields) new SduStatusCustomFields().deserialize(JSON.serialize(ret.getCustomFields()), (Map<String, Object>) jsonMap.get('customFields'), SduStatusCustomFields.class);
+      Map<String, Object> customFieldsMap = (Map<String, Object>) jsonMap.get('customFields');
+      SduStatusCustomFields newCustomFields = (SduStatusCustomFields) new SduStatusCustomFields().deserialize(JSON.serialize(customFieldsMap), customFieldsMap, SduStatusCustomFields.class);
       ret.setCustomFields(newCustomFields);
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'total_annotated_pages', 'totalAnnotatedPages');
-      mapping.put(parentLabel + 'total_pages', 'totalPages');
-      mapping.put(parentLabel + 'total_documents', 'totalDocuments');
-      mapping.put(parentLabel + 'custom_fields', 'customFields');
-      mapping.putAll(((IBMWatsonGenericModel) SduStatusCustomFields.class.newInstance()).addToApiToSdkMapping(parentLabel + 'custom_fields/', mapping));
-      return mapping;
     }
   }
 
@@ -21763,9 +21868,21 @@ public class IBMDiscoveryV1Models {
       this.maximumAllowed = maximumAllowed;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'maximum_allowed', 'maximumAllowed');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'maximum_allowed' => 'maximumAllowed'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SduStatusCustomFields ret = (SduStatusCustomFields) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -21862,10 +21979,22 @@ public class IBMDiscoveryV1Models {
       this.lastTrained = lastTrained;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'status_description', 'statusDescription');
-      mapping.put(parentLabel + 'last_trained', 'lastTrained');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'status_description' => 'statusDescription',
+        'last_trained' => 'lastTrained'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SearchStatus ret = (SearchStatus) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -21943,16 +22072,37 @@ public class IBMDiscoveryV1Models {
       return new SegmentSettingsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'selectorTags', 'selector_tags');
-      mapping.put(parentLabel + 'annotatedFields', 'annotated_fields');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'selector_tags' => 'selectorTags',
+        'annotated_fields' => 'annotatedFields'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SegmentSettings ret = (SegmentSettings) super.deserialize(jsonString, jsonMap, classType);
+      SegmentSettingsBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'selector_tags', 'selectorTags');
-      mapping.put(parentLabel + 'annotated_fields', 'annotatedFields');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'selectorTags' => 'selector_tags',
+        'annotatedFields' => 'annotated_fields'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -22142,46 +22292,62 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype',
+        'credential_id' => 'credentialId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Source ret = (Source) super.deserialize(jsonString, jsonMap, classType);
       SourceBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for schedule
-      SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(ret.getSchedule()), (Map<String, Object>) jsonMap.get('schedule'), SourceSchedule.class);
+      Map<String, Object> scheduleMap = (Map<String, Object>) jsonMap.get('schedule');
+      SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(scheduleMap), scheduleMap, SourceSchedule.class);
       retBuilder.schedule(newSchedule);
 
       // calling custom deserializer for options
-      SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options'), SourceOptions.class);
+      Map<String, Object> optionsMap = (Map<String, Object>) jsonMap.get('options');
+      SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(optionsMap), optionsMap, SourceOptions.class);
       retBuilder.options(newOptions);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'xtype', 'type');
-      mapping.put(parentLabel + 'credentialId', 'credential_id');
-      if (schedule != null) {
-        mapping.putAll(schedule.addToSdkToApiMapping(parentLabel + 'schedule/', mapping));
-      }
-      if (options != null) {
-        mapping.putAll(options.addToSdkToApiMapping(parentLabel + 'options/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xtype' => 'type',
+        'credentialId' => 'credential_id'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for schedule
+      if (schedule != null) {
+        String scheduleJsonString = schedule.serialize();
+        String scheduleKey = 'schedule';
+        if (propertyNameMapping.containsKey(scheduleKey)) {
+          scheduleKey = propertyNameMapping.get(scheduleKey);
+        }
+        jsonMap.put(scheduleKey, JSON.deserializeUntyped(scheduleJsonString));
       }
-      mapping.put(parentLabel + 'type', 'xtype');
-      mapping.put(parentLabel + 'credential_id', 'credentialId');
-      mapping.putAll(((IBMWatsonGenericModel) SourceSchedule.class.newInstance()).addToApiToSdkMapping(parentLabel + 'schedule/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) SourceOptions.class.newInstance()).addToApiToSdkMapping(parentLabel + 'options/', mapping));
-      return mapping;
+
+      // calling custom serializer for options
+      if (options != null) {
+        String optionsJsonString = options.serialize();
+        String optionsKey = 'options';
+        if (propertyNameMapping.containsKey(optionsKey)) {
+          optionsKey = propertyNameMapping.get(optionsKey);
+        }
+        jsonMap.put(optionsKey, JSON.deserializeUntyped(optionsJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -22380,6 +22546,14 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'site_collections' => 'siteCollections',
+        'crawl_all_buckets' => 'crawlAllBuckets'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       SourceOptions ret = (SourceOptions) super.deserialize(jsonString, jsonMap, classType);
       SourceOptionsBuilder retBuilder = ret.newBuilder();
 
@@ -22390,7 +22564,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedFolders.size(); i++) {
           SourceOptionsFolder currentItem = ret.getFolders().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('folders');
-          SourceOptionsFolder newItem = (SourceOptionsFolder) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsFolder.class);
+          SourceOptionsFolder newItem = (SourceOptionsFolder) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsFolder.class);
           newFolders.add(newItem);
         }
         retBuilder.folders(newFolders);
@@ -22403,7 +22577,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedObjects.size(); i++) {
           SourceOptionsObject currentItem = ret.getObjects().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('objects');
-          SourceOptionsObject newItem = (SourceOptionsObject) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsObject.class);
+          SourceOptionsObject newItem = (SourceOptionsObject) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsObject.class);
           newObjects.add(newItem);
         }
         retBuilder.objects(newObjects);
@@ -22416,7 +22590,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedSiteCollections.size(); i++) {
           SourceOptionsSiteColl currentItem = ret.getSiteCollections().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('siteCollections');
-          SourceOptionsSiteColl newItem = (SourceOptionsSiteColl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsSiteColl.class);
+          SourceOptionsSiteColl newItem = (SourceOptionsSiteColl) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsSiteColl.class);
           newSiteCollections.add(newItem);
         }
         retBuilder.siteCollections(newSiteCollections);
@@ -22429,7 +22603,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedUrls.size(); i++) {
           SourceOptionsWebCrawl currentItem = ret.getUrls().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('urls');
-          SourceOptionsWebCrawl newItem = (SourceOptionsWebCrawl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsWebCrawl.class);
+          SourceOptionsWebCrawl newItem = (SourceOptionsWebCrawl) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsWebCrawl.class);
           newUrls.add(newItem);
         }
         retBuilder.urls(newUrls);
@@ -22442,7 +22616,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedBuckets.size(); i++) {
           SourceOptionsBuckets currentItem = ret.getBuckets().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('buckets');
-          SourceOptionsBuckets newItem = (SourceOptionsBuckets) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsBuckets.class);
+          SourceOptionsBuckets newItem = (SourceOptionsBuckets) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsBuckets.class);
           newBuckets.add(newItem);
         }
         retBuilder.buckets(newBuckets);
@@ -22451,36 +22625,88 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (folders != null && folders[0] != null) {
-        mapping.putAll(folders[0].addToSdkToApiMapping(parentLabel + 'folders/', mapping));
-      }
-      if (objects != null && objects[0] != null) {
-        mapping.putAll(objects[0].addToSdkToApiMapping(parentLabel + 'objects/', mapping));
-      }
-      mapping.put(parentLabel + 'siteCollections', 'site_collections');
-      if (siteCollections != null && siteCollections[0] != null) {
-        mapping.putAll(siteCollections[0].addToSdkToApiMapping(parentLabel + 'siteCollections/', mapping));
-      }
-      if (urls != null && urls[0] != null) {
-        mapping.putAll(urls[0].addToSdkToApiMapping(parentLabel + 'urls/', mapping));
-      }
-      if (buckets != null && buckets[0] != null) {
-        mapping.putAll(buckets[0].addToSdkToApiMapping(parentLabel + 'buckets/', mapping));
-      }
-      mapping.put(parentLabel + 'crawlAllBuckets', 'crawl_all_buckets');
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsFolder.class.newInstance()).addToApiToSdkMapping(parentLabel + 'folders/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsObject.class.newInstance()).addToApiToSdkMapping(parentLabel + 'objects/', mapping));
-      mapping.put(parentLabel + 'site_collections', 'siteCollections');
-      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsSiteColl.class.newInstance()).addToApiToSdkMapping(parentLabel + 'site_collections/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsWebCrawl.class.newInstance()).addToApiToSdkMapping(parentLabel + 'urls/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) SourceOptionsBuckets.class.newInstance()).addToApiToSdkMapping(parentLabel + 'buckets/', mapping));
-      mapping.put(parentLabel + 'crawl_all_buckets', 'crawlAllBuckets');
-      return mapping;
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'siteCollections' => 'site_collections',
+        'crawlAllBuckets' => 'crawl_all_buckets'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for folders
+      if (folders != null) {
+        List<Object> foldersJsonList = new List<Object>();
+        for (SourceOptionsFolder listItem : folders) {
+          String listItemJsonString = listItem.serialize();
+          foldersJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String foldersKey = 'folders';
+        if (propertyNameMapping.containsKey(foldersKey)) {
+          foldersKey = propertyNameMapping.get(foldersKey);
+        }
+        jsonMap.put(foldersKey, foldersJsonList);
+      }
+
+      // calling custom serializer for objects
+      if (objects != null) {
+        List<Object> objectsJsonList = new List<Object>();
+        for (SourceOptionsObject listItem : objects) {
+          String listItemJsonString = listItem.serialize();
+          objectsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String objectsKey = 'objects';
+        if (propertyNameMapping.containsKey(objectsKey)) {
+          objectsKey = propertyNameMapping.get(objectsKey);
+        }
+        jsonMap.put(objectsKey, objectsJsonList);
+      }
+
+      // calling custom serializer for siteCollections
+      if (siteCollections != null) {
+        List<Object> siteCollectionsJsonList = new List<Object>();
+        for (SourceOptionsSiteColl listItem : siteCollections) {
+          String listItemJsonString = listItem.serialize();
+          siteCollectionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String siteCollectionsKey = 'siteCollections';
+        if (propertyNameMapping.containsKey(siteCollectionsKey)) {
+          siteCollectionsKey = propertyNameMapping.get(siteCollectionsKey);
+        }
+        jsonMap.put(siteCollectionsKey, siteCollectionsJsonList);
+      }
+
+      // calling custom serializer for urls
+      if (urls != null) {
+        List<Object> urlsJsonList = new List<Object>();
+        for (SourceOptionsWebCrawl listItem : urls) {
+          String listItemJsonString = listItem.serialize();
+          urlsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String urlsKey = 'urls';
+        if (propertyNameMapping.containsKey(urlsKey)) {
+          urlsKey = propertyNameMapping.get(urlsKey);
+        }
+        jsonMap.put(urlsKey, urlsJsonList);
+      }
+
+      // calling custom serializer for buckets
+      if (buckets != null) {
+        List<Object> bucketsJsonList = new List<Object>();
+        for (SourceOptionsBuckets listItem : buckets) {
+          String listItemJsonString = listItem.serialize();
+          bucketsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String bucketsKey = 'buckets';
+        if (propertyNameMapping.containsKey(bucketsKey)) {
+          bucketsKey = propertyNameMapping.get(bucketsKey);
+        }
+        jsonMap.put(bucketsKey, bucketsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -22719,14 +22945,35 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsBucketsBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'limit' => 'xlimit'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SourceOptionsBuckets ret = (SourceOptionsBuckets) super.deserialize(jsonString, jsonMap, classType);
+      SourceOptionsBucketsBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'limit', 'xlimit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -22856,26 +23103,39 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsFolderBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'ownerUserId', 'owner_user_id');
-      mapping.put(parentLabel + 'folderId', 'folder_id');
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'owner_user_id' => 'ownerUserId',
+        'folder_id' => 'folderId',
+        'limit' => 'xlimit'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SourceOptionsFolder ret = (SourceOptionsFolder) super.deserialize(jsonString, jsonMap, classType);
+      SourceOptionsFolderBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'owner_user_id', 'ownerUserId');
-      mapping.put(parentLabel + 'folder_id', 'folderId');
-      mapping.put(parentLabel + 'limit', 'xlimit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'ownerUserId' => 'owner_user_id',
+        'folderId' => 'folder_id',
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -23006,14 +23266,35 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsObjectBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'limit' => 'xlimit'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SourceOptionsObject ret = (SourceOptionsObject) super.deserialize(jsonString, jsonMap, classType);
+      SourceOptionsObjectBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'limit', 'xlimit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -23130,24 +23411,37 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsSiteCollBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'siteCollectionPath', 'site_collection_path');
-      mapping.put(parentLabel + 'xlimit', 'limit');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'site_collection_path' => 'siteCollectionPath',
+        'limit' => 'xlimit'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SourceOptionsSiteColl ret = (SourceOptionsSiteColl) super.deserialize(jsonString, jsonMap, classType);
+      SourceOptionsSiteCollBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'site_collection_path', 'siteCollectionPath');
-      mapping.put(parentLabel + 'limit', 'xlimit');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'siteCollectionPath' => 'site_collection_path',
+        'xlimit' => 'limit'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -23353,24 +23647,45 @@ public class IBMDiscoveryV1Models {
       return new SourceOptionsWebCrawlBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'limitToStartingHosts', 'limit_to_starting_hosts');
-      mapping.put(parentLabel + 'crawlSpeed', 'crawl_speed');
-      mapping.put(parentLabel + 'allowUntrustedCertificate', 'allow_untrusted_certificate');
-      mapping.put(parentLabel + 'maximumHops', 'maximum_hops');
-      mapping.put(parentLabel + 'requestTimeout', 'request_timeout');
-      mapping.put(parentLabel + 'overrideRobotsTxt', 'override_robots_txt');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'limit_to_starting_hosts' => 'limitToStartingHosts',
+        'crawl_speed' => 'crawlSpeed',
+        'allow_untrusted_certificate' => 'allowUntrustedCertificate',
+        'maximum_hops' => 'maximumHops',
+        'request_timeout' => 'requestTimeout',
+        'override_robots_txt' => 'overrideRobotsTxt'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SourceOptionsWebCrawl ret = (SourceOptionsWebCrawl) super.deserialize(jsonString, jsonMap, classType);
+      SourceOptionsWebCrawlBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'limit_to_starting_hosts', 'limitToStartingHosts');
-      mapping.put(parentLabel + 'crawl_speed', 'crawlSpeed');
-      mapping.put(parentLabel + 'allow_untrusted_certificate', 'allowUntrustedCertificate');
-      mapping.put(parentLabel + 'maximum_hops', 'maximumHops');
-      mapping.put(parentLabel + 'request_timeout', 'requestTimeout');
-      mapping.put(parentLabel + 'override_robots_txt', 'overrideRobotsTxt');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'limitToStartingHosts' => 'limit_to_starting_hosts',
+        'crawlSpeed' => 'crawl_speed',
+        'allowUntrustedCertificate' => 'allow_untrusted_certificate',
+        'maximumHops' => 'maximum_hops',
+        'requestTimeout' => 'request_timeout',
+        'overrideRobotsTxt' => 'override_robots_txt'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -23600,14 +23915,35 @@ public class IBMDiscoveryV1Models {
       return new SourceScheduleBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'timeZone', 'time_zone');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'time_zone' => 'timeZone'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SourceSchedule ret = (SourceSchedule) super.deserialize(jsonString, jsonMap, classType);
+      SourceScheduleBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'time_zone', 'timeZone');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'timeZone' => 'time_zone'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -23729,9 +24065,21 @@ public class IBMDiscoveryV1Models {
       this.nextCrawl = nextCrawl;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'next_crawl', 'nextCrawl');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'next_crawl' => 'nextCrawl'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      SourceStatus ret = (SourceStatus) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -23765,8 +24113,7 @@ public class IBMDiscoveryV1Models {
      * The configuration to use to process the document. If this part is provided, then the provided configuration is
      * used to process the document. If the **configuration_id** is also provided (both are present at the same time),
      * then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB
-     * are rejected.
-     * See the `GET /configurations/{configuration_id}` operation for an example configuration.
+     * are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.
      *
      * @return the configuration
      */
@@ -23812,8 +24159,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata.
      *
-     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected.
-     * Example:  ``` {
+     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {
      *   "Creator": "Johnny Appleseed",
      *   "Subject": "Apples"
      * } ```.
@@ -23869,14 +24215,6 @@ public class IBMDiscoveryV1Models {
      */
     public TestConfigurationInEnvironmentOptionsBuilder newBuilder() {
       return new TestConfigurationInEnvironmentOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('fileContentType', 'file_content_type');
-      mapping.put('configurationId', 'configuration_id');
-      return mapping;
     }
   }
 
@@ -24119,6 +24457,15 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'configuration_id' => 'configurationId',
+        'enriched_field_units' => 'enrichedFieldUnits',
+        'original_media_type' => 'originalMediaType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TestDocument ret = (TestDocument) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for snapshots
@@ -24128,7 +24475,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedSnapshots.size(); i++) {
           DocumentSnapshot currentItem = ret.getSnapshots().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('snapshots');
-          DocumentSnapshot newItem = (DocumentSnapshot) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentSnapshot.class);
+          DocumentSnapshot newItem = (DocumentSnapshot) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentSnapshot.class);
           newSnapshots.add(newItem);
         }
         ret.snapshots = newSnapshots;
@@ -24141,25 +24488,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
         ret.notices = newNotices;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'configuration_id', 'configurationId');
-      mapping.put(parentLabel + 'enriched_field_units', 'enrichedFieldUnits');
-      mapping.put(parentLabel + 'original_media_type', 'originalMediaType');
-      mapping.putAll(((IBMWatsonGenericModel) Notice.class.newInstance()).addToApiToSdkMapping(parentLabel + 'notices/', mapping));
-      return mapping;
     }
   }
 
@@ -24236,9 +24571,17 @@ public class IBMDiscoveryV1Models {
       return new TokenDictRuleBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'partOfSpeech', 'part_of_speech');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'partOfSpeech' => 'part_of_speech'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -24412,9 +24755,21 @@ public class IBMDiscoveryV1Models {
       this.xtype = xtype;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.put(parentLabel + 'type', 'xtype');
-      return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xtype'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TokenDictStatusResponse ret = (TokenDictStatusResponse) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -24472,6 +24827,13 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'matching_results' => 'matchingResults'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TopHitsResults ret = (TopHitsResults) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for hits
@@ -24481,23 +24843,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedHits.size(); i++) {
           QueryResult currentItem = ret.getHits().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('hits');
-          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
+          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
           newHits.add(newItem);
         }
         ret.hits = newHits;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'matching_results', 'matchingResults');
-      mapping.putAll(((IBMWatsonGenericModel) QueryResult.class.newInstance()).addToApiToSdkMapping(parentLabel + 'hits/', mapping));
-      return mapping;
     }
   }
 
@@ -24577,6 +24929,14 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'environment_id' => 'environmentId',
+        'collection_id' => 'collectionId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TrainingDataSet ret = (TrainingDataSet) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for queries
@@ -24586,24 +24946,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedQueries.size(); i++) {
           TrainingQuery currentItem = ret.getQueries().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('queries');
-          TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingQuery.class);
+          TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingQuery.class);
           newQueries.add(newItem);
         }
         ret.queries = newQueries;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'environment_id', 'environmentId');
-      mapping.put(parentLabel + 'collection_id', 'collectionId');
-      mapping.putAll(((IBMWatsonGenericModel) TrainingQuery.class.newInstance()).addToApiToSdkMapping(parentLabel + 'queries/', mapping));
-      return mapping;
     }
   }
 
@@ -24672,24 +25021,37 @@ public class IBMDiscoveryV1Models {
       return new TrainingExampleBuilder(this);
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'documentId', 'document_id');
-      mapping.put(parentLabel + 'crossReference', 'cross_reference');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_id' => 'documentId',
+        'cross_reference' => 'crossReference'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TrainingExample ret = (TrainingExample) super.deserialize(jsonString, jsonMap, classType);
+      TrainingExampleBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'cross_reference', 'crossReference');
-      return mapping;
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'documentId' => 'document_id',
+        'crossReference' => 'cross_reference'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -24797,18 +25159,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           TrainingExample currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
-          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
+          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
           newExamples.add(newItem);
         }
         ret.examples = newExamples;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) TrainingExample.class.newInstance()).addToApiToSdkMapping(parentLabel + 'examples/', mapping));
-      return mapping;
     }
   }
 
@@ -24910,6 +25267,14 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'query_id' => 'queryId',
+        'natural_language_query' => 'naturalLanguageQuery'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TrainingQuery ret = (TrainingQuery) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for examples
@@ -24919,24 +25284,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           TrainingExample currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
-          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
+          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
           newExamples.add(newItem);
         }
         ret.examples = newExamples;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'query_id', 'queryId');
-      mapping.put(parentLabel + 'natural_language_query', 'naturalLanguageQuery');
-      mapping.putAll(((IBMWatsonGenericModel) TrainingExample.class.newInstance()).addToApiToSdkMapping(parentLabel + 'examples/', mapping));
-      return mapping;
     }
   }
 
@@ -25143,18 +25497,26 @@ public class IBMDiscoveryV1Models {
       this.dataUpdated = dataUpdated;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'total_examples', 'totalExamples');
-      mapping.put(parentLabel + 'minimum_queries_added', 'minimumQueriesAdded');
-      mapping.put(parentLabel + 'minimum_examples_added', 'minimumExamplesAdded');
-      mapping.put(parentLabel + 'sufficient_label_diversity', 'sufficientLabelDiversity');
-      mapping.put(parentLabel + 'successfully_trained', 'successfullyTrained');
-      mapping.put(parentLabel + 'data_updated', 'dataUpdated');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'total_examples' => 'totalExamples',
+        'minimum_queries_added' => 'minimumQueriesAdded',
+        'minimum_examples_added' => 'minimumExamplesAdded',
+        'sufficient_label_diversity' => 'sufficientLabelDiversity',
+        'successfully_trained' => 'successfullyTrained',
+        'data_updated' => 'dataUpdated'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -25241,14 +25603,6 @@ public class IBMDiscoveryV1Models {
      */
     public UpdateCollectionOptionsBuilder newBuilder() {
       return new UpdateCollectionOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('configurationId', 'configuration_id');
-      return mapping;
     }
   }
 
@@ -25489,25 +25843,6 @@ public class IBMDiscoveryV1Models {
      */
     public UpdateConfigurationOptionsBuilder newBuilder() {
       return new UpdateConfigurationOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('configurationId', 'configuration_id');
-      if (conversions != null) {
-        mapping.putAll(conversions.addToSdkToApiMapping('', mapping));
-      }
-      if (enrichments != null && enrichments[0] != null) {
-        mapping.putAll(enrichments[0].addToSdkToApiMapping('', mapping));
-      }
-      if (normalizations != null && normalizations[0] != null) {
-        mapping.putAll(normalizations[0].addToSdkToApiMapping('', mapping));
-      }
-      if (source != null) {
-        mapping.putAll(source.addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
     }
   }
 
@@ -25806,18 +26141,6 @@ public class IBMDiscoveryV1Models {
     public UpdateCredentialsOptionsBuilder newBuilder() {
       return new UpdateCredentialsOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('credentialId', 'credential_id');
-      mapping.put('sourceType', 'source_type');
-      mapping.put('credentialDetails', 'credential_details');
-      if (credentialDetails != null) {
-        mapping.putAll(credentialDetails.addToSdkToApiMapping('', mapping));
-      }
-      return mapping;
-    }
   }
 
   /**
@@ -26029,8 +26352,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata.
      *
-     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected.
-     * Example:  ``` {
+     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {
      *   "Creator": "Johnny Appleseed",
      *   "Subject": "Apples"
      * } ```.
@@ -26063,15 +26385,6 @@ public class IBMDiscoveryV1Models {
      */
     public UpdateDocumentOptionsBuilder newBuilder() {
       return new UpdateDocumentOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('documentId', 'document_id');
-      mapping.put('fileContentType', 'file_content_type');
-      return mapping;
     }
   }
 
@@ -26287,12 +26600,6 @@ public class IBMDiscoveryV1Models {
     public UpdateEnvironmentOptionsBuilder newBuilder() {
       return new UpdateEnvironmentOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      return mapping;
-    }
   }
 
   /**
@@ -26492,16 +26799,6 @@ public class IBMDiscoveryV1Models {
     public UpdateTrainingExampleOptionsBuilder newBuilder() {
       return new UpdateTrainingExampleOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('environmentId', 'environment_id');
-      mapping.put('collectionId', 'collection_id');
-      mapping.put('queryId', 'query_id');
-      mapping.put('exampleId', 'example_id');
-      mapping.put('crossReference', 'cross_reference');
-      return mapping;
-    }
   }
 
   /**
@@ -26696,7 +26993,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedFonts.size(); i++) {
           FontSetting currentItem = ret.getFonts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fonts');
-          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
+          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
         retBuilder.fonts(newFonts);
@@ -26709,7 +27006,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedStyles.size(); i++) {
           WordStyle currentItem = ret.getStyles().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('styles');
-          WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordStyle.class);
+          WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordStyle.class);
           newStyles.add(newItem);
         }
         retBuilder.styles(newStyles);
@@ -26718,16 +27015,31 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (fonts != null && fonts[0] != null) {
-        mapping.putAll(fonts[0].addToSdkToApiMapping(parentLabel + 'fonts/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) FontSetting.class.newInstance()).addToApiToSdkMapping(parentLabel + 'fonts/', mapping));
-      return mapping;
+      // calling custom serializer for fonts
+      if (fonts != null) {
+        List<Object> fontsJsonList = new List<Object>();
+        for (FontSetting listItem : fonts) {
+          String listItemJsonString = listItem.serialize();
+          fontsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('fonts', fontsJsonList);
+      }
+
+      // calling custom serializer for styles
+      if (styles != null) {
+        List<Object> stylesJsonList = new List<Object>();
+        for (WordStyle listItem : styles) {
+          String listItemJsonString = listItem.serialize();
+          stylesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('styles', stylesJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -26857,22 +27169,24 @@ public class IBMDiscoveryV1Models {
       WordSettingsBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for heading
-      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading'), WordHeadingDetection.class);
+      Map<String, Object> headingMap = (Map<String, Object>) jsonMap.get('heading');
+      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(headingMap), headingMap, WordHeadingDetection.class);
       retBuilder.heading(newHeading);
 
       return retBuilder.build();
     }
 
-    public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-      if (heading != null) {
-        mapping.putAll(heading.addToSdkToApiMapping(parentLabel + 'heading/', mapping));
-      }
-      return mapping;
-    }
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) WordHeadingDetection.class.newInstance()).addToApiToSdkMapping(parentLabel + 'heading/', mapping));
-      return mapping;
+      // calling custom serializer for heading
+      if (heading != null) {
+        String headingJsonString = heading.serialize();
+        jsonMap.put('heading', JSON.deserializeUntyped(headingJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -26962,6 +27276,24 @@ public class IBMDiscoveryV1Models {
      */
     public WordStyleBuilder newBuilder() {
       return new WordStyleBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WordStyle ret = (WordStyle) super.deserialize(jsonString, jsonMap, classType);
+      WordStyleBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -27066,6 +27398,24 @@ public class IBMDiscoveryV1Models {
      */
     public XPathPatternsBuilder newBuilder() {
       return new XPathPatternsBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      XPathPatterns ret = (XPathPatterns) super.deserialize(jsonString, jsonMap, classType);
+      XPathPatternsBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 

@@ -8,7 +8,7 @@
  * with Watson Knowledge Studio to detect custom entities, relations, and categories in Natural Language Understanding.
  *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-understanding.html">Natural Language Understanding</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/natural-language-understanding/">Natural Language Understanding</a>
  */
 public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
 
@@ -88,7 +88,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('features', analyzeOptions.features());
+    contentJson.put('features', analyzeOptions.features().serialize());
     if (analyzeOptions.text() != null) {
       contentJson.put('text', analyzeOptions.text());
     }
@@ -116,7 +116,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     if (analyzeOptions.limitTextCharacters() != null) {
       contentJson.put('limit_text_characters', analyzeOptions.limitTextCharacters());
     }
-    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, analyzeOptions.getSdkToApiMapping()));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMNaturalLanguageUnderstandingV1Models.AnalysisResults) createServiceCall(builder.build(), IBMNaturalLanguageUnderstandingV1Models.AnalysisResults.class);
   }

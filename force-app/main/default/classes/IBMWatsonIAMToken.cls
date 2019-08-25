@@ -28,19 +28,41 @@ public class IBMWatsonIAMToken extends IBMWatsonGenericModel {
     return expiration;
   }
 
-  public override Map<String, String> addToSdkToApiMapping(String parentLabel, Map<String, String> mapping) {
-    mapping.put('accessToken', 'access_token');
-    mapping.put('refreshToken', 'refresh_token');
-    mapping.put('tokenType', 'token_type');
-    mapping.put('expiresIn', 'expires_in');
-    return mapping;
+  public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+    if (jsonMap == null) {
+      return null;
+    }
+
+    // replace any names that are different between the API and SDK
+    Map<String, String> propertyNameMapping = new Map<String, String> {
+      'user_defined' => 'userDefined',
+      'access_token' => 'accessToken',
+      'refresh_token' => 'refreshToken',
+      'token_type' => 'tokenType',
+      'expires_in' => 'expiresIn'
+    };
+    jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+    jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+    IBMWatsonIAMToken ret = (IBMWatsonIAMToken) super.deserialize(jsonString, jsonMap, classType);
+
+    return ret;    
   }
 
-  public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-    mapping.put('access_token', 'accessToken');
-    mapping.put('refresh_token', 'refreshToken');
-    mapping.put('token_type', 'tokenType');
-    mapping.put('expires_in', 'expiresIn');
-    return mapping;
+  public String serialize() {
+    // get map representation of current model
+    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+    // replace any names that are different between the SDK and API
+    Map<String, String> propertyNameMapping = new Map<String, String> {
+      'userDefined' => 'user_defined',
+      'accessToken' => 'access_token',
+      'refreshToken' => 'refresh_token',
+      'tokenType' => 'token_type',
+      'expiresIn' => 'expires_in'
+    };
+    jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+    return JSON.serialize(jsonMap);
   }
 }

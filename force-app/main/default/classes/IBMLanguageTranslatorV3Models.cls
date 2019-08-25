@@ -76,14 +76,6 @@ public class IBMLanguageTranslatorV3Models {
     public CreateModelOptionsBuilder newBuilder() {
       return new CreateModelOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('baseModelId', 'base_model_id');
-      mapping.put('forcedGlossary', 'forced_glossary');
-      mapping.put('parallelCorpus', 'parallel_corpus');
-      return mapping;
-    }
   }
 
   /**
@@ -215,12 +207,6 @@ public class IBMLanguageTranslatorV3Models {
     public DeleteDocumentOptionsBuilder newBuilder() {
       return new DeleteDocumentOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('documentId', 'document_id');
-      return mapping;
-    }
   }
 
   /**
@@ -312,12 +298,6 @@ public class IBMLanguageTranslatorV3Models {
      */
     public DeleteModelOptionsBuilder newBuilder() {
       return new DeleteModelOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('modelId', 'model_id');
-      return mapping;
     }
   }
 
@@ -421,18 +401,13 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedDocuments.size(); i++) {
           DocumentStatus currentItem = ret.getDocuments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('documents');
-          DocumentStatus newItem = (DocumentStatus) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentStatus.class);
+          DocumentStatus newItem = (DocumentStatus) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentStatus.class);
           newDocuments.add(newItem);
         }
         ret.documents = newDocuments;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) DocumentStatus.class.newInstance()).addToApiToSdkMapping(parentLabel + 'documents/', mapping));
-      return mapping;
     }
   }
 
@@ -685,17 +660,25 @@ public class IBMLanguageTranslatorV3Models {
       this.characterCount = characterCount;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'document_id', 'documentId');
-      mapping.put(parentLabel + 'model_id', 'modelId');
-      mapping.put(parentLabel + 'base_model_id', 'baseModelId');
-      mapping.put(parentLabel + 'word_count', 'wordCount');
-      mapping.put(parentLabel + 'character_count', 'characterCount');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'document_id' => 'documentId',
+        'model_id' => 'modelId',
+        'base_model_id' => 'baseModelId',
+        'word_count' => 'wordCount',
+        'character_count' => 'characterCount'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      DocumentStatus ret = (DocumentStatus) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -729,12 +712,6 @@ public class IBMLanguageTranslatorV3Models {
      */
     public GetDocumentStatusOptionsBuilder newBuilder() {
       return new GetDocumentStatusOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('documentId', 'document_id');
-      return mapping;
     }
   }
 
@@ -827,12 +804,6 @@ public class IBMLanguageTranslatorV3Models {
      */
     public GetModelOptionsBuilder newBuilder() {
       return new GetModelOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('modelId', 'model_id');
-      return mapping;
     }
   }
 
@@ -945,13 +916,6 @@ public class IBMLanguageTranslatorV3Models {
      */
     public GetTranslatedDocumentOptionsBuilder newBuilder() {
       return new GetTranslatedDocumentOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('documentId', 'document_id');
-      mapping.put('accept', 'Accept');
-      return mapping;
     }
   }
 
@@ -1075,6 +1039,16 @@ public class IBMLanguageTranslatorV3Models {
     public void setName(final String name) {
       this.name = name;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      IdentifiableLanguage ret = (IdentifiableLanguage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -1118,7 +1092,7 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedLanguages.size(); i++) {
           IdentifiableLanguage currentItem = ret.getLanguages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('languages');
-          IdentifiableLanguage newItem = (IdentifiableLanguage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiableLanguage.class);
+          IdentifiableLanguage newItem = (IdentifiableLanguage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiableLanguage.class);
           newLanguages.add(newItem);
         }
         ret.languages = newLanguages;
@@ -1176,6 +1150,16 @@ public class IBMLanguageTranslatorV3Models {
     public void setConfidence(final Double confidence) {
       this.confidence = confidence;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      IdentifiedLanguage ret = (IdentifiedLanguage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -1219,7 +1203,7 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedLanguages.size(); i++) {
           IdentifiedLanguage currentItem = ret.getLanguages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('languages');
-          IdentifiedLanguage newItem = (IdentifiedLanguage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiedLanguage.class);
+          IdentifiedLanguage newItem = (IdentifiedLanguage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiedLanguage.class);
           newLanguages.add(newItem);
         }
         ret.languages = newLanguages;
@@ -1491,12 +1475,6 @@ public class IBMLanguageTranslatorV3Models {
     public ListModelsOptionsBuilder newBuilder() {
       return new ListModelsOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('defaultModels', 'default');
-      return mapping;
-    }
   }
 
   /**
@@ -1690,14 +1668,6 @@ public class IBMLanguageTranslatorV3Models {
      */
     public TranslateDocumentOptionsBuilder newBuilder() {
       return new TranslateDocumentOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('fileContentType', 'file_content_type');
-      mapping.put('modelId', 'model_id');
-      mapping.put('documentId', 'document_id');
-      return mapping;
     }
   }
 
@@ -1910,12 +1880,6 @@ public class IBMLanguageTranslatorV3Models {
     public TranslateOptionsBuilder newBuilder() {
       return new TranslateOptionsBuilder(this);
     }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('modelId', 'model_id');
-      return mapping;
-    }
   }
 
   /**
@@ -2059,13 +2023,21 @@ public class IBMLanguageTranslatorV3Models {
       this.translationOutput = translationOutput;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'translation', 'translationOutput');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'translation' => 'translationOutput'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Translation ret = (Translation) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -2298,15 +2270,23 @@ public class IBMLanguageTranslatorV3Models {
       this.status = status;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'model_id', 'modelId');
-      mapping.put(parentLabel + 'base_model_id', 'baseModelId');
-      mapping.put(parentLabel + 'default_model', 'defaultModel');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'model_id' => 'modelId',
+        'base_model_id' => 'baseModelId',
+        'default_model' => 'defaultModel'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TranslationModel ret = (TranslationModel) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -2351,18 +2331,13 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedModels.size(); i++) {
           TranslationModel currentItem = ret.getModels().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('models');
-          TranslationModel newItem = (TranslationModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TranslationModel.class);
+          TranslationModel newItem = (TranslationModel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TranslationModel.class);
           newModels.add(newItem);
         }
         ret.models = newModels;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      mapping.putAll(((IBMWatsonGenericModel) TranslationModel.class.newInstance()).addToApiToSdkMapping(parentLabel + 'models/', mapping));
-      return mapping;
     }
   }
 
@@ -2442,6 +2417,14 @@ public class IBMLanguageTranslatorV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'word_count' => 'wordCount',
+        'character_count' => 'characterCount'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       TranslationResult ret = (TranslationResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for translations
@@ -2451,24 +2434,13 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedTranslations.size(); i++) {
           Translation currentItem = ret.getTranslations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('translations');
-          Translation newItem = (Translation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Translation.class);
+          Translation newItem = (Translation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Translation.class);
           newTranslations.add(newItem);
         }
         ret.translations = newTranslations;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'word_count', 'wordCount');
-      mapping.put(parentLabel + 'character_count', 'characterCount');
-      mapping.putAll(((IBMWatsonGenericModel) Translation.class.newInstance()).addToApiToSdkMapping(parentLabel + 'translations/', mapping));
-      return mapping;
     }
   }
 

@@ -5,7 +5,7 @@
  * their own language, and more.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/language-translator.html">Language Translator</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/language-translator/">Language Translator</a>
  */
 public class IBMLanguageTranslatorV3 extends IBMWatsonService {
 
@@ -85,7 +85,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     if (translateOptions.target() != null) {
       contentJson.put('target', translateOptions.target());
     }
-    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, translateOptions.getSdkToApiMapping()));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMLanguageTranslatorV3Models.TranslationResult) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationResult.class);
   }

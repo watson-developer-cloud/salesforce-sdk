@@ -94,13 +94,21 @@ public class IBMPersonalityInsightsV3Models {
       this.percentage = percentage;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'trait_id', 'traitId');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'trait_id' => 'traitId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Behavior ret = (Behavior) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -182,13 +190,21 @@ public class IBMPersonalityInsightsV3Models {
       this.score = score;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'consumption_preference_id', 'consumptionPreferenceId');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'consumption_preference_id' => 'consumptionPreferenceId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ConsumptionPreferences ret = (ConsumptionPreferences) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -269,6 +285,14 @@ public class IBMPersonalityInsightsV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'consumption_preference_category_id' => 'consumptionPreferenceCategoryId',
+        'consumption_preferences' => 'consumptionPreferences'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ConsumptionPreferencesCategory ret = (ConsumptionPreferencesCategory) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for consumptionPreferences
@@ -278,24 +302,13 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
           ConsumptionPreferences currentItem = ret.getConsumptionPreferences().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('consumptionPreferences');
-          ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferences.class);
+          ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferences.class);
           newConsumptionPreferences.add(newItem);
         }
         ret.consumptionPreferences = newConsumptionPreferences;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'consumption_preference_category_id', 'consumptionPreferenceCategoryId');
-      mapping.put(parentLabel + 'consumption_preferences', 'consumptionPreferences');
-      mapping.putAll(((IBMWatsonGenericModel) ConsumptionPreferences.class.newInstance()).addToApiToSdkMapping(parentLabel + 'consumption_preferences/', mapping));
-      return mapping;
     }
   }
 
@@ -328,6 +341,23 @@ public class IBMPersonalityInsightsV3Models {
      */
     public ContentBuilder newBuilder() {
       return new ContentBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // calling custom serializer for contentItems
+      if (contentItems != null) {
+        List<Object> contentItemsJsonList = new List<Object>();
+        for (ContentItem listItem : contentItems) {
+          String listItemJsonString = listItem.serialize();
+          contentItemsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('contentItems', contentItemsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -536,6 +566,13 @@ public class IBMPersonalityInsightsV3Models {
      */
     public ContentItemBuilder newBuilder() {
       return new ContentItemBuilder(this);
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
     }
   }
 
@@ -904,6 +941,16 @@ public class IBMPersonalityInsightsV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'processed_language' => 'processedLanguage',
+        'word_count' => 'wordCount',
+        'word_count_message' => 'wordCountMessage',
+        'consumption_preferences' => 'consumptionPreferences'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Profile ret = (Profile) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for personality
@@ -913,7 +960,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedPersonality.size(); i++) {
           Trait currentItem = ret.getPersonality().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('personality');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newPersonality.add(newItem);
         }
         ret.personality = newPersonality;
@@ -926,7 +973,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedNeeds.size(); i++) {
           Trait currentItem = ret.getNeeds().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('needs');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newNeeds.add(newItem);
         }
         ret.needs = newNeeds;
@@ -939,7 +986,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           Trait currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newValues.add(newItem);
         }
         ret.values = newValues;
@@ -952,7 +999,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedBehavior.size(); i++) {
           Behavior currentItem = ret.getBehavior().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('behavior');
-          Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Behavior.class);
+          Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Behavior.class);
           newBehavior.add(newItem);
         }
         ret.behavior = newBehavior;
@@ -965,7 +1012,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
           ConsumptionPreferencesCategory currentItem = ret.getConsumptionPreferences().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('consumptionPreferences');
-          ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferencesCategory.class);
+          ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferencesCategory.class);
           newConsumptionPreferences.add(newItem);
         }
         ret.consumptionPreferences = newConsumptionPreferences;
@@ -978,31 +1025,13 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           Warning currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'processed_language', 'processedLanguage');
-      mapping.put(parentLabel + 'word_count', 'wordCount');
-      mapping.put(parentLabel + 'word_count_message', 'wordCountMessage');
-      mapping.putAll(((IBMWatsonGenericModel) Trait.class.newInstance()).addToApiToSdkMapping(parentLabel + 'personality/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Trait.class.newInstance()).addToApiToSdkMapping(parentLabel + 'needs/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Trait.class.newInstance()).addToApiToSdkMapping(parentLabel + 'values/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Behavior.class.newInstance()).addToApiToSdkMapping(parentLabel + 'behavior/', mapping));
-      mapping.put(parentLabel + 'consumption_preferences', 'consumptionPreferences');
-      mapping.putAll(((IBMWatsonGenericModel) ConsumptionPreferencesCategory.class.newInstance()).addToApiToSdkMapping(parentLabel + 'consumption_preferences/', mapping));
-      mapping.putAll(((IBMWatsonGenericModel) Warning.class.newInstance()).addToApiToSdkMapping(parentLabel + 'warnings/', mapping));
-      return mapping;
     }
   }
 
@@ -1145,17 +1174,6 @@ public class IBMPersonalityInsightsV3Models {
      */
     public ProfileOptionsBuilder newBuilder() {
       return new ProfileOptionsBuilder(this);
-    }
-
-    public override Map<String, String> getSdkToApiMapping() {
-      Map<String, String> mapping = new Map<String, String>();
-      mapping.put('contentType', 'Content-Type');
-      mapping.put('contentLanguage', 'Content-Language');
-      mapping.put('acceptLanguage', 'Accept-Language');
-      mapping.put('rawScores', 'raw_scores');
-      mapping.put('csvHeaders', 'csv_headers');
-      mapping.put('consumptionPreferences', 'consumption_preferences');
-      return mapping;
     }
   }
 
@@ -1485,6 +1503,14 @@ public class IBMPersonalityInsightsV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'trait_id' => 'traitId',
+        'raw_score' => 'rawScore'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Trait ret = (Trait) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for children
@@ -1494,24 +1520,13 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedChildren.size(); i++) {
           Trait currentItem = ret.getChildren().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('children');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newChildren.add(newItem);
         }
         ret.children = newChildren;
       }
 
       return ret;
-    }
-
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
-      }
-      mapping.put(parentLabel + 'trait_id', 'traitId');
-      mapping.put(parentLabel + 'raw_score', 'rawScore');
-      mapping.putAll(((IBMWatsonGenericModel) Trait.class.newInstance()).addToApiToSdkMapping(parentLabel + 'children/', mapping));
-      return mapping;
     }
   }
 
@@ -1574,13 +1589,21 @@ public class IBMPersonalityInsightsV3Models {
       this.message = message;
     }
 
-    public override Map<String, String> addToApiToSdkMapping(String parentLabel, Map<String, String> mapping) {
-      // break out of property loop
-      if (parentLabel.split('/').size() > 10) {
-        return mapping;
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
       }
-      mapping.put(parentLabel + 'warning_id', 'warningId');
-      return mapping;
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'warning_id' => 'warningId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Warning ret = (Warning) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 

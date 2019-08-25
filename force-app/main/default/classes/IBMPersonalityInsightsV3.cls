@@ -18,7 +18,7 @@
  * `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/personality-insights.html">Personality Insights</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/personality-insights/">Personality Insights</a>
  */
 public class IBMPersonalityInsightsV3 extends IBMWatsonService {
 

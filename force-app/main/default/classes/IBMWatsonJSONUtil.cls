@@ -5,99 +5,36 @@
 public class IBMWatsonJSONUtil {
 
   /**
-   * Serializes a map and uses the provided name mapping to create a valid JSON string for
-   * an external API.
+   * Replaces top-level keys in a map based on the provided mapping.
    *
-   * @param jsonMap Map representation of the JSON request
-   * @param propertyNameMapping Map with keys representing property names for the SDK and values
-   *        representing the names accepted by the API
+   * @param jsonMap the map on which key substitution will be performed
+   * @param nameMapping Map containing names to replace and the value to use instead
    *
-   * @return JSON string ready to be sent to the API
+   * @return the map with keys replaced
    */
-  public static String serialize(Map<String, Object> jsonMap, Map<String, String> propertyNameMapping) {
-    // need to make sure everything inside is of core Apex types so that we can manipulate it properly
-    jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(jsonMap, true));
-
-    // change keys to work with API
-    jsonMap = replacePropertyNames(jsonMap, propertyNameMapping);
-
-    // raise additional properties up a level to play well with API
-    jsonMap = raiseAdditionalProperties(jsonMap);
-
-    return JSON.serialize(jsonMap);
-  }
-
-  /**
-   * Parses through the provided map to change key names according to the supplied mapping.
-   *
-   * @param jsonMap Map representation of the eventual JSON request
-   * @param propertyNameMapping Map with keys representing property names for the SDK and values
-   *        representing the names accepted by the API
-   *
-   * @return Map with modified keys
-   */
-  public static Map<String, Object> replacePropertyNames(Map<String, Object> jsonMap, Map<String, String> propertyNameMapping) {
-    return replacePropertyNames(null, jsonMap, propertyNameMapping);
-  }
-
-  /**
-   * Helper function for the public method which tracks a parentProp to help differentiate between
-   * keys of the same name at different levels of the JSON object.
-   *
-   * @param parentProp String representing the current level of the JSON tree, with parents separated by '/'. For
-   *        example: dialog_node/actions/
-   * @param jsonMap Map representation of the JSON object being parsed
-   * @param propertyNameMapping Map with keys representing property names for the SDK and values
-   *        representing the names accepted by the API
-   *
-   * @return Map with modified keys
-   */
-  private static Map<String, Object> replacePropertyNames(String parentProp, Map<String, Object> jsonMap, Map<String, String> propertyNameMapping) {
-    String label = '';
-    if (parentProp != null) {
-      label = parentProp + '/';
-    }
-
+  public static Map<String, Object> replaceKeyNamesInMap(Map<String, Object> jsonMap, Map<String, String> nameMapping) {
     for (String key : jsonMap.keySet()) {
-      Object jsonValue = jsonMap.get(key);
-      String keyToUse = key;
-
-      if (propertyNameMapping.containsKey(label + key)) {
-        keyToUse = propertyNameMapping.get(label + key);
-        jsonMap.put(keyToUse, jsonValue);
+      if (nameMapping.containsKey(key)) {
+        String replacementKey = nameMapping.get(key);
+        jsonMap.put(replacementKey, jsonMap.get(key));
         jsonMap.remove(key);
       }
-      if (jsonValue instanceof Map<String, Object>) {
-        jsonMap.put(keyToUse, replacePropertyNames(label + key, (Map<String, Object>) jsonValue, propertyNameMapping));
-      }
-      if (jsonValue instanceof List<Object>) {
-        jsonMap.put(keyToUse, replacePropertyNamesList(label + key, (List<Object>) jsonValue, propertyNameMapping));
-      }
     }
-
     return jsonMap;
   }
 
   /**
-   * Helper function for the public method to specifically handle JSON arrays.
-   * @param parentProp String representing the current level of the JSON tree, with parents separated by '/'. For
-   *        example: dialog_node/actions/
-   * @param jsonList List representation of the JSON array being parsed
-   * @param propertyNameMapping Map with keys representing property names for the SDK and values
-   *        representing the names accepted by the API
+   * Replaces top-level keys in a JSON string based on the provided mapping.
    *
-   * @return List with modified keys inside (if there are any)
+   * @param jsonString the string on which key substitution will be performed
+   * @param nameMapping Map containing names to replace and the value to use instead
+   *
+   * @return the string with keys replaced
    */
-  private static List<Object> replacePropertyNamesList(String parentProp, List<Object> jsonList, Map<String, String> propertyNameMapping) {
-    List<Object> modifiedList = new List<Object>();
-    for (Object val : jsonList) {
-      if (val instanceof Map<String, Object>) {
-        modifiedList.add(replacePropertyNames(parentProp, (Map<String, Object>) val, propertyNameMapping));
-      } else {
-        modifiedList.add(val);
-      }
-    }
-    return modifiedList;
+  public static String replaceKeyNamesInString(String jsonString, Map<String, String> nameMapping) {
+    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+    jsonMap = replaceKeyNamesInMap(jsonMap, nameMapping);
+    return JSON.serialize(jsonMap);
   }
 
   /**

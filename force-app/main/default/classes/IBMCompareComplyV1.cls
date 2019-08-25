@@ -3,7 +3,7 @@
  * documents.
  *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/compare-comply.html">Compare Comply</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/compare-comply?topic=compare-comply-about">Compare Comply</a>
  */
 public class IBMCompareComplyV1 extends IBMWatsonService {
 
@@ -215,14 +215,14 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('feedback_data', addFeedbackOptions.feedbackData());
+    contentJson.put('feedback_data', addFeedbackOptions.feedbackData().serialize());
     if (addFeedbackOptions.userId() != null) {
       contentJson.put('user_id', addFeedbackOptions.userId());
     }
     if (addFeedbackOptions.comment() != null) {
       contentJson.put('comment', addFeedbackOptions.comment());
     }
-    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, addFeedbackOptions.getSdkToApiMapping()));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMCompareComplyV1Models.FeedbackReturn) createServiceCall(builder.build(), IBMCompareComplyV1Models.FeedbackReturn.class);
   }

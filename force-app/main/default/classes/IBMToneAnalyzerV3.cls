@@ -9,7 +9,7 @@
  * `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/tone-analyzer.html">Tone Analyzer</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/tone-analyzer/">Tone Analyzer</a>
  */
 public class IBMToneAnalyzerV3 extends IBMWatsonService {
 
@@ -151,8 +151,12 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('utterances', toneChatOptions.utterances());
-    builder.bodyJson(IBMWatsonJSONUtil.serialize(contentJson, toneChatOptions.getSdkToApiMapping()));
+    List<Object> utterancesList = new List<Object>();
+    for (IBMToneAnalyzerV3Models.Utterance utterancesItem : toneChatOptions.utterances()) {
+      utterancesList.add(utterancesItem.serialize());
+    }
+    contentJson.put('utterances', utterancesList);
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMToneAnalyzerV3Models.UtteranceAnalyses) createServiceCall(builder.build(), IBMToneAnalyzerV3Models.UtteranceAnalyses.class);
   }

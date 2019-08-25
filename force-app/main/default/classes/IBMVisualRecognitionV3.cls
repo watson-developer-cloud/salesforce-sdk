@@ -4,7 +4,7 @@
  * your needs.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/visual-recognition.html">Visual Recognition</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/visual-recognition/">Visual Recognition</a>
  */
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
@@ -316,7 +316,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Retrieve a Core ML model of a classifier.
    *
-   * Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\"core_ml_enabled\": true</tt> in
+   * Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>"core_ml_enabled": true</tt> in
    * the classifier details.
    *
    * @param getCoreMlModelOptions the {@link IBMVisualRecognitionV3Models.GetCoreMlModelOptions} containing the options for the call
