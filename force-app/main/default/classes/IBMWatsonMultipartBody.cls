@@ -242,7 +242,9 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
         throw new IBMWatsonServiceExceptions.IllegalArgumentException('name == null');
       }
       String disposition = 'form-data; name="' + name + '"';
-      disposition += '; filename="' + (String.isNotBlank(filename) ? filename : 'filename') + '"';
+      if (String.isNotBlank(filename)) {
+        disposition += '; filename="' + filename + '"';
+      }
       this.headers.put('Content-Disposition', disposition);
       return create(this.headers, body);
     }
@@ -307,6 +309,10 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
 
     /** Add a form data part to the body. */
     public Builder addFormDataPart(String name, String filename, IBMWatsonRequestBody body) {
+      // use default filename if we're expecting one but nothing is supplied
+      if (filename == null) {
+        filename = 'filename';
+      }
       Part newPart = new Part().createFormData(name, filename, body);
       return addPart(newPart);
     }
