@@ -51,7 +51,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   }
 
   private long writeForm64(List<Part> parts) {
-    headers.put('Content-Type', 'multipart/form-data; boundary="' + Boundary + '"');
+    headers.put('Content-Type', 'multipart/form-data; boundary="' + boundary + '"');
     form64 = '';
     for (Integer i = 0; i < parts.size(); i++) {
       Part p = parts[i];
@@ -165,7 +165,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   }
 
   public String writeBoundary() {
-    String value = '--' + Boundary;
+    String value = '--' + boundary;
     String valueCrlf = value + CRLF;
     Blob valueBlob = blob.valueOf(valueCrlf);
     String boundaryEncoded = EncodingUtil.base64Encode(valueBlob);
@@ -252,15 +252,11 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     }
   }
 
-  private static String UUID() {
+  private static String generateRandomBoundaryString() {
     Blob b = Crypto.GenerateAESKey(128);
     String h = EncodingUtil.ConvertTohex(b);
-    String UUID = h.substring(0, 8) + '-'
-      + h.substring(8, 12) + '-'
-      + h.substring(12, 16) + '-'
-      + h.substring(16, 20) + '-'
-      + h.substring(20);
-    return UUID.toUpperCase();
+    String boundaryString = h.substring(0, 8);
+    return boundaryString;
   }
 
   public class Builder {
@@ -269,7 +265,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     private List<Part> parts = new List<Part>();
 
     public Builder() {
-      this(IBMWatsonMultipartBody.UUID());
+      this(IBMWatsonMultipartBody.generateRandomBoundaryString());
     }
 
     public Builder(String boundary) {
