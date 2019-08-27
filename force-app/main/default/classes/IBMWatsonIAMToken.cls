@@ -2,26 +2,46 @@
  * Represents response from IAM API.
  */
 public class IBMWatsonIAMToken extends IBMWatsonAbstractToken implements IBMWatsonTokenServerResponse {
-  private String access_token_serialized_name;
-  private String refresh_token_serialized_name;
-  private String token_type_serialized_name;
-  private Long expires_in_serialized_name;
-  private Long expiration_serialized_name;
+  private String accessToken;
+  private String refreshToken;
+  private String tokenType;
+  private Long expiresIn;
+  private Long expiration;
 
   public String getRefreshToken() {
-    return refresh_token_serialized_name;
+    return refreshToken;
   }
 
   public String getTokenType() {
-    return token_type_serialized_name;
+    return tokenType;
   }
 
   public Long getExpiresIn() {
-    return expires_in_serialized_name;
+    return expiresIn;
   }
 
   public Long getExpiration() {
-    return expiration_serialized_name;
+    return expiration;
+  }
+
+  public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+    if (jsonMap == null) {
+      return null;
+    }
+
+    // replace any names that are different between the API and SDK
+    Map<String, String> propertyNameMapping = new Map<String, String> {
+      'access_token' => 'accessToken',
+      'refresh_token' => 'refreshToken',
+      'token_type' => 'tokenType',
+      'expires_in' => 'expiresIn'
+    };
+    jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+    jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+    IBMWatsonIAMToken ret = (IBMWatsonIAMToken) super.deserialize(jsonString, jsonMap, classType);
+
+    return ret;    
   }
 
   /**
@@ -43,6 +63,6 @@ public class IBMWatsonIAMToken extends IBMWatsonAbstractToken implements IBMWats
   }
 
   public override String getAccessToken() {
-    return this.access_token_serialized_name;
+    return this.accessToken;
   }
 }

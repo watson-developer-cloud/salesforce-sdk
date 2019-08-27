@@ -20,7 +20,7 @@ private class IBMWatsonServiceTest {
    * Simple response model to use for testing purposes.
    */
   class TestClass extends IBMWatsonResponseModel {
-    public String test_key_serialized_name;
+    public String test_key;
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {

@@ -81,9 +81,10 @@ private class IBMAssistantV2Test {
   static testMethod void testCaptureGroup() {
     Test.startTest();
 
-    IBMAssistantV2Models.CaptureGroup captureGroup = new IBMAssistantV2Models.CaptureGroup();
-    captureGroup.setXgroup(GROUP_STR);
-    captureGroup.setLocation(LOCATION);
+    IBMAssistantV2Models.CaptureGroup captureGroup = new IBMAssistantV2Models.CaptureGroupBuilder()
+      .xgroup(GROUP_STR)
+      .location(LOCATION)
+      .build();
 
     System.assertEquals(GROUP_STR, captureGroup.getXgroup());
     System.assertEquals(LOCATION, captureGroup.getLocation());
@@ -119,10 +120,11 @@ private class IBMAssistantV2Test {
   static testMethod void testMessageContextGlobalSystem() {
     Test.startTest();
 
-    IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystem = new IBMAssistantV2Models.MessageContextGlobalSystem();
-    messageContextGlobalSystem.setTimezone(TIMEZONE);
-    messageContextGlobalSystem.setTurnCount(TURN_COUNT);
-    messageContextGlobalSystem.setUserId(USER_ID);
+    IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystem = new IBMAssistantV2Models.MessageContextGlobalSystemBuilder()
+      .timezone(TIMEZONE)
+      .turnCount(TURN_COUNT)
+      .userId(USER_ID)
+      .build();
 
     System.assertEquals(TIMEZONE, messageContextGlobalSystem.getTimezone());
     System.assertEquals(TURN_COUNT, messageContextGlobalSystem.getTurnCount());
@@ -135,8 +137,9 @@ private class IBMAssistantV2Test {
 
     IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystem = new IBMAssistantV2Models.MessageContextGlobalSystem();
 
-    IBMAssistantV2Models.MessageContextGlobal messageContextGlobal = new IBMAssistantV2Models.MessageContextGlobal();
-    messageContextGlobal.setXsystem(messageContextGlobalSystem);
+    IBMAssistantV2Models.MessageContextGlobal messageContextGlobal = new IBMAssistantV2Models.MessageContextGlobalBuilder()
+      .xsystem(messageContextGlobalSystem)
+      .build();
 
     System.assertEquals(messageContextGlobalSystem, messageContextGlobal.getXsystem());
     Test.stopTest();
@@ -148,9 +151,10 @@ private class IBMAssistantV2Test {
     IBMAssistantV2Models.MessageContextGlobal messageContextGlobal = new IBMAssistantV2Models.MessageContextGlobal();
     IBMAssistantV2Models.MessageContextSkills messageContextSkills = new IBMAssistantV2Models.MessageContextSkills();
 
-    IBMAssistantV2Models.MessageContext messageContext = new IBMAssistantV2Models.MessageContext();
-    messageContext.setXglobal(messageContextGlobal);
-    messageContext.setSkills(messageContextSkills);
+    IBMAssistantV2Models.MessageContext messageContext = new IBMAssistantV2Models.MessageContextBuilder()
+      .xglobal(messageContextGlobal)
+      .skills(messageContextSkills)
+      .build();
 
     System.assertEquals(messageContextGlobal, messageContext.getXglobal());
     System.assertEquals(messageContextSkills, messageContext.getSkills());
@@ -160,22 +164,26 @@ private class IBMAssistantV2Test {
   static testMethod void testMessageInput() {
     Test.startTest();
 
-    IBMAssistantV2Models.RuntimeEntity entity1 = new IBMAssistantV2Models.RuntimeEntity();
-    entity1.setEntity(ENTITY);
-    entity1.setLocation(LOCATION);
-    entity1.setValue(VALUE);
-    IBMAssistantV2Models.RuntimeEntity entity2 = new IBMAssistantV2Models.RuntimeEntity();
-    entity2.setEntity(ENTITY);
-    entity2.setLocation(LOCATION);
-    entity2.setValue(VALUE);
+    IBMAssistantV2Models.RuntimeEntity entity1 = new IBMAssistantV2Models.RuntimeEntityBuilder()
+      .entity(ENTITY)
+      .location(LOCATION)
+      .value(VALUE)
+      .build();
+    IBMAssistantV2Models.RuntimeEntity entity2 = new IBMAssistantV2Models.RuntimeEntityBuilder()
+      .entity(ENTITY)
+      .location(LOCATION)
+      .value(VALUE)
+      .build();
     List<IBMAssistantV2Models.RuntimeEntity> entityList = new List<IBMAssistantV2Models.RuntimeEntity>();
     entityList.add(entity1);
-    IBMAssistantV2Models.RuntimeIntent intent1 = new IBMAssistantV2Models.RuntimeIntent();
-    intent1.setConfidence(CONFIDENCE);
-    intent1.setIntent(INTENT);
-    IBMAssistantV2Models.RuntimeIntent intent2 = new IBMAssistantV2Models.RuntimeIntent();
-    intent2.setConfidence(CONFIDENCE);
-    intent2.setIntent(INTENT);
+    IBMAssistantV2Models.RuntimeIntent intent1 = new IBMAssistantV2Models.RuntimeIntentBuilder()
+      .confidence(CONFIDENCE)
+      .intent(INTENT)
+      .build();
+    IBMAssistantV2Models.RuntimeIntent intent2 = new IBMAssistantV2Models.RuntimeIntentBuilder()
+      .confidence(CONFIDENCE)
+      .intent(INTENT)
+      .build();
     List<IBMAssistantV2Models.RuntimeIntent> intentList = new List<IBMAssistantV2Models.RuntimeIntent>();
     intentList.add(intent1);
     IBMAssistantV2Models.MessageInputOptions inputOptions = new IBMAssistantV2Models.MessageInputOptions();
@@ -206,11 +214,12 @@ private class IBMAssistantV2Test {
   static testMethod void testMessageInputOptions() {
     Test.startTest();
 
-    IBMAssistantV2Models.MessageInputOptions inputOptions = new IBMAssistantV2Models.MessageInputOptions();
-    inputOptions.setAlternateIntents(true);
-    inputOptions.setDebug(true);
-    inputOptions.setRestart(true);
-    inputOptions.setReturnContext(true);
+    IBMAssistantV2Models.MessageInputOptions inputOptions = new IBMAssistantV2Models.MessageInputOptionsBuilder()
+      .alternateIntents(true)
+      .debug(true)
+      .restart(true)
+      .returnContext(true)
+      .build();
 
     System.assert(inputOptions.getAlternateIntents());
     System.assert(inputOptions.getDebug());
@@ -243,17 +252,18 @@ private class IBMAssistantV2Test {
   static testMethod void testRuntimeEntity() {
     Test.startTest();
 
-    IBMAssistantV2Models.CaptureGroup captureGroup = new IBMAssistantV2Models.CaptureGroup();
-    captureGroup.setXgroup(GROUP_STR);
+    IBMAssistantV2Models.CaptureGroup captureGroup = new IBMAssistantV2Models.CaptureGroupBuilder()
+      .xgroup(GROUP_STR)
+      .build();
     List<IBMAssistantV2Models.CaptureGroup> captureGroupList = new List<IBMAssistantV2Models.CaptureGroup> { captureGroup };
-
-    IBMAssistantV2Models.RuntimeEntity runtimeEntity = new IBMAssistantV2Models.RuntimeEntity();
-    runtimeEntity.setConfidence(CONFIDENCE);
-    runtimeEntity.setEntity(ENTITY);
-    runtimeEntity.setGroups(captureGroupList);
-    runtimeEntity.setLocation(LOCATION);
-    runtimeEntity.setMetadata(KEY_VAL);
-    runtimeEntity.setValue(VALUE);
+    IBMAssistantV2Models.RuntimeEntity runtimeEntity = new IBMAssistantV2Models.RuntimeEntityBuilder()
+      .confidence(CONFIDENCE)
+      .entity(ENTITY)
+      .groups(captureGroupList)
+      .location(LOCATION)
+      .metadata(KEY_VAL)
+      .value(VALUE)
+      .build();
 
     System.assertEquals(CONFIDENCE, runtimeEntity.getConfidence());
     System.assertEquals(ENTITY, runtimeEntity.getEntity());
@@ -267,9 +277,10 @@ private class IBMAssistantV2Test {
   static testMethod void testRuntimeIntent() {
     Test.startTest();
 
-    IBMAssistantV2Models.RuntimeIntent runtimeIntent = new IBMAssistantV2Models.RuntimeIntent();
-    runtimeIntent.setConfidence(CONFIDENCE);
-    runtimeIntent.setIntent(INTENT);
+    IBMAssistantV2Models.RuntimeIntent runtimeIntent = new IBMAssistantV2Models.RuntimeIntentBuilder()
+      .confidence(CONFIDENCE)
+      .intent(INTENT)
+      .build();
 
     System.assertEquals(CONFIDENCE, runtimeIntent.getConfidence());
     System.assertEquals(INTENT, runtimeIntent.getIntent());
@@ -334,9 +345,9 @@ private class IBMAssistantV2Test {
     Test.startTest();
 
     IBMAssistantV2Models.MessageOptions messageOptions = new IBMAssistantV2Models.MessageOptionsBuilder()
-        .assistantId(ASSISTANT_ID)
-        .sessionId(SESSION_ID)
-        .build();
+      .assistantId(ASSISTANT_ID)
+      .sessionId(SESSION_ID)
+      .build();
     IBMAssistantV2Models.MessageResponse response = service.message(messageOptions);
 
     System.assert(response.getContext() != null);

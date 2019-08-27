@@ -15,19 +15,24 @@
  * Phonetic Representation (SPR).
  *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/text-to-speech.html">Text to Speech</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/text-to-speech/">Text to Speech</a>
  */
 public class IBMTextToSpeechV1 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'text_to_speech';
   private static final String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
 
   /**
-   * Instantiates a new `IBMTextToSpeechV1` with the specified authentication configuration.
+   * Instantiates a new `IBMTextToSpeechV1`.
    *
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMTextToSpeechV1(IBMWatsonAuthenticator authenticator) {
-    super('text_to_speech', 'v1', authenticator);
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
   }
 
   /**
@@ -60,8 +65,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * Get a voice.
    *
    * Gets information about the specified voice. The information includes the name, language, gender, and other details
-   * about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
-   * voice. To list information about all available voices, use the **List voices** method.
+   * about the voice. Specify a customization ID to obtain information for a custom voice model that is defined for the
+   * language of the specified voice. To list information about all available voices, use the **List voices** method.
    *
    * **See also:** [Listing a specific
    * voice](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-voices#listVoice).
@@ -162,8 +167,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    *
    *  If a request includes invalid query parameters, the service returns a `Warnings` response header that provides
    * messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
-   * strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by
-   * a list of the form `\"{invalid_arg_1}, {invalid_arg_2}.\"` The request succeeds despite the warnings.
+   * strings. For example, a message such as `"Unknown arguments:"` or `"Unknown url query arguments:"` followed by a
+   * list of the form `"{invalid_arg_1}, {invalid_arg_2}."` The request succeeds despite the warnings.
    *
    * @param synthesizeOptions the {@link IBMTextToSpeechV1Models.SynthesizeOptions} containing the options for the call
    * @return the {@link IBMWatsonFile} with the response
@@ -189,7 +194,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', synthesizeOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
   }
@@ -270,7 +275,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     if (createVoiceModelOptions.description() != null) {
       contentJson.put('description', createVoiceModelOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMTextToSpeechV1Models.VoiceModel) createServiceCall(builder.build(), IBMTextToSpeechV1Models.VoiceModel.class);
   }
@@ -321,11 +326,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
    * representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
    *
-   *   <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+   *   <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
    *
    *   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
    *
-   *   <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+   *   <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
    *
    * **Note:** This method is currently a beta release.
    *
@@ -359,9 +364,13 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
       contentJson.put('description', updateVoiceModelOptions.description());
     }
     if (updateVoiceModelOptions.words() != null) {
-      contentJson.put('words', updateVoiceModelOptions.words());
+      List<Object> wordsList = new List<Object>();
+      for (IBMTextToSpeechV1Models.Word wordsItem : updateVoiceModelOptions.words()) {
+        wordsList.add(wordsItem.serialize());
+      }
+      contentJson.put('words', wordsList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     createServiceCall(builder.build(), null);
   }
@@ -436,11 +445,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
    * representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
    *
-   *   <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+   *   <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
    *
    *   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
    *
-   *   <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+   *   <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
    *
    * **Note:** This method is currently a beta release.
    *
@@ -467,8 +476,12 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
       }
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('words', addWordsOptions.words());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    List<Object> wordsList = new List<Object>();
+    for (IBMTextToSpeechV1Models.Word wordsItem : addWordsOptions.words()) {
+      wordsList.add(wordsItem.serialize());
+    }
+    contentJson.put('words', wordsList);
+    builder.bodyJson(JSON.serialize(contentJson));
 
     createServiceCall(builder.build(), null);
   }
@@ -515,11 +528,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
    * representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
    *
-   *   <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+   *   <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
    *
    *   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
    *
-   *   <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+   *   <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
    *
    * **Note:** This method is currently a beta release.
    *
@@ -549,7 +562,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     if (addWordOptions.partOfSpeech() != null) {
       contentJson.put('part_of_speech', addWordOptions.partOfSpeech());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     createServiceCall(builder.build(), null);
   }

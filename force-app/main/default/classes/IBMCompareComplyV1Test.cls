@@ -73,6 +73,7 @@ private class IBMCompareComplyV1Test {
   private static String UNIT;
   private static Double NUMERIC_VALUE;
 
+  private static IBMCompareComplyV1Models.Location LOCATION;
   private static IBMCompareComplyV1 service;
 
   static {
@@ -149,12 +150,34 @@ private class IBMCompareComplyV1Test {
     UNIT = 'unit';
     NUMERIC_VALUE = 21.0;
 
+    LOCATION = new IBMCompareComplyV1Models.LocationBuilder()
+      .xbegin(TEST_BEGIN)
+      .xend(TEST_END)
+      .build();
     service = new IBMCompareComplyV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testAddFeedbackOptions() {
     Test.startTest();
-    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInput();
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel>{ typeLabel };
+    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
+    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabels = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabels = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .feedbackType(FEEDBACK_TYPE)
+      .location(LOCATION)
+      .text(TEXT)
+      .originalLabels(originalLabels)
+      .updatedLabels(updatedLabels)
+      .build();
 
     IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
       .comment(COMMENT)
@@ -172,9 +195,10 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testCategory() {
     Test.startTest();
-    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.Category();
-    category.setLabel(AMENDMENTS);
-    category.setProvenanceIds(new List<String> { PROVENANCE_ID });
+    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder()
+      .label(AMENDMENTS)
+      .provenanceIds(new List<String> { PROVENANCE_ID })
+      .build();
 
     System.assertEquals(AMENDMENTS, category.getLabel());
     Test.stopTest();
@@ -322,20 +346,31 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testFeedbackDataInput() {
     Test.startTest();
-    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDoc();
+    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDocBuilder().build();
     IBMCompareComplyV1Models.Location location = new IBMCompareComplyV1Models.Location();
-    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsIn();
-    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsIn();
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel };
+    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
+    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
 
-    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInput();
-    feedbackDataInput.setDocument(shortDoc);
-    feedbackDataInput.setFeedbackType(FEEDBACK_TYPE);
-    feedbackDataInput.setLocation(location);
-    feedbackDataInput.setModelId(MODEL_ID);
-    feedbackDataInput.setModelVersion(MODEL_VERSION);
-    feedbackDataInput.setOriginalLabels(originalLabelsIn);
-    feedbackDataInput.setText(TEXT);
-    feedbackDataInput.setUpdatedLabels(updatedLabelsIn);
+    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .document(shortDoc)
+      .feedbackType(FEEDBACK_TYPE)
+      .location(location)
+      .modelId(MODEL_ID)
+      .modelVersion(MODEL_VERSION)
+      .originalLabels(originalLabelsIn)
+      .text(TEXT)
+      .updatedLabels(updatedLabelsIn)
+      .build();
 
     System.assertEquals(shortDoc, feedbackDataInput.getDocument());
     System.assertEquals(FEEDBACK_TYPE, feedbackDataInput.getFeedbackType());
@@ -387,9 +422,10 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testLabel() {
     Test.startTest();
-    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.Label();
-    label.setNature(NATURE);
-    label.setParty(PARTY);
+    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature(NATURE)
+      .party(PARTY)
+      .build();
 
     System.assertEquals(NATURE, label.getNature());
     System.assertEquals(PARTY, label.getParty());
@@ -439,22 +475,19 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testLocation() {
     Test.startTest();
-    IBMCompareComplyV1Models.Location location = new IBMCompareComplyV1Models.Location();
-    location.setXbegin(TEST_BEGIN);
-    location.setXend(TEST_END);
-
-    System.assertEquals(TEST_BEGIN, location.getXbegin());
-    System.assertEquals(TEST_END, location.getXend());
+    System.assertEquals(TEST_BEGIN, LOCATION.getXbegin());
+    System.assertEquals(TEST_END, LOCATION.getXend());
     Test.stopTest();
   }
 
   static testMethod void testOriginalLabelsIn() {
     Test.startTest();
     IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.Category();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabel();
-    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsIn();
-    originalLabelsIn.setCategories(new List<IBMCompareComplyV1Models.Category> { category });
-    originalLabelsIn.setTypes(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel });
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .categories(new List<IBMCompareComplyV1Models.Category> { category })
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel })
+      .build();
 
     System.assertEquals(category, originalLabelsIn.getCategories().get(0));
     System.assertEquals(typeLabel, originalLabelsIn.getTypes().get(0));
@@ -463,9 +496,10 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testShortDoc() {
     Test.startTest();
-    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDoc();
-    shortDoc.setHash(HASH);
-    shortDoc.setTitle(TITLE);
+    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDocBuilder()
+      .hash(HASH)
+      .title(TITLE)
+      .build();
 
     System.assertEquals(HASH, shortDoc.getHash());
     System.assertEquals(TITLE, shortDoc.getTitle());
@@ -474,10 +508,14 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testTypeLabel() {
     Test.startTest();
-    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.Label();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabel();
-    typeLabel.setLabel(label);
-    typeLabel.setProvenanceIds(new List<String> { PROVENANCE_ID });
+    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature(NATURE)
+      .party(PARTY)
+      .build();
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder()
+      .label(label)
+      .provenanceIds(new List<String> { PROVENANCE_ID })
+      .build();
 
     System.assertEquals(label, typeLabel.getLabel());
     Test.stopTest();
@@ -502,10 +540,11 @@ private class IBMCompareComplyV1Test {
   static testMethod void testUpdatedLabelsIn() {
     Test.startTest();
     IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.Category();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabel();
-    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsIn();
-    updatedLabelsIn.setCategories(new List<IBMCompareComplyV1Models.Category> { category });
-    updatedLabelsIn.setTypes(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel });
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .categories(new List<IBMCompareComplyV1Models.Category> { category })
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel })
+      .build();
 
     System.assertEquals(category, updatedLabelsIn.getCategories().get(0));
     System.assertEquals(typeLabel, updatedLabelsIn.getTypes().get(0));
@@ -623,14 +662,14 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd());
     System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin());
     System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0).getId());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0).getText());
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0));
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0));
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0).getTextNormalized());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0).getId());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0).getText());
+        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0));
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0));
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0));
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0).getTextNormalized());
+        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0));
     System.assertEquals(TYPE, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXtype());
     System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
@@ -639,7 +678,7 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().getCellId());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getCellId());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
@@ -791,14 +830,14 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd());
     System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin());
     System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0).getId());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0).getText());
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0));
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0));
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0).getTextNormalized());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0).getId());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0).getText());
+        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0));
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0));
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0));
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0).getTextNormalized());
+        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0));
     System.assertEquals(TYPE, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXtype());
     System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
@@ -807,7 +846,7 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().getCellId());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getCellId());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
     System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
@@ -889,9 +928,29 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel>{ typeLabel };
+    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
+    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabels = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabels = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.FeedbackDataInput data = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .feedbackType(FEEDBACK_TYPE)
+      .location(LOCATION)
+      .text(TEXT)
+      .originalLabels(originalLabels)
+      .updatedLabels(updatedLabels)
+      .build();
+
     IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
       .comment(COMMENT)
-      .feedbackData(new IBMCompareComplyV1Models.FeedbackDataInput())
+      .feedbackData(data)
       .userId(USER_ID)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();

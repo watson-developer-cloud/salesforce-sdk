@@ -4,17 +4,33 @@ private class IBMDiscoveryV1Test {
   private static final String ENVIRONMENT_ID = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
   private static final String CONFIGURATION_ID = 'configuration_id';
 
+  private static String DESTINATION_FIELD;
+  private static String SOURCE_FIELD;
+  private static String ENRICHMENT_NAME;
+  private static String TEXT;
+  private static String TOKEN;
+  private static String PART_OF_SPEECH;
+  private static List<String> TOKENS;
+
   private static IBMDiscoveryV1 service;
 
   static {
+    DESTINATION_FIELD = 'destination_field';
+    SOURCE_FIELD = 'source_field';
+    ENRICHMENT_NAME = 'enrichment_name';
+    TEXT = 'text';
+    TOKEN = 'token';
+    PART_OF_SPEECH = 'noun';
+    TOKENS = new List<String> { TOKEN };
     service = new IBMDiscoveryV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testNluEnrichmentConcepts() {
     Long lim = 5L;
 
-    IBMDiscoveryV1Models.NluEnrichmentConcepts concepts = new IBMDiscoveryV1Models.NluEnrichmentConcepts();
-    concepts.setXlimit(lim);
+    IBMDiscoveryV1Models.NluEnrichmentConcepts concepts = new IBMDiscoveryV1Models.NluEnrichmentConceptsBuilder()
+      .xlimit(lim)
+      .build();
 
     System.assertEquals(lim, concepts.getXlimit());
   }
@@ -300,56 +316,71 @@ private class IBMDiscoveryV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMDiscoveryV1Models.Enrichment enrichment = new IBMDiscoveryV1Models.Enrichment();
-    enrichment.setDescription('test Description');
-    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.Conversions();
-    IBMDiscoveryV1Models.HtmlSettings html = new IBMDiscoveryV1Models.HtmlSettings();
-    IBMDiscoveryV1Models.XPathPatterns patterns = new IBMDiscoveryV1Models.XPathPatterns();
-    patterns.setXpaths(new List<String>{ 'xpath' });
-    html.setExcludeContent(patterns);
-    html.setExcludeTagAttributes(new List<String>{ 'attribute' });
-    html.setExcludeTagsCompletely(new List<String>{ 'tag' });
-    html.setExcludeTagsKeepContent(new List<String>{ 'tag' });
-    html.setKeepContent(patterns);
-    html.setKeepTagAttributes(new List<String>{ 'tag' });
-    conversions.setHtml(html);
-    IBMDiscoveryV1Models.NormalizationOperation normalizationOperation = new IBMDiscoveryV1Models.NormalizationOperation();
-    normalizationOperation.setDestinationField('field');
-    normalizationOperation.setOperation('operation');
-    normalizationOperation.setSourceField('field');
-    conversions.setJsonNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{ normalizationOperation });
-    IBMDiscoveryV1Models.PdfSettings pdfSettings = new IBMDiscoveryV1Models.PdfSettings();
-    IBMDiscoveryV1Models.PdfHeadingDetection pdfHeadingDetection = new IBMDiscoveryV1Models.PdfHeadingDetection();
-    IBMDiscoveryV1Models.FontSetting fontSetting = new IBMDiscoveryV1Models.FontSetting();
-    fontSetting.setBold(true);
-    fontSetting.setItalic(true);
-    fontSetting.setLevel(10);
-    fontSetting.setMaxSize(10);
-    fontSetting.setMinSize(10);
-    fontSetting.setName('name');
-    pdfHeadingDetection.setFonts(new List<IBMDiscoveryV1Models.FontSetting>{ fontSetting });
-    pdfSettings.setHeading(pdfHeadingDetection);
-    conversions.setPdf(pdfSettings);
-    IBMDiscoveryV1Models.SegmentSettings segment = new IBMDiscoveryV1Models.SegmentSettings();
-    segment.setEnabled(true);
-    segment.setSelectorTags(new List<String>{ 'tag' });
-    segment.setAnnotatedFields(new List<String>{ 'field' });
-    conversions.setSegment(segment);
-    IBMDiscoveryV1Models.WordSettings word = new IBMDiscoveryV1Models.WordSettings();
-    IBMDiscoveryV1Models.WordHeadingDetection wordHeading = new IBMDiscoveryV1Models.WordHeadingDetection();
-    wordHeading.setFonts(new List<IBMDiscoveryV1Models.FontSetting>{ fontSetting });
-    IBMDiscoveryV1Models.WordStyle style = new IBMDiscoveryV1Models.WordStyle();
-    style.setLevel(10);
-    style.setNames(new List<String>{ 'name' });
-    wordHeading.setStyles(new List<IBMDiscoveryV1Models.WordStyle>{ style });
-    word.setHeading(wordHeading);
-    conversions.setWord(word);
+    IBMDiscoveryV1Models.XPathPatterns patterns = new IBMDiscoveryV1Models.XPathPatternsBuilder()
+      .xpaths(new List<String>{ 'xpath' })
+      .build();
+    IBMDiscoveryV1Models.HtmlSettings html = new IBMDiscoveryV1Models.HtmlSettingsBuilder()
+      .excludeContent(patterns)
+      .excludeTagAttributes(new List<String>{ 'attribute' })
+      .excludeTagsCompletely(new List<String>{ 'tag' })
+      .excludeTagsKeepContent(new List<String>{ 'tag' })
+      .keepContent(patterns)
+      .keepTagAttributes(new List<String>{ 'tag' })
+      .build();
+    IBMDiscoveryV1Models.NormalizationOperation normalizationOperation = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
+      .destinationField('field')
+      .operation('operation')
+      .sourceField('field')
+      .build();
+    IBMDiscoveryV1Models.FontSetting fontSetting = new IBMDiscoveryV1Models.FontSettingBuilder()
+      .bold(true)
+      .italic(true)
+      .level(10)
+      .maxSize(10)
+      .minSize(10)
+      .name('name')
+      .build();
+    IBMDiscoveryV1Models.PdfHeadingDetection pdfHeadingDetection = new IBMDiscoveryV1Models.PdfHeadingDetectionBuilder()
+      .fonts(new List<IBMDiscoveryV1Models.FontSetting>{ fontSetting })
+      .build();
+    IBMDiscoveryV1Models.PdfSettings pdfSettings = new IBMDiscoveryV1Models.PdfSettingsBuilder()
+      .heading(pdfHeadingDetection)
+      .build();
+    IBMDiscoveryV1Models.SegmentSettings segment = new IBMDiscoveryV1Models.SegmentSettingsBuilder()
+      .enabled(true)
+      .selectorTags(new List<String>{ 'tag' })
+      .annotatedFields(new List<String>{ 'field' })
+      .build();
+    IBMDiscoveryV1Models.WordStyle style = new IBMDiscoveryV1Models.WordStyleBuilder()
+      .level(10)
+      .names(new List<String>{ 'name' })
+      .build();
+    IBMDiscoveryV1Models.WordHeadingDetection wordHeading = new IBMDiscoveryV1Models.WordHeadingDetectionBuilder()
+      .fonts(new List<IBMDiscoveryV1Models.FontSetting>{ fontSetting })
+      .styles(new List<IBMDiscoveryV1Models.WordStyle>{ style })
+      .build();
+    IBMDiscoveryV1Models.WordSettings word = new IBMDiscoveryV1Models.WordSettingsBuilder()
+      .heading(wordHeading)
+      .build();
+    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
+      .html(html)
+      .jsonNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{ normalizationOperation })
+      .pdf(pdfSettings)
+      .segment(segment)
+      .word(word)
+      .build();
+    IBMDiscoveryV1Models.Enrichment enrichment = new IBMDiscoveryV1Models.EnrichmentBuilder()
+      .description('test description')
+      .destinationField(DESTINATION_FIELD)
+      .sourceField(SOURCE_FIELD)
+      .enrichmentName(ENRICHMENT_NAME)
+      .build();
     IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder(ENVIRONMENT_ID, 'test_environment')
       .environmentId(ENVIRONMENT_ID)
       .name('test_environment')
       .description('test_environment description')
       .addEnrichments(enrichment)
-      .enrichments(new List<IBMDiscoveryV1Models.Enrichment>{enrichment})
+      .enrichments(new List<IBMDiscoveryV1Models.Enrichment> { enrichment })
       .addNormalizations(normalizationOperation)
       .normalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{normalizationOperation})
       .conversions(conversions)
@@ -1020,18 +1051,19 @@ private class IBMDiscoveryV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
-    IBMDiscoveryV1Models.TrainingExample te= new IBMDiscoveryV1Models.TrainingExample();
-    te.setDocumentId('string');
-    te.setCrossReference('string');
-    te.setRelevance(0);
+    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
+    IBMDiscoveryV1Models.TrainingExample trainingExample = new IBMDiscoveryV1Models.TrainingExampleBuilder()
+      .documentId('string')
+      .crossReference('string')
+      .relevance(0)
+      .build();
     IBMDiscoveryV1Models.AddTrainingDataOptions options = new IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .naturalLanguageQuery('en')
       .filter('test')
-      .addExamples(te)
-      .examples(new List<IBMDiscoveryV1Models.TrainingExample>{te})
+      .addExamples(trainingExample)
+      .examples(new List<IBMDiscoveryV1Models.TrainingExample> { trainingExample })
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1056,16 +1088,17 @@ private class IBMDiscoveryV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
-    IBMDiscoveryV1Models.TrainingExample te= new IBMDiscoveryV1Models.TrainingExample();
-    te.setDocumentId('string');
-    te.setCrossReference('string');
-    te.setRelevance(0);
+    List<String> collectionIds= new List<String> { 'Collection1', 'Collection2' };
+    IBMDiscoveryV1Models.TrainingExample trainingExample = new IBMDiscoveryV1Models.TrainingExampleBuilder()
+      .documentId('string')
+      .crossReference('string')
+      .relevance(0)
+      .build();
     IBMDiscoveryV1Models.CreateTrainingExampleOptions options = new IBMDiscoveryV1Models.CreateTrainingExampleOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('en')
-      .trainingExample(te)
+      .trainingExample(trainingExample)
       .documentId('test')
       .relevance(2)
       .crossReference('test')
@@ -1272,7 +1305,7 @@ private class IBMDiscoveryV1Test {
   }
 
    /**
-   *  Test  configuration model
+   *  Test configuration model
    *
    */
   static testMethod void testConfigurationModel() {
@@ -1280,60 +1313,56 @@ private class IBMDiscoveryV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMDiscoveryV1Models.Configuration configuration = new IBMDiscoveryV1Models.Configuration();
-    //set the value
-    configuration.setName('test-collection');
-    configuration.setDescription('A test collection to show as an example');
-    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.Conversions();
-    IBMDiscoveryV1Models.PdfSettings pdfSettings = new IBMDiscoveryV1Models.PdfSettings();
-    IBMDiscoveryV1Models.PdfHeadingDetection pdfHeadingDetection = new IBMDiscoveryV1Models.PdfHeadingDetection();
-    IBMDiscoveryV1Models.FontSetting fontSetting = new IBMDiscoveryV1Models.FontSetting();
-    fontSetting.setLevel(1);
-    fontSetting.setMinSize(4);
-    fontSetting.setMaxSize(10);
-    fontSetting.setBold(true);
-    fontSetting.setItalic(true);
-    fontSetting.setName('ariel');
-    List<IBMDiscoveryV1Models.FontSetting> fontSettings= new List<IBMDiscoveryV1Models.FontSetting>{fontSetting};
-    pdfHeadingDetection.setFonts(fontSettings);
-    pdfSettings.setHeading(pdfHeadingDetection);
-    conversions.setPdf(pdfSettings);
-    IBMDiscoveryV1Models.WordSettings wordSettings = new IBMDiscoveryV1Models.WordSettings();
-    IBMDiscoveryV1Models.WordHeadingDetection wordHeadingDetection = new IBMDiscoveryV1Models.WordHeadingDetection();
-    IBMDiscoveryV1Models.WordStyle wordStyle = new IBMDiscoveryV1Models.WordStyle();
-    wordStyle.setLevel(1);
-    wordStyle.setNames(new List<String>{'Style1', 'Style2'});
-    List<IBMDiscoveryV1Models.WordStyle> wordStyles= new List<IBMDiscoveryV1Models.WordStyle>{wordStyle};
-    wordHeadingDetection.setFonts(fontSettings);
-    wordHeadingDetection.setStyles(wordStyles);
-    wordSettings.setHeading(wordHeadingDetection);
-    conversions.setWord(wordSettings);
-    IBMDiscoveryV1Models.HtmlSettings htmlSettings = new IBMDiscoveryV1Models.HtmlSettings();
-    htmlSettings.setExcludeTagsCompletely(new List<String>{'Tag1', 'Tag2'});
-    htmlSettings.setExcludeTagsKeepContent(new List<String>{'KeepCntent1', 'KeepCntent2'});
-    htmlSettings.setKeepTagAttributes(new List<String>{'ExAtt1'});
-    htmlSettings.setExcludeTagAttributes(new List<String>{'KeepAtt'});
-    IBMDiscoveryV1Models.XPathPatterns xPathPatterns = new IBMDiscoveryV1Models.XPathPatterns();
-    xPathPatterns.setXpaths(new List<String>{'xpath1'});
-    htmlSettings.setKeepContent(xPathPatterns);
-    htmlSettings.setExcludeContent(xPathPatterns);
-    conversions.setHtml(htmlSettings);
-    IBMDiscoveryV1Models.NormalizationOperation normalizationOperation = new IBMDiscoveryV1Models.NormalizationOperation();
-    normalizationOperation.setOperation('test operation');
-    normalizationOperation.setSourceField('test source');
-    normalizationOperation.setDestinationField('test destination');
-    conversions.setJsonNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{normalizationOperation});
-    configuration.setConversions(conversions);
-    IBMDiscoveryV1Models.Enrichment enrichment = new IBMDiscoveryV1Models.Enrichment();
-    enrichment.setDescription('test Description');
-    enrichment.setDestinationField('test Description');
-    enrichment.setSourceField('test Description');
-    enrichment.setOverwrite(true);
-    enrichment.setEnrichmentName('test Description');
-    enrichment.setIgnoreDownstreamErrors(true);
+    IBMDiscoveryV1Models.XPathPatterns xPathPatterns = new IBMDiscoveryV1Models.XPathPatternsBuilder()
+      .xpaths(new List<String>{ 'xpath1' })
+      .build();
+    IBMDiscoveryV1Models.HtmlSettings html = new IBMDiscoveryV1Models.HtmlSettingsBuilder()
+      .excludeContent(xPathPatterns)
+      .excludeTagAttributes(new List<String> { 'ExAtt1' })
+      .excludeTagsCompletely(new List<String> { 'Tag1', 'Tag2' })
+      .excludeTagsKeepContent(new List<String> { 'KeepCntent1', 'KeepCntent2' })
+      .keepContent(xPathPatterns)
+      .keepTagAttributes(new List<String> { 'tag' })
+      .build();
+    IBMDiscoveryV1Models.NormalizationOperation normalizationOperation = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
+      .destinationField('test destination')
+      .operation('test operation')
+      .sourceField('test source')
+      .build();
+    IBMDiscoveryV1Models.FontSetting fontSetting = new IBMDiscoveryV1Models.FontSettingBuilder()
+      .bold(true)
+      .italic(true)
+      .level(1)
+      .maxSize(10)
+      .minSize(4)
+      .name('ariel')
+      .build();
+    IBMDiscoveryV1Models.PdfHeadingDetection pdfHeadingDetection = new IBMDiscoveryV1Models.PdfHeadingDetectionBuilder()
+      .fonts(new List<IBMDiscoveryV1Models.FontSetting> { fontSetting })
+      .build();
+    IBMDiscoveryV1Models.PdfSettings pdfSettings = new IBMDiscoveryV1Models.PdfSettingsBuilder()
+      .heading(pdfHeadingDetection)
+      .build();
+    IBMDiscoveryV1Models.WordStyle style = new IBMDiscoveryV1Models.WordStyleBuilder()
+      .level(1)
+      .names(new List<String> { 'Style1', 'Style2' })
+      .build();
+    IBMDiscoveryV1Models.WordHeadingDetection wordHeading = new IBMDiscoveryV1Models.WordHeadingDetectionBuilder()
+      .fonts(new List<IBMDiscoveryV1Models.FontSetting> { fontSetting })
+      .styles(new List<IBMDiscoveryV1Models.WordStyle> { style })
+      .build();
+    IBMDiscoveryV1Models.WordSettings word = new IBMDiscoveryV1Models.WordSettingsBuilder()
+      .heading(wordHeading)
+      .build();
+    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
+      .html(html)
+      .jsonNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{ normalizationOperation })
+      .pdf(pdfSettings)
+      .word(word)
+      .build();
     IBMDiscoveryV1Models.NluEnrichmentEmotion enrichmentEmotion = new IBMDiscoveryV1Models.NluEnrichmentEmotionBuilder()
       .document(true)
-      .targets(new List<String>{'Target1', 'Target2'})
+      .targets(new List<String> { 'Target1', 'Target2' })
       .build();
     IBMDiscoveryV1Models.NluEnrichmentEntities enrichmentEntities = new IBMDiscoveryV1Models.NluEnrichmentEntitiesBuilder()
       .emotion(true)
@@ -1349,8 +1378,9 @@ private class IBMDiscoveryV1Test {
       .xlimit(5)
       .sentiment(true)
       .build();
-    IBMDiscoveryV1Models.NluEnrichmentRelations enrichmentRelations = new IBMDiscoveryV1Models.NluEnrichmentRelations();
-    enrichmentRelations.setModel('test');
+    IBMDiscoveryV1Models.NluEnrichmentRelations enrichmentRelations = new IBMDiscoveryV1Models.NluEnrichmentRelationsBuilder()
+      .model('test')
+      .build();
     IBMDiscoveryV1Models.NluEnrichmentSemanticRoles enrichmentSemanticRoles = new IBMDiscoveryV1Models.NluEnrichmentSemanticRolesBuilder()
       .entities(true)
       .keywords(true)
@@ -1373,12 +1403,22 @@ private class IBMDiscoveryV1Test {
       .model('test')
       .language('en')
       .build();
-    enrichment.setOptions(enrichmentOptions);
-    configuration.setEnrichments(new List<IBMDiscoveryV1Models.Enrichment>{enrichment});
-    configuration.setNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{normalizationOperation});
-    
-    
-    
+    IBMDiscoveryV1Models.Enrichment enrichment = new IBMDiscoveryV1Models.EnrichmentBuilder()
+      .description('test Description')
+      .destinationField('test Description')
+      .sourceField('test Description')
+      .overwrite(true)
+      .enrichmentName('test Description')
+      .ignoreDownstreamErrors(true)
+      .options(enrichmentOptions)
+      .build();
+    IBMDiscoveryV1Models.Configuration configuration = new IBMDiscoveryV1Models.ConfigurationBuilder()
+      .name('test-collection')
+      .description('A test collection to show as an example')
+      .enrichments(new List<IBMDiscoveryV1Models.Enrichment> { enrichment })
+      .normalizations(new List<IBMDiscoveryV1Models.NormalizationOperation> { normalizationOperation })
+      .conversions(conversions)
+      .build();
     IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .configuration(configuration)
@@ -1402,8 +1442,8 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(configuration.getConversions().getWord().getHeading().getStyles()[0].getNames()[0], 'Style1');
     System.assertEquals(configuration.getConversions().getHtml().getExcludeTagsCompletely()[0], 'Tag1');
     System.assertEquals(configuration.getConversions().getHtml().getExcludeTagsKeepContent()[0], 'KeepCntent1');
-    System.assertEquals(configuration.getConversions().getHtml().getKeepTagAttributes()[0], 'ExAtt1');
-    System.assertEquals(configuration.getConversions().getHtml().getExcludeTagAttributes()[0], 'KeepAtt');
+    System.assertEquals(configuration.getConversions().getHtml().getKeepTagAttributes()[0], 'tag');
+    System.assertEquals(configuration.getConversions().getHtml().getExcludeTagAttributes()[0], 'ExAtt1');
     System.assertEquals(configuration.getConversions().getHtml().getKeepContent().getXpaths()[0], 'xpath1');
     System.assertEquals(configuration.getConversions().getHtml().getExcludeContent().getXpaths()[0], 'xpath1');
     System.assertEquals(configuration.getConversions().getJsonNormalizations()[0].getOperation(), 'test operation');
@@ -1571,14 +1611,17 @@ private class IBMDiscoveryV1Test {
     List<String> expansion1ExpandedTerms = new List<String> { 'monday', 'tuesday', 'wednesday', 'thursday', 'friday' };
     List<String> expansion2InputTerms = new List<String> { 'weekend', 'week end' };
     List<String> expansion2ExpandedTerms = new List<String> { 'saturday', 'sunday' };
-    IBMDiscoveryV1Models.Expansion expansion1 = new IBMDiscoveryV1Models.Expansion();
-    expansion1.setInputTerms(expansion1InputTerms);
-    expansion1.setExpandedTerms(expansion1ExpandedTerms);
-    IBMDiscoveryV1Models.Expansion expansion2 = new IBMDiscoveryV1Models.Expansion();
-    expansion2.setInputTerms(expansion2InputTerms);
-    expansion2.setExpandedTerms(expansion2ExpandedTerms);
-    IBMDiscoveryV1Models.Expansions expansions = new IBMDiscoveryV1Models.Expansions();
-    expansions.setExpansions(new List<IBMDiscoveryV1Models.Expansion> { expansion1, expansion2 });
+    IBMDiscoveryV1Models.Expansion expansion1 = new IBMDiscoveryV1Models.ExpansionBuilder()
+      .inputTerms(expansion1InputTerms)
+      .expandedTerms(expansion1ExpandedTerms)
+      .build();
+    IBMDiscoveryV1Models.Expansion expansion2 = new IBMDiscoveryV1Models.ExpansionBuilder()
+      .inputTerms(expansion2InputTerms)
+      .expandedTerms(expansion2ExpandedTerms)
+      .build();
+    IBMDiscoveryV1Models.Expansions expansions = new IBMDiscoveryV1Models.ExpansionsBuilder()
+      .expansions(new List<IBMDiscoveryV1Models.Expansion> { expansion1, expansion2 })
+      .build();
 
     IBMDiscoveryV1Models.CreateExpansionsOptions createOptions = new IBMDiscoveryV1Models.CreateExpansionsOptionsBuilder()
         .environmentId('environment_id')
@@ -1603,14 +1646,17 @@ private class IBMDiscoveryV1Test {
     List<String> expansion1ExpandedTerms = new List<String> { 'monday', 'tuesday', 'wednesday', 'thursday', 'friday' };
     List<String> expansion2InputTerms = new List<String> { 'weekend', 'week end' };
     List<String> expansion2ExpandedTerms = new List<String> { 'saturday', 'sunday' };
-    IBMDiscoveryV1Models.Expansion expansion1 = new IBMDiscoveryV1Models.Expansion();
-    expansion1.setInputTerms(expansion1InputTerms);
-    expansion1.setExpandedTerms(expansion1ExpandedTerms);
-    IBMDiscoveryV1Models.Expansion expansion2 = new IBMDiscoveryV1Models.Expansion();
-    expansion2.setInputTerms(expansion2InputTerms);
-    expansion2.setExpandedTerms(expansion2ExpandedTerms);
-    IBMDiscoveryV1Models.Expansions expansions = new IBMDiscoveryV1Models.Expansions();
-    expansions.setExpansions(new List<IBMDiscoveryV1Models.Expansion> { expansion1, expansion2 });
+    IBMDiscoveryV1Models.Expansion expansion1 = new IBMDiscoveryV1Models.ExpansionBuilder()
+      .inputTerms(expansion1InputTerms)
+      .expandedTerms(expansion1ExpandedTerms)
+      .build();
+    IBMDiscoveryV1Models.Expansion expansion2 = new IBMDiscoveryV1Models.ExpansionBuilder()
+      .inputTerms(expansion2InputTerms)
+      .expandedTerms(expansion2ExpandedTerms)
+      .build();
+    IBMDiscoveryV1Models.Expansions expansions = new IBMDiscoveryV1Models.ExpansionsBuilder()
+      .expansions(new List<IBMDiscoveryV1Models.Expansion> { expansion1, expansion2 })
+      .build();
 
     IBMDiscoveryV1Models.ListExpansionsOptions listOptions = new IBMDiscoveryV1Models.ListExpansionsOptionsBuilder()
         .environmentId('environment_id')
@@ -1646,11 +1692,13 @@ private class IBMDiscoveryV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContext();
-    context.setText('text');
-    IBMDiscoveryV1Models.QueryEntitiesEntity entity = new IBMDiscoveryV1Models.QueryEntitiesEntity();
-    entity.setXtype('type');
-    entity.setText('text');
+    IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContextBuilder()
+      .text('text')
+      .build();
+    IBMDiscoveryV1Models.QueryEntitiesEntity entity = new IBMDiscoveryV1Models.QueryEntitiesEntityBuilder()
+      .xtype('type')
+      .text('text')
+      .build();
     IBMDiscoveryV1Models.QueryEntitiesOptions options = new IBMDiscoveryV1Models.QueryEntitiesOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -1684,19 +1732,23 @@ private class IBMDiscoveryV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContext();
-    context.setText('text');
-    IBMDiscoveryV1Models.QueryRelationsEntity entity = new IBMDiscoveryV1Models.QueryRelationsEntity();
-    entity.setXtype('text');
-    entity.setExact(true);
-    entity.setText('text');
-    IBMDiscoveryV1Models.QueryFilterType filterType = new IBMDiscoveryV1Models.QueryFilterType();
-    filterType.setInclude(new List<String>{ 'include' });
-    filterType.setExclude(new List<String>{ 'exclude' });
-    IBMDiscoveryV1Models.QueryRelationsFilter filter = new IBMDiscoveryV1Models.QueryRelationsFilter();
-    filter.setDocumentIds(new List<String>{ 'id' });
-    filter.setEntityTypes(filterType);
-    filter.setRelationTypes(filterType);
+    IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContextBuilder()
+      .text('text')
+      .build();
+    IBMDiscoveryV1Models.QueryRelationsEntity entity = new IBMDiscoveryV1Models.QueryRelationsEntityBuilder()
+      .xtype('text')
+      .exact(true)
+      .text('text')
+      .build();
+    IBMDiscoveryV1Models.QueryFilterType filterType = new IBMDiscoveryV1Models.QueryFilterTypeBuilder()
+      .include(new List<String>{ 'include' })
+      .exclude(new List<String>{ 'exclude' })
+      .build();
+    IBMDiscoveryV1Models.QueryRelationsFilter filter = new IBMDiscoveryV1Models.QueryRelationsFilterBuilder()
+      .documentIds(new List<String> { 'id' })
+      .entityTypes(filterType)
+      .relationTypes(filterType)
+      .build();
     IBMDiscoveryV1Models.QueryRelationsOptions options = new IBMDiscoveryV1Models.QueryRelationsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -1768,26 +1820,27 @@ private class IBMDiscoveryV1Test {
     String endpoint = 'endpoint';
     String secretAccessKey = 'secret_access_key';
 
-    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetails();
-    details.setClientId(clientId);
-    details.setClientSecret(clientSecret);
-    details.setCredentialType(credentialType);
-    details.setEnterpriseId(enterpriseId);
-    details.setOrganizationUrl(organizationUrl);
-    details.setPassphrase(passphrase);
-    details.setPassword(password);
-    details.setPrivateKey(privateKey);
-    details.setPublicKeyId(publicKeyId);
-    details.setSiteCollectionPath(siteCollectionPath);
-    details.setUrl(url);
-    details.setUsername(username);
-    details.setGatewayId(gatewayId);
-    details.setSourceVersion(sourceVersion);
-    details.setWebApplicationUrl(webApplicationUrl);
-    details.setDomain(domain);
-    details.setAccessKeyId(accessKeyId);
-    details.setEndpoint(endpoint);
-    details.setSecretAccessKey(secretAccessKey);
+    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
+      .clientId(clientId)
+      .clientSecret(clientSecret)
+      .credentialType(credentialType)
+      .enterpriseId(enterpriseId)
+      .organizationUrl(organizationUrl)
+      .passphrase(passphrase)
+      .password(password)
+      .privateKey(privateKey)
+      .publicKeyId(publicKeyId)
+      .siteCollectionPath(siteCollectionPath)
+      .url(url)
+      .username(username)
+      .gatewayId(gatewayId)
+      .sourceVersion(sourceVersion)
+      .webApplicationUrl(webApplicationUrl)
+      .domain(domain)
+      .accessKeyId(accessKeyId)
+      .endpoint(endpoint)
+      .secretAccessKey(secretAccessKey)
+      .build();
 
     System.assertEquals(clientId, details.getClientId());
     System.assertEquals(clientSecret, details.getClientSecret());
@@ -1821,28 +1874,29 @@ private class IBMDiscoveryV1Test {
     String url = 'login.salesforce.com';
     String username = 'user@email.address';
     String status = 'connected';
-
-    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetails();
-    details.setClientId('client_id');
-    details.setClientSecret('client_secret');
-    details.setCredentialType(credentialType);
-    details.setEnterpriseId('enterprise_id');
-    details.setOrganizationUrl('organization_url');
-    details.setPassphrase('passphrase');
-    details.setPassword('password');
-    details.setPrivateKey('private_key');
-    details.setPublicKeyId('public_key_id');
-    details.setSiteCollectionPath('site_collection_path');
-    details.setUrl(url);
-    details.setUsername(username);
-    details.setGatewayId('gateway_id');
-    details.setSourceVersion('source_version');
-    details.setWebApplicationUrl('web_application_url');
-    details.setDomain('domain');
-    IBMDiscoveryV1Models.Credentials credentials = new IBMDiscoveryV1Models.Credentials();
-    credentials.setSourceType(sourceType);
-    credentials.setCredentialDetails(details);
-    credentials.setStatus(status);
+    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
+      .clientId('client_id')
+      .clientSecret('client_secret')
+      .credentialType(credentialType)
+      .enterpriseId('enterprise_id')
+      .organizationUrl('organization_url')
+      .passphrase('passphrase')
+      .password('password')
+      .privateKey('private_key')
+      .publicKeyId('public_key_id')
+      .siteCollectionPath('site_collection_path')
+      .url(url)
+      .username(username)
+      .gatewayId('gateway_id')
+      .sourceVersion('source_version')
+      .webApplicationUrl('web_application_url')
+      .domain('domain')
+      .build();
+    IBMDiscoveryV1Models.Credentials credentials = new IBMDiscoveryV1Models.CredentialsBuilder()
+      .sourceType(sourceType)
+      .credentialDetails(details)
+      .status(status)
+      .build();
 
     IBMDiscoveryV1Models.CreateCredentialsOptions options = new IBMDiscoveryV1Models.CreateCredentialsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
@@ -1926,22 +1980,24 @@ private class IBMDiscoveryV1Test {
     String username = 'user@email.address';
     String status = 'connected';
 
-    IBMDiscoveryV1Models.CredentialDetails newDetails = new IBMDiscoveryV1Models.CredentialDetails();
-    newDetails.setClientId('client_id');
-    newDetails.setClientSecret('client_secret');
-    newDetails.setCredentialType(credentialType);
-    newDetails.setEnterpriseId('enterprise_id');
-    newDetails.setOrganizationUrl('organization_url');
-    newDetails.setPassphrase('passphrase');
-    newDetails.setPassword('password');
-    newDetails.setPrivateKey('private_key');
-    newDetails.setPublicKeyId('public_key_id');
-    newDetails.setSiteCollectionPath('site_collection_path');
-    newDetails.setUrl(url);
-    newDetails.setUsername(username);
-    IBMDiscoveryV1Models.Credentials newCredentials = new IBMDiscoveryV1Models.Credentials();
-    newCredentials.setSourceType(sourceType);
-    newCredentials.setCredentialDetails(newDetails);
+    IBMDiscoveryV1Models.CredentialDetails newDetails = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
+      .clientId('client_id')
+      .clientSecret('client_secret')
+      .credentialType(credentialType)
+      .enterpriseId('enterprise_id')
+      .organizationUrl('organization_url')
+      .passphrase('passphrase')
+      .password('password')
+      .privateKey('private_key')
+      .publicKeyId('public_key_id')
+      .siteCollectionPath('site_collection_path')
+      .url(url)
+      .username(username)
+      .build();
+    IBMDiscoveryV1Models.Credentials newCredentials = new IBMDiscoveryV1Models.CredentialsBuilder()
+      .sourceType(sourceType)
+      .credentialDetails(newDetails)
+      .build();
 
     IBMDiscoveryV1Models.UpdateCredentialsOptions options = new IBMDiscoveryV1Models.UpdateCredentialsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
@@ -1976,13 +2032,14 @@ private class IBMDiscoveryV1Test {
     String documentId = 'mock_docid';
     String queryId = 'mock_queryid';
 
-    IBMDiscoveryV1Models.EventData eventData = new IBMDiscoveryV1Models.EventData();
-    eventData.setEnvironmentId(ENVIRONMENT_ID);
-    eventData.setCollectionId(collectionId);
-    eventData.setDocumentId(documentId);
-    eventData.setDisplayRank(displayRank);
-    eventData.setSessionToken(sessionToken);
-    eventData.setClientTimestamp(dateValue);
+    IBMDiscoveryV1Models.EventData eventData = new IBMDiscoveryV1Models.EventDataBuilder()
+      .environmentId(ENVIRONMENT_ID)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .displayRank(displayRank)
+      .sessionToken(sessionToken)
+      .clientTimestamp(dateValue)
+      .build();
     IBMDiscoveryV1Models.CreateEventOptions createEventOptions = new IBMDiscoveryV1Models.CreateEventOptionsBuilder()
         .xtype(eventType)
         .data(eventData)
@@ -2217,11 +2274,12 @@ private class IBMDiscoveryV1Test {
     List<String> readings = new List<String> { 'reading 1', 'reading 2' };
     List<String> tokens = new List<String> { 'token 1', 'token 2' };
 
-    IBMDiscoveryV1Models.TokenDictRule tokenDictRule = new IBMDiscoveryV1Models.TokenDictRule();
-    tokenDictRule.setText(text);
-    tokenDictRule.setPartOfSpeech(partOfSpeech);
-    tokenDictRule.setReadings(readings);
-    tokenDictRule.setTokens(tokens);
+    IBMDiscoveryV1Models.TokenDictRule tokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
+      .text(text)
+      .partOfSpeech(partOfSpeech)
+      .readings(readings)
+      .tokens(tokens)
+      .build();
 
     System.assertEquals(text, tokenDictRule.getText());
     System.assertEquals(partOfSpeech, tokenDictRule.getPartOfSpeech());
@@ -2238,8 +2296,16 @@ private class IBMDiscoveryV1Test {
     String collectionId = 'collection_id';
     String headerKey = 'Test-Header';
     String headerValue = 'test_value';
-    IBMDiscoveryV1Models.TokenDictRule firstTokenDictRule = new IBMDiscoveryV1Models.TokenDictRule();
-    IBMDiscoveryV1Models.TokenDictRule secondTokenDictRule = new IBMDiscoveryV1Models.TokenDictRule();
+    IBMDiscoveryV1Models.TokenDictRule firstTokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
+      .text(TEXT)
+      .tokens(TOKENS)
+      .partOfSpeech(PART_OF_SPEECH)
+      .build();
+    IBMDiscoveryV1Models.TokenDictRule secondTokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
+      .text(TEXT)
+      .tokens(TOKENS)
+      .partOfSpeech(PART_OF_SPEECH)
+      .build();
     List<IBMDiscoveryV1Models.TokenDictRule> tokenDictRuleList = new List<IBMDiscoveryV1Models.TokenDictRule>();
     tokenDictRuleList.add(firstTokenDictRule);
 
@@ -2309,10 +2375,16 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
+    IBMDiscoveryV1Models.TokenDictRule tokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
+      .text(TEXT)
+      .tokens(TOKENS)
+      .partOfSpeech(PART_OF_SPEECH)
+      .build();
+
     IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createOptions = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
         .environmentId(environmentId)
         .collectionId(collectionId)
-        .tokenizationRules(new List<IBMDiscoveryV1Models.TokenDictRule> { new IBMDiscoveryV1Models.TokenDictRule() })
+        .tokenizationRules(new List<IBMDiscoveryV1Models.TokenDictRule> { tokenDictRule })
         .build();
     IBMDiscoveryV1Models.TokenDictStatusResponse response = service.createTokenizationDictionary(createOptions);
 
@@ -2669,15 +2741,16 @@ private class IBMDiscoveryV1Test {
     Long requestTimeout = 2000L;
     List<String> blacklist = new List<String>{ 'badsite.com' };
 
-    IBMDiscoveryV1Models.SourceOptionsWebCrawl sourceOptionsWebCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawl();
-    sourceOptionsWebCrawl.setUrl(url);
-    sourceOptionsWebCrawl.setLimitToStartingHosts(true);
-    sourceOptionsWebCrawl.setCrawlSpeed(crawlSpeed);
-    sourceOptionsWebCrawl.setAllowUntrustedCertificate(true);
-    sourceOptionsWebCrawl.setMaximumHops(maximumHops);
-    sourceOptionsWebCrawl.setRequestTimeout(requestTimeout);
-    sourceOptionsWebCrawl.setOverrideRobotsTxt(true);
-    sourceOptionsWebCrawl.setBlacklist(blacklist);
+    IBMDiscoveryV1Models.SourceOptionsWebCrawl sourceOptionsWebCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawlBuilder()
+      .url(url)
+      .limitToStartingHosts(true)
+      .crawlSpeed(crawlSpeed)
+      .allowUntrustedCertificate(true)
+      .maximumHops(maximumHops)
+      .requestTimeout(requestTimeout)
+      .overrideRobotsTxt(true)
+      .blacklist(blacklist)
+      .build();
 
     System.assertEquals(url, sourceOptionsWebCrawl.getUrl());
     System.assert(sourceOptionsWebCrawl.getLimitToStartingHosts());
@@ -2693,9 +2766,10 @@ private class IBMDiscoveryV1Test {
     String name = 'name';
     Long testLimit = 9000L;
 
-    IBMDiscoveryV1Models.SourceOptionsBuckets sourceOptionsBuckets = new IBMDiscoveryV1Models.SourceOptionsBuckets();
-    sourceOptionsBuckets.setName(name);
-    sourceOptionsBuckets.setXlimit(testLimit);
+    IBMDiscoveryV1Models.SourceOptionsBuckets sourceOptionsBuckets = new IBMDiscoveryV1Models.SourceOptionsBucketsBuilder()
+      .name(name)
+      .xlimit(testLimit)
+      .build();
 
     System.assertEquals(name, sourceOptionsBuckets.getName());
     System.assertEquals(testLimit, sourceOptionsBuckets.getXlimit());
@@ -2713,34 +2787,40 @@ private class IBMDiscoveryV1Test {
     String bucketName = 'bucket_name';
     String crawlSpeed = 'aggressive';
 
-    IBMDiscoveryV1Models.SourceOptions sourceOptions = new IBMDiscoveryV1Models.SourceOptions();
-    IBMDiscoveryV1Models.SourceOptionsFolder folder = new IBMDiscoveryV1Models.SourceOptionsFolder();
-    folder.setOwnerUserId(folderOwnerUserId);
-    folder.setFolderId(folderId);
-    folder.setXlimit(testLimit);
-    sourceOptions.setFolders(new List<IBMDiscoveryV1Models.SourceOptionsFolder> { folder });
-    IBMDiscoveryV1Models.SourceOptionsObject sourceObject = new IBMDiscoveryV1Models.SourceOptionsObject();
-    sourceObject.setName(objectName);
-    sourceObject.setXlimit(testLimit);
-    sourceOptions.setObjects(new List<IBMDiscoveryV1Models.SourceOptionsObject> { sourceObject });
-    IBMDiscoveryV1Models.SourceOptionsSiteColl siteColl = new IBMDiscoveryV1Models.SourceOptionsSiteColl();
-    siteColl.setSiteCollectionPath(siteCollectionPath);
-    siteColl.setXlimit(testLimit);
-    sourceOptions.setSiteCollections(new List<IBMDiscoveryV1Models.SourceOptionsSiteColl> { siteColl });
-    IBMDiscoveryV1Models.SourceOptionsWebCrawl webCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawl();
-    webCrawl.setUrl(url);
-    webCrawl.setLimitToStartingHosts(true);
-    webCrawl.setCrawlSpeed(crawlSpeed);
-    webCrawl.setAllowUntrustedCertificate(true);
-    webCrawl.setMaximumHops(maximumHops);
-    webCrawl.setRequestTimeout(requestTimeout);
-    webCrawl.setOverrideRobotsTxt(true);
-    sourceOptions.setUrls(new List<IBMDiscoveryV1Models.SourceOptionsWebCrawl> { webCrawl });
-    IBMDiscoveryV1Models.SourceOptionsBuckets buckets = new IBMDiscoveryV1Models.SourceOptionsBuckets();
-    buckets.setName(bucketName);
-    buckets.setXlimit(testLimit);
-    sourceOptions.setBuckets(new List<IBMDiscoveryV1Models.SourceOptionsBuckets> { buckets });
-    sourceOptions.setCrawlAllBuckets(true);
+    IBMDiscoveryV1Models.SourceOptionsFolder folder = new IBMDiscoveryV1Models.SourceOptionsFolderBuilder()
+      .ownerUserId(folderOwnerUserId)
+      .folderId(folderId)
+      .xlimit(testLimit)
+      .build();
+    IBMDiscoveryV1Models.SourceOptionsObject sourceObject = new IBMDiscoveryV1Models.SourceOptionsObjectBuilder()
+      .name(objectName)
+      .xlimit(testLimit)
+      .build();
+    IBMDiscoveryV1Models.SourceOptionsSiteColl siteColl = new IBMDiscoveryV1Models.SourceOptionsSiteCollBuilder()
+      .siteCollectionPath(siteCollectionPath)
+      .xlimit(testLimit)
+      .build();
+    IBMDiscoveryV1Models.SourceOptionsWebCrawl webCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawlBuilder()
+      .url(url)
+      .limitToStartingHosts(true)
+      .crawlSpeed(crawlSpeed)
+      .allowUntrustedCertificate(true)
+      .maximumHops(maximumHops)
+      .requestTimeout(requestTimeout)
+      .overrideRobotsTxt(true)
+      .build();
+    IBMDiscoveryV1Models.SourceOptionsBuckets buckets = new IBMDiscoveryV1Models.SourceOptionsBucketsBuilder()
+      .name(bucketName)
+      .xlimit(testLimit)
+      .build();
+    IBMDiscoveryV1Models.SourceOptions sourceOptions = new IBMDiscoveryV1Models.SourceOptionsBuilder()
+      .folders(new List<IBMDiscoveryV1Models.SourceOptionsFolder> { folder })
+      .siteCollections(new List<IBMDiscoveryV1Models.SourceOptionsSiteColl> { siteColl })
+      .urls(new List<IBMDiscoveryV1Models.SourceOptionsWebCrawl> { webCrawl })
+      .buckets(new List<IBMDiscoveryV1Models.SourceOptionsBuckets> { buckets })
+      .objects(new List<IBMDiscoveryV1Models.SourceOptionsObject> { sourceObject })
+      .crawlAllBuckets(true)
+      .build();
 
     System.assertEquals(folderOwnerUserId, sourceOptions.getFolders().get(0).getOwnerUserId());
     System.assertEquals(folderId, sourceOptions.getFolders().get(0).getFolderId());

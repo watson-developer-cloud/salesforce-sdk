@@ -4,23 +4,28 @@
  * your needs.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/visual-recognition.html">Visual Recognition</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/visual-recognition/">Visual Recognition</a>
  */
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'visual_recognition';
   private static final String URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
 
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMVisualRecognitionV3` with the specified authentication configuration.
+   * Instantiates a new `IBMVisualRecognitionV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMVisualRecognitionV3(String versionDate, IBMWatsonAuthenticator authenticator) {
-    super('visual_recognition', 'v3', authenticator);
+    super(SERVICE_NAME, 'v3', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
@@ -130,11 +135,17 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    * Create a classifier.
    *
    * Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or
-   * negative examples. Include at least two sets of examples, either two positive example files or one positive and one
-   * negative file. You can upload a maximum of 256 MB per call.
+   * negative example training images. Include at least two sets of examples, either two positive example files or one
+   * positive and one negative file. You can upload a maximum of 256 MB per call.
    *
-   * Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
-   * names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+   * **Tips when creating:**
+   *
+   * - If you set the **X-Watson-Learning-Opt-Out** header parameter to `true` when you create a classifier, the example
+   * training images are not stored. Save your training images locally. For more information, see [Data
+   * collection](#data-collection).
+   *
+   * - Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
+   * class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
    *
    * @param createClassifierOptions the {@link IBMVisualRecognitionV3Models.CreateClassifierOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifier} with the response
@@ -228,8 +239,14 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    * Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
    * names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
    *
-   * **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests
-   * in parallel, the last request overwrites the previous requests. The retrained property shows the last time the
+   * **Tips about retraining:**
+   *
+   * - You can't update the classifier if the **X-Watson-Learning-Opt-Out** header parameter was set to `true` when the
+   * classifier was created. Training images are not stored in that case. Instead, create another classifier. For more
+   * information, see [Data collection](#data-collection).
+   *
+   * - Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in
+   * parallel, the last request overwrites the previous requests. The `retrained` property shows the last time the
    * classifier retraining finished.
    *
    * @param updateClassifierOptions the {@link IBMVisualRecognitionV3Models.UpdateClassifierOptions} containing the options for the call
@@ -293,7 +310,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Retrieve a Core ML model of a classifier.
    *
-   * Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\"core_ml_enabled\": true</tt> in
+   * Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>"core_ml_enabled": true</tt> in
    * the classifier details.
    *
    * @param getCoreMlModelOptions the {@link IBMVisualRecognitionV3Models.GetCoreMlModelOptions} containing the options for the call

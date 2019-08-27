@@ -18,19 +18,24 @@
  * customization is beta functionality that is available for all supported languages.
  *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/speech-to-text.html">Speech to Text</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/speech-to-text/">Speech to Text</a>
  */
 public class IBMSpeechToTextV1 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'speech_to_text';
   private static final String URL = 'https://stream.watsonplatform.net/speech-to-text/api';
 
   /**
-   * Instantiates a new `IBMSpeechToTextV1` with the specified authentication configuration.
+   * Instantiates a new `IBMSpeechToTextV1`.
    *
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMSpeechToTextV1(IBMWatsonAuthenticator authenticator) {
-    super('speech_to_text', 'v1', authenticator);
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
   }
 
   /**
@@ -117,7 +122,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * format of the audio.
    * * For all other formats, you can omit the `Content-Type` header or specify `application/octet-stream` with the
    * header to have the service automatically detect the format of the audio. (With the `curl` command, you can specify
-   * either `\"Content-Type:\"` or `\"Content-Type: application/octet-stream\"`.)
+   * either `"Content-Type:"` or `"Content-Type: application/octet-stream"`.)
    *
    * Where indicated, the format that you specify must include the sampling rate and can optionally include the number
    * of channels and the endianness of the audio.
@@ -381,7 +386,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * format of the audio.
    * * For all other formats, you can omit the `Content-Type` header or specify `application/octet-stream` with the
    * header to have the service automatically detect the format of the audio. (With the `curl` command, you can specify
-   * either `\"Content-Type:\"` or `\"Content-Type: application/octet-stream\"`.)
+   * either `"Content-Type:"` or `"Content-Type: application/octet-stream"`.)
    *
    * Where indicated, the format that you specify must include the sampling rate and can optionally include the number
    * of channels and the endianness of the audio.
@@ -630,7 +635,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createLanguageModelOptions.description() != null) {
       contentJson.put('description', createLanguageModelOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMSpeechToTextV1Models.LanguageModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.LanguageModel.class);
   }
@@ -1098,8 +1103,12 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
       }
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('words', addWordsOptions.words());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    List<Object> wordsList = new List<Object>();
+    for (IBMSpeechToTextV1Models.CustomWord wordsItem : addWordsOptions.words()) {
+      wordsList.add(wordsItem.serialize());
+    }
+    contentJson.put('words', wordsList);
+    builder.bodyJson(JSON.serialize(contentJson));
 
     createServiceCall(builder.build(), null);
   }
@@ -1161,7 +1170,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (addWordOptions.displayAs() != null) {
       contentJson.put('display_as', addWordOptions.displayAs());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     createServiceCall(builder.build(), null);
   }
@@ -1397,7 +1406,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createAcousticModelOptions.description() != null) {
       contentJson.put('description', createAcousticModelOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMSpeechToTextV1Models.AcousticModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AcousticModel.class);
   }

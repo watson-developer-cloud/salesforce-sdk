@@ -3,12 +3,12 @@ public class IBMNaturalLanguageClassifierV1Models {
    * Response from the classifier for a phrase.
    */
   public class Classification extends IBMWatsonResponseModel {
-    private String classifier_id_serialized_name;
-    private String url_serialized_name;
-    private String text_serialized_name;
-    private String top_class_serialized_name;
-    private List<ClassifiedClass> classes_serialized_name;
- 
+    private String classifierId;
+    private String url;
+    private String text;
+    private String topClass;
+    private List<ClassifiedClass> classes;
+
     /**
      * Gets the classifierId.
      *
@@ -18,9 +18,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getClassifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -30,9 +30,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getUrl() {
-      return url_serialized_name;
+      return url;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -42,9 +42,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
- 
+
     /**
      * Gets the topClass.
      *
@@ -54,9 +54,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getTopClass() {
-      return top_class_serialized_name;
+      return topClass;
     }
- 
+
     /**
      * Gets the classes.
      *
@@ -66,7 +66,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public List<ClassifiedClass> getClasses() {
-      return classes_serialized_name;
+      return classes;
     }
 
     /**
@@ -75,7 +75,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param classifierId the new classifierId
      */
     public void setClassifierId(final String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -84,7 +84,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param url the new url
      */
     public void setUrl(final String url) {
-      this.url_serialized_name = url;
+      this.url = url;
     }
 
     /**
@@ -93,7 +93,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -102,7 +102,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param topClass the new topClass
      */
     public void setTopClass(final String topClass) {
-      this.top_class_serialized_name = topClass;
+      this.topClass = topClass;
     }
 
     /**
@@ -111,13 +111,21 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param classes the new classes
      */
     public void setClasses(final List<ClassifiedClass> classes) {
-      this.classes_serialized_name = classes;
+      this.classes = classes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId',
+        'top_class' => 'topClass'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       Classification ret = (Classification) super.deserialize(jsonString, jsonMap, classType);
 
@@ -127,11 +135,11 @@ public class IBMNaturalLanguageClassifierV1Models {
       if (deserializedClasses != null) {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassifiedClass currentItem = ret.getClasses().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('classes_serialized_name');
-          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
+          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
           newClasses.add(newItem);
         }
-        ret.classes_serialized_name = newClasses;
+        ret.classes = newClasses;
       }
 
       return ret;
@@ -142,10 +150,10 @@ public class IBMNaturalLanguageClassifierV1Models {
    * Response from the classifier for multiple phrases.
    */
   public class ClassificationCollection extends IBMWatsonResponseModel {
-    private String classifier_id_serialized_name;
-    private String url_serialized_name;
-    private List<CollectionItem> collection_serialized_name;
- 
+    private String classifierId;
+    private String url;
+    private List<CollectionItem> collection;
+
     /**
      * Gets the classifierId.
      *
@@ -155,9 +163,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getClassifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -167,9 +175,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getUrl() {
-      return url_serialized_name;
+      return url;
     }
- 
+
     /**
      * Gets the collection.
      *
@@ -179,7 +187,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public List<CollectionItem> getCollection() {
-      return collection_serialized_name;
+      return collection;
     }
 
     /**
@@ -188,7 +196,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param classifierId the new classifierId
      */
     public void setClassifierId(final String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -197,7 +205,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param url the new url
      */
     public void setUrl(final String url) {
-      this.url_serialized_name = url;
+      this.url = url;
     }
 
     /**
@@ -206,13 +214,20 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param collection the new collection
      */
     public void setCollection(final List<CollectionItem> collection) {
-      this.collection_serialized_name = collection;
+      this.collection = collection;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       ClassificationCollection ret = (ClassificationCollection) super.deserialize(jsonString, jsonMap, classType);
 
@@ -222,11 +237,11 @@ public class IBMNaturalLanguageClassifierV1Models {
       if (deserializedCollection != null) {
         for (Integer i = 0; i < deserializedCollection.size(); i++) {
           CollectionItem currentItem = ret.getCollection().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('collection_serialized_name');
-          CollectionItem newItem = (CollectionItem) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CollectionItem.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('collection');
+          CollectionItem newItem = (CollectionItem) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CollectionItem.class);
           newCollection.add(newItem);
         }
-        ret.collection_serialized_name = newCollection;
+        ret.collection = newCollection;
       }
 
       return ret;
@@ -237,9 +252,9 @@ public class IBMNaturalLanguageClassifierV1Models {
    * Class and confidence.
    */
   public class ClassifiedClass extends IBMWatsonGenericModel {
-    private Double confidence_serialized_name;
-    private String class_name_serialized_name;
- 
+    private Double confidence;
+    private String className;
+
     /**
      * Gets the confidence.
      *
@@ -250,9 +265,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return confidence_serialized_name;
+      return confidence;
     }
- 
+
     /**
      * Gets the className.
      *
@@ -262,7 +277,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getClassName() {
-      return class_name_serialized_name;
+      return className;
     }
 
     /**
@@ -271,7 +286,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.confidence_serialized_name = confidence;
+      this.confidence = confidence;
     }
 
     /**
@@ -280,23 +295,39 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param className the new className
      */
     public void setClassName(final String className) {
-      this.class_name_serialized_name = className;
+      this.className = className;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'class_name' => 'className'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ClassifiedClass ret = (ClassifiedClass) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * A classifier for natural language phrases.
    */
   public class Classifier extends IBMWatsonResponseModel {
-    private String name_serialized_name;
-    private String url_serialized_name;
-    private String status_serialized_name;
-    private String classifier_id_serialized_name;
-    private Datetime created_serialized_name;
-    private String status_description_serialized_name;
-    private String language_serialized_name;
- 
+    private String name;
+    private String url;
+    private String status;
+    private String classifierId;
+    private Datetime created;
+    private String statusDescription;
+    private String language;
+
     /**
      * Gets the name.
      *
@@ -306,9 +337,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -318,9 +349,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getUrl() {
-      return url_serialized_name;
+      return url;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -330,9 +361,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
- 
+
     /**
      * Gets the classifierId.
      *
@@ -342,9 +373,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getClassifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -354,9 +385,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
- 
+
     /**
      * Gets the statusDescription.
      *
@@ -366,9 +397,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getStatusDescription() {
-      return status_description_serialized_name;
+      return statusDescription;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -378,7 +409,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getLanguage() {
-      return language_serialized_name;
+      return language;
     }
 
     /**
@@ -387,7 +418,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -396,7 +427,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param url the new url
      */
     public void setUrl(final String url) {
-      this.url_serialized_name = url;
+      this.url = url;
     }
 
     /**
@@ -405,7 +436,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param classifierId the new classifierId
      */
     public void setClassifierId(final String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -414,17 +445,34 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param language the new language
      */
     public void setLanguage(final String language) {
-      this.language_serialized_name = language;
+      this.language = language;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId',
+        'status_description' => 'statusDescription'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Classifier ret = (Classifier) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * List of available classifiers.
    */
   public class ClassifierList extends IBMWatsonResponseModel {
-    private List<Classifier> classifiers_serialized_name;
- 
+    private List<Classifier> classifiers;
+
     /**
      * Gets the classifiers.
      *
@@ -434,7 +482,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public List<Classifier> getClassifiers() {
-      return classifiers_serialized_name;
+      return classifiers;
     }
 
     /**
@@ -443,7 +491,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param classifiers the new classifiers
      */
     public void setClassifiers(final List<Classifier> classifiers) {
-      this.classifiers_serialized_name = classifiers;
+      this.classifiers = classifiers;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -459,11 +507,11 @@ public class IBMNaturalLanguageClassifierV1Models {
       if (deserializedClassifiers != null) {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           Classifier currentItem = ret.getClassifiers().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers_serialized_name');
-          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
+          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
           newClassifiers.add(newItem);
         }
-        ret.classifiers_serialized_name = newClassifiers;
+        ret.classifiers = newClassifiers;
       }
 
       return ret;
@@ -476,7 +524,7 @@ public class IBMNaturalLanguageClassifierV1Models {
   public class ClassifyCollectionOptions extends IBMWatsonOptionsModel {
     private String classifierId;
     private List<ClassifyInput> collection;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -487,7 +535,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String classifierId() {
       return classifierId;
     }
- 
+
     /**
      * Gets the collection.
      *
@@ -515,7 +563,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     public ClassifyCollectionOptionsBuilder newBuilder() {
       return new ClassifyCollectionOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -611,9 +658,9 @@ public class IBMNaturalLanguageClassifierV1Models {
   /**
    * Request payload to classify.
    */
-  public class ClassifyInput {
-    private String text_serialized_name;
- 
+  public class ClassifyInput extends IBMWatsonGenericModel {
+    private String text;
+
     /**
      * Gets the text.
      *
@@ -622,18 +669,75 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @return the text
      */
     public String getText() {
-      return text_serialized_name;
+      return text;
+    }
+  
+    private ClassifyInput(ClassifyInputBuilder builder) {
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      this.text = builder.text;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a ClassifyInput builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
+    public ClassifyInputBuilder newBuilder() {
+      return new ClassifyInputBuilder(this);
     }
 
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
+    }
+  }
+
+  /**
+   * ClassifyInput Builder.
+   */
+  public class ClassifyInputBuilder {
+    private String text;
+
+    private ClassifyInputBuilder(ClassifyInput classifyInput) {
+      this.text = classifyInput.text;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ClassifyInputBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param text the text
+     */
+    public ClassifyInputBuilder(String text) {
+      this.text = text;
+    }
+
+    /**
+     * Builds a ClassifyInput.
+     *
+     * @return the classifyInput
+     */
+    public ClassifyInput build() {
+      return new ClassifyInput(this);
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the ClassifyInput builder
+     */
+    public ClassifyInputBuilder text(String text) {
+      this.text = text;
+      return this;
+    }
   }
 
   /**
@@ -642,7 +746,7 @@ public class IBMNaturalLanguageClassifierV1Models {
   public class ClassifyOptions extends IBMWatsonOptionsModel {
     private String classifierId;
     private String text;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -653,7 +757,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String classifierId() {
       return classifierId;
     }
- 
+
     /**
      * Gets the text.
      *
@@ -681,7 +785,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     public ClassifyOptionsBuilder newBuilder() {
       return new ClassifyOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -762,10 +865,10 @@ public class IBMNaturalLanguageClassifierV1Models {
    * Response from the classifier for a phrase in a collection.
    */
   public class CollectionItem extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private String top_class_serialized_name;
-    private List<ClassifiedClass> classes_serialized_name;
- 
+    private String text;
+    private String topClass;
+    private List<ClassifiedClass> classes;
+
     /**
      * Gets the text.
      *
@@ -775,9 +878,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getText() {
-      return text_serialized_name;
+      return text;
     }
- 
+
     /**
      * Gets the topClass.
      *
@@ -787,9 +890,9 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public String getTopClass() {
-      return top_class_serialized_name;
+      return topClass;
     }
- 
+
     /**
      * Gets the classes.
      *
@@ -799,7 +902,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     @AuraEnabled
     public List<ClassifiedClass> getClasses() {
-      return classes_serialized_name;
+      return classes;
     }
 
     /**
@@ -808,7 +911,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param text the new text
      */
     public void setText(final String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -817,7 +920,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param topClass the new topClass
      */
     public void setTopClass(final String topClass) {
-      this.top_class_serialized_name = topClass;
+      this.topClass = topClass;
     }
 
     /**
@@ -826,13 +929,20 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param classes the new classes
      */
     public void setClasses(final List<ClassifiedClass> classes) {
-      this.classes_serialized_name = classes;
+      this.classes = classes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'top_class' => 'topClass'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       CollectionItem ret = (CollectionItem) super.deserialize(jsonString, jsonMap, classType);
 
@@ -842,11 +952,11 @@ public class IBMNaturalLanguageClassifierV1Models {
       if (deserializedClasses != null) {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassifiedClass currentItem = ret.getClasses().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('classes_serialized_name');
-          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
+          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
           newClasses.add(newItem);
         }
-        ret.classes_serialized_name = newClasses;
+        ret.classes = newClasses;
       }
 
       return ret;
@@ -859,7 +969,7 @@ public class IBMNaturalLanguageClassifierV1Models {
   public class CreateClassifierOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile metadata;
     private IBMWatsonFile trainingData;
- 
+
     /**
      * Gets the metadata.
      *
@@ -874,7 +984,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     public IBMWatsonFile metadata() {
       return metadata;
     }
- 
+
     /**
      * Gets the trainingData.
      *
@@ -904,7 +1014,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     public CreateClassifierOptionsBuilder newBuilder() {
       return new CreateClassifierOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -986,7 +1095,7 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class DeleteClassifierOptions extends IBMWatsonOptionsModel {
     private String classifierId;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -1012,7 +1121,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     public DeleteClassifierOptionsBuilder newBuilder() {
       return new DeleteClassifierOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1079,7 +1187,7 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class GetClassifierOptions extends IBMWatsonOptionsModel {
     private String classifierId;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -1105,7 +1213,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     public GetClassifierOptionsBuilder newBuilder() {
       return new GetClassifierOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1184,7 +1291,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     public ListClassifiersOptionsBuilder newBuilder() {
       return new ListClassifiersOptionsBuilder(this);
     }
-
   }
 
   /**

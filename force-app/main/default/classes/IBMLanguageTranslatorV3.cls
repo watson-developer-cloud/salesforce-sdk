@@ -5,23 +5,28 @@
  * their own language, and more.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/language-translator.html">Language Translator</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/language-translator/">Language Translator</a>
  */
 public class IBMLanguageTranslatorV3 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'language_translator';
   private static final String URL = 'https://gateway.watsonplatform.net/language-translator/api';
 
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMLanguageTranslatorV3` with the specified authentication configuration.
+   * Instantiates a new `IBMLanguageTranslatorV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMLanguageTranslatorV3(String versionDate, IBMWatsonAuthenticator authenticator) {
-    super('language_translator', 'v3', authenticator);
+    super(SERVICE_NAME, 'v3', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
@@ -60,7 +65,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     if (translateOptions.target() != null) {
       contentJson.put('target', translateOptions.target());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMLanguageTranslatorV3Models.TranslationResult) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationResult.class);
   }
@@ -160,7 +165,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    * files is limited to <b>250 MB</b>. To successfully train with a parallel corpus you must have at least <b>5,000
    * parallel sentences</b> in your corpus.
    *
-   * You can have a <b>maxium of 10 custom models per language pair</b>.
+   * You can have a <b>maximum of 10 custom models per language pair</b>.
    *
    * @param createModelOptions the {@link IBMLanguageTranslatorV3Models.CreateModelOptions} containing the options for the call
    * @return the {@link IBMLanguageTranslatorV3Models.TranslationModel} with the response

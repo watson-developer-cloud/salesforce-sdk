@@ -3,11 +3,11 @@ public class IBMPersonalityInsightsV3Models {
    * The temporal behavior for the input content.
    */
   public class Behavior extends IBMWatsonGenericModel {
-    private String trait_id_serialized_name;
-    private String name_serialized_name;
-    private String category_serialized_name;
-    private Double percentage_serialized_name;
- 
+    private String traitId;
+    private String name;
+    private String category;
+    private Double percentage;
+
     /**
      * Gets the traitId.
      *
@@ -18,9 +18,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getTraitId() {
-      return trait_id_serialized_name;
+      return traitId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -30,9 +30,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
- 
+
     /**
      * Gets the category.
      *
@@ -42,9 +42,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getCategory() {
-      return category_serialized_name;
+      return category;
     }
- 
+
     /**
      * Gets the percentage.
      *
@@ -55,7 +55,7 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public Double getPercentage() {
-      return percentage_serialized_name;
+      return percentage;
     }
 
     /**
@@ -64,7 +64,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param traitId the new traitId
      */
     public void setTraitId(final String traitId) {
-      this.trait_id_serialized_name = traitId;
+      this.traitId = traitId;
     }
 
     /**
@@ -73,7 +73,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -82,7 +82,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param category the new category
      */
     public void setCategory(final String category) {
-      this.category_serialized_name = category;
+      this.category = category;
     }
 
     /**
@@ -91,19 +91,35 @@ public class IBMPersonalityInsightsV3Models {
      * @param percentage the new percentage
      */
     public void setPercentage(final Double percentage) {
-      this.percentage_serialized_name = percentage;
+      this.percentage = percentage;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'trait_id' => 'traitId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Behavior ret = (Behavior) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * A consumption preference that the service inferred from the input content.
    */
   public class ConsumptionPreferences extends IBMWatsonGenericModel {
-    private String consumption_preference_id_serialized_name;
-    private String name_serialized_name;
-    private Double score_serialized_name;
- 
+    private String consumptionPreferenceId;
+    private String name;
+    private Double score;
+
     /**
      * Gets the consumptionPreferenceId.
      *
@@ -114,9 +130,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getConsumptionPreferenceId() {
-      return consumption_preference_id_serialized_name;
+      return consumptionPreferenceId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -126,9 +142,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -144,7 +160,7 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return score_serialized_name;
+      return score;
     }
 
     /**
@@ -153,7 +169,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param consumptionPreferenceId the new consumptionPreferenceId
      */
     public void setConsumptionPreferenceId(final String consumptionPreferenceId) {
-      this.consumption_preference_id_serialized_name = consumptionPreferenceId;
+      this.consumptionPreferenceId = consumptionPreferenceId;
     }
 
     /**
@@ -162,7 +178,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -171,19 +187,35 @@ public class IBMPersonalityInsightsV3Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.score_serialized_name = score;
+      this.score = score;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'consumption_preference_id' => 'consumptionPreferenceId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ConsumptionPreferences ret = (ConsumptionPreferences) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * The consumption preferences that the service inferred from the input content.
    */
   public class ConsumptionPreferencesCategory extends IBMWatsonGenericModel {
-    private String consumption_preference_category_id_serialized_name;
-    private String name_serialized_name;
-    private List<ConsumptionPreferences> consumption_preferences_serialized_name;
- 
+    private String consumptionPreferenceCategoryId;
+    private String name;
+    private List<ConsumptionPreferences> consumptionPreferences;
+
     /**
      * Gets the consumptionPreferenceCategoryId.
      *
@@ -194,9 +226,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getConsumptionPreferenceCategoryId() {
-      return consumption_preference_category_id_serialized_name;
+      return consumptionPreferenceCategoryId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -206,9 +238,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
- 
+
     /**
      * Gets the consumptionPreferences.
      *
@@ -218,7 +250,7 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public List<ConsumptionPreferences> getConsumptionPreferences() {
-      return consumption_preferences_serialized_name;
+      return consumptionPreferences;
     }
 
     /**
@@ -227,7 +259,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param consumptionPreferenceCategoryId the new consumptionPreferenceCategoryId
      */
     public void setConsumptionPreferenceCategoryId(final String consumptionPreferenceCategoryId) {
-      this.consumption_preference_category_id_serialized_name = consumptionPreferenceCategoryId;
+      this.consumptionPreferenceCategoryId = consumptionPreferenceCategoryId;
     }
 
     /**
@@ -236,7 +268,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -245,13 +277,21 @@ public class IBMPersonalityInsightsV3Models {
      * @param consumptionPreferences the new consumptionPreferences
      */
     public void setConsumptionPreferences(final List<ConsumptionPreferences> consumptionPreferences) {
-      this.consumption_preferences_serialized_name = consumptionPreferences;
+      this.consumptionPreferences = consumptionPreferences;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'consumption_preference_category_id' => 'consumptionPreferenceCategoryId',
+        'consumption_preferences' => 'consumptionPreferences'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       ConsumptionPreferencesCategory ret = (ConsumptionPreferencesCategory) super.deserialize(jsonString, jsonMap, classType);
 
@@ -261,11 +301,11 @@ public class IBMPersonalityInsightsV3Models {
       if (deserializedConsumptionPreferences != null) {
         for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
           ConsumptionPreferences currentItem = ret.getConsumptionPreferences().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('consumption_preferences_serialized_name');
-          ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferences.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('consumptionPreferences');
+          ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferences.class);
           newConsumptionPreferences.add(newItem);
         }
-        ret.consumption_preferences_serialized_name = newConsumptionPreferences;
+        ret.consumptionPreferences = newConsumptionPreferences;
       }
 
       return ret;
@@ -275,9 +315,9 @@ public class IBMPersonalityInsightsV3Models {
   /**
    * The full input content that the service is to analyze.
    */
-  public class Content {
-    private List<ContentItem> contentItems_serialized_name;
- 
+  public class Content extends IBMWatsonGenericModel {
+    private List<ContentItem> contentItems;
+
     /**
      * Gets the contentItems.
      *
@@ -286,12 +326,12 @@ public class IBMPersonalityInsightsV3Models {
      * @return the contentItems
      */
     public List<ContentItem> contentItems() {
-      return contentItems_serialized_name;
+      return contentItems;
     }
   
     private Content(ContentBuilder builder) {
       IBMWatsonValidator.notNull(builder.contentItems, 'contentItems cannot be null');
-      this.contentItems_serialized_name = builder.contentItems;
+      this.contentItems = builder.contentItems;
     }
 
     /**
@@ -303,6 +343,22 @@ public class IBMPersonalityInsightsV3Models {
       return new ContentBuilder(this);
     }
 
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // calling custom serializer for contentItems
+      if (contentItems != null) {
+        List<Object> contentItemsJsonList = new List<Object>();
+        for (ContentItem listItem : contentItems) {
+          String listItemJsonString = listItem.serialize();
+          contentItemsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('contentItems', contentItemsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
+    }
   }
 
   /**
@@ -312,7 +368,7 @@ public class IBMPersonalityInsightsV3Models {
     private List<ContentItem> contentItems;
 
     private ContentBuilder(Content content) {
-      this.contentItems = content.contentItems_serialized_name;
+      this.contentItems = content.contentItems;
     }
 
     /**
@@ -370,17 +426,17 @@ public class IBMPersonalityInsightsV3Models {
   /**
    * An input content item that the service is to analyze.
    */
-  public class ContentItem {
-    private String content_serialized_name;
-    private String id_serialized_name;
-    private Long created_serialized_name;
-    private Long updated_serialized_name;
-    private String contenttype_serialized_name;
-    private String language_serialized_name;
-    private String parentid_serialized_name;
-    private Boolean reply_serialized_name;
-    private Boolean forward_serialized_name;
- 
+  public class ContentItem extends IBMWatsonGenericModel {
+    private String content;
+    private String id;
+    private Long created;
+    private Long updated;
+    private String contenttype;
+    private String language;
+    private String parentid;
+    private Boolean reply;
+    private Boolean forward;
+
     /**
      * Gets the content.
      *
@@ -390,9 +446,9 @@ public class IBMPersonalityInsightsV3Models {
      * @return the content
      */
     public String content() {
-      return content_serialized_name;
+      return content;
     }
- 
+
     /**
      * Gets the id.
      *
@@ -401,9 +457,9 @@ public class IBMPersonalityInsightsV3Models {
      * @return the id
      */
     public String id() {
-      return id_serialized_name;
+      return id;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -413,9 +469,9 @@ public class IBMPersonalityInsightsV3Models {
      * @return the created
      */
     public Long created() {
-      return created_serialized_name;
+      return created;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -425,9 +481,9 @@ public class IBMPersonalityInsightsV3Models {
      * @return the updated
      */
     public Long updated() {
-      return updated_serialized_name;
+      return updated;
     }
- 
+
     /**
      * Gets the contenttype.
      *
@@ -437,9 +493,9 @@ public class IBMPersonalityInsightsV3Models {
      * @return the contenttype
      */
     public String contenttype() {
-      return contenttype_serialized_name;
+      return contenttype;
     }
- 
+
     /**
      * Gets the language.
      *
@@ -453,9 +509,9 @@ public class IBMPersonalityInsightsV3Models {
      * @return the language
      */
     public String language() {
-      return language_serialized_name;
+      return language;
     }
- 
+
     /**
      * Gets the parentid.
      *
@@ -465,9 +521,9 @@ public class IBMPersonalityInsightsV3Models {
      * @return the parentid
      */
     public String parentid() {
-      return parentid_serialized_name;
+      return parentid;
     }
- 
+
     /**
      * Gets the reply.
      *
@@ -476,9 +532,9 @@ public class IBMPersonalityInsightsV3Models {
      * @return the reply
      */
     public Boolean reply() {
-      return reply_serialized_name;
+      return reply;
     }
- 
+
     /**
      * Gets the forward.
      *
@@ -487,20 +543,20 @@ public class IBMPersonalityInsightsV3Models {
      * @return the forward
      */
     public Boolean forward() {
-      return forward_serialized_name;
+      return forward;
     }
   
     private ContentItem(ContentItemBuilder builder) {
       IBMWatsonValidator.notNull(builder.content, 'content cannot be null');
-      this.content_serialized_name = builder.content;
-      this.id_serialized_name = builder.id;
-      this.created_serialized_name = builder.created;
-      this.updated_serialized_name = builder.updated;
-      this.contenttype_serialized_name = builder.contenttype;
-      this.language_serialized_name = builder.language;
-      this.parentid_serialized_name = builder.parentid;
-      this.reply_serialized_name = builder.reply;
-      this.forward_serialized_name = builder.forward;
+      this.content = builder.content;
+      this.id = builder.id;
+      this.created = builder.created;
+      this.updated = builder.updated;
+      this.contenttype = builder.contenttype;
+      this.language = builder.language;
+      this.parentid = builder.parentid;
+      this.reply = builder.reply;
+      this.forward = builder.forward;
     }
 
     /**
@@ -512,6 +568,12 @@ public class IBMPersonalityInsightsV3Models {
       return new ContentItemBuilder(this);
     }
 
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      return JSON.serialize(jsonMap);
+    }
   }
 
   /**
@@ -529,15 +591,15 @@ public class IBMPersonalityInsightsV3Models {
     private Boolean forward;
 
     private ContentItemBuilder(ContentItem contentItem) {
-      this.content = contentItem.content_serialized_name;
-      this.id = contentItem.id_serialized_name;
-      this.created = contentItem.created_serialized_name;
-      this.updated = contentItem.updated_serialized_name;
-      this.contenttype = contentItem.contenttype_serialized_name;
-      this.language = contentItem.language_serialized_name;
-      this.parentid = contentItem.parentid_serialized_name;
-      this.reply = contentItem.reply_serialized_name;
-      this.forward = contentItem.forward_serialized_name;
+      this.content = contentItem.content;
+      this.id = contentItem.id;
+      this.created = contentItem.created;
+      this.updated = contentItem.updated;
+      this.contenttype = contentItem.contenttype;
+      this.language = contentItem.language;
+      this.parentid = contentItem.parentid;
+      this.reply = contentItem.reply;
+      this.forward = contentItem.forward;
     }
 
     /**
@@ -668,16 +730,16 @@ public class IBMPersonalityInsightsV3Models {
    * The personality profile that the service generated for the input content.
    */
   public class Profile extends IBMWatsonResponseModel {
-    private String processed_language_serialized_name;
-    private Long word_count_serialized_name;
-    private String word_count_message_serialized_name;
-    private List<Trait> personality_serialized_name;
-    private List<Trait> needs_serialized_name;
-    private List<Trait> values_serialized_name;
-    private List<Behavior> behavior_serialized_name;
-    private List<ConsumptionPreferencesCategory> consumption_preferences_serialized_name;
-    private List<Warning> warnings_serialized_name;
- 
+    private String processedLanguage;
+    private Long wordCount;
+    private String wordCountMessage;
+    private List<Trait> personality;
+    private List<Trait> needs;
+    private List<Trait> values;
+    private List<Behavior> behavior;
+    private List<ConsumptionPreferencesCategory> consumptionPreferences;
+    private List<Warning> warnings;
+
     /**
      * Gets the processedLanguage.
      *
@@ -687,9 +749,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getProcessedLanguage() {
-      return processed_language_serialized_name;
+      return processedLanguage;
     }
- 
+
     /**
      * Gets the wordCount.
      *
@@ -699,9 +761,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public Long getWordCount() {
-      return word_count_serialized_name;
+      return wordCount;
     }
- 
+
     /**
      * Gets the wordCountMessage.
      *
@@ -712,9 +774,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getWordCountMessage() {
-      return word_count_message_serialized_name;
+      return wordCountMessage;
     }
- 
+
     /**
      * Gets the personality.
      *
@@ -725,9 +787,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public List<Trait> getPersonality() {
-      return personality_serialized_name;
+      return personality;
     }
- 
+
     /**
      * Gets the needs.
      *
@@ -737,9 +799,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public List<Trait> getNeeds() {
-      return needs_serialized_name;
+      return needs;
     }
- 
+
     /**
      * Gets the values.
      *
@@ -749,9 +811,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public List<Trait> getValues() {
-      return values_serialized_name;
+      return values;
     }
- 
+
     /**
      * Gets the behavior.
      *
@@ -763,9 +825,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public List<Behavior> getBehavior() {
-      return behavior_serialized_name;
+      return behavior;
     }
- 
+
     /**
      * Gets the consumptionPreferences.
      *
@@ -777,9 +839,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public List<ConsumptionPreferencesCategory> getConsumptionPreferences() {
-      return consumption_preferences_serialized_name;
+      return consumptionPreferences;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -790,7 +852,7 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public List<Warning> getWarnings() {
-      return warnings_serialized_name;
+      return warnings;
     }
 
     /**
@@ -799,7 +861,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param processedLanguage the new processedLanguage
      */
     public void setProcessedLanguage(final String processedLanguage) {
-      this.processed_language_serialized_name = processedLanguage;
+      this.processedLanguage = processedLanguage;
     }
 
     /**
@@ -808,7 +870,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param wordCount the new wordCount
      */
     public void setWordCount(final long wordCount) {
-      this.word_count_serialized_name = wordCount;
+      this.wordCount = wordCount;
     }
 
     /**
@@ -817,7 +879,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param wordCountMessage the new wordCountMessage
      */
     public void setWordCountMessage(final String wordCountMessage) {
-      this.word_count_message_serialized_name = wordCountMessage;
+      this.wordCountMessage = wordCountMessage;
     }
 
     /**
@@ -826,7 +888,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param personality the new personality
      */
     public void setPersonality(final List<Trait> personality) {
-      this.personality_serialized_name = personality;
+      this.personality = personality;
     }
 
     /**
@@ -835,7 +897,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param needs the new needs
      */
     public void setNeeds(final List<Trait> needs) {
-      this.needs_serialized_name = needs;
+      this.needs = needs;
     }
 
     /**
@@ -844,7 +906,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param values the new values
      */
     public void setValues(final List<Trait> values) {
-      this.values_serialized_name = values;
+      this.values = values;
     }
 
     /**
@@ -853,7 +915,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param behavior the new behavior
      */
     public void setBehavior(final List<Behavior> behavior) {
-      this.behavior_serialized_name = behavior;
+      this.behavior = behavior;
     }
 
     /**
@@ -862,7 +924,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param consumptionPreferences the new consumptionPreferences
      */
     public void setConsumptionPreferences(final List<ConsumptionPreferencesCategory> consumptionPreferences) {
-      this.consumption_preferences_serialized_name = consumptionPreferences;
+      this.consumptionPreferences = consumptionPreferences;
     }
 
     /**
@@ -871,13 +933,23 @@ public class IBMPersonalityInsightsV3Models {
      * @param warnings the new warnings
      */
     public void setWarnings(final List<Warning> warnings) {
-      this.warnings_serialized_name = warnings;
+      this.warnings = warnings;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'processed_language' => 'processedLanguage',
+        'word_count' => 'wordCount',
+        'word_count_message' => 'wordCountMessage',
+        'consumption_preferences' => 'consumptionPreferences'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       Profile ret = (Profile) super.deserialize(jsonString, jsonMap, classType);
 
@@ -887,11 +959,11 @@ public class IBMPersonalityInsightsV3Models {
       if (deserializedPersonality != null) {
         for (Integer i = 0; i < deserializedPersonality.size(); i++) {
           Trait currentItem = ret.getPersonality().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('personality_serialized_name');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('personality');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newPersonality.add(newItem);
         }
-        ret.personality_serialized_name = newPersonality;
+        ret.personality = newPersonality;
       }
 
       // calling custom deserializer for needs
@@ -900,11 +972,11 @@ public class IBMPersonalityInsightsV3Models {
       if (deserializedNeeds != null) {
         for (Integer i = 0; i < deserializedNeeds.size(); i++) {
           Trait currentItem = ret.getNeeds().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('needs_serialized_name');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('needs');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newNeeds.add(newItem);
         }
-        ret.needs_serialized_name = newNeeds;
+        ret.needs = newNeeds;
       }
 
       // calling custom deserializer for values
@@ -913,11 +985,11 @@ public class IBMPersonalityInsightsV3Models {
       if (deserializedValues != null) {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           Trait currentItem = ret.getValues().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('values');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newValues.add(newItem);
         }
-        ret.values_serialized_name = newValues;
+        ret.values = newValues;
       }
 
       // calling custom deserializer for behavior
@@ -926,11 +998,11 @@ public class IBMPersonalityInsightsV3Models {
       if (deserializedBehavior != null) {
         for (Integer i = 0; i < deserializedBehavior.size(); i++) {
           Behavior currentItem = ret.getBehavior().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('behavior_serialized_name');
-          Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Behavior.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('behavior');
+          Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Behavior.class);
           newBehavior.add(newItem);
         }
-        ret.behavior_serialized_name = newBehavior;
+        ret.behavior = newBehavior;
       }
 
       // calling custom deserializer for consumptionPreferences
@@ -939,11 +1011,11 @@ public class IBMPersonalityInsightsV3Models {
       if (deserializedConsumptionPreferences != null) {
         for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
           ConsumptionPreferencesCategory currentItem = ret.getConsumptionPreferences().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('consumption_preferences_serialized_name');
-          ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferencesCategory.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('consumptionPreferences');
+          ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferencesCategory.class);
           newConsumptionPreferences.add(newItem);
         }
-        ret.consumption_preferences_serialized_name = newConsumptionPreferences;
+        ret.consumptionPreferences = newConsumptionPreferences;
       }
 
       // calling custom deserializer for warnings
@@ -952,11 +1024,11 @@ public class IBMPersonalityInsightsV3Models {
       if (deserializedWarnings != null) {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           Warning currentItem = ret.getWarnings().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings_serialized_name');
-          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
           newWarnings.add(newItem);
         }
-        ret.warnings_serialized_name = newWarnings;
+        ret.warnings = newWarnings;
       }
 
       return ret;
@@ -975,7 +1047,7 @@ public class IBMPersonalityInsightsV3Models {
     private Boolean rawScores;
     private Boolean csvHeaders;
     private Boolean consumptionPreferences;
- 
+
     /**
      * Gets the content.
      *
@@ -989,7 +1061,7 @@ public class IBMPersonalityInsightsV3Models {
     public Content content() {
       return content;
     }
- 
+
     /**
      * Gets the body.
      *
@@ -1003,20 +1075,18 @@ public class IBMPersonalityInsightsV3Models {
     public String body() {
       return body;
     }
- 
+
     /**
      * Gets the contentType.
      *
      * The type of the input. For more information, see **Content types** in the method description.
-     *
-     * Default: `text/plain`.
      *
      * @return the contentType
      */
     public String contentType() {
       return contentType;
     }
- 
+
     /**
      * Gets the contentLanguage.
      *
@@ -1035,7 +1105,7 @@ public class IBMPersonalityInsightsV3Models {
     public String contentLanguage() {
       return contentLanguage;
     }
- 
+
     /**
      * Gets the acceptLanguage.
      *
@@ -1048,7 +1118,7 @@ public class IBMPersonalityInsightsV3Models {
     public String acceptLanguage() {
       return acceptLanguage;
     }
- 
+
     /**
      * Gets the rawScores.
      *
@@ -1060,7 +1130,7 @@ public class IBMPersonalityInsightsV3Models {
     public Boolean rawScores() {
       return rawScores;
     }
- 
+
     /**
      * Gets the csvHeaders.
      *
@@ -1072,7 +1142,7 @@ public class IBMPersonalityInsightsV3Models {
     public Boolean csvHeaders() {
       return csvHeaders;
     }
- 
+
     /**
      * Gets the consumptionPreferences.
      *
@@ -1105,7 +1175,6 @@ public class IBMPersonalityInsightsV3Models {
     public ProfileOptionsBuilder newBuilder() {
       return new ProfileOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1256,14 +1325,14 @@ public class IBMPersonalityInsightsV3Models {
    * The characteristics that the service inferred from the input content.
    */
   public class Trait extends IBMWatsonGenericModel {
-    private String trait_id_serialized_name;
-    private String name_serialized_name;
-    private String category_serialized_name;
-    private Double percentile_serialized_name;
-    private Double raw_score_serialized_name;
-    private Boolean significant_serialized_name;
-    private List<Trait> children_serialized_name;
- 
+    private String traitId;
+    private String name;
+    private String category;
+    private Double percentile;
+    private Double rawScore;
+    private Boolean significant;
+    private List<Trait> children;
+
     /**
      * Gets the traitId.
      *
@@ -1277,9 +1346,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getTraitId() {
-      return trait_id_serialized_name;
+      return traitId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -1289,9 +1358,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
- 
+
     /**
      * Gets the category.
      *
@@ -1302,9 +1371,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getCategory() {
-      return category_serialized_name;
+      return category;
     }
- 
+
     /**
      * Gets the percentile.
      *
@@ -1316,9 +1385,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public Double getPercentile() {
-      return percentile_serialized_name;
+      return percentile;
     }
- 
+
     /**
      * Gets the rawScore.
      *
@@ -1335,9 +1404,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public Double getRawScore() {
-      return raw_score_serialized_name;
+      return rawScore;
     }
- 
+
     /**
      * Gets the significant.
      *
@@ -1350,9 +1419,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public Boolean getSignificant() {
-      return significant_serialized_name;
+      return significant;
     }
- 
+
     /**
      * Gets the children.
      *
@@ -1363,7 +1432,7 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public List<Trait> getChildren() {
-      return children_serialized_name;
+      return children;
     }
 
     /**
@@ -1372,7 +1441,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param traitId the new traitId
      */
     public void setTraitId(final String traitId) {
-      this.trait_id_serialized_name = traitId;
+      this.traitId = traitId;
     }
 
     /**
@@ -1381,7 +1450,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -1390,7 +1459,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param category the new category
      */
     public void setCategory(final String category) {
-      this.category_serialized_name = category;
+      this.category = category;
     }
 
     /**
@@ -1399,7 +1468,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param percentile the new percentile
      */
     public void setPercentile(final Double percentile) {
-      this.percentile_serialized_name = percentile;
+      this.percentile = percentile;
     }
 
     /**
@@ -1408,7 +1477,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param rawScore the new rawScore
      */
     public void setRawScore(final Double rawScore) {
-      this.raw_score_serialized_name = rawScore;
+      this.rawScore = rawScore;
     }
 
     /**
@@ -1417,7 +1486,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param significant the new significant
      */
     public void setSignificant(final Boolean significant) {
-      this.significant_serialized_name = significant;
+      this.significant = significant;
     }
 
     /**
@@ -1426,13 +1495,21 @@ public class IBMPersonalityInsightsV3Models {
      * @param children the new children
      */
     public void setChildren(final List<Trait> children) {
-      this.children_serialized_name = children;
+      this.children = children;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'trait_id' => 'traitId',
+        'raw_score' => 'rawScore'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       Trait ret = (Trait) super.deserialize(jsonString, jsonMap, classType);
 
@@ -1442,11 +1519,11 @@ public class IBMPersonalityInsightsV3Models {
       if (deserializedChildren != null) {
         for (Integer i = 0; i < deserializedChildren.size(); i++) {
           Trait currentItem = ret.getChildren().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('children_serialized_name');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('children');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newChildren.add(newItem);
         }
-        ret.children_serialized_name = newChildren;
+        ret.children = newChildren;
       }
 
       return ret;
@@ -1457,9 +1534,9 @@ public class IBMPersonalityInsightsV3Models {
    * A warning message that is associated with the input content.
    */
   public class Warning extends IBMWatsonGenericModel {
-    private String warning_id_serialized_name;
-    private String message_serialized_name;
- 
+    private String warningId;
+    private String message;
+
     /**
      * Gets the warningId.
      *
@@ -1469,9 +1546,9 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getWarningId() {
-      return warning_id_serialized_name;
+      return warningId;
     }
- 
+
     /**
      * Gets the message.
      *
@@ -1491,7 +1568,7 @@ public class IBMPersonalityInsightsV3Models {
      */
     @AuraEnabled
     public String getMessage() {
-      return message_serialized_name;
+      return message;
     }
 
     /**
@@ -1500,7 +1577,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param warningId the new warningId
      */
     public void setWarningId(final String warningId) {
-      this.warning_id_serialized_name = warningId;
+      this.warningId = warningId;
     }
 
     /**
@@ -1509,9 +1586,25 @@ public class IBMPersonalityInsightsV3Models {
      * @param message the new message
      */
     public void setMessage(final String message) {
-      this.message_serialized_name = message;
+      this.message = message;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'warning_id' => 'warningId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Warning ret = (Warning) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
 }

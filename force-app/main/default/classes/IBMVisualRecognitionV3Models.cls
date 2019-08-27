@@ -3,8 +3,8 @@ public class IBMVisualRecognitionV3Models {
    * A category within a classifier.
    */
   public class ModelClass extends IBMWatsonGenericModel {
-    private String class_serialized_name;
- 
+    private String className;
+
     /**
      * Gets the className.
      *
@@ -14,7 +14,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getClassName() {
-      return class_serialized_name;
+      return className;
     }
 
     /**
@@ -23,19 +23,35 @@ public class IBMVisualRecognitionV3Models {
      * @param className the new className
      */
     public void setClassName(final String className) {
-      this.class_serialized_name = className;
+      this.className = className;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'class' => 'className'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ModelClass ret = (ModelClass) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * Result of a class within a classifier.
    */
   public class ClassResult extends IBMWatsonGenericModel {
-    private String class_serialized_name;
-    private Double score_serialized_name;
-    private String type_hierarchy_serialized_name;
- 
+    private String className;
+    private Double score;
+    private String typeHierarchy;
+
     /**
      * Gets the className.
      *
@@ -50,9 +66,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getClassName() {
-      return class_serialized_name;
+      return className;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -63,9 +79,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return score_serialized_name;
+      return score;
     }
- 
+
     /**
      * Gets the typeHierarchy.
      *
@@ -76,7 +92,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getTypeHierarchy() {
-      return type_hierarchy_serialized_name;
+      return typeHierarchy;
     }
 
     /**
@@ -85,7 +101,7 @@ public class IBMVisualRecognitionV3Models {
      * @param className the new className
      */
     public void setClassName(final String className) {
-      this.class_serialized_name = className;
+      this.className = className;
     }
 
     /**
@@ -94,7 +110,7 @@ public class IBMVisualRecognitionV3Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.score_serialized_name = score;
+      this.score = score;
     }
 
     /**
@@ -103,21 +119,38 @@ public class IBMVisualRecognitionV3Models {
      * @param typeHierarchy the new typeHierarchy
      */
     public void setTypeHierarchy(final String typeHierarchy) {
-      this.type_hierarchy_serialized_name = typeHierarchy;
+      this.typeHierarchy = typeHierarchy;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'class' => 'className',
+        'type_hierarchy' => 'typeHierarchy'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ClassResult ret = (ClassResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * Results for one image.
    */
   public class ClassifiedImage extends IBMWatsonGenericModel {
-    private String source_url_serialized_name;
-    private String resolved_url_serialized_name;
-    private String image_serialized_name;
-    private ErrorInfo error_serialized_name;
-    private List<ClassifierResult> classifiers_serialized_name;
- 
+    private String sourceUrl;
+    private String resolvedUrl;
+    private String image;
+    private ErrorInfo error;
+    private List<ClassifierResult> classifiers;
+
     /**
      * Gets the sourceUrl.
      *
@@ -127,9 +160,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getSourceUrl() {
-      return source_url_serialized_name;
+      return sourceUrl;
     }
- 
+
     /**
      * Gets the resolvedUrl.
      *
@@ -139,9 +172,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getResolvedUrl() {
-      return resolved_url_serialized_name;
+      return resolvedUrl;
     }
- 
+
     /**
      * Gets the image.
      *
@@ -151,9 +184,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getImage() {
-      return image_serialized_name;
+      return image;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -164,9 +197,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public ErrorInfo getError() {
-      return error_serialized_name;
+      return error;
     }
- 
+
     /**
      * Gets the classifiers.
      *
@@ -176,7 +209,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<ClassifierResult> getClassifiers() {
-      return classifiers_serialized_name;
+      return classifiers;
     }
 
     /**
@@ -185,7 +218,7 @@ public class IBMVisualRecognitionV3Models {
      * @param sourceUrl the new sourceUrl
      */
     public void setSourceUrl(final String sourceUrl) {
-      this.source_url_serialized_name = sourceUrl;
+      this.sourceUrl = sourceUrl;
     }
 
     /**
@@ -194,7 +227,7 @@ public class IBMVisualRecognitionV3Models {
      * @param resolvedUrl the new resolvedUrl
      */
     public void setResolvedUrl(final String resolvedUrl) {
-      this.resolved_url_serialized_name = resolvedUrl;
+      this.resolvedUrl = resolvedUrl;
     }
 
     /**
@@ -203,7 +236,7 @@ public class IBMVisualRecognitionV3Models {
      * @param image the new image
      */
     public void setImage(final String image) {
-      this.image_serialized_name = image;
+      this.image = image;
     }
 
     /**
@@ -212,7 +245,7 @@ public class IBMVisualRecognitionV3Models {
      * @param error the new error
      */
     public void setError(final ErrorInfo error) {
-      this.error_serialized_name = error;
+      this.error = error;
     }
 
     /**
@@ -221,7 +254,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classifiers the new classifiers
      */
     public void setClassifiers(final List<ClassifierResult> classifiers) {
-      this.classifiers_serialized_name = classifiers;
+      this.classifiers = classifiers;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -229,10 +262,19 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'source_url' => 'sourceUrl',
+        'resolved_url' => 'resolvedUrl'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       ClassifiedImage ret = (ClassifiedImage) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for error
-      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(ret.getError()), (Map<String, Object>) jsonMap.get('error_serialized_name'), ErrorInfo.class);
+      Map<String, Object> errorMap = (Map<String, Object>) jsonMap.get('error');
+      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(errorMap), errorMap, ErrorInfo.class);
       ret.setError(newError);
 
       // calling custom deserializer for classifiers
@@ -241,11 +283,11 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedClassifiers != null) {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           ClassifierResult currentItem = ret.getClassifiers().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers_serialized_name');
-          ClassifierResult newItem = (ClassifierResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifierResult.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
+          ClassifierResult newItem = (ClassifierResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifierResult.class);
           newClassifiers.add(newItem);
         }
-        ret.classifiers_serialized_name = newClassifiers;
+        ret.classifiers = newClassifiers;
       }
 
       return ret;
@@ -256,11 +298,11 @@ public class IBMVisualRecognitionV3Models {
    * Results for all images.
    */
   public class ClassifiedImages extends IBMWatsonResponseModel {
-    private Long custom_classes_serialized_name;
-    private Long images_processed_serialized_name;
-    private List<ClassifiedImage> images_serialized_name;
-    private List<WarningInfo> warnings_serialized_name;
- 
+    private Long customClasses;
+    private Long imagesProcessed;
+    private List<ClassifiedImage> images;
+    private List<WarningInfo> warnings;
+
     /**
      * Gets the customClasses.
      *
@@ -270,9 +312,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Long getCustomClasses() {
-      return custom_classes_serialized_name;
+      return customClasses;
     }
- 
+
     /**
      * Gets the imagesProcessed.
      *
@@ -282,9 +324,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Long getImagesProcessed() {
-      return images_processed_serialized_name;
+      return imagesProcessed;
     }
- 
+
     /**
      * Gets the images.
      *
@@ -294,9 +336,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<ClassifiedImage> getImages() {
-      return images_serialized_name;
+      return images;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -308,7 +350,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<WarningInfo> getWarnings() {
-      return warnings_serialized_name;
+      return warnings;
     }
 
     /**
@@ -317,7 +359,7 @@ public class IBMVisualRecognitionV3Models {
      * @param customClasses the new customClasses
      */
     public void setCustomClasses(final long customClasses) {
-      this.custom_classes_serialized_name = customClasses;
+      this.customClasses = customClasses;
     }
 
     /**
@@ -326,7 +368,7 @@ public class IBMVisualRecognitionV3Models {
      * @param imagesProcessed the new imagesProcessed
      */
     public void setImagesProcessed(final long imagesProcessed) {
-      this.images_processed_serialized_name = imagesProcessed;
+      this.imagesProcessed = imagesProcessed;
     }
 
     /**
@@ -335,7 +377,7 @@ public class IBMVisualRecognitionV3Models {
      * @param images the new images
      */
     public void setImages(final List<ClassifiedImage> images) {
-      this.images_serialized_name = images;
+      this.images = images;
     }
 
     /**
@@ -344,13 +386,21 @@ public class IBMVisualRecognitionV3Models {
      * @param warnings the new warnings
      */
     public void setWarnings(final List<WarningInfo> warnings) {
-      this.warnings_serialized_name = warnings;
+      this.warnings = warnings;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'custom_classes' => 'customClasses',
+        'images_processed' => 'imagesProcessed'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       ClassifiedImages ret = (ClassifiedImages) super.deserialize(jsonString, jsonMap, classType);
 
@@ -360,11 +410,11 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedImages != null) {
         for (Integer i = 0; i < deserializedImages.size(); i++) {
           ClassifiedImage currentItem = ret.getImages().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('images_serialized_name');
-          ClassifiedImage newItem = (ClassifiedImage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedImage.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('images');
+          ClassifiedImage newItem = (ClassifiedImage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedImage.class);
           newImages.add(newItem);
         }
-        ret.images_serialized_name = newImages;
+        ret.images = newImages;
       }
 
       // calling custom deserializer for warnings
@@ -373,11 +423,11 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedWarnings != null) {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           WarningInfo currentItem = ret.getWarnings().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings_serialized_name');
-          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
+          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
           newWarnings.add(newItem);
         }
-        ret.warnings_serialized_name = newWarnings;
+        ret.warnings = newWarnings;
       }
 
       return ret;
@@ -388,17 +438,17 @@ public class IBMVisualRecognitionV3Models {
    * Information about a classifier.
    */
   public class Classifier extends IBMWatsonResponseModel {
-    private String classifier_id_serialized_name;
-    private String name_serialized_name;
-    private String owner_serialized_name;
-    private String status_serialized_name;
-    private Boolean core_ml_enabled_serialized_name;
-    private String explanation_serialized_name;
-    private Datetime created_serialized_name;
-    private List<ModelClass> classes_serialized_name;
-    private Datetime retrained_serialized_name;
-    private Datetime updated_serialized_name;
- 
+    private String classifierId;
+    private String name;
+    private String owner;
+    private String status;
+    private Boolean coreMlEnabled;
+    private String explanation;
+    private Datetime created;
+    private List<ModelClass> classes;
+    private Datetime retrained;
+    private Datetime updated;
+
     /**
      * Gets the classifierId.
      *
@@ -408,9 +458,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getClassifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
- 
+
     /**
      * Gets the name.
      *
@@ -420,9 +470,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
- 
+
     /**
      * Gets the owner.
      *
@@ -432,9 +482,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getOwner() {
-      return owner_serialized_name;
+      return owner;
     }
- 
+
     /**
      * Gets the status.
      *
@@ -444,9 +494,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getStatus() {
-      return status_serialized_name;
+      return status;
     }
- 
+
     /**
      * Gets the coreMlEnabled.
      *
@@ -456,9 +506,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Boolean getCoreMlEnabled() {
-      return core_ml_enabled_serialized_name;
+      return coreMlEnabled;
     }
- 
+
     /**
      * Gets the explanation.
      *
@@ -468,9 +518,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getExplanation() {
-      return explanation_serialized_name;
+      return explanation;
     }
- 
+
     /**
      * Gets the created.
      *
@@ -480,9 +530,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Datetime getCreated() {
-      return created_serialized_name;
+      return created;
     }
- 
+
     /**
      * Gets the classes.
      *
@@ -492,9 +542,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<ModelClass> getClasses() {
-      return classes_serialized_name;
+      return classes;
     }
- 
+
     /**
      * Gets the retrained.
      *
@@ -505,9 +555,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Datetime getRetrained() {
-      return retrained_serialized_name;
+      return retrained;
     }
- 
+
     /**
      * Gets the updated.
      *
@@ -518,7 +568,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Datetime getUpdated() {
-      return updated_serialized_name;
+      return updated;
     }
 
     /**
@@ -527,7 +577,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classifierId the new classifierId
      */
     public void setClassifierId(final String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -536,7 +586,7 @@ public class IBMVisualRecognitionV3Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -545,7 +595,7 @@ public class IBMVisualRecognitionV3Models {
      * @param owner the new owner
      */
     public void setOwner(final String owner) {
-      this.owner_serialized_name = owner;
+      this.owner = owner;
     }
 
     /**
@@ -554,7 +604,7 @@ public class IBMVisualRecognitionV3Models {
      * @param status the new status
      */
     public void setStatus(final String status) {
-      this.status_serialized_name = status;
+      this.status = status;
     }
 
     /**
@@ -563,7 +613,7 @@ public class IBMVisualRecognitionV3Models {
      * @param coreMlEnabled the new coreMlEnabled
      */
     public void setCoreMlEnabled(final Boolean coreMlEnabled) {
-      this.core_ml_enabled_serialized_name = coreMlEnabled;
+      this.coreMlEnabled = coreMlEnabled;
     }
 
     /**
@@ -572,7 +622,7 @@ public class IBMVisualRecognitionV3Models {
      * @param explanation the new explanation
      */
     public void setExplanation(final String explanation) {
-      this.explanation_serialized_name = explanation;
+      this.explanation = explanation;
     }
 
     /**
@@ -581,7 +631,7 @@ public class IBMVisualRecognitionV3Models {
      * @param created the new created
      */
     public void setCreated(final Datetime created) {
-      this.created_serialized_name = created;
+      this.created = created;
     }
 
     /**
@@ -590,7 +640,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classes the new classes
      */
     public void setClasses(final List<ModelClass> classes) {
-      this.classes_serialized_name = classes;
+      this.classes = classes;
     }
 
     /**
@@ -599,7 +649,7 @@ public class IBMVisualRecognitionV3Models {
      * @param retrained the new retrained
      */
     public void setRetrained(final Datetime retrained) {
-      this.retrained_serialized_name = retrained;
+      this.retrained = retrained;
     }
 
     /**
@@ -608,13 +658,21 @@ public class IBMVisualRecognitionV3Models {
      * @param updated the new updated
      */
     public void setUpdated(final Datetime updated) {
-      this.updated_serialized_name = updated;
+      this.updated = updated;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId',
+        'core_ml_enabled' => 'coreMlEnabled'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       Classifier ret = (Classifier) super.deserialize(jsonString, jsonMap, classType);
 
@@ -624,11 +682,11 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedClasses != null) {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ModelClass currentItem = ret.getClasses().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('classes_serialized_name');
-          ModelClass newItem = (ModelClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ModelClass.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
+          ModelClass newItem = (ModelClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ModelClass.class);
           newClasses.add(newItem);
         }
-        ret.classes_serialized_name = newClasses;
+        ret.classes = newClasses;
       }
 
       return ret;
@@ -639,10 +697,10 @@ public class IBMVisualRecognitionV3Models {
    * Classifier and score combination.
    */
   public class ClassifierResult extends IBMWatsonGenericModel {
-    private String name_serialized_name;
-    private String classifier_id_serialized_name;
-    private List<ClassResult> classes_serialized_name;
- 
+    private String name;
+    private String classifierId;
+    private List<ClassResult> classes;
+
     /**
      * Gets the name.
      *
@@ -652,9 +710,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getName() {
-      return name_serialized_name;
+      return name;
     }
- 
+
     /**
      * Gets the classifierId.
      *
@@ -664,9 +722,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getClassifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
- 
+
     /**
      * Gets the classes.
      *
@@ -676,7 +734,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<ClassResult> getClasses() {
-      return classes_serialized_name;
+      return classes;
     }
 
     /**
@@ -685,7 +743,7 @@ public class IBMVisualRecognitionV3Models {
      * @param name the new name
      */
     public void setName(final String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -694,7 +752,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classifierId the new classifierId
      */
     public void setClassifierId(final String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -703,13 +761,20 @@ public class IBMVisualRecognitionV3Models {
      * @param classes the new classes
      */
     public void setClasses(final List<ClassResult> classes) {
-      this.classes_serialized_name = classes;
+      this.classes = classes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'classifier_id' => 'classifierId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       ClassifierResult ret = (ClassifierResult) super.deserialize(jsonString, jsonMap, classType);
 
@@ -719,11 +784,11 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedClasses != null) {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassResult currentItem = ret.getClasses().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('classes_serialized_name');
-          ClassResult newItem = (ClassResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassResult.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
+          ClassResult newItem = (ClassResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassResult.class);
           newClasses.add(newItem);
         }
-        ret.classes_serialized_name = newClasses;
+        ret.classes = newClasses;
       }
 
       return ret;
@@ -734,8 +799,8 @@ public class IBMVisualRecognitionV3Models {
    * A container for the list of classifiers.
    */
   public class Classifiers extends IBMWatsonResponseModel {
-    private List<Classifier> classifiers_serialized_name;
- 
+    private List<Classifier> classifiers;
+
     /**
      * Gets the classifiers.
      *
@@ -745,7 +810,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<Classifier> getClassifiers() {
-      return classifiers_serialized_name;
+      return classifiers;
     }
 
     /**
@@ -754,7 +819,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classifiers the new classifiers
      */
     public void setClassifiers(final List<Classifier> classifiers) {
-      this.classifiers_serialized_name = classifiers;
+      this.classifiers = classifiers;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -770,11 +835,11 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedClassifiers != null) {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           Classifier currentItem = ret.getClassifiers().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers_serialized_name');
-          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
+          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
           newClassifiers.add(newItem);
         }
-        ret.classifiers_serialized_name = newClassifiers;
+        ret.classifiers = newClassifiers;
       }
 
       return ret;
@@ -793,7 +858,7 @@ public class IBMVisualRecognitionV3Models {
     private List<String> owners;
     private List<String> classifierIds;
     private String acceptLanguage;
- 
+
     /**
      * Gets the imagesFile.
      *
@@ -808,7 +873,7 @@ public class IBMVisualRecognitionV3Models {
     public IBMWatsonFile imagesFile() {
       return imagesFile;
     }
- 
+
     /**
      * Gets the imagesFilename.
      *
@@ -819,7 +884,7 @@ public class IBMVisualRecognitionV3Models {
     public String imagesFilename() {
       return imagesFilename;
     }
- 
+
     /**
      * Gets the imagesFileContentType.
      *
@@ -830,7 +895,7 @@ public class IBMVisualRecognitionV3Models {
     public String imagesFileContentType() {
       return imagesFileContentType;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -845,7 +910,7 @@ public class IBMVisualRecognitionV3Models {
     public String url() {
       return url;
     }
- 
+
     /**
      * Gets the threshold.
      *
@@ -857,7 +922,7 @@ public class IBMVisualRecognitionV3Models {
     public Double threshold() {
       return threshold;
     }
- 
+
     /**
      * Gets the owners.
      *
@@ -874,7 +939,7 @@ public class IBMVisualRecognitionV3Models {
     public List<String> owners() {
       return owners;
     }
- 
+
     /**
      * Gets the classifierIds.
      *
@@ -892,7 +957,7 @@ public class IBMVisualRecognitionV3Models {
     public List<String> classifierIds() {
       return classifierIds;
     }
- 
+
     /**
      * Gets the acceptLanguage.
      *
@@ -925,7 +990,6 @@ public class IBMVisualRecognitionV3Models {
     public ClassifyOptionsBuilder newBuilder() {
       return new ClassifyOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1109,7 +1173,7 @@ public class IBMVisualRecognitionV3Models {
     private Map<String, IBMWatsonFile> positiveExamples;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
- 
+
     /**
      * Gets the name.
      *
@@ -1120,7 +1184,7 @@ public class IBMVisualRecognitionV3Models {
     public String name() {
       return name;
     }
- 
+
     /**
      * Gets the positiveExamples.
      *
@@ -1140,7 +1204,7 @@ public class IBMVisualRecognitionV3Models {
     public Map<String, IBMWatsonFile> positiveExamples() {
       return positiveExamples;
     }
- 
+
     /**
      * Gets the negativeExamples.
      *
@@ -1154,7 +1218,7 @@ public class IBMVisualRecognitionV3Models {
     public IBMWatsonFile negativeExamples() {
       return negativeExamples;
     }
- 
+
     /**
      * Gets the negativeExamplesFilename.
      *
@@ -1185,7 +1249,6 @@ public class IBMVisualRecognitionV3Models {
     public CreateClassifierOptionsBuilder newBuilder() {
       return new CreateClassifierOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1309,7 +1372,7 @@ public class IBMVisualRecognitionV3Models {
    */
   public class DeleteClassifierOptions extends IBMWatsonOptionsModel {
     private String classifierId;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -1335,7 +1398,6 @@ public class IBMVisualRecognitionV3Models {
     public DeleteClassifierOptionsBuilder newBuilder() {
       return new DeleteClassifierOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1402,7 +1464,7 @@ public class IBMVisualRecognitionV3Models {
    */
   public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
     private String customerId;
- 
+
     /**
      * Gets the customerId.
      *
@@ -1428,7 +1490,6 @@ public class IBMVisualRecognitionV3Models {
     public DeleteUserDataOptionsBuilder newBuilder() {
       return new DeleteUserDataOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1499,7 +1560,7 @@ public class IBMVisualRecognitionV3Models {
     private String imagesFileContentType;
     private String url;
     private String acceptLanguage;
- 
+
     /**
      * Gets the imagesFile.
      *
@@ -1516,7 +1577,7 @@ public class IBMVisualRecognitionV3Models {
     public IBMWatsonFile imagesFile() {
       return imagesFile;
     }
- 
+
     /**
      * Gets the imagesFilename.
      *
@@ -1527,7 +1588,7 @@ public class IBMVisualRecognitionV3Models {
     public String imagesFilename() {
       return imagesFilename;
     }
- 
+
     /**
      * Gets the imagesFileContentType.
      *
@@ -1538,7 +1599,7 @@ public class IBMVisualRecognitionV3Models {
     public String imagesFileContentType() {
       return imagesFileContentType;
     }
- 
+
     /**
      * Gets the url.
      *
@@ -1553,7 +1614,7 @@ public class IBMVisualRecognitionV3Models {
     public String url() {
       return url;
     }
- 
+
     /**
      * Gets the acceptLanguage.
      *
@@ -1583,7 +1644,6 @@ public class IBMVisualRecognitionV3Models {
     public DetectFacesOptionsBuilder newBuilder() {
       return new DetectFacesOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -1692,10 +1752,10 @@ public class IBMVisualRecognitionV3Models {
    * Results for all faces.
    */
   public class DetectedFaces extends IBMWatsonResponseModel {
-    private Long images_processed_serialized_name;
-    private List<ImageWithFaces> images_serialized_name;
-    private List<WarningInfo> warnings_serialized_name;
- 
+    private Long imagesProcessed;
+    private List<ImageWithFaces> images;
+    private List<WarningInfo> warnings;
+
     /**
      * Gets the imagesProcessed.
      *
@@ -1705,9 +1765,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Long getImagesProcessed() {
-      return images_processed_serialized_name;
+      return imagesProcessed;
     }
- 
+
     /**
      * Gets the images.
      *
@@ -1717,9 +1777,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<ImageWithFaces> getImages() {
-      return images_serialized_name;
+      return images;
     }
- 
+
     /**
      * Gets the warnings.
      *
@@ -1731,7 +1791,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<WarningInfo> getWarnings() {
-      return warnings_serialized_name;
+      return warnings;
     }
 
     /**
@@ -1740,7 +1800,7 @@ public class IBMVisualRecognitionV3Models {
      * @param imagesProcessed the new imagesProcessed
      */
     public void setImagesProcessed(final long imagesProcessed) {
-      this.images_processed_serialized_name = imagesProcessed;
+      this.imagesProcessed = imagesProcessed;
     }
 
     /**
@@ -1749,7 +1809,7 @@ public class IBMVisualRecognitionV3Models {
      * @param images the new images
      */
     public void setImages(final List<ImageWithFaces> images) {
-      this.images_serialized_name = images;
+      this.images = images;
     }
 
     /**
@@ -1758,13 +1818,20 @@ public class IBMVisualRecognitionV3Models {
      * @param warnings the new warnings
      */
     public void setWarnings(final List<WarningInfo> warnings) {
-      this.warnings_serialized_name = warnings;
+      this.warnings = warnings;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'images_processed' => 'imagesProcessed'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       DetectedFaces ret = (DetectedFaces) super.deserialize(jsonString, jsonMap, classType);
 
@@ -1774,11 +1841,11 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedImages != null) {
         for (Integer i = 0; i < deserializedImages.size(); i++) {
           ImageWithFaces currentItem = ret.getImages().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('images_serialized_name');
-          ImageWithFaces newItem = (ImageWithFaces) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ImageWithFaces.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('images');
+          ImageWithFaces newItem = (ImageWithFaces) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ImageWithFaces.class);
           newImages.add(newItem);
         }
-        ret.images_serialized_name = newImages;
+        ret.images = newImages;
       }
 
       // calling custom deserializer for warnings
@@ -1787,11 +1854,11 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedWarnings != null) {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           WarningInfo currentItem = ret.getWarnings().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings_serialized_name');
-          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
+          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
           newWarnings.add(newItem);
         }
-        ret.warnings_serialized_name = newWarnings;
+        ret.warnings = newWarnings;
       }
 
       return ret;
@@ -1803,10 +1870,10 @@ public class IBMVisualRecognitionV3Models {
    * no error.
    */
   public class ErrorInfo extends IBMWatsonResponseModel {
-    private Long code_serialized_name;
-    private String description_serialized_name;
-    private String error_id_serialized_name;
- 
+    private Long code;
+    private String description;
+    private String errorId;
+
     /**
      * Gets the code.
      *
@@ -1816,9 +1883,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Long getCode() {
-      return code_serialized_name;
+      return code;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -1828,9 +1895,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
- 
+
     /**
      * Gets the errorId.
      *
@@ -1840,7 +1907,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getErrorId() {
-      return error_id_serialized_name;
+      return errorId;
     }
 
     /**
@@ -1849,7 +1916,7 @@ public class IBMVisualRecognitionV3Models {
      * @param code the new code
      */
     public void setCode(final long code) {
-      this.code_serialized_name = code;
+      this.code = code;
     }
 
     /**
@@ -1858,7 +1925,7 @@ public class IBMVisualRecognitionV3Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
     /**
@@ -1867,19 +1934,35 @@ public class IBMVisualRecognitionV3Models {
      * @param errorId the new errorId
      */
     public void setErrorId(final String errorId) {
-      this.error_id_serialized_name = errorId;
+      this.errorId = errorId;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'error_id' => 'errorId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ErrorInfo ret = (ErrorInfo) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * Information about the face.
    */
   public class Face extends IBMWatsonGenericModel {
-    private FaceAge age_serialized_name;
-    private FaceGender gender_serialized_name;
-    private FaceLocation face_location_serialized_name;
- 
+    private FaceAge age;
+    private FaceGender gender;
+    private FaceLocation faceLocation;
+
     /**
      * Gets the age.
      *
@@ -1889,9 +1972,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public FaceAge getAge() {
-      return age_serialized_name;
+      return age;
     }
- 
+
     /**
      * Gets the gender.
      *
@@ -1901,9 +1984,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public FaceGender getGender() {
-      return gender_serialized_name;
+      return gender;
     }
- 
+
     /**
      * Gets the faceLocation.
      *
@@ -1913,7 +1996,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public FaceLocation getFaceLocation() {
-      return face_location_serialized_name;
+      return faceLocation;
     }
 
     /**
@@ -1922,7 +2005,7 @@ public class IBMVisualRecognitionV3Models {
      * @param age the new age
      */
     public void setAge(final FaceAge age) {
-      this.age_serialized_name = age;
+      this.age = age;
     }
 
     /**
@@ -1931,7 +2014,7 @@ public class IBMVisualRecognitionV3Models {
      * @param gender the new gender
      */
     public void setGender(final FaceGender gender) {
-      this.gender_serialized_name = gender;
+      this.gender = gender;
     }
 
     /**
@@ -1940,7 +2023,7 @@ public class IBMVisualRecognitionV3Models {
      * @param faceLocation the new faceLocation
      */
     public void setFaceLocation(final FaceLocation faceLocation) {
-      this.face_location_serialized_name = faceLocation;
+      this.faceLocation = faceLocation;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1948,18 +2031,28 @@ public class IBMVisualRecognitionV3Models {
         return null;
       }
 
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'face_location' => 'faceLocation'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
       Face ret = (Face) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for age
-      FaceAge newAge = (FaceAge) new FaceAge().deserialize(JSON.serialize(ret.getAge()), (Map<String, Object>) jsonMap.get('age_serialized_name'), FaceAge.class);
+      Map<String, Object> ageMap = (Map<String, Object>) jsonMap.get('age');
+      FaceAge newAge = (FaceAge) new FaceAge().deserialize(JSON.serialize(ageMap), ageMap, FaceAge.class);
       ret.setAge(newAge);
 
       // calling custom deserializer for gender
-      FaceGender newGender = (FaceGender) new FaceGender().deserialize(JSON.serialize(ret.getGender()), (Map<String, Object>) jsonMap.get('gender_serialized_name'), FaceGender.class);
+      Map<String, Object> genderMap = (Map<String, Object>) jsonMap.get('gender');
+      FaceGender newGender = (FaceGender) new FaceGender().deserialize(JSON.serialize(genderMap), genderMap, FaceGender.class);
       ret.setGender(newGender);
 
       // calling custom deserializer for faceLocation
-      FaceLocation newFaceLocation = (FaceLocation) new FaceLocation().deserialize(JSON.serialize(ret.getFaceLocation()), (Map<String, Object>) jsonMap.get('face_location_serialized_name'), FaceLocation.class);
+      Map<String, Object> faceLocationMap = (Map<String, Object>) jsonMap.get('faceLocation');
+      FaceLocation newFaceLocation = (FaceLocation) new FaceLocation().deserialize(JSON.serialize(faceLocationMap), faceLocationMap, FaceLocation.class);
       ret.setFaceLocation(newFaceLocation);
 
       return ret;
@@ -1970,10 +2063,10 @@ public class IBMVisualRecognitionV3Models {
    * Age information about a face.
    */
   public class FaceAge extends IBMWatsonGenericModel {
-    private Long min_serialized_name;
-    private Long max_serialized_name;
-    private Double score_serialized_name;
- 
+    private Long min;
+    private Long max;
+    private Double score;
+
     /**
      * Gets the min.
      *
@@ -1983,9 +2076,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Long getMin() {
-      return min_serialized_name;
+      return min;
     }
- 
+
     /**
      * Gets the max.
      *
@@ -1995,9 +2088,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Long getMax() {
-      return max_serialized_name;
+      return max;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -2008,7 +2101,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return score_serialized_name;
+      return score;
     }
 
     /**
@@ -2017,7 +2110,7 @@ public class IBMVisualRecognitionV3Models {
      * @param min the new min
      */
     public void setMin(final long min) {
-      this.min_serialized_name = min;
+      this.min = min;
     }
 
     /**
@@ -2026,7 +2119,7 @@ public class IBMVisualRecognitionV3Models {
      * @param max the new max
      */
     public void setMax(final long max) {
-      this.max_serialized_name = max;
+      this.max = max;
     }
 
     /**
@@ -2035,19 +2128,28 @@ public class IBMVisualRecognitionV3Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.score_serialized_name = score;
+      this.score = score;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      FaceAge ret = (FaceAge) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * Information about the gender of the face.
    */
   public class FaceGender extends IBMWatsonGenericModel {
-    private String gender_serialized_name;
-    private String gender_label_serialized_name;
-    private Double score_serialized_name;
- 
+    private String gender;
+    private String genderLabel;
+    private Double score;
+
     /**
      * Gets the gender.
      *
@@ -2057,9 +2159,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getGender() {
-      return gender_serialized_name;
+      return gender;
     }
- 
+
     /**
      * Gets the genderLabel.
      *
@@ -2069,9 +2171,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getGenderLabel() {
-      return gender_label_serialized_name;
+      return genderLabel;
     }
- 
+
     /**
      * Gets the score.
      *
@@ -2082,7 +2184,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return score_serialized_name;
+      return score;
     }
 
     /**
@@ -2091,7 +2193,7 @@ public class IBMVisualRecognitionV3Models {
      * @param gender the new gender
      */
     public void setGender(final String gender) {
-      this.gender_serialized_name = gender;
+      this.gender = gender;
     }
 
     /**
@@ -2100,7 +2202,7 @@ public class IBMVisualRecognitionV3Models {
      * @param genderLabel the new genderLabel
      */
     public void setGenderLabel(final String genderLabel) {
-      this.gender_label_serialized_name = genderLabel;
+      this.genderLabel = genderLabel;
     }
 
     /**
@@ -2109,20 +2211,36 @@ public class IBMVisualRecognitionV3Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.score_serialized_name = score;
+      this.score = score;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'gender_label' => 'genderLabel'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      FaceGender ret = (FaceGender) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
    * The location of the bounding box around the face.
    */
   public class FaceLocation extends IBMWatsonGenericModel {
-    private Double width_serialized_name;
-    private Double height_serialized_name;
-    private Double left_serialized_name;
-    private Double top_serialized_name;
- 
+    private Double width;
+    private Double height;
+    private Double left;
+    private Double top;
+
     /**
      * Gets the width.
      *
@@ -2132,9 +2250,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Double getWidth() {
-      return width_serialized_name;
+      return width;
     }
- 
+
     /**
      * Gets the height.
      *
@@ -2144,9 +2262,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Double getHeight() {
-      return height_serialized_name;
+      return height;
     }
- 
+
     /**
      * Gets the left.
      *
@@ -2156,9 +2274,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Double getLeft() {
-      return left_serialized_name;
+      return left;
     }
- 
+
     /**
      * Gets the top.
      *
@@ -2168,7 +2286,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public Double getTop() {
-      return top_serialized_name;
+      return top;
     }
 
     /**
@@ -2177,7 +2295,7 @@ public class IBMVisualRecognitionV3Models {
      * @param width the new width
      */
     public void setWidth(final Double width) {
-      this.width_serialized_name = width;
+      this.width = width;
     }
 
     /**
@@ -2186,7 +2304,7 @@ public class IBMVisualRecognitionV3Models {
      * @param height the new height
      */
     public void setHeight(final Double height) {
-      this.height_serialized_name = height;
+      this.height = height;
     }
 
     /**
@@ -2195,7 +2313,7 @@ public class IBMVisualRecognitionV3Models {
      * @param left the new left
      */
     public void setLeft(final Double left) {
-      this.left_serialized_name = left;
+      this.left = left;
     }
 
     /**
@@ -2204,9 +2322,18 @@ public class IBMVisualRecognitionV3Models {
      * @param top the new top
      */
     public void setTop(final Double top) {
-      this.top_serialized_name = top;
+      this.top = top;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      FaceLocation ret = (FaceLocation) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -2214,7 +2341,7 @@ public class IBMVisualRecognitionV3Models {
    */
   public class GetClassifierOptions extends IBMWatsonOptionsModel {
     private String classifierId;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -2240,7 +2367,6 @@ public class IBMVisualRecognitionV3Models {
     public GetClassifierOptionsBuilder newBuilder() {
       return new GetClassifierOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -2307,7 +2433,7 @@ public class IBMVisualRecognitionV3Models {
    */
   public class GetCoreMlModelOptions extends IBMWatsonOptionsModel {
     private String classifierId;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -2333,7 +2459,6 @@ public class IBMVisualRecognitionV3Models {
     public GetCoreMlModelOptionsBuilder newBuilder() {
       return new GetCoreMlModelOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -2399,12 +2524,12 @@ public class IBMVisualRecognitionV3Models {
    * Information about faces in the image.
    */
   public class ImageWithFaces extends IBMWatsonGenericModel {
-    private List<Face> faces_serialized_name;
-    private String image_serialized_name;
-    private String source_url_serialized_name;
-    private String resolved_url_serialized_name;
-    private ErrorInfo error_serialized_name;
- 
+    private List<Face> faces;
+    private String image;
+    private String sourceUrl;
+    private String resolvedUrl;
+    private ErrorInfo error;
+
     /**
      * Gets the faces.
      *
@@ -2414,9 +2539,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public List<Face> getFaces() {
-      return faces_serialized_name;
+      return faces;
     }
- 
+
     /**
      * Gets the image.
      *
@@ -2426,9 +2551,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getImage() {
-      return image_serialized_name;
+      return image;
     }
- 
+
     /**
      * Gets the sourceUrl.
      *
@@ -2438,9 +2563,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getSourceUrl() {
-      return source_url_serialized_name;
+      return sourceUrl;
     }
- 
+
     /**
      * Gets the resolvedUrl.
      *
@@ -2450,9 +2575,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getResolvedUrl() {
-      return resolved_url_serialized_name;
+      return resolvedUrl;
     }
- 
+
     /**
      * Gets the error.
      *
@@ -2463,7 +2588,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public ErrorInfo getError() {
-      return error_serialized_name;
+      return error;
     }
 
     /**
@@ -2472,7 +2597,7 @@ public class IBMVisualRecognitionV3Models {
      * @param faces the new faces
      */
     public void setFaces(final List<Face> faces) {
-      this.faces_serialized_name = faces;
+      this.faces = faces;
     }
 
     /**
@@ -2481,7 +2606,7 @@ public class IBMVisualRecognitionV3Models {
      * @param image the new image
      */
     public void setImage(final String image) {
-      this.image_serialized_name = image;
+      this.image = image;
     }
 
     /**
@@ -2490,7 +2615,7 @@ public class IBMVisualRecognitionV3Models {
      * @param sourceUrl the new sourceUrl
      */
     public void setSourceUrl(final String sourceUrl) {
-      this.source_url_serialized_name = sourceUrl;
+      this.sourceUrl = sourceUrl;
     }
 
     /**
@@ -2499,7 +2624,7 @@ public class IBMVisualRecognitionV3Models {
      * @param resolvedUrl the new resolvedUrl
      */
     public void setResolvedUrl(final String resolvedUrl) {
-      this.resolved_url_serialized_name = resolvedUrl;
+      this.resolvedUrl = resolvedUrl;
     }
 
     /**
@@ -2508,13 +2633,21 @@ public class IBMVisualRecognitionV3Models {
      * @param error the new error
      */
     public void setError(final ErrorInfo error) {
-      this.error_serialized_name = error;
+      this.error = error;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'source_url' => 'sourceUrl',
+        'resolved_url' => 'resolvedUrl'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       ImageWithFaces ret = (ImageWithFaces) super.deserialize(jsonString, jsonMap, classType);
 
@@ -2524,15 +2657,16 @@ public class IBMVisualRecognitionV3Models {
       if (deserializedFaces != null) {
         for (Integer i = 0; i < deserializedFaces.size(); i++) {
           Face currentItem = ret.getFaces().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('faces_serialized_name');
-          Face newItem = (Face) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Face.class);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('faces');
+          Face newItem = (Face) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Face.class);
           newFaces.add(newItem);
         }
-        ret.faces_serialized_name = newFaces;
+        ret.faces = newFaces;
       }
 
       // calling custom deserializer for error
-      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(ret.getError()), (Map<String, Object>) jsonMap.get('error_serialized_name'), ErrorInfo.class);
+      Map<String, Object> errorMap = (Map<String, Object>) jsonMap.get('error');
+      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(errorMap), errorMap, ErrorInfo.class);
       ret.setError(newError);
 
       return ret;
@@ -2544,7 +2678,7 @@ public class IBMVisualRecognitionV3Models {
    */
   public class ListClassifiersOptions extends IBMWatsonOptionsModel {
     private Boolean verbose;
- 
+
     /**
      * Gets the verbose.
      *
@@ -2570,7 +2704,6 @@ public class IBMVisualRecognitionV3Models {
     public ListClassifiersOptionsBuilder newBuilder() {
       return new ListClassifiersOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -2631,7 +2764,7 @@ public class IBMVisualRecognitionV3Models {
     private Map<String, IBMWatsonFile> positiveExamples;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
- 
+
     /**
      * Gets the classifierId.
      *
@@ -2642,7 +2775,7 @@ public class IBMVisualRecognitionV3Models {
     public String classifierId() {
       return classifierId;
     }
- 
+
     /**
      * Gets the positiveExamples.
      *
@@ -2662,7 +2795,7 @@ public class IBMVisualRecognitionV3Models {
     public Map<String, IBMWatsonFile> positiveExamples() {
       return positiveExamples;
     }
- 
+
     /**
      * Gets the negativeExamples.
      *
@@ -2676,7 +2809,7 @@ public class IBMVisualRecognitionV3Models {
     public IBMWatsonFile negativeExamples() {
       return negativeExamples;
     }
- 
+
     /**
      * Gets the negativeExamplesFilename.
      *
@@ -2706,7 +2839,6 @@ public class IBMVisualRecognitionV3Models {
     public UpdateClassifierOptionsBuilder newBuilder() {
       return new UpdateClassifierOptionsBuilder(this);
     }
-
   }
 
   /**
@@ -2829,9 +2961,9 @@ public class IBMVisualRecognitionV3Models {
    * Information about something that went wrong.
    */
   public class WarningInfo extends IBMWatsonGenericModel {
-    private String warning_id_serialized_name;
-    private String description_serialized_name;
- 
+    private String warningId;
+    private String description;
+
     /**
      * Gets the warningId.
      *
@@ -2841,9 +2973,9 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getWarningId() {
-      return warning_id_serialized_name;
+      return warningId;
     }
- 
+
     /**
      * Gets the description.
      *
@@ -2853,7 +2985,7 @@ public class IBMVisualRecognitionV3Models {
      */
     @AuraEnabled
     public String getDescription() {
-      return description_serialized_name;
+      return description;
     }
 
     /**
@@ -2862,7 +2994,7 @@ public class IBMVisualRecognitionV3Models {
      * @param warningId the new warningId
      */
     public void setWarningId(final String warningId) {
-      this.warning_id_serialized_name = warningId;
+      this.warningId = warningId;
     }
 
     /**
@@ -2871,9 +3003,25 @@ public class IBMVisualRecognitionV3Models {
      * @param description the new description
      */
     public void setDescription(final String description) {
-      this.description_serialized_name = description;
+      this.description = description;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'warning_id' => 'warningId'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      WarningInfo ret = (WarningInfo) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
 }

@@ -5,23 +5,28 @@
  * filtering of results.
  *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/discovery.html">Discovery</a>
+ * @see <a href="https://console.bluemix.net/docs/services/discovery/">Discovery</a>
  */
 public class IBMDiscoveryV1 extends IBMWatsonService {
 
+  private static final String SERVICE_NAME = 'discovery';
   private static final String URL = 'https://gateway.watsonplatform.net/discovery/api';
 
   private String versionDate;
 
   /**
-   * Instantiates a new `IBMDiscoveryV1` with the specified authentication configuration.
+   * Instantiates a new `IBMDiscoveryV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
-   * @param authenticator the authentication configuration for this service
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMDiscoveryV1(String versionDate, IBMWatsonAuthenticator authenticator) {
-    super('discovery', 'v1', authenticator);
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
@@ -60,7 +65,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createEnvironmentOptions.size() != null) {
       contentJson.put('size', createEnvironmentOptions.size());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Environment) createServiceCall(builder.build(), IBMDiscoveryV1Models.Environment.class);
   }
@@ -144,7 +149,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateEnvironmentOptions.size() != null) {
       contentJson.put('size', updateEnvironmentOptions.size());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Environment) createServiceCall(builder.build(), IBMDiscoveryV1Models.Environment.class);
   }
@@ -232,18 +237,26 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('description', createConfigurationOptions.description());
     }
     if (createConfigurationOptions.conversions() != null) {
-      contentJson.put('conversions', createConfigurationOptions.conversions());
+      contentJson.put('conversions', createConfigurationOptions.conversions().serialize());
     }
     if (createConfigurationOptions.enrichments() != null) {
-      contentJson.put('enrichments', createConfigurationOptions.enrichments());
+      List<Object> enrichmentsList = new List<Object>();
+      for (IBMDiscoveryV1Models.Enrichment enrichmentsItem : createConfigurationOptions.enrichments()) {
+        enrichmentsList.add(enrichmentsItem.serialize());
+      }
+      contentJson.put('enrichments', enrichmentsList);
     }
     if (createConfigurationOptions.normalizations() != null) {
-      contentJson.put('normalizations', createConfigurationOptions.normalizations());
+      List<Object> normalizationsList = new List<Object>();
+      for (IBMDiscoveryV1Models.NormalizationOperation normalizationsItem : createConfigurationOptions.normalizations()) {
+        normalizationsList.add(normalizationsItem.serialize());
+      }
+      contentJson.put('normalizations', normalizationsList);
     }
     if (createConfigurationOptions.source() != null) {
-      contentJson.put('source', createConfigurationOptions.source());
+      contentJson.put('source', createConfigurationOptions.source().serialize());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Configuration) createServiceCall(builder.build(), IBMDiscoveryV1Models.Configuration.class);
   }
@@ -329,18 +342,26 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('description', updateConfigurationOptions.description());
     }
     if (updateConfigurationOptions.conversions() != null) {
-      contentJson.put('conversions', updateConfigurationOptions.conversions());
+      contentJson.put('conversions', updateConfigurationOptions.conversions().serialize());
     }
     if (updateConfigurationOptions.enrichments() != null) {
-      contentJson.put('enrichments', updateConfigurationOptions.enrichments());
+      List<Object> enrichmentsList = new List<Object>();
+      for (IBMDiscoveryV1Models.Enrichment enrichmentsItem : updateConfigurationOptions.enrichments()) {
+        enrichmentsList.add(enrichmentsItem.serialize());
+      }
+      contentJson.put('enrichments', enrichmentsList);
     }
     if (updateConfigurationOptions.normalizations() != null) {
-      contentJson.put('normalizations', updateConfigurationOptions.normalizations());
+      List<Object> normalizationsList = new List<Object>();
+      for (IBMDiscoveryV1Models.NormalizationOperation normalizationsItem : updateConfigurationOptions.normalizations()) {
+        normalizationsList.add(normalizationsItem.serialize());
+      }
+      contentJson.put('normalizations', normalizationsList);
     }
     if (updateConfigurationOptions.source() != null) {
-      contentJson.put('source', updateConfigurationOptions.source());
+      contentJson.put('source', updateConfigurationOptions.source().serialize());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Configuration) createServiceCall(builder.build(), IBMDiscoveryV1Models.Configuration.class);
   }
@@ -449,7 +470,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createCollectionOptions.language() != null) {
       contentJson.put('language', createCollectionOptions.language());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
   }
@@ -531,7 +552,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateCollectionOptions.configurationId() != null) {
       contentJson.put('configuration_id', updateCollectionOptions.configurationId());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
   }
@@ -611,8 +632,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * Create or update expansion list.
    *
    * Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
-   * `500`.
-   * The current expansion list is replaced with the uploaded content.
+   * `500`. The current expansion list is replaced with the uploaded content.
    *
    * @param createExpansionsOptions the {@link IBMDiscoveryV1Models.CreateExpansionsOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
@@ -630,8 +650,12 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('expansions', createExpansionsOptions.expansions());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    List<Object> expansionsList = new List<Object>();
+    for (IBMDiscoveryV1Models.Expansion expansionsItem : createExpansionsOptions.expansions()) {
+      expansionsList.add(expansionsItem.serialize());
+    }
+    contentJson.put('expansions', expansionsList);
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
   }
@@ -706,9 +730,13 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (createTokenizationDictionaryOptions.tokenizationRules() != null) {
-      contentJson.put('tokenization_rules', createTokenizationDictionaryOptions.tokenizationRules());
+      List<Object> tokenizationRulesList = new List<Object>();
+      for (IBMDiscoveryV1Models.TokenDictRule tokenizationRulesItem : createTokenizationDictionaryOptions.tokenizationRules()) {
+        tokenizationRulesList.add(tokenizationRulesItem.serialize());
+      }
+      contentJson.put('tokenization_rules', tokenizationRulesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.TokenDictStatusResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.TokenDictStatusResponse.class);
   }
@@ -1047,7 +1075,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryOptions.bias() != null) {
       contentJson.put('bias', queryOptions.bias());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
   }
@@ -1216,7 +1244,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.bias() != null) {
       contentJson.put('bias', federatedQueryOptions.bias());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
   }
@@ -1316,10 +1344,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('feature', queryEntitiesOptions.feature());
     }
     if (queryEntitiesOptions.entity() != null) {
-      contentJson.put('entity', queryEntitiesOptions.entity());
+      contentJson.put('entity', queryEntitiesOptions.entity().serialize());
     }
     if (queryEntitiesOptions.context() != null) {
-      contentJson.put('context', queryEntitiesOptions.context());
+      contentJson.put('context', queryEntitiesOptions.context().serialize());
     }
     if (queryEntitiesOptions.count() != null) {
       contentJson.put('count', queryEntitiesOptions.count());
@@ -1327,7 +1355,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryEntitiesOptions.evidenceCount() != null) {
       contentJson.put('evidence_count', queryEntitiesOptions.evidenceCount());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.QueryEntitiesResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryEntitiesResponse.class);
   }
@@ -1355,16 +1383,20 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (queryRelationsOptions.entities() != null) {
-      contentJson.put('entities', queryRelationsOptions.entities());
+      List<Object> entitiesList = new List<Object>();
+      for (IBMDiscoveryV1Models.QueryRelationsEntity entitiesItem : queryRelationsOptions.entities()) {
+        entitiesList.add(entitiesItem.serialize());
+      }
+      contentJson.put('entities', entitiesList);
     }
     if (queryRelationsOptions.context() != null) {
-      contentJson.put('context', queryRelationsOptions.context());
+      contentJson.put('context', queryRelationsOptions.context().serialize());
     }
     if (queryRelationsOptions.xsort() != null) {
       contentJson.put('sort', queryRelationsOptions.xsort());
     }
     if (queryRelationsOptions.filter() != null) {
-      contentJson.put('filter', queryRelationsOptions.filter());
+      contentJson.put('filter', queryRelationsOptions.filter().serialize());
     }
     if (queryRelationsOptions.count() != null) {
       contentJson.put('count', queryRelationsOptions.count());
@@ -1372,7 +1404,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryRelationsOptions.evidenceCount() != null) {
       contentJson.put('evidence_count', queryRelationsOptions.evidenceCount());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.QueryRelationsResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryRelationsResponse.class);
   }
@@ -1429,9 +1461,13 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('filter', addTrainingDataOptions.filter());
     }
     if (addTrainingDataOptions.examples() != null) {
-      contentJson.put('examples', addTrainingDataOptions.examples());
+      List<Object> examplesList = new List<Object>();
+      for (IBMDiscoveryV1Models.TrainingExample examplesItem : addTrainingDataOptions.examples()) {
+        examplesList.add(examplesItem.serialize());
+      }
+      contentJson.put('examples', examplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.TrainingQuery) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingQuery.class);
   }
@@ -1560,7 +1596,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createTrainingExampleOptions.relevance() != null) {
       contentJson.put('relevance', createTrainingExampleOptions.relevance());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
   }
@@ -1615,7 +1651,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateTrainingExampleOptions.relevance() != null) {
       contentJson.put('relevance', updateTrainingExampleOptions.relevance());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
   }
@@ -1679,7 +1715,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * Create event.
    *
    * The **Events** API can be used to create log entries that are associated with specific queries. For example, you
-   * can record which documents in the results set were \"clicked\" by a user and when that click occured.
+   * can record which documents in the results set were "clicked" by a user and when that click occured.
    *
    * @param createEventOptions the {@link IBMDiscoveryV1Models.CreateEventOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.CreateEventResponse} with the response
@@ -1698,8 +1734,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('type', createEventOptions.xtype());
-    contentJson.put('data', createEventOptions.data());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    contentJson.put('data', createEventOptions.data().serialize());
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.CreateEventResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.CreateEventResponse.class);
   }
@@ -1778,8 +1814,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Number of queries with an event over time.
    *
-   * Total number of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
-   * over a specified time window. This metric requires having integrated event tracking in your application using the
+   * Total number of queries using the **natural_language_query** parameter that have a corresponding "click" event over
+   * a specified time window. This metric requires having integrated event tracking in your application using the
    * **Events** API.
    *
    * @param getMetricsQueryEventOptions the {@link IBMDiscoveryV1Models.GetMetricsQueryEventOptions} containing the options for the call
@@ -1845,7 +1881,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Percentage of queries with an associated event.
    *
-   * The percentage of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+   * The percentage of queries using the **natural_language_query** parameter that have a corresponding "click" event
    * over a specified time window.  This metric requires having integrated event tracking in your application using the
    * **Events** API.
    *
@@ -1879,9 +1915,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Most frequent query tokens with an event.
    *
-   * The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding
-   * \"click\" event rate within the recording period (queries and events are stored for 30 days). A query token is an
-   * individual word or unigram within the query string.
+   * The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding "click"
+   * event rate within the recording period (queries and events are stored for 30 days). A query token is an individual
+   * word or unigram within the query string.
    *
    * @param getMetricsQueryTokenEventOptions the {@link IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.MetricTokenResponse} with the response
@@ -1958,12 +1994,12 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('source_type', createCredentialsOptions.sourceType());
     }
     if (createCredentialsOptions.credentialDetails() != null) {
-      contentJson.put('credential_details', createCredentialsOptions.credentialDetails());
+      contentJson.put('credential_details', createCredentialsOptions.credentialDetails().serialize());
     }
     if (createCredentialsOptions.status() != null) {
       contentJson.put('status', createCredentialsOptions.status());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
   }
@@ -2022,12 +2058,12 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('source_type', updateCredentialsOptions.sourceType());
     }
     if (updateCredentialsOptions.credentialDetails() != null) {
-      contentJson.put('credential_details', updateCredentialsOptions.credentialDetails());
+      contentJson.put('credential_details', updateCredentialsOptions.credentialDetails().serialize());
     }
     if (updateCredentialsOptions.status() != null) {
       contentJson.put('status', updateCredentialsOptions.status());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
   }
@@ -2104,7 +2140,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createGatewayOptions.name() != null) {
       contentJson.put('name', createGatewayOptions.name());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Gateway) createServiceCall(builder.build(), IBMDiscoveryV1Models.Gateway.class);
   }

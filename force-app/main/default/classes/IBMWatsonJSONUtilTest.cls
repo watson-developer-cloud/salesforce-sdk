@@ -1,54 +1,67 @@
 @isTest
 private class IBMWatsonJSONUtilTest {
-  /**
-   * Test prepareResponse
-   *
-   */
-  static testMethod void testPrepareResponse() {
-    Map<String, Object> mockExtractedMetadata = new Map<String, Object>();
-    mockExtractedMetadata.put('file_type', 'application/json');
-    mockExtractedMetadata.put('filename', 'my_sweet_file.json');
-    Map<String, Object> mockResponse = new Map<String, Object>();
-    mockResponse.put('foo', 'bar');
-    mockResponse.put('extracted_metadata', mockExtractedMetadata);
-    mockResponse.put('crazy_json', '{"some_serialized_name": "value"}');
+  static testMethod void testReplaceKeyNamesInMap() {
+    String mockJson = '{"foo":"bar","go":"bucks"}';
+    Map<String, Object> mockObject = (Map<String, Object>) JSON.deserializeUntyped(mockJson);
+    Map<String, String> propertyMapping = new Map<String, String> { 'foo' => 'oof' };
+    String expectedJson = '{"oof":"bar","go":"bucks"}';
+    Map<String, Object> expectedMap = (Map<String, Object>) JSON.deserializeUntyped(expectedJson);
 
-    Map<String, Object> expectedExtractedMetadata = new Map<String, Object>();
-    expectedExtractedMetadata.put('file_type_serialized_name', 'application/json');
-    expectedExtractedMetadata.put('filename_serialized_name', 'my_sweet_file.json');
-    Map<String, Object> expectedResponse = new Map<String, Object>();
-    expectedResponse.put('foo_serialized_name', 'bar');
-    expectedResponse.put('crazy_json_serialized_name', '{"some_serialized_name": "value"}');
-    expectedResponse.put('extracted_metadata_serialized_name', expectedExtractedMetadata);
+    Map<String, Object> actualMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(mockObject, propertyMapping);
 
-    Map<String, Object> actualResponse = IBMWatsonJSONUtil.prepareResponse(mockResponse);
+    System.assert(expectedMap.equals(actualMap));
+  }
 
-    System.assertEquals(actualResponse, expectedResponse);
+  static testMethod void testReplaceKeyNamesInString() {
+    String mockJson = '{"foo":"bar","go":"bucks"}';
+    Map<String, String> propertyMapping = new Map<String, String> { 'foo' => 'oof' };
+    String expectedJson = '{"oof":"bar","go":"bucks"}';
+    Map<String, Object> expectedMap = (Map<String, Object>) JSON.deserializeUntyped(expectedJson);
+
+    Map<String, Object> actualMap = (Map<String, Object>) JSON.deserializeUntyped(IBMWatsonJSONUtil.replaceKeyNamesInString(mockJson, propertyMapping));
+
+    System.assert(expectedMap.equals(actualMap));
   }
 
   /**
-   * Test raiseAdditionalProperties
-   *
+   * Test that additional properties are brought up a level as expected with flat JSON.
    */
-  static testMethod void testSerialize() {
-    String mockJSON = '{"foo_serialized_name":"bar","additional_properties":{"baz_serialized_name":"bat"}}';
+  static testMethod void testRaiseAdditionalPropertiesFlat() {
+    String mockJson = '{"foo":"bar","additionalProperties":{"drink": "coffee"}}';
+    Map<String, Object> mockObject = (Map<String, Object>) JSON.deserializeUntyped(mockJson);
+    String expectedJson = '{"foo":"bar","drink":"coffee"}';
+    Map<String, Object> expectedMap = (Map<String, Object>) JSON.deserializeUntyped(expectedJson);
 
-    String expectedJSON = '{"baz":"bat","foo":"bar"}';
-    String actualJSON = IBMWatsonJSONUtil.serialize(mockJSON);
+    Map<String, Object> actualMap = IBMWatsonJSONUtil.raiseAdditionalProperties(mockObject);
 
-    System.assertEquals(actualJSON, expectedJSON);
+    System.assert(expectedMap.equals(actualMap));
   }
 
   /**
-   * Test raiseAdditionalProperties with nested additional properties
-   *
+   * Test that additional properties are brought up a level as expected with nested JSON.
    */
-  static testMethod void testSerializeWithNestedAdditionalProperties() {
-    String mockJSON = '{"foo_serialized_name":"bar","additional_properties":{"baz_serialized_name":"bat"},"bird_serialized_name":{"ohio_serialized_name":"cardinal","additional_properties":{"nest_materials_serialized_name":"twigs"}}}';
+  static testMethod void testRaiseAdditionalPropertiesNested() {
+    String mockJson = '{"foo":"bar","ohio":{"city":"columbus","additionalProperties": {"very":"cool"}}}';
+    Map<String, Object> mockObject = (Map<String, Object>) JSON.deserializeUntyped(mockJson);
+    String expectedJson = '{"foo":"bar","ohio":{"city":"columbus","very":"cool"}}';
+    Map<String, Object> expectedMap = (Map<String, Object>) JSON.deserializeUntyped(expectedJson);
 
-    String expectedJSON = '{"baz":"bat","bird":{"nest_materials":"twigs","ohio":"cardinal"},"foo":"bar"}';
-    String actualJSON = IBMWatsonJSONUtil.serialize(mockJSON);
+    Map<String, Object> actualMap = IBMWatsonJSONUtil.raiseAdditionalProperties(mockObject);
 
-    System.assertEquals(actualJSON, expectedJSON);
+    System.assert(expectedMap.equals(actualMap));
+  }
+
+  /**
+   * Test that additional properties are brought up a level as expected with JSON containing an array.
+   */
+  static testMethod void testRaiseAdditionalPropertiesList() {
+    String mockJson = '{"foo":"bar","teams":[{"soccer":"crew","basketball":{"name": "cavaliers","additionalProperties":{"king":"lebron"}}}]}';
+    Map<String, Object> mockObject = (Map<String, Object>) JSON.deserializeUntyped(mockJson);
+    String expectedJson = '{"foo":"bar","teams":[{"soccer":"crew","basketball":{"name": "cavaliers","king":"lebron"}}]}';
+    Map<String, Object> expectedMap = (Map<String, Object>) JSON.deserializeUntyped(expectedJson);
+
+    Map<String, Object> actualMap = IBMWatsonJSONUtil.raiseAdditionalProperties(mockObject);
+
+    System.assert(expectedMap.equals(actualMap));
   }
 }

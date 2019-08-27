@@ -196,10 +196,10 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getresults()[0].getresults()[0].getFinalResults(),true);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getTranscript(), 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getConfidence(),0);
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getNormalizedText(), 'string');
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getStartTime(),0);
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getEndTime(),0);
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getConfidence(),0);
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getNormalizedText(), 'string');
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getStartTime(),0);
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getEndTime(),0);
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getConfidence(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getStartTime(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getEndTime(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),0);
@@ -354,13 +354,14 @@ private class IBMSpeechToTextV1Test {
     Test.startTest();
 
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
-    IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWord();
-    customWord.setWord('tornado');
-    customWord.setSoundsLike(new List<String>{'tornado', 'hurricane'});
-    customWord.setDisplayAs('tornado');
+    IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWordBuilder()
+      .word('tornado')
+      .soundsLike(new List<String> { 'tornado', 'hurricane' })
+      .displayAs('tornado')
+      .build();
     IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions = new IBMSpeechToTextV1Models.AddWordsOptionsBuilder()
       .customizationId(customizationId)
-      .words(new List<IBMSpeechToTextV1Models.CustomWord>{ customWord })
+      .words(new List<IBMSpeechToTextV1Models.CustomWord> { customWord })
       .addHeader('Test-Header', 'test_value')
       .build();
     service.addWords(addWordsOptions);
