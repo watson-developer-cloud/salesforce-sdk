@@ -1,5 +1,8 @@
 @isTest
 private class IBMNaturalLanguageUnderstandingV1Test {
+  private static String VERSION;
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
   private static String TEXT;
   private static Long LIMIT_VAL;
   private static String MODEL;
@@ -7,11 +10,39 @@ private class IBMNaturalLanguageUnderstandingV1Test {
   private static Long LOCATION;
 
   static {
+    VERSION = '2017-02-27';
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
     TEXT = 'text';
     LIMIT_VAL = 200L;
     MODEL = 'model';
     CONFIDENCE = 0.5;
     LOCATION = 0L;
+  }
+
+  static testMethod void testVersionConstructor() {
+    Test.startTest();
+    IBMNaturalLanguageUnderstandingV1 service = new IBMNaturalLanguageUnderstandingV1(VERSION);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testBasicConstructor() {
+    Test.startTest();
+    IBMNaturalLanguageUnderstandingV1 service = new IBMNaturalLanguageUnderstandingV1(VERSION, 'username', 'password');
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testConfigConstructor() {
+    Test.startTest();
+    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
+      .username('username')
+      .password('password')
+      .build();
+    IBMNaturalLanguageUnderstandingV1 service = new IBMNaturalLanguageUnderstandingV1(VERSION, config);
+    System.assert(service != null);
+    Test.stopTest();
   }
 
   static testMethod void testCategoriesOptions() {
@@ -88,8 +119,10 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .xlimit(12L)
       .explanation(true)
       .build();
+    categories = categories.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
     IBMNaturalLanguageUnderstandingV1Models.SyntaxOptions syntax = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsBuilder().build();
+    syntax = syntax.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.Features features = new IBMNaturalLanguageUnderstandingV1Models.FeaturesBuilder()
       .concepts(concepts)
       .emotion(emotion)
@@ -115,7 +148,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .returnAnalyzedText(true)
       .language('en')
       .limitTextCharacters(100)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -191,6 +224,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
   }
 
   static testMethod void testSytntaxOptions() {
+    Test.startTest();
     IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens token = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens();
     token.setLemma(true);
     token.setPartOfSpeech(true);
@@ -203,9 +237,11 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assert(options.sentences());
     System.assert(options.tokens().getLemma());
     System.assert(options.tokens().getPartOfSpeech());
+    Test.stopTest();
   }
 
   static testMethod void testModel() {
+    Test.startTest();
     String status = 'status';
     String modelId = 'model_id';
     String language = 'spanish';
@@ -233,6 +269,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(version, model.getVersion());
     System.assertEquals(versionDescription, model.getVersionDescription());
     System.assertEquals(created, model.getCreated());
+    Test.stopTest();
   }
 
   static testMethod void testAnalysisResultsAttributes() {
@@ -373,7 +410,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     naturalLanguageUnderstanding.setUsernameAndPassword('username', 'password');
     IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions options = new IBMNaturalLanguageUnderstandingV1Models.ListModelsOptionsBuilder()
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -396,7 +433,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions options = new IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptionsBuilder()
       .modelId('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -414,7 +451,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
       IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions options = new IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptionsBuilder()
         .modelId('test')
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
       naturalLanguageUnderstanding.deleteModel(options);
     }

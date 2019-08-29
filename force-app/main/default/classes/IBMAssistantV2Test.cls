@@ -35,6 +35,8 @@ private class IBMAssistantV2Test {
   private static String USER_DEFINED;
   private static String RESPONSE_TYPE;
   private static String PREFERENCE;
+  private static String HEADER_NAME;
+  private static String HEADER_VAL;
 
   static {
     VERSION = '2018-09-20';
@@ -72,6 +74,33 @@ private class IBMAssistantV2Test {
     USER_DEFINED = 'user_defined';
     RESPONSE_TYPE = 'type';
     PREFERENCE = 'preference';
+    HEADER_NAME = 'Header-Name';
+    HEADER_VAL = 'header_val';
+  }
+
+  static testMethod void testVersionConstructor() {
+    Test.startTest();
+    IBMAssistantV2 service = new IBMAssistantV2(VERSION);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testBasicConstructor() {
+    Test.startTest();
+    IBMAssistantV2 service = new IBMAssistantV2(VERSION, 'username', 'password');
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testConfigConstructor() {
+    Test.startTest();
+    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
+      .username('username')
+      .password('password')
+      .build();
+    IBMAssistantV2 service = new IBMAssistantV2(VERSION, config);
+    System.assert(service != null);
+    Test.stopTest();
   }
 
   static testMethod void testCaptureGroup() {
@@ -335,9 +364,16 @@ private class IBMAssistantV2Test {
       .build();
     service.setIamCredentials(iamOptions);
 
+    IBMAssistantV2Models.MessageInput input = new IBMAssistantV2Models.MessageInputBuilder()
+      .text(TEXT)
+      .build();
+    IBMAssistantV2Models.MessageContext context = new IBMAssistantV2Models.MessageContext();
     IBMAssistantV2Models.MessageOptions messageOptions = new IBMAssistantV2Models.MessageOptionsBuilder()
         .assistantId(ASSISTANT_ID)
         .sessionId(SESSION_ID)
+        .input(input)
+        .context(context)
+        .addHeader(HEADER_NAME, HEADER_VAL)
         .build();
     IBMAssistantV2Models.MessageResponse response = service.message(messageOptions);
 
@@ -392,6 +428,7 @@ private class IBMAssistantV2Test {
 
     IBMAssistantV2Models.CreateSessionOptions createSessionOptions = new IBMAssistantV2Models.CreateSessionOptionsBuilder()
         .assistantId(ASSISTANT_ID)
+        .addHeader(HEADER_NAME, HEADER_VAL)
         .build();
     IBMAssistantV2Models.SessionResponse response = service.createSession(createSessionOptions);
 
@@ -415,6 +452,7 @@ private class IBMAssistantV2Test {
     IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptions = new IBMAssistantV2Models.DeleteSessionOptionsBuilder()
         .assistantId(ASSISTANT_ID)
         .sessionId(SESSION_ID)
+        .addHeader(HEADER_NAME, HEADER_VAL)
         .build();
     service.deleteSession(deleteSessionOptions);
 

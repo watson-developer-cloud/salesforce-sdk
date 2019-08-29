@@ -1,5 +1,39 @@
 @isTest
 private class IBMPersonalityInsightsV3Test {
+  private static String VERSION;
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
+
+  static {
+    VERSION = '2017-09-01';
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
+  }
+
+  static testMethod void testVersionConstructor() {
+    Test.startTest();
+    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testBasicConstructor() {
+    Test.startTest();
+    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, 'username', 'password');
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testConfigConstructor() {
+    Test.startTest();
+    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
+      .username('username')
+      .password('password')
+      .build();
+    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, config);
+    System.assert(service != null);
+    Test.stopTest();
+  }
   /**
    * Generates a personality profile based on input text.
    *
@@ -12,9 +46,9 @@ private class IBMPersonalityInsightsV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01', iamOptions);
+    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3(VERSION, iamOptions);
     personalityInsights.setEndPoint('https://gateway.watsonplatform.net/personality-insights/api');
-    IBMPersonalityInsightsV3Models.ContentItem contentItem=new IBMPersonalityInsightsV3Models.ContentItemBuilder()
+    IBMPersonalityInsightsV3Models.ContentItem contentItem = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
       .content('text/plain')
       .id('test')
       .created(1)
@@ -27,12 +61,12 @@ private class IBMPersonalityInsightsV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     contentItem = contentItem.newBuilder().build();
-    IBMPersonalityInsightsV3Models.Content content=new IBMPersonalityInsightsV3Models.ContentBuilder()
+    IBMPersonalityInsightsV3Models.Content content = new IBMPersonalityInsightsV3Models.ContentBuilder()
       .addContentItems(contentItem)
       .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
       .build();
     // or you can use following
-    content=new IBMPersonalityInsightsV3Models.ContentBuilder(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
+    content = new IBMPersonalityInsightsV3Models.ContentBuilder(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
       .addContentItems(contentItem)
       .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
       .build();
@@ -46,7 +80,7 @@ private class IBMPersonalityInsightsV3Test {
       .content(content)
       .html('<html><body>test</body></html>')
       .text('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();

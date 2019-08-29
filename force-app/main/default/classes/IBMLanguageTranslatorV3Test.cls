@@ -1,5 +1,6 @@
 @isTest
 private class IBMLanguageTranslatorV3Test {
+  private static String version;
   private static String headerKey;
   private static String headerVal;
   private static String documentId;
@@ -17,6 +18,7 @@ private class IBMLanguageTranslatorV3Test {
   private static String status;
 
   static {
+    version = '2018-05-01';
     headerKey = 'Test-Header';
     headerVal = 'test_value';
     documentId = 'id';
@@ -34,6 +36,31 @@ private class IBMLanguageTranslatorV3Test {
     status = 'available';
   }
 
+  static testMethod void testVersionConstructor() {
+    Test.startTest();
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testBasicConstructor() {
+    Test.startTest();
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version, 'username', 'password');
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testConfigConstructor() {
+    Test.startTest();
+    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
+      .username('username')
+      .password('password')
+      .build();
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version, config);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
   /**
    *  Test translate
    */
@@ -45,7 +72,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', iamOptions);
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version, iamOptions);
     String modelId = '3e7dfdbe-f757-4150-afee-458e71eb93fb';
     String source = 'en';
     String target = 'es';
@@ -58,6 +85,7 @@ private class IBMLanguageTranslatorV3Test {
       .addText('World')
       .addHeader(headerKey, headerVal)
       .build();
+    translateOptions = translateOptions.newBuilder().build();
     IBMLanguageTranslatorV3Models.TranslationResult translate =
       service.translate(translateOptions);
     System.assertEquals(translate.getWordCount(), 1);
@@ -78,12 +106,13 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version);
     IBMLanguageTranslatorV3Models.IdentifyOptions identifyOptions =
       new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
       .text('sample')
       .addHeader(headerKey, headerVal)
       .build();
+    identifyOptions = identifyOptions.newBuilder().build();
     IBMLanguageTranslatorV3Models.IdentifiedLanguages identify =
       service.identify(identifyOptions);
     Test.stopTest();
@@ -97,11 +126,12 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version);
     IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions =
       new IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptionsBuilder()
       .addHeader(headerKey, headerVal)
       .build();
+    listIdentifiableLanguagesOptions = listIdentifiableLanguagesOptions.newBuilder().build();
     IBMLanguageTranslatorV3Models.IdentifiableLanguages listIdentifiableLanguages =
       service.listIdentifiableLanguages(listIdentifiableLanguagesOptions);
 
@@ -128,7 +158,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version);
     // Forced Glossary
     Attachment forcedGlossaryAttachment = new Attachment(Body = Blob.valueOf('glossary'),
       Name='glossary.txt',
@@ -153,6 +183,7 @@ private class IBMLanguageTranslatorV3Test {
       .parallelCorpus(parallelCorpus)
       .addHeader(headerKey, headerVal)
       .build();
+    createModelOptions = createModelOptions.newBuilder().build();
     IBMLanguageTranslatorV3Models.TranslationModel TranslationModel =
       service.createModel(createModelOptions);
     System.assertEquals(TranslationModel.getModelId(), '3e7dfdbe-f757-4150-afee-458e71eb93fb');
@@ -190,12 +221,13 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version);
     IBMLanguageTranslatorV3Models.DeleteModelOptions deleteModelOptions =
       new IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder()
       .modelId('3e7dfdbe-f757-4150-afee-458e71eb93fb')
       .addHeader(headerKey, headerVal)
       .build();
+    deleteModelOptions = deleteModelOptions.newBuilder().build();
     service.deleteModel(deleteModelOptions);
     IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder newDeleteModelOptionsBuilder1 =
       deleteModelOptions.newBuilder();
@@ -212,12 +244,13 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version);
     IBMLanguageTranslatorV3Models.GetModelOptions getModelOptions =
       new IBMLanguageTranslatorV3Models.GetModelOptionsBuilder()
       .modelId('3e7dfdbe-f757-4150-afee-458e71eb93fb')
       .addHeader(headerKey, headerVal)
       .build();
+    getModelOptions = getModelOptions.newBuilder().build();
     IBMLanguageTranslatorV3Models.TranslationModel getModel =
       service.getModel(getModelOptions);
     IBMLanguageTranslatorV3Models.GetModelOptionsBuilder newGetModelOptionsBuilder1 =
@@ -235,7 +268,7 @@ private class IBMLanguageTranslatorV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01');
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version);
     IBMLanguageTranslatorV3Models.ListModelsOptions listModelsOptions =
       new IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder()
       .source('en')
@@ -243,6 +276,7 @@ private class IBMLanguageTranslatorV3Test {
       .defaultModels(false)
       .addHeader(headerKey, headerVal)
       .build();
+    listModelsOptions = listModelsOptions.newBuilder().build();
     IBMLanguageTranslatorV3Models.TranslationModels listModels =
       service.listModels(listModelsOptions);
     IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder newListModelsOptionsBuilder =
@@ -347,7 +381,7 @@ private class IBMLanguageTranslatorV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthConfig());
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version, new IBMWatsonNoauthConfig());
 
     Attachment documentAttachment = new Attachment(Body = Blob.valueOf('words'),
       Name='document.txt',
@@ -360,7 +394,9 @@ private class IBMLanguageTranslatorV3Test {
     IBMLanguageTranslatorV3Models.TranslateDocumentOptions options = new IBMLanguageTranslatorV3Models.TranslateDocumentOptionsBuilder()
       .file(document)
       .filename(filename)
+      .addHeader(headerKey, headerVal)
       .build();
+    options = options.newBuilder().build();
     IBMLanguageTranslatorV3Models.DocumentStatus response = service.translateDocument(options);
 
     System.assertEquals(documentId, response.getDocumentId());
@@ -384,9 +420,12 @@ private class IBMLanguageTranslatorV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthConfig());
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version, new IBMWatsonNoauthConfig());
 
-    IBMLanguageTranslatorV3Models.ListDocumentsOptions options = new IBMLanguageTranslatorV3Models.ListDocumentsOptionsBuilder().build();
+    IBMLanguageTranslatorV3Models.ListDocumentsOptions options = new IBMLanguageTranslatorV3Models.ListDocumentsOptionsBuilder()
+      .addHeader(headerKey, headerVal)
+      .build();
+    options = options.newBuilder().build();
     IBMLanguageTranslatorV3Models.DocumentList response = service.listDocuments(options);
 
     System.assert(response.getDocuments().size() > 0);
@@ -400,11 +439,13 @@ private class IBMLanguageTranslatorV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthConfig());
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version, new IBMWatsonNoauthConfig());
 
     IBMLanguageTranslatorV3Models.GetDocumentStatusOptions options = new IBMLanguageTranslatorV3Models.GetDocumentStatusOptionsBuilder()
       .documentId(documentId)
+      .addHeader(headerKey, headerVal)
       .build();
+    options = options.newBuilder().build();
     IBMLanguageTranslatorV3Models.DocumentStatus response = service.getDocumentStatus(options);
 
     System.assert(response != null);
@@ -418,11 +459,13 @@ private class IBMLanguageTranslatorV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoauthConfig());
+    IBMLanguageTranslatorV3 service = new IBMLanguageTranslatorV3(version, new IBMWatsonNoauthConfig());
 
     IBMLanguageTranslatorV3Models.DeleteDocumentOptions options = new IBMLanguageTranslatorV3Models.DeleteDocumentOptionsBuilder()
       .documentId(documentId)
+      .addHeader(headerKey, headerVal)
       .build();
+    options = options.newBuilder().build();
     service.deleteDocument(options);
 
     Test.stopTest();
