@@ -1423,7 +1423,7 @@ public class IBMLanguageTranslatorV3Models {
   public class ListModelsOptions extends IBMWatsonOptionsModel {
     private String source;
     private String target;
-    private Boolean defaultModels;
+    private Boolean xDefault;
 
     /**
      * Gets the source.
@@ -1448,22 +1448,22 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Gets the defaultModels.
+     * Gets the xDefault.
      *
      * If the default parameter isn't specified, the service will return all models (default and non-default) for each
      * language pair. To return only default models, set this to `true`. To return only non-default models, set this to
      * `false`. There is exactly one default model per language pair, the IBM provided base model.
      *
-     * @return the defaultModels
+     * @return the xDefault
      */
-    public Boolean defaultModels() {
-      return defaultModels;
+    public Boolean xDefault() {
+      return xDefault;
     }
 
     private ListModelsOptions(ListModelsOptionsBuilder builder) {
       source = builder.source;
       target = builder.target;
-      defaultModels = builder.defaultModels;
+      xDefault = builder.xDefault;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1483,12 +1483,12 @@ public class IBMLanguageTranslatorV3Models {
   public class ListModelsOptionsBuilder extends IBMWatsonOptionsModel {
     private String source;
     private String target;
-    private Boolean defaultModels;
+    private Boolean xDefault;
 
     private ListModelsOptionsBuilder(ListModelsOptions listModelsOptions) {
       source = listModelsOptions.source;
       target = listModelsOptions.target;
-      defaultModels = listModelsOptions.defaultModels;
+      xDefault = listModelsOptions.xDefault;
       this.requestHeaders.putAll(listModelsOptions.requestHeaders());
     }
 
@@ -1530,13 +1530,13 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Set the defaultModels.
+     * Set the xDefault.
      *
-     * @param defaultModels the defaultModels
+     * @param xDefault the xDefault
      * @return the ListModelsOptions builder
      */
-    public ListModelsOptionsBuilder defaultModels(Boolean defaultModels) {
-      this.defaultModels = defaultModels;
+    public ListModelsOptionsBuilder xDefault(Boolean xDefault) {
+      this.xDefault = xDefault;
       return this;
     }
 
@@ -2000,40 +2000,33 @@ public class IBMLanguageTranslatorV3Models {
    * Translation.
    */
   public class Translation extends IBMWatsonGenericModel {
-    private String translationOutput;
+    private String translation;
 
     /**
-     * Gets the translationOutput.
+     * Gets the translation.
      *
      * Translation output in UTF-8.
      *
-     * @return the translationOutput
+     * @return the translation
      */
     @AuraEnabled
-    public String getTranslationOutput() {
-      return translationOutput;
+    public String getTranslation() {
+      return translation;
     }
 
     /**
-     * Sets the translationOutput.
+     * Sets the translation.
      *
-     * @param translationOutput the new translationOutput
+     * @param translation the new translation
      */
-    public void setTranslationOutput(final String translationOutput) {
-      this.translationOutput = translationOutput;
+    public void setTranslation(final String translation) {
+      this.translation = translation;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'translation' => 'translationOutput'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       Translation ret = (Translation) super.deserialize(jsonString, jsonMap, classType);
 

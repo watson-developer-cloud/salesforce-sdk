@@ -1034,8 +1034,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (listWordsOptions.wordType() != null) {
       builder.query('word_type', listWordsOptions.wordType());
     }
-    if (listWordsOptions.xsort() != null) {
-      builder.query('sort', listWordsOptions.xsort());
+    if (listWordsOptions.xSort() != null) {
+      builder.query('sort', listWordsOptions.xSort());
     }
 
     return (IBMSpeechToTextV1Models.Words) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Words.class);

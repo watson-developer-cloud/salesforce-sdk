@@ -241,7 +241,7 @@ private class IBMLanguageTranslatorV3Test {
       new IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder()
       .source('en')
       .target('es')
-      .defaultModels(false)
+      .xDefault(false)
       .addHeader(headerKey, headerVal)
       .build();
     IBMLanguageTranslatorV3Models.TranslationModels listModels =

@@ -117,11 +117,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listWorkspacesOptions != null && listWorkspacesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listWorkspacesOptions.pageLimit()));
     }
-    if (listWorkspacesOptions != null && listWorkspacesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listWorkspacesOptions.includeCount()));
-    }
-    if (listWorkspacesOptions != null && listWorkspacesOptions.xsort() != null) {
-      builder.query('sort', listWorkspacesOptions.xsort());
+    if (listWorkspacesOptions != null && listWorkspacesOptions.xSort() != null) {
+      builder.query('sort', listWorkspacesOptions.xSort());
     }
     if (listWorkspacesOptions != null && listWorkspacesOptions.cursor() != null) {
       builder.query('cursor', listWorkspacesOptions.cursor());
@@ -230,14 +227,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getWorkspaceOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getWorkspaceOptions.xexport()));
+    if (getWorkspaceOptions.xExport() != null) {
+      builder.query('export', String.valueOf(getWorkspaceOptions.xExport()));
     }
     if (getWorkspaceOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getWorkspaceOptions.includeAudit()));
     }
-    if (getWorkspaceOptions.xsort() != null) {
-      builder.query('sort', getWorkspaceOptions.xsort());
+    if (getWorkspaceOptions.xSort() != null) {
+      builder.query('sort', getWorkspaceOptions.xSort());
     }
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
@@ -370,17 +367,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listIntentsOptions.xexport() != null) {
-      builder.query('export', String.valueOf(listIntentsOptions.xexport()));
+    if (listIntentsOptions.xExport() != null) {
+      builder.query('export', String.valueOf(listIntentsOptions.xExport()));
     }
     if (listIntentsOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listIntentsOptions.pageLimit()));
     }
-    if (listIntentsOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listIntentsOptions.includeCount()));
-    }
-    if (listIntentsOptions.xsort() != null) {
-      builder.query('sort', listIntentsOptions.xsort());
+    if (listIntentsOptions.xSort() != null) {
+      builder.query('sort', listIntentsOptions.xSort());
     }
     if (listIntentsOptions.cursor() != null) {
       builder.query('cursor', listIntentsOptions.cursor());
@@ -457,8 +451,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getIntentOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getIntentOptions.xexport()));
+    if (getIntentOptions.xExport() != null) {
+      builder.query('export', String.valueOf(getIntentOptions.xExport()));
     }
     if (getIntentOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getIntentOptions.includeAudit()));
@@ -563,11 +557,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listExamplesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listExamplesOptions.pageLimit()));
     }
-    if (listExamplesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listExamplesOptions.includeCount()));
-    }
-    if (listExamplesOptions.xsort() != null) {
-      builder.query('sort', listExamplesOptions.xsort());
+    if (listExamplesOptions.xSort() != null) {
+      builder.query('sort', listExamplesOptions.xSort());
     }
     if (listExamplesOptions.cursor() != null) {
       builder.query('cursor', listExamplesOptions.cursor());
@@ -739,11 +730,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listCounterexamplesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listCounterexamplesOptions.pageLimit()));
     }
-    if (listCounterexamplesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listCounterexamplesOptions.includeCount()));
-    }
-    if (listCounterexamplesOptions.xsort() != null) {
-      builder.query('sort', listCounterexamplesOptions.xsort());
+    if (listCounterexamplesOptions.xSort() != null) {
+      builder.query('sort', listCounterexamplesOptions.xSort());
     }
     if (listCounterexamplesOptions.cursor() != null) {
       builder.query('cursor', listCounterexamplesOptions.cursor());
@@ -899,17 +887,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listEntitiesOptions.xexport() != null) {
-      builder.query('export', String.valueOf(listEntitiesOptions.xexport()));
+    if (listEntitiesOptions.xExport() != null) {
+      builder.query('export', String.valueOf(listEntitiesOptions.xExport()));
     }
     if (listEntitiesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listEntitiesOptions.pageLimit()));
     }
-    if (listEntitiesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listEntitiesOptions.includeCount()));
-    }
-    if (listEntitiesOptions.xsort() != null) {
-      builder.query('sort', listEntitiesOptions.xsort());
+    if (listEntitiesOptions.xSort() != null) {
+      builder.query('sort', listEntitiesOptions.xSort());
     }
     if (listEntitiesOptions.cursor() != null) {
       builder.query('cursor', listEntitiesOptions.cursor());
@@ -992,8 +977,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getEntityOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getEntityOptions.xexport()));
+    if (getEntityOptions.xExport() != null) {
+      builder.query('export', String.valueOf(getEntityOptions.xExport()));
     }
     if (getEntityOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getEntityOptions.includeAudit()));
@@ -1102,8 +1087,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listMentionsOptions.xexport() != null) {
-      builder.query('export', String.valueOf(listMentionsOptions.xexport()));
+    if (listMentionsOptions.xExport() != null) {
+      builder.query('export', String.valueOf(listMentionsOptions.xExport()));
     }
     if (listMentionsOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(listMentionsOptions.includeAudit()));
@@ -1134,17 +1119,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listValuesOptions.xexport() != null) {
-      builder.query('export', String.valueOf(listValuesOptions.xexport()));
+    if (listValuesOptions.xExport() != null) {
+      builder.query('export', String.valueOf(listValuesOptions.xExport()));
     }
     if (listValuesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listValuesOptions.pageLimit()));
     }
-    if (listValuesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listValuesOptions.includeCount()));
-    }
-    if (listValuesOptions.xsort() != null) {
-      builder.query('sort', listValuesOptions.xsort());
+    if (listValuesOptions.xSort() != null) {
+      builder.query('sort', listValuesOptions.xSort());
     }
     if (listValuesOptions.cursor() != null) {
       builder.query('cursor', listValuesOptions.cursor());
@@ -1186,8 +1168,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createValueOptions.metadata() != null) {
       contentJson.put('metadata', createValueOptions.metadata().serialize());
     }
-    if (createValueOptions.valueType() != null) {
-      contentJson.put('type', createValueOptions.valueType());
+    if (createValueOptions.xType() != null) {
+      contentJson.put('type', createValueOptions.xType());
     }
     if (createValueOptions.synonyms() != null) {
       contentJson.put('synonyms', createValueOptions.synonyms());
@@ -1222,8 +1204,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getValueOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getValueOptions.xexport()));
+    if (getValueOptions.xExport() != null) {
+      builder.query('export', String.valueOf(getValueOptions.xExport()));
     }
     if (getValueOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getValueOptions.includeAudit()));
@@ -1265,8 +1247,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateValueOptions.newMetadata() != null) {
       contentJson.put('metadata', updateValueOptions.newMetadata().serialize());
     }
-    if (updateValueOptions.valueType() != null) {
-      contentJson.put('type', updateValueOptions.valueType());
+    if (updateValueOptions.newType() != null) {
+      contentJson.put('type', updateValueOptions.newType());
     }
     if (updateValueOptions.newSynonyms() != null) {
       contentJson.put('synonyms', updateValueOptions.newSynonyms());
@@ -1330,11 +1312,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listSynonymsOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listSynonymsOptions.pageLimit()));
     }
-    if (listSynonymsOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listSynonymsOptions.includeCount()));
-    }
-    if (listSynonymsOptions.xsort() != null) {
-      builder.query('sort', listSynonymsOptions.xsort());
+    if (listSynonymsOptions.xSort() != null) {
+      builder.query('sort', listSynonymsOptions.xSort());
     }
     if (listSynonymsOptions.cursor() != null) {
       builder.query('cursor', listSynonymsOptions.cursor());
@@ -1492,11 +1471,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listDialogNodesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listDialogNodesOptions.pageLimit()));
     }
-    if (listDialogNodesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listDialogNodesOptions.includeCount()));
-    }
-    if (listDialogNodesOptions.xsort() != null) {
-      builder.query('sort', listDialogNodesOptions.xsort());
+    if (listDialogNodesOptions.xSort() != null) {
+      builder.query('sort', listDialogNodesOptions.xSort());
     }
     if (listDialogNodesOptions.cursor() != null) {
       builder.query('cursor', listDialogNodesOptions.cursor());
@@ -1562,8 +1538,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createDialogNodeOptions.title() != null) {
       contentJson.put('title', createDialogNodeOptions.title());
     }
-    if (createDialogNodeOptions.nodeType() != null) {
-      contentJson.put('type', createDialogNodeOptions.nodeType());
+    if (createDialogNodeOptions.xType() != null) {
+      contentJson.put('type', createDialogNodeOptions.xType());
     }
     if (createDialogNodeOptions.eventName() != null) {
       contentJson.put('event_name', createDialogNodeOptions.eventName());
@@ -1680,8 +1656,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateDialogNodeOptions.newTitle() != null) {
       contentJson.put('title', updateDialogNodeOptions.newTitle());
     }
-    if (updateDialogNodeOptions.nodeType() != null) {
-      contentJson.put('type', updateDialogNodeOptions.nodeType());
+    if (updateDialogNodeOptions.newType() != null) {
+      contentJson.put('type', updateDialogNodeOptions.newType());
     }
     if (updateDialogNodeOptions.newEventName() != null) {
       contentJson.put('event_name', updateDialogNodeOptions.newEventName());
@@ -1762,8 +1738,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listLogsOptions.xsort() != null) {
-      builder.query('sort', listLogsOptions.xsort());
+    if (listLogsOptions.xSort() != null) {
+      builder.query('sort', listLogsOptions.xSort());
     }
     if (listLogsOptions.filter() != null) {
       builder.query('filter', listLogsOptions.filter());
@@ -1804,8 +1780,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listAllLogsOptions.filter() != null) {
       builder.query('filter', listAllLogsOptions.filter());
     }
-    if (listAllLogsOptions.xsort() != null) {
-      builder.query('sort', listAllLogsOptions.xsort());
+    if (listAllLogsOptions.xSort() != null) {
+      builder.query('sort', listAllLogsOptions.xSort());
     }
     if (listAllLogsOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listAllLogsOptions.pageLimit()));

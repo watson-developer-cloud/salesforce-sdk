@@ -110,7 +110,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     String training_data_filename = 'My Classifier Data';
     IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
-      .metadata(training_metadata)
+      .trainingMetadata(training_metadata)
       .trainingData(training_data)
       .addHeader('Test-Header', 'test_value')
       .build();

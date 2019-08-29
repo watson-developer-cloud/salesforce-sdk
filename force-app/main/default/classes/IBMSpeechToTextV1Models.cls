@@ -1412,13 +1412,13 @@ public class IBMSpeechToTextV1Models {
    * Information about an audio resource from a custom acoustic model.
    */
   public class AudioDetails extends IBMWatsonGenericModel {
-    private String xtype;
+    private String xType;
     private String codec;
     private Long frequency;
     private String compression;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type of the audio resource:
      * * `audio` for an individual audio file
@@ -1426,11 +1426,11 @@ public class IBMSpeechToTextV1Models {
      * * `undetermined` for a resource that the service cannot validate (for example, if the user mistakenly passes a
      * file that does not contain audio, such as a JPEG file).
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -1475,12 +1475,12 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -1517,7 +1517,7 @@ public class IBMSpeechToTextV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -1788,7 +1788,7 @@ public class IBMSpeechToTextV1Models {
    * Detailed information about the signal characteristics of the input audio.
    */
   public class AudioMetricsDetails extends IBMWatsonGenericModel {
-    private Boolean xfinal;
+    private Boolean xFinal;
     private Double endTime;
     private Double signalToNoiseRatio;
     private Double speechRatio;
@@ -1799,17 +1799,17 @@ public class IBMSpeechToTextV1Models {
     private List<AudioMetricsHistogramBin> nonSpeechLevel;
 
     /**
-     * Gets the xfinal.
+     * Gets the xFinal.
      *
      * If `true`, indicates the end of the audio stream, meaning that transcription is complete. Currently, the field is
      * always `true`. The service returns metrics just once per audio stream. The results provide aggregated audio
      * metrics that pertain to the complete audio stream.
      *
-     * @return the xfinal
+     * @return the xFinal
      */
     @AuraEnabled
-    public Boolean getXfinal() {
-      return xfinal;
+    public Boolean getXFinal() {
+      return xFinal;
     }
 
     /**
@@ -1924,12 +1924,12 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the xfinal.
+     * Sets the xFinal.
      *
-     * @param xfinal the new xfinal
+     * @param xFinal the new xFinal
      */
-    public void setXfinal(final Boolean xfinal) {
-      this.xfinal = xfinal;
+    public void setXFinal(final Boolean xFinal) {
+      this.xFinal = xFinal;
     }
 
     /**
@@ -2011,7 +2011,7 @@ public class IBMSpeechToTextV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'final' => 'xfinal',
+        'final' => 'xFinal',
         'end_time' => 'endTime',
         'signal_to_noise_ratio' => 'signalToNoiseRatio',
         'speech_ratio' => 'speechRatio',
@@ -2088,32 +2088,32 @@ public class IBMSpeechToTextV1Models {
    * infinity and the first boundary, and between the last boundary and positive infinity, respectively.
    */
   public class AudioMetricsHistogramBin extends IBMWatsonGenericModel {
-    private Double xbegin;
-    private Double xend;
+    private Double xBegin;
+    private Double xEnd;
     private Long count;
 
     /**
-     * Gets the xbegin.
+     * Gets the xBegin.
      *
      * The lower boundary of the bin in the histogram.
      *
-     * @return the xbegin
+     * @return the xBegin
      */
     @AuraEnabled
-    public Double getXbegin() {
-      return xbegin;
+    public Double getXBegin() {
+      return xBegin;
     }
 
     /**
-     * Gets the xend.
+     * Gets the xEnd.
      *
      * The upper boundary of the bin in the histogram.
      *
-     * @return the xend
+     * @return the xEnd
      */
     @AuraEnabled
-    public Double getXend() {
-      return xend;
+    public Double getXEnd() {
+      return xEnd;
     }
 
     /**
@@ -2129,21 +2129,21 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the xbegin.
+     * Sets the xBegin.
      *
-     * @param xbegin the new xbegin
+     * @param xBegin the new xBegin
      */
-    public void setXbegin(final Double xbegin) {
-      this.xbegin = xbegin;
+    public void setXBegin(final Double xBegin) {
+      this.xBegin = xBegin;
     }
 
     /**
-     * Sets the xend.
+     * Sets the xEnd.
      *
-     * @param xend the new xend
+     * @param xEnd the new xEnd
      */
-    public void setXend(final Double xend) {
-      this.xend = xend;
+    public void setXEnd(final Double xEnd) {
+      this.xEnd = xEnd;
     }
 
     /**
@@ -2162,8 +2162,8 @@ public class IBMSpeechToTextV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'begin' => 'xbegin',
-        'end' => 'xend'
+        'begin' => 'xBegin',
+        'end' => 'xEnd'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -6971,7 +6971,7 @@ public class IBMSpeechToTextV1Models {
   public class ListWordsOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String wordType;
-    private String xsort;
+    private String xSort;
 
     /**
      * Gets the customizationId.
@@ -7001,7 +7001,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * Indicates the order in which the words are to be listed, `alphabetical` or by `count`. You can prepend an
      * optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or descending
@@ -7010,17 +7010,17 @@ public class IBMSpeechToTextV1Models {
      * values with the same count are ordered alphabetically. With the `curl` command, URL-encode the `+` symbol as
      * `%2B`.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     private ListWordsOptions(ListWordsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
       customizationId = builder.customizationId;
       wordType = builder.wordType;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7040,12 +7040,12 @@ public class IBMSpeechToTextV1Models {
   public class ListWordsOptionsBuilder extends IBMWatsonOptionsModel {
     private String customizationId;
     private String wordType;
-    private String xsort;
+    private String xSort;
 
     private ListWordsOptionsBuilder(ListWordsOptions listWordsOptions) {
       customizationId = listWordsOptions.customizationId;
       wordType = listWordsOptions.wordType;
-      xsort = listWordsOptions.xsort;
+      xSort = listWordsOptions.xSort;
       this.requestHeaders.putAll(listWordsOptions.requestHeaders());
     }
 
@@ -7096,13 +7096,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the xSort.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the ListWordsOptions builder
      */
-    public ListWordsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListWordsOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -8718,23 +8718,23 @@ public class IBMSpeechToTextV1Models {
    * Information about the speakers from speech recognition results.
    */
   public class SpeakerLabelsResult extends IBMWatsonGenericModel {
-    private Double xfrom;
+    private Double xFrom;
     private Double to;
     private Long speaker;
     private Double confidence;
-    private Boolean finalResults;
+    private Boolean xFinal;
 
     /**
-     * Gets the xfrom.
+     * Gets the xFrom.
      *
      * The start time of a word from the transcript. The value matches the start time of a word from the `timestamps`
      * array.
      *
-     * @return the xfrom
+     * @return the xFrom
      */
     @AuraEnabled
-    public Double getXfrom() {
-      return xfrom;
+    public Double getXFrom() {
+      return xFrom;
     }
 
     /**
@@ -8776,26 +8776,26 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Gets the finalResults.
+     * Gets the xFinal.
      *
      * An indication of whether the service might further change word and speaker-label results. A value of `true` means
      * that the service guarantees not to send any further updates for the current or any preceding results; `false`
      * means that the service might send further updates to the results.
      *
-     * @return the finalResults
+     * @return the xFinal
      */
     @AuraEnabled
-    public Boolean getFinalResults() {
-      return finalResults;
+    public Boolean getXFinal() {
+      return xFinal;
     }
 
     /**
-     * Sets the xfrom.
+     * Sets the xFrom.
      *
-     * @param xfrom the new xfrom
+     * @param xFrom the new xFrom
      */
-    public void setXfrom(final Double xfrom) {
-      this.xfrom = xfrom;
+    public void setXFrom(final Double xFrom) {
+      this.xFrom = xFrom;
     }
 
     /**
@@ -8826,12 +8826,12 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the finalResults.
+     * Sets the xFinal.
      *
-     * @param finalResults the new finalResults
+     * @param xFinal the new xFinal
      */
-    public void setFinalResults(final Boolean finalResults) {
-      this.finalResults = finalResults;
+    public void setXFinal(final Boolean xFinal) {
+      this.xFinal = xFinal;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8841,8 +8841,8 @@ public class IBMSpeechToTextV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'from' => 'xfrom',
-        'final' => 'finalResults'
+        'from' => 'xFrom',
+        'final' => 'xFinal'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -9184,22 +9184,22 @@ public class IBMSpeechToTextV1Models {
    * Component results for a speech recognition request.
    */
   public class SpeechRecognitionResult extends IBMWatsonGenericModel {
-    private Boolean finalResults;
+    private Boolean xFinal;
     private List<SpeechRecognitionAlternative> alternatives;
     private Map<String, List<KeywordResult>> keywordsResult;
     private List<WordAlternativeResults> wordAlternatives;
 
     /**
-     * Gets the finalResults.
+     * Gets the xFinal.
      *
      * An indication of whether the transcription results are final. If `true`, the results for this utterance are not
      * updated further; no additional results are sent for a `result_index` once its results are indicated as final.
      *
-     * @return the finalResults
+     * @return the xFinal
      */
     @AuraEnabled
-    public Boolean getFinalResults() {
-      return finalResults;
+    public Boolean getXFinal() {
+      return xFinal;
     }
 
     /**
@@ -9244,12 +9244,12 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the finalResults.
+     * Sets the xFinal.
      *
-     * @param finalResults the new finalResults
+     * @param xFinal the new xFinal
      */
-    public void setFinalResults(final Boolean finalResults) {
-      this.finalResults = finalResults;
+    public void setXFinal(final Boolean xFinal) {
+      this.xFinal = xFinal;
     }
 
     /**
@@ -9286,7 +9286,7 @@ public class IBMSpeechToTextV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'final' => 'finalResults',
+        'final' => 'xFinal',
         'keywords_result' => 'keywordsResult',
         'word_alternatives' => 'wordAlternatives'
       };

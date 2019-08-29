@@ -144,8 +144,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     if (listModelsOptions != null && listModelsOptions.target() != null) {
       builder.query('target', listModelsOptions.target());
     }
-    if (listModelsOptions != null && listModelsOptions.defaultModels() != null) {
-      builder.query('default', String.valueOf(listModelsOptions.defaultModels()));
+    if (listModelsOptions != null && listModelsOptions.xDefault() != null) {
+      builder.query('default', String.valueOf(listModelsOptions.xDefault()));
     }
 
     return (IBMLanguageTranslatorV3Models.TranslationModels) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationModels.class);

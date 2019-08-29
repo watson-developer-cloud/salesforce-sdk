@@ -27,7 +27,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getImages()[0].getError().getDescription(), 'string');
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getName(), 'string');
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClassifierId(), 'string');
-    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getClassName(), 'string');
+    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getXClass(), 'string');
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getScore(),0);
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getTypeHierarchy(), 'string');
     System.assertEquals(resp.getWarnings()[0].getWarningId(), 'string');
@@ -153,7 +153,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getOwner(), 'string');
     System.assertEquals(resp.getStatus(), 'ready');
     System.assertEquals(resp.getExplanation(), 'string');
-    System.assertEquals(resp.getClasses()[0].getClassName(), 'string');
+    System.assertEquals(resp.getClasses()[0].getXClass(), 'string');
     Test.stopTest();
   }
   /**

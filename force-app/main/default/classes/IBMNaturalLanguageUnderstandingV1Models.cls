@@ -1063,7 +1063,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class CategoriesOptions extends IBMWatsonGenericModel {
     private Boolean explanation;
-    private Long xlimit;
+    private Long xLimit;
     private String model;
 
     /**
@@ -1079,14 +1079,14 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * Maximum number of categories to return.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
-    public Long xlimit() {
-      return xlimit;
+    public Long xLimit() {
+      return xLimit;
     }
 
     /**
@@ -1104,7 +1104,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   
     private CategoriesOptions(CategoriesOptionsBuilder builder) {
       this.explanation = builder.explanation;
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
       this.model = builder.model;
     }
 
@@ -1123,7 +1123,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -1136,12 +1136,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class CategoriesOptionsBuilder {
     private Boolean explanation;
-    private Long xlimit;
+    private Long xLimit;
     private String model;
 
     private CategoriesOptionsBuilder(CategoriesOptions categoriesOptions) {
       this.explanation = categoriesOptions.explanation;
-      this.xlimit = categoriesOptions.xlimit;
+      this.xLimit = categoriesOptions.xLimit;
       this.model = categoriesOptions.model;
     }
 
@@ -1172,13 +1172,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the CategoriesOptions builder
      */
-    public CategoriesOptionsBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public CategoriesOptionsBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
 
@@ -1389,21 +1389,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
    */
   public class ConceptsOptions extends IBMWatsonGenericModel {
-    private Long xlimit;
+    private Long xLimit;
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * Maximum number of concepts to return.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
-    public Long xlimit() {
-      return xlimit;
+    public Long xLimit() {
+      return xLimit;
     }
   
     private ConceptsOptions(ConceptsOptionsBuilder builder) {
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
     }
 
     /**
@@ -1421,7 +1421,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -1433,10 +1433,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * ConceptsOptions Builder.
    */
   public class ConceptsOptionsBuilder {
-    private Long xlimit;
+    private Long xLimit;
 
     private ConceptsOptionsBuilder(ConceptsOptions conceptsOptions) {
-      this.xlimit = conceptsOptions.xlimit;
+      this.xLimit = conceptsOptions.xLimit;
     }
 
     /**
@@ -1455,13 +1455,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the ConceptsOptions builder
      */
-    public ConceptsOptionsBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public ConceptsOptionsBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
   }
@@ -2173,21 +2173,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * Arabic, Chinese, and Dutch are supported only through custom models.
    */
   public class EntitiesOptions extends IBMWatsonGenericModel {
-    private Long xlimit;
+    private Long xLimit;
     private Boolean mentions;
     private String model;
     private Boolean sentiment;
     private Boolean emotion;
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * Maximum number of entities to return.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
-    public Long xlimit() {
-      return xlimit;
+    public Long xLimit() {
+      return xLimit;
     }
 
     /**
@@ -2237,7 +2237,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private EntitiesOptions(EntitiesOptionsBuilder builder) {
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
       this.mentions = builder.mentions;
       this.model = builder.model;
       this.sentiment = builder.sentiment;
@@ -2259,7 +2259,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -2271,14 +2271,14 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * EntitiesOptions Builder.
    */
   public class EntitiesOptionsBuilder {
-    private Long xlimit;
+    private Long xLimit;
     private Boolean mentions;
     private String model;
     private Boolean sentiment;
     private Boolean emotion;
 
     private EntitiesOptionsBuilder(EntitiesOptions entitiesOptions) {
-      this.xlimit = entitiesOptions.xlimit;
+      this.xLimit = entitiesOptions.xLimit;
       this.mentions = entitiesOptions.mentions;
       this.model = entitiesOptions.model;
       this.sentiment = entitiesOptions.sentiment;
@@ -2301,13 +2301,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the EntitiesOptions builder
      */
-    public EntitiesOptionsBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public EntitiesOptionsBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
 
@@ -2360,7 +2360,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * The important people, places, geopolitical entities and other types of entities in your content.
    */
   public class EntitiesResult extends IBMWatsonGenericModel {
-    private String xtype;
+    private String xType;
     private String text;
     private Double relevance;
     private Double confidence;
@@ -2371,15 +2371,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private DisambiguationResult disambiguation;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * Entity type.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -2481,12 +2481,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -2568,7 +2568,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -3214,19 +3214,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
    */
   public class KeywordsOptions extends IBMWatsonGenericModel {
-    private Long xlimit;
+    private Long xLimit;
     private Boolean sentiment;
     private Boolean emotion;
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * Maximum number of keywords to return.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
-    public Long xlimit() {
-      return xlimit;
+    public Long xLimit() {
+      return xLimit;
     }
 
     /**
@@ -3252,7 +3252,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private KeywordsOptions(KeywordsOptionsBuilder builder) {
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
       this.sentiment = builder.sentiment;
       this.emotion = builder.emotion;
     }
@@ -3272,7 +3272,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -3284,12 +3284,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * KeywordsOptions Builder.
    */
   public class KeywordsOptionsBuilder {
-    private Long xlimit;
+    private Long xLimit;
     private Boolean sentiment;
     private Boolean emotion;
 
     private KeywordsOptionsBuilder(KeywordsOptions keywordsOptions) {
-      this.xlimit = keywordsOptions.xlimit;
+      this.xLimit = keywordsOptions.xLimit;
       this.sentiment = keywordsOptions.sentiment;
       this.emotion = keywordsOptions.emotion;
     }
@@ -3310,13 +3310,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the KeywordsOptions builder
      */
-    public KeywordsOptionsBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public KeywordsOptionsBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
 
@@ -3937,7 +3937,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class RelationEntity extends IBMWatsonGenericModel {
     private String text;
-    private String xtype;
+    private String xType;
 
     /**
      * Gets the text.
@@ -3952,15 +3952,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * Entity type.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -3973,12 +3973,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3988,7 +3988,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -4087,7 +4087,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class RelationsResult extends IBMWatsonGenericModel {
     private Double score;
     private String sentence;
-    private String xtype;
+    private String xType;
     private List<RelationArgument> arguments;
 
     /**
@@ -4115,15 +4115,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type of the relation.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -4157,12 +4157,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -4181,7 +4181,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -4209,19 +4209,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * SemanticRolesEntity.
    */
   public class SemanticRolesEntity extends IBMWatsonGenericModel {
-    private String xtype;
+    private String xType;
     private String text;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * Entity type.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -4237,12 +4237,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -4261,7 +4261,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -4316,19 +4316,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * Supported languages: English, German, Japanese, Korean, Spanish.
    */
   public class SemanticRolesOptions extends IBMWatsonGenericModel {
-    private Long xlimit;
+    private Long xLimit;
     private Boolean keywords;
     private Boolean entities;
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * Maximum number of semantic_roles results to return.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
-    public Long xlimit() {
-      return xlimit;
+    public Long xLimit() {
+      return xLimit;
     }
 
     /**
@@ -4354,7 +4354,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private SemanticRolesOptions(SemanticRolesOptionsBuilder builder) {
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
       this.keywords = builder.keywords;
       this.entities = builder.entities;
     }
@@ -4374,7 +4374,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -4386,12 +4386,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * SemanticRolesOptions Builder.
    */
   public class SemanticRolesOptionsBuilder {
-    private Long xlimit;
+    private Long xLimit;
     private Boolean keywords;
     private Boolean entities;
 
     private SemanticRolesOptionsBuilder(SemanticRolesOptions semanticRolesOptions) {
-      this.xlimit = semanticRolesOptions.xlimit;
+      this.xLimit = semanticRolesOptions.xLimit;
       this.keywords = semanticRolesOptions.keywords;
       this.entities = semanticRolesOptions.entities;
     }
@@ -4412,13 +4412,13 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the SemanticRolesOptions builder
      */
-    public SemanticRolesOptionsBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public SemanticRolesOptionsBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
 
@@ -4452,7 +4452,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String sentence;
     private SemanticRolesResultSubject subject;
     private SemanticRolesResultAction action;
-    private SemanticRolesResultObject xobject;
+    private SemanticRolesResultObject xObject;
 
     /**
      * Gets the sentence.
@@ -4491,15 +4491,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Gets the xobject.
+     * Gets the xObject.
      *
      * The extracted object from the sentence.
      *
-     * @return the xobject
+     * @return the xObject
      */
     @AuraEnabled
-    public SemanticRolesResultObject getXobject() {
-      return xobject;
+    public SemanticRolesResultObject getXObject() {
+      return xObject;
     }
 
     /**
@@ -4530,12 +4530,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
-     * Sets the xobject.
+     * Sets the xObject.
      *
-     * @param xobject the new xobject
+     * @param xObject the new xObject
      */
-    public void setXobject(final SemanticRolesResultObject xobject) {
-      this.xobject = xobject;
+    public void setXObject(final SemanticRolesResultObject xObject) {
+      this.xObject = xObject;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4545,7 +4545,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'object' => 'xobject'
+        'object' => 'xObject'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -4562,10 +4562,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       SemanticRolesResultAction newAction = (SemanticRolesResultAction) new SemanticRolesResultAction().deserialize(JSON.serialize(actionMap), actionMap, SemanticRolesResultAction.class);
       ret.setAction(newAction);
 
-      // calling custom deserializer for xobject
-      Map<String, Object> xobjectMap = (Map<String, Object>) jsonMap.get('xobject');
-      SemanticRolesResultObject newXobject = (SemanticRolesResultObject) new SemanticRolesResultObject().deserialize(JSON.serialize(xobjectMap), xobjectMap, SemanticRolesResultObject.class);
-      ret.setXobject(newXobject);
+      // calling custom deserializer for xObject
+      Map<String, Object> xObjectMap = (Map<String, Object>) jsonMap.get('xObject');
+      SemanticRolesResultObject newXObject = (SemanticRolesResultObject) new SemanticRolesResultObject().deserialize(JSON.serialize(xObjectMap), xObjectMap, SemanticRolesResultObject.class);
+      ret.setXObject(newXObject);
 
       return ret;
     }

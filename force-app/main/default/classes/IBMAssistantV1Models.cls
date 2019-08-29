@@ -3,7 +3,7 @@ public class IBMAssistantV1Models {
    * A recognized capture group for a pattern-based entity.
    */
   public class CaptureGroup extends IBMWatsonGenericModel {
-    private String xgroup;
+    private String xGroup;
     private List<Long> location;
 
     /**
@@ -13,15 +13,15 @@ public class IBMAssistantV1Models {
     public CaptureGroup() { }
 
     /**
-     * Gets the xgroup.
+     * Gets the xGroup.
      *
      * A recognized capture group for the entity.
      *
-     * @return the xgroup
+     * @return the xGroup
      */
     @AuraEnabled
-    public String getXgroup() {
-      return xgroup;
+    public String getXGroup() {
+      return xGroup;
     }
 
     /**
@@ -37,8 +37,8 @@ public class IBMAssistantV1Models {
     }
   
     private CaptureGroup(CaptureGroupBuilder builder) {
-      IBMWatsonValidator.notNull(builder.xgroup, 'xgroup cannot be null');
-      this.xgroup = builder.xgroup;
+      IBMWatsonValidator.notNull(builder.xGroup, 'xGroup cannot be null');
+      this.xGroup = builder.xGroup;
       this.location = builder.location;
     }
 
@@ -58,7 +58,7 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'group' => 'xgroup'
+        'group' => 'xGroup'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -75,7 +75,7 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xgroup' => 'group'
+        'xGroup' => 'group'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -87,11 +87,11 @@ public class IBMAssistantV1Models {
    * CaptureGroup Builder.
    */
   public class CaptureGroupBuilder {
-    private String xgroup;
+    private String xGroup;
     private List<Long> location;
 
     private CaptureGroupBuilder(CaptureGroup captureGroup) {
-      this.xgroup = captureGroup.xgroup;
+      this.xGroup = captureGroup.xGroup;
       this.location = captureGroup.location;
     }
 
@@ -104,10 +104,10 @@ public class IBMAssistantV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param xgroup the xgroup
+     * @param xGroup the xGroup
      */
-    public CaptureGroupBuilder(String xgroup) {
-      this.xgroup = xgroup;
+    public CaptureGroupBuilder(String xGroup) {
+      this.xGroup = xGroup;
     }
 
     /**
@@ -135,13 +135,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xgroup.
+     * Set the xGroup.
      *
-     * @param xgroup the xgroup
+     * @param xGroup the xGroup
      * @return the CaptureGroup builder
      */
-    public CaptureGroupBuilder xgroup(String xgroup) {
-      this.xgroup = xgroup;
+    public CaptureGroupBuilder xGroup(String xGroup) {
+      this.xGroup = xGroup;
       return this;
     }
 
@@ -163,7 +163,7 @@ public class IBMAssistantV1Models {
    */
   public class Context extends IBMWatsonDynamicModel {
     private String conversationId;
-    private SystemResponse xsystem;
+    private SystemResponse xSystem;
     private MessageContextMetadata metadata;
     private Map<String, Object> additionalProperties;
 
@@ -184,13 +184,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xsystem.
+     * Gets the xSystem.
      *
-     * @return the xsystem
+     * @return the xSystem
      */
     @AuraEnabled
-    public SystemResponse getXsystem() {
-      return xsystem;
+    public SystemResponse getXSystem() {
+      return xSystem;
     }
 
     /**
@@ -215,7 +215,7 @@ public class IBMAssistantV1Models {
 
     private Context(ContextBuilder builder) {
       this.conversationId = builder.conversationId;
-      this.xsystem = builder.xsystem;
+      this.xSystem = builder.xSystem;
       this.metadata = builder.metadata;
     }
 
@@ -236,7 +236,7 @@ public class IBMAssistantV1Models {
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'conversation_id' => 'conversationId',
-        'system' => 'xsystem'
+        'system' => 'xSystem'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -244,10 +244,10 @@ public class IBMAssistantV1Models {
       Context ret = (Context) super.deserialize(jsonString, jsonMap, classType);
       ContextBuilder retBuilder = ret.newBuilder();
 
-      // calling custom deserializer for xsystem
-      Map<String, Object> xsystemMap = (Map<String, Object>) jsonMap.get('xsystem');
-      SystemResponse newXsystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(xsystemMap), xsystemMap, SystemResponse.class);
-      retBuilder.xsystem(newXsystem);
+      // calling custom deserializer for xSystem
+      Map<String, Object> xSystemMap = (Map<String, Object>) jsonMap.get('xSystem');
+      SystemResponse newXSystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(xSystemMap), xSystemMap, SystemResponse.class);
+      retBuilder.xSystem(newXSystem);
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
@@ -273,19 +273,19 @@ public class IBMAssistantV1Models {
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'conversationId' => 'conversation_id',
-        'xsystem' => 'system'
+        'xSystem' => 'system'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
-      // calling custom serializer for xsystem
-      if (xsystem != null) {
-        String xsystemJsonString = xsystem.serialize();
-        String xsystemKey = 'xsystem';
-        if (propertyNameMapping.containsKey(xsystemKey)) {
-          xsystemKey = propertyNameMapping.get(xsystemKey);
+      // calling custom serializer for xSystem
+      if (xSystem != null) {
+        String xSystemJsonString = xSystem.serialize();
+        String xSystemKey = 'xSystem';
+        if (propertyNameMapping.containsKey(xSystemKey)) {
+          xSystemKey = propertyNameMapping.get(xSystemKey);
         }
-        jsonMap.put(xsystemKey, JSON.deserializeUntyped(xsystemJsonString));
+        jsonMap.put(xSystemKey, JSON.deserializeUntyped(xSystemJsonString));
       }
 
       // calling custom serializer for metadata
@@ -307,12 +307,12 @@ public class IBMAssistantV1Models {
    */
   public class ContextBuilder {
     private String conversationId;
-    private SystemResponse xsystem;
+    private SystemResponse xSystem;
     private MessageContextMetadata metadata;
 
     private ContextBuilder(Context context) {
       this.conversationId = context.conversationId;
-      this.xsystem = context.xsystem;
+      this.xSystem = context.xSystem;
       this.metadata = context.metadata;
     }
 
@@ -342,13 +342,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xsystem.
+     * Set the xSystem.
      *
-     * @param xsystem the xsystem
+     * @param xSystem the xSystem
      * @return the Context builder
      */
-    public ContextBuilder xsystem(SystemResponse xsystem) {
-      this.xsystem = xsystem;
+    public ContextBuilder xSystem(SystemResponse xSystem) {
+      this.xSystem = xSystem;
       return this;
     }
 
@@ -750,7 +750,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private DialogNodeNextStep nextStep;
     private String title;
-    private String nodeType;
+    private String xType;
     private String eventName;
     private String variable;
     private List<DialogNodeAction> actions;
@@ -885,14 +885,14 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the nodeType.
+     * Gets the xType.
      *
      * How the dialog node is processed.
      *
-     * @return the nodeType
+     * @return the xType
      */
-    public String nodeType() {
-      return nodeType;
+    public String xType() {
+      return xType;
     }
 
     /**
@@ -986,7 +986,7 @@ public class IBMAssistantV1Models {
       metadata = builder.metadata;
       nextStep = builder.nextStep;
       title = builder.title;
-      nodeType = builder.nodeType;
+      xType = builder.xType;
       eventName = builder.eventName;
       variable = builder.variable;
       actions = builder.actions;
@@ -1022,7 +1022,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private DialogNodeNextStep nextStep;
     private String title;
-    private String nodeType;
+    private String xType;
     private String eventName;
     private String variable;
     private List<DialogNodeAction> actions;
@@ -1043,7 +1043,7 @@ public class IBMAssistantV1Models {
       metadata = createDialogNodeOptions.metadata;
       nextStep = createDialogNodeOptions.nextStep;
       title = createDialogNodeOptions.title;
-      nodeType = createDialogNodeOptions.nodeType;
+      xType = createDialogNodeOptions.xType;
       eventName = createDialogNodeOptions.eventName;
       variable = createDialogNodeOptions.variable;
       actions = createDialogNodeOptions.actions;
@@ -1217,13 +1217,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the nodeType.
+     * Set the xType.
      *
-     * @param nodeType the nodeType
+     * @param xType the xType
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder nodeType(String nodeType) {
-      this.nodeType = nodeType;
+    public CreateDialogNodeOptionsBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 
@@ -1322,7 +1322,7 @@ public class IBMAssistantV1Models {
       this.metadata = dialogNode.getMetadata();
       this.nextStep = dialogNode.getNextStep();
       this.title = dialogNode.getTitle();
-      this.nodeType = dialogNode.getNodeType();
+      this.xType = dialogNode.getXType();
       this.eventName = dialogNode.getEventName();
       this.variable = dialogNode.getVariable();
       this.actions = dialogNode.getActions();
@@ -2692,7 +2692,7 @@ public class IBMAssistantV1Models {
   public class CreateValue extends IBMWatsonGenericModel {
     private String value;
     private IBMWatsonMapModel metadata;
-    private String valueType;
+    private String xType;
     private List<String> synonyms;
     private List<String> patterns;
     private Datetime created;
@@ -2723,14 +2723,14 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the valueType.
+     * Gets the xType.
      *
      * Specifies the type of entity value.
      *
-     * @return the valueType
+     * @return the xType
      */
-    public String valueType() {
-      return valueType;
+    public String xType() {
+      return xType;
     }
 
     /**
@@ -2787,7 +2787,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
       this.value = builder.value;
       this.metadata = builder.metadata;
-      this.valueType = builder.valueType;
+      this.xType = builder.xType;
       this.synonyms = builder.synonyms;
       this.patterns = builder.patterns;
       this.created = builder.created;
@@ -2809,7 +2809,7 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'valueType' => 'type'
+        'xType' => 'type'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -2833,7 +2833,7 @@ public class IBMAssistantV1Models {
   public class CreateValueBuilder {
     private String value;
     private IBMWatsonMapModel metadata;
-    private String valueType;
+    private String xType;
     private List<String> synonyms;
     private List<String> patterns;
     private Datetime created;
@@ -2842,7 +2842,7 @@ public class IBMAssistantV1Models {
     private CreateValueBuilder(CreateValue createValue) {
       this.value = createValue.value;
       this.metadata = createValue.metadata;
-      this.valueType = createValue.valueType;
+      this.xType = createValue.xType;
       this.synonyms = createValue.synonyms;
       this.patterns = createValue.patterns;
       this.created = createValue.created;
@@ -2926,13 +2926,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the valueType.
+     * Set the xType.
      *
-     * @param valueType the valueType
+     * @param xType the xType
      * @return the CreateValue builder
      */
-    public CreateValueBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public CreateValueBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 
@@ -2991,7 +2991,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private IBMWatsonMapModel metadata;
-    private String valueType;
+    private String xType;
     private List<String> synonyms;
     private List<String> patterns;
 
@@ -3042,14 +3042,14 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the valueType.
+     * Gets the xType.
      *
      * Specifies the type of entity value.
      *
-     * @return the valueType
+     * @return the xType
      */
-    public String valueType() {
-      return valueType;
+    public String xType() {
+      return xType;
     }
 
     /**
@@ -3088,7 +3088,7 @@ public class IBMAssistantV1Models {
       entity = builder.entity;
       value = builder.value;
       metadata = builder.metadata;
-      valueType = builder.valueType;
+      xType = builder.xType;
       synonyms = builder.synonyms;
       patterns = builder.patterns;
       this.requestHeaders = builder.requestHeaders;
@@ -3112,7 +3112,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private IBMWatsonMapModel metadata;
-    private String valueType;
+    private String xType;
     private List<String> synonyms;
     private List<String> patterns;
 
@@ -3121,7 +3121,7 @@ public class IBMAssistantV1Models {
       entity = createValueOptions.entity;
       value = createValueOptions.value;
       metadata = createValueOptions.metadata;
-      valueType = createValueOptions.valueType;
+      xType = createValueOptions.xType;
       synonyms = createValueOptions.synonyms;
       patterns = createValueOptions.patterns;
       this.requestHeaders.putAll(createValueOptions.requestHeaders());
@@ -3230,13 +3230,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the valueType.
+     * Set the xType.
      *
-     * @param valueType the valueType
+     * @param xType the xType
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public CreateValueOptionsBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 
@@ -4819,7 +4819,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private DialogNodeNextStep nextStep;
     private String title;
-    private String nodeType;
+    private String xType;
     private String eventName;
     private String variable;
     private List<DialogNodeAction> actions;
@@ -4962,15 +4962,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the nodeType.
+     * Gets the xType.
      *
      * How the dialog node is processed.
      *
-     * @return the nodeType
+     * @return the xType
      */
     @AuraEnabled
-    public String getNodeType() {
-      return nodeType;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -5105,7 +5105,7 @@ public class IBMAssistantV1Models {
       this.metadata = builder.metadata;
       this.nextStep = builder.nextStep;
       this.title = builder.title;
-      this.nodeType = builder.nodeType;
+      this.xType = builder.xType;
       this.eventName = builder.eventName;
       this.variable = builder.variable;
       this.actions = builder.actions;
@@ -5137,7 +5137,7 @@ public class IBMAssistantV1Models {
         'dialog_node' => 'dialogNode',
         'previous_sibling' => 'previousSibling',
         'next_step' => 'nextStep',
-        'type' => 'nodeType',
+        'type' => 'xType',
         'event_name' => 'eventName',
         'digress_in' => 'digressIn',
         'digress_out' => 'digressOut',
@@ -5195,7 +5195,7 @@ public class IBMAssistantV1Models {
         'dialogNode' => 'dialog_node',
         'previousSibling' => 'previous_sibling',
         'nextStep' => 'next_step',
-        'nodeType' => 'type',
+        'xType' => 'type',
         'eventName' => 'event_name',
         'digressIn' => 'digress_in',
         'digressOut' => 'digress_out',
@@ -5276,7 +5276,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private DialogNodeNextStep nextStep;
     private String title;
-    private String nodeType;
+    private String xType;
     private String eventName;
     private String variable;
     private List<DialogNodeAction> actions;
@@ -5299,7 +5299,7 @@ public class IBMAssistantV1Models {
       this.metadata = dialogNode.metadata;
       this.nextStep = dialogNode.nextStep;
       this.title = dialogNode.title;
-      this.nodeType = dialogNode.nodeType;
+      this.xType = dialogNode.xType;
       this.eventName = dialogNode.eventName;
       this.variable = dialogNode.variable;
       this.actions = dialogNode.actions;
@@ -5462,13 +5462,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the nodeType.
+     * Set the xType.
      *
-     * @param nodeType the nodeType
+     * @param xType the xType
      * @return the DialogNode builder
      */
-    public DialogNodeBuilder nodeType(String nodeType) {
-      this.nodeType = nodeType;
+    public DialogNodeBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 
@@ -5589,7 +5589,7 @@ public class IBMAssistantV1Models {
    */
   public class DialogNodeAction extends IBMWatsonGenericModel {
     private String name;
-    private String actionType;
+    private String xType;
     private IBMWatsonMapModel parameters;
     private String resultVariable;
     private String credentials;
@@ -5613,15 +5613,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the actionType.
+     * Gets the xType.
      *
      * The type of action to invoke.
      *
-     * @return the actionType
+     * @return the xType
      */
     @AuraEnabled
-    public String getActionType() {
-      return actionType;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -5664,7 +5664,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
       IBMWatsonValidator.notNull(builder.resultVariable, 'resultVariable cannot be null');
       this.name = builder.name;
-      this.actionType = builder.actionType;
+      this.xType = builder.xType;
       this.parameters = builder.parameters;
       this.resultVariable = builder.resultVariable;
       this.credentials = builder.credentials;
@@ -5686,7 +5686,7 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'actionType',
+        'type' => 'xType',
         'result_variable' => 'resultVariable'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
@@ -5709,7 +5709,7 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'actionType' => 'type',
+        'xType' => 'type',
         'resultVariable' => 'result_variable'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -5733,14 +5733,14 @@ public class IBMAssistantV1Models {
    */
   public class DialogNodeActionBuilder {
     private String name;
-    private String actionType;
+    private String xType;
     private IBMWatsonMapModel parameters;
     private String resultVariable;
     private String credentials;
 
     private DialogNodeActionBuilder(DialogNodeAction dialogNodeAction) {
       this.name = dialogNodeAction.name;
-      this.actionType = dialogNodeAction.actionType;
+      this.xType = dialogNodeAction.xType;
       this.parameters = dialogNodeAction.parameters;
       this.resultVariable = dialogNodeAction.resultVariable;
       this.credentials = dialogNodeAction.credentials;
@@ -5784,13 +5784,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the actionType.
+     * Set the xType.
      *
-     * @param actionType the actionType
+     * @param xType the xType
      * @return the DialogNodeAction builder
      */
-    public DialogNodeActionBuilder actionType(String actionType) {
-      this.actionType = actionType;
+    public DialogNodeActionBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 
@@ -6296,7 +6296,7 @@ public class IBMAssistantV1Models {
     private List<DialogNodeOutputTextValuesElement> values;
     private String selectionPolicy;
     private String delimiter;
-    private Long xtime;
+    private Long xTime;
     private Boolean typing;
     private String source;
     private String title;
@@ -6369,16 +6369,16 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xtime.
+     * Gets the xTime.
      *
      * How long to pause, in milliseconds. The valid values are from 0 to 10000. Valid only when
      * **response_type**=`pause`.
      *
-     * @return the xtime
+     * @return the xTime
      */
     @AuraEnabled
-    public Long getXtime() {
-      return xtime;
+    public Long getXTime() {
+      return xTime;
     }
 
     /**
@@ -6529,7 +6529,7 @@ public class IBMAssistantV1Models {
       this.values = builder.values;
       this.selectionPolicy = builder.selectionPolicy;
       this.delimiter = builder.delimiter;
-      this.xtime = builder.xtime;
+      this.xTime = builder.xTime;
       this.typing = builder.typing;
       this.source = builder.source;
       this.title = builder.title;
@@ -6561,7 +6561,7 @@ public class IBMAssistantV1Models {
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'response_type' => 'responseType',
         'selection_policy' => 'selectionPolicy',
-        'time' => 'xtime',
+        'time' => 'xTime',
         'message_to_human_agent' => 'messageToHumanAgent',
         'query_type' => 'queryType',
         'discovery_version' => 'discoveryVersion'
@@ -6609,7 +6609,7 @@ public class IBMAssistantV1Models {
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'responseType' => 'response_type',
         'selectionPolicy' => 'selection_policy',
-        'xtime' => 'time',
+        'xTime' => 'time',
         'messageToHumanAgent' => 'message_to_human_agent',
         'queryType' => 'query_type',
         'discoveryVersion' => 'discovery_version'
@@ -6656,7 +6656,7 @@ public class IBMAssistantV1Models {
     private List<DialogNodeOutputTextValuesElement> values;
     private String selectionPolicy;
     private String delimiter;
-    private Long xtime;
+    private Long xTime;
     private Boolean typing;
     private String source;
     private String title;
@@ -6674,7 +6674,7 @@ public class IBMAssistantV1Models {
       this.values = dialogNodeOutputGeneric.values;
       this.selectionPolicy = dialogNodeOutputGeneric.selectionPolicy;
       this.delimiter = dialogNodeOutputGeneric.delimiter;
-      this.xtime = dialogNodeOutputGeneric.xtime;
+      this.xTime = dialogNodeOutputGeneric.xTime;
       this.typing = dialogNodeOutputGeneric.typing;
       this.source = dialogNodeOutputGeneric.source;
       this.title = dialogNodeOutputGeneric.title;
@@ -6788,13 +6788,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xtime.
+     * Set the xTime.
      *
-     * @param xtime the xtime
+     * @param xTime the xTime
      * @return the DialogNodeOutputGeneric builder
      */
-    public DialogNodeOutputGenericBuilder xtime(Long xtime) {
-      this.xtime = xtime;
+    public DialogNodeOutputGenericBuilder xTime(Long xTime) {
+      this.xTime = xTime;
       return this;
     }
 
@@ -7658,12 +7658,575 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * DialogRuntimeResponseGeneric.
+   * DialogSuggestion.
    */
-  public class DialogRuntimeResponseGeneric extends IBMWatsonGenericModel {
+  public class DialogSuggestion extends IBMWatsonGenericModel {
+    private String label;
+    private DialogSuggestionValue value;
+    private DialogSuggestionOutput output;
+    private String dialogNode;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogSuggestion() { }
+
+    /**
+     * Gets the label.
+     *
+     * The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
+     * corresponding dialog node.
+     *
+     * @return the label
+     */
+    @AuraEnabled
+    public String getLabel() {
+      return label;
+    }
+
+    /**
+     * Gets the value.
+     *
+     * An object defining the message input, intents, and entities to be sent to the Watson Assistant service if the
+     * user selects the corresponding disambiguation option.
+     *
+     * @return the value
+     */
+    @AuraEnabled
+    public DialogSuggestionValue getValue() {
+      return value;
+    }
+
+    /**
+     * Gets the output.
+     *
+     * The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding
+     * option.
+     *
+     * @return the output
+     */
+    @AuraEnabled
+    public DialogSuggestionOutput getOutput() {
+      return output;
+    }
+
+    /**
+     * Gets the dialogNode.
+     *
+     * The ID of the dialog node that the **label** property is taken from. The **label** property is populated using
+     * the value of the dialog node's **user_label** property.
+     *
+     * @return the dialogNode
+     */
+    @AuraEnabled
+    public String getDialogNode() {
+      return dialogNode;
+    }
+  
+    private DialogSuggestion(DialogSuggestionBuilder builder) {
+      IBMWatsonValidator.notNull(builder.label, 'label cannot be null');
+      IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
+      this.label = builder.label;
+      this.value = builder.value;
+      this.output = builder.output;
+      this.dialogNode = builder.dialogNode;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder newBuilder() {
+      return new DialogSuggestionBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'dialog_node' => 'dialogNode'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      DialogSuggestion ret = (DialogSuggestion) super.deserialize(jsonString, jsonMap, classType);
+      DialogSuggestionBuilder retBuilder = ret.newBuilder();
+
+      // calling custom deserializer for value
+      Map<String, Object> valueMap = (Map<String, Object>) jsonMap.get('value');
+      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(valueMap), valueMap, DialogSuggestionValue.class);
+      retBuilder.value(newValue);
+
+      // calling custom deserializer for output
+      Map<String, Object> outputMap = (Map<String, Object>) jsonMap.get('output');
+      DialogSuggestionOutput newOutput = (DialogSuggestionOutput) new DialogSuggestionOutput().deserialize(JSON.serialize(outputMap), outputMap, DialogSuggestionOutput.class);
+      retBuilder.output(newOutput);
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'dialogNode' => 'dialog_node'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for value
+      if (value != null) {
+        String valueJsonString = value.serialize();
+        String valueKey = 'value';
+        if (propertyNameMapping.containsKey(valueKey)) {
+          valueKey = propertyNameMapping.get(valueKey);
+        }
+        jsonMap.put(valueKey, JSON.deserializeUntyped(valueJsonString));
+      }
+
+      // calling custom serializer for output
+      if (output != null) {
+        String outputJsonString = output.serialize();
+        String outputKey = 'output';
+        if (propertyNameMapping.containsKey(outputKey)) {
+          outputKey = propertyNameMapping.get(outputKey);
+        }
+        jsonMap.put(outputKey, JSON.deserializeUntyped(outputJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
+    }
+  }
+
+  /**
+   * DialogSuggestion Builder.
+   */
+  public class DialogSuggestionBuilder {
+    private String label;
+    private DialogSuggestionValue value;
+    private DialogSuggestionOutput output;
+    private String dialogNode;
+
+    private DialogSuggestionBuilder(DialogSuggestion dialogSuggestion) {
+      this.label = dialogSuggestion.label;
+      this.value = dialogSuggestion.value;
+      this.output = dialogSuggestion.output;
+      this.dialogNode = dialogSuggestion.dialogNode;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogSuggestionBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param label the label
+     * @param value the value
+     */
+    public DialogSuggestionBuilder(String label, DialogSuggestionValue value) {
+      this.label = label;
+      this.value = value;
+    }
+
+    /**
+     * Builds a DialogSuggestion.
+     *
+     * @return the dialogSuggestion
+     */
+    public DialogSuggestion build() {
+      return new DialogSuggestion(this);
+    }
+
+    /**
+     * Set the label.
+     *
+     * @param label the label
+     * @return the DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder label(String label) {
+      this.label = label;
+      return this;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder value(DialogSuggestionValue value) {
+      this.value = value;
+      return this;
+    }
+
+    /**
+     * Set the output.
+     *
+     * @param output the output
+     * @return the DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder output(DialogSuggestionOutput output) {
+      this.output = output;
+      return this;
+    }
+
+    /**
+     * Set the dialogNode.
+     *
+     * @param dialogNode the dialogNode
+     * @return the DialogSuggestion builder
+     */
+    public DialogSuggestionBuilder dialogNode(String dialogNode) {
+      this.dialogNode = dialogNode;
+      return this;
+    }
+  }
+
+  /**
+   * The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding option.
+   */
+  public class DialogSuggestionOutput extends IBMWatsonDynamicModel {
+    private List<String> nodesVisited;
+    private List<DialogNodeVisitedDetails> nodesVisitedDetails;
+    private List<String> text;
+    private List<DialogSuggestionResponseGeneric> generic;
+    private Map<String, Object> additionalProperties;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogSuggestionOutput() { }
+
+    /**
+     * Gets the nodesVisited.
+     *
+     * @return the nodesVisited
+     */
+    @AuraEnabled
+    public List<String> getNodesVisited() {
+      return nodesVisited;
+    }
+
+    /**
+     * Gets the nodesVisitedDetails.
+     *
+     * @return the nodesVisitedDetails
+     */
+    @AuraEnabled
+    public List<DialogNodeVisitedDetails> getNodesVisitedDetails() {
+      return nodesVisitedDetails;
+    }
+
+    /**
+     * Gets the text.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public List<String> getText() {
+      return text;
+    }
+
+    /**
+     * Gets the generic.
+     *
+     * @return the generic
+     */
+    @AuraEnabled
+    public List<DialogSuggestionResponseGeneric> getGeneric() {
+      return generic;
+    }
+
+    /**
+     * Gets the dynamic properties attached to DialogSuggestionOutput.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
+
+    private DialogSuggestionOutput(DialogSuggestionOutputBuilder builder) {
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      this.nodesVisited = builder.nodesVisited;
+      this.nodesVisitedDetails = builder.nodesVisitedDetails;
+      this.text = builder.text;
+      this.generic = builder.generic;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder newBuilder() {
+      return new DialogSuggestionOutputBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'nodes_visited' => 'nodesVisited',
+        'nodes_visited_details' => 'nodesVisitedDetails'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      DialogSuggestionOutput ret = (DialogSuggestionOutput) super.deserialize(jsonString, jsonMap, classType);
+      DialogSuggestionOutputBuilder retBuilder = ret.newBuilder();
+
+      // calling custom deserializer for nodesVisitedDetails
+      List<DialogNodeVisitedDetails> newNodesVisitedDetails = new List<DialogNodeVisitedDetails>();
+      List<DialogNodeVisitedDetails> deserializedNodesVisitedDetails = ret.getNodesVisitedDetails();
+      if (deserializedNodesVisitedDetails != null) {
+        for (Integer i = 0; i < deserializedNodesVisitedDetails.size(); i++) {
+          DialogNodeVisitedDetails currentItem = ret.getNodesVisitedDetails().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('nodesVisitedDetails');
+          DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeVisitedDetails.class);
+          newNodesVisitedDetails.add(newItem);
+        }
+        retBuilder.nodesVisitedDetails(newNodesVisitedDetails);
+      }
+
+      // calling custom deserializer for generic
+      List<DialogSuggestionResponseGeneric> newGeneric = new List<DialogSuggestionResponseGeneric>();
+      List<DialogSuggestionResponseGeneric> deserializedGeneric = ret.getGeneric();
+      if (deserializedGeneric != null) {
+        for (Integer i = 0; i < deserializedGeneric.size(); i++) {
+          DialogSuggestionResponseGeneric currentItem = ret.getGeneric().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
+          DialogSuggestionResponseGeneric newItem = (DialogSuggestionResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestionResponseGeneric.class);
+          newGeneric.add(newItem);
+        }
+        retBuilder.generic(newGeneric);
+      }
+
+      DialogSuggestionOutput builderResult = retBuilder.build();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key)) {
+          builderResult.put(key, jsonMap.get(key));
+        }
+      }
+
+      return builderResult;
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'nodesVisited' => 'nodes_visited',
+        'nodesVisitedDetails' => 'nodes_visited_details'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
+
+      // calling custom serializer for nodesVisitedDetails
+      if (nodesVisitedDetails != null) {
+        List<Object> nodesVisitedDetailsJsonList = new List<Object>();
+        for (DialogNodeVisitedDetails listItem : nodesVisitedDetails) {
+          String listItemJsonString = listItem.serialize();
+          nodesVisitedDetailsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String nodesVisitedDetailsKey = 'nodesVisitedDetails';
+        if (propertyNameMapping.containsKey(nodesVisitedDetailsKey)) {
+          nodesVisitedDetailsKey = propertyNameMapping.get(nodesVisitedDetailsKey);
+        }
+        jsonMap.put(nodesVisitedDetailsKey, nodesVisitedDetailsJsonList);
+      }
+
+      // calling custom serializer for generic
+      if (generic != null) {
+        List<Object> genericJsonList = new List<Object>();
+        for (DialogSuggestionResponseGeneric listItem : generic) {
+          String listItemJsonString = listItem.serialize();
+          genericJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String genericKey = 'generic';
+        if (propertyNameMapping.containsKey(genericKey)) {
+          genericKey = propertyNameMapping.get(genericKey);
+        }
+        jsonMap.put(genericKey, genericJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
+    }
+  }
+
+  /**
+   * DialogSuggestionOutput Builder.
+   */
+  public class DialogSuggestionOutputBuilder {
+    private List<String> nodesVisited;
+    private List<DialogNodeVisitedDetails> nodesVisitedDetails;
+    private List<String> text;
+    private List<DialogSuggestionResponseGeneric> generic;
+
+    private DialogSuggestionOutputBuilder(DialogSuggestionOutput dialogSuggestionOutput) {
+      this.nodesVisited = dialogSuggestionOutput.nodesVisited;
+      this.nodesVisitedDetails = dialogSuggestionOutput.nodesVisitedDetails;
+      this.text = dialogSuggestionOutput.text;
+      this.generic = dialogSuggestionOutput.generic;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogSuggestionOutputBuilder() { }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param text the text
+     */
+    public DialogSuggestionOutputBuilder(List<String> text) {
+      this.text = text;
+    }
+
+    /**
+     * Builds a DialogSuggestionOutput.
+     *
+     * @return the dialogSuggestionOutput
+     */
+    public DialogSuggestionOutput build() {
+      return new DialogSuggestionOutput(this);
+    }
+
+    /**
+     * Adds an nodesVisited to nodesVisited.
+     *
+     * @param nodesVisited the new nodesVisited
+     * @return the DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder addNodesVisited(String nodesVisited) {
+      IBMWatsonValidator.notNull(nodesVisited, 'nodesVisited cannot be null');
+      if (this.nodesVisited == null) {
+        this.nodesVisited = new List<String>();
+      }
+      this.nodesVisited.add(nodesVisited);
+      return this;
+    }
+
+    /**
+     * Adds an nodesVisitedDetails to nodesVisitedDetails.
+     *
+     * @param nodesVisitedDetails the new nodesVisitedDetails
+     * @return the DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder addNodesVisitedDetails(DialogNodeVisitedDetails nodesVisitedDetails) {
+      IBMWatsonValidator.notNull(nodesVisitedDetails, 'nodesVisitedDetails cannot be null');
+      if (this.nodesVisitedDetails == null) {
+        this.nodesVisitedDetails = new List<DialogNodeVisitedDetails>();
+      }
+      this.nodesVisitedDetails.add(nodesVisitedDetails);
+      return this;
+    }
+
+    /**
+     * Adds an text to text.
+     *
+     * @param text the new text
+     * @return the DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder addText(String text) {
+      IBMWatsonValidator.notNull(text, 'text cannot be null');
+      if (this.text == null) {
+        this.text = new List<String>();
+      }
+      this.text.add(text);
+      return this;
+    }
+
+    /**
+     * Adds an generic to generic.
+     *
+     * @param generic the new generic
+     * @return the DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder addGeneric(DialogSuggestionResponseGeneric generic) {
+      IBMWatsonValidator.notNull(generic, 'generic cannot be null');
+      if (this.generic == null) {
+        this.generic = new List<DialogSuggestionResponseGeneric>();
+      }
+      this.generic.add(generic);
+      return this;
+    }
+
+    /**
+     * Set the nodesVisited.
+     * Existing nodesVisited will be replaced.
+     *
+     * @param nodesVisited the nodesVisited
+     * @return the DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder nodesVisited(List<String> nodesVisited) {
+      this.nodesVisited = nodesVisited;
+      return this;
+    }
+
+    /**
+     * Set the nodesVisitedDetails.
+     * Existing nodesVisitedDetails will be replaced.
+     *
+     * @param nodesVisitedDetails the nodesVisitedDetails
+     * @return the DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder nodesVisitedDetails(List<DialogNodeVisitedDetails> nodesVisitedDetails) {
+      this.nodesVisitedDetails = nodesVisitedDetails;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     * Existing text will be replaced.
+     *
+     * @param text the text
+     * @return the DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder text(List<String> text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the generic.
+     * Existing generic will be replaced.
+     *
+     * @param generic the generic
+     * @return the DialogSuggestionOutput builder
+     */
+    public DialogSuggestionOutputBuilder generic(List<DialogSuggestionResponseGeneric> generic) {
+      this.generic = generic;
+      return this;
+    }
+  }
+
+  /**
+   * DialogSuggestionResponseGeneric.
+   */
+  public class DialogSuggestionResponseGeneric extends IBMWatsonGenericModel {
     private String responseType;
     private String text;
-    private Long xtime;
+    private Long xTime;
     private Boolean typing;
     private String source;
     private String title;
@@ -7673,13 +8236,12 @@ public class IBMAssistantV1Models {
     private String messageToHumanAgent;
     private String topic;
     private String dialogNode;
-    private List<DialogSuggestion> suggestions;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
      * and should not be called by the client.
      */
-    public DialogRuntimeResponseGeneric() { }
+    public DialogSuggestionResponseGeneric() { }
 
     /**
      * Gets the responseType.
@@ -7688,7 +8250,8 @@ public class IBMAssistantV1Models {
      * application or channel.
      *
      * **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
-     * Plus and Premium users.
+     * Plus and Premium users. The **search_skill** response type is available only for Plus and Premium users, and is
+     * used only by the v2 runtime API.
      *
      * @return the responseType
      */
@@ -7710,15 +8273,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xtime.
+     * Gets the xTime.
      *
      * How long to pause, in milliseconds.
      *
-     * @return the xtime
+     * @return the xTime
      */
     @AuraEnabled
-    public Long getXtime() {
-      return xtime;
+    public Long getXTime() {
+      return xTime;
     }
 
     /**
@@ -7829,27 +8392,12 @@ public class IBMAssistantV1Models {
     public String getDialogNode() {
       return dialogNode;
     }
-
-    /**
-     * Gets the suggestions.
-     *
-     * An array of objects describing the possible matching dialog nodes from which the user can choose.
-     *
-     * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
-     * users.
-     *
-     * @return the suggestions
-     */
-    @AuraEnabled
-    public List<DialogSuggestion> getSuggestions() {
-      return suggestions;
-    }
   
-    private DialogRuntimeResponseGeneric(DialogRuntimeResponseGenericBuilder builder) {
+    private DialogSuggestionResponseGeneric(DialogSuggestionResponseGenericBuilder builder) {
       IBMWatsonValidator.notNull(builder.responseType, 'responseType cannot be null');
       this.responseType = builder.responseType;
       this.text = builder.text;
-      this.xtime = builder.xtime;
+      this.xTime = builder.xTime;
       this.typing = builder.typing;
       this.source = builder.source;
       this.title = builder.title;
@@ -7859,16 +8407,15 @@ public class IBMAssistantV1Models {
       this.messageToHumanAgent = builder.messageToHumanAgent;
       this.topic = builder.topic;
       this.dialogNode = builder.dialogNode;
-      this.suggestions = builder.suggestions;
     }
 
     /**
      * New builder.
      *
-     * @return a DialogRuntimeResponseGeneric builder
+     * @return a DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder newBuilder() {
-      return new DialogRuntimeResponseGenericBuilder(this);
+    public DialogSuggestionResponseGenericBuilder newBuilder() {
+      return new DialogSuggestionResponseGenericBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7879,15 +8426,15 @@ public class IBMAssistantV1Models {
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'response_type' => 'responseType',
-        'time' => 'xtime',
+        'time' => 'xTime',
         'message_to_human_agent' => 'messageToHumanAgent',
         'dialog_node' => 'dialogNode'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      DialogRuntimeResponseGeneric ret = (DialogRuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
-      DialogRuntimeResponseGenericBuilder retBuilder = ret.newBuilder();
+      DialogSuggestionResponseGeneric ret = (DialogSuggestionResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
+      DialogSuggestionResponseGenericBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for options
       List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
@@ -7902,19 +8449,6 @@ public class IBMAssistantV1Models {
         retBuilder.options(newOptions);
       }
 
-      // calling custom deserializer for suggestions
-      List<DialogSuggestion> newSuggestions = new List<DialogSuggestion>();
-      List<DialogSuggestion> deserializedSuggestions = ret.getSuggestions();
-      if (deserializedSuggestions != null) {
-        for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
-          DialogSuggestion currentItem = ret.getSuggestions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions');
-          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
-          newSuggestions.add(newItem);
-        }
-        retBuilder.suggestions(newSuggestions);
-      }
-
       return retBuilder.build();
     }
 
@@ -7925,7 +8459,7 @@ public class IBMAssistantV1Models {
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'responseType' => 'response_type',
-        'xtime' => 'time',
+        'xTime' => 'time',
         'messageToHumanAgent' => 'message_to_human_agent',
         'dialogNode' => 'dialog_node'
       };
@@ -7945,31 +8479,17 @@ public class IBMAssistantV1Models {
         jsonMap.put(optionsKey, optionsJsonList);
       }
 
-      // calling custom serializer for suggestions
-      if (suggestions != null) {
-        List<Object> suggestionsJsonList = new List<Object>();
-        for (DialogSuggestion listItem : suggestions) {
-          String listItemJsonString = listItem.serialize();
-          suggestionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
-        }
-        String suggestionsKey = 'suggestions';
-        if (propertyNameMapping.containsKey(suggestionsKey)) {
-          suggestionsKey = propertyNameMapping.get(suggestionsKey);
-        }
-        jsonMap.put(suggestionsKey, suggestionsJsonList);
-      }
-
       return JSON.serialize(jsonMap);
     }
   }
 
   /**
-   * DialogRuntimeResponseGeneric Builder.
+   * DialogSuggestionResponseGeneric Builder.
    */
-  public class DialogRuntimeResponseGenericBuilder {
+  public class DialogSuggestionResponseGenericBuilder {
     private String responseType;
     private String text;
-    private Long xtime;
+    private Long xTime;
     private Boolean typing;
     private String source;
     private String title;
@@ -7979,28 +8499,26 @@ public class IBMAssistantV1Models {
     private String messageToHumanAgent;
     private String topic;
     private String dialogNode;
-    private List<DialogSuggestion> suggestions;
 
-    private DialogRuntimeResponseGenericBuilder(DialogRuntimeResponseGeneric dialogRuntimeResponseGeneric) {
-      this.responseType = dialogRuntimeResponseGeneric.responseType;
-      this.text = dialogRuntimeResponseGeneric.text;
-      this.xtime = dialogRuntimeResponseGeneric.xtime;
-      this.typing = dialogRuntimeResponseGeneric.typing;
-      this.source = dialogRuntimeResponseGeneric.source;
-      this.title = dialogRuntimeResponseGeneric.title;
-      this.description = dialogRuntimeResponseGeneric.description;
-      this.preference = dialogRuntimeResponseGeneric.preference;
-      this.options = dialogRuntimeResponseGeneric.options;
-      this.messageToHumanAgent = dialogRuntimeResponseGeneric.messageToHumanAgent;
-      this.topic = dialogRuntimeResponseGeneric.topic;
-      this.dialogNode = dialogRuntimeResponseGeneric.dialogNode;
-      this.suggestions = dialogRuntimeResponseGeneric.suggestions;
+    private DialogSuggestionResponseGenericBuilder(DialogSuggestionResponseGeneric dialogSuggestionResponseGeneric) {
+      this.responseType = dialogSuggestionResponseGeneric.responseType;
+      this.text = dialogSuggestionResponseGeneric.text;
+      this.xTime = dialogSuggestionResponseGeneric.xTime;
+      this.typing = dialogSuggestionResponseGeneric.typing;
+      this.source = dialogSuggestionResponseGeneric.source;
+      this.title = dialogSuggestionResponseGeneric.title;
+      this.description = dialogSuggestionResponseGeneric.description;
+      this.preference = dialogSuggestionResponseGeneric.preference;
+      this.options = dialogSuggestionResponseGeneric.options;
+      this.messageToHumanAgent = dialogSuggestionResponseGeneric.messageToHumanAgent;
+      this.topic = dialogSuggestionResponseGeneric.topic;
+      this.dialogNode = dialogSuggestionResponseGeneric.dialogNode;
     }
 
     /**
      * Instantiates a new builder.
      */
-    public DialogRuntimeResponseGenericBuilder() {
+    public DialogSuggestionResponseGenericBuilder() {
     }
 
     /**
@@ -8008,26 +8526,26 @@ public class IBMAssistantV1Models {
      *
      * @param responseType the responseType
      */
-    public DialogRuntimeResponseGenericBuilder(String responseType) {
+    public DialogSuggestionResponseGenericBuilder(String responseType) {
       this.responseType = responseType;
     }
 
     /**
-     * Builds a DialogRuntimeResponseGeneric.
+     * Builds a DialogSuggestionResponseGeneric.
      *
-     * @return the dialogRuntimeResponseGeneric
+     * @return the dialogSuggestionResponseGeneric
      */
-    public DialogRuntimeResponseGeneric build() {
-      return new DialogRuntimeResponseGeneric(this);
+    public DialogSuggestionResponseGeneric build() {
+      return new DialogSuggestionResponseGeneric(this);
     }
 
     /**
      * Adds an options to options.
      *
      * @param options the new options
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder addOptions(DialogNodeOutputOptionsElement options) {
+    public DialogSuggestionResponseGenericBuilder addOptions(DialogNodeOutputOptionsElement options) {
       IBMWatsonValidator.notNull(options, 'options cannot be null');
       if (this.options == null) {
         this.options = new List<DialogNodeOutputOptionsElement>();
@@ -8037,27 +8555,12 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Adds an suggestions to suggestions.
-     *
-     * @param suggestions the new suggestions
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder addSuggestions(DialogSuggestion suggestions) {
-      IBMWatsonValidator.notNull(suggestions, 'suggestions cannot be null');
-      if (this.suggestions == null) {
-        this.suggestions = new List<DialogSuggestion>();
-      }
-      this.suggestions.add(suggestions);
-      return this;
-    }
-
-    /**
      * Set the responseType.
      *
      * @param responseType the responseType
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder responseType(String responseType) {
+    public DialogSuggestionResponseGenericBuilder responseType(String responseType) {
       this.responseType = responseType;
       return this;
     }
@@ -8066,21 +8569,21 @@ public class IBMAssistantV1Models {
      * Set the text.
      *
      * @param text the text
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder text(String text) {
+    public DialogSuggestionResponseGenericBuilder text(String text) {
       this.text = text;
       return this;
     }
 
     /**
-     * Set the xtime.
+     * Set the xTime.
      *
-     * @param xtime the xtime
-     * @return the DialogRuntimeResponseGeneric builder
+     * @param xTime the xTime
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder xtime(Long xtime) {
-      this.xtime = xtime;
+    public DialogSuggestionResponseGenericBuilder xTime(Long xTime) {
+      this.xTime = xTime;
       return this;
     }
 
@@ -8088,9 +8591,9 @@ public class IBMAssistantV1Models {
      * Set the typing.
      *
      * @param typing the typing
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder typing(Boolean typing) {
+    public DialogSuggestionResponseGenericBuilder typing(Boolean typing) {
       this.typing = typing;
       return this;
     }
@@ -8099,9 +8602,9 @@ public class IBMAssistantV1Models {
      * Set the source.
      *
      * @param source the source
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder source(String source) {
+    public DialogSuggestionResponseGenericBuilder source(String source) {
       this.source = source;
       return this;
     }
@@ -8110,9 +8613,9 @@ public class IBMAssistantV1Models {
      * Set the title.
      *
      * @param title the title
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder title(String title) {
+    public DialogSuggestionResponseGenericBuilder title(String title) {
       this.title = title;
       return this;
     }
@@ -8121,9 +8624,9 @@ public class IBMAssistantV1Models {
      * Set the description.
      *
      * @param description the description
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder description(String description) {
+    public DialogSuggestionResponseGenericBuilder description(String description) {
       this.description = description;
       return this;
     }
@@ -8132,9 +8635,9 @@ public class IBMAssistantV1Models {
      * Set the preference.
      *
      * @param preference the preference
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder preference(String preference) {
+    public DialogSuggestionResponseGenericBuilder preference(String preference) {
       this.preference = preference;
       return this;
     }
@@ -8144,9 +8647,9 @@ public class IBMAssistantV1Models {
      * Existing options will be replaced.
      *
      * @param options the options
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder options(List<DialogNodeOutputOptionsElement> options) {
+    public DialogSuggestionResponseGenericBuilder options(List<DialogNodeOutputOptionsElement> options) {
       this.options = options;
       return this;
     }
@@ -8155,9 +8658,9 @@ public class IBMAssistantV1Models {
      * Set the messageToHumanAgent.
      *
      * @param messageToHumanAgent the messageToHumanAgent
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder messageToHumanAgent(String messageToHumanAgent) {
+    public DialogSuggestionResponseGenericBuilder messageToHumanAgent(String messageToHumanAgent) {
       this.messageToHumanAgent = messageToHumanAgent;
       return this;
     }
@@ -8166,9 +8669,9 @@ public class IBMAssistantV1Models {
      * Set the topic.
      *
      * @param topic the topic
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder topic(String topic) {
+    public DialogSuggestionResponseGenericBuilder topic(String topic) {
       this.topic = topic;
       return this;
     }
@@ -8177,255 +8680,9 @@ public class IBMAssistantV1Models {
      * Set the dialogNode.
      *
      * @param dialogNode the dialogNode
-     * @return the DialogRuntimeResponseGeneric builder
+     * @return the DialogSuggestionResponseGeneric builder
      */
-    public DialogRuntimeResponseGenericBuilder dialogNode(String dialogNode) {
-      this.dialogNode = dialogNode;
-      return this;
-    }
-
-    /**
-     * Set the suggestions.
-     * Existing suggestions will be replaced.
-     *
-     * @param suggestions the suggestions
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder suggestions(List<DialogSuggestion> suggestions) {
-      this.suggestions = suggestions;
-      return this;
-    }
-  }
-
-  /**
-   * DialogSuggestion.
-   */
-  public class DialogSuggestion extends IBMWatsonGenericModel {
-    private String label;
-    private DialogSuggestionValue value;
-    private IBMWatsonMapModel output;
-    private String dialogNode;
-
-    /**
-     * This constructor is strictly for internal serialization/deserialization purposes
-     * and should not be called by the client.
-     */
-    public DialogSuggestion() { }
-
-    /**
-     * Gets the label.
-     *
-     * The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
-     * corresponding dialog node.
-     *
-     * @return the label
-     */
-    @AuraEnabled
-    public String getLabel() {
-      return label;
-    }
-
-    /**
-     * Gets the value.
-     *
-     * An object defining the message input, intents, and entities to be sent to the Watson Assistant service if the
-     * user selects the corresponding disambiguation option.
-     *
-     * @return the value
-     */
-    @AuraEnabled
-    public DialogSuggestionValue getValue() {
-      return value;
-    }
-
-    /**
-     * Gets the output.
-     *
-     * The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding
-     * option.
-     *
-     * @return the output
-     */
-    @AuraEnabled
-    public IBMWatsonMapModel getOutput() {
-      return output;
-    }
-
-    /**
-     * Gets the dialogNode.
-     *
-     * The ID of the dialog node that the **label** property is taken from. The **label** property is populated using
-     * the value of the dialog node's **user_label** property.
-     *
-     * @return the dialogNode
-     */
-    @AuraEnabled
-    public String getDialogNode() {
-      return dialogNode;
-    }
-  
-    private DialogSuggestion(DialogSuggestionBuilder builder) {
-      IBMWatsonValidator.notNull(builder.label, 'label cannot be null');
-      IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
-      this.label = builder.label;
-      this.value = builder.value;
-      this.output = builder.output;
-      this.dialogNode = builder.dialogNode;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a DialogSuggestion builder
-     */
-    public DialogSuggestionBuilder newBuilder() {
-      return new DialogSuggestionBuilder(this);
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'dialog_node' => 'dialogNode'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      DialogSuggestion ret = (DialogSuggestion) super.deserialize(jsonString, jsonMap, classType);
-      DialogSuggestionBuilder retBuilder = ret.newBuilder();
-
-      // calling custom deserializer for value
-      Map<String, Object> valueMap = (Map<String, Object>) jsonMap.get('value');
-      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(valueMap), valueMap, DialogSuggestionValue.class);
-      retBuilder.value(newValue);
-
-      // calling custom deserializer for output
-      Map<String, Object> outputMap = (Map<String, Object>) jsonMap.get('output');
-      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(outputMap), outputMap, IBMWatsonMapModel.class);
-      retBuilder.output(newOutput);
-
-      return retBuilder.build();
-    }
-
-    public String serialize() {
-      // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      // replace any names that are different between the SDK and API
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'dialogNode' => 'dialog_node'
-      };
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      // calling custom serializer for value
-      if (value != null) {
-        String valueJsonString = value.serialize();
-        String valueKey = 'value';
-        if (propertyNameMapping.containsKey(valueKey)) {
-          valueKey = propertyNameMapping.get(valueKey);
-        }
-        jsonMap.put(valueKey, JSON.deserializeUntyped(valueJsonString));
-      }
-
-      // calling custom serializer for output
-      if (output != null) {
-        String outputJsonString = output.serialize();
-        String outputKey = 'output';
-        if (propertyNameMapping.containsKey(outputKey)) {
-          outputKey = propertyNameMapping.get(outputKey);
-        }
-        jsonMap.put(outputKey, JSON.deserializeUntyped(outputJsonString));
-      }
-
-      return JSON.serialize(jsonMap);
-    }
-  }
-
-  /**
-   * DialogSuggestion Builder.
-   */
-  public class DialogSuggestionBuilder {
-    private String label;
-    private DialogSuggestionValue value;
-    private IBMWatsonMapModel output;
-    private String dialogNode;
-
-    private DialogSuggestionBuilder(DialogSuggestion dialogSuggestion) {
-      this.label = dialogSuggestion.label;
-      this.value = dialogSuggestion.value;
-      this.output = dialogSuggestion.output;
-      this.dialogNode = dialogSuggestion.dialogNode;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public DialogSuggestionBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param label the label
-     * @param value the value
-     */
-    public DialogSuggestionBuilder(String label, DialogSuggestionValue value) {
-      this.label = label;
-      this.value = value;
-    }
-
-    /**
-     * Builds a DialogSuggestion.
-     *
-     * @return the dialogSuggestion
-     */
-    public DialogSuggestion build() {
-      return new DialogSuggestion(this);
-    }
-
-    /**
-     * Set the label.
-     *
-     * @param label the label
-     * @return the DialogSuggestion builder
-     */
-    public DialogSuggestionBuilder label(String label) {
-      this.label = label;
-      return this;
-    }
-
-    /**
-     * Set the value.
-     *
-     * @param value the value
-     * @return the DialogSuggestion builder
-     */
-    public DialogSuggestionBuilder value(DialogSuggestionValue value) {
-      this.value = value;
-      return this;
-    }
-
-    /**
-     * Set the output.
-     *
-     * @param output the output
-     * @return the DialogSuggestion builder
-     */
-    public DialogSuggestionBuilder output(IBMWatsonMapModel output) {
-      this.output = output;
-      return this;
-    }
-
-    /**
-     * Set the dialogNode.
-     *
-     * @param dialogNode the dialogNode
-     * @return the DialogSuggestion builder
-     */
-    public DialogSuggestionBuilder dialogNode(String dialogNode) {
+    public DialogSuggestionResponseGenericBuilder dialogNode(String dialogNode) {
       this.dialogNode = dialogNode;
       return this;
     }
@@ -9689,7 +9946,7 @@ public class IBMAssistantV1Models {
   public class GetEntityOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
 
     /**
@@ -9715,15 +9972,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xexport.
+     * Gets the xExport.
      *
      * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
      * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
-     * @return the xexport
+     * @return the xExport
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean xExport() {
+      return xExport;
     }
 
     /**
@@ -9742,7 +9999,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       workspaceId = builder.workspaceId;
       entity = builder.entity;
-      xexport = builder.xexport;
+      xExport = builder.xExport;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -9763,13 +10020,13 @@ public class IBMAssistantV1Models {
   public class GetEntityOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
 
     private GetEntityOptionsBuilder(GetEntityOptions getEntityOptions) {
       workspaceId = getEntityOptions.workspaceId;
       entity = getEntityOptions.entity;
-      xexport = getEntityOptions.xexport;
+      xExport = getEntityOptions.xExport;
       includeAudit = getEntityOptions.includeAudit;
       this.requestHeaders.putAll(getEntityOptions.requestHeaders());
     }
@@ -9823,13 +10080,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the xExport.
      *
-     * @param xexport the xexport
+     * @param xExport the xExport
      * @return the GetEntityOptions builder
      */
-    public GetEntityOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetEntityOptionsBuilder xExport(Boolean xExport) {
+      this.xExport = xExport;
       return this;
     }
 
@@ -10039,7 +10296,7 @@ public class IBMAssistantV1Models {
   public class GetIntentOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String intent;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
 
     /**
@@ -10065,15 +10322,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xexport.
+     * Gets the xExport.
      *
      * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
      * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
-     * @return the xexport
+     * @return the xExport
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean xExport() {
+      return xExport;
     }
 
     /**
@@ -10092,7 +10349,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
       workspaceId = builder.workspaceId;
       intent = builder.intent;
-      xexport = builder.xexport;
+      xExport = builder.xExport;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -10113,13 +10370,13 @@ public class IBMAssistantV1Models {
   public class GetIntentOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String intent;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
 
     private GetIntentOptionsBuilder(GetIntentOptions getIntentOptions) {
       workspaceId = getIntentOptions.workspaceId;
       intent = getIntentOptions.intent;
-      xexport = getIntentOptions.xexport;
+      xExport = getIntentOptions.xExport;
       includeAudit = getIntentOptions.includeAudit;
       this.requestHeaders.putAll(getIntentOptions.requestHeaders());
     }
@@ -10173,13 +10430,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the xExport.
      *
-     * @param xexport the xexport
+     * @param xExport the xExport
      * @return the GetIntentOptions builder
      */
-    public GetIntentOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetIntentOptionsBuilder xExport(Boolean xExport) {
+      this.xExport = xExport;
       return this;
     }
 
@@ -10419,7 +10676,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String entity;
     private String value;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
 
     /**
@@ -10456,15 +10713,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xexport.
+     * Gets the xExport.
      *
      * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
      * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
-     * @return the xexport
+     * @return the xExport
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean xExport() {
+      return xExport;
     }
 
     /**
@@ -10485,7 +10742,7 @@ public class IBMAssistantV1Models {
       workspaceId = builder.workspaceId;
       entity = builder.entity;
       value = builder.value;
-      xexport = builder.xexport;
+      xExport = builder.xExport;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -10507,14 +10764,14 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String entity;
     private String value;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
 
     private GetValueOptionsBuilder(GetValueOptions getValueOptions) {
       workspaceId = getValueOptions.workspaceId;
       entity = getValueOptions.entity;
       value = getValueOptions.value;
-      xexport = getValueOptions.xexport;
+      xExport = getValueOptions.xExport;
       includeAudit = getValueOptions.includeAudit;
       this.requestHeaders.putAll(getValueOptions.requestHeaders());
     }
@@ -10581,13 +10838,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the xExport.
      *
-     * @param xexport the xexport
+     * @param xExport the xExport
      * @return the GetValueOptions builder
      */
-    public GetValueOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetValueOptionsBuilder xExport(Boolean xExport) {
+      this.xExport = xExport;
       return this;
     }
 
@@ -10620,9 +10877,9 @@ public class IBMAssistantV1Models {
    */
   public class GetWorkspaceOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
-    private String xsort;
+    private String xSort;
 
     /**
      * Gets the workspaceId.
@@ -10636,15 +10893,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xexport.
+     * Gets the xExport.
      *
      * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
      * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
-     * @return the xexport
+     * @return the xExport
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean xExport() {
+      return xExport;
     }
 
     /**
@@ -10659,23 +10916,23 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * Indicates how the returned workspace data will be sorted. This parameter is valid only if **export**=`true`.
      * Specify `sort=stable` to sort all workspace objects by unique identifier, in ascending alphabetical order.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     private GetWorkspaceOptions(GetWorkspaceOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       workspaceId = builder.workspaceId;
-      xexport = builder.xexport;
+      xExport = builder.xExport;
       includeAudit = builder.includeAudit;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -10694,15 +10951,15 @@ public class IBMAssistantV1Models {
    */
   public class GetWorkspaceOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
-    private String xsort;
+    private String xSort;
 
     private GetWorkspaceOptionsBuilder(GetWorkspaceOptions getWorkspaceOptions) {
       workspaceId = getWorkspaceOptions.workspaceId;
-      xexport = getWorkspaceOptions.xexport;
+      xExport = getWorkspaceOptions.xExport;
       includeAudit = getWorkspaceOptions.includeAudit;
-      xsort = getWorkspaceOptions.xsort;
+      xSort = getWorkspaceOptions.xSort;
       this.requestHeaders.putAll(getWorkspaceOptions.requestHeaders());
     }
 
@@ -10742,13 +10999,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the xExport.
      *
-     * @param xexport the xexport
+     * @param xExport the xExport
      * @return the GetWorkspaceOptions builder
      */
-    public GetWorkspaceOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetWorkspaceOptionsBuilder xExport(Boolean xExport) {
+      this.xExport = xExport;
       return this;
     }
 
@@ -10764,13 +11021,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the xSort.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the GetWorkspaceOptions builder
      */
-    public GetWorkspaceOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public GetWorkspaceOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -10993,7 +11250,7 @@ public class IBMAssistantV1Models {
    */
   public class ListAllLogsOptions extends IBMWatsonOptionsModel {
     private String filter;
-    private String xsort;
+    private String xSort;
     private Long pageLimit;
     private String cursor;
 
@@ -11012,15 +11269,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort order, prefix the
      * parameter value with a minus sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -11048,7 +11305,7 @@ public class IBMAssistantV1Models {
     private ListAllLogsOptions(ListAllLogsOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.filter, 'filter cannot be null');
       filter = builder.filter;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       pageLimit = builder.pageLimit;
       cursor = builder.cursor;
       this.requestHeaders = builder.requestHeaders;
@@ -11069,13 +11326,13 @@ public class IBMAssistantV1Models {
    */
   public class ListAllLogsOptionsBuilder extends IBMWatsonOptionsModel {
     private String filter;
-    private String xsort;
+    private String xSort;
     private Long pageLimit;
     private String cursor;
 
     private ListAllLogsOptionsBuilder(ListAllLogsOptions listAllLogsOptions) {
       filter = listAllLogsOptions.filter;
-      xsort = listAllLogsOptions.xsort;
+      xSort = listAllLogsOptions.xSort;
       pageLimit = listAllLogsOptions.pageLimit;
       cursor = listAllLogsOptions.cursor;
       this.requestHeaders.putAll(listAllLogsOptions.requestHeaders());
@@ -11117,13 +11374,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the xSort.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the ListAllLogsOptions builder
      */
-    public ListAllLogsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListAllLogsOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -11168,8 +11425,7 @@ public class IBMAssistantV1Models {
   public class ListCounterexamplesOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -11196,26 +11452,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the includeCount.
-     *
-     * Whether to include information about the number of records returned.
-     *
-     * @return the includeCount
-     */
-    public Boolean includeCount() {
-      return includeCount;
-    }
-
-    /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The attribute by which returned counterexamples will be sorted. To reverse the sort order, prefix the value with
      * a minus sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -11244,8 +11489,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       workspaceId = builder.workspaceId;
       pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       cursor = builder.cursor;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
@@ -11267,16 +11511,14 @@ public class IBMAssistantV1Models {
   public class ListCounterexamplesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
     private ListCounterexamplesOptionsBuilder(ListCounterexamplesOptions listCounterexamplesOptions) {
       workspaceId = listCounterexamplesOptions.workspaceId;
       pageLimit = listCounterexamplesOptions.pageLimit;
-      includeCount = listCounterexamplesOptions.includeCount;
-      xsort = listCounterexamplesOptions.xsort;
+      xSort = listCounterexamplesOptions.xSort;
       cursor = listCounterexamplesOptions.cursor;
       includeAudit = listCounterexamplesOptions.includeAudit;
       this.requestHeaders.putAll(listCounterexamplesOptions.requestHeaders());
@@ -11329,24 +11571,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the includeCount.
+     * Set the xSort.
      *
-     * @param includeCount the includeCount
+     * @param xSort the xSort
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
-      return this;
-    }
-
-    /**
-     * Set the xsort.
-     *
-     * @param xsort the xsort
-     * @return the ListCounterexamplesOptions builder
-     */
-    public ListCounterexamplesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListCounterexamplesOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -11391,8 +11622,7 @@ public class IBMAssistantV1Models {
   public class ListDialogNodesOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -11419,26 +11649,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the includeCount.
-     *
-     * Whether to include information about the number of records returned.
-     *
-     * @return the includeCount
-     */
-    public Boolean includeCount() {
-      return includeCount;
-    }
-
-    /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The attribute by which returned dialog nodes will be sorted. To reverse the sort order, prefix the value with a
      * minus sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -11467,8 +11686,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       workspaceId = builder.workspaceId;
       pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       cursor = builder.cursor;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
@@ -11490,16 +11708,14 @@ public class IBMAssistantV1Models {
   public class ListDialogNodesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
     private ListDialogNodesOptionsBuilder(ListDialogNodesOptions listDialogNodesOptions) {
       workspaceId = listDialogNodesOptions.workspaceId;
       pageLimit = listDialogNodesOptions.pageLimit;
-      includeCount = listDialogNodesOptions.includeCount;
-      xsort = listDialogNodesOptions.xsort;
+      xSort = listDialogNodesOptions.xSort;
       cursor = listDialogNodesOptions.cursor;
       includeAudit = listDialogNodesOptions.includeAudit;
       this.requestHeaders.putAll(listDialogNodesOptions.requestHeaders());
@@ -11552,24 +11768,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the includeCount.
+     * Set the xSort.
      *
-     * @param includeCount the includeCount
+     * @param xSort the xSort
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
-      return this;
-    }
-
-    /**
-     * Set the xsort.
-     *
-     * @param xsort the xsort
-     * @return the ListDialogNodesOptions builder
-     */
-    public ListDialogNodesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListDialogNodesOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -11613,10 +11818,9 @@ public class IBMAssistantV1Models {
    */
   public class ListEntitiesOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private Boolean xexport;
+    private Boolean xExport;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -11632,15 +11836,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xexport.
+     * Gets the xExport.
      *
      * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
      * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
-     * @return the xexport
+     * @return the xExport
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean xExport() {
+      return xExport;
     }
 
     /**
@@ -11655,26 +11859,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the includeCount.
-     *
-     * Whether to include information about the number of records returned.
-     *
-     * @return the includeCount
-     */
-    public Boolean includeCount() {
-      return includeCount;
-    }
-
-    /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The attribute by which returned entities will be sorted. To reverse the sort order, prefix the value with a minus
      * sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -11702,10 +11895,9 @@ public class IBMAssistantV1Models {
     private ListEntitiesOptions(ListEntitiesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       workspaceId = builder.workspaceId;
-      xexport = builder.xexport;
+      xExport = builder.xExport;
       pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       cursor = builder.cursor;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
@@ -11726,19 +11918,17 @@ public class IBMAssistantV1Models {
    */
   public class ListEntitiesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private Boolean xexport;
+    private Boolean xExport;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
     private ListEntitiesOptionsBuilder(ListEntitiesOptions listEntitiesOptions) {
       workspaceId = listEntitiesOptions.workspaceId;
-      xexport = listEntitiesOptions.xexport;
+      xExport = listEntitiesOptions.xExport;
       pageLimit = listEntitiesOptions.pageLimit;
-      includeCount = listEntitiesOptions.includeCount;
-      xsort = listEntitiesOptions.xsort;
+      xSort = listEntitiesOptions.xSort;
       cursor = listEntitiesOptions.cursor;
       includeAudit = listEntitiesOptions.includeAudit;
       this.requestHeaders.putAll(listEntitiesOptions.requestHeaders());
@@ -11780,13 +11970,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the xExport.
      *
-     * @param xexport the xexport
+     * @param xExport the xExport
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListEntitiesOptionsBuilder xExport(Boolean xExport) {
+      this.xExport = xExport;
       return this;
     }
 
@@ -11802,24 +11992,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the includeCount.
+     * Set the xSort.
      *
-     * @param includeCount the includeCount
+     * @param xSort the xSort
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
-      return this;
-    }
-
-    /**
-     * Set the xsort.
-     *
-     * @param xsort the xsort
-     * @return the ListEntitiesOptions builder
-     */
-    public ListEntitiesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListEntitiesOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -11865,8 +12044,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String intent;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -11904,26 +12082,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the includeCount.
-     *
-     * Whether to include information about the number of records returned.
-     *
-     * @return the includeCount
-     */
-    public Boolean includeCount() {
-      return includeCount;
-    }
-
-    /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The attribute by which returned examples will be sorted. To reverse the sort order, prefix the value with a minus
      * sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -11954,8 +12121,7 @@ public class IBMAssistantV1Models {
       workspaceId = builder.workspaceId;
       intent = builder.intent;
       pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       cursor = builder.cursor;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
@@ -11978,8 +12144,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String intent;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -11987,8 +12152,7 @@ public class IBMAssistantV1Models {
       workspaceId = listExamplesOptions.workspaceId;
       intent = listExamplesOptions.intent;
       pageLimit = listExamplesOptions.pageLimit;
-      includeCount = listExamplesOptions.includeCount;
-      xsort = listExamplesOptions.xsort;
+      xSort = listExamplesOptions.xSort;
       cursor = listExamplesOptions.cursor;
       includeAudit = listExamplesOptions.includeAudit;
       this.requestHeaders.putAll(listExamplesOptions.requestHeaders());
@@ -12054,24 +12218,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the includeCount.
+     * Set the xSort.
      *
-     * @param includeCount the includeCount
+     * @param xSort the xSort
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
-      return this;
-    }
-
-    /**
-     * Set the xsort.
-     *
-     * @param xsort the xsort
-     * @return the ListExamplesOptions builder
-     */
-    public ListExamplesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListExamplesOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -12115,10 +12268,9 @@ public class IBMAssistantV1Models {
    */
   public class ListIntentsOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private Boolean xexport;
+    private Boolean xExport;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -12134,15 +12286,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xexport.
+     * Gets the xExport.
      *
      * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
      * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
-     * @return the xexport
+     * @return the xExport
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean xExport() {
+      return xExport;
     }
 
     /**
@@ -12157,26 +12309,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the includeCount.
-     *
-     * Whether to include information about the number of records returned.
-     *
-     * @return the includeCount
-     */
-    public Boolean includeCount() {
-      return includeCount;
-    }
-
-    /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The attribute by which returned intents will be sorted. To reverse the sort order, prefix the value with a minus
      * sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -12204,10 +12345,9 @@ public class IBMAssistantV1Models {
     private ListIntentsOptions(ListIntentsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       workspaceId = builder.workspaceId;
-      xexport = builder.xexport;
+      xExport = builder.xExport;
       pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       cursor = builder.cursor;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
@@ -12228,19 +12368,17 @@ public class IBMAssistantV1Models {
    */
   public class ListIntentsOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private Boolean xexport;
+    private Boolean xExport;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
     private ListIntentsOptionsBuilder(ListIntentsOptions listIntentsOptions) {
       workspaceId = listIntentsOptions.workspaceId;
-      xexport = listIntentsOptions.xexport;
+      xExport = listIntentsOptions.xExport;
       pageLimit = listIntentsOptions.pageLimit;
-      includeCount = listIntentsOptions.includeCount;
-      xsort = listIntentsOptions.xsort;
+      xSort = listIntentsOptions.xSort;
       cursor = listIntentsOptions.cursor;
       includeAudit = listIntentsOptions.includeAudit;
       this.requestHeaders.putAll(listIntentsOptions.requestHeaders());
@@ -12282,13 +12420,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the xExport.
      *
-     * @param xexport the xexport
+     * @param xExport the xExport
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListIntentsOptionsBuilder xExport(Boolean xExport) {
+      this.xExport = xExport;
       return this;
     }
 
@@ -12304,24 +12442,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the includeCount.
+     * Set the xSort.
      *
-     * @param includeCount the includeCount
+     * @param xSort the xSort
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
-      return this;
-    }
-
-    /**
-     * Set the xsort.
-     *
-     * @param xsort the xsort
-     * @return the ListIntentsOptions builder
-     */
-    public ListIntentsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListIntentsOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -12365,7 +12492,7 @@ public class IBMAssistantV1Models {
    */
   public class ListLogsOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private String xsort;
+    private String xSort;
     private String filter;
     private Long pageLimit;
     private String cursor;
@@ -12382,15 +12509,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort order, prefix the
      * parameter value with a minus sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -12431,7 +12558,7 @@ public class IBMAssistantV1Models {
     private ListLogsOptions(ListLogsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       workspaceId = builder.workspaceId;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       filter = builder.filter;
       pageLimit = builder.pageLimit;
       cursor = builder.cursor;
@@ -12453,14 +12580,14 @@ public class IBMAssistantV1Models {
    */
   public class ListLogsOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private String xsort;
+    private String xSort;
     private String filter;
     private Long pageLimit;
     private String cursor;
 
     private ListLogsOptionsBuilder(ListLogsOptions listLogsOptions) {
       workspaceId = listLogsOptions.workspaceId;
-      xsort = listLogsOptions.xsort;
+      xSort = listLogsOptions.xSort;
       filter = listLogsOptions.filter;
       pageLimit = listLogsOptions.pageLimit;
       cursor = listLogsOptions.cursor;
@@ -12503,13 +12630,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the xSort.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListLogsOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -12565,7 +12692,7 @@ public class IBMAssistantV1Models {
   public class ListMentionsOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
 
     /**
@@ -12591,15 +12718,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xexport.
+     * Gets the xExport.
      *
      * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
      * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
-     * @return the xexport
+     * @return the xExport
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean xExport() {
+      return xExport;
     }
 
     /**
@@ -12618,7 +12745,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       workspaceId = builder.workspaceId;
       entity = builder.entity;
-      xexport = builder.xexport;
+      xExport = builder.xExport;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -12639,13 +12766,13 @@ public class IBMAssistantV1Models {
   public class ListMentionsOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
-    private Boolean xexport;
+    private Boolean xExport;
     private Boolean includeAudit;
 
     private ListMentionsOptionsBuilder(ListMentionsOptions listMentionsOptions) {
       workspaceId = listMentionsOptions.workspaceId;
       entity = listMentionsOptions.entity;
-      xexport = listMentionsOptions.xexport;
+      xExport = listMentionsOptions.xExport;
       includeAudit = listMentionsOptions.includeAudit;
       this.requestHeaders.putAll(listMentionsOptions.requestHeaders());
     }
@@ -12699,13 +12826,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the xExport.
      *
-     * @param xexport the xexport
+     * @param xExport the xExport
      * @return the ListMentionsOptions builder
      */
-    public ListMentionsOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListMentionsOptionsBuilder xExport(Boolean xExport) {
+      this.xExport = xExport;
       return this;
     }
 
@@ -12741,8 +12868,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -12791,26 +12917,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the includeCount.
-     *
-     * Whether to include information about the number of records returned.
-     *
-     * @return the includeCount
-     */
-    public Boolean includeCount() {
-      return includeCount;
-    }
-
-    /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The attribute by which returned entity value synonyms will be sorted. To reverse the sort order, prefix the value
      * with a minus sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -12843,8 +12958,7 @@ public class IBMAssistantV1Models {
       entity = builder.entity;
       value = builder.value;
       pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       cursor = builder.cursor;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
@@ -12868,8 +12982,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -12878,8 +12991,7 @@ public class IBMAssistantV1Models {
       entity = listSynonymsOptions.entity;
       value = listSynonymsOptions.value;
       pageLimit = listSynonymsOptions.pageLimit;
-      includeCount = listSynonymsOptions.includeCount;
-      xsort = listSynonymsOptions.xsort;
+      xSort = listSynonymsOptions.xSort;
       cursor = listSynonymsOptions.cursor;
       includeAudit = listSynonymsOptions.includeAudit;
       this.requestHeaders.putAll(listSynonymsOptions.requestHeaders());
@@ -12958,24 +13070,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the includeCount.
+     * Set the xSort.
      *
-     * @param includeCount the includeCount
+     * @param xSort the xSort
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
-      return this;
-    }
-
-    /**
-     * Set the xsort.
-     *
-     * @param xsort the xsort
-     * @return the ListSynonymsOptions builder
-     */
-    public ListSynonymsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListSynonymsOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -13020,10 +13121,9 @@ public class IBMAssistantV1Models {
   public class ListValuesOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
-    private Boolean xexport;
+    private Boolean xExport;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -13050,15 +13150,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the xexport.
+     * Gets the xExport.
      *
      * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
      * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
-     * @return the xexport
+     * @return the xExport
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean xExport() {
+      return xExport;
     }
 
     /**
@@ -13073,26 +13173,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the includeCount.
-     *
-     * Whether to include information about the number of records returned.
-     *
-     * @return the includeCount
-     */
-    public Boolean includeCount() {
-      return includeCount;
-    }
-
-    /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The attribute by which returned entity values will be sorted. To reverse the sort order, prefix the value with a
      * minus sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -13122,10 +13211,9 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       workspaceId = builder.workspaceId;
       entity = builder.entity;
-      xexport = builder.xexport;
+      xExport = builder.xExport;
       pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       cursor = builder.cursor;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
@@ -13147,20 +13235,18 @@ public class IBMAssistantV1Models {
   public class ListValuesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
-    private Boolean xexport;
+    private Boolean xExport;
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
     private ListValuesOptionsBuilder(ListValuesOptions listValuesOptions) {
       workspaceId = listValuesOptions.workspaceId;
       entity = listValuesOptions.entity;
-      xexport = listValuesOptions.xexport;
+      xExport = listValuesOptions.xExport;
       pageLimit = listValuesOptions.pageLimit;
-      includeCount = listValuesOptions.includeCount;
-      xsort = listValuesOptions.xsort;
+      xSort = listValuesOptions.xSort;
       cursor = listValuesOptions.cursor;
       includeAudit = listValuesOptions.includeAudit;
       this.requestHeaders.putAll(listValuesOptions.requestHeaders());
@@ -13215,13 +13301,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the xExport.
      *
-     * @param xexport the xexport
+     * @param xExport the xExport
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListValuesOptionsBuilder xExport(Boolean xExport) {
+      this.xExport = xExport;
       return this;
     }
 
@@ -13237,24 +13323,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the includeCount.
+     * Set the xSort.
      *
-     * @param includeCount the includeCount
+     * @param xSort the xSort
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
-      return this;
-    }
-
-    /**
-     * Set the xsort.
-     *
-     * @param xsort the xsort
-     * @return the ListValuesOptions builder
-     */
-    public ListValuesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListValuesOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -13298,8 +13373,7 @@ public class IBMAssistantV1Models {
    */
   public class ListWorkspacesOptions extends IBMWatsonOptionsModel {
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
@@ -13315,26 +13389,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the includeCount.
-     *
-     * Whether to include information about the number of records returned.
-     *
-     * @return the includeCount
-     */
-    public Boolean includeCount() {
-      return includeCount;
-    }
-
-    /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix the value with a
      * minus sign (`-`).
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -13361,8 +13424,7 @@ public class IBMAssistantV1Models {
 
     private ListWorkspacesOptions(ListWorkspacesOptionsBuilder builder) {
       pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       cursor = builder.cursor;
       includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
@@ -13383,15 +13445,13 @@ public class IBMAssistantV1Models {
    */
   public class ListWorkspacesOptionsBuilder extends IBMWatsonOptionsModel {
     private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String xSort;
     private String cursor;
     private Boolean includeAudit;
 
     private ListWorkspacesOptionsBuilder(ListWorkspacesOptions listWorkspacesOptions) {
       pageLimit = listWorkspacesOptions.pageLimit;
-      includeCount = listWorkspacesOptions.includeCount;
-      xsort = listWorkspacesOptions.xsort;
+      xSort = listWorkspacesOptions.xSort;
       cursor = listWorkspacesOptions.cursor;
       includeAudit = listWorkspacesOptions.includeAudit;
       this.requestHeaders.putAll(listWorkspacesOptions.requestHeaders());
@@ -13424,24 +13484,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the includeCount.
+     * Set the xSort.
      *
-     * @param includeCount the includeCount
+     * @param xSort the xSort
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
-      return this;
-    }
-
-    /**
-     * Set the xsort.
-     *
-     * @param xsort the xsort
-     * @return the ListWorkspacesOptions builder
-     */
-    public ListWorkspacesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListWorkspacesOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -13751,10 +13800,9 @@ public class IBMAssistantV1Models {
   /**
    * Log message details.
    */
-  public class LogMessage extends IBMWatsonDynamicModel {
+  public class LogMessage extends IBMWatsonGenericModel {
     private String level;
     private String msg;
-    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -13764,6 +13812,8 @@ public class IBMAssistantV1Models {
 
     /**
      * Gets the level.
+     *
+     * The severity of the log message.
      *
      * @return the level
      */
@@ -13775,23 +13825,15 @@ public class IBMAssistantV1Models {
     /**
      * Gets the msg.
      *
+     * The text of the log message.
+     *
      * @return the msg
      */
     @AuraEnabled
     public String getMsg() {
       return msg;
     }
-
-    /**
-     * Gets the dynamic properties attached to LogMessage.
-     *
-     * @return the dynamic properties
-     */
-    @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
-    }
-
+  
     private LogMessage(LogMessageBuilder builder) {
       IBMWatsonValidator.notNull(builder.level, 'level cannot be null');
       IBMWatsonValidator.notNull(builder.msg, 'msg cannot be null');
@@ -13816,23 +13858,12 @@ public class IBMAssistantV1Models {
       LogMessage ret = (LogMessage) super.deserialize(jsonString, jsonMap, classType);
       LogMessageBuilder retBuilder = ret.newBuilder();
 
-      LogMessage builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
-
-      for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key)) {
-          builderResult.put(key, jsonMap.get(key));
-        }
-      }
-
-      return builderResult;
+      return retBuilder.build();
     }
 
     public String serialize() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
       return JSON.serialize(jsonMap);
     }
@@ -13853,7 +13884,8 @@ public class IBMAssistantV1Models {
     /**
      * Instantiates a new builder.
      */
-    public LogMessageBuilder() { }
+    public LogMessageBuilder() {
+    }
 
     /**
      * Instantiates a new builder with required properties.
@@ -15384,11 +15416,11 @@ public class IBMAssistantV1Models {
    * An output object that includes the response to the user, the dialog nodes that were triggered, and messages from the log.
    */
   public class OutputData extends IBMWatsonDynamicModel {
-    private List<LogMessage> logMessages;
-    private List<String> text;
-    private List<DialogRuntimeResponseGeneric> generic;
     private List<String> nodesVisited;
     private List<DialogNodeVisitedDetails> nodesVisitedDetails;
+    private List<LogMessage> logMessages;
+    private List<String> text;
+    private List<RuntimeResponseGeneric> generic;
     private Map<String, Object> additionalProperties;
 
     /**
@@ -15396,6 +15428,26 @@ public class IBMAssistantV1Models {
      * and should not be called by the client.
      */
     public OutputData() { }
+
+    /**
+     * Gets the nodesVisited.
+     *
+     * @return the nodesVisited
+     */
+    @AuraEnabled
+    public List<String> getNodesVisited() {
+      return nodesVisited;
+    }
+
+    /**
+     * Gets the nodesVisitedDetails.
+     *
+     * @return the nodesVisitedDetails
+     */
+    @AuraEnabled
+    public List<DialogNodeVisitedDetails> getNodesVisitedDetails() {
+      return nodesVisitedDetails;
+    }
 
     /**
      * Gets the logMessages.
@@ -15423,28 +15475,8 @@ public class IBMAssistantV1Models {
      * @return the generic
      */
     @AuraEnabled
-    public List<DialogRuntimeResponseGeneric> getGeneric() {
+    public List<RuntimeResponseGeneric> getGeneric() {
       return generic;
-    }
-
-    /**
-     * Gets the nodesVisited.
-     *
-     * @return the nodesVisited
-     */
-    @AuraEnabled
-    public List<String> getNodesVisited() {
-      return nodesVisited;
-    }
-
-    /**
-     * Gets the nodesVisitedDetails.
-     *
-     * @return the nodesVisitedDetails
-     */
-    @AuraEnabled
-    public List<DialogNodeVisitedDetails> getNodesVisitedDetails() {
-      return nodesVisitedDetails;
     }
 
     /**
@@ -15460,11 +15492,11 @@ public class IBMAssistantV1Models {
     private OutputData(OutputDataBuilder builder) {
       IBMWatsonValidator.notNull(builder.logMessages, 'logMessages cannot be null');
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      this.nodesVisited = builder.nodesVisited;
+      this.nodesVisitedDetails = builder.nodesVisitedDetails;
       this.logMessages = builder.logMessages;
       this.text = builder.text;
       this.generic = builder.generic;
-      this.nodesVisited = builder.nodesVisited;
-      this.nodesVisitedDetails = builder.nodesVisitedDetails;
     }
 
     /**
@@ -15483,15 +15515,28 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'log_messages' => 'logMessages',
         'nodes_visited' => 'nodesVisited',
-        'nodes_visited_details' => 'nodesVisitedDetails'
+        'nodes_visited_details' => 'nodesVisitedDetails',
+        'log_messages' => 'logMessages'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       OutputData ret = (OutputData) super.deserialize(jsonString, jsonMap, classType);
       OutputDataBuilder retBuilder = ret.newBuilder();
+
+      // calling custom deserializer for nodesVisitedDetails
+      List<DialogNodeVisitedDetails> newNodesVisitedDetails = new List<DialogNodeVisitedDetails>();
+      List<DialogNodeVisitedDetails> deserializedNodesVisitedDetails = ret.getNodesVisitedDetails();
+      if (deserializedNodesVisitedDetails != null) {
+        for (Integer i = 0; i < deserializedNodesVisitedDetails.size(); i++) {
+          DialogNodeVisitedDetails currentItem = ret.getNodesVisitedDetails().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('nodesVisitedDetails');
+          DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeVisitedDetails.class);
+          newNodesVisitedDetails.add(newItem);
+        }
+        retBuilder.nodesVisitedDetails(newNodesVisitedDetails);
+      }
 
       // calling custom deserializer for logMessages
       List<LogMessage> newLogMessages = new List<LogMessage>();
@@ -15507,29 +15552,16 @@ public class IBMAssistantV1Models {
       }
 
       // calling custom deserializer for generic
-      List<DialogRuntimeResponseGeneric> newGeneric = new List<DialogRuntimeResponseGeneric>();
-      List<DialogRuntimeResponseGeneric> deserializedGeneric = ret.getGeneric();
+      List<RuntimeResponseGeneric> newGeneric = new List<RuntimeResponseGeneric>();
+      List<RuntimeResponseGeneric> deserializedGeneric = ret.getGeneric();
       if (deserializedGeneric != null) {
         for (Integer i = 0; i < deserializedGeneric.size(); i++) {
-          DialogRuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
+          RuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
-          DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
+          RuntimeResponseGeneric newItem = (RuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeResponseGeneric.class);
           newGeneric.add(newItem);
         }
         retBuilder.generic(newGeneric);
-      }
-
-      // calling custom deserializer for nodesVisitedDetails
-      List<DialogNodeVisitedDetails> newNodesVisitedDetails = new List<DialogNodeVisitedDetails>();
-      List<DialogNodeVisitedDetails> deserializedNodesVisitedDetails = ret.getNodesVisitedDetails();
-      if (deserializedNodesVisitedDetails != null) {
-        for (Integer i = 0; i < deserializedNodesVisitedDetails.size(); i++) {
-          DialogNodeVisitedDetails currentItem = ret.getNodesVisitedDetails().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('nodesVisitedDetails');
-          DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeVisitedDetails.class);
-          newNodesVisitedDetails.add(newItem);
-        }
-        retBuilder.nodesVisitedDetails(newNodesVisitedDetails);
       }
 
       OutputData builderResult = retBuilder.build();
@@ -15550,12 +15582,26 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'logMessages' => 'log_messages',
         'nodesVisited' => 'nodes_visited',
-        'nodesVisitedDetails' => 'nodes_visited_details'
+        'nodesVisitedDetails' => 'nodes_visited_details',
+        'logMessages' => 'log_messages'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
+
+      // calling custom serializer for nodesVisitedDetails
+      if (nodesVisitedDetails != null) {
+        List<Object> nodesVisitedDetailsJsonList = new List<Object>();
+        for (DialogNodeVisitedDetails listItem : nodesVisitedDetails) {
+          String listItemJsonString = listItem.serialize();
+          nodesVisitedDetailsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String nodesVisitedDetailsKey = 'nodesVisitedDetails';
+        if (propertyNameMapping.containsKey(nodesVisitedDetailsKey)) {
+          nodesVisitedDetailsKey = propertyNameMapping.get(nodesVisitedDetailsKey);
+        }
+        jsonMap.put(nodesVisitedDetailsKey, nodesVisitedDetailsJsonList);
+      }
 
       // calling custom serializer for logMessages
       if (logMessages != null) {
@@ -15574,7 +15620,7 @@ public class IBMAssistantV1Models {
       // calling custom serializer for generic
       if (generic != null) {
         List<Object> genericJsonList = new List<Object>();
-        for (DialogRuntimeResponseGeneric listItem : generic) {
+        for (RuntimeResponseGeneric listItem : generic) {
           String listItemJsonString = listItem.serialize();
           genericJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
@@ -15585,20 +15631,6 @@ public class IBMAssistantV1Models {
         jsonMap.put(genericKey, genericJsonList);
       }
 
-      // calling custom serializer for nodesVisitedDetails
-      if (nodesVisitedDetails != null) {
-        List<Object> nodesVisitedDetailsJsonList = new List<Object>();
-        for (DialogNodeVisitedDetails listItem : nodesVisitedDetails) {
-          String listItemJsonString = listItem.serialize();
-          nodesVisitedDetailsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
-        }
-        String nodesVisitedDetailsKey = 'nodesVisitedDetails';
-        if (propertyNameMapping.containsKey(nodesVisitedDetailsKey)) {
-          nodesVisitedDetailsKey = propertyNameMapping.get(nodesVisitedDetailsKey);
-        }
-        jsonMap.put(nodesVisitedDetailsKey, nodesVisitedDetailsJsonList);
-      }
-
       return JSON.serialize(jsonMap);
     }
   }
@@ -15607,18 +15639,18 @@ public class IBMAssistantV1Models {
    * OutputData Builder.
    */
   public class OutputDataBuilder {
-    private List<LogMessage> logMessages;
-    private List<String> text;
-    private List<DialogRuntimeResponseGeneric> generic;
     private List<String> nodesVisited;
     private List<DialogNodeVisitedDetails> nodesVisitedDetails;
+    private List<LogMessage> logMessages;
+    private List<String> text;
+    private List<RuntimeResponseGeneric> generic;
 
     private OutputDataBuilder(OutputData outputData) {
+      this.nodesVisited = outputData.nodesVisited;
+      this.nodesVisitedDetails = outputData.nodesVisitedDetails;
       this.logMessages = outputData.logMessages;
       this.text = outputData.text;
       this.generic = outputData.generic;
-      this.nodesVisited = outputData.nodesVisited;
-      this.nodesVisitedDetails = outputData.nodesVisitedDetails;
     }
 
     /**
@@ -15644,6 +15676,36 @@ public class IBMAssistantV1Models {
      */
     public OutputData build() {
       return new OutputData(this);
+    }
+
+    /**
+     * Adds an nodesVisited to nodesVisited.
+     *
+     * @param nodesVisited the new nodesVisited
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder addNodesVisited(String nodesVisited) {
+      IBMWatsonValidator.notNull(nodesVisited, 'nodesVisited cannot be null');
+      if (this.nodesVisited == null) {
+        this.nodesVisited = new List<String>();
+      }
+      this.nodesVisited.add(nodesVisited);
+      return this;
+    }
+
+    /**
+     * Adds an nodesVisitedDetails to nodesVisitedDetails.
+     *
+     * @param nodesVisitedDetails the new nodesVisitedDetails
+     * @return the OutputData builder
+     */
+    public OutputDataBuilder addNodesVisitedDetails(DialogNodeVisitedDetails nodesVisitedDetails) {
+      IBMWatsonValidator.notNull(nodesVisitedDetails, 'nodesVisitedDetails cannot be null');
+      if (this.nodesVisitedDetails == null) {
+        this.nodesVisitedDetails = new List<DialogNodeVisitedDetails>();
+      }
+      this.nodesVisitedDetails.add(nodesVisitedDetails);
+      return this;
     }
 
     /**
@@ -15682,42 +15744,36 @@ public class IBMAssistantV1Models {
      * @param generic the new generic
      * @return the OutputData builder
      */
-    public OutputDataBuilder addGeneric(DialogRuntimeResponseGeneric generic) {
+    public OutputDataBuilder addGeneric(RuntimeResponseGeneric generic) {
       IBMWatsonValidator.notNull(generic, 'generic cannot be null');
       if (this.generic == null) {
-        this.generic = new List<DialogRuntimeResponseGeneric>();
+        this.generic = new List<RuntimeResponseGeneric>();
       }
       this.generic.add(generic);
       return this;
     }
 
     /**
-     * Adds an nodesVisited to nodesVisited.
+     * Set the nodesVisited.
+     * Existing nodesVisited will be replaced.
      *
-     * @param nodesVisited the new nodesVisited
+     * @param nodesVisited the nodesVisited
      * @return the OutputData builder
      */
-    public OutputDataBuilder addNodesVisited(String nodesVisited) {
-      IBMWatsonValidator.notNull(nodesVisited, 'nodesVisited cannot be null');
-      if (this.nodesVisited == null) {
-        this.nodesVisited = new List<String>();
-      }
-      this.nodesVisited.add(nodesVisited);
+    public OutputDataBuilder nodesVisited(List<String> nodesVisited) {
+      this.nodesVisited = nodesVisited;
       return this;
     }
 
     /**
-     * Adds an nodesVisitedDetails to nodesVisitedDetails.
+     * Set the nodesVisitedDetails.
+     * Existing nodesVisitedDetails will be replaced.
      *
-     * @param nodesVisitedDetails the new nodesVisitedDetails
+     * @param nodesVisitedDetails the nodesVisitedDetails
      * @return the OutputData builder
      */
-    public OutputDataBuilder addNodesVisitedDetails(DialogNodeVisitedDetails nodesVisitedDetails) {
-      IBMWatsonValidator.notNull(nodesVisitedDetails, 'nodesVisitedDetails cannot be null');
-      if (this.nodesVisitedDetails == null) {
-        this.nodesVisitedDetails = new List<DialogNodeVisitedDetails>();
-      }
-      this.nodesVisitedDetails.add(nodesVisitedDetails);
+    public OutputDataBuilder nodesVisitedDetails(List<DialogNodeVisitedDetails> nodesVisitedDetails) {
+      this.nodesVisitedDetails = nodesVisitedDetails;
       return this;
     }
 
@@ -15752,32 +15808,8 @@ public class IBMAssistantV1Models {
      * @param generic the generic
      * @return the OutputData builder
      */
-    public OutputDataBuilder generic(List<DialogRuntimeResponseGeneric> generic) {
+    public OutputDataBuilder generic(List<RuntimeResponseGeneric> generic) {
       this.generic = generic;
-      return this;
-    }
-
-    /**
-     * Set the nodesVisited.
-     * Existing nodesVisited will be replaced.
-     *
-     * @param nodesVisited the nodesVisited
-     * @return the OutputData builder
-     */
-    public OutputDataBuilder nodesVisited(List<String> nodesVisited) {
-      this.nodesVisited = nodesVisited;
-      return this;
-    }
-
-    /**
-     * Set the nodesVisitedDetails.
-     * Existing nodesVisitedDetails will be replaced.
-     *
-     * @param nodesVisitedDetails the nodesVisitedDetails
-     * @return the OutputData builder
-     */
-    public OutputDataBuilder nodesVisitedDetails(List<DialogNodeVisitedDetails> nodesVisitedDetails) {
-      this.nodesVisitedDetails = nodesVisitedDetails;
       return this;
     }
   }
@@ -15943,14 +15975,13 @@ public class IBMAssistantV1Models {
   /**
    * A term from the request that was identified as an entity.
    */
-  public class RuntimeEntity extends IBMWatsonDynamicModel {
+  public class RuntimeEntity extends IBMWatsonGenericModel {
     private String entity;
     private List<Long> location;
     private String value;
     private Double confidence;
     private IBMWatsonMapModel metadata;
     private List<CaptureGroup> groups;
-    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -15960,6 +15991,8 @@ public class IBMAssistantV1Models {
 
     /**
      * Gets the entity.
+     *
+     * An entity detected in the input.
      *
      * @return the entity
      */
@@ -15971,6 +16004,9 @@ public class IBMAssistantV1Models {
     /**
      * Gets the location.
      *
+     * An array of zero-based character offsets that indicate where the detected entity values begin and end in the
+     * input text.
+     *
      * @return the location
      */
     @AuraEnabled
@@ -15980,6 +16016,8 @@ public class IBMAssistantV1Models {
 
     /**
      * Gets the value.
+     *
+     * The entity value that was recognized in the user input.
      *
      * @return the value
      */
@@ -15991,6 +16029,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the confidence.
      *
+     * A decimal percentage that represents Watson's confidence in the recognized entity.
+     *
      * @return the confidence
      */
     @AuraEnabled
@@ -16000,6 +16040,8 @@ public class IBMAssistantV1Models {
 
     /**
      * Gets the metadata.
+     *
+     * Any metadata for the entity.
      *
      * @return the metadata
      */
@@ -16011,23 +16053,15 @@ public class IBMAssistantV1Models {
     /**
      * Gets the groups.
      *
+     * The recognized capture groups for the entity, as defined by the entity pattern.
+     *
      * @return the groups
      */
     @AuraEnabled
     public List<CaptureGroup> getGroups() {
       return groups;
     }
-
-    /**
-     * Gets the dynamic properties attached to RuntimeEntity.
-     *
-     * @return the dynamic properties
-     */
-    @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
-    }
-
+  
     private RuntimeEntity(RuntimeEntityBuilder builder) {
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
       IBMWatsonValidator.notNull(builder.location, 'location cannot be null');
@@ -16075,23 +16109,12 @@ public class IBMAssistantV1Models {
         retBuilder.groups(newGroups);
       }
 
-      RuntimeEntity builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
-
-      for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key)) {
-          builderResult.put(key, jsonMap.get(key));
-        }
-      }
-
-      return builderResult;
+      return retBuilder.build();
     }
 
     public String serialize() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
       // calling custom serializer for metadata
       if (metadata != null) {
@@ -16136,7 +16159,8 @@ public class IBMAssistantV1Models {
     /**
      * Instantiates a new builder.
      */
-    public RuntimeEntityBuilder() { }
+    public RuntimeEntityBuilder() {
+    }
 
     /**
      * Instantiates a new builder with required properties.
@@ -16262,10 +16286,9 @@ public class IBMAssistantV1Models {
   /**
    * An intent identified in the user input.
    */
-  public class RuntimeIntent extends IBMWatsonDynamicModel {
+  public class RuntimeIntent extends IBMWatsonGenericModel {
     private String intent;
     private Double confidence;
-    private Map<String, Object> additionalProperties;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -16275,6 +16298,8 @@ public class IBMAssistantV1Models {
 
     /**
      * Gets the intent.
+     *
+     * The name of the recognized intent.
      *
      * @return the intent
      */
@@ -16286,23 +16311,15 @@ public class IBMAssistantV1Models {
     /**
      * Gets the confidence.
      *
+     * A decimal percentage that represents Watson's confidence in the intent.
+     *
      * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
       return confidence;
     }
-
-    /**
-     * Gets the dynamic properties attached to RuntimeIntent.
-     *
-     * @return the dynamic properties
-     */
-    @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
-    }
-
+  
     private RuntimeIntent(RuntimeIntentBuilder builder) {
       IBMWatsonValidator.notNull(builder.intent, 'intent cannot be null');
       IBMWatsonValidator.notNull(builder.confidence, 'confidence cannot be null');
@@ -16327,23 +16344,12 @@ public class IBMAssistantV1Models {
       RuntimeIntent ret = (RuntimeIntent) super.deserialize(jsonString, jsonMap, classType);
       RuntimeIntentBuilder retBuilder = ret.newBuilder();
 
-      RuntimeIntent builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
-
-      for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key)) {
-          builderResult.put(key, jsonMap.get(key));
-        }
-      }
-
-      return builderResult;
+      return retBuilder.build();
     }
 
     public String serialize() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
       return JSON.serialize(jsonMap);
     }
@@ -16364,7 +16370,8 @@ public class IBMAssistantV1Models {
     /**
      * Instantiates a new builder.
      */
-    public RuntimeIntentBuilder() { }
+    public RuntimeIntentBuilder() {
+    }
 
     /**
      * Instantiates a new builder with required properties.
@@ -16405,6 +16412,546 @@ public class IBMAssistantV1Models {
      */
     public RuntimeIntentBuilder confidence(Double confidence) {
       this.confidence = confidence;
+      return this;
+    }
+  }
+
+  /**
+   * RuntimeResponseGeneric.
+   */
+  public class RuntimeResponseGeneric extends IBMWatsonGenericModel {
+    private String responseType;
+    private String text;
+    private Long xTime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+    private String topic;
+    private String dialogNode;
+    private List<DialogSuggestion> suggestions;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeResponseGeneric() { }
+
+    /**
+     * Gets the responseType.
+     *
+     * The type of response returned by the dialog node. The specified response type must be supported by the client
+     * application or channel.
+     *
+     * **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
+     * Plus and Premium users.
+     *
+     * @return the responseType
+     */
+    @AuraEnabled
+    public String getResponseType() {
+      return responseType;
+    }
+
+    /**
+     * Gets the text.
+     *
+     * The text of the response.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text;
+    }
+
+    /**
+     * Gets the xTime.
+     *
+     * How long to pause, in milliseconds.
+     *
+     * @return the xTime
+     */
+    @AuraEnabled
+    public Long getXTime() {
+      return xTime;
+    }
+
+    /**
+     * Gets the typing.
+     *
+     * Whether to send a "user is typing" event during the pause.
+     *
+     * @return the typing
+     */
+    @AuraEnabled
+    public Boolean getTyping() {
+      return typing;
+    }
+
+    /**
+     * Gets the source.
+     *
+     * The URL of the image.
+     *
+     * @return the source
+     */
+    @AuraEnabled
+    public String getSource() {
+      return source;
+    }
+
+    /**
+     * Gets the title.
+     *
+     * The title or introductory text to show before the response.
+     *
+     * @return the title
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title;
+    }
+
+    /**
+     * Gets the description.
+     *
+     * The description to show with the the response.
+     *
+     * @return the description
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description;
+    }
+
+    /**
+     * Gets the preference.
+     *
+     * The preferred type of control to display.
+     *
+     * @return the preference
+     */
+    @AuraEnabled
+    public String getPreference() {
+      return preference;
+    }
+
+    /**
+     * Gets the options.
+     *
+     * An array of objects describing the options from which the user can choose.
+     *
+     * @return the options
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputOptionsElement> getOptions() {
+      return options;
+    }
+
+    /**
+     * Gets the messageToHumanAgent.
+     *
+     * A message to be sent to the human agent who will be taking over the conversation.
+     *
+     * @return the messageToHumanAgent
+     */
+    @AuraEnabled
+    public String getMessageToHumanAgent() {
+      return messageToHumanAgent;
+    }
+
+    /**
+     * Gets the topic.
+     *
+     * A label identifying the topic of the conversation, derived from the **user_label** property of the relevant node.
+     *
+     * @return the topic
+     */
+    @AuraEnabled
+    public String getTopic() {
+      return topic;
+    }
+
+    /**
+     * Gets the dialogNode.
+     *
+     * The ID of the dialog node that the **topic** property is taken from. The **topic** property is populated using
+     * the value of the dialog node's **user_label** property.
+     *
+     * @return the dialogNode
+     */
+    @AuraEnabled
+    public String getDialogNode() {
+      return dialogNode;
+    }
+
+    /**
+     * Gets the suggestions.
+     *
+     * An array of objects describing the possible matching dialog nodes from which the user can choose.
+     *
+     * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
+     * users.
+     *
+     * @return the suggestions
+     */
+    @AuraEnabled
+    public List<DialogSuggestion> getSuggestions() {
+      return suggestions;
+    }
+  
+    private RuntimeResponseGeneric(RuntimeResponseGenericBuilder builder) {
+      IBMWatsonValidator.notNull(builder.responseType, 'responseType cannot be null');
+      this.responseType = builder.responseType;
+      this.text = builder.text;
+      this.xTime = builder.xTime;
+      this.typing = builder.typing;
+      this.source = builder.source;
+      this.title = builder.title;
+      this.description = builder.description;
+      this.preference = builder.preference;
+      this.options = builder.options;
+      this.messageToHumanAgent = builder.messageToHumanAgent;
+      this.topic = builder.topic;
+      this.dialogNode = builder.dialogNode;
+      this.suggestions = builder.suggestions;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder newBuilder() {
+      return new RuntimeResponseGenericBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'response_type' => 'responseType',
+        'time' => 'xTime',
+        'message_to_human_agent' => 'messageToHumanAgent',
+        'dialog_node' => 'dialogNode'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      RuntimeResponseGeneric ret = (RuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeResponseGenericBuilder retBuilder = ret.newBuilder();
+
+      // calling custom deserializer for options
+      List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
+      List<DialogNodeOutputOptionsElement> deserializedOptions = ret.getOptions();
+      if (deserializedOptions != null) {
+        for (Integer i = 0; i < deserializedOptions.size(); i++) {
+          DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('options');
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          newOptions.add(newItem);
+        }
+        retBuilder.options(newOptions);
+      }
+
+      // calling custom deserializer for suggestions
+      List<DialogSuggestion> newSuggestions = new List<DialogSuggestion>();
+      List<DialogSuggestion> deserializedSuggestions = ret.getSuggestions();
+      if (deserializedSuggestions != null) {
+        for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
+          DialogSuggestion currentItem = ret.getSuggestions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions');
+          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
+          newSuggestions.add(newItem);
+        }
+        retBuilder.suggestions(newSuggestions);
+      }
+
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'responseType' => 'response_type',
+        'xTime' => 'time',
+        'messageToHumanAgent' => 'message_to_human_agent',
+        'dialogNode' => 'dialog_node'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for options
+      if (options != null) {
+        List<Object> optionsJsonList = new List<Object>();
+        for (DialogNodeOutputOptionsElement listItem : options) {
+          String listItemJsonString = listItem.serialize();
+          optionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String optionsKey = 'options';
+        if (propertyNameMapping.containsKey(optionsKey)) {
+          optionsKey = propertyNameMapping.get(optionsKey);
+        }
+        jsonMap.put(optionsKey, optionsJsonList);
+      }
+
+      // calling custom serializer for suggestions
+      if (suggestions != null) {
+        List<Object> suggestionsJsonList = new List<Object>();
+        for (DialogSuggestion listItem : suggestions) {
+          String listItemJsonString = listItem.serialize();
+          suggestionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        String suggestionsKey = 'suggestions';
+        if (propertyNameMapping.containsKey(suggestionsKey)) {
+          suggestionsKey = propertyNameMapping.get(suggestionsKey);
+        }
+        jsonMap.put(suggestionsKey, suggestionsJsonList);
+      }
+
+      return JSON.serialize(jsonMap);
+    }
+  }
+
+  /**
+   * RuntimeResponseGeneric Builder.
+   */
+  public class RuntimeResponseGenericBuilder {
+    private String responseType;
+    private String text;
+    private Long xTime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+    private String topic;
+    private String dialogNode;
+    private List<DialogSuggestion> suggestions;
+
+    private RuntimeResponseGenericBuilder(RuntimeResponseGeneric runtimeResponseGeneric) {
+      this.responseType = runtimeResponseGeneric.responseType;
+      this.text = runtimeResponseGeneric.text;
+      this.xTime = runtimeResponseGeneric.xTime;
+      this.typing = runtimeResponseGeneric.typing;
+      this.source = runtimeResponseGeneric.source;
+      this.title = runtimeResponseGeneric.title;
+      this.description = runtimeResponseGeneric.description;
+      this.preference = runtimeResponseGeneric.preference;
+      this.options = runtimeResponseGeneric.options;
+      this.messageToHumanAgent = runtimeResponseGeneric.messageToHumanAgent;
+      this.topic = runtimeResponseGeneric.topic;
+      this.dialogNode = runtimeResponseGeneric.dialogNode;
+      this.suggestions = runtimeResponseGeneric.suggestions;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeResponseGenericBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param responseType the responseType
+     */
+    public RuntimeResponseGenericBuilder(String responseType) {
+      this.responseType = responseType;
+    }
+
+    /**
+     * Builds a RuntimeResponseGeneric.
+     *
+     * @return the runtimeResponseGeneric
+     */
+    public RuntimeResponseGeneric build() {
+      return new RuntimeResponseGeneric(this);
+    }
+
+    /**
+     * Adds an options to options.
+     *
+     * @param options the new options
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder addOptions(DialogNodeOutputOptionsElement options) {
+      IBMWatsonValidator.notNull(options, 'options cannot be null');
+      if (this.options == null) {
+        this.options = new List<DialogNodeOutputOptionsElement>();
+      }
+      this.options.add(options);
+      return this;
+    }
+
+    /**
+     * Adds an suggestions to suggestions.
+     *
+     * @param suggestions the new suggestions
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder addSuggestions(DialogSuggestion suggestions) {
+      IBMWatsonValidator.notNull(suggestions, 'suggestions cannot be null');
+      if (this.suggestions == null) {
+        this.suggestions = new List<DialogSuggestion>();
+      }
+      this.suggestions.add(suggestions);
+      return this;
+    }
+
+    /**
+     * Set the responseType.
+     *
+     * @param responseType the responseType
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder responseType(String responseType) {
+      this.responseType = responseType;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder text(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the xTime.
+     *
+     * @param xTime the xTime
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder xTime(Long xTime) {
+      this.xTime = xTime;
+      return this;
+    }
+
+    /**
+     * Set the typing.
+     *
+     * @param typing the typing
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder typing(Boolean typing) {
+      this.typing = typing;
+      return this;
+    }
+
+    /**
+     * Set the source.
+     *
+     * @param source the source
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder source(String source) {
+      this.source = source;
+      return this;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param title the title
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder title(String title) {
+      this.title = title;
+      return this;
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder description(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the preference.
+     *
+     * @param preference the preference
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder preference(String preference) {
+      this.preference = preference;
+      return this;
+    }
+
+    /**
+     * Set the options.
+     * Existing options will be replaced.
+     *
+     * @param options the options
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder options(List<DialogNodeOutputOptionsElement> options) {
+      this.options = options;
+      return this;
+    }
+
+    /**
+     * Set the messageToHumanAgent.
+     *
+     * @param messageToHumanAgent the messageToHumanAgent
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder messageToHumanAgent(String messageToHumanAgent) {
+      this.messageToHumanAgent = messageToHumanAgent;
+      return this;
+    }
+
+    /**
+     * Set the topic.
+     *
+     * @param topic the topic
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder topic(String topic) {
+      this.topic = topic;
+      return this;
+    }
+
+    /**
+     * Set the dialogNode.
+     *
+     * @param dialogNode the dialogNode
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder dialogNode(String dialogNode) {
+      this.dialogNode = dialogNode;
+      return this;
+    }
+
+    /**
+     * Set the suggestions.
+     * Existing suggestions will be replaced.
+     *
+     * @param suggestions the suggestions
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder suggestions(List<DialogSuggestion> suggestions) {
+      this.suggestions = suggestions;
       return this;
     }
   }
@@ -16898,7 +17445,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel newMetadata;
     private DialogNodeNextStep newNextStep;
     private String newTitle;
-    private String nodeType;
+    private String newType;
     private String newEventName;
     private String newVariable;
     private List<DialogNodeAction> newActions;
@@ -17044,14 +17591,14 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the nodeType.
+     * Gets the newType.
      *
      * How the dialog node is processed.
      *
-     * @return the nodeType
+     * @return the newType
      */
-    public String nodeType() {
-      return nodeType;
+    public String newType() {
+      return newType;
     }
 
     /**
@@ -17146,7 +17693,7 @@ public class IBMAssistantV1Models {
       newMetadata = builder.newMetadata;
       newNextStep = builder.newNextStep;
       newTitle = builder.newTitle;
-      nodeType = builder.nodeType;
+      newType = builder.newType;
       newEventName = builder.newEventName;
       newVariable = builder.newVariable;
       newActions = builder.newActions;
@@ -17183,7 +17730,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel newMetadata;
     private DialogNodeNextStep newNextStep;
     private String newTitle;
-    private String nodeType;
+    private String newType;
     private String newEventName;
     private String newVariable;
     private List<DialogNodeAction> newActions;
@@ -17205,7 +17752,7 @@ public class IBMAssistantV1Models {
       newMetadata = updateDialogNodeOptions.newMetadata;
       newNextStep = updateDialogNodeOptions.newNextStep;
       newTitle = updateDialogNodeOptions.newTitle;
-      nodeType = updateDialogNodeOptions.nodeType;
+      newType = updateDialogNodeOptions.newType;
       newEventName = updateDialogNodeOptions.newEventName;
       newVariable = updateDialogNodeOptions.newVariable;
       newActions = updateDialogNodeOptions.newActions;
@@ -17390,13 +17937,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the nodeType.
+     * Set the newType.
      *
-     * @param nodeType the nodeType
+     * @param newType the newType
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder nodeType(String nodeType) {
-      this.nodeType = nodeType;
+    public UpdateDialogNodeOptionsBuilder newType(String newType) {
+      this.newType = newType;
       return this;
     }
 
@@ -18413,7 +18960,7 @@ public class IBMAssistantV1Models {
     private String value;
     private String newValue;
     private IBMWatsonMapModel newMetadata;
-    private String valueType;
+    private String newType;
     private List<String> newSynonyms;
     private List<String> newPatterns;
 
@@ -18475,14 +19022,14 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the valueType.
+     * Gets the newType.
      *
      * Specifies the type of entity value.
      *
-     * @return the valueType
+     * @return the newType
      */
-    public String valueType() {
-      return valueType;
+    public String newType() {
+      return newType;
     }
 
     /**
@@ -18522,7 +19069,7 @@ public class IBMAssistantV1Models {
       value = builder.value;
       newValue = builder.newValue;
       newMetadata = builder.newMetadata;
-      valueType = builder.valueType;
+      newType = builder.newType;
       newSynonyms = builder.newSynonyms;
       newPatterns = builder.newPatterns;
       this.requestHeaders = builder.requestHeaders;
@@ -18547,7 +19094,7 @@ public class IBMAssistantV1Models {
     private String value;
     private String newValue;
     private IBMWatsonMapModel newMetadata;
-    private String valueType;
+    private String newType;
     private List<String> newSynonyms;
     private List<String> newPatterns;
 
@@ -18557,7 +19104,7 @@ public class IBMAssistantV1Models {
       value = updateValueOptions.value;
       newValue = updateValueOptions.newValue;
       newMetadata = updateValueOptions.newMetadata;
-      valueType = updateValueOptions.valueType;
+      newType = updateValueOptions.newType;
       newSynonyms = updateValueOptions.newSynonyms;
       newPatterns = updateValueOptions.newPatterns;
       this.requestHeaders.putAll(updateValueOptions.requestHeaders());
@@ -18677,13 +19224,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the valueType.
+     * Set the newType.
      *
-     * @param valueType the valueType
+     * @param newType the newType
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public UpdateValueOptionsBuilder newType(String newType) {
+      this.newType = newType;
       return this;
     }
 
@@ -19179,7 +19726,7 @@ public class IBMAssistantV1Models {
   public class Value extends IBMWatsonResponseModel {
     private String value;
     private IBMWatsonMapModel metadata;
-    private String valueType;
+    private String xType;
     private List<String> synonyms;
     private List<String> patterns;
     private Datetime created;
@@ -19218,15 +19765,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the valueType.
+     * Gets the xType.
      *
      * Specifies the type of entity value.
      *
-     * @return the valueType
+     * @return the xType
      */
     @AuraEnabled
-    public String getValueType() {
-      return valueType;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -19285,10 +19832,10 @@ public class IBMAssistantV1Models {
   
     private Value(ValueBuilder builder) {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
-      IBMWatsonValidator.notNull(builder.valueType, 'valueType cannot be null');
+      IBMWatsonValidator.notNull(builder.xType, 'xType cannot be null');
       this.value = builder.value;
       this.metadata = builder.metadata;
-      this.valueType = builder.valueType;
+      this.xType = builder.xType;
       this.synonyms = builder.synonyms;
       this.patterns = builder.patterns;
       this.created = builder.created;
@@ -19311,7 +19858,7 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'valueType'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -19334,7 +19881,7 @@ public class IBMAssistantV1Models {
   public class ValueBuilder {
     private String value;
     private IBMWatsonMapModel metadata;
-    private String valueType;
+    private String xType;
     private List<String> synonyms;
     private List<String> patterns;
     private Datetime created;
@@ -19343,7 +19890,7 @@ public class IBMAssistantV1Models {
     private ValueBuilder(Value value) {
       this.value = value.value;
       this.metadata = value.metadata;
-      this.valueType = value.valueType;
+      this.xType = value.xType;
       this.synonyms = value.synonyms;
       this.patterns = value.patterns;
       this.created = value.created;
@@ -19360,11 +19907,11 @@ public class IBMAssistantV1Models {
      * Instantiates a new builder with required properties.
      *
      * @param value the value
-     * @param valueType the valueType
+     * @param xType the xType
      */
-    public ValueBuilder(String value, String valueType) {
+    public ValueBuilder(String value, String xType) {
       this.value = value;
-      this.valueType = valueType;
+      this.xType = xType;
     }
 
     /**
@@ -19429,13 +19976,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the valueType.
+     * Set the xType.
      *
-     * @param valueType the valueType
+     * @param xType the xType
      * @return the Value builder
      */
-    public ValueBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public ValueBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 

@@ -3,27 +3,27 @@ public class IBMVisualRecognitionV3Models {
    * A category within a classifier.
    */
   public class ModelClass extends IBMWatsonGenericModel {
-    private String className;
+    private String xClass;
 
     /**
-     * Gets the className.
+     * Gets the xClass.
      *
      * The name of the class.
      *
-     * @return the className
+     * @return the xClass
      */
     @AuraEnabled
-    public String getClassName() {
-      return className;
+    public String getXClass() {
+      return xClass;
     }
 
     /**
-     * Sets the className.
+     * Sets the xClass.
      *
-     * @param className the new className
+     * @param xClass the new xClass
      */
-    public void setClassName(final String className) {
-      this.className = className;
+    public void setXClass(final String xClass) {
+      this.xClass = xClass;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -33,7 +33,7 @@ public class IBMVisualRecognitionV3Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'class' => 'className'
+        'class' => 'xClass'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -48,12 +48,12 @@ public class IBMVisualRecognitionV3Models {
    * Result of a class within a classifier.
    */
   public class ClassResult extends IBMWatsonGenericModel {
-    private String className;
+    private String xClass;
     private Double score;
     private String typeHierarchy;
 
     /**
-     * Gets the className.
+     * Gets the xClass.
      *
      * Name of the class.
      *
@@ -62,11 +62,11 @@ public class IBMVisualRecognitionV3Models {
      * response might not be in the specified language when the requested language is not supported or when there is no
      * translation for the class name.
      *
-     * @return the className
+     * @return the xClass
      */
     @AuraEnabled
-    public String getClassName() {
-      return className;
+    public String getXClass() {
+      return xClass;
     }
 
     /**
@@ -96,12 +96,12 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the className.
+     * Sets the xClass.
      *
-     * @param className the new className
+     * @param xClass the new xClass
      */
-    public void setClassName(final String className) {
-      this.className = className;
+    public void setXClass(final String xClass) {
+      this.xClass = xClass;
     }
 
     /**
@@ -129,7 +129,7 @@ public class IBMVisualRecognitionV3Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'class' => 'className',
+        'class' => 'xClass',
         'type_hierarchy' => 'typeHierarchy'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);

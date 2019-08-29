@@ -193,7 +193,7 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getCreated(), 'string');
     System.assertEquals(createJob.getUpdated(), 'string');
     System.assertEquals(createJob.getUserToken(), 'string');
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getFinalResults(),true);
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getXFinal(),true);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getTranscript(), 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getConfidence(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword')[0].getNormalizedText(), 'string');
@@ -209,7 +209,7 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getTo(),0);
     System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getSpeaker(),0);
     System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getConfidence(),0);
-    System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getFinalResults(),true);
+    System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getXFinal(),true);
     System.assertEquals(createJob.getresults()[0].getWarnings()[0], 'string');
     System.assertEquals(createJob.getWarnings()[0], 'string');
     createJobOptions = createJobOptions.newBuilder().build();

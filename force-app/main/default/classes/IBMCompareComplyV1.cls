@@ -58,7 +58,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(convertToHtmlOptions.file(), convertToHtmlOptions.fileContentType());
-    multipartBuilder.addFormDataPart('file', convertToHtmlOptions.filename(), fileBody);
+    multipartBuilder.addFormDataPart('file', null, fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -268,8 +268,8 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     if (listFeedbackOptions != null && listFeedbackOptions.cursor() != null) {
       builder.query('cursor', listFeedbackOptions.cursor());
     }
-    if (listFeedbackOptions != null && listFeedbackOptions.xsort() != null) {
-      builder.query('sort', listFeedbackOptions.xsort());
+    if (listFeedbackOptions != null && listFeedbackOptions.xSort() != null) {
+      builder.query('sort', listFeedbackOptions.xSort());
     }
     if (listFeedbackOptions != null && listFeedbackOptions.includeTotal() != null) {
       builder.query('include_total', String.valueOf(listFeedbackOptions.includeTotal()));

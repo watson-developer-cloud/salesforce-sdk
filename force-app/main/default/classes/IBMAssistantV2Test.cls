@@ -287,7 +287,7 @@ private class IBMAssistantV2Test {
     Test.stopTest();
   }
 
-  static testMethod void testDialogRuntimeResponseGeneric() {
+  static testMethod void testRuntimeResponseGeneric() {
     Test.startTest();
 
     IBMAssistantV2Models.DialogNodeOutputOptionsElement option1 = new IBMAssistantV2Models.DialogNodeOutputOptionsElement();
@@ -297,7 +297,7 @@ private class IBMAssistantV2Test {
     IBMAssistantV2Models.DialogSuggestion suggestion2 = new IBMAssistantV2Models.DialogSuggestion();
     List<IBMAssistantV2Models.DialogSuggestion> suggestions = new List<IBMAssistantV2Models.DialogSuggestion> { suggestion1 };
 
-    IBMAssistantV2Models.DialogRuntimeResponseGeneric generic = new IBMAssistantV2Models.DialogRuntimeResponseGenericBuilder()
+    IBMAssistantV2Models.RuntimeResponseGeneric generic = new IBMAssistantV2Models.RuntimeResponseGenericBuilder()
       .responseType(RESPONSE_TYPE)
       .text(TEXT)
       .xtime(TIME_VAL)
@@ -353,7 +353,7 @@ private class IBMAssistantV2Test {
     System.assert(response.getContext() != null);
     System.assert(response.getOutput() != null);
 
-    System.assertEquals(ACTION_TYPE, response.getOutput().getActions().get(0).getActionType());
+    System.assertEquals(ACTION_TYPE, response.getOutput().getActions().get(0).getXType());
     System.assertEquals(NAME, response.getOutput().getActions().get(0).getName());
     System.assertEquals(KEY_VAL, response.getOutput().getActions().get(0).getParameters());
     System.assertEquals(RESULT_VARIABLE, response.getOutput().getActions().get(0).getResultVariable());

@@ -2622,18 +2622,18 @@ public class IBMDiscoveryV1Models {
    * The createEvent options.
    */
   public class CreateEventOptions extends IBMWatsonOptionsModel {
-    private String xtype;
+    private String xType;
     private EventData data;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The event type to be created.
      *
-     * @return the xtype
+     * @return the xType
      */
-    public String xtype() {
-      return xtype;
+    public String xType() {
+      return xType;
     }
 
     /**
@@ -2648,9 +2648,9 @@ public class IBMDiscoveryV1Models {
     }
 
     private CreateEventOptions(CreateEventOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.xtype, 'xtype cannot be null');
+      IBMWatsonValidator.notNull(builder.xType, 'xType cannot be null');
       IBMWatsonValidator.notNull(builder.data, 'data cannot be null');
-      xtype = builder.xtype;
+      xType = builder.xType;
       data = builder.data;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -2669,11 +2669,11 @@ public class IBMDiscoveryV1Models {
    * CreateEventOptions Builder.
    */
   public class CreateEventOptionsBuilder extends IBMWatsonOptionsModel {
-    private String xtype;
+    private String xType;
     private EventData data;
 
     private CreateEventOptionsBuilder(CreateEventOptions createEventOptions) {
-      xtype = createEventOptions.xtype;
+      xType = createEventOptions.xType;
       data = createEventOptions.data;
       this.requestHeaders.putAll(createEventOptions.requestHeaders());
     }
@@ -2687,11 +2687,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param xtype the xtype
+     * @param xType the xType
      * @param data the data
      */
-    public CreateEventOptionsBuilder(String xtype, EventData data) {
-      this.xtype = xtype;
+    public CreateEventOptionsBuilder(String xType, EventData data) {
+      this.xType = xType;
       this.data = data;
     }
 
@@ -2705,13 +2705,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xtype.
+     * Set the xType.
      *
-     * @param xtype the xtype
+     * @param xType the xType
      * @return the CreateEventOptions builder
      */
-    public CreateEventOptionsBuilder xtype(String xtype) {
-      this.xtype = xtype;
+    public CreateEventOptionsBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 
@@ -2743,19 +2743,19 @@ public class IBMDiscoveryV1Models {
    * An object defining the event being created.
    */
   public class CreateEventResponse extends IBMWatsonResponseModel {
-    private String xtype;
+    private String xType;
     private EventData data;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The event type that was created.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -2771,12 +2771,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -2795,7 +2795,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -6720,7 +6720,7 @@ public class IBMDiscoveryV1Models {
     private String destinationField;
     private String sourceField;
     private Boolean overwrite;
-    private String enrichmentName;
+    private String enrichment;
     private Boolean ignoreDownstreamErrors;
     private EnrichmentOptions options;
 
@@ -6784,7 +6784,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the enrichmentName.
+     * Gets the enrichment.
      *
      * Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.
      *
@@ -6796,11 +6796,11 @@ public class IBMDiscoveryV1Models {
      * specified in [the
      * documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification).
      *
-     * @return the enrichmentName
+     * @return the enrichment
      */
     @AuraEnabled
-    public String getEnrichmentName() {
-      return enrichmentName;
+    public String getEnrichment() {
+      return enrichment;
     }
 
     /**
@@ -6831,12 +6831,12 @@ public class IBMDiscoveryV1Models {
     private Enrichment(EnrichmentBuilder builder) {
       IBMWatsonValidator.notNull(builder.destinationField, 'destinationField cannot be null');
       IBMWatsonValidator.notNull(builder.sourceField, 'sourceField cannot be null');
-      IBMWatsonValidator.notNull(builder.enrichmentName, 'enrichmentName cannot be null');
+      IBMWatsonValidator.notNull(builder.enrichment, 'enrichment cannot be null');
       this.description = builder.description;
       this.destinationField = builder.destinationField;
       this.sourceField = builder.sourceField;
       this.overwrite = builder.overwrite;
-      this.enrichmentName = builder.enrichmentName;
+      this.enrichment = builder.enrichment;
       this.ignoreDownstreamErrors = builder.ignoreDownstreamErrors;
       this.options = builder.options;
     }
@@ -6859,7 +6859,6 @@ public class IBMDiscoveryV1Models {
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'destination_field' => 'destinationField',
         'source_field' => 'sourceField',
-        'enrichment' => 'enrichmentName',
         'ignore_downstream_errors' => 'ignoreDownstreamErrors'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
@@ -6884,7 +6883,6 @@ public class IBMDiscoveryV1Models {
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'destinationField' => 'destination_field',
         'sourceField' => 'source_field',
-        'enrichmentName' => 'enrichment',
         'ignoreDownstreamErrors' => 'ignore_downstream_errors'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -6911,7 +6909,7 @@ public class IBMDiscoveryV1Models {
     private String destinationField;
     private String sourceField;
     private Boolean overwrite;
-    private String enrichmentName;
+    private String enrichment;
     private Boolean ignoreDownstreamErrors;
     private EnrichmentOptions options;
 
@@ -6920,7 +6918,7 @@ public class IBMDiscoveryV1Models {
       this.destinationField = enrichment.destinationField;
       this.sourceField = enrichment.sourceField;
       this.overwrite = enrichment.overwrite;
-      this.enrichmentName = enrichment.enrichmentName;
+      this.enrichment = enrichment.enrichment;
       this.ignoreDownstreamErrors = enrichment.ignoreDownstreamErrors;
       this.options = enrichment.options;
     }
@@ -6936,12 +6934,12 @@ public class IBMDiscoveryV1Models {
      *
      * @param destinationField the destinationField
      * @param sourceField the sourceField
-     * @param enrichmentName the enrichmentName
+     * @param enrichment the enrichment
      */
-    public EnrichmentBuilder(String destinationField, String sourceField, String enrichmentName) {
+    public EnrichmentBuilder(String destinationField, String sourceField, String enrichment) {
       this.destinationField = destinationField;
       this.sourceField = sourceField;
-      this.enrichmentName = enrichmentName;
+      this.enrichment = enrichment;
     }
 
     /**
@@ -6998,13 +6996,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the enrichmentName.
+     * Set the enrichment.
      *
-     * @param enrichmentName the enrichmentName
+     * @param enrichment the enrichment
      * @return the Enrichment builder
      */
-    public EnrichmentBuilder enrichmentName(String enrichmentName) {
-      this.enrichmentName = enrichmentName;
+    public EnrichmentBuilder enrichment(String enrichment) {
+      this.enrichment = enrichment;
       return this;
     }
 
@@ -8122,9 +8120,9 @@ public class IBMDiscoveryV1Models {
     private String naturalLanguageQuery;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> xReturn;
     private Long offset;
-    private List<String> xsort;
+    private List<String> xSort;
     private Boolean highlight;
     private String deduplicateField;
     private Boolean similar;
@@ -8215,14 +8213,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the returnFields.
+     * Gets the xReturn.
      *
      * A comma-separated list of the portion of the document hierarchy to return.
      *
-     * @return the returnFields
+     * @return the xReturn
      */
-    public List<String> returnFields() {
-      return returnFields;
+    public List<String> xReturn() {
+      return xReturn;
     }
 
     /**
@@ -8239,16 +8237,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
      * prefix is specified.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public List<String> xsort() {
-      return xsort;
+    public List<String> xSort() {
+      return xSort;
     }
 
     /**
@@ -8325,9 +8323,9 @@ public class IBMDiscoveryV1Models {
       naturalLanguageQuery = builder.naturalLanguageQuery;
       aggregation = builder.aggregation;
       count = builder.count;
-      returnFields = builder.returnFields;
+      xReturn = builder.xReturn;
       offset = builder.offset;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       highlight = builder.highlight;
       deduplicateField = builder.deduplicateField;
       similar = builder.similar;
@@ -8357,9 +8355,9 @@ public class IBMDiscoveryV1Models {
     private String naturalLanguageQuery;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> xReturn;
     private Long offset;
-    private List<String> xsort;
+    private List<String> xSort;
     private Boolean highlight;
     private String deduplicateField;
     private Boolean similar;
@@ -8374,9 +8372,9 @@ public class IBMDiscoveryV1Models {
       naturalLanguageQuery = federatedQueryNoticesOptions.naturalLanguageQuery;
       aggregation = federatedQueryNoticesOptions.aggregation;
       count = federatedQueryNoticesOptions.count;
-      returnFields = federatedQueryNoticesOptions.returnFields;
+      xReturn = federatedQueryNoticesOptions.xReturn;
       offset = federatedQueryNoticesOptions.offset;
-      xsort = federatedQueryNoticesOptions.xsort;
+      xSort = federatedQueryNoticesOptions.xSort;
       highlight = federatedQueryNoticesOptions.highlight;
       deduplicateField = federatedQueryNoticesOptions.deduplicateField;
       similar = federatedQueryNoticesOptions.similar;
@@ -8427,32 +8425,32 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an returnFields to returnFields.
+     * Adds an xReturn to xReturn.
      *
-     * @param returnFields the new returnFields
+     * @param xReturn the new xReturn
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addReturnFields(String returnFields) {
-      IBMWatsonValidator.notNull(returnFields, 'returnFields cannot be null');
-      if (this.returnFields == null) {
-        this.returnFields = new List<String>();
+    public FederatedQueryNoticesOptionsBuilder addXReturn(String xReturn) {
+      IBMWatsonValidator.notNull(xReturn, 'xReturn cannot be null');
+      if (this.xReturn == null) {
+        this.xReturn = new List<String>();
       }
-      this.returnFields.add(returnFields);
+      this.xReturn.add(xReturn);
       return this;
     }
 
     /**
-     * Adds an xsort to xsort.
+     * Adds an xSort to xSort.
      *
-     * @param xsort the new xsort
+     * @param xSort the new xSort
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addXsort(String xsort) {
-      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
-      if (this.xsort == null) {
-        this.xsort = new List<String>();
+    public FederatedQueryNoticesOptionsBuilder addXSort(String xSort) {
+      IBMWatsonValidator.notNull(xSort, 'xSort cannot be null');
+      if (this.xSort == null) {
+        this.xSort = new List<String>();
       }
-      this.xsort.add(xsort);
+      this.xSort.add(xSort);
       return this;
     }
 
@@ -8565,14 +8563,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the returnFields.
-     * Existing returnFields will be replaced.
+     * Set the xReturn.
+     * Existing xReturn will be replaced.
      *
-     * @param returnFields the returnFields
+     * @param xReturn the xReturn
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder returnFields(List<String> returnFields) {
-      this.returnFields = returnFields;
+    public FederatedQueryNoticesOptionsBuilder xReturn(List<String> xReturn) {
+      this.xReturn = xReturn;
       return this;
     }
 
@@ -8588,14 +8586,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
-     * Existing xsort will be replaced.
+     * Set the xSort.
+     * Existing xSort will be replaced.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder xsort(List<String> xsort) {
-      this.xsort = xsort;
+    public FederatedQueryNoticesOptionsBuilder xSort(List<String> xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -8680,9 +8678,9 @@ public class IBMDiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private String returnFields;
+    private String xReturn;
     private Long offset;
-    private String xsort;
+    private String xSort;
     private Boolean highlight;
     private String passagesFields;
     private Long passagesCount;
@@ -8694,7 +8692,7 @@ public class IBMDiscoveryV1Models {
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
-    private Boolean loggingOptOut;
+    private Boolean xWatsonLoggingOptOut;
 
     /**
      * Gets the environmentId.
@@ -8779,14 +8777,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the returnFields.
+     * Gets the xReturn.
      *
      * A comma-separated list of the portion of the document hierarchy to return.
      *
-     * @return the returnFields
+     * @return the xReturn
      */
-    public String returnFields() {
-      return returnFields;
+    public String xReturn() {
+      return xReturn;
     }
 
     /**
@@ -8802,16 +8800,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
      * prefix is specified. This parameter cannot be used in the same query as the **bias** parameter.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -8953,14 +8951,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the loggingOptOut.
+     * Gets the xWatsonLoggingOptOut.
      *
      * If `true`, queries are not stored in the Discovery **Logs** endpoint.
      *
-     * @return the loggingOptOut
+     * @return the xWatsonLoggingOptOut
      */
-    public Boolean loggingOptOut() {
-      return loggingOptOut;
+    public Boolean xWatsonLoggingOptOut() {
+      return xWatsonLoggingOptOut;
     }
 
     private FederatedQueryOptions(FederatedQueryOptionsBuilder builder) {
@@ -8972,9 +8970,9 @@ public class IBMDiscoveryV1Models {
       passages = builder.passages;
       aggregation = builder.aggregation;
       count = builder.count;
-      returnFields = builder.returnFields;
+      xReturn = builder.xReturn;
       offset = builder.offset;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       highlight = builder.highlight;
       passagesFields = builder.passagesFields;
       passagesCount = builder.passagesCount;
@@ -8986,7 +8984,7 @@ public class IBMDiscoveryV1Models {
       similarDocumentIds = builder.similarDocumentIds;
       similarFields = builder.similarFields;
       bias = builder.bias;
-      loggingOptOut = builder.loggingOptOut;
+      xWatsonLoggingOptOut = builder.xWatsonLoggingOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9011,9 +9009,9 @@ public class IBMDiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private String returnFields;
+    private String xReturn;
     private Long offset;
-    private String xsort;
+    private String xSort;
     private Boolean highlight;
     private String passagesFields;
     private Long passagesCount;
@@ -9025,7 +9023,7 @@ public class IBMDiscoveryV1Models {
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
-    private Boolean loggingOptOut;
+    private Boolean xWatsonLoggingOptOut;
 
     private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
       environmentId = federatedQueryOptions.environmentId;
@@ -9035,9 +9033,9 @@ public class IBMDiscoveryV1Models {
       passages = federatedQueryOptions.passages;
       aggregation = federatedQueryOptions.aggregation;
       count = federatedQueryOptions.count;
-      returnFields = federatedQueryOptions.returnFields;
+      xReturn = federatedQueryOptions.xReturn;
       offset = federatedQueryOptions.offset;
-      xsort = federatedQueryOptions.xsort;
+      xSort = federatedQueryOptions.xSort;
       highlight = federatedQueryOptions.highlight;
       passagesFields = federatedQueryOptions.passagesFields;
       passagesCount = federatedQueryOptions.passagesCount;
@@ -9049,7 +9047,7 @@ public class IBMDiscoveryV1Models {
       similarDocumentIds = federatedQueryOptions.similarDocumentIds;
       similarFields = federatedQueryOptions.similarFields;
       bias = federatedQueryOptions.bias;
-      loggingOptOut = federatedQueryOptions.loggingOptOut;
+      xWatsonLoggingOptOut = federatedQueryOptions.xWatsonLoggingOptOut;
       this.requestHeaders.putAll(federatedQueryOptions.requestHeaders());
     }
 
@@ -9155,13 +9153,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the returnFields.
+     * Set the xReturn.
      *
-     * @param returnFields the returnFields
+     * @param xReturn the xReturn
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder returnFields(String returnFields) {
-      this.returnFields = returnFields;
+    public FederatedQueryOptionsBuilder xReturn(String xReturn) {
+      this.xReturn = xReturn;
       return this;
     }
 
@@ -9177,13 +9175,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the xSort.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public FederatedQueryOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -9309,13 +9307,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the loggingOptOut.
+     * Set the xWatsonLoggingOptOut.
      *
-     * @param loggingOptOut the loggingOptOut
+     * @param xWatsonLoggingOptOut the xWatsonLoggingOptOut
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder loggingOptOut(Boolean loggingOptOut) {
-      this.loggingOptOut = loggingOptOut;
+    public FederatedQueryOptionsBuilder xWatsonLoggingOptOut(Boolean xWatsonLoggingOptOut) {
+      this.xWatsonLoggingOptOut = xWatsonLoggingOptOut;
       return this;
     }
 
@@ -9336,31 +9334,31 @@ public class IBMDiscoveryV1Models {
    * Field.
    */
   public class Field extends IBMWatsonGenericModel {
-    private String fieldName;
-    private String fieldType;
+    private String field;
+    private String xType;
 
     /**
-     * Gets the fieldName.
+     * Gets the field.
      *
      * The name of the field.
      *
-     * @return the fieldName
+     * @return the field
      */
     @AuraEnabled
-    public String getFieldName() {
-      return fieldName;
+    public String getField() {
+      return field;
     }
 
     /**
-     * Gets the fieldType.
+     * Gets the xType.
      *
      * The type of the field.
      *
-     * @return the fieldType
+     * @return the xType
      */
     @AuraEnabled
-    public String getFieldType() {
-      return fieldType;
+    public String getXType() {
+      return xType;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9370,8 +9368,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'field' => 'fieldName',
-        'type' => 'fieldType'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -14784,7 +14781,7 @@ public class IBMDiscoveryV1Models {
    * An object specifiying the concepts enrichment and related parameters.
    */
   public class NluEnrichmentConcepts extends IBMWatsonGenericModel {
-    private Long xlimit;
+    private Long xLimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -14793,19 +14790,19 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentConcepts() { }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * The maximum number of concepts enrichments to extact from each instance of the specified field.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
     @AuraEnabled
-    public Long getXlimit() {
-      return xlimit;
+    public Long getXLimit() {
+      return xLimit;
     }
   
     private NluEnrichmentConcepts(NluEnrichmentConceptsBuilder builder) {
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
     }
 
     /**
@@ -14824,7 +14821,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'limit' => 'xlimit'
+        'limit' => 'xLimit'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -14841,7 +14838,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -14853,10 +14850,10 @@ public class IBMDiscoveryV1Models {
    * NluEnrichmentConcepts Builder.
    */
   public class NluEnrichmentConceptsBuilder {
-    private Long xlimit;
+    private Long xLimit;
 
     private NluEnrichmentConceptsBuilder(NluEnrichmentConcepts nluEnrichmentConcepts) {
-      this.xlimit = nluEnrichmentConcepts.xlimit;
+      this.xLimit = nluEnrichmentConcepts.xLimit;
     }
 
     /**
@@ -14875,13 +14872,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the NluEnrichmentConcepts builder
      */
-    public NluEnrichmentConceptsBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public NluEnrichmentConceptsBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
   }
@@ -15028,7 +15025,7 @@ public class IBMDiscoveryV1Models {
   public class NluEnrichmentEntities extends IBMWatsonGenericModel {
     private Boolean sentiment;
     private Boolean emotion;
-    private Long xlimit;
+    private Long xLimit;
     private Boolean mentions;
     private Boolean mentionTypes;
     private Boolean sentenceLocations;
@@ -15065,15 +15062,15 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * The maximum number of entities to extract for each instance of the specified field.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
     @AuraEnabled
-    public Long getXlimit() {
-      return xlimit;
+    public Long getXLimit() {
+      return xLimit;
     }
 
     /**
@@ -15129,7 +15126,7 @@ public class IBMDiscoveryV1Models {
     private NluEnrichmentEntities(NluEnrichmentEntitiesBuilder builder) {
       this.sentiment = builder.sentiment;
       this.emotion = builder.emotion;
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
       this.mentions = builder.mentions;
       this.mentionTypes = builder.mentionTypes;
       this.sentenceLocations = builder.sentenceLocations;
@@ -15152,7 +15149,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'limit' => 'xlimit',
+        'limit' => 'xLimit',
         'mention_types' => 'mentionTypes',
         'sentence_locations' => 'sentenceLocations'
       };
@@ -15171,7 +15168,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit',
+        'xLimit' => 'limit',
         'mentionTypes' => 'mention_types',
         'sentenceLocations' => 'sentence_locations'
       };
@@ -15187,7 +15184,7 @@ public class IBMDiscoveryV1Models {
   public class NluEnrichmentEntitiesBuilder {
     private Boolean sentiment;
     private Boolean emotion;
-    private Long xlimit;
+    private Long xLimit;
     private Boolean mentions;
     private Boolean mentionTypes;
     private Boolean sentenceLocations;
@@ -15196,7 +15193,7 @@ public class IBMDiscoveryV1Models {
     private NluEnrichmentEntitiesBuilder(NluEnrichmentEntities nluEnrichmentEntities) {
       this.sentiment = nluEnrichmentEntities.sentiment;
       this.emotion = nluEnrichmentEntities.emotion;
-      this.xlimit = nluEnrichmentEntities.xlimit;
+      this.xLimit = nluEnrichmentEntities.xLimit;
       this.mentions = nluEnrichmentEntities.mentions;
       this.mentionTypes = nluEnrichmentEntities.mentionTypes;
       this.sentenceLocations = nluEnrichmentEntities.sentenceLocations;
@@ -15241,13 +15238,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the NluEnrichmentEntities builder
      */
-    public NluEnrichmentEntitiesBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public NluEnrichmentEntitiesBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
 
@@ -15717,7 +15714,7 @@ public class IBMDiscoveryV1Models {
   public class NluEnrichmentKeywords extends IBMWatsonGenericModel {
     private Boolean sentiment;
     private Boolean emotion;
-    private Long xlimit;
+    private Long xLimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -15750,21 +15747,21 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * The maximum number of keywords to extract for each instance of the specified field.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
     @AuraEnabled
-    public Long getXlimit() {
-      return xlimit;
+    public Long getXLimit() {
+      return xLimit;
     }
   
     private NluEnrichmentKeywords(NluEnrichmentKeywordsBuilder builder) {
       this.sentiment = builder.sentiment;
       this.emotion = builder.emotion;
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
     }
 
     /**
@@ -15783,7 +15780,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'limit' => 'xlimit'
+        'limit' => 'xLimit'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -15800,7 +15797,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -15814,12 +15811,12 @@ public class IBMDiscoveryV1Models {
   public class NluEnrichmentKeywordsBuilder {
     private Boolean sentiment;
     private Boolean emotion;
-    private Long xlimit;
+    private Long xLimit;
 
     private NluEnrichmentKeywordsBuilder(NluEnrichmentKeywords nluEnrichmentKeywords) {
       this.sentiment = nluEnrichmentKeywords.sentiment;
       this.emotion = nluEnrichmentKeywords.emotion;
-      this.xlimit = nluEnrichmentKeywords.xlimit;
+      this.xLimit = nluEnrichmentKeywords.xLimit;
     }
 
     /**
@@ -15860,13 +15857,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the NluEnrichmentKeywords builder
      */
-    public NluEnrichmentKeywordsBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public NluEnrichmentKeywordsBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
   }
@@ -15972,7 +15969,7 @@ public class IBMDiscoveryV1Models {
   public class NluEnrichmentSemanticRoles extends IBMWatsonGenericModel {
     private Boolean entities;
     private Boolean keywords;
-    private Long xlimit;
+    private Long xLimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -16005,21 +16002,21 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * The maximum number of semantic roles enrichments to extact from each instance of the specified field.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
     @AuraEnabled
-    public Long getXlimit() {
-      return xlimit;
+    public Long getXLimit() {
+      return xLimit;
     }
   
     private NluEnrichmentSemanticRoles(NluEnrichmentSemanticRolesBuilder builder) {
       this.entities = builder.entities;
       this.keywords = builder.keywords;
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
     }
 
     /**
@@ -16038,7 +16035,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'limit' => 'xlimit'
+        'limit' => 'xLimit'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -16055,7 +16052,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -16069,12 +16066,12 @@ public class IBMDiscoveryV1Models {
   public class NluEnrichmentSemanticRolesBuilder {
     private Boolean entities;
     private Boolean keywords;
-    private Long xlimit;
+    private Long xLimit;
 
     private NluEnrichmentSemanticRolesBuilder(NluEnrichmentSemanticRoles nluEnrichmentSemanticRoles) {
       this.entities = nluEnrichmentSemanticRoles.entities;
       this.keywords = nluEnrichmentSemanticRoles.keywords;
-      this.xlimit = nluEnrichmentSemanticRoles.xlimit;
+      this.xLimit = nluEnrichmentSemanticRoles.xLimit;
     }
 
     /**
@@ -16115,13 +16112,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the NluEnrichmentSemanticRoles builder
      */
-    public NluEnrichmentSemanticRolesBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public NluEnrichmentSemanticRolesBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
   }
@@ -16809,7 +16806,7 @@ public class IBMDiscoveryV1Models {
    * An aggregation produced by  Discovery to analyze the input provided.
    */
   public class QueryAggregation extends IBMWatsonGenericModel {
-    private String xtype;
+    private String xType;
     private List<AggregationResult> results;
     private Long matchingResults;
     private List<QueryAggregation> aggregations;
@@ -16825,15 +16822,15 @@ public class IBMDiscoveryV1Models {
     private TopHitsResults hits;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type of aggregation command used. For example: term, filter, max, min, etc.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -16991,12 +16988,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -17123,7 +17120,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype',
+        'type' => 'xType',
         'matching_results' => 'matchingResults',
         'histogram_interval' => 'histogramInterval',
         'timeslice_interval' => 'timesliceInterval'
@@ -17250,7 +17247,7 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryEntitiesEntity extends IBMWatsonGenericModel {
     private String text;
-    private String xtype;
+    private String xType;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -17271,20 +17268,20 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type of the specified entity.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
   
     private QueryEntitiesEntity(QueryEntitiesEntityBuilder builder) {
       this.text = builder.text;
-      this.xtype = builder.xtype;
+      this.xType = builder.xType;
     }
 
     /**
@@ -17303,7 +17300,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -17320,7 +17317,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xtype' => 'type'
+        'xType' => 'type'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -17333,11 +17330,11 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryEntitiesEntityBuilder {
     private String text;
-    private String xtype;
+    private String xType;
 
     private QueryEntitiesEntityBuilder(QueryEntitiesEntity queryEntitiesEntity) {
       this.text = queryEntitiesEntity.text;
-      this.xtype = queryEntitiesEntity.xtype;
+      this.xType = queryEntitiesEntity.xType;
     }
 
     /**
@@ -17367,13 +17364,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xtype.
+     * Set the xType.
      *
-     * @param xtype the xtype
+     * @param xType the xType
      * @return the QueryEntitiesEntity builder
      */
-    public QueryEntitiesEntityBuilder xtype(String xtype) {
-      this.xtype = xtype;
+    public QueryEntitiesEntityBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
   }
@@ -17687,7 +17684,7 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryEntitiesResponseItem extends IBMWatsonGenericModel {
     private String text;
-    private String xtype;
+    private String xType;
     private List<QueryEvidence> evidence;
 
     /**
@@ -17703,15 +17700,15 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type of the result entity.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -17736,12 +17733,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -17760,7 +17757,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -17936,21 +17933,21 @@ public class IBMDiscoveryV1Models {
    * Entity description and location within evidence field.
    */
   public class QueryEvidenceEntity extends IBMWatsonGenericModel {
-    private String xtype;
+    private String xType;
     private String text;
     private Long startOffset;
     private Long endOffset;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The entity type for this entity. Possible types vary based on model used.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -17990,12 +17987,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -18032,7 +18029,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype',
+        'type' => 'xType',
         'start_offset' => 'startOffset',
         'end_offset' => 'endOffset'
       };
@@ -18186,7 +18183,7 @@ public class IBMDiscoveryV1Models {
     private String query;
     private Long count;
     private Long offset;
-    private List<String> xsort;
+    private List<String> xSort;
 
     /**
      * Gets the filter.
@@ -18238,16 +18235,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
      * prefix is specified.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public List<String> xsort() {
-      return xsort;
+    public List<String> xSort() {
+      return xSort;
     }
 
     private QueryLogOptions(QueryLogOptionsBuilder builder) {
@@ -18255,7 +18252,7 @@ public class IBMDiscoveryV1Models {
       query = builder.query;
       count = builder.count;
       offset = builder.offset;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -18277,14 +18274,14 @@ public class IBMDiscoveryV1Models {
     private String query;
     private Long count;
     private Long offset;
-    private List<String> xsort;
+    private List<String> xSort;
 
     private QueryLogOptionsBuilder(QueryLogOptions queryLogOptions) {
       filter = queryLogOptions.filter;
       query = queryLogOptions.query;
       count = queryLogOptions.count;
       offset = queryLogOptions.offset;
-      xsort = queryLogOptions.xsort;
+      xSort = queryLogOptions.xSort;
       this.requestHeaders.putAll(queryLogOptions.requestHeaders());
     }
 
@@ -18304,17 +18301,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an xsort to xsort.
+     * Adds an xSort to xSort.
      *
-     * @param xsort the new xsort
+     * @param xSort the new xSort
      * @return the QueryLogOptions builder
      */
-    public QueryLogOptionsBuilder addXsort(String xsort) {
-      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
-      if (this.xsort == null) {
-        this.xsort = new List<String>();
+    public QueryLogOptionsBuilder addXSort(String xSort) {
+      IBMWatsonValidator.notNull(xSort, 'xSort cannot be null');
+      if (this.xSort == null) {
+        this.xSort = new List<String>();
       }
-      this.xsort.add(xsort);
+      this.xSort.add(xSort);
       return this;
     }
 
@@ -18363,14 +18360,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
-     * Existing xsort will be replaced.
+     * Set the xSort.
+     * Existing xSort will be replaced.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the QueryLogOptions builder
      */
-    public QueryLogOptionsBuilder xsort(List<String> xsort) {
-      this.xsort = xsort;
+    public QueryLogOptionsBuilder xSort(List<String> xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -18399,9 +18396,9 @@ public class IBMDiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> xReturn;
     private Long offset;
-    private List<String> xsort;
+    private List<String> xSort;
     private Boolean highlight;
     private List<String> passagesFields;
     private Long passagesCount;
@@ -18506,14 +18503,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the returnFields.
+     * Gets the xReturn.
      *
      * A comma-separated list of the portion of the document hierarchy to return.
      *
-     * @return the returnFields
+     * @return the xReturn
      */
-    public List<String> returnFields() {
-      return returnFields;
+    public List<String> xReturn() {
+      return xReturn;
     }
 
     /**
@@ -18530,16 +18527,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
      * prefix is specified.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public List<String> xsort() {
-      return xsort;
+    public List<String> xSort() {
+      return xSort;
     }
 
     /**
@@ -18651,9 +18648,9 @@ public class IBMDiscoveryV1Models {
       passages = builder.passages;
       aggregation = builder.aggregation;
       count = builder.count;
-      returnFields = builder.returnFields;
+      xReturn = builder.xReturn;
       offset = builder.offset;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       highlight = builder.highlight;
       passagesFields = builder.passagesFields;
       passagesCount = builder.passagesCount;
@@ -18687,9 +18684,9 @@ public class IBMDiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> xReturn;
     private Long offset;
-    private List<String> xsort;
+    private List<String> xSort;
     private Boolean highlight;
     private List<String> passagesFields;
     private Long passagesCount;
@@ -18708,9 +18705,9 @@ public class IBMDiscoveryV1Models {
       passages = queryNoticesOptions.passages;
       aggregation = queryNoticesOptions.aggregation;
       count = queryNoticesOptions.count;
-      returnFields = queryNoticesOptions.returnFields;
+      xReturn = queryNoticesOptions.xReturn;
       offset = queryNoticesOptions.offset;
-      xsort = queryNoticesOptions.xsort;
+      xSort = queryNoticesOptions.xSort;
       highlight = queryNoticesOptions.highlight;
       passagesFields = queryNoticesOptions.passagesFields;
       passagesCount = queryNoticesOptions.passagesCount;
@@ -18749,32 +18746,32 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an returnFields to returnFields.
+     * Adds an xReturn to xReturn.
      *
-     * @param returnFields the new returnFields
+     * @param xReturn the new xReturn
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addReturnFields(String returnFields) {
-      IBMWatsonValidator.notNull(returnFields, 'returnFields cannot be null');
-      if (this.returnFields == null) {
-        this.returnFields = new List<String>();
+    public QueryNoticesOptionsBuilder addXReturn(String xReturn) {
+      IBMWatsonValidator.notNull(xReturn, 'xReturn cannot be null');
+      if (this.xReturn == null) {
+        this.xReturn = new List<String>();
       }
-      this.returnFields.add(returnFields);
+      this.xReturn.add(xReturn);
       return this;
     }
 
     /**
-     * Adds an xsort to xsort.
+     * Adds an xSort to xSort.
      *
-     * @param xsort the new xsort
+     * @param xSort the new xSort
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addXsort(String xsort) {
-      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
-      if (this.xsort == null) {
-        this.xsort = new List<String>();
+    public QueryNoticesOptionsBuilder addXSort(String xSort) {
+      IBMWatsonValidator.notNull(xSort, 'xSort cannot be null');
+      if (this.xSort == null) {
+        this.xSort = new List<String>();
       }
-      this.xsort.add(xsort);
+      this.xSort.add(xSort);
       return this;
     }
 
@@ -18912,14 +18909,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the returnFields.
-     * Existing returnFields will be replaced.
+     * Set the xReturn.
+     * Existing xReturn will be replaced.
      *
-     * @param returnFields the returnFields
+     * @param xReturn the xReturn
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder returnFields(List<String> returnFields) {
-      this.returnFields = returnFields;
+    public QueryNoticesOptionsBuilder xReturn(List<String> xReturn) {
+      this.xReturn = xReturn;
       return this;
     }
 
@@ -18935,14 +18932,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
-     * Existing xsort will be replaced.
+     * Set the xSort.
+     * Existing xSort will be replaced.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder xsort(List<String> xsort) {
-      this.xsort = xsort;
+    public QueryNoticesOptionsBuilder xSort(List<String> xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -19502,9 +19499,9 @@ public class IBMDiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private String returnFields;
+    private String xReturn;
     private Long offset;
-    private String xsort;
+    private String xSort;
     private Boolean highlight;
     private String passagesFields;
     private Long passagesCount;
@@ -19516,7 +19513,7 @@ public class IBMDiscoveryV1Models {
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
-    private Boolean loggingOptOut;
+    private Boolean xWatsonLoggingOptOut;
 
     /**
      * Gets the environmentId.
@@ -19612,14 +19609,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the returnFields.
+     * Gets the xReturn.
      *
      * A comma-separated list of the portion of the document hierarchy to return.
      *
-     * @return the returnFields
+     * @return the xReturn
      */
-    public String returnFields() {
-      return returnFields;
+    public String xReturn() {
+      return xReturn;
     }
 
     /**
@@ -19635,16 +19632,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
      * prefix is specified. This parameter cannot be used in the same query as the **bias** parameter.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -19786,14 +19783,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the loggingOptOut.
+     * Gets the xWatsonLoggingOptOut.
      *
      * If `true`, queries are not stored in the Discovery **Logs** endpoint.
      *
-     * @return the loggingOptOut
+     * @return the xWatsonLoggingOptOut
      */
-    public Boolean loggingOptOut() {
-      return loggingOptOut;
+    public Boolean xWatsonLoggingOptOut() {
+      return xWatsonLoggingOptOut;
     }
 
     private QueryOptions(QueryOptionsBuilder builder) {
@@ -19807,9 +19804,9 @@ public class IBMDiscoveryV1Models {
       passages = builder.passages;
       aggregation = builder.aggregation;
       count = builder.count;
-      returnFields = builder.returnFields;
+      xReturn = builder.xReturn;
       offset = builder.offset;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       highlight = builder.highlight;
       passagesFields = builder.passagesFields;
       passagesCount = builder.passagesCount;
@@ -19821,7 +19818,7 @@ public class IBMDiscoveryV1Models {
       similarDocumentIds = builder.similarDocumentIds;
       similarFields = builder.similarFields;
       bias = builder.bias;
-      loggingOptOut = builder.loggingOptOut;
+      xWatsonLoggingOptOut = builder.xWatsonLoggingOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -19847,9 +19844,9 @@ public class IBMDiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private String returnFields;
+    private String xReturn;
     private Long offset;
-    private String xsort;
+    private String xSort;
     private Boolean highlight;
     private String passagesFields;
     private Long passagesCount;
@@ -19861,7 +19858,7 @@ public class IBMDiscoveryV1Models {
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
-    private Boolean loggingOptOut;
+    private Boolean xWatsonLoggingOptOut;
 
     private QueryOptionsBuilder(QueryOptions queryOptions) {
       environmentId = queryOptions.environmentId;
@@ -19872,9 +19869,9 @@ public class IBMDiscoveryV1Models {
       passages = queryOptions.passages;
       aggregation = queryOptions.aggregation;
       count = queryOptions.count;
-      returnFields = queryOptions.returnFields;
+      xReturn = queryOptions.xReturn;
       offset = queryOptions.offset;
-      xsort = queryOptions.xsort;
+      xSort = queryOptions.xSort;
       highlight = queryOptions.highlight;
       passagesFields = queryOptions.passagesFields;
       passagesCount = queryOptions.passagesCount;
@@ -19886,7 +19883,7 @@ public class IBMDiscoveryV1Models {
       similarDocumentIds = queryOptions.similarDocumentIds;
       similarFields = queryOptions.similarFields;
       bias = queryOptions.bias;
-      loggingOptOut = queryOptions.loggingOptOut;
+      xWatsonLoggingOptOut = queryOptions.xWatsonLoggingOptOut;
       this.requestHeaders.putAll(queryOptions.requestHeaders());
     }
 
@@ -20005,13 +20002,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the returnFields.
+     * Set the xReturn.
      *
-     * @param returnFields the returnFields
+     * @param xReturn the xReturn
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder returnFields(String returnFields) {
-      this.returnFields = returnFields;
+    public QueryOptionsBuilder xReturn(String xReturn) {
+      this.xReturn = xReturn;
       return this;
     }
 
@@ -20027,13 +20024,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the xSort.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public QueryOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -20159,13 +20156,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the loggingOptOut.
+     * Set the xWatsonLoggingOptOut.
      *
-     * @param loggingOptOut the loggingOptOut
+     * @param xWatsonLoggingOptOut the xWatsonLoggingOptOut
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder loggingOptOut(Boolean loggingOptOut) {
-      this.loggingOptOut = loggingOptOut;
+    public QueryOptionsBuilder xWatsonLoggingOptOut(Boolean xWatsonLoggingOptOut) {
+      this.xWatsonLoggingOptOut = xWatsonLoggingOptOut;
       return this;
     }
 
@@ -20397,7 +20394,7 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryRelationsEntity extends IBMWatsonGenericModel {
     private String text;
-    private String xtype;
+    private String xType;
     private Boolean exact;
 
     /**
@@ -20412,14 +20409,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type of the specified entity.
      *
-     * @return the xtype
+     * @return the xType
      */
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -20435,7 +20432,7 @@ public class IBMDiscoveryV1Models {
   
     private QueryRelationsEntity(QueryRelationsEntityBuilder builder) {
       this.text = builder.text;
-      this.xtype = builder.xtype;
+      this.xType = builder.xType;
       this.exact = builder.exact;
     }
 
@@ -20454,7 +20451,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xtype' => 'type'
+        'xType' => 'type'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -20467,12 +20464,12 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryRelationsEntityBuilder {
     private String text;
-    private String xtype;
+    private String xType;
     private Boolean exact;
 
     private QueryRelationsEntityBuilder(QueryRelationsEntity queryRelationsEntity) {
       this.text = queryRelationsEntity.text;
-      this.xtype = queryRelationsEntity.xtype;
+      this.xType = queryRelationsEntity.xType;
       this.exact = queryRelationsEntity.exact;
     }
 
@@ -20503,13 +20500,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xtype.
+     * Set the xType.
      *
-     * @param xtype the xtype
+     * @param xType the xType
      * @return the QueryRelationsEntity builder
      */
-    public QueryRelationsEntityBuilder xtype(String xtype) {
-      this.xtype = xtype;
+    public QueryRelationsEntityBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 
@@ -20700,7 +20697,7 @@ public class IBMDiscoveryV1Models {
     private String collectionId;
     private List<QueryRelationsEntity> entities;
     private QueryEntitiesContext context;
-    private String xsort;
+    private String xSort;
     private QueryRelationsFilter filter;
     private Long count;
     private Long evidenceCount;
@@ -20751,16 +20748,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique
      * times each entity is identified. The default is `score`. This parameter cannot be used in the same query as the
      * **bias** parameter.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -20802,7 +20799,7 @@ public class IBMDiscoveryV1Models {
       collectionId = builder.collectionId;
       entities = builder.entities;
       context = builder.context;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       filter = builder.filter;
       count = builder.count;
       evidenceCount = builder.evidenceCount;
@@ -20827,7 +20824,7 @@ public class IBMDiscoveryV1Models {
     private String collectionId;
     private List<QueryRelationsEntity> entities;
     private QueryEntitiesContext context;
-    private String xsort;
+    private String xSort;
     private QueryRelationsFilter filter;
     private Long count;
     private Long evidenceCount;
@@ -20837,7 +20834,7 @@ public class IBMDiscoveryV1Models {
       collectionId = queryRelationsOptions.collectionId;
       entities = queryRelationsOptions.entities;
       context = queryRelationsOptions.context;
-      xsort = queryRelationsOptions.xsort;
+      xSort = queryRelationsOptions.xSort;
       filter = queryRelationsOptions.filter;
       count = queryRelationsOptions.count;
       evidenceCount = queryRelationsOptions.evidenceCount;
@@ -20931,13 +20928,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the xSort.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the QueryRelationsOptions builder
      */
-    public QueryRelationsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public QueryRelationsOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -20991,21 +20988,21 @@ public class IBMDiscoveryV1Models {
    * QueryRelationsRelationship.
    */
   public class QueryRelationsRelationship extends IBMWatsonGenericModel {
-    private String xtype;
+    private String xType;
     private Long frequency;
     private List<QueryRelationsArgument> arguments;
     private List<QueryEvidence> evidence;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The identified relationship type.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -21045,12 +21042,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -21087,7 +21084,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -22205,7 +22202,7 @@ public class IBMDiscoveryV1Models {
    * Object containing source parameters for the configuration.
    */
   public class Source extends IBMWatsonGenericModel {
-    private String xtype;
+    private String xType;
     private String credentialId;
     private SourceSchedule schedule;
     private SourceOptions options;
@@ -22217,7 +22214,7 @@ public class IBMDiscoveryV1Models {
     public Source() { }
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type of source to connect to.
      * -  `box` indicates the configuration is to connect an instance of Enterprise Box.
@@ -22226,11 +22223,11 @@ public class IBMDiscoveryV1Models {
      * -  `web_crawl` indicates the configuration is to perform a web page crawl.
      * -  `cloud_object_storage` indicates the configuration is to connect to a cloud object store.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -22272,7 +22269,7 @@ public class IBMDiscoveryV1Models {
     }
   
     private Source(SourceBuilder builder) {
-      this.xtype = builder.xtype;
+      this.xType = builder.xType;
       this.credentialId = builder.credentialId;
       this.schedule = builder.schedule;
       this.options = builder.options;
@@ -22294,7 +22291,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype',
+        'type' => 'xType',
         'credential_id' => 'credentialId'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
@@ -22322,7 +22319,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xtype' => 'type',
+        'xType' => 'type',
         'credentialId' => 'credential_id'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -22355,13 +22352,13 @@ public class IBMDiscoveryV1Models {
    * Source Builder.
    */
   public class SourceBuilder {
-    private String xtype;
+    private String xType;
     private String credentialId;
     private SourceSchedule schedule;
     private SourceOptions options;
 
     private SourceBuilder(Source source) {
-      this.xtype = source.xtype;
+      this.xType = source.xType;
       this.credentialId = source.credentialId;
       this.schedule = source.schedule;
       this.options = source.options;
@@ -22383,13 +22380,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xtype.
+     * Set the xType.
      *
-     * @param xtype the xtype
+     * @param xType the xType
      * @return the Source builder
      */
-    public SourceBuilder xtype(String xtype) {
-      this.xtype = xtype;
+    public SourceBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
 
@@ -22897,7 +22894,7 @@ public class IBMDiscoveryV1Models {
    */
   public class SourceOptionsBuckets extends IBMWatsonGenericModel {
     private String name;
-    private Long xlimit;
+    private Long xLimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -22918,22 +22915,22 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * The number of documents to crawl from this cloud object store bucket. If not specified, all documents in the
      * bucket are crawled.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
     @AuraEnabled
-    public Long getXlimit() {
-      return xlimit;
+    public Long getXLimit() {
+      return xLimit;
     }
   
     private SourceOptionsBuckets(SourceOptionsBucketsBuilder builder) {
       IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
       this.name = builder.name;
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
     }
 
     /**
@@ -22952,7 +22949,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'limit' => 'xlimit'
+        'limit' => 'xLimit'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -22969,7 +22966,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -22982,11 +22979,11 @@ public class IBMDiscoveryV1Models {
    */
   public class SourceOptionsBucketsBuilder {
     private String name;
-    private Long xlimit;
+    private Long xLimit;
 
     private SourceOptionsBucketsBuilder(SourceOptionsBuckets sourceOptionsBuckets) {
       this.name = sourceOptionsBuckets.name;
-      this.xlimit = sourceOptionsBuckets.xlimit;
+      this.xLimit = sourceOptionsBuckets.xLimit;
     }
 
     /**
@@ -23025,13 +23022,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the SourceOptionsBuckets builder
      */
-    public SourceOptionsBucketsBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public SourceOptionsBucketsBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
   }
@@ -23042,7 +23039,7 @@ public class IBMDiscoveryV1Models {
   public class SourceOptionsFolder extends IBMWatsonGenericModel {
     private String ownerUserId;
     private String folderId;
-    private Long xlimit;
+    private Long xLimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -23075,15 +23072,15 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * The maximum number of documents to crawl for this folder. By default, all documents in the folder are crawled.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
     @AuraEnabled
-    public Long getXlimit() {
-      return xlimit;
+    public Long getXLimit() {
+      return xLimit;
     }
   
     private SourceOptionsFolder(SourceOptionsFolderBuilder builder) {
@@ -23091,7 +23088,7 @@ public class IBMDiscoveryV1Models {
       IBMWatsonValidator.notNull(builder.folderId, 'folderId cannot be null');
       this.ownerUserId = builder.ownerUserId;
       this.folderId = builder.folderId;
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
     }
 
     /**
@@ -23112,7 +23109,7 @@ public class IBMDiscoveryV1Models {
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'owner_user_id' => 'ownerUserId',
         'folder_id' => 'folderId',
-        'limit' => 'xlimit'
+        'limit' => 'xLimit'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -23131,7 +23128,7 @@ public class IBMDiscoveryV1Models {
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'ownerUserId' => 'owner_user_id',
         'folderId' => 'folder_id',
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -23145,12 +23142,12 @@ public class IBMDiscoveryV1Models {
   public class SourceOptionsFolderBuilder {
     private String ownerUserId;
     private String folderId;
-    private Long xlimit;
+    private Long xLimit;
 
     private SourceOptionsFolderBuilder(SourceOptionsFolder sourceOptionsFolder) {
       this.ownerUserId = sourceOptionsFolder.ownerUserId;
       this.folderId = sourceOptionsFolder.folderId;
-      this.xlimit = sourceOptionsFolder.xlimit;
+      this.xLimit = sourceOptionsFolder.xLimit;
     }
 
     /**
@@ -23202,13 +23199,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the SourceOptionsFolder builder
      */
-    public SourceOptionsFolderBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public SourceOptionsFolderBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
   }
@@ -23218,7 +23215,7 @@ public class IBMDiscoveryV1Models {
    */
   public class SourceOptionsObject extends IBMWatsonGenericModel {
     private String name;
-    private Long xlimit;
+    private Long xLimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -23239,22 +23236,22 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * The maximum number of documents to crawl for this document object. By default, all documents in the document
      * object are crawled.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
     @AuraEnabled
-    public Long getXlimit() {
-      return xlimit;
+    public Long getXLimit() {
+      return xLimit;
     }
   
     private SourceOptionsObject(SourceOptionsObjectBuilder builder) {
       IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
       this.name = builder.name;
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
     }
 
     /**
@@ -23273,7 +23270,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'limit' => 'xlimit'
+        'limit' => 'xLimit'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -23290,7 +23287,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -23303,11 +23300,11 @@ public class IBMDiscoveryV1Models {
    */
   public class SourceOptionsObjectBuilder {
     private String name;
-    private Long xlimit;
+    private Long xLimit;
 
     private SourceOptionsObjectBuilder(SourceOptionsObject sourceOptionsObject) {
       this.name = sourceOptionsObject.name;
-      this.xlimit = sourceOptionsObject.xlimit;
+      this.xLimit = sourceOptionsObject.xLimit;
     }
 
     /**
@@ -23346,13 +23343,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the SourceOptionsObject builder
      */
-    public SourceOptionsObjectBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public SourceOptionsObjectBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
   }
@@ -23362,7 +23359,7 @@ public class IBMDiscoveryV1Models {
    */
   public class SourceOptionsSiteColl extends IBMWatsonGenericModel {
     private String siteCollectionPath;
-    private Long xlimit;
+    private Long xLimit;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -23384,22 +23381,22 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xlimit.
+     * Gets the xLimit.
      *
      * The maximum number of documents to crawl for this site collection. By default, all documents in the site
      * collection are crawled.
      *
-     * @return the xlimit
+     * @return the xLimit
      */
     @AuraEnabled
-    public Long getXlimit() {
-      return xlimit;
+    public Long getXLimit() {
+      return xLimit;
     }
   
     private SourceOptionsSiteColl(SourceOptionsSiteCollBuilder builder) {
       IBMWatsonValidator.notNull(builder.siteCollectionPath, 'siteCollectionPath cannot be null');
       this.siteCollectionPath = builder.siteCollectionPath;
-      this.xlimit = builder.xlimit;
+      this.xLimit = builder.xLimit;
     }
 
     /**
@@ -23419,7 +23416,7 @@ public class IBMDiscoveryV1Models {
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'site_collection_path' => 'siteCollectionPath',
-        'limit' => 'xlimit'
+        'limit' => 'xLimit'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -23437,7 +23434,7 @@ public class IBMDiscoveryV1Models {
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'siteCollectionPath' => 'site_collection_path',
-        'xlimit' => 'limit'
+        'xLimit' => 'limit'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -23450,11 +23447,11 @@ public class IBMDiscoveryV1Models {
    */
   public class SourceOptionsSiteCollBuilder {
     private String siteCollectionPath;
-    private Long xlimit;
+    private Long xLimit;
 
     private SourceOptionsSiteCollBuilder(SourceOptionsSiteColl sourceOptionsSiteColl) {
       this.siteCollectionPath = sourceOptionsSiteColl.siteCollectionPath;
-      this.xlimit = sourceOptionsSiteColl.xlimit;
+      this.xLimit = sourceOptionsSiteColl.xLimit;
     }
 
     /**
@@ -23493,13 +23490,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the xlimit.
+     * Set the xLimit.
      *
-     * @param xlimit the xlimit
+     * @param xLimit the xLimit
      * @return the SourceOptionsSiteColl builder
      */
-    public SourceOptionsSiteCollBuilder xlimit(Long xlimit) {
-      this.xlimit = xlimit;
+    public SourceOptionsSiteCollBuilder xLimit(Long xLimit) {
+      this.xLimit = xLimit;
       return this;
     }
   }
@@ -24711,7 +24708,7 @@ public class IBMDiscoveryV1Models {
    */
   public class TokenDictStatusResponse extends IBMWatsonResponseModel {
     private String status;
-    private String xtype;
+    private String xType;
 
     /**
      * Gets the status.
@@ -24726,15 +24723,15 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type for this wordlist. Can be `tokenization_dictionary` or `stopwords`.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -24747,12 +24744,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -24762,7 +24759,7 @@ public class IBMDiscoveryV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);

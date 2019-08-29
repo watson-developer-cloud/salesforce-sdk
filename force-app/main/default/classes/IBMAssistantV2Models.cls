@@ -3,7 +3,7 @@ public class IBMAssistantV2Models {
    * CaptureGroup.
    */
   public class CaptureGroup extends IBMWatsonGenericModel {
-    private String xgroup;
+    private String xGroup;
     private List<Long> location;
 
     /**
@@ -13,15 +13,15 @@ public class IBMAssistantV2Models {
     public CaptureGroup() { }
 
     /**
-     * Gets the xgroup.
+     * Gets the xGroup.
      *
      * A recognized capture group for the entity.
      *
-     * @return the xgroup
+     * @return the xGroup
      */
     @AuraEnabled
-    public String getXgroup() {
-      return xgroup;
+    public String getXGroup() {
+      return xGroup;
     }
 
     /**
@@ -37,8 +37,8 @@ public class IBMAssistantV2Models {
     }
   
     private CaptureGroup(CaptureGroupBuilder builder) {
-      IBMWatsonValidator.notNull(builder.xgroup, 'xgroup cannot be null');
-      this.xgroup = builder.xgroup;
+      IBMWatsonValidator.notNull(builder.xGroup, 'xGroup cannot be null');
+      this.xGroup = builder.xGroup;
       this.location = builder.location;
     }
 
@@ -58,7 +58,7 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'group' => 'xgroup'
+        'group' => 'xGroup'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -75,7 +75,7 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xgroup' => 'group'
+        'xGroup' => 'group'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -87,11 +87,11 @@ public class IBMAssistantV2Models {
    * CaptureGroup Builder.
    */
   public class CaptureGroupBuilder {
-    private String xgroup;
+    private String xGroup;
     private List<Long> location;
 
     private CaptureGroupBuilder(CaptureGroup captureGroup) {
-      this.xgroup = captureGroup.xgroup;
+      this.xGroup = captureGroup.xGroup;
       this.location = captureGroup.location;
     }
 
@@ -104,10 +104,10 @@ public class IBMAssistantV2Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param xgroup the xgroup
+     * @param xGroup the xGroup
      */
-    public CaptureGroupBuilder(String xgroup) {
-      this.xgroup = xgroup;
+    public CaptureGroupBuilder(String xGroup) {
+      this.xGroup = xGroup;
     }
 
     /**
@@ -135,13 +135,13 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Set the xgroup.
+     * Set the xGroup.
      *
-     * @param xgroup the xgroup
+     * @param xGroup the xGroup
      * @return the CaptureGroup builder
      */
-    public CaptureGroupBuilder xgroup(String xgroup) {
-      this.xgroup = xgroup;
+    public CaptureGroupBuilder xGroup(String xGroup) {
+      this.xGroup = xGroup;
       return this;
     }
 
@@ -444,7 +444,7 @@ public class IBMAssistantV2Models {
    */
   public class DialogNodeAction extends IBMWatsonGenericModel {
     private String name;
-    private String actionType;
+    private String xType;
     private IBMWatsonMapModel parameters;
     private String resultVariable;
     private String credentials;
@@ -462,15 +462,15 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Gets the actionType.
+     * Gets the xType.
      *
      * The type of action to invoke.
      *
-     * @return the actionType
+     * @return the xType
      */
     @AuraEnabled
-    public String getActionType() {
-      return actionType;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -519,12 +519,12 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the actionType.
+     * Sets the xType.
      *
-     * @param actionType the new actionType
+     * @param xType the new xType
      */
-    public void setActionType(final String actionType) {
-      this.actionType = actionType;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -561,7 +561,7 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'actionType',
+        'type' => 'xType',
         'result_variable' => 'resultVariable'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
@@ -776,557 +776,6 @@ public class IBMAssistantV2Models {
   }
 
   /**
-   * DialogRuntimeResponseGeneric.
-   */
-  public class DialogRuntimeResponseGeneric extends IBMWatsonGenericModel {
-    private String responseType;
-    private String text;
-    private Long xtime;
-    private Boolean typing;
-    private String source;
-    private String title;
-    private String description;
-    private String preference;
-    private List<DialogNodeOutputOptionsElement> options;
-    private String messageToHumanAgent;
-    private String topic;
-    private List<DialogSuggestion> suggestions;
-    private String header;
-    private List<SearchResult> results;
-
-    /**
-     * This constructor is strictly for internal serialization/deserialization purposes
-     * and should not be called by the client.
-     */
-    public DialogRuntimeResponseGeneric() { }
-
-    /**
-     * Gets the responseType.
-     *
-     * The type of response returned by the dialog node. The specified response type must be supported by the client
-     * application or channel.
-     *
-     * **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
-     * Premium users.
-     *
-     * @return the responseType
-     */
-    @AuraEnabled
-    public String getResponseType() {
-      return responseType;
-    }
-
-    /**
-     * Gets the text.
-     *
-     * The text of the response.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text;
-    }
-
-    /**
-     * Gets the xtime.
-     *
-     * How long to pause, in milliseconds.
-     *
-     * @return the xtime
-     */
-    @AuraEnabled
-    public Long getXtime() {
-      return xtime;
-    }
-
-    /**
-     * Gets the typing.
-     *
-     * Whether to send a "user is typing" event during the pause.
-     *
-     * @return the typing
-     */
-    @AuraEnabled
-    public Boolean getTyping() {
-      return typing;
-    }
-
-    /**
-     * Gets the source.
-     *
-     * The URL of the image.
-     *
-     * @return the source
-     */
-    @AuraEnabled
-    public String getSource() {
-      return source;
-    }
-
-    /**
-     * Gets the title.
-     *
-     * The title or introductory text to show before the response.
-     *
-     * @return the title
-     */
-    @AuraEnabled
-    public String getTitle() {
-      return title;
-    }
-
-    /**
-     * Gets the description.
-     *
-     * The description to show with the the response.
-     *
-     * @return the description
-     */
-    @AuraEnabled
-    public String getDescription() {
-      return description;
-    }
-
-    /**
-     * Gets the preference.
-     *
-     * The preferred type of control to display.
-     *
-     * @return the preference
-     */
-    @AuraEnabled
-    public String getPreference() {
-      return preference;
-    }
-
-    /**
-     * Gets the options.
-     *
-     * An array of objects describing the options from which the user can choose.
-     *
-     * @return the options
-     */
-    @AuraEnabled
-    public List<DialogNodeOutputOptionsElement> getOptions() {
-      return options;
-    }
-
-    /**
-     * Gets the messageToHumanAgent.
-     *
-     * A message to be sent to the human agent who will be taking over the conversation.
-     *
-     * @return the messageToHumanAgent
-     */
-    @AuraEnabled
-    public String getMessageToHumanAgent() {
-      return messageToHumanAgent;
-    }
-
-    /**
-     * Gets the topic.
-     *
-     * A label identifying the topic of the conversation, derived from the **user_label** property of the relevant node.
-     *
-     * @return the topic
-     */
-    @AuraEnabled
-    public String getTopic() {
-      return topic;
-    }
-
-    /**
-     * Gets the suggestions.
-     *
-     * An array of objects describing the possible matching dialog nodes from which the user can choose.
-     *
-     * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
-     * users.
-     *
-     * @return the suggestions
-     */
-    @AuraEnabled
-    public List<DialogSuggestion> getSuggestions() {
-      return suggestions;
-    }
-
-    /**
-     * Gets the header.
-     *
-     * The title or introductory text to show before the response. This text is defined in the search skill
-     * configuration.
-     *
-     * @return the header
-     */
-    @AuraEnabled
-    public String getHeader() {
-      return header;
-    }
-
-    /**
-     * Gets the results.
-     *
-     * An array of objects containing search results.
-     *
-     * @return the results
-     */
-    @AuraEnabled
-    public List<SearchResult> getResults() {
-      return results;
-    }
-  
-    private DialogRuntimeResponseGeneric(DialogRuntimeResponseGenericBuilder builder) {
-      IBMWatsonValidator.notNull(builder.responseType, 'responseType cannot be null');
-      this.responseType = builder.responseType;
-      this.text = builder.text;
-      this.xtime = builder.xtime;
-      this.typing = builder.typing;
-      this.source = builder.source;
-      this.title = builder.title;
-      this.description = builder.description;
-      this.preference = builder.preference;
-      this.options = builder.options;
-      this.messageToHumanAgent = builder.messageToHumanAgent;
-      this.topic = builder.topic;
-      this.suggestions = builder.suggestions;
-      this.header = builder.header;
-      this.results = builder.results;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder newBuilder() {
-      return new DialogRuntimeResponseGenericBuilder(this);
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'response_type' => 'responseType',
-        'time' => 'xtime',
-        'message_to_human_agent' => 'messageToHumanAgent'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      DialogRuntimeResponseGeneric ret = (DialogRuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
-      DialogRuntimeResponseGenericBuilder retBuilder = ret.newBuilder();
-
-      // calling custom deserializer for options
-      List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
-      List<DialogNodeOutputOptionsElement> deserializedOptions = ret.getOptions();
-      if (deserializedOptions != null) {
-        for (Integer i = 0; i < deserializedOptions.size(); i++) {
-          DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('options');
-          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
-          newOptions.add(newItem);
-        }
-        retBuilder.options(newOptions);
-      }
-
-      // calling custom deserializer for suggestions
-      List<DialogSuggestion> newSuggestions = new List<DialogSuggestion>();
-      List<DialogSuggestion> deserializedSuggestions = ret.getSuggestions();
-      if (deserializedSuggestions != null) {
-        for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
-          DialogSuggestion currentItem = ret.getSuggestions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions');
-          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
-          newSuggestions.add(newItem);
-        }
-        retBuilder.suggestions(newSuggestions);
-      }
-
-      // calling custom deserializer for results
-      List<SearchResult> newResults = new List<SearchResult>();
-      List<SearchResult> deserializedResults = ret.getResults();
-      if (deserializedResults != null) {
-        for (Integer i = 0; i < deserializedResults.size(); i++) {
-          SearchResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          SearchResult newItem = (SearchResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SearchResult.class);
-          newResults.add(newItem);
-        }
-        retBuilder.results(newResults);
-      }
-
-      return retBuilder.build();
-    }
-  }
-
-  /**
-   * DialogRuntimeResponseGeneric Builder.
-   */
-  public class DialogRuntimeResponseGenericBuilder {
-    private String responseType;
-    private String text;
-    private Long xtime;
-    private Boolean typing;
-    private String source;
-    private String title;
-    private String description;
-    private String preference;
-    private List<DialogNodeOutputOptionsElement> options;
-    private String messageToHumanAgent;
-    private String topic;
-    private List<DialogSuggestion> suggestions;
-    private String header;
-    private List<SearchResult> results;
-
-    private DialogRuntimeResponseGenericBuilder(DialogRuntimeResponseGeneric dialogRuntimeResponseGeneric) {
-      this.responseType = dialogRuntimeResponseGeneric.responseType;
-      this.text = dialogRuntimeResponseGeneric.text;
-      this.xtime = dialogRuntimeResponseGeneric.xtime;
-      this.typing = dialogRuntimeResponseGeneric.typing;
-      this.source = dialogRuntimeResponseGeneric.source;
-      this.title = dialogRuntimeResponseGeneric.title;
-      this.description = dialogRuntimeResponseGeneric.description;
-      this.preference = dialogRuntimeResponseGeneric.preference;
-      this.options = dialogRuntimeResponseGeneric.options;
-      this.messageToHumanAgent = dialogRuntimeResponseGeneric.messageToHumanAgent;
-      this.topic = dialogRuntimeResponseGeneric.topic;
-      this.suggestions = dialogRuntimeResponseGeneric.suggestions;
-      this.header = dialogRuntimeResponseGeneric.header;
-      this.results = dialogRuntimeResponseGeneric.results;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public DialogRuntimeResponseGenericBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param responseType the responseType
-     */
-    public DialogRuntimeResponseGenericBuilder(String responseType) {
-      this.responseType = responseType;
-    }
-
-    /**
-     * Builds a DialogRuntimeResponseGeneric.
-     *
-     * @return the dialogRuntimeResponseGeneric
-     */
-    public DialogRuntimeResponseGeneric build() {
-      return new DialogRuntimeResponseGeneric(this);
-    }
-
-    /**
-     * Adds an options to options.
-     *
-     * @param options the new options
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder addOptions(DialogNodeOutputOptionsElement options) {
-      IBMWatsonValidator.notNull(options, 'options cannot be null');
-      if (this.options == null) {
-        this.options = new List<DialogNodeOutputOptionsElement>();
-      }
-      this.options.add(options);
-      return this;
-    }
-
-    /**
-     * Adds an suggestions to suggestions.
-     *
-     * @param suggestions the new suggestions
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder addSuggestions(DialogSuggestion suggestions) {
-      IBMWatsonValidator.notNull(suggestions, 'suggestions cannot be null');
-      if (this.suggestions == null) {
-        this.suggestions = new List<DialogSuggestion>();
-      }
-      this.suggestions.add(suggestions);
-      return this;
-    }
-
-    /**
-     * Adds an results to results.
-     *
-     * @param results the new results
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder addResults(SearchResult results) {
-      IBMWatsonValidator.notNull(results, 'results cannot be null');
-      if (this.results == null) {
-        this.results = new List<SearchResult>();
-      }
-      this.results.add(results);
-      return this;
-    }
-
-    /**
-     * Set the responseType.
-     *
-     * @param responseType the responseType
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder responseType(String responseType) {
-      this.responseType = responseType;
-      return this;
-    }
-
-    /**
-     * Set the text.
-     *
-     * @param text the text
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder text(String text) {
-      this.text = text;
-      return this;
-    }
-
-    /**
-     * Set the xtime.
-     *
-     * @param xtime the xtime
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder xtime(Long xtime) {
-      this.xtime = xtime;
-      return this;
-    }
-
-    /**
-     * Set the typing.
-     *
-     * @param typing the typing
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder typing(Boolean typing) {
-      this.typing = typing;
-      return this;
-    }
-
-    /**
-     * Set the source.
-     *
-     * @param source the source
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder source(String source) {
-      this.source = source;
-      return this;
-    }
-
-    /**
-     * Set the title.
-     *
-     * @param title the title
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder title(String title) {
-      this.title = title;
-      return this;
-    }
-
-    /**
-     * Set the description.
-     *
-     * @param description the description
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder description(String description) {
-      this.description = description;
-      return this;
-    }
-
-    /**
-     * Set the preference.
-     *
-     * @param preference the preference
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder preference(String preference) {
-      this.preference = preference;
-      return this;
-    }
-
-    /**
-     * Set the options.
-     * Existing options will be replaced.
-     *
-     * @param options the options
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder options(List<DialogNodeOutputOptionsElement> options) {
-      this.options = options;
-      return this;
-    }
-
-    /**
-     * Set the messageToHumanAgent.
-     *
-     * @param messageToHumanAgent the messageToHumanAgent
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder messageToHumanAgent(String messageToHumanAgent) {
-      this.messageToHumanAgent = messageToHumanAgent;
-      return this;
-    }
-
-    /**
-     * Set the topic.
-     *
-     * @param topic the topic
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder topic(String topic) {
-      this.topic = topic;
-      return this;
-    }
-
-    /**
-     * Set the suggestions.
-     * Existing suggestions will be replaced.
-     *
-     * @param suggestions the suggestions
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder suggestions(List<DialogSuggestion> suggestions) {
-      this.suggestions = suggestions;
-      return this;
-    }
-
-    /**
-     * Set the header.
-     *
-     * @param header the header
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder header(String header) {
-      this.header = header;
-      return this;
-    }
-
-    /**
-     * Set the results.
-     * Existing results will be replaced.
-     *
-     * @param results the results
-     * @return the DialogRuntimeResponseGeneric builder
-     */
-    public DialogRuntimeResponseGenericBuilder results(List<SearchResult> results) {
-      this.results = results;
-      return this;
-    }
-  }
-
-  /**
    * DialogSuggestion.
    */
   public class DialogSuggestion extends IBMWatsonGenericModel {
@@ -1469,7 +918,7 @@ public class IBMAssistantV2Models {
    * MessageContext.
    */
   public class MessageContext extends IBMWatsonGenericModel {
-    private MessageContextGlobal xglobal;
+    private MessageContextGlobal xGlobal;
     private MessageContextSkills skills;
 
     /**
@@ -1479,15 +928,15 @@ public class IBMAssistantV2Models {
     public MessageContext() { }
 
     /**
-     * Gets the xglobal.
+     * Gets the xGlobal.
      *
      * Information that is shared by all skills used by the Assistant.
      *
-     * @return the xglobal
+     * @return the xGlobal
      */
     @AuraEnabled
-    public MessageContextGlobal getXglobal() {
-      return xglobal;
+    public MessageContextGlobal getXGlobal() {
+      return xGlobal;
     }
 
     /**
@@ -1506,7 +955,7 @@ public class IBMAssistantV2Models {
     }
   
     private MessageContext(MessageContextBuilder builder) {
-      this.xglobal = builder.xglobal;
+      this.xGlobal = builder.xGlobal;
       this.skills = builder.skills;
     }
 
@@ -1526,7 +975,7 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'global' => 'xglobal'
+        'global' => 'xGlobal'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -1534,10 +983,10 @@ public class IBMAssistantV2Models {
       MessageContext ret = (MessageContext) super.deserialize(jsonString, jsonMap, classType);
       MessageContextBuilder retBuilder = ret.newBuilder();
 
-      // calling custom deserializer for xglobal
-      Map<String, Object> xglobalMap = (Map<String, Object>) jsonMap.get('xglobal');
-      MessageContextGlobal newXglobal = (MessageContextGlobal) new MessageContextGlobal().deserialize(JSON.serialize(xglobalMap), xglobalMap, MessageContextGlobal.class);
-      retBuilder.xglobal(newXglobal);
+      // calling custom deserializer for xGlobal
+      Map<String, Object> xGlobalMap = (Map<String, Object>) jsonMap.get('xGlobal');
+      MessageContextGlobal newXGlobal = (MessageContextGlobal) new MessageContextGlobal().deserialize(JSON.serialize(xGlobalMap), xGlobalMap, MessageContextGlobal.class);
+      retBuilder.xGlobal(newXGlobal);
 
       // calling custom deserializer for skills
       Map<String, Object> skillsMap = (Map<String, Object>) jsonMap.get('skills');
@@ -1553,18 +1002,18 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xglobal' => 'global'
+        'xGlobal' => 'global'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for xglobal
-      if (xglobal != null) {
-        String xglobalJsonString = xglobal.serialize();
-        String xglobalKey = 'xglobal';
-        if (propertyNameMapping.containsKey(xglobalKey)) {
-          xglobalKey = propertyNameMapping.get(xglobalKey);
+      // calling custom serializer for xGlobal
+      if (xGlobal != null) {
+        String xGlobalJsonString = xGlobal.serialize();
+        String xGlobalKey = 'xGlobal';
+        if (propertyNameMapping.containsKey(xGlobalKey)) {
+          xGlobalKey = propertyNameMapping.get(xGlobalKey);
         }
-        jsonMap.put(xglobalKey, JSON.deserializeUntyped(xglobalJsonString));
+        jsonMap.put(xGlobalKey, JSON.deserializeUntyped(xGlobalJsonString));
       }
 
       // calling custom serializer for skills
@@ -1585,11 +1034,11 @@ public class IBMAssistantV2Models {
    * MessageContext Builder.
    */
   public class MessageContextBuilder {
-    private MessageContextGlobal xglobal;
+    private MessageContextGlobal xGlobal;
     private MessageContextSkills skills;
 
     private MessageContextBuilder(MessageContext messageContext) {
-      this.xglobal = messageContext.xglobal;
+      this.xGlobal = messageContext.xGlobal;
       this.skills = messageContext.skills;
     }
 
@@ -1609,13 +1058,13 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Set the xglobal.
+     * Set the xGlobal.
      *
-     * @param xglobal the xglobal
+     * @param xGlobal the xGlobal
      * @return the MessageContext builder
      */
-    public MessageContextBuilder xglobal(MessageContextGlobal xglobal) {
-      this.xglobal = xglobal;
+    public MessageContextBuilder xGlobal(MessageContextGlobal xGlobal) {
+      this.xGlobal = xGlobal;
       return this;
     }
 
@@ -1635,7 +1084,7 @@ public class IBMAssistantV2Models {
    * Information that is shared by all skills used by the Assistant.
    */
   public class MessageContextGlobal extends IBMWatsonGenericModel {
-    private MessageContextGlobalSystem xsystem;
+    private MessageContextGlobalSystem xSystem;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -1644,19 +1093,19 @@ public class IBMAssistantV2Models {
     public MessageContextGlobal() { }
 
     /**
-     * Gets the xsystem.
+     * Gets the xSystem.
      *
      * Built-in system properties that apply to all skills used by the assistant.
      *
-     * @return the xsystem
+     * @return the xSystem
      */
     @AuraEnabled
-    public MessageContextGlobalSystem getXsystem() {
-      return xsystem;
+    public MessageContextGlobalSystem getXSystem() {
+      return xSystem;
     }
   
     private MessageContextGlobal(MessageContextGlobalBuilder builder) {
-      this.xsystem = builder.xsystem;
+      this.xSystem = builder.xSystem;
     }
 
     /**
@@ -1675,7 +1124,7 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'system' => 'xsystem'
+        'system' => 'xSystem'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -1683,10 +1132,10 @@ public class IBMAssistantV2Models {
       MessageContextGlobal ret = (MessageContextGlobal) super.deserialize(jsonString, jsonMap, classType);
       MessageContextGlobalBuilder retBuilder = ret.newBuilder();
 
-      // calling custom deserializer for xsystem
-      Map<String, Object> xsystemMap = (Map<String, Object>) jsonMap.get('xsystem');
-      MessageContextGlobalSystem newXsystem = (MessageContextGlobalSystem) new MessageContextGlobalSystem().deserialize(JSON.serialize(xsystemMap), xsystemMap, MessageContextGlobalSystem.class);
-      retBuilder.xsystem(newXsystem);
+      // calling custom deserializer for xSystem
+      Map<String, Object> xSystemMap = (Map<String, Object>) jsonMap.get('xSystem');
+      MessageContextGlobalSystem newXSystem = (MessageContextGlobalSystem) new MessageContextGlobalSystem().deserialize(JSON.serialize(xSystemMap), xSystemMap, MessageContextGlobalSystem.class);
+      retBuilder.xSystem(newXSystem);
 
       return retBuilder.build();
     }
@@ -1697,18 +1146,18 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xsystem' => 'system'
+        'xSystem' => 'system'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for xsystem
-      if (xsystem != null) {
-        String xsystemJsonString = xsystem.serialize();
-        String xsystemKey = 'xsystem';
-        if (propertyNameMapping.containsKey(xsystemKey)) {
-          xsystemKey = propertyNameMapping.get(xsystemKey);
+      // calling custom serializer for xSystem
+      if (xSystem != null) {
+        String xSystemJsonString = xSystem.serialize();
+        String xSystemKey = 'xSystem';
+        if (propertyNameMapping.containsKey(xSystemKey)) {
+          xSystemKey = propertyNameMapping.get(xSystemKey);
         }
-        jsonMap.put(xsystemKey, JSON.deserializeUntyped(xsystemJsonString));
+        jsonMap.put(xSystemKey, JSON.deserializeUntyped(xSystemJsonString));
       }
 
       return JSON.serialize(jsonMap);
@@ -1719,10 +1168,10 @@ public class IBMAssistantV2Models {
    * MessageContextGlobal Builder.
    */
   public class MessageContextGlobalBuilder {
-    private MessageContextGlobalSystem xsystem;
+    private MessageContextGlobalSystem xSystem;
 
     private MessageContextGlobalBuilder(MessageContextGlobal messageContextGlobal) {
-      this.xsystem = messageContextGlobal.xsystem;
+      this.xSystem = messageContextGlobal.xSystem;
     }
 
     /**
@@ -1741,13 +1190,13 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Set the xsystem.
+     * Set the xSystem.
      *
-     * @param xsystem the xsystem
+     * @param xSystem the xSystem
      * @return the MessageContextGlobal builder
      */
-    public MessageContextGlobalBuilder xsystem(MessageContextGlobalSystem xsystem) {
-      this.xsystem = xsystem;
+    public MessageContextGlobalBuilder xSystem(MessageContextGlobalSystem xSystem) {
+      this.xSystem = xSystem;
       return this;
     }
   }
@@ -2849,7 +2298,7 @@ public class IBMAssistantV2Models {
    * Assistant output to be rendered or processed by the client.
    */
   public class MessageOutput extends IBMWatsonGenericModel {
-    private List<DialogRuntimeResponseGeneric> generic;
+    private List<RuntimeResponseGeneric> generic;
     private List<RuntimeIntent> intents;
     private List<RuntimeEntity> entities;
     private List<DialogNodeAction> actions;
@@ -2865,7 +2314,7 @@ public class IBMAssistantV2Models {
      * @return the generic
      */
     @AuraEnabled
-    public List<DialogRuntimeResponseGeneric> getGeneric() {
+    public List<RuntimeResponseGeneric> getGeneric() {
       return generic;
     }
 
@@ -2935,7 +2384,7 @@ public class IBMAssistantV2Models {
      *
      * @param generic the new generic
      */
-    public void setGeneric(final List<DialogRuntimeResponseGeneric> generic) {
+    public void setGeneric(final List<RuntimeResponseGeneric> generic) {
       this.generic = generic;
     }
 
@@ -2999,13 +2448,13 @@ public class IBMAssistantV2Models {
       MessageOutput ret = (MessageOutput) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for generic
-      List<DialogRuntimeResponseGeneric> newGeneric = new List<DialogRuntimeResponseGeneric>();
-      List<DialogRuntimeResponseGeneric> deserializedGeneric = ret.getGeneric();
+      List<RuntimeResponseGeneric> newGeneric = new List<RuntimeResponseGeneric>();
+      List<RuntimeResponseGeneric> deserializedGeneric = ret.getGeneric();
       if (deserializedGeneric != null) {
         for (Integer i = 0; i < deserializedGeneric.size(); i++) {
-          DialogRuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
+          RuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
-          DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
+          RuntimeResponseGeneric newItem = (RuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeResponseGeneric.class);
           newGeneric.add(newItem);
         }
         ret.generic = newGeneric;
@@ -3719,6 +3168,557 @@ public class IBMAssistantV2Models {
      */
     public RuntimeIntentBuilder confidence(Double confidence) {
       this.confidence = confidence;
+      return this;
+    }
+  }
+
+  /**
+   * RuntimeResponseGeneric.
+   */
+  public class RuntimeResponseGeneric extends IBMWatsonGenericModel {
+    private String responseType;
+    private String text;
+    private Long xTime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+    private String topic;
+    private List<DialogSuggestion> suggestions;
+    private String header;
+    private List<SearchResult> results;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeResponseGeneric() { }
+
+    /**
+     * Gets the responseType.
+     *
+     * The type of response returned by the dialog node. The specified response type must be supported by the client
+     * application or channel.
+     *
+     * **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
+     * Premium users.
+     *
+     * @return the responseType
+     */
+    @AuraEnabled
+    public String getResponseType() {
+      return responseType;
+    }
+
+    /**
+     * Gets the text.
+     *
+     * The text of the response.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text;
+    }
+
+    /**
+     * Gets the xTime.
+     *
+     * How long to pause, in milliseconds.
+     *
+     * @return the xTime
+     */
+    @AuraEnabled
+    public Long getXTime() {
+      return xTime;
+    }
+
+    /**
+     * Gets the typing.
+     *
+     * Whether to send a "user is typing" event during the pause.
+     *
+     * @return the typing
+     */
+    @AuraEnabled
+    public Boolean getTyping() {
+      return typing;
+    }
+
+    /**
+     * Gets the source.
+     *
+     * The URL of the image.
+     *
+     * @return the source
+     */
+    @AuraEnabled
+    public String getSource() {
+      return source;
+    }
+
+    /**
+     * Gets the title.
+     *
+     * The title or introductory text to show before the response.
+     *
+     * @return the title
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title;
+    }
+
+    /**
+     * Gets the description.
+     *
+     * The description to show with the the response.
+     *
+     * @return the description
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description;
+    }
+
+    /**
+     * Gets the preference.
+     *
+     * The preferred type of control to display.
+     *
+     * @return the preference
+     */
+    @AuraEnabled
+    public String getPreference() {
+      return preference;
+    }
+
+    /**
+     * Gets the options.
+     *
+     * An array of objects describing the options from which the user can choose.
+     *
+     * @return the options
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputOptionsElement> getOptions() {
+      return options;
+    }
+
+    /**
+     * Gets the messageToHumanAgent.
+     *
+     * A message to be sent to the human agent who will be taking over the conversation.
+     *
+     * @return the messageToHumanAgent
+     */
+    @AuraEnabled
+    public String getMessageToHumanAgent() {
+      return messageToHumanAgent;
+    }
+
+    /**
+     * Gets the topic.
+     *
+     * A label identifying the topic of the conversation, derived from the **user_label** property of the relevant node.
+     *
+     * @return the topic
+     */
+    @AuraEnabled
+    public String getTopic() {
+      return topic;
+    }
+
+    /**
+     * Gets the suggestions.
+     *
+     * An array of objects describing the possible matching dialog nodes from which the user can choose.
+     *
+     * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
+     * users.
+     *
+     * @return the suggestions
+     */
+    @AuraEnabled
+    public List<DialogSuggestion> getSuggestions() {
+      return suggestions;
+    }
+
+    /**
+     * Gets the header.
+     *
+     * The title or introductory text to show before the response. This text is defined in the search skill
+     * configuration.
+     *
+     * @return the header
+     */
+    @AuraEnabled
+    public String getHeader() {
+      return header;
+    }
+
+    /**
+     * Gets the results.
+     *
+     * An array of objects containing search results.
+     *
+     * @return the results
+     */
+    @AuraEnabled
+    public List<SearchResult> getResults() {
+      return results;
+    }
+  
+    private RuntimeResponseGeneric(RuntimeResponseGenericBuilder builder) {
+      IBMWatsonValidator.notNull(builder.responseType, 'responseType cannot be null');
+      this.responseType = builder.responseType;
+      this.text = builder.text;
+      this.xTime = builder.xTime;
+      this.typing = builder.typing;
+      this.source = builder.source;
+      this.title = builder.title;
+      this.description = builder.description;
+      this.preference = builder.preference;
+      this.options = builder.options;
+      this.messageToHumanAgent = builder.messageToHumanAgent;
+      this.topic = builder.topic;
+      this.suggestions = builder.suggestions;
+      this.header = builder.header;
+      this.results = builder.results;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder newBuilder() {
+      return new RuntimeResponseGenericBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'response_type' => 'responseType',
+        'time' => 'xTime',
+        'message_to_human_agent' => 'messageToHumanAgent'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      RuntimeResponseGeneric ret = (RuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeResponseGenericBuilder retBuilder = ret.newBuilder();
+
+      // calling custom deserializer for options
+      List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
+      List<DialogNodeOutputOptionsElement> deserializedOptions = ret.getOptions();
+      if (deserializedOptions != null) {
+        for (Integer i = 0; i < deserializedOptions.size(); i++) {
+          DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('options');
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          newOptions.add(newItem);
+        }
+        retBuilder.options(newOptions);
+      }
+
+      // calling custom deserializer for suggestions
+      List<DialogSuggestion> newSuggestions = new List<DialogSuggestion>();
+      List<DialogSuggestion> deserializedSuggestions = ret.getSuggestions();
+      if (deserializedSuggestions != null) {
+        for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
+          DialogSuggestion currentItem = ret.getSuggestions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions');
+          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
+          newSuggestions.add(newItem);
+        }
+        retBuilder.suggestions(newSuggestions);
+      }
+
+      // calling custom deserializer for results
+      List<SearchResult> newResults = new List<SearchResult>();
+      List<SearchResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          SearchResult currentItem = ret.getResults().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results');
+          SearchResult newItem = (SearchResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SearchResult.class);
+          newResults.add(newItem);
+        }
+        retBuilder.results(newResults);
+      }
+
+      return retBuilder.build();
+    }
+  }
+
+  /**
+   * RuntimeResponseGeneric Builder.
+   */
+  public class RuntimeResponseGenericBuilder {
+    private String responseType;
+    private String text;
+    private Long xTime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+    private String topic;
+    private List<DialogSuggestion> suggestions;
+    private String header;
+    private List<SearchResult> results;
+
+    private RuntimeResponseGenericBuilder(RuntimeResponseGeneric runtimeResponseGeneric) {
+      this.responseType = runtimeResponseGeneric.responseType;
+      this.text = runtimeResponseGeneric.text;
+      this.xTime = runtimeResponseGeneric.xTime;
+      this.typing = runtimeResponseGeneric.typing;
+      this.source = runtimeResponseGeneric.source;
+      this.title = runtimeResponseGeneric.title;
+      this.description = runtimeResponseGeneric.description;
+      this.preference = runtimeResponseGeneric.preference;
+      this.options = runtimeResponseGeneric.options;
+      this.messageToHumanAgent = runtimeResponseGeneric.messageToHumanAgent;
+      this.topic = runtimeResponseGeneric.topic;
+      this.suggestions = runtimeResponseGeneric.suggestions;
+      this.header = runtimeResponseGeneric.header;
+      this.results = runtimeResponseGeneric.results;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeResponseGenericBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param responseType the responseType
+     */
+    public RuntimeResponseGenericBuilder(String responseType) {
+      this.responseType = responseType;
+    }
+
+    /**
+     * Builds a RuntimeResponseGeneric.
+     *
+     * @return the runtimeResponseGeneric
+     */
+    public RuntimeResponseGeneric build() {
+      return new RuntimeResponseGeneric(this);
+    }
+
+    /**
+     * Adds an options to options.
+     *
+     * @param options the new options
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder addOptions(DialogNodeOutputOptionsElement options) {
+      IBMWatsonValidator.notNull(options, 'options cannot be null');
+      if (this.options == null) {
+        this.options = new List<DialogNodeOutputOptionsElement>();
+      }
+      this.options.add(options);
+      return this;
+    }
+
+    /**
+     * Adds an suggestions to suggestions.
+     *
+     * @param suggestions the new suggestions
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder addSuggestions(DialogSuggestion suggestions) {
+      IBMWatsonValidator.notNull(suggestions, 'suggestions cannot be null');
+      if (this.suggestions == null) {
+        this.suggestions = new List<DialogSuggestion>();
+      }
+      this.suggestions.add(suggestions);
+      return this;
+    }
+
+    /**
+     * Adds an results to results.
+     *
+     * @param results the new results
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder addResults(SearchResult results) {
+      IBMWatsonValidator.notNull(results, 'results cannot be null');
+      if (this.results == null) {
+        this.results = new List<SearchResult>();
+      }
+      this.results.add(results);
+      return this;
+    }
+
+    /**
+     * Set the responseType.
+     *
+     * @param responseType the responseType
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder responseType(String responseType) {
+      this.responseType = responseType;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder text(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the xTime.
+     *
+     * @param xTime the xTime
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder xTime(Long xTime) {
+      this.xTime = xTime;
+      return this;
+    }
+
+    /**
+     * Set the typing.
+     *
+     * @param typing the typing
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder typing(Boolean typing) {
+      this.typing = typing;
+      return this;
+    }
+
+    /**
+     * Set the source.
+     *
+     * @param source the source
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder source(String source) {
+      this.source = source;
+      return this;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param title the title
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder title(String title) {
+      this.title = title;
+      return this;
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder description(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the preference.
+     *
+     * @param preference the preference
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder preference(String preference) {
+      this.preference = preference;
+      return this;
+    }
+
+    /**
+     * Set the options.
+     * Existing options will be replaced.
+     *
+     * @param options the options
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder options(List<DialogNodeOutputOptionsElement> options) {
+      this.options = options;
+      return this;
+    }
+
+    /**
+     * Set the messageToHumanAgent.
+     *
+     * @param messageToHumanAgent the messageToHumanAgent
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder messageToHumanAgent(String messageToHumanAgent) {
+      this.messageToHumanAgent = messageToHumanAgent;
+      return this;
+    }
+
+    /**
+     * Set the topic.
+     *
+     * @param topic the topic
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder topic(String topic) {
+      this.topic = topic;
+      return this;
+    }
+
+    /**
+     * Set the suggestions.
+     * Existing suggestions will be replaced.
+     *
+     * @param suggestions the suggestions
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder suggestions(List<DialogSuggestion> suggestions) {
+      this.suggestions = suggestions;
+      return this;
+    }
+
+    /**
+     * Set the header.
+     *
+     * @param header the header
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder header(String header) {
+      this.header = header;
+      return this;
+    }
+
+    /**
+     * Set the results.
+     * Existing results will be replaced.
+     *
+     * @param results the results
+     * @return the RuntimeResponseGeneric builder
+     */
+    public RuntimeResponseGenericBuilder results(List<SearchResult> results) {
+      this.results = results;
       return this;
     }
   }
