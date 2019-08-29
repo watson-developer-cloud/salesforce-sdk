@@ -160,9 +160,20 @@ service.setEndPoint('URL');
 
 ```java
 IBMWatsonAuthenticator authenticator =
-  new IBMWatsonCloudPakForDataAuthenticator('ICP TOKEN EXCHANGE BASE URL', 'USERNAME', 'PASSWORD');
+  new IBMWatsonBasicAuthenticator('USERNAME', 'PASSWORD');
 IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
 service.setEndPoint('SERVICE ICP URL');
+```
+
+**Note:** Make sure you've got your self-signed certificate all set up in your Salesforce organization for this to work properly.
+
+#### Cloud Pak for Data
+
+```java
+IBMWatsonAuthenticator authenticator =
+  new IBMWatsonCloudPakForDataAuthenticator('CP4D TOKEN EXCHANGE BASE URL', 'USERNAME', 'PASSWORD');
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
+service.setEndPoint('SERVICE CP4D URL');
 ```
 
 ### Setting remote site settings
