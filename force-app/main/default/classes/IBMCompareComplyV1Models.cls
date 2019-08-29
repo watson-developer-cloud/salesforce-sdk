@@ -342,20 +342,20 @@ public class IBMCompareComplyV1Models {
    * List of document attributes.
    */
   public class Attribute extends IBMWatsonGenericModel {
-    private String xtype;
+    private String xType;
     private String text;
     private Location location;
 
     /**
-     * Gets the xtype.
+     * Gets the xType.
      *
      * The type of attribute.
      *
-     * @return the xtype
+     * @return the xType
      */
     @AuraEnabled
-    public String getXtype() {
-      return xtype;
+    public String getXType() {
+      return xType;
     }
 
     /**
@@ -384,12 +384,12 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the xType.
      *
-     * @param xtype the new xtype
+     * @param xType the new xType
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setXType(final String xType) {
+      this.xType = xType;
     }
 
     /**
@@ -417,7 +417,7 @@ public class IBMCompareComplyV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xtype'
+        'type' => 'xType'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -3287,7 +3287,6 @@ public class IBMCompareComplyV1Models {
    */
   public class ConvertToHtmlOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
-    private String filename;
     private String fileContentType;
     private String model;
 
@@ -3300,17 +3299,6 @@ public class IBMCompareComplyV1Models {
      */
     public IBMWatsonFile file() {
       return file;
-    }
-
-    /**
-     * Gets the filename.
-     *
-     * The filename for file.
-     *
-     * @return the filename
-     */
-    public String filename() {
-      return filename;
     }
 
     /**
@@ -3339,9 +3327,7 @@ public class IBMCompareComplyV1Models {
 
     private ConvertToHtmlOptions(ConvertToHtmlOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.file, 'file cannot be null');
-      IBMWatsonValidator.notNull(builder.filename, 'filename cannot be null');
       file = builder.file;
-      filename = builder.filename;
       fileContentType = builder.fileContentType;
       model = builder.model;
       this.requestHeaders = builder.requestHeaders;
@@ -3362,13 +3348,11 @@ public class IBMCompareComplyV1Models {
    */
   public class ConvertToHtmlOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
-    private String filename;
     private String fileContentType;
     private String model;
 
     private ConvertToHtmlOptionsBuilder(ConvertToHtmlOptions convertToHtmlOptions) {
       file = convertToHtmlOptions.file;
-      filename = convertToHtmlOptions.filename;
       fileContentType = convertToHtmlOptions.fileContentType;
       model = convertToHtmlOptions.model;
       this.requestHeaders.putAll(convertToHtmlOptions.requestHeaders());
@@ -3384,11 +3368,9 @@ public class IBMCompareComplyV1Models {
      * Instantiates a new builder with required properties.
      *
      * @param file the file
-     * @param filename the filename
      */
-    public ConvertToHtmlOptionsBuilder(IBMWatsonFile file, String filename) {
+    public ConvertToHtmlOptionsBuilder(IBMWatsonFile file) {
       this.file = file;
-      this.filename = filename;
     }
 
     /**
@@ -3408,17 +3390,6 @@ public class IBMCompareComplyV1Models {
      */
     public ConvertToHtmlOptionsBuilder file(IBMWatsonFile file) {
       this.file = file;
-      return this;
-    }
-
-    /**
-     * Set the filename.
-     *
-     * @param filename the filename
-     * @return the ConvertToHtmlOptions builder
-     */
-    public ConvertToHtmlOptionsBuilder filename(String filename) {
-      this.filename = filename;
       return this;
     }
 
@@ -4614,49 +4585,49 @@ public class IBMCompareComplyV1Models {
    * A list of `begin` and `end` indexes that indicate the locations of the elements in the input document.
    */
   public class ElementLocations extends IBMWatsonGenericModel {
-    private Long xbegin;
-    private Long xend;
+    private Long xBegin;
+    private Long xEnd;
 
     /**
-     * Gets the xbegin.
+     * Gets the xBegin.
      *
      * An integer that indicates the starting position of the element in the input document.
      *
-     * @return the xbegin
+     * @return the xBegin
      */
     @AuraEnabled
-    public Long getXbegin() {
-      return xbegin;
+    public Long getXBegin() {
+      return xBegin;
     }
 
     /**
-     * Gets the xend.
+     * Gets the xEnd.
      *
      * An integer that indicates the ending position of the element in the input document.
      *
-     * @return the xend
+     * @return the xEnd
      */
     @AuraEnabled
-    public Long getXend() {
-      return xend;
+    public Long getXEnd() {
+      return xEnd;
     }
 
     /**
-     * Sets the xbegin.
+     * Sets the xBegin.
      *
-     * @param xbegin the new xbegin
+     * @param xBegin the new xBegin
      */
-    public void setXbegin(final long xbegin) {
-      this.xbegin = xbegin;
+    public void setXBegin(final long xBegin) {
+      this.xBegin = xBegin;
     }
 
     /**
-     * Sets the xend.
+     * Sets the xEnd.
      *
-     * @param xend the new xend
+     * @param xEnd the new xEnd
      */
-    public void setXend(final long xend) {
-      this.xend = xend;
+    public void setXEnd(final long xEnd) {
+      this.xEnd = xEnd;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4666,8 +4637,8 @@ public class IBMCompareComplyV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'begin' => 'xbegin',
-        'end' => 'xend'
+        'begin' => 'xBegin',
+        'end' => 'xEnd'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -6843,7 +6814,7 @@ public class IBMCompareComplyV1Models {
     private String typeNotChanged;
     private Long pageLimit;
     private String cursor;
-    private String xsort;
+    private String xSort;
     private Boolean includeTotal;
 
     /**
@@ -7013,16 +6984,16 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Gets the xsort.
+     * Gets the xSort.
      *
      * An optional comma-separated list of fields in the document to sort on. You can optionally specify the sort
      * direction by prefixing the value of the field with `-` for descending order or `+` for ascending order (the
      * default). Currently permitted sorting fields are `created`, `user_id`, and `document_title`.
      *
-     * @return the xsort
+     * @return the xSort
      */
-    public String xsort() {
-      return xsort;
+    public String xSort() {
+      return xSort;
     }
 
     /**
@@ -7052,7 +7023,7 @@ public class IBMCompareComplyV1Models {
       typeNotChanged = builder.typeNotChanged;
       pageLimit = builder.pageLimit;
       cursor = builder.cursor;
-      xsort = builder.xsort;
+      xSort = builder.xSort;
       includeTotal = builder.includeTotal;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -7085,7 +7056,7 @@ public class IBMCompareComplyV1Models {
     private String typeNotChanged;
     private Long pageLimit;
     private String cursor;
-    private String xsort;
+    private String xSort;
     private Boolean includeTotal;
 
     private ListFeedbackOptionsBuilder(ListFeedbackOptions listFeedbackOptions) {
@@ -7103,7 +7074,7 @@ public class IBMCompareComplyV1Models {
       typeNotChanged = listFeedbackOptions.typeNotChanged;
       pageLimit = listFeedbackOptions.pageLimit;
       cursor = listFeedbackOptions.cursor;
-      xsort = listFeedbackOptions.xsort;
+      xSort = listFeedbackOptions.xSort;
       includeTotal = listFeedbackOptions.includeTotal;
       this.requestHeaders.putAll(listFeedbackOptions.requestHeaders());
     }
@@ -7278,13 +7249,13 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the xSort.
      *
-     * @param xsort the xsort
+     * @param xSort the xSort
      * @return the ListFeedbackOptions builder
      */
-    public ListFeedbackOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListFeedbackOptionsBuilder xSort(String xSort) {
+      this.xSort = xSort;
       return this;
     }
 
@@ -7317,8 +7288,8 @@ public class IBMCompareComplyV1Models {
    * `end`.
    */
   public class Location extends IBMWatsonGenericModel {
-    private Long xbegin;
-    private Long xend;
+    private Long xBegin;
+    private Long xEnd;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -7327,34 +7298,34 @@ public class IBMCompareComplyV1Models {
     public Location() { }
 
     /**
-     * Gets the xbegin.
+     * Gets the xBegin.
      *
      * The element's `begin` index.
      *
-     * @return the xbegin
+     * @return the xBegin
      */
     @AuraEnabled
-    public Long getXbegin() {
-      return xbegin;
+    public Long getXBegin() {
+      return xBegin;
     }
 
     /**
-     * Gets the xend.
+     * Gets the xEnd.
      *
      * The element's `end` index.
      *
-     * @return the xend
+     * @return the xEnd
      */
     @AuraEnabled
-    public Long getXend() {
-      return xend;
+    public Long getXEnd() {
+      return xEnd;
     }
   
     private Location(LocationBuilder builder) {
-      IBMWatsonValidator.notNull(builder.xbegin, 'xbegin cannot be null');
-      IBMWatsonValidator.notNull(builder.xend, 'xend cannot be null');
-      this.xbegin = builder.xbegin;
-      this.xend = builder.xend;
+      IBMWatsonValidator.notNull(builder.xBegin, 'xBegin cannot be null');
+      IBMWatsonValidator.notNull(builder.xEnd, 'xEnd cannot be null');
+      this.xBegin = builder.xBegin;
+      this.xEnd = builder.xEnd;
     }
 
     /**
@@ -7373,8 +7344,8 @@ public class IBMCompareComplyV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'begin' => 'xbegin',
-        'end' => 'xend'
+        'begin' => 'xBegin',
+        'end' => 'xEnd'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -7391,8 +7362,8 @@ public class IBMCompareComplyV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xbegin' => 'begin',
-        'xend' => 'end'
+        'xBegin' => 'begin',
+        'xEnd' => 'end'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -7404,12 +7375,12 @@ public class IBMCompareComplyV1Models {
    * Location Builder.
    */
   public class LocationBuilder {
-    private Long xbegin;
-    private Long xend;
+    private Long xBegin;
+    private Long xEnd;
 
     private LocationBuilder(Location location) {
-      this.xbegin = location.xbegin;
-      this.xend = location.xend;
+      this.xBegin = location.xBegin;
+      this.xEnd = location.xEnd;
     }
 
     /**
@@ -7421,12 +7392,12 @@ public class IBMCompareComplyV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param xbegin the xbegin
-     * @param xend the xend
+     * @param xBegin the xBegin
+     * @param xEnd the xEnd
      */
-    public LocationBuilder(Long xbegin, Long xend) {
-      this.xbegin = xbegin;
-      this.xend = xend;
+    public LocationBuilder(Long xBegin, Long xEnd) {
+      this.xBegin = xBegin;
+      this.xEnd = xEnd;
     }
 
     /**
@@ -7439,24 +7410,24 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the xbegin.
+     * Set the xBegin.
      *
-     * @param xbegin the xbegin
+     * @param xBegin the xBegin
      * @return the Location builder
      */
-    public LocationBuilder xbegin(Long xbegin) {
-      this.xbegin = xbegin;
+    public LocationBuilder xBegin(Long xBegin) {
+      this.xBegin = xBegin;
       return this;
     }
 
     /**
-     * Set the xend.
+     * Set the xEnd.
      *
-     * @param xend the xend
+     * @param xEnd the xEnd
      * @return the Location builder
      */
-    public LocationBuilder xend(Long xend) {
-      this.xend = xend;
+    public LocationBuilder xEnd(Long xEnd) {
+      this.xEnd = xEnd;
       return this;
     }
   }

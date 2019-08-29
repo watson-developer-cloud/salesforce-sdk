@@ -37,6 +37,6 @@ after_failure:
 - sfdx force:org:delete -u ciorg -p
 
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: npx semantic-release@15.13.4
+  #- provider: script
+    #skip_cleanup: true
+    #script: npx semantic-release@15.13.4

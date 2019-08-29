@@ -7,7 +7,7 @@ public abstract class IBMWatsonService {
   private Map<String, String> defaultHeaders = null;
 
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk-{0} {1}';
-  private static final String SDK_VERSION = '4.3.0';
+  private static final String SDK_VERSION = '5.0.0-rc1';
   private static final String ERRORMSG_NO_AUTHENTICATOR = 'Authentication information was not properly configured.';
 
   // Regular expression for JSON-related mimetypes.

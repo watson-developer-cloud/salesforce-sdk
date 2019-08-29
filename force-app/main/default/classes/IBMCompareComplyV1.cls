@@ -58,7 +58,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(convertToHtmlOptions.file(), convertToHtmlOptions.fileContentType());
-    multipartBuilder.addFormDataPart('file', convertToHtmlOptions.filename(), fileBody);
+    multipartBuilder.addFormDataPart('file', 'filename', fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -91,7 +91,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyElementsOptions.file(), classifyElementsOptions.fileContentType());
-    multipartBuilder.addFormDataPart('file', null, fileBody);
+    multipartBuilder.addFormDataPart('file', 'filename', fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -124,7 +124,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(extractTablesOptions.file(), extractTablesOptions.fileContentType());
-    multipartBuilder.addFormDataPart('file', null, fileBody);
+    multipartBuilder.addFormDataPart('file', 'filename', fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -163,9 +163,9 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody file1Body = IBMWatsonRequestBody.create(compareDocumentsOptions.file1(), compareDocumentsOptions.file1ContentType());
-    multipartBuilder.addFormDataPart('file_1', null, file1Body);
+    multipartBuilder.addFormDataPart('file_1', 'filename', file1Body);
     IBMWatsonRequestBody file2Body = IBMWatsonRequestBody.create(compareDocumentsOptions.file2(), compareDocumentsOptions.file2ContentType());
-    multipartBuilder.addFormDataPart('file_2', null, file2Body);
+    multipartBuilder.addFormDataPart('file_2', 'filename', file2Body);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -268,8 +268,8 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     if (listFeedbackOptions != null && listFeedbackOptions.cursor() != null) {
       builder.query('cursor', listFeedbackOptions.cursor());
     }
-    if (listFeedbackOptions != null && listFeedbackOptions.xsort() != null) {
-      builder.query('sort', listFeedbackOptions.xsort());
+    if (listFeedbackOptions != null && listFeedbackOptions.xSort() != null) {
+      builder.query('sort', listFeedbackOptions.xSort());
     }
     if (listFeedbackOptions != null && listFeedbackOptions.includeTotal() != null) {
       builder.query('include_total', String.valueOf(listFeedbackOptions.includeTotal()));
@@ -366,11 +366,11 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody inputCredentialsFileBody = IBMWatsonRequestBody.create(createBatchOptions.inputCredentialsFile(), 'application/json');
-    multipartBuilder.addFormDataPart('input_credentials_file', null, inputCredentialsFileBody);
+    multipartBuilder.addFormDataPart('input_credentials_file', 'filename', inputCredentialsFileBody);
     multipartBuilder.addFormDataPart('input_bucket_location', createBatchOptions.inputBucketLocation());
     multipartBuilder.addFormDataPart('input_bucket_name', createBatchOptions.inputBucketName());
     IBMWatsonRequestBody outputCredentialsFileBody = IBMWatsonRequestBody.create(createBatchOptions.outputCredentialsFile(), 'application/json');
-    multipartBuilder.addFormDataPart('output_credentials_file', null, outputCredentialsFileBody);
+    multipartBuilder.addFormDataPart('output_credentials_file', 'filename', outputCredentialsFileBody);
     multipartBuilder.addFormDataPart('output_bucket_location', createBatchOptions.outputBucketLocation());
     multipartBuilder.addFormDataPart('output_bucket_name', createBatchOptions.outputBucketName());
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();

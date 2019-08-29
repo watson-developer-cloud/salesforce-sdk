@@ -1003,8 +1003,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(queryOptions, 'queryOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/query', new String[]{ queryOptions.environmentId(), queryOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
-    if (queryOptions.loggingOptOut() != null) {
-      builder.addHeader('X-Watson-Logging-Opt-Out', queryOptions.loggingOptOut());
+    if (queryOptions.xWatsonLoggingOptOut() != null) {
+      builder.addHeader('X-Watson-Logging-Opt-Out', queryOptions.xWatsonLoggingOptOut());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=query');
     Map<String, String> requestHeaders = (queryOptions != null) ? queryOptions.requestHeaders() : null;
@@ -1033,14 +1033,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryOptions.count() != null) {
       contentJson.put('count', queryOptions.count());
     }
-    if (queryOptions.returnFields() != null) {
-      contentJson.put('return', queryOptions.returnFields());
+    if (queryOptions.xReturn() != null) {
+      contentJson.put('return', queryOptions.xReturn());
     }
     if (queryOptions.offset() != null) {
       contentJson.put('offset', queryOptions.offset());
     }
-    if (queryOptions.xsort() != null) {
-      contentJson.put('sort', queryOptions.xsort());
+    if (queryOptions.xSort() != null) {
+      contentJson.put('sort', queryOptions.xSort());
     }
     if (queryOptions.highlight() != null) {
       contentJson.put('highlight', queryOptions.highlight());
@@ -1121,14 +1121,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryNoticesOptions.count() != null) {
       builder.query('count', String.valueOf(queryNoticesOptions.count()));
     }
-    if (queryNoticesOptions.returnFields() != null) {
-      builder.query('return', String.join(queryNoticesOptions.returnFields(), ','));
+    if (queryNoticesOptions.xReturn() != null) {
+      builder.query('return', String.join(queryNoticesOptions.xReturn(), ','));
     }
     if (queryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryNoticesOptions.offset()));
     }
-    if (queryNoticesOptions.xsort() != null) {
-      builder.query('sort', String.join(queryNoticesOptions.xsort(), ','));
+    if (queryNoticesOptions.xSort() != null) {
+      builder.query('sort', String.join(queryNoticesOptions.xSort(), ','));
     }
     if (queryNoticesOptions.highlight() != null) {
       builder.query('highlight', String.valueOf(queryNoticesOptions.highlight()));
@@ -1172,8 +1172,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(federatedQueryOptions, 'federatedQueryOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
-    if (federatedQueryOptions.loggingOptOut() != null) {
-      builder.addHeader('X-Watson-Logging-Opt-Out', federatedQueryOptions.loggingOptOut());
+    if (federatedQueryOptions.xWatsonLoggingOptOut() != null) {
+      builder.addHeader('X-Watson-Logging-Opt-Out', federatedQueryOptions.xWatsonLoggingOptOut());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=federatedQuery');
     Map<String, String> requestHeaders = (federatedQueryOptions != null) ? federatedQueryOptions.requestHeaders() : null;
@@ -1202,14 +1202,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.count() != null) {
       contentJson.put('count', federatedQueryOptions.count());
     }
-    if (federatedQueryOptions.returnFields() != null) {
-      contentJson.put('return', federatedQueryOptions.returnFields());
+    if (federatedQueryOptions.xReturn() != null) {
+      contentJson.put('return', federatedQueryOptions.xReturn());
     }
     if (federatedQueryOptions.offset() != null) {
       contentJson.put('offset', federatedQueryOptions.offset());
     }
-    if (federatedQueryOptions.xsort() != null) {
-      contentJson.put('sort', federatedQueryOptions.xsort());
+    if (federatedQueryOptions.xSort() != null) {
+      contentJson.put('sort', federatedQueryOptions.xSort());
     }
     if (federatedQueryOptions.highlight() != null) {
       contentJson.put('highlight', federatedQueryOptions.highlight());
@@ -1290,14 +1290,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryNoticesOptions.count() != null) {
       builder.query('count', String.valueOf(federatedQueryNoticesOptions.count()));
     }
-    if (federatedQueryNoticesOptions.returnFields() != null) {
-      builder.query('return', String.join(federatedQueryNoticesOptions.returnFields(), ','));
+    if (federatedQueryNoticesOptions.xReturn() != null) {
+      builder.query('return', String.join(federatedQueryNoticesOptions.xReturn(), ','));
     }
     if (federatedQueryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryNoticesOptions.offset()));
     }
-    if (federatedQueryNoticesOptions.xsort() != null) {
-      builder.query('sort', String.join(federatedQueryNoticesOptions.xsort(), ','));
+    if (federatedQueryNoticesOptions.xSort() != null) {
+      builder.query('sort', String.join(federatedQueryNoticesOptions.xSort(), ','));
     }
     if (federatedQueryNoticesOptions.highlight() != null) {
       builder.query('highlight', String.valueOf(federatedQueryNoticesOptions.highlight()));
@@ -1392,8 +1392,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryRelationsOptions.context() != null) {
       contentJson.put('context', queryRelationsOptions.context().serialize());
     }
-    if (queryRelationsOptions.xsort() != null) {
-      contentJson.put('sort', queryRelationsOptions.xsort());
+    if (queryRelationsOptions.xSort() != null) {
+      contentJson.put('sort', queryRelationsOptions.xSort());
     }
     if (queryRelationsOptions.filter() != null) {
       contentJson.put('filter', queryRelationsOptions.filter().serialize());
@@ -1733,7 +1733,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('type', createEventOptions.xtype());
+    contentJson.put('type', createEventOptions.xType());
     contentJson.put('data', createEventOptions.data().serialize());
     builder.bodyJson(JSON.serialize(contentJson));
 
@@ -1772,8 +1772,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryLogOptions != null && queryLogOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryLogOptions.offset()));
     }
-    if (queryLogOptions != null && queryLogOptions.xsort() != null) {
-      builder.query('sort', String.join(queryLogOptions.xsort(), ','));
+    if (queryLogOptions != null && queryLogOptions.xSort() != null) {
+      builder.query('sort', String.join(queryLogOptions.xSort(), ','));
     }
 
     return (IBMDiscoveryV1Models.LogQueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.LogQueryResponse.class);

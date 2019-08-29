@@ -373,7 +373,7 @@ private class IBMDiscoveryV1Test {
       .description('test description')
       .destinationField(DESTINATION_FIELD)
       .sourceField(SOURCE_FIELD)
-      .enrichmentName(ENRICHMENT_NAME)
+      .enrichment(ENRICHMENT_NAME)
       .build();
     IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder(ENVIRONMENT_ID, 'test_environment')
       .environmentId(ENVIRONMENT_ID)
@@ -846,8 +846,8 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.FederatedQueryOptions options = new IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionIds(collectionIds)
-      .returnFields(fields)
-      .xsort(fields)
+      .xReturn(fields)
+      .xSort(fields)
       .similar(true)
       .similarDocumentIds('doc1,doc2')
       .similarFields('field1,field2')
@@ -876,16 +876,16 @@ private class IBMDiscoveryV1Test {
       .environmentId(ENVIRONMENT_ID)
       .addCollectionIds('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionIds(collectionIds)
-      .addReturnFields('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addXsort('asc')
+      .addXReturn('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .addXSort('asc')
       .filter('test')
       .query('test')
       .naturalLanguageQuery('test')
       .aggregation('test')
       .count(10)
-      .returnFields(new List<String> { 'test' })
+      .xReturn(new List<String> { 'test' })
       .offset(10)
-      .xsort(new List<String>{'test'})
+      .xSort(new List<String>{'test'})
       .highlight(true)
       .deduplicateField('test')
       .similar(true)
@@ -907,7 +907,7 @@ private class IBMDiscoveryV1Test {
     queryNoticesResult.setCollectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     resp.setResults(new List<IBMDiscoveryV1Models.QueryNoticesResult>{queryNoticesResult});
     IBMDiscoveryV1Models.QueryAggregation queryAggregation= new IBMDiscoveryV1Models.QueryAggregation();
-    queryAggregation.setXtype('test');
+    queryAggregation.setXType('test');
     queryAggregation.setField('test');
     queryAggregation.setMatch('test');
     queryAggregation.setCount(10);
@@ -981,13 +981,13 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .returnFields('return1,return2')
-      .xsort('sort1,sort2')
+      .xReturn('return1,return2')
+      .xSort('sort1,sort2')
       .passagesFields('passage1,passage2')
       .similar(true)
       .similarDocumentIds('doc1,doc2')
       .similarFields('field1,field2')
-      .loggingOptOut(true)
+      .xWatsonLoggingOptOut(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1013,8 +1013,8 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.QueryNoticesOptions options = new IBMDiscoveryV1Models.QueryNoticesOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .returnFields(collectionIds)
-      .xsort(collectionIds)
+      .xReturn(collectionIds)
+      .xSort(collectionIds)
       .passagesFields(collectionIds)
       .similar(true)
       .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
@@ -1408,7 +1408,7 @@ private class IBMDiscoveryV1Test {
       .destinationField('test Description')
       .sourceField('test Description')
       .overwrite(true)
-      .enrichmentName('test Description')
+      .enrichment('test Description')
       .ignoreDownstreamErrors(true)
       .options(enrichmentOptions)
       .build();
@@ -1454,7 +1454,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(enrichment.getDestinationField(), 'test Description');
     System.assertEquals(enrichment.getSourceField(), 'test Description');
     System.assertEquals(enrichment.getOverwrite(), true);
-    System.assertEquals(enrichment.getEnrichmentName(), 'test Description');
+    System.assertEquals(enrichment.getEnrichment(), 'test Description');
     System.assertEquals(enrichment.getIgnoreDownstreamErrors(), true);
     System.assertEquals(enrichmentOptions.getModel(), 'test');
     System.assertEquals(enrichmentOptions.getFeatures().getEmotion().getDocument(), true);
@@ -1736,7 +1736,7 @@ private class IBMDiscoveryV1Test {
       .text('text')
       .build();
     IBMDiscoveryV1Models.QueryRelationsEntity entity = new IBMDiscoveryV1Models.QueryRelationsEntityBuilder()
-      .xtype('text')
+      .xType('text')
       .exact(true)
       .text('text')
       .build();
@@ -1757,7 +1757,7 @@ private class IBMDiscoveryV1Test {
       .count(10)
       .evidenceCount(10)
       .filter(filter)
-      .xsort('text')
+      .xSort('text')
       .addHeader('Test-Header', 'test_value')
       .build();
     IBMDiscoveryV1Models.QueryRelationsResponse resp = service.queryRelations(options);
@@ -2243,8 +2243,8 @@ private class IBMDiscoveryV1Test {
     String queryId = 'mock_queryid';
 
     IBMDiscoveryV1Models.QueryLogOptions options = new IBMDiscoveryV1Models.QueryLogOptionsBuilder()
-        .xsort(sortList)
-        .addXsort(extraSort)
+        .xSort(sortList)
+        .addXSort(extraSort)
         .count(count)
         .filter(filter)
         .offset(offset)

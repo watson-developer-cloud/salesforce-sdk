@@ -967,11 +967,11 @@ public class IBMNaturalLanguageClassifierV1Models {
    * The createClassifier options.
    */
   public class CreateClassifierOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile metadata;
+    private IBMWatsonFile trainingMetadata;
     private IBMWatsonFile trainingData;
 
     /**
-     * Gets the metadata.
+     * Gets the trainingMetadata.
      *
      * Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the
      * classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
@@ -979,10 +979,10 @@ public class IBMNaturalLanguageClassifierV1Models {
      * Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
      * (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      *
-     * @return the metadata
+     * @return the trainingMetadata
      */
-    public IBMWatsonFile metadata() {
-      return metadata;
+    public IBMWatsonFile trainingMetadata() {
+      return trainingMetadata;
     }
 
     /**
@@ -999,9 +999,9 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     private CreateClassifierOptions(CreateClassifierOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.metadata, 'metadata cannot be null');
+      IBMWatsonValidator.notNull(builder.trainingMetadata, 'trainingMetadata cannot be null');
       IBMWatsonValidator.notNull(builder.trainingData, 'trainingData cannot be null');
-      metadata = builder.metadata;
+      trainingMetadata = builder.trainingMetadata;
       trainingData = builder.trainingData;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -1020,11 +1020,11 @@ public class IBMNaturalLanguageClassifierV1Models {
    * CreateClassifierOptions Builder.
    */
   public class CreateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile metadata;
+    private IBMWatsonFile trainingMetadata;
     private IBMWatsonFile trainingData;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
-      metadata = createClassifierOptions.metadata;
+      trainingMetadata = createClassifierOptions.trainingMetadata;
       trainingData = createClassifierOptions.trainingData;
       this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
     }
@@ -1038,11 +1038,11 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param metadata the metadata
+     * @param trainingMetadata the trainingMetadata
      * @param trainingData the trainingData
      */
-    public CreateClassifierOptionsBuilder(IBMWatsonFile metadata, IBMWatsonFile trainingData) {
-      this.metadata = metadata;
+    public CreateClassifierOptionsBuilder(IBMWatsonFile trainingMetadata, IBMWatsonFile trainingData) {
+      this.trainingMetadata = trainingMetadata;
       this.trainingData = trainingData;
     }
 
@@ -1056,13 +1056,13 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Set the metadata.
+     * Set the trainingMetadata.
      *
-     * @param metadata the metadata
+     * @param trainingMetadata the trainingMetadata
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder metadata(IBMWatsonFile metadata) {
-      this.metadata = metadata;
+    public CreateClassifierOptionsBuilder trainingMetadata(IBMWatsonFile trainingMetadata) {
+      this.trainingMetadata = trainingMetadata;
       return this;
     }
 

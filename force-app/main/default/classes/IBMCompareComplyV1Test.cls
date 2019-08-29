@@ -4,7 +4,6 @@ private class IBMCompareComplyV1Test {
   private static String COMMENT;
   private static String USER_ID;
   private static String PROVENANCE_ID;
-  private static String FILENAME;
   private static String CONTENT_TYPE_PDF;
   private static String LABEL;
   private static String BUCKET_LOCATION;
@@ -81,7 +80,6 @@ private class IBMCompareComplyV1Test {
     COMMENT = 'comment';
     USER_ID = 'user_id';
     PROVENANCE_ID = 'provenance_id';
-    FILENAME = 'filename';
     CONTENT_TYPE_PDF = 'application/pdf';
     LABEL = 'label';
     BUCKET_LOCATION = 'bucket_location';
@@ -265,7 +263,6 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.ConvertToHtmlOptions convertToHtmlOptions = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
       .file(testPdf)
       .fileContentType(CONTENT_TYPE_PDF)
-      .filename(FILENAME)
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
@@ -273,7 +270,6 @@ private class IBMCompareComplyV1Test {
 
     System.assertEquals(testPdf, convertToHtmlOptions.file());
     System.assertEquals(CONTENT_TYPE_PDF, convertToHtmlOptions.fileContentType());
-    System.assertEquals(FILENAME, convertToHtmlOptions.filename());
     System.assertEquals(CONTRACTS, convertToHtmlOptions.model());
     Test.stopTest();
   }
@@ -570,7 +566,6 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.ConvertToHtmlOptions convertToHtmlOptions = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
       .file(testPdf)
       .fileContentType(CONTENT_TYPE_PDF)
-      .filename(FILENAME)
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
