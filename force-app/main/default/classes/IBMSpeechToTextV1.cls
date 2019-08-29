@@ -940,7 +940,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody corpusFileBody = IBMWatsonRequestBody.create(addCorpusOptions.corpusFile(), 'text/plain');
-    multipartBuilder.addFormDataPart('corpus_file', null, corpusFileBody);
+    multipartBuilder.addFormDataPart('corpus_file', 'filename', corpusFileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
