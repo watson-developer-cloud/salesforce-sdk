@@ -1,8 +1,33 @@
 @isTest
 private class IBMVisualRecognitionV3Test {
-  // Make sure the named credentials below is defined
-  private static String NAMED_CREDENTIALS = 'callout:watson_visual_recognition_v3';
-  private static String API_KEY = '80bc2e663293e8d13564c260cdb4cbf891b606c0';
+  private static String VERSION;
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
+
+  static {
+    VERSION = '2016-05-20';
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
+  }
+
+  static testMethod void testVersionConstructor() {
+    Test.startTest();
+    IBMVisualRecognitionV3 service = new IBMVisualRecognitionV3(VERSION);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testConfigConstructor() {
+    Test.startTest();
+    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
+      .username('username')
+      .password('password')
+      .build();
+    IBMVisualRecognitionV3 service = new IBMVisualRecognitionV3(VERSION, config);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
   static testMethod void testClassify() {
     String body = IBMWatsonMockResponses.classifiedImages();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
@@ -11,11 +36,11 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
     visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api');
     IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
       .url('http://www.indya101.com/gallery/Actors_TV/Sumeet_Sachdev/2011/12/27/Sumeet_Sachdevjpg_3_arnem.jpg')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -47,7 +72,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -60,7 +85,7 @@ private class IBMVisualRecognitionV3Test {
       .imagesFile(testfile)
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -82,8 +107,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -99,7 +123,7 @@ private class IBMVisualRecognitionV3Test {
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
       .acceptLanguage('es')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -133,8 +157,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -155,7 +178,7 @@ private class IBMVisualRecognitionV3Test {
       .addPositiveExamples('other_test', testfile)
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -180,8 +203,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -194,7 +216,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3Models.GetClassifierOptions options = new IBMVisualRecognitionV3Models.GetClassifierOptionsBuilder('classifierId')
       .classifierId('classifierId')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -214,8 +236,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -236,7 +257,7 @@ private class IBMVisualRecognitionV3Test {
       .addPositiveExamples('other_test', testfile)
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -256,8 +277,7 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -270,7 +290,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3Models.DeleteClassifierOptions options = new IBMVisualRecognitionV3Models.DeleteClassifierOptionsBuilder('classifierId')
       .classifierId('classifierId')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -289,11 +309,10 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
     IBMVisualRecognitionV3Models.ListClassifiersOptions options = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
       .verbose(true)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -315,13 +334,12 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION, iamOptions);
 
     String customerId = 'salesforce_sdk_test_id';
     IBMVisualRecognitionV3Models.DeleteUserDataOptions deleteOptions = new IBMVisualRecognitionV3Models.DeleteUserDataOptionsBuilder()
       .customerId(customerId)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();

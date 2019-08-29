@@ -1,5 +1,40 @@
 @isTest
 private class IBMToneAnalyzerV3Test {
+  private static String VERSION;
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
+
+  static {
+    VERSION = '2017-09-21';
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
+  }
+
+  static testMethod void testVersionConstructor() {
+    Test.startTest();
+    IBMToneAnalyzerV3 service = new IBMToneAnalyzerV3(VERSION);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testBasicConstructor() {
+    Test.startTest();
+    IBMToneAnalyzerV3 service = new IBMToneAnalyzerV3(VERSION, 'username', 'password');
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testConfigConstructor() {
+    Test.startTest();
+    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
+      .username('username')
+      .password('password')
+      .build();
+    IBMToneAnalyzerV3 service = new IBMToneAnalyzerV3(VERSION, config);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
   /**
    *  Test Analyze general purpose tone.
    *
@@ -12,7 +47,7 @@ private class IBMToneAnalyzerV3Test {
     IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
       .apiKey('apikey')
       .build();
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21', iamOptions);
+    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3(VERSION, iamOptions);
     toneAnalyzer.setEndPoint('https://gateway.watsonplatform.net/tone-analyzer/api');
     IBMToneAnalyzerV3Models.ToneInput toneInput = new IBMToneAnalyzerV3Models.ToneInputBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
@@ -28,7 +63,7 @@ private class IBMToneAnalyzerV3Test {
     .contentLanguage('en')
     .acceptLanguage('en')
     .toneInput(toneInput)
-    .addHeader('Test-Header', 'test_value')
+    .addHeader(HEADER_KEY, HEADER_VAL)
     .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -67,7 +102,7 @@ private class IBMToneAnalyzerV3Test {
       .addUtterances(utterance)
       .acceptLanguage('en')
       .contentLanguage('en')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
