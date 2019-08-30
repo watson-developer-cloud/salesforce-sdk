@@ -363,11 +363,10 @@ private class IBMWatsonServiceTest {
       .addPart(new Map<String, String>{'test' => 'test', 'Content-Disposition'=>'Content-Disposition'}, IBMWatsonRequestBody.create())
       .addFormDataPart('key', 'value')
       .build();
-    System.assertEquals(IBMWatsonMultipartBody.safelyPad('test', 'test=test=', 'test'), EncodingUtil.base64Encode(blob.valueOf('test test')));
-    System.assertEquals(multipartBody.writeBodyParameter('test', 'test', false), 'Q29udGVudC1EaXNwb3NpdGlvbjogdGVzdCANCg0KdGVzdA0K');
+    System.assertEquals('Content-Disposition: test\r\n\r\ntest\r\n', multipartBody.writeBodyParameter('test', 'test', false));
     System.assertEquals(multipartBody.parts().size(), 2);
     System.assert(multipartBody.getAllHeaders().get('Content-Type').contains('multipart/form-data; boundary'));
-    System.assert(multipartBody.form64().contains(multipartBody.writeBoundary()));
+    System.assert(multipartBody.multipartBody().contains(multipartBody.writeBoundary()));
     Test.stopTest();
   }
 
