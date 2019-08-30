@@ -19,7 +19,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private IBMWatsonMediaType originalType;
   private IBMWatsonMediaType contentType;
   private List<Part> parts;
-  private String form64;
+  private String multipartBody;
   private Blob formBlob;
   private Map<String, String> headers;
   private long contentLength = -1L;
@@ -27,11 +27,11 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   IBMWatsonMultipartBody(String boundary, IBMWatsonMediaType mediaType, List<Part> parts) {
     this.boundary = boundary;
     this.originalType = mediaType;
-    this.contentType = IBMWatsonMediaType.parse(mediaType + '; boundary=' + EncodingUtil.urlEncode(boundary, 'UTF-8'));
+    this.contentType = IBMWatsonMediaType.parse(mediaType + '; boundary=' + boundary);
     this.parts = parts;
     this.headers = new Map<String, String>();
     this.contentLength = 0;
-    writeForm64(parts);
+    writeMultipartBody(parts);
   }
 
   public IBMWatsonMediaType contentType() {
@@ -42,17 +42,17 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     return formBlob;
   }
 
-  public String form64() {
-    return form64;
+  public String multipartBody() {
+    return multipartBody;
   }
 
   public long contentLength() {
     return contentLength;
   }
 
-  private long writeForm64(List<Part> parts) {
-    headers.put('Content-Type', 'multipart/form-data; boundary="' + boundary + '"');
-    form64 = '';
+  private long writeMultipartBody(List<Part> parts) {
+    headers.put('Content-Type', 'multipart/form-data; boundary=' + boundary);
+    multipartBody = '';
     for (Integer i = 0; i < parts.size(); i++) {
       Part p = parts[i];
       Boolean isEndingPart = (i == parts.size() - 1);
@@ -60,14 +60,14 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
         String fileName = p.body().name;
         String mimeType = p.body.bodyContentType().toString();
         String file64Body = EncodingUtil.base64Encode(p.body().blobContent);
-        form64 += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, mimeType, isEndingPart);
+        multipartBody += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, mimeType, isEndingPart);
       } else {
-        form64 += writeBoundary();
-        form64 += writeBodyParameter(p.headers().get('Content-Disposition'), p.body().content, isEndingPart);
+        multipartBody += writeBoundary();
+        multipartBody += writeBodyParameter(p.headers().get('Content-Disposition'), p.body().content, isEndingPart);
       }
     }
 
-    return form64.length();
+    return multipartBody.length();
   }
 
   /**
@@ -93,23 +93,14 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   public String writeBodyParameter(String key, String value, Boolean isEndingPart) {
     String contentDisposition = 'Content-Disposition: ' + key;
     String contentDispositionCrLf = contentDisposition + CRLF + CRLF;
-    Blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
-    String contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
-    String content = safelyPad(contentDisposition, contentDispositionCrLf64, CRLF + CRLF);
-    String valueCrLf = value + CRLF;
-    Blob valueCrLfBlob = blob.valueOf(valueCrLf);
-    String valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
+    String content = contentDispositionCrLf;
 
-    content += safelyPad(value, valueCrLf64, CRLF);
+    String valueCrLf = value + CRLF;
+    content += valueCrLf;
+
     if (isEndingPart == true) {
       String footer = '--' + this.boundary + '--';
-      Blob footerBlob = blob.valueOf(footer);
-      String footerEncoded = EncodingUtil.base64Encode(footerBlob);
-      while (footerEncoded.endsWith('=')) {
-        footer += ' ';
-        footerEncoded = EncodingUtil.base64Encode(blob.valueOf(footer));
-      }
-      content += safelyPad(footer, footerEncoded, CRLF);
+      content = content + footer;
     }
     return content;
   }
@@ -165,15 +156,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   }
 
   public String writeBoundary() {
-    String value = '--' + boundary;
-    String valueCrlf = value + CRLF;
-    Blob valueBlob = blob.valueOf(valueCrlf);
-    String boundaryEncoded = EncodingUtil.base64Encode(valueBlob);
-    while (boundaryEncoded.endsWith('=')) {
-      valueCrlf += ' ';
-      boundaryEncoded = EncodingUtil.base64Encode(blob.valueOf(valueCrlf));
-    }
-    return boundaryEncoded;
+    return '--' + this.boundary + CRLF;
   }
 
   public Map<String, String> getAllHeaders() {
@@ -257,7 +240,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private static String generateRandomBoundaryString() {
     Blob b = Crypto.GenerateAESKey(128);
     String h = EncodingUtil.ConvertTohex(b);
-    String boundaryString = h.substring(0, 8);
+    String boundaryString = h.substring(0, 16);
     return boundaryString;
   }
 
