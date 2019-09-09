@@ -16,7 +16,7 @@ public class IBMWatsonClient {
     Http http = new Http();
     HTTPResponse httpResponse = http.send(request);
 
-    // Creates an IBMWatsonResponse based on the endpoint url and HttpResponse
+    // Creates an IBMWatsonResponse based on the service URL and HttpResponse
     return new IBMWatsonResponse(request.getEndpoint(), httpResponse);
   }
 
