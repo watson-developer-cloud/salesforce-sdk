@@ -10,7 +10,7 @@ public abstract class IBMWatsonService {
   private static final String CALLOUT = 'callout:';
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk-{0} {1}';
-  private static final String SDK_VERSION = '4.4.2';
+  private static final String SDK_VERSION = '4.4.4';
   private static final String APIKEY_AS_USERNAME = 'apikey';
   private static final String ICP_PREFIX = 'icp-';
   private static final String AUTH_HEADER_DEPRECATION_MESSAGE = 'Authenticating with the X-Watson-Authorization-Token'
