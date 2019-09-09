@@ -17,7 +17,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
     IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
 
     if (username != null && password != null) {
-      toneAnalyzer.setEndPoint(URL);
+      toneAnalyzer.setServiceURL(URL);
       toneAnalyzer.setUsernameAndPassword(username, password);
     }
 
@@ -42,7 +42,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
     IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
 
     if (username != null && password != null) {
-      toneAnalyzer.setEndPoint(URL);
+      toneAnalyzer.setServiceURL(URL);
       toneAnalyzer.setUsernameAndPassword(username, password);
     }
 
@@ -67,7 +67,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
     IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
 
     if (username != null && password != null) {
-      toneAnalyzer.setEndPoint(URL);
+      toneAnalyzer.setServiceURL(URL);
       toneAnalyzer.setUsernameAndPassword(username, password);
     }
 

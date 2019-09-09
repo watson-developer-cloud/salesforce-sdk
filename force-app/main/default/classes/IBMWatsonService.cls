@@ -1,6 +1,6 @@
 public abstract class IBMWatsonService {
-  private String defaultEndPoint;
-  private String endPoint;
+  private String defaultServiceURL;
+  private String serviceURL;
   private String userAgent;
   private String name;
   private IBMWatsonAuthenticator authenticator;
@@ -32,11 +32,11 @@ public abstract class IBMWatsonService {
     }
     this.authenticator = authenticator;
 
-    // use endpoint from credential file if it exists
+    // use service URL from credential file if it exists
     Map<String, String> props = IBMWatsonCredentialUtils.getFileCredentialsAsMap(name);
     String url = props.get(IBMWatsonCredentialUtils.PROP_NAME_URL);
     if (String.isNotBlank(url)) {
-      setEndPoint(url);
+      setServiceURL(url);
     }
   }
 
@@ -61,35 +61,35 @@ public abstract class IBMWatsonService {
   }
 
   /**
-   * Sets the end point.
+   * Sets the service URL.
    *
-   * @param endPoint the new end point. Will be ignored if empty or null
+   * @param serviceURL the new service URL. Will be ignored if empty or null
    */
-  public void setEndPoint(String endPointParam) {
-    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(endPointParam)) {
+  public void setServiceURL(String serviceURL) {
+    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(serviceURL)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('The URL shouldn\'t start or end with curly brackets or '
           + 'quotes. Please remove any surrounding {, }, or " characters.');
     }
 
-    if (String.isNotBlank(endPointParam)) {
-      String newEndPoint = endPointParam.endsWith('/') ? endPointParam.removeEnd('/') : endPointParam;
-      if (this.endPoint == null) {
-        this.defaultEndPoint = newEndPoint;
+    if (String.isNotBlank(serviceURL)) {
+      String newServiceURL = serviceURL.endsWith('/') ? serviceURL.removeEnd('/') : serviceURL;
+      if (this.serviceURL == null) {
+        this.defaultServiceURL = newServiceURL;
       }
-      this.endPoint = newEndPoint;
+      this.serviceURL = newServiceURL;
     } else {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('endPointParam cannot be null or empty');
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('serviceURL cannot be null or empty');
     }
   }
 
   /**
-   * Gets the API endpoint.
+   * Gets the service URL.
    *
    *
-   * @return the API endpoint
+   * @return the service URL
    */
-  public String getEndPoint() {
-    return endPoint;
+  public String getServiceURL() {
+    return this.serviceURL;
   }
 
   /**
@@ -179,7 +179,7 @@ public abstract class IBMWatsonService {
     IBMWatsonRequest.Builder builder = request.newBuilder();
     setDefaultHeaders(builder);
 
-    if (String.isNotBlank(endpoint)) {
+    if (String.isNotBlank(this.serviceURL)) {
       setAuthentication(builder);
     }
 
@@ -202,7 +202,7 @@ public abstract class IBMWatsonService {
       throw new IBMWatsonServiceExceptions.BadRequestException(error != null ? error : 'Bad Request', response);
 
     if (statusCode == IBMWatsonHttpStatus.UNAUTHORIZED) // HTTP 401
-      throw new IBMWatsonServiceExceptions.UnauthorizedException('Unauthorized: Access is denied due to invalid credentials. Tip: Check the service endpoint.', response);
+      throw new IBMWatsonServiceExceptions.UnauthorizedException('Unauthorized: Access is denied due to invalid credentials. Tip: Check the service URL.', response);
 
     if (statusCode == IBMWatsonHttpStatus.FORBIDDEN) // HTTP 403
       throw new IBMWatsonServiceExceptions.ForbiddenException(error != null ? error : 'Forbidden: Service refuse the request', response);

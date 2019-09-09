@@ -4,7 +4,7 @@ public with sharing class IBMAssistantV2FTests {
 
   public static void runAllTests(String username, String password, String assistantId) {
     IBMAssistantV2 service = new IBMAssistantV2(VERSION);
-    service.setEndPoint(URL);
+    service.setServiceURL(URL);
     service.setUsernameAndPassword(username, password);
 
     IBMAssistantV2Models.SessionResponse sessionResponse = testCreateSession(service, assistantId);

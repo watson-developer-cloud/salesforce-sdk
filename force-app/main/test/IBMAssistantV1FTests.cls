@@ -53,7 +53,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Workspace testCreateWorkspace(String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -85,7 +85,7 @@ public with sharing class IBMAssistantV1FTests {
   public static void testDeleteWorkspace(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -98,7 +98,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.WorkspaceExport testGetWorkspace(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -113,7 +113,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Workspace updateWorkspace(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -130,7 +130,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.WorkspaceCollection testListWorkspaces(String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -144,7 +144,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.MessageResponse message(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -163,7 +163,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Intent createIntent(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -180,7 +180,7 @@ public with sharing class IBMAssistantV1FTests {
   public static void deleteIntent(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -194,7 +194,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.IntentExport getIntent(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -211,7 +211,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.IntentCollection listIntents(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -227,7 +227,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Intent updateIntent(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -244,7 +244,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Example createExample(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -268,7 +268,7 @@ public with sharing class IBMAssistantV1FTests {
   public static void deleteExample(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -283,7 +283,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Example getExample(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -300,7 +300,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.ExampleCollection listExamples(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -316,7 +316,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Example updateExample(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -334,7 +334,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Entity createEntity(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -355,7 +355,7 @@ public with sharing class IBMAssistantV1FTests {
   public static void deleteEntity(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -369,7 +369,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.EntityExport getEntity(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -386,7 +386,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.EntityCollection listEntities(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -402,7 +402,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Entity updateEntity(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -419,7 +419,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Value createValue(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -436,7 +436,7 @@ public with sharing class IBMAssistantV1FTests {
   public static void deleteValue(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -451,7 +451,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.ValueExport getValue(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -469,7 +469,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Value updateValue(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -487,7 +487,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.ValueCollection listValues(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -503,7 +503,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Synonym createSynonym(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -521,7 +521,7 @@ public with sharing class IBMAssistantV1FTests {
   public static void deleteSynonym(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -537,7 +537,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Synonym getSynonym(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -555,7 +555,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.SynonymCollection listSynonyms(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -572,7 +572,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Synonym updateSynonym(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -591,7 +591,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.DialogNode createDialogNode(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -607,7 +607,7 @@ public with sharing class IBMAssistantV1FTests {
   public static void deleteDialogNode(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -621,7 +621,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.DialogNode getDialogNode(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -637,7 +637,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.DialogNodeCollection listDialogNodes(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -652,7 +652,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.DialogNode updateDialogNode(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -670,7 +670,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.LogCollection listLogs(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -685,7 +685,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Counterexample testCreateCounterexample(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -701,7 +701,7 @@ public with sharing class IBMAssistantV1FTests {
   public static void testDeleteCounterexample(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
     IBMAssistantV1Models.DeleteCounterexampleOptions deleteOptions = new IBMAssistantV1Models.DeleteCounterexampleOptionsBuilder()
@@ -714,7 +714,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Counterexample testGetCounterexample(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -730,7 +730,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.CounterexampleCollection testListCounterexamples(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
@@ -745,7 +745,7 @@ public with sharing class IBMAssistantV1FTests {
   public static IBMAssistantV1Models.Counterexample testUpdateCounterexample(String workspaceId, String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
     if (username != null && password != null) {
-      assistant.setEndPoint(URL);
+      assistant.setServiceURL(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 

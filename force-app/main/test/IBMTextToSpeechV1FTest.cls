@@ -24,7 +24,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static IBMTextToSpeechV1Models.VoiceModel testCreateVoiceModel(String username, String password) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.CreateVoiceModelOptions options = new IBMTextToSpeechV1Models.CreateVoiceModelOptionsBuilder()
@@ -55,7 +55,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static IBMTextToSpeechV1Models.Voice testGetVoice(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.GetVoiceOptions options = new IBMTextToSpeechV1Models.GetVoiceOptionsBuilder()
@@ -75,7 +75,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static IBMTextToSpeechV1Models.Voices testListVoices(String username, String password) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.ListVoicesOptions options = new IBMTextToSpeechV1Models.ListVoicesOptionsBuilder()
@@ -93,7 +93,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static void testDeleteVoiceModel(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.DeleteVoiceModelOptions options = new IBMTextToSpeechV1Models.DeleteVoiceModelOptionsBuilder()
@@ -109,7 +109,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static IBMTextToSpeechV1Models.VoiceModel testGetVoiceModel(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.GetVoiceModelOptions options = new IBMTextToSpeechV1Models.GetVoiceModelOptionsBuilder()
@@ -128,7 +128,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static IBMTextToSpeechV1Models.VoiceModels testListVoiceModels(String username, String password) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.ListVoiceModelsOptions options = new IBMTextToSpeechV1Models.ListVoiceModelsOptionsBuilder()
@@ -146,7 +146,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static void testUpdateVoiceModel(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
@@ -166,7 +166,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static void testAddWord(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.AddWordOptions options = new IBMTextToSpeechV1Models.AddWordOptionsBuilder()
@@ -184,7 +184,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static void testAddWords(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
@@ -204,7 +204,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static void testDeleteWord(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.DeleteWordOptions options = new IBMTextToSpeechV1Models.DeleteWordOptionsBuilder()
@@ -221,7 +221,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static IBMTextToSpeechV1Models.Translation testGetWord(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.GetWordOptions options = new IBMTextToSpeechV1Models.GetWordOptionsBuilder()
@@ -241,7 +241,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static IBMTextToSpeechV1Models.Words testListWords(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.ListWordsOptions options = new IBMTextToSpeechV1Models.ListWordsOptionsBuilder()
@@ -260,7 +260,7 @@ public with sharing class IBMTextToSpeechV1FTest {
   public static IBMWatsonFile testSynthesize(String username, String password, String customizationId) {
     IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
     if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
+      textToSpeech.setServiceURL(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.SynthesizeOptions options = new IBMTextToSpeechV1Models.SynthesizeOptionsBuilder()

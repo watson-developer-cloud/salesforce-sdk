@@ -19,8 +19,8 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   public IBMNaturalLanguageClassifierV1(IBMWatsonAuthenticator authenticator) {
     super(SERVICE_NAME, 'v1', authenticator);
 
-    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
-      setEndPoint(URL);
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(URL);
     }
   }
 
@@ -35,7 +35,8 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageClassifierV1Models.Classification classify(IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions) {
     IBMWatsonValidator.notNull(classifyOptions, 'classifyOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/classifiers/{0}/classify', new String[]{ classifyOptions.classifierId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/classifiers/{0}/classify', new String[]{ classifyOptions.classifierId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural_language_classifier;service_version=V1;operation_id=classify');
     Map<String, String> requestHeaders = (classifyOptions != null) ? classifyOptions.requestHeaders() : null;
@@ -64,7 +65,8 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageClassifierV1Models.ClassificationCollection classifyCollection(IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions classifyCollectionOptions) {
     IBMWatsonValidator.notNull(classifyCollectionOptions, 'classifyCollectionOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/classifiers/{0}/classify_collection', new String[]{ classifyCollectionOptions.classifierId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/classifiers/{0}/classify_collection', new String[]{ classifyCollectionOptions.classifierId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural_language_classifier;service_version=V1;operation_id=classifyCollection');
     Map<String, String> requestHeaders = (classifyCollectionOptions != null) ? classifyCollectionOptions.requestHeaders() : null;
@@ -94,7 +96,8 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageClassifierV1Models.Classifier createClassifier(IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions) {
     IBMWatsonValidator.notNull(createClassifierOptions, 'createClassifierOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/classifiers');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/classifiers');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural_language_classifier;service_version=V1;operation_id=createClassifier');
     Map<String, String> requestHeaders = (createClassifierOptions != null) ? createClassifierOptions.requestHeaders() : null;
@@ -124,7 +127,8 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    * @return the {@link IBMNaturalLanguageClassifierV1Models.ClassifierList} with the response
    */
   public IBMNaturalLanguageClassifierV1Models.ClassifierList listClassifiers(IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/classifiers');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/classifiers');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural_language_classifier;service_version=V1;operation_id=listClassifiers');
     Map<String, String> requestHeaders = (listClassifiersOptions != null) ? listClassifiersOptions.requestHeaders() : null;
@@ -147,7 +151,8 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageClassifierV1Models.Classifier getClassifier(IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOptions) {
     IBMWatsonValidator.notNull(getClassifierOptions, 'getClassifierOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/classifiers/{0}', new String[]{ getClassifierOptions.classifierId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/classifiers/{0}', new String[]{ getClassifierOptions.classifierId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural_language_classifier;service_version=V1;operation_id=getClassifier');
     Map<String, String> requestHeaders = (getClassifierOptions != null) ? getClassifierOptions.requestHeaders() : null;
@@ -168,7 +173,8 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    */
   public void deleteClassifier(IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions) {
     IBMWatsonValidator.notNull(deleteClassifierOptions, 'deleteClassifierOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/classifiers/{0}', new String[]{ deleteClassifierOptions.classifierId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/classifiers/{0}', new String[]{ deleteClassifierOptions.classifierId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural_language_classifier;service_version=V1;operation_id=deleteClassifier');
     Map<String, String> requestHeaders = (deleteClassifierOptions != null) ? deleteClassifierOptions.requestHeaders() : null;

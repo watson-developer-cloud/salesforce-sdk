@@ -37,8 +37,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
   public IBMPersonalityInsightsV3(String versionDate, IBMWatsonAuthenticator authenticator) {
     super(SERVICE_NAME, 'v3', authenticator);
 
-    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
-      setEndPoint(URL);
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(URL);
     }
 
     if (String.isBlank(versionDate)) {
@@ -91,7 +91,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    */
   public IBMPersonalityInsightsV3Models.Profile profile(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/profile');
     builder.addHeader('Accept', 'application/json');
     if (profileOptions.contentType() != null) {
       builder.addHeader('Content-Type', profileOptions.contentType());
@@ -168,7 +169,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    */
   public IBMWatsonFile profileAsCsv(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/profile');
     builder.addHeader('Accept', 'text/csv');
     if (profileOptions.contentType() != null) {
       builder.addHeader('Content-Type', profileOptions.contentType());

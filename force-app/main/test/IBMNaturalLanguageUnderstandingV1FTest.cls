@@ -16,7 +16,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-02-27');
 
     if (username != null && password != null) {
-      naturalLanguageUnderstanding.setEndPoint(URL);
+      naturalLanguageUnderstanding.setServiceURL(URL);
       naturalLanguageUnderstanding.setUsernameAndPassword(username, password);
     }
 
@@ -99,7 +99,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-02-27');
 
     if (username != null && password != null) {
-      naturalLanguageUnderstanding.setEndPoint(URL);
+      naturalLanguageUnderstanding.setServiceURL(URL);
       naturalLanguageUnderstanding.setUsernameAndPassword(username, password);
     }
 
