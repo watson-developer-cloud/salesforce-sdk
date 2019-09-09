@@ -145,7 +145,7 @@ If the methods above don't work for you, setting credentials in the code is alwa
 ```java
 IBMWatsonAuthenticator authenticator = new IBMWatsonBasicAuthenticator('USERNAME', 'PASSWORD');
 IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', authenticator);
-discovery.setEndPoint('URL');
+discovery.setServiceURL('URL');
 ```
 
 #### Using IAM
@@ -153,7 +153,7 @@ discovery.setEndPoint('URL');
 ```java
 IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator('API_KEY');
 IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
-service.setEndPoint('URL');
+service.setServiceURL('URL');
 ```
 
 #### ICP
@@ -162,7 +162,7 @@ service.setEndPoint('URL');
 IBMWatsonAuthenticator authenticator =
   new IBMWatsonBasicAuthenticator('USERNAME', 'PASSWORD');
 IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
-service.setEndPoint('SERVICE ICP URL');
+service.setServiceURL('SERVICE ICP URL');
 ```
 
 **Note:** Make sure you've got your self-signed certificate all set up in your Salesforce organization for this to work properly.
@@ -173,7 +173,7 @@ service.setEndPoint('SERVICE ICP URL');
 IBMWatsonAuthenticator authenticator =
   new IBMWatsonCloudPakForDataAuthenticator('CP4D TOKEN EXCHANGE BASE URL', 'USERNAME', 'PASSWORD');
 IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
-service.setEndPoint('SERVICE CP4D URL');
+service.setServiceURL('SERVICE CP4D URL');
 ```
 
 ### Setting remote site settings
