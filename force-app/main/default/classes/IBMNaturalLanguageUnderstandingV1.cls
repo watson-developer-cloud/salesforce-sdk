@@ -57,6 +57,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageUnderstandingV1Models.AnalysisResults analyze(IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions analyzeOptions) {
     IBMWatsonValidator.notNull(analyzeOptions, 'analyzeOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/analyze');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural-language-understanding;service_version=V1;operation_id=analyze');
@@ -112,6 +113,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    * @return the {@link IBMNaturalLanguageUnderstandingV1Models.ListModelsResults} with the response
    */
   public IBMNaturalLanguageUnderstandingV1Models.ListModelsResults listModels(IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions listModelsOptions) {
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/models');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural-language-understanding;service_version=V1;operation_id=listModels');
@@ -136,6 +138,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    */
   public void deleteModel(IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions deleteModelOptions) {
     IBMWatsonValidator.notNull(deleteModelOptions, 'deleteModelOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/models/{0}', new String[]{ deleteModelOptions.modelId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural-language-understanding;service_version=V1;operation_id=deleteModel');

@@ -42,6 +42,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.HTMLReturn convertToHtml(IBMCompareComplyV1Models.ConvertToHtmlOptions convertToHtmlOptions) {
     IBMWatsonValidator.notNull(convertToHtmlOptions, 'convertToHtmlOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/html_conversion');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=convertToHtml');
@@ -75,6 +76,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.ClassifyReturn classifyElements(IBMCompareComplyV1Models.ClassifyElementsOptions classifyElementsOptions) {
     IBMWatsonValidator.notNull(classifyElementsOptions, 'classifyElementsOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/element_classification');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=classifyElements');
@@ -108,6 +110,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.TableReturn extractTables(IBMCompareComplyV1Models.ExtractTablesOptions extractTablesOptions) {
     IBMWatsonValidator.notNull(extractTablesOptions, 'extractTablesOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/tables');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=extractTables');
@@ -141,6 +144,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.CompareReturn compareDocuments(IBMCompareComplyV1Models.CompareDocumentsOptions compareDocumentsOptions) {
     IBMWatsonValidator.notNull(compareDocumentsOptions, 'compareDocumentsOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/comparison');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=compareDocuments');
@@ -184,6 +188,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.FeedbackReturn addFeedback(IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions) {
     IBMWatsonValidator.notNull(addFeedbackOptions, 'addFeedbackOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/feedback');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=addFeedback');
@@ -216,6 +221,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    * @return the {@link IBMCompareComplyV1Models.FeedbackList} with the response
    */
   public IBMCompareComplyV1Models.FeedbackList listFeedback(IBMCompareComplyV1Models.ListFeedbackOptions listFeedbackOptions) {
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/feedback');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=listFeedback');
@@ -288,6 +294,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.GetFeedback getFeedback(IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions) {
     IBMWatsonValidator.notNull(getFeedbackOptions, 'getFeedbackOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/feedback/{0}', new String[]{ getFeedbackOptions.feedbackId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=getFeedback');
@@ -315,6 +322,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public void deleteFeedback(IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions) {
     IBMWatsonValidator.notNull(deleteFeedbackOptions, 'deleteFeedbackOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/feedback/{0}', new String[]{ deleteFeedbackOptions.feedbackId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=deleteFeedback');
@@ -347,6 +355,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.BatchStatus createBatch(IBMCompareComplyV1Models.CreateBatchOptions createBatchOptions) {
     IBMWatsonValidator.notNull(createBatchOptions, 'createBatchOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/batches');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=createBatch');
@@ -388,6 +397,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    * @return the {@link IBMCompareComplyV1Models.Batches} with the response
    */
   public IBMCompareComplyV1Models.Batches listBatches(IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptions) {
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/batches');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=listBatches');
@@ -412,6 +422,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.BatchStatus getBatch(IBMCompareComplyV1Models.GetBatchOptions getBatchOptions) {
     IBMWatsonValidator.notNull(getBatchOptions, 'getBatchOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/batches/{0}', new String[]{ getBatchOptions.batchId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=getBatch');
@@ -437,6 +448,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    */
   public IBMCompareComplyV1Models.BatchStatus updateBatch(IBMCompareComplyV1Models.UpdateBatchOptions updateBatchOptions) {
     IBMWatsonValidator.notNull(updateBatchOptions, 'updateBatchOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getServiceURL() + String.format('/v1/batches/{0}', new String[]{ updateBatchOptions.batchId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=updateBatch');

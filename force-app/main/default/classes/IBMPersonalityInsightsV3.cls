@@ -91,6 +91,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    */
   public IBMPersonalityInsightsV3Models.Profile profile(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/profile');
     builder.addHeader('Accept', 'application/json');
     if (profileOptions.contentType() != null) {
@@ -168,6 +169,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    */
   public IBMWatsonFile profileAsCsv(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/profile');
     builder.addHeader('Accept', 'text/csv');
     if (profileOptions.contentType() != null) {

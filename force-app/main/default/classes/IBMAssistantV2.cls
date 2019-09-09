@@ -43,6 +43,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
    */
   public IBMAssistantV2Models.SessionResponse createSession(IBMAssistantV2Models.CreateSessionOptions createSessionOptions) {
     IBMWatsonValidator.notNull(createSessionOptions, 'createSessionOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v2/assistants/{0}/sessions', new String[]{ createSessionOptions.assistantId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V2;operation_id=createSession');
@@ -68,6 +69,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
    */
   public void deleteSession(IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptions) {
     IBMWatsonValidator.notNull(deleteSessionOptions, 'deleteSessionOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v2/assistants/{0}/sessions/{1}', new String[]{ deleteSessionOptions.assistantId(), deleteSessionOptions.sessionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V2;operation_id=deleteSession');
@@ -94,6 +96,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
    */
   public IBMAssistantV2Models.MessageResponse message(IBMAssistantV2Models.MessageOptions messageOptions) {
     IBMWatsonValidator.notNull(messageOptions, 'messageOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v2/assistants/{0}/sessions/{1}/message', new String[]{ messageOptions.assistantId(), messageOptions.sessionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V2;operation_id=message');

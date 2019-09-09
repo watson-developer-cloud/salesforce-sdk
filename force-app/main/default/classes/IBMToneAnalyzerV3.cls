@@ -63,6 +63,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    */
   public IBMToneAnalyzerV3Models.ToneAnalysis tone(IBMToneAnalyzerV3Models.ToneOptions toneOptions) {
     IBMWatsonValidator.notNull(toneOptions, 'toneOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/tone');
     builder.addHeader('Accept', 'application/json');
     if (toneOptions.contentType() != null) {
@@ -114,6 +115,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    */
   public IBMToneAnalyzerV3Models.UtteranceAnalyses toneChat(IBMToneAnalyzerV3Models.ToneChatOptions toneChatOptions) {
     IBMWatsonValidator.notNull(toneChatOptions, 'toneChatOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/tone_chat');
     builder.addHeader('Accept', 'application/json');
     if (toneChatOptions.contentLanguage() != null) {
