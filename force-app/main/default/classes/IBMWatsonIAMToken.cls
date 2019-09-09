@@ -12,14 +12,6 @@ public class IBMWatsonIAMToken extends IBMWatsonGenericModel {
     return access_token_serialized_name;
   }
 
-  public String getRefreshToken() {
-    return refresh_token_serialized_name;
-  }
-
-  public String getTokenType() {
-    return token_type_serialized_name;
-  }
-
   public Long getExpiresIn() {
     return expires_in_serialized_name;
   }

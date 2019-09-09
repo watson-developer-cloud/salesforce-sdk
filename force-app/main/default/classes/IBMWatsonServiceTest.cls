@@ -14,6 +14,11 @@ private class IBMWatsonServiceTest {
       builder.query('test_query', 'test_val');
       return (TestClass) createServiceCall(builder.build(), TestClass.class);
     }
+
+    public IBMWatsonFile testingMethodFile() {
+      IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet('https://www.test.com');
+      return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
+    }
   }
 
   /**
@@ -404,6 +409,38 @@ private class IBMWatsonServiceTest {
     TestService testService = new TestService();
     testService.setUsernameAndPassword('apikey', testApiKey);
     System.assert(testService.isTokenManagerSet() == false);
+    Test.stopTest();
+  }
+
+  static testMethod void testDefaultHeaders() {
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', '', null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    String testUserAgent = 'Mozilla/5.0';
+    TestService testService = new TestService();
+    testService.setDefaultHeaders(new Map<String, String> { IBMWatsonHttpHeaders.USER_AGENT => testUserAgent });
+    testService.testingMethod();
+    Test.stopTest();
+  }
+
+  static testMethod void testFileResponse() {
+    Map<String, String> responseHeaders = new Map<String, String> {
+      IBMWatsonHttpHeaders.CONTENT_DISPOSITION => 'filename=testfile.txt',
+      IBMWatsonHttpHeaders.CONTENT_TYPE => 'text/plain'
+    };
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      'Catalonia is an autonomous community on the northeastern corner of Spain.',
+      responseHeaders
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    TestService testService = new TestService();
+    IBMWatsonFile fileResponse = testService.testingMethodFile();
+    System.assert(fileResponse != null);
+
     Test.stopTest();
   }
 }

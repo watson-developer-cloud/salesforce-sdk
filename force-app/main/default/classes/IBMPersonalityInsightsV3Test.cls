@@ -119,4 +119,40 @@ private class IBMPersonalityInsightsV3Test {
     System.assertEquals(resp.getwarnings()[0].getMessage(), 'string');
     Test.stopTest();
   }
+
+  static testMethod void testProfileAsCsv() {
+    String testBody = 'this,is,a,csv,file';
+    Map<String, String> responseHeaders = new Map<String, String> {
+      IBMWatsonHttpHeaders.CONTENT_DISPOSITION => 'filename=testfile.csv',
+      IBMWatsonHttpHeaders.CONTENT_TYPE => 'test/csv'
+    };
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      testBody,
+      responseHeaders
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, iamOptions);
+    IBMPersonalityInsightsV3Models.ProfileOptions options = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
+      .text('text')
+      .contentLanguage('en')
+      .acceptLanguage('en')
+      .rawScores(true)
+      .csvHeaders(true)
+      .consumptionPreferences(true)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    IBMWatsonFile response = service.profileAsCsv(options);
+
+    System.assert(response != null);
+    System.assertEquals(testBody, response.bodyAsString());
+
+    Test.stopTest();
+  }
 }

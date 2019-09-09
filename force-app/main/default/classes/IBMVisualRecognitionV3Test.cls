@@ -4,10 +4,17 @@ private class IBMVisualRecognitionV3Test {
   private static String HEADER_KEY;
   private static String HEADER_VAL;
 
+  private static String CLASS_VAL;
+  private static Double SCORE;
+  private static String TYPE_HEIRARCHY;
+
   static {
     VERSION = '2016-05-20';
     HEADER_KEY = 'Header-Key';
     HEADER_VAL = 'header_val';
+    CLASS_VAL = 'class';
+    SCORE = 10.0;
+    TYPE_HEIRARCHY = 'type_heirarchy';
   }
 
   static testMethod void testVersionConstructor() {
@@ -25,6 +32,28 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3 service = new IBMVisualRecognitionV3(VERSION, config);
     System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testModelClass() {
+    Test.startTest();
+    IBMVisualRecognitionV3Models.ModelClass modelClass = new IBMVisualRecognitionV3Models.ModelClass();
+    modelClass.setClassName(CLASS_VAL);
+
+    System.assertEquals(CLASS_VAL, modelClass.getClassName());
+    Test.stopTest();
+  }
+
+  static testMethod void testClassResult() {
+    Test.startTest();
+    IBMVisualRecognitionV3Models.ClassResult classResult = new IBMVisualRecognitionV3Models.ClassResult();
+    classResult.setClassName(CLASS_VAL);
+    classResult.setScore(SCORE);
+    classResult.setTypeHierarchy(TYPE_HEIRARCHY);
+
+    System.assertEquals(CLASS_VAL, classResult.getClassName());
+    System.assertEquals(SCORE, classResult.getScore());
+    System.assertEquals(TYPE_HEIRARCHY, classResult.getTypeHierarchy());
     Test.stopTest();
   }
 
