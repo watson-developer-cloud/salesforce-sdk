@@ -7,7 +7,7 @@ public with sharing class IBMVisualRecognitionV3FTest {
       .apiKey(iamApiKey)
       .build();
     IBMVisualRecognitionV3 service = new IBMVisualRecognitionV3(VERSION, iamOptions);
-    service.setEndPoint(URL);
+    service.setServiceURL(URL);
 
     testClassify(service);
     // ignoring for now because the service is returning 500s :(

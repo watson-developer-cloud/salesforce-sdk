@@ -13,7 +13,7 @@ public class IBMSpeechToTextV1FTest {
   public static IBMSpeechToTextV1Models.LanguageModel testCreateLanguageModel(String username, String password) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     String name = 'custom_model';
@@ -33,7 +33,7 @@ public class IBMSpeechToTextV1FTest {
   public static IBMSpeechToTextV1Models.LanguageModels testListLanguageModels(String username, String password) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.ListLanguageModelsOptions listLanguageModelsOptions = new IBMSpeechToTextV1Models.ListLanguageModelsOptionsBuilder()
@@ -48,7 +48,7 @@ public class IBMSpeechToTextV1FTest {
   public static IBMSpeechToTextV1Models.LanguageModel testGetLanguageModel(String username, String password, String customizationId) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.GetLanguageModelOptions getLanguageModelOptions = new IBMSpeechToTextV1Models.GetLanguageModelOptionsBuilder()
@@ -63,7 +63,7 @@ public class IBMSpeechToTextV1FTest {
   public static void testUpgradeLanguageModel(String username, String password, String customizationId) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.UpgradeLanguageModelOptions upgradeLanguageModelOptions = new IBMSpeechToTextV1Models.UpgradeLanguageModelOptionsBuilder()
@@ -78,7 +78,7 @@ public class IBMSpeechToTextV1FTest {
   public static void testTrainLanguageModel(String username, String password, String customizationId) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.TrainLanguageModelOptions trainLanguageModelOptions = new IBMSpeechToTextV1Models.TrainLanguageModelOptionsBuilder()
@@ -93,7 +93,7 @@ public class IBMSpeechToTextV1FTest {
   public static void testResetLanguageModel(String username, String password, String customizationId) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.ResetLanguageModelOptions resetLanguageModelOptions = new IBMSpeechToTextV1Models.ResetLanguageModelOptionsBuilder()
@@ -108,7 +108,7 @@ public class IBMSpeechToTextV1FTest {
   public static void testDeleteLanguageModel(String username, String password, String customizationId) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.DeleteLanguageModelOptions deleteLanguageModelOptions = new IBMSpeechToTextV1Models.DeleteLanguageModelOptionsBuilder()
@@ -123,7 +123,7 @@ public class IBMSpeechToTextV1FTest {
   public static void testAddCorpus(String username, String password, String customizationId) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     String corpusText = 'Am I at risk for health problems during travel?' +
@@ -162,7 +162,7 @@ public class IBMSpeechToTextV1FTest {
   public static void testDeleteCorpus(String username, String password, String customizationId, String corpusName) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.DeleteCorpusOptions deleteCorpusOptions = new IBMSpeechToTextV1Models.DeleteCorpusOptionsBuilder(customizationId, corpusName)
@@ -178,7 +178,7 @@ public class IBMSpeechToTextV1FTest {
   public static IBMSpeechToTextV1Models.Corpus testGetCorpus(String username, String password, String customizationId, String corpusName) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.GetCorpusOptions getCorpusOptions = new IBMSpeechToTextV1Models.GetCorpusOptionsBuilder(customizationId, corpusName)
@@ -194,7 +194,7 @@ public class IBMSpeechToTextV1FTest {
   public static IBMSpeechToTextV1Models.Corpora testListCorpora(String username, String password, String customizationId) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.ListCorporaOptions listCorporaOptions = new IBMSpeechToTextV1Models.ListCorporaOptionsBuilder()
@@ -209,7 +209,7 @@ public class IBMSpeechToTextV1FTest {
   public static void testAddWord(String username, String password, String customizationId, String wordName, String soundsLike) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.AddWordOptions addWordOptions = new IBMSpeechToTextV1Models.AddWordOptionsBuilder(customizationId, wordName)
@@ -229,7 +229,7 @@ public class IBMSpeechToTextV1FTest {
   public static void testAddWords(String username, String password, String customizationId, String wordName, String soundsLike) {
     IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
     if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
+      speechToText.setServiceURL(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWord();

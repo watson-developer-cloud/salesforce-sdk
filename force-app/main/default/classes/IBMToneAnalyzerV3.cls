@@ -28,8 +28,8 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
   public IBMToneAnalyzerV3(String versionDate, IBMWatsonAuthenticator authenticator) {
     super(SERVICE_NAME, 'v3', authenticator);
 
-    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
-      setEndPoint(URL);
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(URL);
     }
 
     if (String.isBlank(versionDate)) {
@@ -63,7 +63,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    */
   public IBMToneAnalyzerV3Models.ToneAnalysis tone(IBMToneAnalyzerV3Models.ToneOptions toneOptions) {
     IBMWatsonValidator.notNull(toneOptions, 'toneOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/tone');
     builder.addHeader('Accept', 'application/json');
     if (toneOptions.contentType() != null) {
       builder.addHeader('Content-Type', toneOptions.contentType());
@@ -114,7 +114,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    */
   public IBMToneAnalyzerV3Models.UtteranceAnalyses toneChat(IBMToneAnalyzerV3Models.ToneChatOptions toneChatOptions) {
     IBMWatsonValidator.notNull(toneChatOptions, 'toneChatOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone_chat');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/tone_chat');
     builder.addHeader('Accept', 'application/json');
     if (toneChatOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', toneChatOptions.contentLanguage());

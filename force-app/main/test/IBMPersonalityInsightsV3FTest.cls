@@ -17,7 +17,7 @@ public with sharing class IBMPersonalityInsightsV3FTest {
     IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01');
 
     if (username != null && password != null) {
-      personalityInsights.setEndPoint(URL);
+      personalityInsights.setServiceURL(URL);
       personalityInsights.setUsernameAndPassword(username, password);
     }
 
@@ -67,7 +67,7 @@ public with sharing class IBMPersonalityInsightsV3FTest {
     IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01');
 
     if (username != null && password != null) {
-      personalityInsights.setEndPoint(URL);
+      personalityInsights.setServiceURL(URL);
       personalityInsights.setUsernameAndPassword(username, password);
     }
 

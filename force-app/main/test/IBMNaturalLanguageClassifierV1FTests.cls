@@ -32,7 +32,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
 
     if (username != null && password != null) {
-      service.setEndPoint(URL);
+      service.setServiceURL(URL);
       service.setUsernameAndPassword(username, password);
     }
 
@@ -53,7 +53,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
 
     if (username != null && password != null) {
-      service.setEndPoint(URL);
+      service.setServiceURL(URL);
       service.setUsernameAndPassword(username, password);
     }
 
@@ -80,7 +80,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   public static IBMNaturalLanguageClassifierV1Models.Classifier testCreateClassifier(String username, String password) {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
     if (username != null && password != null) {
-      service.setEndPoint(URL);
+      service.setServiceURL(URL);
       service.setUsernameAndPassword(username, password);
     }
 
@@ -157,7 +157,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
 
     if (username != null && password != null) {
-      service.setEndPoint(URL);
+      service.setServiceURL(URL);
       service.setUsernameAndPassword(username, password);
     }
 
@@ -175,7 +175,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
 
     if (username != null && password != null) {
-      service.setEndPoint(URL);
+      service.setServiceURL(URL);
       service.setUsernameAndPassword(username, password);
     }
 
@@ -193,7 +193,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
 
     if (username != null && password != null) {
-      service.setEndPoint(URL);
+      service.setServiceURL(URL);
       service.setUsernameAndPassword(username, password);
     }
 
