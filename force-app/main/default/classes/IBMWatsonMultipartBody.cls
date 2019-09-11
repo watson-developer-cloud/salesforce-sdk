@@ -52,115 +52,125 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
 
   private long writeMultipartBody(List<Part> parts) {
     this.headers.put('Content-Type', 'multipart/form-data; boundary=' + this.boundary);
-    String multipartBodyString = '';
-    String encodedMultipartBodyString = '';
 
+    Boolean hasFile = false;
     for (Integer i = 0; i < parts.size(); i++) {
-      Part p = parts[i];
-      String partString = '';
+      if (parts[i].body().hasBase64Data()) {
+        hasFile = true;
+        break;
+      }
+    }
 
-      System.debug('part: ' + i);
+    if (hasFile) {
+      String multipartBodyString = '';
+      String encodedMultipartBodyString = '';
+      List<String> partsToDecode = new List<String>();
+      String nonFileSection = '';
 
-      // handle differently for file or not
-      if (p.body().hasBase64Data()) {
-        String header = '--' + this.boundary + '\nContent-Disposition: form-data; name="images_file"; filename="' + p.body().name + '";\nContent-Type: application/octet-stream"';
-        String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
-        while (headerEncoded.endsWith('=')) {
-          header += ' ';
-          headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+      // first put together non-file parts
+      for (Integer i = 0; i < parts.size(); i++) {
+        Part p = parts[i];
+        if (!p.body().hasBase64Data()) {
+          String partString = '';
+
+          System.debug('part: ' + i);
+
+          String header = '--' + this.boundary + '\n';
+          header += 'Content-Disposition: ' + p.headers().get('Content-Disposition') + '\n\n';
+          partString = header + p.body().content + '\n';
+
+          System.debug('partString: ' + partString);
+
+          // add everything from part into total string
+          nonFileSection += partString;
         }
+      }
+      System.debug('non-file section');
+      System.debug(nonFileSection);
 
-        String footer = '--' + this.boundary + '--';  
-        String bodyEncoded = EncodingUtil.base64Encode(p.body().blobContent);
+      // now add in the files
+      for (Integer i = 0; i < parts.size(); i++) {
+        Part p = parts[i];
+        if (p.body().hasBase64Data()) {
+          String header = '--' + this.boundary + '\nContent-Disposition: form-data; name="images_file"; filename="' + p.body().name + '";\nContent-Type: application/octet-stream"';
+          if (!String.isEmpty(nonFileSection)) {
+            header = nonFileSection + header;
+          }
+          String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+          while (headerEncoded.endsWith('=')) {
+            header += ' ';
+            headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+          }
+          System.debug('part before file section: ' + header);
 
-        Blob bodyBlob = null;
-        String last4Bytes = bodyEncoded.substring(bodyEncoded.length() - 4, bodyEncoded.length());
- 
-        if (last4Bytes.endsWith('==')) {
-          System.debug('uploadFile adding OK');
-          last4Bytes = last4Bytes.substring(0, 2) + '0K';
-          bodyEncoded = bodyEncoded.substring(0, bodyEncoded.length() - 4) + last4Bytes;
-          // We have appended the \r\n to the Blob, so leave footer as it is.
-          String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-          bodyBlob = EncodingUtil.base64Decode(encodedMultipartBodyString + headerEncoded + bodyEncoded + footerEncoded);
-          this.multipartBody = bodyBlob;
-          this.contentLength = encodedMultipartBodyString.length() + headerEncoded.length() + bodyEncoded.length() + footerEncoded.length();
-        } else if (last4Bytes.endsWith('=')) {
-          System.debug('uploadFile adding N');
-          last4Bytes = last4Bytes.substring(0, 3) + 'N';
-          bodyEncoded = bodyEncoded.substring(0, bodyEncoded.length() - 4) + last4Bytes;
-          // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
-          footer = '\n' + footer;
-          String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-          bodyBlob = EncodingUtil.base64Decode(encodedMultipartBodyString + headerEncoded + bodyEncoded + footerEncoded);
-          this.multipartBody = bodyBlob;
-          this.contentLength = encodedMultipartBodyString.length() + headerEncoded.length() + bodyEncoded.length() + footerEncoded.length();
-        } else {
-          // Prepend the CR LF to the footer
-          System.debug('uploadFile just adding CR LF');
-          footer = '\r\n' + footer;
-          String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-          bodyBlob = EncodingUtil.base64Decode(encodedMultipartBodyString + headerEncoded + bodyEncoded + footerEncoded);
-          this.multipartBody = bodyBlob;
-          this.contentLength = encodedMultipartBodyString.length() + headerEncoded.length() + bodyEncoded.length() + footerEncoded.length();
+          String footer = '--' + this.boundary + '--';  
+          String bodyEncoded = EncodingUtil.base64Encode(p.body().blobContent);
+
+          Blob bodyBlob = null;
+          String last4Bytes = bodyEncoded.substring(bodyEncoded.length() - 4, bodyEncoded.length());
+  
+          if (last4Bytes.endsWith('==')) {
+            System.debug('uploadFile adding OK');
+            last4Bytes = last4Bytes.substring(0, 2) + '0K';
+            bodyEncoded = bodyEncoded.substring(0, bodyEncoded.length() - 4) + last4Bytes;
+            // We have appended the \r\n to the Blob, so leave footer as it is.
+            String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+            this.multipartBody = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
+            System.debug('file section footer: ' + footer);
+          } else if (last4Bytes.endsWith('=')) {
+            System.debug('uploadFile adding N');
+            last4Bytes = last4Bytes.substring(0, 3) + 'N';
+            bodyEncoded = bodyEncoded.substring(0, bodyEncoded.length() - 4) + last4Bytes;
+            // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
+            footer = '\n' + footer;
+            String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+            this.multipartBody = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
+            System.debug('file section footer: ' + footer);
+          } else {
+            // Prepend the CR LF to the footer
+            System.debug('uploadFile just adding CR LF');
+            footer = '\r\n' + footer;
+            String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+            this.multipartBody = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
+            System.debug('file section footer: ' + footer);
+          }
         }
-        return this.contentLength;
-
-      } else {
-        String header = '--' + this.boundary + '\n';
-        /* if (i != 0) {
-          header = '\n' + header;
-        } */
-        header += 'Content-Disposition: ' + p.headers().get('Content-Disposition') + '\n\n';
-        partString = header + p.body().content + '\n';
       }
 
-      System.debug('partString: ' + partString);
+      return this.contentLength;
 
-      // add everything from part into total string
-      multipartBodyString += partString;
-    }
-
-    System.debug('multipartBodyString:');
-    System.debug(multipartBodyString);
-
-    // set footer accordingly
-    String footer = '';
-    String footerEncoded = '';
-    if (!parts[parts.size() - 1].body().hasBase64Data()) {
-      footer = '--' + this.boundary + '--';
     } else {
+      String multipartBodyString = '';
 
+      for (Integer i = 0; i < parts.size(); i++) {
+        Part p = parts[i];
+        String partString = '';
+
+        System.debug('part: ' + i);
+
+        String header = '--' + this.boundary + '\n';
+        header += 'Content-Disposition: ' + p.headers().get('Content-Disposition') + '\n\n';
+
+        partString = header + p.body().content + '\n';
+        System.debug('partString: ' + partString);
+
+        // add everything from part into total string
+        multipartBodyString += partString;
+      }
+
+      System.debug('multipartBodyString:');
+      System.debug(multipartBodyString);
+
+      // set footer accordingly
+      String footer = '--' + this.boundary + '--';
+      System.debug('footer: ' + footer);
+
+      // set multipart body blob
+      this.multipartBody = Blob.valueOf(multipartBodyString + footer);
+
+      this.contentLength = multipartBodyString.length() + footer.length();
+      return this.contentLength;
     }
-    footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-    encodedMultipartBodyString = EncodingUtil.base64Encode(Blob.valueOf(multipartBodyString));
-
-    System.debug('footer: ' + footer);
-
-    // set multipart body blob
-    //this.multipartBody = EncodingUtil.base64Decode(encodedMultipartBodyString + footerEncoded);
-    this.multipartBody = Blob.valueOf(multipartBodyString + footer);
-
-    //this.contentLength = encodedMultipartBodyString.length() + footerEncoded.length();
-    this.contentLength = multipartBodyString.length() + footer.length();
-    return this.contentLength;
-  }
-
-  /**
-   *  Pad the value with spaces until the base64 encoding is no longer padded.
-   */
-  public static String safelyPad(String value, String valueCrLf64, String lineBreaks) {
-    String valueCrLf = '';
-    Blob valueCrLfBlob = null;
-
-    while (valueCrLf64.endsWith('=')) {
-      value += ' ';
-      valueCrLf = value + lineBreaks;
-      valueCrLfBlob = blob.valueOf(valueCrLf);
-      valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
-    }
-
-    return valueCrLf64;
   }
 
   /**
@@ -199,10 +209,6 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String fullEncodedBody = '';
 
     return fullEncodedBody;
-  }
-
-  public String writeBoundary() {
-    return '--' + this.boundary + CRLF;
   }
 
   public Map<String, String> getAllHeaders() {
