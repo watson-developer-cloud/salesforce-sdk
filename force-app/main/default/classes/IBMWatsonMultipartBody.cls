@@ -71,14 +71,9 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       for (Integer i = 0; i < parts.size(); i++) {
         Part p = parts[i];
         if (!p.body().hasBase64Data()) {
-          String partString = '';
+          String partString = writeNonFileEncapsulation(p.headers().get('Content-Disposition'), p.body().content);
 
           System.debug('part: ' + i);
-
-          String header = '--' + this.boundary + '\n';
-          header += 'Content-Disposition: ' + p.headers().get('Content-Disposition') + '\n\n';
-          partString = header + p.body().content + '\n';
-
           System.debug('partString: ' + partString);
 
           // add everything from part into total string
@@ -144,14 +139,9 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
 
       for (Integer i = 0; i < parts.size(); i++) {
         Part p = parts[i];
-        String partString = '';
+        String partString = writeNonFileEncapsulation(p.headers().get('Content-Disposition'), p.body().content);
 
         System.debug('part: ' + i);
-
-        String header = '--' + this.boundary + '\n';
-        header += 'Content-Disposition: ' + p.headers().get('Content-Disposition') + '\n\n';
-
-        partString = header + p.body().content + '\n';
         System.debug('partString: ' + partString);
 
         // add everything from part into total string
@@ -161,7 +151,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       System.debug('multipartBodyString:');
       System.debug(multipartBodyString);
 
-      // set footer accordingly
+      // set footer
       String footer = '--' + this.boundary + '--';
       System.debug('footer: ' + footer);
 
@@ -173,42 +163,9 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     }
   }
 
-  /**
-   *  Write a key-value pair to the form's body.
-   */
-  public String writeBodyParameter(String key, String value, Boolean isEndingPart) {
-    String contentDisposition = 'Content-Disposition: ' + key;
-    String contentDispositionCrLf = contentDisposition + CRLF + CRLF;
-    String content = contentDispositionCrLf;
-
-    String valueCrLf = value + CRLF;
-    content += valueCrLf;
-
-    if (isEndingPart == true) {
-      String footer = '--' + this.boundary + '--';
-      content = content + footer;
-    }
-    return content;
-  }
-
-  /**
-   *  Write a Blob type to the form's body.
-   */
-  public String writeBlobBody(String contentDispositionValue, String fileName, Blob fileBlob, String mimeType, Boolean isEndingPart) {
-    String header = '--' + this.boundary + '\nContent-Disposition: form-data; name="request_file"; filename="' + fileName + '";\nContent-Type: application/octet-stream';
-    String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
-    while(headerEncoded.endsWith('='))
-    {
-      header += ' ';
-      headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
-    }
-    String bodyEncoded = EncodingUtil.base64Encode(fileBlob);
-
-    String footer = '--' + this.boundary + '--';
-
-    String fullEncodedBody = '';
-
-    return fullEncodedBody;
+  private String writeNonFileEncapsulation(String contentDispositionKey, String value) {
+    String header = '--' + this.boundary + '\nContent-Disposition: ' + contentDispositionKey + '\n\n';
+    return header + value + '\n';
   }
 
   public Map<String, String> getAllHeaders() {
