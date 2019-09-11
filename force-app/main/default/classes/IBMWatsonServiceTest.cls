@@ -371,7 +371,7 @@ private class IBMWatsonServiceTest {
     System.assertEquals('Content-Disposition: test\r\n\r\ntest\r\n', multipartBody.writeBodyParameter('test', 'test', false));
     System.assertEquals(multipartBody.parts().size(), 2);
     System.assert(multipartBody.getAllHeaders().get('Content-Type').contains('multipart/form-data; boundary'));
-    System.assert(multipartBody.multipartBody().contains(multipartBody.writeBoundary()));
+    //System.assert(multipartBody.multipartBody().contains(multipartBody.writeBoundary()));
     Test.stopTest();
   }
 

@@ -19,7 +19,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private IBMWatsonMediaType originalType;
   private IBMWatsonMediaType contentType;
   private List<Part> parts;
-  private String multipartBody;
+  private Blob multipartBody;
   private Blob formBlob;
   private Map<String, String> headers;
   private long contentLength = -1L;
@@ -42,7 +42,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     return formBlob;
   }
 
-  public String multipartBody() {
+  public Blob multipartBody() {
     return multipartBody;
   }
 
@@ -51,23 +51,100 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   }
 
   private long writeMultipartBody(List<Part> parts) {
-    headers.put('Content-Type', 'multipart/form-data; boundary=' + boundary);
-    multipartBody = '';
+    this.headers.put('Content-Type', 'multipart/form-data; boundary=' + this.boundary);
+    String multipartBodyString = '';
+    String encodedMultipartBodyString = '';
+
     for (Integer i = 0; i < parts.size(); i++) {
       Part p = parts[i];
-      Boolean isEndingPart = (i == parts.size() - 1);
+      String partString = '';
+
+      System.debug('part: ' + i);
+
+      // handle differently for file or not
       if (p.body().hasBase64Data()) {
-        String fileName = p.body().name;
-        String mimeType = p.body.bodyContentType().toString();
-        String file64Body = EncodingUtil.base64Encode(p.body().blobContent);
-        multipartBody += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, mimeType, isEndingPart);
+        String header = '--' + this.boundary + CRLF + CRLF;
+
+
+        // encode for later use
+        multipartBodyString = EncodingUtil.base64Encode(Blob.valueOf(multipartBodyString));
+
+        // determine how we need to write the footer
+        String footer = '--' + this.boundary + '--';
+        String last4Bytes = multipartBodyString.substring(multipartBodyString.length() - 4, multipartBodyString.length());
+        if (last4Bytes.endsWith('==')) {
+          last4Bytes = last4Bytes.substring(0, 2) + '0K';
+          multipartBodyString = multipartBodyString.substring(0, multipartBodyString.length() - 4) + last4Bytes;
+
+          // We have appended the \r\n to the Blob, so leave footer as it is.
+          String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+          this.multipartBody = EncodingUtil.base64Decode(multipartBodyString + footerEncoded);
+        } else if (last4Bytes.endsWith('=')) {
+          last4Bytes = last4Bytes.substring(0, 3) + 'N';
+          multipartBodyString = multipartBodyString.substring(0,multipartBodyString.length() - 4) + last4Bytes;
+
+          // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
+          footer = '\n' + footer;
+          String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+          this.multipartBody = EncodingUtil.base64Decode(multipartBodyString + footerEncoded);
+        } else {
+          // Prepend the CR LF to the footer
+          footer = CRLF + footer;
+          String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+          this.multipartBody = EncodingUtil.base64Decode(multipartBodyString + footerEncoded);
+        }
+
+
+
       } else {
-        multipartBody += writeBoundary();
-        multipartBody += writeBodyParameter(p.headers().get('Content-Disposition'), p.body().content, isEndingPart);
+        String header = '--' + this.boundary + '\n';
+        /* if (i != 0) {
+          header = '\n' + header;
+        } */
+        header += 'Content-Disposition: ' + p.headers().get('Content-Disposition') + '\n\n';
+        partString = header + p.body().content + '\n';
       }
+
+      // modify ending accordingly to prepare for next header
+      /* String last4Bytes = partString.substring(partString.length() - 4, partString.length());
+      if (last4Bytes.endsWith('==')) {
+        last4Bytes = last4Bytes.substring(0, 2) + '0K';
+        partString = partString.substring(0, partString.length() - 4) + last4Bytes;
+      } else if (last4Bytes.endsWith('=')) {
+        last4Bytes = last4Bytes.substring(0, 3) + 'N';
+        partString = partString.substring(0,partString.length() - 4) + last4Bytes;
+
+        // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
+        partString += '\n';
+      } else {
+        // Prepend the CR LF to the footer
+        partString += CRLF;
+      } */
+
+      System.debug('partString: ' + partString);
+
+      // add everything from part into total string
+      multipartBodyString += partString;
     }
 
-    return multipartBody.length();
+    // set footer accordingly
+    String footer = '';
+    String footerEncoded = '';
+    if (!parts[parts.size() - 1].body().hasBase64Data()) {
+      footer = '--' + this.boundary + '--';
+    } else {
+
+    }
+    footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+    encodedMultipartBodyString = EncodingUtil.base64Encode(Blob.valueOf(multipartBodyString));
+
+    System.debug('footer: ' + footer);
+
+    // set multipart body blob
+    this.multipartBody = EncodingUtil.base64Decode(encodedMultipartBodyString + footerEncoded);
+
+    this.contentLength = encodedMultipartBodyString.length() + footerEncoded.length();
+    return this.contentLength;
   }
 
   /**
@@ -108,51 +185,21 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   /**
    *  Write a Blob type to the form's body.
    */
-  public String writeBlobBody(String contentDispositionValue, String bodyEncoded, String mimeType, Boolean isEndingPart) {
-    String boundaryCrlf = '--' +this.boundary + CRLF;
-
-    String contentDisposition = 'Content-Disposition: ' + contentDispositionValue;
-    String contentDispositionCrlf = contentDisposition + CRLF;
-
-    String contentType = 'Content-Type: ' + mimeType;
-    String contentTypeCrlf = contentType + CRLF;
-
-    String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
-
-    String HeaderCRLF = CRLF;
-    if (!String.isBlank(mimeType)) {
-       HeaderCRLF += CRLF;
-    }
-    String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
-    while (headerEncoded.endsWith('=')) {
+  public String writeBlobBody(String contentDispositionValue, String fileName, Blob fileBlob, String mimeType, Boolean isEndingPart) {
+    String header = '--' + this.boundary + '\nContent-Disposition: form-data; name="request_file"; filename="' + fileName + '";\nContent-Type: application/octet-stream';
+    String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+    while(headerEncoded.endsWith('='))
+    {
       header += ' ';
-      headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
+      headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
     }
+    String bodyEncoded = EncodingUtil.base64Encode(fileBlob);
 
-    String footer;
-    if (isEndingPart) {
-     footer = CRLF + '--' + this.boundary + '--';
-    } else {
-     footer = CRLF;
-    }
+    String footer = '--' + this.boundary + '--';
 
-    String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+    String fullEncodedBody = '';
 
-    Blob bodyBlob = null;
-    String last4Bytes = bodyEncoded.substring(bodyEncoded.length() - 4, bodyEncoded.length());
-
-    if (last4Bytes.endsWith('=')) {
-      Blob decoded4Bytes = EncodingUtil.base64Decode(last4Bytes);
-      HttpRequest tmp = new HttpRequest();
-      tmp.setBodyAsBlob(decoded4Bytes);
-      String last4BytesFooter = tmp.getBody() + footer;
-      bodyBlob = EncodingUtil.base64Decode(headerEncoded
-        + bodyEncoded.substring(0, bodyEncoded.length() - 4)
-        + EncodingUtil.base64Encode(Blob.valueOf(last4BytesFooter)));
-    } else {
-      bodyBlob = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
-    }
-    return EncodingUtil.base64Encode(bodyBlob);
+    return fullEncodedBody;
   }
 
   public String writeBoundary() {
@@ -250,11 +297,13 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     private List<Part> parts = new List<Part>();
 
     public Builder() {
-      this(IBMWatsonMultipartBody.generateRandomBoundaryString());
+      //this(IBMWatsonMultipartBody.generateRandomBoundaryString());
+      this('----------------------------741e90d31eff');
     }
 
     public Builder(String boundary) {
-      this.boundary = EncodingUtil.urlEncode(boundary, 'UTF-8');
+      //this.boundary = EncodingUtil.urlEncode(boundary, 'UTF-8');
+      this.boundary = boundary;
     }
 
     /**
