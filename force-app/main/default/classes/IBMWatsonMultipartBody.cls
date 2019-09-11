@@ -63,38 +63,48 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
 
       // handle differently for file or not
       if (p.body().hasBase64Data()) {
-        String header = '--' + this.boundary + CRLF + CRLF;
+        String header = '--' + this.boundary + '\nContent-Disposition: form-data; name="images_file"; filename="' + p.body().name + '";\nContent-Type: application/octet-stream"';
+        String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+        while (headerEncoded.endsWith('=')) {
+          header += ' ';
+          headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+        }
 
+        String footer = '--' + this.boundary + '--';  
+        String bodyEncoded = EncodingUtil.base64Encode(p.body().blobContent);
 
-        // encode for later use
-        multipartBodyString = EncodingUtil.base64Encode(Blob.valueOf(multipartBodyString));
-
-        // determine how we need to write the footer
-        String footer = '--' + this.boundary + '--';
-        String last4Bytes = multipartBodyString.substring(multipartBodyString.length() - 4, multipartBodyString.length());
+        Blob bodyBlob = null;
+        String last4Bytes = bodyEncoded.substring(bodyEncoded.length() - 4, bodyEncoded.length());
+ 
         if (last4Bytes.endsWith('==')) {
+          System.debug('uploadFile adding OK');
           last4Bytes = last4Bytes.substring(0, 2) + '0K';
-          multipartBodyString = multipartBodyString.substring(0, multipartBodyString.length() - 4) + last4Bytes;
-
+          bodyEncoded = bodyEncoded.substring(0, bodyEncoded.length() - 4) + last4Bytes;
           // We have appended the \r\n to the Blob, so leave footer as it is.
           String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-          this.multipartBody = EncodingUtil.base64Decode(multipartBodyString + footerEncoded);
+          bodyBlob = EncodingUtil.base64Decode(encodedMultipartBodyString + headerEncoded + bodyEncoded + footerEncoded);
+          this.multipartBody = bodyBlob;
+          this.contentLength = encodedMultipartBodyString.length() + headerEncoded.length() + bodyEncoded.length() + footerEncoded.length();
         } else if (last4Bytes.endsWith('=')) {
+          System.debug('uploadFile adding N');
           last4Bytes = last4Bytes.substring(0, 3) + 'N';
-          multipartBodyString = multipartBodyString.substring(0,multipartBodyString.length() - 4) + last4Bytes;
-
+          bodyEncoded = bodyEncoded.substring(0, bodyEncoded.length() - 4) + last4Bytes;
           // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
           footer = '\n' + footer;
           String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-          this.multipartBody = EncodingUtil.base64Decode(multipartBodyString + footerEncoded);
+          bodyBlob = EncodingUtil.base64Decode(encodedMultipartBodyString + headerEncoded + bodyEncoded + footerEncoded);
+          this.multipartBody = bodyBlob;
+          this.contentLength = encodedMultipartBodyString.length() + headerEncoded.length() + bodyEncoded.length() + footerEncoded.length();
         } else {
           // Prepend the CR LF to the footer
-          footer = CRLF + footer;
+          System.debug('uploadFile just adding CR LF');
+          footer = '\r\n' + footer;
           String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-          this.multipartBody = EncodingUtil.base64Decode(multipartBodyString + footerEncoded);
+          bodyBlob = EncodingUtil.base64Decode(encodedMultipartBodyString + headerEncoded + bodyEncoded + footerEncoded);
+          this.multipartBody = bodyBlob;
+          this.contentLength = encodedMultipartBodyString.length() + headerEncoded.length() + bodyEncoded.length() + footerEncoded.length();
         }
-
-
+        return this.contentLength;
 
       } else {
         String header = '--' + this.boundary + '\n';
@@ -105,27 +115,14 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
         partString = header + p.body().content + '\n';
       }
 
-      // modify ending accordingly to prepare for next header
-      /* String last4Bytes = partString.substring(partString.length() - 4, partString.length());
-      if (last4Bytes.endsWith('==')) {
-        last4Bytes = last4Bytes.substring(0, 2) + '0K';
-        partString = partString.substring(0, partString.length() - 4) + last4Bytes;
-      } else if (last4Bytes.endsWith('=')) {
-        last4Bytes = last4Bytes.substring(0, 3) + 'N';
-        partString = partString.substring(0,partString.length() - 4) + last4Bytes;
-
-        // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
-        partString += '\n';
-      } else {
-        // Prepend the CR LF to the footer
-        partString += CRLF;
-      } */
-
       System.debug('partString: ' + partString);
 
       // add everything from part into total string
       multipartBodyString += partString;
     }
+
+    System.debug('multipartBodyString:');
+    System.debug(multipartBodyString);
 
     // set footer accordingly
     String footer = '';
@@ -141,9 +138,11 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     System.debug('footer: ' + footer);
 
     // set multipart body blob
-    this.multipartBody = EncodingUtil.base64Decode(encodedMultipartBodyString + footerEncoded);
+    //this.multipartBody = EncodingUtil.base64Decode(encodedMultipartBodyString + footerEncoded);
+    this.multipartBody = Blob.valueOf(multipartBodyString + footer);
 
-    this.contentLength = encodedMultipartBodyString.length() + footerEncoded.length();
+    //this.contentLength = encodedMultipartBodyString.length() + footerEncoded.length();
+    this.contentLength = multipartBodyString.length() + footer.length();
     return this.contentLength;
   }
 
