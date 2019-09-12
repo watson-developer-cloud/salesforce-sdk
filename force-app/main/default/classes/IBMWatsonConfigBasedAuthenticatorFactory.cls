@@ -43,15 +43,15 @@ public class IBMWatsonConfigBasedAuthenticatorFactory {
       authType = IBMWatsonCredentialUtils.AUTH_TYPE_IAM;
     }
 
-    if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_NO_AUTH)) {
+    if (authType.equalsIgnoreCase(IBMWatsonCredentialUtils.AUTH_TYPE_NO_AUTH)) {
       authenticator = new IBMWatsonNoAuthAuthenticator();
-    } else if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_BASIC)) {
+    } else if (authType.equalsIgnoreCase(IBMWatsonCredentialUtils.AUTH_TYPE_BASIC)) {
       authenticator = new IBMWatsonBasicAuthenticator(props);
-    } else if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_IAM)) {
+    } else if (authType.equalsIgnoreCase(IBMWatsonCredentialUtils.AUTH_TYPE_IAM)) {
       authenticator = new IBMWatsonIAMAuthenticator(props);
-    } else if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_CP4D)) {
+    } else if (authType.equalsIgnoreCase(IBMWatsonCredentialUtils.AUTH_TYPE_CP4D)) {
       authenticator = new IBMWatsonCloudPakForDataAuthenticator(props);
-    } else if (authType.equals(IBMWatsonCredentialUtils.AUTH_TYPE_BEARER_TOKEN)) {
+    } else if (authType.equalsIgnoreCase(IBMWatsonCredentialUtils.AUTH_TYPE_BEARER_TOKEN)) {
       authenticator = new IBMWatsonBearerTokenAuthenticator(props);
     }
 

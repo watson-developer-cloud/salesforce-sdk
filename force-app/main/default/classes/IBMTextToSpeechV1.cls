@@ -20,7 +20,7 @@
 public class IBMTextToSpeechV1 extends IBMWatsonService {
 
   private static final String SERVICE_NAME = 'text_to_speech';
-  private static final String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
+  private static final String SERVICE_URL = 'https://stream.watsonplatform.net/text-to-speech/api';
 
   /**
    * Instantiates a new `IBMTextToSpeechV1`.
@@ -31,7 +31,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     super(SERVICE_NAME, 'v1', authenticator);
 
     if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
-      setServiceURL(URL);
+      setServiceURL(SERVICE_URL);
     }
   }
 

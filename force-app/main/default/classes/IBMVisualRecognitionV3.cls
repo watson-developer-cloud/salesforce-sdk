@@ -9,7 +9,7 @@
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
   private static final String SERVICE_NAME = 'visual_recognition';
-  private static final String URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
 
   private String versionDate;
 
@@ -24,7 +24,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     super(SERVICE_NAME, 'v3', authenticator);
 
     if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
-      setServiceURL(URL);
+      setServiceURL(SERVICE_URL);
     }
 
     if (String.isBlank(versionDate)) {

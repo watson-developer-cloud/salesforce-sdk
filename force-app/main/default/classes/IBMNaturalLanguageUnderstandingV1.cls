@@ -13,7 +13,7 @@
 public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
 
   private static final String SERVICE_NAME = 'natural_language_understanding';
-  private static final String URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
 
   private String versionDate;
 
@@ -28,7 +28,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     super(SERVICE_NAME, 'v1', authenticator);
 
     if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
-      setServiceURL(URL);
+      setServiceURL(SERVICE_URL);
     }
 
     if (String.isBlank(versionDate)) {

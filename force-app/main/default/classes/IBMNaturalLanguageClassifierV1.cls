@@ -9,7 +9,7 @@
 public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
 
   private static final String SERVICE_NAME = 'natural_language_classifier';
-  private static final String URL = 'https://gateway.watsonplatform.net/natural-language-classifier/api';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/natural-language-classifier/api';
 
   /**
    * Instantiates a new `IBMNaturalLanguageClassifierV1`.
@@ -20,7 +20,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     super(SERVICE_NAME, 'v1', authenticator);
 
     if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
-      setServiceURL(URL);
+      setServiceURL(SERVICE_URL);
     }
   }
 
