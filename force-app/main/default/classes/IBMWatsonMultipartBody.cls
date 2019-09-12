@@ -15,6 +15,8 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   public static final IBMWatsonMediaType MIXED = IBMWatsonMediaType.parse('multipart/mixed');
 
   private static final String CRLF = '\r\n';
+  private static final String DEFAULT_BOUNDARY = '----------------------------741e90d31eff';
+
   private String boundary;
   private IBMWatsonMediaType originalType;
   private IBMWatsonMediaType contentType;
@@ -53,6 +55,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private long writeMultipartBody(List<Part> parts) {
     this.headers.put('Content-Type', 'multipart/form-data; boundary=' + this.boundary);
 
+    // determine if we're going to be sending a file, which will dictate how we send the body
     Boolean hasFile = false;
     for (Integer i = 0; i < parts.size(); i++) {
       if (parts[i].body().hasBase64Data()) {
@@ -61,11 +64,12 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       }
     }
 
+    // bodies with one or more files will be encoded, while we won't bother otherwise
     if (hasFile) {
       String multipartBodyString = '';
       String encodedMultipartBodyString = '';
-      List<String> partsToDecode = new List<String>();
       String nonFileSection = '';
+      List<String> partsToDecode = new List<String>();
 
       // first put together non-file parts
       for (Integer i = 0; i < parts.size(); i++) {
@@ -73,64 +77,75 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
         if (!p.body().hasBase64Data()) {
           String partString = writeNonFileEncapsulation(p.headers().get('Content-Disposition'), p.body().content);
 
-          System.debug('part: ' + i);
-          System.debug('partString: ' + partString);
-
           // add everything from part into total string
           nonFileSection += partString;
         }
       }
-      System.debug('non-file section');
-      System.debug(nonFileSection);
 
       // now add in the files
+      List<String> encodedSections = new List<String>();
+      String charsToPrependToNextBoundary = '';
+      String startingHeaderAddition = '--' + this.boundary;
+      if (!String.isEmpty(nonFileSection)) {
+        startingHeaderAddition = nonFileSection + startingHeaderAddition;
+      }
       for (Integer i = 0; i < parts.size(); i++) {
         Part p = parts[i];
         if (p.body().hasBase64Data()) {
           String header = '--' + this.boundary + '\nContent-Disposition: form-data; name="images_file"; filename="' + p.body().name + '";\nContent-Type: application/octet-stream"';
-          if (!String.isEmpty(nonFileSection)) {
+
+          // add in non-file stuff if necessary
+          if (i == 0 && !String.isEmpty(nonFileSection)) {
             header = nonFileSection + header;
           }
+
+          // add any characters we might've needed if we added a file previously
+          header = charsToPrependToNextBoundary + header;
+
           String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
           while (headerEncoded.endsWith('=')) {
             header += ' ';
             headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
           }
-          System.debug('part before file section: ' + header);
+          encodedSections.add(headerEncoded);
 
-          String footer = '--' + this.boundary + '--';  
           String bodyEncoded = EncodingUtil.base64Encode(p.body().blobContent);
-
           Blob bodyBlob = null;
           String last4Bytes = bodyEncoded.substring(bodyEncoded.length() - 4, bodyEncoded.length());
   
+          // logic from this section and use of charsToPrependToNextBoundary variable borrowed from
+          // http://enreeco.blogspot.com/2013/01/salesforce-apex-post-mutipartform-data.html
           if (last4Bytes.endsWith('==')) {
-            System.debug('uploadFile adding OK');
             last4Bytes = last4Bytes.substring(0, 2) + '0K';
             bodyEncoded = bodyEncoded.substring(0, bodyEncoded.length() - 4) + last4Bytes;
-            // We have appended the \r\n to the Blob, so leave footer as it is.
-            String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-            this.multipartBody = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
-            System.debug('file section footer: ' + footer);
+
+            encodedSections.add(bodyEncoded);
+            charsToPrependToNextBoundary = '';
           } else if (last4Bytes.endsWith('=')) {
-            System.debug('uploadFile adding N');
             last4Bytes = last4Bytes.substring(0, 3) + 'N';
             bodyEncoded = bodyEncoded.substring(0, bodyEncoded.length() - 4) + last4Bytes;
-            // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
-            footer = '\n' + footer;
-            String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-            this.multipartBody = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
-            System.debug('file section footer: ' + footer);
+
+            encodedSections.add(bodyEncoded);
+            charsToPrependToNextBoundary = '\n';
           } else {
-            // Prepend the CR LF to the footer
-            System.debug('uploadFile just adding CR LF');
-            footer = '\r\n' + footer;
-            String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-            this.multipartBody = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
-            System.debug('file section footer: ' + footer);
+            encodedSections.add(bodyEncoded);
+            charsToPrependToNextBoundary = CRLF;
           }
         }
       }
+
+      // add footer after files
+      String footer = charsToPrependToNextBoundary + '--' + this.boundary + '--';
+      String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+      encodedSections.add(footerEncoded);
+
+      // put everything together in the blob
+      String totalEncodedString = '';
+      for (String encodedSection : encodedSections) {
+        totalEncodedString += encodedSection;
+      }
+      this.multipartBody = EncodingUtil.base64Decode(totalEncodedString);
+      this.contentLength = totalEncodedString.length();
 
       return this.contentLength;
 
@@ -141,21 +156,12 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
         Part p = parts[i];
         String partString = writeNonFileEncapsulation(p.headers().get('Content-Disposition'), p.body().content);
 
-        System.debug('part: ' + i);
-        System.debug('partString: ' + partString);
-
         // add everything from part into total string
         multipartBodyString += partString;
       }
 
-      System.debug('multipartBodyString:');
-      System.debug(multipartBodyString);
-
-      // set footer
-      String footer = '--' + this.boundary + '--';
-      System.debug('footer: ' + footer);
-
       // set multipart body blob
+      String footer = '--' + this.boundary + '--';
       this.multipartBody = Blob.valueOf(multipartBodyString + footer);
 
       this.contentLength = multipartBodyString.length() + footer.length();
@@ -163,9 +169,12 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     }
   }
 
+  /**
+   * Create the string for an encapsulation not sending a file parameter. The encapsulation covers the
+   * boundary, Content-Disposition header, and parameter value.
+   */
   private String writeNonFileEncapsulation(String contentDispositionKey, String value) {
-    String header = '--' + this.boundary + '\nContent-Disposition: ' + contentDispositionKey + '\n\n';
-    return header + value + '\n';
+    return '--' + this.boundary + '\nContent-Disposition: ' + contentDispositionKey + '\n\n' + value + '\n';
   }
 
   public Map<String, String> getAllHeaders() {
@@ -246,25 +255,16 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     }
   }
 
-  private static String generateRandomBoundaryString() {
-    Blob b = Crypto.GenerateAESKey(128);
-    String h = EncodingUtil.ConvertTohex(b);
-    String boundaryString = h.substring(0, 16);
-    return boundaryString;
-  }
-
   public class Builder {
     private String boundary;
     private IBMWatsonMediaType mediaType = MIXED;
     private List<Part> parts = new List<Part>();
 
     public Builder() {
-      //this(IBMWatsonMultipartBody.generateRandomBoundaryString());
-      this('----------------------------741e90d31eff');
+      this(DEFAULT_BOUNDARY);
     }
 
     public Builder(String boundary) {
-      //this.boundary = EncodingUtil.urlEncode(boundary, 'UTF-8');
       this.boundary = boundary;
     }
 
