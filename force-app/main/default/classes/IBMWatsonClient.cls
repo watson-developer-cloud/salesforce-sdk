@@ -31,10 +31,9 @@ public class IBMWatsonClient {
     // Set request body
     if (request.getMethod().equals('POST') || request.getMethod().equals('PUT')) {
       if (request.getBody() instanceof IBMWatsonMultipartBody) {
-        // form-multipart request will be send as Base64 request
-        String multipartBody = ((IBMWatsonMultipartBody)request.getBody()).multipartBody();
-        httpRequest.setBodyAsBlob(Blob.valueOf(multipartBody));
-        httpRequest.setHeader('Content-Length', String.valueof(multipartBody.length()));
+        Blob multipartBody = ((IBMWatsonMultipartBody)request.getBody()).multipartBody();
+        httpRequest.setBodyAsBlob(multipartBody);
+        httpRequest.setHeader('Content-Length', String.valueof(((IBMWatsonMultipartBody)request.getBody()).contentLength()));
       } else if (request.getBody().contentType.toString().contains(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
         httpRequest.setBody(IBMWatsonJSONUtil.serialize(request.getBody().content));
       } else {
