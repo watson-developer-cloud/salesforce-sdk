@@ -8,7 +8,7 @@
 public class IBMAssistantV2 extends IBMWatsonService {
 
   private static final String SERVICE_NAME = 'assistant';
-  private static final String URL = 'https://gateway.watsonplatform.net/assistant/api';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/assistant/api';
 
   private String versionDate;
 
@@ -23,7 +23,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
     super(SERVICE_NAME, 'v2', authenticator);
 
     if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
-      setServiceURL(URL);
+      setServiceURL(SERVICE_URL);
     }
 
     if (String.isBlank(versionDate)) {

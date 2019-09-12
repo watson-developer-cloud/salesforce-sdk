@@ -8,7 +8,7 @@
 public class IBMCompareComplyV1 extends IBMWatsonService {
 
   private static final String SERVICE_NAME = 'compare_comply';
-  private static final String URL = 'https://gateway.watsonplatform.net/compare-comply/api';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/compare-comply/api';
 
   private String versionDate;
 
@@ -23,7 +23,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     super(SERVICE_NAME, 'v1', authenticator);
 
     if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
-      setServiceURL(URL);
+      setServiceURL(SERVICE_URL);
     }
 
     if (String.isBlank(versionDate)) {
