@@ -21989,7 +21989,13 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      SearchStatus ret = (SearchStatus) super.deserialize(jsonString, jsonMap, classType);
+      String lastTrained = (String) jsonMap.remove('lastTrained');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      SearchStatus ret = (SearchStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+      if (String.isNotBlank(lastTrained)) {
+        ret.setLastTrained((Datetime) JSON.deserialize('"' + lastTrained + '"', Datetime.class));
+      }
 
       return ret;
     }

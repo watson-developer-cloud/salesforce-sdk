@@ -3,12 +3,6 @@ public with sharing class IBMDiscoveryV1FTests {
   private static String NAMED_CREDENTIALS = 'callout:watson_discovery_v1';
   private static String URL = 'https://gateway.watsonplatform.net/discovery/api';
   private static String VERSION = '2018-08-01';
-  private static String ENVIRONMENT_ID ='20ab41e1-1f5f-4b3f-8745-4173319ad611';
-  private static String CONFIGURATION_ID ='8a813a61-3b2d-4d43-b4e0-3d70d8d4e260';
-  private static String COLLECTION_ID ='895392cd-a81b-4ba1-b2d8-34c0536f79e6';
-  private static String DOCUMENT_ID ='008948a1-d9b5-432e-88ba-f744b60b49e0';
-  private static String QUERY_ID ='3f684b69d307bce0bfc3a6c4d3e8ba570bb5dc4a';
-  private static String EXAMPLE_ID ='008948a1-d9b5-432e-88ba-f744b60b49e0';
 
   /**
    *  Test run functional tests.
@@ -18,31 +12,58 @@ public with sharing class IBMDiscoveryV1FTests {
     IBMDiscoveryV1 service = new IBMDiscoveryV1(VERSION, authenticator);
     service.setServiceURL(URL);
 
-    testListEnvironment(service);
-    testGetEnvironment(service, ENVIRONMENT_ID);
-    testListConfigurations(service, ENVIRONMENT_ID);
-    testGetConfiguration(service, ENVIRONMENT_ID, CONFIGURATION_ID);
-    testListCollections(service, ENVIRONMENT_ID);
-    testGetCollection(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testListCollectionFields(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testListCollectionsFields(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testFederatedQuery(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testGetDocumentStatus(service, ENVIRONMENT_ID, COLLECTION_ID, DOCUMENT_ID);
-    testQuery(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testQueryNotices(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testGetTrainingExample(service, ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID,EXAMPLE_ID);
-    testGetTrainingData(service, ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID);
-    testListTrainingData(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testFederatedQueryNotices(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testAddAndDeleteDocument(service, ENVIRONMENT_ID, COLLECTION_ID);
-    testCredentialsOperations(service, ENVIRONMENT_ID);
+    IBMDiscoveryV1Models.ListEnvironmentsResponse listEnvResponse = testListEnvironment(service);
+
+    // store environment ID for later
+    String environmentId = null;
+    for (IBMDiscoveryV1Models.Environment environment : listEnvResponse.getEnvironments()) {
+      if (!environment.getEnvironmentId().equals('system')) {
+        environmentId = environment.getEnvironmentId();
+        break;
+      }
+    }
+
+    testGetEnvironment(service, environmentId);
+    IBMDiscoveryV1Models.ListConfigurationsResponse listConfResponse = testListConfigurations(service, environmentId);
+
+    // store configuration ID for later
+    String configurationId = listConfResponse.getConfigurations().get(0).getConfigurationId();
+
+    testGetConfiguration(service, environmentId, configurationId);
+    IBMDiscoveryV1Models.ListCollectionsResponse listCollResponse = testListCollections(service, environmentId);
+
+    // store collection ID for later
+    String collectionId = listCollResponse.getCollections().get(0).getCollectionId();
+
+    testGetCollection(service, environmentId, collectionId);
+    testListCollectionFields(service, environmentId, collectionId);
+    testListCollectionsFields(service, environmentId, collectionId);
+    IBMDiscoveryV1Models.QueryResponse queryResponse = testFederatedQuery(service, environmentId, collectionId);
+
+    // save document ID for later
+    String documentId = queryResponse.getResults().get(0).getId();
+
+    testGetDocumentStatus(service, environmentId, collectionId, documentId);
+    testQuery(service, environmentId, collectionId);
+    testQueryNotices(service, environmentId, collectionId);
+    IBMDiscoveryV1Models.TrainingQuery addTrainingDataResponse = testAddTrainingData(service, environmentId, collectionId, documentId);
+
+    // save query ID for later
+    String queryId = addTrainingDataResponse.getQueryId();
+
+    testGetTrainingExample(service, environmentId, collectionId, queryId, documentId);
+    testGetTrainingData(service, environmentId, collectionId, queryId);
+    testListTrainingData(service, environmentId, collectionId);
+    testFederatedQueryNotices(service, environmentId, collectionId);
+    testAddAndDeleteDocument(service, environmentId, collectionId);
+    testCredentialsOperations(service, environmentId);
     testQueryLog(service);
     testGetMetricsEventRate(service);
     testGetMetricsQuery(service);
     testGetMetricsQueryEvent(service);
     testGetMetricsQueryNoResults(service);
     testGetMetricsQueryTokenEvent(service);
-    testGatewayOperations(service, ENVIRONMENT_ID);
+    testGatewayOperations(service, environmentId);
   }
 
   /**
@@ -395,21 +416,27 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test adding a query to the training data in single collection.
    *
    */
-  public static IBMDiscoveryV1Models.TrainingQuery testAddTrainingData(IBMDiscoveryV1 service, String environmentId, String collectionId) {
-    IBMDiscoveryV1Models.TrainingExample te = new IBMDiscoveryV1Models.TrainingExampleBuilder()
-      .documentId('008948a1-d9b5-432e-88ba-f744b60b49e0')
+  public static IBMDiscoveryV1Models.TrainingQuery testAddTrainingData(IBMDiscoveryV1 service, String environmentId, String collectionId, String documentId) {
+    IBMDiscoveryV1Models.TrainingExample trainingExample = new IBMDiscoveryV1Models.TrainingExampleBuilder()
+      .documentId(documentId)
       .relevance(0)
       .build();
-    IBMDiscoveryV1Models.AddTrainingDataOptions options = new
-     IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.AddTrainingDataOptions options = new IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder()
      .environmentId(environmentId)
      .collectionId(collectionId)
-     .naturalLanguageQuery('en')
-     .filter('test')
-     .addExamples(te)
+     .naturalLanguageQuery('test query')
+     .addExamples(trainingExample)
      .build();
     IBMDiscoveryV1Models.TrainingQuery resp = service.addTrainingData(options);
     System.debug('IBMDiscoveryV1FTests.testAddTrainingData: ' + resp);
+
+    // clean up training data for later
+    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions deleteOptions = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    service.deleteAllTrainingData(deleteAllTrainingDataOptions);
+
     return resp;
   }
 
@@ -539,7 +566,7 @@ public with sharing class IBMDiscoveryV1FTests {
      IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
      .environmentId(environmentId)
      .collectionId(collectionId)
-     .queryId('8eec1310ae41ecddac8fa7acba159a2ea0a54b7d')
+     .queryId('query-id')
      .build();
     service.deleteTrainingData(options);
   }
