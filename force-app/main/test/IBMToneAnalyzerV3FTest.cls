@@ -1,26 +1,23 @@
 public with sharing class IBMToneAnalyzerV3FTest {
-
   private static String NAMED_CREDENTIALS = 'callout:watson_tone_analyzer_v3';
+  private static String VERSION = '2017-09-21';
   private static String URL = 'https://gateway.watsonplatform.net/tone-analyzer/api';
 
-  public static void runAllTests(String username, String password) {
-    testTone(username, password);
-    testToneWithToneInput(username, password);
-    testToneChat(username, password);
+  public static void runAllTests(String apiKey) {
+    IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(apiKey);
+    IBMToneAnalyzerV3 service = new IBMToneAnalyzerV3(VERSION, authenticator);
+    service.setServiceURL(URL);
+
+    testTone(service);
+    testToneWithToneInput(service);
+    testToneChat(service);
   }
 
   /**
    *  Test analyze general purpose tone.
    *
    */
-  public static IBMToneAnalyzerV3Models.ToneAnalysis testTone(String username, String password) {
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
-
-    if (username != null && password != null) {
-      toneAnalyzer.setServiceURL(URL);
-      toneAnalyzer.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMToneAnalyzerV3Models.ToneAnalysis testTone(IBMToneAnalyzerV3 service) {
     IBMToneAnalyzerV3Models.ToneOptions options = new IBMToneAnalyzerV3Models.ToneOptionsBuilder()
       .text('We have a better product. We need to do better selling')
       .addTones('social')
@@ -29,7 +26,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
       .acceptLanguage('en')
       .build();
 
-    IBMToneAnalyzerV3Models.ToneAnalysis resp = toneAnalyzer.tone(options);
+    IBMToneAnalyzerV3Models.ToneAnalysis resp = service.tone(options);
     System.debug('IBMToneAnalyzerV3FTest.testTone(): ' + resp);
     return resp;
   }
@@ -38,14 +35,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
    *  Test analyze general purpose tone with tone input.
    *
    */
-  public static IBMToneAnalyzerV3Models.ToneAnalysis testToneWithToneInput(String username, String password) {
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
-
-    if (username != null && password != null) {
-      toneAnalyzer.setServiceURL(URL);
-      toneAnalyzer.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMToneAnalyzerV3Models.ToneAnalysis testToneWithToneInput(IBMToneAnalyzerV3 service) {
     IBMToneAnalyzerV3Models.ToneInput toneInput = new IBMToneAnalyzerV3Models.ToneInputBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
       .build();
@@ -54,7 +44,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
       .toneInput(toneInput)
       .build();
 
-    IBMToneAnalyzerV3Models.ToneAnalysis resp = toneAnalyzer.tone(options);
+    IBMToneAnalyzerV3Models.ToneAnalysis resp = service.tone(options);
     System.debug('IBMToneAnalyzerV3FTest.testTone(): ' + resp);
     return resp;
   }
@@ -63,14 +53,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
    *  Test analyze customer engagement tone.
    *
    */
-  public static IBMToneAnalyzerV3Models.UtteranceAnalyses testToneChat(String username, String password) {
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
-
-    if (username != null && password != null) {
-      toneAnalyzer.setServiceURL(URL);
-      toneAnalyzer.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMToneAnalyzerV3Models.UtteranceAnalyses testToneChat(IBMToneAnalyzerV3 service) {
     IBMToneAnalyzerV3Models.Utterance utterance = new IBMToneAnalyzerV3Models.UtteranceBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
       .user('test user')
@@ -80,7 +63,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
       .addUtterances(utterance)
       .build();
 
-    IBMToneAnalyzerV3Models.UtteranceAnalyses resp = toneAnalyzer.toneChat(options);
+    IBMToneAnalyzerV3Models.UtteranceAnalyses resp = service.toneChat(options);
     System.debug('IBMToneAnalyzerV3FTest.testToneChat(): ' + resp);
     return resp;
   }
