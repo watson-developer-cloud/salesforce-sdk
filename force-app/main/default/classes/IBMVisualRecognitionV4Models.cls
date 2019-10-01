@@ -382,8 +382,8 @@ public class IBMVisualRecognitionV4Models {
    * The analyze options.
    */
   public class AnalyzeOptions extends IBMWatsonOptionsModel {
-    private String collectionIds;
-    private String features;
+    private List<String> collectionIds;
+    private List<String> features;
     private List<IBMWatsonFile> imagesFile;
     private List<String> imageUrl;
     private Double threshold;
@@ -395,7 +395,7 @@ public class IBMVisualRecognitionV4Models {
      *
      * @return the collectionIds
      */
-    public String collectionIds() {
+    public List<String> collectionIds() {
       return collectionIds;
     }
 
@@ -406,7 +406,7 @@ public class IBMVisualRecognitionV4Models {
      *
      * @return the features
      */
-    public String features() {
+    public List<String> features() {
       return features;
     }
 
@@ -479,8 +479,8 @@ public class IBMVisualRecognitionV4Models {
    * AnalyzeOptions Builder.
    */
   public class AnalyzeOptionsBuilder extends IBMWatsonOptionsModel {
-    private String collectionIds;
-    private String features;
+    private List<String> collectionIds;
+    private List<String> features;
     private List<IBMWatsonFile> imagesFile;
     private List<String> imageUrl;
     private Double threshold;
@@ -506,7 +506,7 @@ public class IBMVisualRecognitionV4Models {
      * @param collectionIds the collectionIds
      * @param features the features
      */
-    public AnalyzeOptionsBuilder(String collectionIds, String features) {
+    public AnalyzeOptionsBuilder(List<String> collectionIds, List<String> features) {
       this.collectionIds = collectionIds;
       this.features = features;
     }
@@ -518,6 +518,36 @@ public class IBMVisualRecognitionV4Models {
      */
     public AnalyzeOptions build() {
       return new AnalyzeOptions(this);
+    }
+
+    /**
+     * Adds a collectionId to collectionIds.
+     *
+     * @param collectionId the new collectionId
+     * @return the AnalyzeOptions builder
+     */
+    public AnalyzeOptionsBuilder addCollectionId(String collectionId) {
+      IBMWatsonValidator.notNull(collectionId, 'collectionId cannot be null');
+      if (this.collectionIds == null) {
+        this.collectionIds = new List<String>();
+      }
+      this.collectionIds.add(collectionId);
+      return this;
+    }
+
+    /**
+     * Adds a feature to features.
+     *
+     * @param feature the new feature
+     * @return the AnalyzeOptions builder
+     */
+    public AnalyzeOptionsBuilder addFeature(String feature) {
+      IBMWatsonValidator.notNull(feature, 'feature cannot be null');
+      if (this.features == null) {
+        this.features = new List<String>();
+      }
+      this.features.add(feature);
+      return this;
     }
 
     /**
@@ -556,7 +586,7 @@ public class IBMVisualRecognitionV4Models {
      * @param collectionIds the collectionIds
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder collectionIds(String collectionIds) {
+    public AnalyzeOptionsBuilder collectionIds(List<String> collectionIds) {
       this.collectionIds = collectionIds;
       return this;
     }
@@ -567,7 +597,7 @@ public class IBMVisualRecognitionV4Models {
      * @param features the features
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder features(String features) {
+    public AnalyzeOptionsBuilder features(List<String> features) {
       this.features = features;
       return this;
     }
@@ -1356,7 +1386,7 @@ public class IBMVisualRecognitionV4Models {
       // calling custom deserializer for trainingStatus
       Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
       TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
-      ret.setTrainingStatus(newTrainingStatus);
+      ret.trainingStatus = newTrainingStatus;
 
       return ret;
     }
