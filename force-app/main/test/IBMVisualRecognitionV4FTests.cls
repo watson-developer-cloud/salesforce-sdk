@@ -18,6 +18,7 @@ public with sharing class IBMVisualRecognitionV4FTests {
 
   public static void testAnalyze(IBMVisualRecognitionV4 service) {
     IBMVisualRecognitionV4Models.AnalyzeOptions options = new IBMVisualRecognitionV4Models.AnalyzeOptionsBuilder()
+      .addCollectionIds(PRE_MADE_COLLECTION_ID)
       .addFeature('objects')
       .addImageUrl(DOG_IMAGE_URL)
       .build();
