@@ -446,7 +446,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * AggregationResult.
+   * Aggregation results for the specified query.
    */
   public class AggregationResult extends IBMWatsonGenericModel {
     private String key;
@@ -665,6 +665,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the documentCounts.
      *
+     * Object containing collection document count information.
+     *
      * @return the documentCounts
      */
     @AuraEnabled
@@ -686,6 +688,8 @@ public class IBMDiscoveryV1Models {
 
     /**
      * Gets the trainingStatus.
+     *
+     * Training status details.
      *
      * @return the trainingStatus
      */
@@ -817,7 +821,6 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.remove('trainingStatus');
       Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentCounts
@@ -831,6 +834,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for trainingStatus
+      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
       TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
@@ -978,6 +982,44 @@ public class IBMDiscoveryV1Models {
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       CollectionUsage ret = (CollectionUsage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object containing an array of autocompletion suggestions.
+   */
+  public class Completions extends IBMWatsonResponseModel {
+    private List<String> completions;
+
+    /**
+     * Gets the completions.
+     *
+     * Array of autcomplete suggestion based on the provided prefix.
+     *
+     * @return the completions
+     */
+    @AuraEnabled
+    public List<String> getCompletions() {
+      return completions;
+    }
+
+    /**
+     * Sets the completions.
+     *
+     * @param completions the new completions
+     */
+    public void setCompletions(final List<String> completions) {
+      this.completions = completions;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Completions ret = (Completions) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -1188,9 +1230,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -1198,9 +1243,9 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for conversions
+      // performing custom serialization for conversions
       if (conversions != null) {
-        String conversionsJsonString = conversions.serialize();
+        String conversionsJsonString = JSON.serialize(conversions.replacePropertyNames());
         String conversionsKey = 'conversions';
         if (propertyNameMapping.containsKey(conversionsKey)) {
           conversionsKey = propertyNameMapping.get(conversionsKey);
@@ -1208,11 +1253,11 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(conversionsKey, JSON.deserializeUntyped(conversionsJsonString));
       }
 
-      // calling custom serializer for enrichments
+      // performing custom serialization for enrichments
       if (enrichments != null) {
         List<Object> enrichmentsJsonList = new List<Object>();
         for (Enrichment listItem : enrichments) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           enrichmentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String enrichmentsKey = 'enrichments';
@@ -1222,11 +1267,11 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(enrichmentsKey, enrichmentsJsonList);
       }
 
-      // calling custom serializer for normalizations
+      // performing custom serialization for normalizations
       if (normalizations != null) {
         List<Object> normalizationsJsonList = new List<Object>();
         for (NormalizationOperation listItem : normalizations) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           normalizationsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String normalizationsKey = 'normalizations';
@@ -1236,9 +1281,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(normalizationsKey, normalizationsJsonList);
       }
 
-      // calling custom serializer for source
+      // performing custom serialization for source
       if (source != null) {
-        String sourceJsonString = source.serialize();
+        String sourceJsonString = JSON.serialize(source.replacePropertyNames());
         String sourceKey = 'source';
         if (propertyNameMapping.containsKey(sourceKey)) {
           sourceKey = propertyNameMapping.get(sourceKey);
@@ -1246,7 +1291,7 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(sourceKey, JSON.deserializeUntyped(sourceJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -1595,9 +1640,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -1606,9 +1654,9 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for pdf
+      // performing custom serialization for pdf
       if (pdf != null) {
-        String pdfJsonString = pdf.serialize();
+        String pdfJsonString = JSON.serialize(pdf.replacePropertyNames());
         String pdfKey = 'pdf';
         if (propertyNameMapping.containsKey(pdfKey)) {
           pdfKey = propertyNameMapping.get(pdfKey);
@@ -1616,9 +1664,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(pdfKey, JSON.deserializeUntyped(pdfJsonString));
       }
 
-      // calling custom serializer for word
+      // performing custom serialization for word
       if (word != null) {
-        String wordJsonString = word.serialize();
+        String wordJsonString = JSON.serialize(word.replacePropertyNames());
         String wordKey = 'word';
         if (propertyNameMapping.containsKey(wordKey)) {
           wordKey = propertyNameMapping.get(wordKey);
@@ -1626,9 +1674,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(wordKey, JSON.deserializeUntyped(wordJsonString));
       }
 
-      // calling custom serializer for html
+      // performing custom serialization for html
       if (html != null) {
-        String htmlJsonString = html.serialize();
+        String htmlJsonString = JSON.serialize(html.replacePropertyNames());
         String htmlKey = 'html';
         if (propertyNameMapping.containsKey(htmlKey)) {
           htmlKey = propertyNameMapping.get(htmlKey);
@@ -1636,9 +1684,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(htmlKey, JSON.deserializeUntyped(htmlJsonString));
       }
 
-      // calling custom serializer for segment
+      // performing custom serialization for segment
       if (segment != null) {
-        String segmentJsonString = segment.serialize();
+        String segmentJsonString = JSON.serialize(segment.replacePropertyNames());
         String segmentKey = 'segment';
         if (propertyNameMapping.containsKey(segmentKey)) {
           segmentKey = propertyNameMapping.get(segmentKey);
@@ -1646,11 +1694,11 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(segmentKey, JSON.deserializeUntyped(segmentJsonString));
       }
 
-      // calling custom serializer for jsonNormalizations
+      // performing custom serialization for jsonNormalizations
       if (jsonNormalizations != null) {
         List<Object> jsonNormalizationsJsonList = new List<Object>();
         for (NormalizationOperation listItem : jsonNormalizations) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           jsonNormalizationsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String jsonNormalizationsKey = 'jsonNormalizations';
@@ -1660,7 +1708,7 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(jsonNormalizationsKey, jsonNormalizationsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -4062,9 +4110,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -4084,7 +4135,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -4472,9 +4523,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -4484,9 +4538,9 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for credentialDetails
+      // performing custom serialization for credentialDetails
       if (credentialDetails != null) {
-        String credentialDetailsJsonString = credentialDetails.serialize();
+        String credentialDetailsJsonString = JSON.serialize(credentialDetails.replacePropertyNames());
         String credentialDetailsKey = 'credentialDetails';
         if (propertyNameMapping.containsKey(credentialDetailsKey)) {
           credentialDetailsKey = propertyNameMapping.get(credentialDetailsKey);
@@ -4494,7 +4548,7 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(credentialDetailsKey, JSON.deserializeUntyped(credentialDetailsJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -4575,7 +4629,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * CredentialsList.
+   * Object containing array of credential definitions.
    */
   public class CredentialsList extends IBMWatsonResponseModel {
     private List<Credentials> credentials;
@@ -6307,7 +6361,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * DocumentAccepted.
+   * Information returned after an uploaded document is accepted.
    */
   public class DocumentAccepted extends IBMWatsonResponseModel {
     private String documentId;
@@ -6410,7 +6464,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * DocumentCounts.
+   * Object containing collection document count information.
    */
   public class DocumentCounts extends IBMWatsonGenericModel {
     private Long available;
@@ -6472,71 +6526,6 @@ public class IBMDiscoveryV1Models {
       }
 
       DocumentCounts ret = (DocumentCounts) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * DocumentSnapshot.
-   */
-  public class DocumentSnapshot extends IBMWatsonGenericModel {
-    private String step;
-    private IBMWatsonMapModel snapshot;
-
-    /**
-     * Gets the step.
-     *
-     * The step in the document conversion process that the snapshot object represents.
-     *
-     * @return the step
-     */
-    @AuraEnabled
-    public String getStep() {
-      return step;
-    }
-
-    /**
-     * Gets the snapshot.
-     *
-     * Snapshot of the conversion.
-     *
-     * @return the snapshot
-     */
-    @AuraEnabled
-    public IBMWatsonMapModel getSnapshot() {
-      return snapshot;
-    }
-
-    /**
-     * Sets the step.
-     *
-     * @param step the new step
-     */
-    public void setStep(final String step) {
-      this.step = step;
-    }
-
-    /**
-     * Sets the snapshot.
-     *
-     * @param snapshot the new snapshot
-     */
-    public void setSnapshot(final IBMWatsonMapModel snapshot) {
-      this.snapshot = snapshot;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DocumentSnapshot ret = (DocumentSnapshot) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for snapshot
-      Map<String, Object> snapshotMap = (Map<String, Object>) jsonMap.get('snapshot');
-      IBMWatsonMapModel newSnapshot = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(snapshotMap), snapshotMap, IBMWatsonMapModel.class);
-      ret.setSnapshot(newSnapshot);
 
       return ret;
     }
@@ -6713,7 +6702,8 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Enrichment.
+   * Enrichment step to perform on the document. Each enrichment is performed on the specified field in the order that
+   * they are listed in the configuration.
    */
   public class Enrichment extends IBMWatsonGenericModel {
     private String description;
@@ -6875,9 +6865,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -6887,9 +6880,9 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for options
+      // performing custom serialization for options
       if (options != null) {
-        String optionsJsonString = options.serialize();
+        String optionsJsonString = JSON.serialize(options.replacePropertyNames());
         String optionsKey = 'options';
         if (propertyNameMapping.containsKey(optionsKey)) {
           optionsKey = propertyNameMapping.get(optionsKey);
@@ -6897,7 +6890,7 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(optionsKey, JSON.deserializeUntyped(optionsJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7046,6 +7039,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the features.
      *
+     * Object containing Natural Language Understanding features to be used.
+     *
      * @return the features
      */
     @AuraEnabled
@@ -7112,17 +7107,17 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for features
+      // performing custom serialization for features
       if (features != null) {
-        String featuresJsonString = features.serialize();
+        String featuresJsonString = JSON.serialize(features.replacePropertyNames());
         jsonMap.put('features', JSON.deserializeUntyped(featuresJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7626,9 +7621,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -7642,7 +7640,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7849,9 +7847,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -7860,7 +7861,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -8029,21 +8030,21 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for expansions
+      // performing custom serialization for expansions
       if (expansions != null) {
         List<Object> expansionsJsonList = new List<Object>();
         for (Expansion listItem : expansions) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           expansionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('expansions', expansionsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -8687,11 +8688,11 @@ public class IBMDiscoveryV1Models {
     private Long passagesCharacters;
     private Boolean deduplicate;
     private String deduplicateField;
-    private String collectionIds;
     private Boolean similar;
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
+    private String collectionIds;
     private Boolean xWatsonLoggingOptOut;
 
     /**
@@ -8886,18 +8887,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the collectionIds.
-     *
-     * A comma-separated list of collection IDs to be queried against. Required when querying multiple collections,
-     * invalid when performing a single collection query.
-     *
-     * @return the collectionIds
-     */
-    public String collectionIds() {
-      return collectionIds;
-    }
-
-    /**
      * Gets the similar.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
@@ -8951,6 +8940,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Gets the collectionIds.
+     *
+     * A comma-separated list of collection IDs to be queried against.
+     *
+     * @return the collectionIds
+     */
+    public String collectionIds() {
+      return collectionIds;
+    }
+
+    /**
      * Gets the xWatsonLoggingOptOut.
      *
      * If `true`, queries are not stored in the Discovery **Logs** endpoint.
@@ -8979,11 +8979,11 @@ public class IBMDiscoveryV1Models {
       passagesCharacters = builder.passagesCharacters;
       deduplicate = builder.deduplicate;
       deduplicateField = builder.deduplicateField;
-      collectionIds = builder.collectionIds;
       similar = builder.similar;
       similarDocumentIds = builder.similarDocumentIds;
       similarFields = builder.similarFields;
       bias = builder.bias;
+      collectionIds = builder.collectionIds;
       xWatsonLoggingOptOut = builder.xWatsonLoggingOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -9018,11 +9018,11 @@ public class IBMDiscoveryV1Models {
     private Long passagesCharacters;
     private Boolean deduplicate;
     private String deduplicateField;
-    private String collectionIds;
     private Boolean similar;
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
+    private String collectionIds;
     private Boolean xWatsonLoggingOptOut;
 
     private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
@@ -9042,11 +9042,11 @@ public class IBMDiscoveryV1Models {
       passagesCharacters = federatedQueryOptions.passagesCharacters;
       deduplicate = federatedQueryOptions.deduplicate;
       deduplicateField = federatedQueryOptions.deduplicateField;
-      collectionIds = federatedQueryOptions.collectionIds;
       similar = federatedQueryOptions.similar;
       similarDocumentIds = federatedQueryOptions.similarDocumentIds;
       similarFields = federatedQueryOptions.similarFields;
       bias = federatedQueryOptions.bias;
+      collectionIds = federatedQueryOptions.collectionIds;
       xWatsonLoggingOptOut = federatedQueryOptions.xWatsonLoggingOptOut;
       this.requestHeaders.putAll(federatedQueryOptions.requestHeaders());
     }
@@ -9252,17 +9252,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the collectionIds.
-     *
-     * @param collectionIds the collectionIds
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder collectionIds(String collectionIds) {
-      this.collectionIds = collectionIds;
-      return this;
-    }
-
-    /**
      * Set the similar.
      *
      * @param similar the similar
@@ -9307,6 +9296,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Set the collectionIds.
+     *
+     * @param collectionIds the collectionIds
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder collectionIds(String collectionIds) {
+      this.collectionIds = collectionIds;
+      return this;
+    }
+
+    /**
      * Set the xWatsonLoggingOptOut.
      *
      * @param xWatsonLoggingOptOut the xWatsonLoggingOptOut
@@ -9331,7 +9331,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Field.
+   * Object containing field details.
    */
   public class Field extends IBMWatsonGenericModel {
     private String field;
@@ -9380,7 +9380,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * FontSetting.
+   * Font matching configuration.
    */
   public class FontSetting extends IBMWatsonGenericModel {
     private Long level;
@@ -9505,9 +9505,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -9516,7 +9519,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -9807,6 +9810,206 @@ public class IBMDiscoveryV1Models {
       }
 
       return ret;
+    }
+  }
+
+  /**
+   * The getAutocompletion options.
+   */
+  public class GetAutocompletionOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+    private String field;
+    private String prefix;
+    private Long count;
+
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    /**
+     * Gets the field.
+     *
+     * The field in the result documents that autocompletion suggestions are identified from.
+     *
+     * @return the field
+     */
+    public String field() {
+      return field;
+    }
+
+    /**
+     * Gets the prefix.
+     *
+     * The prefix to use for autocompletion. For example, the prefix `Ho` could autocomplete to `Hot`, `Housing`, or
+     * `How do I upgrade`. Possible completions are.
+     *
+     * @return the prefix
+     */
+    public String prefix() {
+      return prefix;
+    }
+
+    /**
+     * Gets the count.
+     *
+     * The number of autocompletion suggestions to return.
+     *
+     * @return the count
+     */
+    public Long count() {
+      return count;
+    }
+
+    private GetAutocompletionOptions(GetAutocompletionOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      field = builder.field;
+      prefix = builder.prefix;
+      count = builder.count;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetAutocompletionOptions builder
+     */
+    public GetAutocompletionOptionsBuilder newBuilder() {
+      return new GetAutocompletionOptionsBuilder(this);
+    }
+  }
+
+  /**
+   * GetAutocompletionOptions Builder.
+   */
+  public class GetAutocompletionOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+    private String field;
+    private String prefix;
+    private Long count;
+
+    private GetAutocompletionOptionsBuilder(GetAutocompletionOptions getAutocompletionOptions) {
+      environmentId = getAutocompletionOptions.environmentId;
+      collectionId = getAutocompletionOptions.collectionId;
+      field = getAutocompletionOptions.field;
+      prefix = getAutocompletionOptions.prefix;
+      count = getAutocompletionOptions.count;
+      this.requestHeaders.putAll(getAutocompletionOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetAutocompletionOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public GetAutocompletionOptionsBuilder(String environmentId, String collectionId) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a GetAutocompletionOptions.
+     *
+     * @return the getAutocompletionOptions
+     */
+    public GetAutocompletionOptions build() {
+      return new GetAutocompletionOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the GetAutocompletionOptions builder
+     */
+    public GetAutocompletionOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the GetAutocompletionOptions builder
+     */
+    public GetAutocompletionOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the field.
+     *
+     * @param field the field
+     * @return the GetAutocompletionOptions builder
+     */
+    public GetAutocompletionOptionsBuilder field(String field) {
+      this.field = field;
+      return this;
+    }
+
+    /**
+     * Set the prefix.
+     *
+     * @param prefix the prefix
+     * @return the GetAutocompletionOptions builder
+     */
+    public GetAutocompletionOptionsBuilder prefix(String prefix) {
+      this.prefix = prefix;
+      return this;
+    }
+
+    /**
+     * Set the count.
+     *
+     * @param count the count
+     * @return the GetAutocompletionOptions builder
+     */
+    public GetAutocompletionOptionsBuilder count(Long count) {
+      this.count = count;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetAutocompletionOptions builder
+     */
+    public GetAutocompletionOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
     }
   }
 
@@ -11770,6 +11973,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the keepContent.
      *
+     * Object containing an array of XPaths.
+     *
      * @return the keepContent
      */
     @AuraEnabled
@@ -11779,6 +11984,8 @@ public class IBMDiscoveryV1Models {
 
     /**
      * Gets the excludeContent.
+     *
+     * Object containing an array of XPaths.
      *
      * @return the excludeContent
      */
@@ -11862,9 +12069,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -11877,9 +12087,9 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for keepContent
+      // performing custom serialization for keepContent
       if (keepContent != null) {
-        String keepContentJsonString = keepContent.serialize();
+        String keepContentJsonString = JSON.serialize(keepContent.replacePropertyNames());
         String keepContentKey = 'keepContent';
         if (propertyNameMapping.containsKey(keepContentKey)) {
           keepContentKey = propertyNameMapping.get(keepContentKey);
@@ -11887,9 +12097,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(keepContentKey, JSON.deserializeUntyped(keepContentJsonString));
       }
 
-      // calling custom serializer for excludeContent
+      // performing custom serialization for excludeContent
       if (excludeContent != null) {
-        String excludeContentJsonString = excludeContent.serialize();
+        String excludeContentJsonString = JSON.serialize(excludeContent.replacePropertyNames());
         String excludeContentKey = 'excludeContent';
         if (propertyNameMapping.containsKey(excludeContentKey)) {
           excludeContentKey = propertyNameMapping.get(excludeContentKey);
@@ -11897,7 +12107,7 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(excludeContentKey, JSON.deserializeUntyped(excludeContentJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -12473,7 +12683,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * ListCollectionsResponse.
+   * Response object containing an array of collection details.
    */
   public class ListCollectionsResponse extends IBMWatsonResponseModel {
     private List<Collection> collections;
@@ -12642,7 +12852,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * ListConfigurationsResponse.
+   * Object containing an array of available configurations.
    */
   public class ListConfigurationsResponse extends IBMWatsonResponseModel {
     private List<Configuration> configurations;
@@ -12650,7 +12860,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the configurations.
      *
-     * An array of Configurations that are available for the service instance.
+     * An array of configurations that are available for the service instance.
      *
      * @return the configurations
      */
@@ -12867,7 +13077,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * ListEnvironmentsResponse.
+   * Response object containing an array of configured environments.
    */
   public class ListEnvironmentsResponse extends IBMWatsonResponseModel {
     private List<Environment> environments;
@@ -14744,13 +14954,13 @@ public class IBMDiscoveryV1Models {
       return builderResult;
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -14832,9 +15042,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -14842,7 +15055,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -14945,11 +15158,11 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -15114,7 +15327,7 @@ public class IBMDiscoveryV1Models {
      * Gets the model.
      *
      * The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio,
-     * the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+     * or the default public model `alchemy`.
      *
      * @return the model
      */
@@ -15162,9 +15375,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -15174,7 +15390,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -15294,7 +15510,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * NluEnrichmentFeatures.
+   * Object containing Natural Language Understanding features to be used.
    */
   public class NluEnrichmentFeatures extends IBMWatsonGenericModel {
     private NluEnrichmentKeywords keywords;
@@ -15486,9 +15702,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -15496,9 +15715,9 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for keywords
+      // performing custom serialization for keywords
       if (keywords != null) {
-        String keywordsJsonString = keywords.serialize();
+        String keywordsJsonString = JSON.serialize(keywords.replacePropertyNames());
         String keywordsKey = 'keywords';
         if (propertyNameMapping.containsKey(keywordsKey)) {
           keywordsKey = propertyNameMapping.get(keywordsKey);
@@ -15506,9 +15725,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(keywordsKey, JSON.deserializeUntyped(keywordsJsonString));
       }
 
-      // calling custom serializer for entities
+      // performing custom serialization for entities
       if (entities != null) {
-        String entitiesJsonString = entities.serialize();
+        String entitiesJsonString = JSON.serialize(entities.replacePropertyNames());
         String entitiesKey = 'entities';
         if (propertyNameMapping.containsKey(entitiesKey)) {
           entitiesKey = propertyNameMapping.get(entitiesKey);
@@ -15516,9 +15735,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(entitiesKey, JSON.deserializeUntyped(entitiesJsonString));
       }
 
-      // calling custom serializer for sentiment
+      // performing custom serialization for sentiment
       if (sentiment != null) {
-        String sentimentJsonString = sentiment.serialize();
+        String sentimentJsonString = JSON.serialize(sentiment.replacePropertyNames());
         String sentimentKey = 'sentiment';
         if (propertyNameMapping.containsKey(sentimentKey)) {
           sentimentKey = propertyNameMapping.get(sentimentKey);
@@ -15526,9 +15745,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(sentimentKey, JSON.deserializeUntyped(sentimentJsonString));
       }
 
-      // calling custom serializer for emotion
+      // performing custom serialization for emotion
       if (emotion != null) {
-        String emotionJsonString = emotion.serialize();
+        String emotionJsonString = JSON.serialize(emotion.replacePropertyNames());
         String emotionKey = 'emotion';
         if (propertyNameMapping.containsKey(emotionKey)) {
           emotionKey = propertyNameMapping.get(emotionKey);
@@ -15536,9 +15755,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(emotionKey, JSON.deserializeUntyped(emotionJsonString));
       }
 
-      // calling custom serializer for categories
+      // performing custom serialization for categories
       if (categories != null) {
-        String categoriesJsonString = categories.serialize();
+        String categoriesJsonString = JSON.serialize(categories.replacePropertyNames());
         String categoriesKey = 'categories';
         if (propertyNameMapping.containsKey(categoriesKey)) {
           categoriesKey = propertyNameMapping.get(categoriesKey);
@@ -15546,9 +15765,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(categoriesKey, JSON.deserializeUntyped(categoriesJsonString));
       }
 
-      // calling custom serializer for semanticRoles
+      // performing custom serialization for semanticRoles
       if (semanticRoles != null) {
-        String semanticRolesJsonString = semanticRoles.serialize();
+        String semanticRolesJsonString = JSON.serialize(semanticRoles.replacePropertyNames());
         String semanticRolesKey = 'semanticRoles';
         if (propertyNameMapping.containsKey(semanticRolesKey)) {
           semanticRolesKey = propertyNameMapping.get(semanticRolesKey);
@@ -15556,9 +15775,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(semanticRolesKey, JSON.deserializeUntyped(semanticRolesJsonString));
       }
 
-      // calling custom serializer for relations
+      // performing custom serialization for relations
       if (relations != null) {
-        String relationsJsonString = relations.serialize();
+        String relationsJsonString = JSON.serialize(relations.replacePropertyNames());
         String relationsKey = 'relations';
         if (propertyNameMapping.containsKey(relationsKey)) {
           relationsKey = propertyNameMapping.get(relationsKey);
@@ -15566,9 +15785,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(relationsKey, JSON.deserializeUntyped(relationsJsonString));
       }
 
-      // calling custom serializer for concepts
+      // performing custom serialization for concepts
       if (concepts != null) {
-        String conceptsJsonString = concepts.serialize();
+        String conceptsJsonString = JSON.serialize(concepts.replacePropertyNames());
         String conceptsKey = 'concepts';
         if (propertyNameMapping.containsKey(conceptsKey)) {
           conceptsKey = propertyNameMapping.get(conceptsKey);
@@ -15576,7 +15795,7 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(conceptsKey, JSON.deserializeUntyped(conceptsJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -15791,9 +16010,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -15801,7 +16023,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -15884,8 +16106,7 @@ public class IBMDiscoveryV1Models {
      * Gets the model.
      *
      * *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship
-     * extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge
-     * Graph `en-news`, the default is`en-news`.
+     * extraction. May be a custom model provided by Watson Knowledge Studio, the default public model is`en-news`.
      *
      * @return the model
      */
@@ -15918,11 +16139,11 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16046,9 +16267,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -16056,7 +16280,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16185,11 +16409,11 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16260,7 +16484,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * NormalizationOperation.
+   * Object containing normalization operations.
    */
   public class NormalizationOperation extends IBMWatsonGenericModel {
     private String operation;
@@ -16366,9 +16590,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -16377,7 +16604,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16571,7 +16798,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * PdfHeadingDetection.
+   * Object containing heading detection conversion settings for PDF documents.
    */
   public class PdfHeadingDetection extends IBMWatsonGenericModel {
     private List<FontSetting> fonts;
@@ -16584,6 +16811,8 @@ public class IBMDiscoveryV1Models {
 
     /**
      * Gets the fonts.
+     *
+     * Array of font matching configurations.
      *
      * @return the fonts
      */
@@ -16629,21 +16858,21 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for fonts
+      // performing custom serialization for fonts
       if (fonts != null) {
         List<Object> fontsJsonList = new List<Object>();
         for (FontSetting listItem : fonts) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           fontsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('fonts', fontsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16715,6 +16944,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the heading.
      *
+     * Object containing heading detection conversion settings for PDF documents.
+     *
      * @return the heading
      */
     @AuraEnabled
@@ -16751,17 +16982,17 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for heading
+      // performing custom serialization for heading
       if (heading != null) {
-        String headingJsonString = heading.serialize();
+        String headingJsonString = JSON.serialize(heading.replacePropertyNames());
         jsonMap.put('heading', JSON.deserializeUntyped(headingJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16908,6 +17139,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count.
      *
+     * The number of terms identified.
+     *
      * @return the count
      */
     @AuraEnabled
@@ -16979,6 +17212,8 @@ public class IBMDiscoveryV1Models {
 
     /**
      * Gets the hits.
+     *
+     * Top hit information for this query.
      *
      * @return the hits
      */
@@ -17162,1016 +17397,6 @@ public class IBMDiscoveryV1Models {
       ret.setHits(newHits);
 
       return ret;
-    }
-  }
-
-  /**
-   * Entity text to provide context for the queried entity and rank based on that association. For example, if you
-   * wanted to query the city of London in England your query would look for `London` with the context of `England`.
-   */
-  public class QueryEntitiesContext extends IBMWatsonGenericModel {
-    private String text;
-
-    /**
-     * Gets the text.
-     *
-     * Entity text to provide context for the queried entity and rank based on that association. For example, if you
-     * wanted to query the city of London in England your query would look for `London` with the context of `England`.
-     *
-     * @return the text
-     */
-    public String getText() {
-      return text;
-    }
-  
-    private QueryEntitiesContext(QueryEntitiesContextBuilder builder) {
-      this.text = builder.text;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a QueryEntitiesContext builder
-     */
-    public QueryEntitiesContextBuilder newBuilder() {
-      return new QueryEntitiesContextBuilder(this);
-    }
-
-    public String serialize() {
-      // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      return JSON.serialize(jsonMap);
-    }
-  }
-
-  /**
-   * QueryEntitiesContext Builder.
-   */
-  public class QueryEntitiesContextBuilder {
-    private String text;
-
-    private QueryEntitiesContextBuilder(QueryEntitiesContext queryEntitiesContext) {
-      this.text = queryEntitiesContext.text;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public QueryEntitiesContextBuilder() {
-    }
-
-    /**
-     * Builds a QueryEntitiesContext.
-     *
-     * @return the queryEntitiesContext
-     */
-    public QueryEntitiesContext build() {
-      return new QueryEntitiesContext(this);
-    }
-
-    /**
-     * Set the text.
-     *
-     * @param text the text
-     * @return the QueryEntitiesContext builder
-     */
-    public QueryEntitiesContextBuilder text(String text) {
-      this.text = text;
-      return this;
-    }
-  }
-
-  /**
-   * A text string that appears within the entity text field.
-   */
-  public class QueryEntitiesEntity extends IBMWatsonGenericModel {
-    private String text;
-    private String xType;
-
-    /**
-     * This constructor is strictly for internal serialization/deserialization purposes
-     * and should not be called by the client.
-     */
-    public QueryEntitiesEntity() { }
-
-    /**
-     * Gets the text.
-     *
-     * Entity text content.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text;
-    }
-
-    /**
-     * Gets the xType.
-     *
-     * The type of the specified entity.
-     *
-     * @return the xType
-     */
-    @AuraEnabled
-    public String getXType() {
-      return xType;
-    }
-  
-    private QueryEntitiesEntity(QueryEntitiesEntityBuilder builder) {
-      this.text = builder.text;
-      this.xType = builder.xType;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a QueryEntitiesEntity builder
-     */
-    public QueryEntitiesEntityBuilder newBuilder() {
-      return new QueryEntitiesEntityBuilder(this);
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xType'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      QueryEntitiesEntity ret = (QueryEntitiesEntity) super.deserialize(jsonString, jsonMap, classType);
-      QueryEntitiesEntityBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
-
-    public String serialize() {
-      // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      // replace any names that are different between the SDK and API
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xType' => 'type'
-      };
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      return JSON.serialize(jsonMap);
-    }
-  }
-
-  /**
-   * QueryEntitiesEntity Builder.
-   */
-  public class QueryEntitiesEntityBuilder {
-    private String text;
-    private String xType;
-
-    private QueryEntitiesEntityBuilder(QueryEntitiesEntity queryEntitiesEntity) {
-      this.text = queryEntitiesEntity.text;
-      this.xType = queryEntitiesEntity.xType;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public QueryEntitiesEntityBuilder() {
-    }
-
-    /**
-     * Builds a QueryEntitiesEntity.
-     *
-     * @return the queryEntitiesEntity
-     */
-    public QueryEntitiesEntity build() {
-      return new QueryEntitiesEntity(this);
-    }
-
-    /**
-     * Set the text.
-     *
-     * @param text the text
-     * @return the QueryEntitiesEntity builder
-     */
-    public QueryEntitiesEntityBuilder text(String text) {
-      this.text = text;
-      return this;
-    }
-
-    /**
-     * Set the xType.
-     *
-     * @param xType the xType
-     * @return the QueryEntitiesEntity builder
-     */
-    public QueryEntitiesEntityBuilder xType(String xType) {
-      this.xType = xType;
-      return this;
-    }
-  }
-
-  /**
-   * The queryEntities options.
-   */
-  public class QueryEntitiesOptions extends IBMWatsonOptionsModel {
-    private String environmentId;
-    private String collectionId;
-    private String feature;
-    private QueryEntitiesEntity entity;
-    private QueryEntitiesContext context;
-    private Long count;
-    private Long evidenceCount;
-
-    /**
-     * Gets the environmentId.
-     *
-     * The ID of the environment.
-     *
-     * @return the environmentId
-     */
-    public String environmentId() {
-      return environmentId;
-    }
-
-    /**
-     * Gets the collectionId.
-     *
-     * The ID of the collection.
-     *
-     * @return the collectionId
-     */
-    public String collectionId() {
-      return collectionId;
-    }
-
-    /**
-     * Gets the feature.
-     *
-     * The entity query feature to perform. Supported features are `disambiguate` and `similar_entities`.
-     *
-     * @return the feature
-     */
-    public String feature() {
-      return feature;
-    }
-
-    /**
-     * Gets the entity.
-     *
-     * A text string that appears within the entity text field.
-     *
-     * @return the entity
-     */
-    public QueryEntitiesEntity entity() {
-      return entity;
-    }
-
-    /**
-     * Gets the context.
-     *
-     * Entity text to provide context for the queried entity and rank based on that association. For example, if you
-     * wanted to query the city of London in England your query would look for `London` with the context of `England`.
-     *
-     * @return the context
-     */
-    public QueryEntitiesContext context() {
-      return context;
-    }
-
-    /**
-     * Gets the count.
-     *
-     * The number of results to return. The default is `10`. The maximum is `1000`.
-     *
-     * @return the count
-     */
-    public Long count() {
-      return count;
-    }
-
-    /**
-     * Gets the evidenceCount.
-     *
-     * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
-     * per query is 10,000.
-     *
-     * @return the evidenceCount
-     */
-    public Long evidenceCount() {
-      return evidenceCount;
-    }
-
-    private QueryEntitiesOptions(QueryEntitiesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      feature = builder.feature;
-      entity = builder.entity;
-      context = builder.context;
-      count = builder.count;
-      evidenceCount = builder.evidenceCount;
-      this.requestHeaders = builder.requestHeaders;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder newBuilder() {
-      return new QueryEntitiesOptionsBuilder(this);
-    }
-  }
-
-  /**
-   * QueryEntitiesOptions Builder.
-   */
-  public class QueryEntitiesOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environmentId;
-    private String collectionId;
-    private String feature;
-    private QueryEntitiesEntity entity;
-    private QueryEntitiesContext context;
-    private Long count;
-    private Long evidenceCount;
-
-    private QueryEntitiesOptionsBuilder(QueryEntitiesOptions queryEntitiesOptions) {
-      environmentId = queryEntitiesOptions.environmentId;
-      collectionId = queryEntitiesOptions.collectionId;
-      feature = queryEntitiesOptions.feature;
-      entity = queryEntitiesOptions.entity;
-      context = queryEntitiesOptions.context;
-      count = queryEntitiesOptions.count;
-      evidenceCount = queryEntitiesOptions.evidenceCount;
-      this.requestHeaders.putAll(queryEntitiesOptions.requestHeaders());
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public QueryEntitiesOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     */
-    public QueryEntitiesOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-    }
-
-    /**
-     * Builds a QueryEntitiesOptions.
-     *
-     * @return the queryEntitiesOptions
-     */
-    public QueryEntitiesOptions build() {
-      return new QueryEntitiesOptions(this);
-    }
-
-    /**
-     * Set the environmentId.
-     *
-     * @param environmentId the environmentId
-     * @return the QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
-      return this;
-    }
-
-    /**
-     * Set the collectionId.
-     *
-     * @param collectionId the collectionId
-     * @return the QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
-      return this;
-    }
-
-    /**
-     * Set the feature.
-     *
-     * @param feature the feature
-     * @return the QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder feature(String feature) {
-      this.feature = feature;
-      return this;
-    }
-
-    /**
-     * Set the entity.
-     *
-     * @param entity the entity
-     * @return the QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder entity(QueryEntitiesEntity entity) {
-      this.entity = entity;
-      return this;
-    }
-
-    /**
-     * Set the context.
-     *
-     * @param context the context
-     * @return the QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder context(QueryEntitiesContext context) {
-      this.context = context;
-      return this;
-    }
-
-    /**
-     * Set the count.
-     *
-     * @param count the count
-     * @return the QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder count(Long count) {
-      this.count = count;
-      return this;
-    }
-
-    /**
-     * Set the evidenceCount.
-     *
-     * @param evidenceCount the evidenceCount
-     * @return the QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder evidenceCount(Long evidenceCount) {
-      this.evidenceCount = evidenceCount;
-      return this;
-    }
-
-    /**
-     * Add a request header.
-     *
-     * @param name the header name
-     * @param value the header value
-     * @return the QueryEntitiesOptions builder
-     */
-    public QueryEntitiesOptionsBuilder addHeader(String name, String value) {
-      this.requestHeaders.put(name, value);
-      return this;
-    }
-  }
-
-  /**
-   * An object that contains an array of entities resulting from the query.
-   */
-  public class QueryEntitiesResponse extends IBMWatsonResponseModel {
-    private List<QueryEntitiesResponseItem> entities;
-
-    /**
-     * Gets the entities.
-     *
-     * Array of entities that results from the query.
-     *
-     * @return the entities
-     */
-    @AuraEnabled
-    public List<QueryEntitiesResponseItem> getEntities() {
-      return entities;
-    }
-
-    /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<QueryEntitiesResponseItem> entities) {
-      this.entities = entities;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      QueryEntitiesResponse ret = (QueryEntitiesResponse) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for entities
-      List<QueryEntitiesResponseItem> newEntities = new List<QueryEntitiesResponseItem>();
-      List<QueryEntitiesResponseItem> deserializedEntities = ret.getEntities();
-      if (deserializedEntities != null) {
-        for (Integer i = 0; i < deserializedEntities.size(); i++) {
-          QueryEntitiesResponseItem currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          QueryEntitiesResponseItem newItem = (QueryEntitiesResponseItem) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesResponseItem.class);
-          newEntities.add(newItem);
-        }
-        ret.entities = newEntities;
-      }
-
-      return ret;
-    }
-  }
-
-  /**
-   * Object containing Entity query response information.
-   */
-  public class QueryEntitiesResponseItem extends IBMWatsonGenericModel {
-    private String text;
-    private String xType;
-    private List<QueryEvidence> evidence;
-
-    /**
-     * Gets the text.
-     *
-     * Entity text content.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text;
-    }
-
-    /**
-     * Gets the xType.
-     *
-     * The type of the result entity.
-     *
-     * @return the xType
-     */
-    @AuraEnabled
-    public String getXType() {
-      return xType;
-    }
-
-    /**
-     * Gets the evidence.
-     *
-     * List of different evidentiary items to support the result.
-     *
-     * @return the evidence
-     */
-    @AuraEnabled
-    public List<QueryEvidence> getEvidence() {
-      return evidence;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text = text;
-    }
-
-    /**
-     * Sets the xType.
-     *
-     * @param xType the new xType
-     */
-    public void setXType(final String xType) {
-      this.xType = xType;
-    }
-
-    /**
-     * Sets the evidence.
-     *
-     * @param evidence the new evidence
-     */
-    public void setEvidence(final List<QueryEvidence> evidence) {
-      this.evidence = evidence;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xType'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      QueryEntitiesResponseItem ret = (QueryEntitiesResponseItem) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for evidence
-      List<QueryEvidence> newEvidence = new List<QueryEvidence>();
-      List<QueryEvidence> deserializedEvidence = ret.getEvidence();
-      if (deserializedEvidence != null) {
-        for (Integer i = 0; i < deserializedEvidence.size(); i++) {
-          QueryEvidence currentItem = ret.getEvidence().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('evidence');
-          QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
-          newEvidence.add(newItem);
-        }
-        ret.evidence = newEvidence;
-      }
-
-      return ret;
-    }
-  }
-
-  /**
-   * Description of evidence location supporting Knoweldge Graph query result.
-   */
-  public class QueryEvidence extends IBMWatsonGenericModel {
-    private String documentId;
-    private String field;
-    private Long startOffset;
-    private Long endOffset;
-    private List<QueryEvidenceEntity> entities;
-
-    /**
-     * Gets the documentId.
-     *
-     * The docuemnt ID (as indexed in Discovery) of the evidence location.
-     *
-     * @return the documentId
-     */
-    @AuraEnabled
-    public String getDocumentId() {
-      return documentId;
-    }
-
-    /**
-     * Gets the field.
-     *
-     * The field of the document where the supporting evidence was identified.
-     *
-     * @return the field
-     */
-    @AuraEnabled
-    public String getField() {
-      return field;
-    }
-
-    /**
-     * Gets the startOffset.
-     *
-     * The start location of the evidence in the identified field. This value is inclusive.
-     *
-     * @return the startOffset
-     */
-    @AuraEnabled
-    public Long getStartOffset() {
-      return startOffset;
-    }
-
-    /**
-     * Gets the endOffset.
-     *
-     * The end location of the evidence in the identified field. This value is inclusive.
-     *
-     * @return the endOffset
-     */
-    @AuraEnabled
-    public Long getEndOffset() {
-      return endOffset;
-    }
-
-    /**
-     * Gets the entities.
-     *
-     * An array of entity objects that show evidence of the result.
-     *
-     * @return the entities
-     */
-    @AuraEnabled
-    public List<QueryEvidenceEntity> getEntities() {
-      return entities;
-    }
-
-    /**
-     * Sets the documentId.
-     *
-     * @param documentId the new documentId
-     */
-    public void setDocumentId(final String documentId) {
-      this.documentId = documentId;
-    }
-
-    /**
-     * Sets the field.
-     *
-     * @param field the new field
-     */
-    public void setField(final String field) {
-      this.field = field;
-    }
-
-    /**
-     * Sets the startOffset.
-     *
-     * @param startOffset the new startOffset
-     */
-    public void setStartOffset(final long startOffset) {
-      this.startOffset = startOffset;
-    }
-
-    /**
-     * Sets the endOffset.
-     *
-     * @param endOffset the new endOffset
-     */
-    public void setEndOffset(final long endOffset) {
-      this.endOffset = endOffset;
-    }
-
-    /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<QueryEvidenceEntity> entities) {
-      this.entities = entities;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'document_id' => 'documentId',
-        'start_offset' => 'startOffset',
-        'end_offset' => 'endOffset'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      QueryEvidence ret = (QueryEvidence) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for entities
-      List<QueryEvidenceEntity> newEntities = new List<QueryEvidenceEntity>();
-      List<QueryEvidenceEntity> deserializedEntities = ret.getEntities();
-      if (deserializedEntities != null) {
-        for (Integer i = 0; i < deserializedEntities.size(); i++) {
-          QueryEvidenceEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          QueryEvidenceEntity newItem = (QueryEvidenceEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidenceEntity.class);
-          newEntities.add(newItem);
-        }
-        ret.entities = newEntities;
-      }
-
-      return ret;
-    }
-  }
-
-  /**
-   * Entity description and location within evidence field.
-   */
-  public class QueryEvidenceEntity extends IBMWatsonGenericModel {
-    private String xType;
-    private String text;
-    private Long startOffset;
-    private Long endOffset;
-
-    /**
-     * Gets the xType.
-     *
-     * The entity type for this entity. Possible types vary based on model used.
-     *
-     * @return the xType
-     */
-    @AuraEnabled
-    public String getXType() {
-      return xType;
-    }
-
-    /**
-     * Gets the text.
-     *
-     * The original text of this entity as found in the evidence field.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text;
-    }
-
-    /**
-     * Gets the startOffset.
-     *
-     * The start location of the entity text in the identified field. This value is inclusive.
-     *
-     * @return the startOffset
-     */
-    @AuraEnabled
-    public Long getStartOffset() {
-      return startOffset;
-    }
-
-    /**
-     * Gets the endOffset.
-     *
-     * The end location of the entity text in the identified field. This value is exclusive.
-     *
-     * @return the endOffset
-     */
-    @AuraEnabled
-    public Long getEndOffset() {
-      return endOffset;
-    }
-
-    /**
-     * Sets the xType.
-     *
-     * @param xType the new xType
-     */
-    public void setXType(final String xType) {
-      this.xType = xType;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text = text;
-    }
-
-    /**
-     * Sets the startOffset.
-     *
-     * @param startOffset the new startOffset
-     */
-    public void setStartOffset(final long startOffset) {
-      this.startOffset = startOffset;
-    }
-
-    /**
-     * Sets the endOffset.
-     *
-     * @param endOffset the new endOffset
-     */
-    public void setEndOffset(final long endOffset) {
-      this.endOffset = endOffset;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xType',
-        'start_offset' => 'startOffset',
-        'end_offset' => 'endOffset'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      QueryEvidenceEntity ret = (QueryEvidenceEntity) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * QueryFilterType.
-   */
-  public class QueryFilterType extends IBMWatsonGenericModel {
-    private List<String> exclude;
-    private List<String> include;
-
-    /**
-     * Gets the exclude.
-     *
-     * A comma-separated list of types to exclude.
-     *
-     * @return the exclude
-     */
-    public List<String> getExclude() {
-      return exclude;
-    }
-
-    /**
-     * Gets the include.
-     *
-     * A comma-separated list of types to include. All other types are excluded.
-     *
-     * @return the include
-     */
-    public List<String> getInclude() {
-      return include;
-    }
-  
-    private QueryFilterType(QueryFilterTypeBuilder builder) {
-      this.exclude = builder.exclude;
-      this.include = builder.include;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a QueryFilterType builder
-     */
-    public QueryFilterTypeBuilder newBuilder() {
-      return new QueryFilterTypeBuilder(this);
-    }
-
-    public String serialize() {
-      // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      return JSON.serialize(jsonMap);
-    }
-  }
-
-  /**
-   * QueryFilterType Builder.
-   */
-  public class QueryFilterTypeBuilder {
-    private List<String> exclude;
-    private List<String> include;
-
-    private QueryFilterTypeBuilder(QueryFilterType queryFilterType) {
-      this.exclude = queryFilterType.exclude;
-      this.include = queryFilterType.include;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public QueryFilterTypeBuilder() {
-    }
-
-    /**
-     * Builds a QueryFilterType.
-     *
-     * @return the queryFilterType
-     */
-    public QueryFilterType build() {
-      return new QueryFilterType(this);
-    }
-
-    /**
-     * Adds an exclude to exclude.
-     *
-     * @param exclude the new exclude
-     * @return the QueryFilterType builder
-     */
-    public QueryFilterTypeBuilder addExclude(String exclude) {
-      IBMWatsonValidator.notNull(exclude, 'exclude cannot be null');
-      if (this.exclude == null) {
-        this.exclude = new List<String>();
-      }
-      this.exclude.add(exclude);
-      return this;
-    }
-
-    /**
-     * Adds an include to include.
-     *
-     * @param include the new include
-     * @return the QueryFilterType builder
-     */
-    public QueryFilterTypeBuilder addInclude(String include) {
-      IBMWatsonValidator.notNull(include, 'include cannot be null');
-      if (this.include == null) {
-        this.include = new List<String>();
-      }
-      this.include.add(include);
-      return this;
-    }
-
-    /**
-     * Set the exclude.
-     * Existing exclude will be replaced.
-     *
-     * @param exclude the exclude
-     * @return the QueryFilterType builder
-     */
-    public QueryFilterTypeBuilder exclude(List<String> exclude) {
-      this.exclude = exclude;
-      return this;
-    }
-
-    /**
-     * Set the include.
-     * Existing include will be replaced.
-     *
-     * @param include the include
-     * @return the QueryFilterType builder
-     */
-    public QueryFilterTypeBuilder include(List<String> include) {
-      this.include = include;
-      return this;
     }
   }
 
@@ -19048,7 +18273,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * QueryNoticesResponse.
+   * Object containing notice query results.
    */
   public class QueryNoticesResponse extends IBMWatsonResponseModel {
     private Long matchingResults;
@@ -19221,7 +18446,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * QueryNoticesResult.
+   * Query result object.
    */
   public class QueryNoticesResult extends IBMWatsonDynamicModel {
     private String id;
@@ -19508,11 +18733,11 @@ public class IBMDiscoveryV1Models {
     private Long passagesCharacters;
     private Boolean deduplicate;
     private String deduplicateField;
-    private String collectionIds;
     private Boolean similar;
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
+    private Boolean spellingSuggestions;
     private Boolean xWatsonLoggingOptOut;
 
     /**
@@ -19718,18 +18943,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the collectionIds.
-     *
-     * A comma-separated list of collection IDs to be queried against. Required when querying multiple collections,
-     * invalid when performing a single collection query.
-     *
-     * @return the collectionIds
-     */
-    public String collectionIds() {
-      return collectionIds;
-    }
-
-    /**
      * Gets the similar.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
@@ -19783,6 +18996,21 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Gets the spellingSuggestions.
+     *
+     * When `true` and the **natural_language_query** parameter is used, the **natural_languge_query** parameter is
+     * spell checked. The most likely correction is retunred in the **suggested_query** field of the response (if one
+     * exists).
+     *
+     * **Important:** this parameter is only valid when using the Cloud Pak version of Discovery.
+     *
+     * @return the spellingSuggestions
+     */
+    public Boolean spellingSuggestions() {
+      return spellingSuggestions;
+    }
+
+    /**
      * Gets the xWatsonLoggingOptOut.
      *
      * If `true`, queries are not stored in the Discovery **Logs** endpoint.
@@ -19813,11 +19041,11 @@ public class IBMDiscoveryV1Models {
       passagesCharacters = builder.passagesCharacters;
       deduplicate = builder.deduplicate;
       deduplicateField = builder.deduplicateField;
-      collectionIds = builder.collectionIds;
       similar = builder.similar;
       similarDocumentIds = builder.similarDocumentIds;
       similarFields = builder.similarFields;
       bias = builder.bias;
+      spellingSuggestions = builder.spellingSuggestions;
       xWatsonLoggingOptOut = builder.xWatsonLoggingOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -19853,11 +19081,11 @@ public class IBMDiscoveryV1Models {
     private Long passagesCharacters;
     private Boolean deduplicate;
     private String deduplicateField;
-    private String collectionIds;
     private Boolean similar;
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
+    private Boolean spellingSuggestions;
     private Boolean xWatsonLoggingOptOut;
 
     private QueryOptionsBuilder(QueryOptions queryOptions) {
@@ -19878,11 +19106,11 @@ public class IBMDiscoveryV1Models {
       passagesCharacters = queryOptions.passagesCharacters;
       deduplicate = queryOptions.deduplicate;
       deduplicateField = queryOptions.deduplicateField;
-      collectionIds = queryOptions.collectionIds;
       similar = queryOptions.similar;
       similarDocumentIds = queryOptions.similarDocumentIds;
       similarFields = queryOptions.similarFields;
       bias = queryOptions.bias;
+      spellingSuggestions = queryOptions.spellingSuggestions;
       xWatsonLoggingOptOut = queryOptions.xWatsonLoggingOptOut;
       this.requestHeaders.putAll(queryOptions.requestHeaders());
     }
@@ -20101,17 +19329,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the collectionIds.
-     *
-     * @param collectionIds the collectionIds
-     * @return the QueryOptions builder
-     */
-    public QueryOptionsBuilder collectionIds(String collectionIds) {
-      this.collectionIds = collectionIds;
-      return this;
-    }
-
-    /**
      * Set the similar.
      *
      * @param similar the similar
@@ -20156,6 +19373,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Set the spellingSuggestions.
+     *
+     * @param spellingSuggestions the spellingSuggestions
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder spellingSuggestions(Boolean spellingSuggestions) {
+      this.spellingSuggestions = spellingSuggestions;
+      return this;
+    }
+
+    /**
      * Set the xWatsonLoggingOptOut.
      *
      * @param xWatsonLoggingOptOut the xWatsonLoggingOptOut
@@ -20180,7 +19408,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * QueryPassages.
+   * A passage query result.
    */
   public class QueryPassages extends IBMWatsonGenericModel {
     private String documentId;
@@ -20333,840 +19561,6 @@ public class IBMDiscoveryV1Models {
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       QueryPassages ret = (QueryPassages) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * QueryRelationsArgument.
-   */
-  public class QueryRelationsArgument extends IBMWatsonGenericModel {
-    private List<QueryEntitiesEntity> entities;
-
-    /**
-     * Gets the entities.
-     *
-     * Array of query entities.
-     *
-     * @return the entities
-     */
-    @AuraEnabled
-    public List<QueryEntitiesEntity> getEntities() {
-      return entities;
-    }
-
-    /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<QueryEntitiesEntity> entities) {
-      this.entities = entities;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      QueryRelationsArgument ret = (QueryRelationsArgument) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for entities
-      List<QueryEntitiesEntity> newEntities = new List<QueryEntitiesEntity>();
-      List<QueryEntitiesEntity> deserializedEntities = ret.getEntities();
-      if (deserializedEntities != null) {
-        for (Integer i = 0; i < deserializedEntities.size(); i++) {
-          QueryEntitiesEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          QueryEntitiesEntity newItem = (QueryEntitiesEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesEntity.class);
-          newEntities.add(newItem);
-        }
-        ret.entities = newEntities;
-      }
-
-      return ret;
-    }
-  }
-
-  /**
-   * QueryRelationsEntity.
-   */
-  public class QueryRelationsEntity extends IBMWatsonGenericModel {
-    private String text;
-    private String xType;
-    private Boolean exact;
-
-    /**
-     * Gets the text.
-     *
-     * Entity text content.
-     *
-     * @return the text
-     */
-    public String getText() {
-      return text;
-    }
-
-    /**
-     * Gets the xType.
-     *
-     * The type of the specified entity.
-     *
-     * @return the xType
-     */
-    public String getXType() {
-      return xType;
-    }
-
-    /**
-     * Gets the exact.
-     *
-     * If false, implicit querying is performed. The default is `false`.
-     *
-     * @return the exact
-     */
-    public Boolean getExact() {
-      return exact;
-    }
-  
-    private QueryRelationsEntity(QueryRelationsEntityBuilder builder) {
-      this.text = builder.text;
-      this.xType = builder.xType;
-      this.exact = builder.exact;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a QueryRelationsEntity builder
-     */
-    public QueryRelationsEntityBuilder newBuilder() {
-      return new QueryRelationsEntityBuilder(this);
-    }
-
-    public String serialize() {
-      // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      // replace any names that are different between the SDK and API
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xType' => 'type'
-      };
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      return JSON.serialize(jsonMap);
-    }
-  }
-
-  /**
-   * QueryRelationsEntity Builder.
-   */
-  public class QueryRelationsEntityBuilder {
-    private String text;
-    private String xType;
-    private Boolean exact;
-
-    private QueryRelationsEntityBuilder(QueryRelationsEntity queryRelationsEntity) {
-      this.text = queryRelationsEntity.text;
-      this.xType = queryRelationsEntity.xType;
-      this.exact = queryRelationsEntity.exact;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public QueryRelationsEntityBuilder() {
-    }
-
-    /**
-     * Builds a QueryRelationsEntity.
-     *
-     * @return the queryRelationsEntity
-     */
-    public QueryRelationsEntity build() {
-      return new QueryRelationsEntity(this);
-    }
-
-    /**
-     * Set the text.
-     *
-     * @param text the text
-     * @return the QueryRelationsEntity builder
-     */
-    public QueryRelationsEntityBuilder text(String text) {
-      this.text = text;
-      return this;
-    }
-
-    /**
-     * Set the xType.
-     *
-     * @param xType the xType
-     * @return the QueryRelationsEntity builder
-     */
-    public QueryRelationsEntityBuilder xType(String xType) {
-      this.xType = xType;
-      return this;
-    }
-
-    /**
-     * Set the exact.
-     *
-     * @param exact the exact
-     * @return the QueryRelationsEntity builder
-     */
-    public QueryRelationsEntityBuilder exact(Boolean exact) {
-      this.exact = exact;
-      return this;
-    }
-  }
-
-  /**
-   * QueryRelationsFilter.
-   */
-  public class QueryRelationsFilter extends IBMWatsonGenericModel {
-    private QueryFilterType relationTypes;
-    private QueryFilterType entityTypes;
-    private List<String> documentIds;
-
-    /**
-     * Gets the relationTypes.
-     *
-     * @return the relationTypes
-     */
-    public QueryFilterType getRelationTypes() {
-      return relationTypes;
-    }
-
-    /**
-     * Gets the entityTypes.
-     *
-     * @return the entityTypes
-     */
-    public QueryFilterType getEntityTypes() {
-      return entityTypes;
-    }
-
-    /**
-     * Gets the documentIds.
-     *
-     * A comma-separated list of document IDs to include in the query.
-     *
-     * @return the documentIds
-     */
-    public List<String> getDocumentIds() {
-      return documentIds;
-    }
-  
-    private QueryRelationsFilter(QueryRelationsFilterBuilder builder) {
-      this.relationTypes = builder.relationTypes;
-      this.entityTypes = builder.entityTypes;
-      this.documentIds = builder.documentIds;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a QueryRelationsFilter builder
-     */
-    public QueryRelationsFilterBuilder newBuilder() {
-      return new QueryRelationsFilterBuilder(this);
-    }
-
-    public String serialize() {
-      // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      // replace any names that are different between the SDK and API
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'relationTypes' => 'relation_types',
-        'entityTypes' => 'entity_types',
-        'documentIds' => 'document_ids'
-      };
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      // calling custom serializer for relationTypes
-      if (relationTypes != null) {
-        String relationTypesJsonString = relationTypes.serialize();
-        String relationTypesKey = 'relationTypes';
-        if (propertyNameMapping.containsKey(relationTypesKey)) {
-          relationTypesKey = propertyNameMapping.get(relationTypesKey);
-        }
-        jsonMap.put(relationTypesKey, JSON.deserializeUntyped(relationTypesJsonString));
-      }
-
-      // calling custom serializer for entityTypes
-      if (entityTypes != null) {
-        String entityTypesJsonString = entityTypes.serialize();
-        String entityTypesKey = 'entityTypes';
-        if (propertyNameMapping.containsKey(entityTypesKey)) {
-          entityTypesKey = propertyNameMapping.get(entityTypesKey);
-        }
-        jsonMap.put(entityTypesKey, JSON.deserializeUntyped(entityTypesJsonString));
-      }
-
-      return JSON.serialize(jsonMap);
-    }
-  }
-
-  /**
-   * QueryRelationsFilter Builder.
-   */
-  public class QueryRelationsFilterBuilder {
-    private QueryFilterType relationTypes;
-    private QueryFilterType entityTypes;
-    private List<String> documentIds;
-
-    private QueryRelationsFilterBuilder(QueryRelationsFilter queryRelationsFilter) {
-      this.relationTypes = queryRelationsFilter.relationTypes;
-      this.entityTypes = queryRelationsFilter.entityTypes;
-      this.documentIds = queryRelationsFilter.documentIds;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public QueryRelationsFilterBuilder() {
-    }
-
-    /**
-     * Builds a QueryRelationsFilter.
-     *
-     * @return the queryRelationsFilter
-     */
-    public QueryRelationsFilter build() {
-      return new QueryRelationsFilter(this);
-    }
-
-    /**
-     * Adds an documentIds to documentIds.
-     *
-     * @param documentIds the new documentIds
-     * @return the QueryRelationsFilter builder
-     */
-    public QueryRelationsFilterBuilder addDocumentIds(String documentIds) {
-      IBMWatsonValidator.notNull(documentIds, 'documentIds cannot be null');
-      if (this.documentIds == null) {
-        this.documentIds = new List<String>();
-      }
-      this.documentIds.add(documentIds);
-      return this;
-    }
-
-    /**
-     * Set the relationTypes.
-     *
-     * @param relationTypes the relationTypes
-     * @return the QueryRelationsFilter builder
-     */
-    public QueryRelationsFilterBuilder relationTypes(QueryFilterType relationTypes) {
-      this.relationTypes = relationTypes;
-      return this;
-    }
-
-    /**
-     * Set the entityTypes.
-     *
-     * @param entityTypes the entityTypes
-     * @return the QueryRelationsFilter builder
-     */
-    public QueryRelationsFilterBuilder entityTypes(QueryFilterType entityTypes) {
-      this.entityTypes = entityTypes;
-      return this;
-    }
-
-    /**
-     * Set the documentIds.
-     * Existing documentIds will be replaced.
-     *
-     * @param documentIds the documentIds
-     * @return the QueryRelationsFilter builder
-     */
-    public QueryRelationsFilterBuilder documentIds(List<String> documentIds) {
-      this.documentIds = documentIds;
-      return this;
-    }
-  }
-
-  /**
-   * The queryRelations options.
-   */
-  public class QueryRelationsOptions extends IBMWatsonOptionsModel {
-    private String environmentId;
-    private String collectionId;
-    private List<QueryRelationsEntity> entities;
-    private QueryEntitiesContext context;
-    private String xSort;
-    private QueryRelationsFilter filter;
-    private Long count;
-    private Long evidenceCount;
-
-    /**
-     * Gets the environmentId.
-     *
-     * The ID of the environment.
-     *
-     * @return the environmentId
-     */
-    public String environmentId() {
-      return environmentId;
-    }
-
-    /**
-     * Gets the collectionId.
-     *
-     * The ID of the collection.
-     *
-     * @return the collectionId
-     */
-    public String collectionId() {
-      return collectionId;
-    }
-
-    /**
-     * Gets the entities.
-     *
-     * An array of entities to find relationships for.
-     *
-     * @return the entities
-     */
-    public List<QueryRelationsEntity> entities() {
-      return entities;
-    }
-
-    /**
-     * Gets the context.
-     *
-     * Entity text to provide context for the queried entity and rank based on that association. For example, if you
-     * wanted to query the city of London in England your query would look for `London` with the context of `England`.
-     *
-     * @return the context
-     */
-    public QueryEntitiesContext context() {
-      return context;
-    }
-
-    /**
-     * Gets the xSort.
-     *
-     * The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique
-     * times each entity is identified. The default is `score`. This parameter cannot be used in the same query as the
-     * **bias** parameter.
-     *
-     * @return the xSort
-     */
-    public String xSort() {
-      return xSort;
-    }
-
-    /**
-     * Gets the filter.
-     *
-     * @return the filter
-     */
-    public QueryRelationsFilter filter() {
-      return filter;
-    }
-
-    /**
-     * Gets the count.
-     *
-     * The number of results to return. The default is `10`. The maximum is `1000`.
-     *
-     * @return the count
-     */
-    public Long count() {
-      return count;
-    }
-
-    /**
-     * Gets the evidenceCount.
-     *
-     * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
-     * per query is 10,000.
-     *
-     * @return the evidenceCount
-     */
-    public Long evidenceCount() {
-      return evidenceCount;
-    }
-
-    private QueryRelationsOptions(QueryRelationsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      entities = builder.entities;
-      context = builder.context;
-      xSort = builder.xSort;
-      filter = builder.filter;
-      count = builder.count;
-      evidenceCount = builder.evidenceCount;
-      this.requestHeaders = builder.requestHeaders;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder newBuilder() {
-      return new QueryRelationsOptionsBuilder(this);
-    }
-  }
-
-  /**
-   * QueryRelationsOptions Builder.
-   */
-  public class QueryRelationsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environmentId;
-    private String collectionId;
-    private List<QueryRelationsEntity> entities;
-    private QueryEntitiesContext context;
-    private String xSort;
-    private QueryRelationsFilter filter;
-    private Long count;
-    private Long evidenceCount;
-
-    private QueryRelationsOptionsBuilder(QueryRelationsOptions queryRelationsOptions) {
-      environmentId = queryRelationsOptions.environmentId;
-      collectionId = queryRelationsOptions.collectionId;
-      entities = queryRelationsOptions.entities;
-      context = queryRelationsOptions.context;
-      xSort = queryRelationsOptions.xSort;
-      filter = queryRelationsOptions.filter;
-      count = queryRelationsOptions.count;
-      evidenceCount = queryRelationsOptions.evidenceCount;
-      this.requestHeaders.putAll(queryRelationsOptions.requestHeaders());
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public QueryRelationsOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     */
-    public QueryRelationsOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-    }
-
-    /**
-     * Builds a QueryRelationsOptions.
-     *
-     * @return the queryRelationsOptions
-     */
-    public QueryRelationsOptions build() {
-      return new QueryRelationsOptions(this);
-    }
-
-    /**
-     * Adds an entities to entities.
-     *
-     * @param entities the new entities
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder addEntities(QueryRelationsEntity entities) {
-      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
-      if (this.entities == null) {
-        this.entities = new List<QueryRelationsEntity>();
-      }
-      this.entities.add(entities);
-      return this;
-    }
-
-    /**
-     * Set the environmentId.
-     *
-     * @param environmentId the environmentId
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
-      return this;
-    }
-
-    /**
-     * Set the collectionId.
-     *
-     * @param collectionId the collectionId
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
-      return this;
-    }
-
-    /**
-     * Set the entities.
-     * Existing entities will be replaced.
-     *
-     * @param entities the entities
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder entities(List<QueryRelationsEntity> entities) {
-      this.entities = entities;
-      return this;
-    }
-
-    /**
-     * Set the context.
-     *
-     * @param context the context
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder context(QueryEntitiesContext context) {
-      this.context = context;
-      return this;
-    }
-
-    /**
-     * Set the xSort.
-     *
-     * @param xSort the xSort
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder xSort(String xSort) {
-      this.xSort = xSort;
-      return this;
-    }
-
-    /**
-     * Set the filter.
-     *
-     * @param filter the filter
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder filter(QueryRelationsFilter filter) {
-      this.filter = filter;
-      return this;
-    }
-
-    /**
-     * Set the count.
-     *
-     * @param count the count
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder count(Long count) {
-      this.count = count;
-      return this;
-    }
-
-    /**
-     * Set the evidenceCount.
-     *
-     * @param evidenceCount the evidenceCount
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder evidenceCount(Long evidenceCount) {
-      this.evidenceCount = evidenceCount;
-      return this;
-    }
-
-    /**
-     * Add a request header.
-     *
-     * @param name the header name
-     * @param value the header value
-     * @return the QueryRelationsOptions builder
-     */
-    public QueryRelationsOptionsBuilder addHeader(String name, String value) {
-      this.requestHeaders.put(name, value);
-      return this;
-    }
-  }
-
-  /**
-   * QueryRelationsRelationship.
-   */
-  public class QueryRelationsRelationship extends IBMWatsonGenericModel {
-    private String xType;
-    private Long frequency;
-    private List<QueryRelationsArgument> arguments;
-    private List<QueryEvidence> evidence;
-
-    /**
-     * Gets the xType.
-     *
-     * The identified relationship type.
-     *
-     * @return the xType
-     */
-    @AuraEnabled
-    public String getXType() {
-      return xType;
-    }
-
-    /**
-     * Gets the frequency.
-     *
-     * The number of times the relationship is mentioned.
-     *
-     * @return the frequency
-     */
-    @AuraEnabled
-    public Long getFrequency() {
-      return frequency;
-    }
-
-    /**
-     * Gets the arguments.
-     *
-     * Information about the relationship.
-     *
-     * @return the arguments
-     */
-    @AuraEnabled
-    public List<QueryRelationsArgument> getArguments() {
-      return arguments;
-    }
-
-    /**
-     * Gets the evidence.
-     *
-     * List of different evidentiary items to support the result.
-     *
-     * @return the evidence
-     */
-    @AuraEnabled
-    public List<QueryEvidence> getEvidence() {
-      return evidence;
-    }
-
-    /**
-     * Sets the xType.
-     *
-     * @param xType the new xType
-     */
-    public void setXType(final String xType) {
-      this.xType = xType;
-    }
-
-    /**
-     * Sets the frequency.
-     *
-     * @param frequency the new frequency
-     */
-    public void setFrequency(final long frequency) {
-      this.frequency = frequency;
-    }
-
-    /**
-     * Sets the arguments.
-     *
-     * @param arguments the new arguments
-     */
-    public void setArguments(final List<QueryRelationsArgument> arguments) {
-      this.arguments = arguments;
-    }
-
-    /**
-     * Sets the evidence.
-     *
-     * @param evidence the new evidence
-     */
-    public void setEvidence(final List<QueryEvidence> evidence) {
-      this.evidence = evidence;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'type' => 'xType'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      QueryRelationsRelationship ret = (QueryRelationsRelationship) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for arguments
-      List<QueryRelationsArgument> newArguments = new List<QueryRelationsArgument>();
-      List<QueryRelationsArgument> deserializedArguments = ret.getArguments();
-      if (deserializedArguments != null) {
-        for (Integer i = 0; i < deserializedArguments.size(); i++) {
-          QueryRelationsArgument currentItem = ret.getArguments().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('arguments');
-          QueryRelationsArgument newItem = (QueryRelationsArgument) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsArgument.class);
-          newArguments.add(newItem);
-        }
-        ret.arguments = newArguments;
-      }
-
-      // calling custom deserializer for evidence
-      List<QueryEvidence> newEvidence = new List<QueryEvidence>();
-      List<QueryEvidence> deserializedEvidence = ret.getEvidence();
-      if (deserializedEvidence != null) {
-        for (Integer i = 0; i < deserializedEvidence.size(); i++) {
-          QueryEvidence currentItem = ret.getEvidence().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('evidence');
-          QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
-          newEvidence.add(newItem);
-        }
-        ret.evidence = newEvidence;
-      }
-
-      return ret;
-    }
-  }
-
-  /**
-   * QueryRelationsResponse.
-   */
-  public class QueryRelationsResponse extends IBMWatsonResponseModel {
-    private List<QueryRelationsRelationship> relations;
-
-    /**
-     * Gets the relations.
-     *
-     * Array of relationships for the relations query.
-     *
-     * @return the relations
-     */
-    @AuraEnabled
-    public List<QueryRelationsRelationship> getRelations() {
-      return relations;
-    }
-
-    /**
-     * Sets the relations.
-     *
-     * @param relations the new relations
-     */
-    public void setRelations(final List<QueryRelationsRelationship> relations) {
-      this.relations = relations;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      QueryRelationsResponse ret = (QueryRelationsResponse) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for relations
-      List<QueryRelationsRelationship> newRelations = new List<QueryRelationsRelationship>();
-      List<QueryRelationsRelationship> deserializedRelations = ret.getRelations();
-      if (deserializedRelations != null) {
-        for (Integer i = 0; i < deserializedRelations.size(); i++) {
-          QueryRelationsRelationship currentItem = ret.getRelations().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('relations');
-          QueryRelationsRelationship newItem = (QueryRelationsRelationship) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsRelationship.class);
-          newRelations.add(newItem);
-        }
-        ret.relations = newRelations;
-      }
 
       return ret;
     }
@@ -21400,7 +19794,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * QueryResult.
+   * Query result object.
    */
   public class QueryResult extends IBMWatsonDynamicModel {
     private String id;
@@ -21989,13 +20383,7 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      String lastTrained = (String) jsonMap.remove('lastTrained');
-      String jsonStringWithoutDates = JSON.serialize(jsonMap);
-
-      SearchStatus ret = (SearchStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
-      if (String.isNotBlank(lastTrained)) {
-        ret.setLastTrained((Datetime) JSON.deserialize('"' + lastTrained + '"', Datetime.class));
-      }
+      SearchStatus ret = (SearchStatus) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -22094,9 +20482,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -22105,7 +20496,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -22319,9 +20710,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -22330,9 +20724,9 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for schedule
+      // performing custom serialization for schedule
       if (schedule != null) {
-        String scheduleJsonString = schedule.serialize();
+        String scheduleJsonString = JSON.serialize(schedule.replacePropertyNames());
         String scheduleKey = 'schedule';
         if (propertyNameMapping.containsKey(scheduleKey)) {
           scheduleKey = propertyNameMapping.get(scheduleKey);
@@ -22340,9 +20734,9 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(scheduleKey, JSON.deserializeUntyped(scheduleJsonString));
       }
 
-      // calling custom serializer for options
+      // performing custom serialization for options
       if (options != null) {
-        String optionsJsonString = options.serialize();
+        String optionsJsonString = JSON.serialize(options.replacePropertyNames());
         String optionsKey = 'options';
         if (propertyNameMapping.containsKey(optionsKey)) {
           optionsKey = propertyNameMapping.get(optionsKey);
@@ -22350,7 +20744,7 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(optionsKey, JSON.deserializeUntyped(optionsJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -22628,9 +21022,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -22639,11 +21036,11 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for folders
+      // performing custom serialization for folders
       if (folders != null) {
         List<Object> foldersJsonList = new List<Object>();
         for (SourceOptionsFolder listItem : folders) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           foldersJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String foldersKey = 'folders';
@@ -22653,11 +21050,11 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(foldersKey, foldersJsonList);
       }
 
-      // calling custom serializer for objects
+      // performing custom serialization for objects
       if (objects != null) {
         List<Object> objectsJsonList = new List<Object>();
         for (SourceOptionsObject listItem : objects) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           objectsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String objectsKey = 'objects';
@@ -22667,11 +21064,11 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(objectsKey, objectsJsonList);
       }
 
-      // calling custom serializer for siteCollections
+      // performing custom serialization for siteCollections
       if (siteCollections != null) {
         List<Object> siteCollectionsJsonList = new List<Object>();
         for (SourceOptionsSiteColl listItem : siteCollections) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           siteCollectionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String siteCollectionsKey = 'siteCollections';
@@ -22681,11 +21078,11 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(siteCollectionsKey, siteCollectionsJsonList);
       }
 
-      // calling custom serializer for urls
+      // performing custom serialization for urls
       if (urls != null) {
         List<Object> urlsJsonList = new List<Object>();
         for (SourceOptionsWebCrawl listItem : urls) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           urlsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String urlsKey = 'urls';
@@ -22695,11 +21092,11 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(urlsKey, urlsJsonList);
       }
 
-      // calling custom serializer for buckets
+      // performing custom serialization for buckets
       if (buckets != null) {
         List<Object> bucketsJsonList = new List<Object>();
         for (SourceOptionsBuckets listItem : buckets) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           bucketsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String bucketsKey = 'buckets';
@@ -22709,7 +21106,7 @@ public class IBMDiscoveryV1Models {
         jsonMap.put(bucketsKey, bucketsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -22966,9 +21363,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -22976,7 +21376,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -23126,9 +21526,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -23138,7 +21541,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -23287,9 +21690,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -23297,7 +21703,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -23433,9 +21839,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -23444,7 +21853,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -23673,9 +22082,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -23688,7 +22100,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -23936,9 +22348,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -23946,7 +22361,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -24087,421 +22502,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * The testConfigurationInEnvironment options.
-   */
-  public class TestConfigurationInEnvironmentOptions extends IBMWatsonOptionsModel {
-    private String environmentId;
-    private String configuration;
-    private IBMWatsonFile file;
-    private String filename;
-    private String fileContentType;
-    private String metadata;
-    private String step;
-    private String configurationId;
-
-    /**
-     * Gets the environmentId.
-     *
-     * The ID of the environment.
-     *
-     * @return the environmentId
-     */
-    public String environmentId() {
-      return environmentId;
-    }
-
-    /**
-     * Gets the configuration.
-     *
-     * The configuration to use to process the document. If this part is provided, then the provided configuration is
-     * used to process the document. If the **configuration_id** is also provided (both are present at the same time),
-     * then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB
-     * are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.
-     *
-     * @return the configuration
-     */
-    public String configuration() {
-      return configuration;
-    }
-
-    /**
-     * Gets the file.
-     *
-     * The content of the document to ingest. The maximum supported file size when adding a file to a collection is 50
-     * megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files larger than the
-     * supported size are rejected.
-     *
-     * @return the file
-     */
-    public IBMWatsonFile file() {
-      return file;
-    }
-
-    /**
-     * Gets the filename.
-     *
-     * The filename for file.
-     *
-     * @return the filename
-     */
-    public String filename() {
-      return filename;
-    }
-
-    /**
-     * Gets the fileContentType.
-     *
-     * The content type of file.
-     *
-     * @return the fileContentType
-     */
-    public String fileContentType() {
-      return fileContentType;
-    }
-
-    /**
-     * Gets the metadata.
-     *
-     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {
-     *   "Creator": "Johnny Appleseed",
-     *   "Subject": "Apples"
-     * } ```.
-     *
-     * @return the metadata
-     */
-    public String metadata() {
-      return metadata;
-    }
-
-    /**
-     * Gets the step.
-     *
-     * Specify to only run the input document through the given step instead of running the input document through the
-     * entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
-     *
-     * @return the step
-     */
-    public String step() {
-      return step;
-    }
-
-    /**
-     * Gets the configurationId.
-     *
-     * The ID of the configuration to use to process the document. If the **configuration** form part is also provided
-     * (both are present at the same time), then the request will be rejected.
-     *
-     * @return the configurationId
-     */
-    public String configurationId() {
-      return configurationId;
-    }
-
-    private TestConfigurationInEnvironmentOptions(TestConfigurationInEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.isTrue(builder.file == null || builder.fileContentType != null, 'content type cannot be null if file is not null');
-      environmentId = builder.environmentId;
-      configuration = builder.configuration;
-      file = builder.file;
-      filename = builder.filename;
-      fileContentType = builder.fileContentType;
-      metadata = builder.metadata;
-      step = builder.step;
-      configurationId = builder.configurationId;
-      this.requestHeaders = builder.requestHeaders;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder newBuilder() {
-      return new TestConfigurationInEnvironmentOptionsBuilder(this);
-    }
-  }
-
-  /**
-   * TestConfigurationInEnvironmentOptions Builder.
-   */
-  public class TestConfigurationInEnvironmentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environmentId;
-    private String configuration;
-    private IBMWatsonFile file;
-    private String filename;
-    private String fileContentType;
-    private String metadata;
-    private String step;
-    private String configurationId;
-
-    private TestConfigurationInEnvironmentOptionsBuilder(TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
-      environmentId = testConfigurationInEnvironmentOptions.environmentId;
-      configuration = testConfigurationInEnvironmentOptions.configuration;
-      file = testConfigurationInEnvironmentOptions.file;
-      filename = testConfigurationInEnvironmentOptions.filename;
-      fileContentType = testConfigurationInEnvironmentOptions.fileContentType;
-      metadata = testConfigurationInEnvironmentOptions.metadata;
-      step = testConfigurationInEnvironmentOptions.step;
-      configurationId = testConfigurationInEnvironmentOptions.configurationId;
-      this.requestHeaders.putAll(testConfigurationInEnvironmentOptions.requestHeaders());
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param environmentId the environmentId
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
-    }
-
-    /**
-     * Builds a TestConfigurationInEnvironmentOptions.
-     *
-     * @return the testConfigurationInEnvironmentOptions
-     */
-    public TestConfigurationInEnvironmentOptions build() {
-      return new TestConfigurationInEnvironmentOptions(this);
-    }
-
-    /**
-     * Set the environmentId.
-     *
-     * @param environmentId the environmentId
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
-      return this;
-    }
-
-    /**
-     * Set the configuration.
-     *
-     * @param configuration the configuration
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder configuration(String configuration) {
-      this.configuration = configuration;
-      return this;
-    }
-
-    /**
-     * Set the file.
-     *
-     * @param file the file
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder file(IBMWatsonFile file) {
-      this.file = file;
-      return this;
-    }
-
-    /**
-     * Set the filename.
-     *
-     * @param filename the filename
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder filename(String filename) {
-      this.filename = filename;
-      return this;
-    }
-
-    /**
-     * Set the fileContentType.
-     *
-     * @param fileContentType the fileContentType
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder fileContentType(String fileContentType) {
-      this.fileContentType = fileContentType;
-      return this;
-    }
-
-    /**
-     * Set the metadata.
-     *
-     * @param metadata the metadata
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder metadata(String metadata) {
-      this.metadata = metadata;
-      return this;
-    }
-
-    /**
-     * Set the step.
-     *
-     * @param step the step
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder step(String step) {
-      this.step = step;
-      return this;
-    }
-
-    /**
-     * Set the configurationId.
-     *
-     * @param configurationId the configurationId
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder configurationId(String configurationId) {
-      this.configurationId = configurationId;
-      return this;
-    }
-
-    /**
-     * Add a request header.
-     *
-     * @param name the header name
-     * @param value the header value
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder addHeader(String name, String value) {
-      this.requestHeaders.put(name, value);
-      return this;
-    }
-  }
-
-  /**
-   * TestDocument.
-   */
-  public class TestDocument extends IBMWatsonResponseModel {
-    private String configurationId;
-    private String status;
-    private Long enrichedFieldUnits;
-    private String originalMediaType;
-    private List<DocumentSnapshot> snapshots;
-    private List<Notice> notices;
-
-    /**
-     * Gets the configurationId.
-     *
-     * The unique identifier for the configuration.
-     *
-     * @return the configurationId
-     */
-    @AuraEnabled
-    public String getConfigurationId() {
-      return configurationId;
-    }
-
-    /**
-     * Gets the status.
-     *
-     * Status of the preview operation.
-     *
-     * @return the status
-     */
-    @AuraEnabled
-    public String getStatus() {
-      return status;
-    }
-
-    /**
-     * Gets the enrichedFieldUnits.
-     *
-     * The number of 10-kB chunks of field data that were enriched. This can be used to estimate the cost of running a
-     * real ingestion.
-     *
-     * @return the enrichedFieldUnits
-     */
-    @AuraEnabled
-    public Long getEnrichedFieldUnits() {
-      return enrichedFieldUnits;
-    }
-
-    /**
-     * Gets the originalMediaType.
-     *
-     * Format of the test document.
-     *
-     * @return the originalMediaType
-     */
-    @AuraEnabled
-    public String getOriginalMediaType() {
-      return originalMediaType;
-    }
-
-    /**
-     * Gets the snapshots.
-     *
-     * An array of objects that describe each step in the preview process.
-     *
-     * @return the snapshots
-     */
-    @AuraEnabled
-    public List<DocumentSnapshot> getSnapshots() {
-      return snapshots;
-    }
-
-    /**
-     * Gets the notices.
-     *
-     * An array of notice messages about the preview operation.
-     *
-     * @return the notices
-     */
-    @AuraEnabled
-    public List<Notice> getNotices() {
-      return notices;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'configuration_id' => 'configurationId',
-        'enriched_field_units' => 'enrichedFieldUnits',
-        'original_media_type' => 'originalMediaType'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      TestDocument ret = (TestDocument) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for snapshots
-      List<DocumentSnapshot> newSnapshots = new List<DocumentSnapshot>();
-      List<DocumentSnapshot> deserializedSnapshots = ret.getSnapshots();
-      if (deserializedSnapshots != null) {
-        for (Integer i = 0; i < deserializedSnapshots.size(); i++) {
-          DocumentSnapshot currentItem = ret.getSnapshots().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('snapshots');
-          DocumentSnapshot newItem = (DocumentSnapshot) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentSnapshot.class);
-          newSnapshots.add(newItem);
-        }
-        ret.snapshots = newSnapshots;
-      }
-
-      // calling custom deserializer for notices
-      List<Notice> newNotices = new List<Notice>();
-      List<Notice> deserializedNotices = ret.getNotices();
-      if (deserializedNotices != null) {
-        for (Integer i = 0; i < deserializedNotices.size(); i++) {
-          Notice currentItem = ret.getNotices().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
-          newNotices.add(newItem);
-        }
-        ret.notices = newNotices;
-      }
-
-      return ret;
-    }
-  }
-
-  /**
    * An object defining a single tokenizaion rule.
    */
   public class TokenDictRule extends IBMWatsonGenericModel {
@@ -24574,9 +22574,12 @@ public class IBMDiscoveryV1Models {
       return new TokenDictRuleBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -24584,7 +22587,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -24777,7 +22780,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * TopHitsResults.
+   * Top hit information for this query.
    */
   public class TopHitsResults extends IBMWatsonGenericModel {
     private Long matchingResults;
@@ -24857,7 +22860,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * TrainingDataSet.
+   * Training information for a specific collection.
    */
   public class TrainingDataSet extends IBMWatsonResponseModel {
     private String environmentId;
@@ -24960,7 +22963,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * TrainingExample.
+   * Training example details.
    */
   public class TrainingExample extends IBMWatsonResponseModel {
     private String documentId;
@@ -25043,9 +23046,12 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -25054,7 +23060,7 @@ public class IBMDiscoveryV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -25122,7 +23128,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * TrainingExampleList.
+   * Object containing an array of training examples.
    */
   public class TrainingExampleList extends IBMWatsonResponseModel {
     private List<TrainingExample> examples;
@@ -25173,7 +23179,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * TrainingQuery.
+   * Training query details.
    */
   public class TrainingQuery extends IBMWatsonResponseModel {
     private String queryId;
@@ -25298,7 +23304,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * TrainingStatus.
+   * Training status details.
    */
   public class TrainingStatus extends IBMWatsonGenericModel {
     private Long totalExamples;
@@ -25517,17 +23523,7 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      String dataUpdated = (String) jsonMap.remove('dataUpdated');
-      String successfullyTrained = (String) jsonMap.remove('successfullyTrained');
-      String jsonStringWithoutDates = JSON.serialize(jsonMap);
-
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
-      if (String.isNotBlank(dataUpdated)) {
-        ret.setDataUpdated((Datetime) JSON.deserialize('"' + dataUpdated + '"', Datetime.class));
-      }
-      if (String.isNotBlank(successfullyTrained)) {
-        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfullyTrained + '"', Datetime.class));
-      }
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -26945,7 +24941,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * WordHeadingDetection.
+   * Object containing heading detection conversion settings for Microsoft Word documents.
    */
   public class WordHeadingDetection extends IBMWatsonGenericModel {
     private List<FontSetting> fonts;
@@ -26960,6 +24956,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the fonts.
      *
+     * Array of font matching configurations.
+     *
      * @return the fonts
      */
     @AuraEnabled
@@ -26969,6 +24967,8 @@ public class IBMDiscoveryV1Models {
 
     /**
      * Gets the styles.
+     *
+     * Array of Microsoft Word styles to convert.
      *
      * @return the styles
      */
@@ -27028,31 +25028,31 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for fonts
+      // performing custom serialization for fonts
       if (fonts != null) {
         List<Object> fontsJsonList = new List<Object>();
         for (FontSetting listItem : fonts) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           fontsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('fonts', fontsJsonList);
       }
 
-      // calling custom serializer for styles
+      // performing custom serialization for styles
       if (styles != null) {
         List<Object> stylesJsonList = new List<Object>();
         for (WordStyle listItem : styles) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           stylesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('styles', stylesJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -27153,6 +25153,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the heading.
      *
+     * Object containing heading detection conversion settings for Microsoft Word documents.
+     *
      * @return the heading
      */
     @AuraEnabled
@@ -27189,17 +25191,17 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for heading
+      // performing custom serialization for heading
       if (heading != null) {
-        String headingJsonString = heading.serialize();
+        String headingJsonString = JSON.serialize(heading.replacePropertyNames());
         jsonMap.put('heading', JSON.deserializeUntyped(headingJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -27241,7 +25243,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * WordStyle.
+   * Microsoft Word styles to convert into a specified HTML head level.
    */
   public class WordStyle extends IBMWatsonGenericModel {
     private Long level;
@@ -27302,11 +25304,11 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -27377,7 +25379,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * XPathPatterns.
+   * Object containing an array of XPaths.
    */
   public class XPathPatterns extends IBMWatsonGenericModel {
     private List<String> xpaths;
@@ -27424,11 +25426,11 @@ public class IBMDiscoveryV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 

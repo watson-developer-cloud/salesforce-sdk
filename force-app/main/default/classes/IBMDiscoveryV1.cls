@@ -18,6 +18,16 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * Instantiates a new `IBMDiscoveryV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *          calls from failing when the service introduces breaking changes.
+   */
+   public IBMDiscoveryV1(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMDiscoveryV1`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
@@ -244,24 +254,24 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('description', createConfigurationOptions.description());
     }
     if (createConfigurationOptions.conversions() != null) {
-      contentJson.put('conversions', createConfigurationOptions.conversions().serialize());
+      contentJson.put('conversions', createConfigurationOptions.conversions().replacePropertyNames());
     }
     if (createConfigurationOptions.enrichments() != null) {
       List<Object> enrichmentsList = new List<Object>();
       for (IBMDiscoveryV1Models.Enrichment enrichmentsItem : createConfigurationOptions.enrichments()) {
-        enrichmentsList.add(enrichmentsItem.serialize());
+        enrichmentsList.add(enrichmentsItem.replacePropertyNames());
       }
       contentJson.put('enrichments', enrichmentsList);
     }
     if (createConfigurationOptions.normalizations() != null) {
       List<Object> normalizationsList = new List<Object>();
       for (IBMDiscoveryV1Models.NormalizationOperation normalizationsItem : createConfigurationOptions.normalizations()) {
-        normalizationsList.add(normalizationsItem.serialize());
+        normalizationsList.add(normalizationsItem.replacePropertyNames());
       }
       contentJson.put('normalizations', normalizationsList);
     }
     if (createConfigurationOptions.source() != null) {
-      contentJson.put('source', createConfigurationOptions.source().serialize());
+      contentJson.put('source', createConfigurationOptions.source().replacePropertyNames());
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
@@ -352,24 +362,24 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('description', updateConfigurationOptions.description());
     }
     if (updateConfigurationOptions.conversions() != null) {
-      contentJson.put('conversions', updateConfigurationOptions.conversions().serialize());
+      contentJson.put('conversions', updateConfigurationOptions.conversions().replacePropertyNames());
     }
     if (updateConfigurationOptions.enrichments() != null) {
       List<Object> enrichmentsList = new List<Object>();
       for (IBMDiscoveryV1Models.Enrichment enrichmentsItem : updateConfigurationOptions.enrichments()) {
-        enrichmentsList.add(enrichmentsItem.serialize());
+        enrichmentsList.add(enrichmentsItem.replacePropertyNames());
       }
       contentJson.put('enrichments', enrichmentsList);
     }
     if (updateConfigurationOptions.normalizations() != null) {
       List<Object> normalizationsList = new List<Object>();
       for (IBMDiscoveryV1Models.NormalizationOperation normalizationsItem : updateConfigurationOptions.normalizations()) {
-        normalizationsList.add(normalizationsItem.serialize());
+        normalizationsList.add(normalizationsItem.replacePropertyNames());
       }
       contentJson.put('normalizations', normalizationsList);
     }
     if (updateConfigurationOptions.source() != null) {
-      contentJson.put('source', updateConfigurationOptions.source().serialize());
+      contentJson.put('source', updateConfigurationOptions.source().replacePropertyNames());
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
@@ -402,55 +412,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Test configuration.
-   *
-   * **Deprecated** This method is no longer supported and is scheduled to be removed from service on July 31st 2019.
-   *
-   *  Runs a sample document through the default or your configuration and returns diagnostic information designed to
-   * help you understand how the document was processed. The document is not added to the index.
-   *
-   * @param testConfigurationInEnvironmentOptions the {@link IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions} containing the options for the call
-   * @return the {@link IBMDiscoveryV1Models.TestDocument} with the response
-   */
-  public IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
-    IBMWatsonValidator.notNull(testConfigurationInEnvironmentOptions, 'testConfigurationInEnvironmentOptions cannot be null');
-    IBMWatsonValidator.isTrue((testConfigurationInEnvironmentOptions.configuration() != null) || (testConfigurationInEnvironmentOptions.file() != null) || (testConfigurationInEnvironmentOptions.metadata() != null), 'At least one of configuration, file, or metadata must be supplied.');
-    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/preview', new String[]{ testConfigurationInEnvironmentOptions.environmentId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=testConfigurationInEnvironment');
-    Map<String, String> requestHeaders = (testConfigurationInEnvironmentOptions != null) ? testConfigurationInEnvironmentOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (testConfigurationInEnvironmentOptions.step() != null) {
-      builder.query('step', testConfigurationInEnvironmentOptions.step());
-    }
-    if (testConfigurationInEnvironmentOptions.configurationId() != null) {
-      builder.query('configuration_id', testConfigurationInEnvironmentOptions.configurationId());
-    }
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (testConfigurationInEnvironmentOptions.configuration() != null) {
-      multipartBuilder.addFormDataPart('configuration', testConfigurationInEnvironmentOptions.configuration());
-    }
-    if (testConfigurationInEnvironmentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
-      multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), fileBody);
-    }
-    if (testConfigurationInEnvironmentOptions.metadata() != null) {
-      multipartBuilder.addFormDataPart('metadata', testConfigurationInEnvironmentOptions.metadata());
-    }
-    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
-    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
-
-    return (IBMDiscoveryV1Models.TestDocument) createServiceCall(builder.build(), IBMDiscoveryV1Models.TestDocument.class);
   }
 
   /**
@@ -672,7 +633,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     List<Object> expansionsList = new List<Object>();
     for (IBMDiscoveryV1Models.Expansion expansionsItem : createExpansionsOptions.expansions()) {
-      expansionsList.add(expansionsItem.serialize());
+      expansionsList.add(expansionsItem.replacePropertyNames());
     }
     contentJson.put('expansions', expansionsList);
     builder.bodyJson(JSON.serialize(contentJson));
@@ -755,7 +716,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createTokenizationDictionaryOptions.tokenizationRules() != null) {
       List<Object> tokenizationRulesList = new List<Object>();
       for (IBMDiscoveryV1Models.TokenDictRule tokenizationRulesItem : createTokenizationDictionaryOptions.tokenizationRules()) {
-        tokenizationRulesList.add(tokenizationRulesItem.serialize());
+        tokenizationRulesList.add(tokenizationRulesItem.replacePropertyNames());
       }
       contentJson.put('tokenization_rules', tokenizationRulesList);
     }
@@ -1092,9 +1053,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryOptions.deduplicateField() != null) {
       contentJson.put('deduplicate.field', queryOptions.deduplicateField());
     }
-    if (queryOptions.collectionIds() != null) {
-      contentJson.put('collection_ids', queryOptions.collectionIds());
-    }
     if (queryOptions.similar() != null) {
       contentJson.put('similar', queryOptions.similar());
     }
@@ -1106,6 +1064,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (queryOptions.bias() != null) {
       contentJson.put('bias', queryOptions.bias());
+    }
+    if (queryOptions.spellingSuggestions() != null) {
+      contentJson.put('spelling_suggestions', queryOptions.spellingSuggestions());
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
@@ -1263,9 +1224,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.deduplicateField() != null) {
       contentJson.put('deduplicate.field', federatedQueryOptions.deduplicateField());
     }
-    if (federatedQueryOptions.collectionIds() != null) {
-      contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
-    }
     if (federatedQueryOptions.similar() != null) {
       contentJson.put('similar', federatedQueryOptions.similar());
     }
@@ -1277,6 +1235,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (federatedQueryOptions.bias() != null) {
       contentJson.put('bias', federatedQueryOptions.bias());
+    }
+    if (federatedQueryOptions.collectionIds() != null) {
+      contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
@@ -1354,96 +1315,38 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
-   * Knowledge Graph entity query.
+   * Get Autocomplete Suggestions.
    *
-   * See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
-   * more details.
+   * Returns completion query suggestions for the specified prefix.  /n/n **Important:** this method is only valid when
+   * using the Cloud Pak version of Discovery.
    *
-   * @param queryEntitiesOptions the {@link IBMDiscoveryV1Models.QueryEntitiesOptions} containing the options for the call
-   * @return the {@link IBMDiscoveryV1Models.QueryEntitiesResponse} with the response
+   * @param getAutocompletionOptions the {@link IBMDiscoveryV1Models.GetAutocompletionOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Completions} with the response
    */
-  public IBMDiscoveryV1Models.QueryEntitiesResponse queryEntities(IBMDiscoveryV1Models.QueryEntitiesOptions queryEntitiesOptions) {
-    IBMWatsonValidator.notNull(queryEntitiesOptions, 'queryEntitiesOptions cannot be null');
+  public IBMDiscoveryV1Models.Completions getAutocompletion(IBMDiscoveryV1Models.GetAutocompletionOptions getAutocompletionOptions) {
+    IBMWatsonValidator.notNull(getAutocompletionOptions, 'getAutocompletionOptions cannot be null');
     IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/query_entities', new String[]{ queryEntitiesOptions.environmentId(), queryEntitiesOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/autocompletion', new String[]{ getAutocompletionOptions.environmentId(), getAutocompletionOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=queryEntities');
-    Map<String, String> requestHeaders = (queryEntitiesOptions != null) ? queryEntitiesOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getAutocompletion');
+    Map<String, String> requestHeaders = (getAutocompletionOptions != null) ? getAutocompletionOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
     builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    if (queryEntitiesOptions.feature() != null) {
-      contentJson.put('feature', queryEntitiesOptions.feature());
+    if (getAutocompletionOptions.field() != null) {
+      builder.query('field', getAutocompletionOptions.field());
     }
-    if (queryEntitiesOptions.entity() != null) {
-      contentJson.put('entity', queryEntitiesOptions.entity().serialize());
+    if (getAutocompletionOptions.prefix() != null) {
+      builder.query('prefix', getAutocompletionOptions.prefix());
     }
-    if (queryEntitiesOptions.context() != null) {
-      contentJson.put('context', queryEntitiesOptions.context().serialize());
+    if (getAutocompletionOptions.count() != null) {
+      builder.query('count', String.valueOf(getAutocompletionOptions.count()));
     }
-    if (queryEntitiesOptions.count() != null) {
-      contentJson.put('count', queryEntitiesOptions.count());
-    }
-    if (queryEntitiesOptions.evidenceCount() != null) {
-      contentJson.put('evidence_count', queryEntitiesOptions.evidenceCount());
-    }
-    builder.bodyJson(JSON.serialize(contentJson));
 
-    return (IBMDiscoveryV1Models.QueryEntitiesResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryEntitiesResponse.class);
-  }
-
-  /**
-   * Knowledge Graph relationship query.
-   *
-   * See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
-   * more details.
-   *
-   * @param queryRelationsOptions the {@link IBMDiscoveryV1Models.QueryRelationsOptions} containing the options for the call
-   * @return the {@link IBMDiscoveryV1Models.QueryRelationsResponse} with the response
-   */
-  public IBMDiscoveryV1Models.QueryRelationsResponse queryRelations(IBMDiscoveryV1Models.QueryRelationsOptions queryRelationsOptions) {
-    IBMWatsonValidator.notNull(queryRelationsOptions, 'queryRelationsOptions cannot be null');
-    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/query_relations', new String[]{ queryRelationsOptions.environmentId(), queryRelationsOptions.collectionId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=queryRelations');
-    Map<String, String> requestHeaders = (queryRelationsOptions != null) ? queryRelationsOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    if (queryRelationsOptions.entities() != null) {
-      List<Object> entitiesList = new List<Object>();
-      for (IBMDiscoveryV1Models.QueryRelationsEntity entitiesItem : queryRelationsOptions.entities()) {
-        entitiesList.add(entitiesItem.serialize());
-      }
-      contentJson.put('entities', entitiesList);
-    }
-    if (queryRelationsOptions.context() != null) {
-      contentJson.put('context', queryRelationsOptions.context().serialize());
-    }
-    if (queryRelationsOptions.xSort() != null) {
-      contentJson.put('sort', queryRelationsOptions.xSort());
-    }
-    if (queryRelationsOptions.filter() != null) {
-      contentJson.put('filter', queryRelationsOptions.filter().serialize());
-    }
-    if (queryRelationsOptions.count() != null) {
-      contentJson.put('count', queryRelationsOptions.count());
-    }
-    if (queryRelationsOptions.evidenceCount() != null) {
-      contentJson.put('evidence_count', queryRelationsOptions.evidenceCount());
-    }
-    builder.bodyJson(JSON.serialize(contentJson));
-
-    return (IBMDiscoveryV1Models.QueryRelationsResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryRelationsResponse.class);
+    return (IBMDiscoveryV1Models.Completions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Completions.class);
   }
 
   /**
@@ -1502,7 +1405,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (addTrainingDataOptions.examples() != null) {
       List<Object> examplesList = new List<Object>();
       for (IBMDiscoveryV1Models.TrainingExample examplesItem : addTrainingDataOptions.examples()) {
-        examplesList.add(examplesItem.serialize());
+        examplesList.add(examplesItem.replacePropertyNames());
       }
       contentJson.put('examples', examplesList);
     }
@@ -1783,7 +1686,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('type', createEventOptions.xType());
-    contentJson.put('data', createEventOptions.data().serialize());
+    contentJson.put('data', createEventOptions.data().replacePropertyNames());
     builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.CreateEventResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.CreateEventResponse.class);
@@ -2051,7 +1954,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('source_type', createCredentialsOptions.sourceType());
     }
     if (createCredentialsOptions.credentialDetails() != null) {
-      contentJson.put('credential_details', createCredentialsOptions.credentialDetails().serialize());
+      contentJson.put('credential_details', createCredentialsOptions.credentialDetails().replacePropertyNames());
     }
     if (createCredentialsOptions.status() != null) {
       contentJson.put('status', createCredentialsOptions.status());
@@ -2117,7 +2020,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('source_type', updateCredentialsOptions.sourceType());
     }
     if (updateCredentialsOptions.credentialDetails() != null) {
-      contentJson.put('credential_details', updateCredentialsOptions.credentialDetails().serialize());
+      contentJson.put('credential_details', updateCredentialsOptions.credentialDetails().replacePropertyNames());
     }
     if (updateCredentialsOptions.status() != null) {
       contentJson.put('status', updateCredentialsOptions.status());
