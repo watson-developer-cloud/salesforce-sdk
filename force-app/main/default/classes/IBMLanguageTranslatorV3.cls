@@ -18,6 +18,16 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    * Instantiates a new `IBMLanguageTranslatorV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *          calls from failing when the service introduces breaking changes.
+   */
+   public IBMLanguageTranslatorV3(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMLanguageTranslatorV3`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
