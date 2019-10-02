@@ -1117,9 +1117,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new CategoriesOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -1127,7 +1130,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -1415,9 +1418,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new ConceptsOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -1425,7 +1431,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -1886,11 +1892,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new EmotionOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -2253,9 +2259,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new EntitiesOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -2263,7 +2272,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -2902,9 +2911,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new FeaturesBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -2912,9 +2924,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for concepts
+      // performing custom serialization for concepts
       if (concepts != null) {
-        String conceptsJsonString = concepts.serialize();
+        String conceptsJsonString = JSON.serialize(concepts.replacePropertyNames());
         String conceptsKey = 'concepts';
         if (propertyNameMapping.containsKey(conceptsKey)) {
           conceptsKey = propertyNameMapping.get(conceptsKey);
@@ -2922,9 +2934,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(conceptsKey, JSON.deserializeUntyped(conceptsJsonString));
       }
 
-      // calling custom serializer for emotion
+      // performing custom serialization for emotion
       if (emotion != null) {
-        String emotionJsonString = emotion.serialize();
+        String emotionJsonString = JSON.serialize(emotion.replacePropertyNames());
         String emotionKey = 'emotion';
         if (propertyNameMapping.containsKey(emotionKey)) {
           emotionKey = propertyNameMapping.get(emotionKey);
@@ -2932,9 +2944,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(emotionKey, JSON.deserializeUntyped(emotionJsonString));
       }
 
-      // calling custom serializer for entities
+      // performing custom serialization for entities
       if (entities != null) {
-        String entitiesJsonString = entities.serialize();
+        String entitiesJsonString = JSON.serialize(entities.replacePropertyNames());
         String entitiesKey = 'entities';
         if (propertyNameMapping.containsKey(entitiesKey)) {
           entitiesKey = propertyNameMapping.get(entitiesKey);
@@ -2942,9 +2954,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(entitiesKey, JSON.deserializeUntyped(entitiesJsonString));
       }
 
-      // calling custom serializer for keywords
+      // performing custom serialization for keywords
       if (keywords != null) {
-        String keywordsJsonString = keywords.serialize();
+        String keywordsJsonString = JSON.serialize(keywords.replacePropertyNames());
         String keywordsKey = 'keywords';
         if (propertyNameMapping.containsKey(keywordsKey)) {
           keywordsKey = propertyNameMapping.get(keywordsKey);
@@ -2952,9 +2964,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(keywordsKey, JSON.deserializeUntyped(keywordsJsonString));
       }
 
-      // calling custom serializer for metadata
+      // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = metadata.serialize();
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -2962,9 +2974,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(metadataKey, JSON.deserializeUntyped(metadataJsonString));
       }
 
-      // calling custom serializer for relations
+      // performing custom serialization for relations
       if (relations != null) {
-        String relationsJsonString = relations.serialize();
+        String relationsJsonString = JSON.serialize(relations.replacePropertyNames());
         String relationsKey = 'relations';
         if (propertyNameMapping.containsKey(relationsKey)) {
           relationsKey = propertyNameMapping.get(relationsKey);
@@ -2972,9 +2984,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(relationsKey, JSON.deserializeUntyped(relationsJsonString));
       }
 
-      // calling custom serializer for semanticRoles
+      // performing custom serialization for semanticRoles
       if (semanticRoles != null) {
-        String semanticRolesJsonString = semanticRoles.serialize();
+        String semanticRolesJsonString = JSON.serialize(semanticRoles.replacePropertyNames());
         String semanticRolesKey = 'semanticRoles';
         if (propertyNameMapping.containsKey(semanticRolesKey)) {
           semanticRolesKey = propertyNameMapping.get(semanticRolesKey);
@@ -2982,9 +2994,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(semanticRolesKey, JSON.deserializeUntyped(semanticRolesJsonString));
       }
 
-      // calling custom serializer for sentiment
+      // performing custom serialization for sentiment
       if (sentiment != null) {
-        String sentimentJsonString = sentiment.serialize();
+        String sentimentJsonString = JSON.serialize(sentiment.replacePropertyNames());
         String sentimentKey = 'sentiment';
         if (propertyNameMapping.containsKey(sentimentKey)) {
           sentimentKey = propertyNameMapping.get(sentimentKey);
@@ -2992,9 +3004,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(sentimentKey, JSON.deserializeUntyped(sentimentJsonString));
       }
 
-      // calling custom serializer for categories
+      // performing custom serialization for categories
       if (categories != null) {
-        String categoriesJsonString = categories.serialize();
+        String categoriesJsonString = JSON.serialize(categories.replacePropertyNames());
         String categoriesKey = 'categories';
         if (propertyNameMapping.containsKey(categoriesKey)) {
           categoriesKey = propertyNameMapping.get(categoriesKey);
@@ -3002,9 +3014,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(categoriesKey, JSON.deserializeUntyped(categoriesJsonString));
       }
 
-      // calling custom serializer for syntax
+      // performing custom serialization for syntax
       if (syntax != null) {
-        String syntaxJsonString = syntax.serialize();
+        String syntaxJsonString = JSON.serialize(syntax.replacePropertyNames());
         String syntaxKey = 'syntax';
         if (propertyNameMapping.containsKey(syntaxKey)) {
           syntaxKey = propertyNameMapping.get(syntaxKey);
@@ -3012,7 +3024,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         jsonMap.put(syntaxKey, JSON.deserializeUntyped(syntaxJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -3266,9 +3278,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new KeywordsOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -3276,7 +3291,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -3604,11 +3619,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new MetadataOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -4036,11 +4051,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new RelationsOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -4368,9 +4383,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SemanticRolesOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -4378,7 +4396,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -5003,11 +5021,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SentimentOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -5198,17 +5216,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SyntaxOptionsBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for tokens
+      // performing custom serialization for tokens
       if (tokens != null) {
-        String tokensJsonString = tokens.serialize();
+        String tokensJsonString = JSON.serialize(tokens.replacePropertyNames());
         jsonMap.put('tokens', JSON.deserializeUntyped(tokensJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -5305,9 +5323,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return new SyntaxOptionsTokensBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -5315,7 +5336,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 

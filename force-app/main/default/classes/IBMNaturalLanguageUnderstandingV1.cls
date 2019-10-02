@@ -21,6 +21,16 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    * Instantiates a new `IBMNaturalLanguageUnderstandingV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *          calls from failing when the service introduces breaking changes.
+   */
+   public IBMNaturalLanguageUnderstandingV1(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMNaturalLanguageUnderstandingV1`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
@@ -69,7 +79,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('features', analyzeOptions.features().serialize());
+    contentJson.put('features', analyzeOptions.features().replacePropertyNames());
     if (analyzeOptions.text() != null) {
       contentJson.put('text', analyzeOptions.text());
     }
