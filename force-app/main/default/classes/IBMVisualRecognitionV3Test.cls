@@ -66,53 +66,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getImages()[0].getResolvedUrl(), 'string');
     Test.stopTest();
   }
-  /**
-   *  Test Analyze text, HTML, or a public webpage.
-   *
-   */
-  static testMethod void testDetectFaces() {
-    String body = IBMWatsonMockResponses.detectedFaces();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
 
-    Attachment att = new Attachment(Body=Blob.valueOf('test string'),
-      Name='test.txt',
-      Description='test description',
-      ContentType='text/plain');
-    IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
-      .body(att.Body)
-      .name(att.Name)
-      .description(att.Description)
-      .contentType(att.ContentType)
-      .build();
-    IBMVisualRecognitionV3Models.DetectFacesOptions options = new IBMVisualRecognitionV3Models.DetectFacesOptionsBuilder()
-      .imagesFile(testfile)
-      .imagesFilename(att.Name)
-      .imagesFileContentType(att.ContentType)
-      .acceptLanguage('es')
-      .addHeader('Test-Header', 'test_value')
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMVisualRecognitionV3Models.DetectedFaces resp = service.detectFaces(options);
-    System.assertEquals(resp.getImagesProcessed(),0);
-    System.assertEquals(resp.getImages()[0].getImage(), 'string');
-    System.assertEquals(resp.getImages()[0].getSourceUrl(), 'string');
-    System.assertEquals(resp.getImages()[0].getResolvedUrl(), 'string');
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getAge().getMin(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getAge().getMax(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getAge().getScore(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getGender().getGender(), 'string');
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getGender().getScore(),0);
-    System.assertEquals('male', resp.getImages()[0].getFaces()[0].getGender().getGenderLabel());
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getWidth(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getHeight(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getLeft(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getTop(),0);
-    System.assertEquals(resp.getImages()[0].getError().getErrorId(), 'string');
-    Test.stopTest();
-  }
   /**
    *  Test Create a classifier.
    *

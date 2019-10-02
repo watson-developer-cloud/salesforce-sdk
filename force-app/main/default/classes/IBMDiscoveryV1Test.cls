@@ -1538,36 +1538,6 @@ private class IBMDiscoveryV1Test {
   }
 
   /**
-   *  Test configuration
-   */
-  static testMethod void testConfigurationInEnvironment() {
-    String body = IBMWatsonMockResponses.testDocument();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMWatsonFile testfile = new IBMWatsonFile.FileBuilder()
-      .body(Blob.valueOf('test string'))
-      .name('test.txt')
-      .description('test description')
-      .contentType('text/plain')
-      .build();
-    IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions options = new IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .file(testfile)
-      .filename('test.txt')
-      .fileContentType('text/plain')
-      .addHeader('Test-Header', 'test_value')
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.TestDocument resp =
-      service.testConfigurationInEnvironment(options);
-    Test.stopTest();
-  }
-
-  /**
    *  Update a document.
    *
    */
@@ -1683,98 +1653,6 @@ private class IBMDiscoveryV1Test {
         .build();
     service.deleteExpansions(deleteOptions);
 
-    Test.stopTest();
-  }
-
-  static testMethod void testQueryEntities() {
-    String body = IBMWatsonMockResponses.queryEntitiesResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContextBuilder()
-      .text('text')
-      .build();
-    IBMDiscoveryV1Models.QueryEntitiesEntity entity = new IBMDiscoveryV1Models.QueryEntitiesEntityBuilder()
-      .xtype('type')
-      .text('text')
-      .build();
-    IBMDiscoveryV1Models.QueryEntitiesOptions options = new IBMDiscoveryV1Models.QueryEntitiesOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .context(context)
-      .count(10)
-      .entity(entity)
-      .evidenceCount(10)
-      .feature('feature')
-      .addHeader('Test-Header', 'test_value')
-      .build();
-    IBMDiscoveryV1Models.QueryEntitiesResponse resp = service.queryEntities(options);
-
-    System.assertEquals(1, resp.getEntities().size());
-    System.assertEquals('Steve Jobs', resp.getEntities().get(0).getText());
-    System.assertEquals('PERSON', resp.getEntities().get(0).getXtype());
-    System.assertEquals(1, resp.getEntities().get(0).getEvidence().size());
-    System.assertEquals('cb77ce6b-bb93-42a0-8643-dfb523e14da8', resp.getEntities().get(0).getEvidence().get(0).getDocumentId());
-    System.assertEquals('description', resp.getEntities().get(0).getEvidence().get(0).getField());
-    System.assertEquals(305, resp.getEntities().get(0).getEvidence().get(0).getStartOffset());
-    System.assertEquals(392, resp.getEntities().get(0).getEvidence().get(0).getEndOffset());
-    System.assertEquals('Person', resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getXtype());
-    System.assertEquals('Steve Jobs', resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getText());
-    System.assertEquals(311, resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getStartOffset());
-    System.assertEquals(321, resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getEndOffset());
-    Test.stopTest();
-  }
-
-  static testMethod void testQueryRelations() {
-    String body = IBMWatsonMockResponses.queryRelationsResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContextBuilder()
-      .text('text')
-      .build();
-    IBMDiscoveryV1Models.QueryRelationsEntity entity = new IBMDiscoveryV1Models.QueryRelationsEntityBuilder()
-      .xType('text')
-      .exact(true)
-      .text('text')
-      .build();
-    IBMDiscoveryV1Models.QueryFilterType filterType = new IBMDiscoveryV1Models.QueryFilterTypeBuilder()
-      .include(new List<String>{ 'include' })
-      .exclude(new List<String>{ 'exclude' })
-      .build();
-    IBMDiscoveryV1Models.QueryRelationsFilter filter = new IBMDiscoveryV1Models.QueryRelationsFilterBuilder()
-      .documentIds(new List<String> { 'id' })
-      .entityTypes(filterType)
-      .relationTypes(filterType)
-      .build();
-    IBMDiscoveryV1Models.QueryRelationsOptions options = new IBMDiscoveryV1Models.QueryRelationsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addEntities(entity)
-      .context(context)
-      .count(10)
-      .evidenceCount(10)
-      .filter(filter)
-      .xSort('text')
-      .addHeader('Test-Header', 'test_value')
-      .build();
-    IBMDiscoveryV1Models.QueryRelationsResponse resp = service.queryRelations(options);
-
-    System.assertEquals(1, resp.getRelations().size());
-    System.assertEquals('FOUNDEROF', resp.getRelations().get(0).getXtype());
-    System.assertEquals(7, resp.getRelations().get(0).getFrequency());
-    System.assertEquals('PERSON', resp.getRelations().get(0).getArguments().get(0).getEntities().get(0).getXtype());
-    System.assertEquals('Steve Jobs', resp.getRelations().get(0).getArguments().get(0).getEntities().get(0).getText());
-    System.assertEquals('b95df4c1-d00f-4771-abb2-a52baea0444a', resp.getRelations().get(0).getEvidence().get(0).getDocumentId());
-    System.assertEquals('text', resp.getRelations().get(0).getEvidence().get(0).getField());
-    System.assertEquals(243, resp.getRelations().get(0).getEvidence().get(0).getStartOffset());
-    System.assertEquals(303, resp.getRelations().get(0).getEvidence().get(0).getEndOffset());
-    System.assertEquals('Person', resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getXtype());
-    System.assertEquals('Steve Jobs', resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getText());
-    System.assertEquals(243, resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getStartOffset());
-    System.assertEquals(253, resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getEndOffset());
     Test.stopTest();
   }
 
