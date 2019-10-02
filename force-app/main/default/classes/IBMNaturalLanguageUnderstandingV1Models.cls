@@ -1119,7 +1119,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -1420,7 +1420,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -1894,7 +1894,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -2261,7 +2261,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -2913,7 +2913,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -3280,7 +3280,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -3621,7 +3621,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -4053,7 +4053,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -4385,7 +4385,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -5023,7 +5023,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -5218,7 +5218,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for tokens
       if (tokens != null) {
@@ -5325,7 +5325,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
