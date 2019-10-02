@@ -32,11 +32,10 @@ private class IBMVisualRecognitionV4Test {
   private static String HEADER_VALUE;
 
   private static IBMWatsonFile testFile;
-  private static IBMVisualRecognitionV4Models.BaseObject baseObject;
+  private static IBMVisualRecognitionV4Models.TrainingDataObject trainingDataObject;
   private static IBMVisualRecognitionV4Models.Location location;
   private static IBMVisualRecognitionV4Models.TrainingStatus trainingStatus;
   private static IBMVisualRecognitionV4Models.ObjectTrainingStatus objectTrainingStatus;
-  private static IBMVisualRecognitionV4Models.BaseCollection baseCollection;
   private static Datetime testDate;
 
   private static IBMVisualRecognitionV4 service;
@@ -86,7 +85,7 @@ private class IBMVisualRecognitionV4Test {
         .height(HEIGHT)
         .width(WIDTH)
         .build();
-    baseObject = new IBMVisualRecognitionV4Models.BaseObjectBuilder().build();
+    trainingDataObject = new IBMVisualRecognitionV4Models.TrainingDataObjectBuilder().build();
     objectTrainingStatus = new IBMVisualRecognitionV4Models.ObjectTrainingStatusBuilder()
         .ready(true)
         .inProgress(true)
@@ -96,10 +95,6 @@ private class IBMVisualRecognitionV4Test {
         .build();
     trainingStatus = new IBMVisualRecognitionV4Models.TrainingStatusBuilder()
         .objects(objectTrainingStatus)
-        .build();
-    baseCollection = new IBMVisualRecognitionV4Models.BaseCollectionBuilder()
-        .name(NAME)
-        .description(DESCRIPTION)
         .build();
     testDate = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
 
@@ -133,13 +128,13 @@ private class IBMVisualRecognitionV4Test {
 
   static testMethod void testAddImageTrainingDataOptions() {
     Test.startTest();
-    List<IBMVisualRecognitionV4Models.BaseObject> objectList = new List<IBMVisualRecognitionV4Models.BaseObject> { baseObject };
+    List<IBMVisualRecognitionV4Models.TrainingDataObject> objectList = new List<IBMVisualRecognitionV4Models.TrainingDataObject> { trainingDataObject };
 
     IBMVisualRecognitionV4Models.AddImageTrainingDataOptions options = new IBMVisualRecognitionV4Models.AddImageTrainingDataOptionsBuilder()
         .collectionId(COLLECTION_ID)
         .imageId(IMAGE_ID)
         .objects(objectList)
-        .addObjects(baseObject)
+        .addObjects(trainingDataObject)
         .addHeader(HEADER_NAME, HEADER_VALUE)
         .build();
     options = options.newBuilder().build();
@@ -147,7 +142,7 @@ private class IBMVisualRecognitionV4Test {
     System.assertEquals(COLLECTION_ID, options.collectionId());
     System.assertEquals(IMAGE_ID, options.imageId());
     System.assertEquals(2, options.objects().size());
-    System.assertEquals(baseObject, options.objects().get(0));
+    System.assertEquals(trainingDataObject, options.objects().get(0));
     Test.stopTest();
   }
 
@@ -160,9 +155,9 @@ private class IBMVisualRecognitionV4Test {
 
     IBMVisualRecognitionV4Models.AnalyzeOptions options = new IBMVisualRecognitionV4Models.AnalyzeOptionsBuilder()
         .collectionIds(collectionIdList)
-        .addCollectionId(COLLECTION_ID)
+        .addCollectionIds(COLLECTION_ID)
         .features(featureList)
-        .addFeature(ANALYZE_OPTIONS_FEATURES)
+        .addFeatures(ANALYZE_OPTIONS_FEATURES)
         .imagesFile(imageList)
         .addImagesFile(testFile)
         .imageUrl(imageUrlList)
@@ -184,42 +179,6 @@ private class IBMVisualRecognitionV4Test {
     Test.stopTest();
   }
 
-  static testMethod void testBaseCollection() {
-    Test.startTest();
-    IBMVisualRecognitionV4Models.BaseCollection baseCollection = new IBMVisualRecognitionV4Models.BaseCollectionBuilder()
-        .collectionId(COLLECTION_ID)
-        .name(NAME)
-        .description(DESCRIPTION)
-        .created(testDate)
-        .updated(testDate)
-        .imageCount(IMAGE_COUNT)
-        .trainingStatus(trainingStatus)
-        .build();
-    baseCollection = baseCollection.newBuilder().build();
-
-    System.assertEquals(COLLECTION_ID, baseCollection.getCollectionId());
-    System.assertEquals(NAME, baseCollection.getName());
-    System.assertEquals(DESCRIPTION, baseCollection.getDescription());
-    System.assertEquals(testDate, baseCollection.getCreated());
-    System.assertEquals(testDate, baseCollection.getUpdated());
-    System.assertEquals(IMAGE_COUNT, baseCollection.getImageCount());
-    System.assertEquals(trainingStatus, baseCollection.getTrainingStatus());
-    Test.stopTest();
-  }
-
-  static testMethod void testBaseObject() {
-    Test.startTest();
-    IBMVisualRecognitionV4Models.BaseObject baseObject = new IBMVisualRecognitionV4Models.BaseObjectBuilder()
-        .xObject(OBJECT_VAL)
-        .location(location)
-        .build();
-    baseObject = baseObject.newBuilder().build();
-
-    System.assertEquals(OBJECT_VAL, baseObject.getXObject());
-    System.assertEquals(location, baseObject.getLocation());
-    Test.stopTest();
-  }
-
   static testMethod void testCreateCollectionOptions() {
     Test.startTest();
     IBMVisualRecognitionV4Models.CreateCollectionOptions options = new IBMVisualRecognitionV4Models.CreateCollectionOptionsBuilder()
@@ -231,17 +190,6 @@ private class IBMVisualRecognitionV4Test {
 
     System.assertEquals(NAME, options.name());
     System.assertEquals(DESCRIPTION, options.description());
-    Test.stopTest();
-  }
-
-  static testMethod void testCreateCollectionOptionsBaseCollection() {
-    Test.startTest();
-    IBMVisualRecognitionV4Models.CreateCollectionOptions options = new IBMVisualRecognitionV4Models.CreateCollectionOptionsBuilder()
-        .baseCollection(baseCollection)
-        .build();
-
-    System.assertEquals(baseCollection.getName(), options.name());
-    System.assertEquals(baseCollection.getDescription(), options.description());
     Test.stopTest();
   }
 
@@ -423,19 +371,6 @@ private class IBMVisualRecognitionV4Test {
     Test.stopTest();
   }
 
-  static testMethod void testUpdateCollectionOptionsBaseCollection() {
-    Test.startTest();
-    IBMVisualRecognitionV4Models.UpdateCollectionOptions options = new IBMVisualRecognitionV4Models.UpdateCollectionOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .baseCollection(baseCollection)
-        .build();
-
-    System.assertEquals(COLLECTION_ID, options.collectionId());
-    System.assertEquals(baseCollection.getName(), options.name());
-    System.assertEquals(baseCollection.getDescription(), options.description());
-    Test.stopTest();
-  }
-
   static testMethod void testAnalyze() {
     String body = IBMWatsonMockResponses.analyzeResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
@@ -447,8 +382,8 @@ private class IBMVisualRecognitionV4Test {
     Test.startTest();
 
     IBMVisualRecognitionV4Models.AnalyzeOptions options = new IBMVisualRecognitionV4Models.AnalyzeOptionsBuilder()
-        .addCollectionId(COLLECTION_ID)
-        .addFeature(ANALYZE_OPTIONS_FEATURES)
+        .addCollectionIds(COLLECTION_ID)
+        .addFeatures(ANALYZE_OPTIONS_FEATURES)
         .addImagesFile(testFile)
         .addImageUrl(IMAGE_URL)
         .threshold(THRESHOLD)
@@ -762,7 +697,7 @@ private class IBMVisualRecognitionV4Test {
     IBMVisualRecognitionV4Models.AddImageTrainingDataOptions options = new IBMVisualRecognitionV4Models.AddImageTrainingDataOptionsBuilder()
         .collectionId(COLLECTION_ID)
         .imageId(IMAGE_ID)
-        .addObjects(baseObject)
+        .addObjects(trainingDataObject)
         .addHeader(HEADER_NAME, HEADER_VALUE)
         .build();
     IBMVisualRecognitionV4Models.TrainingDataObjects response = service.addImageTrainingData(options);

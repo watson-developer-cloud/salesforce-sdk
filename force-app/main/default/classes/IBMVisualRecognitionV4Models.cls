@@ -5,7 +5,7 @@ public class IBMVisualRecognitionV4Models {
   public class AddImageTrainingDataOptions extends IBMWatsonOptionsModel {
     private String collectionId;
     private String imageId;
-    private List<BaseObject> objects;
+    private List<TrainingDataObject> objects;
 
     /**
      * Gets the collectionId.
@@ -36,7 +36,7 @@ public class IBMVisualRecognitionV4Models {
      *
      * @return the objects
      */
-    public List<BaseObject> objects() {
+    public List<TrainingDataObject> objects() {
       return objects;
     }
 
@@ -65,7 +65,7 @@ public class IBMVisualRecognitionV4Models {
   public class AddImageTrainingDataOptionsBuilder extends IBMWatsonOptionsModel {
     private String collectionId;
     private String imageId;
-    private List<BaseObject> objects;
+    private List<TrainingDataObject> objects;
 
     private AddImageTrainingDataOptionsBuilder(AddImageTrainingDataOptions addImageTrainingDataOptions) {
       collectionId = addImageTrainingDataOptions.collectionId;
@@ -106,10 +106,10 @@ public class IBMVisualRecognitionV4Models {
      * @param objects the new objects
      * @return the AddImageTrainingDataOptions builder
      */
-    public AddImageTrainingDataOptionsBuilder addObjects(BaseObject objects) {
+    public AddImageTrainingDataOptionsBuilder addObjects(TrainingDataObject objects) {
       IBMWatsonValidator.notNull(objects, 'objects cannot be null');
       if (this.objects == null) {
-        this.objects = new List<BaseObject>();
+        this.objects = new List<TrainingDataObject>();
       }
       this.objects.add(objects);
       return this;
@@ -144,7 +144,7 @@ public class IBMVisualRecognitionV4Models {
      * @param objects the objects
      * @return the AddImageTrainingDataOptions builder
      */
-    public AddImageTrainingDataOptionsBuilder objects(List<BaseObject> objects) {
+    public AddImageTrainingDataOptionsBuilder objects(List<TrainingDataObject> objects) {
       this.objects = objects;
       return this;
     }
@@ -391,7 +391,7 @@ public class IBMVisualRecognitionV4Models {
     /**
      * Gets the collectionIds.
      *
-     * The IDs of the collections to analyze. Separate multiple values with commas.
+     * The IDs of the collections to analyze.
      *
      * @return the collectionIds
      */
@@ -402,7 +402,7 @@ public class IBMVisualRecognitionV4Models {
     /**
      * Gets the features.
      *
-     * The features to analyze. Separate multiple values with commas.
+     * The features to analyze.
      *
      * @return the features
      */
@@ -521,32 +521,32 @@ public class IBMVisualRecognitionV4Models {
     }
 
     /**
-     * Adds a collectionId to collectionIds.
+     * Adds an collectionIds to collectionIds.
      *
-     * @param collectionId the new collectionId
+     * @param collectionIds the new collectionIds
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder addCollectionId(String collectionId) {
-      IBMWatsonValidator.notNull(collectionId, 'collectionId cannot be null');
+    public AnalyzeOptionsBuilder addCollectionIds(String collectionIds) {
+      IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
       if (this.collectionIds == null) {
         this.collectionIds = new List<String>();
       }
-      this.collectionIds.add(collectionId);
+      this.collectionIds.add(collectionIds);
       return this;
     }
 
     /**
-     * Adds a feature to features.
+     * Adds an features to features.
      *
-     * @param feature the new feature
+     * @param features the new features
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder addFeature(String feature) {
-      IBMWatsonValidator.notNull(feature, 'feature cannot be null');
+    public AnalyzeOptionsBuilder addFeatures(String features) {
+      IBMWatsonValidator.notNull(features, 'features cannot be null');
       if (this.features == null) {
         this.features = new List<String>();
       }
-      this.features.add(feature);
+      this.features.add(features);
       return this;
     }
 
@@ -582,6 +582,7 @@ public class IBMVisualRecognitionV4Models {
 
     /**
      * Set the collectionIds.
+     * Existing collectionIds will be replaced.
      *
      * @param collectionIds the collectionIds
      * @return the AnalyzeOptions builder
@@ -593,6 +594,7 @@ public class IBMVisualRecognitionV4Models {
 
     /**
      * Set the features.
+     * Existing features will be replaced.
      *
      * @param features the features
      * @return the AnalyzeOptions builder
@@ -655,7 +657,7 @@ public class IBMVisualRecognitionV4Models {
    */
   public class AnalyzeResponse extends IBMWatsonResponseModel {
     private List<Image> images;
-    private List<BaseError> warnings;
+    private List<Warning> warnings;
     private String trace;
 
     /**
@@ -678,7 +680,7 @@ public class IBMVisualRecognitionV4Models {
      * @return the warnings
      */
     @AuraEnabled
-    public List<BaseError> getWarnings() {
+    public List<Warning> getWarnings() {
       return warnings;
     }
 
@@ -708,7 +710,7 @@ public class IBMVisualRecognitionV4Models {
      *
      * @param warnings the new warnings
      */
-    public void setWarnings(final List<BaseError> warnings) {
+    public void setWarnings(final List<Warning> warnings) {
       this.warnings = warnings;
     }
 
@@ -742,514 +744,19 @@ public class IBMVisualRecognitionV4Models {
       }
 
       // calling custom deserializer for warnings
-      List<BaseError> newWarnings = new List<BaseError>();
-      List<BaseError> deserializedWarnings = ret.getWarnings();
+      List<Warning> newWarnings = new List<Warning>();
+      List<Warning> deserializedWarnings = ret.getWarnings();
       if (deserializedWarnings != null) {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
-          BaseError currentItem = ret.getWarnings().get(i);
+          Warning currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          BaseError newItem = (BaseError) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BaseError.class);
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
       }
 
       return ret;
-    }
-  }
-
-  /**
-   * Base details about a collection.
-   */
-  public class BaseCollection extends IBMWatsonGenericModel {
-    private String collectionId;
-    private String name;
-    private String description;
-    private Datetime created;
-    private Datetime updated;
-    private Long imageCount;
-    private TrainingStatus trainingStatus;
-
-    /**
-     * This constructor is strictly for internal serialization/deserialization purposes
-     * and should not be called by the client.
-     */
-    public BaseCollection() { }
-
-    /**
-     * Gets the collectionId.
-     *
-     * The identifier of the collection.
-     *
-     * @return the collectionId
-     */
-    @AuraEnabled
-    public String getCollectionId() {
-      return collectionId;
-    }
-
-    /**
-     * Gets the name.
-     *
-     * The name of the collection. The name can contain alphanumeric, underscore, hyphen, and dot characters. It cannot
-     * begin with the reserved prefix `sys-`.
-     *
-     * @return the name
-     */
-    @AuraEnabled
-    public String getName() {
-      return name;
-    }
-
-    /**
-     * Gets the description.
-     *
-     * The description of the collection.
-     *
-     * @return the description
-     */
-    @AuraEnabled
-    public String getDescription() {
-      return description;
-    }
-
-    /**
-     * Gets the created.
-     *
-     * Date and time in Coordinated Universal Time (UTC) that the collection was created.
-     *
-     * @return the created
-     */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created;
-    }
-
-    /**
-     * Gets the updated.
-     *
-     * Date and time in Coordinated Universal Time (UTC) that the collection was most recently updated.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated;
-    }
-
-    /**
-     * Gets the imageCount.
-     *
-     * Number of images in the collection.
-     *
-     * @return the imageCount
-     */
-    @AuraEnabled
-    public Long getImageCount() {
-      return imageCount;
-    }
-
-    /**
-     * Gets the trainingStatus.
-     *
-     * Training status information for the collection.
-     *
-     * @return the trainingStatus
-     */
-    @AuraEnabled
-    public TrainingStatus getTrainingStatus() {
-      return trainingStatus;
-    }
-  
-    private BaseCollection(BaseCollectionBuilder builder) {
-      this.collectionId = builder.collectionId;
-      this.name = builder.name;
-      this.description = builder.description;
-      this.created = builder.created;
-      this.updated = builder.updated;
-      this.imageCount = builder.imageCount;
-      this.trainingStatus = builder.trainingStatus;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a BaseCollection builder
-     */
-    public BaseCollectionBuilder newBuilder() {
-      return new BaseCollectionBuilder(this);
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'collection_id' => 'collectionId',
-        'image_count' => 'imageCount',
-        'training_status' => 'trainingStatus'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      BaseCollection ret = (BaseCollection) super.deserialize(jsonString, jsonMap, classType);
-      BaseCollectionBuilder retBuilder = ret.newBuilder();
-
-      // calling custom deserializer for trainingStatus
-      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
-      retBuilder.trainingStatus(newTrainingStatus);
-
-      return retBuilder.build();
-    }
-
-    public String serialize() {
-      // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      // replace any names that are different between the SDK and API
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'collectionId' => 'collection_id',
-        'imageCount' => 'image_count',
-        'trainingStatus' => 'training_status'
-      };
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      // calling custom serializer for trainingStatus
-      if (trainingStatus != null) {
-        String trainingStatusJsonString = trainingStatus.serialize();
-        String trainingStatusKey = 'trainingStatus';
-        if (propertyNameMapping.containsKey(trainingStatusKey)) {
-          trainingStatusKey = propertyNameMapping.get(trainingStatusKey);
-        }
-        jsonMap.put(trainingStatusKey, JSON.deserializeUntyped(trainingStatusJsonString));
-      }
-
-      return JSON.serialize(jsonMap);
-    }
-  }
-
-  /**
-   * BaseCollection Builder.
-   */
-  public class BaseCollectionBuilder {
-    private String collectionId;
-    private String name;
-    private String description;
-    private Datetime created;
-    private Datetime updated;
-    private Long imageCount;
-    private TrainingStatus trainingStatus;
-
-    private BaseCollectionBuilder(BaseCollection baseCollection) {
-      this.collectionId = baseCollection.collectionId;
-      this.name = baseCollection.name;
-      this.description = baseCollection.description;
-      this.created = baseCollection.created;
-      this.updated = baseCollection.updated;
-      this.imageCount = baseCollection.imageCount;
-      this.trainingStatus = baseCollection.trainingStatus;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public BaseCollectionBuilder() {
-    }
-
-    /**
-     * Builds a BaseCollection.
-     *
-     * @return the baseCollection
-     */
-    public BaseCollection build() {
-      return new BaseCollection(this);
-    }
-
-    /**
-     * Set the collectionId.
-     *
-     * @param collectionId the collectionId
-     * @return the BaseCollection builder
-     */
-    public BaseCollectionBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
-      return this;
-    }
-
-    /**
-     * Set the name.
-     *
-     * @param name the name
-     * @return the BaseCollection builder
-     */
-    public BaseCollectionBuilder name(String name) {
-      this.name = name;
-      return this;
-    }
-
-    /**
-     * Set the description.
-     *
-     * @param description the description
-     * @return the BaseCollection builder
-     */
-    public BaseCollectionBuilder description(String description) {
-      this.description = description;
-      return this;
-    }
-
-    /**
-     * Set the created.
-     *
-     * @param created the created
-     * @return the BaseCollection builder
-     */
-    public BaseCollectionBuilder created(Datetime created) {
-      this.created = created;
-      return this;
-    }
-
-    /**
-     * Set the updated.
-     *
-     * @param updated the updated
-     * @return the BaseCollection builder
-     */
-    public BaseCollectionBuilder updated(Datetime updated) {
-      this.updated = updated;
-      return this;
-    }
-
-    /**
-     * Set the imageCount.
-     *
-     * @param imageCount the imageCount
-     * @return the BaseCollection builder
-     */
-    public BaseCollectionBuilder imageCount(Long imageCount) {
-      this.imageCount = imageCount;
-      return this;
-    }
-
-    /**
-     * Set the trainingStatus.
-     *
-     * @param trainingStatus the trainingStatus
-     * @return the BaseCollection builder
-     */
-    public BaseCollectionBuilder trainingStatus(TrainingStatus trainingStatus) {
-      this.trainingStatus = trainingStatus;
-      return this;
-    }
-  }
-
-  /**
-   * Details about a problem.
-   */
-  public class BaseError extends IBMWatsonGenericModel {
-    private String code;
-    private String message;
-    private String moreInfo;
-
-    /**
-     * Gets the code.
-     *
-     * Identifier of the problem.
-     *
-     * @return the code
-     */
-    @AuraEnabled
-    public String getCode() {
-      return code;
-    }
-
-    /**
-     * Gets the message.
-     *
-     * An explanation of the problem with possible solutions.
-     *
-     * @return the message
-     */
-    @AuraEnabled
-    public String getMessage() {
-      return message;
-    }
-
-    /**
-     * Gets the moreInfo.
-     *
-     * A URL for more information about the solution.
-     *
-     * @return the moreInfo
-     */
-    @AuraEnabled
-    public String getMoreInfo() {
-      return moreInfo;
-    }
-
-    /**
-     * Sets the code.
-     *
-     * @param code the new code
-     */
-    public void setCode(final String code) {
-      this.code = code;
-    }
-
-    /**
-     * Sets the message.
-     *
-     * @param message the new message
-     */
-    public void setMessage(final String message) {
-      this.message = message;
-    }
-
-    /**
-     * Sets the moreInfo.
-     *
-     * @param moreInfo the new moreInfo
-     */
-    public void setMoreInfo(final String moreInfo) {
-      this.moreInfo = moreInfo;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      // replace any names that are different between the API and SDK
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'more_info' => 'moreInfo'
-      };
-      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      BaseError ret = (BaseError) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * Details about an object and its location.
-   */
-  public class BaseObject extends IBMWatsonGenericModel {
-    private String xObject;
-    private Location location;
-
-    /**
-     * Gets the xObject.
-     *
-     * The name of the object. The name can contain alphanumeric, underscore, hyphen, space, and dot characters. It
-     * cannot begin with the reserved prefix `sys-`.
-     *
-     * @return the xObject
-     */
-    public String getXObject() {
-      return xObject;
-    }
-
-    /**
-     * Gets the location.
-     *
-     * Defines the location of the bounding box around the object.
-     *
-     * @return the location
-     */
-    public Location getLocation() {
-      return location;
-    }
-  
-    private BaseObject(BaseObjectBuilder builder) {
-      this.xObject = builder.xObject;
-      this.location = builder.location;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a BaseObject builder
-     */
-    public BaseObjectBuilder newBuilder() {
-      return new BaseObjectBuilder(this);
-    }
-
-    public String serialize() {
-      // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
-
-      // replace any names that are different between the SDK and API
-      Map<String, String> propertyNameMapping = new Map<String, String> {
-        'xObject' => 'object'
-      };
-      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
-
-      // calling custom serializer for location
-      if (location != null) {
-        String locationJsonString = location.serialize();
-        String locationKey = 'location';
-        if (propertyNameMapping.containsKey(locationKey)) {
-          locationKey = propertyNameMapping.get(locationKey);
-        }
-        jsonMap.put(locationKey, JSON.deserializeUntyped(locationJsonString));
-      }
-
-      return JSON.serialize(jsonMap);
-    }
-  }
-
-  /**
-   * BaseObject Builder.
-   */
-  public class BaseObjectBuilder {
-    private String xObject;
-    private Location location;
-
-    private BaseObjectBuilder(BaseObject baseObject) {
-      this.xObject = baseObject.xObject;
-      this.location = baseObject.location;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public BaseObjectBuilder() {
-    }
-
-    /**
-     * Builds a BaseObject.
-     *
-     * @return the baseObject
-     */
-    public BaseObject build() {
-      return new BaseObject(this);
-    }
-
-    /**
-     * Set the xObject.
-     *
-     * @param xObject the xObject
-     * @return the BaseObject builder
-     */
-    public BaseObjectBuilder xObject(String xObject) {
-      this.xObject = xObject;
-      return this;
-    }
-
-    /**
-     * Set the location.
-     *
-     * @param location the location
-     * @return the BaseObject builder
-     */
-    public BaseObjectBuilder location(Location location) {
-      this.location = location;
-      return this;
     }
   }
 
@@ -1292,7 +799,7 @@ public class IBMVisualRecognitionV4Models {
     /**
      * Gets the description.
      *
-     * The descripion of the collection.
+     * The description of the collection.
      *
      * @return the description
      */
@@ -1386,7 +893,7 @@ public class IBMVisualRecognitionV4Models {
       // calling custom deserializer for trainingStatus
       Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
       TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
-      ret.trainingStatus = newTrainingStatus;
+      ret.setTrainingStatus(newTrainingStatus);
 
       return ret;
     }
@@ -1476,7 +983,7 @@ public class IBMVisualRecognitionV4Models {
    * A container for the list of collections.
    */
   public class CollectionsList extends IBMWatsonResponseModel {
-    private List<BaseCollection> collections;
+    private List<Collection> collections;
 
     /**
      * Gets the collections.
@@ -1486,7 +993,7 @@ public class IBMVisualRecognitionV4Models {
      * @return the collections
      */
     @AuraEnabled
-    public List<BaseCollection> getCollections() {
+    public List<Collection> getCollections() {
       return collections;
     }
 
@@ -1495,7 +1002,7 @@ public class IBMVisualRecognitionV4Models {
      *
      * @param collections the new collections
      */
-    public void setCollections(final List<BaseCollection> collections) {
+    public void setCollections(final List<Collection> collections) {
       this.collections = collections;
     }
 
@@ -1507,13 +1014,13 @@ public class IBMVisualRecognitionV4Models {
       CollectionsList ret = (CollectionsList) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for collections
-      List<BaseCollection> newCollections = new List<BaseCollection>();
-      List<BaseCollection> deserializedCollections = ret.getCollections();
+      List<Collection> newCollections = new List<Collection>();
+      List<Collection> deserializedCollections = ret.getCollections();
       if (deserializedCollections != null) {
         for (Integer i = 0; i < deserializedCollections.size(); i++) {
-          BaseCollection currentItem = ret.getCollections().get(i);
+          Collection currentItem = ret.getCollections().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('collections');
-          BaseCollection newItem = (BaseCollection) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BaseCollection.class);
+          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Collection.class);
           newCollections.add(newItem);
         }
         ret.collections = newCollections;
@@ -1616,18 +1123,6 @@ public class IBMVisualRecognitionV4Models {
      */
     public CreateCollectionOptionsBuilder description(String description) {
       this.description = description;
-      return this;
-    }
-
-    /**
-     * Set the baseCollection.
-     *
-     * @param baseCollection the baseCollection
-     * @return the CreateCollectionOptions builder
-     */
-    public CreateCollectionOptionsBuilder baseCollection(BaseCollection baseCollection) {
-      this.name = baseCollection.getName();
-      this.description = baseCollection.getDescription();
       return this;
     }
 
@@ -2048,7 +1543,7 @@ public class IBMVisualRecognitionV4Models {
     /**
      * Gets the target.
      *
-     * Details about the specfic area of the problem.
+     * Details about the specific area of the problem.
      *
      * @return the target
      */
@@ -2117,7 +1612,7 @@ public class IBMVisualRecognitionV4Models {
   }
 
   /**
-   * Details about the specfic area of the problem.
+   * Details about the specific area of the problem.
    */
   public class ErrorTarget extends IBMWatsonGenericModel {
     private String xType;
@@ -2870,7 +2365,7 @@ public class IBMVisualRecognitionV4Models {
    */
   public class ImageDetailsList extends IBMWatsonResponseModel {
     private List<ImageDetails> images;
-    private List<BaseError> warnings;
+    private List<Warning> warnings;
     private String trace;
 
     /**
@@ -2893,7 +2388,7 @@ public class IBMVisualRecognitionV4Models {
      * @return the warnings
      */
     @AuraEnabled
-    public List<BaseError> getWarnings() {
+    public List<Warning> getWarnings() {
       return warnings;
     }
 
@@ -2923,7 +2418,7 @@ public class IBMVisualRecognitionV4Models {
      *
      * @param warnings the new warnings
      */
-    public void setWarnings(final List<BaseError> warnings) {
+    public void setWarnings(final List<Warning> warnings) {
       this.warnings = warnings;
     }
 
@@ -2957,13 +2452,13 @@ public class IBMVisualRecognitionV4Models {
       }
 
       // calling custom deserializer for warnings
-      List<BaseError> newWarnings = new List<BaseError>();
-      List<BaseError> deserializedWarnings = ret.getWarnings();
+      List<Warning> newWarnings = new List<Warning>();
+      List<Warning> deserializedWarnings = ret.getWarnings();
       if (deserializedWarnings != null) {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
-          BaseError currentItem = ret.getWarnings().get(i);
+          Warning currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          BaseError newItem = (BaseError) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BaseError.class);
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
@@ -4064,6 +3559,12 @@ public class IBMVisualRecognitionV4Models {
     private Location location;
 
     /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public TrainingDataObject() { }
+
+    /**
      * Gets the xObject.
      *
      * The name of the object.
@@ -4086,23 +3587,19 @@ public class IBMVisualRecognitionV4Models {
     public Location getLocation() {
       return location;
     }
-
-    /**
-     * Sets the xObject.
-     *
-     * @param xObject the new xObject
-     */
-    public void setXObject(final String xObject) {
-      this.xObject = xObject;
+  
+    private TrainingDataObject(TrainingDataObjectBuilder builder) {
+      this.xObject = builder.xObject;
+      this.location = builder.location;
     }
 
     /**
-     * Sets the location.
+     * New builder.
      *
-     * @param location the new location
+     * @return a TrainingDataObject builder
      */
-    public void setLocation(final Location location) {
-      this.location = location;
+    public TrainingDataObjectBuilder newBuilder() {
+      return new TrainingDataObjectBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4118,13 +3615,87 @@ public class IBMVisualRecognitionV4Models {
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       TrainingDataObject ret = (TrainingDataObject) super.deserialize(jsonString, jsonMap, classType);
+      TrainingDataObjectBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
       Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
-      ret.setLocation(newLocation);
+      retBuilder.location(newLocation);
 
-      return ret;
+      return retBuilder.build();
+    }
+
+    public String serialize() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xObject' => 'object'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      // calling custom serializer for location
+      if (location != null) {
+        String locationJsonString = location.serialize();
+        String locationKey = 'location';
+        if (propertyNameMapping.containsKey(locationKey)) {
+          locationKey = propertyNameMapping.get(locationKey);
+        }
+        jsonMap.put(locationKey, JSON.deserializeUntyped(locationJsonString));
+      }
+
+      return JSON.serialize(jsonMap);
+    }
+  }
+
+  /**
+   * TrainingDataObject Builder.
+   */
+  public class TrainingDataObjectBuilder {
+    private String xObject;
+    private Location location;
+
+    private TrainingDataObjectBuilder(TrainingDataObject trainingDataObject) {
+      this.xObject = trainingDataObject.xObject;
+      this.location = trainingDataObject.location;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public TrainingDataObjectBuilder() {
+    }
+
+    /**
+     * Builds a TrainingDataObject.
+     *
+     * @return the trainingDataObject
+     */
+    public TrainingDataObject build() {
+      return new TrainingDataObject(this);
+    }
+
+    /**
+     * Set the xObject.
+     *
+     * @param xObject the xObject
+     * @return the TrainingDataObject builder
+     */
+    public TrainingDataObjectBuilder xObject(String xObject) {
+      this.xObject = xObject;
+      return this;
+    }
+
+    /**
+     * Set the location.
+     *
+     * @param location the location
+     * @return the TrainingDataObject builder
+     */
+    public TrainingDataObjectBuilder location(Location location) {
+      this.location = location;
+      return this;
     }
   }
 
@@ -4426,18 +3997,6 @@ public class IBMVisualRecognitionV4Models {
     }
 
     /**
-     * Set the baseCollection.
-     *
-     * @param baseCollection the baseCollection
-     * @return the UpdateCollectionOptions builder
-     */
-    public UpdateCollectionOptionsBuilder baseCollection(BaseCollection baseCollection) {
-      this.name = baseCollection.getName();
-      this.description = baseCollection.getDescription();
-      return this;
-    }
-
-    /**
      * Add a request header.
      *
      * @param name the header name
@@ -4447,6 +4006,95 @@ public class IBMVisualRecognitionV4Models {
     public UpdateCollectionOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
+    }
+  }
+
+  /**
+   * Details about a problem.
+   */
+  public class Warning extends IBMWatsonGenericModel {
+    private String code;
+    private String message;
+    private String moreInfo;
+
+    /**
+     * Gets the code.
+     *
+     * Identifier of the problem.
+     *
+     * @return the code
+     */
+    @AuraEnabled
+    public String getCode() {
+      return code;
+    }
+
+    /**
+     * Gets the message.
+     *
+     * An explanation of the problem with possible solutions.
+     *
+     * @return the message
+     */
+    @AuraEnabled
+    public String getMessage() {
+      return message;
+    }
+
+    /**
+     * Gets the moreInfo.
+     *
+     * A URL for more information about the solution.
+     *
+     * @return the moreInfo
+     */
+    @AuraEnabled
+    public String getMoreInfo() {
+      return moreInfo;
+    }
+
+    /**
+     * Sets the code.
+     *
+     * @param code the new code
+     */
+    public void setCode(final String code) {
+      this.code = code;
+    }
+
+    /**
+     * Sets the message.
+     *
+     * @param message the new message
+     */
+    public void setMessage(final String message) {
+      this.message = message;
+    }
+
+    /**
+     * Sets the moreInfo.
+     *
+     * @param moreInfo the new moreInfo
+     */
+    public void setMoreInfo(final String moreInfo) {
+      this.moreInfo = moreInfo;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'more_info' => 'moreInfo'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      Warning ret = (Warning) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
