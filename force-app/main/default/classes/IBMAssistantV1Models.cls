@@ -69,9 +69,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -79,7 +82,7 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -266,9 +269,12 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -278,9 +284,9 @@ public class IBMAssistantV1Models {
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
-      // calling custom serializer for xSystem
+      // performing custom serialization for xSystem
       if (xSystem != null) {
-        String xSystemJsonString = xSystem.serialize();
+        String xSystemJsonString = JSON.serialize(xSystem.replacePropertyNames());
         String xSystemKey = 'xSystem';
         if (propertyNameMapping.containsKey(xSystemKey)) {
           xSystemKey = propertyNameMapping.get(xSystemKey);
@@ -288,9 +294,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(xSystemKey, JSON.deserializeUntyped(xSystemJsonString));
       }
 
-      // calling custom serializer for metadata
+      // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = metadata.serialize();
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -298,7 +304,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(metadataKey, JSON.deserializeUntyped(metadataJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -443,11 +449,11 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -1458,9 +1464,12 @@ public class IBMAssistantV1Models {
       return new CreateEntityBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -1468,9 +1477,9 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for metadata
+      // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = metadata.serialize();
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -1478,11 +1487,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(metadataKey, JSON.deserializeUntyped(metadataJsonString));
       }
 
-      // calling custom serializer for values
+      // performing custom serialization for values
       if (values != null) {
         List<Object> valuesJsonList = new List<Object>();
         for (CreateValue listItem : values) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           valuesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String valuesKey = 'values';
@@ -1492,7 +1501,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(valuesKey, valuesJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -2171,21 +2180,21 @@ public class IBMAssistantV1Models {
       return new CreateIntentBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for examples
+      // performing custom serialization for examples
       if (examples != null) {
         List<Object> examplesJsonList = new List<Object>();
         for (Example listItem : examples) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           examplesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('examples', examplesJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -2803,9 +2812,12 @@ public class IBMAssistantV1Models {
       return new CreateValueBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -2813,9 +2825,9 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for metadata
+      // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = metadata.serialize();
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -2823,7 +2835,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(metadataKey, JSON.deserializeUntyped(metadataJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -5186,9 +5198,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -5204,9 +5219,9 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for output
+      // performing custom serialization for output
       if (output != null) {
-        String outputJsonString = output.serialize();
+        String outputJsonString = JSON.serialize(output.replacePropertyNames());
         String outputKey = 'output';
         if (propertyNameMapping.containsKey(outputKey)) {
           outputKey = propertyNameMapping.get(outputKey);
@@ -5214,9 +5229,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(outputKey, JSON.deserializeUntyped(outputJsonString));
       }
 
-      // calling custom serializer for context
+      // performing custom serialization for context
       if (context != null) {
-        String contextJsonString = context.serialize();
+        String contextJsonString = JSON.serialize(context.replacePropertyNames());
         String contextKey = 'context';
         if (propertyNameMapping.containsKey(contextKey)) {
           contextKey = propertyNameMapping.get(contextKey);
@@ -5224,9 +5239,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(contextKey, JSON.deserializeUntyped(contextJsonString));
       }
 
-      // calling custom serializer for metadata
+      // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = metadata.serialize();
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -5234,9 +5249,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(metadataKey, JSON.deserializeUntyped(metadataJsonString));
       }
 
-      // calling custom serializer for nextStep
+      // performing custom serialization for nextStep
       if (nextStep != null) {
-        String nextStepJsonString = nextStep.serialize();
+        String nextStepJsonString = JSON.serialize(nextStep.replacePropertyNames());
         String nextStepKey = 'nextStep';
         if (propertyNameMapping.containsKey(nextStepKey)) {
           nextStepKey = propertyNameMapping.get(nextStepKey);
@@ -5244,11 +5259,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(nextStepKey, JSON.deserializeUntyped(nextStepJsonString));
       }
 
-      // calling custom serializer for actions
+      // performing custom serialization for actions
       if (actions != null) {
         List<Object> actionsJsonList = new List<Object>();
         for (DialogNodeAction listItem : actions) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           actionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String actionsKey = 'actions';
@@ -5258,7 +5273,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(actionsKey, actionsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -5703,9 +5718,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -5714,9 +5732,9 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for parameters
+      // performing custom serialization for parameters
       if (parameters != null) {
-        String parametersJsonString = parameters.serialize();
+        String parametersJsonString = JSON.serialize(parameters.replacePropertyNames());
         String parametersKey = 'parameters';
         if (propertyNameMapping.containsKey(parametersKey)) {
           parametersKey = propertyNameMapping.get(parametersKey);
@@ -5724,7 +5742,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(parametersKey, JSON.deserializeUntyped(parametersJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -6015,9 +6033,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -6025,7 +6046,7 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -6197,29 +6218,29 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
-      // calling custom serializer for generic
+      // performing custom serialization for generic
       if (generic != null) {
         List<Object> genericJsonList = new List<Object>();
         for (DialogNodeOutputGeneric listItem : generic) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           genericJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('generic', genericJsonList);
       }
 
-      // calling custom serializer for modifiers
+      // performing custom serialization for modifiers
       if (modifiers != null) {
-        String modifiersJsonString = modifiers.serialize();
+        String modifiersJsonString = JSON.serialize(modifiers.replacePropertyNames());
         jsonMap.put('modifiers', JSON.deserializeUntyped(modifiersJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -6601,9 +6622,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -6616,11 +6640,11 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for values
+      // performing custom serialization for values
       if (values != null) {
         List<Object> valuesJsonList = new List<Object>();
         for (DialogNodeOutputTextValuesElement listItem : values) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           valuesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String valuesKey = 'values';
@@ -6630,11 +6654,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(valuesKey, valuesJsonList);
       }
 
-      // calling custom serializer for options
+      // performing custom serialization for options
       if (options != null) {
         List<Object> optionsJsonList = new List<Object>();
         for (DialogNodeOutputOptionsElement listItem : options) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           optionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String optionsKey = 'options';
@@ -6644,7 +6668,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(optionsKey, optionsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -6970,11 +6994,11 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7085,17 +7109,17 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for value
+      // performing custom serialization for value
       if (value != null) {
-        String valueJsonString = value.serialize();
+        String valueJsonString = JSON.serialize(value.replacePropertyNames());
         jsonMap.put('value', JSON.deserializeUntyped(valueJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7274,37 +7298,37 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for input
+      // performing custom serialization for input
       if (input != null) {
-        String inputJsonString = input.serialize();
+        String inputJsonString = JSON.serialize(input.replacePropertyNames());
         jsonMap.put('input', JSON.deserializeUntyped(inputJsonString));
       }
 
-      // calling custom serializer for intents
+      // performing custom serialization for intents
       if (intents != null) {
         List<Object> intentsJsonList = new List<Object>();
         for (RuntimeIntent listItem : intents) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           intentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('intents', intentsJsonList);
       }
 
-      // calling custom serializer for entities
+      // performing custom serialization for entities
       if (entities != null) {
         List<Object> entitiesJsonList = new List<Object>();
         for (RuntimeEntity listItem : entities) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           entitiesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('entities', entitiesJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7452,11 +7476,11 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7580,9 +7604,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -7590,7 +7617,7 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7770,9 +7797,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -7780,9 +7810,9 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for value
+      // performing custom serialization for value
       if (value != null) {
-        String valueJsonString = value.serialize();
+        String valueJsonString = JSON.serialize(value.replacePropertyNames());
         String valueKey = 'value';
         if (propertyNameMapping.containsKey(valueKey)) {
           valueKey = propertyNameMapping.get(valueKey);
@@ -7790,9 +7820,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(valueKey, JSON.deserializeUntyped(valueJsonString));
       }
 
-      // calling custom serializer for output
+      // performing custom serialization for output
       if (output != null) {
-        String outputJsonString = output.serialize();
+        String outputJsonString = JSON.serialize(output.replacePropertyNames());
         String outputKey = 'output';
         if (propertyNameMapping.containsKey(outputKey)) {
           outputKey = propertyNameMapping.get(outputKey);
@@ -7800,7 +7830,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(outputKey, JSON.deserializeUntyped(outputJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -8028,9 +8058,12 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -8040,11 +8073,11 @@ public class IBMAssistantV1Models {
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
-      // calling custom serializer for nodesVisitedDetails
+      // performing custom serialization for nodesVisitedDetails
       if (nodesVisitedDetails != null) {
         List<Object> nodesVisitedDetailsJsonList = new List<Object>();
         for (DialogNodeVisitedDetails listItem : nodesVisitedDetails) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           nodesVisitedDetailsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String nodesVisitedDetailsKey = 'nodesVisitedDetails';
@@ -8054,11 +8087,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(nodesVisitedDetailsKey, nodesVisitedDetailsJsonList);
       }
 
-      // calling custom serializer for generic
+      // performing custom serialization for generic
       if (generic != null) {
         List<Object> genericJsonList = new List<Object>();
         for (DialogSuggestionResponseGeneric listItem : generic) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           genericJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String genericKey = 'generic';
@@ -8068,7 +8101,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(genericKey, genericJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -8452,9 +8485,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -8465,11 +8501,11 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for options
+      // performing custom serialization for options
       if (options != null) {
         List<Object> optionsJsonList = new List<Object>();
         for (DialogNodeOutputOptionsElement listItem : options) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           optionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String optionsKey = 'options';
@@ -8479,7 +8515,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(optionsKey, optionsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -8796,37 +8832,37 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for input
+      // performing custom serialization for input
       if (input != null) {
-        String inputJsonString = input.serialize();
+        String inputJsonString = JSON.serialize(input.replacePropertyNames());
         jsonMap.put('input', JSON.deserializeUntyped(inputJsonString));
       }
 
-      // calling custom serializer for intents
+      // performing custom serialization for intents
       if (intents != null) {
         List<Object> intentsJsonList = new List<Object>();
         for (RuntimeIntent listItem : intents) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           intentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('intents', intentsJsonList);
       }
 
-      // calling custom serializer for entities
+      // performing custom serialization for entities
       if (entities != null) {
         List<Object> entitiesJsonList = new List<Object>();
         for (RuntimeEntity listItem : entities) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           entitiesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('entities', entitiesJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -9449,21 +9485,21 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for mentions
+      // performing custom serialization for mentions
       if (mentions != null) {
         List<Object> mentionsJsonList = new List<Object>();
         for (Mention listItem : mentions) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           mentionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('mentions', mentionsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -13861,11 +13897,11 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -14084,11 +14120,11 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -14242,9 +14278,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -14252,7 +14291,7 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -14372,13 +14411,13 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -14940,9 +14979,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -14950,9 +14992,9 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for input
+      // performing custom serialization for input
       if (input != null) {
-        String inputJsonString = input.serialize();
+        String inputJsonString = JSON.serialize(input.replacePropertyNames());
         String inputKey = 'input';
         if (propertyNameMapping.containsKey(inputKey)) {
           inputKey = propertyNameMapping.get(inputKey);
@@ -14960,11 +15002,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(inputKey, JSON.deserializeUntyped(inputJsonString));
       }
 
-      // calling custom serializer for intents
+      // performing custom serialization for intents
       if (intents != null) {
         List<Object> intentsJsonList = new List<Object>();
         for (RuntimeIntent listItem : intents) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           intentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String intentsKey = 'intents';
@@ -14974,11 +15016,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(intentsKey, intentsJsonList);
       }
 
-      // calling custom serializer for entities
+      // performing custom serialization for entities
       if (entities != null) {
         List<Object> entitiesJsonList = new List<Object>();
         for (RuntimeEntity listItem : entities) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           entitiesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String entitiesKey = 'entities';
@@ -14988,9 +15030,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(entitiesKey, entitiesJsonList);
       }
 
-      // calling custom serializer for context
+      // performing custom serialization for context
       if (context != null) {
-        String contextJsonString = context.serialize();
+        String contextJsonString = JSON.serialize(context.replacePropertyNames());
         String contextKey = 'context';
         if (propertyNameMapping.containsKey(contextKey)) {
           contextKey = propertyNameMapping.get(contextKey);
@@ -14998,9 +15040,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(contextKey, JSON.deserializeUntyped(contextJsonString));
       }
 
-      // calling custom serializer for output
+      // performing custom serialization for output
       if (output != null) {
-        String outputJsonString = output.serialize();
+        String outputJsonString = JSON.serialize(output.replacePropertyNames());
         String outputKey = 'output';
         if (propertyNameMapping.containsKey(outputKey)) {
           outputKey = propertyNameMapping.get(outputKey);
@@ -15008,11 +15050,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(outputKey, JSON.deserializeUntyped(outputJsonString));
       }
 
-      // calling custom serializer for actions
+      // performing custom serialization for actions
       if (actions != null) {
         List<Object> actionsJsonList = new List<Object>();
         for (DialogNodeAction listItem : actions) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           actionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String actionsKey = 'actions';
@@ -15022,7 +15064,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(actionsKey, actionsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -15576,9 +15618,12 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -15589,11 +15634,11 @@ public class IBMAssistantV1Models {
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
-      // calling custom serializer for nodesVisitedDetails
+      // performing custom serialization for nodesVisitedDetails
       if (nodesVisitedDetails != null) {
         List<Object> nodesVisitedDetailsJsonList = new List<Object>();
         for (DialogNodeVisitedDetails listItem : nodesVisitedDetails) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           nodesVisitedDetailsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String nodesVisitedDetailsKey = 'nodesVisitedDetails';
@@ -15603,11 +15648,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(nodesVisitedDetailsKey, nodesVisitedDetailsJsonList);
       }
 
-      // calling custom serializer for logMessages
+      // performing custom serialization for logMessages
       if (logMessages != null) {
         List<Object> logMessagesJsonList = new List<Object>();
         for (LogMessage listItem : logMessages) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           logMessagesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String logMessagesKey = 'logMessages';
@@ -15617,11 +15662,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(logMessagesKey, logMessagesJsonList);
       }
 
-      // calling custom serializer for generic
+      // performing custom serialization for generic
       if (generic != null) {
         List<Object> genericJsonList = new List<Object>();
         for (RuntimeResponseGeneric listItem : generic) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           genericJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String genericKey = 'generic';
@@ -15631,7 +15676,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(genericKey, genericJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16112,27 +16157,27 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for metadata
+      // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = metadata.serialize();
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
         jsonMap.put('metadata', JSON.deserializeUntyped(metadataJsonString));
       }
 
-      // calling custom serializer for groups
+      // performing custom serialization for groups
       if (groups != null) {
         List<Object> groupsJsonList = new List<Object>();
         for (CaptureGroup listItem : groups) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           groupsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('groups', groupsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16347,11 +16392,11 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -16677,9 +16722,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -16690,11 +16738,11 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for options
+      // performing custom serialization for options
       if (options != null) {
         List<Object> optionsJsonList = new List<Object>();
         for (DialogNodeOutputOptionsElement listItem : options) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           optionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String optionsKey = 'options';
@@ -16704,11 +16752,11 @@ public class IBMAssistantV1Models {
         jsonMap.put(optionsKey, optionsJsonList);
       }
 
-      // calling custom serializer for suggestions
+      // performing custom serialization for suggestions
       if (suggestions != null) {
         List<Object> suggestionsJsonList = new List<Object>();
         for (DialogSuggestion listItem : suggestions) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           suggestionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String suggestionsKey = 'suggestions';
@@ -16718,7 +16766,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(suggestionsKey, suggestionsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -17035,11 +17083,11 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -17247,13 +17295,13 @@ public class IBMAssistantV1Models {
       return builderResult;
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -20650,9 +20698,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -20660,9 +20711,9 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for tooling
+      // performing custom serialization for tooling
       if (tooling != null) {
-        String toolingJsonString = tooling.serialize();
+        String toolingJsonString = JSON.serialize(tooling.replacePropertyNames());
         String toolingKey = 'tooling';
         if (propertyNameMapping.containsKey(toolingKey)) {
           toolingKey = propertyNameMapping.get(toolingKey);
@@ -20670,9 +20721,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(toolingKey, JSON.deserializeUntyped(toolingJsonString));
       }
 
-      // calling custom serializer for disambiguation
+      // performing custom serialization for disambiguation
       if (disambiguation != null) {
-        String disambiguationJsonString = disambiguation.serialize();
+        String disambiguationJsonString = JSON.serialize(disambiguation.replacePropertyNames());
         String disambiguationKey = 'disambiguation';
         if (propertyNameMapping.containsKey(disambiguationKey)) {
           disambiguationKey = propertyNameMapping.get(disambiguationKey);
@@ -20680,9 +20731,9 @@ public class IBMAssistantV1Models {
         jsonMap.put(disambiguationKey, JSON.deserializeUntyped(disambiguationJsonString));
       }
 
-      // calling custom serializer for humanAgentAssist
+      // performing custom serialization for humanAgentAssist
       if (humanAgentAssist != null) {
-        String humanAgentAssistJsonString = humanAgentAssist.serialize();
+        String humanAgentAssistJsonString = JSON.serialize(humanAgentAssist.replacePropertyNames());
         String humanAgentAssistKey = 'humanAgentAssist';
         if (propertyNameMapping.containsKey(humanAgentAssistKey)) {
           humanAgentAssistKey = propertyNameMapping.get(humanAgentAssistKey);
@@ -20690,7 +20741,7 @@ public class IBMAssistantV1Models {
         jsonMap.put(humanAgentAssistKey, JSON.deserializeUntyped(humanAgentAssistJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -20858,9 +20909,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -20868,7 +20922,7 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -21003,9 +21057,12 @@ public class IBMAssistantV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -21013,7 +21070,7 @@ public class IBMAssistantV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
