@@ -8,17 +8,17 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" ]; then
   sfdx force:mdapi:deploy -d config/DocumentsFTest -w 1
   sfdx force:apex:test:run -u ciorg -c -r human
 
-  echo "IBMDiscoveryV1FTests.runAllTests('$DISCOVERY_API_KEY');" > DiscoveryTestRunner.apex
-  $(sfdx force:apex:execute -f DiscoveryTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm DiscoveryTestRunner.apex
+  #echo "IBMDiscoveryV1FTests.runAllTests('$DISCOVERY_API_KEY');" > DiscoveryTestRunner.apex
+  #$(sfdx force:apex:execute -f DiscoveryTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm DiscoveryTestRunner.apex
 
-  echo "IBMPersonalityInsightsV3FTest.runAllTests('$PERSONALITY_INSIGHTS_API_KEY');" > PersonalityInsightsTestRunner.apex
-  $(sfdx force:apex:execute -f PersonalityInsightsTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm PersonalityInsightsTestRunner.apex
+  #echo "IBMPersonalityInsightsV3FTest.runAllTests('$PERSONALITY_INSIGHTS_API_KEY');" > PersonalityInsightsTestRunner.apex
+  #$(sfdx force:apex:execute -f PersonalityInsightsTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm PersonalityInsightsTestRunner.apex
 
-  echo "IBMToneAnalyzerV3FTest.runAllTests('$TONE_ANALYZER_API_KEY');" > ToneAnalyzerTestRunner.apex
-  $(sfdx force:apex:execute -f ToneAnalyzerTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm ToneAnalyzerTestRunner.apex
+  #echo "IBMToneAnalyzerV3FTest.runAllTests('$TONE_ANALYZER_API_KEY');" > ToneAnalyzerTestRunner.apex
+  #$(sfdx force:apex:execute -f ToneAnalyzerTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm ToneAnalyzerTestRunner.apex
 
   echo "IBMNaturalLanguageUnderstandingV1FTest.runAllTests('$NLU_API_KEY');" > NLUTestRunner.apex
   $(sfdx force:apex:execute -f NLUTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1

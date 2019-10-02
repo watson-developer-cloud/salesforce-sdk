@@ -1,7 +1,7 @@
 public with sharing class IBMToneAnalyzerV3FTest {
   private static String NAMED_CREDENTIALS = 'callout:watson_tone_analyzer_v3';
   private static String VERSION = '2017-09-21';
-  private static String URL = 'https://gateway.watsonplatform.net/tone-analyzer/api';
+  private static String URL = 'https://gateway-wdc.watsonplatform.net/tone-analyzer/api';
 
   public static void runAllTests(String apiKey) {
     IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(apiKey);

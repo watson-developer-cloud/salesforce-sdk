@@ -19,7 +19,7 @@ public with sharing class IBMVisualRecognitionV4FTests {
   public static void testAnalyze(IBMVisualRecognitionV4 service) {
     IBMVisualRecognitionV4Models.AnalyzeOptions options = new IBMVisualRecognitionV4Models.AnalyzeOptionsBuilder()
       .addCollectionIds(PRE_MADE_COLLECTION_ID)
-      .addFeature('objects')
+      .addFeatures('objects')
       .addImageUrl(DOG_IMAGE_URL)
       .build();
     IBMVisualRecognitionV4Models.AnalyzeResponse response = service.analyze(options);
@@ -77,7 +77,7 @@ public with sharing class IBMVisualRecognitionV4FTests {
       IBMVisualRecognitionV4Models.CollectionsList collectionsList = service.listCollections(listCollectionsOptions);
 
       System.assert(collectionsList != null);
-      for (IBMVisualRecognitionV4Models.BaseCollection collection : collectionsList.getCollections()) {
+      for (IBMVisualRecognitionV4Models.Collection collection : collectionsList.getCollections()) {
         System.assert(!collection.getCollectionId().equals(testCollectionId));
       }
     }

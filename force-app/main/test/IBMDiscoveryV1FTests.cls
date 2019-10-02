@@ -53,6 +53,10 @@ public with sharing class IBMDiscoveryV1FTests {
 
     testGetTrainingExample(service, environmentId, collectionId, queryId, documentId);
     testGetTrainingData(service, environmentId, collectionId, queryId);
+
+    // delete training data that we don't need anymore
+    testDeleteAllTrainingData(service, environmentId, collectionId);
+
     testListTrainingData(service, environmentId, collectionId);
     testFederatedQueryNotices(service, environmentId, collectionId);
     testAddAndDeleteDocument(service, environmentId, collectionId);
@@ -429,14 +433,6 @@ public with sharing class IBMDiscoveryV1FTests {
      .build();
     IBMDiscoveryV1Models.TrainingQuery resp = service.addTrainingData(options);
     System.debug('IBMDiscoveryV1FTests.testAddTrainingData: ' + resp);
-
-    // clean up training data for later
-    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions deleteOptions = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .build();
-    service.deleteAllTrainingData(deleteAllTrainingDataOptions);
-
     return resp;
   }
 
@@ -549,11 +545,10 @@ public with sharing class IBMDiscoveryV1FTests {
    *
    */
   public static void testDeleteAllTrainingData(IBMDiscoveryV1 service, String environmentId, String collectionId) {
-    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new
-     IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-     .environmentId(environmentId)
-     .collectionId(collectionId)
-     .build();
+    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
     service.deleteAllTrainingData(options);
    }
 
@@ -644,27 +639,6 @@ public with sharing class IBMDiscoveryV1FTests {
 
     System.debug('Document successfully deleted');
     return true;
-  }
-
-   public static IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(IBMDiscoveryV1 service, String environmentId, String configurationId) {
-    Attachment att=createFile();
-    IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
-     .body(att.Body)
-     .name(att.Name)
-     .description(att.Description)
-     .contentType(att.ContentType)
-     .build();
-    IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions options = new IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptionsBuilder()
-     .environmentId(environmentId)
-     .configurationId(configurationId)
-     .file(testfile)
-     .filename(att.Name)
-     .fileContentType(att.ContentType)
-     .build();
-    IBMDiscoveryV1Models.TestDocument resp =
-     service.testConfigurationInEnvironment(options);
-    System.debug('IBMDiscoveryV1FTests.testConfigurationInEnvironment: ' + resp);
-    return resp;
   }
 
   /**
