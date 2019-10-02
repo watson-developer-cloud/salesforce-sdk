@@ -893,7 +893,7 @@ public class IBMVisualRecognitionV4Models {
       // calling custom deserializer for trainingStatus
       Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
       TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
-      ret.setTrainingStatus(newTrainingStatus);
+      ret.trainingStatus = newTrainingStatus;
 
       return ret;
     }
