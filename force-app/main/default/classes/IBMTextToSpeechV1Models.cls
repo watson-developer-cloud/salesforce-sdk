@@ -1901,9 +1901,12 @@ public class IBMTextToSpeechV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -1911,7 +1914,7 @@ public class IBMTextToSpeechV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -2788,9 +2791,12 @@ public class IBMTextToSpeechV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -2798,7 +2804,7 @@ public class IBMTextToSpeechV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -2946,21 +2952,21 @@ public class IBMTextToSpeechV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for words
+      // performing custom serialization for words
       if (words != null) {
         List<Object> wordsJsonList = new List<Object>();
         for (Word listItem : words) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           wordsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('words', wordsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
