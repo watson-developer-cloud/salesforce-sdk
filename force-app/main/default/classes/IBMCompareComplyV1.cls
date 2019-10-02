@@ -16,6 +16,16 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    * Instantiates a new `IBMCompareComplyV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *          calls from failing when the service introduces breaking changes.
+   */
+   public IBMCompareComplyV1(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMCompareComplyV1`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
@@ -200,7 +210,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('feedback_data', addFeedbackOptions.feedbackData().serialize());
+    contentJson.put('feedback_data', addFeedbackOptions.feedbackData().replacePropertyNames());
     if (addFeedbackOptions.userId() != null) {
       contentJson.put('user_id', addFeedbackOptions.userId());
     }

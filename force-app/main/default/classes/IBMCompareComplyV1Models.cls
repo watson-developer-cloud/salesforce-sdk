@@ -1169,9 +1169,12 @@ public class IBMCompareComplyV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -1179,7 +1182,7 @@ public class IBMCompareComplyV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -5123,9 +5126,12 @@ public class IBMCompareComplyV1Models {
       return new FeedbackDataInputBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -5137,9 +5143,9 @@ public class IBMCompareComplyV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for document
+      // performing custom serialization for document
       if (document != null) {
-        String documentJsonString = document.serialize();
+        String documentJsonString = JSON.serialize(document.replacePropertyNames());
         String documentKey = 'document';
         if (propertyNameMapping.containsKey(documentKey)) {
           documentKey = propertyNameMapping.get(documentKey);
@@ -5147,9 +5153,9 @@ public class IBMCompareComplyV1Models {
         jsonMap.put(documentKey, JSON.deserializeUntyped(documentJsonString));
       }
 
-      // calling custom serializer for location
+      // performing custom serialization for location
       if (location != null) {
-        String locationJsonString = location.serialize();
+        String locationJsonString = JSON.serialize(location.replacePropertyNames());
         String locationKey = 'location';
         if (propertyNameMapping.containsKey(locationKey)) {
           locationKey = propertyNameMapping.get(locationKey);
@@ -5157,9 +5163,9 @@ public class IBMCompareComplyV1Models {
         jsonMap.put(locationKey, JSON.deserializeUntyped(locationJsonString));
       }
 
-      // calling custom serializer for originalLabels
+      // performing custom serialization for originalLabels
       if (originalLabels != null) {
-        String originalLabelsJsonString = originalLabels.serialize();
+        String originalLabelsJsonString = JSON.serialize(originalLabels.replacePropertyNames());
         String originalLabelsKey = 'originalLabels';
         if (propertyNameMapping.containsKey(originalLabelsKey)) {
           originalLabelsKey = propertyNameMapping.get(originalLabelsKey);
@@ -5167,9 +5173,9 @@ public class IBMCompareComplyV1Models {
         jsonMap.put(originalLabelsKey, JSON.deserializeUntyped(originalLabelsJsonString));
       }
 
-      // calling custom serializer for updatedLabels
+      // performing custom serialization for updatedLabels
       if (updatedLabels != null) {
-        String updatedLabelsJsonString = updatedLabels.serialize();
+        String updatedLabelsJsonString = JSON.serialize(updatedLabels.replacePropertyNames());
         String updatedLabelsKey = 'updatedLabels';
         if (propertyNameMapping.containsKey(updatedLabelsKey)) {
           updatedLabelsKey = propertyNameMapping.get(updatedLabelsKey);
@@ -5177,7 +5183,7 @@ public class IBMCompareComplyV1Models {
         jsonMap.put(updatedLabelsKey, JSON.deserializeUntyped(updatedLabelsJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -6563,11 +6569,11 @@ public class IBMCompareComplyV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7356,9 +7362,12 @@ public class IBMCompareComplyV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -7367,7 +7376,7 @@ public class IBMCompareComplyV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -7543,31 +7552,31 @@ public class IBMCompareComplyV1Models {
       return new OriginalLabelsInBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for types
+      // performing custom serialization for types
       if (types != null) {
         List<Object> typesJsonList = new List<Object>();
         for (TypeLabel listItem : types) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           typesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('types', typesJsonList);
       }
 
-      // calling custom serializer for categories
+      // performing custom serialization for categories
       if (categories != null) {
         List<Object> categoriesJsonList = new List<Object>();
         for (Category listItem : categories) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           categoriesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('categories', categoriesJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -8782,11 +8791,11 @@ public class IBMCompareComplyV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -9788,9 +9797,12 @@ public class IBMCompareComplyV1Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -9798,9 +9810,9 @@ public class IBMCompareComplyV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for label
+      // performing custom serialization for label
       if (label != null) {
-        String labelJsonString = label.serialize();
+        String labelJsonString = JSON.serialize(label.replacePropertyNames());
         String labelKey = 'label';
         if (propertyNameMapping.containsKey(labelKey)) {
           labelKey = propertyNameMapping.get(labelKey);
@@ -9808,7 +9820,7 @@ public class IBMCompareComplyV1Models {
         jsonMap.put(labelKey, JSON.deserializeUntyped(labelJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -10317,31 +10329,31 @@ public class IBMCompareComplyV1Models {
       return new UpdatedLabelsInBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for types
+      // performing custom serialization for types
       if (types != null) {
         List<Object> typesJsonList = new List<Object>();
         for (TypeLabel listItem : types) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           typesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('types', typesJsonList);
       }
 
-      // calling custom serializer for categories
+      // performing custom serialization for categories
       if (categories != null) {
         List<Object> categoriesJsonList = new List<Object>();
         for (Category listItem : categories) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           categoriesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('categories', categoriesJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
