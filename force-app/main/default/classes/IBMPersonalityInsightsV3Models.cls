@@ -343,21 +343,21 @@ public class IBMPersonalityInsightsV3Models {
       return new ContentBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for contentItems
+      // performing custom serialization for contentItems
       if (contentItems != null) {
         List<Object> contentItemsJsonList = new List<Object>();
         for (ContentItem listItem : contentItems) {
-          String listItemJsonString = listItem.serialize();
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
           contentItemsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('contentItems', contentItemsJsonList);
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -568,11 +568,11 @@ public class IBMPersonalityInsightsV3Models {
       return new ContentItemBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
