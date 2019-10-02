@@ -28,6 +28,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   /**
    * Instantiates a new `IBMSpeechToTextV1`.
    *
+   */
+   public IBMSpeechToTextV1() {
+     this(IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMSpeechToTextV1`.
+   *
    * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMSpeechToTextV1(IBMWatsonAuthenticator authenticator) {
@@ -1127,7 +1135,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     List<Object> wordsList = new List<Object>();
     for (IBMSpeechToTextV1Models.CustomWord wordsItem : addWordsOptions.words()) {
-      wordsList.add(wordsItem.serialize());
+      wordsList.add(wordsItem.replacePropertyNames());
     }
     contentJson.put('words', wordsList);
     builder.bodyJson(JSON.serialize(contentJson));

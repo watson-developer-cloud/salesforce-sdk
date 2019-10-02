@@ -4044,9 +4044,12 @@ public class IBMSpeechToTextV1Models {
       return new CustomWordBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -4055,7 +4058,7 @@ public class IBMSpeechToTextV1Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -9070,8 +9073,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript;
     private Double confidence;
-    private List<List<String>> timestamps;
-    private List<List<String>> wordConfidence;
+    private List<String> timestamps;
+    private List<String> wordConfidence;
 
     /**
      * Gets the transcript.
@@ -9108,7 +9111,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<List<String>> getTimestamps() {
+    public List<String> getTimestamps() {
       return timestamps;
     }
 
@@ -9122,7 +9125,7 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<List<String>> getWordConfidence() {
+    public List<String> getWordConfidence() {
       return wordConfidence;
     }
 
@@ -9149,7 +9152,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<List<String>> timestamps) {
+    public void setTimestamps(final List<String> timestamps) {
       this.timestamps = timestamps;
     }
 
@@ -9158,7 +9161,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<List<String>> wordConfidence) {
+    public void setWordConfidence(final List<String> wordConfidence) {
       this.wordConfidence = wordConfidence;
     }
 
@@ -9186,7 +9189,7 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionResult extends IBMWatsonGenericModel {
     private Boolean xFinal;
     private List<SpeechRecognitionAlternative> alternatives;
-    private Map<String, List<KeywordResult>> keywordsResult;
+    private IBMWatsonMapModel keywordsResult;
     private List<WordAlternativeResults> wordAlternatives;
 
     /**
@@ -9226,7 +9229,7 @@ public class IBMSpeechToTextV1Models {
      * @return the keywordsResult
      */
     @AuraEnabled
-    public Map<String, List<KeywordResult>> getKeywordsResult() {
+    public IBMWatsonMapModel getKeywordsResult() {
       return keywordsResult;
     }
 
@@ -9266,7 +9269,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param keywordsResult the new keywordsResult
      */
-    public void setKeywordsResult(final Map<String, List<KeywordResult>> keywordsResult) {
+    public void setKeywordsResult(final IBMWatsonMapModel keywordsResult) {
       this.keywordsResult = keywordsResult;
     }
 
@@ -9309,23 +9312,9 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywordsResult
-      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
-      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
-      if (deserializedKeywordsResult != null) {
-        for (String key : deserializedKeywordsResult.keySet()) {
-          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
-          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
-          for (Integer i = 0; i < keywordResultList.size(); i++) {
-            KeywordResult currentItem = keywordResultList.get(i);
-            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywordsResult');
-            Object innerObject = ((List<Object>) itemInMap.get(key)).get(i);
-            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(innerObject), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerObject)), KeywordResult.class);
-            newKeywordResult.add(newItem);
-          }
-          newKeywordsResult.put(key, newKeywordResult);
-        }
-        ret.setKeywordsResult(newKeywordsResult);
-      }
+      Map<String, Object> keywordsResultMap = (Map<String, Object>) jsonMap.get('keywordsResult');
+      IBMWatsonMapModel newKeywordsResult = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(keywordsResultMap), keywordsResultMap, IBMWatsonMapModel.class);
+      ret.setKeywordsResult(newKeywordsResult);
 
       // calling custom deserializer for wordAlternatives
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
