@@ -1,6 +1,6 @@
 /**
- * The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces
- *  in images you upload to the service. You can create and train a custom classifier to identify subjects that suit
+ * The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes and objects in
+ * images that you upload to the service. You can create and train a custom classifier to identify subjects that suit
  * your needs.
  *
  * @version V3
@@ -12,6 +12,16 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
 
   private String versionDate;
+
+  /**
+   * Instantiates a new `IBMVisualRecognitionV3`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *          calls from failing when the service introduces breaking changes.
+   */
+   public IBMVisualRecognitionV3(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
 
   /**
    * Instantiates a new `IBMVisualRecognitionV3`.
@@ -71,66 +81,19 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('threshold', String.valueOf(classifyOptions.threshold()));
     }
     if (classifyOptions.owners() != null) {
-      multipartBuilder.addFormDataPart('owners', String.join(classifyOptions.owners(), ','));
+      for (String item : classifyOptions.owners()) {
+        multipartBuilder.addFormDataPart('owners', item);
+      }
     }
     if (classifyOptions.classifierIds() != null) {
-      multipartBuilder.addFormDataPart('classifier_ids', String.join(classifyOptions.classifierIds(), ','));
+      for (String item : classifyOptions.classifierIds()) {
+        multipartBuilder.addFormDataPart('classifier_ids', item);
+      }
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
     return (IBMVisualRecognitionV3Models.ClassifiedImages) createServiceCall(builder.build(), IBMVisualRecognitionV3Models.ClassifiedImages.class);
-  }
-
-  /**
-   * Detect faces in images.
-   *
-   * **Important:** On April 2, 2018, the identity information in the response to calls to the Face model was removed.
-   * The identity information refers to the `name` of the person, `score`, and `type_hierarchy` knowledge graph. For
-   * details about the enhanced Face model, see the [Release
-   * notes](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-release-notes#2april2018).
-   *
-   * Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a
-   * built-in model, so no training is necessary. The **Detect faces** method does not support general biometric facial
-   * recognition.
-   *
-   * Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
-   * recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
-   * 224 x 224 pixels.
-   *
-   * @param detectFacesOptions the {@link IBMVisualRecognitionV3Models.DetectFacesOptions} containing the options for the call
-   * @return the {@link IBMVisualRecognitionV3Models.DetectedFaces} with the response
-   */
-  public IBMVisualRecognitionV3Models.DetectedFaces detectFaces(IBMVisualRecognitionV3Models.DetectFacesOptions detectFacesOptions) {
-    IBMWatsonValidator.notNull(detectFacesOptions, 'detectFacesOptions cannot be null');
-    IBMWatsonValidator.isTrue((detectFacesOptions.imagesFile() != null) || (detectFacesOptions.url() != null), 'At least one of images_file or url must be supplied.');
-    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/detect_faces');
-    builder.addHeader('Accept', 'application/json');
-    if (detectFacesOptions.acceptLanguage() != null) {
-      builder.addHeader('Accept-Language', detectFacesOptions.acceptLanguage());
-    }
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=watson_vision_combined;service_version=V3;operation_id=detectFaces');
-    Map<String, String> requestHeaders = (detectFacesOptions != null) ? detectFacesOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (detectFacesOptions.imagesFile() != null) {
-      IBMWatsonRequestBody imagesFileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentType());
-      multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilename(), imagesFileBody);
-    }
-    if (detectFacesOptions.url() != null) {
-      multipartBuilder.addFormDataPart('url', detectFacesOptions.url());
-    }
-    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
-    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
-
-    return (IBMVisualRecognitionV3Models.DetectedFaces) createServiceCall(builder.build(), IBMVisualRecognitionV3Models.DetectedFaces.class);
   }
 
   /**
