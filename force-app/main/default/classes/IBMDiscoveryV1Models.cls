@@ -817,6 +817,7 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
+      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.remove('trainingStatus');
       Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentCounts
@@ -830,7 +831,6 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for trainingStatus
-      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
       TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
@@ -21989,7 +21989,13 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      SearchStatus ret = (SearchStatus) super.deserialize(jsonString, jsonMap, classType);
+      String lastTrained = (String) jsonMap.remove('lastTrained');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      SearchStatus ret = (SearchStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+      if (String.isNotBlank(lastTrained)) {
+        ret.setLastTrained((Datetime) JSON.deserialize('"' + lastTrained + '"', Datetime.class));
+      }
 
       return ret;
     }
@@ -25511,7 +25517,17 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
+      String dataUpdated = (String) jsonMap.remove('dataUpdated');
+      String successfullyTrained = (String) jsonMap.remove('successfullyTrained');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+      if (String.isNotBlank(dataUpdated)) {
+        ret.setDataUpdated((Datetime) JSON.deserialize('"' + dataUpdated + '"', Datetime.class));
+      }
+      if (String.isNotBlank(successfullyTrained)) {
+        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfullyTrained + '"', Datetime.class));
+      }
 
       return ret;
     }

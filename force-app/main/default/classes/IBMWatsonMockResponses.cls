@@ -4117,4 +4117,225 @@ public class IBMWatsonMockResponses {
       ']' +
     '}';
   }
+
+  public static testMethod String analyzeResponse() {
+    return '{' +
+      '"images": [' +
+        '{' +
+          '"source": {' +
+            '"type": "file",' +
+            '"filename": "filename",' +
+            '"archive_filename": "archive_filename",' +
+            '"source_url": "source_url",' +
+            '"resolved_url": "resolved_url"' +
+          '},' +
+          '"dimensions": {' +
+            '"height": 200,' +
+            '"width": 100' +
+          '},' +
+          '"objects": {' +
+            '"collections": [' +
+              '{' +
+                '"collection_id": "123456789",' +
+                '"objects": [' +
+                  '{' +
+                    '"object": "object",' +
+                    '"location": {' +
+                      '"top": 0,' +
+                      '"left": 10,' +
+                      '"width": 100,' +
+                      '"height": 200' +
+                    '},' +
+                    '"score": 5.0' +
+                  '}' +
+                ']' +
+              '}' +
+            ']' +
+          '},' +
+          '"errors": {' +
+            '"code": "code",' +
+            '"message": "message",' +
+            '"more_info": "more_info",' +
+            '"target": {' +
+              '"type": "field",' +
+              '"name": "name"' +
+            '}' +
+          '}' +
+        '}' +
+      '],' +
+      '"warnings": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message",' +
+          '"more_info": "more_info"' +
+        '}' +
+      '],' +
+      '"trace": "trace"' +
+    '}';
+  }
+
+  public static testMethod String visRecCollection() {
+    return '{' +
+      '"collection_id": "123456789",' +
+      '"name": "name",' +
+      '"description": "description",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"image_count": 50,' +
+      '"training_status": {' +
+        '"objects": {' +
+          '"ready": true,' +
+          '"in_progress": true,' +
+          '"data_changed": true,' +
+          '"latest_failed": true,' +
+          '"description": "description"' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String collectionsList() {
+    return '{' +
+      '"collections": [' +
+        '{' +
+          '"collection_id": "123456789",' +
+          '"name": "name",' +
+          '"description": "description",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"image_count": 50,' +
+          '"training_status": {' +
+            '"objects": {' +
+              '"ready": true,' +
+              '"in_progress": true,' +
+              '"data_changed": true,' +
+              '"latest_failed": true,' +
+              '"description": "description"' +
+            '}' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String imageDetails() {
+    return '{' +
+      '"image_id": "image_id",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"source": {' +
+        '"type": "file",' +
+        '"filename": "filename",' +
+        '"archive_filename": "archive_filename",' +
+        '"source_url": "source_url",' +
+        '"resolved_url": "resolved_url"' +
+      '},' +
+      '"dimensions": {' +
+        '"height": 200,' +
+        '"width": 100' +
+      '},' +
+      '"errors": {' +
+        '"code": "code",' +
+        '"message": "message",' +
+        '"more_info": "more_info",' +
+        '"target": {' +
+          '"type": "field",' +
+          '"name": "name"' +
+        '}' +
+      '},' +
+      '"training_data": {' +
+        '"objects": [' +
+          '{' +
+            '"object": "object",' +
+            '"location": {' +
+              '"top": 0,' +
+              '"left": 10,' +
+              '"width": 100,' +
+              '"height": 200' +
+            '}' +
+          '}' +
+        ']' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String imageDetailsList() {
+    return '{' +
+      '"images": [' +
+        '{' +
+          '"image_id": "image_id",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"source": {' +
+            '"type": "file",' +
+            '"filename": "filename",' +
+            '"archive_filename": "archive_filename",' +
+            '"source_url": "source_url",' +
+            '"resolved_url": "resolved_url"' +
+          '},' +
+          '"dimensions": {' +
+            '"height": 200,' +
+            '"width": 100' +
+          '},' +
+          '"errors": {' +
+            '"code": "code",' +
+            '"message": "message",' +
+            '"more_info": "more_info",' +
+            '"target": {' +
+              '"type": "field",' +
+              '"name": "name"' +
+            '}' +
+          '},' +
+          '"training_data": {' +
+            '"objects": [' +
+              '{' +
+                '"object": "object",' +
+                '"location": {' +
+                  '"top": 0,' +
+                  '"left": 10,' +
+                  '"width": 100,' +
+                  '"height": 200' +
+                '}' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      '],' +
+      '"warnings": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message",' +
+          '"more_info": "more_info"' +
+        '}' +
+      '],' +
+      '"trace": "trace"' +
+    '}';
+  }
+
+  public static testMethod String imageSummaryList() {
+    return '{' +
+      '"images": [' +
+        '{' +
+          '"image_id": "image_id",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String trainingDataObjects() {
+    return '{' +
+      '"objects": [' +
+        '{' +
+          '"object": "object",' +
+          '"location": {' +
+            '"top": 0,' +
+            '"left": 10,' +
+            '"width": 100,' +
+            '"height": 200' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
 }

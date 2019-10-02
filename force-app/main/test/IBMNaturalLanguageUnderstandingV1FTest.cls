@@ -1,25 +1,23 @@
 public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
   private static String URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
+  private static String VERSION = '2018-11-16';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_natural_language_understanding_v1';
 
-  public static void runAllTests(String username, String password) {
-    testAnalyze(username, password);
-    testListModels(username, password);
+  public static void runAllTests(String apiKey) {
+    IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(apiKey);
+    IBMNaturalLanguageUnderstandingV1 service = new IBMNaturalLanguageUnderstandingV1(VERSION, authenticator);
+    service.setServiceURL(URL);
+
+    testAnalyze(service);
+    testListModels(service);
   }
 
   /**
    *  Test Analyze text, HTML, or a public webpage.
    *
    */
-  public static IBMNaturalLanguageUnderstandingV1Models.AnalysisResults testAnalyze(String username, String password) {
-    IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-02-27');
-
-    if (username != null && password != null) {
-      naturalLanguageUnderstanding.setServiceURL(URL);
-      naturalLanguageUnderstanding.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMNaturalLanguageUnderstandingV1Models.AnalysisResults testAnalyze(IBMNaturalLanguageUnderstandingV1 service) {
     IBMNaturalLanguageUnderstandingV1Models.ConceptsOptions concepts = new IBMNaturalLanguageUnderstandingV1Models.ConceptsOptionsBuilder()
       .xlimit(8)
       .build();
@@ -62,11 +60,11 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
       .targets(new List<String>{''})
       .build();
 
-    IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions();
-    categories.put('emotion', emotion);
+    IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptionsBuilder()
+      .explanation(true)
+      .build();
 
-    IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
-    metadata.put('', '');
+    IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptionsBuilder().build();
 
     IBMNaturalLanguageUnderstandingV1Models.Features features = new IBMNaturalLanguageUnderstandingV1Models.FeaturesBuilder()
       .concepts(concepts)
@@ -90,23 +88,16 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
       .language('en')
       .build();
 
-    IBMNaturalLanguageUnderstandingV1Models.AnalysisResults resp = naturalLanguageUnderstanding.analyze(options);
+    IBMNaturalLanguageUnderstandingV1Models.AnalysisResults resp = service.analyze(options);
     System.debug('IBMNaturalLanguageUnderstandingV1FTest.testAnalyze(): ' + resp);
     return resp;
   }
 
-  public static IBMNaturalLanguageUnderstandingV1Models.ListModelsResults testListModels(String username, String password) {
-    IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-02-27');
-
-    if (username != null && password != null) {
-      naturalLanguageUnderstanding.setServiceURL(URL);
-      naturalLanguageUnderstanding.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMNaturalLanguageUnderstandingV1Models.ListModelsResults testListModels(IBMNaturalLanguageUnderstandingV1 service) {
     IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions options = new IBMNaturalLanguageUnderstandingV1Models.ListModelsOptionsBuilder()
       .build();
 
-    IBMNaturalLanguageUnderstandingV1Models.ListModelsResults resp = naturalLanguageUnderstanding.listModels(options);
+    IBMNaturalLanguageUnderstandingV1Models.ListModelsResults resp = service.listModels(options);
     System.debug('IBMNaturalLanguageUnderstandingV1FTest.testListModels(): ' + resp);
     return resp;
   }
