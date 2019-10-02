@@ -207,10 +207,9 @@ public with sharing class IBMTextToSpeechV1FTest {
    */
   public static IBMWatsonFile testSynthesize(IBMTextToSpeechV1 service, String customizationId) {
     IBMTextToSpeechV1Models.SynthesizeOptions options = new IBMTextToSpeechV1Models.SynthesizeOptionsBuilder()
-      .accept('audio/mp3')
-      .voice('de-DE_DieterVoice')
-      .customizationId(customizationId)
-      .text('IBM Watson wird die Kundenerfahrung revolutionieren.')
+      .accept('audio/wav')
+      .voice('en-US_LisaVoice')
+      .text('This is an integration test!')
       .build();
     IBMWatsonFile resp = service.synthesize(options);
     return resp;

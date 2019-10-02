@@ -38,6 +38,7 @@ public with sharing class IBMAssistantV2FTests {
       IBMAssistantV2Models.MessageInput input = new IBMAssistantV2Models.MessageInputBuilder()
           .text(message)
           .options(inputOptions)
+          .messageType('text')
           .build();
       IBMAssistantV2Models.MessageOptions messageOptions = new IBMAssistantV2Models.MessageOptionsBuilder()
           .assistantId(assistantId)

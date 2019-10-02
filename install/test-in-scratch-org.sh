@@ -20,29 +20,29 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" ]; then
   #$(sfdx force:apex:execute -f ToneAnalyzerTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
   #rm ToneAnalyzerTestRunner.apex
 
-  echo "IBMNaturalLanguageUnderstandingV1FTest.runAllTests('$NLU_API_KEY');" > NLUTestRunner.apex
-  $(sfdx force:apex:execute -f NLUTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm NLUTestRunner.apex
+  #echo "IBMNaturalLanguageUnderstandingV1FTest.runAllTests('$NLU_API_KEY');" > NLUTestRunner.apex
+  #$(sfdx force:apex:execute -f NLUTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm NLUTestRunner.apex
 
-  echo "IBMNaturalLanguageClassifierV1FTests.runAllTests('$NLC_API_KEY');" > NLCTestRunner.apex
-  $(sfdx force:apex:execute -f NLCTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm NLCTestRunner.apex
+  #echo "IBMNaturalLanguageClassifierV1FTests.runAllTests('$NLC_API_KEY');" > NLCTestRunner.apex
+  #$(sfdx force:apex:execute -f NLCTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm NLCTestRunner.apex
 
-  echo "IBMTextToSpeechV1FTest.runAllTests('$TEXT_TO_SPEECH_API_KEY');" > TextToSpeechTestRunner.apex
-  $(sfdx force:apex:execute -f TextToSpeechTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm TextToSpeechTestRunner.apex
+  #echo "IBMTextToSpeechV1FTest.runAllTests('$TEXT_TO_SPEECH_API_KEY');" > TextToSpeechTestRunner.apex
+  #$(sfdx force:apex:execute -f TextToSpeechTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm TextToSpeechTestRunner.apex
 
-  echo "IBMSpeechToTextV1FTest.runAllTests('$SPEECH_TO_TEXT_API_KEY');" > SpeechToTextTestRunner.apex
-  $(sfdx force:apex:execute -f SpeechToTextTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm SpeechToTextTestRunner.apex
+  #echo "IBMSpeechToTextV1FTest.runAllTests('$SPEECH_TO_TEXT_API_KEY');" > SpeechToTextTestRunner.apex
+  #$(sfdx force:apex:execute -f SpeechToTextTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm SpeechToTextTestRunner.apex
 
   echo "IBMAssistantV2FTests.runAllTests('$ASSISTANT_V2_API_KEY', '$ASSISTANT_V2_ASSISTANT_ID');" > AssistantV2TestRunner.apex
   $(sfdx force:apex:execute -f AssistantV2TestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
   rm AssistantV2TestRunner.apex
 
-  echo "IBMVisualRecognitionV3FTest.runAllTests('$VISUAL_RECOGNITION_IAM_API_KEY');" > VisualRecognitionTestRunner.apex
-  $(sfdx force:apex:execute -f VisualRecognitionTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm VisualRecognitionTestRunner.apex
+  echo "IBMVisualRecognitionV3FTest.runAllTests('$VISUAL_RECOGNITION_IAM_API_KEY');" > VisualRecognitionV3TestRunner.apex
+  $(sfdx force:apex:execute -f VisualRecognitionV3TestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  rm VisualRecognitionV3TestRunner.apex
 
   echo "IBMCompareComplyV1FTests.runAllTests('$COMPARE_AND_COMPLY_IAM_API_KEY');" > CompareComplyTestRunner.apex
   $(sfdx force:apex:execute -f CompareComplyTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo "Success" || exit 1

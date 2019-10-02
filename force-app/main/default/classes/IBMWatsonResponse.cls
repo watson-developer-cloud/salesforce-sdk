@@ -30,7 +30,15 @@ public with sharing class IBMWatsonResponse {
   }
 
   public String getHeader(String key) {
-    return this.httpResponse.getHeader(key);
+    // we'll try the lowercase key too as a fallback
+    String lowerCaseKey = key.toLowerCase();
+
+    String headerVal = this.httpResponse.getHeader(key);
+    if (headerVal == null) {
+      headerVal = this.httpResponse.getHeader(lowerCaseKey);
+    }
+
+    return headerVal;
   }
 
   public String[] getHeaderKeys() {
