@@ -22,6 +22,16 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * Instantiates a new `IBMToneAnalyzerV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *          calls from failing when the service introduces breaking changes.
+   */
+   public IBMToneAnalyzerV3(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMToneAnalyzerV3`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
@@ -135,7 +145,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     List<Object> utterancesList = new List<Object>();
     for (IBMToneAnalyzerV3Models.Utterance utterancesItem : toneChatOptions.utterances()) {
-      utterancesList.add(utterancesItem.serialize());
+      utterancesList.add(utterancesItem.replacePropertyNames());
     }
     contentJson.put('utterances', utterancesList);
     builder.bodyJson(JSON.serialize(contentJson));

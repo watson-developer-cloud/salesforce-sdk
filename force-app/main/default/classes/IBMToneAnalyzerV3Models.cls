@@ -793,11 +793,11 @@ public class IBMToneAnalyzerV3Models {
       return new ToneInputBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -1268,11 +1268,11 @@ public class IBMToneAnalyzerV3Models {
       return new UtteranceBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
