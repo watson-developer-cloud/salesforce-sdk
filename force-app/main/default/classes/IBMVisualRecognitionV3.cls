@@ -131,11 +131,15 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       String partName = String.format('{0}_positive_examples', new String[] { key });
       IBMWatsonFile file = createClassifierOptions.positiveExamples().get(key);
       IBMWatsonRequestBody formPart = IBMWatsonRequestBody.create(file, 'application/octet-stream');
-      multipartBuilder.addFormDataPart(partName, file.name(), formPart);
+      multipartBuilder.addFormDataPart(partName, file.name() + '.zip', formPart);
     }
     if (createClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody negativeExamplesBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilename(), negativeExamplesBody);
+      String negativeExamplesFilename = createClassifierOptions.negativeExamplesFilename();
+      if (!negativeExamplesFilename.contains('.')) {
+        negativeExamplesFilename += '.zip';
+      }
+      multipartBuilder.addFormDataPart('negative_examples', negativeExamplesFilename, negativeExamplesBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
