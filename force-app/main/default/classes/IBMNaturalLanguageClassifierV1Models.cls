@@ -686,11 +686,11 @@ public class IBMNaturalLanguageClassifierV1Models {
       return new ClassifyInputBuilder(this);
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 

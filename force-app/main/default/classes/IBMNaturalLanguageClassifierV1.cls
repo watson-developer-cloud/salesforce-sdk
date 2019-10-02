@@ -14,6 +14,14 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   /**
    * Instantiates a new `IBMNaturalLanguageClassifierV1`.
    *
+   */
+   public IBMNaturalLanguageClassifierV1() {
+     this(IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMNaturalLanguageClassifierV1`.
+   *
    * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
    */
   public IBMNaturalLanguageClassifierV1(IBMWatsonAuthenticator authenticator) {
@@ -78,7 +86,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     List<Object> collectionList = new List<Object>();
     for (IBMNaturalLanguageClassifierV1Models.ClassifyInput collectionItem : classifyCollectionOptions.collection()) {
-      collectionList.add(collectionItem.serialize());
+      collectionList.add(collectionItem.replacePropertyNames());
     }
     contentJson.put('collection', collectionList);
     builder.bodyJson(JSON.serialize(contentJson));
