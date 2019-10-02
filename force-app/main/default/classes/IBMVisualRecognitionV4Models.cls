@@ -893,7 +893,7 @@ public class IBMVisualRecognitionV4Models {
       // calling custom deserializer for trainingStatus
       Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
       TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
-      ret.trainingStatus = newTrainingStatus;
+      ret.setTrainingStatus(newTrainingStatus);
 
       return ret;
     }
@@ -3024,11 +3024,11 @@ public class IBMVisualRecognitionV4Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -3337,9 +3337,12 @@ public class IBMVisualRecognitionV4Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -3349,7 +3352,7 @@ public class IBMVisualRecognitionV4Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -3625,9 +3628,12 @@ public class IBMVisualRecognitionV4Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
@@ -3635,9 +3641,9 @@ public class IBMVisualRecognitionV4Models {
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      // calling custom serializer for location
+      // performing custom serialization for location
       if (location != null) {
-        String locationJsonString = location.serialize();
+        String locationJsonString = JSON.serialize(location.replacePropertyNames());
         String locationKey = 'location';
         if (propertyNameMapping.containsKey(locationKey)) {
           locationKey = propertyNameMapping.get(locationKey);
@@ -3645,7 +3651,7 @@ public class IBMVisualRecognitionV4Models {
         jsonMap.put(locationKey, JSON.deserializeUntyped(locationJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 
@@ -3804,17 +3810,17 @@ public class IBMVisualRecognitionV4Models {
       return retBuilder.build();
     }
 
-    public String serialize() {
+    public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
 
-      // calling custom serializer for objects
+      // performing custom serialization for objects
       if (objects != null) {
-        String objectsJsonString = objects.serialize();
+        String objectsJsonString = JSON.serialize(objects.replacePropertyNames());
         jsonMap.put('objects', JSON.deserializeUntyped(objectsJsonString));
       }
 
-      return JSON.serialize(jsonMap);
+      return jsonMap;
     }
   }
 

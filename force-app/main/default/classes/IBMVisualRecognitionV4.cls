@@ -74,8 +74,12 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    multipartBuilder.addFormDataPart('collection_ids', String.join(analyzeOptions.collectionIds(), ','));
-    multipartBuilder.addFormDataPart('features', String.join(analyzeOptions.features(), ','));
+    for (String item : analyzeOptions.collectionIds()) {
+      multipartBuilder.addFormDataPart('collection_ids', item);
+    }
+    for (String item : analyzeOptions.features()) {
+      multipartBuilder.addFormDataPart('features', item);
+    }
     if (analyzeOptions.imagesFile() != null) {
       for (IBMWatsonFile item : analyzeOptions.imagesFile()) {
         IBMWatsonRequestBody itemBody = IBMWatsonRequestBody.create(item, item.contentType());
@@ -454,7 +458,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     if (addImageTrainingDataOptions.objects() != null) {
       List<Object> objectsList = new List<Object>();
       for (IBMVisualRecognitionV4Models.TrainingDataObject objectsItem : addImageTrainingDataOptions.objects()) {
-        objectsList.add(objectsItem.serialize());
+        objectsList.add(objectsItem.replacePropertyNames());
       }
       contentJson.put('objects', objectsList);
     }
