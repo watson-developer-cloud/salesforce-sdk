@@ -2,6 +2,9 @@
  * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
  * dialog editor to create conversation flows between your apps and your users.
  *
+ * The Assistant v2 API provides runtime methods your client application can use to send user input to an assistant and
+ * receive a response.
+ *
  * @version V2
  * @see <a href="https://cloud.ibm.com/docs/services/assistant/">Assistant</a>
  */
@@ -11,6 +14,16 @@ public class IBMAssistantV2 extends IBMWatsonService {
   private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/assistant/api';
 
   private String versionDate;
+
+  /**
+   * Instantiates a new `IBMAssistantV2`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *          calls from failing when the service introduces breaking changes.
+   */
+   public IBMAssistantV2(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
 
   /**
    * Instantiates a new `IBMAssistantV2`.
@@ -109,10 +122,10 @@ public class IBMAssistantV2 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (messageOptions.input() != null) {
-      contentJson.put('input', messageOptions.input().serialize());
+      contentJson.put('input', messageOptions.input().replacePropertyNames());
     }
     if (messageOptions.context() != null) {
-      contentJson.put('context', messageOptions.context().serialize());
+      contentJson.put('context', messageOptions.context().replacePropertyNames());
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
