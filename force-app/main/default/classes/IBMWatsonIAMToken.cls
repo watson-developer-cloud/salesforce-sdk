@@ -8,14 +8,6 @@ public class IBMWatsonIAMToken extends IBMWatsonAbstractToken implements IBMWats
   private Long expiresIn;
   private Long expiration;
 
-  public String getRefreshToken() {
-    return refreshToken;
-  }
-
-  public String getTokenType() {
-    return tokenType;
-  }
-
   public Long getExpiresIn() {
     return expiresIn;
   }

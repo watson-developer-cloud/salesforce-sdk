@@ -1,8 +1,15 @@
 @isTest
 private class IBMToneAnalyzerV3Test {
+  private static String VERSION;
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
+
   private static IBMToneAnalyzerV3 service;
 
   static {
+    VERSION = '2017-09-21';
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
     service = new IBMToneAnalyzerV3('2017-09-21', new IBMWatsonNoAuthAuthenticator());
   }
 
@@ -15,7 +22,6 @@ private class IBMToneAnalyzerV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     IBMToneAnalyzerV3Models.ToneInput toneInput = new IBMToneAnalyzerV3Models.ToneInputBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
       .build();
@@ -30,7 +36,7 @@ private class IBMToneAnalyzerV3Test {
     .contentLanguage('en')
     .acceptLanguage('en')
     .toneInput(toneInput)
-    .addHeader('Test-Header', 'test_value')
+    .addHeader(HEADER_KEY, HEADER_VAL)
     .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -68,7 +74,7 @@ private class IBMToneAnalyzerV3Test {
       .addUtterances(utterance)
       .acceptLanguage('en')
       .contentLanguage('en')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();

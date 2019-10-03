@@ -4,6 +4,8 @@ private class IBMDiscoveryV1Test {
   private static final String ENVIRONMENT_ID = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
   private static final String CONFIGURATION_ID = 'configuration_id';
 
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
   private static String DESTINATION_FIELD;
   private static String SOURCE_FIELD;
   private static String ENRICHMENT_NAME;
@@ -15,6 +17,8 @@ private class IBMDiscoveryV1Test {
   private static IBMDiscoveryV1 service;
 
   static {
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
     DESTINATION_FIELD = 'destination_field';
     SOURCE_FIELD = 'source_field';
     ENRICHMENT_NAME = 'enrichment_name';
@@ -26,6 +30,7 @@ private class IBMDiscoveryV1Test {
   }
 
   static testMethod void testNluEnrichmentConcepts() {
+    Test.startTest();
     Long lim = 5L;
 
     IBMDiscoveryV1Models.NluEnrichmentConcepts concepts = new IBMDiscoveryV1Models.NluEnrichmentConceptsBuilder()
@@ -33,15 +38,18 @@ private class IBMDiscoveryV1Test {
       .build();
 
     System.assertEquals(lim, concepts.getXlimit());
+    Test.stopTest();
   }
 
   static testMethod void testRetrievalDetails() {
+    Test.startTest();
     String retrievalStrategy = 'relevancy_training';
 
     IBMDiscoveryV1Models.RetrievalDetails retrievalDetails = new IBMDiscoveryV1Models.RetrievalDetails();
     retrievalDetails.setDocumentRetrievalStrategy(retrievalStrategy);
 
     System.assertEquals(retrievalStrategy, retrievalDetails.getDocumentRetrievalStrategy());
+    Test.stopTest();
   }
 
   /**
@@ -58,7 +66,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder()
       .name(text)
       .description('test_environment description')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -100,8 +108,9 @@ private class IBMDiscoveryV1Test {
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder()
         .name(text)
         .description('test_environment description')
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
+      options = options.newBuilder().build();
       IBMDiscoveryV1Models.Environment resp =
         service.createEnvironment(options);
     }
@@ -126,7 +135,7 @@ private class IBMDiscoveryV1Test {
     String text = 'test_environment';
     IBMDiscoveryV1Models.ListEnvironmentsOptions options = new IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
       .name(text)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -152,7 +161,7 @@ private class IBMDiscoveryV1Test {
     String text = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
     IBMDiscoveryV1Models.DeleteEnvironmentOptions options = new IBMDiscoveryV1Models.DeleteEnvironmentOptionsBuilder()
       .environmentId(text)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -173,8 +182,9 @@ private class IBMDiscoveryV1Test {
       String text = '';
       IBMDiscoveryV1Models.DeleteEnvironmentOptions options = new IBMDiscoveryV1Models.DeleteEnvironmentOptionsBuilder()
         .environmentId(text)
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
+      options = options.newBuilder().build();
       service.deleteEnvironment(options);
     }
     catch(Exception exptn) {
@@ -197,7 +207,7 @@ private class IBMDiscoveryV1Test {
     String text = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
     IBMDiscoveryV1Models.GetEnvironmentOptions options = new IBMDiscoveryV1Models.GetEnvironmentOptionsBuilder()
       .environmentId(text)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -222,8 +232,9 @@ private class IBMDiscoveryV1Test {
     try {
       IBMDiscoveryV1Models.GetEnvironmentOptions options = new IBMDiscoveryV1Models.GetEnvironmentOptionsBuilder()
         .environmentId(text)
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
+      options = options.newBuilder().build();
       IBMDiscoveryV1Models.Environment resp =
         service.getEnvironment(options);
     }
@@ -247,7 +258,7 @@ private class IBMDiscoveryV1Test {
       .environmentId(ENVIRONMENT_ID)
       .name('test_environment')
       .description('test_environment description')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -271,8 +282,9 @@ private class IBMDiscoveryV1Test {
         .environmentId(ENVIRONMENT_ID)
         .name('')
         .description('test_environment description')
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
+      options = options.newBuilder().build();
       IBMDiscoveryV1Models.Environment resp =
         service.updateEnvironment(options);
     }
@@ -296,7 +308,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.ListFieldsOptions options = new IBMDiscoveryV1Models.ListFieldsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionIds(collectionIds)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -411,8 +423,9 @@ private class IBMDiscoveryV1Test {
       IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
         .name('test_environment')
         .description('test_environment description')
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
+      options = options.newBuilder().build();
       IBMDiscoveryV1Models.Configuration resp =
         service.createConfiguration(options);
     }
@@ -435,7 +448,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.DeleteConfigurationOptions options = new IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
       .environmentId(ENVIRONMENT_ID)
       .configurationId(CONFIGURATION_ID)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -456,7 +469,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.GetConfigurationOptions options = new IBMDiscoveryV1Models.GetConfigurationOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .configurationId(CONFIGURATION_ID)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -478,7 +491,7 @@ private class IBMDiscoveryV1Test {
 
     IBMDiscoveryV1Models.ListConfigurationsOptions options = new IBMDiscoveryV1Models.ListConfigurationsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -502,7 +515,7 @@ private class IBMDiscoveryV1Test {
       .name('test_environment')
       .description('test_environment description')
       .configurationId(CONFIGURATION_ID)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -527,8 +540,9 @@ private class IBMDiscoveryV1Test {
         .environmentId(ENVIRONMENT_ID)
         .name('test_environment')
         .description('test_environment description')
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
+      options = options.newBuilder().build();
       IBMDiscoveryV1Models.Configuration resp =
         service.updateConfiguration(options);
     }
@@ -553,7 +567,7 @@ private class IBMDiscoveryV1Test {
       .configurationId(CONFIGURATION_ID)
       .name('test_environment')
       .description('test_environment description')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .language('de')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -577,7 +591,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.DeleteCollectionOptions options = new IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
       .environmentId(ENVIRONMENT_ID)
       .collectionId(CONFIGURATION_ID)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -598,7 +612,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.GetCollectionOptions options = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -642,7 +656,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.GetCollectionOptions options = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -685,7 +699,7 @@ private class IBMDiscoveryV1Test {
 
     IBMDiscoveryV1Models.ListCollectionsOptions options = new IBMDiscoveryV1Models.ListCollectionsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -709,7 +723,7 @@ private class IBMDiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .name('test_environment')
       .description('test_environment description')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -734,8 +748,9 @@ private class IBMDiscoveryV1Test {
         .environmentId(ENVIRONMENT_ID)
         .name('test_environment')
         .description('test_environment description')
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
+      options = options.newBuilder().build();
       IBMDiscoveryV1Models.Collection resp =
         service.updateCollection(options);
     }
@@ -759,7 +774,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.ListCollectionFieldsOptions options = new IBMDiscoveryV1Models.ListCollectionFieldsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -783,7 +798,7 @@ private class IBMDiscoveryV1Test {
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -805,7 +820,7 @@ private class IBMDiscoveryV1Test {
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -851,7 +866,7 @@ private class IBMDiscoveryV1Test {
       .similar(true)
       .similarDocumentIds('doc1,doc2')
       .similarFields('field1,field2')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -891,7 +906,7 @@ private class IBMDiscoveryV1Test {
       .similar(true)
       .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
       .similarFields(new List<String> { 'field1', 'field2' })
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -988,7 +1003,7 @@ private class IBMDiscoveryV1Test {
       .similarDocumentIds('doc1,doc2')
       .similarFields('field1,field2')
       .xWatsonLoggingOptOut(true)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1019,7 +1034,7 @@ private class IBMDiscoveryV1Test {
       .similar(true)
       .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
       .similarFields(new List<String> { 'field1', 'field2' })
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1064,7 +1079,7 @@ private class IBMDiscoveryV1Test {
       .filter('test')
       .addExamples(trainingExample)
       .examples(new List<IBMDiscoveryV1Models.TrainingExample> { trainingExample })
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1102,7 +1117,7 @@ private class IBMDiscoveryV1Test {
       .documentId('test')
       .relevance(2)
       .crossReference('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1125,7 +1140,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1147,7 +1162,7 @@ private class IBMDiscoveryV1Test {
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1169,7 +1184,7 @@ private class IBMDiscoveryV1Test {
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1196,7 +1211,7 @@ private class IBMDiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1220,7 +1235,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.ListTrainingDataOptions options = new IBMDiscoveryV1Models.ListTrainingDataOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1250,7 +1265,7 @@ private class IBMDiscoveryV1Test {
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .relevance(2)
       .crossReference('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1364,6 +1379,7 @@ private class IBMDiscoveryV1Test {
       .document(true)
       .targets(new List<String> { 'Target1', 'Target2' })
       .build();
+    enrichmentEmotion = enrichmentEmotion.newBuilder().build();
     IBMDiscoveryV1Models.NluEnrichmentEntities enrichmentEntities = new IBMDiscoveryV1Models.NluEnrichmentEntitiesBuilder()
       .emotion(true)
       .xlimit(5)
@@ -1373,11 +1389,13 @@ private class IBMDiscoveryV1Test {
       .sentenceLocations(true)
       .sentiment(true)
       .build();
+    enrichmentEntities = enrichmentEntities.newBuilder().build();
     IBMDiscoveryV1Models.NluEnrichmentKeywords enrichmentKeywords = new IBMDiscoveryV1Models.NluEnrichmentKeywordsBuilder()
       .emotion(true)
       .xlimit(5)
       .sentiment(true)
       .build();
+    enrichmentKeywords = enrichmentKeywords.newBuilder().build();
     IBMDiscoveryV1Models.NluEnrichmentRelations enrichmentRelations = new IBMDiscoveryV1Models.NluEnrichmentRelationsBuilder()
       .model('test')
       .build();
@@ -1386,10 +1404,12 @@ private class IBMDiscoveryV1Test {
       .keywords(true)
       .xlimit(5)
       .build();
+    enrichmentSemanticRoles = enrichmentSemanticRoles.newBuilder().build();
     IBMDiscoveryV1Models.NluEnrichmentSentiment enrichmentSentiment = new IBMDiscoveryV1Models.NluEnrichmentSentimentBuilder()
       .document(true)
       .targets(new List<String>{'Target1', 'Target2'})
       .build();
+    enrichmentSentiment = enrichmentSentiment.newBuilder().build();
     IBMDiscoveryV1Models.NluEnrichmentFeatures enrichmentFeatures = new IBMDiscoveryV1Models.NluEnrichmentFeaturesBuilder()
       .emotion(enrichmentEmotion)
       .entities(enrichmentEntities)
@@ -1398,6 +1418,7 @@ private class IBMDiscoveryV1Test {
       .semanticRoles(enrichmentSemanticRoles)
       .sentiment(enrichmentSentiment)
       .build();
+    enrichmentFeatures = enrichmentFeatures.newBuilder().build();
     IBMDiscoveryV1Models.EnrichmentOptions enrichmentOptions = new IBMDiscoveryV1Models.EnrichmentOptionsBuilder()
       .features(enrichmentFeatures)
       .model('test')
@@ -1422,7 +1443,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .configuration(configuration)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1493,7 +1514,7 @@ private class IBMDiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1526,7 +1547,7 @@ private class IBMDiscoveryV1Test {
       .file(testfile)
       .filename('test.txt')
       .fileContentType('text/plain')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
      //you can add more attributes using following builder method. This step is not necessary
      options = options.newBuilder().build();
@@ -1560,7 +1581,7 @@ private class IBMDiscoveryV1Test {
       .file(testfile)
       .filename('test.txt')
       .fileContentType('text/plain')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1597,7 +1618,7 @@ private class IBMDiscoveryV1Test {
         .environmentId('environment_id')
         .collectionId('collection_id')
         .expansions(expansions)
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     IBMDiscoveryV1Models.Expansions createResults = service.createExpansions(createOptions);
 
@@ -1631,7 +1652,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.ListExpansionsOptions listOptions = new IBMDiscoveryV1Models.ListExpansionsOptionsBuilder()
         .environmentId('environment_id')
         .collectionId('collection_id')
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     IBMDiscoveryV1Models.Expansions listResults = service.listExpansions(listOptions);
 
@@ -1649,7 +1670,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.DeleteExpansionsOptions deleteOptions = new IBMDiscoveryV1Models.DeleteExpansionsOptionsBuilder()
         .environmentId('environment_id')
         .collectionId('collection_id')
-        .addHeader('Test-Header', 'test_value')
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     service.deleteExpansions(deleteOptions);
 
@@ -1668,7 +1689,7 @@ private class IBMDiscoveryV1Test {
     String customerId = 'salesforce_sdk_test_id';
     IBMDiscoveryV1Models.DeleteUserDataOptions options = new IBMDiscoveryV1Models.DeleteUserDataOptionsBuilder()
       .customerId(customerId)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1677,6 +1698,7 @@ private class IBMDiscoveryV1Test {
   }
 
   static testMethod void testCredentialDetails() {
+    Test.startTest();
     String clientId = 'client_id';
     String clientSecret = 'client_secret';
     String sourceType = 'salesforce';
@@ -1739,6 +1761,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(accessKeyId, details.getAccessKeyId());
     System.assertEquals(endpoint, details.getEndpoint());
     System.assertEquals(secretAccessKey, details.getSecretAccessKey());
+    Test.stopTest();
   }
 
   static testMethod void testCreateCredentials() {
@@ -1782,8 +1805,9 @@ private class IBMDiscoveryV1Test {
       .credentials(credentials)
       .credentialDetails(details)
       .status(status)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    options = options.newBuilder().build();
     IBMDiscoveryV1Models.Credentials credentialsResponse = service.createCredentials(options);
 
     System.assertEquals(sourceType, credentialsResponse.getSourceType());
@@ -1804,8 +1828,9 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.DeleteCredentialsOptions options = new IBMDiscoveryV1Models.DeleteCredentialsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .credentialId('credential_id')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    options = options.newBuilder().build();
     service.deleteCredentials(options);
 
     Test.stopTest();
@@ -1820,8 +1845,9 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.GetCredentialsOptions options = new IBMDiscoveryV1Models.GetCredentialsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .credentialId('credential_id')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    options = options.newBuilder().build();
     IBMDiscoveryV1Models.Credentials credentialsResponse = service.getCredentials(options);
 
     System.assert(credentialsResponse != null);
@@ -1837,8 +1863,9 @@ private class IBMDiscoveryV1Test {
 
     IBMDiscoveryV1Models.ListCredentialsOptions options = new IBMDiscoveryV1Models.ListCredentialsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    options = options.newBuilder().build();
     IBMDiscoveryV1Models.CredentialsList credentialsResponse = service.listCredentials(options);
 
     System.assert(credentialsResponse != null);
@@ -1884,7 +1911,9 @@ private class IBMDiscoveryV1Test {
       .credentials(newCredentials)
       .credentialDetails(newDetails)
       .status(status)
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    options = options.newBuilder().build();
     IBMDiscoveryV1Models.Credentials credentialsResponse = service.updateCredentials(options);
 
     System.assertEquals(sourceType, credentialsResponse.getSourceType());
@@ -1919,9 +1948,10 @@ private class IBMDiscoveryV1Test {
       .clientTimestamp(dateValue)
       .build();
     IBMDiscoveryV1Models.CreateEventOptions createEventOptions = new IBMDiscoveryV1Models.CreateEventOptionsBuilder()
-        .xtype(eventType)
-        .data(eventData)
-        .build();
+      .xtype(eventType)
+      .data(eventData)
+      .build();
+    createEventOptions = createEventOptions.newBuilder().build();
     IBMDiscoveryV1Models.CreateEventResponse response = service.createEvent(createEventOptions);
 
     System.assertEquals(eventType, response.getXtype());
@@ -1951,10 +1981,12 @@ private class IBMDiscoveryV1Test {
     String resultType = 'document';
 
     IBMDiscoveryV1Models.GetMetricsEventRateOptions options = new IBMDiscoveryV1Models.GetMetricsEventRateOptionsBuilder()
-        .startTime(dateValue)
-        .endTime(dateValue)
-        .resultType(resultType)
-        .build();
+      .startTime(dateValue)
+      .endTime(dateValue)
+      .resultType(resultType)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    options = options.newBuilder().build();
 
     IBMDiscoveryV1Models.MetricResponse response = service.getMetricsEventRate(options);
 
@@ -1985,10 +2017,12 @@ private class IBMDiscoveryV1Test {
     String resultType = 'document';
 
     IBMDiscoveryV1Models.GetMetricsQueryOptions options = new IBMDiscoveryV1Models.GetMetricsQueryOptionsBuilder()
-        .startTime(dateValue)
-        .endTime(dateValue)
-        .resultType(resultType)
-        .build();
+      .startTime(dateValue)
+      .endTime(dateValue)
+      .resultType(resultType)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    options = options.newBuilder().build();
 
     IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQuery(options);
 
@@ -2019,10 +2053,12 @@ private class IBMDiscoveryV1Test {
     String resultType = 'document';
 
     IBMDiscoveryV1Models.GetMetricsQueryEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryEventOptionsBuilder()
-        .startTime(dateValue)
-        .endTime(dateValue)
-        .resultType(resultType)
-        .build();
+      .startTime(dateValue)
+      .endTime(dateValue)
+      .resultType(resultType)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    options = options.newBuilder().build();
 
     IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQueryEvent(options);
 
@@ -2053,10 +2089,12 @@ private class IBMDiscoveryV1Test {
     String resultType = 'document';
 
     IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions options = new IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptionsBuilder()
-        .startTime(dateValue)
-        .endTime(dateValue)
-        .resultType(resultType)
-        .build();
+      .startTime(dateValue)
+      .endTime(dateValue)
+      .resultType(resultType)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    options = options.newBuilder().build();
 
     IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQueryNoResults(options);
 
@@ -2085,7 +2123,9 @@ private class IBMDiscoveryV1Test {
 
     IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptionsBuilder()
       .count(count)
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    options = options.newBuilder().build();
 
     IBMDiscoveryV1Models.MetricTokenResponse response = service.getMetricsQueryTokenEvent(options);
 
@@ -2121,13 +2161,15 @@ private class IBMDiscoveryV1Test {
     String queryId = 'mock_queryid';
 
     IBMDiscoveryV1Models.QueryLogOptions options = new IBMDiscoveryV1Models.QueryLogOptionsBuilder()
-        .xSort(sortList)
-        .addXSort(extraSort)
-        .count(count)
-        .filter(filter)
-        .offset(offset)
-        .query(naturalLanguageQuery)
-        .build();
+      .xSort(sortList)
+      .addXSort(extraSort)
+      .count(count)
+      .filter(filter)
+      .offset(offset)
+      .query(naturalLanguageQuery)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    options = options.newBuilder().build();
 
     IBMDiscoveryV1Models.LogQueryResponse response = service.queryLog(options);
 
@@ -2172,8 +2214,6 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
-    String headerKey = 'Test-Header';
-    String headerValue = 'test_value';
     IBMDiscoveryV1Models.TokenDictRule firstTokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
       .text(TEXT)
       .tokens(TOKENS)
@@ -2188,19 +2228,19 @@ private class IBMDiscoveryV1Test {
     tokenDictRuleList.add(firstTokenDictRule);
 
     IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createOptions = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .tokenizationRules(tokenDictRuleList)
-        .addTokenizationRules(secondTokenDictRule)
-        .addHeader(headerKey, headerValue)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .tokenizationRules(tokenDictRuleList)
+      .addTokenizationRules(secondTokenDictRule)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    createOptions = createOptions.newBuilder().build();
 
     tokenDictRuleList.add(secondTokenDictRule);
 
     System.assertEquals(environmentId, createOptions.environmentId());
     System.assertEquals(collectionId, createOptions.collectionId());
     System.assertEquals(tokenDictRuleList, createOptions.tokenizationRules());
-    System.assertEquals(headerValue, createOptions.requestHeaders().get(headerKey));
 
     Test.stopTest(); 
   }
@@ -2210,17 +2250,15 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
-    String headerKey = 'Test-Header';
-    String headerValue = 'test_value';
     IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getOptions = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .addHeader(headerKey, headerValue)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    getOptions = getOptions.newBuilder().build();
 
     System.assertEquals(environmentId, getOptions.environmentId());
     System.assertEquals(collectionId, getOptions.collectionId());
-    System.assertEquals(headerValue, getOptions.requestHeaders().get(headerKey));
 
     Test.stopTest();
   }
@@ -2230,17 +2268,15 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
-    String headerKey = 'Test-Header';
-    String headerValue = 'test_value';
     IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteOptions = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .addHeader(headerKey, headerValue)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    deleteOptions = deleteOptions.newBuilder().build();
 
     System.assertEquals(environmentId, deleteOptions.environmentId());
     System.assertEquals(collectionId, deleteOptions.collectionId());
-    System.assertEquals(headerValue, deleteOptions.requestHeaders().get(headerKey));
 
     Test.stopTest();
   }
@@ -2260,10 +2296,12 @@ private class IBMDiscoveryV1Test {
       .build();
 
     IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createOptions = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .tokenizationRules(new List<IBMDiscoveryV1Models.TokenDictRule> { tokenDictRule })
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .tokenizationRules(new List<IBMDiscoveryV1Models.TokenDictRule> { tokenDictRule })
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    createOptions = createOptions.newBuilder().build();
     IBMDiscoveryV1Models.TokenDictStatusResponse response = service.createTokenizationDictionary(createOptions);
 
     System.assertEquals('active', response.getStatus());
@@ -2281,9 +2319,10 @@ private class IBMDiscoveryV1Test {
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
     IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getOptions = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
     IBMDiscoveryV1Models.TokenDictStatusResponse response = service.getTokenizationDictionaryStatus(getOptions);
 
     System.assertEquals('active', response.getStatus());
@@ -2301,9 +2340,11 @@ private class IBMDiscoveryV1Test {
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
     IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteOptions = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    deleteOptions = deleteOptions.newBuilder().build();
     service.deleteTokenizationDictionary(deleteOptions);
 
     Test.stopTest();
@@ -2321,11 +2362,12 @@ private class IBMDiscoveryV1Test {
       .build();
 
     IBMDiscoveryV1Models.CreateStopwordListOptions createStopwordListOptions = new IBMDiscoveryV1Models.CreateStopwordListOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .stopwordFile(testfile)
-        .stopwordFilename(testFilename)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .stopwordFile(testfile)
+      .stopwordFilename(testFilename)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
     createStopwordListOptions = createStopwordListOptions.newBuilder().build();
 
     System.assertEquals(environmentId, createStopwordListOptions.environmentId());
@@ -2351,11 +2393,13 @@ private class IBMDiscoveryV1Test {
       .build();
 
     IBMDiscoveryV1Models.CreateStopwordListOptions createStopwordListOptions = new IBMDiscoveryV1Models.CreateStopwordListOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .stopwordFile(testfile)
-        .stopwordFilename(testFilename)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .stopwordFile(testfile)
+      .stopwordFilename(testFilename)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    createStopwordListOptions = createStopwordListOptions.newBuilder().build();
     IBMDiscoveryV1Models.TokenDictStatusResponse response = service.createStopwordList(createStopwordListOptions);
 
     System.assertEquals('active', response.getStatus());
@@ -2371,9 +2415,10 @@ private class IBMDiscoveryV1Test {
     String collectionId = 'collection_id';
 
     IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions = new IBMDiscoveryV1Models.DeleteStopwordListOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
     deleteStopwordListOptions = deleteStopwordListOptions.newBuilder().build();
 
     System.assertEquals(environmentId, deleteStopwordListOptions.environmentId());
@@ -2392,9 +2437,11 @@ private class IBMDiscoveryV1Test {
     String collectionId = 'collection_id';
 
     IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions = new IBMDiscoveryV1Models.DeleteStopwordListOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .build();
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    deleteStopwordListOptions = deleteStopwordListOptions.newBuilder().build();
     service.deleteStopwordList(deleteStopwordListOptions);
 
     Test.stopTest();
@@ -2409,6 +2456,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.GetStopwordListStatusOptions getStopwordListStatusOptions = new IBMDiscoveryV1Models.GetStopwordListStatusOptionsBuilder()
         .environmentId(environmentId)
         .collectionId(collectionId)
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     getStopwordListStatusOptions = getStopwordListStatusOptions.newBuilder().build();
 
@@ -2430,6 +2478,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.GetStopwordListStatusOptions getStopwordListStatusOptions = new IBMDiscoveryV1Models.GetStopwordListStatusOptionsBuilder()
         .environmentId(environmentId)
         .collectionId(collectionId)
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     IBMDiscoveryV1Models.TokenDictStatusResponse response = service.getStopwordListStatus(getStopwordListStatusOptions);
 
@@ -2474,6 +2523,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.CreateGatewayOptions createGatewayOptions = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
         .environmentId(environmentId)
         .name(name)
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     IBMDiscoveryV1Models.Gateway response = service.createGateway(createGatewayOptions);
 
@@ -2516,6 +2566,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.DeleteGatewayOptions deleteGatewayOptions = new IBMDiscoveryV1Models.DeleteGatewayOptionsBuilder()
         .environmentId(environmentId)
         .gatewayId(gatewayId)
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     service.deleteGateway(deleteGatewayOptions);
 
@@ -2557,6 +2608,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions = new IBMDiscoveryV1Models.GetGatewayOptionsBuilder()
         .environmentId(environmentId)
         .gatewayId(gatewayId)
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     IBMDiscoveryV1Models.Gateway response = service.getGateway(getGatewayOptions);
 
@@ -2600,6 +2652,7 @@ private class IBMDiscoveryV1Test {
 
     IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
         .environmentId(environmentId)
+        .addHeader(HEADER_KEY, HEADER_VAL)
         .build();
     IBMDiscoveryV1Models.GatewayList response = service.listGateways(listGatewaysOptions);
 
@@ -2613,6 +2666,7 @@ private class IBMDiscoveryV1Test {
   }
 
   static testMethod void testSourceOptionsWebCrawl() {
+    Test.startTest();
     String url = 'url';
     String crawlSpeed = 'crawl_speed';
     Long maximumHops = 1L;
@@ -2638,9 +2692,11 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(requestTimeout, sourceOptionsWebCrawl.getRequestTimeout());
     System.assert(sourceOptionsWebCrawl.getOverrideRobotsTxt());
     System.assertEquals(blacklist, sourceOptionsWebCrawl.getBlacklist());
+    Test.stopTest();
   }
 
   static testMethod void testSourceOptionsBuckets() {
+    Test.startTest();
     String name = 'name';
     Long testLimit = 9000L;
 
@@ -2651,9 +2707,11 @@ private class IBMDiscoveryV1Test {
 
     System.assertEquals(name, sourceOptionsBuckets.getName());
     System.assertEquals(testLimit, sourceOptionsBuckets.getXlimit());
+    Test.stopTest();
   }
 
   static testMethod void testSourceOptions() {
+    Test.startTest();
     String folderOwnerUserId = 'folder_owner_user_id';
     String folderId = 'folder_id';
     Long testLimit = 10L;
@@ -2717,6 +2775,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(bucketName, sourceOptions.getBuckets().get(0).getName());
     System.assertEquals(testLimit, sourceOptions.getBuckets().get(0).getXlimit());
     System.assert(sourceOptions.getCrawlAllBuckets());
+    Test.stopTest();
   }
 
   static testMethod void testSourceStatus() {

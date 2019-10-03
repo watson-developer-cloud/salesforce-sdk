@@ -1,9 +1,46 @@
 @isTest
 private class IBMVisualRecognitionV3Test {
+  private static String VERSION;
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
+
+  private static String CLASS_VAL;
+  private static Double SCORE;
+  private static String TYPE_HEIRARCHY;
+
   private static IBMVisualRecognitionV3 service;
 
   static {
+    VERSION = '2016-05-20';
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
+    CLASS_VAL = 'class';
+    SCORE = 10.0;
+    TYPE_HEIRARCHY = 'type_heirarchy';
+
     service = new IBMVisualRecognitionV3('2016-05-20', new IBMWatsonNoAuthAuthenticator());
+  }
+
+  static testMethod void testModelClass() {
+    Test.startTest();
+    IBMVisualRecognitionV3Models.ModelClass modelClass = new IBMVisualRecognitionV3Models.ModelClass();
+    modelClass.setClassName(CLASS_VAL);
+
+    System.assertEquals(CLASS_VAL, modelClass.getClassName());
+    Test.stopTest();
+  }
+
+  static testMethod void testClassResult() {
+    Test.startTest();
+    IBMVisualRecognitionV3Models.ClassResult classResult = new IBMVisualRecognitionV3Models.ClassResult();
+    classResult.setClassName(CLASS_VAL);
+    classResult.setScore(SCORE);
+    classResult.setTypeHierarchy(TYPE_HEIRARCHY);
+
+    System.assertEquals(CLASS_VAL, classResult.getClassName());
+    System.assertEquals(SCORE, classResult.getScore());
+    System.assertEquals(TYPE_HEIRARCHY, classResult.getTypeHierarchy());
+    Test.stopTest();
   }
 
   static testMethod void testClassify() {
@@ -11,10 +48,9 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
       .url('http://www.indya101.com/gallery/Actors_TV/Sumeet_Sachdev/2011/12/27/Sumeet_Sachdevjpg_3_arnem.jpg')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -43,7 +79,6 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -56,7 +91,7 @@ private class IBMVisualRecognitionV3Test {
       .imagesFile(testfile)
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -66,7 +101,6 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getImages()[0].getResolvedUrl(), 'string');
     Test.stopTest();
   }
-
   /**
    *  Test Create a classifier.
    *
@@ -76,7 +110,6 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -97,7 +130,7 @@ private class IBMVisualRecognitionV3Test {
       .addPositiveExamples('other_test', testfile)
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -119,7 +152,6 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -132,7 +164,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3Models.GetClassifierOptions options = new IBMVisualRecognitionV3Models.GetClassifierOptionsBuilder('classifierId')
       .classifierId('classifierId')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -149,7 +181,6 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -170,7 +201,7 @@ private class IBMVisualRecognitionV3Test {
       .addPositiveExamples('other_test', testfile)
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -187,7 +218,6 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -200,7 +230,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3Models.DeleteClassifierOptions options = new IBMVisualRecognitionV3Models.DeleteClassifierOptionsBuilder('classifierId')
       .classifierId('classifierId')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -216,10 +246,9 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     IBMVisualRecognitionV3Models.ListClassifiersOptions options = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
       .verbose(true)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -241,7 +270,7 @@ private class IBMVisualRecognitionV3Test {
     String customerId = 'salesforce_sdk_test_id';
     IBMVisualRecognitionV3Models.DeleteUserDataOptions deleteOptions = new IBMVisualRecognitionV3Models.DeleteUserDataOptionsBuilder()
       .customerId(customerId)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();

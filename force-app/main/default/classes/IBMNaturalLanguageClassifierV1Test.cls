@@ -1,8 +1,13 @@
 @isTest
 private class IBMNaturalLanguageClassifierV1Test {
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
+
   private static IBMNaturalLanguageClassifierV1 service;
 
   static {
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
     service = new IBMNaturalLanguageClassifierV1(new IBMWatsonNoAuthAuthenticator());
   }
 
@@ -23,8 +28,9 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions = new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
       .classifierId(classifier_id)
       .text(text)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    classifyOptions = classifyOptions.newBuilder().build();
     IBMNaturalLanguageClassifierV1Models.Classification classification = service.classify(classifyOptions);
     System.assertEquals(classification.getClassifierId(), classifier_id);
     System.assertEquals(classification.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyURL);
@@ -70,8 +76,9 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions classifyOptions = new IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptionsBuilder()
       .classifierId(classifierId)
       .collection(inputCollection)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    classifyOptions = classifyOptions.newBuilder().build();
     IBMNaturalLanguageClassifierV1Models.ClassificationCollection classification = service.classifyCollection(classifyOptions);
     System.assertEquals(classification.getClassifierId(), classifierId);
     System.assertEquals(classification.getUrl(), 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/' + classifierId);
@@ -112,8 +119,9 @@ private class IBMNaturalLanguageClassifierV1Test {
       new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
       .trainingMetadata(training_metadata)
       .trainingData(training_data)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
+    createClassifierOptions = createClassifierOptions.newBuilder().build();
     IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.createClassifier(createClassifierOptions);
     System.assertEquals(Classifier.getName(), 'My Classifier');
     System.assertEquals(Classifier.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
@@ -142,7 +150,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder()
       .classifierId(classifier_id)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     service.deleteClassifier(deleteClassifierOptions);
     IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder DeleteClassifierOptionsBuilder =
@@ -160,7 +168,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOption =
       new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder()
       .classifierId(classifier_id)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.getClassifier(getClassifierOption);
     System.assertEquals(Classifier.getName(), 'My Classifier');
@@ -184,7 +192,7 @@ private class IBMNaturalLanguageClassifierV1Test {
 
     IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions =
       new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     IBMNaturalLanguageClassifierV1Models.ClassifierList ClassifierList = service.listClassifiers(listClassifiersOptions);
     List<IBMNaturalLanguageClassifierV1Models.Classifier> Classifiers = ClassifierList.getClassifiers();

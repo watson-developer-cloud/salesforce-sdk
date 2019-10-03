@@ -155,6 +155,31 @@ private class IBMCompareComplyV1Test {
     service = new IBMCompareComplyV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
+  static testMethod void testVersionConstructor() {
+    Test.startTest();
+    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testBasicConstructor() {
+    Test.startTest();
+    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, 'username', 'password');
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
+  static testMethod void testConfigConstructor() {
+    Test.startTest();
+    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
+      .username('username')
+      .password('password')
+      .build();
+    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, config);
+    System.assert(service != null);
+    Test.stopTest();
+  }
+
   static testMethod void testAddFeedbackOptions() {
     Test.startTest();
     IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
@@ -569,6 +594,7 @@ private class IBMCompareComplyV1Test {
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    convertToHtmlOptions = convertToHtmlOptions.newBuilder().build();
     IBMCompareComplyV1Models.HTMLReturn response = service.convertToHtml(convertToHtmlOptions);
 
     System.assertEquals(NUM_PAGES, response.getNumPages());
@@ -600,6 +626,7 @@ private class IBMCompareComplyV1Test {
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    classifyElementsOptions = classifyElementsOptions.newBuilder().build();
     IBMCompareComplyV1Models.ClassifyReturn response = service.classifyElements(classifyElementsOptions);
 
     System.assertEquals(TITLE, response.getDocument().getTitle());
@@ -755,6 +782,12 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(PROVENANCE_ID, response.getPaymentTerms().get(0).getProvenanceIds().get(0));
     System.assertEquals(TEST_BEGIN, response.getPaymentTerms().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getPaymentTerms().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getContractCurrencies().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT, response.getContractCurrencies().get(0).getText());
+    System.assertEquals(TEXT_NORMALIZED, response.getContractCurrencies().get(0).getTextNormalized());
+    System.assertEquals(PROVENANCE_ID, response.getContractCurrencies().get(0).getProvenanceIds().get(0));
+    System.assertEquals(TEST_BEGIN, response.getContractCurrencies().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getContractCurrencies().get(0).getLocation().getXend());
     Test.stopTest();
   }
 
@@ -779,6 +812,7 @@ private class IBMCompareComplyV1Test {
       .model(TABLES)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    extractTablesOptions = extractTablesOptions.newBuilder().build();
     IBMCompareComplyV1Models.TableReturn response = service.extractTables(extractTablesOptions);
 
     System.assertEquals(HTML, response.getDocument().getHtml());
@@ -874,6 +908,7 @@ private class IBMCompareComplyV1Test {
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    compareDocumentsOptions = compareDocumentsOptions.newBuilder().build();
     IBMCompareComplyV1Models.CompareReturn response = service.compareDocuments(compareDocumentsOptions);
 
     System.assertEquals(TITLE, response.getDocuments().get(0).getTitle());
@@ -949,6 +984,7 @@ private class IBMCompareComplyV1Test {
       .userId(USER_ID)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    addFeedbackOptions = addFeedbackOptions.newBuilder().build();
     IBMCompareComplyV1Models.FeedbackReturn response = service.addFeedback(addFeedbackOptions);
 
     System.assertEquals(FEEDBACK_ID, response.getFeedbackId());
@@ -1005,6 +1041,7 @@ private class IBMCompareComplyV1Test {
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    deleteFeedbackOptions = deleteFeedbackOptions.newBuilder().build();
     service.deleteFeedback(deleteFeedbackOptions);
 
     Test.stopTest();
@@ -1025,6 +1062,7 @@ private class IBMCompareComplyV1Test {
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    getFeedbackOptions = getFeedbackOptions.newBuilder().build();
     IBMCompareComplyV1Models.GetFeedback response = service.getFeedback(getFeedbackOptions);
 
     System.assertEquals(FEEDBACK_ID, response.getFeedbackId());
@@ -1093,6 +1131,7 @@ private class IBMCompareComplyV1Test {
       .typeNotChanged(TYPE_NOT_CHANGED)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    listFeedbackOptions = listFeedbackOptions.newBuilder().build();
     IBMCompareComplyV1Models.FeedbackList response = service.listFeedback(listFeedbackOptions);
 
     System.assertEquals(FEEDBACK_ID, response.getFeedback().get(0).getFeedbackId());
@@ -1168,6 +1207,7 @@ private class IBMCompareComplyV1Test {
       .outputCredentialsFile(testCredentialFile)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    createBatchOptions = createBatchOptions.newBuilder().build();
     IBMCompareComplyV1Models.BatchStatus response = service.createBatch(createBatchOptions);
 
     assertBatchStatusResponse(response);
@@ -1188,6 +1228,7 @@ private class IBMCompareComplyV1Test {
       .batchId(BATCH_ID)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    getBatchOptions = getBatchOptions.newBuilder().build();
     IBMCompareComplyV1Models.BatchStatus response = service.getBatch(getBatchOptions);
 
     assertBatchStatusResponse(response);
@@ -1207,6 +1248,7 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptions = new IBMCompareComplyV1Models.ListBatchesOptionsBuilder()
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    listBatchesOptions = listBatchesOptions.newBuilder().build();
     IBMCompareComplyV1Models.Batches response = service.listBatches(listBatchesOptions);
 
     assertBatchStatusResponse(response.getBatches().get(0));
@@ -1229,6 +1271,7 @@ private class IBMCompareComplyV1Test {
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
+    updateBatchOptions = updateBatchOptions.newBuilder().build();
     IBMCompareComplyV1Models.BatchStatus response = service.updateBatch(updateBatchOptions);
 
     assertBatchStatusResponse(response);

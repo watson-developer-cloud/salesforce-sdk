@@ -14,6 +14,11 @@ private class IBMWatsonServiceTest {
       builder.query('test_query', 'test_val');
       return (TestClass) createServiceCall(builder.build(), TestClass.class);
     }
+
+    public IBMWatsonFile testingMethodFile() {
+      IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet('https://www.test.com');
+      return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
+    }
   }
 
   /**
@@ -363,11 +368,8 @@ private class IBMWatsonServiceTest {
       .addPart(new Map<String, String>{'test' => 'test', 'Content-Disposition'=>'Content-Disposition'}, IBMWatsonRequestBody.create())
       .addFormDataPart('key', 'value')
       .build();
-    System.assertEquals(IBMWatsonMultipartBody.safelyPad('test', 'test=test=', 'test'), EncodingUtil.base64Encode(blob.valueOf('test test')));
-    System.assertEquals(multipartBody.writeBodyParameter('test', 'test', false), 'Q29udGVudC1EaXNwb3NpdGlvbjogdGVzdCANCg0KdGVzdA0K');
     System.assertEquals(multipartBody.parts().size(), 2);
     System.assert(multipartBody.getAllHeaders().get('Content-Type').contains('multipart/form-data; boundary'));
-    System.assert(multipartBody.form64().contains(multipartBody.writeBoundary()));
     Test.stopTest();
   }
 
@@ -387,6 +389,38 @@ private class IBMWatsonServiceTest {
     System.assert(testClass.getHeaders() != null);
     System.assert(testClass.getHeaders().size() == 1);
     System.assert(testClass.getHeaders().get('Test-Name').equals('test_val'));
+    Test.stopTest();
+  }
+
+  static testMethod void testDefaultHeaders() {
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', '', null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    String testUserAgent = 'Mozilla/5.0';
+    TestService testService = new TestService();
+    testService.setDefaultHeaders(new Map<String, String> { IBMWatsonHttpHeaders.USER_AGENT => testUserAgent });
+    testService.testingMethod();
+    Test.stopTest();
+  }
+
+  static testMethod void testFileResponse() {
+    Map<String, String> responseHeaders = new Map<String, String> {
+      IBMWatsonHttpHeaders.CONTENT_DISPOSITION => 'filename=testfile.txt',
+      IBMWatsonHttpHeaders.CONTENT_TYPE => 'text/plain'
+    };
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      'Catalonia is an autonomous community on the northeastern corner of Spain.',
+      responseHeaders
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    TestService testService = new TestService();
+    IBMWatsonFile fileResponse = testService.testingMethodFile();
+    System.assert(fileResponse != null);
+
     Test.stopTest();
   }
 }

@@ -1,8 +1,15 @@
 @isTest
 private class IBMPersonalityInsightsV3Test {
+  private static String VERSION;
+  private static String HEADER_KEY;
+  private static String HEADER_VAL;
+
   private static IBMPersonalityInsightsV3 service;
 
   static {
+    VERSION = '2017-09-01';
+    HEADER_KEY = 'Header-Key';
+    HEADER_VAL = 'header_val';
     service = new IBMPersonalityInsightsV3('2017-09-01', new IBMWatsonNoAuthAuthenticator());
   }
 
@@ -15,7 +22,6 @@ private class IBMPersonalityInsightsV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
     IBMPersonalityInsightsV3Models.ContentItem contentItem = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
       .content('text/plain')
       .id('test')
@@ -48,7 +54,7 @@ private class IBMPersonalityInsightsV3Test {
       .content(content)
       .html('<html><body>test</body></html>')
       .text('test')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -84,6 +90,42 @@ private class IBMPersonalityInsightsV3Test {
     System.assertEquals(resp.getConsumptionPreferences()[0].getConsumptionPreferences()[0].getScore(), 0.0);
     System.assertEquals(resp.getwarnings()[0].getWarningId(), 'WORD_COUNT_MESSAGE');
     System.assertEquals(resp.getwarnings()[0].getMessage(), 'string');
+    Test.stopTest();
+  }
+
+  static testMethod void testProfileAsCsv() {
+    String testBody = 'this,is,a,csv,file';
+    Map<String, String> responseHeaders = new Map<String, String> {
+      IBMWatsonHttpHeaders.CONTENT_DISPOSITION => 'filename=testfile.csv',
+      IBMWatsonHttpHeaders.CONTENT_TYPE => 'test/csv'
+    };
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      testBody,
+      responseHeaders
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, iamOptions);
+    IBMPersonalityInsightsV3Models.ProfileOptions options = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
+      .text('text')
+      .contentLanguage('en')
+      .acceptLanguage('en')
+      .rawScores(true)
+      .csvHeaders(true)
+      .consumptionPreferences(true)
+      .addHeader(HEADER_KEY, HEADER_VAL)
+      .build();
+    IBMWatsonFile response = service.profileAsCsv(options);
+
+    System.assert(response != null);
+    System.assertEquals(testBody, response.bodyAsString());
+
     Test.stopTest();
   }
 }

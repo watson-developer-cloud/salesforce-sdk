@@ -35,6 +35,8 @@ private class IBMAssistantV2Test {
   private static String USER_DEFINED;
   private static String RESPONSE_TYPE;
   private static String PREFERENCE;
+  private static String HEADER_NAME;
+  private static String HEADER_VAL;
 
   private static IBMAssistantV2 service;
 
@@ -395,6 +397,7 @@ private class IBMAssistantV2Test {
 
     IBMAssistantV2Models.CreateSessionOptions createSessionOptions = new IBMAssistantV2Models.CreateSessionOptionsBuilder()
         .assistantId(ASSISTANT_ID)
+        .addHeader(HEADER_NAME, HEADER_VAL)
         .build();
     IBMAssistantV2Models.SessionResponse response = service.createSession(createSessionOptions);
 
@@ -412,6 +415,7 @@ private class IBMAssistantV2Test {
     IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptions = new IBMAssistantV2Models.DeleteSessionOptionsBuilder()
         .assistantId(ASSISTANT_ID)
         .sessionId(SESSION_ID)
+        .addHeader(HEADER_NAME, HEADER_VAL)
         .build();
     service.deleteSession(deleteSessionOptions);
 

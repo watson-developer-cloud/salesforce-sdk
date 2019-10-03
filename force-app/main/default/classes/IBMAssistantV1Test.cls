@@ -75,6 +75,8 @@ private class IBMAssistantV1Test {
   private static String label;
   private static String messageToHumanAgent;
   private static String topic;
+  private static String headerKey;
+  private static String headerVal;
 
   private static IBMAssistantV1 service;
 
@@ -268,7 +270,7 @@ private class IBMAssistantV1Test {
       .entities(new List<IBMAssistantV1Models.CreateEntity>{createEntity})
       .language(workspaceLanguage)
       .systemSettings(systemSettings)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createWorkspaceOptions = createWorkspaceOptions.newBuilder().build();
@@ -303,7 +305,7 @@ private class IBMAssistantV1Test {
 
     IBMAssistantV1Models.DeleteWorkspaceOptions deleteOptions = new IBMAssistantV1Models.DeleteWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -329,7 +331,7 @@ private class IBMAssistantV1Test {
       .xexport(true)
       .includeAudit(true)
       .xsort(xsort)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -388,7 +390,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.UpdateWorkspaceOptions updateOptions = new IBMAssistantV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .systemSettings(systemSettings)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -422,7 +424,7 @@ private class IBMAssistantV1Test {
     Test.startTest();
 
     IBMAssistantV1Models.ListWorkspacesOptions listOptions = new IBMAssistantV1Models.ListWorkspacesOptionsBuilder()
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -455,6 +457,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.CreateValue createValue = new IBMAssistantV1Models.CreateValueBuilder()
       .value('value')
       .build();
+    createValue = createValue.newBuilder().build();
     IBMAssistantV1Models.CreateValueOptions createOptions = new IBMAssistantV1Models.CreateValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -462,7 +465,7 @@ private class IBMAssistantV1Test {
       .metadata(metadata)
       .addPatterns(valuePattern)
       .addSynonyms(valueSynonym)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -492,7 +495,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -516,7 +519,7 @@ private class IBMAssistantV1Test {
       .entity(entityName)
       .value(valueName)
       .xexport(true)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -549,7 +552,7 @@ private class IBMAssistantV1Test {
       .newMetadata(metadata)
       .addNewPatterns(valuePattern)
       .addNewSynonyms(valueSynonym)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -578,7 +581,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.ListValuesOptions listOptions = new IBMAssistantV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -598,6 +601,7 @@ private class IBMAssistantV1Test {
   }
 
   static testMethod void testContext() {
+    Test.startTest();
     String conversationId = 'conversation_id';
 
     IBMAssistantV1Models.SystemResponse systemResponse = new IBMAssistantV1Models.SystemResponse();
@@ -611,9 +615,11 @@ private class IBMAssistantV1Test {
     System.assertEquals(conversationId, context.getConversationId());
     System.assertEquals(systemResponse, context.getXsystem());
     System.assertEquals(metadata, context.getMetadata());
+    Test.stopTest();
   }
 
   static testMethod void testMessageContextMetadata() {
+    Test.startTest();
     String deployment = 'deployment';
     String userId = 'user_id';
 
@@ -624,6 +630,7 @@ private class IBMAssistantV1Test {
 
     System.assertEquals(deployment, metadata.getDeployment());
     System.assertEquals(userId, metadata.getUserId());
+    Test.stopTest();
   }
 
   static testMethod void message() {
@@ -645,7 +652,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .input(input)
       .alternateIntents(alternateIntents)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     messageOptions = messageOptions.newBuilder().build();
@@ -711,7 +718,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .description(intentDescription)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -737,7 +744,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.DeleteIntentOptions deleteOptions = new IBMAssistantV1Models.DeleteIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -760,7 +767,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .xexport(true)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -789,7 +796,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.ListIntentsOptions listOptions = new IBMAssistantV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
       .xexport(true)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -825,7 +832,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .newDescription(intentDescription)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -865,7 +872,7 @@ private class IBMAssistantV1Test {
       .text(exampleText)
       .mentions(mentionsList)
       .addMentions(mentions2)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -893,7 +900,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .text('example A')
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -916,7 +923,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -941,7 +948,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.ListExamplesOptions listOptions = new IBMAssistantV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -985,7 +992,7 @@ private class IBMAssistantV1Test {
       .newText(exampleText)
       .newMentions(mentionsList)
       .addNewMentions(mentions2)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1011,7 +1018,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .description(entityDescription)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1039,7 +1046,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.DeleteEntityOptions deleteOptions = new IBMAssistantV1Models.DeleteEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -1062,7 +1069,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .xexport(true)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1096,7 +1103,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.ListEntitiesOptions listOptions = new IBMAssistantV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
       .xexport(true)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1135,7 +1142,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .newDescription(entityDescription)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1163,13 +1170,14 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.Synonym synonym = new IBMAssistantV1Models.SynonymBuilder()
       .synonym('synonym')
       .build();
+    synonym = synonym.newBuilder().build();
     IBMAssistantV1Models.CreateSynonymOptions createOptions = new IBMAssistantV1Models.CreateSynonymOptionsBuilder()
       .synonym(synonym)
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1196,7 +1204,7 @@ private class IBMAssistantV1Test {
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -1220,7 +1228,7 @@ private class IBMAssistantV1Test {
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1246,7 +1254,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1278,7 +1286,7 @@ private class IBMAssistantV1Test {
       .value(valueName)
       .synonym(valueSynonym)
       .newSynonym(valueSynonym)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1308,7 +1316,7 @@ private class IBMAssistantV1Test {
       .digressOut(dialogNodeDigressOut)
       .digressOutSlots(dialogNodeDigressOutSlots)
       .userLabel(userLabel)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1355,7 +1363,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.DeleteDialogNodeOptions deleteOptions = new IBMAssistantV1Models.DeleteDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -1377,7 +1385,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.GetDialogNodeOptions getOptions = new IBMAssistantV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1420,7 +1428,7 @@ private class IBMAssistantV1Test {
 
     IBMAssistantV1Models.ListDialogNodesOptions listOptions = new IBMAssistantV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1474,7 +1482,7 @@ private class IBMAssistantV1Test {
       .newDigressOut(dialogNodeDigressOut)
       .newDigressOutSlots(dialogNodeDigressOutSlots)
       .newUserLabel(newUserLabel)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1518,7 +1526,7 @@ private class IBMAssistantV1Test {
 
     IBMAssistantV1Models.ListLogsOptions listOptions = new IBMAssistantV1Models.ListLogsOptionsBuilder()
       .workspaceId(workspaceId)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1563,11 +1571,12 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.Counterexample counterexample = new IBMAssistantV1Models.CounterexampleBuilder()
       .text('text')
       .build();
+    counterexample = counterexample.newBuilder().build();
     IBMAssistantV1Models.CreateCounterexampleOptions createOptions = new IBMAssistantV1Models.CreateCounterexampleOptionsBuilder()
       .counterexample(counterexample)
       .workspaceId(workspaceId)
       .text(counterexampleText)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1591,7 +1600,7 @@ private class IBMAssistantV1Test {
 
     IBMAssistantV1Models.CreateCounterexampleOptions createOptions =
       new IBMAssistantV1Models.CreateCounterexampleOptionsBuilder(workspaceId,counterexampleText)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1616,7 +1625,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.DeleteCounterexampleOptions deleteOptions = new IBMAssistantV1Models.DeleteCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -1638,7 +1647,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.GetCounterexampleOptions getOptions = new IBMAssistantV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1662,7 +1671,7 @@ private class IBMAssistantV1Test {
 
     IBMAssistantV1Models.ListCounterexamplesOptions listOptions = new IBMAssistantV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1692,7 +1701,7 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .newText(counterexampleText)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1717,7 +1726,7 @@ private class IBMAssistantV1Test {
     String customerId = 'salesforce_sdk_test_id';
     IBMAssistantV1Models.DeleteUserDataOptions deleteOptions = new IBMAssistantV1Models.DeleteUserDataOptionsBuilder()
       .customerId(customerId)
-      .addHeader('Test-Header', 'test_value')
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -1741,6 +1750,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.ListMentionsOptions listMentionsOptions = new IBMAssistantV1Models.ListMentionsOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
+      .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listMentionsOptions = listMentionsOptions.newBuilder().build();
