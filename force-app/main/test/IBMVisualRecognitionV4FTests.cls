@@ -25,7 +25,7 @@ public with sharing class IBMVisualRecognitionV4FTests {
     IBMVisualRecognitionV4Models.AnalyzeResponse response = service.analyze(options);
 
     System.assert(response != null);
-    System.assertEquals(2, response.getImages().size());
+    System.assertEquals(1, response.getImages().size());
   }
 
   public static void testCollectionOperations(IBMVisualRecognitionV4 service) {

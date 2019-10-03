@@ -76,6 +76,8 @@ private class IBMAssistantV2Test {
     USER_DEFINED = 'user_defined';
     RESPONSE_TYPE = 'type';
     PREFERENCE = 'preference';
+    HEADER_NAME = 'Test-Header';
+    HEADER_VAL = 'test_value';
 
     service = new IBMAssistantV2(VERSION, new IBMWatsonNoAuthAuthenticator());
   }

@@ -155,31 +155,6 @@ private class IBMCompareComplyV1Test {
     service = new IBMCompareComplyV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
-  static testMethod void testVersionConstructor() {
-    Test.startTest();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION);
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testBasicConstructor() {
-    Test.startTest();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, 'username', 'password');
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testConfigConstructor() {
-    Test.startTest();
-    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
-      .username('username')
-      .password('password')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, config);
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
   static testMethod void testAddFeedbackOptions() {
     Test.startTest();
     IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();

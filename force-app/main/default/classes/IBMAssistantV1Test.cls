@@ -159,6 +159,8 @@ private class IBMAssistantV1Test {
     label = 'label';
     messageToHumanAgent = 'message_to_human_agent';
     topic = 'topic';
+    headerKey = 'Test-Header';
+    headerVal = 'test_value';
 
     service = new IBMAssistantV1('2018-02-16', new IBMWatsonNoAuthAuthenticator());
   }

@@ -29,7 +29,7 @@ before_script:
 - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then chmod a+x ./appscan/ASOC.sh; fi'
 
 script:
-#- "./install/test-in-scratch-org.sh"
+- "./install/test-in-scratch-org.sh"
 - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then ./appscan/ASOC.sh; fi'
 after_success:
 - sfdx force:org:delete -u ciorg -p

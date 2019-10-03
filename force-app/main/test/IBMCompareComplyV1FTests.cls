@@ -15,11 +15,16 @@ public with sharing class IBMCompareComplyV1FTests {
   public static void testFeedbackOperations(IBMCompareComplyV1 service) {
     String userId = 'lp_apex';
     String comment = 'could be better';
-    String text = 'This is some text from a contract about something.';
-    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDoc();
+    String text = '1. IBM will provide a Senior Managing Consultant / expert resource, for up to 80 hours, to assist '
+        + 'Florida Power & Light (FPL) with the creation of an IT infrastructure unit cost model for existing '
+        + 'infrastructure.';
+    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDocBuilder()
+      .title('doc title')
+      .hash('')
+      .build();
     IBMCompareComplyV1Models.Location location = new IBMCompareComplyV1Models.LocationBuilder()
-      .xBegin(0L)
-      .xEnd(1L)
+      .xBegin(241L)
+      .xEnd(237L)
       .build();
     IBMCompareComplyV1Models.Label label1 = new IBMCompareComplyV1Models.LabelBuilder()
       .nature('Obligation')
@@ -70,6 +75,9 @@ public with sharing class IBMCompareComplyV1FTests {
       .text(text)
       .originalLabels(originalLabelsIn)
       .updatedLabels(updatedLabelsIn)
+      .feedbackType('element_classification')
+      .modelId('contracts')
+      .modelVersion('11.00')
       .build();
 
     IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()

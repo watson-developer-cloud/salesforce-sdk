@@ -123,8 +123,13 @@ public abstract class IBMWatsonService {
       // this service is expecting a file response
       if (targetType == IBMWatsonFile.class) {
         String contentDisposition = response.getHeader(IBMWatsonHttpHeaders.CONTENT_DISPOSITION);
-        String filename = contentDisposition.substringAfter('filename=');
-        filename = (String.isNotBlank(filename)) ? filename.replaceAll('"', '') : 'result';
+        String filename = 'result';
+        if (contentDisposition != null) {
+          filename = contentDisposition.substringAfter('filename=');
+          if (String.isNotBlank(filename)) {
+            filename = filename.replaceAll('"', '');
+          }
+        }
         String contentType = response.getHeader(IBMWatsonHttpHeaders.CONTENT_TYPE);
         IBMWatsonFile resFile = new IBMWatsonFile.FileBuilder()
           .name(filename)

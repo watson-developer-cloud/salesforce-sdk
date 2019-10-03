@@ -108,10 +108,6 @@ private class IBMPersonalityInsightsV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, iamOptions);
     IBMPersonalityInsightsV3Models.ProfileOptions options = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
       .text('text')
       .contentLanguage('en')

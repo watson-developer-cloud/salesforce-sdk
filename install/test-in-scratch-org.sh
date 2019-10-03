@@ -36,17 +36,17 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" ]; then
   #$(sfdx force:apex:execute -f SpeechToTextTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
   #rm SpeechToTextTestRunner.apex
 
-  echo "IBMAssistantV2FTests.runAllTests('$ASSISTANT_V2_API_KEY', '$ASSISTANT_V2_ASSISTANT_ID');" > AssistantV2TestRunner.apex
-  $(sfdx force:apex:execute -f AssistantV2TestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm AssistantV2TestRunner.apex
+  #echo "IBMAssistantV2FTests.runAllTests('$ASSISTANT_V2_API_KEY', '$ASSISTANT_V2_ASSISTANT_ID');" > AssistantV2TestRunner.apex
+  #$(sfdx force:apex:execute -f AssistantV2TestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm AssistantV2TestRunner.apex
 
-  echo "IBMVisualRecognitionV3FTest.runAllTests('$VISUAL_RECOGNITION_IAM_API_KEY');" > VisualRecognitionV3TestRunner.apex
-  $(sfdx force:apex:execute -f VisualRecognitionV3TestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm VisualRecognitionV3TestRunner.apex
+  #echo "IBMVisualRecognitionV3FTest.runAllTests('$VISUAL_RECOGNITION_IAM_API_KEY');" > VisualRecognitionV3TestRunner.apex
+  #$(sfdx force:apex:execute -f VisualRecognitionV3TestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  #rm VisualRecognitionV3TestRunner.apex
 
-  echo "IBMCompareComplyV1FTests.runAllTests('$COMPARE_AND_COMPLY_IAM_API_KEY');" > CompareComplyTestRunner.apex
-  $(sfdx force:apex:execute -f CompareComplyTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo "Success" || exit 1
-  rm CompareComplyTestRunner.apex
+  #echo "IBMCompareComplyV1FTests.runAllTests('$COMPARE_AND_COMPLY_IAM_API_KEY');" > CompareComplyTestRunner.apex
+  #$(sfdx force:apex:execute -f CompareComplyTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo "Success" || exit 1
+  #rm CompareComplyTestRunner.apex
 
   echo "IBMVisualRecognitionV4FTests.runAllTests('$VISUAL_RECOGNITION_IAM_API_KEY');" > VisualRecognitionV4TestRunner.apex
   $(sfdx force:apex:execute -f VisualRecognitionV4TestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo "Success" || exit 1

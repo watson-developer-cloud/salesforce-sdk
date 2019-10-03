@@ -24,20 +24,20 @@ private class IBMVisualRecognitionV3Test {
   static testMethod void testModelClass() {
     Test.startTest();
     IBMVisualRecognitionV3Models.ModelClass modelClass = new IBMVisualRecognitionV3Models.ModelClass();
-    modelClass.setClassName(CLASS_VAL);
+    modelClass.setXClass(CLASS_VAL);
 
-    System.assertEquals(CLASS_VAL, modelClass.getClassName());
+    System.assertEquals(CLASS_VAL, modelClass.getXClass());
     Test.stopTest();
   }
 
   static testMethod void testClassResult() {
     Test.startTest();
     IBMVisualRecognitionV3Models.ClassResult classResult = new IBMVisualRecognitionV3Models.ClassResult();
-    classResult.setClassName(CLASS_VAL);
+    classResult.setXClass(CLASS_VAL);
     classResult.setScore(SCORE);
     classResult.setTypeHierarchy(TYPE_HEIRARCHY);
 
-    System.assertEquals(CLASS_VAL, classResult.getClassName());
+    System.assertEquals(CLASS_VAL, classResult.getXClass());
     System.assertEquals(SCORE, classResult.getScore());
     System.assertEquals(TYPE_HEIRARCHY, classResult.getTypeHierarchy());
     Test.stopTest();
