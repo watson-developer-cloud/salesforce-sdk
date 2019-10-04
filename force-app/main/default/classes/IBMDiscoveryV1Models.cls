@@ -821,7 +821,18 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
+      String created = (String) jsonMap.remove('created');
+      String updated = (String) jsonMap.remove('updated');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      Collection ret = (Collection) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+
+      if (String.isNotBlank(created)) {
+        ret.created = (Datetime) JSON.deserialize('"' + created + '"', Datetime.class);
+      }
+      if (String.isNotBlank(updated)) {
+        ret.updated = (Datetime) JSON.deserialize('"' + updated + '"', Datetime.class);
+      }
 
       // calling custom deserializer for documentCounts
       Map<String, Object> documentCountsMap = (Map<String, Object>) jsonMap.get('documentCounts');
@@ -1188,8 +1199,19 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      Configuration ret = (Configuration) super.deserialize(jsonString, jsonMap, classType);
+      String created = (String) jsonMap.remove('created');
+      String updated = (String) jsonMap.remove('updated');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      Configuration ret = (Configuration) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
       ConfigurationBuilder retBuilder = ret.newBuilder();
+
+      if (String.isNotBlank(created)) {
+        retBuilder.created((Datetime) JSON.deserialize('"' + created + '"', Datetime.class));
+      }
+      if (String.isNotBlank(updated)) {
+        retBuilder.updated((Datetime) JSON.deserialize('"' + updated + '"', Datetime.class));
+      }
 
       // calling custom deserializer for conversions
       Map<String, Object> conversionsMap = (Map<String, Object>) jsonMap.get('conversions');
@@ -7405,7 +7427,18 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      Environment ret = (Environment) super.deserialize(jsonString, jsonMap, classType);
+      String created = (String) jsonMap.remove('created');
+      String updated = (String) jsonMap.remove('updated');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      Environment ret = (Environment) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+
+      if (String.isNotBlank(created)) {
+        ret.created = (Datetime) JSON.deserialize('"' + created + '"', Datetime.class);
+      }
+      if (String.isNotBlank(updated)) {
+        ret.updated = (Datetime) JSON.deserialize('"' + updated + '"', Datetime.class);
+      }
 
       // calling custom deserializer for indexCapacity
       Map<String, Object> indexCapacityMap = (Map<String, Object>) jsonMap.get('indexCapacity');
@@ -7615,8 +7648,15 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      EventData ret = (EventData) super.deserialize(jsonString, jsonMap, classType);
+       String clientTimestamp = (String) jsonMap.remove('clientTimestamp');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      EventData ret = (EventData) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
       EventDataBuilder retBuilder = ret.newBuilder();
+
+      if (String.isNotBlank(clientTimestamp)) {
+        retBuilder.clientTimestamp((Datetime) JSON.deserialize('"' + clientTimestamp + '"', Datetime.class));
+      }
 
       return retBuilder.build();
     }
@@ -14195,7 +14235,18 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      LogQueryResponseResult ret = (LogQueryResponseResult) super.deserialize(jsonString, jsonMap, classType);
+      String createdTimestamp = (String) jsonMap.remove('createdTimestamp');
+      String clientTimestamp = (String) jsonMap.remove('clientTimestamp');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      LogQueryResponseResult ret = (LogQueryResponseResult) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+
+      if (String.isNotBlank(createdTimestamp)) {
+        ret.setCreatedTimestamp((Datetime) JSON.deserialize('"' + createdTimestamp + '"', Datetime.class));
+      }
+      if (String.isNotBlank(clientTimestamp)) {
+        ret.setClientTimestamp((Datetime) JSON.deserialize('"' + clientTimestamp + '"', Datetime.class));
+      }
 
       // calling custom deserializer for documentResults
       Map<String, Object> documentResultsMap = (Map<String, Object>) jsonMap.get('documentResults');
@@ -14624,7 +14675,14 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      MetricAggregationResult ret = (MetricAggregationResult) super.deserialize(jsonString, jsonMap, classType);
+      String keyAsString = (String) jsonMap.remove('keyAsString');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      MetricAggregationResult ret = (MetricAggregationResult) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+
+      if (String.isNotBlank(keyAsString)) {
+        ret.setKeyAsString((Datetime) JSON.deserialize('"' + keyAsString + '"', Datetime.class));
+      }
 
       return ret;
     }
@@ -16794,7 +16852,14 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      Notice ret = (Notice) super.deserialize(jsonString, jsonMap, classType);
+      String created = (String) jsonMap.remove('created');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      Notice ret = (Notice) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+
+      if (String.isNotBlank(created)) {
+        ret.created = (Datetime) JSON.deserialize('"' + created + '"', Datetime.class);
+      }
 
       return ret;
     }
@@ -20409,7 +20474,14 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      SearchStatus ret = (SearchStatus) super.deserialize(jsonString, jsonMap, classType);
+      String lastTrained = (String) jsonMap.remove('lastTrained');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      SearchStatus ret = (SearchStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+
+      if (String.isNotBlank(lastTrained)) {
+        ret.setLastTrained((Datetime) JSON.deserialize('"' + lastTrained + '"', Datetime.class));
+      }
 
       return ret;
     }
@@ -22521,7 +22593,14 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      SourceStatus ret = (SourceStatus) super.deserialize(jsonString, jsonMap, classType);
+      String nextCrawl = (String) jsonMap.remove('nextCrawl');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      SourceStatus ret = (SourceStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+
+      if (String.isNotBlank(nextCrawl)) {
+        ret.setNextCrawl((Datetime) JSON.deserialize('"' + nextCrawl + '"', Datetime.class));
+      }
 
       return ret;
     }
@@ -23549,7 +23628,18 @@ public class IBMDiscoveryV1Models {
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
+      String successfullyTrained = (String) jsonMap.remove('successfullyTrained');
+      String dataUpdated = (String) jsonMap.remove('dataUpdated');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+
+      if (String.isNotBlank(successfullyTrained)) {
+        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfullyTrained + '"', Datetime.class));
+      }
+      if (String.isNotBlank(dataUpdated)) {
+        ret.setDataUpdated((Datetime) JSON.deserialize('"' + dataUpdated + '"', Datetime.class));
+      }
 
       return ret;
     }
