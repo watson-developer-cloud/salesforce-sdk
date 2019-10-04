@@ -1,6 +1,6 @@
 @isTest
 private class IBMDiscoveryV1Test {
-  private static final String VERSION = '2018-03-05';
+  private static final String VERSION = '2019-04-30';
   private static final String ENVIRONMENT_ID = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
   private static final String CONFIGURATION_ID = 'configuration_id';
 

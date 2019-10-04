@@ -1,6 +1,6 @@
 public with sharing class IBMAssistantV2FTests {
   private static String URL = 'https://gateway.watsonplatform.net/assistant/api';
-  private static String VERSION = '2018-09-20';
+  private static String VERSION = '2019-02-28';
 
   public static void runAllTests(String apiKey, String assistantId) {
     IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(apiKey);

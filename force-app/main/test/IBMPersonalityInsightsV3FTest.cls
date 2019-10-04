@@ -1,6 +1,6 @@
 public with sharing class IBMPersonalityInsightsV3FTest {
 
-  private static String VERSION = '2017-09-01';
+  private static String VERSION = '2017-10-13';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_personality_insights_v3';
   private static String URL = 'https://gateway.watsonplatform.net/personality-insights/api';

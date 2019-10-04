@@ -11,14 +11,14 @@ private class IBMVisualRecognitionV3Test {
   private static IBMVisualRecognitionV3 service;
 
   static {
-    VERSION = '2016-05-20';
+    VERSION = '2018-03-19';
     HEADER_KEY = 'Header-Key';
     HEADER_VAL = 'header_val';
     CLASS_VAL = 'class';
     SCORE = 10.0;
     TYPE_HEIRARCHY = 'type_heirarchy';
 
-    service = new IBMVisualRecognitionV3('2016-05-20', new IBMWatsonNoAuthAuthenticator());
+    service = new IBMVisualRecognitionV3(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testModelClass() {

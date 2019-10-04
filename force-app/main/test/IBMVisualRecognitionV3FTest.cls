@@ -1,6 +1,6 @@
 public with sharing class IBMVisualRecognitionV3FTest {
   private static String URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
-  private static String VERSION = '2016-05-20';
+  private static String VERSION = '2018-03-19';
 
   public static void runAllTests(String iamApiKey) {
     IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(iamApiKey);

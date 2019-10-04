@@ -129,7 +129,7 @@ Once this is done, you're good to go! As an example, if you uploaded a credentia
 
 ```java
 IBMWatsonAuthenticator authenticator = new IBMWatsonConfigBasedAuthenticatorFactory('discovery');
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', authenticator);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2019-04-30', authenticator);
 ```
 
 and you'll be authenticated :white_check_mark:
@@ -144,7 +144,7 @@ If the methods above don't work for you, setting credentials in the code is alwa
 
 ```java
 IBMWatsonAuthenticator authenticator = new IBMWatsonBasicAuthenticator('USERNAME', 'PASSWORD');
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', authenticator);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2019-04-30', authenticator);
 discovery.setServiceURL('URL');
 ```
 
@@ -152,7 +152,7 @@ discovery.setServiceURL('URL');
 
 ```java
 IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator('API_KEY');
-IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2019-04-30', authenticator);
 service.setServiceURL('URL');
 ```
 
@@ -161,7 +161,7 @@ service.setServiceURL('URL');
 ```java
 IBMWatsonAuthenticator authenticator =
   new IBMWatsonBasicAuthenticator('USERNAME', 'PASSWORD');
-IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2019-04-30', authenticator);
 service.setServiceURL('SERVICE ICP URL');
 ```
 
@@ -172,7 +172,7 @@ service.setServiceURL('SERVICE ICP URL');
 ```java
 IBMWatsonAuthenticator authenticator =
   new IBMWatsonCloudPakForDataAuthenticator('CP4D TOKEN EXCHANGE BASE URL', 'USERNAME', 'PASSWORD');
-IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', authenticator);
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2019-04-30', authenticator);
 service.setServiceURL('SERVICE CP4D URL');
 ```
 
@@ -194,7 +194,7 @@ Getting started using a service is very simple! All services follow the same pat
 
 ```java
 IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator('API_KEY');
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', authenticator);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2019-04-30', authenticator);
 
 // configuring options for listing environments
 IBMDiscoveryV1Models.ListEnvironmentsOptions options =
@@ -210,7 +210,7 @@ Similarly, here is an example of creating an intent in the Watson Assistant serv
 
 ```java
 IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator('API_KEY');
-IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16', authenticator);
+IBMAssistantV1 assistant = new IBMAssistantV1('2019-02-28', authenticator);
 
 // configuring options for creating intent
 IBMAssistantV1Models.CreateIntentOptions options =
@@ -276,7 +276,7 @@ If going through the `additionalProperties` object is undesired for any reason, 
 public class ServerSideController {
   @AuraEnabled
   public static String query(String environmentId, String collectionId) {
-    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2019-04-30');
     IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder(environmentId, collectionId)
       .naturalLanguageQuery('example query')
       .build();

@@ -12,7 +12,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
   private static IBMNaturalLanguageUnderstandingV1 service;
 
   static {
-    VERSION = '2017-02-27';
+    VERSION = '2019-07-12';
     HEADER_KEY = 'Header-Key';
     HEADER_VAL = 'header_val';
     TEXT = 'text';
@@ -21,7 +21,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     CONFIDENCE = 0.5;
     LOCATION = 0L;
 
-    service = new IBMNaturalLanguageUnderstandingV1('2017-02-27', new IBMWatsonNoAuthAuthenticator());
+    service = new IBMNaturalLanguageUnderstandingV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testCategoriesOptions() {

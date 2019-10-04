@@ -162,7 +162,7 @@ private class IBMAssistantV1Test {
     headerKey = 'Test-Header';
     headerVal = 'test_value';
 
-    service = new IBMAssistantV1('2018-02-16', new IBMWatsonNoAuthAuthenticator());
+    service = new IBMAssistantV1('2019-02-28', new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testCreateWorkspace() {

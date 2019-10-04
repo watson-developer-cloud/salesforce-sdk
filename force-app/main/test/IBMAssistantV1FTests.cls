@@ -2,7 +2,7 @@ public with sharing class IBMAssistantV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_assistant_v1_test';
   private static String URL = 'https://gateway.watsonplatform.net/assistant/api';
-  private static String VERSION = '2018-07-10';
+  private static String VERSION = '2019-02-28';
 
   /**
    *  Test run functional tests.

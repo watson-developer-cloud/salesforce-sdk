@@ -41,7 +41,7 @@ private class IBMAssistantV2Test {
   private static IBMAssistantV2 service;
 
   static {
-    VERSION = '2018-09-20';
+    VERSION = '2019-02-28';
     ASSISTANT_ID = 'assistant_id';
     SESSION_ID = 'session_id';
     TIMEZONE = 'timezone';

@@ -1,6 +1,6 @@
 public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
   private static String URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
-  private static String VERSION = '2018-11-16';
+  private static String VERSION = '2019-07-12';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_natural_language_understanding_v1';
 

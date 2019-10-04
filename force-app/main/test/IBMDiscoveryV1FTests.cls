@@ -2,7 +2,7 @@ public with sharing class IBMDiscoveryV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_discovery_v1';
   private static String URL = 'https://gateway.watsonplatform.net/discovery/api';
-  private static String VERSION = '2018-08-01';
+  private static String VERSION = '2019-04-30';
 
   /**
    *  Test run functional tests.

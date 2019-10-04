@@ -10,7 +10,7 @@ private class IBMToneAnalyzerV3Test {
     VERSION = '2017-09-21';
     HEADER_KEY = 'Header-Key';
     HEADER_VAL = 'header_val';
-    service = new IBMToneAnalyzerV3('2017-09-21', new IBMWatsonNoAuthAuthenticator());
+    service = new IBMToneAnalyzerV3(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   /**
