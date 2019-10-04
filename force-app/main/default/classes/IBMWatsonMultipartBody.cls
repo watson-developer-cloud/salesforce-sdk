@@ -15,13 +15,13 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   public static final IBMWatsonMediaType MIXED = IBMWatsonMediaType.parse('multipart/mixed');
 
   private static final String CRLF = '\r\n';
-  private static final String DEFAULT_BOUNDARY = '----------------------------741e90d31eff';
 
   private String boundary;
   private IBMWatsonMediaType originalType;
   private IBMWatsonMediaType contentType;
   private List<Part> parts;
   private Blob multipartBody;
+  private String form64;
   private Blob formBlob;
   private Map<String, String> headers;
   private long contentLength = -1L;
@@ -33,7 +33,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     this.parts = parts;
     this.headers = new Map<String, String>();
     this.contentLength = 0;
-    writeMultipartBody(parts);
+    writeParts(parts);
   }
 
   public IBMWatsonMediaType contentType() {
@@ -48,8 +48,186 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     return multipartBody;
   }
 
+  public String form64() {
+    return this.form64;
+  }
+
   public long contentLength() {
     return contentLength;
+  }
+
+  private long writeParts(List<Part> parts) {
+    Boolean hasFile = false;
+    Boolean hasImageFile = false;
+    Boolean hasDouble = false;
+    for (Integer i = 0; i < parts.size(); i++) {
+
+      // one way we'll be determining how to build the body
+      IBMWatsonMediaType contentType = parts[i].body.bodyContentType();
+      String lowerCasedContentType = null;
+      if (contentType != null) {
+        lowerCasedContentType = contentType.toString().toLowerCase();
+      }
+
+      if (parts[i].body().hasBase64Data()) {
+        hasFile = true;
+
+        if (lowerCasedContentType != null && lowerCasedContentType.startsWith('image')) {
+          hasImageFile = true;
+        }
+      } else {
+        // doubles need to be sent in the same way that images do
+        String partValue = parts[i].body().content;
+        Boolean valueIsDouble = false;
+        try {
+          Double valueAsDouble = Double.valueOf(partValue);
+          valueIsDouble = true;
+        } catch (Exception e) {
+          // this is fine
+        }
+        if (valueIsDouble) {
+          hasDouble = true;
+        }
+      }
+    }
+
+    // we want to send the encoded body if:
+    // - we're sending a file
+    // - it's NOT an image file
+    // - there are no doubles in the body params
+    //
+    // otherwise, we go the other route
+    if (hasFile && (!hasImageFile && !hasDouble)) {
+      return writeForm64(parts);
+    } else {
+      return writeMultipartBody(parts);
+    }
+  }
+
+  private long writeForm64(List<Part> parts) {
+    headers.put('Content-Type', 'multipart/form-data; boundary="' + this.boundary + '"');
+    form64 = '';
+    for (Integer i = 0; i < parts.size(); i++) {
+      Part p = parts[i];
+      Boolean isEndingPart = (i == parts.size() - 1);
+      if (p.body().hasBase64Data()) {
+        String fileName = p.body().name;
+        String mimeType = p.body.bodyContentType().toString();
+        String file64Body = EncodingUtil.base64Encode(p.body().blobContent);
+        form64 += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, mimeType, isEndingPart);
+      } else {
+        form64 += writeBoundary();
+        form64 += writeBodyParameter(p.headers().get('Content-Disposition'), p.body().content, isEndingPart);
+      }
+    }
+
+    return form64.length();
+  }
+
+  /**
+   *  Pad the value with spaces until the base64 encoding is no longer padded.
+   */
+  public static String safelyPad(String value, String valueCrLf64, String lineBreaks) {
+    String valueCrLf = '';
+    Blob valueCrLfBlob = null;
+
+    while (valueCrLf64.endsWith('=')) {
+      value += ' ';
+      valueCrLf = value + lineBreaks;
+      valueCrLfBlob = blob.valueOf(valueCrLf);
+      valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
+    }
+
+    return valueCrLf64;
+  }
+
+  /**
+   *  Write a key-value pair to the form's body.
+   */
+  public String writeBodyParameter(String key, String value, Boolean isEndingPart) {
+    String contentDisposition = 'Content-Disposition: ' + key;
+    String contentDispositionCrLf = contentDisposition + CRLF + CRLF;
+    Blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
+    String contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
+    String content = safelyPad(contentDisposition, contentDispositionCrLf64, CRLF + CRLF);
+    String valueCrLf = value + CRLF;
+    Blob valueCrLfBlob = blob.valueOf(valueCrLf);
+    String valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
+
+    content += safelyPad(value, valueCrLf64, CRLF);
+    if (isEndingPart == true) {
+      String footer = '--' + this.boundary + '--';
+      Blob footerBlob = blob.valueOf(footer);
+      String footerEncoded = EncodingUtil.base64Encode(footerBlob);
+      while (footerEncoded.endsWith('=')) {
+        footer += ' ';
+        footerEncoded = EncodingUtil.base64Encode(blob.valueOf(footer));
+      }
+      content += safelyPad(footer, footerEncoded, CRLF);
+    }
+    return content;
+  }
+
+  /**
+   *  Write a Blob type to the form's body.
+   */
+  public String writeBlobBody(String contentDispositionValue, String bodyEncoded, String mimeType, Boolean isEndingPart) {
+    String boundaryCrlf = '--' +this.boundary + CRLF;
+
+    String contentDisposition = 'Content-Disposition: ' + contentDispositionValue;
+    String contentDispositionCrlf = contentDisposition + CRLF;
+
+    String contentType = 'Content-Type: ' + mimeType;
+    String contentTypeCrlf = contentType + CRLF;
+
+    String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
+
+    String HeaderCRLF = CRLF;
+    if (!String.isBlank(mimeType)) {
+       HeaderCRLF += CRLF;
+    }
+    String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
+    while (headerEncoded.endsWith('=')) {
+      header += ' ';
+      headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
+    }
+
+    String footer;
+    if (isEndingPart) {
+     footer = CRLF + '--' + this.boundary + '--';
+    } else {
+     footer = CRLF;
+    }
+
+    String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+
+    Blob bodyBlob = null;
+    String last4Bytes = bodyEncoded.substring(bodyEncoded.length() - 4, bodyEncoded.length());
+
+    if (last4Bytes.endsWith('=')) {
+      Blob decoded4Bytes = EncodingUtil.base64Decode(last4Bytes);
+      HttpRequest tmp = new HttpRequest();
+      tmp.setBodyAsBlob(decoded4Bytes);
+      String last4BytesFooter = tmp.getBody() + footer;
+      bodyBlob = EncodingUtil.base64Decode(headerEncoded
+        + bodyEncoded.substring(0, bodyEncoded.length() - 4)
+        + EncodingUtil.base64Encode(Blob.valueOf(last4BytesFooter)));
+    } else {
+      bodyBlob = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
+    }
+    return EncodingUtil.base64Encode(bodyBlob);
+  }
+
+  public String writeBoundary() {
+    String value = '--' + Boundary;
+    String valueCrlf = value + CRLF;
+    Blob valueBlob = blob.valueOf(valueCrlf);
+    String boundaryEncoded = EncodingUtil.base64Encode(valueBlob);
+    while (boundaryEncoded.endsWith('=')) {
+      valueCrlf += ' ';
+      boundaryEncoded = EncodingUtil.base64Encode(blob.valueOf(valueCrlf));
+    }
+    return boundaryEncoded;
   }
 
   private long writeMultipartBody(List<Part> parts) {
@@ -255,17 +433,24 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     }
   }
 
+  private static String generateRandomBoundaryString() {
+    Blob b = Crypto.GenerateAESKey(128);
+    String h = EncodingUtil.ConvertTohex(b);
+    String boundaryString = h.substring(0, 8);
+    return boundaryString;
+  }
+
   public class Builder {
     private String boundary;
     private IBMWatsonMediaType mediaType = MIXED;
     private List<Part> parts = new List<Part>();
 
     public Builder() {
-      this(DEFAULT_BOUNDARY);
+      this(IBMWatsonMultipartBody.generateRandomBoundaryString());
     }
 
     public Builder(String boundary) {
-      this.boundary = boundary;
+      this.boundary = EncodingUtil.urlEncode(boundary, 'UTF-8');
     }
 
     /**
