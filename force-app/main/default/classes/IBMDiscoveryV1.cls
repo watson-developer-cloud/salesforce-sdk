@@ -1336,11 +1336,11 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getAutocompletionOptions.field() != null) {
-      builder.query('field', getAutocompletionOptions.field());
-    }
     if (getAutocompletionOptions.prefix() != null) {
       builder.query('prefix', getAutocompletionOptions.prefix());
+    }
+    if (getAutocompletionOptions.field() != null) {
+      builder.query('field', getAutocompletionOptions.field());
     }
     if (getAutocompletionOptions.count() != null) {
       builder.query('count', String.valueOf(getAutocompletionOptions.count()));
