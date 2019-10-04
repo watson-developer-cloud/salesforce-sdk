@@ -746,7 +746,11 @@ public class IBMWatsonMockResponses {
                 '],' +
                 '"entities": [' +
                 '{' +
-                  '"entity": "test_entity"' +
+                  '"entity": "test_entity",' +
+                  '"location": [' +
+                    '10' +
+                  '],' +
+                  '"value": "Value of test_entity"' +
                 '}' +
                 ']' +
               '},' +
@@ -1153,159 +1157,6 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static testMethod String testDocument() {
-    return  '{' +
-            '  "configuration_id": "e8b9d793-b163-452a-9373-bce07efb510b", ' +
-            '  "status": "completed", ' +
-            '  "enriched_field_units": 5, ' +
-            '  "original_media_type": "text/html", ' +
-            '  "snapshots": [' +
-            '    {' +
-            '      "step": "html_input", ' +
-            '      "snapshot": {' +
-            '        "html": "<html><body>test</body></html>"' +
-            '      }' +
-            '    }, ' +
-            '    {' +
-            '      "step": "html_output", ' +
-            '      "snapshot": {' +
-            '        "html": "<html><body>test</body></html>"' +
-            '      }' +
-            '    }, ' +
-            '    {' +
-            '      "step": "json_output", ' +
-            '      "snapshot": {' +
-            '        "text": "test", ' +
-            '        "html": "<html><body>test</body></html>", ' +
-            '        "metadata": {' +
-            '          "title": "Press Release 2014-01-09", ' +
-            '          "category": "news"' +
-            '        }, ' +
-            '        "extracted_metadata": {' +
-            '          "title": "IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations", ' +
-            '          "author": "Jake Bake"' +
-            '        }' +
-            '      }' +
-            '    }, ' +
-            '    {' +
-            '      "step": "json_normalizations_output", ' +
-            '      "snapshot": {' +
-            '        "text": "test", ' +
-            '        "html": "<html><body>test</body></html>", ' +
-            '        "metadata": {' +
-            '          "title": "test", ' +
-            '          "author": "Jake Bake", ' +
-            '          "category": "news"' +
-            '        }' +
-            '      }' +
-            '    }, ' +
-            '    {' +
-            '      "step": "enrichments_output", ' +
-            '      "snapshot": {' +
-            '        "html": "<html><body>test</body></html>", ' +
-            '        "text": "test", ' +
-            '        "metadata": {' +
-            '          "title": "IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations", ' +
-            '          "author": "Jake Bake", ' +
-            '          "category": "news"' +
-            '        }, ' +
-            '        "alchemy_enriched_text": {' +
-            '          "status": "OK", ' +
-            '          "language": "english", ' +
-            '          "text": "test", ' +
-            '          "keywords": [' +
-            '            {' +
-            '            "relevance": 0.978167, ' +
-            '            "text": "IBM Watson Group"' +
-            '            }, ' +
-            '            {' +
-            '            "relevance": 0.432563, ' +
-            '            "text": "products"' +
-            '            }' +
-            '          ]' +
-            '        }, ' +
-            '        "sire_enriched_text": {' +
-            '          "status": "OK", ' +
-            '          "language": "english", ' +
-            '          "model": "ie-en-news", ' +
-            '          "typedRelations": [' +
-            '            {' +
-            '            "arguments": [' +
-            '              {' +
-            '                "entities": [' +
-            '                  {' +
-            '                    "id": "-E3", ' +
-            '                    "text": "Silicon Alley", ' +
-            '                    "type": "GeopoliticalEntity"' +
-            '                  }' +
-            '                ], ' +
-            '                "part": "first", ' +
-            '                "text": "Silicon Alley"' +
-            '              }' +
-            '            ], ' +
-            '            "score": "0.898437", ' +
-            '            "sentence": "test", ' +
-            '            "type": "locatedAt"' +
-            '            }' +
-            '          ]' +
-            '        }' +
-            '      }' +
-            '    }, ' +
-            '    {' +
-            '     "step": "normalizations_output", ' +
-            '      "snapshot": {' +
-            '        "title": "IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations", ' +
-            '        "author": "Jake Bake", ' +
-            '        "language": "english", ' +
-            '        "text": "test", ' +
-            '        "alchemy_enriched_text": {' +
-            '          "keywords": [' +
-            '            {' +
-            '            "relevance": 0.978167, ' +
-            '            "text": "IBM Watson Group"' +
-            '            }, ' +
-            '            {' +
-            '            "relevance": 0.432563, ' +
-            '            "text": "products"' +
-            '            }' +
-            '          ]' +
-            '        }, ' +
-            '        "sire_enriched_text": {' +
-            '          "typedRelations": [' +
-            '            {' +
-            '            "arguments": [' +
-            '              {' +
-            '                "entities": [' +
-            '                  {' +
-            '                    "id": "-E3", ' +
-            '                    "text": "Silicon Alley", ' +
-            '                    "type": "GeopoliticalEntity"' +
-            '                  }' +
-            '                ], ' +
-            '                "part": "first", ' +
-            '                "text": "Silicon Alley"' +
-            '              }' +
-            '            ], ' +
-            '            "score": "0.898437", ' +
-            '            "sentence": "test", ' +
-            '            "type": "locatedAt"' +
-            '            }' +
-            '          ]' +
-            '        }' +
-            '      }' +
-            '    }' +
-            '  ], ' +
-            '  "notices": [' +
-            '    {' +
-            '      "notice_id": "xpath_not_found", ' +
-            '      "severity": "warning", ' +
-            '      "step": "html-to-html", ' +
-            '      "description": "xpath not found"' +
-            '    }' +
-            '  ]' +
-            '}';
-  }
-  
   public static testMethod String Classify() {
     return '{' +
     '  "classifier_id": "10D41B-nlc-1", ' +
@@ -1699,55 +1550,7 @@ public class IBMWatsonMockResponses {
                       '  ]' +
                       '}';
   }
-  
-  public static testMethod String detectedFaces() {
-    return  '{' +
-                      '  "images_processed": 0, ' +
-                      '  "images": [' +
-                      '    {' +
-                      '      "faces": [' +
-                      '        {' +
-                      '          "age": {' +
-                      '            "min": 0, ' +
-                      '            "max": 0, ' +
-                      '            "score": 0' +
-                      '          }, ' +
-                      '          "gender": {' +
-                      '            "gender": "string", ' +
-                      '            "score": 0,' +
-                      '            "gender_label": "male"' + 
-                      '          }, ' +
-                      '          "face_location": {' +
-                      '            "width": 0, ' +
-                      '            "height": 0, ' +
-                      '            "left": 0, ' +
-                      '            "top": 0' +
-                      '          }, ' +
-                      '          "identity": {' +
-                      '            "name": "string", ' +
-                      '            "score": 0, ' +
-                      '            "type_hierarchy": "string"' +
-                      '          }' +
-                      '        }' +
-                      '      ], ' +
-                      '      "image": "string", ' +
-                      '      "source_url": "string", ' +
-                      '      "resolved_url": "string", ' +
-                      '      "error": {' +
-                      '        "error_id": "string", ' +
-                      '        "description": "string"' +
-                      '      }' +
-                      '    }' +
-                      '  ], ' +
-                      '  "warnings": [' +
-                      '    {' +
-                      '      "warning_id": "string", ' +
-                      '      "description": "string"' +
-                      '    }' +
-                      '  ]' +
-                      '}';
-  }
-    
+
   public static testMethod String classifiers() {
     return  '{' +
                       '  "classifiers": [' +
@@ -2580,70 +2383,6 @@ public class IBMWatsonMockResponses {
     '   ]' +
     ' }' +
     ' ]' +
-    '}';
-  }
-
-  public static testMethod String queryEntitiesResponse() {
-    return '{' +
-      '"entities": [' +
-      '{' +
-        '"text": "Steve Jobs",' +
-        '"type": "PERSON",' +
-        '"evidence": [' +
-        '{' +
-          '"document_id": "cb77ce6b-bb93-42a0-8643-dfb523e14da8",' +
-          '"field": "description",' +
-          '"start_offset": 305,' +
-          '"end_offset": 392,' +
-          '"entities": [' +
-          '{' +
-            '"type": "Person",' +
-            '"text": "Steve Jobs",' +
-            '"start_offset": 311,' +
-            '"end_offset": 321' +
-          '}' +
-          ']' +
-        '}' +
-        ']' +
-      '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String queryRelationsResponse() {
-    return '{' +
-      '"relations": [' +
-      '{' +
-        '"type": "FOUNDEROF",' +
-        '"frequency": 7,' +
-        '"arguments": [' +
-        '{' +
-          '"entities": [' +
-          '{' +
-            '"type": "PERSON",' +
-            '"text": "Steve Jobs"' +
-          '}' +
-          ']' +
-        '}' +
-        '],' +
-        '"evidence": [' +
-        '{' +
-          '"document_id": "b95df4c1-d00f-4771-abb2-a52baea0444a",' +
-          '"field": "text",' +
-          '"start_offset": 243,' +
-          '"end_offset": 303,' +
-          '"entities": [' +
-          '{' +
-            '"type": "Person",' +
-            '"text": "Steve Jobs",' +
-            '"start_offset": 243,' +
-            '"end_offset": 253' +
-          '}' +
-          ']' +
-        '}' +
-        ']' +
-      '}' +
-      ']' +
     '}';
   }
 
@@ -4123,6 +3862,227 @@ public class IBMWatsonMockResponses {
           '"status": "available",' +
           '"created": "2018-08-24T08:20:30.5Z",' +
           '"completed": "2018-08-24T08:20:35.5Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String analyzeResponse() {
+    return '{' +
+      '"images": [' +
+        '{' +
+          '"source": {' +
+            '"type": "file",' +
+            '"filename": "filename",' +
+            '"archive_filename": "archive_filename",' +
+            '"source_url": "source_url",' +
+            '"resolved_url": "resolved_url"' +
+          '},' +
+          '"dimensions": {' +
+            '"height": 200,' +
+            '"width": 100' +
+          '},' +
+          '"objects": {' +
+            '"collections": [' +
+              '{' +
+                '"collection_id": "123456789",' +
+                '"objects": [' +
+                  '{' +
+                    '"object": "object",' +
+                    '"location": {' +
+                      '"top": 0,' +
+                      '"left": 10,' +
+                      '"width": 100,' +
+                      '"height": 200' +
+                    '},' +
+                    '"score": 5.0' +
+                  '}' +
+                ']' +
+              '}' +
+            ']' +
+          '},' +
+          '"errors": {' +
+            '"code": "code",' +
+            '"message": "message",' +
+            '"more_info": "more_info",' +
+            '"target": {' +
+              '"type": "field",' +
+              '"name": "name"' +
+            '}' +
+          '}' +
+        '}' +
+      '],' +
+      '"warnings": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message",' +
+          '"more_info": "more_info"' +
+        '}' +
+      '],' +
+      '"trace": "trace"' +
+    '}';
+  }
+
+  public static testMethod String visRecCollection() {
+    return '{' +
+      '"collection_id": "123456789",' +
+      '"name": "name",' +
+      '"description": "description",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"image_count": 50,' +
+      '"training_status": {' +
+        '"objects": {' +
+          '"ready": true,' +
+          '"in_progress": true,' +
+          '"data_changed": true,' +
+          '"latest_failed": true,' +
+          '"description": "description"' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String collectionsList() {
+    return '{' +
+      '"collections": [' +
+        '{' +
+          '"collection_id": "123456789",' +
+          '"name": "name",' +
+          '"description": "description",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"image_count": 50,' +
+          '"training_status": {' +
+            '"objects": {' +
+              '"ready": true,' +
+              '"in_progress": true,' +
+              '"data_changed": true,' +
+              '"latest_failed": true,' +
+              '"description": "description"' +
+            '}' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String imageDetails() {
+    return '{' +
+      '"image_id": "image_id",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"source": {' +
+        '"type": "file",' +
+        '"filename": "filename",' +
+        '"archive_filename": "archive_filename",' +
+        '"source_url": "source_url",' +
+        '"resolved_url": "resolved_url"' +
+      '},' +
+      '"dimensions": {' +
+        '"height": 200,' +
+        '"width": 100' +
+      '},' +
+      '"errors": {' +
+        '"code": "code",' +
+        '"message": "message",' +
+        '"more_info": "more_info",' +
+        '"target": {' +
+          '"type": "field",' +
+          '"name": "name"' +
+        '}' +
+      '},' +
+      '"training_data": {' +
+        '"objects": [' +
+          '{' +
+            '"object": "object",' +
+            '"location": {' +
+              '"top": 0,' +
+              '"left": 10,' +
+              '"width": 100,' +
+              '"height": 200' +
+            '}' +
+          '}' +
+        ']' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String imageDetailsList() {
+    return '{' +
+      '"images": [' +
+        '{' +
+          '"image_id": "image_id",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"source": {' +
+            '"type": "file",' +
+            '"filename": "filename",' +
+            '"archive_filename": "archive_filename",' +
+            '"source_url": "source_url",' +
+            '"resolved_url": "resolved_url"' +
+          '},' +
+          '"dimensions": {' +
+            '"height": 200,' +
+            '"width": 100' +
+          '},' +
+          '"errors": {' +
+            '"code": "code",' +
+            '"message": "message",' +
+            '"more_info": "more_info",' +
+            '"target": {' +
+              '"type": "field",' +
+              '"name": "name"' +
+            '}' +
+          '},' +
+          '"training_data": {' +
+            '"objects": [' +
+              '{' +
+                '"object": "object",' +
+                '"location": {' +
+                  '"top": 0,' +
+                  '"left": 10,' +
+                  '"width": 100,' +
+                  '"height": 200' +
+                '}' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      '],' +
+      '"warnings": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message",' +
+          '"more_info": "more_info"' +
+        '}' +
+      '],' +
+      '"trace": "trace"' +
+    '}';
+  }
+
+  public static testMethod String imageSummaryList() {
+    return '{' +
+      '"images": [' +
+        '{' +
+          '"image_id": "image_id",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String trainingDataObjects() {
+    return '{' +
+      '"objects": [' +
+        '{' +
+          '"object": "object",' +
+          '"location": {' +
+            '"top": 0,' +
+            '"left": 10,' +
+            '"width": 100,' +
+            '"height": 200' +
+          '}' +
         '}' +
       ']' +
     '}';

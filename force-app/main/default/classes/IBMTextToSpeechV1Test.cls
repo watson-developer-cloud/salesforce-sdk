@@ -1,40 +1,14 @@
 @isTest
 private class IBMTextToSpeechV1Test {
-  private static String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
-  private static String username = 'username';
-  private static String password = 'password';
-
   private static String HEADER_KEY;
   private static String HEADER_VAL;
+
+  private static IBMTextToSpeechV1 service;
 
   static {
     HEADER_KEY = 'Header-Key';
     HEADER_VAL = 'header_val';
-  }
-
-  static testMethod void testEmptyConstructor() {
-    Test.startTest();
-    IBMTextToSpeechV1 service = new IBMTextToSpeechV1();
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testBasicConstructor() {
-    Test.startTest();
-    IBMTextToSpeechV1 service = new IBMTextToSpeechV1('username', 'password');
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testConfigConstructor() {
-    Test.startTest();
-    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
-      .username('username')
-      .password('password')
-      .build();
-    IBMTextToSpeechV1 service = new IBMTextToSpeechV1(config);
-    System.assert(service != null);
-    Test.stopTest();
+    service = new IBMTextToSpeechV1(new IBMWatsonNoAuthAuthenticator());
   }
 
   /**
@@ -46,11 +20,7 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1(iamOptions);
-    textToSpeech.setEndPoint(URL);
+
     IBMTextToSpeechV1Models.CreateVoiceModelOptions options = new IBMTextToSpeechV1Models.CreateVoiceModelOptionsBuilder()
       .name('I love Apples not oranges')
       .language('de-DE')
@@ -60,7 +30,7 @@ private class IBMTextToSpeechV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.VoiceModel resp =
-      textToSpeech.createVoiceModel(options);
+      service.createVoiceModel(options);
     System.assertEquals(resp.getCustomizationId(), 'string');
     System.assertEquals(resp.getName(), 'string');
     System.assertEquals(resp.getLanguage(), 'string');
@@ -83,11 +53,7 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.GetVoiceOptions options = new IBMTextToSpeechV1Models.GetVoiceOptionsBuilder()
       .customizationId('customizationId')
       .voice('en-US_AllisonVoice')
@@ -96,7 +62,7 @@ private class IBMTextToSpeechV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Voice resp =
-      textToSpeech.getVoice(options);
+      service.getVoice(options);
     System.assertEquals(resp.getURL(), 'string');
     System.assertEquals(resp.getGender(), 'string');
     System.assertEquals(resp.getName(), 'string');
@@ -118,18 +84,14 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.ListVoicesOptions options = new IBMTextToSpeechV1Models.ListVoicesOptionsBuilder()
       .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Voices resp =
-      textToSpeech.listVoices(options);
+      service.listVoices(options);
     System.assertEquals(resp.getVoices()[0].getURL(), 'string');
     Test.stopTest();
   }
@@ -143,18 +105,14 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.DeleteVoiceModelOptions options = new IBMTextToSpeechV1Models.DeleteVoiceModelOptionsBuilder()
       .customizationId('customizationId')
       .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    textToSpeech.deleteVoiceModel(options);
+    service.deleteVoiceModel(options);
     Test.stopTest();
   }
 
@@ -167,11 +125,7 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.GetVoiceModelOptions options = new IBMTextToSpeechV1Models.GetVoiceModelOptionsBuilder()
       .customizationId('customizationId')
       .addHeader(HEADER_KEY, HEADER_VAL)
@@ -179,7 +133,7 @@ private class IBMTextToSpeechV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.VoiceModel resp =
-      textToSpeech.getVoiceModel(options);
+      service.getVoiceModel(options);
     System.assertEquals(resp.getCustomizationId(), 'string');
     Test.stopTest();
   }
@@ -193,18 +147,14 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.ListVoiceModelsOptions options = new IBMTextToSpeechV1Models.ListVoiceModelsOptionsBuilder()
       .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.VoiceModels resp =
-      textToSpeech.listVoiceModels(options);
+      service.listVoiceModels(options);
     System.assertEquals(resp.getCustomizations()[0].getCustomizationId(), 'string');
     Test.stopTest();
   }
@@ -218,14 +168,10 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
-    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
-    word.setWord('Hello');
-    word.setTranslation('de-DE');
+    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.WordBuilder()
+      .word('Hello')
+      .translation('de-DE')
+      .build();
     IBMTextToSpeechV1Models.UpdateVoiceModelOptions options = new IBMTextToSpeechV1Models.UpdateVoiceModelOptionsBuilder()
       .customizationId('customizationId')
       .addWords(word)
@@ -233,7 +179,7 @@ private class IBMTextToSpeechV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    textToSpeech.updateVoiceModel(options);
+    service.updateVoiceModel(options);
     Test.stopTest();
   }
 
@@ -246,14 +192,10 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
-    IBMTextToSpeechV1Models.Translation translation = new IBMTextToSpeechV1Models.Translation();
-    translation.setTranslation('de-DE');
-    translation.setPartOfSpeech('Josi');
+    IBMTextToSpeechV1Models.Translation translation = new IBMTextToSpeechV1Models.TranslationBuilder()
+      .translation('de-DE')
+      .partOfSpeech('Josi')
+      .build();
     IBMTextToSpeechV1Models.AddWordOptions options = new IBMTextToSpeechV1Models.AddWordOptionsBuilder()
       .customizationId('customizationId')
       .word('World')
@@ -264,7 +206,7 @@ private class IBMTextToSpeechV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    textToSpeech.addWord(options);
+    service.addWord(options);
     Test.stopTest();
   }
 
@@ -277,15 +219,11 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
-    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
-    word.setWord('Again');
-    word.setTranslation('de-DE');
-    word.setPartOfSpeech('Josi');
+    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.WordBuilder()
+      .word('Again')
+      .translation('de-DE')
+      .partOfSpeech('Josi')
+      .build();
     List<IBMTextToSpeechV1Models.Word> words = new List<IBMTextToSpeechV1Models.Word>{ word };
     IBMTextToSpeechV1Models.AddWordsOptions options = new IBMTextToSpeechV1Models.AddWordsOptionsBuilder('customizationId', words)
       .customizationId('customizationId')
@@ -295,7 +233,7 @@ private class IBMTextToSpeechV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    textToSpeech.addWords(options);
+    service.addWords(options);
     Test.stopTest();
   }
 
@@ -308,11 +246,7 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.DeleteWordOptions options = new IBMTextToSpeechV1Models.DeleteWordOptionsBuilder()
       .customizationId('customizationId')
       .word('World')
@@ -320,7 +254,7 @@ private class IBMTextToSpeechV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    textToSpeech.deleteWord(options);
+    service.deleteWord(options);
     Test.stopTest();
   }
 
@@ -333,11 +267,7 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1('username', 'pasword');
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.GetWordOptions options = new IBMTextToSpeechV1Models.GetWordOptionsBuilder()
       .customizationId('customizationId')
       .word('World')
@@ -346,7 +276,7 @@ private class IBMTextToSpeechV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Translation resp =
-      textToSpeech.getWord(options);
+      service.getWord(options);
     System.assertEquals(resp.getTranslation(), 'string');
     System.assertEquals(resp.getPartOfSpeech(), 'Josi');
     Test.stopTest();
@@ -361,11 +291,7 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.ListWordsOptions options = new IBMTextToSpeechV1Models.ListWordsOptionsBuilder()
       .customizationId('customizationId')
       .addHeader(HEADER_KEY, HEADER_VAL)
@@ -373,7 +299,7 @@ private class IBMTextToSpeechV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Words resp =
-      textToSpeech.listWords(options);
+      service.listWords(options);
     System.assertEquals(resp.getWords()[0].getWord(), 'string');
     Test.stopTest();
   }
@@ -387,11 +313,7 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+
     IBMTextToSpeechV1Models.GetPronunciationOptions options = new IBMTextToSpeechV1Models.GetPronunciationOptionsBuilder()
       .text('Hello World')
       .voice('de-DE_DieterVoice')
@@ -402,7 +324,7 @@ private class IBMTextToSpeechV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Pronunciation resp =
-      textToSpeech.getPronunciation(options);
+      service.getPronunciation(options);
     System.assertEquals(resp.getPronunciation(), 'string');
     Test.stopTest();
   }
@@ -417,9 +339,6 @@ private class IBMTextToSpeechV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    textToSpeech.setUsernameAndPassword('username', 'password');
-
     String customerId = 'salesforce_sdk_test_id';
     IBMTextToSpeechV1Models.DeleteUserDataOptions deleteOptions = new IBMTextToSpeechV1Models.DeleteUserDataOptionsBuilder()
       .customerId(customerId)
@@ -427,7 +346,7 @@ private class IBMTextToSpeechV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    textToSpeech.deleteUserData(deleteOptions);
+    service.deleteUserData(deleteOptions);
 
     Test.stopTest();
   }

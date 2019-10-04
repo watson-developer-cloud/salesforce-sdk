@@ -4,86 +4,37 @@
  */
 public class IBMWatsonJSONUtil {
 
-  private static Set<String> reservedWords;
-
-  static {
-    reservedWords = new Set<String> {
-        'abstract', 'activate', 'and', 'any', 'array', 'as', 'asc', 'autonomous', 'begin', 'bigdecimal', 'blob',
-        'break', 'bulk', 'by', 'byte', 'case', 'cast', 'catch', 'char', 'class', 'collect', 'commit', 'const',
-        'continue', 'convertcurrency', 'decimal', 'default', 'delete', 'desc', 'do', 'else', 'end', 'enum',
-        'exception', 'exit', 'export', 'extends', 'false', 'final', 'finally', 'float', 'for', 'from', 'future',
-        'global', 'goto', 'group', 'having', 'hint', 'if', 'implements', 'import', 'inner', 'insert', 'instanceof',
-        'interface', 'into', 'int', 'join', 'last_90_days', 'last_month', 'last_n_days', 'last_week', 'like',
-        'limit', 'list', 'long', 'loop', 'map', 'merge', 'new', 'next_90_days', 'next_month', 'next_n_days',
-        'next_week', 'not', 'null', 'nulls', 'number', 'object', 'of', 'on', 'or', 'outer', 'override', 'package',
-        'parallel', 'pragma', 'private', 'protected', 'public', 'retrieve', 'return', 'returning', 'rollback',
-        'savepoint', 'search', 'select', 'set', 'short', 'sort', 'stat', 'static', 'super', 'switch',
-        'synchronized', 'system', 'testmethod', 'then', 'this', 'this_month', 'this_week', 'throw', 'today',
-        'tolabel', 'tomorrow', 'transaction', 'trigger', 'true', 'try', 'type', 'undelete', 'update', 'upsert',
-        'using', 'virtual', 'webservice', 'when', 'where', 'while', 'yesterday'
-    };
-  }
-
   /**
-   * Removes '_serialized_name' suffix to match API spec and modifies JSON request string
-   * to properly handle additional properties.
+   * Replaces top-level keys in a map based on the provided mapping.
    *
-   * @param jsonString String representation of the JSON request
+   * @param jsonMap the map on which key substitution will be performed
+   * @param nameMapping Map containing names to replace and the value to use instead
    *
-   * @return String representing our modified JSON request ready to be sent
+   * @return the map with keys replaced
    */
-  public static String serialize(String jsonString) {
-    jsonString = jsonString.remove('_serialized_name');
-    Map<String, Object> jsonMap = raiseAdditionalProperties((Map<String, Object>) JSON.deserializeUntyped(jsonString));
-    return JSON.serialize(jsonMap);
-  }
-
-  /**
-   * Calls appropriate methods to prepare the JSON response for deserialization. This involves removing empty
-   * string values and adding the property suffix to avoid using reserved words.
-   *
-   * @param jsonMap Map<String, Object> representation of the JSON response
-   *
-   * return Map<String, Object> representing our JSON object ready to be deserialized
-   */
-  public static Map<String, Object> prepareResponse(Map<String, Object> jsonMap) {
-    return addPropertySuffix(jsonMap);
-  }
-
-  /**
-   * Adds '_serialized_name' suffix to all property keys.
-   *
-   * @param jsonMap Map<String, Object> representation of the JSON response
-   *
-   * @return Map<String, Object> representing the JSON response with modified keys
-   */
-  public static Map<String, Object> addPropertySuffix(Map<String, Object> jsonMap) {
-    Map<String, Object> safeMap = new Map<String, Object>();
-
+  public static Map<String, Object> replaceKeyNamesInMap(Map<String, Object> jsonMap, Map<String, String> nameMapping) {
     for (String key : jsonMap.keySet()) {
-      String safeKey = key + '_serialized_name';
-      Object jsonValue = jsonMap.get(key);
-      if (jsonValue instanceof Map<String, Object>) {
-        safeMap.put(safeKey, addPropertySuffix((Map<String, Object>) jsonValue));
-      } else if (jsonValue instanceof List<Object>) {
-        safeMap.put(safeKey, addPropertySuffixList((List<Object>) jsonValue));
-      } else {
-        safeMap.put(safeKey, jsonValue);
+      if (nameMapping.containsKey(key)) {
+        String replacementKey = nameMapping.get(key);
+        jsonMap.put(replacementKey, jsonMap.get(key));
+        jsonMap.remove(key);
       }
     }
-    return safeMap;
+    return jsonMap;
   }
 
-  private static List<Object> addPropertySuffixList(List<Object> jsonList) {
-    List<Object> safeList = new List<Object>();
-    for (Object jsonValue : jsonList) {
-      if (jsonValue instanceof Map<String, Object>) {
-        safeList.add(addPropertySuffix((Map<String, Object>) jsonValue));
-      } else {
-        safeList.add(jsonValue);
-      }
-    }
-    return safeList;
+  /**
+   * Replaces top-level keys in a JSON string based on the provided mapping.
+   *
+   * @param jsonString the string on which key substitution will be performed
+   * @param nameMapping Map containing names to replace and the value to use instead
+   *
+   * @return the string with keys replaced
+   */
+  public static String replaceKeyNamesInString(String jsonString, Map<String, String> nameMapping) {
+    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+    jsonMap = replaceKeyNamesInMap(jsonMap, nameMapping);
+    return JSON.serialize(jsonMap);
   }
 
   /**
@@ -94,13 +45,13 @@ public class IBMWatsonJSONUtil {
    *
    * @return Map representing the JSON request with moved additional properties
    */
-  private static Map<String, Object> raiseAdditionalProperties(Map<String, Object> jsonMap) {
-    Map<String, Object> additionalProperties = (Map<String, Object>) jsonMap.get('additional_properties');
+  public static Map<String, Object> raiseAdditionalProperties(Map<String, Object> jsonMap) {
+    Map<String, Object> additionalProperties = (Map<String, Object>) jsonMap.get('additionalProperties');
     if (additionalProperties != null) {
       for (String key : additionalProperties.keySet()) {
         jsonMap.put(key, additionalProperties.get(key));
       }
-      jsonMap.remove('additional_properties');
+      jsonMap.remove('additionalProperties');
     }
 
     for (String key : jsonMap.keySet()) {
@@ -109,8 +60,31 @@ public class IBMWatsonJSONUtil {
         Map<String, Object> raisedSection = raiseAdditionalProperties((Map<String, Object>) jsonSection);
         jsonMap.put(key, raisedSection);
       }
+      if (jsonSection instanceof List<Object>) {
+        List<Object> raisedSection = raiseAdditionalPropertiesList((List<Object>) jsonSection);
+        jsonMap.put(key, raisedSection);
+      }
     }
 
     return jsonMap;
+  }
+
+  /**
+   * Helper function for the public method to specifically handle JSON arrays.
+   *
+   * @param jsonList List representation of the current JSON array
+   *
+   * @return List with any nested additional properties brought up a level
+   */
+  private static List<Object> raiseAdditionalPropertiesList(List<Object> jsonList) {
+    List<Object> modifiedList = new List<Object>();
+    for (Object val : jsonList) {
+      if (val instanceof Map<String, Object>) {
+        modifiedList.add(raiseAdditionalProperties((Map<String, Object>) val));
+      } else {
+        modifiedList.add(val);
+      }
+    }
+    return modifiedList;
   }
 }

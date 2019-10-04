@@ -1,23 +1,14 @@
 public abstract class IBMWatsonService {
-  private String apiKey;
-  private String defaultEndPoint;
-  private String endPoint;
+  private String defaultServiceURL;
+  private String serviceURL;
   private String userAgent;
   private String name;
   private IBMWatsonAuthenticator authenticator;
   private Map<String, String> defaultHeaders = null;
 
-  private static final String CALLOUT = 'callout:';
-  private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk-{0} {1}';
-  private static final String SDK_VERSION = '4.4.4';
-  private static final String APIKEY_AS_USERNAME = 'apikey';
-  private static final String ICP_PREFIX = 'icp-';
-  private static final String AUTH_HEADER_DEPRECATION_MESSAGE = 'Authenticating with the X-Watson-Authorization-Token'
-    + 'header is deprecated. The token continues to work with Cloud Foundry services, but is not supported for '
-    + 'services that use Identity and Access Management (IAM) authentication. For details see the IAM '
-    + 'authentication section in the README.';
-
+  private static final String SDK_VERSION = '4.4.5';
+  private static final String ERRORMSG_NO_AUTHENTICATOR = 'Authentication information was not properly configured.';
 
   // Regular expression for JSON-related mimetypes.
   private static final Pattern JSON_MIME_PATTERN =
@@ -30,36 +21,23 @@ public abstract class IBMWatsonService {
    *
    * @param name the service name
    * @param version the service version
+   * @param authenticator the IBMWatsonAuthenticator implementation to use
    */
-  protected IBMWatsonService(String name, String version) {
+  protected IBMWatsonService(String name, String version, IBMWatsonAuthenticator authenticator) {
     this.name = name;
     this.userAgent = buildUserAgent(); // initialize the `User-Agent` value
 
-    IBMWatsonCredentialUtils.ServiceCredentials fileCredentials = IBMWatsonCredentialUtils.loadCredentialFileValues(name);
-    if (!fileCredentials.isEmpty()) {
-      setCredentialFields(fileCredentials);
-    } else {
-      String namedCredentialsKey = String.format('watson_{0}_{1}', new String[]{ name, version });
-      setEndPoint(CALLOUT + namedCredentialsKey);
+    if (authenticator == null) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException(ERRORMSG_NO_AUTHENTICATOR);
     }
-  }
+    this.authenticator = authenticator;
 
-  private void setCredentialFields(IBMWatsonCredentialUtils.ServiceCredentials serviceCredentials) {
-    if (serviceCredentials.getUrl() != null) {
-      setEndPoint(serviceCredentials.getUrl());
+    // use service URL from credential file if it exists
+    Map<String, String> props = IBMWatsonCredentialUtils.getFileCredentialsAsMap(name);
+    String url = props.get(IBMWatsonCredentialUtils.PROP_NAME_URL);
+    if (String.isNotBlank(url)) {
+      setServiceURL(url);
     }
-
-    if ((serviceCredentials.getUsername() != null) && (serviceCredentials.getPassword() != null)) {
-      setUsernameAndPassword(serviceCredentials.getUsername(), serviceCredentials.getPassword());
-    }
-
-    if (serviceCredentials.getIamApiKey() != null) {
-      IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-        .apiKey(serviceCredentials.getIamApiKey())
-        .url(serviceCredentials.getIamUrl())
-        .build();
-      setAuthenticator(iamOptions);
-   }
   }
 
   /**
@@ -82,6 +60,56 @@ public abstract class IBMWatsonService {
     return mimeType != null && JSON_PATCH_MIME_PATTERN.matcher(mimeType).matches();
   }
 
+  /**
+   * Sets the service URL.
+   *
+   * @param serviceURL the new service URL. Will be ignored if empty or null
+   */
+  public void setServiceURL(String serviceURL) {
+    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(serviceURL)) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The URL shouldn\'t start or end with curly brackets or '
+          + 'quotes. Please remove any surrounding {, }, or " characters.');
+    }
+
+    if (String.isNotBlank(serviceURL)) {
+      String newServiceURL = serviceURL.endsWith('/') ? serviceURL.removeEnd('/') : serviceURL;
+      if (this.serviceURL == null) {
+        this.defaultServiceURL = newServiceURL;
+      }
+      this.serviceURL = newServiceURL;
+    } else {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('serviceURL cannot be null or empty');
+    }
+  }
+
+  /**
+   * Gets the service URL.
+   *
+   *
+   * @return the service URL
+   */
+  public String getServiceURL() {
+    return this.serviceURL;
+  }
+
+  /**
+   * Returns the IBMWatsonAuthenticator instance currently set on this IBMWatsonService instance.
+   *
+   * @return the IBMWatsonAuthenticator instance
+   */
+  public IBMWatsonAuthenticator getAuthenticator() {
+    return this.authenticator;
+  }
+
+  /**
+   * Set the default headers to be used on every HTTP request.
+   *
+   * @param headers name value pairs of headers
+   */
+  public void setDefaultHeaders(Map<String, String> headers) {
+    defaultHeaders = headers;
+  }
+
   private static String buildUserAgent() {
     ApexClass ac = [Select ApiVersion From ApexClass Where Name = 'IBMWatsonService' LIMIT 1];
     return String.format(USER_AGENT_FORMAT, new List<String>{SDK_VERSION, String.valueOf(ac.ApiVersion)});
@@ -95,8 +123,13 @@ public abstract class IBMWatsonService {
       // this service is expecting a file response
       if (targetType == IBMWatsonFile.class) {
         String contentDisposition = response.getHeader(IBMWatsonHttpHeaders.CONTENT_DISPOSITION);
-        String filename = contentDisposition.substringAfter('filename=');
-        filename = (String.isNotBlank(filename)) ? filename.replaceAll('"', '') : 'result';
+        String filename = 'result';
+        if (contentDisposition != null) {
+          filename = contentDisposition.substringAfter('filename=');
+          if (String.isNotBlank(filename)) {
+            filename = filename.replaceAll('"', '');
+          }
+        }
         String contentType = response.getHeader(IBMWatsonHttpHeaders.CONTENT_TYPE);
         IBMWatsonFile resFile = new IBMWatsonFile.FileBuilder()
           .name(filename)
@@ -113,14 +146,13 @@ public abstract class IBMWatsonService {
       else{
         String responseText = response.getBody();
         if (String.isNotBlank(responseText)) {
-          Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseText);
-          Map<String, Object> safeJsonMap = IBMWatsonJSONUtil.prepareResponse(jsonMap);
           Object targetObject = targetType.newInstance();
-          String jsonString = JSON.serialize(safeJsonMap);
+          Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseText);
+          String jsonString = JSON.serialize(jsonMap);
           if (targetObject instanceof IBMWatsonDynamicResponseModel) {
-            return (IBMWatsonDynamicResponseModel) addResponseHeaders(response, ((IBMWatsonResponseModel) targetObject).deserialize(jsonString, safeJsonMap, targetType));
+            return (IBMWatsonDynamicResponseModel) addResponseHeaders(response, ((IBMWatsonResponseModel) targetObject).deserialize(jsonString, jsonMap, targetType));
           } else {
-            return (IBMWatsonResponseModel) addResponseHeaders(response, ((IBMWatsonResponseModel) targetObject).deserialize(jsonString, safeJsonMap, targetType));
+            return (IBMWatsonResponseModel) addResponseHeaders(response, ((IBMWatsonResponseModel) targetObject).deserialize(jsonString, jsonMap, targetType));
           }
         }
       }
@@ -133,12 +165,12 @@ public abstract class IBMWatsonService {
    * Adds headers onto the model returned from the service.
    */
   private Object addResponseHeaders(IBMWatsonResponse response, Object responseObject) {
-  	IBMWatsonResponseModel testModel = (IBMWatsonResponseModel) responseObject;
+  	IBMWatsonResponseModel responseModel = (IBMWatsonResponseModel) responseObject;
     String[] headerKeys = response.getHeaderKeys();
     for (String key : headerKeys) {
-      testModel.addHeader(key, response.getHeader(key));
+      responseModel.addHeader(key, response.getHeader(key));
     }
-    return testModel;
+    return responseModel;
   }
 
   /**
@@ -152,7 +184,7 @@ public abstract class IBMWatsonService {
     IBMWatsonRequest.Builder builder = request.newBuilder();
     setDefaultHeaders(builder);
 
-    if (String.isNotBlank(endpoint) && !endPoint.startsWith(CALLOUT)) {
+    if (String.isNotBlank(this.serviceURL)) {
       setAuthentication(builder);
     }
 
@@ -175,7 +207,7 @@ public abstract class IBMWatsonService {
       throw new IBMWatsonServiceExceptions.BadRequestException(error != null ? error : 'Bad Request', response);
 
     if (statusCode == IBMWatsonHttpStatus.UNAUTHORIZED) // HTTP 401
-      throw new IBMWatsonServiceExceptions.UnauthorizedException('Unauthorized: Access is denied due to invalid credentials. Tip: Check the service endpoint.', response);
+      throw new IBMWatsonServiceExceptions.UnauthorizedException('Unauthorized: Access is denied due to invalid credentials. Tip: Check the service URL.', response);
 
     if (statusCode == IBMWatsonHttpStatus.FORBIDDEN) // HTTP 403
       throw new IBMWatsonServiceExceptions.ForbiddenException(error != null ? error : 'Forbidden: Service refuse the request', response);
@@ -226,15 +258,6 @@ public abstract class IBMWatsonService {
   }
 
   /**
-   * Set the default headers to be used on every HTTP request.
-   *
-   * @param headers name value pairs of headers
-   */
-  public void setDefaultHeaders(Map<String, String> headers) {
-    defaultHeaders = headers;
-  }
-
-  /**
    * Sets the authentication.
    *
    * @param builder the new authentication
@@ -243,104 +266,7 @@ public abstract class IBMWatsonService {
     if (this.authenticator != null) {
       this.authenticator.authenticate(builder);
     } else {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Authentication information was not properly configured.');
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException(ERRORMSG_NO_AUTHENTICATOR);
     }
-  }
-
-  /**
-   * Sets the username and password.
-   *
-   * @param username the username
-   * @param password the password
-   */
-  public void setUsernameAndPassword(final String username, final String password) {
-    // we'll perform the token exchange for users UNLESS they're on ICP
-    if (username.equals(APIKEY_AS_USERNAME) && !password.startsWith(ICP_PREFIX)) {
-      IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-        .apiKey(password)
-        .build();
-      setAuthenticator(iamOptions);
-    } else {
-      this.apiKey = IBMWatsonCredentialUtils.toBasicAuth(username, password);
-      IBMWatsonBasicAuthConfig basicAuthConfig = new IBMWatsonBasicAuthConfig.Builder()
-        .username(username)
-        .password(password)
-        .build();
-      setAuthenticator(basicAuthConfig);
-    }
-  }
-
-  /**
-   * Sets the end point.
-   *
-   * @param endPoint the new end point. Will be ignored if empty or null
-   */
-  public void setEndPoint(String endPointParam) {
-    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(endPointParam)) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The URL shouldn\'t start or end with curly brackets or '
-          + 'quotes. Please remove any surrounding {, }, or " characters.');
-    }
-
-    if (String.isNotBlank(endPointParam)) {
-      String newEndPoint = endPointParam.endsWith('/') ? endPointParam.removeEnd('/') : endPointParam;
-      if (this.endPoint == null) {
-        this.defaultEndPoint = newEndPoint;
-      }
-      this.endPoint = newEndPoint;
-    } else {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('endPointParam cannot be null or empty');
-    }
-  }
-
-  /**
-   * Sets IAM information.
-   *
-   * Be aware that if you pass in an access token using this method, you accept responsibility for managing the access
-   * token yourself. You must set a new access token before this one expires. Failing to do so will result in
-   * authentication errors after this token expires.
-   *
-   * @param iamOptions object containing values to be used for authenticating with IAM
-   */
-  public void setIamCredentials(IBMWatsonIAMOptions iamOptions) {
-    setAuthenticator(iamOptions);
-  }
-
-  public void setAuthenticator(IBMWatsonAuthenticatorConfig authConfig) {
-    try {
-      this.authenticator = IBMWatsonAuthenticatorFactory.getAuthenticator(authConfig);
-    } catch (Exception e) {
-      throw new IBMWatsonServiceExceptions.ResponseException(e.getMessage());
-    }
-  }
-
-  /**
-   * Gets the API endpoint.
-   *
-   *
-   * @return the API endpoint
-   */
-  public String getEndPoint() {
-    return endPoint;
-  }
-
-  /**
-   * Gets the base64 username:password
-   *
-   *
-   * @return the apiKey
-   * @deprecated
-   */
-  protected String getApiKey() {
-    return apiKey;
-  }
-
-  /**
-   * Checks the status of the tokenManager.
-   *
-   * @return true if the tokenManager has been set
-   */
-  public Boolean isTokenManagerSet() {
-    return this.authenticator != null
-      && this.authenticator.authenticationType().equals(IBMWatsonCredentialUtils.AUTHTYPE_IAM);
   }
 }

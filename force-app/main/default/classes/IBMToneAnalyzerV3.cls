@@ -9,11 +9,12 @@
  * `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/tone-analyzer.html">Tone Analyzer</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/tone-analyzer/">Tone Analyzer</a>
  */
 public class IBMToneAnalyzerV3 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/tone-analyzer/api';
+  private static final String SERVICE_NAME = 'tone_analyzer';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/tone-analyzer/api';
 
   private String versionDate;
 
@@ -21,41 +22,30 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * Instantiates a new `IBMToneAnalyzerV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
+   *          calls from failing when the service introduces breaking changes.
    */
-  public IBMToneAnalyzerV3(String versionDate) {
-    super('tone_analyzer', 'v3');
+   public IBMToneAnalyzerV3(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMToneAnalyzerV3`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
+   */
+  public IBMToneAnalyzerV3(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super(SERVICE_NAME, 'v3', authenticator);
+
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(SERVICE_URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMToneAnalyzerV3` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMToneAnalyzerV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMToneAnalyzerV3(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMToneAnalyzerV3` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMToneAnalyzerV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**
@@ -83,7 +73,8 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    */
   public IBMToneAnalyzerV3Models.ToneAnalysis tone(IBMToneAnalyzerV3Models.ToneOptions toneOptions) {
     IBMWatsonValidator.notNull(toneOptions, 'toneOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/tone');
     builder.addHeader('Accept', 'application/json');
     if (toneOptions.contentType() != null) {
       builder.addHeader('Content-Type', toneOptions.contentType());
@@ -134,7 +125,8 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    */
   public IBMToneAnalyzerV3Models.UtteranceAnalyses toneChat(IBMToneAnalyzerV3Models.ToneChatOptions toneChatOptions) {
     IBMWatsonValidator.notNull(toneChatOptions, 'toneChatOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone_chat');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/tone_chat');
     builder.addHeader('Accept', 'application/json');
     if (toneChatOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', toneChatOptions.contentLanguage());
@@ -151,8 +143,12 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('utterances', toneChatOptions.utterances());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    List<Object> utterancesList = new List<Object>();
+    for (IBMToneAnalyzerV3Models.Utterance utterancesItem : toneChatOptions.utterances()) {
+      utterancesList.add(utterancesItem.replacePropertyNames());
+    }
+    contentJson.put('utterances', utterancesList);
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMToneAnalyzerV3Models.UtteranceAnalyses) createServiceCall(builder.build(), IBMToneAnalyzerV3Models.UtteranceAnalyses.class);
   }

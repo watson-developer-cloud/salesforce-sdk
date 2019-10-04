@@ -16,7 +16,7 @@ public class IBMWatsonClient {
     Http http = new Http();
     HTTPResponse httpResponse = http.send(request);
 
-    // Creates an IBMWatsonResponse based on the endpoint url and HttpResponse
+    // Creates an IBMWatsonResponse based on the service URL and HttpResponse
     return new IBMWatsonResponse(request.getEndpoint(), httpResponse);
   }
 
@@ -31,11 +31,18 @@ public class IBMWatsonClient {
     // Set request body
     if (request.getMethod().equals('POST') || request.getMethod().equals('PUT')) {
       if (request.getBody() instanceof IBMWatsonMultipartBody) {
-        Blob multipartBody = ((IBMWatsonMultipartBody)request.getBody()).multipartBody();
-        httpRequest.setBodyAsBlob(multipartBody);
-        httpRequest.setHeader('Content-Length', String.valueof(((IBMWatsonMultipartBody)request.getBody()).contentLength()));
+        IBMWatsonMultipartBody multipartBody = (IBMWatsonMultipartBody) request.getBody();
+        if (multipartBody.form64() != null) {
+          String form64 = multipartBody.form64();
+          httpRequest.setBodyAsBlob(EncodingUtil.base64Decode(form64));
+          httpRequest.setHeader('Content-Length', String.valueof(form64.length()));
+        } else {
+          Blob multipartBodyBlob = multipartBody.multipartBody();
+          httpRequest.setBodyAsBlob(multipartBodyBlob);
+          httpRequest.setHeader('Content-Length', String.valueof(multipartBody.contentLength()));
+        }
       } else if (request.getBody().contentType.toString().contains(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-        httpRequest.setBody(IBMWatsonJSONUtil.serialize(request.getBody().content));
+        httpRequest.setBody(request.getBody().content);
       } else {
         if (request.getBody().content != null) {
           httpRequest.setBody(request.getBody().content);

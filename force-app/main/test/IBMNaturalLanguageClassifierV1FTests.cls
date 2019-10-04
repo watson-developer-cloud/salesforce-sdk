@@ -2,20 +2,23 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   // Make sure the named credentials below is defined
   private static String URL = 'https://gateway.watsonplatform.net/natural-language-classifier/api';
   private static String NAMED_CREDENTIALS = 'callout:watson_natural_language_classifier_v1';
-  private static String VERSION_2017_05_26 = '2017-05-26';
   private static final String CLASSIFIER_TEXT_1 = 'How hot will it be today?';
   private static final String CLASSIFIER_TEXT_2 = 'Is it hot outside?';
 
-  public static void runAllTests(String username, String password) {
-    String classifierId = testCreateClassifier(username, password).getClassifierId();
-    testListClassifiers(username, password);
-    String classifierStatus=testGetClassifier(classifierId, username, password).getStatus();
+  public static void runAllTests(String apiKey) {
+    IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(apiKey);
+    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1(authenticator);
+    service.setServiceURL(URL);
+
+    String classifierId = testCreateClassifier(service).getClassifierId();
+    testListClassifiers(service);
+    String classifierStatus=testGetClassifier(service, classifierId).getStatus();
 
     if (classifierStatus.equalsIgnoreCase('ready')) {
-      testClassify(classifierId, username, password);
-      textClassifyCollection(classifierId, username, password);
+      testClassify(service, classifierId);
+      textClassifyCollection(service, classifierId);
     }
-    testDeleteClassifier(classifierId, username, password);
+    testDeleteClassifier(service, classifierId);
   }
   private static String CSVFormat(List<String> strRows) {
     String CSVBody = '';
@@ -28,14 +31,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   /**
    *  Test classify.
    */
-  public static IBMNaturalLanguageClassifierV1Models.Classification testClassify(String classifierId, String username, String password) {
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-
-    if (username != null && password != null) {
-      service.setEndPoint(URL);
-      service.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMNaturalLanguageClassifierV1Models.Classification testClassify(IBMNaturalLanguageClassifierV1 service, String classifierId) {
     IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions =
       new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
       .classifierId(classifierId)
@@ -49,18 +45,13 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   /**
    * Test classifying multiple phrases at once.
    */
-  public static IBMNaturalLanguageClassifierV1Models.ClassificationCollection textClassifyCollection(String classifierId, String username, String password) {
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-
-    if (username != null && password != null) {
-      service.setEndPoint(URL);
-      service.setUsernameAndPassword(username, password);
-    }
-
-    IBMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
-    input1.setText(CLASSIFIER_TEXT_1);
-    IBMNaturalLanguageClassifierV1Models.ClassifyInput input2 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
-    input2.setText(CLASSIFIER_TEXT_2);
+  public static IBMNaturalLanguageClassifierV1Models.ClassificationCollection textClassifyCollection(IBMNaturalLanguageClassifierV1 service, String classifierId) {
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
+      .text(CLASSIFIER_TEXT_1)
+      .build();
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput input2 = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
+      .text(CLASSIFIER_TEXT_2)
+      .build();
     List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> inputCollection = new List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> {
       input1,
       input2
@@ -77,24 +68,17 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
    *  Test create a classifier
    *
    */
-  public static IBMNaturalLanguageClassifierV1Models.Classifier testCreateClassifier(String username, String password) {
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    if (username != null && password != null) {
-      service.setEndPoint(URL);
-      service.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMNaturalLanguageClassifierV1Models.Classifier testCreateClassifier(IBMNaturalLanguageClassifierV1 service) {
     //
     //  Metadata
     //
-    Attachment TrainingMetadata = new Attachment(Body = Blob.valueOf('{"language":"en","name":"metadata.json"}'),
+    Attachment trainingMetadataAttachment = new Attachment(Body = Blob.valueOf('{"language":"en","name":"metadata.json"}'),
       Name='metadata.json',
       Description='metadata for the training file',
       ContentType='application/json');
-    IBMWatsonFile training_metadata = new IBMWatsonFile.FileBuilder()
-      .attachment(TrainingMetadata)
+    IBMWatsonFile trainingMetadata = new IBMWatsonFile.FileBuilder()
+      .attachment(trainingMetadataAttachment)
       .build();
-    String training_metadata_filename = 'metadata.json';
 
     //
     //  Training data
@@ -121,24 +105,21 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     String TrainingDataContentCSVStr = CSVFormat(TrainingDataContentList);
     blob TrainingDataContentCSVBlob = Blob.valueOf(TrainingDataContentCSVStr);
 
-    Attachment TrainingData = new Attachment(Body = TrainingDataContentCSVBlob,
+    Attachment trainingDataAttachment = new Attachment(Body = TrainingDataContentCSVBlob,
       Name='weather_data_train.csv',
       Description='Each record in this sample includes the text input and one class',
       ContentType='text/csv');
-    IBMWatsonFile training_data = new IBMWatsonFile.FileBuilder()
-      .attachment(TrainingData)
+    IBMWatsonFile trainingData = new IBMWatsonFile.FileBuilder()
+      .attachment(trainingDataAttachment)
       .build();
-    String training_data_filename = 'weather_data_train.csv';
 
     //
     //  Construct options
     //
     IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
-      .metadata(training_metadata)
-      .trainingMetadataFilename(training_metadata_filename)
-      .trainingData(training_data)
-      .trainingDataFilename(training_data_filename)
+      .trainingMetadata(trainingMetadata)
+      .trainingData(trainingData)
       .build();
 
     //
@@ -153,14 +134,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
    *  Test delete a classifier
    *
    */
-  public static void testDeleteClassifier(String classifierId, String username, String password) {
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-
-    if (username != null && password != null) {
-      service.setEndPoint(URL);
-      service.setUsernameAndPassword(username, password);
-    }
-
+  public static void testDeleteClassifier(IBMNaturalLanguageClassifierV1 service, String classifierId) {
     IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder(classifierId)
       .build();
@@ -171,14 +145,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   /**
    *  Test retrieve information about an existing classifier
    */
-  public static IBMNaturalLanguageClassifierV1Models.Classifier testGetClassifier(String classifierId, String username, String password) {
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-
-    if (username != null && password != null) {
-      service.setEndPoint(URL);
-      service.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMNaturalLanguageClassifierV1Models.Classifier testGetClassifier(IBMNaturalLanguageClassifierV1 service, String classifierId) {
     IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder(ClassifierId)
       .build();
@@ -189,14 +156,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
    *  Test retrieve information about all classifiers
    *
    */
-  public static IBMNaturalLanguageClassifierV1Models.ClassifierList testListClassifiers(String username, String password) {
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-
-    if (username != null && password != null) {
-      service.setEndPoint(URL);
-      service.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMNaturalLanguageClassifierV1Models.ClassifierList testListClassifiers(IBMNaturalLanguageClassifierV1 service) {
     IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions =
       new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
       .build();

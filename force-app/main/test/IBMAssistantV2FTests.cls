@@ -1,11 +1,11 @@
 public with sharing class IBMAssistantV2FTests {
   private static String URL = 'https://gateway.watsonplatform.net/assistant/api';
-  private static String VERSION = '2018-09-20';
+  private static String VERSION = '2019-02-28';
 
-  public static void runAllTests(String username, String password, String assistantId) {
-    IBMAssistantV2 service = new IBMAssistantV2(VERSION);
-    service.setEndPoint(URL);
-    service.setUsernameAndPassword(username, password);
+  public static void runAllTests(String apiKey, String assistantId) {
+    IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(apiKey);
+    IBMAssistantV2 service = new IBMAssistantV2(VERSION, authenticator);
+    service.setServiceURL(URL);
 
     IBMAssistantV2Models.SessionResponse sessionResponse = testCreateSession(service, assistantId);
     String sessionId = sessionResponse.getSessionId();
@@ -32,11 +32,13 @@ public with sharing class IBMAssistantV2FTests {
     IBMAssistantV2Models.MessageContext context = new IBMAssistantV2Models.MessageContext();
 
     for (String message : messages) {
-      IBMAssistantV2Models.MessageInputOptions inputOptions = new IBMAssistantV2Models.MessageInputOptions();
-      inputOptions.setDebug(true);
+      IBMAssistantV2Models.MessageInputOptions inputOptions = new IBMAssistantV2Models.MessageInputOptionsBuilder()
+        .debug(true)
+        .build();
       IBMAssistantV2Models.MessageInput input = new IBMAssistantV2Models.MessageInputBuilder()
           .text(message)
           .options(inputOptions)
+          .messageType('text')
           .build();
       IBMAssistantV2Models.MessageOptions messageOptions = new IBMAssistantV2Models.MessageOptionsBuilder()
           .assistantId(assistantId)

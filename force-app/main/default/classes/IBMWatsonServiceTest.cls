@@ -6,7 +6,7 @@ private class IBMWatsonServiceTest {
    */
   class TestService extends IBMWatsonService {
     public TestService() {
-      super('service', 'v1');
+      super('service', 'v1', new IBMWatsonNoAuthAuthenticator());
     }
 
     public TestClass testingMethod() {
@@ -25,7 +25,7 @@ private class IBMWatsonServiceTest {
    * Simple response model to use for testing purposes.
    */
   class TestClass extends IBMWatsonResponseModel {
-    public String test_key_serialized_name;
+    public String test_key;
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
@@ -389,24 +389,6 @@ private class IBMWatsonServiceTest {
     System.assert(testClass.getHeaders() != null);
     System.assert(testClass.getHeaders().size() == 1);
     System.assert(testClass.getHeaders().get('Test-Name').equals('test_val'));
-    Test.stopTest();
-  }
-
-  static testMethod void testAuthenticationWithApiKeyAsUsername() {
-    Test.startTest();
-    String testApiKey = '12345';
-    TestService testService = new TestService();
-    testService.setUsernameAndPassword('apikey', testApiKey);
-    System.assert(testService.isTokenManagerSet() == true);
-    Test.stopTest();
-  }
-
-  static testMethod void testAuthenticationWithIcp() {
-    Test.startTest();
-    String testApiKey = 'icp-12345';
-    TestService testService = new TestService();
-    testService.setUsernameAndPassword('apikey', testApiKey);
-    System.assert(testService.isTokenManagerSet() == false);
     Test.stopTest();
   }
 

@@ -5,11 +5,12 @@
  * their own language, and more.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/language-translator.html">Language Translator</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/language-translator/">Language Translator</a>
  */
 public class IBMLanguageTranslatorV3 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/language-translator/api';
+  private static final String SERVICE_NAME = 'language_translator';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/language-translator/api';
 
   private String versionDate;
 
@@ -17,41 +18,30 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    * Instantiates a new `IBMLanguageTranslatorV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
+   *          calls from failing when the service introduces breaking changes.
    */
-  public IBMLanguageTranslatorV3(String versionDate) {
-    super('language_translator', 'v3');
+   public IBMLanguageTranslatorV3(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMLanguageTranslatorV3`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
+   */
+  public IBMLanguageTranslatorV3(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super(SERVICE_NAME, 'v3', authenticator);
+
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(SERVICE_URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMLanguageTranslatorV3` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMLanguageTranslatorV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMLanguageTranslatorV3(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMLanguageTranslatorV3` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMLanguageTranslatorV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**
@@ -64,7 +54,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV3Models.TranslationResult translate(IBMLanguageTranslatorV3Models.TranslateOptions translateOptions) {
     IBMWatsonValidator.notNull(translateOptions, 'translateOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/translate');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/translate');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=translate');
     Map<String, String> requestHeaders = (translateOptions != null) ? translateOptions.requestHeaders() : null;
@@ -85,7 +76,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     if (translateOptions.target() != null) {
       contentJson.put('target', translateOptions.target());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMLanguageTranslatorV3Models.TranslationResult) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationResult.class);
   }
@@ -100,7 +91,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    * @return the {@link IBMLanguageTranslatorV3Models.IdentifiableLanguages} with the response
    */
   public IBMLanguageTranslatorV3Models.IdentifiableLanguages listIdentifiableLanguages(IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/identifiable_languages');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v3/identifiable_languages');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=listIdentifiableLanguages');
     Map<String, String> requestHeaders = (listIdentifiableLanguagesOptions != null) ? listIdentifiableLanguagesOptions.requestHeaders() : null;
@@ -124,7 +116,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV3Models.IdentifiedLanguages identify(IBMLanguageTranslatorV3Models.IdentifyOptions identifyOptions) {
     IBMWatsonValidator.notNull(identifyOptions, 'identifyOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/identify');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/identify');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=identify');
     Map<String, String> requestHeaders = (identifyOptions != null) ? identifyOptions.requestHeaders() : null;
@@ -148,7 +141,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    * @return the {@link IBMLanguageTranslatorV3Models.TranslationModels} with the response
    */
   public IBMLanguageTranslatorV3Models.TranslationModels listModels(IBMLanguageTranslatorV3Models.ListModelsOptions listModelsOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/models');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v3/models');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=listModels');
     Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
@@ -164,8 +158,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     if (listModelsOptions != null && listModelsOptions.target() != null) {
       builder.query('target', listModelsOptions.target());
     }
-    if (listModelsOptions != null && listModelsOptions.defaultModels() != null) {
-      builder.query('default', String.valueOf(listModelsOptions.defaultModels()));
+    if (listModelsOptions != null && listModelsOptions.xDefault() != null) {
+      builder.query('default', String.valueOf(listModelsOptions.xDefault()));
     }
 
     return (IBMLanguageTranslatorV3Models.TranslationModels) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationModels.class);
@@ -185,7 +179,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    * files is limited to <b>250 MB</b>. To successfully train with a parallel corpus you must have at least <b>5,000
    * parallel sentences</b> in your corpus.
    *
-   * You can have a <b>maxium of 10 custom models per language pair</b>.
+   * You can have a <b>maximum of 10 custom models per language pair</b>.
    *
    * @param createModelOptions the {@link IBMLanguageTranslatorV3Models.CreateModelOptions} containing the options for the call
    * @return the {@link IBMLanguageTranslatorV3Models.TranslationModel} with the response
@@ -193,7 +187,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   public IBMLanguageTranslatorV3Models.TranslationModel createModel(IBMLanguageTranslatorV3Models.CreateModelOptions createModelOptions) {
     IBMWatsonValidator.notNull(createModelOptions, 'createModelOptions cannot be null');
     IBMWatsonValidator.isTrue((createModelOptions.forcedGlossary() != null) || (createModelOptions.parallelCorpus() != null), 'At least one of forced_glossary or parallel_corpus must be supplied.');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/models');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/models');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=createModel');
     Map<String, String> requestHeaders = (createModelOptions != null) ? createModelOptions.requestHeaders() : null;
@@ -213,11 +208,11 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (createModelOptions.forcedGlossary() != null) {
       IBMWatsonRequestBody forcedGlossaryBody = IBMWatsonRequestBody.create(createModelOptions.forcedGlossary(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('forced_glossary', null, forcedGlossaryBody);
+      multipartBuilder.addFormDataPart('forced_glossary', 'filename', forcedGlossaryBody);
     }
     if (createModelOptions.parallelCorpus() != null) {
       IBMWatsonRequestBody parallelCorpusBody = IBMWatsonRequestBody.create(createModelOptions.parallelCorpus(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('parallel_corpus', null, parallelCorpusBody);
+      multipartBuilder.addFormDataPart('parallel_corpus', 'filename', parallelCorpusBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
@@ -235,7 +230,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public void deleteModel(IBMLanguageTranslatorV3Models.DeleteModelOptions deleteModelOptions) {
     IBMWatsonValidator.notNull(deleteModelOptions, 'deleteModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v3/models/{0}', new String[]{ deleteModelOptions.modelId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v3/models/{0}', new String[]{ deleteModelOptions.modelId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=deleteModel');
     Map<String, String> requestHeaders = (deleteModelOptions != null) ? deleteModelOptions.requestHeaders() : null;
@@ -260,7 +256,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV3Models.TranslationModel getModel(IBMLanguageTranslatorV3Models.GetModelOptions getModelOptions) {
     IBMWatsonValidator.notNull(getModelOptions, 'getModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/models/{0}', new String[]{ getModelOptions.modelId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v3/models/{0}', new String[]{ getModelOptions.modelId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=getModel');
     Map<String, String> requestHeaders = (getModelOptions != null) ? getModelOptions.requestHeaders() : null;
@@ -283,7 +280,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    * @return the {@link IBMLanguageTranslatorV3Models.DocumentList} with the response
    */
   public IBMLanguageTranslatorV3Models.DocumentList listDocuments(IBMLanguageTranslatorV3Models.ListDocumentsOptions listDocumentsOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/documents');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v3/documents');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=listDocuments');
     Map<String, String> requestHeaders = (listDocumentsOptions != null) ? listDocumentsOptions.requestHeaders() : null;
@@ -308,7 +306,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV3Models.DocumentStatus translateDocument(IBMLanguageTranslatorV3Models.TranslateDocumentOptions translateDocumentOptions) {
     IBMWatsonValidator.notNull(translateDocumentOptions, 'translateDocumentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/documents');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/documents');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=translateDocument');
     Map<String, String> requestHeaders = (translateDocumentOptions != null) ? translateDocumentOptions.requestHeaders() : null;
@@ -350,7 +349,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV3Models.DocumentStatus getDocumentStatus(IBMLanguageTranslatorV3Models.GetDocumentStatusOptions getDocumentStatusOptions) {
     IBMWatsonValidator.notNull(getDocumentStatusOptions, 'getDocumentStatusOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/documents/{0}', new String[]{ getDocumentStatusOptions.documentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v3/documents/{0}', new String[]{ getDocumentStatusOptions.documentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=getDocumentStatus');
     Map<String, String> requestHeaders = (getDocumentStatusOptions != null) ? getDocumentStatusOptions.requestHeaders() : null;
@@ -374,7 +374,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public void deleteDocument(IBMLanguageTranslatorV3Models.DeleteDocumentOptions deleteDocumentOptions) {
     IBMWatsonValidator.notNull(deleteDocumentOptions, 'deleteDocumentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v3/documents/{0}', new String[]{ deleteDocumentOptions.documentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v3/documents/{0}', new String[]{ deleteDocumentOptions.documentId() }));
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=deleteDocument');
     Map<String, String> requestHeaders = (deleteDocumentOptions != null) ? deleteDocumentOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -397,7 +398,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public IBMWatsonFile getTranslatedDocument(IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptions getTranslatedDocumentOptions) {
     IBMWatsonValidator.notNull(getTranslatedDocumentOptions, 'getTranslatedDocumentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/documents/{0}/translated_document', new String[]{ getTranslatedDocumentOptions.documentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v3/documents/{0}/translated_document', new String[]{ getTranslatedDocumentOptions.documentId() }));
     if (getTranslatedDocumentOptions.accept() != null) {
       builder.addHeader('Accept', getTranslatedDocumentOptions.accept());
     }

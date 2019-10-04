@@ -4,7 +4,6 @@ private class IBMCompareComplyV1Test {
   private static String COMMENT;
   private static String USER_ID;
   private static String PROVENANCE_ID;
-  private static String FILENAME;
   private static String CONTENT_TYPE_PDF;
   private static String LABEL;
   private static String BUCKET_LOCATION;
@@ -73,12 +72,14 @@ private class IBMCompareComplyV1Test {
   private static String UNIT;
   private static Double NUMERIC_VALUE;
 
+  private static IBMCompareComplyV1Models.Location LOCATION;
+  private static IBMCompareComplyV1 service;
+
   static {
     VERSION = '2018-10-15';
     COMMENT = 'comment';
     USER_ID = 'user_id';
     PROVENANCE_ID = 'provenance_id';
-    FILENAME = 'filename';
     CONTENT_TYPE_PDF = 'application/pdf';
     LABEL = 'label';
     BUCKET_LOCATION = 'bucket_location';
@@ -146,36 +147,35 @@ private class IBMCompareComplyV1Test {
     VALUE = 'value';
     UNIT = 'unit';
     NUMERIC_VALUE = 21.0;
-  }
 
-  static testMethod void testVersionConstructor() {
-    Test.startTest();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION);
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testBasicConstructor() {
-    Test.startTest();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, 'username', 'password');
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testConfigConstructor() {
-    Test.startTest();
-    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
-      .username('username')
-      .password('password')
+    LOCATION = new IBMCompareComplyV1Models.LocationBuilder()
+      .xbegin(TEST_BEGIN)
+      .xend(TEST_END)
       .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, config);
-    System.assert(service != null);
-    Test.stopTest();
+    service = new IBMCompareComplyV1(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testAddFeedbackOptions() {
     Test.startTest();
-    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInput();
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel>{ typeLabel };
+    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
+    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabels = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabels = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .feedbackType(FEEDBACK_TYPE)
+      .location(LOCATION)
+      .text(TEXT)
+      .originalLabels(originalLabels)
+      .updatedLabels(updatedLabels)
+      .build();
 
     IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
       .comment(COMMENT)
@@ -193,9 +193,10 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testCategory() {
     Test.startTest();
-    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.Category();
-    category.setLabel(AMENDMENTS);
-    category.setProvenanceIds(new List<String> { PROVENANCE_ID });
+    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder()
+      .label(AMENDMENTS)
+      .provenanceIds(new List<String> { PROVENANCE_ID })
+      .build();
 
     System.assertEquals(AMENDMENTS, category.getLabel());
     Test.stopTest();
@@ -262,7 +263,6 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.ConvertToHtmlOptions convertToHtmlOptions = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
       .file(testPdf)
       .fileContentType(CONTENT_TYPE_PDF)
-      .filename(FILENAME)
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
@@ -270,7 +270,6 @@ private class IBMCompareComplyV1Test {
 
     System.assertEquals(testPdf, convertToHtmlOptions.file());
     System.assertEquals(CONTENT_TYPE_PDF, convertToHtmlOptions.fileContentType());
-    System.assertEquals(FILENAME, convertToHtmlOptions.filename());
     System.assertEquals(CONTRACTS, convertToHtmlOptions.model());
     Test.stopTest();
   }
@@ -343,20 +342,31 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testFeedbackDataInput() {
     Test.startTest();
-    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDoc();
+    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDocBuilder().build();
     IBMCompareComplyV1Models.Location location = new IBMCompareComplyV1Models.Location();
-    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsIn();
-    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsIn();
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel };
+    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
+    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
 
-    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInput();
-    feedbackDataInput.setDocument(shortDoc);
-    feedbackDataInput.setFeedbackType(FEEDBACK_TYPE);
-    feedbackDataInput.setLocation(location);
-    feedbackDataInput.setModelId(MODEL_ID);
-    feedbackDataInput.setModelVersion(MODEL_VERSION);
-    feedbackDataInput.setOriginalLabels(originalLabelsIn);
-    feedbackDataInput.setText(TEXT);
-    feedbackDataInput.setUpdatedLabels(updatedLabelsIn);
+    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .document(shortDoc)
+      .feedbackType(FEEDBACK_TYPE)
+      .location(location)
+      .modelId(MODEL_ID)
+      .modelVersion(MODEL_VERSION)
+      .originalLabels(originalLabelsIn)
+      .text(TEXT)
+      .updatedLabels(updatedLabelsIn)
+      .build();
 
     System.assertEquals(shortDoc, feedbackDataInput.getDocument());
     System.assertEquals(FEEDBACK_TYPE, feedbackDataInput.getFeedbackType());
@@ -408,9 +418,10 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testLabel() {
     Test.startTest();
-    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.Label();
-    label.setNature(NATURE);
-    label.setParty(PARTY);
+    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature(NATURE)
+      .party(PARTY)
+      .build();
 
     System.assertEquals(NATURE, label.getNature());
     System.assertEquals(PARTY, label.getParty());
@@ -460,22 +471,19 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testLocation() {
     Test.startTest();
-    IBMCompareComplyV1Models.Location location = new IBMCompareComplyV1Models.Location();
-    location.setXbegin(TEST_BEGIN);
-    location.setXend(TEST_END);
-
-    System.assertEquals(TEST_BEGIN, location.getXbegin());
-    System.assertEquals(TEST_END, location.getXend());
+    System.assertEquals(TEST_BEGIN, LOCATION.getXbegin());
+    System.assertEquals(TEST_END, LOCATION.getXend());
     Test.stopTest();
   }
 
   static testMethod void testOriginalLabelsIn() {
     Test.startTest();
     IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.Category();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabel();
-    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsIn();
-    originalLabelsIn.setCategories(new List<IBMCompareComplyV1Models.Category> { category });
-    originalLabelsIn.setTypes(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel });
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .categories(new List<IBMCompareComplyV1Models.Category> { category })
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel })
+      .build();
 
     System.assertEquals(category, originalLabelsIn.getCategories().get(0));
     System.assertEquals(typeLabel, originalLabelsIn.getTypes().get(0));
@@ -484,9 +492,10 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testShortDoc() {
     Test.startTest();
-    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDoc();
-    shortDoc.setHash(HASH);
-    shortDoc.setTitle(TITLE);
+    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDocBuilder()
+      .hash(HASH)
+      .title(TITLE)
+      .build();
 
     System.assertEquals(HASH, shortDoc.getHash());
     System.assertEquals(TITLE, shortDoc.getTitle());
@@ -495,10 +504,14 @@ private class IBMCompareComplyV1Test {
 
   static testMethod void testTypeLabel() {
     Test.startTest();
-    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.Label();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabel();
-    typeLabel.setLabel(label);
-    typeLabel.setProvenanceIds(new List<String> { PROVENANCE_ID });
+    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature(NATURE)
+      .party(PARTY)
+      .build();
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder()
+      .label(label)
+      .provenanceIds(new List<String> { PROVENANCE_ID })
+      .build();
 
     System.assertEquals(label, typeLabel.getLabel());
     Test.stopTest();
@@ -523,10 +536,11 @@ private class IBMCompareComplyV1Test {
   static testMethod void testUpdatedLabelsIn() {
     Test.startTest();
     IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.Category();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabel();
-    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsIn();
-    updatedLabelsIn.setCategories(new List<IBMCompareComplyV1Models.Category> { category });
-    updatedLabelsIn.setTypes(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel });
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .categories(new List<IBMCompareComplyV1Models.Category> { category })
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel })
+      .build();
 
     System.assertEquals(category, updatedLabelsIn.getCategories().get(0));
     System.assertEquals(typeLabel, updatedLabelsIn.getTypes().get(0));
@@ -543,11 +557,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
       .name('test_pdf.pdf')
       .description('Test PDF file')
@@ -557,7 +566,6 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.ConvertToHtmlOptions convertToHtmlOptions = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
       .file(testPdf)
       .fileContentType(CONTENT_TYPE_PDF)
-      .filename(FILENAME)
       .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
@@ -581,11 +589,6 @@ private class IBMCompareComplyV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
 
     IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
       .name('test_pdf.pdf')
@@ -773,11 +776,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
       .name('test_pdf.pdf')
       .description('Test PDF file')
@@ -869,11 +867,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
       .name('test_pdf.pdf')
       .description('Test PDF file')
@@ -940,14 +933,29 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
+    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
+    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel>{ typeLabel };
+    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
+    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabels = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(types)
+      .categories(categories)
       .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabels = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(types)
+      .categories(categories)
+      .build();
+    IBMCompareComplyV1Models.FeedbackDataInput data = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .feedbackType(FEEDBACK_TYPE)
+      .location(LOCATION)
+      .text(TEXT)
+      .originalLabels(originalLabels)
+      .updatedLabels(updatedLabels)
+      .build();
 
     IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
       .comment(COMMENT)
-      .feedbackData(new IBMCompareComplyV1Models.FeedbackDataInput())
+      .feedbackData(data)
       .userId(USER_ID)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
@@ -1003,11 +1011,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
       .feedbackId(FEEDBACK_ID)
       .model(CONTRACTS)
@@ -1028,11 +1031,6 @@ private class IBMCompareComplyV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
 
     IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
       .feedbackId(FEEDBACK_ID)
@@ -1088,11 +1086,6 @@ private class IBMCompareComplyV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
 
     IBMCompareComplyV1Models.ListFeedbackOptions listFeedbackOptions = new IBMCompareComplyV1Models.ListFeedbackOptionsBuilder()
       .after(TEST_DATE)
@@ -1172,11 +1165,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMWatsonFile testCredentialFile = new IBMWatsonFile.FileBuilder()
       .name('test_credentials.json')
       .description('Test JSON file')
@@ -1211,11 +1199,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMCompareComplyV1Models.GetBatchOptions getBatchOptions = new IBMCompareComplyV1Models.GetBatchOptionsBuilder()
       .batchId(BATCH_ID)
       .addHeader(HEADER_NAME, HEADER_VALUE)
@@ -1237,11 +1220,6 @@ private class IBMCompareComplyV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
-
     IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptions = new IBMCompareComplyV1Models.ListBatchesOptionsBuilder()
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
@@ -1261,11 +1239,6 @@ private class IBMCompareComplyV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMCompareComplyV1 service = new IBMCompareComplyV1(VERSION, iamOptions);
 
     IBMCompareComplyV1Models.UpdateBatchOptions updateBatchOptions = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
       .action(CANCEL)

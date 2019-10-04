@@ -21,4 +21,13 @@ public class IBMWatsonMapModel extends IBMWatsonDynamicModel {
 
     return ret;
   }
+
+  public Map<String, Object> replacePropertyNames() {
+    // get map representation of current model
+    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+
+    jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
+
+    return jsonMap;
+  }
 }

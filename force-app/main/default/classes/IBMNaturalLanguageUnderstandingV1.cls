@@ -8,11 +8,12 @@
  * with Watson Knowledge Studio to detect custom entities, relations, and categories in Natural Language Understanding.
  *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-understanding.html">Natural Language Understanding</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/natural-language-understanding/">Natural Language Understanding</a>
  */
 public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
+  private static final String SERVICE_NAME = 'natural_language_understanding';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
 
   private String versionDate;
 
@@ -20,41 +21,30 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    * Instantiates a new `IBMNaturalLanguageUnderstandingV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
+   *          calls from failing when the service introduces breaking changes.
    */
-  public IBMNaturalLanguageUnderstandingV1(String versionDate) {
-    super('natural_language_understanding', 'v1');
+   public IBMNaturalLanguageUnderstandingV1(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMNaturalLanguageUnderstandingV1`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
+   */
+  public IBMNaturalLanguageUnderstandingV1(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(SERVICE_URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMNaturalLanguageUnderstandingV1` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMNaturalLanguageUnderstandingV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMNaturalLanguageUnderstandingV1(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMNaturalLanguageUnderstandingV1` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMNaturalLanguageUnderstandingV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**
@@ -77,7 +67,8 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageUnderstandingV1Models.AnalysisResults analyze(IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions analyzeOptions) {
     IBMWatsonValidator.notNull(analyzeOptions, 'analyzeOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/analyze');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/analyze');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural-language-understanding;service_version=V1;operation_id=analyze');
     Map<String, String> requestHeaders = (analyzeOptions != null) ? analyzeOptions.requestHeaders() : null;
@@ -88,7 +79,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('features', analyzeOptions.features());
+    contentJson.put('features', analyzeOptions.features().replacePropertyNames());
     if (analyzeOptions.text() != null) {
       contentJson.put('text', analyzeOptions.text());
     }
@@ -116,7 +107,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     if (analyzeOptions.limitTextCharacters() != null) {
       contentJson.put('limit_text_characters', analyzeOptions.limitTextCharacters());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMNaturalLanguageUnderstandingV1Models.AnalysisResults) createServiceCall(builder.build(), IBMNaturalLanguageUnderstandingV1Models.AnalysisResults.class);
   }
@@ -132,7 +123,8 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    * @return the {@link IBMNaturalLanguageUnderstandingV1Models.ListModelsResults} with the response
    */
   public IBMNaturalLanguageUnderstandingV1Models.ListModelsResults listModels(IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions listModelsOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/models');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/models');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural-language-understanding;service_version=V1;operation_id=listModels');
     Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
@@ -156,7 +148,8 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    */
   public void deleteModel(IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions deleteModelOptions) {
     IBMWatsonValidator.notNull(deleteModelOptions, 'deleteModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/models/{0}', new String[]{ deleteModelOptions.modelId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/models/{0}', new String[]{ deleteModelOptions.modelId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=natural-language-understanding;service_version=V1;operation_id=deleteModel');
     Map<String, String> requestHeaders = (deleteModelOptions != null) ? deleteModelOptions.requestHeaders() : null;

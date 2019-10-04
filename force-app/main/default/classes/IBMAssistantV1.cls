@@ -2,12 +2,15 @@
  * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
  * dialog editor to create conversation flows between your apps and your users.
  *
+ * The Assistant v1 API provides authoring methods your application can use to create or update a workspace.
+ *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/assistant.html">Assistant</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/assistant/">Assistant</a>
  */
 public class IBMAssistantV1 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/assistant/api';
+  private static final String SERVICE_NAME = 'assistant';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/assistant/api';
 
   private String versionDate;
 
@@ -15,10 +18,25 @@ public class IBMAssistantV1 extends IBMWatsonService {
    * Instantiates a new `IBMAssistantV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
+   *          calls from failing when the service introduces breaking changes.
    */
-  public IBMAssistantV1(String versionDate) {
-    super('assistant', 'v1');
+   public IBMAssistantV1(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMAssistantV1`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
+   */
+  public IBMAssistantV1(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(SERVICE_URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
@@ -27,38 +45,12 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * Instantiates a new `IBMAssistantV1` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMAssistantV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMAssistantV1(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMAssistantV1` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMAssistantV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
-  }
-
-  /**
    * Get response to user input.
    *
    * Send user input to a workspace and receive a response.
    *
-   * **Note:** For most applications, there are significant advantages to using the v2 runtime API instead. These
-   * advantages include ease of deployment, automatic state management, versioning, and search capabilities. For more
+   * **Important:** This method has been superseded by the new v2 runtime API. The v2 API offers significant advantages,
+   * including ease of deployment, automatic state management, versioning, and search capabilities. For more
    * information, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-api-overview).
    *
    * There is no rate limit for this operation.
@@ -68,7 +60,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.MessageResponse message(IBMAssistantV1Models.MessageOptions messageOptions) {
     IBMWatsonValidator.notNull(messageOptions, 'messageOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/message', new String[]{ messageOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/message', new String[]{ messageOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=message');
     Map<String, String> requestHeaders = (messageOptions != null) ? messageOptions.requestHeaders() : null;
@@ -83,24 +76,32 @@ public class IBMAssistantV1 extends IBMWatsonService {
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (messageOptions.input() != null) {
-      contentJson.put('input', messageOptions.input());
+      contentJson.put('input', messageOptions.input().replacePropertyNames());
     }
     if (messageOptions.intents() != null) {
-      contentJson.put('intents', messageOptions.intents());
+      List<Object> intentsList = new List<Object>();
+      for (IBMAssistantV1Models.RuntimeIntent intentsItem : messageOptions.intents()) {
+        intentsList.add(intentsItem.replacePropertyNames());
+      }
+      contentJson.put('intents', intentsList);
     }
     if (messageOptions.entities() != null) {
-      contentJson.put('entities', messageOptions.entities());
+      List<Object> entitiesList = new List<Object>();
+      for (IBMAssistantV1Models.RuntimeEntity entitiesItem : messageOptions.entities()) {
+        entitiesList.add(entitiesItem.replacePropertyNames());
+      }
+      contentJson.put('entities', entitiesList);
     }
     if (messageOptions.alternateIntents() != null) {
       contentJson.put('alternate_intents', messageOptions.alternateIntents());
     }
     if (messageOptions.context() != null) {
-      contentJson.put('context', messageOptions.context());
+      contentJson.put('context', messageOptions.context().replacePropertyNames());
     }
     if (messageOptions.output() != null) {
-      contentJson.put('output', messageOptions.output());
+      contentJson.put('output', messageOptions.output().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.MessageResponse) createServiceCall(builder.build(), IBMAssistantV1Models.MessageResponse.class);
   }
@@ -116,7 +117,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    * @return the {@link IBMAssistantV1Models.WorkspaceCollection} with the response
    */
   public IBMAssistantV1Models.WorkspaceCollection listWorkspaces(IBMAssistantV1Models.ListWorkspacesOptions listWorkspacesOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/workspaces');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/workspaces');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listWorkspaces');
     Map<String, String> requestHeaders = (listWorkspacesOptions != null) ? listWorkspacesOptions.requestHeaders() : null;
@@ -129,11 +131,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listWorkspacesOptions != null && listWorkspacesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listWorkspacesOptions.pageLimit()));
     }
-    if (listWorkspacesOptions != null && listWorkspacesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listWorkspacesOptions.includeCount()));
-    }
-    if (listWorkspacesOptions != null && listWorkspacesOptions.xsort() != null) {
-      builder.query('sort', listWorkspacesOptions.xsort());
+    if (listWorkspacesOptions != null && listWorkspacesOptions.xSort() != null) {
+      builder.query('sort', listWorkspacesOptions.xSort());
     }
     if (listWorkspacesOptions != null && listWorkspacesOptions.cursor() != null) {
       builder.query('cursor', listWorkspacesOptions.cursor());
@@ -157,7 +156,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    * @return the {@link IBMAssistantV1Models.Workspace} with the response
    */
   public IBMAssistantV1Models.Workspace createWorkspace(IBMAssistantV1Models.CreateWorkspaceOptions createWorkspaceOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/workspaces');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/workspaces');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createWorkspace');
     Map<String, String> requestHeaders = (createWorkspaceOptions != null) ? createWorkspaceOptions.requestHeaders() : null;
@@ -178,27 +178,43 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('language', createWorkspaceOptions.language());
     }
     if (createWorkspaceOptions.metadata() != null) {
-      contentJson.put('metadata', createWorkspaceOptions.metadata());
+      contentJson.put('metadata', createWorkspaceOptions.metadata().replacePropertyNames());
     }
     if (createWorkspaceOptions.learningOptOut() != null) {
       contentJson.put('learning_opt_out', createWorkspaceOptions.learningOptOut());
     }
     if (createWorkspaceOptions.systemSettings() != null) {
-      contentJson.put('system_settings', createWorkspaceOptions.systemSettings());
+      contentJson.put('system_settings', createWorkspaceOptions.systemSettings().replacePropertyNames());
     }
     if (createWorkspaceOptions.intents() != null) {
-      contentJson.put('intents', createWorkspaceOptions.intents());
+      List<Object> intentsList = new List<Object>();
+      for (IBMAssistantV1Models.CreateIntent intentsItem : createWorkspaceOptions.intents()) {
+        intentsList.add(intentsItem.replacePropertyNames());
+      }
+      contentJson.put('intents', intentsList);
     }
     if (createWorkspaceOptions.entities() != null) {
-      contentJson.put('entities', createWorkspaceOptions.entities());
+      List<Object> entitiesList = new List<Object>();
+      for (IBMAssistantV1Models.CreateEntity entitiesItem : createWorkspaceOptions.entities()) {
+        entitiesList.add(entitiesItem.replacePropertyNames());
+      }
+      contentJson.put('entities', entitiesList);
     }
     if (createWorkspaceOptions.dialogNodes() != null) {
-      contentJson.put('dialog_nodes', createWorkspaceOptions.dialogNodes());
+      List<Object> dialogNodesList = new List<Object>();
+      for (IBMAssistantV1Models.DialogNode dialogNodesItem : createWorkspaceOptions.dialogNodes()) {
+        dialogNodesList.add(dialogNodesItem.replacePropertyNames());
+      }
+      contentJson.put('dialog_nodes', dialogNodesList);
     }
     if (createWorkspaceOptions.counterexamples() != null) {
-      contentJson.put('counterexamples', createWorkspaceOptions.counterexamples());
+      List<Object> counterexamplesList = new List<Object>();
+      for (IBMAssistantV1Models.Counterexample counterexamplesItem : createWorkspaceOptions.counterexamples()) {
+        counterexamplesList.add(counterexamplesItem.replacePropertyNames());
+      }
+      contentJson.put('counterexamples', counterexamplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
   }
@@ -216,7 +232,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Workspace getWorkspace(IBMAssistantV1Models.GetWorkspaceOptions getWorkspaceOptions) {
     IBMWatsonValidator.notNull(getWorkspaceOptions, 'getWorkspaceOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}', new String[]{ getWorkspaceOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}', new String[]{ getWorkspaceOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getWorkspace');
     Map<String, String> requestHeaders = (getWorkspaceOptions != null) ? getWorkspaceOptions.requestHeaders() : null;
@@ -226,14 +243,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getWorkspaceOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getWorkspaceOptions.xexport()));
+    if (getWorkspaceOptions.xExport() != null) {
+      builder.query('export', String.valueOf(getWorkspaceOptions.xExport()));
     }
     if (getWorkspaceOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getWorkspaceOptions.includeAudit()));
     }
-    if (getWorkspaceOptions.xsort() != null) {
-      builder.query('sort', getWorkspaceOptions.xsort());
+    if (getWorkspaceOptions.xSort() != null) {
+      builder.query('sort', getWorkspaceOptions.xSort());
     }
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
@@ -252,7 +269,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Workspace updateWorkspace(IBMAssistantV1Models.UpdateWorkspaceOptions updateWorkspaceOptions) {
     IBMWatsonValidator.notNull(updateWorkspaceOptions, 'updateWorkspaceOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}', new String[]{ updateWorkspaceOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}', new String[]{ updateWorkspaceOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=updateWorkspace');
     Map<String, String> requestHeaders = (updateWorkspaceOptions != null) ? updateWorkspaceOptions.requestHeaders() : null;
@@ -276,27 +294,43 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('language', updateWorkspaceOptions.language());
     }
     if (updateWorkspaceOptions.metadata() != null) {
-      contentJson.put('metadata', updateWorkspaceOptions.metadata());
+      contentJson.put('metadata', updateWorkspaceOptions.metadata().replacePropertyNames());
     }
     if (updateWorkspaceOptions.learningOptOut() != null) {
       contentJson.put('learning_opt_out', updateWorkspaceOptions.learningOptOut());
     }
     if (updateWorkspaceOptions.systemSettings() != null) {
-      contentJson.put('system_settings', updateWorkspaceOptions.systemSettings());
+      contentJson.put('system_settings', updateWorkspaceOptions.systemSettings().replacePropertyNames());
     }
     if (updateWorkspaceOptions.intents() != null) {
-      contentJson.put('intents', updateWorkspaceOptions.intents());
+      List<Object> intentsList = new List<Object>();
+      for (IBMAssistantV1Models.CreateIntent intentsItem : updateWorkspaceOptions.intents()) {
+        intentsList.add(intentsItem.replacePropertyNames());
+      }
+      contentJson.put('intents', intentsList);
     }
     if (updateWorkspaceOptions.entities() != null) {
-      contentJson.put('entities', updateWorkspaceOptions.entities());
+      List<Object> entitiesList = new List<Object>();
+      for (IBMAssistantV1Models.CreateEntity entitiesItem : updateWorkspaceOptions.entities()) {
+        entitiesList.add(entitiesItem.replacePropertyNames());
+      }
+      contentJson.put('entities', entitiesList);
     }
     if (updateWorkspaceOptions.dialogNodes() != null) {
-      contentJson.put('dialog_nodes', updateWorkspaceOptions.dialogNodes());
+      List<Object> dialogNodesList = new List<Object>();
+      for (IBMAssistantV1Models.DialogNode dialogNodesItem : updateWorkspaceOptions.dialogNodes()) {
+        dialogNodesList.add(dialogNodesItem.replacePropertyNames());
+      }
+      contentJson.put('dialog_nodes', dialogNodesList);
     }
     if (updateWorkspaceOptions.counterexamples() != null) {
-      contentJson.put('counterexamples', updateWorkspaceOptions.counterexamples());
+      List<Object> counterexamplesList = new List<Object>();
+      for (IBMAssistantV1Models.Counterexample counterexamplesItem : updateWorkspaceOptions.counterexamples()) {
+        counterexamplesList.add(counterexamplesItem.replacePropertyNames());
+      }
+      contentJson.put('counterexamples', counterexamplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
   }
@@ -313,7 +347,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteWorkspace(IBMAssistantV1Models.DeleteWorkspaceOptions deleteWorkspaceOptions) {
     IBMWatsonValidator.notNull(deleteWorkspaceOptions, 'deleteWorkspaceOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}', new String[]{ deleteWorkspaceOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/workspaces/{0}', new String[]{ deleteWorkspaceOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteWorkspace');
     Map<String, String> requestHeaders = (deleteWorkspaceOptions != null) ? deleteWorkspaceOptions.requestHeaders() : null;
@@ -340,7 +375,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.IntentCollection listIntents(IBMAssistantV1Models.ListIntentsOptions listIntentsOptions) {
     IBMWatsonValidator.notNull(listIntentsOptions, 'listIntentsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents', new String[]{ listIntentsOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/intents', new String[]{ listIntentsOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listIntents');
     Map<String, String> requestHeaders = (listIntentsOptions != null) ? listIntentsOptions.requestHeaders() : null;
@@ -350,17 +386,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listIntentsOptions.xexport() != null) {
-      builder.query('export', String.valueOf(listIntentsOptions.xexport()));
+    if (listIntentsOptions.xExport() != null) {
+      builder.query('export', String.valueOf(listIntentsOptions.xExport()));
     }
     if (listIntentsOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listIntentsOptions.pageLimit()));
     }
-    if (listIntentsOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listIntentsOptions.includeCount()));
-    }
-    if (listIntentsOptions.xsort() != null) {
-      builder.query('sort', listIntentsOptions.xsort());
+    if (listIntentsOptions.xSort() != null) {
+      builder.query('sort', listIntentsOptions.xSort());
     }
     if (listIntentsOptions.cursor() != null) {
       builder.query('cursor', listIntentsOptions.cursor());
@@ -387,7 +420,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Intent createIntent(IBMAssistantV1Models.CreateIntentOptions createIntentOptions) {
     IBMWatsonValidator.notNull(createIntentOptions, 'createIntentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/intents', new String[]{ createIntentOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/intents', new String[]{ createIntentOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createIntent');
     Map<String, String> requestHeaders = (createIntentOptions != null) ? createIntentOptions.requestHeaders() : null;
@@ -403,9 +437,13 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('description', createIntentOptions.description());
     }
     if (createIntentOptions.examples() != null) {
-      contentJson.put('examples', createIntentOptions.examples());
+      List<Object> examplesList = new List<Object>();
+      for (IBMAssistantV1Models.Example examplesItem : createIntentOptions.examples()) {
+        examplesList.add(examplesItem.replacePropertyNames());
+      }
+      contentJson.put('examples', examplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
   }
@@ -423,7 +461,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Intent getIntent(IBMAssistantV1Models.GetIntentOptions getIntentOptions) {
     IBMWatsonValidator.notNull(getIntentOptions, 'getIntentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ getIntentOptions.workspaceId(), getIntentOptions.intent() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ getIntentOptions.workspaceId(), getIntentOptions.intent() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getIntent');
     Map<String, String> requestHeaders = (getIntentOptions != null) ? getIntentOptions.requestHeaders() : null;
@@ -433,8 +472,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getIntentOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getIntentOptions.xexport()));
+    if (getIntentOptions.xExport() != null) {
+      builder.query('export', String.valueOf(getIntentOptions.xExport()));
     }
     if (getIntentOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getIntentOptions.includeAudit()));
@@ -459,7 +498,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Intent updateIntent(IBMAssistantV1Models.UpdateIntentOptions updateIntentOptions) {
     IBMWatsonValidator.notNull(updateIntentOptions, 'updateIntentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ updateIntentOptions.workspaceId(), updateIntentOptions.intent() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ updateIntentOptions.workspaceId(), updateIntentOptions.intent() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=updateIntent');
     Map<String, String> requestHeaders = (updateIntentOptions != null) ? updateIntentOptions.requestHeaders() : null;
@@ -477,9 +517,13 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('description', updateIntentOptions.newDescription());
     }
     if (updateIntentOptions.newExamples() != null) {
-      contentJson.put('examples', updateIntentOptions.newExamples());
+      List<Object> newExamplesList = new List<Object>();
+      for (IBMAssistantV1Models.Example newExamplesItem : updateIntentOptions.newExamples()) {
+        newExamplesList.add(newExamplesItem.replacePropertyNames());
+      }
+      contentJson.put('examples', newExamplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
   }
@@ -496,7 +540,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteIntent(IBMAssistantV1Models.DeleteIntentOptions deleteIntentOptions) {
     IBMWatsonValidator.notNull(deleteIntentOptions, 'deleteIntentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ deleteIntentOptions.workspaceId(), deleteIntentOptions.intent() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ deleteIntentOptions.workspaceId(), deleteIntentOptions.intent() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteIntent');
     Map<String, String> requestHeaders = (deleteIntentOptions != null) ? deleteIntentOptions.requestHeaders() : null;
@@ -522,7 +567,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.ExampleCollection listExamples(IBMAssistantV1Models.ListExamplesOptions listExamplesOptions) {
     IBMWatsonValidator.notNull(listExamplesOptions, 'listExamplesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples', new String[]{ listExamplesOptions.workspaceId(), listExamplesOptions.intent() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/intents/{1}/examples', new String[]{ listExamplesOptions.workspaceId(), listExamplesOptions.intent() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listExamples');
     Map<String, String> requestHeaders = (listExamplesOptions != null) ? listExamplesOptions.requestHeaders() : null;
@@ -535,11 +581,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listExamplesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listExamplesOptions.pageLimit()));
     }
-    if (listExamplesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listExamplesOptions.includeCount()));
-    }
-    if (listExamplesOptions.xsort() != null) {
-      builder.query('sort', listExamplesOptions.xsort());
+    if (listExamplesOptions.xSort() != null) {
+      builder.query('sort', listExamplesOptions.xSort());
     }
     if (listExamplesOptions.cursor() != null) {
       builder.query('cursor', listExamplesOptions.cursor());
@@ -566,7 +609,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Example createExample(IBMAssistantV1Models.CreateExampleOptions createExampleOptions) {
     IBMWatsonValidator.notNull(createExampleOptions, 'createExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples', new String[]{ createExampleOptions.workspaceId(), createExampleOptions.intent() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/intents/{1}/examples', new String[]{ createExampleOptions.workspaceId(), createExampleOptions.intent() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createExample');
     Map<String, String> requestHeaders = (createExampleOptions != null) ? createExampleOptions.requestHeaders() : null;
@@ -579,9 +623,13 @@ public class IBMAssistantV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createExampleOptions.text());
     if (createExampleOptions.mentions() != null) {
-      contentJson.put('mentions', createExampleOptions.mentions());
+      List<Object> mentionsList = new List<Object>();
+      for (IBMAssistantV1Models.Mention mentionsItem : createExampleOptions.mentions()) {
+        mentionsList.add(mentionsItem.replacePropertyNames());
+      }
+      contentJson.put('mentions', mentionsList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
   }
@@ -598,7 +646,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Example getExample(IBMAssistantV1Models.GetExampleOptions getExampleOptions) {
     IBMWatsonValidator.notNull(getExampleOptions, 'getExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ getExampleOptions.workspaceId(), getExampleOptions.intent(), getExampleOptions.text() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ getExampleOptions.workspaceId(), getExampleOptions.intent(), getExampleOptions.text() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getExample');
     Map<String, String> requestHeaders = (getExampleOptions != null) ? getExampleOptions.requestHeaders() : null;
@@ -630,7 +679,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Example updateExample(IBMAssistantV1Models.UpdateExampleOptions updateExampleOptions) {
     IBMWatsonValidator.notNull(updateExampleOptions, 'updateExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ updateExampleOptions.workspaceId(), updateExampleOptions.intent(), updateExampleOptions.text() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ updateExampleOptions.workspaceId(), updateExampleOptions.intent(), updateExampleOptions.text() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=updateExample');
     Map<String, String> requestHeaders = (updateExampleOptions != null) ? updateExampleOptions.requestHeaders() : null;
@@ -645,9 +695,13 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('text', updateExampleOptions.newText());
     }
     if (updateExampleOptions.newMentions() != null) {
-      contentJson.put('mentions', updateExampleOptions.newMentions());
+      List<Object> newMentionsList = new List<Object>();
+      for (IBMAssistantV1Models.Mention newMentionsItem : updateExampleOptions.newMentions()) {
+        newMentionsList.add(newMentionsItem.replacePropertyNames());
+      }
+      contentJson.put('mentions', newMentionsList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
   }
@@ -664,7 +718,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteExample(IBMAssistantV1Models.DeleteExampleOptions deleteExampleOptions) {
     IBMWatsonValidator.notNull(deleteExampleOptions, 'deleteExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ deleteExampleOptions.workspaceId(), deleteExampleOptions.intent(), deleteExampleOptions.text() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ deleteExampleOptions.workspaceId(), deleteExampleOptions.intent(), deleteExampleOptions.text() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteExample');
     Map<String, String> requestHeaders = (deleteExampleOptions != null) ? deleteExampleOptions.requestHeaders() : null;
@@ -690,7 +745,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.CounterexampleCollection listCounterexamples(IBMAssistantV1Models.ListCounterexamplesOptions listCounterexamplesOptions) {
     IBMWatsonValidator.notNull(listCounterexamplesOptions, 'listCounterexamplesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples', new String[]{ listCounterexamplesOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/counterexamples', new String[]{ listCounterexamplesOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listCounterexamples');
     Map<String, String> requestHeaders = (listCounterexamplesOptions != null) ? listCounterexamplesOptions.requestHeaders() : null;
@@ -703,11 +759,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listCounterexamplesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listCounterexamplesOptions.pageLimit()));
     }
-    if (listCounterexamplesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listCounterexamplesOptions.includeCount()));
-    }
-    if (listCounterexamplesOptions.xsort() != null) {
-      builder.query('sort', listCounterexamplesOptions.xsort());
+    if (listCounterexamplesOptions.xSort() != null) {
+      builder.query('sort', listCounterexamplesOptions.xSort());
     }
     if (listCounterexamplesOptions.cursor() != null) {
       builder.query('cursor', listCounterexamplesOptions.cursor());
@@ -734,7 +787,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Counterexample createCounterexample(IBMAssistantV1Models.CreateCounterexampleOptions createCounterexampleOptions) {
     IBMWatsonValidator.notNull(createCounterexampleOptions, 'createCounterexampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples', new String[]{ createCounterexampleOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/counterexamples', new String[]{ createCounterexampleOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createCounterexample');
     Map<String, String> requestHeaders = (createCounterexampleOptions != null) ? createCounterexampleOptions.requestHeaders() : null;
@@ -746,7 +800,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createCounterexampleOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
   }
@@ -763,7 +817,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Counterexample getCounterexample(IBMAssistantV1Models.GetCounterexampleOptions getCounterexampleOptions) {
     IBMWatsonValidator.notNull(getCounterexampleOptions, 'getCounterexampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ getCounterexampleOptions.workspaceId(), getCounterexampleOptions.text() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ getCounterexampleOptions.workspaceId(), getCounterexampleOptions.text() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getCounterexample');
     Map<String, String> requestHeaders = (getCounterexampleOptions != null) ? getCounterexampleOptions.requestHeaders() : null;
@@ -795,7 +850,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Counterexample updateCounterexample(IBMAssistantV1Models.UpdateCounterexampleOptions updateCounterexampleOptions) {
     IBMWatsonValidator.notNull(updateCounterexampleOptions, 'updateCounterexampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ updateCounterexampleOptions.workspaceId(), updateCounterexampleOptions.text() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ updateCounterexampleOptions.workspaceId(), updateCounterexampleOptions.text() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=updateCounterexample');
     Map<String, String> requestHeaders = (updateCounterexampleOptions != null) ? updateCounterexampleOptions.requestHeaders() : null;
@@ -809,7 +865,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateCounterexampleOptions.newText() != null) {
       contentJson.put('text', updateCounterexampleOptions.newText());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
   }
@@ -826,7 +882,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteCounterexample(IBMAssistantV1Models.DeleteCounterexampleOptions deleteCounterexampleOptions) {
     IBMWatsonValidator.notNull(deleteCounterexampleOptions, 'deleteCounterexampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ deleteCounterexampleOptions.workspaceId(), deleteCounterexampleOptions.text() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ deleteCounterexampleOptions.workspaceId(), deleteCounterexampleOptions.text() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteCounterexample');
     Map<String, String> requestHeaders = (deleteCounterexampleOptions != null) ? deleteCounterexampleOptions.requestHeaders() : null;
@@ -853,7 +910,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.EntityCollection listEntities(IBMAssistantV1Models.ListEntitiesOptions listEntitiesOptions) {
     IBMWatsonValidator.notNull(listEntitiesOptions, 'listEntitiesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities', new String[]{ listEntitiesOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/entities', new String[]{ listEntitiesOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listEntities');
     Map<String, String> requestHeaders = (listEntitiesOptions != null) ? listEntitiesOptions.requestHeaders() : null;
@@ -863,17 +921,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listEntitiesOptions.xexport() != null) {
-      builder.query('export', String.valueOf(listEntitiesOptions.xexport()));
+    if (listEntitiesOptions.xExport() != null) {
+      builder.query('export', String.valueOf(listEntitiesOptions.xExport()));
     }
     if (listEntitiesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listEntitiesOptions.pageLimit()));
     }
-    if (listEntitiesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listEntitiesOptions.includeCount()));
-    }
-    if (listEntitiesOptions.xsort() != null) {
-      builder.query('sort', listEntitiesOptions.xsort());
+    if (listEntitiesOptions.xSort() != null) {
+      builder.query('sort', listEntitiesOptions.xSort());
     }
     if (listEntitiesOptions.cursor() != null) {
       builder.query('cursor', listEntitiesOptions.cursor());
@@ -900,7 +955,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Entity createEntity(IBMAssistantV1Models.CreateEntityOptions createEntityOptions) {
     IBMWatsonValidator.notNull(createEntityOptions, 'createEntityOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities', new String[]{ createEntityOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/entities', new String[]{ createEntityOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createEntity');
     Map<String, String> requestHeaders = (createEntityOptions != null) ? createEntityOptions.requestHeaders() : null;
@@ -916,15 +972,19 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('description', createEntityOptions.description());
     }
     if (createEntityOptions.metadata() != null) {
-      contentJson.put('metadata', createEntityOptions.metadata());
+      contentJson.put('metadata', createEntityOptions.metadata().replacePropertyNames());
     }
     if (createEntityOptions.fuzzyMatch() != null) {
       contentJson.put('fuzzy_match', createEntityOptions.fuzzyMatch());
     }
     if (createEntityOptions.values() != null) {
-      contentJson.put('values', createEntityOptions.values());
+      List<Object> valuesList = new List<Object>();
+      for (IBMAssistantV1Models.CreateValue valuesItem : createEntityOptions.values()) {
+        valuesList.add(valuesItem.replacePropertyNames());
+      }
+      contentJson.put('values', valuesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
   }
@@ -942,7 +1002,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Entity getEntity(IBMAssistantV1Models.GetEntityOptions getEntityOptions) {
     IBMWatsonValidator.notNull(getEntityOptions, 'getEntityOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ getEntityOptions.workspaceId(), getEntityOptions.entity() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ getEntityOptions.workspaceId(), getEntityOptions.entity() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getEntity');
     Map<String, String> requestHeaders = (getEntityOptions != null) ? getEntityOptions.requestHeaders() : null;
@@ -952,8 +1013,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getEntityOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getEntityOptions.xexport()));
+    if (getEntityOptions.xExport() != null) {
+      builder.query('export', String.valueOf(getEntityOptions.xExport()));
     }
     if (getEntityOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getEntityOptions.includeAudit()));
@@ -978,7 +1039,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Entity updateEntity(IBMAssistantV1Models.UpdateEntityOptions updateEntityOptions) {
     IBMWatsonValidator.notNull(updateEntityOptions, 'updateEntityOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ updateEntityOptions.workspaceId(), updateEntityOptions.entity() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ updateEntityOptions.workspaceId(), updateEntityOptions.entity() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=updateEntity');
     Map<String, String> requestHeaders = (updateEntityOptions != null) ? updateEntityOptions.requestHeaders() : null;
@@ -996,15 +1058,19 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('description', updateEntityOptions.newDescription());
     }
     if (updateEntityOptions.newMetadata() != null) {
-      contentJson.put('metadata', updateEntityOptions.newMetadata());
+      contentJson.put('metadata', updateEntityOptions.newMetadata().replacePropertyNames());
     }
     if (updateEntityOptions.newFuzzyMatch() != null) {
       contentJson.put('fuzzy_match', updateEntityOptions.newFuzzyMatch());
     }
     if (updateEntityOptions.newValues() != null) {
-      contentJson.put('values', updateEntityOptions.newValues());
+      List<Object> newValuesList = new List<Object>();
+      for (IBMAssistantV1Models.CreateValue newValuesItem : updateEntityOptions.newValues()) {
+        newValuesList.add(newValuesItem.replacePropertyNames());
+      }
+      contentJson.put('values', newValuesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
   }
@@ -1021,7 +1087,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteEntity(IBMAssistantV1Models.DeleteEntityOptions deleteEntityOptions) {
     IBMWatsonValidator.notNull(deleteEntityOptions, 'deleteEntityOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ deleteEntityOptions.workspaceId(), deleteEntityOptions.entity() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ deleteEntityOptions.workspaceId(), deleteEntityOptions.entity() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteEntity');
     Map<String, String> requestHeaders = (deleteEntityOptions != null) ? deleteEntityOptions.requestHeaders() : null;
@@ -1048,7 +1115,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.EntityMentionCollection listMentions(IBMAssistantV1Models.ListMentionsOptions listMentionsOptions) {
     IBMWatsonValidator.notNull(listMentionsOptions, 'listMentionsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/mentions', new String[]{ listMentionsOptions.workspaceId(), listMentionsOptions.entity() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/mentions', new String[]{ listMentionsOptions.workspaceId(), listMentionsOptions.entity() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listMentions');
     Map<String, String> requestHeaders = (listMentionsOptions != null) ? listMentionsOptions.requestHeaders() : null;
@@ -1058,8 +1126,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listMentionsOptions.xexport() != null) {
-      builder.query('export', String.valueOf(listMentionsOptions.xexport()));
+    if (listMentionsOptions.xExport() != null) {
+      builder.query('export', String.valueOf(listMentionsOptions.xExport()));
     }
     if (listMentionsOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(listMentionsOptions.includeAudit()));
@@ -1080,7 +1148,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.ValueCollection listValues(IBMAssistantV1Models.ListValuesOptions listValuesOptions) {
     IBMWatsonValidator.notNull(listValuesOptions, 'listValuesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ listValuesOptions.workspaceId(), listValuesOptions.entity() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ listValuesOptions.workspaceId(), listValuesOptions.entity() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listValues');
     Map<String, String> requestHeaders = (listValuesOptions != null) ? listValuesOptions.requestHeaders() : null;
@@ -1090,17 +1159,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listValuesOptions.xexport() != null) {
-      builder.query('export', String.valueOf(listValuesOptions.xexport()));
+    if (listValuesOptions.xExport() != null) {
+      builder.query('export', String.valueOf(listValuesOptions.xExport()));
     }
     if (listValuesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listValuesOptions.pageLimit()));
     }
-    if (listValuesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listValuesOptions.includeCount()));
-    }
-    if (listValuesOptions.xsort() != null) {
-      builder.query('sort', listValuesOptions.xsort());
+    if (listValuesOptions.xSort() != null) {
+      builder.query('sort', listValuesOptions.xSort());
     }
     if (listValuesOptions.cursor() != null) {
       builder.query('cursor', listValuesOptions.cursor());
@@ -1127,7 +1193,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Value createValue(IBMAssistantV1Models.CreateValueOptions createValueOptions) {
     IBMWatsonValidator.notNull(createValueOptions, 'createValueOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ createValueOptions.workspaceId(), createValueOptions.entity() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ createValueOptions.workspaceId(), createValueOptions.entity() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createValue');
     Map<String, String> requestHeaders = (createValueOptions != null) ? createValueOptions.requestHeaders() : null;
@@ -1140,10 +1207,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('value', createValueOptions.value());
     if (createValueOptions.metadata() != null) {
-      contentJson.put('metadata', createValueOptions.metadata());
+      contentJson.put('metadata', createValueOptions.metadata().replacePropertyNames());
     }
-    if (createValueOptions.valueType() != null) {
-      contentJson.put('type', createValueOptions.valueType());
+    if (createValueOptions.xType() != null) {
+      contentJson.put('type', createValueOptions.xType());
     }
     if (createValueOptions.synonyms() != null) {
       contentJson.put('synonyms', createValueOptions.synonyms());
@@ -1151,7 +1218,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createValueOptions.patterns() != null) {
       contentJson.put('patterns', createValueOptions.patterns());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
   }
@@ -1168,7 +1235,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Value getValue(IBMAssistantV1Models.GetValueOptions getValueOptions) {
     IBMWatsonValidator.notNull(getValueOptions, 'getValueOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ getValueOptions.workspaceId(), getValueOptions.entity(), getValueOptions.value() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ getValueOptions.workspaceId(), getValueOptions.entity(), getValueOptions.value() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getValue');
     Map<String, String> requestHeaders = (getValueOptions != null) ? getValueOptions.requestHeaders() : null;
@@ -1178,8 +1246,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getValueOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getValueOptions.xexport()));
+    if (getValueOptions.xExport() != null) {
+      builder.query('export', String.valueOf(getValueOptions.xExport()));
     }
     if (getValueOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getValueOptions.includeAudit()));
@@ -1204,7 +1272,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Value updateValue(IBMAssistantV1Models.UpdateValueOptions updateValueOptions) {
     IBMWatsonValidator.notNull(updateValueOptions, 'updateValueOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ updateValueOptions.workspaceId(), updateValueOptions.entity(), updateValueOptions.value() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ updateValueOptions.workspaceId(), updateValueOptions.entity(), updateValueOptions.value() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=updateValue');
     Map<String, String> requestHeaders = (updateValueOptions != null) ? updateValueOptions.requestHeaders() : null;
@@ -1219,10 +1288,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('value', updateValueOptions.newValue());
     }
     if (updateValueOptions.newMetadata() != null) {
-      contentJson.put('metadata', updateValueOptions.newMetadata());
+      contentJson.put('metadata', updateValueOptions.newMetadata().replacePropertyNames());
     }
-    if (updateValueOptions.valueType() != null) {
-      contentJson.put('type', updateValueOptions.valueType());
+    if (updateValueOptions.newType() != null) {
+      contentJson.put('type', updateValueOptions.newType());
     }
     if (updateValueOptions.newSynonyms() != null) {
       contentJson.put('synonyms', updateValueOptions.newSynonyms());
@@ -1230,7 +1299,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateValueOptions.newPatterns() != null) {
       contentJson.put('patterns', updateValueOptions.newPatterns());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
   }
@@ -1247,7 +1316,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteValue(IBMAssistantV1Models.DeleteValueOptions deleteValueOptions) {
     IBMWatsonValidator.notNull(deleteValueOptions, 'deleteValueOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ deleteValueOptions.workspaceId(), deleteValueOptions.entity(), deleteValueOptions.value() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ deleteValueOptions.workspaceId(), deleteValueOptions.entity(), deleteValueOptions.value() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteValue');
     Map<String, String> requestHeaders = (deleteValueOptions != null) ? deleteValueOptions.requestHeaders() : null;
@@ -1273,7 +1343,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.SynonymCollection listSynonyms(IBMAssistantV1Models.ListSynonymsOptions listSynonymsOptions) {
     IBMWatsonValidator.notNull(listSynonymsOptions, 'listSynonymsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms', new String[]{ listSynonymsOptions.workspaceId(), listSynonymsOptions.entity(), listSynonymsOptions.value() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms', new String[]{ listSynonymsOptions.workspaceId(), listSynonymsOptions.entity(), listSynonymsOptions.value() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listSynonyms');
     Map<String, String> requestHeaders = (listSynonymsOptions != null) ? listSynonymsOptions.requestHeaders() : null;
@@ -1286,11 +1357,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listSynonymsOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listSynonymsOptions.pageLimit()));
     }
-    if (listSynonymsOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listSynonymsOptions.includeCount()));
-    }
-    if (listSynonymsOptions.xsort() != null) {
-      builder.query('sort', listSynonymsOptions.xsort());
+    if (listSynonymsOptions.xSort() != null) {
+      builder.query('sort', listSynonymsOptions.xSort());
     }
     if (listSynonymsOptions.cursor() != null) {
       builder.query('cursor', listSynonymsOptions.cursor());
@@ -1317,7 +1385,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Synonym createSynonym(IBMAssistantV1Models.CreateSynonymOptions createSynonymOptions) {
     IBMWatsonValidator.notNull(createSynonymOptions, 'createSynonymOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms', new String[]{ createSynonymOptions.workspaceId(), createSynonymOptions.entity(), createSynonymOptions.value() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms', new String[]{ createSynonymOptions.workspaceId(), createSynonymOptions.entity(), createSynonymOptions.value() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createSynonym');
     Map<String, String> requestHeaders = (createSynonymOptions != null) ? createSynonymOptions.requestHeaders() : null;
@@ -1329,7 +1398,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('synonym', createSynonymOptions.synonym());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
   }
@@ -1346,7 +1415,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Synonym getSynonym(IBMAssistantV1Models.GetSynonymOptions getSynonymOptions) {
     IBMWatsonValidator.notNull(getSynonymOptions, 'getSynonymOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ getSynonymOptions.workspaceId(), getSynonymOptions.entity(), getSynonymOptions.value(), getSynonymOptions.synonym() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ getSynonymOptions.workspaceId(), getSynonymOptions.entity(), getSynonymOptions.value(), getSynonymOptions.synonym() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getSynonym');
     Map<String, String> requestHeaders = (getSynonymOptions != null) ? getSynonymOptions.requestHeaders() : null;
@@ -1378,7 +1448,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.Synonym updateSynonym(IBMAssistantV1Models.UpdateSynonymOptions updateSynonymOptions) {
     IBMWatsonValidator.notNull(updateSynonymOptions, 'updateSynonymOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ updateSynonymOptions.workspaceId(), updateSynonymOptions.entity(), updateSynonymOptions.value(), updateSynonymOptions.synonym() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ updateSynonymOptions.workspaceId(), updateSynonymOptions.entity(), updateSynonymOptions.value(), updateSynonymOptions.synonym() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=updateSynonym');
     Map<String, String> requestHeaders = (updateSynonymOptions != null) ? updateSynonymOptions.requestHeaders() : null;
@@ -1392,7 +1463,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateSynonymOptions.newSynonym() != null) {
       contentJson.put('synonym', updateSynonymOptions.newSynonym());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
   }
@@ -1409,7 +1480,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteSynonym(IBMAssistantV1Models.DeleteSynonymOptions deleteSynonymOptions) {
     IBMWatsonValidator.notNull(deleteSynonymOptions, 'deleteSynonymOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ deleteSynonymOptions.workspaceId(), deleteSynonymOptions.entity(), deleteSynonymOptions.value(), deleteSynonymOptions.synonym() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ deleteSynonymOptions.workspaceId(), deleteSynonymOptions.entity(), deleteSynonymOptions.value(), deleteSynonymOptions.synonym() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteSynonym');
     Map<String, String> requestHeaders = (deleteSynonymOptions != null) ? deleteSynonymOptions.requestHeaders() : null;
@@ -1435,7 +1507,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.DialogNodeCollection listDialogNodes(IBMAssistantV1Models.ListDialogNodesOptions listDialogNodesOptions) {
     IBMWatsonValidator.notNull(listDialogNodesOptions, 'listDialogNodesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ listDialogNodesOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ listDialogNodesOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listDialogNodes');
     Map<String, String> requestHeaders = (listDialogNodesOptions != null) ? listDialogNodesOptions.requestHeaders() : null;
@@ -1448,11 +1521,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listDialogNodesOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listDialogNodesOptions.pageLimit()));
     }
-    if (listDialogNodesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listDialogNodesOptions.includeCount()));
-    }
-    if (listDialogNodesOptions.xsort() != null) {
-      builder.query('sort', listDialogNodesOptions.xsort());
+    if (listDialogNodesOptions.xSort() != null) {
+      builder.query('sort', listDialogNodesOptions.xSort());
     }
     if (listDialogNodesOptions.cursor() != null) {
       builder.query('cursor', listDialogNodesOptions.cursor());
@@ -1479,7 +1549,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.DialogNode createDialogNode(IBMAssistantV1Models.CreateDialogNodeOptions createDialogNodeOptions) {
     IBMWatsonValidator.notNull(createDialogNodeOptions, 'createDialogNodeOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ createDialogNodeOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ createDialogNodeOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createDialogNode');
     Map<String, String> requestHeaders = (createDialogNodeOptions != null) ? createDialogNodeOptions.requestHeaders() : null;
@@ -1504,22 +1575,22 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('previous_sibling', createDialogNodeOptions.previousSibling());
     }
     if (createDialogNodeOptions.output() != null) {
-      contentJson.put('output', createDialogNodeOptions.output());
+      contentJson.put('output', createDialogNodeOptions.output().replacePropertyNames());
     }
     if (createDialogNodeOptions.context() != null) {
-      contentJson.put('context', createDialogNodeOptions.context());
+      contentJson.put('context', createDialogNodeOptions.context().replacePropertyNames());
     }
     if (createDialogNodeOptions.metadata() != null) {
-      contentJson.put('metadata', createDialogNodeOptions.metadata());
+      contentJson.put('metadata', createDialogNodeOptions.metadata().replacePropertyNames());
     }
     if (createDialogNodeOptions.nextStep() != null) {
-      contentJson.put('next_step', createDialogNodeOptions.nextStep());
+      contentJson.put('next_step', createDialogNodeOptions.nextStep().replacePropertyNames());
     }
     if (createDialogNodeOptions.title() != null) {
       contentJson.put('title', createDialogNodeOptions.title());
     }
-    if (createDialogNodeOptions.nodeType() != null) {
-      contentJson.put('type', createDialogNodeOptions.nodeType());
+    if (createDialogNodeOptions.xType() != null) {
+      contentJson.put('type', createDialogNodeOptions.xType());
     }
     if (createDialogNodeOptions.eventName() != null) {
       contentJson.put('event_name', createDialogNodeOptions.eventName());
@@ -1528,7 +1599,11 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('variable', createDialogNodeOptions.variable());
     }
     if (createDialogNodeOptions.actions() != null) {
-      contentJson.put('actions', createDialogNodeOptions.actions());
+      List<Object> actionsList = new List<Object>();
+      for (IBMAssistantV1Models.DialogNodeAction actionsItem : createDialogNodeOptions.actions()) {
+        actionsList.add(actionsItem.replacePropertyNames());
+      }
+      contentJson.put('actions', actionsList);
     }
     if (createDialogNodeOptions.digressIn() != null) {
       contentJson.put('digress_in', createDialogNodeOptions.digressIn());
@@ -1542,7 +1617,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createDialogNodeOptions.userLabel() != null) {
       contentJson.put('user_label', createDialogNodeOptions.userLabel());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.DialogNode) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNode.class);
   }
@@ -1559,7 +1634,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.DialogNode getDialogNode(IBMAssistantV1Models.GetDialogNodeOptions getDialogNodeOptions) {
     IBMWatsonValidator.notNull(getDialogNodeOptions, 'getDialogNodeOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ getDialogNodeOptions.workspaceId(), getDialogNodeOptions.dialogNode() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ getDialogNodeOptions.workspaceId(), getDialogNodeOptions.dialogNode() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getDialogNode');
     Map<String, String> requestHeaders = (getDialogNodeOptions != null) ? getDialogNodeOptions.requestHeaders() : null;
@@ -1591,7 +1667,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.DialogNode updateDialogNode(IBMAssistantV1Models.UpdateDialogNodeOptions updateDialogNodeOptions) {
     IBMWatsonValidator.notNull(updateDialogNodeOptions, 'updateDialogNodeOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ updateDialogNodeOptions.workspaceId(), updateDialogNodeOptions.dialogNode() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ updateDialogNodeOptions.workspaceId(), updateDialogNodeOptions.dialogNode() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=updateDialogNode');
     Map<String, String> requestHeaders = (updateDialogNodeOptions != null) ? updateDialogNodeOptions.requestHeaders() : null;
@@ -1618,22 +1695,22 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('previous_sibling', updateDialogNodeOptions.newPreviousSibling());
     }
     if (updateDialogNodeOptions.newOutput() != null) {
-      contentJson.put('output', updateDialogNodeOptions.newOutput());
+      contentJson.put('output', updateDialogNodeOptions.newOutput().replacePropertyNames());
     }
     if (updateDialogNodeOptions.newContext() != null) {
-      contentJson.put('context', updateDialogNodeOptions.newContext());
+      contentJson.put('context', updateDialogNodeOptions.newContext().replacePropertyNames());
     }
     if (updateDialogNodeOptions.newMetadata() != null) {
-      contentJson.put('metadata', updateDialogNodeOptions.newMetadata());
+      contentJson.put('metadata', updateDialogNodeOptions.newMetadata().replacePropertyNames());
     }
     if (updateDialogNodeOptions.newNextStep() != null) {
-      contentJson.put('next_step', updateDialogNodeOptions.newNextStep());
+      contentJson.put('next_step', updateDialogNodeOptions.newNextStep().replacePropertyNames());
     }
     if (updateDialogNodeOptions.newTitle() != null) {
       contentJson.put('title', updateDialogNodeOptions.newTitle());
     }
-    if (updateDialogNodeOptions.nodeType() != null) {
-      contentJson.put('type', updateDialogNodeOptions.nodeType());
+    if (updateDialogNodeOptions.newType() != null) {
+      contentJson.put('type', updateDialogNodeOptions.newType());
     }
     if (updateDialogNodeOptions.newEventName() != null) {
       contentJson.put('event_name', updateDialogNodeOptions.newEventName());
@@ -1642,7 +1719,11 @@ public class IBMAssistantV1 extends IBMWatsonService {
       contentJson.put('variable', updateDialogNodeOptions.newVariable());
     }
     if (updateDialogNodeOptions.newActions() != null) {
-      contentJson.put('actions', updateDialogNodeOptions.newActions());
+      List<Object> newActionsList = new List<Object>();
+      for (IBMAssistantV1Models.DialogNodeAction newActionsItem : updateDialogNodeOptions.newActions()) {
+        newActionsList.add(newActionsItem.replacePropertyNames());
+      }
+      contentJson.put('actions', newActionsList);
     }
     if (updateDialogNodeOptions.newDigressIn() != null) {
       contentJson.put('digress_in', updateDialogNodeOptions.newDigressIn());
@@ -1656,7 +1737,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateDialogNodeOptions.newUserLabel() != null) {
       contentJson.put('user_label', updateDialogNodeOptions.newUserLabel());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV1Models.DialogNode) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNode.class);
   }
@@ -1673,7 +1754,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteDialogNode(IBMAssistantV1Models.DeleteDialogNodeOptions deleteDialogNodeOptions) {
     IBMWatsonValidator.notNull(deleteDialogNodeOptions, 'deleteDialogNodeOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ deleteDialogNodeOptions.workspaceId(), deleteDialogNodeOptions.dialogNode() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ deleteDialogNodeOptions.workspaceId(), deleteDialogNodeOptions.dialogNode() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteDialogNode');
     Map<String, String> requestHeaders = (deleteDialogNodeOptions != null) ? deleteDialogNodeOptions.requestHeaders() : null;
@@ -1700,7 +1782,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.LogCollection listLogs(IBMAssistantV1Models.ListLogsOptions listLogsOptions) {
     IBMWatsonValidator.notNull(listLogsOptions, 'listLogsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/logs', new String[]{ listLogsOptions.workspaceId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/workspaces/{0}/logs', new String[]{ listLogsOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listLogs');
     Map<String, String> requestHeaders = (listLogsOptions != null) ? listLogsOptions.requestHeaders() : null;
@@ -1710,8 +1793,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (listLogsOptions.xsort() != null) {
-      builder.query('sort', listLogsOptions.xsort());
+    if (listLogsOptions.xSort() != null) {
+      builder.query('sort', listLogsOptions.xSort());
     }
     if (listLogsOptions.filter() != null) {
       builder.query('filter', listLogsOptions.filter());
@@ -1739,7 +1822,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public IBMAssistantV1Models.LogCollection listAllLogs(IBMAssistantV1Models.ListAllLogsOptions listAllLogsOptions) {
     IBMWatsonValidator.notNull(listAllLogsOptions, 'listAllLogsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/logs');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/logs');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listAllLogs');
     Map<String, String> requestHeaders = (listAllLogsOptions != null) ? listAllLogsOptions.requestHeaders() : null;
@@ -1752,8 +1836,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (listAllLogsOptions.filter() != null) {
       builder.query('filter', listAllLogsOptions.filter());
     }
-    if (listAllLogsOptions.xsort() != null) {
-      builder.query('sort', listAllLogsOptions.xsort());
+    if (listAllLogsOptions.xSort() != null) {
+      builder.query('sort', listAllLogsOptions.xSort());
     }
     if (listAllLogsOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listAllLogsOptions.pageLimit()));
@@ -1780,7 +1864,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    */
   public void deleteUserData(IBMAssistantV1Models.DeleteUserDataOptions deleteUserDataOptions) {
     IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v1/user_data');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + '/v1/user_data');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteUserData');
     Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;

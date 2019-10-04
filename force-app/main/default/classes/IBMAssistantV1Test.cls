@@ -78,6 +78,8 @@ private class IBMAssistantV1Test {
   private static String headerKey;
   private static String headerVal;
 
+  private static IBMAssistantV1 service;
+
   static {
     workspaceName = 'test_workspace';
     workspaceDescription = 'Description of ' + workspaceName;
@@ -157,33 +159,10 @@ private class IBMAssistantV1Test {
     label = 'label';
     messageToHumanAgent = 'message_to_human_agent';
     topic = 'topic';
-    headerKey = 'Header-Key';
-    headerVal = 'header_val';
-  }
+    headerKey = 'Test-Header';
+    headerVal = 'test_value';
 
-  static testMethod void testVersionConstructor() {
-    Test.startTest();
-    IBMAssistantV1 service = new IBMAssistantV1('2018-02-16');
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testBasicConstructor() {
-    Test.startTest();
-    IBMAssistantV1 service = new IBMAssistantV1('2018-02-16', 'username', 'password');
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testConfigConstructor() {
-    Test.startTest();
-    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
-      .username('username')
-      .password('password')
-      .build();
-    IBMAssistantV1 service = new IBMAssistantV1('2018-02-16', config);
-    System.assert(service != null);
-    Test.stopTest();
+    service = new IBMAssistantV1('2019-02-28', new IBMWatsonNoAuthAuthenticator());
   }
 
   static testMethod void testCreateWorkspace() {
@@ -196,10 +175,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16', iamOptions);
     IBMAssistantV1Models.Counterexample counterexample = new IBMAssistantV1Models.CounterexampleBuilder('text')
       .text(counterexampleText)
       .build();
@@ -215,16 +190,18 @@ private class IBMAssistantV1Test {
       .updated((Datetime) JSON.deserialize(timeUpdated, Datetime.class))
       .build();
     createIntent = createIntent.newBuilder().build();
-    IBMAssistantV1Models.DialogNodeAction  dialogNodeAction = new IBMAssistantV1Models.DialogNodeAction();
-    dialogNodeAction.setName('test');
-    dialogNodeAction.setActionType('test');
-    dialogNodeAction.setParameters(metadata);
-    dialogNodeAction.setResultVariable('test');
-    dialogNodeAction.setCredentials('test');
-    IBMAssistantV1Models.DialogNodeNextStep dialogNodeNextStep=new IBMAssistantV1Models.DialogNodeNextStep();
-    dialogNodeNextStep.setBehavior('test');
-    dialogNodeNextStep.setDialogNode('test');
-    dialogNodeNextStep.setSelector('test');
+    IBMAssistantV1Models.DialogNodeAction dialogNodeAction = new IBMAssistantV1Models.DialogNodeActionBuilder()
+      .name('test')
+      .xType('test')
+      .parameters(metadata)
+      .resultVariable('test')
+      .credentials('test')
+      .build();
+    IBMAssistantV1Models.DialogNodeNextStep dialogNodeNextStep=new IBMAssistantV1Models.DialogNodeNextStepBuilder()
+      .behavior('test')
+      .dialogNode('test')
+      .selector('test')
+      .build();
     String userLabel = 'user_label';
     IBMAssistantV1Models.DialogNode createDialogNode = new IBMAssistantV1Models.DialogNodeBuilder()
       .addActions(dialogNodeAction)
@@ -239,7 +216,7 @@ private class IBMAssistantV1Test {
       .nextStep(dialogNodeNextStep)
       .actions(new List<IBMAssistantV1Models.DialogNodeAction>{dialogNodeAction})
       .title('test')
-      .nodeType('test')
+      .xType('test')
       .eventName('test')
       .variable('test')
       .userLabel(userLabel)
@@ -252,7 +229,7 @@ private class IBMAssistantV1Test {
       .metadata(metadata)
       .synonyms(new List<String>{'test1', 'test2'})
       .patterns(new List<String>{'test1', 'test2'})
-      .valueType('test')
+      .xType('test')
       .build();
     createValue = createValue.newBuilder().build();
     IBMAssistantV1Models.CreateEntity createEntity = new IBMAssistantV1Models.CreateEntityBuilder('test')
@@ -265,19 +242,22 @@ private class IBMAssistantV1Test {
       .updated((Datetime) JSON.deserialize(timeUpdated, Datetime.class))
       .build();
     createEntity = createEntity.newBuilder().build();
-    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
-    disambiguation.setEnabled(true);
-    disambiguation.setNoneOfTheAbovePrompt('none of the above');
-    disambiguation.setPrompt('prompt');
-    disambiguation.setSensitivity('high');
-    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
-    tooling.setStoreGenericResponses(true);
+    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguationBuilder()
+      .enabled(true)
+      .noneOfTheAbovePrompt('none of the above')
+      .prompt('prompt')
+      .sensitivity('high')
+      .build();
+    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsToolingBuilder()
+      .storeGenericResponses(true)
+      .build();
     IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
     humanAgentAssist.put('help', 'ok');
-    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
-    systemSettings.setDisambiguation(disambiguation);
-    systemSettings.setTooling(tooling);
-    systemSettings.setHumanAgentAssist(humanAgentAssist);
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettingsBuilder()
+      .disambiguation(disambiguation)
+      .tooling(tooling)
+      .humanAgentAssist(humanAgentAssist)
+      .build();
 
     IBMAssistantV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMAssistantV1Models.CreateWorkspaceOptionsBuilder()
       .name(workspaceName)
@@ -296,7 +276,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createWorkspaceOptions = createWorkspaceOptions.newBuilder().build();
-    IBMAssistantV1Models.Workspace response = assistant.createWorkspace(createWorkspaceOptions);
+    IBMAssistantV1Models.Workspace response = service.createWorkspace(createWorkspaceOptions);
 
     System.assertEquals(response.getName(), workspaceName);
     System.assertEquals(response.getDescription(), workspaceDescription);
@@ -325,16 +305,13 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.DeleteWorkspaceOptions deleteOptions = new IBMAssistantV1Models.DeleteWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteWorkspace(deleteOptions);
+    service.deleteWorkspace(deleteOptions);
 
     Test.stopTest();
   }
@@ -348,9 +325,6 @@ private class IBMAssistantV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
 
     String xsort = 'stable';
 
@@ -369,7 +343,7 @@ private class IBMAssistantV1Test {
     System.assert(getOptions.includeAudit());
     System.assertEquals(xsort, getOptions.xsort());
 
-    IBMAssistantV1Models.Workspace response = assistant.getWorkspace(getOptions);
+    IBMAssistantV1Models.Workspace response = service.getWorkspace(getOptions);
 
     System.assertEquals(response.getName(), workspaceName);
     System.assertEquals(response.getDescription(), workspaceDescription);
@@ -398,23 +372,22 @@ private class IBMAssistantV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
-    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
-    disambiguation.setEnabled(true);
-    disambiguation.setNoneOfTheAbovePrompt('none of the above');
-    disambiguation.setPrompt('prompt');
-    disambiguation.setSensitivity('high');
-    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
-    tooling.setStoreGenericResponses(true);
+    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguationBuilder()
+      .enabled(true)
+      .noneOfTheAbovePrompt('none of the above')
+      .prompt('prompt')
+      .sensitivity('high')
+      .build();
+    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsToolingBuilder()
+      .storeGenericResponses(true)
+      .build();
     IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
     humanAgentAssist.put('help', 'ok');
-    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
-    systemSettings.setDisambiguation(disambiguation);
-    systemSettings.setTooling(tooling);
-    systemSettings.setHumanAgentAssist(humanAgentAssist);
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettingsBuilder()
+      .disambiguation(disambiguation)
+      .tooling(tooling)
+      .humanAgentAssist(humanAgentAssist)
+      .build();
 
     IBMAssistantV1Models.UpdateWorkspaceOptions updateOptions = new IBMAssistantV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
@@ -423,7 +396,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
-    IBMAssistantV1Models.Workspace response = assistant.updateWorkspace(updateOptions);
+    IBMAssistantV1Models.Workspace response = service.updateWorkspace(updateOptions);
 
     System.assertEquals(response.getName(), workspaceName);
     System.assertEquals(response.getDescription(), workspaceDescription);
@@ -452,15 +425,12 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListWorkspacesOptions listOptions = new IBMAssistantV1Models.ListWorkspacesOptionsBuilder()
       .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.WorkspaceCollection response = assistant.listWorkspaces(listOptions);
+    IBMAssistantV1Models.WorkspaceCollection response = service.listWorkspaces(listOptions);
 
     System.assertEquals(response.getWorkspaces().get(0).getName(), workspaceName);
     System.assertEquals(response.getWorkspaces().get(0).getDescription(), workspaceDescription);
@@ -486,15 +456,11 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.CreateValue createValue = new IBMAssistantV1Models.CreateValueBuilder()
       .value('value')
       .build();
     createValue = createValue.newBuilder().build();
     IBMAssistantV1Models.CreateValueOptions createOptions = new IBMAssistantV1Models.CreateValueOptionsBuilder()
-      .createValue(createValue)
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
@@ -505,10 +471,10 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
-    IBMAssistantV1Models.Value response = assistant.createValue(createOptions);
+    IBMAssistantV1Models.Value response = service.createValue(createOptions);
 
     System.assertEquals(response.getValue(), valueName);
-    System.assertEquals(response.getValueType(), valueType);
+    System.assertEquals(response.getXType(), valueType);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
@@ -527,9 +493,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.DeleteValueOptions deleteOptions = new IBMAssistantV1Models.DeleteValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -538,7 +501,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteValue(deleteOptions);
+    service.deleteValue(deleteOptions);
 
     Test.stopTest();
   }
@@ -553,9 +516,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.GetValueOptions getOptions = new IBMAssistantV1Models.GetValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -565,10 +525,10 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
-    IBMAssistantV1Models.Value response = assistant.getValue(getOptions);
+    IBMAssistantV1Models.Value response = service.getValue(getOptions);
 
     System.assertEquals(response.getValue(), valueName);
-    System.assertEquals(response.getValueType(), valueType);
+    System.assertEquals(response.getXType(), valueType);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
@@ -587,9 +547,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.UpdateValueOptions updateOptions = new IBMAssistantV1Models.UpdateValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -601,10 +558,10 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
-    IBMAssistantV1Models.Value response = assistant.updateValue(updateOptions);
+    IBMAssistantV1Models.Value response = service.updateValue(updateOptions);
 
     System.assertEquals(response.getValue(), valueName);
-    System.assertEquals(response.getValueType(), valueType);
+    System.assertEquals(response.getXType(), valueType);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
@@ -623,9 +580,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListValuesOptions listOptions = new IBMAssistantV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -633,7 +587,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.ValueCollection response = assistant.listValues(listOptions);
+    IBMAssistantV1Models.ValueCollection response = service.listValues(listOptions);
 
     System.assertEquals(response.getValues().get(0).getValue(), valueName);
     System.assertEquals(response.getValues().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -652,12 +606,13 @@ private class IBMAssistantV1Test {
     Test.startTest();
     String conversationId = 'conversation_id';
 
-    IBMAssistantV1Models.Context context = new IBMAssistantV1Models.Context();
     IBMAssistantV1Models.SystemResponse systemResponse = new IBMAssistantV1Models.SystemResponse();
     IBMAssistantV1Models.MessageContextMetadata metadata = new IBMAssistantV1Models.MessageContextMetadata();
-    context.setConversationId(conversationId);
-    context.setXsystem(systemResponse);
-    context.setMetadata(metadata);
+    IBMAssistantV1Models.Context context = new IBMAssistantV1Models.ContextBuilder()
+      .conversationId(conversationId)
+      .xsystem(systemResponse)
+      .metadata(metadata)
+      .build();
 
     System.assertEquals(conversationId, context.getConversationId());
     System.assertEquals(systemResponse, context.getXsystem());
@@ -670,9 +625,10 @@ private class IBMAssistantV1Test {
     String deployment = 'deployment';
     String userId = 'user_id';
 
-    IBMAssistantV1Models.MessageContextMetadata metadata = new IBMAssistantV1Models.MessageContextMetadata();
-    metadata.setDeployment(deployment);
-    metadata.setUserId(userId);
+    IBMAssistantV1Models.MessageContextMetadata metadata = new IBMAssistantV1Models.MessageContextMetadataBuilder()
+      .deployment(deployment)
+      .userId(userId)
+      .build();
 
     System.assertEquals(deployment, metadata.getDeployment());
     System.assertEquals(userId, metadata.getUserId());
@@ -689,9 +645,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.MessageInput input = new IBMAssistantV1Models.MessageInputBuilder()
       .text(messageInput)
       .build();
@@ -705,7 +658,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     messageOptions = messageOptions.newBuilder().build();
-    IBMAssistantV1Models.MessageResponse response = assistant.message(messageOptions);
+    IBMAssistantV1Models.MessageResponse response = service.message(messageOptions);
 
     System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
     System.assertEquals(response.getIntents().get(0).getConfidence(), confidence);
@@ -746,7 +699,7 @@ private class IBMAssistantV1Test {
     System.assert(response.getOutput().getGeneric().get(0).getTyping());
     System.assertEquals(response.getOutput().getGeneric().get(0).getXtime(), testTime);
     System.assertEquals(response.getActions().get(0).getName(), actionName);
-    System.assertEquals(response.getActions().get(0).getActionType(), actionType);
+    System.assertEquals(response.getActions().get(0).getXType(), actionType);
     System.assertEquals(response.getActions().get(0).getParameters(), actionParameters);
     System.assertEquals(response.getActions().get(0).getResultVariable(), actionResultVariable);
     System.assertEquals(response.getActions().get(0).getCredentials(), actionCredentials);
@@ -763,9 +716,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.CreateIntentOptions createOptions = new IBMAssistantV1Models.CreateIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
@@ -774,7 +724,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
-    IBMAssistantV1Models.Intent response = assistant.createIntent(createOptions);
+    IBMAssistantV1Models.Intent response = service.createIntent(createOptions);
 
     System.assertEquals(response.getIntent(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
@@ -793,9 +743,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.DeleteIntentOptions deleteOptions = new IBMAssistantV1Models.DeleteIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
@@ -803,7 +750,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteIntent(deleteOptions);
+    service.deleteIntent(deleteOptions);
 
     Test.stopTest();
   }
@@ -818,9 +765,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.GetIntentOptions getOptions = new IBMAssistantV1Models.GetIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
@@ -829,7 +773,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
-    IBMAssistantV1Models.Intent response = assistant.getIntent(getOptions);
+    IBMAssistantV1Models.Intent response = service.getIntent(getOptions);
 
     System.assertEquals(response.getIntent(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
@@ -851,9 +795,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListIntentsOptions listOptions = new IBMAssistantV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
       .xexport(true)
@@ -861,7 +802,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.IntentCollection response = assistant.listIntents(listOptions);
+    IBMAssistantV1Models.IntentCollection response = service.listIntents(listOptions);
 
     System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
     System.assertEquals(response.getIntents().get(0).getDescription(), intentDescription);
@@ -889,9 +830,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.UpdateIntentOptions updateOptions = new IBMAssistantV1Models.UpdateIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
@@ -900,7 +838,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
-    IBMAssistantV1Models.Intent response = assistant.updateIntent(updateOptions);
+    IBMAssistantV1Models.Intent response = service.updateIntent(updateOptions);
 
     System.assertEquals(response.getIntent(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
@@ -919,17 +857,16 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
-    IBMAssistantV1Models.Mention mentions1 = new IBMAssistantV1Models.Mention();
-    mentions1.setEntity('entity');
-    mentions1.setLocation(new List<Long> { 0L, 10L });
+    IBMAssistantV1Models.Mention mentions1 = new IBMAssistantV1Models.MentionBuilder()
+      .entity('entity')
+      .location(new List<Long> { 0L, 10L })
+      .build();
     List<IBMAssistantV1Models.Mention> mentionsList = new List<IBMAssistantV1Models.Mention>();
     mentionsList.add(mentions1);
-    IBMAssistantV1Models.Mention mentions2 = new IBMAssistantV1Models.Mention();
-    mentions2.setEntity('second_entity');
-    mentions2.setLocation(new List<Long> { 0L, 10L });
+    IBMAssistantV1Models.Mention mentions2 = new IBMAssistantV1Models.MentionBuilder()
+      .entity('second_entity')
+      .location(new List<Long> { 0L, 10L })
+      .build();
 
     IBMAssistantV1Models.CreateExampleOptions createOptions = new IBMAssistantV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -941,7 +878,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
-    IBMAssistantV1Models.Example response = assistant.createExample(createOptions);
+    IBMAssistantV1Models.Example response = service.createExample(createOptions);
 
     mentionsList.add(mentions2);
 
@@ -961,9 +898,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.DeleteExampleOptions deleteOptions = new IBMAssistantV1Models.DeleteExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
@@ -972,7 +906,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteExample(deleteOptions);
+    service.deleteExample(deleteOptions);
 
     Test.stopTest();
   }
@@ -987,9 +921,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.GetExampleOptions getOptions = new IBMAssistantV1Models.GetExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
@@ -998,7 +929,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
-    IBMAssistantV1Models.Example response = assistant.getExample(getOptions);
+    IBMAssistantV1Models.Example response = service.getExample(getOptions);
 
     System.assertEquals(response.getText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1016,9 +947,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListExamplesOptions listOptions = new IBMAssistantV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
@@ -1026,7 +954,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.ExampleCollection response = assistant.listExamples(listOptions);
+    IBMAssistantV1Models.ExampleCollection response = service.listExamples(listOptions);
 
     System.assertEquals(response.getExamples().get(0).getText(), exampleText);
     System.assertEquals(response.getExamples().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1048,17 +976,16 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
-    IBMAssistantV1Models.Mention mentions1 = new IBMAssistantV1Models.Mention();
-    mentions1.setEntity('entity');
-    mentions1.setLocation(new List<Long> { 0L, 10L });
+    IBMAssistantV1Models.Mention mentions1 = new IBMAssistantV1Models.MentionBuilder()
+      .entity('entity')
+      .location(new List<Long> { 0L, 10L })
+      .build();
     List<IBMAssistantV1Models.Mention> mentionsList = new List<IBMAssistantV1Models.Mention>();
     mentionsList.add(mentions1);
-    IBMAssistantV1Models.Mention mentions2 = new IBMAssistantV1Models.Mention();
-    mentions2.setEntity('second_entity');
-    mentions2.setLocation(new List<Long> { 0L, 10L });
+    IBMAssistantV1Models.Mention mentions2 = new IBMAssistantV1Models.MentionBuilder()
+      .entity('second_entity')
+      .location(new List<Long> { 0L, 10L })
+      .build();
 
     IBMAssistantV1Models.UpdateExampleOptions updateOptions = new IBMAssistantV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -1071,7 +998,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
-    IBMAssistantV1Models.Example response = assistant.updateExample(updateOptions);
+    IBMAssistantV1Models.Example response = service.updateExample(updateOptions);
 
     System.assertEquals(response.getText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1089,9 +1016,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.CreateEntityOptions createOptions = new IBMAssistantV1Models.CreateEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -1100,7 +1024,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
-    IBMAssistantV1Models.Entity response = assistant.createEntity(createOptions);
+    IBMAssistantV1Models.Entity response = service.createEntity(createOptions);
 
     System.assertEquals(response.getEntity(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
@@ -1121,9 +1045,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.DeleteEntityOptions deleteOptions = new IBMAssistantV1Models.DeleteEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -1131,7 +1052,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteEntity(deleteOptions);
+    service.deleteEntity(deleteOptions);
 
     Test.stopTest();
   }
@@ -1146,9 +1067,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.GetEntityOptions getOptions = new IBMAssistantV1Models.GetEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -1157,7 +1075,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
-    IBMAssistantV1Models.Entity response = assistant.getEntity(getOptions);
+    IBMAssistantV1Models.Entity response = service.getEntity(getOptions);
 
     System.assertEquals(response.getEntity(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
@@ -1184,9 +1102,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListEntitiesOptions listOptions = new IBMAssistantV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
       .xexport(true)
@@ -1194,7 +1109,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.EntityCollection response = assistant.listEntities(listOptions);
+    IBMAssistantV1Models.EntityCollection response = service.listEntities(listOptions);
 
     System.assertEquals(response.getEntities().get(0).getEntity(), entityName);
     System.assertEquals(response.getEntities().get(0).getDescription(), entityDescription);
@@ -1225,9 +1140,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.UpdateEntityOptions updateOptions = new IBMAssistantV1Models.UpdateEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -1236,7 +1148,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
-    IBMAssistantV1Models.Entity response = assistant.updateEntity(updateOptions);
+    IBMAssistantV1Models.Entity response = service.updateEntity(updateOptions);
 
     System.assertEquals(response.getEntity(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
@@ -1257,9 +1169,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.Synonym synonym = new IBMAssistantV1Models.SynonymBuilder()
       .synonym('synonym')
       .build();
@@ -1274,7 +1183,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
-    IBMAssistantV1Models.Synonym response = assistant.createSynonym(createOptions);
+    IBMAssistantV1Models.Synonym response = service.createSynonym(createOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1292,9 +1201,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.DeleteSynonymOptions deleteOptions = new IBMAssistantV1Models.DeleteSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -1304,7 +1210,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteSynonym(deleteOptions);
+    service.deleteSynonym(deleteOptions);
 
     Test.stopTest();
   }
@@ -1319,9 +1225,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.GetSynonymOptions getOptions = new IBMAssistantV1Models.GetSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -1331,7 +1234,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
-    IBMAssistantV1Models.Synonym response = assistant.getSynonym(getOptions);
+    IBMAssistantV1Models.Synonym response = service.getSynonym(getOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1349,9 +1252,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListSynonymsOptions listOptions = new IBMAssistantV1Models.ListSynonymsOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -1360,7 +1260,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.SynonymCollection response = assistant.listSynonyms(listOptions);
+    IBMAssistantV1Models.SynonymCollection response = service.listSynonyms(listOptions);
 
     System.assertEquals(response.getSynonyms().get(0).getSynonym(), valueSynonym);
     System.assertEquals(response.getSynonyms().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1382,9 +1282,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.UpdateSynonymOptions updateOptions = new IBMAssistantV1Models.UpdateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
@@ -1395,7 +1292,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
-    IBMAssistantV1Models.Synonym response = assistant.updateSynonym(updateOptions);
+    IBMAssistantV1Models.Synonym response = service.updateSynonym(updateOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1413,16 +1310,8 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     String userLabel = 'user_label';
-    IBMAssistantV1Models.DialogNode dialogNode = new IBMAssistantV1Models.DialogNodeBuilder()
-      .dialogNode('dialog_node')
-      .build();
-    dialogNode = dialogNode.newBuilder().build();
     IBMAssistantV1Models.CreateDialogNodeOptions createOptions = new IBMAssistantV1Models.CreateDialogNodeOptionsBuilder()
-      .dialogNode(dialogNode)
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .digressIn(dialogNodeDigressIn)
@@ -1433,7 +1322,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
-    IBMAssistantV1Models.DialogNode response = assistant.createDialogNode(createOptions);
+    IBMAssistantV1Models.DialogNode response = service.createDialogNode(createOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
@@ -1450,11 +1339,11 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getMetadata(), metadata);
     System.assertEquals(response.getContext(), dialogNodeContext);
     System.assertEquals(response.getActions().get(0).getName(), actionName);
-    System.assertEquals(response.getActions().get(0).getActionType(), actionType);
+    System.assertEquals(response.getActions().get(0).getXType(), actionType);
     System.assertEquals(response.getActions().get(0).getParameters(), actionParameters);
     System.assertEquals(response.getActions().get(0).getResultVariable(), actionResultVariable);
     System.assertEquals(response.getActions().get(0).getCredentials(), actionCredentials);
-    System.assertEquals(response.getNodeType(), dialogNodeType);
+    System.assertEquals(response.getXType(), dialogNodeType);
     System.assertEquals(response.getEventName(), dialogNodeEventName);
     System.assertEquals(response.getVariable(), dialogNodeVariable);
     System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
@@ -1473,9 +1362,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.DeleteDialogNodeOptions deleteOptions = new IBMAssistantV1Models.DeleteDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
@@ -1483,7 +1369,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteDialogNode(deleteOptions);
+    service.deleteDialogNode(deleteOptions);
 
     Test.stopTest();
   }
@@ -1498,9 +1384,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.GetDialogNodeOptions getOptions = new IBMAssistantV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
@@ -1508,7 +1391,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
-    IBMAssistantV1Models.DialogNode response = assistant.getDialogNode(getOptions);
+    IBMAssistantV1Models.DialogNode response = service.getDialogNode(getOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
@@ -1525,11 +1408,11 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getMetadata(), metadata);
     System.assertEquals(response.getContext(), dialogNodeContext);
     System.assertEquals(response.getActions().get(0).getName(), actionName);
-    System.assertEquals(response.getActions().get(0).getActionType(), actionType);
+    System.assertEquals(response.getActions().get(0).getXType(), actionType);
     System.assertEquals(response.getActions().get(0).getParameters(), actionParameters);
     System.assertEquals(response.getActions().get(0).getResultVariable(), actionResultVariable);
     System.assertEquals(response.getActions().get(0).getCredentials(), actionCredentials);
-    System.assertEquals(response.getNodeType(), dialogNodeType);
+    System.assertEquals(response.getXType(), dialogNodeType);
     System.assertEquals(response.getEventName(), dialogNodeEventName);
     System.assertEquals(response.getVariable(), dialogNodeVariable);
     Test.stopTest();
@@ -1545,16 +1428,13 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListDialogNodesOptions listOptions = new IBMAssistantV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
       .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.DialogNodeCollection response = assistant.listDialogNodes(listOptions);
+    IBMAssistantV1Models.DialogNodeCollection response = service.listDialogNodes(listOptions);
 
     System.assertEquals(response.getDialogNodes().get(0).getDialogNode(), dialogNodeName);
     System.assertEquals(response.getDialogNodes().get(0).getDescription(), dialogNodeDescription);
@@ -1593,9 +1473,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     String newUserLabel = 'new_user_label';
 
     IBMAssistantV1Models.UpdateDialogNodeOptions updateOptions = new IBMAssistantV1Models.UpdateDialogNodeOptionsBuilder()
@@ -1611,7 +1488,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
-    IBMAssistantV1Models.DialogNode response = assistant.updateDialogNode(updateOptions);
+    IBMAssistantV1Models.DialogNode response = service.updateDialogNode(updateOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
@@ -1649,16 +1526,13 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListLogsOptions listOptions = new IBMAssistantV1Models.ListLogsOptionsBuilder()
       .workspaceId(workspaceId)
       .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.LogCollection response = assistant.listLogs(listOptions);
+    IBMAssistantV1Models.LogCollection response = service.listLogs(listOptions);
 
     System.assertEquals(response.getLogs().get(0).getRequest().getInput().getText(), messageInput);
     System.assertEquals(response.getLogs().get(0).getResponse().getIntents().get(0).getIntent(), intentName);
@@ -1696,9 +1570,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.Counterexample counterexample = new IBMAssistantV1Models.CounterexampleBuilder()
       .text('text')
       .build();
@@ -1711,7 +1582,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
-    IBMAssistantV1Models.Counterexample response = assistant.createCounterexample(createOptions);
+    IBMAssistantV1Models.Counterexample response = service.createCounterexample(createOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1728,8 +1599,6 @@ private class IBMAssistantV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
 
     IBMAssistantV1Models.CreateCounterexampleOptions createOptions =
       new IBMAssistantV1Models.CreateCounterexampleOptionsBuilder(workspaceId,counterexampleText)
@@ -1737,7 +1606,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
-    IBMAssistantV1Models.Counterexample response = assistant.createCounterexample(createOptions);
+    IBMAssistantV1Models.Counterexample response = service.createCounterexample(createOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1755,9 +1624,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.DeleteCounterexampleOptions deleteOptions = new IBMAssistantV1Models.DeleteCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
@@ -1765,7 +1631,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteCounterexample(deleteOptions);
+    service.deleteCounterexample(deleteOptions);
 
     Test.stopTest();
   }
@@ -1780,9 +1646,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.GetCounterexampleOptions getOptions = new IBMAssistantV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
@@ -1790,7 +1653,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
-    IBMAssistantV1Models.Counterexample response = assistant.getCounterexample(getOptions);
+    IBMAssistantV1Models.Counterexample response = service.getCounterexample(getOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1808,16 +1671,13 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.ListCounterexamplesOptions listOptions = new IBMAssistantV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .addHeader(headerKey, headerVal)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
-    IBMAssistantV1Models.CounterexampleCollection response = assistant.listCounterexamples(listOptions);
+    IBMAssistantV1Models.CounterexampleCollection response = service.listCounterexamples(listOptions);
 
     System.assertEquals(response.getCounterexamples().get(0).getText(), counterexampleText);
     System.assertEquals(response.getCounterexamples().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1839,9 +1699,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     IBMAssistantV1Models.UpdateCounterexampleOptions updateOptions = new IBMAssistantV1Models.UpdateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
@@ -1850,7 +1707,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
-    IBMAssistantV1Models.Counterexample response = assistant.updateCounterexample(updateOptions);
+    IBMAssistantV1Models.Counterexample response = service.updateCounterexample(updateOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1868,9 +1725,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     String customerId = 'salesforce_sdk_test_id';
     IBMAssistantV1Models.DeleteUserDataOptions deleteOptions = new IBMAssistantV1Models.DeleteUserDataOptionsBuilder()
       .customerId(customerId)
@@ -1878,7 +1732,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
-    assistant.deleteUserData(deleteOptions);
+    service.deleteUserData(deleteOptions);
 
     Test.stopTest();
   }
@@ -1893,9 +1747,6 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
-
     String entity = 'amenity';
 
     IBMAssistantV1Models.ListMentionsOptions listMentionsOptions = new IBMAssistantV1Models.ListMentionsOptionsBuilder()
@@ -1905,7 +1756,7 @@ private class IBMAssistantV1Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listMentionsOptions = listMentionsOptions.newBuilder().build();
-    IBMAssistantV1Models.EntityMentionCollection response = assistant.listMentions(listMentionsOptions);
+    IBMAssistantV1Models.EntityMentionCollection response = service.listMentions(listMentionsOptions);
 
     System.assert(!response.getExamples().isEmpty());
 

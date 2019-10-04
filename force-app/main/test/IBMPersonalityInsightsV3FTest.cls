@@ -1,26 +1,24 @@
 public with sharing class IBMPersonalityInsightsV3FTest {
 
-  private static String VERSION_2017_09_01 = '2017-09-01';
+  private static String VERSION = '2017-10-13';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_personality_insights_v3';
   private static String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
 
-  public static void runAllTests(String username, String password) {
-    testProfile(username, password);
+  public static void runAllTests(String apiKey) {
+    IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(apiKey);
+    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, authenticator);
+    service.setServiceURL(URL);
+
+    testProfile(service);
+    testProfileAsCSV(service);
   }
 
   /**
    * Generates a personality profile based on input text.
    *
    */
-  public static IBMPersonalityInsightsV3Models.Profile testProfile(String username, String password) {
-    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01');
-
-    if (username != null && password != null) {
-      personalityInsights.setEndPoint(URL);
-      personalityInsights.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMPersonalityInsightsV3Models.Profile testProfile(IBMPersonalityInsightsV3 service) {
     IBMPersonalityInsightsV3Models.ContentItem contentItem = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
       .content('text/plain')
       .id('test')
@@ -58,19 +56,12 @@ public with sharing class IBMPersonalityInsightsV3FTest {
              'The partnership with Watson doesn\'t mean Salesforce is abandoning Einstein. The company launched a new tool at Dreamforce called myEinstein, which lets users create AI-powered apps and chat bots without needing any coding knowledge. Salesforce also announced a new partnership with Google that will provide the CRM with access to Google Analytics and Google\'s own AI technology.')
       .build();
 
-    IBMPersonalityInsightsV3Models.Profile resp = personalityInsights.profile(options);
+    IBMPersonalityInsightsV3Models.Profile resp = service.profile(options);
     System.debug('IBMNaturalLanguageUnderstandingV1FTest.testAnalyze(): ' + resp);
     return resp;
   }
 
-  public static IBMWatsonFile testProfileAsCSV(String username, String password) {
-    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01');
-
-    if (username != null && password != null) {
-      personalityInsights.setEndPoint(URL);
-      personalityInsights.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMWatsonFile testProfileAsCSV(IBMPersonalityInsightsV3 service) {
     IBMPersonalityInsightsV3Models.ContentItem contentItem = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
       .content('text/plain')
       .id('test')
@@ -109,8 +100,8 @@ public with sharing class IBMPersonalityInsightsV3FTest {
              'The partnership with Watson doesn\'t mean Salesforce is abandoning Einstein. The company launched a new tool at Dreamforce called myEinstein, which lets users create AI-powered apps and chat bots without needing any coding knowledge. Salesforce also announced a new partnership with Google that will provide the CRM with access to Google Analytics and Google\'s own AI technology.')
       .build();
 
-    IBMWatsonFile resp = personalityInsights.profileAsCsv(options);
-    System.debug('IBMNaturalLanguageUnderstandingV1FTest.testAnalyze(): ' + resp);
+    IBMWatsonFile resp = service.profileAsCsv(options);
+    System.assert(resp != null);
     return resp;
   }
 }

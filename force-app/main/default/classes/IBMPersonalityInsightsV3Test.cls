@@ -4,36 +4,15 @@ private class IBMPersonalityInsightsV3Test {
   private static String HEADER_KEY;
   private static String HEADER_VAL;
 
+  private static IBMPersonalityInsightsV3 service;
+
   static {
-    VERSION = '2017-09-01';
+    VERSION = '2017-10-13';
     HEADER_KEY = 'Header-Key';
     HEADER_VAL = 'header_val';
+    service = new IBMPersonalityInsightsV3(VERSION, new IBMWatsonNoAuthAuthenticator());
   }
 
-  static testMethod void testVersionConstructor() {
-    Test.startTest();
-    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION);
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testBasicConstructor() {
-    Test.startTest();
-    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, 'username', 'password');
-    System.assert(service != null);
-    Test.stopTest();
-  }
-
-  static testMethod void testConfigConstructor() {
-    Test.startTest();
-    IBMWatsonAuthenticatorConfig config = new IBMWatsonBasicAuthConfig.Builder()
-      .username('username')
-      .password('password')
-      .build();
-    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, config);
-    System.assert(service != null);
-    Test.stopTest();
-  }
   /**
    * Generates a personality profile based on input text.
    *
@@ -43,11 +22,6 @@ private class IBMPersonalityInsightsV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3(VERSION, iamOptions);
-    personalityInsights.setEndPoint('https://gateway.watsonplatform.net/personality-insights/api');
     IBMPersonalityInsightsV3Models.ContentItem contentItem = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
       .content('text/plain')
       .id('test')
@@ -63,7 +37,7 @@ private class IBMPersonalityInsightsV3Test {
     contentItem = contentItem.newBuilder().build();
     IBMPersonalityInsightsV3Models.Content content = new IBMPersonalityInsightsV3Models.ContentBuilder()
       .addContentItems(contentItem)
-      .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
+      .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem>{ contentItem })
       .build();
     // or you can use following
     content = new IBMPersonalityInsightsV3Models.ContentBuilder(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
@@ -84,8 +58,7 @@ private class IBMPersonalityInsightsV3Test {
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
-    IBMPersonalityInsightsV3Models.Profile resp =
-      personalityInsights.profile(options);
+    IBMPersonalityInsightsV3Models.Profile resp = service.profile(options);
     System.assertEquals(content.contentItems().size(), 1);
     System.assertEquals(contentItem.content(), 'text/plain');
     System.assertEquals(contentItem.contenttype(), IBMWatsonHttpMediaType.APPLICATION_JSON);
@@ -135,10 +108,6 @@ private class IBMPersonalityInsightsV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
-      .apiKey('apikey')
-      .build();
-    IBMPersonalityInsightsV3 service = new IBMPersonalityInsightsV3(VERSION, iamOptions);
     IBMPersonalityInsightsV3Models.ProfileOptions options = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
       .text('text')
       .contentLanguage('en')

@@ -2,12 +2,16 @@
  * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
  * dialog editor to create conversation flows between your apps and your users.
  *
+ * The Assistant v2 API provides runtime methods your client application can use to send user input to an assistant and
+ * receive a response.
+ *
  * @version V2
- * @see <a href="http://www.ibm.com/watson/developercloud/assistant.html">Assistant</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/assistant/">Assistant</a>
  */
 public class IBMAssistantV2 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/assistant/api';
+  private static final String SERVICE_NAME = 'assistant';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/assistant/api';
 
   private String versionDate;
 
@@ -15,41 +19,30 @@ public class IBMAssistantV2 extends IBMWatsonService {
    * Instantiates a new `IBMAssistantV2`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
+   *          calls from failing when the service introduces breaking changes.
    */
-  public IBMAssistantV2(String versionDate) {
-    super('assistant', 'v2');
+   public IBMAssistantV2(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMAssistantV2`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
+   */
+  public IBMAssistantV2(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super(SERVICE_NAME, 'v2', authenticator);
+
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(SERVICE_URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMAssistantV2` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMAssistantV2(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMAssistantV2(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMAssistantV2` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMAssistantV2(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**
@@ -63,7 +56,8 @@ public class IBMAssistantV2 extends IBMWatsonService {
    */
   public IBMAssistantV2Models.SessionResponse createSession(IBMAssistantV2Models.CreateSessionOptions createSessionOptions) {
     IBMWatsonValidator.notNull(createSessionOptions, 'createSessionOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v2/assistants/{0}/sessions', new String[]{ createSessionOptions.assistantId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v2/assistants/{0}/sessions', new String[]{ createSessionOptions.assistantId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V2;operation_id=createSession');
     Map<String, String> requestHeaders = (createSessionOptions != null) ? createSessionOptions.requestHeaders() : null;
@@ -88,7 +82,8 @@ public class IBMAssistantV2 extends IBMWatsonService {
    */
   public void deleteSession(IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptions) {
     IBMWatsonValidator.notNull(deleteSessionOptions, 'deleteSessionOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v2/assistants/{0}/sessions/{1}', new String[]{ deleteSessionOptions.assistantId(), deleteSessionOptions.sessionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v2/assistants/{0}/sessions/{1}', new String[]{ deleteSessionOptions.assistantId(), deleteSessionOptions.sessionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V2;operation_id=deleteSession');
     Map<String, String> requestHeaders = (deleteSessionOptions != null) ? deleteSessionOptions.requestHeaders() : null;
@@ -114,7 +109,8 @@ public class IBMAssistantV2 extends IBMWatsonService {
    */
   public IBMAssistantV2Models.MessageResponse message(IBMAssistantV2Models.MessageOptions messageOptions) {
     IBMWatsonValidator.notNull(messageOptions, 'messageOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v2/assistants/{0}/sessions/{1}/message', new String[]{ messageOptions.assistantId(), messageOptions.sessionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v2/assistants/{0}/sessions/{1}/message', new String[]{ messageOptions.assistantId(), messageOptions.sessionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V2;operation_id=message');
     Map<String, String> requestHeaders = (messageOptions != null) ? messageOptions.requestHeaders() : null;
@@ -126,12 +122,12 @@ public class IBMAssistantV2 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (messageOptions.input() != null) {
-      contentJson.put('input', messageOptions.input());
+      contentJson.put('input', messageOptions.input().replacePropertyNames());
     }
     if (messageOptions.context() != null) {
-      contentJson.put('context', messageOptions.context());
+      contentJson.put('context', messageOptions.context().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMAssistantV2Models.MessageResponse) createServiceCall(builder.build(), IBMAssistantV2Models.MessageResponse.class);
   }

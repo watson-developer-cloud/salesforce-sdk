@@ -1,4 +1,4 @@
-public virtual class IBMWatsonResponseModel {
+public virtual class IBMWatsonResponseModel extends IBMWatsonGenericModel {
   private Map<String, String> headers = new Map<String, String>();
 
   /**
@@ -7,49 +7,15 @@ public virtual class IBMWatsonResponseModel {
    * @return serialized String form of this
    */
   public override String toString() {
-    // get JSON string representation
-    String jsonString = JSON.serialize(this, true);
-
     // remove response headers from string representation
-    Map<String, Object> fullJsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+    Map<String, Object> fullJsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
     fullJsonMap.remove('headers');
-    String jsonStringWithoutHeaders = JSON.serialize(fullJsonMap);
 
-    // call custom serializer to raise additional properties
-    jsonStringWithoutHeaders = IBMWatsonJSONUtil.serialize(jsonStringWithoutHeaders);
+    // raise additional props
+    fullJsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(fullJsonMap);
 
     // pretty print formatting
-    jsonStringWithoutHeaders = JSON.serializePretty(JSON.deserializeUntyped(jsonStringWithoutHeaders));
-    return jsonStringWithoutHeaders;
-  }
-
-  /**
-   * Allows comparison of custom models based on their serialized String form.
-   *
-   * @param obj the object this is being compared to
-   *
-   * @return Boolean indicating whether or not the two objects are equal
-   */
-  public Boolean equals(Object obj) {
-    if ((obj == null)) {
-      return false;
-    }
-
-    IBMWatsonResponseModel other = (IBMWatsonResponseModel) obj;
-
-    return this.toString().equals(other.toString());
-  }
-
-  public virtual Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-    Object ret;
-    if (jsonString.equals('null')) {
-      ret = classType.newInstance();
-    }
-    else {
-      ret = JSON.deserialize(jsonString, classType);
-    }
-
-    return ret;
+    return JSON.serializePretty(fullJsonMap);
   }
 
   /**

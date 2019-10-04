@@ -5,11 +5,12 @@
  * filtering of results.
  *
  * @version V1
- * @see <a href="http://www.ibm.com/watson/developercloud/discovery.html">Discovery</a>
+ * @see <a href="https://console.bluemix.net/docs/services/discovery/">Discovery</a>
  */
 public class IBMDiscoveryV1 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/discovery/api';
+  private static final String SERVICE_NAME = 'discovery';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/discovery/api';
 
   private String versionDate;
 
@@ -17,41 +18,30 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * Instantiates a new `IBMDiscoveryV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
+   *          calls from failing when the service introduces breaking changes.
    */
-  public IBMDiscoveryV1(String versionDate) {
-    super('discovery', 'v1');
+   public IBMDiscoveryV1(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMDiscoveryV1`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
+   */
+  public IBMDiscoveryV1(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super(SERVICE_NAME, 'v1', authenticator);
+
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(SERVICE_URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMDiscoveryV1` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMDiscoveryV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMDiscoveryV1(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMDiscoveryV1` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMDiscoveryV1(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**
@@ -67,7 +57,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Environment createEnvironment(IBMDiscoveryV1Models.CreateEnvironmentOptions createEnvironmentOptions) {
     IBMWatsonValidator.notNull(createEnvironmentOptions, 'createEnvironmentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/environments');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/environments');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createEnvironment');
     Map<String, String> requestHeaders = (createEnvironmentOptions != null) ? createEnvironmentOptions.requestHeaders() : null;
@@ -85,7 +76,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createEnvironmentOptions.size() != null) {
       contentJson.put('size', createEnvironmentOptions.size());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Environment) createServiceCall(builder.build(), IBMDiscoveryV1Models.Environment.class);
   }
@@ -99,7 +90,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * @return the {@link IBMDiscoveryV1Models.ListEnvironmentsResponse} with the response
    */
   public IBMDiscoveryV1Models.ListEnvironmentsResponse listEnvironments(IBMDiscoveryV1Models.ListEnvironmentsOptions listEnvironmentsOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/environments');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/environments');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listEnvironments');
     Map<String, String> requestHeaders = (listEnvironmentsOptions != null) ? listEnvironmentsOptions.requestHeaders() : null;
@@ -124,7 +116,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Environment getEnvironment(IBMDiscoveryV1Models.GetEnvironmentOptions getEnvironmentOptions) {
     IBMWatsonValidator.notNull(getEnvironmentOptions, 'getEnvironmentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}', new String[]{ getEnvironmentOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}', new String[]{ getEnvironmentOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getEnvironment');
     Map<String, String> requestHeaders = (getEnvironmentOptions != null) ? getEnvironmentOptions.requestHeaders() : null;
@@ -149,7 +142,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Environment updateEnvironment(IBMDiscoveryV1Models.UpdateEnvironmentOptions updateEnvironmentOptions) {
     IBMWatsonValidator.notNull(updateEnvironmentOptions, 'updateEnvironmentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/environments/{0}', new String[]{ updateEnvironmentOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getServiceURL() + String.format('/v1/environments/{0}', new String[]{ updateEnvironmentOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=updateEnvironment');
     Map<String, String> requestHeaders = (updateEnvironmentOptions != null) ? updateEnvironmentOptions.requestHeaders() : null;
@@ -169,7 +163,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateEnvironmentOptions.size() != null) {
       contentJson.put('size', updateEnvironmentOptions.size());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Environment) createServiceCall(builder.build(), IBMDiscoveryV1Models.Environment.class);
   }
@@ -182,7 +176,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteEnvironment(IBMDiscoveryV1Models.DeleteEnvironmentOptions deleteEnvironmentOptions) {
     IBMWatsonValidator.notNull(deleteEnvironmentOptions, 'deleteEnvironmentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}', new String[]{ deleteEnvironmentOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}', new String[]{ deleteEnvironmentOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteEnvironment');
     Map<String, String> requestHeaders = (deleteEnvironmentOptions != null) ? deleteEnvironmentOptions.requestHeaders() : null;
@@ -206,7 +201,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.ListCollectionFieldsResponse listFields(IBMDiscoveryV1Models.ListFieldsOptions listFieldsOptions) {
     IBMWatsonValidator.notNull(listFieldsOptions, 'listFieldsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/fields', new String[]{ listFieldsOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/fields', new String[]{ listFieldsOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listFields');
     Map<String, String> requestHeaders = (listFieldsOptions != null) ? listFieldsOptions.requestHeaders() : null;
@@ -241,7 +237,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Configuration createConfiguration(IBMDiscoveryV1Models.CreateConfigurationOptions createConfigurationOptions) {
     IBMWatsonValidator.notNull(createConfigurationOptions, 'createConfigurationOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/configurations', new String[]{ createConfigurationOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/configurations', new String[]{ createConfigurationOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createConfiguration');
     Map<String, String> requestHeaders = (createConfigurationOptions != null) ? createConfigurationOptions.requestHeaders() : null;
@@ -257,18 +254,26 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('description', createConfigurationOptions.description());
     }
     if (createConfigurationOptions.conversions() != null) {
-      contentJson.put('conversions', createConfigurationOptions.conversions());
+      contentJson.put('conversions', createConfigurationOptions.conversions().replacePropertyNames());
     }
     if (createConfigurationOptions.enrichments() != null) {
-      contentJson.put('enrichments', createConfigurationOptions.enrichments());
+      List<Object> enrichmentsList = new List<Object>();
+      for (IBMDiscoveryV1Models.Enrichment enrichmentsItem : createConfigurationOptions.enrichments()) {
+        enrichmentsList.add(enrichmentsItem.replacePropertyNames());
+      }
+      contentJson.put('enrichments', enrichmentsList);
     }
     if (createConfigurationOptions.normalizations() != null) {
-      contentJson.put('normalizations', createConfigurationOptions.normalizations());
+      List<Object> normalizationsList = new List<Object>();
+      for (IBMDiscoveryV1Models.NormalizationOperation normalizationsItem : createConfigurationOptions.normalizations()) {
+        normalizationsList.add(normalizationsItem.replacePropertyNames());
+      }
+      contentJson.put('normalizations', normalizationsList);
     }
     if (createConfigurationOptions.source() != null) {
-      contentJson.put('source', createConfigurationOptions.source());
+      contentJson.put('source', createConfigurationOptions.source().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Configuration) createServiceCall(builder.build(), IBMDiscoveryV1Models.Configuration.class);
   }
@@ -283,7 +288,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.ListConfigurationsResponse listConfigurations(IBMDiscoveryV1Models.ListConfigurationsOptions listConfigurationsOptions) {
     IBMWatsonValidator.notNull(listConfigurationsOptions, 'listConfigurationsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/configurations', new String[]{ listConfigurationsOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/configurations', new String[]{ listConfigurationsOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listConfigurations');
     Map<String, String> requestHeaders = (listConfigurationsOptions != null) ? listConfigurationsOptions.requestHeaders() : null;
@@ -308,7 +314,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Configuration getConfiguration(IBMDiscoveryV1Models.GetConfigurationOptions getConfigurationOptions) {
     IBMWatsonValidator.notNull(getConfigurationOptions, 'getConfigurationOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ getConfigurationOptions.environmentId(), getConfigurationOptions.configurationId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ getConfigurationOptions.environmentId(), getConfigurationOptions.configurationId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getConfiguration');
     Map<String, String> requestHeaders = (getConfigurationOptions != null) ? getConfigurationOptions.requestHeaders() : null;
@@ -338,7 +345,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Configuration updateConfiguration(IBMDiscoveryV1Models.UpdateConfigurationOptions updateConfigurationOptions) {
     IBMWatsonValidator.notNull(updateConfigurationOptions, 'updateConfigurationOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ updateConfigurationOptions.environmentId(), updateConfigurationOptions.configurationId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getServiceURL() + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ updateConfigurationOptions.environmentId(), updateConfigurationOptions.configurationId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=updateConfiguration');
     Map<String, String> requestHeaders = (updateConfigurationOptions != null) ? updateConfigurationOptions.requestHeaders() : null;
@@ -354,18 +362,26 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('description', updateConfigurationOptions.description());
     }
     if (updateConfigurationOptions.conversions() != null) {
-      contentJson.put('conversions', updateConfigurationOptions.conversions());
+      contentJson.put('conversions', updateConfigurationOptions.conversions().replacePropertyNames());
     }
     if (updateConfigurationOptions.enrichments() != null) {
-      contentJson.put('enrichments', updateConfigurationOptions.enrichments());
+      List<Object> enrichmentsList = new List<Object>();
+      for (IBMDiscoveryV1Models.Enrichment enrichmentsItem : updateConfigurationOptions.enrichments()) {
+        enrichmentsList.add(enrichmentsItem.replacePropertyNames());
+      }
+      contentJson.put('enrichments', enrichmentsList);
     }
     if (updateConfigurationOptions.normalizations() != null) {
-      contentJson.put('normalizations', updateConfigurationOptions.normalizations());
+      List<Object> normalizationsList = new List<Object>();
+      for (IBMDiscoveryV1Models.NormalizationOperation normalizationsItem : updateConfigurationOptions.normalizations()) {
+        normalizationsList.add(normalizationsItem.replacePropertyNames());
+      }
+      contentJson.put('normalizations', normalizationsList);
     }
     if (updateConfigurationOptions.source() != null) {
-      contentJson.put('source', updateConfigurationOptions.source());
+      contentJson.put('source', updateConfigurationOptions.source().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Configuration) createServiceCall(builder.build(), IBMDiscoveryV1Models.Configuration.class);
   }
@@ -383,7 +399,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteConfiguration(IBMDiscoveryV1Models.DeleteConfigurationOptions deleteConfigurationOptions) {
     IBMWatsonValidator.notNull(deleteConfigurationOptions, 'deleteConfigurationOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ deleteConfigurationOptions.environmentId(), deleteConfigurationOptions.configurationId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ deleteConfigurationOptions.environmentId(), deleteConfigurationOptions.configurationId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteConfiguration');
     Map<String, String> requestHeaders = (deleteConfigurationOptions != null) ? deleteConfigurationOptions.requestHeaders() : null;
@@ -398,54 +415,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
-   * Test configuration.
-   *
-   * **Deprecated** This method is no longer supported and is scheduled to be removed from service on July 31st 2019.
-   *
-   *  Runs a sample document through the default or your configuration and returns diagnostic information designed to
-   * help you understand how the document was processed. The document is not added to the index.
-   *
-   * @param testConfigurationInEnvironmentOptions the {@link IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions} containing the options for the call
-   * @return the {@link IBMDiscoveryV1Models.TestDocument} with the response
-   */
-  public IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
-    IBMWatsonValidator.notNull(testConfigurationInEnvironmentOptions, 'testConfigurationInEnvironmentOptions cannot be null');
-    IBMWatsonValidator.isTrue((testConfigurationInEnvironmentOptions.configuration() != null) || (testConfigurationInEnvironmentOptions.file() != null) || (testConfigurationInEnvironmentOptions.metadata() != null), 'At least one of configuration, file, or metadata must be supplied.');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/preview', new String[]{ testConfigurationInEnvironmentOptions.environmentId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=testConfigurationInEnvironment');
-    Map<String, String> requestHeaders = (testConfigurationInEnvironmentOptions != null) ? testConfigurationInEnvironmentOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (testConfigurationInEnvironmentOptions.step() != null) {
-      builder.query('step', testConfigurationInEnvironmentOptions.step());
-    }
-    if (testConfigurationInEnvironmentOptions.configurationId() != null) {
-      builder.query('configuration_id', testConfigurationInEnvironmentOptions.configurationId());
-    }
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (testConfigurationInEnvironmentOptions.configuration() != null) {
-      multipartBuilder.addFormDataPart('configuration', testConfigurationInEnvironmentOptions.configuration());
-    }
-    if (testConfigurationInEnvironmentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
-      multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), fileBody);
-    }
-    if (testConfigurationInEnvironmentOptions.metadata() != null) {
-      multipartBuilder.addFormDataPart('metadata', testConfigurationInEnvironmentOptions.metadata());
-    }
-    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
-    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
-
-    return (IBMDiscoveryV1Models.TestDocument) createServiceCall(builder.build(), IBMDiscoveryV1Models.TestDocument.class);
-  }
-
-  /**
    * Create a collection.
    *
    * @param createCollectionOptions the {@link IBMDiscoveryV1Models.CreateCollectionOptions} containing the options for the call
@@ -453,7 +422,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Collection createCollection(IBMDiscoveryV1Models.CreateCollectionOptions createCollectionOptions) {
     IBMWatsonValidator.notNull(createCollectionOptions, 'createCollectionOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections', new String[]{ createCollectionOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections', new String[]{ createCollectionOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createCollection');
     Map<String, String> requestHeaders = (createCollectionOptions != null) ? createCollectionOptions.requestHeaders() : null;
@@ -474,7 +444,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createCollectionOptions.language() != null) {
       contentJson.put('language', createCollectionOptions.language());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
   }
@@ -489,7 +459,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.ListCollectionsResponse listCollections(IBMDiscoveryV1Models.ListCollectionsOptions listCollectionsOptions) {
     IBMWatsonValidator.notNull(listCollectionsOptions, 'listCollectionsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections', new String[]{ listCollectionsOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections', new String[]{ listCollectionsOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listCollections');
     Map<String, String> requestHeaders = (listCollectionsOptions != null) ? listCollectionsOptions.requestHeaders() : null;
@@ -514,7 +485,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Collection getCollection(IBMDiscoveryV1Models.GetCollectionOptions getCollectionOptions) {
     IBMWatsonValidator.notNull(getCollectionOptions, 'getCollectionOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}', new String[]{ getCollectionOptions.environmentId(), getCollectionOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}', new String[]{ getCollectionOptions.environmentId(), getCollectionOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getCollection');
     Map<String, String> requestHeaders = (getCollectionOptions != null) ? getCollectionOptions.requestHeaders() : null;
@@ -536,7 +508,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Collection updateCollection(IBMDiscoveryV1Models.UpdateCollectionOptions updateCollectionOptions) {
     IBMWatsonValidator.notNull(updateCollectionOptions, 'updateCollectionOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}', new String[]{ updateCollectionOptions.environmentId(), updateCollectionOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}', new String[]{ updateCollectionOptions.environmentId(), updateCollectionOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=updateCollection');
     Map<String, String> requestHeaders = (updateCollectionOptions != null) ? updateCollectionOptions.requestHeaders() : null;
@@ -556,7 +529,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateCollectionOptions.configurationId() != null) {
       contentJson.put('configuration_id', updateCollectionOptions.configurationId());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
   }
@@ -569,7 +542,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteCollection(IBMDiscoveryV1Models.DeleteCollectionOptions deleteCollectionOptions) {
     IBMWatsonValidator.notNull(deleteCollectionOptions, 'deleteCollectionOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}', new String[]{ deleteCollectionOptions.environmentId(), deleteCollectionOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}', new String[]{ deleteCollectionOptions.environmentId(), deleteCollectionOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteCollection');
     Map<String, String> requestHeaders = (deleteCollectionOptions != null) ? deleteCollectionOptions.requestHeaders() : null;
@@ -593,7 +567,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.ListCollectionFieldsResponse listCollectionFields(IBMDiscoveryV1Models.ListCollectionFieldsOptions listCollectionFieldsOptions) {
     IBMWatsonValidator.notNull(listCollectionFieldsOptions, 'listCollectionFieldsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/fields', new String[]{ listCollectionFieldsOptions.environmentId(), listCollectionFieldsOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/fields', new String[]{ listCollectionFieldsOptions.environmentId(), listCollectionFieldsOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listCollectionFields');
     Map<String, String> requestHeaders = (listCollectionFieldsOptions != null) ? listCollectionFieldsOptions.requestHeaders() : null;
@@ -618,7 +593,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Expansions listExpansions(IBMDiscoveryV1Models.ListExpansionsOptions listExpansionsOptions) {
     IBMWatsonValidator.notNull(listExpansionsOptions, 'listExpansionsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ listExpansionsOptions.environmentId(), listExpansionsOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ listExpansionsOptions.environmentId(), listExpansionsOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listExpansions');
     Map<String, String> requestHeaders = (listExpansionsOptions != null) ? listExpansionsOptions.requestHeaders() : null;
@@ -636,15 +612,15 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * Create or update expansion list.
    *
    * Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
-   * `500`.
-   * The current expansion list is replaced with the uploaded content.
+   * `500`. The current expansion list is replaced with the uploaded content.
    *
    * @param createExpansionsOptions the {@link IBMDiscoveryV1Models.CreateExpansionsOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
    */
   public IBMDiscoveryV1Models.Expansions createExpansions(IBMDiscoveryV1Models.CreateExpansionsOptions createExpansionsOptions) {
     IBMWatsonValidator.notNull(createExpansionsOptions, 'createExpansionsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ createExpansionsOptions.environmentId(), createExpansionsOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ createExpansionsOptions.environmentId(), createExpansionsOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createExpansions');
     Map<String, String> requestHeaders = (createExpansionsOptions != null) ? createExpansionsOptions.requestHeaders() : null;
@@ -655,8 +631,12 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('expansions', createExpansionsOptions.expansions());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    List<Object> expansionsList = new List<Object>();
+    for (IBMDiscoveryV1Models.Expansion expansionsItem : createExpansionsOptions.expansions()) {
+      expansionsList.add(expansionsItem.replacePropertyNames());
+    }
+    contentJson.put('expansions', expansionsList);
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
   }
@@ -672,7 +652,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteExpansions(IBMDiscoveryV1Models.DeleteExpansionsOptions deleteExpansionsOptions) {
     IBMWatsonValidator.notNull(deleteExpansionsOptions, 'deleteExpansionsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ deleteExpansionsOptions.environmentId(), deleteExpansionsOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ deleteExpansionsOptions.environmentId(), deleteExpansionsOptions.collectionId() }));
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteExpansions');
     Map<String, String> requestHeaders = (deleteExpansionsOptions != null) ? deleteExpansionsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -695,7 +676,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TokenDictStatusResponse getTokenizationDictionaryStatus(IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getTokenizationDictionaryStatusOptions) {
     IBMWatsonValidator.notNull(getTokenizationDictionaryStatusOptions, 'getTokenizationDictionaryStatusOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ getTokenizationDictionaryStatusOptions.environmentId(), getTokenizationDictionaryStatusOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ getTokenizationDictionaryStatusOptions.environmentId(), getTokenizationDictionaryStatusOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getTokenizationDictionaryStatus');
     Map<String, String> requestHeaders = (getTokenizationDictionaryStatusOptions != null) ? getTokenizationDictionaryStatusOptions.requestHeaders() : null;
@@ -719,7 +701,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TokenDictStatusResponse createTokenizationDictionary(IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createTokenizationDictionaryOptions) {
     IBMWatsonValidator.notNull(createTokenizationDictionaryOptions, 'createTokenizationDictionaryOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ createTokenizationDictionaryOptions.environmentId(), createTokenizationDictionaryOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ createTokenizationDictionaryOptions.environmentId(), createTokenizationDictionaryOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createTokenizationDictionary');
     Map<String, String> requestHeaders = (createTokenizationDictionaryOptions != null) ? createTokenizationDictionaryOptions.requestHeaders() : null;
@@ -731,9 +714,13 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (createTokenizationDictionaryOptions.tokenizationRules() != null) {
-      contentJson.put('tokenization_rules', createTokenizationDictionaryOptions.tokenizationRules());
+      List<Object> tokenizationRulesList = new List<Object>();
+      for (IBMDiscoveryV1Models.TokenDictRule tokenizationRulesItem : createTokenizationDictionaryOptions.tokenizationRules()) {
+        tokenizationRulesList.add(tokenizationRulesItem.replacePropertyNames());
+      }
+      contentJson.put('tokenization_rules', tokenizationRulesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.TokenDictStatusResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.TokenDictStatusResponse.class);
   }
@@ -748,7 +735,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteTokenizationDictionary(IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteTokenizationDictionaryOptions) {
     IBMWatsonValidator.notNull(deleteTokenizationDictionaryOptions, 'deleteTokenizationDictionaryOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ deleteTokenizationDictionaryOptions.environmentId(), deleteTokenizationDictionaryOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ deleteTokenizationDictionaryOptions.environmentId(), deleteTokenizationDictionaryOptions.collectionId() }));
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteTokenizationDictionary');
     Map<String, String> requestHeaders = (deleteTokenizationDictionaryOptions != null) ? deleteTokenizationDictionaryOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -771,7 +759,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TokenDictStatusResponse getStopwordListStatus(IBMDiscoveryV1Models.GetStopwordListStatusOptions getStopwordListStatusOptions) {
     IBMWatsonValidator.notNull(getStopwordListStatusOptions, 'getStopwordListStatusOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ getStopwordListStatusOptions.environmentId(), getStopwordListStatusOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ getStopwordListStatusOptions.environmentId(), getStopwordListStatusOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getStopwordListStatus');
     Map<String, String> requestHeaders = (getStopwordListStatusOptions != null) ? getStopwordListStatusOptions.requestHeaders() : null;
@@ -795,7 +784,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TokenDictStatusResponse createStopwordList(IBMDiscoveryV1Models.CreateStopwordListOptions createStopwordListOptions) {
     IBMWatsonValidator.notNull(createStopwordListOptions, 'createStopwordListOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ createStopwordListOptions.environmentId(), createStopwordListOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ createStopwordListOptions.environmentId(), createStopwordListOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createStopwordList');
     Map<String, String> requestHeaders = (createStopwordListOptions != null) ? createStopwordListOptions.requestHeaders() : null;
@@ -826,7 +816,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteStopwordList(IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions) {
     IBMWatsonValidator.notNull(deleteStopwordListOptions, 'deleteStopwordListOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ deleteStopwordListOptions.environmentId(), deleteStopwordListOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ deleteStopwordListOptions.environmentId(), deleteStopwordListOptions.collectionId() }));
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteStopwordList');
     Map<String, String> requestHeaders = (deleteStopwordListOptions != null) ? deleteStopwordListOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -871,7 +862,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public IBMDiscoveryV1Models.DocumentAccepted addDocument(IBMDiscoveryV1Models.AddDocumentOptions addDocumentOptions) {
     IBMWatsonValidator.notNull(addDocumentOptions, 'addDocumentOptions cannot be null');
     IBMWatsonValidator.isTrue((addDocumentOptions.file() != null) || (addDocumentOptions.metadata() != null), 'At least one of file or metadata must be supplied.');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/documents', new String[]{ addDocumentOptions.environmentId(), addDocumentOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/documents', new String[]{ addDocumentOptions.environmentId(), addDocumentOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=addDocument');
     Map<String, String> requestHeaders = (addDocumentOptions != null) ? addDocumentOptions.requestHeaders() : null;
@@ -908,7 +900,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.DocumentStatus getDocumentStatus(IBMDiscoveryV1Models.GetDocumentStatusOptions getDocumentStatusOptions) {
     IBMWatsonValidator.notNull(getDocumentStatusOptions, 'getDocumentStatusOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ getDocumentStatusOptions.environmentId(), getDocumentStatusOptions.collectionId(), getDocumentStatusOptions.documentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ getDocumentStatusOptions.environmentId(), getDocumentStatusOptions.collectionId(), getDocumentStatusOptions.documentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getDocumentStatus');
     Map<String, String> requestHeaders = (getDocumentStatusOptions != null) ? getDocumentStatusOptions.requestHeaders() : null;
@@ -937,7 +930,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public IBMDiscoveryV1Models.DocumentAccepted updateDocument(IBMDiscoveryV1Models.UpdateDocumentOptions updateDocumentOptions) {
     IBMWatsonValidator.notNull(updateDocumentOptions, 'updateDocumentOptions cannot be null');
     IBMWatsonValidator.isTrue((updateDocumentOptions.file() != null) || (updateDocumentOptions.metadata() != null), 'At least one of file or metadata must be supplied.');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ updateDocumentOptions.environmentId(), updateDocumentOptions.collectionId(), updateDocumentOptions.documentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ updateDocumentOptions.environmentId(), updateDocumentOptions.collectionId(), updateDocumentOptions.documentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=updateDocument');
     Map<String, String> requestHeaders = (updateDocumentOptions != null) ? updateDocumentOptions.requestHeaders() : null;
@@ -973,7 +967,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteDocument(IBMDiscoveryV1Models.DeleteDocumentOptions deleteDocumentOptions) {
     IBMWatsonValidator.notNull(deleteDocumentOptions, 'deleteDocumentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ deleteDocumentOptions.environmentId(), deleteDocumentOptions.collectionId(), deleteDocumentOptions.documentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ deleteDocumentOptions.environmentId(), deleteDocumentOptions.collectionId(), deleteDocumentOptions.documentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteDocument');
     Map<String, String> requestHeaders = (deleteDocumentOptions != null) ? deleteDocumentOptions.requestHeaders() : null;
@@ -998,10 +993,11 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.QueryResponse query(IBMDiscoveryV1Models.QueryOptions queryOptions) {
     IBMWatsonValidator.notNull(queryOptions, 'queryOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/query', new String[]{ queryOptions.environmentId(), queryOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/query', new String[]{ queryOptions.environmentId(), queryOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
-    if (queryOptions.loggingOptOut() != null) {
-      builder.addHeader('X-Watson-Logging-Opt-Out', queryOptions.loggingOptOut());
+    if (queryOptions.xWatsonLoggingOptOut() != null) {
+      builder.addHeader('X-Watson-Logging-Opt-Out', queryOptions.xWatsonLoggingOptOut());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=query');
     Map<String, String> requestHeaders = (queryOptions != null) ? queryOptions.requestHeaders() : null;
@@ -1030,14 +1026,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryOptions.count() != null) {
       contentJson.put('count', queryOptions.count());
     }
-    if (queryOptions.returnFields() != null) {
-      contentJson.put('return', queryOptions.returnFields());
+    if (queryOptions.xReturn() != null) {
+      contentJson.put('return', queryOptions.xReturn());
     }
     if (queryOptions.offset() != null) {
       contentJson.put('offset', queryOptions.offset());
     }
-    if (queryOptions.xsort() != null) {
-      contentJson.put('sort', queryOptions.xsort());
+    if (queryOptions.xSort() != null) {
+      contentJson.put('sort', queryOptions.xSort());
     }
     if (queryOptions.highlight() != null) {
       contentJson.put('highlight', queryOptions.highlight());
@@ -1057,9 +1053,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryOptions.deduplicateField() != null) {
       contentJson.put('deduplicate.field', queryOptions.deduplicateField());
     }
-    if (queryOptions.collectionIds() != null) {
-      contentJson.put('collection_ids', queryOptions.collectionIds());
-    }
     if (queryOptions.similar() != null) {
       contentJson.put('similar', queryOptions.similar());
     }
@@ -1072,7 +1065,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryOptions.bias() != null) {
       contentJson.put('bias', queryOptions.bias());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    if (queryOptions.spellingSuggestions() != null) {
+      contentJson.put('spelling_suggestions', queryOptions.spellingSuggestions());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
   }
@@ -1090,7 +1086,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.QueryNoticesResponse queryNotices(IBMDiscoveryV1Models.QueryNoticesOptions queryNoticesOptions) {
     IBMWatsonValidator.notNull(queryNoticesOptions, 'queryNoticesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/notices', new String[]{ queryNoticesOptions.environmentId(), queryNoticesOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/notices', new String[]{ queryNoticesOptions.environmentId(), queryNoticesOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=queryNotices');
     Map<String, String> requestHeaders = (queryNoticesOptions != null) ? queryNoticesOptions.requestHeaders() : null;
@@ -1118,14 +1115,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryNoticesOptions.count() != null) {
       builder.query('count', String.valueOf(queryNoticesOptions.count()));
     }
-    if (queryNoticesOptions.returnFields() != null) {
-      builder.query('return', String.join(queryNoticesOptions.returnFields(), ','));
+    if (queryNoticesOptions.xReturn() != null) {
+      builder.query('return', String.join(queryNoticesOptions.xReturn(), ','));
     }
     if (queryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryNoticesOptions.offset()));
     }
-    if (queryNoticesOptions.xsort() != null) {
-      builder.query('sort', String.join(queryNoticesOptions.xsort(), ','));
+    if (queryNoticesOptions.xSort() != null) {
+      builder.query('sort', String.join(queryNoticesOptions.xSort(), ','));
     }
     if (queryNoticesOptions.highlight() != null) {
       builder.query('highlight', String.valueOf(queryNoticesOptions.highlight()));
@@ -1167,10 +1164,11 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.QueryResponse federatedQuery(IBMDiscoveryV1Models.FederatedQueryOptions federatedQueryOptions) {
     IBMWatsonValidator.notNull(federatedQueryOptions, 'federatedQueryOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
-    if (federatedQueryOptions.loggingOptOut() != null) {
-      builder.addHeader('X-Watson-Logging-Opt-Out', federatedQueryOptions.loggingOptOut());
+    if (federatedQueryOptions.xWatsonLoggingOptOut() != null) {
+      builder.addHeader('X-Watson-Logging-Opt-Out', federatedQueryOptions.xWatsonLoggingOptOut());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=federatedQuery');
     Map<String, String> requestHeaders = (federatedQueryOptions != null) ? federatedQueryOptions.requestHeaders() : null;
@@ -1199,14 +1197,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.count() != null) {
       contentJson.put('count', federatedQueryOptions.count());
     }
-    if (federatedQueryOptions.returnFields() != null) {
-      contentJson.put('return', federatedQueryOptions.returnFields());
+    if (federatedQueryOptions.xReturn() != null) {
+      contentJson.put('return', federatedQueryOptions.xReturn());
     }
     if (federatedQueryOptions.offset() != null) {
       contentJson.put('offset', federatedQueryOptions.offset());
     }
-    if (federatedQueryOptions.xsort() != null) {
-      contentJson.put('sort', federatedQueryOptions.xsort());
+    if (federatedQueryOptions.xSort() != null) {
+      contentJson.put('sort', federatedQueryOptions.xSort());
     }
     if (federatedQueryOptions.highlight() != null) {
       contentJson.put('highlight', federatedQueryOptions.highlight());
@@ -1226,9 +1224,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.deduplicateField() != null) {
       contentJson.put('deduplicate.field', federatedQueryOptions.deduplicateField());
     }
-    if (federatedQueryOptions.collectionIds() != null) {
-      contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
-    }
     if (federatedQueryOptions.similar() != null) {
       contentJson.put('similar', federatedQueryOptions.similar());
     }
@@ -1241,7 +1236,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.bias() != null) {
       contentJson.put('bias', federatedQueryOptions.bias());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    if (federatedQueryOptions.collectionIds() != null) {
+      contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
   }
@@ -1259,7 +1257,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.QueryNoticesResponse federatedQueryNotices(IBMDiscoveryV1Models.FederatedQueryNoticesOptions federatedQueryNoticesOptions) {
     IBMWatsonValidator.notNull(federatedQueryNoticesOptions, 'federatedQueryNoticesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/notices', new String[]{ federatedQueryNoticesOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/notices', new String[]{ federatedQueryNoticesOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=federatedQueryNotices');
     Map<String, String> requestHeaders = (federatedQueryNoticesOptions != null) ? federatedQueryNoticesOptions.requestHeaders() : null;
@@ -1287,14 +1286,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryNoticesOptions.count() != null) {
       builder.query('count', String.valueOf(federatedQueryNoticesOptions.count()));
     }
-    if (federatedQueryNoticesOptions.returnFields() != null) {
-      builder.query('return', String.join(federatedQueryNoticesOptions.returnFields(), ','));
+    if (federatedQueryNoticesOptions.xReturn() != null) {
+      builder.query('return', String.join(federatedQueryNoticesOptions.xReturn(), ','));
     }
     if (federatedQueryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryNoticesOptions.offset()));
     }
-    if (federatedQueryNoticesOptions.xsort() != null) {
-      builder.query('sort', String.join(federatedQueryNoticesOptions.xsort(), ','));
+    if (federatedQueryNoticesOptions.xSort() != null) {
+      builder.query('sort', String.join(federatedQueryNoticesOptions.xSort(), ','));
     }
     if (federatedQueryNoticesOptions.highlight() != null) {
       builder.query('highlight', String.valueOf(federatedQueryNoticesOptions.highlight()));
@@ -1316,90 +1315,38 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
-   * Knowledge Graph entity query.
+   * Get Autocomplete Suggestions.
    *
-   * See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
-   * more details.
+   * Returns completion query suggestions for the specified prefix.  /n/n **Important:** this method is only valid when
+   * using the Cloud Pak version of Discovery.
    *
-   * @param queryEntitiesOptions the {@link IBMDiscoveryV1Models.QueryEntitiesOptions} containing the options for the call
-   * @return the {@link IBMDiscoveryV1Models.QueryEntitiesResponse} with the response
+   * @param getAutocompletionOptions the {@link IBMDiscoveryV1Models.GetAutocompletionOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Completions} with the response
    */
-  public IBMDiscoveryV1Models.QueryEntitiesResponse queryEntities(IBMDiscoveryV1Models.QueryEntitiesOptions queryEntitiesOptions) {
-    IBMWatsonValidator.notNull(queryEntitiesOptions, 'queryEntitiesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/query_entities', new String[]{ queryEntitiesOptions.environmentId(), queryEntitiesOptions.collectionId() }));
+  public IBMDiscoveryV1Models.Completions getAutocompletion(IBMDiscoveryV1Models.GetAutocompletionOptions getAutocompletionOptions) {
+    IBMWatsonValidator.notNull(getAutocompletionOptions, 'getAutocompletionOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/autocompletion', new String[]{ getAutocompletionOptions.environmentId(), getAutocompletionOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=queryEntities');
-    Map<String, String> requestHeaders = (queryEntitiesOptions != null) ? queryEntitiesOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getAutocompletion');
+    Map<String, String> requestHeaders = (getAutocompletionOptions != null) ? getAutocompletionOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
     builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    if (queryEntitiesOptions.feature() != null) {
-      contentJson.put('feature', queryEntitiesOptions.feature());
+    if (getAutocompletionOptions.prefix() != null) {
+      builder.query('prefix', getAutocompletionOptions.prefix());
     }
-    if (queryEntitiesOptions.entity() != null) {
-      contentJson.put('entity', queryEntitiesOptions.entity());
+    if (getAutocompletionOptions.field() != null) {
+      builder.query('field', getAutocompletionOptions.field());
     }
-    if (queryEntitiesOptions.context() != null) {
-      contentJson.put('context', queryEntitiesOptions.context());
+    if (getAutocompletionOptions.count() != null) {
+      builder.query('count', String.valueOf(getAutocompletionOptions.count()));
     }
-    if (queryEntitiesOptions.count() != null) {
-      contentJson.put('count', queryEntitiesOptions.count());
-    }
-    if (queryEntitiesOptions.evidenceCount() != null) {
-      contentJson.put('evidence_count', queryEntitiesOptions.evidenceCount());
-    }
-    builder.bodyJson(JSON.serialize(contentJson, true));
 
-    return (IBMDiscoveryV1Models.QueryEntitiesResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryEntitiesResponse.class);
-  }
-
-  /**
-   * Knowledge Graph relationship query.
-   *
-   * See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
-   * more details.
-   *
-   * @param queryRelationsOptions the {@link IBMDiscoveryV1Models.QueryRelationsOptions} containing the options for the call
-   * @return the {@link IBMDiscoveryV1Models.QueryRelationsResponse} with the response
-   */
-  public IBMDiscoveryV1Models.QueryRelationsResponse queryRelations(IBMDiscoveryV1Models.QueryRelationsOptions queryRelationsOptions) {
-    IBMWatsonValidator.notNull(queryRelationsOptions, 'queryRelationsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/query_relations', new String[]{ queryRelationsOptions.environmentId(), queryRelationsOptions.collectionId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=queryRelations');
-    Map<String, String> requestHeaders = (queryRelationsOptions != null) ? queryRelationsOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    if (queryRelationsOptions.entities() != null) {
-      contentJson.put('entities', queryRelationsOptions.entities());
-    }
-    if (queryRelationsOptions.context() != null) {
-      contentJson.put('context', queryRelationsOptions.context());
-    }
-    if (queryRelationsOptions.xsort() != null) {
-      contentJson.put('sort', queryRelationsOptions.xsort());
-    }
-    if (queryRelationsOptions.filter() != null) {
-      contentJson.put('filter', queryRelationsOptions.filter());
-    }
-    if (queryRelationsOptions.count() != null) {
-      contentJson.put('count', queryRelationsOptions.count());
-    }
-    if (queryRelationsOptions.evidenceCount() != null) {
-      contentJson.put('evidence_count', queryRelationsOptions.evidenceCount());
-    }
-    builder.bodyJson(JSON.serialize(contentJson, true));
-
-    return (IBMDiscoveryV1Models.QueryRelationsResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryRelationsResponse.class);
+    return (IBMDiscoveryV1Models.Completions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Completions.class);
   }
 
   /**
@@ -1412,7 +1359,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TrainingDataSet listTrainingData(IBMDiscoveryV1Models.ListTrainingDataOptions listTrainingDataOptions) {
     IBMWatsonValidator.notNull(listTrainingDataOptions, 'listTrainingDataOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ listTrainingDataOptions.environmentId(), listTrainingDataOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ listTrainingDataOptions.environmentId(), listTrainingDataOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listTrainingData');
     Map<String, String> requestHeaders = (listTrainingDataOptions != null) ? listTrainingDataOptions.requestHeaders() : null;
@@ -1436,7 +1384,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TrainingQuery addTrainingData(IBMDiscoveryV1Models.AddTrainingDataOptions addTrainingDataOptions) {
     IBMWatsonValidator.notNull(addTrainingDataOptions, 'addTrainingDataOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ addTrainingDataOptions.environmentId(), addTrainingDataOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ addTrainingDataOptions.environmentId(), addTrainingDataOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=addTrainingData');
     Map<String, String> requestHeaders = (addTrainingDataOptions != null) ? addTrainingDataOptions.requestHeaders() : null;
@@ -1454,9 +1403,13 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('filter', addTrainingDataOptions.filter());
     }
     if (addTrainingDataOptions.examples() != null) {
-      contentJson.put('examples', addTrainingDataOptions.examples());
+      List<Object> examplesList = new List<Object>();
+      for (IBMDiscoveryV1Models.TrainingExample examplesItem : addTrainingDataOptions.examples()) {
+        examplesList.add(examplesItem.replacePropertyNames());
+      }
+      contentJson.put('examples', examplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.TrainingQuery) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingQuery.class);
   }
@@ -1471,7 +1424,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteAllTrainingData(IBMDiscoveryV1Models.DeleteAllTrainingDataOptions deleteAllTrainingDataOptions) {
     IBMWatsonValidator.notNull(deleteAllTrainingDataOptions, 'deleteAllTrainingDataOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ deleteAllTrainingDataOptions.environmentId(), deleteAllTrainingDataOptions.collectionId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ deleteAllTrainingDataOptions.environmentId(), deleteAllTrainingDataOptions.collectionId() }));
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteAllTrainingData');
     Map<String, String> requestHeaders = (deleteAllTrainingDataOptions != null) ? deleteAllTrainingDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -1494,7 +1448,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TrainingQuery getTrainingData(IBMDiscoveryV1Models.GetTrainingDataOptions getTrainingDataOptions) {
     IBMWatsonValidator.notNull(getTrainingDataOptions, 'getTrainingDataOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ getTrainingDataOptions.environmentId(), getTrainingDataOptions.collectionId(), getTrainingDataOptions.queryId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ getTrainingDataOptions.environmentId(), getTrainingDataOptions.collectionId(), getTrainingDataOptions.queryId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getTrainingData');
     Map<String, String> requestHeaders = (getTrainingDataOptions != null) ? getTrainingDataOptions.requestHeaders() : null;
@@ -1518,7 +1473,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteTrainingData(IBMDiscoveryV1Models.DeleteTrainingDataOptions deleteTrainingDataOptions) {
     IBMWatsonValidator.notNull(deleteTrainingDataOptions, 'deleteTrainingDataOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ deleteTrainingDataOptions.environmentId(), deleteTrainingDataOptions.collectionId(), deleteTrainingDataOptions.queryId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ deleteTrainingDataOptions.environmentId(), deleteTrainingDataOptions.collectionId(), deleteTrainingDataOptions.queryId() }));
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteTrainingData');
     Map<String, String> requestHeaders = (deleteTrainingDataOptions != null) ? deleteTrainingDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -1541,7 +1497,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TrainingExampleList listTrainingExamples(IBMDiscoveryV1Models.ListTrainingExamplesOptions listTrainingExamplesOptions) {
     IBMWatsonValidator.notNull(listTrainingExamplesOptions, 'listTrainingExamplesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples', new String[]{ listTrainingExamplesOptions.environmentId(), listTrainingExamplesOptions.collectionId(), listTrainingExamplesOptions.queryId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples', new String[]{ listTrainingExamplesOptions.environmentId(), listTrainingExamplesOptions.collectionId(), listTrainingExamplesOptions.queryId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listTrainingExamples');
     Map<String, String> requestHeaders = (listTrainingExamplesOptions != null) ? listTrainingExamplesOptions.requestHeaders() : null;
@@ -1565,7 +1522,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TrainingExample createTrainingExample(IBMDiscoveryV1Models.CreateTrainingExampleOptions createTrainingExampleOptions) {
     IBMWatsonValidator.notNull(createTrainingExampleOptions, 'createTrainingExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples', new String[]{ createTrainingExampleOptions.environmentId(), createTrainingExampleOptions.collectionId(), createTrainingExampleOptions.queryId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples', new String[]{ createTrainingExampleOptions.environmentId(), createTrainingExampleOptions.collectionId(), createTrainingExampleOptions.queryId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createTrainingExample');
     Map<String, String> requestHeaders = (createTrainingExampleOptions != null) ? createTrainingExampleOptions.requestHeaders() : null;
@@ -1585,7 +1543,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createTrainingExampleOptions.relevance() != null) {
       contentJson.put('relevance', createTrainingExampleOptions.relevance());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
   }
@@ -1600,7 +1558,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteTrainingExample(IBMDiscoveryV1Models.DeleteTrainingExampleOptions deleteTrainingExampleOptions) {
     IBMWatsonValidator.notNull(deleteTrainingExampleOptions, 'deleteTrainingExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ deleteTrainingExampleOptions.environmentId(), deleteTrainingExampleOptions.collectionId(), deleteTrainingExampleOptions.queryId(), deleteTrainingExampleOptions.exampleId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ deleteTrainingExampleOptions.environmentId(), deleteTrainingExampleOptions.collectionId(), deleteTrainingExampleOptions.queryId(), deleteTrainingExampleOptions.exampleId() }));
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteTrainingExample');
     Map<String, String> requestHeaders = (deleteTrainingExampleOptions != null) ? deleteTrainingExampleOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -1623,7 +1582,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TrainingExample updateTrainingExample(IBMDiscoveryV1Models.UpdateTrainingExampleOptions updateTrainingExampleOptions) {
     IBMWatsonValidator.notNull(updateTrainingExampleOptions, 'updateTrainingExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ updateTrainingExampleOptions.environmentId(), updateTrainingExampleOptions.collectionId(), updateTrainingExampleOptions.queryId(), updateTrainingExampleOptions.exampleId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ updateTrainingExampleOptions.environmentId(), updateTrainingExampleOptions.collectionId(), updateTrainingExampleOptions.queryId(), updateTrainingExampleOptions.exampleId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=updateTrainingExample');
     Map<String, String> requestHeaders = (updateTrainingExampleOptions != null) ? updateTrainingExampleOptions.requestHeaders() : null;
@@ -1640,7 +1600,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateTrainingExampleOptions.relevance() != null) {
       contentJson.put('relevance', updateTrainingExampleOptions.relevance());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
   }
@@ -1655,7 +1615,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.TrainingExample getTrainingExample(IBMDiscoveryV1Models.GetTrainingExampleOptions getTrainingExampleOptions) {
     IBMWatsonValidator.notNull(getTrainingExampleOptions, 'getTrainingExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ getTrainingExampleOptions.environmentId(), getTrainingExampleOptions.collectionId(), getTrainingExampleOptions.queryId(), getTrainingExampleOptions.exampleId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ getTrainingExampleOptions.environmentId(), getTrainingExampleOptions.collectionId(), getTrainingExampleOptions.queryId(), getTrainingExampleOptions.exampleId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getTrainingExample');
     Map<String, String> requestHeaders = (getTrainingExampleOptions != null) ? getTrainingExampleOptions.requestHeaders() : null;
@@ -1684,7 +1645,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteUserData(IBMDiscoveryV1Models.DeleteUserDataOptions deleteUserDataOptions) {
     IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v1/user_data');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + '/v1/user_data');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteUserData');
     Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -1704,14 +1666,15 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * Create event.
    *
    * The **Events** API can be used to create log entries that are associated with specific queries. For example, you
-   * can record which documents in the results set were \"clicked\" by a user and when that click occured.
+   * can record which documents in the results set were "clicked" by a user and when that click occured.
    *
    * @param createEventOptions the {@link IBMDiscoveryV1Models.CreateEventOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.CreateEventResponse} with the response
    */
   public IBMDiscoveryV1Models.CreateEventResponse createEvent(IBMDiscoveryV1Models.CreateEventOptions createEventOptions) {
     IBMWatsonValidator.notNull(createEventOptions, 'createEventOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/events');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v1/events');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createEvent');
     Map<String, String> requestHeaders = (createEventOptions != null) ? createEventOptions.requestHeaders() : null;
@@ -1722,9 +1685,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('type', createEventOptions.xtype());
-    contentJson.put('data', createEventOptions.data());
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    contentJson.put('type', createEventOptions.xType());
+    contentJson.put('data', createEventOptions.data().replacePropertyNames());
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.CreateEventResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.CreateEventResponse.class);
   }
@@ -1739,7 +1702,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * @return the {@link IBMDiscoveryV1Models.LogQueryResponse} with the response
    */
   public IBMDiscoveryV1Models.LogQueryResponse queryLog(IBMDiscoveryV1Models.QueryLogOptions queryLogOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/logs');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/logs');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=queryLog');
     Map<String, String> requestHeaders = (queryLogOptions != null) ? queryLogOptions.requestHeaders() : null;
@@ -1761,8 +1725,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryLogOptions != null && queryLogOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryLogOptions.offset()));
     }
-    if (queryLogOptions != null && queryLogOptions.xsort() != null) {
-      builder.query('sort', String.join(queryLogOptions.xsort(), ','));
+    if (queryLogOptions != null && queryLogOptions.xSort() != null) {
+      builder.query('sort', String.join(queryLogOptions.xSort(), ','));
     }
 
     return (IBMDiscoveryV1Models.LogQueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.LogQueryResponse.class);
@@ -1777,7 +1741,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * @return the {@link IBMDiscoveryV1Models.MetricResponse} with the response
    */
   public IBMDiscoveryV1Models.MetricResponse getMetricsQuery(IBMDiscoveryV1Models.GetMetricsQueryOptions getMetricsQueryOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/number_of_queries');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/metrics/number_of_queries');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getMetricsQuery');
     Map<String, String> requestHeaders = (getMetricsQueryOptions != null) ? getMetricsQueryOptions.requestHeaders() : null;
@@ -1803,15 +1768,16 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Number of queries with an event over time.
    *
-   * Total number of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
-   * over a specified time window. This metric requires having integrated event tracking in your application using the
+   * Total number of queries using the **natural_language_query** parameter that have a corresponding "click" event over
+   * a specified time window. This metric requires having integrated event tracking in your application using the
    * **Events** API.
    *
    * @param getMetricsQueryEventOptions the {@link IBMDiscoveryV1Models.GetMetricsQueryEventOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.MetricResponse} with the response
    */
   public IBMDiscoveryV1Models.MetricResponse getMetricsQueryEvent(IBMDiscoveryV1Models.GetMetricsQueryEventOptions getMetricsQueryEventOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/number_of_queries_with_event');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/metrics/number_of_queries_with_event');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getMetricsQueryEvent');
     Map<String, String> requestHeaders = (getMetricsQueryEventOptions != null) ? getMetricsQueryEventOptions.requestHeaders() : null;
@@ -1844,7 +1810,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * @return the {@link IBMDiscoveryV1Models.MetricResponse} with the response
    */
   public IBMDiscoveryV1Models.MetricResponse getMetricsQueryNoResults(IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions getMetricsQueryNoResultsOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/number_of_queries_with_no_search_results');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/metrics/number_of_queries_with_no_search_results');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getMetricsQueryNoResults');
     Map<String, String> requestHeaders = (getMetricsQueryNoResultsOptions != null) ? getMetricsQueryNoResultsOptions.requestHeaders() : null;
@@ -1870,7 +1837,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Percentage of queries with an associated event.
    *
-   * The percentage of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+   * The percentage of queries using the **natural_language_query** parameter that have a corresponding "click" event
    * over a specified time window.  This metric requires having integrated event tracking in your application using the
    * **Events** API.
    *
@@ -1878,7 +1845,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * @return the {@link IBMDiscoveryV1Models.MetricResponse} with the response
    */
   public IBMDiscoveryV1Models.MetricResponse getMetricsEventRate(IBMDiscoveryV1Models.GetMetricsEventRateOptions getMetricsEventRateOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/event_rate');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/metrics/event_rate');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getMetricsEventRate');
     Map<String, String> requestHeaders = (getMetricsEventRateOptions != null) ? getMetricsEventRateOptions.requestHeaders() : null;
@@ -1904,15 +1872,16 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Most frequent query tokens with an event.
    *
-   * The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding
-   * \"click\" event rate within the recording period (queries and events are stored for 30 days). A query token is an
-   * individual word or unigram within the query string.
+   * The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding "click"
+   * event rate within the recording period (queries and events are stored for 30 days). A query token is an individual
+   * word or unigram within the query string.
    *
    * @param getMetricsQueryTokenEventOptions the {@link IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.MetricTokenResponse} with the response
    */
   public IBMDiscoveryV1Models.MetricTokenResponse getMetricsQueryTokenEvent(IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions getMetricsQueryTokenEventOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/top_query_tokens_with_event_rate');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v1/metrics/top_query_tokens_with_event_rate');
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getMetricsQueryTokenEvent');
     Map<String, String> requestHeaders = (getMetricsQueryTokenEventOptions != null) ? getMetricsQueryTokenEventOptions.requestHeaders() : null;
@@ -1941,7 +1910,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.CredentialsList listCredentials(IBMDiscoveryV1Models.ListCredentialsOptions listCredentialsOptions) {
     IBMWatsonValidator.notNull(listCredentialsOptions, 'listCredentialsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/credentials', new String[]{ listCredentialsOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/credentials', new String[]{ listCredentialsOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listCredentials');
     Map<String, String> requestHeaders = (listCredentialsOptions != null) ? listCredentialsOptions.requestHeaders() : null;
@@ -1968,7 +1938,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Credentials createCredentials(IBMDiscoveryV1Models.CreateCredentialsOptions createCredentialsOptions) {
     IBMWatsonValidator.notNull(createCredentialsOptions, 'createCredentialsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/credentials', new String[]{ createCredentialsOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/credentials', new String[]{ createCredentialsOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createCredentials');
     Map<String, String> requestHeaders = (createCredentialsOptions != null) ? createCredentialsOptions.requestHeaders() : null;
@@ -1983,12 +1954,12 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('source_type', createCredentialsOptions.sourceType());
     }
     if (createCredentialsOptions.credentialDetails() != null) {
-      contentJson.put('credential_details', createCredentialsOptions.credentialDetails());
+      contentJson.put('credential_details', createCredentialsOptions.credentialDetails().replacePropertyNames());
     }
     if (createCredentialsOptions.status() != null) {
       contentJson.put('status', createCredentialsOptions.status());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
   }
@@ -2006,7 +1977,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Credentials getCredentials(IBMDiscoveryV1Models.GetCredentialsOptions getCredentialsOptions) {
     IBMWatsonValidator.notNull(getCredentialsOptions, 'getCredentialsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ getCredentialsOptions.environmentId(), getCredentialsOptions.credentialId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ getCredentialsOptions.environmentId(), getCredentialsOptions.credentialId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getCredentials');
     Map<String, String> requestHeaders = (getCredentialsOptions != null) ? getCredentialsOptions.requestHeaders() : null;
@@ -2032,7 +2004,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Credentials updateCredentials(IBMDiscoveryV1Models.UpdateCredentialsOptions updateCredentialsOptions) {
     IBMWatsonValidator.notNull(updateCredentialsOptions, 'updateCredentialsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ updateCredentialsOptions.environmentId(), updateCredentialsOptions.credentialId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getServiceURL() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ updateCredentialsOptions.environmentId(), updateCredentialsOptions.credentialId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=updateCredentials');
     Map<String, String> requestHeaders = (updateCredentialsOptions != null) ? updateCredentialsOptions.requestHeaders() : null;
@@ -2047,12 +2020,12 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       contentJson.put('source_type', updateCredentialsOptions.sourceType());
     }
     if (updateCredentialsOptions.credentialDetails() != null) {
-      contentJson.put('credential_details', updateCredentialsOptions.credentialDetails());
+      contentJson.put('credential_details', updateCredentialsOptions.credentialDetails().replacePropertyNames());
     }
     if (updateCredentialsOptions.status() != null) {
       contentJson.put('status', updateCredentialsOptions.status());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
   }
@@ -2067,7 +2040,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteCredentials(IBMDiscoveryV1Models.DeleteCredentialsOptions deleteCredentialsOptions) {
     IBMWatsonValidator.notNull(deleteCredentialsOptions, 'deleteCredentialsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ deleteCredentialsOptions.environmentId(), deleteCredentialsOptions.credentialId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ deleteCredentialsOptions.environmentId(), deleteCredentialsOptions.credentialId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteCredentials');
     Map<String, String> requestHeaders = (deleteCredentialsOptions != null) ? deleteCredentialsOptions.requestHeaders() : null;
@@ -2091,7 +2065,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.GatewayList listGateways(IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions) {
     IBMWatsonValidator.notNull(listGatewaysOptions, 'listGatewaysOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/gateways', new String[]{ listGatewaysOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/gateways', new String[]{ listGatewaysOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=listGateways');
     Map<String, String> requestHeaders = (listGatewaysOptions != null) ? listGatewaysOptions.requestHeaders() : null;
@@ -2115,7 +2090,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Gateway createGateway(IBMDiscoveryV1Models.CreateGatewayOptions createGatewayOptions) {
     IBMWatsonValidator.notNull(createGatewayOptions, 'createGatewayOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/gateways', new String[]{ createGatewayOptions.environmentId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v1/environments/{0}/gateways', new String[]{ createGatewayOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=createGateway');
     Map<String, String> requestHeaders = (createGatewayOptions != null) ? createGatewayOptions.requestHeaders() : null;
@@ -2129,7 +2105,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createGatewayOptions.name() != null) {
       contentJson.put('name', createGatewayOptions.name());
     }
-    builder.bodyJson(JSON.serialize(contentJson, true));
+    builder.bodyJson(JSON.serialize(contentJson));
 
     return (IBMDiscoveryV1Models.Gateway) createServiceCall(builder.build(), IBMDiscoveryV1Models.Gateway.class);
   }
@@ -2144,7 +2120,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public IBMDiscoveryV1Models.Gateway getGateway(IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions) {
     IBMWatsonValidator.notNull(getGatewayOptions, 'getGatewayOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/gateways/{1}', new String[]{ getGatewayOptions.environmentId(), getGatewayOptions.gatewayId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v1/environments/{0}/gateways/{1}', new String[]{ getGatewayOptions.environmentId(), getGatewayOptions.gatewayId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getGateway');
     Map<String, String> requestHeaders = (getGatewayOptions != null) ? getGatewayOptions.requestHeaders() : null;
@@ -2168,7 +2145,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    */
   public void deleteGateway(IBMDiscoveryV1Models.DeleteGatewayOptions deleteGatewayOptions) {
     IBMWatsonValidator.notNull(deleteGatewayOptions, 'deleteGatewayOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/gateways/{1}', new String[]{ deleteGatewayOptions.environmentId(), deleteGatewayOptions.gatewayId() }));
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v1/environments/{0}/gateways/{1}', new String[]{ deleteGatewayOptions.environmentId(), deleteGatewayOptions.gatewayId() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteGateway');
     Map<String, String> requestHeaders = (deleteGatewayOptions != null) ? deleteGatewayOptions.requestHeaders() : null;

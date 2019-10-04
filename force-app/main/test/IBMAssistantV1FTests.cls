@@ -2,74 +2,75 @@ public with sharing class IBMAssistantV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_assistant_v1_test';
   private static String URL = 'https://gateway.watsonplatform.net/assistant/api';
-  private static String VERSION = '2018-07-10';
+  private static String VERSION = '2019-02-28';
 
   /**
    *  Test run functional tests.
    */
-  public static void runAllTests(String username, String password) {
-    String workspaceId=testCreateWorkspace(username, password).getWorkspaceId();
-    testGetWorkspace(workspaceId, username, password);
-    updateWorkspace(workspaceId, username, password);
-    testListWorkspaces(username, password);
-    message(workspaceId, username, password);
-    createIntent(workspaceId, username, password);
-    getIntent(workspaceId, username, password);
-    listIntents(workspaceId, username, password);
-    updateIntent(workspaceId, username, password);
-    createExample(workspaceId, username, password);
-    getExample(workspaceId, username, password);
-    listExamples(workspaceId, username, password);
-    updateExample(workspaceId, username, password);
-    createEntity(workspaceId, username, password);
-    getEntity(workspaceId, username, password);
-    listEntities(workspaceId, username, password);
-    updateEntity(workspaceId, username, password);
-    createValue(workspaceId, username, password);
-    getValue(workspaceId, username, password);
-    updateValue(workspaceId, username, password);
-    listValues(workspaceId, username, password);
-    createSynonym(workspaceId, username, password);
-    getSynonym(workspaceId, username, password);
-    listSynonyms(workspaceId, username, password);
-    updateSynonym(workspaceId, username, password);
-    createDialogNode(workspaceId, username, password);
-    getDialogNode(workspaceId, username, password);
-    listDialogNodes(workspaceId, username, password);
-    updateDialogNode(workspaceId, username, password);
-    listLogs(workspaceId, username, password);
-    testCreateCounterexample(workspaceId, username, password);
-    testGetCounterexample(workspaceId, username, password);
-    testListCounterexamples(workspaceId, username, password);
-    testUpdateCounterexample(workspaceId, username, password);
-    testDeleteCounterexample(workspaceId, username, password);
-    deleteDialogNode(workspaceId, username, password);
-    deleteSynonym(workspaceId, username, password);
-    deleteValue(workspaceId, username, password);
-    deleteEntity(workspaceId, username, password);
-    deleteIntent(workspaceId, username, password);
-    testDeleteWorkspace(workspaceId, username, password);
-  }
-  public static IBMAssistantV1Models.Workspace testCreateWorkspace(String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
+  public static void runAllTests(String apiKey) {
+    IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator(apiKey);
+    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION, authenticator);
+    assistant.setServiceURL(URL);
 
-    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
-    disambiguation.setEnabled(true);
-    disambiguation.setNoneOfTheAbovePrompt('none of the above');
-    disambiguation.setPrompt('prompt');
-    disambiguation.setSensitivity('high');
-    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
-    tooling.setStoreGenericResponses(true);
+    String workspaceId=testCreateWorkspace(assistant).getWorkspaceId();
+    testGetWorkspace(assistant, workspaceId);
+    updateWorkspace(assistant, workspaceId);
+    testListWorkspaces(assistant);
+    message(assistant, workspaceId);
+    createIntent(assistant, workspaceId);
+    getIntent(assistant, workspaceId);
+    listIntents(assistant, workspaceId);
+    updateIntent(assistant, workspaceId);
+    createExample(assistant, workspaceId);
+    getExample(assistant, workspaceId);
+    listExamples(assistant, workspaceId);
+    updateExample(assistant, workspaceId);
+    createEntity(assistant, workspaceId);
+    getEntity(assistant, workspaceId);
+    listEntities(assistant, workspaceId);
+    updateEntity(assistant, workspaceId);
+    createValue(assistant, workspaceId);
+    getValue(assistant, workspaceId);
+    updateValue(assistant, workspaceId);
+    listValues(assistant, workspaceId);
+    createSynonym(assistant, workspaceId);
+    getSynonym(assistant, workspaceId);
+    listSynonyms(assistant, workspaceId);
+    updateSynonym(assistant, workspaceId);
+    createDialogNode(assistant, workspaceId);
+    getDialogNode(assistant, workspaceId);
+    listDialogNodes(assistant, workspaceId);
+    updateDialogNode(assistant, workspaceId);
+    listLogs(assistant, workspaceId);
+    testCreateCounterexample(assistant, workspaceId);
+    testGetCounterexample(assistant, workspaceId);
+    testListCounterexamples(assistant, workspaceId);
+    testUpdateCounterexample(assistant, workspaceId);
+    testDeleteCounterexample(assistant, workspaceId);
+    deleteDialogNode(assistant, workspaceId);
+    deleteSynonym(assistant, workspaceId);
+    deleteValue(assistant, workspaceId);
+    deleteEntity(assistant, workspaceId);
+    deleteIntent(assistant, workspaceId);
+    testDeleteWorkspace(assistant, workspaceId);
+  }
+  public static IBMAssistantV1Models.Workspace testCreateWorkspace(IBMAssistantV1 assistant) {
+    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguationBuilder()
+      .enabled(true)
+      .noneOfTheAbovePrompt('none of the above')
+      .prompt('prompt')
+      .sensitivity('high')
+      .build();
+    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsToolingBuilder()
+      .storeGenericResponses(true)
+      .build();
     IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
     humanAgentAssist.put('help', 'ok');
-    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
-    systemSettings.setDisambiguation(disambiguation);
-    systemSettings.setTooling(tooling);
-    systemSettings.setHumanAgentAssist(humanAgentAssist);
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettingsBuilder()
+      .disambiguation(disambiguation)
+      .tooling(tooling)
+      .humanAgentAssist(humanAgentAssist)
+      .build();
 
     IBMAssistantV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMAssistantV1Models.CreateWorkspaceOptionsBuilder()
       .name('functional-test-workspace')
@@ -82,41 +83,23 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static void testDeleteWorkspace(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static void testDeleteWorkspace(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.DeleteWorkspaceOptions deleteOptions = new IBMAssistantV1Models.DeleteWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
     assistant.deleteWorkspace(deleteOptions);
   }
 
-  public static IBMAssistantV1Models.WorkspaceExport testGetWorkspace(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Workspace testGetWorkspace(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.GetWorkspaceOptions getOptions = new IBMAssistantV1Models.GetWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
-    IBMAssistantV1Models.WorkspaceExport response = assistant.getWorkspace(getOptions);
+    IBMAssistantV1Models.Workspace response = assistant.getWorkspace(getOptions);
 
     return response;
   }
 
-  public static IBMAssistantV1Models.Workspace updateWorkspace(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Workspace updateWorkspace(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.UpdateWorkspaceOptions updateOptions = new IBMAssistantV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .name('new test workspace')
@@ -127,13 +110,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.WorkspaceCollection testListWorkspaces(String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.WorkspaceCollection testListWorkspaces(IBMAssistantV1 assistant) {
     IBMAssistantV1Models.ListWorkspacesOptions listOptions = new IBMAssistantV1Models.ListWorkspacesOptionsBuilder()
       .build();
     IBMAssistantV1Models.WorkspaceCollection response = assistant.listWorkspaces(listOptions);
@@ -141,14 +118,8 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.MessageResponse message(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
-    IBMAssistantV1Models.InputData input = new IBMAssistantV1Models.InputDataBuilder()
+  public static IBMAssistantV1Models.MessageResponse message(IBMAssistantV1 assistant, String workspaceId) {
+    IBMAssistantV1Models.MessageInput input = new IBMAssistantV1Models.MessageInputBuilder()
       .text('This is a message')
       .build();
     IBMAssistantV1Models.MessageOptions messageOptions = new IBMAssistantV1Models.MessageOptionsBuilder()
@@ -160,13 +131,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Intent createIntent(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Intent createIntent(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.CreateIntentOptions createOptions = new IBMAssistantV1Models.CreateIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
@@ -177,13 +142,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static void deleteIntent(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static void deleteIntent(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.DeleteIntentOptions deleteOptions = new IBMAssistantV1Models.DeleteIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
@@ -191,30 +150,18 @@ public with sharing class IBMAssistantV1FTests {
     assistant.deleteIntent(deleteOptions);
   }
 
-  public static IBMAssistantV1Models.IntentExport getIntent(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Intent getIntent(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.GetIntentOptions getOptions = new IBMAssistantV1Models.GetIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
       .xexport(true)
       .build();
-    IBMAssistantV1Models.IntentExport response = assistant.getIntent(getOptions);
+    IBMAssistantV1Models.Intent response = assistant.getIntent(getOptions);
 
     return response;
   }
 
-  public static IBMAssistantV1Models.IntentCollection listIntents(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.IntentCollection listIntents(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.ListIntentsOptions listOptions = new IBMAssistantV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
       .xexport(true)
@@ -224,13 +171,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Intent updateIntent(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Intent updateIntent(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.UpdateIntentOptions updateOptions = new IBMAssistantV1Models.UpdateIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
@@ -241,37 +182,26 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Example createExample(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
-    IBMAssistantV1Models.Mentions mentions1 = new IBMAssistantV1Models.Mentions();
-    mentions1.setEntity('entity');
-    mentions1.setLocation(new List<Long> { 0L, 10L });
-    List<IBMAssistantV1Models.Mentions> mentionsList = new List<IBMAssistantV1Models.Mentions>();
-    mentionsList.add(mentions1);
+  public static IBMAssistantV1Models.Example createExample(IBMAssistantV1 assistant, String workspaceId) {
+    IBMAssistantV1Models.Mention mention1 = new IBMAssistantV1Models.MentionBuilder()
+      .entity('entity')
+      .location(new List<Long> { 0L, 10L })
+      .build();
+    List<IBMAssistantV1Models.Mention> mentionList = new List<IBMAssistantV1Models.Mention>();
+    mentionList.add(mention1);
 
     IBMAssistantV1Models.CreateExampleOptions createOptions = new IBMAssistantV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
       .text('example A')
-      .mentions(mentionsList)
+      .mentions(mentionList)
       .build();
     IBMAssistantV1Models.Example response = assistant.createExample(createOptions);
 
     return response;
   }
 
-  public static void deleteExample(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static void deleteExample(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.DeleteExampleOptions deleteOptions = new IBMAssistantV1Models.DeleteExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
@@ -280,13 +210,7 @@ public with sharing class IBMAssistantV1FTests {
     assistant.deleteExample(deleteOptions);
   }
 
-  public static IBMAssistantV1Models.Example getExample(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Example getExample(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.GetExampleOptions getOptions = new IBMAssistantV1Models.GetExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
@@ -297,13 +221,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.ExampleCollection listExamples(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.ExampleCollection listExamples(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.ListExamplesOptions listOptions = new IBMAssistantV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
@@ -313,13 +231,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Example updateExample(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Example updateExample(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.UpdateExampleOptions updateOptions = new IBMAssistantV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
@@ -331,13 +243,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Entity createEntity(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Entity createEntity(IBMAssistantV1 assistant, String workspaceId) {
     IBMWatsonMapModel metadata = new IBMWatsonMapModel();
     metadata.put('Boston', 'nice');
     IBMAssistantV1Models.CreateEntityOptions createOptions = new IBMAssistantV1Models.CreateEntityOptionsBuilder()
@@ -352,13 +258,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static void deleteEntity(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static void deleteEntity(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.DeleteEntityOptions deleteOptions = new IBMAssistantV1Models.DeleteEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -366,30 +266,18 @@ public with sharing class IBMAssistantV1FTests {
     assistant.deleteEntity(deleteOptions);
   }
 
-  public static IBMAssistantV1Models.EntityExport getEntity(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Entity getEntity(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.GetEntityOptions getOptions = new IBMAssistantV1Models.GetEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
       .xexport(true)
       .build();
-    IBMAssistantV1Models.EntityExport response = assistant.getEntity(getOptions);
+    IBMAssistantV1Models.Entity response = assistant.getEntity(getOptions);
 
     return response;
   }
 
-  public static IBMAssistantV1Models.EntityCollection listEntities(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.EntityCollection listEntities(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.ListEntitiesOptions listOptions = new IBMAssistantV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
       .xexport(true)
@@ -399,13 +287,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Entity updateEntity(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Entity updateEntity(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.UpdateEntityOptions updateOptions = new IBMAssistantV1Models.UpdateEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -416,13 +298,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
   
-  public static IBMAssistantV1Models.Value createValue(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Value createValue(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.CreateValueOptions createOptions = new IBMAssistantV1Models.CreateValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -433,13 +309,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static void deleteValue(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static void deleteValue(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.DeleteValueOptions deleteOptions = new IBMAssistantV1Models.DeleteValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -448,31 +318,19 @@ public with sharing class IBMAssistantV1FTests {
     assistant.deleteValue(deleteOptions);
   }
 
-  public static IBMAssistantV1Models.ValueExport getValue(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Value getValue(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.GetValueOptions getOptions = new IBMAssistantV1Models.GetValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
       .value('Boston')
       .xexport(true)
       .build();
-    IBMAssistantV1Models.ValueExport response = assistant.getValue(getOptions);
+    IBMAssistantV1Models.Value response = assistant.getValue(getOptions);
 
     return response;
   }
 
-  public static IBMAssistantV1Models.Value updateValue(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Value updateValue(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.UpdateValueOptions updateOptions = new IBMAssistantV1Models.UpdateValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -484,13 +342,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.ValueCollection listValues(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.ValueCollection listValues(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.ListValuesOptions listOptions = new IBMAssistantV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -500,13 +352,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
   
-  public static IBMAssistantV1Models.Synonym createSynonym(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Synonym createSynonym(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.CreateSynonymOptions createOptions = new IBMAssistantV1Models.CreateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -518,13 +364,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static void deleteSynonym(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static void deleteSynonym(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.DeleteSynonymOptions deleteOptions = new IBMAssistantV1Models.DeleteSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -534,13 +374,7 @@ public with sharing class IBMAssistantV1FTests {
     assistant.deleteSynonym(deleteOptions);
   }
 
-  public static IBMAssistantV1Models.Synonym getSynonym(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Synonym getSynonym(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.GetSynonymOptions getOptions = new IBMAssistantV1Models.GetSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -552,13 +386,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.SynonymCollection listSynonyms(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.SynonymCollection listSynonyms(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.ListSynonymsOptions listOptions = new IBMAssistantV1Models.ListSynonymsOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -569,13 +397,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Synonym updateSynonym(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Synonym updateSynonym(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.UpdateSynonymOptions updateOptions = new IBMAssistantV1Models.UpdateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
@@ -588,13 +410,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.DialogNode createDialogNode(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.DialogNode createDialogNode(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.CreateDialogNodeOptions createOptions = new IBMAssistantV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode('new_dialog_name')
@@ -604,13 +420,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static void deleteDialogNode(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static void deleteDialogNode(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.DeleteDialogNodeOptions deleteOptions = new IBMAssistantV1Models.DeleteDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode('New Name')
@@ -618,13 +428,7 @@ public with sharing class IBMAssistantV1FTests {
     assistant.deleteDialogNode(deleteOptions);
   }
 
-  public static IBMAssistantV1Models.DialogNode getDialogNode(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.DialogNode getDialogNode(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.GetDialogNodeOptions getOptions = new IBMAssistantV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode('new_dialog_name')
@@ -634,13 +438,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.DialogNodeCollection listDialogNodes(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.DialogNodeCollection listDialogNodes(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.ListDialogNodesOptions listOptions = new IBMAssistantV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
@@ -649,13 +447,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.DialogNode updateDialogNode(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.DialogNode updateDialogNode(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.UpdateDialogNodeOptions updateOptions = new IBMAssistantV1Models.UpdateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode('new_dialog_name')
@@ -667,13 +459,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.LogCollection listLogs(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.LogCollection listLogs(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.ListLogsOptions listOptions = new IBMAssistantV1Models.ListLogsOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
@@ -682,13 +468,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Counterexample testCreateCounterexample(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Counterexample testCreateCounterexample(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.CreateCounterexampleOptions createOptions = new IBMAssistantV1Models.CreateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text('Text for a counterexample')
@@ -698,12 +478,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static void testDeleteCounterexample(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
+  public static void testDeleteCounterexample(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.DeleteCounterexampleOptions deleteOptions = new IBMAssistantV1Models.DeleteCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text('new text')
@@ -711,13 +486,7 @@ public with sharing class IBMAssistantV1FTests {
     assistant.deleteCounterexample(deleteOptions);
   }
 
-  public static IBMAssistantV1Models.Counterexample testGetCounterexample(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Counterexample testGetCounterexample(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.GetCounterexampleOptions getOptions = new IBMAssistantV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text('Text for a counterexample')
@@ -727,13 +496,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.CounterexampleCollection testListCounterexamples(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.CounterexampleCollection testListCounterexamples(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.ListCounterexamplesOptions listOptions = new IBMAssistantV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
@@ -742,13 +505,7 @@ public with sharing class IBMAssistantV1FTests {
     return response;
   }
 
-  public static IBMAssistantV1Models.Counterexample testUpdateCounterexample(String workspaceId, String username, String password) {
-    IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    if (username != null && password != null) {
-      assistant.setEndPoint(URL);
-      assistant.setUsernameAndPassword(username, password);
-    }
-
+  public static IBMAssistantV1Models.Counterexample testUpdateCounterexample(IBMAssistantV1 assistant, String workspaceId) {
     IBMAssistantV1Models.UpdateCounterexampleOptions updateOptions = new IBMAssistantV1Models.UpdateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text('Text for a counterexample')

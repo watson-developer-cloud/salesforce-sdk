@@ -18,11 +18,12 @@
  * `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
  *
  * @version V3
- * @see <a href="http://www.ibm.com/watson/developercloud/personality-insights.html">Personality Insights</a>
+ * @see <a href="https://cloud.ibm.com/docs/services/personality-insights/">Personality Insights</a>
  */
 public class IBMPersonalityInsightsV3 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
+  private static final String SERVICE_NAME = 'personality_insights';
+  private static final String SERVICE_URL = 'https://gateway.watsonplatform.net/personality-insights/api';
 
   private String versionDate;
 
@@ -30,41 +31,30 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * Instantiates a new `IBMPersonalityInsightsV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
+   *          calls from failing when the service introduces breaking changes.
    */
-  public IBMPersonalityInsightsV3(String versionDate) {
-    super('personality_insights', 'v3');
+   public IBMPersonalityInsightsV3(String versionDate) {
+     this(versionDate, IBMWatsonConfigBasedAuthenticatorFactory.getAuthenticator(SERVICE_NAME));
+   }
+
+  /**
+   * Instantiates a new `IBMPersonalityInsightsV3`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param authenticator The IBMWatsonAuthenticator implementation to use for authenticating when making service requests
+   */
+  public IBMPersonalityInsightsV3(String versionDate, IBMWatsonAuthenticator authenticator) {
+    super(SERVICE_NAME, 'v3', authenticator);
+
+    if ((getServiceURL() == null) || String.isBlank(getServiceURL())) {
+      setServiceURL(SERVICE_URL);
+    }
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
-  }
-
-  /**
-   * Instantiates a new `IBMPersonalityInsightsV3` with username and password.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param username the username
-   * @param password the password
-   * @deprecated Use IBMPersonalityInsightsV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
-   */
-  public IBMPersonalityInsightsV3(String versionDate, String username, String password) {
-    this(versionDate);
-    setUsernameAndPassword(username, password);
-  }
-
-  /**
-   * Instantiates a new `IBMPersonalityInsightsV3` with the specified authentication configuration.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param authenticatorConfig the authentication configuration for this service
-   */
-  public IBMPersonalityInsightsV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
-    this(versionDate);
-    setAuthenticator(authenticatorConfig);
   }
 
   /**
@@ -111,7 +101,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    */
   public IBMPersonalityInsightsV3Models.Profile profile(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/profile');
     builder.addHeader('Accept', 'application/json');
     if (profileOptions.contentType() != null) {
       builder.addHeader('Content-Type', profileOptions.contentType());
@@ -188,7 +179,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    */
   public IBMWatsonFile profileAsCsv(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + '/v3/profile');
     builder.addHeader('Accept', 'text/csv');
     if (profileOptions.contentType() != null) {
       builder.addHeader('Content-Type', profileOptions.contentType());

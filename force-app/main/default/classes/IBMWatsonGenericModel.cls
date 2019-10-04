@@ -5,16 +5,13 @@ public virtual class IBMWatsonGenericModel {
    *
    * @return serialized String form of this
    */
-  public override String toString() {
-    // get JSON string representation
-    String jsonString = JSON.serialize(this, true);
-
-    // call custom serializer to raise additional properties
-    jsonString = IBMWatsonJSONUtil.serialize(jsonString);
+  public virtual override String toString() {
+    // get Map representation and raise additional props
+    Map<String, Object> objectMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+    objectMap = IBMWatsonJSONUtil.raiseAdditionalProperties(objectMap);
 
     // pretty print formatting
-    jsonString = JSON.serializePretty(JSON.deserializeUntyped(jsonString));
-    return jsonString;
+    return JSON.serializePretty(objectMap);
   }
 
   /**
