@@ -8,7 +8,2811 @@ public class IBMWatsonMockResponses {
     'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1';
   public static String IBMNaturalLanguageClassifierClassifyURL = 
     IBMNaturalLanguageClassifierClassifyBaseURL + '/classify?text=How%20hot%20wil/10D41B-nlc-1';
-    
+
+
+  // --- Assistant v1 ---
+
+  public static testMethod String assistantV1MessageResponse() {
+    return '{' +
+      '"intents": [' +
+        '{' +
+          '"intent": "intent",' +
+          '"confidence": 0.5' +
+        '}' +
+      '],' +
+      '"entities": [' +
+        '{' +
+          '"entity": "entity",' +
+          '"location": [' +
+            '10,' +
+            '10' +
+          '],' +
+          '"value": "value",' +
+          '"confidence": 0.5,' +
+          '"metadata": {' +
+            '"key": "value"' +
+          '},' +
+          '"groups": [' +
+            '{' +
+              '"group": "group",' +
+              '"location": [' +
+                '10,' +
+                '10' +
+              ']' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"input": {' +
+        '"text": "text"' +
+      '},' +
+      '"output": {' +
+        '"generic": [' +
+          '{' +
+            '"response_type": "response_type",' +
+            '"text": "text",' +
+            '"time": 10,' +
+            '"typing": true,' +
+            '"source": "source",' +
+            '"title": "title",' +
+            '"description": "description",' +
+            '"preference": "preference",' +
+            '"options": [' +
+              '{' +
+                '"label": "label",' +
+                '"value": {' +
+                  '"input": {' +
+                    '"text": "text"' +
+                  '},' +
+                  '"intents": [' +
+                    '{' +
+                      '"intent": "intent",' +
+                      '"confidence": 0.5' +
+                    '}' +
+                  '],' +
+                  '"entities": [' +
+                    '{' +
+                      '"entity": "entity",' +
+                      '"location": [' +
+                        '10,' +
+                        '10' +
+                      '],' +
+                      '"value": "value",' +
+                      '"confidence": 0.5,' +
+                      '"metadata": {' +
+                        '"key": "value"' +
+                      '},' +
+                      '"groups": [' +
+                        '{' +
+                          '"group": "group",' +
+                          '"location": [' +
+                            '10,' +
+                            '10' +
+                          ']' +
+                        '}' +
+                      ']' +
+                    '}' +
+                  ']' +
+                '}' +
+              '}' +
+            '],' +
+            '"message_to_human_agent": "message_to_human_agent",' +
+            '"topic": "topic",' +
+            '"dialog_node": "dialog_node",' +
+            '"suggestions": [' +
+              '{' +
+                '"label": "label",' +
+                '"dialog_node": "dialog_node",' +
+                '"value": {' +
+                  '"input": {' +
+                    '"text": "text"' +
+                  '},' +
+                  '"intents": [' +
+                    '{' +
+                      '"intent": "intent",' +
+                      '"confidence": 0.5' +
+                    '}' +
+                  '],' +
+                  '"entities": [' +
+                    '{' +
+                      '"entity": "entity",' +
+                      '"location": [' +
+                        '10,' +
+                        '10' +
+                      '],' +
+                      '"value": "value",' +
+                      '"confidence": 0.5,' +
+                      '"metadata": {' +
+                        '"key": "value"' +
+                      '},' +
+                      '"groups": [' +
+                        '{' +
+                          '"group": "group",' +
+                          '"location": [' +
+                            '10,' +
+                            '10' +
+                          ']' +
+                        '}' +
+                      ']' +
+                    '}' +
+                  ']' +
+                '},' +
+                '"output": {' +
+                  '"nodes_visited": [' +
+                    '"nodes_visited"' +
+                  '],' +
+                  '"nodes_visited_details": [' +
+                    '{' +
+                      '"dialog_node": "dialog_node",' +
+                      '"title": "title",' +
+                      '"conditions": "conditions"' +
+                    '}' +
+                  '],' +
+                  '"text": [' +
+                    '"text"' +
+                  '],' +
+                  '"generic": [' +
+                    '{' +
+                      '"response_type": "response_type",' +
+                      '"text": "text",' +
+                      '"time": 10,' +
+                      '"typing": true,' +
+                      '"source": "source",' +
+                      '"title": "title",' +
+                      '"description": "description",' +
+                      '"preference": "preference",' +
+                      '"options": [' +
+                        '{' +
+                          '"label": "label",' +
+                          '"value": {' +
+                            '"input": {' +
+                              '"text": "text"' +
+                            '},' +
+                            '"intents": [' +
+                              '{' +
+                                '"intent": "intent",' +
+                                '"confidence": 0.5' +
+                              '}' +
+                            '],' +
+                            '"entities": [' +
+                              '{' +
+                                '"entity": "entity",' +
+                                '"location": [' +
+                                  '10,' +
+                                  '10' +
+                                '],' +
+                                '"value": "value",' +
+                                '"confidence": 0.5,' +
+                                '"metadata": {' +
+                                  '"key": "value"' +
+                                '},' +
+                                '"groups": [' +
+                                  '{' +
+                                    '"group": "group",' +
+                                    '"location": [' +
+                                      '10,' +
+                                      '10' +
+                                    ']' +
+                                  '}' +
+                                ']' +
+                              '}' +
+                            ']' +
+                          '}' +
+                        '}' +
+                      '],' +
+                      '"message_to_human_agent": "message_to_human_agent",' +
+                      '"topic": "topic",' +
+                      '"dialog_node": "dialog_node"' +
+                    '}' +
+                  ']' +
+                '}' +
+              '}' +
+            ']' +
+          '}' +
+        '],' +
+        '"text": [' +
+          '"text"' +
+        '],' +
+        '"nodes_visited": [' +
+          '"nodes_visited"' +
+        '],' +
+        '"nodes_visited_details": [' +
+          '{' +
+            '"dialog_node": "dialog_node",' +
+            '"title": "title",' +
+            '"conditions": "conditions"' +
+          '}' +
+        '],' +
+        '"log_messages": [' +
+          '{' +
+            '"level": "level",' +
+            '"msg": "msg"' +
+          '}' +
+        ']' +
+      '},' +
+      '"context": {' +
+        '"conversation_id": "conversation_id",' +
+        '"system": {' +
+          '"dialog_turn_counter": 1,' +
+          '"dialog_request_counter": 1' +
+        '},' +
+        '"metadata": {' +
+          '"deployment": "deployment",' +
+          '"user_id": "user_id"' +
+        '}' +
+      '},' +
+      '"alternate_intents": true,' +
+      '"actions": [' +
+        '{' +
+          '"name": "name",' +
+          '"type": "type",' +
+          '"parameters": {' +
+            '"param_1": "param_1_val"' +
+          '},' +
+          '"result_variable": "result_variable",' +
+          '"credentials": "credentials"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String assistantV1WorkspaceCollection() {
+    return '{' +
+      '"workspaces": [' +
+        '{' +
+          '"name": "name", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"language": "language", ' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '}, ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"description": "description", ' +
+          '"workspace_id": "workspace_id", ' +
+          '"status": "status", ' +
+          '"learning_opt_out": true,' +
+          '"intents": [' +
+            '{' +
+              '"intent": "intent", ' +
+              '"created": "1995-06-12T01:11:11.111Z", ' +
+              '"updated": "1995-06-12T01:11:11.111Z", ' +
+              '"description": "description", ' +
+              '"examples": [' +
+                '{' +
+                  '"text": "text", ' +
+                  '"mentions": [' +
+                    '{' +
+                      '"entity": "entity",' +
+                      '"location": [' +
+                        '10' +
+                      ']' +
+                    '}' +
+                  '],' +
+                  '"created": "1995-06-12T01:11:11.111Z", ' +
+                  '"updated": "1995-06-12T01:11:11.111Z"' +
+                '}' +
+              ']' +
+            '}' +
+          '],' +
+          '"entities": [' +
+            '{' +
+              '"entity": "entity", ' +
+              '"description": "description", ' +
+              '"created": "1995-06-12T01:11:11.111Z", ' +
+              '"updated": "1995-06-12T01:11:11.111Z", ' +
+              '"metadata": {' +
+                '"code": "test_code"' +
+              '}, ' +
+              '"fuzzy_match": true, ' +
+              '"values": [' +
+                '{' +
+                  '"value": "value", ' +
+                  '"type": "type",' +
+                  '"metadata": {' +
+                    '"code": "test_code"' +
+                  '}, ' +
+                  '"created": "1995-06-12T01:11:11.111Z", ' +
+                  '"updated": "1995-06-12T01:11:11.111Z", ' +
+                  '"patterns": [' +
+                    '"pattern"' +
+                  '], ' +
+                  '"synonyms": [' +
+                    '"synonym"' +
+                  ']' +
+                '}' +
+              ']' +
+            '}' +
+          '],' +
+          '"dialog_nodes": [' +
+            '{' +
+              '"dialog_node": "dialog_node", ' +
+              '"description": "description", ' +
+              '"title": "title", ' +
+              '"created": "1995-06-12T01:11:11.111Z", ' +
+              '"updated": "1995-06-12T01:11:11.111Z", ' +
+              '"conditions": "conditions", ' +
+              '"parent": "parent", ' +
+              '"previous_sibling": "previous_sibling", ' +
+              '"user_label": "user_label", ' +
+              '"disabled": true, ' +
+              '"next_step": {' +
+                '"dialog_node": "dialog_node", ' +
+                '"behavior": "behavior", ' +
+                '"selector": "selector"' +
+              '}, ' +
+              '"output": {' +
+                '"generic": [' +
+                  '{' +
+                    '"response_type": "response_type",' +
+                    '"values": [' +
+                      '{' +
+                        '"text": "text"' +
+                      '}' +
+                    '],' +
+                    '"selection_policy": "selection_policy",' +
+                    '"delimiter": "delimiter",' +
+                    '"time": 10,' +
+                    '"typing": true,' +
+                    '"source": "source",' +
+                    '"title": "title",' +
+                    '"description": "description",' +
+                    '"preference": "preference",' +
+                    '"options": [' +
+                      '{' +
+                        '"label": "label",' +
+                        '"value": {' +
+                          '"input": {' +
+                            '"text": "text"' +
+                          '},' +
+                          '"intents": [' +
+                            '{' +
+                              '"intent": "intent",' +
+                              '"confidence": 0.5' +
+                            '}' +
+                          '],' +
+                          '"entities": [' +
+                            '{' +
+                              '"entity": "entity",' +
+                              '"location": [' +
+                                '10,' +
+                                '10' +
+                              '],' +
+                              '"value": "value",' +
+                              '"confidence": 0.5,' +
+                              '"metadata": {' +
+                                '"key": "value"' +
+                              '},' +
+                              '"groups": [' +
+                                '{' +
+                                  '"group": "group",' +
+                                  '"location": [' +
+                                    '10,' +
+                                    '10' +
+                                  ']' +
+                                '}' +
+                              ']' +
+                            '}' +
+                          ']' +
+                        '}' +
+                      '}' +
+                    '],' +
+                    '"message_to_human_agent": "message_to_human_agent",' +
+                    '"query": "query",' +
+                    '"query_type": "query_type",' +
+                    '"filter": "filter",' +
+                    '"discovery_version": "discovery_version"' +
+                  '}' +
+                '],' +
+                '"modifiers": {' +
+                  '"overwrite": true' +
+                '}' +
+              '}, ' +
+              '"metadata": {' +
+                '"code": "test_code"' +
+              '}, ' +
+              '"context": {' +
+                '"context": "context"' +
+              '}, ' +
+              '"actions": [' +
+              '{' +
+                '"name": "name", ' +
+                '"type": "type", ' +
+                '"parameters": {' +
+                  '"param_1": "param_1_val"' +
+                '}, ' +
+                '"result_variable": "result_variable", ' +
+                '"credentials": "credentials"' +
+              '}' +
+              '], ' +
+              '"type": "type", ' +
+              '"event_name": "event_name", ' +
+              '"variable": "variable",' +
+              '"digress_in": "digress_in",' +
+              '"digress_out": "digress_out",' +
+              '"digress_out_slots": "digress_out_slots"' +
+            '}' +
+          '],' +
+          '"counterexamples": [' +
+            '{' +
+              '"text": "text", ' +
+              '"created": "1995-06-12T01:11:11.111Z",' +
+              '"updated": "1995-06-12T01:11:11.111Z"' +
+            '}' +
+          '],' +
+          '"system_settings": {' +
+            '"tooling": {' +
+              '"store_generic_responses": true' +
+            '},' +
+            '"disambiguation": {' +
+              '"prompt": "prompt",' +
+              '"none_of_the_above_prompt": "none_of_the_above_prompt",' +
+              '"enabled": true,' +
+              '"sensitivity": "sensitivity"' +
+            '},' +
+            '"human_agent_assist": {}' +
+          '}' +
+        '}' +
+      '],' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1Workspace() {
+    return '{' +
+      '"name": "name", ' +
+      '"created": "1995-06-12T01:11:11.111Z", ' +
+      '"language": "language", ' +
+      '"metadata": {' +
+        '"code": "test_code"' +
+      '}, ' +
+      '"updated": "1995-06-12T01:11:11.111Z", ' +
+      '"description": "description", ' +
+      '"workspace_id": "workspace_id", ' +
+      '"status": "status", ' +
+      '"learning_opt_out": true,' +
+      '"intents": [' +
+        '{' +
+          '"intent": "intent", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"description": "description", ' +
+          '"examples": [' +
+            '{' +
+              '"text": "text", ' +
+              '"mentions": [' +
+                '{' +
+                  '"entity": "entity",' +
+                  '"location": [' +
+                    '10' +
+                  ']' +
+                '}' +
+              '],' +
+              '"created": "1995-06-12T01:11:11.111Z", ' +
+              '"updated": "1995-06-12T01:11:11.111Z"' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"entities": [' +
+        '{' +
+          '"entity": "entity", ' +
+          '"description": "description", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '}, ' +
+          '"fuzzy_match": true, ' +
+          '"values": [' +
+            '{' +
+              '"value": "value", ' +
+              '"type": "type",' +
+              '"metadata": {' +
+                '"code": "test_code"' +
+              '}, ' +
+              '"created": "1995-06-12T01:11:11.111Z", ' +
+              '"updated": "1995-06-12T01:11:11.111Z", ' +
+              '"patterns": [' +
+                '"pattern"' +
+              '], ' +
+              '"synonyms": [' +
+                '"synonym"' +
+              ']' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"dialog_nodes": [' +
+        '{' +
+          '"dialog_node": "dialog_node", ' +
+          '"description": "description", ' +
+          '"title": "title", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"conditions": "conditions", ' +
+          '"parent": "parent", ' +
+          '"previous_sibling": "previous_sibling", ' +
+          '"user_label": "user_label", ' +
+          '"disabled": true, ' +
+          '"next_step": {' +
+            '"dialog_node": "dialog_node", ' +
+            '"behavior": "behavior", ' +
+            '"selector": "selector"' +
+          '}, ' +
+          '"output": {' +
+            '"generic": [' +
+              '{' +
+                '"response_type": "response_type",' +
+                '"values": [' +
+                  '{' +
+                    '"text": "text"' +
+                  '}' +
+                '],' +
+                '"selection_policy": "selection_policy",' +
+                '"delimiter": "delimiter",' +
+                '"time": 10,' +
+                '"typing": true,' +
+                '"source": "source",' +
+                '"title": "title",' +
+                '"description": "description",' +
+                '"preference": "preference",' +
+                '"options": [' +
+                  '{' +
+                    '"label": "label",' +
+                    '"value": {' +
+                      '"input": {' +
+                        '"text": "text"' +
+                      '},' +
+                      '"intents": [' +
+                        '{' +
+                          '"intent": "intent",' +
+                          '"confidence": 0.5' +
+                        '}' +
+                      '],' +
+                      '"entities": [' +
+                        '{' +
+                          '"entity": "entity",' +
+                          '"location": [' +
+                            '10,' +
+                            '10' +
+                          '],' +
+                          '"value": "value",' +
+                          '"confidence": 0.5,' +
+                          '"metadata": {' +
+                            '"key": "value"' +
+                          '},' +
+                          '"groups": [' +
+                            '{' +
+                              '"group": "group",' +
+                              '"location": [' +
+                                '10,' +
+                                '10' +
+                              ']' +
+                            '}' +
+                          ']' +
+                        '}' +
+                      ']' +
+                    '}' +
+                  '}' +
+                '],' +
+                '"message_to_human_agent": "message_to_human_agent",' +
+                '"query": "query",' +
+                '"query_type": "query_type",' +
+                '"filter": "filter",' +
+                '"discovery_version": "discovery_version"' +
+              '}' +
+            '],' +
+            '"modifiers": {' +
+              '"overwrite": true' +
+            '}' +
+          '}, ' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '}, ' +
+          '"context": {' +
+            '"context": "context"' +
+          '}, ' +
+          '"actions": [' +
+          '{' +
+            '"name": "name", ' +
+            '"type": "type", ' +
+            '"parameters": {' +
+              '"param_1": "param_1_val"' +
+            '}, ' +
+            '"result_variable": "result_variable", ' +
+            '"credentials": "credentials"' +
+          '}' +
+          '], ' +
+          '"type": "type", ' +
+          '"event_name": "event_name", ' +
+          '"variable": "variable",' +
+          '"digress_in": "digress_in",' +
+          '"digress_out": "digress_out",' +
+          '"digress_out_slots": "digress_out_slots"' +
+        '}' +
+      '],' +
+      '"counterexamples": [' +
+        '{' +
+          '"text": "text", ' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      '],' +
+      '"system_settings": {' +
+        '"tooling": {' +
+          '"store_generic_responses": true' +
+        '},' +
+        '"disambiguation": {' +
+          '"prompt": "prompt",' +
+          '"none_of_the_above_prompt": "none_of_the_above_prompt",' +
+          '"enabled": true,' +
+          '"sensitivity": "sensitivity"' +
+        '},' +
+        '"human_agent_assist": {}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1IntentCollection() {
+    return '{' +
+      '"intents": [' +
+        '{' +
+          '"intent": "intent", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"description": "description", ' +
+          '"examples": [' +
+            '{' +
+              '"text": "text", ' +
+              '"mentions": [' +
+                '{' +
+                  '"entity": "entity",' +
+                  '"location": [' +
+                    '10' +
+                  ']' +
+                '}' +
+              '],' +
+              '"created": "1995-06-12T01:11:11.111Z", ' +
+              '"updated": "1995-06-12T01:11:11.111Z"' +
+            '}' +
+          ']' +
+        '}' +
+      '], ' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1Intent() {
+    return '{' +
+      '"intent": "intent", ' +
+      '"created": "1995-06-12T01:11:11.111Z", ' +
+      '"updated": "1995-06-12T01:11:11.111Z", ' +
+      '"description": "description", ' +
+      '"examples": [' +
+        '{' +
+          '"text": "text", ' +
+          '"mentions": [' +
+            '{' +
+              '"entity": "entity",' +
+              '"location": [' +
+                '10' +
+              ']' +
+            '}' +
+          '],' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String assistantV1ExampleCollection() {
+    return '{' +
+      '"examples": [' +
+        '{' +
+          '"text": "text", ' +
+          '"mentions": [' +
+            '{' +
+              '"entity": "entity",' +
+              '"location": [' +
+                '10' +
+              ']' +
+            '}' +
+          '],' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      '],' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1Example() {
+    return '{' +
+      '"text": "text", ' +
+      '"mentions": [' +
+        '{' +
+          '"entity": "entity",' +
+          '"location": [' +
+            '10' +
+          ']' +
+        '}' +
+      '],' +
+      '"created": "1995-06-12T01:11:11.111Z", ' +
+      '"updated": "1995-06-12T01:11:11.111Z"' +
+    '}';
+  }
+
+  public static testMethod String assistantV1CounterexampleCollection() {
+    return '{' +
+      '"counterexamples": [' +
+        '{' +
+          '"text": "text", ' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      '],' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1Counterexample() {
+    return '{' +
+      '"text": "text", ' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z"' +
+    '}';
+  }
+
+  public static testMethod String assistantV1EntityCollection() {
+    return '{' +
+      '"entities": [' +
+        '{' +
+          '"entity": "entity", ' +
+          '"description": "description", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '}, ' +
+          '"fuzzy_match": true, ' +
+          '"values": [' +
+            '{' +
+              '"value": "value", ' +
+              '"type": "type",' +
+              '"metadata": {' +
+                '"code": "test_code"' +
+              '}, ' +
+              '"created": "1995-06-12T01:11:11.111Z", ' +
+              '"updated": "1995-06-12T01:11:11.111Z", ' +
+              '"patterns": [' +
+                '"pattern"' +
+              '], ' +
+              '"synonyms": [' +
+                '"synonym"' +
+              ']' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1Entity() {
+    return '{' +
+      '"entity": "entity", ' +
+      '"description": "description", ' +
+      '"created": "1995-06-12T01:11:11.111Z", ' +
+      '"updated": "1995-06-12T01:11:11.111Z", ' +
+      '"metadata": {' +
+        '"code": "test_code"' +
+      '}, ' +
+      '"fuzzy_match": true, ' +
+      '"values": [' +
+        '{' +
+          '"value": "value", ' +
+          '"type": "type",' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '}, ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"patterns": [' +
+            '"pattern"' +
+          '], ' +
+          '"synonyms": [' +
+            '"synonym"' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String assistantV1EntityMentionCollection() {
+    return '{' +
+      '"examples": [' +
+        '{' +
+          '"text": "text",' +
+          '"intent": "intent",' +
+          '"location": [' +
+            '10' +
+          ']' +
+        '}' +
+      '],' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1ValueCollection() {
+    return '{' +
+      '"values": [' +
+        '{' +
+          '"value": "value", ' +
+          '"type": "type",' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '}, ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"patterns": [' +
+            '"pattern"' +
+          '], ' +
+          '"synonyms": [' +
+            '"synonym"' +
+          ']' +
+        '}' +
+      '],' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1Value() {
+    return '{' +
+      '"value": "value", ' +
+      '"type": "type",' +
+      '"metadata": {' +
+        '"code": "test_code"' +
+      '}, ' +
+      '"created": "1995-06-12T01:11:11.111Z", ' +
+      '"updated": "1995-06-12T01:11:11.111Z", ' +
+      '"patterns": [' +
+        '"pattern"' +
+      '], ' +
+      '"synonyms": [' +
+        '"synonym"' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String assistantV1SynonymCollection() {
+    return '{' +
+      '"synonyms": [' +
+        '{' +
+          '"synonym": "synonym",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      '],' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1Synonym() {
+    return '{' +
+      '"synonym": "synonym",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z"' +
+    '}';
+  }
+
+  public static testMethod String assistantV1DialogNodeCollection() {
+    return '{' +
+      '"dialog_nodes": [' +
+        '{' +
+          '"dialog_node": "dialog_node", ' +
+          '"description": "description", ' +
+          '"title": "title", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"conditions": "conditions", ' +
+          '"parent": "parent", ' +
+          '"previous_sibling": "previous_sibling", ' +
+          '"user_label": "user_label", ' +
+          '"disabled": true, ' +
+          '"next_step": {' +
+            '"dialog_node": "dialog_node", ' +
+            '"behavior": "behavior", ' +
+            '"selector": "selector"' +
+          '}, ' +
+          '"output": {' +
+            '"generic": [' +
+              '{' +
+                '"response_type": "response_type",' +
+                '"values": [' +
+                  '{' +
+                    '"text": "text"' +
+                  '}' +
+                '],' +
+                '"selection_policy": "selection_policy",' +
+                '"delimiter": "delimiter",' +
+                '"time": 10,' +
+                '"typing": true,' +
+                '"source": "source",' +
+                '"title": "title",' +
+                '"description": "description",' +
+                '"preference": "preference",' +
+                '"options": [' +
+                  '{' +
+                    '"label": "label",' +
+                    '"value": {' +
+                      '"input": {' +
+                        '"text": "text"' +
+                      '},' +
+                      '"intents": [' +
+                        '{' +
+                          '"intent": "intent",' +
+                          '"confidence": 0.5' +
+                        '}' +
+                      '],' +
+                      '"entities": [' +
+                        '{' +
+                          '"entity": "entity",' +
+                          '"location": [' +
+                            '10,' +
+                            '10' +
+                          '],' +
+                          '"value": "value",' +
+                          '"confidence": 0.5,' +
+                          '"metadata": {' +
+                            '"key": "value"' +
+                          '},' +
+                          '"groups": [' +
+                            '{' +
+                              '"group": "group",' +
+                              '"location": [' +
+                                '10,' +
+                                '10' +
+                              ']' +
+                            '}' +
+                          ']' +
+                        '}' +
+                      ']' +
+                    '}' +
+                  '}' +
+                '],' +
+                '"message_to_human_agent": "message_to_human_agent",' +
+                '"query": "query",' +
+                '"query_type": "query_type",' +
+                '"filter": "filter",' +
+                '"discovery_version": "discovery_version"' +
+              '}' +
+            '],' +
+            '"modifiers": {' +
+              '"overwrite": true' +
+            '}' +
+          '}, ' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '}, ' +
+          '"context": {' +
+            '"context": "context"' +
+          '}, ' +
+          '"actions": [' +
+          '{' +
+            '"name": "name", ' +
+            '"type": "type", ' +
+            '"parameters": {' +
+              '"param_1": "param_1_val"' +
+            '}, ' +
+            '"result_variable": "result_variable", ' +
+            '"credentials": "credentials"' +
+          '}' +
+          '], ' +
+          '"type": "type", ' +
+          '"event_name": "event_name", ' +
+          '"variable": "variable",' +
+          '"digress_in": "digress_in",' +
+          '"digress_out": "digress_out",' +
+          '"digress_out_slots": "digress_out_slots"' +
+        '}' +
+      '],' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String assistantV1DialogNode() {
+    return '{' +
+      '"dialog_node": "dialog_node", ' +
+      '"description": "description", ' +
+      '"title": "title", ' +
+      '"created": "1995-06-12T01:11:11.111Z", ' +
+      '"updated": "1995-06-12T01:11:11.111Z", ' +
+      '"conditions": "conditions", ' +
+      '"parent": "parent", ' +
+      '"previous_sibling": "previous_sibling", ' +
+      '"user_label": "user_label", ' +
+      '"disabled": true, ' +
+      '"next_step": {' +
+        '"dialog_node": "dialog_node", ' +
+        '"behavior": "behavior", ' +
+        '"selector": "selector"' +
+      '}, ' +
+      '"output": {' +
+        '"generic": [' +
+          '{' +
+            '"response_type": "response_type",' +
+            '"values": [' +
+              '{' +
+                '"text": "text"' +
+              '}' +
+            '],' +
+            '"selection_policy": "selection_policy",' +
+            '"delimiter": "delimiter",' +
+            '"time": 10,' +
+            '"typing": true,' +
+            '"source": "source",' +
+            '"title": "title",' +
+            '"description": "description",' +
+            '"preference": "preference",' +
+            '"options": [' +
+              '{' +
+                '"label": "label",' +
+                '"value": {' +
+                  '"input": {' +
+                    '"text": "text"' +
+                  '},' +
+                  '"intents": [' +
+                    '{' +
+                      '"intent": "intent",' +
+                      '"confidence": 0.5' +
+                    '}' +
+                  '],' +
+                  '"entities": [' +
+                    '{' +
+                      '"entity": "entity",' +
+                      '"location": [' +
+                        '10,' +
+                        '10' +
+                      '],' +
+                      '"value": "value",' +
+                      '"confidence": 0.5,' +
+                      '"metadata": {' +
+                        '"key": "value"' +
+                      '},' +
+                      '"groups": [' +
+                        '{' +
+                          '"group": "group",' +
+                          '"location": [' +
+                            '10,' +
+                            '10' +
+                          ']' +
+                        '}' +
+                      ']' +
+                    '}' +
+                  ']' +
+                '}' +
+              '}' +
+            '],' +
+            '"message_to_human_agent": "message_to_human_agent",' +
+            '"query": "query",' +
+            '"query_type": "query_type",' +
+            '"filter": "filter",' +
+            '"discovery_version": "discovery_version"' +
+          '}' +
+        '],' +
+        '"modifiers": {' +
+          '"overwrite": true' +
+        '}' +
+      '}, ' +
+      '"metadata": {' +
+        '"code": "test_code"' +
+      '}, ' +
+      '"context": {' +
+        '"context": "context"' +
+      '}, ' +
+      '"actions": [' +
+      '{' +
+        '"name": "name", ' +
+        '"type": "type", ' +
+        '"parameters": {' +
+          '"param_1": "param_1_val"' +
+        '}, ' +
+        '"result_variable": "result_variable", ' +
+        '"credentials": "credentials"' +
+      '}' +
+      '], ' +
+      '"type": "type", ' +
+      '"event_name": "event_name", ' +
+      '"variable": "variable",' +
+      '"digress_in": "digress_in",' +
+      '"digress_out": "digress_out",' +
+      '"digress_out_slots": "digress_out_slots"' +
+    '}';
+  }
+
+  public static testMethod String assistantV1LogCollection() {
+    return '{' +
+      '"logs": [' +
+        '{' +
+          '"request": {' +
+            '"input": {' +
+              '"text": "text"' +
+            '},' +
+            '"intents": [' +
+              '{' +
+                '"intent": "intent",' +
+                '"confidence": 0.5' +
+              '}' +
+            '],' +
+            '"entities": [' +
+              '{' +
+                '"entity": "entity",' +
+                '"location": [' +
+                  '10,' +
+                  '10' +
+                '],' +
+                '"value": "value",' +
+                '"confidence": 0.5,' +
+                '"metadata": {' +
+                  '"key": "value"' +
+                '},' +
+                '"groups": [' +
+                  '{' +
+                    '"group": "group",' +
+                    '"location": [' +
+                      '10,' +
+                      '10' +
+                    ']' +
+                  '}' +
+                ']' +
+              '}' +
+            '],' +
+            '"alternate_intents": true,' +
+            '"context": {' +
+              '"conversation_id": "conversation_id",' +
+              '"system": {' +
+                '"dialog_turn_counter": 1,' +
+                '"dialog_request_counter": 1' +
+              '},' +
+              '"metadata": {' +
+                '"deployment": "deployment",' +
+                '"user_id": "user_id"' +
+              '}' +
+            '},' +
+            '"output": {' +
+              '"generic": [' +
+                '{' +
+                  '"response_type": "response_type",' +
+                  '"text": "text",' +
+                  '"time": 10,' +
+                  '"typing": true,' +
+                  '"source": "source",' +
+                  '"title": "title",' +
+                  '"description": "description",' +
+                  '"preference": "preference",' +
+                  '"options": [' +
+                    '{' +
+                      '"label": "label",' +
+                      '"value": {' +
+                        '"input": {' +
+                          '"text": "text"' +
+                        '},' +
+                        '"intents": [' +
+                          '{' +
+                            '"intent": "intent",' +
+                            '"confidence": 0.5' +
+                          '}' +
+                        '],' +
+                        '"entities": [' +
+                          '{' +
+                            '"entity": "entity",' +
+                            '"location": [' +
+                              '10,' +
+                              '10' +
+                            '],' +
+                            '"value": "value",' +
+                            '"confidence": 0.5,' +
+                            '"metadata": {' +
+                              '"key": "value"' +
+                            '},' +
+                            '"groups": [' +
+                              '{' +
+                                '"group": "group",' +
+                                '"location": [' +
+                                  '10,' +
+                                  '10' +
+                                ']' +
+                              '}' +
+                            ']' +
+                          '}' +
+                        ']' +
+                      '}' +
+                    '}' +
+                  '],' +
+                  '"message_to_human_agent": "message_to_human_agent",' +
+                  '"topic": "topic",' +
+                  '"dialog_node": "dialog_node",' +
+                  '"suggestions": [' +
+                    '{' +
+                      '"label": "label",' +
+                      '"dialog_node": "dialog_node",' +
+                      '"value": {' +
+                        '"input": {' +
+                          '"text": "text"' +
+                        '},' +
+                        '"intents": [' +
+                          '{' +
+                            '"intent": "intent",' +
+                            '"confidence": 0.5' +
+                          '}' +
+                        '],' +
+                        '"entities": [' +
+                          '{' +
+                            '"entity": "entity",' +
+                            '"location": [' +
+                              '10,' +
+                              '10' +
+                            '],' +
+                            '"value": "value",' +
+                            '"confidence": 0.5,' +
+                            '"metadata": {' +
+                              '"key": "value"' +
+                            '},' +
+                            '"groups": [' +
+                              '{' +
+                                '"group": "group",' +
+                                '"location": [' +
+                                  '10,' +
+                                  '10' +
+                                ']' +
+                              '}' +
+                            ']' +
+                          '}' +
+                        ']' +
+                      '},' +
+                      '"output": {' +
+                        '"nodes_visited": [' +
+                          '"nodes_visited"' +
+                        '],' +
+                        '"nodes_visited_details": [' +
+                          '{' +
+                            '"dialog_node": "dialog_node",' +
+                            '"title": "title",' +
+                            '"conditions": "conditions"' +
+                          '}' +
+                        '],' +
+                        '"text": [' +
+                          '"text"' +
+                        '],' +
+                        '"generic": [' +
+                          '{' +
+                            '"response_type": "response_type",' +
+                            '"text": "text",' +
+                            '"time": 10,' +
+                            '"typing": true,' +
+                            '"source": "source",' +
+                            '"title": "title",' +
+                            '"description": "description",' +
+                            '"preference": "preference",' +
+                            '"options": [' +
+                              '{' +
+                                '"label": "label",' +
+                                '"value": {' +
+                                  '"input": {' +
+                                    '"text": "text"' +
+                                  '},' +
+                                  '"intents": [' +
+                                    '{' +
+                                      '"intent": "intent",' +
+                                      '"confidence": 0.5' +
+                                    '}' +
+                                  '],' +
+                                  '"entities": [' +
+                                    '{' +
+                                      '"entity": "entity",' +
+                                      '"location": [' +
+                                        '10,' +
+                                        '10' +
+                                      '],' +
+                                      '"value": "value",' +
+                                      '"confidence": 0.5,' +
+                                      '"metadata": {' +
+                                        '"key": "value"' +
+                                      '},' +
+                                      '"groups": [' +
+                                        '{' +
+                                          '"group": "group",' +
+                                          '"location": [' +
+                                            '10,' +
+                                            '10' +
+                                          ']' +
+                                        '}' +
+                                      ']' +
+                                    '}' +
+                                  ']' +
+                                '}' +
+                              '}' +
+                            '],' +
+                            '"message_to_human_agent": "message_to_human_agent",' +
+                            '"topic": "topic",' +
+                            '"dialog_node": "dialog_node"' +
+                          '}' +
+                        ']' +
+                      '}' +
+                    '}' +
+                  ']' +
+                '}' +
+              '],' +
+              '"text": [' +
+                '"text"' +
+              '],' +
+              '"nodes_visited": [' +
+                '"nodes_visited"' +
+              '],' +
+              '"nodes_visited_details": [' +
+                '{' +
+                  '"dialog_node": "dialog_node",' +
+                  '"title": "title",' +
+                  '"conditions": "conditions"' +
+                '}' +
+              '],' +
+              '"log_messages": [' +
+                '{' +
+                  '"level": "level",' +
+                  '"msg": "msg"' +
+                '}' +
+              ']' +
+            '},' +
+            '"actions": [' +
+              '{' +
+                '"name": "name",' +
+                '"type": "type",' +
+                '"parameters": {' +
+                  '"param_1": "param_1_val"' +
+                '},' +
+                '"result_variable": "result_variable",' +
+                '"credentials": "credentials"' +
+              '}' +
+            ']' +
+          '}, ' +
+          '"response": {' +
+            '"intents": [' +
+              '{' +
+                '"intent": "intent",' +
+                '"confidence": 0.5' +
+              '}' +
+            '],' +
+            '"entities": [' +
+              '{' +
+                '"entity": "entity",' +
+                '"location": [' +
+                  '10,' +
+                  '10' +
+                '],' +
+                '"value": "value",' +
+                '"confidence": 0.5,' +
+                '"metadata": {' +
+                  '"key": "value"' +
+                '},' +
+                '"groups": [' +
+                  '{' +
+                    '"group": "group",' +
+                    '"location": [' +
+                      '10,' +
+                      '10' +
+                    ']' +
+                  '}' +
+                ']' +
+              '}' +
+            '],' +
+            '"input": {' +
+              '"text": "text"' +
+            '},' +
+            '"output": {' +
+              '"generic": [' +
+                '{' +
+                  '"response_type": "response_type",' +
+                  '"text": "text",' +
+                  '"time": 10,' +
+                  '"typing": true,' +
+                  '"source": "source",' +
+                  '"title": "title",' +
+                  '"description": "description",' +
+                  '"preference": "preference",' +
+                  '"options": [' +
+                    '{' +
+                      '"label": "label",' +
+                      '"value": {' +
+                        '"input": {' +
+                          '"text": "text"' +
+                        '},' +
+                        '"intents": [' +
+                          '{' +
+                            '"intent": "intent",' +
+                            '"confidence": 0.5' +
+                          '}' +
+                        '],' +
+                        '"entities": [' +
+                          '{' +
+                            '"entity": "entity",' +
+                            '"location": [' +
+                              '10,' +
+                              '10' +
+                            '],' +
+                            '"value": "value",' +
+                            '"confidence": 0.5,' +
+                            '"metadata": {' +
+                              '"key": "value"' +
+                            '},' +
+                            '"groups": [' +
+                              '{' +
+                                '"group": "group",' +
+                                '"location": [' +
+                                  '10,' +
+                                  '10' +
+                                ']' +
+                              '}' +
+                            ']' +
+                          '}' +
+                        ']' +
+                      '}' +
+                    '}' +
+                  '],' +
+                  '"message_to_human_agent": "message_to_human_agent",' +
+                  '"topic": "topic",' +
+                  '"dialog_node": "dialog_node",' +
+                  '"suggestions": [' +
+                    '{' +
+                      '"label": "label",' +
+                      '"dialog_node": "dialog_node",' +
+                      '"value": {' +
+                        '"input": {' +
+                          '"text": "text"' +
+                        '},' +
+                        '"intents": [' +
+                          '{' +
+                            '"intent": "intent",' +
+                            '"confidence": 0.5' +
+                          '}' +
+                        '],' +
+                        '"entities": [' +
+                          '{' +
+                            '"entity": "entity",' +
+                            '"location": [' +
+                              '10,' +
+                              '10' +
+                            '],' +
+                            '"value": "value",' +
+                            '"confidence": 0.5,' +
+                            '"metadata": {' +
+                              '"key": "value"' +
+                            '},' +
+                            '"groups": [' +
+                              '{' +
+                                '"group": "group",' +
+                                '"location": [' +
+                                  '10,' +
+                                  '10' +
+                                ']' +
+                              '}' +
+                            ']' +
+                          '}' +
+                        ']' +
+                      '},' +
+                      '"output": {' +
+                        '"nodes_visited": [' +
+                          '"nodes_visited"' +
+                        '],' +
+                        '"nodes_visited_details": [' +
+                          '{' +
+                            '"dialog_node": "dialog_node",' +
+                            '"title": "title",' +
+                            '"conditions": "conditions"' +
+                          '}' +
+                        '],' +
+                        '"text": [' +
+                          '"text"' +
+                        '],' +
+                        '"generic": [' +
+                          '{' +
+                            '"response_type": "response_type",' +
+                            '"text": "text",' +
+                            '"time": 10,' +
+                            '"typing": true,' +
+                            '"source": "source",' +
+                            '"title": "title",' +
+                            '"description": "description",' +
+                            '"preference": "preference",' +
+                            '"options": [' +
+                              '{' +
+                                '"label": "label",' +
+                                '"value": {' +
+                                  '"input": {' +
+                                    '"text": "text"' +
+                                  '},' +
+                                  '"intents": [' +
+                                    '{' +
+                                      '"intent": "intent",' +
+                                      '"confidence": 0.5' +
+                                    '}' +
+                                  '],' +
+                                  '"entities": [' +
+                                    '{' +
+                                      '"entity": "entity",' +
+                                      '"location": [' +
+                                        '10,' +
+                                        '10' +
+                                      '],' +
+                                      '"value": "value",' +
+                                      '"confidence": 0.5,' +
+                                      '"metadata": {' +
+                                        '"key": "value"' +
+                                      '},' +
+                                      '"groups": [' +
+                                        '{' +
+                                          '"group": "group",' +
+                                          '"location": [' +
+                                            '10,' +
+                                            '10' +
+                                          ']' +
+                                        '}' +
+                                      ']' +
+                                    '}' +
+                                  ']' +
+                                '}' +
+                              '}' +
+                            '],' +
+                            '"message_to_human_agent": "message_to_human_agent",' +
+                            '"topic": "topic",' +
+                            '"dialog_node": "dialog_node"' +
+                          '}' +
+                        ']' +
+                      '}' +
+                    '}' +
+                  ']' +
+                '}' +
+              '],' +
+              '"text": [' +
+                '"text"' +
+              '],' +
+              '"nodes_visited": [' +
+                '"nodes_visited"' +
+              '],' +
+              '"nodes_visited_details": [' +
+                '{' +
+                  '"dialog_node": "dialog_node",' +
+                  '"title": "title",' +
+                  '"conditions": "conditions"' +
+                '}' +
+              '],' +
+              '"log_messages": [' +
+                '{' +
+                  '"level": "level",' +
+                  '"msg": "msg"' +
+                '}' +
+              ']' +
+            '},' +
+            '"context": {' +
+              '"conversation_id": "conversation_id",' +
+              '"system": {' +
+                '"dialog_turn_counter": 1,' +
+                '"dialog_request_counter": 1' +
+              '},' +
+              '"metadata": {' +
+                '"deployment": "deployment",' +
+                '"user_id": "user_id"' +
+              '}' +
+            '},' +
+            '"alternate_intents": true,' +
+            '"actions": [' +
+              '{' +
+                '"name": "name",' +
+                '"type": "type",' +
+                '"parameters": {' +
+                  '"param_1": "param_1_val"' +
+                '},' +
+                '"result_variable": "result_variable",' +
+                '"credentials": "credentials"' +
+              '}' +
+            ']' +
+          '}, ' +
+          '"language": "language", ' +
+          '"workspace_id": "workspace_id", ' +
+          '"request_timestamp": "request_timestamp", ' +
+          '"response_timestamp": "response_timestamp", ' +
+          '"log_id": "log_id"' +
+        '}' +
+      '], ' +
+      '"pagination": {' +
+        '"refresh_url": "refresh_url", ' +
+        '"next_url": "next_url", ' +
+        '"total": 10, ' +
+        '"matched": 10,' +
+        '"refresh_cursor": "refresh_cursor",' +
+        '"next_cursor": "next_cursor"' +
+      '}' +
+    '}';
+  }
+
+
+  // --- Assistant v2 ---
+
+  public static testMethod String assistantV2SessionResponse() {
+    return '{' +
+      '"session_id": "session_id"' +
+    '}';
+  }
+
+  public static testMethod String assistantV2MessageResponse() {
+    return '{' +
+      '"context": {' +
+        '"global": {' +
+          '"system": {' +
+            '"timezone": "timezone",' +
+            '"user_id": "user_id",' +
+            '"turn_count": 10' +
+          '}' +
+        '},' +
+        '"skills": {' +
+          '"main skill": {' +
+            '"skill_key": "skill_var"' +
+          '}' +
+        '}' +
+      '},' +
+      '"output": {' +
+        '"generic": [' +
+          '{' +
+            '"response_type": "response_type",' +
+            '"text": "text",' +
+            '"time": 10,' +
+            '"typing": true,' +
+            '"source": "source",' +
+            '"title": "title",' +
+            '"description": "description",' +
+            '"preference": "preference",' +
+            '"header": "header",' +
+            '"options": [' +
+              '{' +
+                '"label": "label",' +
+                '"value": {' +
+                  '"input": {' +
+                    '"message_type": "message_type",' +
+                    '"text": "text",' +
+                    '"options": {' +
+                      '"debug": true,' +
+                      '"restart": true,' +
+                      '"alternate_intents": true,' +
+                      '"return_context": true' +
+                    '},' +
+                    '"intents": [' +
+                      '{' +
+                        '"intent": "intent",' +
+                        '"confidence": 0.5' +
+                      '}' +
+                    '],' +
+                    '"entities": [' +
+                      '{' +
+                        '"entity": "entity",' +
+                        '"location": [' +
+                          '10,' +
+                          '10' +
+                        '],' +
+                        '"value": "value",' +
+                        '"confidence": 0.5,' +
+                        '"metadata": {' +
+                          '"key": "value"' +
+                        '},' +
+                        '"groups": [' +
+                          '{' +
+                            '"group": "group",' +
+                            '"location": [' +
+                              '10,' +
+                              '10' +
+                            ']' +
+                          '}' +
+                        ']' +
+                      '}' +
+                    '],' +
+                    '"suggestion_id": "suggestion_id"' +
+                  '}' +
+                '}' +
+              '}' +
+            '],' +
+            '"message_to_human_agent": "message_to_human_agent",' +
+            '"topic": "topic",' +
+            '"suggestions": [' +
+              '{' +
+                '"label": "label",' +
+                '"value": {' +
+                  '"input": {' +
+                    '"message_type": "message_type",' +
+                    '"text": "text",' +
+                    '"options": {' +
+                      '"debug": true,' +
+                      '"restart": true,' +
+                      '"alternate_intents": true,' +
+                      '"return_context": true' +
+                    '},' +
+                    '"intents": [' +
+                      '{' +
+                        '"intent": "intent",' +
+                        '"confidence": 0.5' +
+                      '}' +
+                    '],' +
+                    '"entities": [' +
+                      '{' +
+                        '"entity": "entity",' +
+                        '"location": [' +
+                          '10,' +
+                          '10' +
+                        '],' +
+                        '"value": "value",' +
+                        '"confidence": 0.5,' +
+                        '"metadata": {' +
+                          '"key": "value"' +
+                        '},' +
+                        '"groups": [' +
+                          '{' +
+                            '"group": "group",' +
+                            '"location": [' +
+                              '10,' +
+                              '10' +
+                            ']' +
+                          '}' +
+                        ']' +
+                      '}' +
+                    '],' +
+                    '"suggestion_id": "suggestion_id"' +
+                  '}' +
+                '},' +
+                '"output": {' +
+                  '"key": "value"' +
+                '}' +
+              '}' +
+            '],' +
+            '"results": [' +
+              '{' +
+                '"id": "id",' +
+                '"body": "body",' +
+                '"title": "title",' +
+                '"url": "url",' +
+                '"result_metadata": {' +
+                  '"confidence": 0.5,' +
+                  '"score": 0.5' +
+                '},' +
+                '"highlight" : {' +
+                  '"body": [' +
+                    '"body"' +
+                  '],' +
+                  '"title": [' +
+                    '"title"' +
+                  '],' +
+                  '"url": [' +
+                    '"url"' +
+                  ']' +
+                '}' +
+              '}' +
+            ']' +
+          '}' +
+        '],' +
+        '"intents": [' +
+          '{' +
+            '"intent": "intent",' +
+            '"confidence": 0.5' +
+          '}' +
+        '],' +
+        '"entities": [' +
+          '{' +
+            '"entity": "entity",' +
+            '"location": [' +
+              '10,' +
+              '10' +
+            '],' +
+            '"value": "value",' +
+            '"confidence": 0.5,' +
+            '"metadata": {' +
+              '"key": "value"' +
+            '},' +
+            '"groups": [' +
+              '{' +
+                '"group": "group",' +
+                '"location": [' +
+                  '10,' +
+                  '10' +
+                ']' +
+              '}' +
+            ']' +
+          '}' +
+        '],' +
+        '"actions": [' +
+          '{' +
+            '"name": "name",' +
+            '"type": "type",' +
+            '"parameters": {' +
+              '"key": "value"' +
+            '},' +
+            '"result_variable": "result_variable",' +
+            '"credentials": "credentials"' +
+          '}' +
+        '],' +
+        '"debug": {' +
+          '"nodes_visited": [' +
+            '{' +
+              '"dialog_node": "dialog_node",' +
+              '"title": "title",' +
+              '"conditions": "conditions"' +
+            '}' +
+          '],' +
+          '"log_messages": [' +
+            '{' +
+              '"level": "level",' +
+              '"message": "message"' +
+            '}' +
+          '],' +
+          '"branch_exited": true,' +
+          '"branch_exited_reason": "branch_exited_reason"' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  // --- Compare and Comply v1 ---
+
+  public static testMethod String compareComplyV1BatchStatus() {
+    return '{' +
+      '"function": "function",' +
+      '"input_bucket_location": "input_bucket_location",' +
+      '"input_bucket_name": "input_bucket_name",' +
+      '"output_bucket_location": "output_bucket_location",' +
+      '"output_bucket_name": "output_bucket_name",' +
+      '"batch_id": "batch_id",' +
+      '"document_counts": {' +
+        '"total": 10,' +
+        '"pending": 10,' +
+        '"successful": 10,' +
+        '"failed": 10' +
+      '},' +
+      '"status": "status",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z"' +
+    '}';
+  }
+
+  public static testMethod String compareComplyV1Batches() {
+    return '{' +
+      '"batches": [' +
+        '{' +
+          '"function": "function",' +
+          '"input_bucket_location": "input_bucket_location",' +
+          '"input_bucket_name": "input_bucket_name",' +
+          '"output_bucket_location": "output_bucket_location",' +
+          '"output_bucket_name": "output_bucket_name",' +
+          '"batch_id": "batch_id",' +
+          '"document_counts": {' +
+            '"total": 10,' +
+            '"pending": 10,' +
+            '"successful": 10,' +
+            '"failed": 10' +
+          '},' +
+          '"status": "status",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String compareComplyV1ClassifyReturn() {
+    return '{' +
+      '"document": {' +
+        '"title": "title",' +
+        '"html": "html",' +
+        '"hash": "hash",' +
+        '"label": "label"' +
+      '},' +
+      '"model_id": "model_id",' +
+      '"model_version": "model_version",' +
+      '"elements": [' +
+        '{' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '},' +
+          '"text": "text",' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"attributes": [' +
+            '{' +
+              '"type": "type",' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '}' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"tables": [' +
+        '{' +
+          '"location": {' +
+          '  "begin": 10,' +
+          '  "end": 10' +
+          '},' +
+          '"text": "text",' +
+          '"section_title": {' +
+          '  "text": "text",' +
+          '  "location": {' +
+          '    "begin": 10,' +
+          '    "end": 10' +
+          '  }' +
+          '},' +
+          '"table_headers": [' +
+          '  {' +
+          '    "cell_id": "cell_id",' +
+          '    "location": {' +
+          '      "begin": 10,' +
+          '      "end": 10' +
+          '    },' +
+          '    "text": "text",' +
+          '    "row_index_begin": 10,' +
+          '    "row_index_end": 10,' +
+          '    "column_index_begin": 10,' +
+          '    "column_index_end": 10' +
+          '  }' +
+          '],' +
+          '"row_headers": [' +
+          '  {' +
+          '    "cell_id": "cell_id",' +
+          '    "location": {' +
+          '      "begin": 10,' +
+          '      "end": 10' +
+          '    },' +
+          '    "text": "text",' +
+          '    "text_normalized": "text_normalized",' +
+          '    "row_index_begin": 10,' +
+          '    "row_index_end": 10,' +
+          '    "column_index_begin": 10,' +
+          '    "column_index_end": 10' +
+          '  }' +
+          '],' +
+          '"column_headers": [' +
+          '  {' +
+          '    "cell_id": "cell_id",' +
+          '    "location": {' +
+          '      "begin": 10,' +
+          '      "end": 10' +
+          '    },' +
+          '    "text": "text",' +
+          '    "text_normalized": "text_normalized",' +
+          '    "row_index_begin": 10,' +
+          '    "row_index_end": 10,' +
+          '    "column_index_begin": 10,' +
+          '    "column_index_end": 10' +
+          '  }' +
+          '],' +
+          '"body_cells": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text",' +
+              '"row_index_begin": 10,' +
+              '"row_index_end": 10,' +
+              '"column_index_begin": 10,' +
+              '"column_index_end": 10,' +
+              '"row_header_ids": [' +
+                '"row_header_ids"' +
+              '],' +
+              '"row_header_texts": [' +
+                '"row_header_texts"' +
+              '],' +
+              '"row_header_texts_normalized": [' +
+                '"row_header_texts_normalized"' +
+              '],' +
+              '"column_header_ids": [' +
+                '"column_header_ids"' +
+              '],' +
+              '"column_header_texts": [' +
+                '"column_header_texts"' +
+              '],' +
+              '"column_header_texts_normalized": [' +
+                '"column_header_texts_normalized"' +
+              '],' +
+              '"attributes": [' +
+              '  {' +
+              '    "type": "type",' +
+              '    "text": "text",' +
+              '    "location": {' +
+              '      "begin": 10,' +
+              '      "end": 10' +
+              '    }' +
+              '  }' +
+              ']' +
+            '}' +
+          '],' +
+          '"key_value_pairs": [' +
+          '{' +
+            '"key": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text"' +
+            '},' +
+            '"value": [{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text"' +
+            '}]' +
+          '}' +
+          '],' +
+          '"title": {' +
+            '"text": "text",' +
+            '"location": {' +
+              '"begin": 10,' +
+              '"end": 10' +
+            '}' +
+          '},' +
+          '"contexts": [' +
+            '{' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '}' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"document_structure": {' +
+        '"section_titles": [' +
+          '{' +
+            '"text": "text",' +
+            '"location": {' +
+              '"begin": 10,' +
+              '"end": 10' +
+            '},' +
+            '"level": 10,' +
+            '"element_locations": [' +
+              '{' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '}' +
+            ']' +
+          '}' +
+        '],' +
+        '"leading_sentences": [' +
+          '{' +
+            '"text": "text",' +
+            '"location": {' +
+              '"begin": 10,' +
+              '"end": 10' +
+            '},' +
+            '"element_locations": [' +
+              '{' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '}' +
+            ']' +
+          '}' +
+        '],' +
+        '"paragraphs": [' +
+          '{' +
+            '"location": {' +
+              '"begin": 10,' +
+              '"end": 10' +
+            '}' +
+          '}' +
+        ']' +
+      '},' +
+      '"parties": [' +
+        '{' +
+          '"party": "party",' +
+          '"importance": "importance",' +
+          '"role": "role",' +
+          '"addresses": [' +
+            '{' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '}' +
+            '}' +
+          '],' +
+          '"contacts": [' +
+            '{' +
+              '"name": "name",' +
+              '"role": "role"' +
+            '}' +
+          '],' +
+          '"mentions": [' +
+            '{' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '}' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"effective_dates": [' +
+        '{' +
+          '"text": "text",' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '},' +
+          '"confidence_level": "confidence_level",' +
+          '"text_normalized": "text_normalized",' +
+          '"provenance_ids": [' +
+            '"provenance_ids"' +
+          ']' +
+        '}' +
+      '],' +
+      '"contract_amounts": [' +
+        '{' +
+          '"text": "text",' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '},' +
+          '"confidence_level": "confidence_level",' +
+          '"text_normalized": "text_normalized",' +
+          '"interpretation": {' +
+            '"value": "value",' +
+            '"numeric_value": 0.5,' +
+            '"unit": "unit"' +
+          '},' +
+          '"provenance_ids": [' +
+            '"provenance_ids"' +
+          ']' +
+        '}' +
+      '],' +
+      '"termination_dates": [' +
+        '{' +
+          '"text": "text",' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '},' +
+          '"confidence_level": "confidence_level",' +
+          '"text_normalized": "text_normalized",' +
+          '"provenance_ids": [' +
+            '"provenance_ids"' +
+          ']' +
+        '}' +
+      '],' +
+      '"contract_types": [' +
+      '{' +
+        '"text": "text",' +
+        '"location": {' +
+          '"begin": 10,' +
+          '"end": 10' +
+        '},' +
+        '"provenance_ids": [' +
+          '"provenance_ids"' +
+        '],' +
+        '"confidence_level": "confidence_level"' +
+      '}' +
+      '],' +
+      '"contract_terms": [' +
+        '{' +
+          '"confidence_level": "confidence_level",' +
+          '"text": "text",' +
+          '"text_normalized": "text_normalized",' +
+          '"interpretation": {' +
+            '"value": "value",' +
+            '"numeric_value": 0.5,' +
+            '"unit": "unit"' +
+          '},' +
+          '"provenance_ids": [' +
+            '"provenance_ids"' +
+          '],' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '}' +
+        '}' +
+      '],' +
+      '"payment_terms": [' +
+        '{' +
+          '"confidence_level": "confidence_level",' +
+          '"text": "text",' +
+          '"text_normalized": "text_normalized",' +
+          '"interpretation": {' +
+            '"value": "value",' +
+            '"numeric_value": 0.5,' +
+            '"unit": "unit"' +
+          '},' +
+          '"provenance_ids": [' +
+            '"provenance_ids"' +
+          '],' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '}' +
+        '}' +
+      '],' +
+      '"contract_currencies": [' +
+        '{' +
+          '"confidence_level": "confidence_level",' +
+          '"text": "text",' +
+          '"text_normalized": "text_normalized",' +
+          '"provenance_ids": [' +
+            '"provenance_ids"' +
+          '],' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String compareComplyV1CompareReturn() {
+    return '{' +
+      '"documents": [' +
+        '{' +
+          '"title": "title",' +
+          '"html": "html",' +
+          '"hash": "hash",' +
+          '"label": "label"' +
+        '}' +
+      '],' +
+      '"aligned_elements": [' +
+        '{' +
+          '"element_pair": [' +
+            '{' +
+              '"document_label": "document_label",' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"types": [' +
+                '{' +
+                  '"label": {' +
+                    '"nature": "nature",' +
+                    '"party": "party"' +
+                  '}' +
+                '}' +
+              '],' +
+              '"categories": [' +
+                '{' +
+                  '"label": "label"' +
+                '}' +
+              '],' +
+              '"attributes": [' +
+                '{' +
+                  '"type": "type",' +
+                  '"text": "text",' +
+                  '"location": {' +
+                    '"begin": 10,' +
+                    '"end": 10' +
+                  '}' +
+                '}' +
+              ']' +
+            '}' +
+          '],' +
+          '"identical_text": true,' +
+          '"provenance_ids": [' +
+            '"provenance_ids"' +
+          '],' +
+          '"significant_elements": true' +
+        '}' +
+      '],' +
+      '"unaligned_elements": [' +
+        '{' +
+          '"document_label": "document_label",' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '},' +
+          '"text": "text",' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '}' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label"' +
+            '}' +
+          '],' +
+          '"attributes": [' +
+            '{' +
+              '"type": "type",' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '}' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"model_id": "model_id",' +
+      '"model_version": "model_version"' +
+    '}';
+  }
+
+  public static testMethod String compareComplyV1FeedbackList() {
+    return '{' +
+      '"feedback": [' +
+        '{' +
+          '"feedback_id": "feedback_id",' +
+          '"comment": "comment",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"feedback_data": {' +
+            '"feedback_type": "feedback_type",' +
+            '"document": {' +
+              '"title": "title",' +
+              '"hash": "hash"' +
+            '},' +
+            '"model_id": "model_id",' +
+            '"model_version": "model_version",' +
+            '"location": {' +
+              '"begin": 10,' +
+              '"end": 10' +
+            '},' +
+            '"text": "text",' +
+            '"original_labels": {' +
+              '"types": [' +
+                '{' +
+                  '"label": {' +
+                    '"nature": "nature",' +
+                    '"party": "party"' +
+                  '},' +
+                  '"provenance_ids": [' +
+                    '"provenance_ids"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"categories": [' +
+                '{' +
+                  '"label": "label",' +
+                  '"provenance_ids": [' +
+                    '"provenance_ids"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"modification": "modification"' +
+            '},' +
+            '"updated_labels": {' +
+              '"types": [' +
+                '{' +
+                  '"label": {' +
+                    '"nature": "nature",' +
+                    '"party": "party"' +
+                  '},' +
+                  '"provenance_ids": [' +
+                    '"provenance_ids"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"categories": [' +
+                '{' +
+                  '"label": "label",' +
+                  '"provenance_ids": [' +
+                    '"provenance_ids"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"modification": "modification"' +
+            '},' +
+            '"pagination": {' +
+              '"refresh_cursor": "refresh_cursor",' +
+              '"next_cursor": "next_cursor",' +
+              '"refresh_url": "refresh_url",' +
+              '"next_url": "next_url",' +
+              '"total": 10' +
+            '}' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String compareComplyV1FeedbackReturn() {
+    return '{' +
+      '"feedback_id": "feedback_id",' +
+      '"user_id": "user_id",' +
+      '"comment": "comment",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"feedback_data": {' +
+        '"feedback_type": "feedback_type",' +
+        '"document": {' +
+          '"title": "title",' +
+          '"hash": "hash"' +
+        '},' +
+        '"model_id": "model_id",' +
+        '"model_version": "model_version",' +
+        '"location": {' +
+          '"begin": 10,' +
+          '"end": 10' +
+        '},' +
+        '"text": "text",' +
+        '"original_labels": {' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"modification": "modification"' +
+        '},' +
+        '"updated_labels": {' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"modification": "modification"' +
+        '},' +
+        '"pagination": {' +
+          '"refresh_cursor": "refresh_cursor",' +
+          '"next_cursor": "next_cursor",' +
+          '"refresh_url": "refresh_url",' +
+          '"next_url": "next_url",' +
+          '"total": 10' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String compareComplyV1GetFeedback() {
+    return '{' +
+      '"feedback_id": "feedback_id",' +
+      '"comment": "comment",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"feedback_data": {' +
+        '"feedback_type": "feedback_type",' +
+        '"document": {' +
+          '"title": "title",' +
+          '"hash": "hash"' +
+        '},' +
+        '"model_id": "model_id",' +
+        '"model_version": "model_version",' +
+        '"location": {' +
+          '"begin": 10,' +
+          '"end": 10' +
+        '},' +
+        '"text": "text",' +
+        '"original_labels": {' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"modification": "modification"' +
+        '},' +
+        '"updated_labels": {' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_ids"' +
+              ']' +
+            '}' +
+          '],' +
+          '"modification": "modification"' +
+        '},' +
+        '"pagination": {' +
+          '"refresh_cursor": "refresh_cursor",' +
+          '"next_cursor": "next_cursor",' +
+          '"refresh_url": "refresh_url",' +
+          '"next_url": "next_url",' +
+          '"total": 10' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String compareComplyV1HtmlReturn() {
+    return '{' +
+      '"num_pages": "num_pages",' +
+      '"author": "author",' +
+      '"publication_date": "publication_date",' +
+      '"title": "title",' +
+      '"html": "html"' +
+    '}';
+  }
+
+  public static testMethod String compareComplyV1TableReturn() {
+    return '{' +
+      '"document": {' +
+        '"html": "html",' +
+        '"title": "title",' +
+        '"hash": "hash"' +
+      '},' +
+      '"model_id": "model_id",' +
+      '"model_version": "model_version",' +
+      '"tables": [' +
+        '{' +
+          '"location": {' +
+            '"begin": 10,' +
+            '"end": 10' +
+          '},' +
+          '"text": "text",' +
+          '"section_title": {' +
+            '"text": "text",' +
+            '"location": {' +
+              '"begin": 10,' +
+              '"end": 10' +
+            '}' +
+          '},' +
+          '"title": {' +
+            '"text": "text",' +
+            '"location": {' +
+              '"begin": 10,' +
+              '"end": 10' +
+            '}' +
+          '},' +
+          '"table_headers": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text",' +
+              '"row_index_begin": 10,' +
+              '"row_index_end": 10,' +
+              '"column_index_begin": 10,' +
+              '"column_index_end": 10' +
+            '}' +
+          '],' +
+          '"row_headers": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text",' +
+              '"text_normalized": "text_normalized",' +
+              '"row_index_begin": 10,' +
+              '"row_index_end": 10,' +
+              '"column_index_begin": 10,' +
+              '"column_index_end": 10' +
+            '}' +
+          '],' +
+          '"column_headers": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text",' +
+              '"text_normalized": "text_normalized",' +
+              '"row_index_begin": 10,' +
+              '"row_index_end": 10,' +
+              '"column_index_begin": 10,' +
+              '"column_index_end": 10' +
+            '}' +
+          '],' +
+          '"body_cells": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text",' +
+              '"row_index_begin": 10,' +
+              '"row_index_end": 10,' +
+              '"column_index_begin": 10,' +
+              '"column_index_end": 10,' +
+              '"row_header_ids": [' +
+                '"row_header_ids"' +
+              '],' +
+              '"row_header_texts": [' +
+                '"row_header_texts"' +
+              '],' +
+              '"row_header_texts_normalized": [' +
+                '"row_header_texts_normalized"' +
+              '],' +
+              '"column_header_ids": [' +
+                '"column_header_ids"' +
+              '],' +
+              '"column_header_texts": [' +
+                '"column_header_texts"' +
+              '],' +
+              '"column_header_texts_normalized": [' +
+                '"column_header_texts_normalized"' +
+              '],' +
+              '"attributes": [' +
+              '  {' +
+              '    "type": "type",' +
+              '    "text": "text",' +
+              '    "location": {' +
+              '      "begin": 10,' +
+              '      "end": 10' +
+              '    }' +
+              '  }' +
+              ']' +
+            '}' +
+          '],' +
+          '"key_value_pairs": [' +
+          '{' +
+            '"key": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text"' +
+            '},' +
+            '"value": [{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '},' +
+              '"text": "text"' +
+            '}]' +
+          '}' +
+          '],' +
+          '"contexts": [' +
+            '{' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 10' +
+              '}' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
+
   public static testMethod String environment() {
     return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment", ' +
                         '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z", ' +
@@ -477,679 +3281,6 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static testMethod String workspace() {
-    return '{' +
-        '"name": "test_workspace", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"language": "en", ' +
-        '"metadata": {' +
-          '"code": "test_code"' +
-        '}, ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"description": "Description of test_workspace", ' +
-        '"status": "Available", ' +
-        '"workspace_id": "123456789", ' +
-        '"learning_opt_out": false,' +
-        '"system_settings": {' +
-          '"tooling": {' +
-            '"store_generic_responses": true' +
-          '},' +
-          '"disambiguation": {' +
-            '"none_of_the_above_prompt": "none of the above",' +
-            '"enabled": true,' +
-            '"prompt": "prompt",' +
-            '"sensitivity": "high"' +
-          '}' +
-        '}' +
-      '}';
-  }
-
-  public static testMethod String workspaceExport() {
-    return '{' +
-        '"name": "test_workspace", ' +
-        '"description": "Description of test_workspace", ' +
-        '"language": "en", ' +
-        '"metadata": {' +
-        '"code": "test_code"' +
-        '}, ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"workspace_id": "123456789", ' +
-        '"status": "Available", ' +
-        '"learning_opt_out": false, ' +
-        '"intents": [' +
-        '{' +
-        '"intent": "test_intent", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"description": "Description of test_intent", ' +
-        '"examples": [' +
-        '{' +
-        '"text": "Example of test_intent", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800"' +
-        '}' +
-        ']' +
-        '}' +
-        '], ' +
-        '"entities": [' +
-        '{' +
-        '"entity": "test_entity", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"description": "Description of test_entity", ' +
-        '"values": [' +
-        '{' +
-        '"value": "Value of test_entity", ' +
-        '"type": "value_type",' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"synonyms": [' +
-        '"Synonym for value of test_entity"' +
-        ']' +
-        '}' +
-        ']' +
-        '}' +
-        '], ' +
-        '"counterexamples": [' +
-        '{' +
-        '"text": "Counterexample for test_workspace", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800"' +
-        '}' +
-        '], ' +
-        '"dialog_nodes": []' +
-        '}';
-  }
-
-  public static testMethod String workspaceCollection() {
-    return '{' +
-        '"workspaces": [' +
-        '{' +
-        '"name": "test_workspace", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"language": "en", ' +
-        '"metadata": {' +
-        '"code": "test_code"' +
-        '}, ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"description": "Description of test_workspace", ' +
-        '"workspace_id": "123456789", ' +
-        '"learning_opt_out": false' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-        '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
-        '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-        '"total": 1, ' +
-        '"matched": 1' +
-        '}' +
-        '}';
-  }
-
-  public static testMethod String value() {
-    return '{' +
-        '"value": "Value of test_entity", ' +
-        '"type": "value_type",' +
-        '"metadata": {' +
-        '"code": "test_code"' +
-        '}, ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"patterns": [' +
-        '"test_pattern"' +
-        '], ' +
-        '"synonyms": [' +
-        '"Synonym for value of test_entity"' +
-        ']' +
-        '}';
-  }
-
-  public static testMethod String valueCollection() {
-    return '{' +
-        '"values": [' +
-        '{' +
-        '"value": "Value of test_entity", ' +
-        '"type": "value_type",' +
-        '"metadata": {' +
-        '"code": "test_code"' +
-        '}, ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"patterns": [' +
-        '"test_pattern"' +
-        '], ' +
-        '"synonyms": [' +
-        '"Synonym for value of test_entity"' +
-        ']' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-        '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
-        '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-        '"total": 1, ' +
-        '"matched": 1' +
-        '}' +
-        '}';
-  }
-
-  public static testMethod String messageResponse() {
-    return '{' +
-        '"intents": [' +
-        '{' +
-          '"intent": "test_intent", ' +
-          '"confidence": 0.314159' +
-        '}' +
-        '], ' +
-        '"entities": [' +
-        '{' +
-          '"entity": "test_entity", ' +
-          '"location": [' +
-            '10' +
-          '], ' +
-          '"value": "Value of test_entity", ' +
-          '"confidence": 0.314159' +
-        '}' +
-        '], ' +
-        '"input": {' +
-          '"text": "This is a message"' +
-        '}, ' +
-        '"alternate_intents": false, ' +
-        '"context": {' +
-          '"conversation_id": "0000000", ' +
-          '"system": {' +
-            '"dialog_turn_counter": "5"' +
-          '}' +
-        '}, ' +
-        '"output": {' +
-          '"text": [' +
-            '"This is a response"' +
-          '], ' +
-          '"nodes_visited": [' +
-            '"node_1"' +
-          '], ' +
-          '"log_messages": [' +
-          '{' +
-            '"level": "warn", ' +
-            '"msg": "test_warning"' +
-          '}' +
-          '],' +
-          '"actions": [ ' +
-          '{' +
-            '"name": "action",' +
-            '"type": "server",' +
-            '"parameters": {' +
-              '"param_1": "param_1_val"' +
-            '},' +
-            '"result_variable": "action_var",' +
-            '"credentials": "creds"' +
-          '}' +
-          '],' +
-          '"nodes_visited_details": [' +
-          '{' +
-            '"dialog_node": "node",' +
-            '"title": "node_title",' +
-            '"conditions": "#condition"' +
-          '}' +  
-          '],' +
-          '"generic": [' +
-          '{' +
-            '"response_type": "response_type",' +
-            '"text": "text",' +
-            '"time": 200,' +
-            '"typing": true,' +
-            '"source": "source",' +
-            '"title": "title",' +
-            '"description": "description",' +
-            '"preference": "preference",' +
-            '"options": [' +
-            '{' +
-              '"label": "label",' +
-              '"value": {' +
-                '"input": {' +
-                  '"text": "text"' +
-                '},' +
-                '"intents": [' +
-                  '{' +
-                    '"intent": "test_intent", ' +
-                    '"confidence": 0.314159' +
-                  '}' +
-                '],' +
-                '"entities": [' +
-                  '{' +
-                    '"entity": "test_entity", ' +
-                    '"location": [' +
-                      '10' +
-                    '], ' +
-                    '"value": "Value of test_entity", ' +
-                    '"confidence": 0.314159' +
-                  '}' +
-                ']' +
-              '}' +
-            '}' +
-            '],' +
-            '"message_to_human_agent": "message_to_human_agent",' +
-            '"topic": "topic",' +
-            '"dialog_node": "dialog_node",' +
-            '"suggestions": [' +
-            '{' +
-              '"label": "label",' +
-              '"value": {' +
-                '"input": {' +
-                  '"text": "text"' +
-                '},' +
-                '"intents": [' +
-                '{' +
-                  '"intent": "test_intent",' +
-                  '"confidence": 0.314159' +
-                '}' +
-                '],' +
-                '"entities": [' +
-                '{' +
-                  '"entity": "test_entity",' +
-                  '"location": [' +
-                    '10' +
-                  '],' +
-                  '"value": "Value of test_entity"' +
-                '}' +
-                ']' +
-              '},' +
-              '"dialog_node": "dialog_node"' +
-            '}' +
-            ']' +
-          '}' +
-          ']' +
-        '},' +
-        '"actions": [ ' +
-        '{' +
-          '"name": "action",' +
-          '"type": "server",' +
-          '"parameters": {' +
-            '"param_1": "param_1_val"' +
-          '},' +
-          '"result_variable": "action_var",' +
-          '"credentials": "creds"' +
-        '}' +
-        ']' +
-        '}';
-  }
-
-  public static testMethod String intent() {
-    return '{' +
-        '"intent": "test_intent", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"description": "Description of test_intent"' +
-        '}';
-  }
-
-  public static testMethod String intentExport() {
-    return '{' +
-        '"intent": "test_intent", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"description": "Description of test_intent", ' +
-        '"examples": [' +
-        '{' +
-          '"text": "Example of test_intent", ' +
-          '"created": "2015-12-06T23:53:59.153Z", ' +
-          '"updated": "2017-10-18T15:44:56.800"' +
-        '}' +
-        ']' +
-        '}';
-  }
-
-  public static testMethod String intentCollection() {
-    return '{' +
-        '"intents": [' +
-        '{' +
-          '"intent": "test_intent", ' +
-          '"created": "2015-12-06T23:53:59.153Z", ' +
-          '"updated": "2017-10-18T15:44:56.800", ' +
-          '"description": "Description of test_intent", ' +
-          '"examples": [' +
-          '{' +
-            '"text": "Example of test_intent", ' +
-            '"created": "2015-12-06T23:53:59.153Z", ' +
-            '"updated": "2017-10-18T15:44:56.800"' +
-          '}' +
-          ']' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
-          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-          '"total": 1, ' +
-          '"matched": 1,' +
-          '"next_cursor": "next_cursor",' +
-          '"refresh_cursor": "refresh_cursor"' +
-        '}' +
-        '}';
-  }
-
-  public static testMethod String example() {
-    return '{' +
-        '"text": "Example of test_intent", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800"' +
-        '}';
-  }
-
-  public static testMethod String exampleCollection() {
-    return '{' +
-        '"examples": [' +
-        '{' +
-          '"text": "Example of test_intent", ' +
-          '"created": "2015-12-06T23:53:59.153Z", ' +
-          '"updated": "2017-10-18T15:44:56.800"' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
-          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-          '"total": 1, ' +
-          '"matched": 1' +
-        '}' +
-        '}';
-  }
-
-  public static testMethod String entity() {
-    return '{' +
-        '"entity": "test_entity", ' +
-        '"description": "Description of test_entity", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"metadata": {' +
-          '"code": "test_code"' +
-        '}, ' +
-        '"fuzzy_match": false' +
-        '}';
-  }
-
-  public static testMethod String entityExport() {
-    return '{' +
-        '"entity": "test_entity", ' +
-        '"description": "Description of test_entity", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"metadata": {' +
-        '"code": "test_code"' +
-        '}, ' +
-        '"fuzzy_match": false, ' +
-        '"values": [' +
-        '{' +
-          '"value": "Value of test_entity", ' +
-          '"type": "value_type",' +
-          '"metadata": {' +
-            '"code": "test_code"' +
-          '}, ' +
-          '"created": "2015-12-06T23:53:59.153Z", ' +
-          '"updated": "2017-10-18T15:44:56.800", ' +
-          '"patterns": [' +
-            '"test_pattern"' +
-          '], ' +
-          '"synonyms": [' +
-            '"Synonym for value of test_entity"' +
-          ']' +
-        '}' +
-        ']' +
-        '}';
-  }
-
-  public static testMethod String entityCollection() {
-    return '{' +
-        '"entities": [' +
-        '{' +
-          '"entity": "test_entity", ' +
-          '"description": "Description of test_entity", ' +
-          '"created": "2015-12-06T23:53:59.153Z", ' +
-          '"updated": "2017-10-18T15:44:56.800", ' +
-          '"metadata": {' +
-            '"code": "test_code"' +
-          '}, ' +
-          '"fuzzy_match": false, ' +
-          '"values": [' +
-          '{' +
-            '"value": "Value of test_entity", ' +
-            '"type": "value_type",' +
-            '"metadata": {' +
-            '"code": "test_code"' +
-            '}, ' +
-            '"created": "2015-12-06T23:53:59.153Z", ' +
-            '"updated": "2017-10-18T15:44:56.800", ' +
-            '"patterns": [' +
-            '"test_pattern"' +
-            '], ' +
-            '"synonyms": [' +
-            '"Synonym for value of test_entity"' +
-            ']' +
-          '}' +
-          ']' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
-          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-          '"total": 1, ' +
-          '"matched": 1' +
-        '}' +
-        '}';
-  }
-
-  public static testMethod String synonym() {
-    return '{' +
-        '"synonym": "Synonym for value of test_entity", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800"' +
-        '}';
-  }
-
-  public static testMethod String synonymCollection() {
-    return '{' +
-        '"synonyms": [' +
-        '{' +
-          '"synonym": "Synonym for value of test_entity", ' +
-          '"created": "2015-12-06T23:53:59.153Z", ' +
-          '"updated": "2017-10-18T15:44:56.800"' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
-          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-          '"total": 1, ' +
-          '"matched": 1' +
-        '}' +
-        '}';
-  }
-
-  public static testMethod String dialogNode() {
-    return '{' +
-        '"dialog_node": "dialog_node", ' +
-        '"description": "Description of dialog_node", ' +
-        '"title": "dialog_node_title", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"conditions": "#test", ' +
-        '"parent": "parent", ' +
-        '"previous_sibling": "sibling", ' +
-        '"next_step": {' +
-          '"dialog_node": "next_dialog_node", ' +
-          '"behavior": "behavior", ' +
-          '"selector": "body"' +
-        '}, ' +
-        '"output": {' +
-          '"text": "output text"' +
-        '}, ' +
-        '"metadata": {' +
-          '"code": "test_code"' +
-        '}, ' +
-        '"context": {' +
-          '"context": "context_val"' +
-        '}, ' +
-        '"actions": [' +
-        '{' +
-          '"name": "action", ' +
-          '"type": "server", ' +
-          '"parameters": {' +
-            '"param_1": "param_1_val"' +
-          '}, ' +
-          '"result_variable": "action_var", ' +
-          '"credentials": "creds"' +
-        '}' +
-        '], ' +
-        '"type": "standard", ' +
-        '"event_name": "dialog_node_event", ' +
-        '"variable": "dialog_node_var",' +
-        '"digress_in": "returns",' +
-        '"digress_out": "allow_all",' +
-        '"digress_out_slots": "allow_all"' +
-        '}';
-  }
-
-  public static testMethod String dialogNodeCollection() {
-    return '{' +
-        '"dialog_nodes": [' +
-        '{' +
-        '"dialog_node": "dialog_node", ' +
-        '"description": "Description of dialog_node", ' +
-        '"title": "dialog_node_title", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800", ' +
-        '"conditions": "#test", ' +
-        '"parent": "parent", ' +
-        '"previous_sibling": "sibling", ' +
-        '"next_step": {' +
-        '"dialog_node": "next_dialog_node", ' +
-        '"behavior": "behavior", ' +
-        '"selector": "body"' +
-        '}, ' +
-        '"output": {' +
-        '"text": "output text"' +
-        '}, ' +
-        '"metadata": {' +
-        '"code": "test_code"' +
-        '}, ' +
-        '"context": {' +
-        '"context": "context_val"' +
-        '}, ' +
-        '"actions": [' +
-        '{' +
-        '"name": "action", ' +
-        '"type": "server", ' +
-        '"parameters": {' +
-        '"param_1": "param_1_val"' +
-        '}, ' +
-        '"result_variable": "action_var", ' +
-        '"credentials": "creds"' +
-        '}' +
-        '], ' +
-        '"type": "standard", ' +
-        '"event_name": "dialog_node_event", ' +
-        '"variable": "dialog_node_var"' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-        '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
-        '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-        '"total": 1, ' +
-        '"matched": 1' +
-        '}' +
-        '}';
-  }
-
-  public static testMethod String logCollection() {
-    return '{' +
-        '"logs": [' +
-        '{' +
-          '"request": {' +
-            '"input": {' +
-            '"text": "This is a message"' +
-            '}, ' +
-            '"context": {}' +
-          '}, ' +
-          '"response": {' +
-            '"intents": [' +
-            '{' +
-            '"intent": "test_intent", ' +
-            '"confidence": 0.314159' +
-            '}' +
-            '], ' +
-            '"entities": [' +
-            '{' +
-            '"entity": "test_entity", ' +
-            '"location": [' +
-              '10' +
-            '], ' +
-            '"value": "Value of test_entity", ' +
-            '"confidence": 0.314159' +
-            '}' +
-            '], ' +
-            '"input": {' +
-            '"text": "This is a message"' +
-            '}, ' +
-            '"alternate_intents": false, ' +
-            '"context": {' +
-            '"conversation_id": "0000000", ' +
-            '"system": {' +
-              '"dialog_turn_counter": "5"' +
-            '}' +
-            '}, ' +
-            '"output": {' +
-            '"text": [' +
-              '"This is a response"' +
-            '], ' +
-            '"nodes_visited": [' +
-              '"node_1"' +
-            '], ' +
-            '"log_messages": [' +
-            '{' +
-              '"level": "warn", ' +
-              '"msg": "test_warning"' +
-            '}' +
-            ']' +
-            '}' +
-          '}, ' +
-          '"language": "en", ' +
-          '"workspace_id": "123456789", ' +
-          '"request_timestamp": "2017-12-06T23:53:59.153Z", ' +
-          '"response_timestamp": "2017-12-06T23:54:59.153Z", ' +
-          '"log_id": "987654321"' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-          '"matched": 1,' +
-          '"next_cursor": "next_cursor",' +
-          '"refresh_cursor": "refresh_cursor"' +
-        '}' +
-      '}';
-  }
-
-  public static testMethod String counterexample() {
-    return '{' +
-        '"text": "Counterexample for test_workspace", ' +
-        '"created": "2015-12-06T23:53:59.153Z", ' +
-        '"updated": "2017-10-18T15:44:56.800"' +
-        '}';
-  }
-
-  public static testMethod String counterexampleCollection() {
-    return '{' +
-        '"counterexamples": [' +
-        '{' +
-          '"text": "Counterexample for test_workspace", ' +
-          '"created": "2015-12-06T23:53:59.153Z", ' +
-          '"updated": "2017-10-18T15:44:56.800"' +
-        '}' +
-        '], ' +
-        '"pagination": {' +
-          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
-          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-          '"total": 1, ' +
-          '"matched": 1' +
-        '}' +
-        '}';
-  }
   public static testMethod String documentAccepted() {
     return '{' +
             '"document_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
@@ -1586,81 +3717,107 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static testMethod String CreateModel() {
+
+  // --- Language Translator v3 ---
+
+  public static testMethod String languageTranslatorV3TranslationModel() {
     return '{' +
-           '  "model_id": "3e7dfdbe-f757-4150-afee-458e71eb93fb"' +
-           '}';
+      '"model_id ": "model_id", ' +
+      '"source": "source", ' +
+      '"target": "target", ' +
+      '"base_model_id": "base_model_id", ' +
+      '"domain": "domain", ' +
+      '"owner": "owner", ' +
+      '"status": "status", ' +
+      '"customizable": true, ' +
+      '"default_model": true, ' +
+      '"name": "name"' +
+    '}';
   }
   
-  public static testMethod String DeleteModel() {
-    return '{}';
+  public static testMethod String languageTranslatorV3TranslationModels() {
+    return '{' +
+      '"models": [{' +
+        '"model_id ": "model_id", ' +
+        '"source": "source", ' +
+        '"target": "target", ' +
+        '"base_model_id": "base_model_id", ' +
+        '"domain": "domain", ' +
+        '"owner": "owner", ' +
+        '"status": "status", ' +
+        '"customizable": true, ' +
+        '"default_model": true, ' +
+        '"name": "name"' +
+      '}]' +
+    '}';
+  }
+
+  public static testMethod String languageTranslatorV3DocumentList() {
+    return '{' +
+      '"documents": [' +
+        '{' +
+          '"document_id": "document_id",' +
+          '"filename": "filename",' +
+          '"model_id": "model_id",' +
+          '"base_model_id": "base_model_id",' +
+          '"source": "source",' +
+          '"target": "target",' +
+          '"status": "status",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"completed": "1995-06-12T01:11:11.111Z",' +
+          '"word_count": 10,' +
+          '"character_count": 10' +
+        '}' +
+      ']' +
+    '}';
   }
   
-  public static testMethod String GetModel() {
+  public static testMethod String languageTranslatorV3IdentifiableLanguages() {
     return '{' +
-           '  "models": [{' +
-           '  "model_id ": "3e7dfdbe-f757-4150-afee-458e71eb93fb", ' +
-           '  "source": "en", ' +
-           '  "target": "es", ' +
-           '  "base_model_id": "en-es", ' +
-           '  "customizable": "false", ' +
-           '  "default_model": "false", ' +
-           '  "domain": "travel", ' +
-           '  "owner": "74a239fa-f2db-42ef-8737-7bf74f49e35f", ' +
-           '  "status": "available", ' +
-           '  "name": "mymodel"' +
-           ' }]' +
-           '}';
+      '"languages": [' +
+        '{' +
+        ' "language": "language", ' +
+        ' "name": "name"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String languageTranslatorV3IdentifiedLanguages() {
+    return '{' +
+      '"languages": [' +
+        '{' +
+          '"language": "language",' +
+          '"confidence": 0.5' +
+        '}' +
+      ']' +
+    '}';
   }
   
-  public static testMethod String ListModels() {
+  public static testMethod String languageTranslatorV3TranslationResult() {
     return '{' +
-           '  "models": [{' +
-           '  "model_id ": "3e7dfdbe-f757-4150-afee-458e71eb93fb", ' +
-           '  "source": "en", ' +
-           '  "target": "es", ' +
-           '  "base_model_id": "en-es", ' +
-           //'  "customizable": "false", ' +
-           //'  "default_model": "false", ' +
-           '  "domain": "travel", ' +
-           '  "owner": "74a239fa-f2db-42ef-8737-7bf74f49e35f", ' +
-           '  "status": "available", ' +
-           '  "name": "mymodel"' +
-           ' }]' +
-           '}';
+      '"translations": [{' +
+        '"translation": "translation"' +
+      '}], ' +
+      '"word_count": 10, ' +
+      '"character_count": 10' +
+    '}';
   }
-  
-  public static testMethod String ListIdentifiableLanguages() {
+
+  public static testMethod String languageTranslatorV3DocumentStatus() {
     return '{' +
-           ' "languages": [' +
-           '  {' +
-           '   "language": "af", ' +
-           '   "name": "Afrikaans"' +
-           '  }, ' +
-           '  {' +
-           '   "language": "ar", ' +
-           '   "name": "Arabic"' +
-           '  }, ' +
-           '  {' +
-           '   "language": "az", ' +
-           '   "name": "Azerbaijani"' +
-           '  }, ' +
-           '  {' +
-           '   "language": "ba", ' +
-           '   "name": "Bashkir"' +
-           '  }' +
-           '  ]' +
-           '}';
-  }
-  
-  public static testMethod String Translate() {
-    return '{' +
-           ' "translations": [{' +
-           ' "translation": "Hola"' +
-           ' }], ' +
-           ' "word_count": 1, ' +
-           ' "character_count": 5' +
-           '}';
+      '"document_id": "document_id",' +
+      '"filename": "filename",' +
+      '"model_id": "model_id",' +
+      '"base_model_id": "base_model_id",' +
+      '"source": "source",' +
+      '"target": "target",' +
+      '"status": "status",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"completed": "1995-06-12T01:11:11.111Z",' +
+      '"word_count": 10,' +
+      '"character_count": 10' +
+    '}';
   }
   
   public static testMethod String voices() {
@@ -2636,202 +4793,6 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
-  public static testMethod String messageResponseV2() {
-    return '{' +
-      '"context": {' +
-        '"global": {' +
-          '"system": {' +
-            '"timezone": "timezone",' +
-            '"user_id": "user_id",' +
-            '"turn_count": "10"' +
-          '}' +
-        '},' +
-        '"skills": {' +
-          '"skill_key": "skill_var"' +
-        '}' +
-      '},' +
-      '"output": {' +
-        '"generic": [' +
-          '{' +
-            '"response_type": "text",' +
-            '"text": "text",' +
-            '"time": 1234,' +
-            '"typing": true,' +
-            '"source": "source",' +
-            '"title": "title",' +
-            '"description": "description",' +
-            '"preference": "button",' +
-            '"options": [' +
-              '{' +
-                '"label": "label",' +
-                '"value": {' +
-                  '"input": {' +
-                    '"message_type": "text",' +
-                    '"text": "text",' +
-                    '"options": {' +
-                      '"debug": true,' +
-                      '"restart": true,' +
-                      '"alternate_intents": true,' +
-                      '"return_context": true' +
-                    '},' +
-                    '"intents": [' +
-                      '{' +
-                        '"intent": "intent",' +
-                        '"confidence": 0.0' +
-                      '}' +
-                    '],' +
-                    '"entities": [' +
-                      '{' +
-                        '"entity": "entity",' +
-                        '"location": [' +
-                          '1,' +
-                          '2' +
-                        '],' +
-                        '"value": "value",' +
-                        '"confidence": 0.0,' +
-                        '"metadata": {' +
-                          '"key": "value"' +
-                        '},' +
-                        '"groups": [' +
-                          '{' +
-                            '"group": "group",' +
-                            '"location": [' +
-                              '1,' +
-                              '2' +
-                            ']' +
-                          '}' +
-                        ']' +
-                      '}' +
-                    '],' +
-                    '"suggestion_id": "suggestion_id"' +
-                  '}' +
-                '}' +
-              '}' +
-            '],' +
-            '"message_to_human_agent": "message",' +
-            '"topic": "topic",' +
-            '"suggestions": [' +
-              '{' +
-                '"label": "label",' +
-                '"value": {' +
-                  '"input": {' +
-                    '"message_type": "text",' +
-                    '"text": "text",' +
-                    '"options": {' +
-                      '"debug": true,' +
-                      '"restart": true,' +
-                      '"alternate_intents": true,' +
-                      '"return_context": true' +
-                    '},' +
-                    '"intents": [' +
-                      '{' +
-                        '"intent": "intent",' +
-                        '"confidence": 0.0' +
-                      '}' +
-                    '],' +
-                    '"entities": [' +
-                      '{' +
-                        '"entity": "entity",' +
-                        '"location": [' +
-                          '1,' +
-                          '2' +
-                        '],' +
-                        '"value": "value",' +
-                        '"confidence": 0.0,' +
-                        '"metadata": {' +
-                          '"key": "value"' +
-                        '},' +
-                        '"groups": [' +
-                          '{' +
-                            '"group": "group",' +
-                            '"location": [' +
-                              '1,' +
-                              '2' +
-                            ']' +
-                          '}' +
-                        ']' +
-                      '}' +
-                    '],' +
-                    '"suggestion_id": "suggestion_id"' +
-                  '}' +
-                '},' +
-                '"output": {' +
-                  '"key": "value"' +
-                '}' +
-              '}' +
-            ']' +
-          '}' +
-        '],' +
-        '"intents": [' +
-          '{' +
-            '"intent": "intent",' +
-            '"confidence": 0.0' +
-          '}' +
-        '],' +
-        '"entities": [' +
-          '{' +
-            '"entity": "entity",' +
-            '"location": [' +
-              '1,' +
-              '2' +
-            '],' +
-            '"value": "value",' +
-            '"confidence": 0.0,' +
-            '"metadata": {' +
-              '"key": "value"' +
-            '},' +
-            '"groups": [' +
-              '{' +
-                '"group": "group",' +
-                '"location": [' +
-                  '1,' +
-                  '2' +
-                ']' +
-              '}' +
-            ']' +
-          '}' +
-        '],' +
-        '"actions": [' +
-          '{' +
-            '"name": "name",' +
-            '"type": "client",' +
-            '"parameters": {' +
-              '"key": "value"' +
-            '},' +
-            '"result_variable": "result_variable",' +
-            '"credentials": "credentials"' +
-          '}' +
-        '],' +
-        '"debug": {' +
-          '"nodes_visited": [' +
-            '{' +
-              '"dialog_node": "dialog_node",' +
-              '"title": "title",' +
-              '"conditions": "conditions"' +
-            '}' +
-          '],' +
-          '"log_messages": [' +
-            '{' +
-              '"level": "info",' +
-              '"message": "message"' +
-            '}' +
-          '],' +
-          '"branch_exited": true,' +
-          '"branch_exited_reason": "completed"' +
-        '},' +
-        '"user_defined": {' +
-          '"key": "value"' +
-        '}' +
-      '}' +
-    '}';
-  }
-
-  public static testMethod String sessionResponse() {
-    return '{' +
-      '"session_id": "session_id"' +
-    '}';
-  }
-
   public static testMethod String tokenDictStatusResponse() {
     return '{' +
       '"status" : "active",' +
@@ -2843,876 +4804,6 @@ public class IBMWatsonMockResponses {
     return '{' +
       '"status" : "active",' +
       '"type" : "stopwords"' +
-    '}';
-  }
-
-  public static testMethod String batchStatusResponse() {
-    return '{' +
-      '"function": "element_classification",' +
-      '"input_bucket_location": "bucket_location",' +
-      '"input_bucket_name": "bucket_name",' +
-      '"output_bucket_location": "bucket_location",' +
-      '"output_bucket_name": "bucket_name",' +
-      '"batch_id": "batch_id",' +
-      '"document_counts": {' +
-        '"total": 1000,' +
-        '"pending": 300,' +
-        '"successful": 400,' +
-        '"failed": 500' +
-      '},' +
-      '"status": "status",' +
-      '"created": "1995-06-12T01:11:11.111Z",' +
-      '"updated": "1995-06-12T01:11:11.111Z"' +
-    '}';
-  }
-
-  public static testMethod String batchesResponse() {
-    return '{' +
-      '"batches": [' +
-        '{' +
-          '"function": "element_classification",' +
-          '"input_bucket_location": "bucket_location",' +
-          '"input_bucket_name": "bucket_name",' +
-          '"output_bucket_location": "bucket_location",' +
-          '"output_bucket_name": "bucket_name",' +
-          '"batch_id": "batch_id",' +
-          '"document_counts": {' +
-            '"total": 1000,' +
-            '"pending": 300,' +
-            '"successful": 400,' +
-            '"failed": 500' +
-          '},' +
-          '"status": "status",' +
-          '"created": "1995-06-12T01:11:11.111Z",' +
-          '"updated": "1995-06-12T01:11:11.111Z"' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String classifyReturnResponse() {
-    return '{' +
-      '"document": {' +
-        '"title": "title",' +
-        '"html": "html",' +
-        '"hash": "hash",' +
-        '"label": "label"' +
-      '},' +
-      '"model_id": "model_id",' +
-      '"model_version": "model_version",' +
-      '"elements": [' +
-        '{' +
-          '"location": {' +
-          '"begin": 0,' +
-          '"end": 1' +
-          '},' +
-          '"text": "text",' +
-          '"types": [' +
-            '{' +
-              '"label": {' +
-                '"nature": "nature",' +
-                '"party": "party"' +
-              '},' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"categories": [' +
-            '{' +
-              '"label": "label",' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"attributes": [' +
-            '{' +
-              '"type": "type",' +
-              '"text": "text",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '}' +
-            '}' +
-          ']' +
-        '}' +
-      '],' +
-      '"tables": [' +
-        '{' +
-          '"location": {' +
-          '  "begin": 0,' +
-          '  "end": 1' +
-          '},' +
-          '"text": "text",' +
-          '"section_title": {' +
-          '  "location": {' +
-          '    "begin": 0,' +
-          '    "end": 1' +
-          '  }' +
-          '},' +
-          '"table_headers": [' +
-          '  {' +
-          '    "cell_id": "cell_id",' +
-          '    "location": {' +
-          '      "begin": 0,' +
-          '      "end": 1' +
-          '    },' +
-          '    "text": "text",' +
-          '    "row_index_begin": 2000,' +
-          '    "row_index_end": 3000,' +
-          '    "column_index_begin": 4000,' +
-          '    "column_index_end": 5000' +
-          '  }' +
-          '],' +
-          '"row_headers": [' +
-          '  {' +
-          '    "cell_id": "cell_id",' +
-          '    "location": {' +
-          '      "begin": 0,' +
-          '      "end": 1' +
-          '    },' +
-          '    "text": "text",' +
-          '    "text_normalized": "text_normalized",' +
-          '    "row_index_begin": 2000,' +
-          '    "row_index_end": 3000,' +
-          '    "column_index_begin": 4000,' +
-          '    "column_index_end": 5000' +
-          '  }' +
-          '],' +
-          '"column_headers": [' +
-          '  {' +
-          '    "cell_id": "cell_id",' +
-          '    "location": {' +
-          '      "begin": 0,' +
-          '      "end": 1' +
-          '    },' +
-          '    "text": "text",' +
-          '    "text_normalized": "text_normalized",' +
-          '    "row_index_begin": 2000,' +
-          '    "row_index_end": 3000,' +
-          '    "column_index_begin": 4000,' +
-          '    "column_index_end": 5000' +
-          '  }' +
-          '],' +
-          '"body_cells": [' +
-            '{' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text",' +
-              '"row_index_begin": 2000,' +
-              '"row_index_end": 3000,' +
-              '"column_index_begin": 4000,' +
-              '"column_index_end": 5000,' +
-              '"row_header_ids": [' +
-                '"id"' +
-              '],' +
-              '"row_header_texts": [' +
-                '"text"' +
-              '],' +
-              '"row_header_texts_normalized": [' +
-                '"text_normalized"' +
-              '],' +
-              '"column_header_ids": [' +
-                '"id"' +
-              '],' +
-              '"column_header_texts": [' +
-                '"text"' +
-              '],' +
-              '"column_header_texts_normalized": [' +
-                '"text_normalized"' +
-              '],' +
-              '"attributes": [' +
-              '  {' +
-              '    "type": "type",' +
-              '    "text": "text",' +
-              '    "location": {' +
-              '      "begin": 0,' +
-              '      "end": 1' +
-              '    }' +
-              '  }' +
-              ']' +
-            '}' +
-          '],' +
-          '"key_value_pairs": [' +
-          '{' +
-            '"key": {' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text"' +
-            '},' +
-            '"value": [{' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text"' +
-            '}]' +
-          '}' +
-          '],' +
-          '"title": {' +
-            '"text": "text",' +
-            '"location": {' +
-              '"begin": 0,' +
-              '"end": 1' +
-            '}' +
-          '},' +
-          '"contexts": [' +
-            '{' +
-              '"text": "text",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '}' +
-            '}' +
-          ']' +
-        '}' +
-      '],' +
-      '"document_structure": {' +
-        '"section_titles": [' +
-          '{' +
-            '"text": "text",' +
-            '"location": {' +
-              '"begin": 0,' +
-              '"end": 1' +
-            '},' +
-            '"level": 12,' +
-            '"element_locations": [' +
-              '{' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '}' +
-            ']' +
-          '}' +
-        '],' +
-        '"leading_sentences": [' +
-          '{' +
-            '"text": "text",' +
-            '"location": {' +
-              '"begin": 0,' +
-              '"end": 1' +
-            '},' +
-            '"element_locations": [' +
-              '{' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '}' +
-            ']' +
-          '}' +
-        '],' +
-        '"paragraphs": [' +
-          '{' +
-            '"location": {' +
-              '"begin": 0,' +
-              '"end": 1' +
-            '}' +
-          '}' +
-        ']' +
-      '},' +
-      '"parties": [' +
-        '{' +
-          '"party": "party",' +
-          '"importance": "Unknown",' +
-          '"role": "role",' +
-          '"addresses": [' +
-            '{' +
-              '"text": "text",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '}' +
-            '}' +
-          '],' +
-          '"contacts": [' +
-            '{' +
-              '"name": "name",' +
-              '"role": "role"' +
-            '}' +
-          '],' +
-          '"mentions": [' +
-            '{' +
-              '"text": "text",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '}' +
-            '}' +
-          ']' +
-        '}' +
-      '],' +
-      '"effective_dates": [' +
-        '{' +
-          '"text": "text",' +
-          '"location": {' +
-            '"begin": 0,' +
-            '"end": 1' +
-          '},' +
-          '"confidence_level": "High",' +
-          '"text_normalized": "text_normalized",' +
-          '"provenance_ids": [' +
-            '"provenance_id"' +
-          ']' +
-        '}' +
-      '],' +
-      '"contract_amounts": [' +
-        '{' +
-          '"text": "text",' +
-          '"location": {' +
-            '"begin": 0,' +
-            '"end": 1' +
-          '},' +
-          '"confidence_level": "High",' +
-          '"text_normalized": "text_normalized",' +
-          '"interpretation": {' +
-            '"value": "value",' +
-            '"numeric_value": 21,' +
-            '"unit": "unit"' +
-          '},' +
-          '"provenance_ids": [' +
-            '"provenance_id"' +
-          ']' +
-        '}' +
-      '],' +
-      '"termination_dates": [' +
-        '{' +
-          '"text": "text",' +
-          '"location": {' +
-            '"begin": 0,' +
-            '"end": 1' +
-          '},' +
-          '"confidence_level": "High",' +
-          '"text_normalized": "text_normalized",' +
-          '"provenance_ids": [' +
-            '"provenance_id"' +
-          ']' +
-        '}' +
-      '],' +
-      '"contract_types": [' +
-      '{' +
-        '"text": "text",' +
-        '"location": {' +
-          '"begin": 0,' +
-          '"end": 1' +
-        '},' +
-        '"confidence_level": "High"' +
-      '}' +
-      '],' +
-      '"contract_terms": [' +
-        '{' +
-          '"confidence_level": "High",' +
-          '"text": "text",' +
-          '"text_normalized": "text_normalized",' +
-          '"interpretation": {' +
-            '"value": "value",' +
-            '"numeric_value": 21,' +
-            '"unit": "unit"' +
-          '},' +
-          '"provenance_ids": [' +
-            '"provenance_id"' +
-          '],' +
-          '"location": {' +
-            '"begin": 0,' +
-            '"end": 1' +
-          '}' +
-        '}' +
-      '],' +
-      '"payment_terms": [' +
-        '{' +
-          '"confidence_level": "High",' +
-          '"text": "text",' +
-          '"text_normalized": "text_normalized",' +
-          '"interpretation": {' +
-            '"value": "value",' +
-            '"numeric_value": 21,' +
-            '"unit": "unit"' +
-          '},' +
-          '"provenance_ids": [' +
-            '"provenance_id"' +
-          '],' +
-          '"location": {' +
-            '"begin": 0,' +
-            '"end": 1' +
-          '}' +
-        '}' +
-      '],' +
-      '"contract_currencies": [' +
-        '{' +
-          '"confidence_level": "High",' +
-          '"text": "text",' +
-          '"text_normalized": "text_normalized",' +
-          '"provenance_ids": [' +
-            '"provenance_id"' +
-          '],' +
-          '"location": {' +
-            '"begin": 0,' +
-            '"end": 1' +
-          '}' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String compareReturnResponse() {
-    return '{' +
-      '"documents": [' +
-        '{' +
-          '"title": "title",' +
-          '"html": "html",' +
-          '"hash": "hash",' +
-          '"label": "label"' +
-        '}' +
-      '],' +
-      '"aligned_elements": [' +
-        '{' +
-          '"element_pair": [' +
-            '{' +
-              '"document_label": "document_label",' +
-              '"text": "text",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"types": [' +
-                '{' +
-                  '"label": {' +
-                    '"nature": "nature",' +
-                    '"party": "party"' +
-                  '}' +
-                '}' +
-              '],' +
-              '"categories": [' +
-                '{' +
-                  '"label": "label"' +
-                '}' +
-              '],' +
-              '"attributes": [' +
-                '{' +
-                  '"type": "type",' +
-                  '"text": "text",' +
-                  '"location": {' +
-                    '"begin": 0,' +
-                    '"end": 1' +
-                  '}' +
-                '}' +
-              ']' +
-            '}' +
-          '],' +
-          '"identical_text": true,' +
-          '"provenance_ids": [' +
-            '"provenance_id"' +
-          '],' +
-          '"significant_elements": true' +
-        '}' +
-      '],' +
-      '"unaligned_elements": [' +
-        '{' +
-          '"document_label": "document_label",' +
-          '"location": {' +
-            '"begin": 0,' +
-            '"end": 1' +
-          '},' +
-          '"text": "text",' +
-          '"types": [' +
-            '{' +
-              '"label": {' +
-                '"nature": "nature",' +
-                '"party": "party"' +
-              '}' +
-            '}' +
-          '],' +
-          '"categories": [' +
-            '{' +
-              '"label": "label"' +
-            '}' +
-          '],' +
-          '"attributes": [' +
-            '{' +
-              '"type": "type",' +
-              '"text": "text",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '}' +
-            '}' +
-          ']' +
-        '}' +
-      '],' +
-      '"model_id": "model_id",' +
-      '"model_version": "model_version"' +
-    '}';
-  }
-
-  public static testMethod String feedbackListResponse() {
-    return '{' +
-      '"feedback": [' +
-        '{' +
-          '"feedback_id": "feedback_id",' +
-          '"comment": "comment",' +
-          '"created": "1995-06-12T01:11:11.111Z",' +
-          '"feedback_data": {' +
-            '"feedback_type": "feedback_type",' +
-            '"document": {' +
-              '"title": "title",' +
-              '"hash": "hash"' +
-            '},' +
-            '"model_id": "model_id",' +
-            '"model_version": "model_version",' +
-            '"location": {' +
-              '"begin": 0,' +
-              '"end": 1' +
-            '},' +
-            '"text": "text",' +
-            '"original_labels": {' +
-              '"types": [' +
-                '{' +
-                  '"label": {' +
-                    '"nature": "nature",' +
-                    '"party": "party"' +
-                  '},' +
-                  '"provenance_ids": [' +
-                    '"provenance_id"' +
-                  ']' +
-                '}' +
-              '],' +
-              '"categories": [' +
-                '{' +
-                  '"label": "label",' +
-                  '"provenance_ids": [' +
-                    '"provenance_id"' +
-                  ']' +
-                '}' +
-              '],' +
-              '"modification": "added"' +
-            '},' +
-            '"updated_labels": {' +
-              '"types": [' +
-                '{' +
-                  '"label": {' +
-                    '"nature": "nature",' +
-                    '"party": "party"' +
-                  '},' +
-                  '"provenance_ids": [' +
-                    '"provenance_id"' +
-                  ']' +
-                '}' +
-              '],' +
-              '"categories": [' +
-                '{' +
-                  '"label": "label",' +
-                  '"provenance_ids": [' +
-                    '"provenance_id"' +
-                  ']' +
-                '}' +
-              '],' +
-              '"modification": "added"' +
-            '},' +
-            '"pagination": {' +
-              '"refresh_cursor": "refresh_cursor",' +
-              '"next_cursor": "next_cursor",' +
-              '"refresh_url": "refresh_url",' +
-              '"next_url": "next_url",' +
-              '"total": 1000' +
-            '}' +
-          '}' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String feedbackReturnResponse() {
-    return '{' +
-      '"feedback_id": "feedback_id",' +
-      '"user_id": "user_id",' +
-      '"comment": "comment",' +
-      '"created": "1995-06-12T01:11:11.111Z",' +
-      '"feedback_data": {' +
-        '"feedback_type": "feedback_type",' +
-        '"document": {' +
-          '"title": "title",' +
-          '"hash": "hash"' +
-        '},' +
-        '"model_id": "model_id",' +
-        '"model_version": "model_version",' +
-        '"location": {' +
-          '"begin": 0,' +
-          '"end": 1' +
-        '},' +
-        '"text": "text",' +
-        '"original_labels": {' +
-          '"types": [' +
-            '{' +
-              '"label": {' +
-                '"nature": "nature",' +
-                '"party": "party"' +
-              '},' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"categories": [' +
-            '{' +
-              '"label": "label",' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"modification": "added"' +
-        '},' +
-        '"updated_labels": {' +
-          '"types": [' +
-            '{' +
-              '"label": {' +
-                '"nature": "nature",' +
-                '"party": "party"' +
-              '},' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"categories": [' +
-            '{' +
-              '"label": "label",' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"modification": "added"' +
-        '},' +
-        '"pagination": {' +
-          '"refresh_cursor": "refresh_cursor",' +
-          '"next_cursor": "next_cursor",' +
-          '"refresh_url": "refresh_url",' +
-          '"next_url": "next_url",' +
-          '"total": 1000' +
-        '}' +
-      '}' +
-    '}';
-  }
-
-  public static testMethod String getFeedbackResponse() {
-    return '{' +
-      '"feedback_id": "feedback_id",' +
-      '"comment": "comment",' +
-      '"created": "1995-06-12T01:11:11.111Z",' +
-      '"feedback_data": {' +
-        '"feedback_type": "feedback_type",' +
-        '"document": {' +
-          '"title": "title",' +
-          '"hash": "hash"' +
-        '},' +
-        '"model_id": "model_id",' +
-        '"model_version": "model_version",' +
-        '"location": {' +
-          '"begin": 0,' +
-          '"end": 1' +
-        '},' +
-        '"text": "text",' +
-        '"original_labels": {' +
-          '"types": [' +
-            '{' +
-              '"label": {' +
-                '"nature": "nature",' +
-                '"party": "party"' +
-              '},' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"categories": [' +
-            '{' +
-              '"label": "label",' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"modification": "added"' +
-        '},' +
-        '"updated_labels": {' +
-          '"types": [' +
-            '{' +
-              '"label": {' +
-                '"nature": "nature",' +
-                '"party": "party"' +
-              '},' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"categories": [' +
-            '{' +
-              '"label": "label",' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
-            '}' +
-          '],' +
-          '"modification": "added"' +
-        '},' +
-        '"pagination": {' +
-          '"refresh_cursor": "refresh_cursor",' +
-          '"next_cursor": "next_cursor",' +
-          '"refresh_url": "refresh_url",' +
-          '"next_url": "next_url",' +
-          '"total": 1000' +
-        '}' +
-      '}' +
-    '}';
-  }
-
-  public static testMethod String htmlReturnResponse() {
-    return '{' +
-      '"num_pages": "20",' +
-      '"author": "author",' +
-      '"publication_date": "06-12-1995",' +
-      '"title": "title",' +
-      '"html": "html"' +
-    '}';
-  }
-
-  public static testMethod String tableReturnResponse() {
-    return '{' +
-      '"document": {' +
-        '"html": "html",' +
-        '"title": "title",' +
-        '"hash": "hash"' +
-      '},' +
-      '"model_id": "model_id",' +
-      '"model_version": "model_version",' +
-      '"tables": [' +
-        '{' +
-          '"location": {' +
-            '"begin": 0,' +
-            '"end": 1' +
-          '},' +
-          '"text": "text",' +
-          '"section_title": {' +
-            '"location": {' +
-              '"begin": 0,' +
-              '"end": 1' +
-            '}' +
-          '},' +
-          '"table_headers": [' +
-            '{' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text",' +
-              '"row_index_begin": 2000,' +
-              '"row_index_end": 3000,' +
-              '"column_index_begin": 4000,' +
-              '"column_index_end": 5000' +
-            '}' +
-          '],' +
-          '"row_headers": [' +
-            '{' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text",' +
-              '"text_normalized": "text_normalized",' +
-              '"row_index_begin": 2000,' +
-              '"row_index_end": 3000,' +
-              '"column_index_begin": 4000,' +
-              '"column_index_end": 5000' +
-            '}' +
-          '],' +
-          '"column_headers": [' +
-            '{' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text",' +
-              '"text_normalized": "text_normalized",' +
-              '"row_index_begin": 2000,' +
-              '"row_index_end": 3000,' +
-              '"column_index_begin": 4000,' +
-              '"column_index_end": 5000' +
-            '}' +
-          '],' +
-          '"body_cells": [' +
-            '{' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text",' +
-              '"row_index_begin": 2000,' +
-              '"row_index_end": 3000,' +
-              '"column_index_begin": 4000,' +
-              '"column_index_end": 5000,' +
-              '"row_header_ids": [' +
-                '"id"' +
-              '],' +
-              '"row_header_texts": [' +
-                '"text"' +
-              '],' +
-              '"row_header_texts_normalized": [' +
-                '"text_normalized"' +
-              '],' +
-              '"column_header_ids": [' +
-                '"id"' +
-              '],' +
-              '"column_header_texts": [' +
-                '"text"' +
-              '],' +
-              '"column_header_texts_normalized": [' +
-                '"text_normalized"' +
-              '],' +
-              '"attributes": [' +
-              '  {' +
-              '    "type": "type",' +
-              '    "text": "text",' +
-              '    "location": {' +
-              '      "begin": 0,' +
-              '      "end": 1' +
-              '    }' +
-              '  }' +
-              ']' +
-            '}' +
-          '],' +
-          '"key_value_pairs": [' +
-          '{' +
-            '"key": {' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text"' +
-            '},' +
-            '"value": [{' +
-              '"cell_id": "cell_id",' +
-              '"location": {' +
-                '"begin": 0,' +
-                '"end": 1' +
-              '},' +
-              '"text": "text"' +
-            '}]' +
-          '}' +
-          ']' +
-        '}' +
-      ']' +
     '}';
   }
 
@@ -3817,53 +4908,6 @@ public class IBMWatsonMockResponses {
       '"accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwicGVybWlzc2lvbnMiOlsiYWRtaW5pc3RyYXRvciIsIm1hbmFnZV9jYXRhbG9nIiwiYWNjZXNzX2NhdGFsb2ciLCJtYW5hZ2VfcG9saWNpZXMiLCJhY2Nlc3NfcG9saWNpZXMiLCJ2aXJ0dWFsaXplX3RyYW5zZm9ybSIsImNhbl9wcm92aXNpb24iLCJkZXBsb3ltZW50X2FkbWluIl0sInN1YiI6ImFkbWluIiwiaXNzIjoiS05PWFNTTyIsImF1ZCI6IkRTWCIsInVpZCI6Ijk5OSIsImlhdCI6MTU1OTMyODk1NSwiZXhwIjoxNTU5MzI4OTU1fQ==.GE-ML3JWmI3oB0z5mjMG3jFtYVVA5bQCsOTOOj9ab7PcgJc1mA5hn1sONkO0JAFADhUoAgpG4KgQef5tjnCSrtl1tbnDuhaP1DH4QKMCZOkWrKyfQ2X8P1jhyJmV-KpE4wuTrGdMoMVj4wVRZwnxMRSK6LhV6pIzyOLLYR21zcW_2KcKWxCYfIC7tiM1d2PSM5nWa_5Vb068F8PtdiFUElEYHYKrvmwpV57_k2jpXoY6zw8PDcIiWQe3g20w6vCB6zWhxbcFWyjMg1tPOZHgTNNskPShHQBbtZFsSrc7rkNPzttKF70m7_JqrRYUZDNN8TmuR9uyitwxEFkr2L0WDQ",' +
       '"_messageCode_": "success",' +
       '"message": "success"' +
-    '}';
-  }
-
-  public static testMethod String languageTranslatorDocumentStatus() {
-    return '{' +
-      '"document_id": "id",' +
-      '"filename": "test-file.txt",' +
-      '"model_id": "model-id",' +
-      '"base_model_id": "en-es",' +
-      '"source": "en",' +
-      '"target": "es",' +
-      '"status": "available",' +
-      '"created": "2018-08-24T08:20:30.5Z",' +
-      '"completed": "2018-08-24T08:20:30.5Z",' +
-      '"word_count": 1,' +
-      '"character_count": 2' +
-    '}';
-  }
-
-  public static testMethod String listDocuments() {
-    return '{' +
-      '"documents": [' +
-        '{' +
-          '"document_id": "id",' +
-          '"filename": "test-file.txt",' +
-          '"model_id": "model-id",' +
-          '"base_model_id": "en-es",' +
-          '"source": "en",' +
-          '"target": "es",' +
-          '"status": "available",' +
-          '"created": "2018-08-24T08:20:30.5Z",' +
-          '"completed": "2018-08-24T08:20:35.5Z",' +
-          '"word_count": 1,' +
-          '"character_count": 2' +
-        '},' +
-        '{' +
-          '"document_id": "id",' +
-          '"filename": "en.pdf",' +
-          '"model_id": "9ef1eda2-e4dc-460f-b51a-efeec95f239f",' +
-          '"base_model_id": "en-fr",' +
-          '"source": "en",' +
-          '"target": "fr",' +
-          '"status": "available",' +
-          '"created": "2018-08-24T08:20:30.5Z",' +
-          '"completed": "2018-08-24T08:20:35.5Z"' +
-        '}' +
-      ']' +
     '}';
   }
 
