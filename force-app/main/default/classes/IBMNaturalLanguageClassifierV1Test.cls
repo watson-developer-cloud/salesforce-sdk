@@ -1,214 +1,504 @@
 @isTest
 private class IBMNaturalLanguageClassifierV1Test {
-  private static String HEADER_KEY;
-  private static String HEADER_VAL;
-
   private static IBMNaturalLanguageClassifierV1 service;
 
   static {
-    HEADER_KEY = 'Header-Key';
-    HEADER_VAL = 'header_val';
     service = new IBMNaturalLanguageClassifierV1(new IBMWatsonNoAuthAuthenticator());
   }
 
-  /**
-   *  Test phrase to classify.
-   *
-   */
-  static testMethod void testClassify() {
-    String body = IBMWatsonMockResponses.Classify();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testClassificationModel() {
     Test.startTest();
+    String classifierId = 'classifier_id';
+    String url = 'url';
+    String text = 'text';
+    String topClass = 'top_class';
+    IBMNaturalLanguageClassifierV1Models.ClassifiedClass classesItem = new IBMNaturalLanguageClassifierV1Models.ClassifiedClass();
+    List<IBMNaturalLanguageClassifierV1Models.ClassifiedClass> classes = new List<IBMNaturalLanguageClassifierV1Models.ClassifiedClass> { classesItem } ;
 
-    String classifier_id = '10D41B-nlc-1';
-    String text = 'How hot will it be today?';
-    // this would be the expected top class as defined on the mock response
-    String top_class = 'temperature';
-    IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions = new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
-      .classifierId(classifier_id)
+    IBMNaturalLanguageClassifierV1Models.Classification testRequestModel = new IBMNaturalLanguageClassifierV1Models.Classification();
+    testRequestModel.setClassifierId(classifierId);
+    testRequestModel.setUrl(url);
+    testRequestModel.setText(text);
+    testRequestModel.setTopClass(topClass);
+    testRequestModel.setClasses(classes);
+
+    System.assertEquals(classifierId, testRequestModel.getClassifierId());
+    System.assertEquals(url, testRequestModel.getUrl());
+    System.assertEquals(text, testRequestModel.getText());
+    System.assertEquals(topClass, testRequestModel.getTopClass());
+    System.assertEquals(classes, testRequestModel.getClasses());
+    Test.stopTest();
+  }
+  static testMethod void testClassificationCollectionModel() {
+    Test.startTest();
+    String classifierId = 'classifier_id';
+    String url = 'url';
+    IBMNaturalLanguageClassifierV1Models.CollectionItem collectionItem = new IBMNaturalLanguageClassifierV1Models.CollectionItem();
+    List<IBMNaturalLanguageClassifierV1Models.CollectionItem> collection = new List<IBMNaturalLanguageClassifierV1Models.CollectionItem> { collectionItem } ;
+
+    IBMNaturalLanguageClassifierV1Models.ClassificationCollection testRequestModel = new IBMNaturalLanguageClassifierV1Models.ClassificationCollection();
+    testRequestModel.setClassifierId(classifierId);
+    testRequestModel.setUrl(url);
+    testRequestModel.setCollection(collection);
+
+    System.assertEquals(classifierId, testRequestModel.getClassifierId());
+    System.assertEquals(url, testRequestModel.getUrl());
+    System.assertEquals(collection, testRequestModel.getCollection());
+    Test.stopTest();
+  }
+  static testMethod void testClassifiedClassModel() {
+    Test.startTest();
+    Double confidence = 0.5;
+    String className = 'class_name';
+
+    IBMNaturalLanguageClassifierV1Models.ClassifiedClass testRequestModel = new IBMNaturalLanguageClassifierV1Models.ClassifiedClass();
+    testRequestModel.setConfidence(confidence);
+    testRequestModel.setClassName(className);
+
+    System.assertEquals(confidence, testRequestModel.getConfidence());
+    System.assertEquals(className, testRequestModel.getClassName());
+    Test.stopTest();
+  }
+  static testMethod void testClassifierModel() {
+    Test.startTest();
+    String name = 'name';
+    String url = 'url';
+    String classifierId = 'classifier_id';
+    String language = 'language';
+
+    IBMNaturalLanguageClassifierV1Models.Classifier testRequestModel = new IBMNaturalLanguageClassifierV1Models.Classifier();
+    testRequestModel.setName(name);
+    testRequestModel.setUrl(url);
+    testRequestModel.setClassifierId(classifierId);
+    testRequestModel.setLanguage(language);
+
+    System.assertEquals(name, testRequestModel.getName());
+    System.assertEquals(url, testRequestModel.getUrl());
+    System.assertEquals(classifierId, testRequestModel.getClassifierId());
+    System.assertEquals(language, testRequestModel.getLanguage());
+    Test.stopTest();
+  }
+  static testMethod void testClassifierListModel() {
+    Test.startTest();
+    String url = 'url';
+    String classifierId = 'classifier_id';
+    IBMNaturalLanguageClassifierV1Models.Classifier classifiersItem = new IBMNaturalLanguageClassifierV1Models.Classifier();
+    List<IBMNaturalLanguageClassifierV1Models.Classifier> classifiers = new List<IBMNaturalLanguageClassifierV1Models.Classifier> { classifiersItem } ;
+
+    IBMNaturalLanguageClassifierV1Models.ClassifierList testRequestModel = new IBMNaturalLanguageClassifierV1Models.ClassifierList();
+    testRequestModel.setClassifiers(classifiers);
+
+    System.assertEquals(classifiers, testRequestModel.getClassifiers());
+    Test.stopTest();
+  }
+  static testMethod void testClassifyCollectionOptionsModel() {
+    Test.startTest();
+    String classifierId = 'classifier_id';
+    String text = 'text';
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput collectionItem = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
       .text(text)
-      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
-    classifyOptions = classifyOptions.newBuilder().build();
-    IBMNaturalLanguageClassifierV1Models.Classification classification = service.classify(classifyOptions);
-    System.assertEquals(classification.getClassifierId(), classifier_id);
-    System.assertEquals(classification.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyURL);
-    System.assertEquals(classification.getText(), text);
-    System.assertEquals(classification.getTopClass(), top_class);
-    List<IBMNaturalLanguageClassifierV1Models.ClassifiedClass> ClassifiedClassList = classification.getClasses();
-    System.assertNotEquals(ClassifiedClassList, null);
-    System.assertEquals(ClassifiedClassList.size(), 2);
-    IBMNaturalLanguageClassifierV1Models.ClassifiedClass ClassifiedClass = ClassifiedClassList[0];
-    String class_name = ClassifiedClass.getClassName();
-    Set<String> class_name_set = new Set<String>{'temperature', 'conditions'};
-    System.assert(class_name_set.contains(class_name), 'Invalid class name for classifier.');
-    Double confidence = ClassifiedClass.getConfidence();
-    System.assertNotEquals(confidence, null);
-    System.assert(confidence > 0, 'Invalid confidence for classifier.');
-    IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder ClassifyOptionsBuilder = classifyOptions.newBuilder();
-    ClassifyOptionsBuilder = new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder(classifier_id, text);
-    Test.stopTest();
-  }
+    List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> collection = new List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> { collectionItem } ;
 
-  /**
-   * Test classifying multiple phrases at once.
-   */
-  static testMethod void testClassifyCollection() {
-    String body = IBMWatsonMockResponses.ClassifyCollection();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String classifierId = '10D41B-nlc-1';
-    String text1 = 'How hot will it be today?';
-    String text2 = 'Is it hot outside?';
-    IBMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
-      .text(text1)
-      .build();
-    IBMNaturalLanguageClassifierV1Models.ClassifyInput input2 = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
-      .text(text2)
-      .build();
-    List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> inputCollection = new List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> {
-      input1,
-      input2
-    };
-    IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions classifyOptions = new IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptionsBuilder()
+    IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions testRequestModel = new IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptionsBuilder()
       .classifierId(classifierId)
-      .collection(inputCollection)
-      .addHeader(HEADER_KEY, HEADER_VAL)
+      .collection(collection)
       .build();
-    classifyOptions = classifyOptions.newBuilder().build();
-    IBMNaturalLanguageClassifierV1Models.ClassificationCollection classification = service.classifyCollection(classifyOptions);
-    System.assertEquals(classification.getClassifierId(), classifierId);
-    System.assertEquals(classification.getUrl(), 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/' + classifierId);
-    System.assertEquals(classification.getCollection().get(0).getText(), text1);
-    System.assertEquals(classification.getCollection().get(0).getTopClass(), 'temperature');
-    System.assertEquals(classification.getCollection().get(1).getText(), text2);
-    System.assertEquals(classification.getCollection().get(1).getTopClass(), 'temperature');
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(classifierId, testRequestModel.classifierId());
+    System.assertEquals(collection, testRequestModel.collection());
+    Test.stopTest();
+  }
+  static testMethod void testClassifyInputModel() {
+    Test.startTest();
+    String text = 'text';
+
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput testRequestModel = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
+      .text(text)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(text, testRequestModel.getText());
+    Test.stopTest();
+  }
+  static testMethod void testClassifyOptionsModel() {
+    Test.startTest();
+    String classifierId = 'classifier_id';
+    String text = 'text';
+
+    IBMNaturalLanguageClassifierV1Models.ClassifyOptions testRequestModel = new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
+      .classifierId(classifierId)
+      .text(text)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(classifierId, testRequestModel.classifierId());
+    System.assertEquals(text, testRequestModel.text());
+    Test.stopTest();
+  }
+  static testMethod void testCollectionItemModel() {
+    Test.startTest();
+    String text = 'text';
+    String topClass = 'top_class';
+    IBMNaturalLanguageClassifierV1Models.ClassifiedClass classesItem = new IBMNaturalLanguageClassifierV1Models.ClassifiedClass();
+    List<IBMNaturalLanguageClassifierV1Models.ClassifiedClass> classes = new List<IBMNaturalLanguageClassifierV1Models.ClassifiedClass> { classesItem } ;
+
+    IBMNaturalLanguageClassifierV1Models.CollectionItem testRequestModel = new IBMNaturalLanguageClassifierV1Models.CollectionItem();
+    testRequestModel.setText(text);
+    testRequestModel.setTopClass(topClass);
+    testRequestModel.setClasses(classes);
+
+    System.assertEquals(text, testRequestModel.getText());
+    System.assertEquals(topClass, testRequestModel.getTopClass());
+    System.assertEquals(classes, testRequestModel.getClasses());
+    Test.stopTest();
+  }
+  static testMethod void testCreateClassifierOptionsModel() {
+    Test.startTest();
+    IBMWatsonFile trainingMetadata = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/json')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+    IBMWatsonFile trainingData = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('text/csv')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+
+    IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions testRequestModel = new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
+      .trainingMetadata(trainingMetadata)
+      .trainingData(trainingData)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(trainingMetadata, testRequestModel.trainingMetadata());
+    System.assertEquals(trainingData, testRequestModel.trainingData());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteClassifierOptionsModel() {
+    Test.startTest();
+    String classifierId = 'classifier_id';
+
+    IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions testRequestModel = new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder()
+      .classifierId(classifierId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(classifierId, testRequestModel.classifierId());
+    Test.stopTest();
+  }
+  static testMethod void testGetClassifierOptionsModel() {
+    Test.startTest();
+    String classifierId = 'classifier_id';
+
+    IBMNaturalLanguageClassifierV1Models.GetClassifierOptions testRequestModel = new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder()
+      .classifierId(classifierId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(classifierId, testRequestModel.classifierId());
+    Test.stopTest();
+  }
+  static testMethod void testListClassifiersOptionsModel() {
+    Test.startTest();
+
+    IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions testRequestModel = new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
     Test.stopTest();
   }
 
-  /**
-   *  Test send data to create and train a classifier.
-   *
-   */
-  static testMethod void  testCreateClassifier() {
-    String body = IBMWatsonMockResponses.CreateClassifier();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+
+  static testMethod void testClassify() {
+    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1Classification();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    Attachment TrainingMetadata = new Attachment(Body = Blob.valueOf('test string'),
-      Name='test.txt',
-      Description='test description',
-      ContentType='text/plain');
-    IBMWatsonFile training_metadata = new IBMWatsonFile.FileBuilder()
-      .attachment(TrainingMetadata)
+    String classifierId = 'classifier_id';
+    String text = 'text';
+
+    IBMNaturalLanguageClassifierV1Models.ClassifyOptions options = new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
+      .classifierId(classifierId)
+      .text(text)
+      .addHeader('Test-Header', 'test_value')
       .build();
-    Attachment TrainingData = new Attachment(Body = Blob.valueOf('test string'),
-      Name='test.txt',
-      Description='test description',
-      ContentType='text/plain');
-    String training_metadata_filename = 'My Classifier Metadata';
-    IBMWatsonFile training_data = new IBMWatsonFile.FileBuilder()
-      .attachment(TrainingData)
-      .build();
-    String training_data_filename = 'My Classifier Data';
-    IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions =
-      new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
-      .trainingMetadata(training_metadata)
-      .trainingData(training_data)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    createClassifierOptions = createClassifierOptions.newBuilder().build();
-    IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.createClassifier(createClassifierOptions);
-    System.assertEquals(Classifier.getName(), 'My Classifier');
-    System.assertEquals(Classifier.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
-    System.assertEquals(Classifier.getStatus(), 'Training');
-    System.assertEquals(Classifier.getClassifierId(), '10D41B-nlc-1');
-    System.assertEquals(Classifier.getCreated(), (DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"', DateTime.class));
-    System.assertEquals(Classifier.getStatusDescription(), 'The classifier instance is in its training phase, not yet ready to accept classify requests');
-    System.assertEquals(Classifier.getLanguage(), 'en');
-    IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder
-      CreateClassifierOptionsBuilder = createClassifierOptions.newBuilder();
-    CreateClassifierOptionsBuilder = new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder(training_metadata,
-     training_data);
+
+    IBMNaturalLanguageClassifierV1Models.Classification response = service.classify(options);
+
+    System.assertEquals(
+      'classifier_id',
+      response.getClassifierId()
+    );
+    System.assertEquals(
+      'url',
+      response.getUrl()
+    );
+    System.assertEquals(
+      'text',
+      response.getText()
+    );
+    System.assertEquals(
+      'top_class',
+      response.getTopClass()
+    );
+    System.assertEquals(
+      0.5,
+      response.getClasses().get(0).getConfidence()
+    );
+    System.assertEquals(
+      'class_name',
+      response.getClasses().get(0).getClassName()
+    );
+
     Test.stopTest();
   }
-
-  /**
-   *  Test send data to delete a classifier.
-   *
-   */
-  static testMethod void testDeleteClassifier() {
-    String body = IBMWatsonMockResponses.CreateClassifier();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+  static testMethod void testClassifyCollection() {
+    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1ClassificationCollection();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    String classifier_id = '10D41B-nlc-1';
-    IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions =
-      new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder()
-      .classifierId(classifier_id)
-      .addHeader(HEADER_KEY, HEADER_VAL)
+
+    String classifierId = 'classifier_id';
+    String text = 'text';
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput collectionItem = new IBMNaturalLanguageClassifierV1Models.ClassifyInputBuilder()
+      .text(text)
       .build();
-    service.deleteClassifier(deleteClassifierOptions);
-    IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder DeleteClassifierOptionsBuilder =
-      deleteClassifierOptions.newBuilder();
-    DeleteClassifierOptionsBuilder = new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder(classifier_id);
+    List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> collection = new List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> { collectionItem } ;
+
+    IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions options = new IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptionsBuilder()
+      .classifierId(classifierId)
+      .collection(collection)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMNaturalLanguageClassifierV1Models.ClassificationCollection response = service.classifyCollection(options);
+
+    System.assertEquals(
+      'classifier_id',
+      response.getClassifierId()
+    );
+    System.assertEquals(
+      'url',
+      response.getUrl()
+    );
+    System.assertEquals(
+      'text',
+      response.getCollection().get(0).getText()
+    );
+    System.assertEquals(
+      'top_class',
+      response.getCollection().get(0).getTopClass()
+    );
+    System.assertEquals(
+      0.5,
+      response.getCollection().get(0).getClasses().get(0).getConfidence()
+    );
+    System.assertEquals(
+      'class_name',
+      response.getCollection().get(0).getClasses().get(0).getClassName()
+    );
+
     Test.stopTest();
   }
-
-  static testMethod void testGetClassifier() {
-    String body = IBMWatsonMockResponses.getClassifier();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+  static testMethod void testCreateClassifier() {
+    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1Classifier();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    String classifier_id = '10D41B-nlc-1';
-    IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOption =
-      new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder()
-      .classifierId(classifier_id)
-      .addHeader(HEADER_KEY, HEADER_VAL)
+
+    IBMWatsonFile trainingMetadata = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/json')
+      .body(Blob.valueOf('Test file contents string'))
       .build();
-    IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.getClassifier(getClassifierOption);
-    System.assertEquals(Classifier.getName(), 'My Classifier');
-    System.assertEquals(Classifier.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
-    System.assertEquals(Classifier.getStatus(), 'Available');
-    System.assertEquals(Classifier.getClassifierId(), '10D41B-nlc-1');
-    System.assertEquals(Classifier.getCreated(), (DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"', DateTime.class));
-    System.assertEquals(Classifier.getStatusDescription(), 'The classifier instance is now available and is ready to take classifier requests.');
-    System.assertEquals(Classifier.getLanguage(), 'en');
-    IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder GetClassifierOptionsBuilder =
-      getClassifierOption.newBuilder();
-    GetClassifierOptionsBuilder = new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder(classifier_id);
+    IBMWatsonFile trainingData = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('text/csv')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+
+    IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions options = new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
+      .trainingMetadata(trainingMetadata)
+      .trainingData(trainingData)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMNaturalLanguageClassifierV1Models.Classifier response = service.createClassifier(options);
+
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'url',
+      response.getUrl()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'classifier_id',
+      response.getClassifierId()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      'status_description',
+      response.getStatusDescription()
+    );
+    System.assertEquals(
+      'language',
+      response.getLanguage()
+    );
+
     Test.stopTest();
   }
-
   static testMethod void testListClassifiers() {
-    String body = IBMWatsonMockResponses.listClassifiers();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1ClassifierList();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions =
-      new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
-      .addHeader(HEADER_KEY, HEADER_VAL)
+
+    IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions options = new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMNaturalLanguageClassifierV1Models.ClassifierList ClassifierList = service.listClassifiers(listClassifiersOptions);
-    List<IBMNaturalLanguageClassifierV1Models.Classifier> Classifiers = ClassifierList.getClassifiers();
-    System.assertNotEquals(Classifiers, null);
-    System.assertEquals(Classifiers.size(), 1);
-    IBMNaturalLanguageClassifierV1Models.Classifier Classifier = Classifiers[0];
-    System.assertEquals(Classifier.getName(), 'My Classifier');
-    System.assertEquals(Classifier.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
-    System.assertEquals(Classifier.getStatus(), null);
-    System.assertEquals(Classifier.getClassifierId(), '10D41B-nlc-1');
-    System.assertEquals(Classifier.getCreated(), (DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"', DateTime.class));
-    System.assertEquals(Classifier.getStatusDescription(), null);
-    System.assertEquals(Classifier.getLanguage(), 'en');
-    IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder ListClassifiersOptionsBuilder =
-      listClassifiersOptions.newBuilder();
+
+    IBMNaturalLanguageClassifierV1Models.ClassifierList response = service.listClassifiers(options);
+
+    System.assertEquals(
+      'name',
+      response.getClassifiers().get(0).getName()
+    );
+    System.assertEquals(
+      'url',
+      response.getClassifiers().get(0).getUrl()
+    );
+    System.assertEquals(
+      'status',
+      response.getClassifiers().get(0).getStatus()
+    );
+    System.assertEquals(
+      'classifier_id',
+      response.getClassifiers().get(0).getClassifierId()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getClassifiers().get(0).getCreated()
+    );
+    System.assertEquals(
+      'status_description',
+      response.getClassifiers().get(0).getStatusDescription()
+    );
+    System.assertEquals(
+      'language',
+      response.getClassifiers().get(0).getLanguage()
+    );
+
     Test.stopTest();
   }
+  static testMethod void testGetClassifier() {
+    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1Classifier();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
 
+    String classifierId = 'classifier_id';
+
+    IBMNaturalLanguageClassifierV1Models.GetClassifierOptions options = new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder()
+      .classifierId(classifierId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMNaturalLanguageClassifierV1Models.Classifier response = service.getClassifier(options);
+
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'url',
+      response.getUrl()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'classifier_id',
+      response.getClassifierId()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      'status_description',
+      response.getStatusDescription()
+    );
+    System.assertEquals(
+      'language',
+      response.getLanguage()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteClassifier() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String classifierId = 'classifier_id';
+
+    IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions options = new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder()
+      .classifierId(classifierId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteClassifier(options);
+
+    Test.stopTest();
+  }
 }
