@@ -4070,6 +4070,237 @@ public class IBMWatsonMockResponses {
   }
 
 
+  // --- Natural Language Understanding v1 ---
+
+  public static testMethod String naturalLanguageUnderstandingV1AnalysisResults() {
+    return '{' +
+      '"usage": {' +
+        '"features": 10,' +
+        '"text_characters": 10,' +
+        '"text_units": 10' +
+      '},' +
+      '"language": "language",' +
+      '"retrieved_url": "retrieved_url",' +
+      '"analyzed_text": "analyzed_text",' +
+      '"categories": [' +
+        '{' +
+          '"score": 0.5,' +
+          '"label": "label",' +
+          '"explanation": {' +
+            '"relevant_text": [' +
+              '{' +
+                '"text": "text"' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      '],' +
+      '"concepts": [' +
+        '{' +
+          '"text": "text",' +
+          '"relevance": 0.5,' +
+          '"dbpedia_resource": "dbpedia_resource"' +
+        '}' +
+      '],' +
+      '"emotion": {' +
+        '"targets": [' +
+          '{' +
+            '"text": "text",' +
+            '"emotion": {' +
+              '"sadness": 0.5,' +
+              '"joy": 0.5,' +
+              '"fear": 0.5,' +
+              '"disgust": 0.5,' +
+              '"anger": 0.5' +
+            '}' +
+          '}' +
+        '],' +
+        '"document": {' +
+          '"emotion": {' +
+            '"sadness": 0.5,' +
+            '"joy": 0.5,' +
+            '"fear": 0.5,' +
+            '"disgust": 0.5,' +
+            '"anger": 0.5' +
+          '}' +
+        '}' +
+      '},' +
+      '"metadata": {' +
+        '"title": "title",' +
+        '"image": "image",' +
+        '"publication_date": "publication_date",' +
+        '"feeds": [' +
+          '{' +
+            '"link": "link"' +
+          '}' +
+        '],' +
+        '"authors": [' +
+          '{' +
+            '"name": "name"' +
+          '}' +
+        ']' +
+      '},' +
+      '"relations": [' +
+        '{' +
+          '"type": "type",' +
+          '"sentence": "sentence",' +
+          '"score": 0.5,' +
+          '"arguments": [' +
+            '{' +
+              '"text": "text",' +
+              '"entities": [' +
+                '{' +
+                  '"type": "type",' +
+                  '"text": "text"' +
+                '}' +
+              '],' +
+              '"location": [' +
+                '10' +
+              ']' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"semantic_roles": [' +
+        '{' +
+          '"sentence": "sentence",' +
+          '"subject": {' +
+            '"text": "text",' +
+            '"entities": [' +
+              '{' +
+                '"type": "type",' +
+                '"text": "text"' +
+              '}' +
+            '],' +
+            '"keywords": [' +
+              '{' +
+                '"text": "text"' +
+              '}' +
+            ']' +
+          '},' +
+          '"action": {' +
+            '"verb": {' +
+              '"text": "text",' +
+              '"tense": "tense"' +
+            '},' +
+            '"text": "text",' +
+            '"normalized": "normalized"' +
+          '},' +
+          '"object": {' +
+            '"text": "text",' +
+            '"keywords": [' +
+              '{' +
+                '"text": "text"' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      '],' +
+      '"sentiment": {' +
+        '"document": {' +
+          '"label": "label",' +
+          '"score": 0.5' +
+        '},' +
+        '"targets": [' +
+          '{' +
+            '"text": "text",' +
+            '"score": 0.5' +
+          '}' +
+        ']' +
+      '},' +
+      '"keywords": [' +
+        '{' +
+          '"text": "text",' +
+          '"sentiment": {' +
+            '"score": 0.5' +
+          '},' +
+          '"count": 10,' +
+          '"relevance": 0.5,' +
+          '"emotion": {' +
+            '"sadness": 0.5,' +
+            '"joy": 0.5,' +
+            '"fear": 0.5,' +
+            '"disgust": 0.5,' +
+            '"anger": 0.5' +
+          '}' +
+        '}' +
+      '],' +
+      '"entities": [' +
+        '{' +
+          '"type": "type",' +
+          '"text": "text",' +
+          '"sentiment": {' +
+            '"score": 0.5' +
+          '},' +
+          '"relevance": 0.5,' +
+          '"emotion": {' +
+            '"sadness": 0.5,' +
+            '"joy": 0.5,' +
+            '"fear": 0.5,' +
+            '"disgust": 0.5,' +
+            '"anger": 0.5' +
+          '},' +
+          '"disambiguation": {' +
+            '"subtype": [' +
+              '"subtype"' +
+            '],' +
+            '"name": "name",' +
+            '"dbpedia_resource": "dbpedia_resource"' +
+          '},' +
+          '"count": 10,' +
+          '"confidence": 0.5,' +
+          '"mentions": [' +
+            '{' +
+              '"text": "text",' +
+              '"location": [' +
+                '10' +
+              '],' +
+              '"confidence": 0.5' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"syntax": {' +
+        '"tokens": [' +
+          '{' +
+            '"text": "text",' +
+            '"part_of_speech": "part_of_speech",' +
+            '"location": [' +
+              '10' +
+            '],' +
+            '"lemma": "lemma"' +
+          '}' +
+        '],' +
+        '"sentences": [' +
+          '{' +
+            '"text": "text",' +
+            '"location": [' +
+              '10' +
+            ']' +
+          '}' +
+        ']' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String naturalLanguageUnderstandingV1ListModelsResults() {
+    return '{' +
+      '"models": [' +
+        '{' +
+          '"status": "status", ' +
+          '"model_id": "model_id", ' +
+          '"language": "language", ' +
+          '"description": "description",' +
+          '"workspace_id": "workspace_id", ' +
+          '"version": "version", ' +
+          '"version_description": "version_description", ' +
+          '"created": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+
 
 
   public static testMethod String collectionTrained() {
@@ -4103,112 +4334,6 @@ public class IBMWatsonMockResponses {
             '    "minimum_queries_added": true' +
             '  }' +
             '}';
-  }
-
-  public static testMethod String analysisResults() {
-    return  '{' +
-            '  "entities": [' +
-            '    {' +
-            '      "type": "Company", ' +
-            '      "relevance": 0.89792, ' +
-            '      "count": 12, ' +
-            '      "name": "IBM", ' +
-            '      "disambiguation": {' +
-            '        "name": "IBM", ' +
-            '        "dbpedia_resource": "http://dbpedia.org/resource/IBM", ' +
-            '        "subtype": [' +
-            '          "SoftwareLicense", ' +
-            '          "OperatingSystemDeveloper", ' +
-            '          "ProcessorManufacturer", ' +
-            '          "SoftwareDeveloper", ' +
-            '          "CompanyFounder", ' +
-            '          "ProgrammingLanguageDesigner", ' +
-            '          "ProgrammingLanguageDeveloper"' +
-            '        ]' +
-            '      }, ' +
-            '      "sentiment": {' +
-            '        "score": 0.099437' +
-            '      }, ' +
-            '      "emotion": {' +
-            '        "sadness": 0.271362, ' +
-            '        "joy": 0.618694, ' +
-            '        "fear": 0.033186, ' +
-            '        "disgust": 0.056113, ' +
-            '        "anger": 0.099437' +
-            '      },' +
-                  '"confidence": 0.5,' +
-                  '"mentions": [' +
-                    '{' +
-                      '"text": "text",' +
-                      '"location": [' +
-                        '0' +
-                      '],' +
-                      '"confidence": 0.5' +
-                    '}' +
-                  ']' +
-            '    }' +
-            '  ], ' +
-            '  "usage": { "features": 4, "text_characters": 40, "text_units": 5}, ' +
-            '  "concepts":[{"text": "test", "relevance": 0.66382, "dbpedia_resource": "test"}], ' +
-            '  "keywords": [' +
-            '    {' +
-            '      "emotion": {' +
-            '        "sadness": 0.174379, ' +
-            '        "joy": 0.66067, ' +
-            '        "fear": 0.051475, ' +
-            '        "disgust": 0.114401, ' +
-            '        "anger": 0.044105' +
-            '      }, ' +
-            '      "relevance": "0.900808", ' +
-            '      "sentiment": {' +
-            '        "score": 0.419889' +
-            '      }, ' +
-            '      "text": "free trial"' +
-            '    }' +
-            '  ], ' +
-            '"categories": [' +
-              '{' +
-                '"label": "Company",' +
-                '"score": 0.89792,' +
-                '"explanation": {' +
-                  '"relevant_text": [' +
-                    '{' +
-                      '"text": "text"' +
-                    '}' +
-                  ']' +
-                '}' +
-              '}' +
-            '],' +
-            '  "metadata": { "authors": [{"name": "test"}], "publication_date": "2017-05-16T13:56:54.957Z","title": "test"}, ' +
-            '  "emotion": { "targets": [{"text": "test", "score": 0.89792,"emotion": {"anger": 0.099437}}], "document": {"label": "test", "score": 0.89792, "emotion": {"anger": 0.099437}}}, ' +
-            '  "relations": [{ "type": "Company", "sentence": "Company", "score": 0.89792,"arguments": [{"entities": [{"text": "test","type": "Company"}],"text": "test"}]}], ' +
-            '  "semantic_roles": [{ "sentence": "Company","subject": {"text": "test","entities":[{"type": "Company","text": "test"}],"keywords":[{"text": "test"}]}, "action": {"text": "test","normalized": "test","verb": {"text": "test","tense": "test"}}, "object": {"text": "test","keywords":[{"text": "test"}]}}], ' +
-            '  "sentiment": { "targets": [{"text": "test", "score": 0.89792}], "document": {"label": "test", "score": 0.89792}}, ' +
-            '  "language": "en", ' +
-            '  "retrieved_url": "https://www.ibm.com/us-en/",' +
-            '"syntax": {' +
-              '"tokens": [' +
-                '{' +
-                  '"text": "Ginni",' +
-                  '"part_of_speech": "PROPN",' +
-                  '"location": [' +
-                    '0,' +
-                    '5' +
-                  '],' +
-                  '"lemma": "lemma"' +
-                '}' +
-              '],' +
-              '"sentences": [' +
-              '{' +
-                '"text": "sentence",' +
-                '"location": [' +
-                    '0,' +
-                    '5' +
-                  ']' +
-              '}' +
-              ']' +
-            '}' +
-          '}';
   }
   
    public static testMethod String listModelsResults() {
