@@ -1,2848 +1,8680 @@
 @isTest
 private class IBMDiscoveryV1Test {
-  private static final String VERSION = '2019-04-30';
-  private static final String ENVIRONMENT_ID = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
-  private static final String CONFIGURATION_ID = 'configuration_id';
-
-  private static String HEADER_KEY;
-  private static String HEADER_VAL;
-  private static String DESTINATION_FIELD;
-  private static String SOURCE_FIELD;
-  private static String ENRICHMENT_NAME;
-  private static String TEXT;
-  private static String TOKEN;
-  private static String PART_OF_SPEECH;
-  private static List<String> TOKENS;
-
   private static IBMDiscoveryV1 service;
 
   static {
-    HEADER_KEY = 'Header-Key';
-    HEADER_VAL = 'header_val';
-    DESTINATION_FIELD = 'destination_field';
-    SOURCE_FIELD = 'source_field';
-    ENRICHMENT_NAME = 'enrichment_name';
-    TEXT = 'text';
-    TOKEN = 'token';
-    PART_OF_SPEECH = 'noun';
-    TOKENS = new List<String> { TOKEN };
-    service = new IBMDiscoveryV1(VERSION, new IBMWatsonNoAuthAuthenticator());
+    service = new IBMDiscoveryV1('2019-04-30', new IBMWatsonNoAuthAuthenticator());
   }
 
-  static testMethod void testNluEnrichmentConcepts() {
+  static testMethod void testAddDocumentOptionsModel() {
     Test.startTest();
-    Long lim = 5L;
-
-    IBMDiscoveryV1Models.NluEnrichmentConcepts concepts = new IBMDiscoveryV1Models.NluEnrichmentConceptsBuilder()
-      .xlimit(lim)
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    IBMWatsonFile file = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/json')
+      .body(Blob.valueOf('Test file contents string'))
       .build();
+    String filename = 'filename';
+    String fileContentType = 'file_content_type';
+    String metadata = 'metadata';
 
-    System.assertEquals(lim, concepts.getXlimit());
+    IBMDiscoveryV1Models.AddDocumentOptions testRequestModel = new IBMDiscoveryV1Models.AddDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .file(file)
+      .filename(filename)
+      .fileContentType(fileContentType)
+      .metadata(metadata)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(file, testRequestModel.file());
+    System.assertEquals(filename, testRequestModel.filename());
+    System.assertEquals(fileContentType, testRequestModel.fileContentType());
+    System.assertEquals(metadata, testRequestModel.metadata());
     Test.stopTest();
   }
-
-  static testMethod void testRetrievalDetails() {
+  static testMethod void testAddTrainingDataOptionsModel() {
     Test.startTest();
-    String retrievalStrategy = 'relevancy_training';
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String naturalLanguageQuery = 'natural_language_query';
+    String filter = 'filter';
+    IBMDiscoveryV1Models.TrainingExample examplesItem = new IBMDiscoveryV1Models.TrainingExampleBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.TrainingExample> examples = new List<IBMDiscoveryV1Models.TrainingExample> { examplesItem } ;
 
-    IBMDiscoveryV1Models.RetrievalDetails retrievalDetails = new IBMDiscoveryV1Models.RetrievalDetails();
-    retrievalDetails.setDocumentRetrievalStrategy(retrievalStrategy);
+    IBMDiscoveryV1Models.AddTrainingDataOptions testRequestModel = new IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .filter(filter)
+      .examples(examples)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(retrievalStrategy, retrievalDetails.getDocumentRetrievalStrategy());
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(naturalLanguageQuery, testRequestModel.naturalLanguageQuery());
+    System.assertEquals(filter, testRequestModel.filter());
+    System.assertEquals(examples, testRequestModel.examples());
     Test.stopTest();
   }
-
-  /**
-   *  Test Successfully creating a new environment.
-   *
-   */
-  static testMethod void testCreateEnvironment() {
-    String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testAggregationResultModel() {
     Test.startTest();
+    String key = 'key';
+    Long matchingResults = 10L;
+    IBMDiscoveryV1Models.QueryAggregation aggregationsItem = new IBMDiscoveryV1Models.QueryAggregation();
+    List<IBMDiscoveryV1Models.QueryAggregation> aggregations = new List<IBMDiscoveryV1Models.QueryAggregation> { aggregationsItem } ;
 
-    String text = 'test_environment';
-    IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder()
-      .name(text)
-      .description('test_environment description')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Environment resp =
-      service.createEnvironment(options);
-    System.assertEquals(resp.getName(), 'test_environment');
-    System.assertEquals(resp.getIndexCapacity().getDocuments().getIndexed(), 0);
-    System.assertEquals(resp.getIndexCapacity().getDocuments().getMaximumAllowed(), 1000000);
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getUsedBytes(), 0);
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getMaximumAllowedBytes(), 99345920);
-    resp.setName('test');
-    resp.setDescription('test');
-    resp.setSize('XS');
-    IBMDiscoveryV1Models.IndexCapacity indexCapacity = new IBMDiscoveryV1Models.IndexCapacity();
-    IBMDiscoveryV1Models.EnvironmentDocuments environmentDocuments = new IBMDiscoveryV1Models.EnvironmentDocuments();
-    indexCapacity.setDocuments(environmentDocuments);
-    IBMDiscoveryV1Models.DiskUsage diskUsage = new IBMDiscoveryV1Models.DiskUsage();
-    indexCapacity.setDiskUsage(diskUsage);
-    resp.setIndexCapacity(indexCapacity);
-    System.assertEquals(resp.getDescription(), 'test');
-    System.assertEquals(resp.getSize(), 'XS');
+    IBMDiscoveryV1Models.AggregationResult testRequestModel = new IBMDiscoveryV1Models.AggregationResult();
+    testRequestModel.setKey(key);
+    testRequestModel.setMatchingResults(matchingResults);
+    testRequestModel.setAggregations(aggregations);
 
+    System.assertEquals(key, testRequestModel.getKey());
+    System.assertEquals(matchingResults, testRequestModel.getMatchingResults());
+    System.assertEquals(aggregations, testRequestModel.getAggregations());
     Test.stopTest();
   }
-
-
-  /**
-    *  Test error while creating a new environment with empty name.
-    *
-    */
-  static testMethod void testCreateEnvironmentEmpty() {
-    String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    try {
-      String text = '';
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder()
-        .name(text)
-        .description('test_environment description')
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-      options = options.newBuilder().build();
-      IBMDiscoveryV1Models.Environment resp =
-        service.createEnvironment(options);
-    }
-    catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'createEnvironmentOptions cannot be null');
-
-    }
-    Test.stopTest();
-  }
-
-
-  /**
-   *  Test listing the environments.
-   *
-   */
-  static testMethod void testListEnvironment() {
-    String body = IBMWatsonMockResponses.listEnvironmentsResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String text = 'test_environment';
-    IBMDiscoveryV1Models.ListEnvironmentsOptions options = new IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
-      .name(text)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.ListEnvironmentsResponse resp =
-      service.listEnvironments(options);
-
-    System.assertEquals(resp.getEnvironments().size(), 2);
-    Test.stopTest();
-  }
-
-
-  /**
-   *  Test deleting an environment.
-   *
-   * Use environment id as parameter to delete environment
-   */
-  static testMethod void testDeleteEnvironment() {
-    String body='';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String text = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
-    IBMDiscoveryV1Models.DeleteEnvironmentOptions options = new IBMDiscoveryV1Models.DeleteEnvironmentOptionsBuilder()
-      .environmentId(text)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    service.deleteEnvironment(options);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test deleting an environment error with empty environment id.
-   */
-  static testMethod void testDeleteEnvironmentEmpty() {
-    String body='';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    try {
-      String text = '';
-      IBMDiscoveryV1Models.DeleteEnvironmentOptions options = new IBMDiscoveryV1Models.DeleteEnvironmentOptionsBuilder()
-        .environmentId(text)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-      options = options.newBuilder().build();
-      service.deleteEnvironment(options);
-    }
-    catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'environmentId cannot be empty');
-
-    }
-    Test.stopTest();
-  }
-
-  /**
-   *  Test get the environment.
-   *
-   */
-  static testMethod void testGetEnvironment() {
-    String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String text = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
-    IBMDiscoveryV1Models.GetEnvironmentOptions options = new IBMDiscoveryV1Models.GetEnvironmentOptionsBuilder()
-      .environmentId(text)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Environment resp =
-      service.getEnvironment(options);
-
-    System.assertEquals(resp.getName(), 'test_environment');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test get the environment error.
-   *
-   */
-  static testMethod void testGetEnvironmentEmpty() {
-    String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String text = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
-    try {
-      IBMDiscoveryV1Models.GetEnvironmentOptions options = new IBMDiscoveryV1Models.GetEnvironmentOptionsBuilder()
-        .environmentId(text)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-      options = options.newBuilder().build();
-      IBMDiscoveryV1Models.Environment resp =
-        service.getEnvironment(options);
-    }
-    catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'getEnvironmentOptions cannot be null');
-    }
-    Test.stopTest();
-  }
-
-   /**
-   *  Test update the environment.
-   *
-   */
-  static testMethod void testUpdateEnvironment() {
-    String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.UpdateEnvironmentOptions options = new IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .name('test_environment')
-      .description('test_environment description')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Environment resp =
-      service.updateEnvironment(options);
-    System.assertEquals(resp.getName(), 'test_environment');
-    Test.stopTest();
-  }
-  /**
-   *  Test update the environment error.
-   *
-   */
-  static testMethod void testUpdateEnvironmentEmpty() {
-    String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    try{
-      IBMDiscoveryV1Models.UpdateEnvironmentOptions options = new IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
-        .environmentId(ENVIRONMENT_ID)
-        .name('')
-        .description('test_environment description')
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-      options = options.newBuilder().build();
-      IBMDiscoveryV1Models.Environment resp =
-        service.updateEnvironment(options);
-    }
-    catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'updateEnvironmentOptions cannot be null');
-    }
-    Test.stopTest();
-  }
-
-  /**
-   *  Test list fields in a collection.
-   *
-   */
-  static testMethod void testListCollectionsFields() {
-    String body = IBMWatsonMockResponses.listCollectionFieldsResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    List<String> collectionIds= new List<String> { 'Collection1', 'Collection2' };
-    IBMDiscoveryV1Models.ListFieldsOptions options = new IBMDiscoveryV1Models.ListFieldsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionIds(collectionIds)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.ListCollectionFieldsResponse resp =
-      service.listFields(options);
-    System.assertEquals(resp.getFields().size(), 4);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test create configuration
-   *
-   */
-  static testMethod void testCreateConfiguration() {
-    String body = IBMWatsonMockResponses.configuration();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.XPathPatterns patterns = new IBMDiscoveryV1Models.XPathPatternsBuilder()
-      .xpaths(new List<String>{ 'xpath' })
-      .build();
-    IBMDiscoveryV1Models.HtmlSettings html = new IBMDiscoveryV1Models.HtmlSettingsBuilder()
-      .excludeContent(patterns)
-      .excludeTagAttributes(new List<String>{ 'attribute' })
-      .excludeTagsCompletely(new List<String>{ 'tag' })
-      .excludeTagsKeepContent(new List<String>{ 'tag' })
-      .keepContent(patterns)
-      .keepTagAttributes(new List<String>{ 'tag' })
-      .build();
-    IBMDiscoveryV1Models.NormalizationOperation normalizationOperation = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
-      .destinationField('field')
-      .operation('operation')
-      .sourceField('field')
-      .build();
-    IBMDiscoveryV1Models.FontSetting fontSetting = new IBMDiscoveryV1Models.FontSettingBuilder()
-      .bold(true)
-      .italic(true)
-      .level(10)
-      .maxSize(10)
-      .minSize(10)
-      .name('name')
-      .build();
-    IBMDiscoveryV1Models.PdfHeadingDetection pdfHeadingDetection = new IBMDiscoveryV1Models.PdfHeadingDetectionBuilder()
-      .fonts(new List<IBMDiscoveryV1Models.FontSetting>{ fontSetting })
-      .build();
-    IBMDiscoveryV1Models.PdfSettings pdfSettings = new IBMDiscoveryV1Models.PdfSettingsBuilder()
-      .heading(pdfHeadingDetection)
-      .build();
-    IBMDiscoveryV1Models.SegmentSettings segment = new IBMDiscoveryV1Models.SegmentSettingsBuilder()
-      .enabled(true)
-      .selectorTags(new List<String>{ 'tag' })
-      .annotatedFields(new List<String>{ 'field' })
-      .build();
-    IBMDiscoveryV1Models.WordStyle style = new IBMDiscoveryV1Models.WordStyleBuilder()
-      .level(10)
-      .names(new List<String>{ 'name' })
-      .build();
-    IBMDiscoveryV1Models.WordHeadingDetection wordHeading = new IBMDiscoveryV1Models.WordHeadingDetectionBuilder()
-      .fonts(new List<IBMDiscoveryV1Models.FontSetting>{ fontSetting })
-      .styles(new List<IBMDiscoveryV1Models.WordStyle>{ style })
-      .build();
-    IBMDiscoveryV1Models.WordSettings word = new IBMDiscoveryV1Models.WordSettingsBuilder()
-      .heading(wordHeading)
-      .build();
-    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
-      .html(html)
-      .jsonNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{ normalizationOperation })
-      .pdf(pdfSettings)
-      .segment(segment)
-      .word(word)
-      .build();
-    IBMDiscoveryV1Models.Enrichment enrichment = new IBMDiscoveryV1Models.EnrichmentBuilder()
-      .description('test description')
-      .destinationField(DESTINATION_FIELD)
-      .sourceField(SOURCE_FIELD)
-      .enrichment(ENRICHMENT_NAME)
-      .build();
-    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder(ENVIRONMENT_ID, 'test_environment')
-      .environmentId(ENVIRONMENT_ID)
-      .name('test_environment')
-      .description('test_environment description')
-      .addEnrichments(enrichment)
-      .enrichments(new List<IBMDiscoveryV1Models.Enrichment> { enrichment })
-      .addNormalizations(normalizationOperation)
-      .normalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{normalizationOperation})
-      .conversions(conversions)
-      .addHeader('Test-Header', 'test_value')
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Configuration resp =
-      service.createConfiguration(options);
-    System.assertEquals(resp.getName(), 'IBM News');
-    System.assertEquals(resp.getConfigurationId(), '448e3545-51ca-4530-a03b-6ff282ceac2e');
-    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
-    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
-    Test.stopTest();
-  }
-
-  /**
-   *  Test create configuration validator error
-   *
-   */
-  static testMethod void testCreateConfigurationEmpty() {
-    String body = IBMWatsonMockResponses.configuration();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    try {
-      IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
-        .name('test_environment')
-        .description('test_environment description')
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-      options = options.newBuilder().build();
-      IBMDiscoveryV1Models.Configuration resp =
-        service.createConfiguration(options);
-    }
-    catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'environmentId cannot be empty');
-    }
-    Test.stopTest();
-  }
-
-  /**
-   *  Test delete configuration
-   *
-   */
-  static testMethod void testDeleteConfiguration() {
-    String body = IBMWatsonMockResponses.configuration();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.DeleteConfigurationOptions options = new IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
-      .environmentId(ENVIRONMENT_ID)
-      .configurationId(CONFIGURATION_ID)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    service.deleteConfiguration(options);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test get configuration
-   *
-   */
-  static testMethod void testGetConfiguration() {
-    String body = IBMWatsonMockResponses.configuration();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.GetConfigurationOptions options = new IBMDiscoveryV1Models.GetConfigurationOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .configurationId(CONFIGURATION_ID)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Configuration resp =
-      service.getConfiguration(options);
-    System.assertEquals(resp.getName(), 'IBM News');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test list configurations
-   *
-   */
-  static testMethod void testListConfigurations() {
-    String body = IBMWatsonMockResponses.listConfigurationsResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.ListConfigurationsOptions options = new IBMDiscoveryV1Models.ListConfigurationsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.ListConfigurationsResponse resp =
-      service.listConfigurations(options);
-    System.assertEquals(resp.getConfigurations().size(), 1);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test update configuration
-   *
-   */
-  static testMethod void testUpdateConfiguration() {
-    String body = IBMWatsonMockResponses.configuration();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID, 'test_environment')
-      .name('test_environment')
-      .description('test_environment description')
-      .configurationId(CONFIGURATION_ID)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Configuration resp =
-      service.updateConfiguration(options);
-    System.assertEquals(resp.getName(), 'IBM News');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test update configuration validator error
-   *
-   */
-  static testMethod void testUpdateConfigurationEmpty() {
-    String body = IBMWatsonMockResponses.configuration();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    try {
-      IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder()
-        .environmentId(ENVIRONMENT_ID)
-        .name('test_environment')
-        .description('test_environment description')
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-      options = options.newBuilder().build();
-      IBMDiscoveryV1Models.Configuration resp =
-        service.updateConfiguration(options);
-    }
-    catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'configurationId cannot be empty');
-    }
-    Test.stopTest();
-  }
-
-  /**
-   *  Test create collection
-   *
-   */
-  static testMethod void testCreateCollection() {
-    String body = IBMWatsonMockResponses.collection();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.CreateCollectionOptions options = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
-      .environmentId(ENVIRONMENT_ID)
-      .configurationId(CONFIGURATION_ID)
-      .name('test_environment')
-      .description('test_environment description')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .language('de')
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Collection resp =
-      service.createCollection(options);
-    System.assertEquals(resp.getName(), 'test-collection');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test delete collection
-   *
-   */
-  static testMethod void testDeleteCollection() {
-    String body = IBMWatsonMockResponses.configuration();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.DeleteCollectionOptions options = new IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId(CONFIGURATION_ID)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    service.deleteCollection(options);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test get collection
-   *
-   */
-  static testMethod void testGetCollection() {
-    String body = IBMWatsonMockResponses.collection();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.GetCollectionOptions options = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Collection resp =
-      service.getCollection(options);
-    System.assertEquals(resp.getName(), 'test-collection');
-    System.assertEquals(resp.getCollectionId(), '800e58e4-198d-45eb-be87-74e1d6df4e96');
-    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
-    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
-    System.assertEquals(resp.getStatus(), 'active');
-    System.assertEquals(resp.getConfigurationId(), '3c4fff84-1500-455c-b125-eaa2d319f6d3');
-    System.assertEquals(resp.getLanguage(), 'de');
-    System.assertEquals(resp.getDescription(), 'A test collection to show as an example');
-    System.assertEquals(resp.getDocumentCounts().getAvailable(), 0);
-    System.assertEquals(resp.getDocumentCounts().getProcessing(), 0);
-    System.assertEquals(resp.getDocumentCounts().getFailed(), 0);
-    System.assertEquals(100, resp.getDocumentCounts().getPending());
-    System.assertEquals(resp.getDiskUsage().getUsedBytes(), 260);
-    System.assertEquals(resp.getTrainingStatus().getTotalExamples(), 0);
-    System.assertEquals(resp.getTrainingStatus().getAvailable(), false);
-    System.assertEquals(resp.getTrainingStatus().getProcessing(), false);
-    System.assertEquals(resp.getTrainingStatus().getMinimumQueriesAdded(), false);
-    System.assertEquals(resp.getTrainingStatus().getMinimumExamplesAdded(), false);
-    System.assertEquals(resp.getTrainingStatus().getSufficientLabelDiversity(), false);
-    System.assertEquals(resp.getTrainingStatus().getNotices(), 0);
-    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), (Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
-    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), (Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
-    Test.stopTest();
-  }
-
-  /**
-   *  Test get trained collection
-   *
-   */
-  static testMethod void testGetCollectionTrained() {
-    String body = IBMWatsonMockResponses.collectionTrained();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.GetCollectionOptions options = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Collection resp =
-      service.getCollection(options);
-    System.assertEquals(resp.getName(), 'test-collection');
-    System.assertEquals(resp.getCollectionId(), '800e58e4-198d-45eb-be87-74e1d6df4e96');
-    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
-    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
-    System.assertEquals(resp.getStatus(), 'active');
-    System.assertEquals(resp.getConfigurationId(), '3c4fff84-1500-455c-b125-eaa2d319f6d3');
-    System.assertEquals(resp.getLanguage(), 'de');
-    System.assertEquals(resp.getDescription(), 'A trained test collection to show as an example');
-    System.assertEquals(resp.getDocumentCounts().getAvailable(), 0);
-    System.assertEquals(resp.getDocumentCounts().getProcessing(), 0);
-    System.assertEquals(resp.getDocumentCounts().getFailed(), 0);
-    System.assertEquals(100, resp.getDocumentCounts().getPending());
-    System.assertEquals(resp.getDiskUsage().getUsedBytes(), 260);
-    System.assertEquals(resp.getTrainingStatus().getTotalExamples(), 10);
-    System.assertEquals(resp.getTrainingStatus().getAvailable(), true);
-    System.assertEquals(resp.getTrainingStatus().getProcessing(), false);
-    System.assertEquals(resp.getTrainingStatus().getMinimumQueriesAdded(), true);
-    System.assertEquals(resp.getTrainingStatus().getMinimumExamplesAdded(), true);
-    System.assertEquals(resp.getTrainingStatus().getSufficientLabelDiversity(), true);
-    System.assertEquals(resp.getTrainingStatus().getNotices(), 0);
-    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), (Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
-    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), (Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
-    Test.stopTest();
-  }
-
-  /**
-   *  Test list collections
-   *
-   */
-  static testMethod void testListCollections() {
-    String body = IBMWatsonMockResponses.listCollectionsResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.ListCollectionsOptions options = new IBMDiscoveryV1Models.ListCollectionsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.ListCollectionsResponse resp =
-      service.listCollections(options);
-    System.assertEquals(resp.getCollections().size(), 1);
-    Test.stopTest();
-  }
-  /**
-   *  Test update collection
-   *
-   */
-  static testMethod void testUpdateCollection() {
-    String body = IBMWatsonMockResponses.collection();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.UpdateCollectionOptions options = new IBMDiscoveryV1Models.UpdateCollectionOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .name('test_environment')
-      .description('test_environment description')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Collection resp =
-      service.updateCollection(options);
-    System.assertEquals(resp.getName(), 'test-collection');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test update collection validator error
-   *
-   */
-  static testMethod void testUpdateCollectionEmpty() {
-    String body = IBMWatsonMockResponses.collection();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    try {
-      IBMDiscoveryV1Models.UpdateCollectionOptions options = new IBMDiscoveryV1Models.UpdateCollectionOptionsBuilder()
-        .environmentId(ENVIRONMENT_ID)
-        .name('test_environment')
-        .description('test_environment description')
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-      options = options.newBuilder().build();
-      IBMDiscoveryV1Models.Collection resp =
-        service.updateCollection(options);
-    }
-    catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'collectionId cannot be empty');
-    }
-    Test.stopTest();
-  }
-
-  /**
-   *  Test list fields in a single collection. (IBMDiscoveryV1.listCollectionFields)
-   *
-   */
-  static testMethod void testListCollectionFields() {
-    String body = IBMWatsonMockResponses.listCollectionFieldsResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
-    IBMDiscoveryV1Models.ListCollectionFieldsOptions options = new IBMDiscoveryV1Models.ListCollectionFieldsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.ListCollectionFieldsResponse resp =
-      service.listCollectionFields(options);
-    System.assertEquals(resp.getFields().size(), 4);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test delete document
-   *
-   */
-  static testMethod void testDeleteDocument() {
-    String body='';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.DeleteDocumentOptions options = new IBMDiscoveryV1Models.DeleteDocumentOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    service.deleteDocument(options);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test get document
-   *
-   */
-  static testMethod void testGetDocumentStatus() {
-    String body = IBMWatsonMockResponses.documentStatus();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.GetDocumentStatusOptions options = new IBMDiscoveryV1Models.GetDocumentStatusOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.DocumentStatus resp =
-      service.getDocumentStatus(options);
-    System.assertEquals(resp.getStatus(), 'available with notices');
-    System.assertEquals(resp.getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
-    System.assertEquals(resp.getConfigurationId(), 'e8b9d793-b163-452a-9373-bce07efb510b');
-    System.assertEquals(resp.getStatusDescription(), 'Document is successfully ingested but was indexed with warnings');
-    System.assertEquals(resp.getFilename(), 'instructions.html');
-    System.assertEquals(resp.getFileType(), 'html');
-    System.assertEquals(resp.getSha1(), 'de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3');
-    System.assertEquals(resp.getNotices()[0].getNoticeId(), 'index_342');
-    System.assertEquals(resp.getNotices()[0].getSeverity(), 'warning');
-    System.assertEquals(resp.getNotices()[0].getStep(), 'indexing');
-    System.assertEquals(resp.getNotices()[0].getDescription(), 'something bad happened');
-    System.assertEquals(resp.getNotices()[0].getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
-    System.assertEquals(resp.getNotices()[0].getCreated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
-    resp.setFilename('instructions1.html');
-    resp.setFileType('html');
-    resp.setSha1('de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3');
-    System.assertEquals(resp.getFilename(), 'instructions1.html');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test Query documents in multiple collections.
-   *
-   */
-  static testMethod void testFederatedQuery() {
-    String body = IBMWatsonMockResponses.queryResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String fields = 'field1,field2';
-    String collectionIds = 'Collection1, Collection2';
-    IBMDiscoveryV1Models.FederatedQueryOptions options = new IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionIds(collectionIds)
-      .xReturn(fields)
-      .xSort(fields)
-      .similar(true)
-      .similarDocumentIds('doc1,doc2')
-      .similarFields('field1,field2')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.QueryResponse resp =
-      service.federatedQuery(options);
-    System.assertEquals(resp.getResults().size(), 1);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test query multiple collection system notices
-   *
-   */
-  static testMethod void testFederatedQueryNotices() {
-    String body = IBMWatsonMockResponses.queryNoticesResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
-    IBMDiscoveryV1Models.FederatedQueryNoticesOptions options = new IBMDiscoveryV1Models.FederatedQueryNoticesOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .addCollectionIds('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .collectionIds(collectionIds)
-      .addXReturn('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addXSort('asc')
-      .filter('test')
-      .query('test')
-      .naturalLanguageQuery('test')
-      .aggregation('test')
-      .count(10)
-      .xReturn(new List<String> { 'test' })
-      .offset(10)
-      .xSort(new List<String>{'test'})
-      .highlight(true)
-      .deduplicateField('test')
-      .similar(true)
-      .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
-      .similarFields(new List<String> { 'field1', 'field2' })
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.QueryNoticesResponse resp =
-      service.federatedQueryNotices(options);
-    System.assertEquals(resp.getResults().size(), 1);
-    resp.setMatchingResults(4);
-    IBMDiscoveryV1Models.QueryNoticesResult queryNoticesResult = new IBMDiscoveryV1Models.QueryNoticesResult();
-    queryNoticesResult.setId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    IBMWatsonMapModel mapModel= new IBMWatsonMapModel();
-    mapModel.put('key', 'value');
-    queryNoticesResult.setMetadata(mapModel);
-    queryNoticesResult.setCollectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    resp.setResults(new List<IBMDiscoveryV1Models.QueryNoticesResult>{queryNoticesResult});
-    IBMDiscoveryV1Models.QueryAggregation queryAggregation= new IBMDiscoveryV1Models.QueryAggregation();
-    queryAggregation.setXType('test');
-    queryAggregation.setField('test');
-    queryAggregation.setMatch('test');
-    queryAggregation.setCount(10);
-    queryAggregation.setValue(10);
-    queryAggregation.setPath('test');
-    queryAggregation.setTimesliceInterval('test');
-    queryAggregation.setAnomaly(true);
-    queryAggregation.setSize(10);
-    IBMDiscoveryV1Models.TopHitsResults hits = new IBMDiscoveryV1Models.TopHitsResults();
-    hits.setMatchingResults(10);
-    queryAggregation.setHits(hits);
-    queryAggregation.setMatchingResults(4);
-    IBMDiscoveryV1Models.AggregationResult aggregationResult= new IBMDiscoveryV1Models.AggregationResult();
-    aggregationResult.setKey('test');
-    aggregationResult.setMatchingResults(3);
-    aggregationResult.setAggregations(null);
-    queryAggregation.setResults(new List<IBMDiscoveryV1Models.AggregationResult>{aggregationResult});
-    resp.setAggregations(new List<IBMDiscoveryV1Models.QueryAggregation>{queryAggregation});
-    IBMDiscoveryV1Models.QueryPassages queryPassages= new IBMDiscoveryV1Models.QueryPassages();
-    queryPassages.setDocumentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    queryPassages.setPassageText('test');
-    queryPassages.setField('test');
-    queryPassages.setPassageScore(2);
-    queryPassages.setStartOffset(2);
-    queryPassages.setEndOffset(2);
-    resp.setPassages(new List<IBMDiscoveryV1Models.QueryPassages>{queryPassages});
-    resp.setDuplicatesRemoved(2);
-    System.assertEquals(resp.getMatchingResults(), 4);
-    System.assertEquals(resp.getResults()[0].getCollectionId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    System.assertEquals(resp.getAggregations()[0].getXtype(), 'test');
-    System.assertEquals(resp.getPassages()[0].getField(), 'test');
-    System.assertEquals(resp.getDuplicatesRemoved(), 2);
-    System.assertEquals(queryNoticesResult.getId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    System.assertEquals(queryNoticesResult.getMetadata().get('key'), 'value');
-    System.assertEquals(queryNoticesResult.getCollectionId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    System.assertEquals(queryAggregation.getResults()[0].getKey(), 'test');
-    System.assertEquals(aggregationResult.getMatchingResults(), 3);
-    System.assertEquals(aggregationResult.getAggregations(), null);
-    System.assertEquals(queryAggregation.getXtype(), 'test');
-    System.assertEquals(queryAggregation.getField(), 'test');
-    System.assertEquals(queryAggregation.getMatch(), 'test');
-    System.assertEquals(queryAggregation.getCount(), 10);
-    System.assertEquals(queryAggregation.getValue(), 10);
-    System.assertEquals(queryAggregation.getPath(), 'test');
-    System.assertEquals(queryAggregation.getTimesliceInterval(), 'test');
-    System.assertEquals(queryAggregation.getAnomaly(), true);
-    System.assertEquals(queryAggregation.getSize(), 10);
-    System.assert(queryAggregation.getHits() != null);
-    System.assertEquals(queryAggregation.getMatchingResults(), 4);
-    System.assertEquals(queryPassages.getDocumentId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    System.assertEquals(queryPassages.getPassageText(), 'test');
-    System.assertEquals(queryPassages.getField(), 'test');
-    System.assertEquals(queryPassages.getPassageScore(), 2);
-    System.assertEquals(queryPassages.getStartOffset(), 2);
-    System.assertEquals(queryPassages.getEndOffset(), 2);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test Query documents in single collection.
-   *
-   */
-  static testMethod void testQuery() {
-    String body = IBMWatsonMockResponses.queryResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String retrievalStrategy = 'relevancy_training';
-    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
-    IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .xReturn('return1,return2')
-      .xSort('sort1,sort2')
-      .passagesFields('passage1,passage2')
-      .similar(true)
-      .similarDocumentIds('doc1,doc2')
-      .similarFields('field1,field2')
-      .xWatsonLoggingOptOut(true)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.QueryResponse resp =
-      service.query(options);
-    System.assertEquals(resp.getResults().size(), 1);
-    System.assertEquals(retrievalStrategy, resp.getRetrievalDetails().getDocumentRetrievalStrategy());
-    Test.stopTest();
-  }
-
-  /**
-   *  Test query collection system notices
-   *
-   */
-  static testMethod void testQueryNotices() {
-    String body = IBMWatsonMockResponses.queryNoticesResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
-    IBMDiscoveryV1Models.QueryNoticesOptions options = new IBMDiscoveryV1Models.QueryNoticesOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .xReturn(collectionIds)
-      .xSort(collectionIds)
-      .passagesFields(collectionIds)
-      .similar(true)
-      .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
-      .similarFields(new List<String> { 'field1', 'field2' })
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.QueryNoticesResponse resp =
-      service.queryNotices(options);
-    System.assertEquals(resp.getResults().size(), 1);
-    System.assertEquals('030ba125-29db-43f2-8552-f941ae30a7a8', resp.getResults().get(0).getId());
-    System.assertEquals('f1360220-ea2d-4271-9d62-89a910b13c37', resp.getResults().get(0).getCollectionId());
-    System.assertEquals(200, resp.getResults().get(0).getCode());
-    System.assertEquals('instructions.html', resp.getResults().get(0).getFilename());
-    System.assertEquals('html', resp.getResults().get(0).getFileType());
-    System.assertEquals('de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3', resp.getResults().get(0).getSha1());
-    System.assertEquals('xpath_not_found', resp.getResults().get(0).getNotices().get(0).getNoticeId());
-    System.assertEquals('030ba125-29db-43f2-8552-f941ae30a7a8', resp.getResults().get(0).getNotices().get(0).getDocumentId());
-    System.assertEquals('warning', resp.getResults().get(0).getNotices().get(0).getSeverity());
-    System.assertEquals('html-to-html', resp.getResults().get(0).getNotices().get(0).getStep());
-    System.assertEquals('The xpath expression boom was not found.', resp.getResults().get(0).getNotices().get(0).getDescription());
-    Test.stopTest();
-  }
-
-
-  /**
-   *  Test adding a query to the training data in single collection.
-   *
-   */
-  static testMethod void testAddTrainingData() {
-    String body = IBMWatsonMockResponses.trainingQuery();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
-    IBMDiscoveryV1Models.TrainingExample trainingExample = new IBMDiscoveryV1Models.TrainingExampleBuilder()
-      .documentId('string')
-      .crossReference('string')
-      .relevance(0)
-      .build();
-    IBMDiscoveryV1Models.AddTrainingDataOptions options = new IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .naturalLanguageQuery('en')
-      .filter('test')
-      .addExamples(trainingExample)
-      .examples(new List<IBMDiscoveryV1Models.TrainingExample> { trainingExample })
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.TrainingQuery resp =
-      service.addTrainingData(options);
-    System.assertEquals(resp.getExamples().size(), 1);
-    System.assertEquals(resp.getExamples()[0].getDocumentId(), 'string');
-    System.assertEquals(resp.getExamples()[0].getCrossReference(), 'string');
-    System.assertEquals(resp.getExamples()[0].getRelevance(), 0);
-
-    Test.stopTest();
-  }
-
-  /**
-   *  Test adding a query to the training data in single collection.
-   *
-   */
-  static testMethod void testCreateTrainingExample() {
-    String body = IBMWatsonMockResponses.trainingExample();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    List<String> collectionIds= new List<String> { 'Collection1', 'Collection2' };
-    IBMDiscoveryV1Models.TrainingExample trainingExample = new IBMDiscoveryV1Models.TrainingExampleBuilder()
-      .documentId('string')
-      .crossReference('string')
-      .relevance(0)
-      .build();
-    IBMDiscoveryV1Models.CreateTrainingExampleOptions options = new IBMDiscoveryV1Models.CreateTrainingExampleOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .queryId('en')
-      .trainingExample(trainingExample)
-      .documentId('test')
-      .relevance(2)
-      .crossReference('test')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.TrainingExample resp =
-      service.createTrainingExample(options);
-    System.assertEquals(resp.getRelevance(), 2);
-    Test.stopTest();
-  }
-
-   /**
-   *  Test delete training data for a collection
-   *
-   */
-  static testMethod void testDeleteAllTrainingData() {
-    String body='';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();    
-
-    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    service.deleteAllTrainingData(options);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test delete training data and all associated examples from the training data set
-   *
-   */
-  static testMethod void testDeleteTrainingData() {
-    String body='';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.DeleteTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    service.deleteTrainingData(options);
-    Test.stopTest();
-  }
-
-   /**
-   *  Test get training data
-   *
-   */
-  static testMethod void testGetTrainingData() {
-    String body = IBMWatsonMockResponses.trainingQuery();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.GetTrainingDataOptions options = new IBMDiscoveryV1Models.GetTrainingDataOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.TrainingQuery resp =
-      service.getTrainingData(options);
-
-    System.assertEquals(resp.getExamples().size(), 1);
-    System.assertEquals(resp.getFilter(), 'string');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test get training example
-   *
-   */
-  static testMethod void testGetTrainingExample() {
-    String body = IBMWatsonMockResponses.trainingExample();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.GetTrainingExampleOptions options = new IBMDiscoveryV1Models.GetTrainingExampleOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.TrainingExample resp =
-      service.getTrainingExample(options);
-
-    System.assertEquals(resp.getRelevance(), 2);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test list training data
-   *
-   */
-  static testMethod void testListTrainingData() {
-    String body = IBMWatsonMockResponses.trainingDataSet();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.ListTrainingDataOptions options = new IBMDiscoveryV1Models.ListTrainingDataOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.TrainingDataSet resp =
-      service.listTrainingData(options);
-
-    System.assertEquals(resp.getQueries()[0].getExamples().size(), 1);
-    System.assertEquals(resp.getQueries()[0].getFilter(), 'string');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test adding a query to the training data in single collection.
-   *
-   */
-  static testMethod void testUpdateTrainingExample() {
-    String body = IBMWatsonMockResponses.trainingExample();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
-    IBMDiscoveryV1Models.UpdateTrainingExampleOptions options = new IBMDiscoveryV1Models.UpdateTrainingExampleOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .queryId('en')
-      .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .relevance(2)
-      .crossReference('test')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.TrainingExample resp =
-      service.updateTrainingExample(options);
-    System.assertEquals(resp.getRelevance(), 2);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test collection model
-   *
-   */
   static testMethod void testCollectionModel() {
     Test.startTest();
-    IBMDiscoveryV1Models.Collection resp = new IBMDiscoveryV1Models.Collection();
-    //set the value
-    resp.setName('test-collection');
-    resp.setConfigurationId('3c4fff84-1500-455c-b125-eaa2d319f6d3');
-    resp.setLanguage('de');
-    resp.setDescription('A test collection to show as an example');
-    IBMDiscoveryV1Models.DocumentCounts dc= new IBMDiscoveryV1Models.DocumentCounts();
-    resp.setDocumentCounts(dc);
-    IBMDiscoveryV1Models.CollectionDiskUsage cdu= new IBMDiscoveryV1Models.CollectionDiskUsage();
-    resp.setDiskUsage(cdu);
-    IBMDiscoveryV1Models.TrainingStatus ts= new IBMDiscoveryV1Models.TrainingStatus();
-    ts.setTotalExamples(0);
-    ts.setAvailable(false);
-    ts.setProcessing(false);
-    ts.setMinimumQueriesAdded(false);
-    ts.setMinimumExamplesAdded(false);
-    ts.setSufficientLabelDiversity(false);
-    ts.setNotices(0);
-    ts.setSuccessfullyTrained(null);
-    ts.setDataUpdated(null);
-    resp.setTrainingStatus(ts);
-    //test the returned values
-    System.assertEquals(resp.getName(), 'test-collection');
-    System.assertEquals(resp.getConfigurationId(), '3c4fff84-1500-455c-b125-eaa2d319f6d3');
-    System.assertEquals(resp.getLanguage(), 'de');
-    System.assertEquals(resp.getDescription(), 'A test collection to show as an example');
-    System.assertEquals(resp.getTrainingStatus().getTotalExamples(), 0);
-    System.assertEquals(resp.getTrainingStatus().getAvailable(), false);
-    System.assertEquals(resp.getTrainingStatus().getProcessing(), false);
-    System.assertEquals(resp.getTrainingStatus().getMinimumQueriesAdded(), false);
-    System.assertEquals(resp.getTrainingStatus().getMinimumExamplesAdded(), false);
-    System.assertEquals(resp.getTrainingStatus().getSufficientLabelDiversity(), false);
-    System.assertEquals(resp.getTrainingStatus().getNotices(), 0);
-    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), null);
-    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), null);
+    String name = 'name';
+    String description = 'description';
+    String configurationId = 'configuration_id';
+    String language = 'language';
+    IBMDiscoveryV1Models.DocumentCounts documentCounts = new IBMDiscoveryV1Models.DocumentCounts();
+    IBMDiscoveryV1Models.CollectionDiskUsage diskUsage = new IBMDiscoveryV1Models.CollectionDiskUsage();
+    IBMDiscoveryV1Models.TrainingStatus trainingStatus = new IBMDiscoveryV1Models.TrainingStatus();
+    IBMDiscoveryV1Models.CollectionCrawlStatus crawlStatus = new IBMDiscoveryV1Models.CollectionCrawlStatus();
+    IBMDiscoveryV1Models.SduStatus smartDocumentUnderstanding = new IBMDiscoveryV1Models.SduStatus();
+
+    IBMDiscoveryV1Models.Collection testRequestModel = new IBMDiscoveryV1Models.Collection();
+    testRequestModel.setName(name);
+    testRequestModel.setDescription(description);
+    testRequestModel.setConfigurationId(configurationId);
+    testRequestModel.setLanguage(language);
+    testRequestModel.setDocumentCounts(documentCounts);
+    testRequestModel.setDiskUsage(diskUsage);
+    testRequestModel.setTrainingStatus(trainingStatus);
+    testRequestModel.setCrawlStatus(crawlStatus);
+    testRequestModel.setSmartDocumentUnderstanding(smartDocumentUnderstanding);
+
+    System.assertEquals(name, testRequestModel.getName());
+    System.assertEquals(description, testRequestModel.getDescription());
+    System.assertEquals(configurationId, testRequestModel.getConfigurationId());
+    System.assertEquals(language, testRequestModel.getLanguage());
+    System.assertEquals(documentCounts, testRequestModel.getDocumentCounts());
+    System.assertEquals(diskUsage, testRequestModel.getDiskUsage());
+    System.assertEquals(trainingStatus, testRequestModel.getTrainingStatus());
+    System.assertEquals(crawlStatus, testRequestModel.getCrawlStatus());
+    System.assertEquals(smartDocumentUnderstanding, testRequestModel.getSmartDocumentUnderstanding());
     Test.stopTest();
   }
-
-   /**
-   *  Test configuration model
-   *
-   */
-  static testMethod void testConfigurationModel() {
-    String body = IBMWatsonMockResponses.configuration();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testCollectionCrawlStatusModel() {
     Test.startTest();
-    IBMDiscoveryV1Models.XPathPatterns xPathPatterns = new IBMDiscoveryV1Models.XPathPatternsBuilder()
-      .xpaths(new List<String>{ 'xpath1' })
+    IBMDiscoveryV1Models.SourceStatus sourceCrawl = new IBMDiscoveryV1Models.SourceStatus();
+
+    IBMDiscoveryV1Models.CollectionCrawlStatus testRequestModel = new IBMDiscoveryV1Models.CollectionCrawlStatus();
+    testRequestModel.setSourceCrawl(sourceCrawl);
+
+    System.assertEquals(sourceCrawl, testRequestModel.getSourceCrawl());
+    Test.stopTest();
+  }
+  static testMethod void testCollectionDiskUsageModel() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.CollectionDiskUsage testRequestModel = new IBMDiscoveryV1Models.CollectionDiskUsage();
+
+    Test.stopTest();
+  }
+  static testMethod void testCollectionUsageModel() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.CollectionUsage testRequestModel = new IBMDiscoveryV1Models.CollectionUsage();
+
+    Test.stopTest();
+  }
+  static testMethod void testCompletionsModel() {
+    Test.startTest();
+    List<String> completions = new List<String> { 'completions' } ;
+
+    IBMDiscoveryV1Models.Completions testRequestModel = new IBMDiscoveryV1Models.Completions();
+    testRequestModel.setCompletions(completions);
+
+    System.assertEquals(completions, testRequestModel.getCompletions());
+    Test.stopTest();
+  }
+  static testMethod void testConfigurationModel() {
+    Test.startTest();
+    String name = 'name';
+    String description = 'description';
+    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
       .build();
-    IBMDiscoveryV1Models.HtmlSettings html = new IBMDiscoveryV1Models.HtmlSettingsBuilder()
-      .excludeContent(xPathPatterns)
-      .excludeTagAttributes(new List<String> { 'ExAtt1' })
-      .excludeTagsCompletely(new List<String> { 'Tag1', 'Tag2' })
-      .excludeTagsKeepContent(new List<String> { 'KeepCntent1', 'KeepCntent2' })
-      .keepContent(xPathPatterns)
-      .keepTagAttributes(new List<String> { 'tag' })
+    String destinationField = 'destination_field';
+    String sourceField = 'source_field';
+    String enrichment = 'enrichment';
+    IBMDiscoveryV1Models.Enrichment enrichmentsItem = new IBMDiscoveryV1Models.EnrichmentBuilder()
+      .destinationField(destinationField)
+      .sourceField(sourceField)
+      .enrichment(enrichment)
       .build();
-    IBMDiscoveryV1Models.NormalizationOperation normalizationOperation = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
-      .destinationField('test destination')
-      .operation('test operation')
-      .sourceField('test source')
+    List<IBMDiscoveryV1Models.Enrichment> enrichments = new List<IBMDiscoveryV1Models.Enrichment> { enrichmentsItem } ;
+    IBMDiscoveryV1Models.NormalizationOperation normalizationsItem = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
       .build();
-    IBMDiscoveryV1Models.FontSetting fontSetting = new IBMDiscoveryV1Models.FontSettingBuilder()
-      .bold(true)
-      .italic(true)
-      .level(1)
-      .maxSize(10)
-      .minSize(4)
-      .name('ariel')
+    List<IBMDiscoveryV1Models.NormalizationOperation> normalizations = new List<IBMDiscoveryV1Models.NormalizationOperation> { normalizationsItem } ;
+    IBMDiscoveryV1Models.Source source = new IBMDiscoveryV1Models.SourceBuilder()
       .build();
-    IBMDiscoveryV1Models.PdfHeadingDetection pdfHeadingDetection = new IBMDiscoveryV1Models.PdfHeadingDetectionBuilder()
-      .fonts(new List<IBMDiscoveryV1Models.FontSetting> { fontSetting })
+
+    IBMDiscoveryV1Models.Configuration testRequestModel = new IBMDiscoveryV1Models.ConfigurationBuilder()
+      .name(name)
+      .description(description)
+      .conversions(conversions)
+      .enrichments(enrichments)
+      .normalizations(normalizations)
+      .source(source)
       .build();
-    IBMDiscoveryV1Models.PdfSettings pdfSettings = new IBMDiscoveryV1Models.PdfSettingsBuilder()
-      .heading(pdfHeadingDetection)
-      .build();
-    IBMDiscoveryV1Models.WordStyle style = new IBMDiscoveryV1Models.WordStyleBuilder()
-      .level(1)
-      .names(new List<String> { 'Style1', 'Style2' })
-      .build();
-    IBMDiscoveryV1Models.WordHeadingDetection wordHeading = new IBMDiscoveryV1Models.WordHeadingDetectionBuilder()
-      .fonts(new List<IBMDiscoveryV1Models.FontSetting> { fontSetting })
-      .styles(new List<IBMDiscoveryV1Models.WordStyle> { style })
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(name, testRequestModel.getName());
+    System.assertEquals(description, testRequestModel.getDescription());
+    System.assertEquals(conversions, testRequestModel.getConversions());
+    System.assertEquals(enrichments, testRequestModel.getEnrichments());
+    System.assertEquals(normalizations, testRequestModel.getNormalizations());
+    System.assertEquals(source, testRequestModel.getSource());
+    Test.stopTest();
+  }
+  static testMethod void testConversionsModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.PdfSettings pdf = new IBMDiscoveryV1Models.PdfSettingsBuilder()
       .build();
     IBMDiscoveryV1Models.WordSettings word = new IBMDiscoveryV1Models.WordSettingsBuilder()
-      .heading(wordHeading)
       .build();
-    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
-      .html(html)
-      .jsonNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{ normalizationOperation })
-      .pdf(pdfSettings)
+    IBMDiscoveryV1Models.HtmlSettings html = new IBMDiscoveryV1Models.HtmlSettingsBuilder()
+      .build();
+    IBMDiscoveryV1Models.SegmentSettings segment = new IBMDiscoveryV1Models.SegmentSettingsBuilder()
+      .build();
+    IBMDiscoveryV1Models.NormalizationOperation jsonNormalizationsItem = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.NormalizationOperation> jsonNormalizations = new List<IBMDiscoveryV1Models.NormalizationOperation> { jsonNormalizationsItem } ;
+    Boolean imageTextRecognition = true;
+
+    IBMDiscoveryV1Models.Conversions testRequestModel = new IBMDiscoveryV1Models.ConversionsBuilder()
+      .pdf(pdf)
       .word(word)
+      .html(html)
+      .segment(segment)
+      .jsonNormalizations(jsonNormalizations)
+      .imageTextRecognition(imageTextRecognition)
       .build();
-    IBMDiscoveryV1Models.NluEnrichmentEmotion enrichmentEmotion = new IBMDiscoveryV1Models.NluEnrichmentEmotionBuilder()
-      .document(true)
-      .targets(new List<String> { 'Target1', 'Target2' })
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(pdf, testRequestModel.getPdf());
+    System.assertEquals(word, testRequestModel.getWord());
+    System.assertEquals(html, testRequestModel.getHtml());
+    System.assertEquals(segment, testRequestModel.getSegment());
+    System.assertEquals(jsonNormalizations, testRequestModel.getJsonNormalizations());
+    System.assertEquals(imageTextRecognition, testRequestModel.getImageTextRecognition());
+    Test.stopTest();
+  }
+  static testMethod void testCreateCollectionOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String name = 'name';
+    String description = 'description';
+    String configurationId = 'configuration_id';
+    String language = 'language';
+
+    IBMDiscoveryV1Models.CreateCollectionOptions testRequestModel = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder()
+      .environmentId(environmentId)
+      .name(name)
+      .description(description)
+      .configurationId(configurationId)
+      .language(language)
       .build();
-    enrichmentEmotion = enrichmentEmotion.newBuilder().build();
-    IBMDiscoveryV1Models.NluEnrichmentEntities enrichmentEntities = new IBMDiscoveryV1Models.NluEnrichmentEntitiesBuilder()
-      .emotion(true)
-      .xlimit(5)
-      .mentions(true)
-      .mentionTypes(true)
-      .model('test')
-      .sentenceLocations(true)
-      .sentiment(true)
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(name, testRequestModel.name());
+    System.assertEquals(description, testRequestModel.description());
+    System.assertEquals(configurationId, testRequestModel.configurationId());
+    System.assertEquals(language, testRequestModel.language());
+    Test.stopTest();
+  }
+  static testMethod void testCreateConfigurationOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String name = 'name';
+    String description = 'description';
+    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
       .build();
-    enrichmentEntities = enrichmentEntities.newBuilder().build();
-    IBMDiscoveryV1Models.NluEnrichmentKeywords enrichmentKeywords = new IBMDiscoveryV1Models.NluEnrichmentKeywordsBuilder()
-      .emotion(true)
-      .xlimit(5)
-      .sentiment(true)
+    String destinationField = 'destination_field';
+    String sourceField = 'source_field';
+    String enrichment = 'enrichment';
+    IBMDiscoveryV1Models.Enrichment enrichmentsItem = new IBMDiscoveryV1Models.EnrichmentBuilder()
+      .destinationField(destinationField)
+      .sourceField(sourceField)
+      .enrichment(enrichment)
       .build();
-    enrichmentKeywords = enrichmentKeywords.newBuilder().build();
-    IBMDiscoveryV1Models.NluEnrichmentRelations enrichmentRelations = new IBMDiscoveryV1Models.NluEnrichmentRelationsBuilder()
-      .model('test')
+    List<IBMDiscoveryV1Models.Enrichment> enrichments = new List<IBMDiscoveryV1Models.Enrichment> { enrichmentsItem } ;
+    IBMDiscoveryV1Models.NormalizationOperation normalizationsItem = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
       .build();
-    IBMDiscoveryV1Models.NluEnrichmentSemanticRoles enrichmentSemanticRoles = new IBMDiscoveryV1Models.NluEnrichmentSemanticRolesBuilder()
-      .entities(true)
-      .keywords(true)
-      .xlimit(5)
+    List<IBMDiscoveryV1Models.NormalizationOperation> normalizations = new List<IBMDiscoveryV1Models.NormalizationOperation> { normalizationsItem } ;
+    IBMDiscoveryV1Models.Source source = new IBMDiscoveryV1Models.SourceBuilder()
       .build();
-    enrichmentSemanticRoles = enrichmentSemanticRoles.newBuilder().build();
-    IBMDiscoveryV1Models.NluEnrichmentSentiment enrichmentSentiment = new IBMDiscoveryV1Models.NluEnrichmentSentimentBuilder()
-      .document(true)
-      .targets(new List<String>{'Target1', 'Target2'})
-      .build();
-    enrichmentSentiment = enrichmentSentiment.newBuilder().build();
-    IBMDiscoveryV1Models.NluEnrichmentFeatures enrichmentFeatures = new IBMDiscoveryV1Models.NluEnrichmentFeaturesBuilder()
-      .emotion(enrichmentEmotion)
-      .entities(enrichmentEntities)
-      .keywords(enrichmentKeywords)
-      .relations(enrichmentRelations)
-      .semanticRoles(enrichmentSemanticRoles)
-      .sentiment(enrichmentSentiment)
-      .build();
-    enrichmentFeatures = enrichmentFeatures.newBuilder().build();
-    IBMDiscoveryV1Models.EnrichmentOptions enrichmentOptions = new IBMDiscoveryV1Models.EnrichmentOptionsBuilder()
-      .features(enrichmentFeatures)
-      .model('test')
-      .language('en')
-      .build();
-    IBMDiscoveryV1Models.Enrichment enrichment = new IBMDiscoveryV1Models.EnrichmentBuilder()
-      .description('test Description')
-      .destinationField('test Description')
-      .sourceField('test Description')
-      .overwrite(true)
-      .enrichment('test Description')
-      .ignoreDownstreamErrors(true)
-      .options(enrichmentOptions)
-      .build();
-    IBMDiscoveryV1Models.Configuration configuration = new IBMDiscoveryV1Models.ConfigurationBuilder()
-      .name('test-collection')
-      .description('A test collection to show as an example')
-      .enrichments(new List<IBMDiscoveryV1Models.Enrichment> { enrichment })
-      .normalizations(new List<IBMDiscoveryV1Models.NormalizationOperation> { normalizationOperation })
+
+    IBMDiscoveryV1Models.CreateConfigurationOptions testRequestModel = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
+      .environmentId(environmentId)
+      .name(name)
+      .description(description)
       .conversions(conversions)
+      .enrichments(enrichments)
+      .normalizations(normalizations)
+      .source(source)
       .build();
-    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .configuration(configuration)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Configuration resp =
-      service.createConfiguration(options);
-    System.assertEquals(resp.getName(), 'IBM News');
-    System.assertEquals(configuration.getName(), 'test-collection');
-    System.assertEquals(configuration.getDescription(), 'A test collection to show as an example');
-    System.assertEquals(configuration.getConversions().getPdf().getHeading().getFonts()[0].getLevel(), 1);
-    System.assertEquals(fontSetting.getMinSize(), 4);
-    System.assertEquals(fontSetting.getMaxSize(), 10);
-    System.assertEquals(fontSetting.getBold(), true);
-    System.assertEquals(fontSetting.getItalic(), true);
-    System.assertEquals(fontSetting.getName(), 'ariel');
-    System.assertEquals(configuration.getConversions().getWord().getHeading().getFonts()[0].getLevel(), 1);
-    System.assertEquals(configuration.getConversions().getWord().getHeading().getStyles()[0].getLevel(), 1);
-    System.assertEquals(configuration.getConversions().getWord().getHeading().getStyles()[0].getNames()[0], 'Style1');
-    System.assertEquals(configuration.getConversions().getHtml().getExcludeTagsCompletely()[0], 'Tag1');
-    System.assertEquals(configuration.getConversions().getHtml().getExcludeTagsKeepContent()[0], 'KeepCntent1');
-    System.assertEquals(configuration.getConversions().getHtml().getKeepTagAttributes()[0], 'tag');
-    System.assertEquals(configuration.getConversions().getHtml().getExcludeTagAttributes()[0], 'ExAtt1');
-    System.assertEquals(configuration.getConversions().getHtml().getKeepContent().getXpaths()[0], 'xpath1');
-    System.assertEquals(configuration.getConversions().getHtml().getExcludeContent().getXpaths()[0], 'xpath1');
-    System.assertEquals(configuration.getConversions().getJsonNormalizations()[0].getOperation(), 'test operation');
-    System.assertEquals(normalizationOperation.getSourceField(), 'test source');
-    System.assertEquals(normalizationOperation.getDestinationField(), 'test destination');
-    System.assertEquals(configuration.getNormalizations()[0].getOperation(), 'test operation');
-    System.assertEquals(configuration.getEnrichments()[0].getDescription(), 'test Description');
-    System.assertEquals(enrichment.getDestinationField(), 'test Description');
-    System.assertEquals(enrichment.getSourceField(), 'test Description');
-    System.assertEquals(enrichment.getOverwrite(), true);
-    System.assertEquals(enrichment.getEnrichment(), 'test Description');
-    System.assertEquals(enrichment.getIgnoreDownstreamErrors(), true);
-    System.assertEquals(enrichmentOptions.getModel(), 'test');
-    System.assertEquals(enrichmentOptions.getFeatures().getEmotion().getDocument(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getEmotion().getTargets()[0], 'Target1');
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getEmotion(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getXlimit(), 5);
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getMentions(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getMentionTypes(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getModel(), 'test');
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getSentenceLocations(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getSentiment(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getEmotion(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getXlimit(), 5);
-    System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getSentiment(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getRelations().getModel(), 'test');
-    System.assertEquals(enrichmentOptions.getFeatures().getSemanticRoles().getEntities(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getSemanticRoles().getKeywords(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getSemanticRoles().getXlimit(), 5);
-    System.assertEquals(enrichmentOptions.getFeatures().getSentiment().getDocument(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getSentiment().getTargets()[0], 'Target1');
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(name, testRequestModel.name());
+    System.assertEquals(description, testRequestModel.description());
+    System.assertEquals(conversions, testRequestModel.conversions());
+    System.assertEquals(enrichments, testRequestModel.enrichments());
+    System.assertEquals(normalizations, testRequestModel.normalizations());
+    System.assertEquals(source, testRequestModel.source());
     Test.stopTest();
   }
-
-  /**
-   *  Test deleting the example with the given ID for the training data query.
-   */
-  static testMethod void testDeleteTrainingExample() {
-    String body='';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testCreateCredentialsOptionsModel() {
     Test.startTest();
-
-    String text = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
-    IBMDiscoveryV1Models.DeleteTrainingExampleOptions options = new IBMDiscoveryV1Models.DeleteTrainingExampleOptionsBuilder('test', 'test', 'test', 'test')
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addHeader(HEADER_KEY, HEADER_VAL)
+    String environmentId = 'environment_id';
+    String sourceType = 'source_type';
+    IBMDiscoveryV1Models.CredentialDetails credentialDetails = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
       .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    service.deleteTrainingExample(options);
+    String status = 'status';
+
+    IBMDiscoveryV1Models.CreateCredentialsOptions testRequestModel = new IBMDiscoveryV1Models.CreateCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .sourceType(sourceType)
+      .credentialDetails(credentialDetails)
+      .status(status)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(sourceType, testRequestModel.sourceType());
+    System.assertEquals(credentialDetails, testRequestModel.credentialDetails());
+    System.assertEquals(status, testRequestModel.status());
     Test.stopTest();
   }
-
-  /**
-   *  Add a document.
-   *
-   * then test using testGetDocumentStatus if document is loaded successfully
-   */
-  static testMethod void testAddDocument() {
-    String body = IBMWatsonMockResponses.documentAccepted();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testCreateEnvironmentOptionsModel() {
     Test.startTest();
+    String name = 'name';
+    String description = 'description';
+    String size = 'size';
 
-    Attachment att = new Attachment(Body=Blob.valueOf('test string'),
-      Name='test.txt',
-      Description='test description',
-      ContentType='text/plain');
-    IBMWatsonFile testfile = new IBMWatsonFile.FileBuilder()
-      .attachment(att)
+    IBMDiscoveryV1Models.CreateEnvironmentOptions testRequestModel = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder()
+      .name(name)
+      .description(description)
+      .size(size)
       .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    IBMDiscoveryV1Models.AddDocumentOptions options = new IBMDiscoveryV1Models.AddDocumentOptionsBuilder()
-      .environmentId('environment_id')
-      .collectionId('collection_id')
-      .file(testfile)
-      .filename('test.txt')
-      .fileContentType('text/plain')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-     //you can add more attributes using following builder method. This step is not necessary
-     options = options.newBuilder().build();
-    IBMDiscoveryV1Models.DocumentAccepted resp =
-      service.addDocument(options);
-    System.assertEquals(resp.getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
-    System.assertEquals(resp.getStatus(), 'processing');
+    System.assertEquals(name, testRequestModel.name());
+    System.assertEquals(description, testRequestModel.description());
+    System.assertEquals(size, testRequestModel.size());
     Test.stopTest();
   }
-
-  /**
-   *  Update a document.
-   *
-   */
-  static testMethod void testUpdateDocument() {
-    String body = IBMWatsonMockResponses.documentAccepted();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testCreateEventOptionsModel() {
     Test.startTest();
+    String xType = 'x_type';
+    String environmentId = 'environment_id';
+    String sessionToken = 'session_token';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+    IBMDiscoveryV1Models.EventData data = new IBMDiscoveryV1Models.EventDataBuilder()
+      .environmentId(environmentId)
+      .sessionToken(sessionToken)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .build();
 
-    IBMWatsonFile testfile= new IBMWatsonFile.FileBuilder()
-      .body(Blob.valueOf('test string'))
-      .name('test.txt')
-      .description('test description')
-      .contentType('text/plain')
+    IBMDiscoveryV1Models.CreateEventOptions testRequestModel = new IBMDiscoveryV1Models.CreateEventOptionsBuilder()
+      .xType(xType)
+      .data(data)
       .build();
-    IBMDiscoveryV1Models.UpdateDocumentOptions options = new IBMDiscoveryV1Models.UpdateDocumentOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId('collection_id')
-      .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .file(testfile)
-      .filename('test.txt')
-      .fileContentType('text/plain')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.DocumentAccepted resp =
-      service.updateDocument(options);
-    System.assertEquals(resp.getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
-    System.assertEquals(resp.getStatus(), 'processing');
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(xType, testRequestModel.xType());
+    System.assertEquals(data, testRequestModel.data());
     Test.stopTest();
   }
-
-  static testMethod void testCreateExpansions() {
-    String body = IBMWatsonMockResponses.expansionsResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testCreateEventResponseModel() {
     Test.startTest();
-
-    List<String> expansion1InputTerms = new List<String> { 'weekday', 'week day' };
-    List<String> expansion1ExpandedTerms = new List<String> { 'monday', 'tuesday', 'wednesday', 'thursday', 'friday' };
-    List<String> expansion2InputTerms = new List<String> { 'weekend', 'week end' };
-    List<String> expansion2ExpandedTerms = new List<String> { 'saturday', 'sunday' };
-    IBMDiscoveryV1Models.Expansion expansion1 = new IBMDiscoveryV1Models.ExpansionBuilder()
-      .inputTerms(expansion1InputTerms)
-      .expandedTerms(expansion1ExpandedTerms)
-      .build();
-    IBMDiscoveryV1Models.Expansion expansion2 = new IBMDiscoveryV1Models.ExpansionBuilder()
-      .inputTerms(expansion2InputTerms)
-      .expandedTerms(expansion2ExpandedTerms)
-      .build();
-    IBMDiscoveryV1Models.Expansions expansions = new IBMDiscoveryV1Models.ExpansionsBuilder()
-      .expansions(new List<IBMDiscoveryV1Models.Expansion> { expansion1, expansion2 })
+    String xType = 'x_type';
+    String environmentId = 'environment_id';
+    String sessionToken = 'session_token';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+    IBMDiscoveryV1Models.EventData data = new IBMDiscoveryV1Models.EventDataBuilder()
+      .environmentId(environmentId)
+      .sessionToken(sessionToken)
+      .collectionId(collectionId)
+      .documentId(documentId)
       .build();
 
-    IBMDiscoveryV1Models.CreateExpansionsOptions createOptions = new IBMDiscoveryV1Models.CreateExpansionsOptionsBuilder()
-        .environmentId('environment_id')
-        .collectionId('collection_id')
-        .expansions(expansions)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    IBMDiscoveryV1Models.Expansions createResults = service.createExpansions(createOptions);
+    IBMDiscoveryV1Models.CreateEventResponse testRequestModel = new IBMDiscoveryV1Models.CreateEventResponse();
+    testRequestModel.setXType(xType);
+    testRequestModel.setData(data);
 
-    System.assertEquals(expansion1, createResults.getExpansions().get(0));
-    System.assertEquals(expansion2, createResults.getExpansions().get(1));
+    System.assertEquals(xType, testRequestModel.getXType());
+    System.assertEquals(data, testRequestModel.getData());
     Test.stopTest();
   }
-
-  static testMethod void testListExpansions() {
-    String body = IBMWatsonMockResponses.expansionsResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testCreateExpansionsOptionsModel() {
     Test.startTest();
-
-    List<String> expansion1InputTerms = new List<String> { 'weekday', 'week day' };
-    List<String> expansion1ExpandedTerms = new List<String> { 'monday', 'tuesday', 'wednesday', 'thursday', 'friday' };
-    List<String> expansion2InputTerms = new List<String> { 'weekend', 'week end' };
-    List<String> expansion2ExpandedTerms = new List<String> { 'saturday', 'sunday' };
-    IBMDiscoveryV1Models.Expansion expansion1 = new IBMDiscoveryV1Models.ExpansionBuilder()
-      .inputTerms(expansion1InputTerms)
-      .expandedTerms(expansion1ExpandedTerms)
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    List<String> expandedTerms = new List<String> { 'expanded_terms' } ;
+    IBMDiscoveryV1Models.Expansion expansionsItem = new IBMDiscoveryV1Models.ExpansionBuilder()
+      .expandedTerms(expandedTerms)
       .build();
-    IBMDiscoveryV1Models.Expansion expansion2 = new IBMDiscoveryV1Models.ExpansionBuilder()
-      .inputTerms(expansion2InputTerms)
-      .expandedTerms(expansion2ExpandedTerms)
-      .build();
-    IBMDiscoveryV1Models.Expansions expansions = new IBMDiscoveryV1Models.ExpansionsBuilder()
-      .expansions(new List<IBMDiscoveryV1Models.Expansion> { expansion1, expansion2 })
-      .build();
+    List<IBMDiscoveryV1Models.Expansion> expansions = new List<IBMDiscoveryV1Models.Expansion> { expansionsItem } ;
 
-    IBMDiscoveryV1Models.ListExpansionsOptions listOptions = new IBMDiscoveryV1Models.ListExpansionsOptionsBuilder()
-        .environmentId('environment_id')
-        .collectionId('collection_id')
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    IBMDiscoveryV1Models.Expansions listResults = service.listExpansions(listOptions);
+    IBMDiscoveryV1Models.CreateExpansionsOptions testRequestModel = new IBMDiscoveryV1Models.CreateExpansionsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .expansions(expansions)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(expansion1, listResults.getExpansions().get(0));
-    System.assertEquals(expansion2, listResults.getExpansions().get(1));
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(expansions, testRequestModel.expansions());
     Test.stopTest();
   }
-
-  static testMethod void testDeleteExpansions() {
-    String body = '';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static testMethod void testCreateGatewayOptionsModel() {
     Test.startTest();
+    String environmentId = 'environment_id';
+    String name = 'name';
 
-    IBMDiscoveryV1Models.DeleteExpansionsOptions deleteOptions = new IBMDiscoveryV1Models.DeleteExpansionsOptionsBuilder()
-        .environmentId('environment_id')
-        .collectionId('collection_id')
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    service.deleteExpansions(deleteOptions);
-
-    Test.stopTest();
-  }
-
-  /**
-   *  Test deleting the example with the given ID for the training data query.
-   */
-  static testMethod void testDeleteUserData() {
-    String body='';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String customerId = 'salesforce_sdk_test_id';
-    IBMDiscoveryV1Models.DeleteUserDataOptions options = new IBMDiscoveryV1Models.DeleteUserDataOptionsBuilder()
-      .customerId(customerId)
-      .addHeader(HEADER_KEY, HEADER_VAL)
+    IBMDiscoveryV1Models.CreateGatewayOptions testRequestModel = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
+      .environmentId(environmentId)
+      .name(name)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    service.deleteUserData(options);
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(name, testRequestModel.name());
     Test.stopTest();
   }
-
-  static testMethod void testCredentialDetails() {
+  static testMethod void testCreateStopwordListOptionsModel() {
     Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    IBMWatsonFile stopwordFile = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/octet-stream')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+    String stopwordFilename = 'stopword_filename';
+
+    IBMDiscoveryV1Models.CreateStopwordListOptions testRequestModel = new IBMDiscoveryV1Models.CreateStopwordListOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .stopwordFile(stopwordFile)
+      .stopwordFilename(stopwordFilename)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(stopwordFile, testRequestModel.stopwordFile());
+    System.assertEquals(stopwordFilename, testRequestModel.stopwordFilename());
+    Test.stopTest();
+  }
+  static testMethod void testCreateTokenizationDictionaryOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String text = 'text';
+    List<String> tokens = new List<String> { 'tokens' } ;
+    String partOfSpeech = 'part_of_speech';
+    IBMDiscoveryV1Models.TokenDictRule tokenizationRulesItem = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
+      .text(text)
+      .tokens(tokens)
+      .partOfSpeech(partOfSpeech)
+      .build();
+    List<IBMDiscoveryV1Models.TokenDictRule> tokenizationRules = new List<IBMDiscoveryV1Models.TokenDictRule> { tokenizationRulesItem } ;
+
+    IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions testRequestModel = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .tokenizationRules(tokenizationRules)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(tokenizationRules, testRequestModel.tokenizationRules());
+    Test.stopTest();
+  }
+  static testMethod void testCreateTrainingExampleOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+    String documentId = 'document_id';
+    String crossReference = 'cross_reference';
+    Long relevance = 10L;
+
+    IBMDiscoveryV1Models.CreateTrainingExampleOptions testRequestModel = new IBMDiscoveryV1Models.CreateTrainingExampleOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .documentId(documentId)
+      .crossReference(crossReference)
+      .relevance(relevance)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(queryId, testRequestModel.queryId());
+    System.assertEquals(documentId, testRequestModel.documentId());
+    System.assertEquals(crossReference, testRequestModel.crossReference());
+    System.assertEquals(relevance, testRequestModel.relevance());
+    Test.stopTest();
+  }
+  static testMethod void testCredentialDetailsModel() {
+    Test.startTest();
+    String credentialType = 'credential_type';
     String clientId = 'client_id';
-    String clientSecret = 'client_secret';
-    String sourceType = 'salesforce';
     String enterpriseId = 'enterprise_id';
+    String url = 'url';
+    String username = 'username';
     String organizationUrl = 'organization_url';
+    String siteCollectionPath = 'site_collection_path';
+    String clientSecret = 'client_secret';
+    String publicKeyId = 'public_key_id';
+    String privateKey = 'private_key';
     String passphrase = 'passphrase';
     String password = 'password';
-    String privateKey = 'private_key';
-    String publicKeyId = 'public_key_id';
-    String siteCollectionPath = 'site_collection_path';
-    String credentialType = 'username_password';
-    String url = 'login.salesforce.com';
-    String username = 'user@email.address';
     String gatewayId = 'gateway_id';
     String sourceVersion = 'source_version';
     String webApplicationUrl = 'web_application_url';
     String domain = 'domain';
-    String accessKeyId = 'access_key_id';
     String endpoint = 'endpoint';
+    String accessKeyId = 'access_key_id';
     String secretAccessKey = 'secret_access_key';
 
-    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
-      .clientId(clientId)
-      .clientSecret(clientSecret)
+    IBMDiscoveryV1Models.CredentialDetails testRequestModel = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
       .credentialType(credentialType)
+      .clientId(clientId)
       .enterpriseId(enterpriseId)
-      .organizationUrl(organizationUrl)
-      .passphrase(passphrase)
-      .password(password)
-      .privateKey(privateKey)
-      .publicKeyId(publicKeyId)
-      .siteCollectionPath(siteCollectionPath)
       .url(url)
       .username(username)
+      .organizationUrl(organizationUrl)
+      .siteCollectionPath(siteCollectionPath)
+      .clientSecret(clientSecret)
+      .publicKeyId(publicKeyId)
+      .privateKey(privateKey)
+      .passphrase(passphrase)
+      .password(password)
       .gatewayId(gatewayId)
       .sourceVersion(sourceVersion)
       .webApplicationUrl(webApplicationUrl)
       .domain(domain)
-      .accessKeyId(accessKeyId)
       .endpoint(endpoint)
+      .accessKeyId(accessKeyId)
       .secretAccessKey(secretAccessKey)
       .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(clientId, details.getClientId());
-    System.assertEquals(clientSecret, details.getClientSecret());
-    System.assertEquals(credentialType, details.getCredentialType());
-    System.assertEquals(enterpriseId, details.getEnterpriseId());
-    System.assertEquals(organizationUrl, details.getOrganizationUrl());
-    System.assertEquals(passphrase, details.getPassphrase());
-    System.assertEquals(password, details.getPassword());
-    System.assertEquals(privateKey, details.getPrivateKey());
-    System.assertEquals(publicKeyId, details.getPublicKeyId());
-    System.assertEquals(siteCollectionPath, details.getSiteCollectionPath());
-    System.assertEquals(url, details.getUrl());
-    System.assertEquals(username, details.getUsername());
-    System.assertEquals(gatewayId, details.getGatewayId());
-    System.assertEquals(sourceVersion, details.getSourceVersion());
-    System.assertEquals(webApplicationUrl, details.getWebApplicationUrl());
-    System.assertEquals(domain, details.getDomain());
-    System.assertEquals(accessKeyId, details.getAccessKeyId());
-    System.assertEquals(endpoint, details.getEndpoint());
-    System.assertEquals(secretAccessKey, details.getSecretAccessKey());
+    System.assertEquals(credentialType, testRequestModel.getCredentialType());
+    System.assertEquals(clientId, testRequestModel.getClientId());
+    System.assertEquals(enterpriseId, testRequestModel.getEnterpriseId());
+    System.assertEquals(url, testRequestModel.getUrl());
+    System.assertEquals(username, testRequestModel.getUsername());
+    System.assertEquals(organizationUrl, testRequestModel.getOrganizationUrl());
+    System.assertEquals(siteCollectionPath, testRequestModel.getSiteCollectionPath());
+    System.assertEquals(clientSecret, testRequestModel.getClientSecret());
+    System.assertEquals(publicKeyId, testRequestModel.getPublicKeyId());
+    System.assertEquals(privateKey, testRequestModel.getPrivateKey());
+    System.assertEquals(passphrase, testRequestModel.getPassphrase());
+    System.assertEquals(password, testRequestModel.getPassword());
+    System.assertEquals(gatewayId, testRequestModel.getGatewayId());
+    System.assertEquals(sourceVersion, testRequestModel.getSourceVersion());
+    System.assertEquals(webApplicationUrl, testRequestModel.getWebApplicationUrl());
+    System.assertEquals(domain, testRequestModel.getDomain());
+    System.assertEquals(endpoint, testRequestModel.getEndpoint());
+    System.assertEquals(accessKeyId, testRequestModel.getAccessKeyId());
+    System.assertEquals(secretAccessKey, testRequestModel.getSecretAccessKey());
+    Test.stopTest();
+  }
+  static testMethod void testCredentialsModel() {
+    Test.startTest();
+    String sourceType = 'source_type';
+    IBMDiscoveryV1Models.CredentialDetails credentialDetails = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
+      .build();
+    String status = 'status';
+
+    IBMDiscoveryV1Models.Credentials testRequestModel = new IBMDiscoveryV1Models.CredentialsBuilder()
+      .sourceType(sourceType)
+      .credentialDetails(credentialDetails)
+      .status(status)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(sourceType, testRequestModel.getSourceType());
+    System.assertEquals(credentialDetails, testRequestModel.getCredentialDetails());
+    System.assertEquals(status, testRequestModel.getStatus());
+    Test.stopTest();
+  }
+  static testMethod void testCredentialsListModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.Credentials credentialsItem = new IBMDiscoveryV1Models.CredentialsBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.Credentials> credentials = new List<IBMDiscoveryV1Models.Credentials> { credentialsItem } ;
+
+    IBMDiscoveryV1Models.CredentialsList testRequestModel = new IBMDiscoveryV1Models.CredentialsList();
+    testRequestModel.setCredentials(credentials);
+
+    System.assertEquals(credentials, testRequestModel.getCredentials());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteAllTrainingDataOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions testRequestModel = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteCollectionOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteCollectionOptions testRequestModel = new IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteConfigurationOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String configurationId = 'configuration_id';
+
+    IBMDiscoveryV1Models.DeleteConfigurationOptions testRequestModel = new IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder()
+      .environmentId(environmentId)
+      .configurationId(configurationId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(configurationId, testRequestModel.configurationId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteCredentialsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String credentialId = 'credential_id';
+
+    IBMDiscoveryV1Models.DeleteCredentialsOptions testRequestModel = new IBMDiscoveryV1Models.DeleteCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(credentialId, testRequestModel.credentialId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteDocumentOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+
+    IBMDiscoveryV1Models.DeleteDocumentOptions testRequestModel = new IBMDiscoveryV1Models.DeleteDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(documentId, testRequestModel.documentId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteEnvironmentOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.DeleteEnvironmentOptions testRequestModel = new IBMDiscoveryV1Models.DeleteEnvironmentOptionsBuilder()
+      .environmentId(environmentId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteExpansionsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteExpansionsOptions testRequestModel = new IBMDiscoveryV1Models.DeleteExpansionsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteGatewayOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String gatewayId = 'gateway_id';
+
+    IBMDiscoveryV1Models.DeleteGatewayOptions testRequestModel = new IBMDiscoveryV1Models.DeleteGatewayOptionsBuilder()
+      .environmentId(environmentId)
+      .gatewayId(gatewayId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(gatewayId, testRequestModel.gatewayId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteStopwordListOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteStopwordListOptions testRequestModel = new IBMDiscoveryV1Models.DeleteStopwordListOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteTokenizationDictionaryOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions testRequestModel = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteTrainingDataOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+
+    IBMDiscoveryV1Models.DeleteTrainingDataOptions testRequestModel = new IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(queryId, testRequestModel.queryId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteTrainingExampleOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+    String exampleId = 'example_id';
+
+    IBMDiscoveryV1Models.DeleteTrainingExampleOptions testRequestModel = new IBMDiscoveryV1Models.DeleteTrainingExampleOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .exampleId(exampleId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(queryId, testRequestModel.queryId());
+    System.assertEquals(exampleId, testRequestModel.exampleId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteUserDataOptionsModel() {
+    Test.startTest();
+    String customerId = 'customer_id';
+
+    IBMDiscoveryV1Models.DeleteUserDataOptions testRequestModel = new IBMDiscoveryV1Models.DeleteUserDataOptionsBuilder()
+      .customerId(customerId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(customerId, testRequestModel.customerId());
+    Test.stopTest();
+  }
+  static testMethod void testDiskUsageModel() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.DiskUsage testRequestModel = new IBMDiscoveryV1Models.DiskUsage();
+
+    Test.stopTest();
+  }
+  static testMethod void testDocumentAcceptedModel() {
+    Test.startTest();
+    String documentId = 'document_id';
+    String status = 'status';
+    IBMDiscoveryV1Models.Notice noticesItem = new IBMDiscoveryV1Models.Notice();
+    List<IBMDiscoveryV1Models.Notice> notices = new List<IBMDiscoveryV1Models.Notice> { noticesItem } ;
+
+    IBMDiscoveryV1Models.DocumentAccepted testRequestModel = new IBMDiscoveryV1Models.DocumentAccepted();
+    testRequestModel.setDocumentId(documentId);
+    testRequestModel.setStatus(status);
+    testRequestModel.setNotices(notices);
+
+    System.assertEquals(documentId, testRequestModel.getDocumentId());
+    System.assertEquals(status, testRequestModel.getStatus());
+    System.assertEquals(notices, testRequestModel.getNotices());
+    Test.stopTest();
+  }
+  static testMethod void testDocumentCountsModel() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.DocumentCounts testRequestModel = new IBMDiscoveryV1Models.DocumentCounts();
+
+    Test.stopTest();
+  }
+  static testMethod void testDocumentStatusModel() {
+    Test.startTest();
+    String filename = 'filename';
+    String fileType = 'file_type';
+    String sha1 = 'sha1';
+
+    IBMDiscoveryV1Models.DocumentStatus testRequestModel = new IBMDiscoveryV1Models.DocumentStatus();
+    testRequestModel.setFilename(filename);
+    testRequestModel.setFileType(fileType);
+    testRequestModel.setSha1(sha1);
+
+    System.assertEquals(filename, testRequestModel.getFilename());
+    System.assertEquals(fileType, testRequestModel.getFileType());
+    System.assertEquals(sha1, testRequestModel.getSha1());
+    Test.stopTest();
+  }
+  static testMethod void testEnrichmentModel() {
+    Test.startTest();
+    String description = 'description';
+    String destinationField = 'destination_field';
+    String sourceField = 'source_field';
+    Boolean overwrite = true;
+    String enrichment = 'enrichment';
+    Boolean ignoreDownstreamErrors = true;
+    IBMDiscoveryV1Models.EnrichmentOptions options = new IBMDiscoveryV1Models.EnrichmentOptionsBuilder()
+      .build();
+
+    IBMDiscoveryV1Models.Enrichment testRequestModel = new IBMDiscoveryV1Models.EnrichmentBuilder()
+      .description(description)
+      .destinationField(destinationField)
+      .sourceField(sourceField)
+      .overwrite(overwrite)
+      .enrichment(enrichment)
+      .ignoreDownstreamErrors(ignoreDownstreamErrors)
+      .options(options)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(description, testRequestModel.getDescription());
+    System.assertEquals(destinationField, testRequestModel.getDestinationField());
+    System.assertEquals(sourceField, testRequestModel.getSourceField());
+    System.assertEquals(overwrite, testRequestModel.getOverwrite());
+    System.assertEquals(enrichment, testRequestModel.getEnrichment());
+    System.assertEquals(ignoreDownstreamErrors, testRequestModel.getIgnoreDownstreamErrors());
+    System.assertEquals(options, testRequestModel.getOptions());
+    Test.stopTest();
+  }
+  static testMethod void testEnrichmentOptionsModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.NluEnrichmentFeatures features = new IBMDiscoveryV1Models.NluEnrichmentFeaturesBuilder()
+      .build();
+    String language = 'language';
+    String model = 'model';
+
+    IBMDiscoveryV1Models.EnrichmentOptions testRequestModel = new IBMDiscoveryV1Models.EnrichmentOptionsBuilder()
+      .features(features)
+      .language(language)
+      .model(model)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(features, testRequestModel.getFeatures());
+    System.assertEquals(language, testRequestModel.getLanguage());
+    System.assertEquals(model, testRequestModel.getModel());
+    Test.stopTest();
+  }
+  static testMethod void testEnvironmentModel() {
+    Test.startTest();
+    String name = 'name';
+    String description = 'description';
+    String size = 'size';
+    String requestedSize = 'requested_size';
+    IBMDiscoveryV1Models.IndexCapacity indexCapacity = new IBMDiscoveryV1Models.IndexCapacity();
+    IBMDiscoveryV1Models.SearchStatus searchStatus = new IBMDiscoveryV1Models.SearchStatus();
+
+    IBMDiscoveryV1Models.Environment testRequestModel = new IBMDiscoveryV1Models.Environment();
+    testRequestModel.setName(name);
+    testRequestModel.setDescription(description);
+    testRequestModel.setSize(size);
+    testRequestModel.setRequestedSize(requestedSize);
+    testRequestModel.setIndexCapacity(indexCapacity);
+    testRequestModel.setSearchStatus(searchStatus);
+
+    System.assertEquals(name, testRequestModel.getName());
+    System.assertEquals(description, testRequestModel.getDescription());
+    System.assertEquals(size, testRequestModel.getSize());
+    System.assertEquals(requestedSize, testRequestModel.getRequestedSize());
+    System.assertEquals(indexCapacity, testRequestModel.getIndexCapacity());
+    System.assertEquals(searchStatus, testRequestModel.getSearchStatus());
+    Test.stopTest();
+  }
+  static testMethod void testEnvironmentDocumentsModel() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.EnvironmentDocuments testRequestModel = new IBMDiscoveryV1Models.EnvironmentDocuments();
+
+    Test.stopTest();
+  }
+  static testMethod void testEventDataModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String sessionToken = 'session_token';
+    Datetime clientTimestamp = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Long displayRank = 10L;
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+
+    IBMDiscoveryV1Models.EventData testRequestModel = new IBMDiscoveryV1Models.EventDataBuilder()
+      .environmentId(environmentId)
+      .sessionToken(sessionToken)
+      .clientTimestamp(clientTimestamp)
+      .displayRank(displayRank)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.getEnvironmentId());
+    System.assertEquals(sessionToken, testRequestModel.getSessionToken());
+    System.assertEquals(clientTimestamp, testRequestModel.getClientTimestamp());
+    System.assertEquals(displayRank, testRequestModel.getDisplayRank());
+    System.assertEquals(collectionId, testRequestModel.getCollectionId());
+    System.assertEquals(documentId, testRequestModel.getDocumentId());
+    Test.stopTest();
+  }
+  static testMethod void testExpansionModel() {
+    Test.startTest();
+    List<String> inputTerms = new List<String> { 'input_terms' } ;
+    List<String> expandedTerms = new List<String> { 'expanded_terms' } ;
+
+    IBMDiscoveryV1Models.Expansion testRequestModel = new IBMDiscoveryV1Models.ExpansionBuilder()
+      .inputTerms(inputTerms)
+      .expandedTerms(expandedTerms)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(inputTerms, testRequestModel.getInputTerms());
+    System.assertEquals(expandedTerms, testRequestModel.getExpandedTerms());
+    Test.stopTest();
+  }
+  static testMethod void testExpansionsModel() {
+    Test.startTest();
+    List<String> expandedTerms = new List<String> { 'expanded_terms' } ;
+    IBMDiscoveryV1Models.Expansion expansionsItem = new IBMDiscoveryV1Models.ExpansionBuilder()
+      .expandedTerms(expandedTerms)
+      .build();
+    List<IBMDiscoveryV1Models.Expansion> expansions = new List<IBMDiscoveryV1Models.Expansion> { expansionsItem } ;
+
+    IBMDiscoveryV1Models.Expansions testRequestModel = new IBMDiscoveryV1Models.ExpansionsBuilder()
+      .expansions(expansions)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(expansions, testRequestModel.getExpansions());
+    Test.stopTest();
+  }
+  static testMethod void testFederatedQueryNoticesOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    List<String> collectionIds = new List<String> { 'collection_ids' } ;
+    String filter = 'filter';
+    String query = 'query';
+    String naturalLanguageQuery = 'natural_language_query';
+    String aggregation = 'aggregation';
+    Long count = 10L;
+    List<String> xReturn = new List<String> { 'x_return' } ;
+    Long offset = 10L;
+    List<String> xSort = new List<String> { 'x_sort' } ;
+    Boolean highlight = true;
+    String deduplicateField = 'deduplicate_field';
+    Boolean similar = true;
+    List<String> similarDocumentIds = new List<String> { 'similar_document_ids' } ;
+    List<String> similarFields = new List<String> { 'similar_fields' } ;
+
+    IBMDiscoveryV1Models.FederatedQueryNoticesOptions testRequestModel = new IBMDiscoveryV1Models.FederatedQueryNoticesOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionIds(collectionIds)
+      .filter(filter)
+      .query(query)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .aggregation(aggregation)
+      .count(count)
+      .xReturn(xReturn)
+      .offset(offset)
+      .xSort(xSort)
+      .highlight(highlight)
+      .deduplicateField(deduplicateField)
+      .similar(similar)
+      .similarDocumentIds(similarDocumentIds)
+      .similarFields(similarFields)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionIds, testRequestModel.collectionIds());
+    System.assertEquals(filter, testRequestModel.filter());
+    System.assertEquals(query, testRequestModel.query());
+    System.assertEquals(naturalLanguageQuery, testRequestModel.naturalLanguageQuery());
+    System.assertEquals(aggregation, testRequestModel.aggregation());
+    System.assertEquals(count, testRequestModel.count());
+    System.assertEquals(xReturn, testRequestModel.xReturn());
+    System.assertEquals(offset, testRequestModel.offset());
+    System.assertEquals(xSort, testRequestModel.xSort());
+    System.assertEquals(highlight, testRequestModel.highlight());
+    System.assertEquals(deduplicateField, testRequestModel.deduplicateField());
+    System.assertEquals(similar, testRequestModel.similar());
+    System.assertEquals(similarDocumentIds, testRequestModel.similarDocumentIds());
+    System.assertEquals(similarFields, testRequestModel.similarFields());
+    Test.stopTest();
+  }
+  static testMethod void testFederatedQueryOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String filter = 'filter';
+    String query = 'query';
+    String naturalLanguageQuery = 'natural_language_query';
+    Boolean passages = true;
+    String aggregation = 'aggregation';
+    Long count = 10L;
+    String xReturn = 'x_return';
+    Long offset = 10L;
+    String xSort = 'x_sort';
+    Boolean highlight = true;
+    String passagesFields = 'passages_fields';
+    Long passagesCount = 10L;
+    Long passagesCharacters = 10L;
+    Boolean deduplicate = true;
+    String deduplicateField = 'deduplicate_field';
+    Boolean similar = true;
+    String similarDocumentIds = 'similar_document_ids';
+    String similarFields = 'similar_fields';
+    String bias = 'bias';
+    String collectionIds = 'collection_ids';
+    Boolean xWatsonLoggingOptOut = true;
+
+    IBMDiscoveryV1Models.FederatedQueryOptions testRequestModel = new IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
+      .environmentId(environmentId)
+      .filter(filter)
+      .query(query)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .passages(passages)
+      .aggregation(aggregation)
+      .count(count)
+      .xReturn(xReturn)
+      .offset(offset)
+      .xSort(xSort)
+      .highlight(highlight)
+      .passagesFields(passagesFields)
+      .passagesCount(passagesCount)
+      .passagesCharacters(passagesCharacters)
+      .deduplicate(deduplicate)
+      .deduplicateField(deduplicateField)
+      .similar(similar)
+      .similarDocumentIds(similarDocumentIds)
+      .similarFields(similarFields)
+      .bias(bias)
+      .collectionIds(collectionIds)
+      .xWatsonLoggingOptOut(xWatsonLoggingOptOut)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(filter, testRequestModel.filter());
+    System.assertEquals(query, testRequestModel.query());
+    System.assertEquals(naturalLanguageQuery, testRequestModel.naturalLanguageQuery());
+    System.assertEquals(passages, testRequestModel.passages());
+    System.assertEquals(aggregation, testRequestModel.aggregation());
+    System.assertEquals(count, testRequestModel.count());
+    System.assertEquals(xReturn, testRequestModel.xReturn());
+    System.assertEquals(offset, testRequestModel.offset());
+    System.assertEquals(xSort, testRequestModel.xSort());
+    System.assertEquals(highlight, testRequestModel.highlight());
+    System.assertEquals(passagesFields, testRequestModel.passagesFields());
+    System.assertEquals(passagesCount, testRequestModel.passagesCount());
+    System.assertEquals(passagesCharacters, testRequestModel.passagesCharacters());
+    System.assertEquals(deduplicate, testRequestModel.deduplicate());
+    System.assertEquals(deduplicateField, testRequestModel.deduplicateField());
+    System.assertEquals(similar, testRequestModel.similar());
+    System.assertEquals(similarDocumentIds, testRequestModel.similarDocumentIds());
+    System.assertEquals(similarFields, testRequestModel.similarFields());
+    System.assertEquals(bias, testRequestModel.bias());
+    System.assertEquals(collectionIds, testRequestModel.collectionIds());
+    System.assertEquals(xWatsonLoggingOptOut, testRequestModel.xWatsonLoggingOptOut());
+    Test.stopTest();
+  }
+  static testMethod void testFieldModel() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.Field testRequestModel = new IBMDiscoveryV1Models.Field();
+
+    Test.stopTest();
+  }
+  static testMethod void testFontSettingModel() {
+    Test.startTest();
+    Long level = 10L;
+    Long minSize = 10L;
+    Long maxSize = 10L;
+    Boolean bold = true;
+    Boolean italic = true;
+    String name = 'name';
+
+    IBMDiscoveryV1Models.FontSetting testRequestModel = new IBMDiscoveryV1Models.FontSettingBuilder()
+      .level(level)
+      .minSize(minSize)
+      .maxSize(maxSize)
+      .bold(bold)
+      .italic(italic)
+      .name(name)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(level, testRequestModel.getLevel());
+    System.assertEquals(minSize, testRequestModel.getMinSize());
+    System.assertEquals(maxSize, testRequestModel.getMaxSize());
+    System.assertEquals(bold, testRequestModel.getBold());
+    System.assertEquals(italic, testRequestModel.getItalic());
+    System.assertEquals(name, testRequestModel.getName());
+    Test.stopTest();
+  }
+  static testMethod void testGatewayModel() {
+    Test.startTest();
+    String gatewayId = 'gateway_id';
+    String name = 'name';
+    String status = 'status';
+    String token = 'token';
+    String tokenId = 'token_id';
+
+    IBMDiscoveryV1Models.Gateway testRequestModel = new IBMDiscoveryV1Models.Gateway();
+    testRequestModel.setGatewayId(gatewayId);
+    testRequestModel.setName(name);
+    testRequestModel.setStatus(status);
+    testRequestModel.setToken(token);
+    testRequestModel.setTokenId(tokenId);
+
+    System.assertEquals(gatewayId, testRequestModel.getGatewayId());
+    System.assertEquals(name, testRequestModel.getName());
+    System.assertEquals(status, testRequestModel.getStatus());
+    System.assertEquals(token, testRequestModel.getToken());
+    System.assertEquals(tokenId, testRequestModel.getTokenId());
+    Test.stopTest();
+  }
+  static testMethod void testGatewayListModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.Gateway gatewaysItem = new IBMDiscoveryV1Models.Gateway();
+    List<IBMDiscoveryV1Models.Gateway> gateways = new List<IBMDiscoveryV1Models.Gateway> { gatewaysItem } ;
+
+    IBMDiscoveryV1Models.GatewayList testRequestModel = new IBMDiscoveryV1Models.GatewayList();
+    testRequestModel.setGateways(gateways);
+
+    System.assertEquals(gateways, testRequestModel.getGateways());
+    Test.stopTest();
+  }
+  static testMethod void testGetAutocompletionOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String prefix = 'prefix';
+    String field = 'field';
+    Long count = 10L;
+
+    IBMDiscoveryV1Models.GetAutocompletionOptions testRequestModel = new IBMDiscoveryV1Models.GetAutocompletionOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .prefix(prefix)
+      .field(field)
+      .count(count)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(prefix, testRequestModel.prefix());
+    System.assertEquals(field, testRequestModel.field());
+    System.assertEquals(count, testRequestModel.count());
+    Test.stopTest();
+  }
+  static testMethod void testGetCollectionOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.GetCollectionOptions testRequestModel = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testGetConfigurationOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String configurationId = 'configuration_id';
+
+    IBMDiscoveryV1Models.GetConfigurationOptions testRequestModel = new IBMDiscoveryV1Models.GetConfigurationOptionsBuilder()
+      .environmentId(environmentId)
+      .configurationId(configurationId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(configurationId, testRequestModel.configurationId());
+    Test.stopTest();
+  }
+  static testMethod void testGetCredentialsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String credentialId = 'credential_id';
+
+    IBMDiscoveryV1Models.GetCredentialsOptions testRequestModel = new IBMDiscoveryV1Models.GetCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(credentialId, testRequestModel.credentialId());
+    Test.stopTest();
+  }
+  static testMethod void testGetDocumentStatusOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+
+    IBMDiscoveryV1Models.GetDocumentStatusOptions testRequestModel = new IBMDiscoveryV1Models.GetDocumentStatusOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(documentId, testRequestModel.documentId());
+    Test.stopTest();
+  }
+  static testMethod void testGetEnvironmentOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.GetEnvironmentOptions testRequestModel = new IBMDiscoveryV1Models.GetEnvironmentOptionsBuilder()
+      .environmentId(environmentId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    Test.stopTest();
+  }
+  static testMethod void testGetGatewayOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String gatewayId = 'gateway_id';
+
+    IBMDiscoveryV1Models.GetGatewayOptions testRequestModel = new IBMDiscoveryV1Models.GetGatewayOptionsBuilder()
+      .environmentId(environmentId)
+      .gatewayId(gatewayId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(gatewayId, testRequestModel.gatewayId());
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsEventRateOptionsModel() {
+    Test.startTest();
+    Datetime startTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime endTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String resultType = 'result_type';
+
+    IBMDiscoveryV1Models.GetMetricsEventRateOptions testRequestModel = new IBMDiscoveryV1Models.GetMetricsEventRateOptionsBuilder()
+      .startTime(startTime)
+      .endTime(endTime)
+      .resultType(resultType)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(startTime, testRequestModel.startTime());
+    System.assertEquals(endTime, testRequestModel.endTime());
+    System.assertEquals(resultType, testRequestModel.resultType());
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsQueryEventOptionsModel() {
+    Test.startTest();
+    Datetime startTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime endTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String resultType = 'result_type';
+
+    IBMDiscoveryV1Models.GetMetricsQueryEventOptions testRequestModel = new IBMDiscoveryV1Models.GetMetricsQueryEventOptionsBuilder()
+      .startTime(startTime)
+      .endTime(endTime)
+      .resultType(resultType)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(startTime, testRequestModel.startTime());
+    System.assertEquals(endTime, testRequestModel.endTime());
+    System.assertEquals(resultType, testRequestModel.resultType());
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsQueryNoResultsOptionsModel() {
+    Test.startTest();
+    Datetime startTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime endTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String resultType = 'result_type';
+
+    IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions testRequestModel = new IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptionsBuilder()
+      .startTime(startTime)
+      .endTime(endTime)
+      .resultType(resultType)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(startTime, testRequestModel.startTime());
+    System.assertEquals(endTime, testRequestModel.endTime());
+    System.assertEquals(resultType, testRequestModel.resultType());
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsQueryOptionsModel() {
+    Test.startTest();
+    Datetime startTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime endTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String resultType = 'result_type';
+
+    IBMDiscoveryV1Models.GetMetricsQueryOptions testRequestModel = new IBMDiscoveryV1Models.GetMetricsQueryOptionsBuilder()
+      .startTime(startTime)
+      .endTime(endTime)
+      .resultType(resultType)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(startTime, testRequestModel.startTime());
+    System.assertEquals(endTime, testRequestModel.endTime());
+    System.assertEquals(resultType, testRequestModel.resultType());
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsQueryTokenEventOptionsModel() {
+    Test.startTest();
+    Long count = 10L;
+
+    IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions testRequestModel = new IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptionsBuilder()
+      .count(count)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(count, testRequestModel.count());
+    Test.stopTest();
+  }
+  static testMethod void testGetStopwordListStatusOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.GetStopwordListStatusOptions testRequestModel = new IBMDiscoveryV1Models.GetStopwordListStatusOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testGetTokenizationDictionaryStatusOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions testRequestModel = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testGetTrainingDataOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+
+    IBMDiscoveryV1Models.GetTrainingDataOptions testRequestModel = new IBMDiscoveryV1Models.GetTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(queryId, testRequestModel.queryId());
+    Test.stopTest();
+  }
+  static testMethod void testGetTrainingExampleOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+    String exampleId = 'example_id';
+
+    IBMDiscoveryV1Models.GetTrainingExampleOptions testRequestModel = new IBMDiscoveryV1Models.GetTrainingExampleOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .exampleId(exampleId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(queryId, testRequestModel.queryId());
+    System.assertEquals(exampleId, testRequestModel.exampleId());
+    Test.stopTest();
+  }
+  static testMethod void testHtmlSettingsModel() {
+    Test.startTest();
+    List<String> excludeTagsCompletely = new List<String> { 'exclude_tags_completely' } ;
+    List<String> excludeTagsKeepContent = new List<String> { 'exclude_tags_keep_content' } ;
+    IBMDiscoveryV1Models.XPathPatterns keepContent = new IBMDiscoveryV1Models.XPathPatternsBuilder()
+      .build();
+    IBMDiscoveryV1Models.XPathPatterns excludeContent = new IBMDiscoveryV1Models.XPathPatternsBuilder()
+      .build();
+    List<String> keepTagAttributes = new List<String> { 'keep_tag_attributes' } ;
+    List<String> excludeTagAttributes = new List<String> { 'exclude_tag_attributes' } ;
+
+    IBMDiscoveryV1Models.HtmlSettings testRequestModel = new IBMDiscoveryV1Models.HtmlSettingsBuilder()
+      .excludeTagsCompletely(excludeTagsCompletely)
+      .excludeTagsKeepContent(excludeTagsKeepContent)
+      .keepContent(keepContent)
+      .excludeContent(excludeContent)
+      .keepTagAttributes(keepTagAttributes)
+      .excludeTagAttributes(excludeTagAttributes)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(excludeTagsCompletely, testRequestModel.getExcludeTagsCompletely());
+    System.assertEquals(excludeTagsKeepContent, testRequestModel.getExcludeTagsKeepContent());
+    System.assertEquals(keepContent, testRequestModel.getKeepContent());
+    System.assertEquals(excludeContent, testRequestModel.getExcludeContent());
+    System.assertEquals(keepTagAttributes, testRequestModel.getKeepTagAttributes());
+    System.assertEquals(excludeTagAttributes, testRequestModel.getExcludeTagAttributes());
+    Test.stopTest();
+  }
+  static testMethod void testIndexCapacityModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.EnvironmentDocuments documents = new IBMDiscoveryV1Models.EnvironmentDocuments();
+    IBMDiscoveryV1Models.DiskUsage diskUsage = new IBMDiscoveryV1Models.DiskUsage();
+    IBMDiscoveryV1Models.CollectionUsage collections = new IBMDiscoveryV1Models.CollectionUsage();
+
+    IBMDiscoveryV1Models.IndexCapacity testRequestModel = new IBMDiscoveryV1Models.IndexCapacity();
+    testRequestModel.setDocuments(documents);
+    testRequestModel.setDiskUsage(diskUsage);
+    testRequestModel.setCollections(collections);
+
+    System.assertEquals(documents, testRequestModel.getDocuments());
+    System.assertEquals(diskUsage, testRequestModel.getDiskUsage());
+    System.assertEquals(collections, testRequestModel.getCollections());
+    Test.stopTest();
+  }
+  static testMethod void testListCollectionFieldsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.ListCollectionFieldsOptions testRequestModel = new IBMDiscoveryV1Models.ListCollectionFieldsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testListCollectionFieldsResponseModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.Field fieldsItem = new IBMDiscoveryV1Models.Field();
+    List<IBMDiscoveryV1Models.Field> fields = new List<IBMDiscoveryV1Models.Field> { fieldsItem } ;
+
+    IBMDiscoveryV1Models.ListCollectionFieldsResponse testRequestModel = new IBMDiscoveryV1Models.ListCollectionFieldsResponse();
+    testRequestModel.setFields(fields);
+
+    System.assertEquals(fields, testRequestModel.getFields());
+    Test.stopTest();
+  }
+  static testMethod void testListCollectionsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String name = 'name';
+
+    IBMDiscoveryV1Models.ListCollectionsOptions testRequestModel = new IBMDiscoveryV1Models.ListCollectionsOptionsBuilder()
+      .environmentId(environmentId)
+      .name(name)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(name, testRequestModel.name());
+    Test.stopTest();
+  }
+  static testMethod void testListCollectionsResponseModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.Collection collectionsItem = new IBMDiscoveryV1Models.Collection();
+    List<IBMDiscoveryV1Models.Collection> collections = new List<IBMDiscoveryV1Models.Collection> { collectionsItem } ;
+
+    IBMDiscoveryV1Models.ListCollectionsResponse testRequestModel = new IBMDiscoveryV1Models.ListCollectionsResponse();
+    testRequestModel.setCollections(collections);
+
+    System.assertEquals(collections, testRequestModel.getCollections());
+    Test.stopTest();
+  }
+  static testMethod void testListConfigurationsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String name = 'name';
+
+    IBMDiscoveryV1Models.ListConfigurationsOptions testRequestModel = new IBMDiscoveryV1Models.ListConfigurationsOptionsBuilder()
+      .environmentId(environmentId)
+      .name(name)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(name, testRequestModel.name());
+    Test.stopTest();
+  }
+  static testMethod void testListConfigurationsResponseModel() {
+    Test.startTest();
+    String name = 'name';
+    IBMDiscoveryV1Models.Configuration configurationsItem = new IBMDiscoveryV1Models.ConfigurationBuilder()
+      .name(name)
+      .build();
+    List<IBMDiscoveryV1Models.Configuration> configurations = new List<IBMDiscoveryV1Models.Configuration> { configurationsItem } ;
+
+    IBMDiscoveryV1Models.ListConfigurationsResponse testRequestModel = new IBMDiscoveryV1Models.ListConfigurationsResponse();
+    testRequestModel.setConfigurations(configurations);
+
+    System.assertEquals(configurations, testRequestModel.getConfigurations());
+    Test.stopTest();
+  }
+  static testMethod void testListCredentialsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.ListCredentialsOptions testRequestModel = new IBMDiscoveryV1Models.ListCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    Test.stopTest();
+  }
+  static testMethod void testListEnvironmentsOptionsModel() {
+    Test.startTest();
+    String name = 'name';
+
+    IBMDiscoveryV1Models.ListEnvironmentsOptions testRequestModel = new IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
+      .name(name)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(name, testRequestModel.name());
+    Test.stopTest();
+  }
+  static testMethod void testListEnvironmentsResponseModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.Environment environmentsItem = new IBMDiscoveryV1Models.Environment();
+    List<IBMDiscoveryV1Models.Environment> environments = new List<IBMDiscoveryV1Models.Environment> { environmentsItem } ;
+
+    IBMDiscoveryV1Models.ListEnvironmentsResponse testRequestModel = new IBMDiscoveryV1Models.ListEnvironmentsResponse();
+    testRequestModel.setEnvironments(environments);
+
+    System.assertEquals(environments, testRequestModel.getEnvironments());
+    Test.stopTest();
+  }
+  static testMethod void testListExpansionsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.ListExpansionsOptions testRequestModel = new IBMDiscoveryV1Models.ListExpansionsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testListFieldsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    List<String> collectionIds = new List<String> { 'collection_ids' } ;
+
+    IBMDiscoveryV1Models.ListFieldsOptions testRequestModel = new IBMDiscoveryV1Models.ListFieldsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionIds(collectionIds)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionIds, testRequestModel.collectionIds());
+    Test.stopTest();
+  }
+  static testMethod void testListGatewaysOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.ListGatewaysOptions testRequestModel = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
+      .environmentId(environmentId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    Test.stopTest();
+  }
+  static testMethod void testListTrainingDataOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.ListTrainingDataOptions testRequestModel = new IBMDiscoveryV1Models.ListTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    Test.stopTest();
+  }
+  static testMethod void testListTrainingExamplesOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+
+    IBMDiscoveryV1Models.ListTrainingExamplesOptions testRequestModel = new IBMDiscoveryV1Models.ListTrainingExamplesOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(queryId, testRequestModel.queryId());
+    Test.stopTest();
+  }
+  static testMethod void testLogQueryResponseModel() {
+    Test.startTest();
+    Long matchingResults = 10L;
+    IBMDiscoveryV1Models.LogQueryResponseResult resultsItem = new IBMDiscoveryV1Models.LogQueryResponseResult();
+    List<IBMDiscoveryV1Models.LogQueryResponseResult> results = new List<IBMDiscoveryV1Models.LogQueryResponseResult> { resultsItem } ;
+
+    IBMDiscoveryV1Models.LogQueryResponse testRequestModel = new IBMDiscoveryV1Models.LogQueryResponse();
+    testRequestModel.setMatchingResults(matchingResults);
+    testRequestModel.setResults(results);
+
+    System.assertEquals(matchingResults, testRequestModel.getMatchingResults());
+    System.assertEquals(results, testRequestModel.getResults());
+    Test.stopTest();
+  }
+  static testMethod void testLogQueryResponseResultModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String customerId = 'customer_id';
+    String documentType = 'document_type';
+    String naturalLanguageQuery = 'natural_language_query';
+    IBMDiscoveryV1Models.LogQueryResponseResultDocuments documentResults = new IBMDiscoveryV1Models.LogQueryResponseResultDocuments();
+    Datetime createdTimestamp = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime clientTimestamp = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String queryId = 'query_id';
+    String sessionToken = 'session_token';
+    String collectionId = 'collection_id';
+    Long displayRank = 10L;
+    String documentId = 'document_id';
+    String eventType = 'event_type';
+    String resultType = 'result_type';
+
+    IBMDiscoveryV1Models.LogQueryResponseResult testRequestModel = new IBMDiscoveryV1Models.LogQueryResponseResult();
+    testRequestModel.setEnvironmentId(environmentId);
+    testRequestModel.setCustomerId(customerId);
+    testRequestModel.setDocumentType(documentType);
+    testRequestModel.setNaturalLanguageQuery(naturalLanguageQuery);
+    testRequestModel.setDocumentResults(documentResults);
+    testRequestModel.setCreatedTimestamp(createdTimestamp);
+    testRequestModel.setClientTimestamp(clientTimestamp);
+    testRequestModel.setQueryId(queryId);
+    testRequestModel.setSessionToken(sessionToken);
+    testRequestModel.setCollectionId(collectionId);
+    testRequestModel.setDisplayRank(displayRank);
+    testRequestModel.setDocumentId(documentId);
+    testRequestModel.setEventType(eventType);
+    testRequestModel.setResultType(resultType);
+
+    System.assertEquals(environmentId, testRequestModel.getEnvironmentId());
+    System.assertEquals(customerId, testRequestModel.getCustomerId());
+    System.assertEquals(documentType, testRequestModel.getDocumentType());
+    System.assertEquals(naturalLanguageQuery, testRequestModel.getNaturalLanguageQuery());
+    System.assertEquals(documentResults, testRequestModel.getDocumentResults());
+    System.assertEquals(createdTimestamp, testRequestModel.getCreatedTimestamp());
+    System.assertEquals(clientTimestamp, testRequestModel.getClientTimestamp());
+    System.assertEquals(queryId, testRequestModel.getQueryId());
+    System.assertEquals(sessionToken, testRequestModel.getSessionToken());
+    System.assertEquals(collectionId, testRequestModel.getCollectionId());
+    System.assertEquals(displayRank, testRequestModel.getDisplayRank());
+    System.assertEquals(documentId, testRequestModel.getDocumentId());
+    System.assertEquals(eventType, testRequestModel.getEventType());
+    System.assertEquals(resultType, testRequestModel.getResultType());
+    Test.stopTest();
+  }
+  static testMethod void testLogQueryResponseResultDocumentsModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.LogQueryResponseResultDocumentsResult resultsItem = new IBMDiscoveryV1Models.LogQueryResponseResultDocumentsResult();
+    List<IBMDiscoveryV1Models.LogQueryResponseResultDocumentsResult> results = new List<IBMDiscoveryV1Models.LogQueryResponseResultDocumentsResult> { resultsItem } ;
+    Long count = 10L;
+
+    IBMDiscoveryV1Models.LogQueryResponseResultDocuments testRequestModel = new IBMDiscoveryV1Models.LogQueryResponseResultDocuments();
+    testRequestModel.setResults(results);
+    testRequestModel.setCount(count);
+
+    System.assertEquals(results, testRequestModel.getResults());
+    System.assertEquals(count, testRequestModel.getCount());
+    Test.stopTest();
+  }
+  static testMethod void testLogQueryResponseResultDocumentsResultModel() {
+    Test.startTest();
+    Long position = 10L;
+    String documentId = 'document_id';
+    Double score = 0.5;
+    Double confidence = 0.5;
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.LogQueryResponseResultDocumentsResult testRequestModel = new IBMDiscoveryV1Models.LogQueryResponseResultDocumentsResult();
+    testRequestModel.setPosition(position);
+    testRequestModel.setDocumentId(documentId);
+    testRequestModel.setScore(score);
+    testRequestModel.setConfidence(confidence);
+    testRequestModel.setCollectionId(collectionId);
+
+    System.assertEquals(position, testRequestModel.getPosition());
+    System.assertEquals(documentId, testRequestModel.getDocumentId());
+    System.assertEquals(score, testRequestModel.getScore());
+    System.assertEquals(confidence, testRequestModel.getConfidence());
+    System.assertEquals(collectionId, testRequestModel.getCollectionId());
+    Test.stopTest();
+  }
+  static testMethod void testMetricAggregationModel() {
+    Test.startTest();
+    String interval = 'interval';
+    String eventType = 'event_type';
+    IBMDiscoveryV1Models.MetricAggregationResult resultsItem = new IBMDiscoveryV1Models.MetricAggregationResult();
+    List<IBMDiscoveryV1Models.MetricAggregationResult> results = new List<IBMDiscoveryV1Models.MetricAggregationResult> { resultsItem } ;
+
+    IBMDiscoveryV1Models.MetricAggregation testRequestModel = new IBMDiscoveryV1Models.MetricAggregation();
+    testRequestModel.setInterval(interval);
+    testRequestModel.setEventType(eventType);
+    testRequestModel.setResults(results);
+
+    System.assertEquals(interval, testRequestModel.getInterval());
+    System.assertEquals(eventType, testRequestModel.getEventType());
+    System.assertEquals(results, testRequestModel.getResults());
+    Test.stopTest();
+  }
+  static testMethod void testMetricAggregationResultModel() {
+    Test.startTest();
+    Datetime keyAsString = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Long key = 10L;
+    Long matchingResults = 10L;
+    Double eventRate = 0.5;
+
+    IBMDiscoveryV1Models.MetricAggregationResult testRequestModel = new IBMDiscoveryV1Models.MetricAggregationResult();
+    testRequestModel.setKeyAsString(keyAsString);
+    testRequestModel.setKey(key);
+    testRequestModel.setMatchingResults(matchingResults);
+    testRequestModel.setEventRate(eventRate);
+
+    System.assertEquals(keyAsString, testRequestModel.getKeyAsString());
+    System.assertEquals(key, testRequestModel.getKey());
+    System.assertEquals(matchingResults, testRequestModel.getMatchingResults());
+    System.assertEquals(eventRate, testRequestModel.getEventRate());
+    Test.stopTest();
+  }
+  static testMethod void testMetricResponseModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.MetricAggregation aggregationsItem = new IBMDiscoveryV1Models.MetricAggregation();
+    List<IBMDiscoveryV1Models.MetricAggregation> aggregations = new List<IBMDiscoveryV1Models.MetricAggregation> { aggregationsItem } ;
+
+    IBMDiscoveryV1Models.MetricResponse testRequestModel = new IBMDiscoveryV1Models.MetricResponse();
+    testRequestModel.setAggregations(aggregations);
+
+    System.assertEquals(aggregations, testRequestModel.getAggregations());
+    Test.stopTest();
+  }
+  static testMethod void testMetricTokenAggregationModel() {
+    Test.startTest();
+    String eventType = 'event_type';
+    IBMDiscoveryV1Models.MetricTokenAggregationResult resultsItem = new IBMDiscoveryV1Models.MetricTokenAggregationResult();
+    List<IBMDiscoveryV1Models.MetricTokenAggregationResult> results = new List<IBMDiscoveryV1Models.MetricTokenAggregationResult> { resultsItem } ;
+
+    IBMDiscoveryV1Models.MetricTokenAggregation testRequestModel = new IBMDiscoveryV1Models.MetricTokenAggregation();
+    testRequestModel.setEventType(eventType);
+    testRequestModel.setResults(results);
+
+    System.assertEquals(eventType, testRequestModel.getEventType());
+    System.assertEquals(results, testRequestModel.getResults());
+    Test.stopTest();
+  }
+  static testMethod void testMetricTokenAggregationResultModel() {
+    Test.startTest();
+    String key = 'key';
+    Long matchingResults = 10L;
+    Double eventRate = 0.5;
+
+    IBMDiscoveryV1Models.MetricTokenAggregationResult testRequestModel = new IBMDiscoveryV1Models.MetricTokenAggregationResult();
+    testRequestModel.setKey(key);
+    testRequestModel.setMatchingResults(matchingResults);
+    testRequestModel.setEventRate(eventRate);
+
+    System.assertEquals(key, testRequestModel.getKey());
+    System.assertEquals(matchingResults, testRequestModel.getMatchingResults());
+    System.assertEquals(eventRate, testRequestModel.getEventRate());
+    Test.stopTest();
+  }
+  static testMethod void testMetricTokenResponseModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.MetricTokenAggregation aggregationsItem = new IBMDiscoveryV1Models.MetricTokenAggregation();
+    List<IBMDiscoveryV1Models.MetricTokenAggregation> aggregations = new List<IBMDiscoveryV1Models.MetricTokenAggregation> { aggregationsItem } ;
+
+    IBMDiscoveryV1Models.MetricTokenResponse testRequestModel = new IBMDiscoveryV1Models.MetricTokenResponse();
+    testRequestModel.setAggregations(aggregations);
+
+    System.assertEquals(aggregations, testRequestModel.getAggregations());
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentCategoriesModel() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.NluEnrichmentCategories testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentCategoriesBuilder()
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentConceptsModel() {
+    Test.startTest();
+    Long xLimit = 10L;
+
+    IBMDiscoveryV1Models.NluEnrichmentConcepts testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentConceptsBuilder()
+      .xLimit(xLimit)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(xLimit, testRequestModel.getXLimit());
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentEmotionModel() {
+    Test.startTest();
+    Boolean document = true;
+    List<String> targets = new List<String> { 'targets' } ;
+
+    IBMDiscoveryV1Models.NluEnrichmentEmotion testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentEmotionBuilder()
+      .document(document)
+      .targets(targets)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(document, testRequestModel.getDocument());
+    System.assertEquals(targets, testRequestModel.getTargets());
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentEntitiesModel() {
+    Test.startTest();
+    Boolean sentiment = true;
+    Boolean emotion = true;
+    Long xLimit = 10L;
+    Boolean mentions = true;
+    Boolean mentionTypes = true;
+    Boolean sentenceLocations = true;
+    String model = 'model';
+
+    IBMDiscoveryV1Models.NluEnrichmentEntities testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentEntitiesBuilder()
+      .sentiment(sentiment)
+      .emotion(emotion)
+      .xLimit(xLimit)
+      .mentions(mentions)
+      .mentionTypes(mentionTypes)
+      .sentenceLocations(sentenceLocations)
+      .model(model)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(sentiment, testRequestModel.getSentiment());
+    System.assertEquals(emotion, testRequestModel.getEmotion());
+    System.assertEquals(xLimit, testRequestModel.getXLimit());
+    System.assertEquals(mentions, testRequestModel.getMentions());
+    System.assertEquals(mentionTypes, testRequestModel.getMentionTypes());
+    System.assertEquals(sentenceLocations, testRequestModel.getSentenceLocations());
+    System.assertEquals(model, testRequestModel.getModel());
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentFeaturesModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.NluEnrichmentKeywords keywords = new IBMDiscoveryV1Models.NluEnrichmentKeywordsBuilder()
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentEntities entities = new IBMDiscoveryV1Models.NluEnrichmentEntitiesBuilder()
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentSentiment sentiment = new IBMDiscoveryV1Models.NluEnrichmentSentimentBuilder()
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentEmotion emotion = new IBMDiscoveryV1Models.NluEnrichmentEmotionBuilder()
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentCategories categories = new IBMDiscoveryV1Models.NluEnrichmentCategoriesBuilder()
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentSemanticRoles semanticRoles = new IBMDiscoveryV1Models.NluEnrichmentSemanticRolesBuilder()
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentRelations relations = new IBMDiscoveryV1Models.NluEnrichmentRelationsBuilder()
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentConcepts concepts = new IBMDiscoveryV1Models.NluEnrichmentConceptsBuilder()
+      .build();
+
+    IBMDiscoveryV1Models.NluEnrichmentFeatures testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentFeaturesBuilder()
+      .keywords(keywords)
+      .entities(entities)
+      .sentiment(sentiment)
+      .emotion(emotion)
+      .categories(categories)
+      .semanticRoles(semanticRoles)
+      .relations(relations)
+      .concepts(concepts)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(keywords, testRequestModel.getKeywords());
+    System.assertEquals(entities, testRequestModel.getEntities());
+    System.assertEquals(sentiment, testRequestModel.getSentiment());
+    System.assertEquals(emotion, testRequestModel.getEmotion());
+    System.assertEquals(categories, testRequestModel.getCategories());
+    System.assertEquals(semanticRoles, testRequestModel.getSemanticRoles());
+    System.assertEquals(relations, testRequestModel.getRelations());
+    System.assertEquals(concepts, testRequestModel.getConcepts());
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentKeywordsModel() {
+    Test.startTest();
+    Boolean sentiment = true;
+    Boolean emotion = true;
+    Long xLimit = 10L;
+
+    IBMDiscoveryV1Models.NluEnrichmentKeywords testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentKeywordsBuilder()
+      .sentiment(sentiment)
+      .emotion(emotion)
+      .xLimit(xLimit)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(sentiment, testRequestModel.getSentiment());
+    System.assertEquals(emotion, testRequestModel.getEmotion());
+    System.assertEquals(xLimit, testRequestModel.getXLimit());
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentRelationsModel() {
+    Test.startTest();
+    String model = 'model';
+
+    IBMDiscoveryV1Models.NluEnrichmentRelations testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentRelationsBuilder()
+      .model(model)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(model, testRequestModel.getModel());
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentSemanticRolesModel() {
+    Test.startTest();
+    Boolean entities = true;
+    Boolean keywords = true;
+    Long xLimit = 10L;
+
+    IBMDiscoveryV1Models.NluEnrichmentSemanticRoles testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentSemanticRolesBuilder()
+      .entities(entities)
+      .keywords(keywords)
+      .xLimit(xLimit)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(entities, testRequestModel.getEntities());
+    System.assertEquals(keywords, testRequestModel.getKeywords());
+    System.assertEquals(xLimit, testRequestModel.getXLimit());
+    Test.stopTest();
+  }
+  static testMethod void testNluEnrichmentSentimentModel() {
+    Test.startTest();
+    Boolean document = true;
+    List<String> targets = new List<String> { 'targets' } ;
+
+    IBMDiscoveryV1Models.NluEnrichmentSentiment testRequestModel = new IBMDiscoveryV1Models.NluEnrichmentSentimentBuilder()
+      .document(document)
+      .targets(targets)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(document, testRequestModel.getDocument());
+    System.assertEquals(targets, testRequestModel.getTargets());
+    Test.stopTest();
+  }
+  static testMethod void testNormalizationOperationModel() {
+    Test.startTest();
+    String operation = 'operation';
+    String sourceField = 'source_field';
+    String destinationField = 'destination_field';
+
+    IBMDiscoveryV1Models.NormalizationOperation testRequestModel = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
+      .operation(operation)
+      .sourceField(sourceField)
+      .destinationField(destinationField)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(operation, testRequestModel.getOperation());
+    System.assertEquals(sourceField, testRequestModel.getSourceField());
+    System.assertEquals(destinationField, testRequestModel.getDestinationField());
+    Test.stopTest();
+  }
+  static testMethod void testNoticeModel() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.Notice testRequestModel = new IBMDiscoveryV1Models.Notice();
+
+    Test.stopTest();
+  }
+  static testMethod void testPdfHeadingDetectionModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.FontSetting fontsItem = new IBMDiscoveryV1Models.FontSettingBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.FontSetting> fonts = new List<IBMDiscoveryV1Models.FontSetting> { fontsItem } ;
+
+    IBMDiscoveryV1Models.PdfHeadingDetection testRequestModel = new IBMDiscoveryV1Models.PdfHeadingDetectionBuilder()
+      .fonts(fonts)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(fonts, testRequestModel.getFonts());
+    Test.stopTest();
+  }
+  static testMethod void testPdfSettingsModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.PdfHeadingDetection heading = new IBMDiscoveryV1Models.PdfHeadingDetectionBuilder()
+      .build();
+
+    IBMDiscoveryV1Models.PdfSettings testRequestModel = new IBMDiscoveryV1Models.PdfSettingsBuilder()
+      .heading(heading)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(heading, testRequestModel.getHeading());
+    Test.stopTest();
+  }
+  static testMethod void testQueryAggregationModel() {
+    Test.startTest();
+    String xType = 'x_type';
+    IBMDiscoveryV1Models.AggregationResult resultsItem = new IBMDiscoveryV1Models.AggregationResult();
+    List<IBMDiscoveryV1Models.AggregationResult> results = new List<IBMDiscoveryV1Models.AggregationResult> { resultsItem } ;
+    Long matchingResults = 10L;
+    IBMDiscoveryV1Models.QueryAggregation aggregationsItem = new IBMDiscoveryV1Models.QueryAggregation();
+    List<IBMDiscoveryV1Models.QueryAggregation> aggregations = new List<IBMDiscoveryV1Models.QueryAggregation> { aggregationsItem } ;
+    String field = 'field';
+    Long histogramInterval = 10L;
+    Double value = 0.5;
+    Long count = 10L;
+    String match = 'match';
+    String path = 'path';
+    String timesliceInterval = 'timeslice_interval';
+    Boolean anomaly = true;
+    Long size = 10L;
+    IBMDiscoveryV1Models.TopHitsResults hits = new IBMDiscoveryV1Models.TopHitsResults();
+
+    IBMDiscoveryV1Models.QueryAggregation testRequestModel = new IBMDiscoveryV1Models.QueryAggregation();
+    testRequestModel.setXType(xType);
+    testRequestModel.setResults(results);
+    testRequestModel.setMatchingResults(matchingResults);
+    testRequestModel.setAggregations(aggregations);
+    testRequestModel.setField(field);
+    testRequestModel.setHistogramInterval(histogramInterval);
+    testRequestModel.setValue(value);
+    testRequestModel.setCount(count);
+    testRequestModel.setMatch(match);
+    testRequestModel.setPath(path);
+    testRequestModel.setTimesliceInterval(timesliceInterval);
+    testRequestModel.setAnomaly(anomaly);
+    testRequestModel.setSize(size);
+    testRequestModel.setHits(hits);
+
+    System.assertEquals(xType, testRequestModel.getXType());
+    System.assertEquals(results, testRequestModel.getResults());
+    System.assertEquals(matchingResults, testRequestModel.getMatchingResults());
+    System.assertEquals(aggregations, testRequestModel.getAggregations());
+    System.assertEquals(field, testRequestModel.getField());
+    System.assertEquals(histogramInterval, testRequestModel.getHistogramInterval());
+    System.assertEquals(value, testRequestModel.getValue());
+    System.assertEquals(count, testRequestModel.getCount());
+    System.assertEquals(match, testRequestModel.getMatch());
+    System.assertEquals(path, testRequestModel.getPath());
+    System.assertEquals(timesliceInterval, testRequestModel.getTimesliceInterval());
+    System.assertEquals(anomaly, testRequestModel.getAnomaly());
+    System.assertEquals(size, testRequestModel.getSize());
+    System.assertEquals(hits, testRequestModel.getHits());
+    Test.stopTest();
+  }
+  static testMethod void testQueryLogOptionsModel() {
+    Test.startTest();
+    String filter = 'filter';
+    String query = 'query';
+    Long count = 10L;
+    Long offset = 10L;
+    List<String> xSort = new List<String> { 'x_sort' } ;
+
+    IBMDiscoveryV1Models.QueryLogOptions testRequestModel = new IBMDiscoveryV1Models.QueryLogOptionsBuilder()
+      .filter(filter)
+      .query(query)
+      .count(count)
+      .offset(offset)
+      .xSort(xSort)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(filter, testRequestModel.filter());
+    System.assertEquals(query, testRequestModel.query());
+    System.assertEquals(count, testRequestModel.count());
+    System.assertEquals(offset, testRequestModel.offset());
+    System.assertEquals(xSort, testRequestModel.xSort());
+    Test.stopTest();
+  }
+  static testMethod void testQueryNoticesOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String filter = 'filter';
+    String query = 'query';
+    String naturalLanguageQuery = 'natural_language_query';
+    Boolean passages = true;
+    String aggregation = 'aggregation';
+    Long count = 10L;
+    List<String> xReturn = new List<String> { 'x_return' } ;
+    Long offset = 10L;
+    List<String> xSort = new List<String> { 'x_sort' } ;
+    Boolean highlight = true;
+    List<String> passagesFields = new List<String> { 'passages_fields' } ;
+    Long passagesCount = 10L;
+    Long passagesCharacters = 10L;
+    String deduplicateField = 'deduplicate_field';
+    Boolean similar = true;
+    List<String> similarDocumentIds = new List<String> { 'similar_document_ids' } ;
+    List<String> similarFields = new List<String> { 'similar_fields' } ;
+
+    IBMDiscoveryV1Models.QueryNoticesOptions testRequestModel = new IBMDiscoveryV1Models.QueryNoticesOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .filter(filter)
+      .query(query)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .passages(passages)
+      .aggregation(aggregation)
+      .count(count)
+      .xReturn(xReturn)
+      .offset(offset)
+      .xSort(xSort)
+      .highlight(highlight)
+      .passagesFields(passagesFields)
+      .passagesCount(passagesCount)
+      .passagesCharacters(passagesCharacters)
+      .deduplicateField(deduplicateField)
+      .similar(similar)
+      .similarDocumentIds(similarDocumentIds)
+      .similarFields(similarFields)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(filter, testRequestModel.filter());
+    System.assertEquals(query, testRequestModel.query());
+    System.assertEquals(naturalLanguageQuery, testRequestModel.naturalLanguageQuery());
+    System.assertEquals(passages, testRequestModel.passages());
+    System.assertEquals(aggregation, testRequestModel.aggregation());
+    System.assertEquals(count, testRequestModel.count());
+    System.assertEquals(xReturn, testRequestModel.xReturn());
+    System.assertEquals(offset, testRequestModel.offset());
+    System.assertEquals(xSort, testRequestModel.xSort());
+    System.assertEquals(highlight, testRequestModel.highlight());
+    System.assertEquals(passagesFields, testRequestModel.passagesFields());
+    System.assertEquals(passagesCount, testRequestModel.passagesCount());
+    System.assertEquals(passagesCharacters, testRequestModel.passagesCharacters());
+    System.assertEquals(deduplicateField, testRequestModel.deduplicateField());
+    System.assertEquals(similar, testRequestModel.similar());
+    System.assertEquals(similarDocumentIds, testRequestModel.similarDocumentIds());
+    System.assertEquals(similarFields, testRequestModel.similarFields());
+    Test.stopTest();
+  }
+  static testMethod void testQueryNoticesResponseModel() {
+    Test.startTest();
+    Long matchingResults = 10L;
+    IBMDiscoveryV1Models.QueryNoticesResult resultsItem = new IBMDiscoveryV1Models.QueryNoticesResult();
+    List<IBMDiscoveryV1Models.QueryNoticesResult> results = new List<IBMDiscoveryV1Models.QueryNoticesResult> { resultsItem } ;
+    IBMDiscoveryV1Models.QueryAggregation aggregationsItem = new IBMDiscoveryV1Models.QueryAggregation();
+    List<IBMDiscoveryV1Models.QueryAggregation> aggregations = new List<IBMDiscoveryV1Models.QueryAggregation> { aggregationsItem } ;
+    IBMDiscoveryV1Models.QueryPassages passagesItem = new IBMDiscoveryV1Models.QueryPassages();
+    List<IBMDiscoveryV1Models.QueryPassages> passages = new List<IBMDiscoveryV1Models.QueryPassages> { passagesItem } ;
+    Long duplicatesRemoved = 10L;
+
+    IBMDiscoveryV1Models.QueryNoticesResponse testRequestModel = new IBMDiscoveryV1Models.QueryNoticesResponse();
+    testRequestModel.setMatchingResults(matchingResults);
+    testRequestModel.setResults(results);
+    testRequestModel.setAggregations(aggregations);
+    testRequestModel.setPassages(passages);
+    testRequestModel.setDuplicatesRemoved(duplicatesRemoved);
+
+    System.assertEquals(matchingResults, testRequestModel.getMatchingResults());
+    System.assertEquals(results, testRequestModel.getResults());
+    System.assertEquals(aggregations, testRequestModel.getAggregations());
+    System.assertEquals(passages, testRequestModel.getPassages());
+    System.assertEquals(duplicatesRemoved, testRequestModel.getDuplicatesRemoved());
+    Test.stopTest();
+  }
+  static testMethod void testQueryNoticesResultModel() {
+    Test.startTest();
+    String id = 'id';
+    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
+    metadata.put('metadata_key', 'metadata');
+    String collectionId = 'collection_id';
+    Double score = 0.5;
+    IBMDiscoveryV1Models.QueryResultMetadata resultMetadata = new IBMDiscoveryV1Models.QueryResultMetadata();
+    String title = 'title';
+    Long code = 10L;
+    String filename = 'filename';
+    String fileType = 'file_type';
+    String sha1 = 'sha1';
+    IBMDiscoveryV1Models.Notice noticesItem = new IBMDiscoveryV1Models.Notice();
+    List<IBMDiscoveryV1Models.Notice> notices = new List<IBMDiscoveryV1Models.Notice> { noticesItem } ;
+
+    IBMDiscoveryV1Models.QueryNoticesResult testRequestModel = new IBMDiscoveryV1Models.QueryNoticesResult();
+    testRequestModel.setId(id);
+    testRequestModel.setMetadata(metadata);
+    testRequestModel.setCollectionId(collectionId);
+    testRequestModel.setResultMetadata(resultMetadata);
+    testRequestModel.setTitle(title);
+    testRequestModel.setCode(code);
+    testRequestModel.setFilename(filename);
+    testRequestModel.setFileType(fileType);
+    testRequestModel.setSha1(sha1);
+    testRequestModel.setNotices(notices);
+
+    System.assertEquals(id, testRequestModel.getId());
+    System.assertEquals(metadata, testRequestModel.getMetadata());
+    System.assertEquals(collectionId, testRequestModel.getCollectionId());
+    System.assertEquals(resultMetadata, testRequestModel.getResultMetadata());
+    System.assertEquals(title, testRequestModel.getTitle());
+    System.assertEquals(code, testRequestModel.getCode());
+    System.assertEquals(filename, testRequestModel.getFilename());
+    System.assertEquals(fileType, testRequestModel.getFileType());
+    System.assertEquals(sha1, testRequestModel.getSha1());
+    System.assertEquals(notices, testRequestModel.getNotices());
+    Test.stopTest();
+  }
+  static testMethod void testQueryOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String filter = 'filter';
+    String query = 'query';
+    String naturalLanguageQuery = 'natural_language_query';
+    Boolean passages = true;
+    String aggregation = 'aggregation';
+    Long count = 10L;
+    String xReturn = 'x_return';
+    Long offset = 10L;
+    String xSort = 'x_sort';
+    Boolean highlight = true;
+    String passagesFields = 'passages_fields';
+    Long passagesCount = 10L;
+    Long passagesCharacters = 10L;
+    Boolean deduplicate = true;
+    String deduplicateField = 'deduplicate_field';
+    Boolean similar = true;
+    String similarDocumentIds = 'similar_document_ids';
+    String similarFields = 'similar_fields';
+    String bias = 'bias';
+    Boolean spellingSuggestions = true;
+    Boolean xWatsonLoggingOptOut = true;
+
+    IBMDiscoveryV1Models.QueryOptions testRequestModel = new IBMDiscoveryV1Models.QueryOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .filter(filter)
+      .query(query)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .passages(passages)
+      .aggregation(aggregation)
+      .count(count)
+      .xReturn(xReturn)
+      .offset(offset)
+      .xSort(xSort)
+      .highlight(highlight)
+      .passagesFields(passagesFields)
+      .passagesCount(passagesCount)
+      .passagesCharacters(passagesCharacters)
+      .deduplicate(deduplicate)
+      .deduplicateField(deduplicateField)
+      .similar(similar)
+      .similarDocumentIds(similarDocumentIds)
+      .similarFields(similarFields)
+      .bias(bias)
+      .spellingSuggestions(spellingSuggestions)
+      .xWatsonLoggingOptOut(xWatsonLoggingOptOut)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(filter, testRequestModel.filter());
+    System.assertEquals(query, testRequestModel.query());
+    System.assertEquals(naturalLanguageQuery, testRequestModel.naturalLanguageQuery());
+    System.assertEquals(passages, testRequestModel.passages());
+    System.assertEquals(aggregation, testRequestModel.aggregation());
+    System.assertEquals(count, testRequestModel.count());
+    System.assertEquals(xReturn, testRequestModel.xReturn());
+    System.assertEquals(offset, testRequestModel.offset());
+    System.assertEquals(xSort, testRequestModel.xSort());
+    System.assertEquals(highlight, testRequestModel.highlight());
+    System.assertEquals(passagesFields, testRequestModel.passagesFields());
+    System.assertEquals(passagesCount, testRequestModel.passagesCount());
+    System.assertEquals(passagesCharacters, testRequestModel.passagesCharacters());
+    System.assertEquals(deduplicate, testRequestModel.deduplicate());
+    System.assertEquals(deduplicateField, testRequestModel.deduplicateField());
+    System.assertEquals(similar, testRequestModel.similar());
+    System.assertEquals(similarDocumentIds, testRequestModel.similarDocumentIds());
+    System.assertEquals(similarFields, testRequestModel.similarFields());
+    System.assertEquals(bias, testRequestModel.bias());
+    System.assertEquals(spellingSuggestions, testRequestModel.spellingSuggestions());
+    System.assertEquals(xWatsonLoggingOptOut, testRequestModel.xWatsonLoggingOptOut());
+    Test.stopTest();
+  }
+  static testMethod void testQueryPassagesModel() {
+    Test.startTest();
+    String documentId = 'document_id';
+    Double passageScore = 0.5;
+    String passageText = 'passage_text';
+    Long startOffset = 10L;
+    Long endOffset = 10L;
+    String field = 'field';
+
+    IBMDiscoveryV1Models.QueryPassages testRequestModel = new IBMDiscoveryV1Models.QueryPassages();
+    testRequestModel.setDocumentId(documentId);
+    testRequestModel.setPassageScore(passageScore);
+    testRequestModel.setPassageText(passageText);
+    testRequestModel.setStartOffset(startOffset);
+    testRequestModel.setEndOffset(endOffset);
+    testRequestModel.setField(field);
+
+    System.assertEquals(documentId, testRequestModel.getDocumentId());
+    System.assertEquals(passageScore, testRequestModel.getPassageScore());
+    System.assertEquals(passageText, testRequestModel.getPassageText());
+    System.assertEquals(startOffset, testRequestModel.getStartOffset());
+    System.assertEquals(endOffset, testRequestModel.getEndOffset());
+    System.assertEquals(field, testRequestModel.getField());
+    Test.stopTest();
+  }
+  static testMethod void testQueryResponseModel() {
+    Test.startTest();
+    Long matchingResults = 10L;
+    IBMDiscoveryV1Models.QueryResult resultsItem = new IBMDiscoveryV1Models.QueryResult();
+    List<IBMDiscoveryV1Models.QueryResult> results = new List<IBMDiscoveryV1Models.QueryResult> { resultsItem } ;
+    IBMDiscoveryV1Models.QueryAggregation aggregationsItem = new IBMDiscoveryV1Models.QueryAggregation();
+    List<IBMDiscoveryV1Models.QueryAggregation> aggregations = new List<IBMDiscoveryV1Models.QueryAggregation> { aggregationsItem } ;
+    IBMDiscoveryV1Models.QueryPassages passagesItem = new IBMDiscoveryV1Models.QueryPassages();
+    List<IBMDiscoveryV1Models.QueryPassages> passages = new List<IBMDiscoveryV1Models.QueryPassages> { passagesItem } ;
+    Long duplicatesRemoved = 10L;
+    String sessionToken = 'session_token';
+    IBMDiscoveryV1Models.RetrievalDetails retrievalDetails = new IBMDiscoveryV1Models.RetrievalDetails();
+    String suggestedQuery = 'suggested_query';
+
+    IBMDiscoveryV1Models.QueryResponse testRequestModel = new IBMDiscoveryV1Models.QueryResponse();
+    testRequestModel.setMatchingResults(matchingResults);
+    testRequestModel.setResults(results);
+    testRequestModel.setAggregations(aggregations);
+    testRequestModel.setPassages(passages);
+    testRequestModel.setDuplicatesRemoved(duplicatesRemoved);
+    testRequestModel.setSessionToken(sessionToken);
+    testRequestModel.setRetrievalDetails(retrievalDetails);
+    testRequestModel.setSuggestedQuery(suggestedQuery);
+
+    System.assertEquals(matchingResults, testRequestModel.getMatchingResults());
+    System.assertEquals(results, testRequestModel.getResults());
+    System.assertEquals(aggregations, testRequestModel.getAggregations());
+    System.assertEquals(passages, testRequestModel.getPassages());
+    System.assertEquals(duplicatesRemoved, testRequestModel.getDuplicatesRemoved());
+    System.assertEquals(sessionToken, testRequestModel.getSessionToken());
+    System.assertEquals(retrievalDetails, testRequestModel.getRetrievalDetails());
+    System.assertEquals(suggestedQuery, testRequestModel.getSuggestedQuery());
+    Test.stopTest();
+  }
+  static testMethod void testQueryResultModel() {
+    Test.startTest();
+    String id = 'id';
+    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
+    metadata.put('metadata_key', 'metadata');
+    String collectionId = 'collection_id';
+    Double score = 0.5;
+    IBMDiscoveryV1Models.QueryResultMetadata resultMetadata = new IBMDiscoveryV1Models.QueryResultMetadata();
+    String title = 'title';
+
+    IBMDiscoveryV1Models.QueryResult testRequestModel = new IBMDiscoveryV1Models.QueryResult();
+    testRequestModel.setId(id);
+    testRequestModel.setMetadata(metadata);
+    testRequestModel.setCollectionId(collectionId);
+    testRequestModel.setResultMetadata(resultMetadata);
+    testRequestModel.setTitle(title);
+
+    System.assertEquals(id, testRequestModel.getId());
+    System.assertEquals(metadata, testRequestModel.getMetadata());
+    System.assertEquals(collectionId, testRequestModel.getCollectionId());
+    System.assertEquals(resultMetadata, testRequestModel.getResultMetadata());
+    System.assertEquals(title, testRequestModel.getTitle());
+    Test.stopTest();
+  }
+  static testMethod void testQueryResultMetadataModel() {
+    Test.startTest();
+    Double score = 0.5;
+    Double confidence = 0.5;
+
+    IBMDiscoveryV1Models.QueryResultMetadata testRequestModel = new IBMDiscoveryV1Models.QueryResultMetadata();
+    testRequestModel.setScore(score);
+    testRequestModel.setConfidence(confidence);
+
+    System.assertEquals(score, testRequestModel.getScore());
+    System.assertEquals(confidence, testRequestModel.getConfidence());
+    Test.stopTest();
+  }
+  static testMethod void testRetrievalDetailsModel() {
+    Test.startTest();
+    String documentRetrievalStrategy = 'document_retrieval_strategy';
+
+    IBMDiscoveryV1Models.RetrievalDetails testRequestModel = new IBMDiscoveryV1Models.RetrievalDetails();
+    testRequestModel.setDocumentRetrievalStrategy(documentRetrievalStrategy);
+
+    System.assertEquals(documentRetrievalStrategy, testRequestModel.getDocumentRetrievalStrategy());
+    Test.stopTest();
+  }
+  static testMethod void testSduStatusModel() {
+    Test.startTest();
+    Boolean enabled = true;
+    Long totalAnnotatedPages = 10L;
+    Long totalPages = 10L;
+    Long totalDocuments = 10L;
+    IBMDiscoveryV1Models.SduStatusCustomFields customFields = new IBMDiscoveryV1Models.SduStatusCustomFields();
+
+    IBMDiscoveryV1Models.SduStatus testRequestModel = new IBMDiscoveryV1Models.SduStatus();
+    testRequestModel.setEnabled(enabled);
+    testRequestModel.setTotalAnnotatedPages(totalAnnotatedPages);
+    testRequestModel.setTotalPages(totalPages);
+    testRequestModel.setTotalDocuments(totalDocuments);
+    testRequestModel.setCustomFields(customFields);
+
+    System.assertEquals(enabled, testRequestModel.getEnabled());
+    System.assertEquals(totalAnnotatedPages, testRequestModel.getTotalAnnotatedPages());
+    System.assertEquals(totalPages, testRequestModel.getTotalPages());
+    System.assertEquals(totalDocuments, testRequestModel.getTotalDocuments());
+    System.assertEquals(customFields, testRequestModel.getCustomFields());
+    Test.stopTest();
+  }
+  static testMethod void testSduStatusCustomFieldsModel() {
+    Test.startTest();
+    Long defined = 10L;
+    Long maximumAllowed = 10L;
+
+    IBMDiscoveryV1Models.SduStatusCustomFields testRequestModel = new IBMDiscoveryV1Models.SduStatusCustomFields();
+    testRequestModel.setDefined(defined);
+    testRequestModel.setMaximumAllowed(maximumAllowed);
+
+    System.assertEquals(defined, testRequestModel.getDefined());
+    System.assertEquals(maximumAllowed, testRequestModel.getMaximumAllowed());
+    Test.stopTest();
+  }
+  static testMethod void testSearchStatusModel() {
+    Test.startTest();
+    String scope = 'scope';
+    String status = 'status';
+    String statusDescription = 'status_description';
+    Datetime lastTrained = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+
+    IBMDiscoveryV1Models.SearchStatus testRequestModel = new IBMDiscoveryV1Models.SearchStatus();
+    testRequestModel.setScope(scope);
+    testRequestModel.setStatus(status);
+    testRequestModel.setStatusDescription(statusDescription);
+    testRequestModel.setLastTrained(lastTrained);
+
+    System.assertEquals(scope, testRequestModel.getScope());
+    System.assertEquals(status, testRequestModel.getStatus());
+    System.assertEquals(statusDescription, testRequestModel.getStatusDescription());
+    System.assertEquals(lastTrained, testRequestModel.getLastTrained());
+    Test.stopTest();
+  }
+  static testMethod void testSegmentSettingsModel() {
+    Test.startTest();
+    Boolean enabled = true;
+    List<String> selectorTags = new List<String> { 'selector_tags' } ;
+    List<String> annotatedFields = new List<String> { 'annotated_fields' } ;
+
+    IBMDiscoveryV1Models.SegmentSettings testRequestModel = new IBMDiscoveryV1Models.SegmentSettingsBuilder()
+      .enabled(enabled)
+      .selectorTags(selectorTags)
+      .annotatedFields(annotatedFields)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(enabled, testRequestModel.getEnabled());
+    System.assertEquals(selectorTags, testRequestModel.getSelectorTags());
+    System.assertEquals(annotatedFields, testRequestModel.getAnnotatedFields());
+    Test.stopTest();
+  }
+  static testMethod void testSourceModel() {
+    Test.startTest();
+    String xType = 'x_type';
+    String credentialId = 'credential_id';
+    IBMDiscoveryV1Models.SourceSchedule schedule = new IBMDiscoveryV1Models.SourceScheduleBuilder()
+      .build();
+    IBMDiscoveryV1Models.SourceOptions options = new IBMDiscoveryV1Models.SourceOptionsBuilder()
+      .build();
+
+    IBMDiscoveryV1Models.Source testRequestModel = new IBMDiscoveryV1Models.SourceBuilder()
+      .xType(xType)
+      .credentialId(credentialId)
+      .schedule(schedule)
+      .options(options)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(xType, testRequestModel.getXType());
+    System.assertEquals(credentialId, testRequestModel.getCredentialId());
+    System.assertEquals(schedule, testRequestModel.getSchedule());
+    System.assertEquals(options, testRequestModel.getOptions());
+    Test.stopTest();
+  }
+  static testMethod void testSourceOptionsModel() {
+    Test.startTest();
+    String ownerUserId = 'owner_user_id';
+    String folderId = 'folder_id';
+    IBMDiscoveryV1Models.SourceOptionsFolder foldersItem = new IBMDiscoveryV1Models.SourceOptionsFolderBuilder()
+      .ownerUserId(ownerUserId)
+      .folderId(folderId)
+      .build();
+    List<IBMDiscoveryV1Models.SourceOptionsFolder> folders = new List<IBMDiscoveryV1Models.SourceOptionsFolder> { foldersItem } ;
+    String name = 'name';
+    IBMDiscoveryV1Models.SourceOptionsObject objectsItem = new IBMDiscoveryV1Models.SourceOptionsObjectBuilder()
+      .name(name)
+      .build();
+    List<IBMDiscoveryV1Models.SourceOptionsObject> objects = new List<IBMDiscoveryV1Models.SourceOptionsObject> { objectsItem } ;
+    String siteCollectionPath = 'site_collection_path';
+    IBMDiscoveryV1Models.SourceOptionsSiteColl siteCollectionsItem = new IBMDiscoveryV1Models.SourceOptionsSiteCollBuilder()
+      .siteCollectionPath(siteCollectionPath)
+      .build();
+    List<IBMDiscoveryV1Models.SourceOptionsSiteColl> siteCollections = new List<IBMDiscoveryV1Models.SourceOptionsSiteColl> { siteCollectionsItem } ;
+    String url = 'url';
+    IBMDiscoveryV1Models.SourceOptionsWebCrawl urlsItem = new IBMDiscoveryV1Models.SourceOptionsWebCrawlBuilder()
+      .url(url)
+      .build();
+    List<IBMDiscoveryV1Models.SourceOptionsWebCrawl> urls = new List<IBMDiscoveryV1Models.SourceOptionsWebCrawl> { urlsItem } ;
+    IBMDiscoveryV1Models.SourceOptionsBuckets bucketsItem = new IBMDiscoveryV1Models.SourceOptionsBucketsBuilder()
+      .name(name)
+      .build();
+    List<IBMDiscoveryV1Models.SourceOptionsBuckets> buckets = new List<IBMDiscoveryV1Models.SourceOptionsBuckets> { bucketsItem } ;
+    Boolean crawlAllBuckets = true;
+
+    IBMDiscoveryV1Models.SourceOptions testRequestModel = new IBMDiscoveryV1Models.SourceOptionsBuilder()
+      .folders(folders)
+      .objects(objects)
+      .siteCollections(siteCollections)
+      .urls(urls)
+      .buckets(buckets)
+      .crawlAllBuckets(crawlAllBuckets)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(folders, testRequestModel.getFolders());
+    System.assertEquals(objects, testRequestModel.getObjects());
+    System.assertEquals(siteCollections, testRequestModel.getSiteCollections());
+    System.assertEquals(urls, testRequestModel.getUrls());
+    System.assertEquals(buckets, testRequestModel.getBuckets());
+    System.assertEquals(crawlAllBuckets, testRequestModel.getCrawlAllBuckets());
+    Test.stopTest();
+  }
+  static testMethod void testSourceOptionsBucketsModel() {
+    Test.startTest();
+    String name = 'name';
+    Long xLimit = 10L;
+
+    IBMDiscoveryV1Models.SourceOptionsBuckets testRequestModel = new IBMDiscoveryV1Models.SourceOptionsBucketsBuilder()
+      .name(name)
+      .xLimit(xLimit)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(name, testRequestModel.getName());
+    System.assertEquals(xLimit, testRequestModel.getXLimit());
+    Test.stopTest();
+  }
+  static testMethod void testSourceOptionsFolderModel() {
+    Test.startTest();
+    String ownerUserId = 'owner_user_id';
+    String folderId = 'folder_id';
+    Long xLimit = 10L;
+
+    IBMDiscoveryV1Models.SourceOptionsFolder testRequestModel = new IBMDiscoveryV1Models.SourceOptionsFolderBuilder()
+      .ownerUserId(ownerUserId)
+      .folderId(folderId)
+      .xLimit(xLimit)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(ownerUserId, testRequestModel.getOwnerUserId());
+    System.assertEquals(folderId, testRequestModel.getFolderId());
+    System.assertEquals(xLimit, testRequestModel.getXLimit());
+    Test.stopTest();
+  }
+  static testMethod void testSourceOptionsObjectModel() {
+    Test.startTest();
+    String name = 'name';
+    Long xLimit = 10L;
+
+    IBMDiscoveryV1Models.SourceOptionsObject testRequestModel = new IBMDiscoveryV1Models.SourceOptionsObjectBuilder()
+      .name(name)
+      .xLimit(xLimit)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(name, testRequestModel.getName());
+    System.assertEquals(xLimit, testRequestModel.getXLimit());
+    Test.stopTest();
+  }
+  static testMethod void testSourceOptionsSiteCollModel() {
+    Test.startTest();
+    String siteCollectionPath = 'site_collection_path';
+    Long xLimit = 10L;
+
+    IBMDiscoveryV1Models.SourceOptionsSiteColl testRequestModel = new IBMDiscoveryV1Models.SourceOptionsSiteCollBuilder()
+      .siteCollectionPath(siteCollectionPath)
+      .xLimit(xLimit)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(siteCollectionPath, testRequestModel.getSiteCollectionPath());
+    System.assertEquals(xLimit, testRequestModel.getXLimit());
+    Test.stopTest();
+  }
+  static testMethod void testSourceOptionsWebCrawlModel() {
+    Test.startTest();
+    String url = 'url';
+    Boolean limitToStartingHosts = true;
+    String crawlSpeed = 'crawl_speed';
+    Boolean allowUntrustedCertificate = true;
+    Long maximumHops = 10L;
+    Long requestTimeout = 10L;
+    Boolean overrideRobotsTxt = true;
+    List<String> blacklist = new List<String> { 'blacklist' } ;
+
+    IBMDiscoveryV1Models.SourceOptionsWebCrawl testRequestModel = new IBMDiscoveryV1Models.SourceOptionsWebCrawlBuilder()
+      .url(url)
+      .limitToStartingHosts(limitToStartingHosts)
+      .crawlSpeed(crawlSpeed)
+      .allowUntrustedCertificate(allowUntrustedCertificate)
+      .maximumHops(maximumHops)
+      .requestTimeout(requestTimeout)
+      .overrideRobotsTxt(overrideRobotsTxt)
+      .blacklist(blacklist)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(url, testRequestModel.getUrl());
+    System.assertEquals(limitToStartingHosts, testRequestModel.getLimitToStartingHosts());
+    System.assertEquals(crawlSpeed, testRequestModel.getCrawlSpeed());
+    System.assertEquals(allowUntrustedCertificate, testRequestModel.getAllowUntrustedCertificate());
+    System.assertEquals(maximumHops, testRequestModel.getMaximumHops());
+    System.assertEquals(requestTimeout, testRequestModel.getRequestTimeout());
+    System.assertEquals(overrideRobotsTxt, testRequestModel.getOverrideRobotsTxt());
+    System.assertEquals(blacklist, testRequestModel.getBlacklist());
+    Test.stopTest();
+  }
+  static testMethod void testSourceScheduleModel() {
+    Test.startTest();
+    Boolean enabled = true;
+    String timeZone = 'time_zone';
+    String frequency = 'frequency';
+
+    IBMDiscoveryV1Models.SourceSchedule testRequestModel = new IBMDiscoveryV1Models.SourceScheduleBuilder()
+      .enabled(enabled)
+      .timeZone(timeZone)
+      .frequency(frequency)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(enabled, testRequestModel.getEnabled());
+    System.assertEquals(timeZone, testRequestModel.getTimeZone());
+    System.assertEquals(frequency, testRequestModel.getFrequency());
+    Test.stopTest();
+  }
+  static testMethod void testSourceStatusModel() {
+    Test.startTest();
+    String status = 'status';
+    Datetime nextCrawl = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+
+    IBMDiscoveryV1Models.SourceStatus testRequestModel = new IBMDiscoveryV1Models.SourceStatus();
+    testRequestModel.setStatus(status);
+    testRequestModel.setNextCrawl(nextCrawl);
+
+    System.assertEquals(status, testRequestModel.getStatus());
+    System.assertEquals(nextCrawl, testRequestModel.getNextCrawl());
+    Test.stopTest();
+  }
+  static testMethod void testTokenDictRuleModel() {
+    Test.startTest();
+    String text = 'text';
+    List<String> tokens = new List<String> { 'tokens' } ;
+    List<String> readings = new List<String> { 'readings' } ;
+    String partOfSpeech = 'part_of_speech';
+
+    IBMDiscoveryV1Models.TokenDictRule testRequestModel = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
+      .text(text)
+      .tokens(tokens)
+      .readings(readings)
+      .partOfSpeech(partOfSpeech)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(text, testRequestModel.getText());
+    System.assertEquals(tokens, testRequestModel.getTokens());
+    System.assertEquals(readings, testRequestModel.getReadings());
+    System.assertEquals(partOfSpeech, testRequestModel.getPartOfSpeech());
+    Test.stopTest();
+  }
+  static testMethod void testTokenDictStatusResponseModel() {
+    Test.startTest();
+    String status = 'status';
+    String xType = 'x_type';
+
+    IBMDiscoveryV1Models.TokenDictStatusResponse testRequestModel = new IBMDiscoveryV1Models.TokenDictStatusResponse();
+    testRequestModel.setStatus(status);
+    testRequestModel.setXType(xType);
+
+    System.assertEquals(status, testRequestModel.getStatus());
+    System.assertEquals(xType, testRequestModel.getXType());
+    Test.stopTest();
+  }
+  static testMethod void testTopHitsResultsModel() {
+    Test.startTest();
+    Long matchingResults = 10L;
+    IBMDiscoveryV1Models.QueryResult hitsItem = new IBMDiscoveryV1Models.QueryResult();
+    List<IBMDiscoveryV1Models.QueryResult> hits = new List<IBMDiscoveryV1Models.QueryResult> { hitsItem } ;
+
+    IBMDiscoveryV1Models.TopHitsResults testRequestModel = new IBMDiscoveryV1Models.TopHitsResults();
+    testRequestModel.setMatchingResults(matchingResults);
+    testRequestModel.setHits(hits);
+
+    System.assertEquals(matchingResults, testRequestModel.getMatchingResults());
+    System.assertEquals(hits, testRequestModel.getHits());
+    Test.stopTest();
+  }
+  static testMethod void testTrainingDataSetModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    IBMDiscoveryV1Models.TrainingQuery queriesItem = new IBMDiscoveryV1Models.TrainingQuery();
+    List<IBMDiscoveryV1Models.TrainingQuery> queries = new List<IBMDiscoveryV1Models.TrainingQuery> { queriesItem } ;
+
+    IBMDiscoveryV1Models.TrainingDataSet testRequestModel = new IBMDiscoveryV1Models.TrainingDataSet();
+    testRequestModel.setEnvironmentId(environmentId);
+    testRequestModel.setCollectionId(collectionId);
+    testRequestModel.setQueries(queries);
+
+    System.assertEquals(environmentId, testRequestModel.getEnvironmentId());
+    System.assertEquals(collectionId, testRequestModel.getCollectionId());
+    System.assertEquals(queries, testRequestModel.getQueries());
+    Test.stopTest();
+  }
+  static testMethod void testTrainingExampleModel() {
+    Test.startTest();
+    String documentId = 'document_id';
+    String crossReference = 'cross_reference';
+    Long relevance = 10L;
+
+    IBMDiscoveryV1Models.TrainingExample testRequestModel = new IBMDiscoveryV1Models.TrainingExampleBuilder()
+      .documentId(documentId)
+      .crossReference(crossReference)
+      .relevance(relevance)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(documentId, testRequestModel.getDocumentId());
+    System.assertEquals(crossReference, testRequestModel.getCrossReference());
+    System.assertEquals(relevance, testRequestModel.getRelevance());
+    Test.stopTest();
+  }
+  static testMethod void testTrainingExampleListModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.TrainingExample examplesItem = new IBMDiscoveryV1Models.TrainingExampleBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.TrainingExample> examples = new List<IBMDiscoveryV1Models.TrainingExample> { examplesItem } ;
+
+    IBMDiscoveryV1Models.TrainingExampleList testRequestModel = new IBMDiscoveryV1Models.TrainingExampleList();
+    testRequestModel.setExamples(examples);
+
+    System.assertEquals(examples, testRequestModel.getExamples());
+    Test.stopTest();
+  }
+  static testMethod void testTrainingQueryModel() {
+    Test.startTest();
+    String queryId = 'query_id';
+    String naturalLanguageQuery = 'natural_language_query';
+    String filter = 'filter';
+    IBMDiscoveryV1Models.TrainingExample examplesItem = new IBMDiscoveryV1Models.TrainingExampleBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.TrainingExample> examples = new List<IBMDiscoveryV1Models.TrainingExample> { examplesItem } ;
+
+    IBMDiscoveryV1Models.TrainingQuery testRequestModel = new IBMDiscoveryV1Models.TrainingQuery();
+    testRequestModel.setQueryId(queryId);
+    testRequestModel.setNaturalLanguageQuery(naturalLanguageQuery);
+    testRequestModel.setFilter(filter);
+    testRequestModel.setExamples(examples);
+
+    System.assertEquals(queryId, testRequestModel.getQueryId());
+    System.assertEquals(naturalLanguageQuery, testRequestModel.getNaturalLanguageQuery());
+    System.assertEquals(filter, testRequestModel.getFilter());
+    System.assertEquals(examples, testRequestModel.getExamples());
+    Test.stopTest();
+  }
+  static testMethod void testTrainingStatusModel() {
+    Test.startTest();
+    Long totalExamples = 10L;
+    Boolean available = true;
+    Boolean processing = true;
+    Boolean minimumQueriesAdded = true;
+    Boolean minimumExamplesAdded = true;
+    Boolean sufficientLabelDiversity = true;
+    Long notices = 10L;
+    Datetime successfullyTrained = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime dataUpdated = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+
+    IBMDiscoveryV1Models.TrainingStatus testRequestModel = new IBMDiscoveryV1Models.TrainingStatus();
+    testRequestModel.setTotalExamples(totalExamples);
+    testRequestModel.setAvailable(available);
+    testRequestModel.setProcessing(processing);
+    testRequestModel.setMinimumQueriesAdded(minimumQueriesAdded);
+    testRequestModel.setMinimumExamplesAdded(minimumExamplesAdded);
+    testRequestModel.setSufficientLabelDiversity(sufficientLabelDiversity);
+    testRequestModel.setNotices(notices);
+    testRequestModel.setSuccessfullyTrained(successfullyTrained);
+    testRequestModel.setDataUpdated(dataUpdated);
+
+    System.assertEquals(totalExamples, testRequestModel.getTotalExamples());
+    System.assertEquals(available, testRequestModel.getAvailable());
+    System.assertEquals(processing, testRequestModel.getProcessing());
+    System.assertEquals(minimumQueriesAdded, testRequestModel.getMinimumQueriesAdded());
+    System.assertEquals(minimumExamplesAdded, testRequestModel.getMinimumExamplesAdded());
+    System.assertEquals(sufficientLabelDiversity, testRequestModel.getSufficientLabelDiversity());
+    System.assertEquals(notices, testRequestModel.getNotices());
+    System.assertEquals(successfullyTrained, testRequestModel.getSuccessfullyTrained());
+    System.assertEquals(dataUpdated, testRequestModel.getDataUpdated());
+    Test.stopTest();
+  }
+  static testMethod void testUpdateCollectionOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String name = 'name';
+    String description = 'description';
+    String configurationId = 'configuration_id';
+
+    IBMDiscoveryV1Models.UpdateCollectionOptions testRequestModel = new IBMDiscoveryV1Models.UpdateCollectionOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .name(name)
+      .description(description)
+      .configurationId(configurationId)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(name, testRequestModel.name());
+    System.assertEquals(description, testRequestModel.description());
+    System.assertEquals(configurationId, testRequestModel.configurationId());
+    Test.stopTest();
+  }
+  static testMethod void testUpdateConfigurationOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String configurationId = 'configuration_id';
+    String name = 'name';
+    String description = 'description';
+    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
+      .build();
+    String destinationField = 'destination_field';
+    String sourceField = 'source_field';
+    String enrichment = 'enrichment';
+    IBMDiscoveryV1Models.Enrichment enrichmentsItem = new IBMDiscoveryV1Models.EnrichmentBuilder()
+      .destinationField(destinationField)
+      .sourceField(sourceField)
+      .enrichment(enrichment)
+      .build();
+    List<IBMDiscoveryV1Models.Enrichment> enrichments = new List<IBMDiscoveryV1Models.Enrichment> { enrichmentsItem } ;
+    IBMDiscoveryV1Models.NormalizationOperation normalizationsItem = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.NormalizationOperation> normalizations = new List<IBMDiscoveryV1Models.NormalizationOperation> { normalizationsItem } ;
+    IBMDiscoveryV1Models.Source source = new IBMDiscoveryV1Models.SourceBuilder()
+      .build();
+
+    IBMDiscoveryV1Models.UpdateConfigurationOptions testRequestModel = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder()
+      .environmentId(environmentId)
+      .configurationId(configurationId)
+      .name(name)
+      .description(description)
+      .conversions(conversions)
+      .enrichments(enrichments)
+      .normalizations(normalizations)
+      .source(source)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(configurationId, testRequestModel.configurationId());
+    System.assertEquals(name, testRequestModel.name());
+    System.assertEquals(description, testRequestModel.description());
+    System.assertEquals(conversions, testRequestModel.conversions());
+    System.assertEquals(enrichments, testRequestModel.enrichments());
+    System.assertEquals(normalizations, testRequestModel.normalizations());
+    System.assertEquals(source, testRequestModel.source());
+    Test.stopTest();
+  }
+  static testMethod void testUpdateCredentialsOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String credentialId = 'credential_id';
+    String sourceType = 'source_type';
+    IBMDiscoveryV1Models.CredentialDetails credentialDetails = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
+      .build();
+    String status = 'status';
+
+    IBMDiscoveryV1Models.UpdateCredentialsOptions testRequestModel = new IBMDiscoveryV1Models.UpdateCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .sourceType(sourceType)
+      .credentialDetails(credentialDetails)
+      .status(status)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(credentialId, testRequestModel.credentialId());
+    System.assertEquals(sourceType, testRequestModel.sourceType());
+    System.assertEquals(credentialDetails, testRequestModel.credentialDetails());
+    System.assertEquals(status, testRequestModel.status());
+    Test.stopTest();
+  }
+  static testMethod void testUpdateDocumentOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+    IBMWatsonFile file = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/json')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+    String filename = 'filename';
+    String fileContentType = 'file_content_type';
+    String metadata = 'metadata';
+
+    IBMDiscoveryV1Models.UpdateDocumentOptions testRequestModel = new IBMDiscoveryV1Models.UpdateDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .file(file)
+      .filename(filename)
+      .fileContentType(fileContentType)
+      .metadata(metadata)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(documentId, testRequestModel.documentId());
+    System.assertEquals(file, testRequestModel.file());
+    System.assertEquals(filename, testRequestModel.filename());
+    System.assertEquals(fileContentType, testRequestModel.fileContentType());
+    System.assertEquals(metadata, testRequestModel.metadata());
+    Test.stopTest();
+  }
+  static testMethod void testUpdateEnvironmentOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String name = 'name';
+    String description = 'description';
+    String size = 'size';
+
+    IBMDiscoveryV1Models.UpdateEnvironmentOptions testRequestModel = new IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
+      .environmentId(environmentId)
+      .name(name)
+      .description(description)
+      .size(size)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(name, testRequestModel.name());
+    System.assertEquals(description, testRequestModel.description());
+    System.assertEquals(size, testRequestModel.size());
+    Test.stopTest();
+  }
+  static testMethod void testUpdateTrainingExampleOptionsModel() {
+    Test.startTest();
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+    String exampleId = 'example_id';
+    String crossReference = 'cross_reference';
+    Long relevance = 10L;
+
+    IBMDiscoveryV1Models.UpdateTrainingExampleOptions testRequestModel = new IBMDiscoveryV1Models.UpdateTrainingExampleOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .exampleId(exampleId)
+      .crossReference(crossReference)
+      .relevance(relevance)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(environmentId, testRequestModel.environmentId());
+    System.assertEquals(collectionId, testRequestModel.collectionId());
+    System.assertEquals(queryId, testRequestModel.queryId());
+    System.assertEquals(exampleId, testRequestModel.exampleId());
+    System.assertEquals(crossReference, testRequestModel.crossReference());
+    System.assertEquals(relevance, testRequestModel.relevance());
+    Test.stopTest();
+  }
+  static testMethod void testWordHeadingDetectionModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.FontSetting fontsItem = new IBMDiscoveryV1Models.FontSettingBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.FontSetting> fonts = new List<IBMDiscoveryV1Models.FontSetting> { fontsItem } ;
+    IBMDiscoveryV1Models.WordStyle stylesItem = new IBMDiscoveryV1Models.WordStyleBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.WordStyle> styles = new List<IBMDiscoveryV1Models.WordStyle> { stylesItem } ;
+
+    IBMDiscoveryV1Models.WordHeadingDetection testRequestModel = new IBMDiscoveryV1Models.WordHeadingDetectionBuilder()
+      .fonts(fonts)
+      .styles(styles)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(fonts, testRequestModel.getFonts());
+    System.assertEquals(styles, testRequestModel.getStyles());
+    Test.stopTest();
+  }
+  static testMethod void testWordSettingsModel() {
+    Test.startTest();
+    IBMDiscoveryV1Models.WordHeadingDetection heading = new IBMDiscoveryV1Models.WordHeadingDetectionBuilder()
+      .build();
+
+    IBMDiscoveryV1Models.WordSettings testRequestModel = new IBMDiscoveryV1Models.WordSettingsBuilder()
+      .heading(heading)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(heading, testRequestModel.getHeading());
+    Test.stopTest();
+  }
+  static testMethod void testWordStyleModel() {
+    Test.startTest();
+    Long level = 10L;
+    List<String> names = new List<String> { 'names' } ;
+
+    IBMDiscoveryV1Models.WordStyle testRequestModel = new IBMDiscoveryV1Models.WordStyleBuilder()
+      .level(level)
+      .names(names)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(level, testRequestModel.getLevel());
+    System.assertEquals(names, testRequestModel.getNames());
+    Test.stopTest();
+  }
+  static testMethod void testXPathPatternsModel() {
+    Test.startTest();
+    List<String> xpaths = new List<String> { 'xpaths' } ;
+
+    IBMDiscoveryV1Models.XPathPatterns testRequestModel = new IBMDiscoveryV1Models.XPathPatternsBuilder()
+      .xpaths(xpaths)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(xpaths, testRequestModel.getXpaths());
     Test.stopTest();
   }
 
-  static testMethod void testCreateCredentials() {
-    String body = IBMWatsonMockResponses.credentials();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+
+  static testMethod void testCreateEnvironment() {
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    String sourceType = 'salesforce';
-    String credentialType = 'username_password';
-    String url = 'login.salesforce.com';
-    String username = 'user@email.address';
-    String status = 'connected';
-    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
-      .clientId('client_id')
-      .clientSecret('client_secret')
-      .credentialType(credentialType)
-      .enterpriseId('enterprise_id')
-      .organizationUrl('organization_url')
-      .passphrase('passphrase')
-      .password('password')
-      .privateKey('private_key')
-      .publicKeyId('public_key_id')
-      .siteCollectionPath('site_collection_path')
-      .url(url)
-      .username(username)
-      .gatewayId('gateway_id')
-      .sourceVersion('source_version')
-      .webApplicationUrl('web_application_url')
-      .domain('domain')
+    String name = 'name';
+
+    IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder()
+      .name(name)
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMDiscoveryV1Models.Credentials credentials = new IBMDiscoveryV1Models.CredentialsBuilder()
-      .sourceType(sourceType)
-      .credentialDetails(details)
-      .status(status)
+
+    IBMDiscoveryV1Models.Environment response = service.createEnvironment(options);
+
+    System.assertEquals(
+      'environment_id',
+      response.getEnvironmentId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      true,
+      response.getReadOnly()
+    );
+    System.assertEquals(
+      'size',
+      response.getSize()
+    );
+    System.assertEquals(
+      'requested_size',
+      response.getRequestedSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDocuments().getIndexed()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDocuments().getMaximumAllowed()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDiskUsage().getUsedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDiskUsage().getMaximumAllowedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getCollections().getAvailable()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getCollections().getMaximumAllowed()
+    );
+    System.assertEquals(
+      'scope',
+      response.getSearchStatus().getScope()
+    );
+    System.assertEquals(
+      'status',
+      response.getSearchStatus().getStatus()
+    );
+    System.assertEquals(
+      'status_description',
+      response.getSearchStatus().getStatusDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getSearchStatus().getLastTrained()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testListEnvironments() {
+    String body = IBMWatsonMockResponses.discoveryV1ListEnvironmentsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+
+    IBMDiscoveryV1Models.ListEnvironmentsOptions options = new IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
+
+    IBMDiscoveryV1Models.ListEnvironmentsResponse response = service.listEnvironments(options);
+
+    System.assertEquals(
+      'environment_id',
+      response.getEnvironments().get(0).getEnvironmentId()
+    );
+    System.assertEquals(
+      'name',
+      response.getEnvironments().get(0).getName()
+    );
+    System.assertEquals(
+      'description',
+      response.getEnvironments().get(0).getDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getEnvironments().get(0).getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getEnvironments().get(0).getUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getEnvironments().get(0).getStatus()
+    );
+    System.assertEquals(
+      true,
+      response.getEnvironments().get(0).getReadOnly()
+    );
+    System.assertEquals(
+      'size',
+      response.getEnvironments().get(0).getSize()
+    );
+    System.assertEquals(
+      'requested_size',
+      response.getEnvironments().get(0).getRequestedSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnvironments().get(0).getIndexCapacity().getDocuments().getIndexed()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnvironments().get(0).getIndexCapacity().getDocuments().getMaximumAllowed()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnvironments().get(0).getIndexCapacity().getDiskUsage().getUsedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnvironments().get(0).getIndexCapacity().getDiskUsage().getMaximumAllowedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnvironments().get(0).getIndexCapacity().getCollections().getAvailable()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnvironments().get(0).getIndexCapacity().getCollections().getMaximumAllowed()
+    );
+    System.assertEquals(
+      'scope',
+      response.getEnvironments().get(0).getSearchStatus().getScope()
+    );
+    System.assertEquals(
+      'status',
+      response.getEnvironments().get(0).getSearchStatus().getStatus()
+    );
+    System.assertEquals(
+      'status_description',
+      response.getEnvironments().get(0).getSearchStatus().getStatusDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getEnvironments().get(0).getSearchStatus().getLastTrained()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetEnvironment() {
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.GetEnvironmentOptions options = new IBMDiscoveryV1Models.GetEnvironmentOptionsBuilder()
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Environment response = service.getEnvironment(options);
+
+    System.assertEquals(
+      'environment_id',
+      response.getEnvironmentId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      true,
+      response.getReadOnly()
+    );
+    System.assertEquals(
+      'size',
+      response.getSize()
+    );
+    System.assertEquals(
+      'requested_size',
+      response.getRequestedSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDocuments().getIndexed()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDocuments().getMaximumAllowed()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDiskUsage().getUsedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDiskUsage().getMaximumAllowedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getCollections().getAvailable()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getCollections().getMaximumAllowed()
+    );
+    System.assertEquals(
+      'scope',
+      response.getSearchStatus().getScope()
+    );
+    System.assertEquals(
+      'status',
+      response.getSearchStatus().getStatus()
+    );
+    System.assertEquals(
+      'status_description',
+      response.getSearchStatus().getStatusDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getSearchStatus().getLastTrained()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testUpdateEnvironment() {
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.UpdateEnvironmentOptions options = new IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Environment response = service.updateEnvironment(options);
+
+    System.assertEquals(
+      'environment_id',
+      response.getEnvironmentId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      true,
+      response.getReadOnly()
+    );
+    System.assertEquals(
+      'size',
+      response.getSize()
+    );
+    System.assertEquals(
+      'requested_size',
+      response.getRequestedSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDocuments().getIndexed()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDocuments().getMaximumAllowed()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDiskUsage().getUsedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getDiskUsage().getMaximumAllowedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getCollections().getAvailable()
+    );
+    System.assertEquals(
+      10L,
+      response.getIndexCapacity().getCollections().getMaximumAllowed()
+    );
+    System.assertEquals(
+      'scope',
+      response.getSearchStatus().getScope()
+    );
+    System.assertEquals(
+      'status',
+      response.getSearchStatus().getStatus()
+    );
+    System.assertEquals(
+      'status_description',
+      response.getSearchStatus().getStatusDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getSearchStatus().getLastTrained()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteEnvironment() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.DeleteEnvironmentOptions options = new IBMDiscoveryV1Models.DeleteEnvironmentOptionsBuilder()
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteEnvironment(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testListFields() {
+    String body = IBMWatsonMockResponses.discoveryV1ListCollectionFieldsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    List<String> collectionIds = new List<String> { 'collection_ids' } ;
+
+    IBMDiscoveryV1Models.ListFieldsOptions options = new IBMDiscoveryV1Models.ListFieldsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionIds(collectionIds)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.ListCollectionFieldsResponse response = service.listFields(options);
+
+    System.assertEquals(
+      'field',
+      response.getFields().get(0).getField()
+    );
+    System.assertEquals(
+      'type',
+      response.getFields().get(0).getXType()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testCreateConfiguration() {
+    String body = IBMWatsonMockResponses.discoveryV1Configuration();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String name = 'name';
+    String destinationField = 'destination_field';
+    String sourceField = 'source_field';
+    String enrichment = 'enrichment';
+
+    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
+      .environmentId(environmentId)
+      .name(name)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Configuration response = service.createConfiguration(options);
+
+    System.assertEquals(
+      'configuration_id',
+      response.getConfigurationId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getLevel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getMinSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getMaxSize()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getBold()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getItalic()
+    );
+    System.assertEquals(
+      'name',
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getLevel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getMinSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getMaxSize()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getBold()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getItalic()
+    );
+    System.assertEquals(
+      'name',
+      response.getConversions().getWord().getHeading().getFonts().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getStyles().get(0).getLevel()
+    );
+    System.assertEquals(
+      'names',
+      response.getConversions().getWord().getHeading().getStyles().get(0).getNames().get(0)
+    );
+    System.assertEquals(
+      'exclude_tags_completely',
+      response.getConversions().getHtml().getExcludeTagsCompletely().get(0)
+    );
+    System.assertEquals(
+      'exclude_tags_keep_content',
+      response.getConversions().getHtml().getExcludeTagsKeepContent().get(0)
+    );
+    System.assertEquals(
+      'xpaths',
+      response.getConversions().getHtml().getKeepContent().getXpaths().get(0)
+    );
+    System.assertEquals(
+      'xpaths',
+      response.getConversions().getHtml().getExcludeContent().getXpaths().get(0)
+    );
+    System.assertEquals(
+      'keep_tag_attributes',
+      response.getConversions().getHtml().getKeepTagAttributes().get(0)
+    );
+    System.assertEquals(
+      'exclude_tag_attributes',
+      response.getConversions().getHtml().getExcludeTagAttributes().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getSegment().getEnabled()
+    );
+    System.assertEquals(
+      'selector_tags',
+      response.getConversions().getSegment().getSelectorTags().get(0)
+    );
+    System.assertEquals(
+      'annotated_fields',
+      response.getConversions().getSegment().getAnnotatedFields().get(0)
+    );
+    System.assertEquals(
+      'operation',
+      response.getConversions().getJsonNormalizations().get(0).getOperation()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getConversions().getJsonNormalizations().get(0).getSourceField()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getConversions().getJsonNormalizations().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getImageTextRecognition()
+    );
+    System.assertEquals(
+      'description',
+      response.getEnrichments().get(0).getDescription()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getEnrichments().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getEnrichments().get(0).getSourceField()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOverwrite()
+    );
+    System.assertEquals(
+      'enrichment',
+      response.getEnrichments().get(0).getEnrichment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getIgnoreDownstreamErrors()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getSentiment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getEmotion()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getSentiment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getEmotion()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getMentions()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getMentionTypes()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getSentenceLocations()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getModel()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSentiment().getDocument()
+    );
+    System.assertEquals(
+      'target',
+      response.getEnrichments().get(0).getOptions().getFeatures().getSentiment().getTargets().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEmotion().getDocument()
+    );
+    System.assertEquals(
+      'target',
+      response.getEnrichments().get(0).getOptions().getFeatures().getEmotion().getTargets().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getEntities()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getKeywords()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getXLimit()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getFeatures().getRelations().getModel()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getConcepts().getXLimit()
+    );
+    System.assertEquals(
+      'language',
+      response.getEnrichments().get(0).getOptions().getLanguage()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getModel()
+    );
+    System.assertEquals(
+      'operation',
+      response.getNormalizations().get(0).getOperation()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getNormalizations().get(0).getSourceField()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getNormalizations().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      'type',
+      response.getSource().getXType()
+    );
+    System.assertEquals(
+      'credential_id',
+      response.getSource().getCredentialId()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getSchedule().getEnabled()
+    );
+    System.assertEquals(
+      'time_zone',
+      response.getSource().getSchedule().getTimeZone()
+    );
+    System.assertEquals(
+      'frequency',
+      response.getSource().getSchedule().getFrequency()
+    );
+    System.assertEquals(
+      'owner_user_id',
+      response.getSource().getOptions().getFolders().get(0).getOwnerUserId()
+    );
+    System.assertEquals(
+      'folder_id',
+      response.getSource().getOptions().getFolders().get(0).getFolderId()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getFolders().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'name',
+      response.getSource().getOptions().getObjects().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getObjects().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'site_collection_path',
+      response.getSource().getOptions().getSiteCollections().get(0).getSiteCollectionPath()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getSiteCollections().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'url',
+      response.getSource().getOptions().getUrls().get(0).getUrl()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getLimitToStartingHosts()
+    );
+    System.assertEquals(
+      'crawl_speed',
+      response.getSource().getOptions().getUrls().get(0).getCrawlSpeed()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getAllowUntrustedCertificate()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getUrls().get(0).getMaximumHops()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getUrls().get(0).getRequestTimeout()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getOverrideRobotsTxt()
+    );
+    System.assertEquals(
+      'blacklist',
+      response.getSource().getOptions().getUrls().get(0).getBlacklist().get(0)
+    );
+    System.assertEquals(
+      'name',
+      response.getSource().getOptions().getBuckets().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getBuckets().get(0).getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getCrawlAllBuckets()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testListConfigurations() {
+    String body = IBMWatsonMockResponses.discoveryV1ListConfigurationsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.ListConfigurationsOptions options = new IBMDiscoveryV1Models.ListConfigurationsOptionsBuilder()
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.ListConfigurationsResponse response = service.listConfigurations(options);
+
+    System.assertEquals(
+      'configuration_id',
+      response.getConfigurations().get(0).getConfigurationId()
+    );
+    System.assertEquals(
+      'name',
+      response.getConfigurations().get(0).getName()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getConfigurations().get(0).getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getConfigurations().get(0).getUpdated()
+    );
+    System.assertEquals(
+      'description',
+      response.getConfigurations().get(0).getDescription()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getConversions().getPdf().getHeading().getFonts().get(0).getLevel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getConversions().getPdf().getHeading().getFonts().get(0).getMinSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getConversions().getPdf().getHeading().getFonts().get(0).getMaxSize()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getConversions().getPdf().getHeading().getFonts().get(0).getBold()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getConversions().getPdf().getHeading().getFonts().get(0).getItalic()
+    );
+    System.assertEquals(
+      'name',
+      response.getConfigurations().get(0).getConversions().getPdf().getHeading().getFonts().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getConversions().getWord().getHeading().getFonts().get(0).getLevel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getConversions().getWord().getHeading().getFonts().get(0).getMinSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getConversions().getWord().getHeading().getFonts().get(0).getMaxSize()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getConversions().getWord().getHeading().getFonts().get(0).getBold()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getConversions().getWord().getHeading().getFonts().get(0).getItalic()
+    );
+    System.assertEquals(
+      'name',
+      response.getConfigurations().get(0).getConversions().getWord().getHeading().getFonts().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getConversions().getWord().getHeading().getStyles().get(0).getLevel()
+    );
+    System.assertEquals(
+      'names',
+      response.getConfigurations().get(0).getConversions().getWord().getHeading().getStyles().get(0).getNames().get(0)
+    );
+    System.assertEquals(
+      'exclude_tags_completely',
+      response.getConfigurations().get(0).getConversions().getHtml().getExcludeTagsCompletely().get(0)
+    );
+    System.assertEquals(
+      'exclude_tags_keep_content',
+      response.getConfigurations().get(0).getConversions().getHtml().getExcludeTagsKeepContent().get(0)
+    );
+    System.assertEquals(
+      'xpaths',
+      response.getConfigurations().get(0).getConversions().getHtml().getKeepContent().getXpaths().get(0)
+    );
+    System.assertEquals(
+      'xpaths',
+      response.getConfigurations().get(0).getConversions().getHtml().getExcludeContent().getXpaths().get(0)
+    );
+    System.assertEquals(
+      'keep_tag_attributes',
+      response.getConfigurations().get(0).getConversions().getHtml().getKeepTagAttributes().get(0)
+    );
+    System.assertEquals(
+      'exclude_tag_attributes',
+      response.getConfigurations().get(0).getConversions().getHtml().getExcludeTagAttributes().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getConversions().getSegment().getEnabled()
+    );
+    System.assertEquals(
+      'selector_tags',
+      response.getConfigurations().get(0).getConversions().getSegment().getSelectorTags().get(0)
+    );
+    System.assertEquals(
+      'annotated_fields',
+      response.getConfigurations().get(0).getConversions().getSegment().getAnnotatedFields().get(0)
+    );
+    System.assertEquals(
+      'operation',
+      response.getConfigurations().get(0).getConversions().getJsonNormalizations().get(0).getOperation()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getConfigurations().get(0).getConversions().getJsonNormalizations().get(0).getSourceField()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getConfigurations().get(0).getConversions().getJsonNormalizations().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getConversions().getImageTextRecognition()
+    );
+    System.assertEquals(
+      'description',
+      response.getConfigurations().get(0).getEnrichments().get(0).getDescription()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getConfigurations().get(0).getEnrichments().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getConfigurations().get(0).getEnrichments().get(0).getSourceField()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOverwrite()
+    );
+    System.assertEquals(
+      'enrichment',
+      response.getConfigurations().get(0).getEnrichments().get(0).getEnrichment()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getIgnoreDownstreamErrors()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getKeywords().getSentiment()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getKeywords().getEmotion()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getKeywords().getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEntities().getSentiment()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEntities().getEmotion()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEntities().getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEntities().getMentions()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEntities().getMentionTypes()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEntities().getSentenceLocations()
+    );
+    System.assertEquals(
+      'model',
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEntities().getModel()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getSentiment().getDocument()
+    );
+    System.assertEquals(
+      'target',
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getSentiment().getTargets().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEmotion().getDocument()
+    );
+    System.assertEquals(
+      'target',
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getEmotion().getTargets().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getEntities()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getKeywords()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getXLimit()
+    );
+    System.assertEquals(
+      'model',
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getRelations().getModel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getFeatures().getConcepts().getXLimit()
+    );
+    System.assertEquals(
+      'language',
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getLanguage()
+    );
+    System.assertEquals(
+      'model',
+      response.getConfigurations().get(0).getEnrichments().get(0).getOptions().getModel()
+    );
+    System.assertEquals(
+      'operation',
+      response.getConfigurations().get(0).getNormalizations().get(0).getOperation()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getConfigurations().get(0).getNormalizations().get(0).getSourceField()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getConfigurations().get(0).getNormalizations().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      'type',
+      response.getConfigurations().get(0).getSource().getXType()
+    );
+    System.assertEquals(
+      'credential_id',
+      response.getConfigurations().get(0).getSource().getCredentialId()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getSource().getSchedule().getEnabled()
+    );
+    System.assertEquals(
+      'time_zone',
+      response.getConfigurations().get(0).getSource().getSchedule().getTimeZone()
+    );
+    System.assertEquals(
+      'frequency',
+      response.getConfigurations().get(0).getSource().getSchedule().getFrequency()
+    );
+    System.assertEquals(
+      'owner_user_id',
+      response.getConfigurations().get(0).getSource().getOptions().getFolders().get(0).getOwnerUserId()
+    );
+    System.assertEquals(
+      'folder_id',
+      response.getConfigurations().get(0).getSource().getOptions().getFolders().get(0).getFolderId()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getSource().getOptions().getFolders().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'name',
+      response.getConfigurations().get(0).getSource().getOptions().getObjects().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getSource().getOptions().getObjects().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'site_collection_path',
+      response.getConfigurations().get(0).getSource().getOptions().getSiteCollections().get(0).getSiteCollectionPath()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getSource().getOptions().getSiteCollections().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'url',
+      response.getConfigurations().get(0).getSource().getOptions().getUrls().get(0).getUrl()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getSource().getOptions().getUrls().get(0).getLimitToStartingHosts()
+    );
+    System.assertEquals(
+      'crawl_speed',
+      response.getConfigurations().get(0).getSource().getOptions().getUrls().get(0).getCrawlSpeed()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getSource().getOptions().getUrls().get(0).getAllowUntrustedCertificate()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getSource().getOptions().getUrls().get(0).getMaximumHops()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getSource().getOptions().getUrls().get(0).getRequestTimeout()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getSource().getOptions().getUrls().get(0).getOverrideRobotsTxt()
+    );
+    System.assertEquals(
+      'blacklist',
+      response.getConfigurations().get(0).getSource().getOptions().getUrls().get(0).getBlacklist().get(0)
+    );
+    System.assertEquals(
+      'name',
+      response.getConfigurations().get(0).getSource().getOptions().getBuckets().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConfigurations().get(0).getSource().getOptions().getBuckets().get(0).getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getConfigurations().get(0).getSource().getOptions().getCrawlAllBuckets()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetConfiguration() {
+    String body = IBMWatsonMockResponses.discoveryV1Configuration();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String configurationId = 'configuration_id';
+
+    IBMDiscoveryV1Models.GetConfigurationOptions options = new IBMDiscoveryV1Models.GetConfigurationOptionsBuilder()
+      .environmentId(environmentId)
+      .configurationId(configurationId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Configuration response = service.getConfiguration(options);
+
+    System.assertEquals(
+      'configuration_id',
+      response.getConfigurationId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getLevel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getMinSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getMaxSize()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getBold()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getItalic()
+    );
+    System.assertEquals(
+      'name',
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getLevel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getMinSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getMaxSize()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getBold()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getItalic()
+    );
+    System.assertEquals(
+      'name',
+      response.getConversions().getWord().getHeading().getFonts().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getStyles().get(0).getLevel()
+    );
+    System.assertEquals(
+      'names',
+      response.getConversions().getWord().getHeading().getStyles().get(0).getNames().get(0)
+    );
+    System.assertEquals(
+      'exclude_tags_completely',
+      response.getConversions().getHtml().getExcludeTagsCompletely().get(0)
+    );
+    System.assertEquals(
+      'exclude_tags_keep_content',
+      response.getConversions().getHtml().getExcludeTagsKeepContent().get(0)
+    );
+    System.assertEquals(
+      'xpaths',
+      response.getConversions().getHtml().getKeepContent().getXpaths().get(0)
+    );
+    System.assertEquals(
+      'xpaths',
+      response.getConversions().getHtml().getExcludeContent().getXpaths().get(0)
+    );
+    System.assertEquals(
+      'keep_tag_attributes',
+      response.getConversions().getHtml().getKeepTagAttributes().get(0)
+    );
+    System.assertEquals(
+      'exclude_tag_attributes',
+      response.getConversions().getHtml().getExcludeTagAttributes().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getSegment().getEnabled()
+    );
+    System.assertEquals(
+      'selector_tags',
+      response.getConversions().getSegment().getSelectorTags().get(0)
+    );
+    System.assertEquals(
+      'annotated_fields',
+      response.getConversions().getSegment().getAnnotatedFields().get(0)
+    );
+    System.assertEquals(
+      'operation',
+      response.getConversions().getJsonNormalizations().get(0).getOperation()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getConversions().getJsonNormalizations().get(0).getSourceField()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getConversions().getJsonNormalizations().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getImageTextRecognition()
+    );
+    System.assertEquals(
+      'description',
+      response.getEnrichments().get(0).getDescription()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getEnrichments().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getEnrichments().get(0).getSourceField()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOverwrite()
+    );
+    System.assertEquals(
+      'enrichment',
+      response.getEnrichments().get(0).getEnrichment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getIgnoreDownstreamErrors()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getSentiment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getEmotion()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getSentiment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getEmotion()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getMentions()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getMentionTypes()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getSentenceLocations()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getModel()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSentiment().getDocument()
+    );
+    System.assertEquals(
+      'target',
+      response.getEnrichments().get(0).getOptions().getFeatures().getSentiment().getTargets().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEmotion().getDocument()
+    );
+    System.assertEquals(
+      'target',
+      response.getEnrichments().get(0).getOptions().getFeatures().getEmotion().getTargets().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getEntities()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getKeywords()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getXLimit()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getFeatures().getRelations().getModel()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getConcepts().getXLimit()
+    );
+    System.assertEquals(
+      'language',
+      response.getEnrichments().get(0).getOptions().getLanguage()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getModel()
+    );
+    System.assertEquals(
+      'operation',
+      response.getNormalizations().get(0).getOperation()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getNormalizations().get(0).getSourceField()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getNormalizations().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      'type',
+      response.getSource().getXType()
+    );
+    System.assertEquals(
+      'credential_id',
+      response.getSource().getCredentialId()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getSchedule().getEnabled()
+    );
+    System.assertEquals(
+      'time_zone',
+      response.getSource().getSchedule().getTimeZone()
+    );
+    System.assertEquals(
+      'frequency',
+      response.getSource().getSchedule().getFrequency()
+    );
+    System.assertEquals(
+      'owner_user_id',
+      response.getSource().getOptions().getFolders().get(0).getOwnerUserId()
+    );
+    System.assertEquals(
+      'folder_id',
+      response.getSource().getOptions().getFolders().get(0).getFolderId()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getFolders().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'name',
+      response.getSource().getOptions().getObjects().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getObjects().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'site_collection_path',
+      response.getSource().getOptions().getSiteCollections().get(0).getSiteCollectionPath()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getSiteCollections().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'url',
+      response.getSource().getOptions().getUrls().get(0).getUrl()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getLimitToStartingHosts()
+    );
+    System.assertEquals(
+      'crawl_speed',
+      response.getSource().getOptions().getUrls().get(0).getCrawlSpeed()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getAllowUntrustedCertificate()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getUrls().get(0).getMaximumHops()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getUrls().get(0).getRequestTimeout()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getOverrideRobotsTxt()
+    );
+    System.assertEquals(
+      'blacklist',
+      response.getSource().getOptions().getUrls().get(0).getBlacklist().get(0)
+    );
+    System.assertEquals(
+      'name',
+      response.getSource().getOptions().getBuckets().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getBuckets().get(0).getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getCrawlAllBuckets()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testUpdateConfiguration() {
+    String body = IBMWatsonMockResponses.discoveryV1Configuration();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String configurationId = 'configuration_id';
+    String name = 'name';
+    String destinationField = 'destination_field';
+    String sourceField = 'source_field';
+    String enrichment = 'enrichment';
+
+    IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder()
+      .environmentId(environmentId)
+      .configurationId(configurationId)
+      .name(name)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Configuration response = service.updateConfiguration(options);
+
+    System.assertEquals(
+      'configuration_id',
+      response.getConfigurationId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getLevel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getMinSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getMaxSize()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getBold()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getItalic()
+    );
+    System.assertEquals(
+      'name',
+      response.getConversions().getPdf().getHeading().getFonts().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getLevel()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getMinSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getMaxSize()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getBold()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getWord().getHeading().getFonts().get(0).getItalic()
+    );
+    System.assertEquals(
+      'name',
+      response.getConversions().getWord().getHeading().getFonts().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getConversions().getWord().getHeading().getStyles().get(0).getLevel()
+    );
+    System.assertEquals(
+      'names',
+      response.getConversions().getWord().getHeading().getStyles().get(0).getNames().get(0)
+    );
+    System.assertEquals(
+      'exclude_tags_completely',
+      response.getConversions().getHtml().getExcludeTagsCompletely().get(0)
+    );
+    System.assertEquals(
+      'exclude_tags_keep_content',
+      response.getConversions().getHtml().getExcludeTagsKeepContent().get(0)
+    );
+    System.assertEquals(
+      'xpaths',
+      response.getConversions().getHtml().getKeepContent().getXpaths().get(0)
+    );
+    System.assertEquals(
+      'xpaths',
+      response.getConversions().getHtml().getExcludeContent().getXpaths().get(0)
+    );
+    System.assertEquals(
+      'keep_tag_attributes',
+      response.getConversions().getHtml().getKeepTagAttributes().get(0)
+    );
+    System.assertEquals(
+      'exclude_tag_attributes',
+      response.getConversions().getHtml().getExcludeTagAttributes().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getSegment().getEnabled()
+    );
+    System.assertEquals(
+      'selector_tags',
+      response.getConversions().getSegment().getSelectorTags().get(0)
+    );
+    System.assertEquals(
+      'annotated_fields',
+      response.getConversions().getSegment().getAnnotatedFields().get(0)
+    );
+    System.assertEquals(
+      'operation',
+      response.getConversions().getJsonNormalizations().get(0).getOperation()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getConversions().getJsonNormalizations().get(0).getSourceField()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getConversions().getJsonNormalizations().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      true,
+      response.getConversions().getImageTextRecognition()
+    );
+    System.assertEquals(
+      'description',
+      response.getEnrichments().get(0).getDescription()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getEnrichments().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getEnrichments().get(0).getSourceField()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOverwrite()
+    );
+    System.assertEquals(
+      'enrichment',
+      response.getEnrichments().get(0).getEnrichment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getIgnoreDownstreamErrors()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getSentiment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getEmotion()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getKeywords().getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getSentiment()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getEmotion()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getMentions()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getMentionTypes()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getSentenceLocations()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getFeatures().getEntities().getModel()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSentiment().getDocument()
+    );
+    System.assertEquals(
+      'target',
+      response.getEnrichments().get(0).getOptions().getFeatures().getSentiment().getTargets().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getEmotion().getDocument()
+    );
+    System.assertEquals(
+      'target',
+      response.getEnrichments().get(0).getOptions().getFeatures().getEmotion().getTargets().get(0)
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getEntities()
+    );
+    System.assertEquals(
+      true,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getKeywords()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getSemanticRoles().getXLimit()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getFeatures().getRelations().getModel()
+    );
+    System.assertEquals(
+      10L,
+      response.getEnrichments().get(0).getOptions().getFeatures().getConcepts().getXLimit()
+    );
+    System.assertEquals(
+      'language',
+      response.getEnrichments().get(0).getOptions().getLanguage()
+    );
+    System.assertEquals(
+      'model',
+      response.getEnrichments().get(0).getOptions().getModel()
+    );
+    System.assertEquals(
+      'operation',
+      response.getNormalizations().get(0).getOperation()
+    );
+    System.assertEquals(
+      'source_field',
+      response.getNormalizations().get(0).getSourceField()
+    );
+    System.assertEquals(
+      'destination_field',
+      response.getNormalizations().get(0).getDestinationField()
+    );
+    System.assertEquals(
+      'type',
+      response.getSource().getXType()
+    );
+    System.assertEquals(
+      'credential_id',
+      response.getSource().getCredentialId()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getSchedule().getEnabled()
+    );
+    System.assertEquals(
+      'time_zone',
+      response.getSource().getSchedule().getTimeZone()
+    );
+    System.assertEquals(
+      'frequency',
+      response.getSource().getSchedule().getFrequency()
+    );
+    System.assertEquals(
+      'owner_user_id',
+      response.getSource().getOptions().getFolders().get(0).getOwnerUserId()
+    );
+    System.assertEquals(
+      'folder_id',
+      response.getSource().getOptions().getFolders().get(0).getFolderId()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getFolders().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'name',
+      response.getSource().getOptions().getObjects().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getObjects().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'site_collection_path',
+      response.getSource().getOptions().getSiteCollections().get(0).getSiteCollectionPath()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getSiteCollections().get(0).getXLimit()
+    );
+    System.assertEquals(
+      'url',
+      response.getSource().getOptions().getUrls().get(0).getUrl()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getLimitToStartingHosts()
+    );
+    System.assertEquals(
+      'crawl_speed',
+      response.getSource().getOptions().getUrls().get(0).getCrawlSpeed()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getAllowUntrustedCertificate()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getUrls().get(0).getMaximumHops()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getUrls().get(0).getRequestTimeout()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getUrls().get(0).getOverrideRobotsTxt()
+    );
+    System.assertEquals(
+      'blacklist',
+      response.getSource().getOptions().getUrls().get(0).getBlacklist().get(0)
+    );
+    System.assertEquals(
+      'name',
+      response.getSource().getOptions().getBuckets().get(0).getName()
+    );
+    System.assertEquals(
+      10L,
+      response.getSource().getOptions().getBuckets().get(0).getXLimit()
+    );
+    System.assertEquals(
+      true,
+      response.getSource().getOptions().getCrawlAllBuckets()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteConfiguration() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String configurationId = 'configuration_id';
+
+    IBMDiscoveryV1Models.DeleteConfigurationOptions options = new IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder()
+      .environmentId(environmentId)
+      .configurationId(configurationId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteConfiguration(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testCreateCollection() {
+    String body = IBMWatsonMockResponses.discoveryV1Collection();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String name = 'name';
+
+    IBMDiscoveryV1Models.CreateCollectionOptions options = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder()
+      .environmentId(environmentId)
+      .name(name)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Collection response = service.createCollection(options);
+
+    System.assertEquals(
+      'collection_id',
+      response.getCollectionId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'configuration_id',
+      response.getConfigurationId()
+    );
+    System.assertEquals(
+      'language',
+      response.getLanguage()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getAvailable()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getProcessing()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getFailed()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getPending()
+    );
+    System.assertEquals(
+      10L,
+      response.getDiskUsage().getUsedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getTrainingStatus().getTotalExamples()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getAvailable()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getProcessing()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getMinimumQueriesAdded()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getMinimumExamplesAdded()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getSufficientLabelDiversity()
+    );
+    System.assertEquals(
+      10L,
+      response.getTrainingStatus().getNotices()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getTrainingStatus().getSuccessfullyTrained()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getTrainingStatus().getDataUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getCrawlStatus().getSourceCrawl().getStatus()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCrawlStatus().getSourceCrawl().getNextCrawl()
+    );
+    System.assertEquals(
+      true,
+      response.getSmartDocumentUnderstanding().getEnabled()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalAnnotatedPages()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalPages()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalDocuments()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getCustomFields().getDefined()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getCustomFields().getMaximumAllowed()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testListCollections() {
+    String body = IBMWatsonMockResponses.discoveryV1ListCollectionsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.ListCollectionsOptions options = new IBMDiscoveryV1Models.ListCollectionsOptionsBuilder()
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.ListCollectionsResponse response = service.listCollections(options);
+
+    System.assertEquals(
+      'collection_id',
+      response.getCollections().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      'name',
+      response.getCollections().get(0).getName()
+    );
+    System.assertEquals(
+      'description',
+      response.getCollections().get(0).getDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCollections().get(0).getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCollections().get(0).getUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getCollections().get(0).getStatus()
+    );
+    System.assertEquals(
+      'configuration_id',
+      response.getCollections().get(0).getConfigurationId()
+    );
+    System.assertEquals(
+      'language',
+      response.getCollections().get(0).getLanguage()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getDocumentCounts().getAvailable()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getDocumentCounts().getProcessing()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getDocumentCounts().getFailed()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getDocumentCounts().getPending()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getDiskUsage().getUsedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getTrainingStatus().getTotalExamples()
+    );
+    System.assertEquals(
+      true,
+      response.getCollections().get(0).getTrainingStatus().getAvailable()
+    );
+    System.assertEquals(
+      true,
+      response.getCollections().get(0).getTrainingStatus().getProcessing()
+    );
+    System.assertEquals(
+      true,
+      response.getCollections().get(0).getTrainingStatus().getMinimumQueriesAdded()
+    );
+    System.assertEquals(
+      true,
+      response.getCollections().get(0).getTrainingStatus().getMinimumExamplesAdded()
+    );
+    System.assertEquals(
+      true,
+      response.getCollections().get(0).getTrainingStatus().getSufficientLabelDiversity()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getTrainingStatus().getNotices()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCollections().get(0).getTrainingStatus().getSuccessfullyTrained()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCollections().get(0).getTrainingStatus().getDataUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getCollections().get(0).getCrawlStatus().getSourceCrawl().getStatus()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCollections().get(0).getCrawlStatus().getSourceCrawl().getNextCrawl()
+    );
+    System.assertEquals(
+      true,
+      response.getCollections().get(0).getSmartDocumentUnderstanding().getEnabled()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getSmartDocumentUnderstanding().getTotalAnnotatedPages()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getSmartDocumentUnderstanding().getTotalPages()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getSmartDocumentUnderstanding().getTotalDocuments()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getSmartDocumentUnderstanding().getCustomFields().getDefined()
+    );
+    System.assertEquals(
+      10L,
+      response.getCollections().get(0).getSmartDocumentUnderstanding().getCustomFields().getMaximumAllowed()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetCollection() {
+    String body = IBMWatsonMockResponses.discoveryV1Collection();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.GetCollectionOptions options = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Collection response = service.getCollection(options);
+
+    System.assertEquals(
+      'collection_id',
+      response.getCollectionId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'configuration_id',
+      response.getConfigurationId()
+    );
+    System.assertEquals(
+      'language',
+      response.getLanguage()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getAvailable()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getProcessing()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getFailed()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getPending()
+    );
+    System.assertEquals(
+      10L,
+      response.getDiskUsage().getUsedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getTrainingStatus().getTotalExamples()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getAvailable()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getProcessing()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getMinimumQueriesAdded()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getMinimumExamplesAdded()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getSufficientLabelDiversity()
+    );
+    System.assertEquals(
+      10L,
+      response.getTrainingStatus().getNotices()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getTrainingStatus().getSuccessfullyTrained()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getTrainingStatus().getDataUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getCrawlStatus().getSourceCrawl().getStatus()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCrawlStatus().getSourceCrawl().getNextCrawl()
+    );
+    System.assertEquals(
+      true,
+      response.getSmartDocumentUnderstanding().getEnabled()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalAnnotatedPages()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalPages()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalDocuments()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getCustomFields().getDefined()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getCustomFields().getMaximumAllowed()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testUpdateCollection() {
+    String body = IBMWatsonMockResponses.discoveryV1Collection();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.UpdateCollectionOptions options = new IBMDiscoveryV1Models.UpdateCollectionOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Collection response = service.updateCollection(options);
+
+    System.assertEquals(
+      'collection_id',
+      response.getCollectionId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'description',
+      response.getDescription()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCreated()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'configuration_id',
+      response.getConfigurationId()
+    );
+    System.assertEquals(
+      'language',
+      response.getLanguage()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getAvailable()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getProcessing()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getFailed()
+    );
+    System.assertEquals(
+      10L,
+      response.getDocumentCounts().getPending()
+    );
+    System.assertEquals(
+      10L,
+      response.getDiskUsage().getUsedBytes()
+    );
+    System.assertEquals(
+      10L,
+      response.getTrainingStatus().getTotalExamples()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getAvailable()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getProcessing()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getMinimumQueriesAdded()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getMinimumExamplesAdded()
+    );
+    System.assertEquals(
+      true,
+      response.getTrainingStatus().getSufficientLabelDiversity()
+    );
+    System.assertEquals(
+      10L,
+      response.getTrainingStatus().getNotices()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getTrainingStatus().getSuccessfullyTrained()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getTrainingStatus().getDataUpdated()
+    );
+    System.assertEquals(
+      'status',
+      response.getCrawlStatus().getSourceCrawl().getStatus()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getCrawlStatus().getSourceCrawl().getNextCrawl()
+    );
+    System.assertEquals(
+      true,
+      response.getSmartDocumentUnderstanding().getEnabled()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalAnnotatedPages()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalPages()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getTotalDocuments()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getCustomFields().getDefined()
+    );
+    System.assertEquals(
+      10L,
+      response.getSmartDocumentUnderstanding().getCustomFields().getMaximumAllowed()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteCollection() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteCollectionOptions options = new IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteCollection(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testListCollectionFields() {
+    String body = IBMWatsonMockResponses.discoveryV1ListCollectionFieldsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.ListCollectionFieldsOptions options = new IBMDiscoveryV1Models.ListCollectionFieldsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.ListCollectionFieldsResponse response = service.listCollectionFields(options);
+
+    System.assertEquals(
+      'field',
+      response.getFields().get(0).getField()
+    );
+    System.assertEquals(
+      'type',
+      response.getFields().get(0).getXType()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testListExpansions() {
+    String body = IBMWatsonMockResponses.discoveryV1Expansions();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.ListExpansionsOptions options = new IBMDiscoveryV1Models.ListExpansionsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Expansions response = service.listExpansions(options);
+
+    System.assertEquals(
+      'input_terms',
+      response.getExpansions().get(0).getInputTerms().get(0)
+    );
+    System.assertEquals(
+      'expanded_terms',
+      response.getExpansions().get(0).getExpandedTerms().get(0)
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testCreateExpansions() {
+    String body = IBMWatsonMockResponses.discoveryV1Expansions();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    List<String> expandedTerms = new List<String> { 'expanded_terms' } ;
+    IBMDiscoveryV1Models.Expansion expansionsItem = new IBMDiscoveryV1Models.ExpansionBuilder()
+      .expandedTerms(expandedTerms)
+      .build();
+    List<IBMDiscoveryV1Models.Expansion> expansions = new List<IBMDiscoveryV1Models.Expansion> { expansionsItem } ;
+
+    IBMDiscoveryV1Models.CreateExpansionsOptions options = new IBMDiscoveryV1Models.CreateExpansionsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .expansions(expansions)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Expansions response = service.createExpansions(options);
+
+    System.assertEquals(
+      'input_terms',
+      response.getExpansions().get(0).getInputTerms().get(0)
+    );
+    System.assertEquals(
+      'expanded_terms',
+      response.getExpansions().get(0).getExpandedTerms().get(0)
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteExpansions() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteExpansionsOptions options = new IBMDiscoveryV1Models.DeleteExpansionsOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteExpansions(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testGetTokenizationDictionaryStatus() {
+    String body = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions options = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TokenDictStatusResponse response = service.getTokenizationDictionaryStatus(options);
+
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'type',
+      response.getXType()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testCreateTokenizationDictionary() {
+    String body = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String text = 'text';
+    List<String> tokens = new List<String> { 'tokens' } ;
+    String partOfSpeech = 'part_of_speech';
+
+    IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions options = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TokenDictStatusResponse response = service.createTokenizationDictionary(options);
+
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'type',
+      response.getXType()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteTokenizationDictionary() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions options = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteTokenizationDictionary(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testGetStopwordListStatus() {
+    String body = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.GetStopwordListStatusOptions options = new IBMDiscoveryV1Models.GetStopwordListStatusOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TokenDictStatusResponse response = service.getStopwordListStatus(options);
+
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'type',
+      response.getXType()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testCreateStopwordList() {
+    String body = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    IBMWatsonFile stopwordFile = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/octet-stream')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+    String stopwordFilename = 'stopword_filename';
+
+    IBMDiscoveryV1Models.CreateStopwordListOptions options = new IBMDiscoveryV1Models.CreateStopwordListOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .stopwordFile(stopwordFile)
+      .stopwordFilename(stopwordFilename)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TokenDictStatusResponse response = service.createStopwordList(options);
+
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'type',
+      response.getXType()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteStopwordList() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteStopwordListOptions options = new IBMDiscoveryV1Models.DeleteStopwordListOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteStopwordList(options);
+
+    Test.stopTest();
+  }
+  /* static testMethod void testAddDocument() {
+    String body = IBMWatsonMockResponses.discoveryV1DocumentAccepted();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.AddDocumentOptions options = new IBMDiscoveryV1Models.AddDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.DocumentAccepted response = service.addDocument(options);
+
+    System.assertEquals(
+      'document_id',
+      response.getDocumentId()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'notice_id',
+      response.getNotices().get(0).getNoticeId()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getNotices().get(0).getCreated()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getNotices().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'query_id',
+      response.getNotices().get(0).getQueryId()
+    );
+    System.assertEquals(
+      'severity',
+      response.getNotices().get(0).getSeverity()
+    );
+    System.assertEquals(
+      'step',
+      response.getNotices().get(0).getStep()
+    );
+    System.assertEquals(
+      'description',
+      response.getNotices().get(0).getDescription()
+    );
+
+    Test.stopTest();
+  } */
+  static testMethod void testGetDocumentStatus() {
+    String body = IBMWatsonMockResponses.discoveryV1DocumentStatus();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+
+    IBMDiscoveryV1Models.GetDocumentStatusOptions options = new IBMDiscoveryV1Models.GetDocumentStatusOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.DocumentStatus response = service.getDocumentStatus(options);
+
+    System.assertEquals(
+      'document_id',
+      response.getDocumentId()
+    );
+    System.assertEquals(
+      'configuration_id',
+      response.getConfigurationId()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'status_description',
+      response.getStatusDescription()
+    );
+    System.assertEquals(
+      'filename',
+      response.getFilename()
+    );
+    System.assertEquals(
+      'file_type',
+      response.getFileType()
+    );
+    System.assertEquals(
+      'sha1',
+      response.getSha1()
+    );
+    System.assertEquals(
+      'notice_id',
+      response.getNotices().get(0).getNoticeId()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getNotices().get(0).getCreated()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getNotices().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'query_id',
+      response.getNotices().get(0).getQueryId()
+    );
+    System.assertEquals(
+      'severity',
+      response.getNotices().get(0).getSeverity()
+    );
+    System.assertEquals(
+      'step',
+      response.getNotices().get(0).getStep()
+    );
+    System.assertEquals(
+      'description',
+      response.getNotices().get(0).getDescription()
+    );
+
+    Test.stopTest();
+  }
+  /* static testMethod void testUpdateDocument() {
+    String body = IBMWatsonMockResponses.discoveryV1DocumentAccepted();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+
+    IBMDiscoveryV1Models.UpdateDocumentOptions options = new IBMDiscoveryV1Models.UpdateDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.DocumentAccepted response = service.updateDocument(options);
+
+    System.assertEquals(
+      'document_id',
+      response.getDocumentId()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'notice_id',
+      response.getNotices().get(0).getNoticeId()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getNotices().get(0).getCreated()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getNotices().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'query_id',
+      response.getNotices().get(0).getQueryId()
+    );
+    System.assertEquals(
+      'severity',
+      response.getNotices().get(0).getSeverity()
+    );
+    System.assertEquals(
+      'step',
+      response.getNotices().get(0).getStep()
+    );
+    System.assertEquals(
+      'description',
+      response.getNotices().get(0).getDescription()
+    );
+
+    Test.stopTest();
+  } */
+  static testMethod void testDeleteDocument() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+
+    IBMDiscoveryV1Models.DeleteDocumentOptions options = new IBMDiscoveryV1Models.DeleteDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteDocument(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testQuery() {
+    String body = IBMWatsonMockResponses.discoveryV1QueryResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.QueryResponse response = service.query(options);
+
+    System.assertEquals(
+      10L,
+      response.getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getResults().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getResults().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getResults().get(0).getTitle()
+    );
+    System.assertEquals(
+      'type',
+      response.getAggregations().get(0).getXType()
+    );
+    System.assertEquals(
+      'key',
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'type',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getXType()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'field',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHistogramInterval()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getValue()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getCount()
+    );
+    System.assertEquals(
+      'match',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getMatch()
+    );
+    System.assertEquals(
+      'path',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getPath()
+    );
+    System.assertEquals(
+      'timeslice_interval',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getTimesliceInterval()
+    );
+    System.assertEquals(
+      true,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getAnomaly()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getTitle()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'field',
+      response.getAggregations().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getHistogramInterval()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getValue()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getCount()
+    );
+    System.assertEquals(
+      'match',
+      response.getAggregations().get(0).getMatch()
+    );
+    System.assertEquals(
+      'path',
+      response.getAggregations().get(0).getPath()
+    );
+    System.assertEquals(
+      'timeslice_interval',
+      response.getAggregations().get(0).getTimesliceInterval()
+    );
+    System.assertEquals(
+      true,
+      response.getAggregations().get(0).getAnomaly()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getHits().getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getAggregations().get(0).getHits().getHits().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getAggregations().get(0).getHits().getHits().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getAggregations().get(0).getHits().getHits().get(0).getTitle()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getPassages().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getPassages().get(0).getPassageScore()
+    );
+    System.assertEquals(
+      'passage_text',
+      response.getPassages().get(0).getPassageText()
+    );
+    System.assertEquals(
+      10L,
+      response.getPassages().get(0).getStartOffset()
+    );
+    System.assertEquals(
+      10L,
+      response.getPassages().get(0).getEndOffset()
+    );
+    System.assertEquals(
+      'field',
+      response.getPassages().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getDuplicatesRemoved()
+    );
+    System.assertEquals(
+      'session_token',
+      response.getSessionToken()
+    );
+    System.assertEquals(
+      'document_retrieval_strategy',
+      response.getRetrievalDetails().getDocumentRetrievalStrategy()
+    );
+    System.assertEquals(
+      'suggested_query',
+      response.getSuggestedQuery()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testQueryNotices() {
+    String body = IBMWatsonMockResponses.discoveryV1QueryNoticesResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.QueryNoticesOptions options = new IBMDiscoveryV1Models.QueryNoticesOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.QueryNoticesResponse response = service.queryNotices(options);
+
+    System.assertEquals(
+      10L,
+      response.getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getResults().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getResults().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getResults().get(0).getTitle()
+    );
+    System.assertEquals(
+      10L,
+      response.getResults().get(0).getCode()
+    );
+    System.assertEquals(
+      'filename',
+      response.getResults().get(0).getFilename()
+    );
+    System.assertEquals(
+      'file_type',
+      response.getResults().get(0).getFileType()
+    );
+    System.assertEquals(
+      'sha1',
+      response.getResults().get(0).getSha1()
+    );
+    System.assertEquals(
+      'notice_id',
+      response.getResults().get(0).getNotices().get(0).getNoticeId()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getResults().get(0).getNotices().get(0).getCreated()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getResults().get(0).getNotices().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'query_id',
+      response.getResults().get(0).getNotices().get(0).getQueryId()
+    );
+    System.assertEquals(
+      'severity',
+      response.getResults().get(0).getNotices().get(0).getSeverity()
+    );
+    System.assertEquals(
+      'step',
+      response.getResults().get(0).getNotices().get(0).getStep()
+    );
+    System.assertEquals(
+      'description',
+      response.getResults().get(0).getNotices().get(0).getDescription()
+    );
+    System.assertEquals(
+      'type',
+      response.getAggregations().get(0).getXType()
+    );
+    System.assertEquals(
+      'key',
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'type',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getXType()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'field',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHistogramInterval()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getValue()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getCount()
+    );
+    System.assertEquals(
+      'match',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getMatch()
+    );
+    System.assertEquals(
+      'path',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getPath()
+    );
+    System.assertEquals(
+      'timeslice_interval',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getTimesliceInterval()
+    );
+    System.assertEquals(
+      true,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getAnomaly()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getTitle()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'field',
+      response.getAggregations().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getHistogramInterval()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getValue()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getCount()
+    );
+    System.assertEquals(
+      'match',
+      response.getAggregations().get(0).getMatch()
+    );
+    System.assertEquals(
+      'path',
+      response.getAggregations().get(0).getPath()
+    );
+    System.assertEquals(
+      'timeslice_interval',
+      response.getAggregations().get(0).getTimesliceInterval()
+    );
+    System.assertEquals(
+      true,
+      response.getAggregations().get(0).getAnomaly()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getHits().getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getAggregations().get(0).getHits().getHits().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getAggregations().get(0).getHits().getHits().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getAggregations().get(0).getHits().getHits().get(0).getTitle()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getPassages().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getPassages().get(0).getPassageScore()
+    );
+    System.assertEquals(
+      'passage_text',
+      response.getPassages().get(0).getPassageText()
+    );
+    System.assertEquals(
+      10L,
+      response.getPassages().get(0).getStartOffset()
+    );
+    System.assertEquals(
+      10L,
+      response.getPassages().get(0).getEndOffset()
+    );
+    System.assertEquals(
+      'field',
+      response.getPassages().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getDuplicatesRemoved()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testFederatedQuery() {
+    String body = IBMWatsonMockResponses.discoveryV1QueryResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.FederatedQueryOptions options = new IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.QueryResponse response = service.federatedQuery(options);
+
+    System.assertEquals(
+      10L,
+      response.getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getResults().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getResults().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getResults().get(0).getTitle()
+    );
+    System.assertEquals(
+      'type',
+      response.getAggregations().get(0).getXType()
+    );
+    System.assertEquals(
+      'key',
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'type',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getXType()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'field',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHistogramInterval()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getValue()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getCount()
+    );
+    System.assertEquals(
+      'match',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getMatch()
+    );
+    System.assertEquals(
+      'path',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getPath()
+    );
+    System.assertEquals(
+      'timeslice_interval',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getTimesliceInterval()
+    );
+    System.assertEquals(
+      true,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getAnomaly()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getTitle()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'field',
+      response.getAggregations().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getHistogramInterval()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getValue()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getCount()
+    );
+    System.assertEquals(
+      'match',
+      response.getAggregations().get(0).getMatch()
+    );
+    System.assertEquals(
+      'path',
+      response.getAggregations().get(0).getPath()
+    );
+    System.assertEquals(
+      'timeslice_interval',
+      response.getAggregations().get(0).getTimesliceInterval()
+    );
+    System.assertEquals(
+      true,
+      response.getAggregations().get(0).getAnomaly()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getHits().getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getAggregations().get(0).getHits().getHits().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getAggregations().get(0).getHits().getHits().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getAggregations().get(0).getHits().getHits().get(0).getTitle()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getPassages().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getPassages().get(0).getPassageScore()
+    );
+    System.assertEquals(
+      'passage_text',
+      response.getPassages().get(0).getPassageText()
+    );
+    System.assertEquals(
+      10L,
+      response.getPassages().get(0).getStartOffset()
+    );
+    System.assertEquals(
+      10L,
+      response.getPassages().get(0).getEndOffset()
+    );
+    System.assertEquals(
+      'field',
+      response.getPassages().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getDuplicatesRemoved()
+    );
+    System.assertEquals(
+      'session_token',
+      response.getSessionToken()
+    );
+    System.assertEquals(
+      'document_retrieval_strategy',
+      response.getRetrievalDetails().getDocumentRetrievalStrategy()
+    );
+    System.assertEquals(
+      'suggested_query',
+      response.getSuggestedQuery()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testFederatedQueryNotices() {
+    String body = IBMWatsonMockResponses.discoveryV1QueryNoticesResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    List<String> collectionIds = new List<String> { 'collection_ids' } ;
+
+    IBMDiscoveryV1Models.FederatedQueryNoticesOptions options = new IBMDiscoveryV1Models.FederatedQueryNoticesOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionIds(collectionIds)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.QueryNoticesResponse response = service.federatedQueryNotices(options);
+
+    System.assertEquals(
+      10L,
+      response.getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getResults().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getResults().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getResults().get(0).getTitle()
+    );
+    System.assertEquals(
+      10L,
+      response.getResults().get(0).getCode()
+    );
+    System.assertEquals(
+      'filename',
+      response.getResults().get(0).getFilename()
+    );
+    System.assertEquals(
+      'file_type',
+      response.getResults().get(0).getFileType()
+    );
+    System.assertEquals(
+      'sha1',
+      response.getResults().get(0).getSha1()
+    );
+    System.assertEquals(
+      'notice_id',
+      response.getResults().get(0).getNotices().get(0).getNoticeId()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getResults().get(0).getNotices().get(0).getCreated()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getResults().get(0).getNotices().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'query_id',
+      response.getResults().get(0).getNotices().get(0).getQueryId()
+    );
+    System.assertEquals(
+      'severity',
+      response.getResults().get(0).getNotices().get(0).getSeverity()
+    );
+    System.assertEquals(
+      'step',
+      response.getResults().get(0).getNotices().get(0).getStep()
+    );
+    System.assertEquals(
+      'description',
+      response.getResults().get(0).getNotices().get(0).getDescription()
+    );
+    System.assertEquals(
+      'type',
+      response.getAggregations().get(0).getXType()
+    );
+    System.assertEquals(
+      'key',
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'type',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getXType()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'field',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHistogramInterval()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getValue()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getCount()
+    );
+    System.assertEquals(
+      'match',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getMatch()
+    );
+    System.assertEquals(
+      'path',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getPath()
+    );
+    System.assertEquals(
+      'timeslice_interval',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getTimesliceInterval()
+    );
+    System.assertEquals(
+      true,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getAnomaly()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getAggregations().get(0).getResults().get(0).getAggregations().get(0).getHits().getHits().get(0).getTitle()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      'field',
+      response.getAggregations().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getHistogramInterval()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getValue()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getCount()
+    );
+    System.assertEquals(
+      'match',
+      response.getAggregations().get(0).getMatch()
+    );
+    System.assertEquals(
+      'path',
+      response.getAggregations().get(0).getPath()
+    );
+    System.assertEquals(
+      'timeslice_interval',
+      response.getAggregations().get(0).getTimesliceInterval()
+    );
+    System.assertEquals(
+      true,
+      response.getAggregations().get(0).getAnomaly()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getSize()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getHits().getMatchingResults()
+    );
+    System.assertEquals(
+      'id',
+      response.getAggregations().get(0).getHits().getHits().get(0).getId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getAggregations().get(0).getHits().getHits().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getHits().getHits().get(0).getResultMetadata().getConfidence()
+    );
+    System.assertEquals(
+      'title',
+      response.getAggregations().get(0).getHits().getHits().get(0).getTitle()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getPassages().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getPassages().get(0).getPassageScore()
+    );
+    System.assertEquals(
+      'passage_text',
+      response.getPassages().get(0).getPassageText()
+    );
+    System.assertEquals(
+      10L,
+      response.getPassages().get(0).getStartOffset()
+    );
+    System.assertEquals(
+      10L,
+      response.getPassages().get(0).getEndOffset()
+    );
+    System.assertEquals(
+      'field',
+      response.getPassages().get(0).getField()
+    );
+    System.assertEquals(
+      10L,
+      response.getDuplicatesRemoved()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetAutocompletion() {
+    String body = IBMWatsonMockResponses.discoveryV1Completions();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String prefix = 'prefix';
+
+    IBMDiscoveryV1Models.GetAutocompletionOptions options = new IBMDiscoveryV1Models.GetAutocompletionOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .prefix(prefix)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Completions response = service.getAutocompletion(options);
+
+    System.assertEquals(
+      'completions',
+      response.getCompletions().get(0)
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testListTrainingData() {
+    String body = IBMWatsonMockResponses.discoveryV1TrainingDataSet();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.ListTrainingDataOptions options = new IBMDiscoveryV1Models.ListTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TrainingDataSet response = service.listTrainingData(options);
+
+    System.assertEquals(
+      'environment_id',
+      response.getEnvironmentId()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getCollectionId()
+    );
+    System.assertEquals(
+      'query_id',
+      response.getQueries().get(0).getQueryId()
+    );
+    System.assertEquals(
+      'natural_language_query',
+      response.getQueries().get(0).getNaturalLanguageQuery()
+    );
+    System.assertEquals(
+      'filter',
+      response.getQueries().get(0).getFilter()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getQueries().get(0).getExamples().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'cross_reference',
+      response.getQueries().get(0).getExamples().get(0).getCrossReference()
+    );
+    System.assertEquals(
+      10L,
+      response.getQueries().get(0).getExamples().get(0).getRelevance()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testAddTrainingData() {
+    String body = IBMWatsonMockResponses.discoveryV1TrainingQuery();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.AddTrainingDataOptions options = new IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TrainingQuery response = service.addTrainingData(options);
+
+    System.assertEquals(
+      'query_id',
+      response.getQueryId()
+    );
+    System.assertEquals(
+      'natural_language_query',
+      response.getNaturalLanguageQuery()
+    );
+    System.assertEquals(
+      'filter',
+      response.getFilter()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getExamples().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'cross_reference',
+      response.getExamples().get(0).getCrossReference()
+    );
+    System.assertEquals(
+      10L,
+      response.getExamples().get(0).getRelevance()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteAllTrainingData() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteAllTrainingData(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testGetTrainingData() {
+    String body = IBMWatsonMockResponses.discoveryV1TrainingQuery();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+
+    IBMDiscoveryV1Models.GetTrainingDataOptions options = new IBMDiscoveryV1Models.GetTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TrainingQuery response = service.getTrainingData(options);
+
+    System.assertEquals(
+      'query_id',
+      response.getQueryId()
+    );
+    System.assertEquals(
+      'natural_language_query',
+      response.getNaturalLanguageQuery()
+    );
+    System.assertEquals(
+      'filter',
+      response.getFilter()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getExamples().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'cross_reference',
+      response.getExamples().get(0).getCrossReference()
+    );
+    System.assertEquals(
+      10L,
+      response.getExamples().get(0).getRelevance()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteTrainingData() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+
+    IBMDiscoveryV1Models.DeleteTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteTrainingData(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testListTrainingExamples() {
+    String body = IBMWatsonMockResponses.discoveryV1TrainingExampleList();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+
+    IBMDiscoveryV1Models.ListTrainingExamplesOptions options = new IBMDiscoveryV1Models.ListTrainingExamplesOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TrainingExampleList response = service.listTrainingExamples(options);
+
+    System.assertEquals(
+      'document_id',
+      response.getExamples().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'cross_reference',
+      response.getExamples().get(0).getCrossReference()
+    );
+    System.assertEquals(
+      10L,
+      response.getExamples().get(0).getRelevance()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testCreateTrainingExample() {
+    String body = IBMWatsonMockResponses.discoveryV1TrainingExample();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+
+    IBMDiscoveryV1Models.CreateTrainingExampleOptions options = new IBMDiscoveryV1Models.CreateTrainingExampleOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TrainingExample response = service.createTrainingExample(options);
+
+    System.assertEquals(
+      'document_id',
+      response.getDocumentId()
+    );
+    System.assertEquals(
+      'cross_reference',
+      response.getCrossReference()
+    );
+    System.assertEquals(
+      10L,
+      response.getRelevance()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteTrainingExample() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+    String exampleId = 'example_id';
+
+    IBMDiscoveryV1Models.DeleteTrainingExampleOptions options = new IBMDiscoveryV1Models.DeleteTrainingExampleOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .exampleId(exampleId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteTrainingExample(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testUpdateTrainingExample() {
+    String body = IBMWatsonMockResponses.discoveryV1TrainingExample();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+    String exampleId = 'example_id';
+
+    IBMDiscoveryV1Models.UpdateTrainingExampleOptions options = new IBMDiscoveryV1Models.UpdateTrainingExampleOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .exampleId(exampleId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TrainingExample response = service.updateTrainingExample(options);
+
+    System.assertEquals(
+      'document_id',
+      response.getDocumentId()
+    );
+    System.assertEquals(
+      'cross_reference',
+      response.getCrossReference()
+    );
+    System.assertEquals(
+      10L,
+      response.getRelevance()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetTrainingExample() {
+    String body = IBMWatsonMockResponses.discoveryV1TrainingExample();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String queryId = 'query_id';
+    String exampleId = 'example_id';
+
+    IBMDiscoveryV1Models.GetTrainingExampleOptions options = new IBMDiscoveryV1Models.GetTrainingExampleOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .queryId(queryId)
+      .exampleId(exampleId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.TrainingExample response = service.getTrainingExample(options);
+
+    System.assertEquals(
+      'document_id',
+      response.getDocumentId()
+    );
+    System.assertEquals(
+      'cross_reference',
+      response.getCrossReference()
+    );
+    System.assertEquals(
+      10L,
+      response.getRelevance()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteUserData() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String customerId = 'customer_id';
+
+    IBMDiscoveryV1Models.DeleteUserDataOptions options = new IBMDiscoveryV1Models.DeleteUserDataOptionsBuilder()
+      .customerId(customerId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteUserData(options);
+
+    Test.stopTest();
+  }
+  static testMethod void testCreateEvent() {
+    String body = IBMWatsonMockResponses.discoveryV1CreateEventResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String xType = 'x_type';
+    String environmentId = 'environment_id';
+    String sessionToken = 'session_token';
+    String collectionId = 'collection_id';
+    String documentId = 'document_id';
+    IBMDiscoveryV1Models.EventData data = new IBMDiscoveryV1Models.EventDataBuilder()
+      .environmentId(environmentId)
+      .sessionToken(sessionToken)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .build();
+
+    IBMDiscoveryV1Models.CreateEventOptions options = new IBMDiscoveryV1Models.CreateEventOptionsBuilder()
+      .xType(xType)
+      .data(data)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.CreateEventResponse response = service.createEvent(options);
+
+    System.assertEquals(
+      'type',
+      response.getXType()
+    );
+    System.assertEquals(
+      'environment_id',
+      response.getData().getEnvironmentId()
+    );
+    System.assertEquals(
+      'session_token',
+      response.getData().getSessionToken()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getData().getClientTimestamp()
+    );
+    System.assertEquals(
+      10L,
+      response.getData().getDisplayRank()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getData().getCollectionId()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getData().getDocumentId()
+    );
+    System.assertEquals(
+      'query_id',
+      response.getData().getQueryId()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testQueryLog() {
+    String body = IBMWatsonMockResponses.discoveryV1LogQueryResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+
+    IBMDiscoveryV1Models.QueryLogOptions options = new IBMDiscoveryV1Models.QueryLogOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.LogQueryResponse response = service.queryLog(options);
+
+    System.assertEquals(
+      10L,
+      response.getMatchingResults()
+    );
+    System.assertEquals(
+      'environment_id',
+      response.getResults().get(0).getEnvironmentId()
+    );
+    System.assertEquals(
+      'customer_id',
+      response.getResults().get(0).getCustomerId()
+    );
+    System.assertEquals(
+      'document_type',
+      response.getResults().get(0).getDocumentType()
+    );
+    System.assertEquals(
+      'natural_language_query',
+      response.getResults().get(0).getNaturalLanguageQuery()
+    );
+    System.assertEquals(
+      10L,
+      response.getResults().get(0).getDocumentResults().getResults().get(0).getPosition()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getResults().get(0).getDocumentResults().getResults().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getDocumentResults().getResults().get(0).getScore()
+    );
+    System.assertEquals(
+      0.5,
+      response.getResults().get(0).getDocumentResults().getResults().get(0).getConfidence()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getResults().get(0).getDocumentResults().getResults().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      10L,
+      response.getResults().get(0).getDocumentResults().getCount()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getResults().get(0).getCreatedTimestamp()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getResults().get(0).getClientTimestamp()
+    );
+    System.assertEquals(
+      'query_id',
+      response.getResults().get(0).getQueryId()
+    );
+    System.assertEquals(
+      'session_token',
+      response.getResults().get(0).getSessionToken()
+    );
+    System.assertEquals(
+      'collection_id',
+      response.getResults().get(0).getCollectionId()
+    );
+    System.assertEquals(
+      10L,
+      response.getResults().get(0).getDisplayRank()
+    );
+    System.assertEquals(
+      'document_id',
+      response.getResults().get(0).getDocumentId()
+    );
+    System.assertEquals(
+      'event_type',
+      response.getResults().get(0).getEventType()
+    );
+    System.assertEquals(
+      'result_type',
+      response.getResults().get(0).getResultType()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsQuery() {
+    String body = IBMWatsonMockResponses.discoveryV1MetricResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+
+    IBMDiscoveryV1Models.GetMetricsQueryOptions options = new IBMDiscoveryV1Models.GetMetricsQueryOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQuery(options);
+
+    System.assertEquals(
+      'interval',
+      response.getAggregations().get(0).getInterval()
+    );
+    System.assertEquals(
+      'event_type',
+      response.getAggregations().get(0).getEventType()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getAggregations().get(0).getResults().get(0).getKeyAsString()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getEventRate()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsQueryEvent() {
+    String body = IBMWatsonMockResponses.discoveryV1MetricResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+
+    IBMDiscoveryV1Models.GetMetricsQueryEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryEventOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQueryEvent(options);
+
+    System.assertEquals(
+      'interval',
+      response.getAggregations().get(0).getInterval()
+    );
+    System.assertEquals(
+      'event_type',
+      response.getAggregations().get(0).getEventType()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getAggregations().get(0).getResults().get(0).getKeyAsString()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getEventRate()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsQueryNoResults() {
+    String body = IBMWatsonMockResponses.discoveryV1MetricResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+
+    IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions options = new IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQueryNoResults(options);
+
+    System.assertEquals(
+      'interval',
+      response.getAggregations().get(0).getInterval()
+    );
+    System.assertEquals(
+      'event_type',
+      response.getAggregations().get(0).getEventType()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getAggregations().get(0).getResults().get(0).getKeyAsString()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getEventRate()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsEventRate() {
+    String body = IBMWatsonMockResponses.discoveryV1MetricResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+
+    IBMDiscoveryV1Models.GetMetricsEventRateOptions options = new IBMDiscoveryV1Models.GetMetricsEventRateOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.MetricResponse response = service.getMetricsEventRate(options);
+
+    System.assertEquals(
+      'interval',
+      response.getAggregations().get(0).getInterval()
+    );
+    System.assertEquals(
+      'event_type',
+      response.getAggregations().get(0).getEventType()
+    );
+    System.assertEquals(
+      (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class),
+      response.getAggregations().get(0).getResults().get(0).getKeyAsString()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getEventRate()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testGetMetricsQueryTokenEvent() {
+    String body = IBMWatsonMockResponses.discoveryV1MetricTokenResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+
+    IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.MetricTokenResponse response = service.getMetricsQueryTokenEvent(options);
+
+    System.assertEquals(
+      'event_type',
+      response.getAggregations().get(0).getEventType()
+    );
+    System.assertEquals(
+      'key',
+      response.getAggregations().get(0).getResults().get(0).getKey()
+    );
+    System.assertEquals(
+      10L,
+      response.getAggregations().get(0).getResults().get(0).getMatchingResults()
+    );
+    System.assertEquals(
+      0.5,
+      response.getAggregations().get(0).getResults().get(0).getEventRate()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testListCredentials() {
+    String body = IBMWatsonMockResponses.discoveryV1CredentialsList();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.ListCredentialsOptions options = new IBMDiscoveryV1Models.ListCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.CredentialsList response = service.listCredentials(options);
+
+    System.assertEquals(
+      'credential_id',
+      response.getCredentials().get(0).getCredentialId()
+    );
+    System.assertEquals(
+      'source_type',
+      response.getCredentials().get(0).getSourceType()
+    );
+    System.assertEquals(
+      'credential_type',
+      response.getCredentials().get(0).getCredentialDetails().getCredentialType()
+    );
+    System.assertEquals(
+      'client_id',
+      response.getCredentials().get(0).getCredentialDetails().getClientId()
+    );
+    System.assertEquals(
+      'enterprise_id',
+      response.getCredentials().get(0).getCredentialDetails().getEnterpriseId()
+    );
+    System.assertEquals(
+      'url',
+      response.getCredentials().get(0).getCredentialDetails().getUrl()
+    );
+    System.assertEquals(
+      'username',
+      response.getCredentials().get(0).getCredentialDetails().getUsername()
+    );
+    System.assertEquals(
+      'organization_url',
+      response.getCredentials().get(0).getCredentialDetails().getOrganizationUrl()
+    );
+    System.assertEquals(
+      'site_collection.path',
+      response.getCredentials().get(0).getCredentialDetails().getSiteCollectionPath()
+    );
+    System.assertEquals(
+      'client_secret',
+      response.getCredentials().get(0).getCredentialDetails().getClientSecret()
+    );
+    System.assertEquals(
+      'public_key_id',
+      response.getCredentials().get(0).getCredentialDetails().getPublicKeyId()
+    );
+    System.assertEquals(
+      'private_key',
+      response.getCredentials().get(0).getCredentialDetails().getPrivateKey()
+    );
+    System.assertEquals(
+      'passphrase',
+      response.getCredentials().get(0).getCredentialDetails().getPassphrase()
+    );
+    System.assertEquals(
+      'password',
+      response.getCredentials().get(0).getCredentialDetails().getPassword()
+    );
+    System.assertEquals(
+      'gateway_id',
+      response.getCredentials().get(0).getCredentialDetails().getGatewayId()
+    );
+    System.assertEquals(
+      'source_version',
+      response.getCredentials().get(0).getCredentialDetails().getSourceVersion()
+    );
+    System.assertEquals(
+      'web_application_url',
+      response.getCredentials().get(0).getCredentialDetails().getWebApplicationUrl()
+    );
+    System.assertEquals(
+      'domain',
+      response.getCredentials().get(0).getCredentialDetails().getDomain()
+    );
+    System.assertEquals(
+      'endpoint',
+      response.getCredentials().get(0).getCredentialDetails().getEndpoint()
+    );
+    System.assertEquals(
+      'access_key_id',
+      response.getCredentials().get(0).getCredentialDetails().getAccessKeyId()
+    );
+    System.assertEquals(
+      'secret_access_key',
+      response.getCredentials().get(0).getCredentialDetails().getSecretAccessKey()
+    );
+    System.assertEquals(
+      'status',
+      response.getCredentials().get(0).getStatus()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testCreateCredentials() {
+    String body = IBMWatsonMockResponses.discoveryV1Credentials();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
 
     IBMDiscoveryV1Models.CreateCredentialsOptions options = new IBMDiscoveryV1Models.CreateCredentialsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .sourceType(sourceType)
-      .credentials(credentials)
-      .credentialDetails(details)
-      .status(status)
-      .addHeader(HEADER_KEY, HEADER_VAL)
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
       .build();
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Credentials credentialsResponse = service.createCredentials(options);
 
-    System.assertEquals(sourceType, credentialsResponse.getSourceType());
-    System.assertEquals(credentialType, credentialsResponse.getCredentialDetails().getCredentialType());
-    System.assertEquals(url, credentialsResponse.getCredentialDetails().getUrl());
-    System.assertEquals(username, credentialsResponse.getCredentialDetails().getUsername());
-    System.assertEquals(status, credentialsResponse.getStatus());
+    IBMDiscoveryV1Models.Credentials response = service.createCredentials(options);
+
+    System.assertEquals(
+      'credential_id',
+      response.getCredentialId()
+    );
+    System.assertEquals(
+      'source_type',
+      response.getSourceType()
+    );
+    System.assertEquals(
+      'credential_type',
+      response.getCredentialDetails().getCredentialType()
+    );
+    System.assertEquals(
+      'client_id',
+      response.getCredentialDetails().getClientId()
+    );
+    System.assertEquals(
+      'enterprise_id',
+      response.getCredentialDetails().getEnterpriseId()
+    );
+    System.assertEquals(
+      'url',
+      response.getCredentialDetails().getUrl()
+    );
+    System.assertEquals(
+      'username',
+      response.getCredentialDetails().getUsername()
+    );
+    System.assertEquals(
+      'organization_url',
+      response.getCredentialDetails().getOrganizationUrl()
+    );
+    System.assertEquals(
+      'site_collection.path',
+      response.getCredentialDetails().getSiteCollectionPath()
+    );
+    System.assertEquals(
+      'client_secret',
+      response.getCredentialDetails().getClientSecret()
+    );
+    System.assertEquals(
+      'public_key_id',
+      response.getCredentialDetails().getPublicKeyId()
+    );
+    System.assertEquals(
+      'private_key',
+      response.getCredentialDetails().getPrivateKey()
+    );
+    System.assertEquals(
+      'passphrase',
+      response.getCredentialDetails().getPassphrase()
+    );
+    System.assertEquals(
+      'password',
+      response.getCredentialDetails().getPassword()
+    );
+    System.assertEquals(
+      'gateway_id',
+      response.getCredentialDetails().getGatewayId()
+    );
+    System.assertEquals(
+      'source_version',
+      response.getCredentialDetails().getSourceVersion()
+    );
+    System.assertEquals(
+      'web_application_url',
+      response.getCredentialDetails().getWebApplicationUrl()
+    );
+    System.assertEquals(
+      'domain',
+      response.getCredentialDetails().getDomain()
+    );
+    System.assertEquals(
+      'endpoint',
+      response.getCredentialDetails().getEndpoint()
+    );
+    System.assertEquals(
+      'access_key_id',
+      response.getCredentialDetails().getAccessKeyId()
+    );
+    System.assertEquals(
+      'secret_access_key',
+      response.getCredentialDetails().getSecretAccessKey()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
 
     Test.stopTest();
   }
-
-  static testMethod void testDeleteCredentials() {
-    String body='';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+  static testMethod void testGetCredentials() {
+    String body = IBMWatsonMockResponses.discoveryV1Credentials();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMDiscoveryV1Models.DeleteCredentialsOptions options = new IBMDiscoveryV1Models.DeleteCredentialsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .credentialId('credential_id')
-      .addHeader(HEADER_KEY, HEADER_VAL)
+    String environmentId = 'environment_id';
+    String credentialId = 'credential_id';
+
+    IBMDiscoveryV1Models.GetCredentialsOptions options = new IBMDiscoveryV1Models.GetCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .addHeader('Test-Header', 'test_value')
       .build();
-    options = options.newBuilder().build();
+
+    IBMDiscoveryV1Models.Credentials response = service.getCredentials(options);
+
+    System.assertEquals(
+      'credential_id',
+      response.getCredentialId()
+    );
+    System.assertEquals(
+      'source_type',
+      response.getSourceType()
+    );
+    System.assertEquals(
+      'credential_type',
+      response.getCredentialDetails().getCredentialType()
+    );
+    System.assertEquals(
+      'client_id',
+      response.getCredentialDetails().getClientId()
+    );
+    System.assertEquals(
+      'enterprise_id',
+      response.getCredentialDetails().getEnterpriseId()
+    );
+    System.assertEquals(
+      'url',
+      response.getCredentialDetails().getUrl()
+    );
+    System.assertEquals(
+      'username',
+      response.getCredentialDetails().getUsername()
+    );
+    System.assertEquals(
+      'organization_url',
+      response.getCredentialDetails().getOrganizationUrl()
+    );
+    System.assertEquals(
+      'site_collection.path',
+      response.getCredentialDetails().getSiteCollectionPath()
+    );
+    System.assertEquals(
+      'client_secret',
+      response.getCredentialDetails().getClientSecret()
+    );
+    System.assertEquals(
+      'public_key_id',
+      response.getCredentialDetails().getPublicKeyId()
+    );
+    System.assertEquals(
+      'private_key',
+      response.getCredentialDetails().getPrivateKey()
+    );
+    System.assertEquals(
+      'passphrase',
+      response.getCredentialDetails().getPassphrase()
+    );
+    System.assertEquals(
+      'password',
+      response.getCredentialDetails().getPassword()
+    );
+    System.assertEquals(
+      'gateway_id',
+      response.getCredentialDetails().getGatewayId()
+    );
+    System.assertEquals(
+      'source_version',
+      response.getCredentialDetails().getSourceVersion()
+    );
+    System.assertEquals(
+      'web_application_url',
+      response.getCredentialDetails().getWebApplicationUrl()
+    );
+    System.assertEquals(
+      'domain',
+      response.getCredentialDetails().getDomain()
+    );
+    System.assertEquals(
+      'endpoint',
+      response.getCredentialDetails().getEndpoint()
+    );
+    System.assertEquals(
+      'access_key_id',
+      response.getCredentialDetails().getAccessKeyId()
+    );
+    System.assertEquals(
+      'secret_access_key',
+      response.getCredentialDetails().getSecretAccessKey()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testUpdateCredentials() {
+    String body = IBMWatsonMockResponses.discoveryV1Credentials();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String credentialId = 'credential_id';
+
+    IBMDiscoveryV1Models.UpdateCredentialsOptions options = new IBMDiscoveryV1Models.UpdateCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMDiscoveryV1Models.Credentials response = service.updateCredentials(options);
+
+    System.assertEquals(
+      'credential_id',
+      response.getCredentialId()
+    );
+    System.assertEquals(
+      'source_type',
+      response.getSourceType()
+    );
+    System.assertEquals(
+      'credential_type',
+      response.getCredentialDetails().getCredentialType()
+    );
+    System.assertEquals(
+      'client_id',
+      response.getCredentialDetails().getClientId()
+    );
+    System.assertEquals(
+      'enterprise_id',
+      response.getCredentialDetails().getEnterpriseId()
+    );
+    System.assertEquals(
+      'url',
+      response.getCredentialDetails().getUrl()
+    );
+    System.assertEquals(
+      'username',
+      response.getCredentialDetails().getUsername()
+    );
+    System.assertEquals(
+      'organization_url',
+      response.getCredentialDetails().getOrganizationUrl()
+    );
+    System.assertEquals(
+      'site_collection.path',
+      response.getCredentialDetails().getSiteCollectionPath()
+    );
+    System.assertEquals(
+      'client_secret',
+      response.getCredentialDetails().getClientSecret()
+    );
+    System.assertEquals(
+      'public_key_id',
+      response.getCredentialDetails().getPublicKeyId()
+    );
+    System.assertEquals(
+      'private_key',
+      response.getCredentialDetails().getPrivateKey()
+    );
+    System.assertEquals(
+      'passphrase',
+      response.getCredentialDetails().getPassphrase()
+    );
+    System.assertEquals(
+      'password',
+      response.getCredentialDetails().getPassword()
+    );
+    System.assertEquals(
+      'gateway_id',
+      response.getCredentialDetails().getGatewayId()
+    );
+    System.assertEquals(
+      'source_version',
+      response.getCredentialDetails().getSourceVersion()
+    );
+    System.assertEquals(
+      'web_application_url',
+      response.getCredentialDetails().getWebApplicationUrl()
+    );
+    System.assertEquals(
+      'domain',
+      response.getCredentialDetails().getDomain()
+    );
+    System.assertEquals(
+      'endpoint',
+      response.getCredentialDetails().getEndpoint()
+    );
+    System.assertEquals(
+      'access_key_id',
+      response.getCredentialDetails().getAccessKeyId()
+    );
+    System.assertEquals(
+      'secret_access_key',
+      response.getCredentialDetails().getSecretAccessKey()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteCredentials() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String credentialId = 'credential_id';
+
+    IBMDiscoveryV1Models.DeleteCredentialsOptions options = new IBMDiscoveryV1Models.DeleteCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
     service.deleteCredentials(options);
 
     Test.stopTest();
   }
-
-  static testMethod void testGetCredentials() {
-    String body = IBMWatsonMockResponses.credentials();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+  static testMethod void testListGateways() {
+    String body = IBMWatsonMockResponses.discoveryV1GatewayList();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.GetCredentialsOptions options = new IBMDiscoveryV1Models.GetCredentialsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .credentialId('credential_id')
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Credentials credentialsResponse = service.getCredentials(options);
-
-    System.assert(credentialsResponse != null);
-
-    Test.stopTest();
-  }
-
-  static testMethod void testListCredentials() {
-    String body = IBMWatsonMockResponses.credentialList();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMDiscoveryV1Models.ListCredentialsOptions options = new IBMDiscoveryV1Models.ListCredentialsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.CredentialsList credentialsResponse = service.listCredentials(options);
-
-    System.assert(credentialsResponse != null);
-
-    Test.stopTest();
-  }
-
-  static testMethod void testUpdateCredentials() {
-    String body = IBMWatsonMockResponses.credentials();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String sourceType = 'salesforce';
-    String credentialType = 'username_password';
-    String url = 'login.salesforce.com';
-    String username = 'user@email.address';
-    String status = 'connected';
-
-    IBMDiscoveryV1Models.CredentialDetails newDetails = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
-      .clientId('client_id')
-      .clientSecret('client_secret')
-      .credentialType(credentialType)
-      .enterpriseId('enterprise_id')
-      .organizationUrl('organization_url')
-      .passphrase('passphrase')
-      .password('password')
-      .privateKey('private_key')
-      .publicKeyId('public_key_id')
-      .siteCollectionPath('site_collection_path')
-      .url(url)
-      .username(username)
-      .build();
-    IBMDiscoveryV1Models.Credentials newCredentials = new IBMDiscoveryV1Models.CredentialsBuilder()
-      .sourceType(sourceType)
-      .credentialDetails(newDetails)
-      .build();
-
-    IBMDiscoveryV1Models.UpdateCredentialsOptions options = new IBMDiscoveryV1Models.UpdateCredentialsOptionsBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .credentialId('credential_id')
-      .sourceType(sourceType)
-      .credentials(newCredentials)
-      .credentialDetails(newDetails)
-      .status(status)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-    IBMDiscoveryV1Models.Credentials credentialsResponse = service.updateCredentials(options);
-
-    System.assertEquals(sourceType, credentialsResponse.getSourceType());
-    System.assertEquals(credentialType, credentialsResponse.getCredentialDetails().getCredentialType());
-    System.assertEquals(url, credentialsResponse.getCredentialDetails().getUrl());
-    System.assertEquals(username, credentialsResponse.getCredentialDetails().getUsername());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testCreateEvent() {
-    String body = IBMWatsonMockResponses.createEventResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String dateString = '"2017-07-14T12:55:40.652Z"';
-    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
-    Long displayRank = 1L;
-    String sessionToken = 'mock_session_token';
-    String eventType = 'click';
-    String collectionId = 'mock_collid';
-    String documentId = 'mock_docid';
-    String queryId = 'mock_queryid';
-
-    IBMDiscoveryV1Models.EventData eventData = new IBMDiscoveryV1Models.EventDataBuilder()
-      .environmentId(ENVIRONMENT_ID)
-      .collectionId(collectionId)
-      .documentId(documentId)
-      .displayRank(displayRank)
-      .sessionToken(sessionToken)
-      .clientTimestamp(dateValue)
-      .build();
-    IBMDiscoveryV1Models.CreateEventOptions createEventOptions = new IBMDiscoveryV1Models.CreateEventOptionsBuilder()
-      .xtype(eventType)
-      .data(eventData)
-      .build();
-    createEventOptions = createEventOptions.newBuilder().build();
-    IBMDiscoveryV1Models.CreateEventResponse response = service.createEvent(createEventOptions);
-
-    System.assertEquals(eventType, response.getXtype());
-    System.assertEquals(ENVIRONMENT_ID, response.getData().getEnvironmentId());
-    System.assertEquals(collectionId, response.getData().getCollectionId());
-    System.assertEquals(documentId, response.getData().getDocumentId());
-    System.assertEquals(displayRank, response.getData().getDisplayRank());
-    System.assertEquals(queryId, response.getData().getQueryId());
-    System.assertEquals(sessionToken, response.getData().getSessionToken());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetMetricsEventRate() {
-    String body = IBMWatsonMockResponses.metricResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String dateString = '"2017-07-14T12:55:40.652Z"';
-    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
-    String interval = '1d';
-    Long key = 1533513600000L;
-    Datetime keyAsString = (Datetime) JSON.deserialize('"2018-08-05T20:00:00.000"', Datetime.class);
-    Double eventRate = 0.0;
-    String eventType = 'click';
-    String resultType = 'document';
-
-    IBMDiscoveryV1Models.GetMetricsEventRateOptions options = new IBMDiscoveryV1Models.GetMetricsEventRateOptionsBuilder()
-      .startTime(dateValue)
-      .endTime(dateValue)
-      .resultType(resultType)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-
-    IBMDiscoveryV1Models.MetricResponse response = service.getMetricsEventRate(options);
-
-    System.assert(!response.getAggregations().isEmpty());
-    System.assertEquals(interval, response.getAggregations().get(0).getInterval());
-    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
-    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
-    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
-    System.assertEquals(keyAsString, response.getAggregations().get(0).getResults().get(0).getKeyAsString());
-    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetMetricsQuery() {
-    String body = IBMWatsonMockResponses.metricResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String dateString = '"2017-07-14T12:55:40.652Z"';
-    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
-    String interval = '1d';
-    Long key = 1533513600000L;
-    Datetime keyAsString = (Datetime) JSON.deserialize('"2018-08-05T20:00:00.000"', Datetime.class);
-    Double eventRate = 0.0;
-    String eventType = 'click';
-    String resultType = 'document';
-
-    IBMDiscoveryV1Models.GetMetricsQueryOptions options = new IBMDiscoveryV1Models.GetMetricsQueryOptionsBuilder()
-      .startTime(dateValue)
-      .endTime(dateValue)
-      .resultType(resultType)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-
-    IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQuery(options);
-
-    System.assert(!response.getAggregations().isEmpty());
-    System.assertEquals(interval, response.getAggregations().get(0).getInterval());
-    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
-    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
-    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
-    System.assertEquals(keyAsString, response.getAggregations().get(0).getResults().get(0).getKeyAsString());
-    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetMetricsQueryEvent() {
-    String body = IBMWatsonMockResponses.metricResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String dateString = '"2017-07-14T12:55:40.652Z"';
-    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
-    String interval = '1d';
-    Long key = 1533513600000L;
-    Datetime keyAsString = (Datetime) JSON.deserialize('"2018-08-05T20:00:00.000"', Datetime.class);
-    Double eventRate = 0.0;
-    String eventType = 'click';
-    String resultType = 'document';
-
-    IBMDiscoveryV1Models.GetMetricsQueryEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryEventOptionsBuilder()
-      .startTime(dateValue)
-      .endTime(dateValue)
-      .resultType(resultType)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-
-    IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQueryEvent(options);
-
-    System.assert(!response.getAggregations().isEmpty());
-    System.assertEquals(interval, response.getAggregations().get(0).getInterval());
-    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
-    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
-    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
-    System.assertEquals(keyAsString, response.getAggregations().get(0).getResults().get(0).getKeyAsString());
-    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetMetricsQueryNoResults() {
-    String body = IBMWatsonMockResponses.metricResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String dateString = '"2017-07-14T12:55:40.652Z"';
-    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
-    String interval = '1d';
-    Long key = 1533513600000L;
-    Datetime keyAsString = (Datetime) JSON.deserialize('"2018-08-05T20:00:00.000"', Datetime.class);
-    Double eventRate = 0.0;
-    String eventType = 'click';
-    String resultType = 'document';
-
-    IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions options = new IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptionsBuilder()
-      .startTime(dateValue)
-      .endTime(dateValue)
-      .resultType(resultType)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-
-    IBMDiscoveryV1Models.MetricResponse response = service.getMetricsQueryNoResults(options);
-
-    System.assert(!response.getAggregations().isEmpty());
-    System.assertEquals(interval, response.getAggregations().get(0).getInterval());
-    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
-    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
-    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
-    System.assertEquals(keyAsString, response.getAggregations().get(0).getResults().get(0).getKeyAsString());
-    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetMetricsQueryTokenEvent() {
-    String body = IBMWatsonMockResponses.metricTokenResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    Long count = 10L;
-    String key = 'beat';
-    Double eventRate = 0.0;
-    Long matchingResults = 117L;
-    String eventType = 'click';
-
-    IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptionsBuilder()
-      .count(count)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-
-    IBMDiscoveryV1Models.MetricTokenResponse response = service.getMetricsQueryTokenEvent(options);
-
-    System.assert(!response.getAggregations().isEmpty());
-    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
-    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
-    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
-    System.assertEquals(matchingResults, response.getAggregations().get(0).getResults().get(0).getMatchingResults());
-    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testQueryLog() {
-    String body = IBMWatsonMockResponses.logQueryResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    List<String> sortList = new List<String> { 'field_a' };
-    String extraSort = 'field_b';
-    String filter = 'filter';
-    String naturalLanguageQuery = 'Who beat Ken Jennings in Jeopardy!';
-    Long count = 5L;
-    Long offset = 5L;
-    Long matchingResults = 2L;
-    String customerId = '';
-    String sessionToken = 'mock_session_token';
-    String eventType = 'query';
-    Long resultCount = 0L;
-    String dateString = '"2017-07-14T12:55:40.652Z"';
-    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
-    String queryId = 'mock_queryid';
-
-    IBMDiscoveryV1Models.QueryLogOptions options = new IBMDiscoveryV1Models.QueryLogOptionsBuilder()
-      .xSort(sortList)
-      .addXSort(extraSort)
-      .count(count)
-      .filter(filter)
-      .offset(offset)
-      .query(naturalLanguageQuery)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    options = options.newBuilder().build();
-
-    IBMDiscoveryV1Models.LogQueryResponse response = service.queryLog(options);
-
-    System.assertEquals(matchingResults, response.getMatchingResults());
-    System.assert(!response.getResults().isEmpty());
-    System.assertEquals(ENVIRONMENT_ID, response.getResults().get(0).getEnvironmentId());
-    System.assertEquals(customerId, response.getResults().get(0).getCustomerId());
-    System.assertEquals(queryId, response.getResults().get(0).getQueryId());
-    System.assertEquals(sessionToken, response.getResults().get(0).getSessionToken());
-    System.assertEquals(eventType, response.getResults().get(0).getEventType());
-    System.assert(response.getResults().get(0).getDocumentResults().getResults() != null);
-    System.assertEquals(resultCount, response.getResults().get(0).getDocumentResults().getCount());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testTokenDictRule() {
-    Test.startTest();
-
-    String text = 'text';
-    String partOfSpeech = 'noun';
-    List<String> readings = new List<String> { 'reading 1', 'reading 2' };
-    List<String> tokens = new List<String> { 'token 1', 'token 2' };
-
-    IBMDiscoveryV1Models.TokenDictRule tokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
-      .text(text)
-      .partOfSpeech(partOfSpeech)
-      .readings(readings)
-      .tokens(tokens)
-      .build();
-
-    System.assertEquals(text, tokenDictRule.getText());
-    System.assertEquals(partOfSpeech, tokenDictRule.getPartOfSpeech());
-    System.assertEquals(readings, tokenDictRule.getReadings());
-    System.assertEquals(tokens, tokenDictRule.getTokens());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testCreateTokenizationDictionaryOptions() {
     Test.startTest();
 
     String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-    IBMDiscoveryV1Models.TokenDictRule firstTokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
-      .text(TEXT)
-      .tokens(TOKENS)
-      .partOfSpeech(PART_OF_SPEECH)
-      .build();
-    IBMDiscoveryV1Models.TokenDictRule secondTokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
-      .text(TEXT)
-      .tokens(TOKENS)
-      .partOfSpeech(PART_OF_SPEECH)
-      .build();
-    List<IBMDiscoveryV1Models.TokenDictRule> tokenDictRuleList = new List<IBMDiscoveryV1Models.TokenDictRule>();
-    tokenDictRuleList.add(firstTokenDictRule);
 
-    IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createOptions = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
+    IBMDiscoveryV1Models.ListGatewaysOptions options = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
       .environmentId(environmentId)
-      .collectionId(collectionId)
-      .tokenizationRules(tokenDictRuleList)
-      .addTokenizationRules(secondTokenDictRule)
-      .addHeader(HEADER_KEY, HEADER_VAL)
+      .addHeader('Test-Header', 'test_value')
       .build();
-    createOptions = createOptions.newBuilder().build();
 
-    tokenDictRuleList.add(secondTokenDictRule);
+    IBMDiscoveryV1Models.GatewayList response = service.listGateways(options);
 
-    System.assertEquals(environmentId, createOptions.environmentId());
-    System.assertEquals(collectionId, createOptions.collectionId());
-    System.assertEquals(tokenDictRuleList, createOptions.tokenizationRules());
-
-    Test.stopTest(); 
-  }
-
-  static testMethod void testGetTokenizationDictionaryStatusOptions() {
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-    IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getOptions = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    getOptions = getOptions.newBuilder().build();
-
-    System.assertEquals(environmentId, getOptions.environmentId());
-    System.assertEquals(collectionId, getOptions.collectionId());
+    System.assertEquals(
+      'gateway_id',
+      response.getGateways().get(0).getGatewayId()
+    );
+    System.assertEquals(
+      'name',
+      response.getGateways().get(0).getName()
+    );
+    System.assertEquals(
+      'status',
+      response.getGateways().get(0).getStatus()
+    );
+    System.assertEquals(
+      'token',
+      response.getGateways().get(0).getToken()
+    );
+    System.assertEquals(
+      'token_id',
+      response.getGateways().get(0).getTokenId()
+    );
 
     Test.stopTest();
   }
-
-  static testMethod void testDeleteTokenizationDictionaryOptions() {
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-    IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteOptions = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    deleteOptions = deleteOptions.newBuilder().build();
-
-    System.assertEquals(environmentId, deleteOptions.environmentId());
-    System.assertEquals(collectionId, deleteOptions.collectionId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testCreateTokenizationDictionary() {
-    String body = IBMWatsonMockResponses.tokenDictStatusResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-    IBMDiscoveryV1Models.TokenDictRule tokenDictRule = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
-      .text(TEXT)
-      .tokens(TOKENS)
-      .partOfSpeech(PART_OF_SPEECH)
-      .build();
-
-    IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createOptions = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .tokenizationRules(new List<IBMDiscoveryV1Models.TokenDictRule> { tokenDictRule })
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    createOptions = createOptions.newBuilder().build();
-    IBMDiscoveryV1Models.TokenDictStatusResponse response = service.createTokenizationDictionary(createOptions);
-
-    System.assertEquals('active', response.getStatus());
-    System.assertEquals('tokenization_dictionary', response.getXtype());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetTokenizationDictionaryStatus() {
-    String body = IBMWatsonMockResponses.tokenDictStatusResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-    IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getOptions = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    IBMDiscoveryV1Models.TokenDictStatusResponse response = service.getTokenizationDictionaryStatus(getOptions);
-
-    System.assertEquals('active', response.getStatus());
-    System.assertEquals('tokenization_dictionary', response.getXtype());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testDeleteTokenizationDictionary() {
-    String body = '';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-    IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteOptions = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    deleteOptions = deleteOptions.newBuilder().build();
-    service.deleteTokenizationDictionary(deleteOptions);
-
-    Test.stopTest();
-  }
-
-  static testMethod void testCreateStopwordListOptions() {
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-    String testFilename = 'test_filename';
-    IBMWatsonFile testfile= new IBMWatsonFile.FileBuilder()
-      .body(Blob.valueOf('test string'))
-      .contentType('text/plain')
-      .build();
-
-    IBMDiscoveryV1Models.CreateStopwordListOptions createStopwordListOptions = new IBMDiscoveryV1Models.CreateStopwordListOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .stopwordFile(testfile)
-      .stopwordFilename(testFilename)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    createStopwordListOptions = createStopwordListOptions.newBuilder().build();
-
-    System.assertEquals(environmentId, createStopwordListOptions.environmentId());
-    System.assertEquals(collectionId, createStopwordListOptions.collectionId());
-    System.assertEquals(testfile, createStopwordListOptions.stopwordFile());
-    System.assertEquals(testFilename, createStopwordListOptions.stopwordFilename());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testCreateStopwordList() {
-    String body = IBMWatsonMockResponses.tokenDictStatusResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-    String testFilename = 'test_filename';
-    IBMWatsonFile testfile= new IBMWatsonFile.FileBuilder()
-      .body(Blob.valueOf('test string'))
-      .contentType('text/plain')
-      .build();
-
-    IBMDiscoveryV1Models.CreateStopwordListOptions createStopwordListOptions = new IBMDiscoveryV1Models.CreateStopwordListOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .stopwordFile(testfile)
-      .stopwordFilename(testFilename)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    createStopwordListOptions = createStopwordListOptions.newBuilder().build();
-    IBMDiscoveryV1Models.TokenDictStatusResponse response = service.createStopwordList(createStopwordListOptions);
-
-    System.assertEquals('active', response.getStatus());
-    System.assertEquals('tokenization_dictionary', response.getXtype());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testDeleteStopwordListOptions() {
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-
-    IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions = new IBMDiscoveryV1Models.DeleteStopwordListOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    deleteStopwordListOptions = deleteStopwordListOptions.newBuilder().build();
-
-    System.assertEquals(environmentId, deleteStopwordListOptions.environmentId());
-    System.assertEquals(collectionId, deleteStopwordListOptions.collectionId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testDeleteStopwordList() {
-    String body = '';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-
-    IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions = new IBMDiscoveryV1Models.DeleteStopwordListOptionsBuilder()
-      .environmentId(environmentId)
-      .collectionId(collectionId)
-      .addHeader(HEADER_KEY, HEADER_VAL)
-      .build();
-    deleteStopwordListOptions = deleteStopwordListOptions.newBuilder().build();
-    service.deleteStopwordList(deleteStopwordListOptions);
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetStopwordListStatusOptions() {
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-
-    IBMDiscoveryV1Models.GetStopwordListStatusOptions getStopwordListStatusOptions = new IBMDiscoveryV1Models.GetStopwordListStatusOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    getStopwordListStatusOptions = getStopwordListStatusOptions.newBuilder().build();
-
-    System.assertEquals(environmentId, getStopwordListStatusOptions.environmentId());
-    System.assertEquals(collectionId, getStopwordListStatusOptions.collectionId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetStopwordListStatus() {
-    String body = IBMWatsonMockResponses.tokenDictStatusResponseStopwords();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String collectionId = 'collection_id';
-
-    IBMDiscoveryV1Models.GetStopwordListStatusOptions getStopwordListStatusOptions = new IBMDiscoveryV1Models.GetStopwordListStatusOptionsBuilder()
-        .environmentId(environmentId)
-        .collectionId(collectionId)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    IBMDiscoveryV1Models.TokenDictStatusResponse response = service.getStopwordListStatus(getStopwordListStatusOptions);
-
-    System.assertEquals('active', response.getStatus());
-    System.assertEquals('stopwords', response.getXtype());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testCreateGatewayOptions() {
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String name = 'name';
-
-    IBMDiscoveryV1Models.CreateGatewayOptions createGatewayOptions = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
-        .environmentId(environmentId)
-        .name(name)
-        .build();
-    createGatewayOptions = createGatewayOptions.newBuilder().build();
-
-    System.assertEquals(environmentId, createGatewayOptions.environmentId());
-    System.assertEquals(name, createGatewayOptions.name());
-
-    Test.stopTest();
-  }
-
   static testMethod void testCreateGateway() {
-    String body = IBMWatsonMockResponses.gatewayResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String body = IBMWatsonMockResponses.discoveryV1Gateway();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
-    String name = 'name';
 
-    String gatewayId = 'gateway_id';
-    String status = 'connected';
-    String token = 'token';
-    String tokenId = 'token_id';
+    IBMDiscoveryV1Models.CreateGatewayOptions options = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
+      .environmentId(environmentId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    IBMDiscoveryV1Models.CreateGatewayOptions createGatewayOptions = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
-        .environmentId(environmentId)
-        .name(name)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    IBMDiscoveryV1Models.Gateway response = service.createGateway(createGatewayOptions);
+    IBMDiscoveryV1Models.Gateway response = service.createGateway(options);
 
-    System.assertEquals(gatewayId, response.getGatewayId());
-    System.assertEquals(name, response.getName());
-    System.assertEquals(status, response.getStatus());
-    System.assertEquals(token, response.getToken());
-    System.assertEquals(tokenId, response.getTokenId());
+    System.assertEquals(
+      'gateway_id',
+      response.getGatewayId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'token',
+      response.getToken()
+    );
+    System.assertEquals(
+      'token_id',
+      response.getTokenId()
+    );
 
     Test.stopTest();
   }
-
-  static testMethod void testDeleteGatewayOptions() {
+  static testMethod void testGetGateway() {
+    String body = IBMWatsonMockResponses.discoveryV1Gateway();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
     String gatewayId = 'gateway_id';
 
-    IBMDiscoveryV1Models.DeleteGatewayOptions deleteGatewayOptions = new IBMDiscoveryV1Models.DeleteGatewayOptionsBuilder()
-        .environmentId(environmentId)
-        .gatewayId(gatewayId)
-        .build();
-    deleteGatewayOptions = deleteGatewayOptions.newBuilder().build();
+    IBMDiscoveryV1Models.GetGatewayOptions options = new IBMDiscoveryV1Models.GetGatewayOptionsBuilder()
+      .environmentId(environmentId)
+      .gatewayId(gatewayId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    System.assertEquals(environmentId, deleteGatewayOptions.environmentId());
-    System.assertEquals(gatewayId, deleteGatewayOptions.gatewayId());
+    IBMDiscoveryV1Models.Gateway response = service.getGateway(options);
+
+    System.assertEquals(
+      'gateway_id',
+      response.getGatewayId()
+    );
+    System.assertEquals(
+      'name',
+      response.getName()
+    );
+    System.assertEquals(
+      'status',
+      response.getStatus()
+    );
+    System.assertEquals(
+      'token',
+      response.getToken()
+    );
+    System.assertEquals(
+      'token_id',
+      response.getTokenId()
+    );
 
     Test.stopTest();
   }
-
   static testMethod void testDeleteGateway() {
     String body = '';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
     String gatewayId = 'gateway_id';
 
-    IBMDiscoveryV1Models.DeleteGatewayOptions deleteGatewayOptions = new IBMDiscoveryV1Models.DeleteGatewayOptionsBuilder()
-        .environmentId(environmentId)
-        .gatewayId(gatewayId)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    service.deleteGateway(deleteGatewayOptions);
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetGatewayOptions() {
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String gatewayId = 'gateway_id';
-
-    IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions = new IBMDiscoveryV1Models.GetGatewayOptionsBuilder()
-        .environmentId(environmentId)
-        .gatewayId(gatewayId)
-        .build();
-    getGatewayOptions = getGatewayOptions.newBuilder().build();
-
-    System.assertEquals(environmentId, getGatewayOptions.environmentId());
-    System.assertEquals(gatewayId, getGatewayOptions.gatewayId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetGateway() {
-    String body = IBMWatsonMockResponses.gatewayResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-    String gatewayId = 'gateway_id';
-
-    String name = 'name';
-    String status = 'connected';
-    String token = 'token';
-    String tokenId = 'token_id';
-
-    IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions = new IBMDiscoveryV1Models.GetGatewayOptionsBuilder()
-        .environmentId(environmentId)
-        .gatewayId(gatewayId)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    IBMDiscoveryV1Models.Gateway response = service.getGateway(getGatewayOptions);
-
-    System.assertEquals(gatewayId, response.getGatewayId());
-    System.assertEquals(name, response.getName());
-    System.assertEquals(status, response.getStatus());
-    System.assertEquals(token, response.getToken());
-    System.assertEquals(tokenId, response.getTokenId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testListGatewaysOptions() {
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-
-    IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
-        .environmentId(environmentId)
-        .build();
-    listGatewaysOptions = listGatewaysOptions.newBuilder().build();
-
-    System.assertEquals(environmentId, listGatewaysOptions.environmentId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testListGateways() {
-    String body = IBMWatsonMockResponses.listGatewaysResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    String environmentId = 'environment_id';
-
-    String gatewayId = 'gateway_id_1';
-    String name = 'name';
-    String status = 'connected';
-    String token = 'token';
-    String tokenId = 'token_id';
-
-    IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
-        .environmentId(environmentId)
-        .addHeader(HEADER_KEY, HEADER_VAL)
-        .build();
-    IBMDiscoveryV1Models.GatewayList response = service.listGateways(listGatewaysOptions);
-
-    System.assertEquals(gatewayId, response.getGateways().get(0).getGatewayId());
-    System.assertEquals(name, response.getGateways().get(0).getName());
-    System.assertEquals(status, response.getGateways().get(0).getStatus());
-    System.assertEquals(token, response.getGateways().get(0).getToken());
-    System.assertEquals(tokenId, response.getGateways().get(0).getTokenId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testSourceOptionsWebCrawl() {
-    Test.startTest();
-    String url = 'url';
-    String crawlSpeed = 'crawl_speed';
-    Long maximumHops = 1L;
-    Long requestTimeout = 2000L;
-    List<String> blacklist = new List<String>{ 'badsite.com' };
-
-    IBMDiscoveryV1Models.SourceOptionsWebCrawl sourceOptionsWebCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawlBuilder()
-      .url(url)
-      .limitToStartingHosts(true)
-      .crawlSpeed(crawlSpeed)
-      .allowUntrustedCertificate(true)
-      .maximumHops(maximumHops)
-      .requestTimeout(requestTimeout)
-      .overrideRobotsTxt(true)
-      .blacklist(blacklist)
+    IBMDiscoveryV1Models.DeleteGatewayOptions options = new IBMDiscoveryV1Models.DeleteGatewayOptionsBuilder()
+      .environmentId(environmentId)
+      .gatewayId(gatewayId)
+      .addHeader('Test-Header', 'test_value')
       .build();
 
-    System.assertEquals(url, sourceOptionsWebCrawl.getUrl());
-    System.assert(sourceOptionsWebCrawl.getLimitToStartingHosts());
-    System.assertEquals(crawlSpeed, sourceOptionsWebCrawl.getCrawlSpeed());
-    System.assert(sourceOptionsWebCrawl.getAllowUntrustedCertificate());
-    System.assertEquals(maximumHops, sourceOptionsWebCrawl.getMaximumHops());
-    System.assertEquals(requestTimeout, sourceOptionsWebCrawl.getRequestTimeout());
-    System.assert(sourceOptionsWebCrawl.getOverrideRobotsTxt());
-    System.assertEquals(blacklist, sourceOptionsWebCrawl.getBlacklist());
-    Test.stopTest();
-  }
-
-  static testMethod void testSourceOptionsBuckets() {
-    Test.startTest();
-    String name = 'name';
-    Long testLimit = 9000L;
-
-    IBMDiscoveryV1Models.SourceOptionsBuckets sourceOptionsBuckets = new IBMDiscoveryV1Models.SourceOptionsBucketsBuilder()
-      .name(name)
-      .xlimit(testLimit)
-      .build();
-
-    System.assertEquals(name, sourceOptionsBuckets.getName());
-    System.assertEquals(testLimit, sourceOptionsBuckets.getXlimit());
-    Test.stopTest();
-  }
-
-  static testMethod void testSourceOptions() {
-    Test.startTest();
-    String folderOwnerUserId = 'folder_owner_user_id';
-    String folderId = 'folder_id';
-    Long testLimit = 10L;
-    String objectName = 'object_name';
-    String siteCollectionPath = 'site_collection_path';
-    String url = 'url';
-    Long maximumHops = 5L;
-    Long requestTimeout = 2L;
-    String bucketName = 'bucket_name';
-    String crawlSpeed = 'aggressive';
-
-    IBMDiscoveryV1Models.SourceOptionsFolder folder = new IBMDiscoveryV1Models.SourceOptionsFolderBuilder()
-      .ownerUserId(folderOwnerUserId)
-      .folderId(folderId)
-      .xlimit(testLimit)
-      .build();
-    IBMDiscoveryV1Models.SourceOptionsObject sourceObject = new IBMDiscoveryV1Models.SourceOptionsObjectBuilder()
-      .name(objectName)
-      .xlimit(testLimit)
-      .build();
-    IBMDiscoveryV1Models.SourceOptionsSiteColl siteColl = new IBMDiscoveryV1Models.SourceOptionsSiteCollBuilder()
-      .siteCollectionPath(siteCollectionPath)
-      .xlimit(testLimit)
-      .build();
-    IBMDiscoveryV1Models.SourceOptionsWebCrawl webCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawlBuilder()
-      .url(url)
-      .limitToStartingHosts(true)
-      .crawlSpeed(crawlSpeed)
-      .allowUntrustedCertificate(true)
-      .maximumHops(maximumHops)
-      .requestTimeout(requestTimeout)
-      .overrideRobotsTxt(true)
-      .build();
-    IBMDiscoveryV1Models.SourceOptionsBuckets buckets = new IBMDiscoveryV1Models.SourceOptionsBucketsBuilder()
-      .name(bucketName)
-      .xlimit(testLimit)
-      .build();
-    IBMDiscoveryV1Models.SourceOptions sourceOptions = new IBMDiscoveryV1Models.SourceOptionsBuilder()
-      .folders(new List<IBMDiscoveryV1Models.SourceOptionsFolder> { folder })
-      .siteCollections(new List<IBMDiscoveryV1Models.SourceOptionsSiteColl> { siteColl })
-      .urls(new List<IBMDiscoveryV1Models.SourceOptionsWebCrawl> { webCrawl })
-      .buckets(new List<IBMDiscoveryV1Models.SourceOptionsBuckets> { buckets })
-      .objects(new List<IBMDiscoveryV1Models.SourceOptionsObject> { sourceObject })
-      .crawlAllBuckets(true)
-      .build();
-
-    System.assertEquals(folderOwnerUserId, sourceOptions.getFolders().get(0).getOwnerUserId());
-    System.assertEquals(folderId, sourceOptions.getFolders().get(0).getFolderId());
-    System.assertEquals(testLimit, sourceOptions.getFolders().get(0).getXlimit());
-    System.assertEquals(objectName, sourceOptions.getObjects().get(0).getName());
-    System.assertEquals(testLimit, sourceOptions.getObjects().get(0).getXlimit());
-    System.assertEquals(siteCollectionPath, sourceOptions.getSiteCollections().get(0).getSiteCollectionPath());
-    System.assertEquals(testLimit, sourceOptions.getSiteCollections().get(0).getXlimit());
-    System.assertEquals(url, sourceOptions.getUrls().get(0).getUrl());
-    System.assert(sourceOptions.getUrls().get(0).getLimitToStartingHosts());
-    System.assertEquals(crawlSpeed, sourceOptions.getUrls().get(0).getCrawlSpeed());
-    System.assert(sourceOptions.getUrls().get(0).getAllowUntrustedCertificate());
-    System.assertEquals(maximumHops, sourceOptions.getUrls().get(0).getMaximumHops());
-    System.assertEquals(requestTimeout, sourceOptions.getUrls().get(0).getRequestTimeout());
-    System.assert(sourceOptions.getUrls().get(0).getOverrideRobotsTxt());
-    System.assertEquals(bucketName, sourceOptions.getBuckets().get(0).getName());
-    System.assertEquals(testLimit, sourceOptions.getBuckets().get(0).getXlimit());
-    System.assert(sourceOptions.getCrawlAllBuckets());
-    Test.stopTest();
-  }
-
-  static testMethod void testSourceStatus() {
-    Test.startTest();
-
-    String status = 'status';
-    String dateString = '"2017-07-14T12:55:40.652Z"';
-    Datetime dateValue = (Datetime) JSON.deserialize(dateString, Datetime.class);
-
-    IBMDiscoveryV1Models.SourceStatus sourceStatus = new IBMDiscoveryV1Models.SourceStatus();
-    sourceStatus.setStatus(status);
-    sourceStatus.setNextCrawl(dateValue);
-
-    System.assertEquals(status, sourceStatus.getStatus());
-    System.assertEquals(dateValue, sourceStatus.getNextCrawl());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testCollectionCrawlStatus() {
-    Test.startTest();
-
-    IBMDiscoveryV1Models.SourceStatus sourceStatus = new IBMDiscoveryV1Models.SourceStatus();
-    IBMDiscoveryV1Models.CollectionCrawlStatus crawlStatus = new IBMDiscoveryV1Models.CollectionCrawlStatus();
-    crawlStatus.setSourceCrawl(sourceStatus);
-
-    System.assertEquals(sourceStatus, crawlStatus.getSourceCrawl());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testSduStatus() {
-    Test.startTest();
-
-    Long annotatedPages = 1L;
-    Long pages = 2L;
-    Long documents = 3L;
-    IBMDiscoveryV1Models.SduStatusCustomFields customFields = new IBMDiscoveryV1Models.SduStatusCustomFields();
-
-    IBMDiscoveryV1Models.SduStatus sduStatus = new IBMDiscoveryV1Models.SduStatus();
-    sduStatus.setEnabled(true);
-    sduStatus.setTotalAnnotatedPages(annotatedPages);
-    sduStatus.setTotalPages(pages);
-    sduStatus.setTotalDocuments(documents);
-    sduStatus.setCustomFields(customFields);
-
-    System.assert(sduStatus.getEnabled());
-    System.assertEquals(annotatedPages, sduStatus.getTotalAnnotatedPages());
-    System.assertEquals(pages, sduStatus.getTotalPages());
-    System.assertEquals(documents, sduStatus.getTotalDocuments());
-    System.assertEquals(customFields, sduStatus.getCustomFields());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testSduStatusCustomFields() {
-    Test.startTest();
-
-    Long defined = 1L;
-    Long maximumAllowed = 2L;
-
-    IBMDiscoveryV1Models.SduStatusCustomFields customFields = new IBMDiscoveryV1Models.SduStatusCustomFields();
-    customFields.setDefined(defined);
-    customFields.setMaximumAllowed(maximumAllowed);
-
-    System.assertEquals(defined, customFields.getDefined());
-    System.assertEquals(maximumAllowed, customFields.getMaximumAllowed());
+    service.deleteGateway(options);
 
     Test.stopTest();
   }

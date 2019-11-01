@@ -1920,6 +1920,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
+
   // --- Compare and Comply v1 ---
 
   public static testMethod String compareComplyV1BatchStatus() {
@@ -2813,299 +2814,1206 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
-  public static testMethod String environment() {
-    return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment", ' +
-                        '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z", ' +
-                          '"updated": "2017-05-16T13:56:54.957Z", "status": "active", "read_only": false, ' +
-                          '"index_capacity": {"documents": {"indexed": 0, "maximum_allowed": 1000000}, ' +
-                          '"disk_usage": {"used_bytes": 0, "maximum_allowed_bytes": 99345920}}}';
-  }
-  public static testMethod String configuration() {
-    return  '{' +
-            '  "configuration_id": "448e3545-51ca-4530-a03b-6ff282ceac2e", ' +
-            '  "name": "IBM News", ' +
-            '  "created": "2015-08-24T18:42:25.324Z", ' +
-            '  "updated": "2015-08-24T18:42:25.324Z", ' +
-            '  "description": "A configuration useful for ingesting IBM press releases.", ' +
-            '  "conversions": {' +
-            '    "html": {' +
-            '      "exclude_tags_keep_content": [' +
-            '        "span"' +
-            '      ], ' +
-            '      "exclude_content": {' +
-            '        "xpaths": [' +
-            '          "/home"' +
-            '        ]' +
-            '      }' +
-            '    }, ' +
-            '    "json_normalizations": [' +
-            '      {' +
-            '        "operation": "move", ' +
-            '        "source_field": "extracted_metadata.title", ' +
-            '        "destination_field": "metadata.title"' +
-            '      }, ' +
-            '      {' +
-            '        "operation": "move", ' +
-            '        "source_field": "extracted_metadata.author", ' +
-            '        "destination_field": "metadata.author"' +
-            '      }, ' +
-            '      {' +
-            '        "operation": "remove", ' +
-            '        "source_field": "extracted_metadata"' +
-            '      }' +
-            '    ]' +
-            '  }, ' +
-            '  "enrichments": [' +
-            '    {' +
-            '      "source_field": "text", ' +
-            '      "destination_field": "alchemy_enriched_text", ' +
-            '      "enrichment": "alchemy_language", ' +
-            '      "options": {' +
-            '        "extract": ["wert"], ' +
-            '        "showSourceText": true' +
-            '      }' +
-            '    }, ' +
-            '    {' +
-            '      "source_field": "alchemy_enriched_text.text", ' +
-            '      "destination_field": "sire_enriched_text", ' +
-            '      "enrichment": "alchemy_language", ' +
-            '      "options": {' +
-            '        "extract": ["typed-rels"], ' +
-            '        "model": "ie-en-news"' +
-            '      }' +
-            '    }' +
-            '  ], ' +
-            '  "normalizations": [' +
-            '    {' +
-            '      "operation": "move", ' +
-            '      "source_field": "metadata.title", ' +
-            '      "destination_field": "title"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "move", ' +
-            '      "source_field": "metadata.author", ' +
-            '      "destination_field": "author"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "move", ' +
-            '      "source_field": "alchemy_enriched_text.language", ' +
-            '      "destination_field": "language"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "html"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "alchemy_enriched_text.status"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "alchemy_enriched_text.text"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "sire_enriched_text.language"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "sire_enriched_text.model"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "sire_enriched_text.status"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove_nulls"' +
-            '    }' +
-            '  ]' +
-            '}';
+
+  // --- Discovery v1 ---
+
+  public static testMethod String discoveryV1Environment() {
+    return '{' +
+      '"environment_id": "environment_id",' +
+      '"name": "name",' +
+      '"description": "description",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"status": "status",' +
+      '"read_only": true,' +
+      '"size": "size",' +
+      '"requested_size": "requested_size",' +
+      '"index_capacity": {' +
+        '"documents": {' +
+          '"indexed": 10,' +
+          '"maximum_allowed": 10' +
+        '},' +
+        '"disk_usage": {' +
+          '"used_bytes": 10,' +
+          '"maximum_allowed_bytes": 10' +
+        '},' +
+        '"collections": {' +
+          '"available": 10,' +
+          '"maximum_allowed": 10' +
+        '}' +
+      '},' +
+      '"search_status": {' +
+        '"scope": "scope",' +
+        '"status": "status",' +
+        '"status_description": "status_description",' +
+        '"last_trained": "1995-06-12T01:11:11.111Z"' +
+      '}' +
+    '}';
   }
 
-  public static testMethod String listConfigurationsResponse() {
+  public static testMethod String discoveryV1ListEnvironmentsResponse() {
     return '{' +
-           ' "configurations": [' +
-           '{' +
-            '  "configuration_id": "448e3545-51ca-4530-a03b-6ff282ceac2e", ' +
-            '  "name": "IBM News", ' +
-            '  "created": "2015-08-24T18:42:25.324Z", ' +
-            '  "updated": "2015-08-24T18:42:25.324Z", ' +
-            '  "description": "A configuration useful for ingesting IBM press releases.", ' +
-            '  "conversions": {' +
-            '    "html": {' +
-            '      "exclude_tags_keep_content": [' +
-            '        "span"' +
-            '      ], ' +
-            '      "exclude_content": {' +
-            '        "xpaths": [' +
-            '          "/home"' +
-            '        ]' +
-            '      }' +
-            '    }, ' +
-            '    "json_normalizations": [' +
-            '      {' +
-            '        "operation": "move", ' +
-            '        "source_field": "extracted_metadata.title", ' +
-            '        "destination_field": "metadata.title"' +
-            '      }, ' +
-            '      {' +
-            '        "operation": "move", ' +
-            '        "source_field": "extracted_metadata.author", ' +
-            '        "destination_field": "metadata.author"' +
-            '      }, ' +
-            '      {' +
-            '        "operation": "remove", ' +
-            '        "source_field": "extracted_metadata"' +
-            '      }' +
-            '    ]' +
-            '  }, ' +
-            '  "enrichments": [' +
-            '    {' +
-            '      "source_field": "text", ' +
-            '      "destination_field": "alchemy_enriched_text", ' +
-            '      "enrichment": "alchemy_language", ' +
-            '      "options": {' +
-            '        "extract": ["wert"], ' +
-            '        "showSourceText": true' +
-            '      }' +
-            '    }, ' +
-            '    {' +
-            '      "source_field": "alchemy_enriched_text.text", ' +
-            '      "destination_field": "sire_enriched_text", ' +
-            '      "enrichment": "alchemy_language", ' +
-            '      "options": {' +
-            '        "extract": ["typed-rels"], ' +
-            '        "model": "ie-en-news"' +
-            '      }' +
-            '    }' +
-            '  ], ' +
-            '  "normalizations": [' +
-            '    {' +
-            '      "operation": "move", ' +
-            '      "source_field": "metadata.title", ' +
-            '      "destination_field": "title"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "move", ' +
-            '      "source_field": "metadata.author", ' +
-            '      "destination_field": "author"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "move", ' +
-            '      "source_field": "alchemy_enriched_text.language", ' +
-            '      "destination_field": "language"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "html"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "alchemy_enriched_text.status"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "alchemy_enriched_text.text"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "sire_enriched_text.language"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "sire_enriched_text.model"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove", ' +
-            '      "source_field": "sire_enriched_text.status"' +
-            '    }, ' +
-            '    {' +
-            '      "operation": "remove_nulls"' +
-            '    }' +
-            '  ]' +
+      '"environments": [' +
+        '{' +
+          '"environment_id": "environment_id",' +
+          '"name": "name",' +
+          '"description": "description",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"status": "status",' +
+          '"read_only": true,' +
+          '"size": "size",' +
+          '"requested_size": "requested_size",' +
+          '"index_capacity": {' +
+            '"documents": {' +
+              '"indexed": 10,' +
+              '"maximum_allowed": 10' +
+            '},' +
+            '"disk_usage": {' +
+              '"used_bytes": 10,' +
+              '"maximum_allowed_bytes": 10' +
+            '},' +
+            '"collections": {' +
+              '"available": 10,' +
+              '"maximum_allowed": 10' +
             '}' +
-           ' ]' +
-           '}';
+          '},' +
+          '"search_status": {' +
+            '"scope": "scope",' +
+            '"status": "status",' +
+            '"status_description": "status_description",' +
+            '"last_trained": "1995-06-12T01:11:11.111Z"' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
   }
 
-   public static testMethod String listCollectionFieldsResponse() {
+  public static testMethod String discoveryV1ListCollectionFieldsResponse() {
     return '{' +
-              '  "fields": [' +
-              '    {' +
-              '      "field": "warnings", ' +
-              '      "type": "nested"' +
-              '    }, ' +
-              '    {' +
-              '      "field": "warnings.properties.description", ' +
-              '      "type": "string"' +
-              '    }, ' +
-              '    {' +
-              '      "field": "warnings.properties.phase", ' +
-              '      "type": "string"' +
-              '    }, ' +
-              '    {' +
-              '      "field": "warnings.properties.warning_id", ' +
-              '      "type": "string"' +
-              '    }' +
-              '  ]' +
-              '}';
+      '"fields": [' +
+        '{' +
+          '"field": "field",' +
+          '"type": "type"' +
+        '}' +
+      ']' +
+    '}';
   }
 
-  public static testMethod String listEnvironmentsResponse() {
+  public static testMethod String discoveryV1Configuration() {
     return '{' +
-              '  "environments": [' +
-              '    {' +
-              '      "environment_id": "ecbda78e-fb06-40b1-a43f-a039fac0adc6", ' +
-              '      "name": "byod_environment", ' +
-              '      "description": "Private Data Environment", ' +
-              '      "created": "2017-07-14T12:54:40.985Z", ' +
-              '      "updated": "2017-07-14T12:54:40.985Z", ' +
-              '      "read_only": false' +
-              '    }, ' +
-              '    {' +
-              '      "environment_id": "system", ' +
-              '      "name": "Watson System Environment", ' +
-              '      "description": "Watson System environment", ' +
-              '      "created": "2017-07-13T01:14:20.761Z", ' +
-              '      "updated": "2017-07-13T01:14:20.761Z", ' +
-              '      "read_only": true' +
-              '    }' +
-              '  ]' +
-              '}';
+      '"configuration_id": "configuration_id",' +
+      '"name": "name",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"description": "description",' +
+      '"conversions": {' +
+        '"pdf" : {' +
+          '"heading": {' +
+            '"fonts": [' +
+              '{' +
+                '"level": 10,' +
+                '"min_size": 10,' +
+                '"max_size": 10,' +
+                '"bold": true,' +
+                '"italic": true,' +
+                '"name": "name"' +
+              '}' +
+            ']' +
+          '}' +
+        '},' +
+        '"word" : {' +
+          '"heading": {' +
+            '"fonts": [' +
+              '{' +
+                '"level": 10,' +
+                '"min_size": 10,' +
+                '"max_size": 10,' +
+                '"bold": true,' +
+                '"italic": true,' +
+                '"name": "name"' +
+              '}' +
+            '],' +
+            '"styles": [' +
+              '{' +
+                '"level": 10,' +
+                '"names": [' +
+                  '"names"' +
+                ']' +
+              '}' +
+            ']' +
+          '}' +
+        '},' +
+        '"html": {' +
+          '"exclude_tags_completely": [' +
+            '"exclude_tags_completely"' +
+          '],' +
+          '"exclude_tags_keep_content": [' +
+            '"exclude_tags_keep_content"' +
+          '],' +
+          '"keep_content": {' +
+            '"xpaths": [' +
+              '"xpaths"' +
+            ']' +
+          '},' +
+          '"exclude_content": {' +
+            '"xpaths": [' +
+              '"xpaths"' +
+            ']' +
+          '},' +
+          '"keep_tag_attributes": [' +
+            '"keep_tag_attributes"' +
+          '],' +
+          '"exclude_tag_attributes": [' +
+            '"exclude_tag_attributes"' +
+          ']' +
+        '},' +
+        '"segment": {' +
+          '"enabled": true,' +
+          '"selector_tags": [' +
+            '"selector_tags"' +
+          '],' +
+          '"annotated_fields": [' +
+            '"annotated_fields"' +
+          ']' +
+        '},' +
+        '"json_normalizations": [' +
+          '{' +
+            '"operation": "operation",' +
+            '"source_field": "source_field",' +
+            '"destination_field": "destination_field"' +
+          '}' +
+        '],' +
+        '"image_text_recognition": true' +
+      '},' +
+      '"enrichments": [' +
+        '{' +
+          '"description": "description",' +
+          '"source_field": "source_field",' +
+          '"destination_field": "destination_field",' +
+          '"enrichment": "enrichment",' +
+          '"overwrite": true,' +
+          '"ignore_downstream_errors": true,' +
+          '"options": {' +
+            '"features": {' +
+              '"keywords": {' +
+                '"sentiment": true,' +
+                '"emotion": true,' +
+                '"limit": 10' +
+              '},' +
+              '"entities": {' +
+                '"sentiment": true,' +
+                '"emotion": true,' +
+                '"limit": 10,' +
+                '"mentions": true,' +
+                '"mentionTypes": true,' +
+                '"sentenceLocations": true,' +
+                '"model": "model"' +
+              '},' +
+              '"sentiment": {' +
+                '"document": true,' +
+                '"targets": [' +
+                  '"target"' +
+                ']' +
+              '},' +
+              '"emotion": {' +
+                '"document": true,' +
+                '"targets": [' +
+                  '"target"' +
+                ']' +
+              '},' +
+              '"semantic_roles": {' +
+                '"entities": true,' +
+                '"keywords": true,' +
+                '"limit": 10' +
+              '},' +
+              '"relations": {' +
+                '"model": "model"' +
+              '},' +
+              '"concepts": {' +
+                '"limit": 10' +
+              '}' +
+            '},' +
+            '"language": "language",' +
+            '"model": "model"' +
+          '}' +
+        '}' +
+      '],' +
+      '"normalizations": [' +
+        '{' +
+          '"operation": "operation",' +
+          '"source_field": "source_field",' +
+          '"destination_field": "destination_field"' +
+        '}' +
+      '],' +
+      '"source": {' +
+        '"type": "type",' +
+        '"credential_id": "credential_id",' +
+        '"schedule": {' +
+          '"enabled": true,' +
+          '"time_zone": "time_zone",' +
+          '"frequency": "frequency"' +
+        '},' +
+        '"options": {' +
+          '"folders": [' +
+            '{' +
+              '"owner_user_id": "owner_user_id",' +
+              '"folder_id": "folder_id",' +
+              '"limit": 10' +
+            '}' +
+          '],' +
+          '"objects": [' +
+            '{' +
+              '"name": "name",' +
+              '"limit": 10' +
+            '}' +
+          '],' +
+          '"site_collections": [' +
+            '{' +
+              '"site_collection_path": "site_collection_path",' +
+              '"limit": 10' +
+            '}' +
+          '],' +
+          '"urls": [' +
+            '{' +
+              '"url": "url",' +
+              '"limit_to_starting_hosts": true,' +
+              '"crawl_speed": "crawl_speed",' +
+              '"allow_untrusted_certificate": true,' +
+              '"maximum_hops": 10,' +
+              '"request_timeout": 10,' +
+              '"override_robots_txt": true,' +
+              '"blacklist": [' +
+                '"blacklist"' +
+              ']' +
+            '}' +
+          '],' +
+          '"buckets": [' +
+            '{' +
+              '"name": "name",' +
+              '"limit": 10' +
+            '}' +
+          '],' +
+          '"crawl_all_buckets": true' +
+        '}' +
+      '}' +
+    '}';
   }
 
-   public static testMethod String collection() {
+  public static testMethod String discoveryV1ListConfigurationsResponse() {
+    return '{' +
+      '"configurations": [' +
+        '{' +
+          '"configuration_id": "configuration_id",' +
+          '"name": "name",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"description": "description",' +
+          '"conversions": {' +
+            '"pdf" : {' +
+              '"heading": {' +
+                '"fonts": [' +
+                  '{' +
+                    '"level": 10,' +
+                    '"min_size": 10,' +
+                    '"max_size": 10,' +
+                    '"bold": true,' +
+                    '"italic": true,' +
+                    '"name": "name"' +
+                  '}' +
+                ']' +
+              '}' +
+            '},' +
+            '"word" : {' +
+              '"heading": {' +
+                '"fonts": [' +
+                  '{' +
+                    '"level": 10,' +
+                    '"min_size": 10,' +
+                    '"max_size": 10,' +
+                    '"bold": true,' +
+                    '"italic": true,' +
+                    '"name": "name"' +
+                  '}' +
+                '],' +
+                '"styles": [' +
+                  '{' +
+                    '"level": 10,' +
+                    '"names": [' +
+                      '"names"' +
+                    ']' +
+                  '}' +
+                ']' +
+              '}' +
+            '},' +
+            '"html": {' +
+              '"exclude_tags_completely": [' +
+                '"exclude_tags_completely"' +
+              '],' +
+              '"exclude_tags_keep_content": [' +
+                '"exclude_tags_keep_content"' +
+              '],' +
+              '"keep_content": {' +
+                '"xpaths": [' +
+                  '"xpaths"' +
+                ']' +
+              '},' +
+              '"exclude_content": {' +
+                '"xpaths": [' +
+                  '"xpaths"' +
+                ']' +
+              '},' +
+              '"keep_tag_attributes": [' +
+                '"keep_tag_attributes"' +
+              '],' +
+              '"exclude_tag_attributes": [' +
+                '"exclude_tag_attributes"' +
+              ']' +
+            '},' +
+            '"segment": {' +
+              '"enabled": true,' +
+              '"selector_tags": [' +
+                '"selector_tags"' +
+              '],' +
+              '"annotated_fields": [' +
+                '"annotated_fields"' +
+              ']' +
+            '},' +
+            '"json_normalizations": [' +
+              '{' +
+                '"operation": "operation",' +
+                '"source_field": "source_field",' +
+                '"destination_field": "destination_field"' +
+              '}' +
+            '],' +
+            '"image_text_recognition": true' +
+          '},' +
+          '"enrichments": [' +
+            '{' +
+              '"description": "description",' +
+              '"source_field": "source_field",' +
+              '"destination_field": "destination_field",' +
+              '"enrichment": "enrichment",' +
+              '"overwrite": true,' +
+              '"ignore_downstream_errors": true,' +
+              '"options": {' +
+                '"features": {' +
+                  '"keywords": {' +
+                    '"sentiment": true,' +
+                    '"emotion": true,' +
+                    '"limit": 10' +
+                  '},' +
+                  '"entities": {' +
+                    '"sentiment": true,' +
+                    '"emotion": true,' +
+                    '"limit": 10,' +
+                    '"mentions": true,' +
+                    '"mentionTypes": true,' +
+                    '"sentenceLocations": true,' +
+                    '"model": "model"' +
+                  '},' +
+                  '"sentiment": {' +
+                    '"document": true,' +
+                    '"targets": [' +
+                      '"target"' +
+                    ']' +
+                  '},' +
+                  '"emotion": {' +
+                    '"document": true,' +
+                    '"targets": [' +
+                      '"target"' +
+                    ']' +
+                  '},' +
+                  '"semantic_roles": {' +
+                    '"entities": true,' +
+                    '"keywords": true,' +
+                    '"limit": 10' +
+                  '},' +
+                  '"relations": {' +
+                    '"model": "model"' +
+                  '},' +
+                  '"concepts": {' +
+                    '"limit": 10' +
+                  '}' +
+                '},' +
+                '"language": "language",' +
+                '"model": "model"' +
+              '}' +
+            '}' +
+          '],' +
+          '"normalizations": [' +
+            '{' +
+              '"operation": "operation",' +
+              '"source_field": "source_field",' +
+              '"destination_field": "destination_field"' +
+            '}' +
+          '],' +
+          '"source": {' +
+            '"type": "type",' +
+            '"credential_id": "credential_id",' +
+            '"schedule": {' +
+              '"enabled": true,' +
+              '"time_zone": "time_zone",' +
+              '"frequency": "frequency"' +
+            '},' +
+            '"options": {' +
+              '"folders": [' +
+                '{' +
+                  '"owner_user_id": "owner_user_id",' +
+                  '"folder_id": "folder_id",' +
+                  '"limit": 10' +
+                '}' +
+              '],' +
+              '"objects": [' +
+                '{' +
+                  '"name": "name",' +
+                  '"limit": 10' +
+                '}' +
+              '],' +
+              '"site_collections": [' +
+                '{' +
+                  '"site_collection_path": "site_collection_path",' +
+                  '"limit": 10' +
+                '}' +
+              '],' +
+              '"urls": [' +
+                '{' +
+                  '"url": "url",' +
+                  '"limit_to_starting_hosts": true,' +
+                  '"crawl_speed": "crawl_speed",' +
+                  '"allow_untrusted_certificate": true,' +
+                  '"maximum_hops": 10,' +
+                  '"request_timeout": 10,' +
+                  '"override_robots_txt": true,' +
+                  '"blacklist": [' +
+                    '"blacklist"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"buckets": [' +
+                '{' +
+                  '"name": "name",' +
+                  '"limit": 10' +
+                '}' +
+              '],' +
+              '"crawl_all_buckets": true' +
+            '}' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+   public static testMethod String discoveryV1Collection() {
+    return '{' +
+      '"collection_id": "collection_id", ' +
+      '"name": "name", ' +
+      '"configuration_id": "configuration_id", ' +
+      '"language": "language", ' +
+      '"status": "status", ' +
+      '"description": "description", ' +
+      '"created": "1995-06-12T01:11:11.111Z", ' +
+      '"updated": "1995-06-12T01:11:11.111Z", ' +
+      '"document_counts": {' +
+        '"available": 10, ' +
+        '"processing": 10, ' +
+        '"failed": 10,' +
+        '"pending": 10' +
+      '}, ' +
+      '"disk_usage": {' +
+        '"used_bytes": 10' +
+      '}, ' +
+      '"training_status": {' +
+        '"data_updated": "1995-06-12T01:11:11.111Z",' +
+        '"total_examples": 10,' +
+        '"sufficient_label_diversity": true,' +
+        '"processing": true,' +
+        '"minimum_examples_added": true,' +
+        '"successfully_trained": "1995-06-12T01:11:11.111Z",' +
+        '"available": true,' +
+        '"notices": 10,' +
+        '"minimum_queries_added": true' +
+      '},' +
+      '"crawl_status": {' +
+        '"source_crawl": {' +
+          '"status": "status",' +
+          '"next_crawl": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      '},' +
+      '"smart_document_understanding": {' +
+        '"enabled": true,' +
+        '"total_annotated_pages": 10,' +
+        '"total_pages": 10,' +
+        '"total_documents": 10,' +
+        '"custom_fields": {' +
+          '"defined": 10,' +
+          '"maximum_allowed": 10' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1ListCollectionsResponse() {
+    return '{' +
+      '"collections": [' +
+        '{' +
+          '"collection_id": "collection_id", ' +
+          '"name": "name", ' +
+          '"configuration_id": "configuration_id", ' +
+          '"language": "language", ' +
+          '"status": "status", ' +
+          '"description": "description", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"document_counts": {' +
+            '"available": 10, ' +
+            '"processing": 10, ' +
+            '"failed": 10,' +
+            '"pending": 10' +
+          '}, ' +
+          '"disk_usage": {' +
+            '"used_bytes": 10' +
+          '}, ' +
+          '"training_status": {' +
+            '"data_updated": "1995-06-12T01:11:11.111Z",' +
+            '"total_examples": 10,' +
+            '"sufficient_label_diversity": true,' +
+            '"processing": true,' +
+            '"minimum_examples_added": true,' +
+            '"successfully_trained": "1995-06-12T01:11:11.111Z",' +
+            '"available": true,' +
+            '"notices": 10,' +
+            '"minimum_queries_added": true' +
+          '},' +
+          '"crawl_status": {' +
+            '"source_crawl": {' +
+              '"status": "status",' +
+              '"next_crawl": "1995-06-12T01:11:11.111Z"' +
+            '}' +
+          '},' +
+          '"smart_document_understanding": {' +
+            '"enabled": true,' +
+            '"total_annotated_pages": 10,' +
+            '"total_pages": 10,' +
+            '"total_documents": 10,' +
+            '"custom_fields": {' +
+              '"defined": 10,' +
+              '"maximum_allowed": 10' +
+            '}' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1Expansions() {
+    return '{' +
+      '"expansions": [' +
+        '{' +
+          '"input_terms" : [' +
+            '"input_terms"' +
+          '],' +
+          '"expanded_terms" : [' +
+            '"expanded_terms"' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1TokenDictStatusResponse() {
+    return '{' +
+      '"status" : "status",' +
+      '"type" : "type"' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1DocumentAccepted() {
+    return '{' +
+      '"document_id": "document_id", ' +
+      '"status": "status", ' +
+      '"notices": [' +
+        '{' +
+          '"notice_id": "notice_id", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"severity": "severity", ' +
+          '"step": "step", ' +
+          '"description": "description", ' +
+          '"query_id": "query_id", ' +
+          '"document_id": "document_id"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1DocumentStatus() {
+    return '{' +
+      '"document_id": "document_id", ' +
+      '"configuration_id": "configuration_id", ' +
+      '"status": "status", ' +
+      '"status_description": "status_description", ' +
+      '"filename": "filename", ' +
+      '"file_type": "file_type", ' +
+      '"sha1": "sha1", ' +
+      '"notices": [' +
+        '{' +
+          '"notice_id": "notice_id", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"severity": "severity", ' +
+          '"step": "step", ' +
+          '"description": "description", ' +
+          '"query_id": "query_id", ' +
+          '"document_id": "document_id"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1QueryResponse() {
+    return '{' +
+      '"matching_results": 10,' +
+      '"aggregations": [' +
+        '{' +
+          '"type": "type",' +
+          '"results": [' +
+            '{' +
+              '"key": "key",' +
+              '"matching_results": 10,' +
+              '"aggregations": [' +
+                '{' +
+                  '"type": "type",' +
+                  '"matching_results": 10,' +
+                  '"field": "field",' +
+                  '"histogram_interval": 10,' +
+                  '"value": 0.5,' +
+                  '"count": 10,' +
+                  '"match": "match",' +
+                  '"path": "path",' +
+                  '"timeslice_interval": "timeslice_interval",' +
+                  '"anomaly": true,' +
+                  '"size": 10,' +
+                  '"hits": {' +
+                    '"matching_results": 10,' +
+                    '"hits": [' +
+                      '{' +
+                        '"id": "id",' +
+                        '"collection_id": "collection_id",' +
+                        '"result_metadata": {' +
+                          '"score": 0.5,' +
+                          '"confidence": 0.5' +
+                        '},' +
+                        '"title": "title"' +
+                      '}' +
+                    ']' +
+                  '}' +
+                '}' +
+              ']' +
+            '}' +
+          '],' +
+          '"matching_results": 10,' +
+          '"field": "field",' +
+          '"histogram_interval": 10,' +
+          '"value": 0.5,' +
+          '"count": 10,' +
+          '"match": "match",' +
+          '"path": "path",' +
+          '"timeslice_interval": "timeslice_interval",' +
+          '"anomaly": true,' +
+          '"size": 10,' +
+          '"hits": {' +
+            '"matching_results": 10,' +
+            '"hits": [' +
+              '{' +
+                '"id": "id",' +
+                '"collection_id": "collection_id",' +
+                '"result_metadata": {' +
+                  '"score": 0.5,' +
+                  '"confidence": 0.5' +
+                '},' +
+                '"title": "title"' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      '],' +
+      '"results": [' +
+        '{' +
+          '"id": "id",' +
+          '"collection_id": "collection_id",' +
+          '"result_metadata": {' +
+            '"score": 0.5,' +
+            '"confidence": 0.5' +
+          '},' +
+          '"title": "title"' +
+        '}' +
+      '],' +
+      '"passages": [' +
+        '{' +
+          '"document_id": "document_id",' +
+          '"passage_score": 0.5,' +
+          '"passage_text": "passage_text",' +
+          '"start_offset": 10,' +
+          '"end_offset": 10,' +
+          '"field": "field"' +
+        '}' +
+      '],' +
+      '"duplicates_removed": 10,' +
+      '"session_token": "session_token",' +
+      '"suggested_query": "suggested_query",' +
+      '"retrieval_details": {' +
+        '"document_retrieval_strategy": "document_retrieval_strategy"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1QueryNoticesResponse() {
+    return '{' +
+      '"matching_results": 10,' +
+      '"results": [' +
+        '{' +
+          '"id": "id",' +
+          '"collection_id": "collection_id",' +
+          '"result_metadata": {' +
+            '"score": 0.5,' +
+            '"confidence": 0.5' +
+          '},' +
+          '"title": "title",' +
+          '"code": 10,' +
+          '"filename": "filename",' +
+          '"file_type": "file_type",' +
+          '"sha1": "sha1",' +
+          '"notice_id": "notice_id",' +
+          '"notices": [' +
+            '{' +
+              '"notice_id": "notice_id",' +
+              '"created": "1995-06-12T01:11:11.111Z",' +
+              '"severity": "severity",' +
+              '"step": "step",' +
+              '"description": "description",' +
+              '"query_id": "query_id",' +
+              '"document_id": "document_id"' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"aggregations": [' +
+        '{' +
+          '"type": "type",' +
+          '"results": [' +
+            '{' +
+              '"key": "key",' +
+              '"matching_results": 10,' +
+              '"aggregations": [' +
+                '{' +
+                  '"type": "type",' +
+                  '"matching_results": 10,' +
+                  '"field": "field",' +
+                  '"histogram_interval": 10,' +
+                  '"value": 0.5,' +
+                  '"count": 10,' +
+                  '"match": "match",' +
+                  '"path": "path",' +
+                  '"timeslice_interval": "timeslice_interval",' +
+                  '"anomaly": true,' +
+                  '"size": 10,' +
+                  '"hits": {' +
+                    '"matching_results": 10,' +
+                    '"hits": [' +
+                      '{' +
+                        '"id": "id",' +
+                        '"collection_id": "collection_id",' +
+                        '"result_metadata": {' +
+                          '"score": 0.5,' +
+                          '"confidence": 0.5' +
+                        '},' +
+                        '"title": "title"' +
+                      '}' +
+                    ']' +
+                  '}' +
+                '}' +
+              ']' +
+            '}' +
+          '],' +
+          '"matching_results": 10,' +
+          '"field": "field",' +
+          '"histogram_interval": 10,' +
+          '"value": 0.5,' +
+          '"count": 10,' +
+          '"match": "match",' +
+          '"path": "path",' +
+          '"timeslice_interval": "timeslice_interval",' +
+          '"anomaly": true,' +
+          '"size": 10,' +
+          '"hits": {' +
+            '"matching_results": 10,' +
+            '"hits": [' +
+              '{' +
+                '"id": "id",' +
+                '"collection_id": "collection_id",' +
+                '"result_metadata": {' +
+                  '"score": 0.5,' +
+                  '"confidence": 0.5' +
+                '},' +
+                '"title": "title"' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      '],' +
+      '"passages": [' +
+        '{' +
+          '"document_id": "document_id",' +
+          '"passage_score": 0.5,' +
+          '"passage_text": "passage_text",' +
+          '"start_offset": 10,' +
+          '"end_offset": 10,' +
+          '"field": "field"' +
+        '}' +
+      '],' +
+      '"duplicates_removed": 10' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1Completions() {
+    return '{' +
+      '"completions": [' +
+        '"completions"' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1TrainingDataSet() {
     return  '{' +
-            '   "collection_id": "800e58e4-198d-45eb-be87-74e1d6df4e96", ' +
-            '  "name": "test-collection", ' +
-            '  "configuration_id": "3c4fff84-1500-455c-b125-eaa2d319f6d3", ' +
-            '  "language": "de", ' +
-            '  "status": "active", ' +
-            '  "description": "A test collection to show as an example", ' +
-            '  "created": "2017-07-14T12:55:40.652Z", ' +
-            '  "updated": "2017-07-14T12:55:40.652Z", ' +
-            '  "document_counts": {' +
-            '    "available": 0, ' +
-            '    "processing": 0, ' +
-            '    "failed": 0,' +
-            '    "pending": 100' +
-            '  }, ' +
-            '  "disk_usage": {' +
-            '    "used_bytes": 260' +
-            '  }, ' +
-            '  "training_status": {' +
-            '    "data_updated": "2017-07-14T12:55:40.652Z", ' +
-            '    "total_examples": 0, ' +
-            '    "sufficient_label_diversity": false, ' +
-            '    "processing": false, ' +
-            '    "minimum_examples_added": false, ' +
-            '    "successfully_trained": "2017-07-14T12:55:40.652Z", ' +
-            '    "available": false, ' +
-            '    "notices": 0, ' +
-            '    "minimum_queries_added": false' +
-            '  }' +
-            '}';
+      '"environment_id": "environment_id", ' +
+      '"collection_id": "collection_id", ' +
+      '"queries": [' +
+        '{' +
+          '"query_id": "query_id", ' +
+          '"natural_language_query": "natural_language_query", ' +
+          '"filter": "filter", ' +
+          '"examples": [' +
+            '{' +
+              '"document_id": "document_id", ' +
+              '"cross_reference": "cross_reference", ' +
+              '"relevance": 10' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
   }
+
+  public static testMethod String discoveryV1TrainingQuery() {
+    return  '{' +
+      '"query_id": "query_id", ' +
+      '"natural_language_query": "natural_language_query", ' +
+      '"filter": "filter", ' +
+      '"examples": [' +
+        '{' +
+          '"document_id": "document_id", ' +
+          '"cross_reference": "cross_reference", ' +
+          '"relevance": 10' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1TrainingExampleList() {
+    return '{' +
+      '"examples": [' +
+        '{' +
+          '"document_id": "document_id", ' +
+          '"cross_reference": "cross_reference", ' +
+          '"relevance": 10' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1TrainingExample() {
+    return '{' +
+      '"document_id": "document_id", ' +
+      '"cross_reference": "cross_reference", ' +
+      '"relevance": 10' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1CreateEventResponse() {
+    return '{' +
+      '"type": "type",' +
+      '"data": {' +
+        '"environment_id": "environment_id",' +
+        '"session_token": "session_token",' +
+        '"client_timestamp": "1995-06-12T01:11:11.111Z",' +
+        '"display_rank": 10,' +
+        '"collection_id": "collection_id",' +
+        '"document_id": "document_id",' +
+        '"query_id": "query_id"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1LogQueryResponse() {
+    return '{' +
+      '"matching_results": 10,' +
+      '"results": [' +
+        '{' +
+          '"environment_id": "environment_id",' +
+          '"customer_id": "customer_id",' +
+          '"document_type": "document_type",' +
+          '"natural_language_query": "natural_language_query",' +
+          '"document_results": {' +
+            '"results": [' +
+              '{' +
+                '"position": 10,' +
+                '"document_id": "document_id",' +
+                '"score": 0.5,' +
+                '"confidence": 0.5,' +
+                '"collection_id": "collection_id"' +
+              '}' +
+            '],' +
+            '"count": 10' +
+          '},' +
+          '"created_timestamp": "1995-06-12T01:11:11.111Z",' +
+          '"client_timestamp": "1995-06-12T01:11:11.111Z",' +
+          '"query_id": "query_id",' +
+          '"session_token": "session_token",' +
+          '"collection_id": "collection_id",' +
+          '"display_rank": 10,' +
+          '"document_id": "document_id",' +
+          '"event_type": "event_type",' +
+          '"result_type": "result_type"' +
+        '}' +
+      ']' +
+    '}'; 
+  }
+
+  public static testMethod String discoveryV1MetricResponse() {
+    return '{' +
+      '"aggregations": [' +
+        '{' +
+          '"interval": "interval",' +
+          '"event_type": "event_type",' +
+          '"results": [' +
+            '{' +
+              '"key_as_string": "1995-06-12T01:11:11.111Z",' +
+              '"key": 10,' +
+              '"matching_results": 10,' +
+              '"event_rate": 0.5' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1MetricTokenResponse() {
+    return '{' +
+      '"aggregations": [' +
+        '{' +
+          '"event_type": "event_type",' +
+          '"results": [' +
+            '{' +
+              '"key": "key",' +
+              '"matching_results": 10,' +
+              '"event_rate": 0.5' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1CredentialsList() {
+    return '{' +
+      '"credentials" : [' +
+        '{' +
+          '"credential_id": "credential_id",' +
+          '"source_type": "source_type",' +
+          '"credential_details": {' +
+            '"credential_type": "credential_type",' +
+            '"client_id": "client_id",' +
+            '"enterprise_id": "enterprise_id",' +
+            '"url": "url",' +
+            '"username": "username",' +
+            '"organization_url": "organization_url",' +
+            '"site_collection.path": "site_collection.path",' +
+            '"client_secret": "client_secret",' +
+            '"public_key_id": "public_key_id",' +
+            '"private_key": "private_key",' +
+            '"passphrase": "passphrase",' +
+            '"password": "password",' +
+            '"gateway_id": "gateway_id",' +
+            '"source_version": "source_version",' +
+            '"web_application_url": "web_application_url",' +
+            '"domain": "domain",' +
+            '"endpoint": "endpoint",' +
+            '"access_key_id": "access_key_id",' +
+            '"secret_access_key": "secret_access_key"' +
+          '},' +
+          '"status": "status"' +
+        '}' + 
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1Credentials() {
+    return '{' +
+      '"credential_id": "credential_id",' +
+      '"source_type": "source_type",' +
+      '"credential_details": {' +
+        '"credential_type": "credential_type",' +
+        '"client_id": "client_id",' +
+        '"enterprise_id": "enterprise_id",' +
+        '"url": "url",' +
+        '"username": "username",' +
+        '"organization_url": "organization_url",' +
+        '"site_collection.path": "site_collection.path",' +
+        '"client_secret": "client_secret",' +
+        '"public_key_id": "public_key_id",' +
+        '"private_key": "private_key",' +
+        '"passphrase": "passphrase",' +
+        '"password": "password",' +
+        '"gateway_id": "gateway_id",' +
+        '"source_version": "source_version",' +
+        '"web_application_url": "web_application_url",' +
+        '"domain": "domain",' +
+        '"endpoint": "endpoint",' +
+        '"access_key_id": "access_key_id",' +
+        '"secret_access_key": "secret_access_key"' +
+      '},' +
+      '"status": "status"' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1GatewayList() {
+    return '{' +
+      '"gateways": [' +
+        '{' +
+          '"gateway_id": "gateway_id",' +
+          '"name": "name",' +
+          '"status": "status",' +
+          '"token": "token",' +
+          '"token_id": "token_id"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV1Gateway() {
+    return '{' +
+      '"gateway_id": "gateway_id",' +
+      '"name": "name",' +
+      '"status": "status",' +
+      '"token": "token",' +
+      '"token_id": "token_id"' +
+    '}';
+  }
+
+
+  // --- Language Translator v3 ---
+
+  public static testMethod String languageTranslatorV3TranslationModel() {
+    return '{' +
+      '"model_id ": "model_id", ' +
+      '"source": "source", ' +
+      '"target": "target", ' +
+      '"base_model_id": "base_model_id", ' +
+      '"domain": "domain", ' +
+      '"owner": "owner", ' +
+      '"status": "status", ' +
+      '"customizable": true, ' +
+      '"default_model": true, ' +
+      '"name": "name"' +
+    '}';
+  }
+  
+  public static testMethod String languageTranslatorV3TranslationModels() {
+    return '{' +
+      '"models": [{' +
+        '"model_id ": "model_id", ' +
+        '"source": "source", ' +
+        '"target": "target", ' +
+        '"base_model_id": "base_model_id", ' +
+        '"domain": "domain", ' +
+        '"owner": "owner", ' +
+        '"status": "status", ' +
+        '"customizable": true, ' +
+        '"default_model": true, ' +
+        '"name": "name"' +
+      '}]' +
+    '}';
+  }
+
+  public static testMethod String languageTranslatorV3DocumentList() {
+    return '{' +
+      '"documents": [' +
+        '{' +
+          '"document_id": "document_id",' +
+          '"filename": "filename",' +
+          '"model_id": "model_id",' +
+          '"base_model_id": "base_model_id",' +
+          '"source": "source",' +
+          '"target": "target",' +
+          '"status": "status",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"completed": "1995-06-12T01:11:11.111Z",' +
+          '"word_count": 10,' +
+          '"character_count": 10' +
+        '}' +
+      ']' +
+    '}';
+  }
+  
+  public static testMethod String languageTranslatorV3IdentifiableLanguages() {
+    return '{' +
+      '"languages": [' +
+        '{' +
+        ' "language": "language", ' +
+        ' "name": "name"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String languageTranslatorV3IdentifiedLanguages() {
+    return '{' +
+      '"languages": [' +
+        '{' +
+          '"language": "language",' +
+          '"confidence": 0.5' +
+        '}' +
+      ']' +
+    '}';
+  }
+  
+  public static testMethod String languageTranslatorV3TranslationResult() {
+    return '{' +
+      '"translations": [{' +
+        '"translation": "translation"' +
+      '}], ' +
+      '"word_count": 10, ' +
+      '"character_count": 10' +
+    '}';
+  }
+
+  public static testMethod String languageTranslatorV3DocumentStatus() {
+    return '{' +
+      '"document_id": "document_id",' +
+      '"filename": "filename",' +
+      '"model_id": "model_id",' +
+      '"base_model_id": "base_model_id",' +
+      '"source": "source",' +
+      '"target": "target",' +
+      '"status": "status",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"completed": "1995-06-12T01:11:11.111Z",' +
+      '"word_count": 10,' +
+      '"character_count": 10' +
+    '}';
+  }
+
+
 
   public static testMethod String collectionTrained() {
     return  '{' +
@@ -3138,154 +4046,6 @@ public class IBMWatsonMockResponses {
             '    "minimum_queries_added": true' +
             '  }' +
             '}';
-  }
-
-  public static testMethod String listCollectionsResponse() {
-    return '{ "collections": [' +
-           '   {' +
-           '     "collection_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
-           '     "name": "example", ' +
-           '     "description": "this is a demo collection", ' +
-           '     "created": "2015-08-24T18:42:25.324Z", ' +
-           '     "updated": "2015-08-24T18:42:25.324Z", ' +
-           '     "status": "active", ' +
-           '     "configuration_id": "6963be41-2dea-4f79-8f52-127c63c479b0", ' +
-           '     "language": "en"' +
-           '   }' +
-           ' ]' +
-           '}';
-  }
-
-  public static testMethod String documentStatus() {
-    return '{' +
-            '  "document_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
-            '  "configuration_id": "e8b9d793-b163-452a-9373-bce07efb510b", ' +
-            '  "created": "2015-08-24T18:42:25.324Z", ' +
-            '  "updated": "2015-08-24T18:42:25.324Z", ' +
-            '  "status": "available with notices", ' +
-            '  "status_description": "Document is successfully ingested but was indexed with warnings", ' +
-            '  "filename": "instructions.html", ' +
-            '  "file_type": "html", ' +
-            '  "sha1": "de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3", ' +
-            '  "notices": [' +
-            '    {' +
-            '      "notice_id": "index_342", ' +
-            '      "created": "2015-08-24T18:42:25.324Z", ' +
-            '      "severity": "warning", ' +
-            '      "step": "indexing", ' +
-            '      "description": "something bad happened", ' +
-            '      "query_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
-            '      "document_id": "f1360220-ea2d-4271-9d62-89a910b13c37"' +
-            '    }' +
-            '  ]' +
-            '}';
-  }
-
-  public static testMethod String queryResponse() {
-    return '{' +
-            '  "matching_results": 24, ' +
-            '  "results": [' +
-            '    {' +
-            '      "id": "watson-generated ID", ' +
-            '      "score": 1' +
-            '    }' +
-            '  ], ' +
-            '  "aggregations":[ {' +
-            '    "term": {' +
-            '      "results": [' +
-            '        {' +
-            '          "key": "active", ' +
-            '          "matching_results": 34' +
-            '        }' +
-            '      ]' +
-            '    }' +
-            '  }],' +
-            '  "retrieval_details": {' +
-            '    "document_retrieval_strategy": "relevancy_training"' +
-            '  }' +
-            '}';
-  }
-
-  public static testMethod String queryNoticesResponse() {
-    return '{' +
-            '  "matching_results": 24, ' +
-            '  "results": [' +
-            '    {' +
-            '      "id": "030ba125-29db-43f2-8552-f941ae30a7a8", ' +
-            '      "collection_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
-            '      "code": 200, ' +
-            '      "score": 1, ' +
-            '      "filename": "instructions.html", ' +
-            '      "file_type": "html", ' +
-            '      "sha1": "de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3", ' +
-            '      "notices": [' +
-            '        {' +
-            '          "notice_id": "xpath_not_found", ' +
-            '          "created": "2016-09-20T17:26:17.000Z", ' +
-            '          "document_id": "030ba125-29db-43f2-8552-f941ae30a7a8", ' +
-            '          "severity": "warning", ' +
-            '          "step": "html-to-html", ' +
-            '          "description": "The xpath expression boom was not found."' +
-            '        }' +
-            '      ]' +
-            '    }' +
-            '  ], ' +
-            '  "aggregations": [{' +
-            '    "term": {' +
-            '      "results": [' +
-            '        {' +
-            '          "key": "warning", ' +
-            '          "matching_results": 34' +
-            '        }' +
-            '      ]' +
-            '    }' +
-            '  }]' +
-            '}';
-  }
-
-   public static testMethod String trainingQuery() {
-    return  '{' +
-            '  "query_id": "string", ' +
-            '  "natural_language_query": "string", ' +
-            '  "filter": "string", ' +
-            '  "examples": [' +
-            '    {' +
-            '      "document_id": "string", ' +
-            '      "cross_reference": "string", ' +
-            '      "relevance": 0' +
-            '    }' +
-            '  ]' +
-            '}';
-  }
-
-  public static testMethod String trainingDataSet() {
-    return  '{ "queries": [{' +
-            '  "query_id": "string", ' +
-            '  "natural_language_query": "string", ' +
-            '  "filter": "string", ' +
-            '  "examples": [' +
-            '    {' +
-            '      "document_id": "string", ' +
-            '      "cross_reference": "string", ' +
-            '      "relevance": 0' +
-            '    }' +
-            '  ]' +
-            '}]}';
-  }
-
-  public static testMethod String trainingExample() {
-    return  '{' +
-            '  "document_id": "string", ' +
-            '  "cross_reference": "string", ' +
-            '  "relevance": 2' +
-            '}';
-  }
-
-  public static testMethod String documentAccepted() {
-    return '{' +
-            '"document_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
-            '"status": "processing"' +
-           '}';
   }
   
   public static testMethod String Classify() {
@@ -3715,109 +4475,6 @@ public class IBMWatsonMockResponses {
             '        }' +
             '      ]' +
             '}';
-  }
-
-
-  // --- Language Translator v3 ---
-
-  public static testMethod String languageTranslatorV3TranslationModel() {
-    return '{' +
-      '"model_id ": "model_id", ' +
-      '"source": "source", ' +
-      '"target": "target", ' +
-      '"base_model_id": "base_model_id", ' +
-      '"domain": "domain", ' +
-      '"owner": "owner", ' +
-      '"status": "status", ' +
-      '"customizable": true, ' +
-      '"default_model": true, ' +
-      '"name": "name"' +
-    '}';
-  }
-  
-  public static testMethod String languageTranslatorV3TranslationModels() {
-    return '{' +
-      '"models": [{' +
-        '"model_id ": "model_id", ' +
-        '"source": "source", ' +
-        '"target": "target", ' +
-        '"base_model_id": "base_model_id", ' +
-        '"domain": "domain", ' +
-        '"owner": "owner", ' +
-        '"status": "status", ' +
-        '"customizable": true, ' +
-        '"default_model": true, ' +
-        '"name": "name"' +
-      '}]' +
-    '}';
-  }
-
-  public static testMethod String languageTranslatorV3DocumentList() {
-    return '{' +
-      '"documents": [' +
-        '{' +
-          '"document_id": "document_id",' +
-          '"filename": "filename",' +
-          '"model_id": "model_id",' +
-          '"base_model_id": "base_model_id",' +
-          '"source": "source",' +
-          '"target": "target",' +
-          '"status": "status",' +
-          '"created": "1995-06-12T01:11:11.111Z",' +
-          '"completed": "1995-06-12T01:11:11.111Z",' +
-          '"word_count": 10,' +
-          '"character_count": 10' +
-        '}' +
-      ']' +
-    '}';
-  }
-  
-  public static testMethod String languageTranslatorV3IdentifiableLanguages() {
-    return '{' +
-      '"languages": [' +
-        '{' +
-        ' "language": "language", ' +
-        ' "name": "name"' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String languageTranslatorV3IdentifiedLanguages() {
-    return '{' +
-      '"languages": [' +
-        '{' +
-          '"language": "language",' +
-          '"confidence": 0.5' +
-        '}' +
-      ']' +
-    '}';
-  }
-  
-  public static testMethod String languageTranslatorV3TranslationResult() {
-    return '{' +
-      '"translations": [{' +
-        '"translation": "translation"' +
-      '}], ' +
-      '"word_count": 10, ' +
-      '"character_count": 10' +
-    '}';
-  }
-
-  public static testMethod String languageTranslatorV3DocumentStatus() {
-    return '{' +
-      '"document_id": "document_id",' +
-      '"filename": "filename",' +
-      '"model_id": "model_id",' +
-      '"base_model_id": "base_model_id",' +
-      '"source": "source",' +
-      '"target": "target",' +
-      '"status": "status",' +
-      '"created": "1995-06-12T01:11:11.111Z",' +
-      '"completed": "1995-06-12T01:11:11.111Z",' +
-      '"word_count": 10,' +
-      '"character_count": 10' +
-    '}';
   }
   
   public static testMethod String voices() {
@@ -4576,37 +5233,6 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
-  public static testMethod String credentialList() {
-    return '{' +
-      '"credentials" : [ {' +
-      '"credential_id" : "00000d8c-0000-00e8-ba89-0ed5f89f718b",' +
-      '"source_type" : "salesforce",' +
-      '"credential_details" : {' +
-        '"credential_type" : "username_password",' +
-        '"url" : "login.salesforce.com",' +
-        '"username" : "user@email.address"' +
-      '}' +
-    '}, {' +
-      '"credential_id" : "00000d8c-0000-00e8-ba89-0ed5f89f111c",' +
-      '"source_type" : "box",' +
-      '"credential_details" : {' +
-        '"credential_type" : "oauth2",' +
-        '"client_id" : "1234567899bz7micz6x6p5zfnycw98e3",' +
-        '"enterprise_id" : "000000001"' +
-      '}' +
-    '}, {' +
-      '"credential_id" : "00000d8c-0000-00e8-ba22-0ed5f89f999d",' +
-      '"source_type" : "sharepoint",' +
-      '"credential_details" : {' +
-        '"credential_type" : "saml",' +
-        '"organization_url" : "https://site001.sharepointonline.com",' +
-        '"site_collection_path" : "/sites/TestSite1",' +
-        '"username" : "userA@sharepointonline.com"' +
-      '}' +
-    '} ]' +
-  '}';
-  }
-
   public static testMethod String mentions() {
     return '{' +
       '"examples" : [ {' +
@@ -4614,227 +5240,6 @@ public class IBMWatsonMockResponses {
         '"intent" : "FoodTypes",' +
         '"location" : [ 20, 24 ]' +
       '} ]' +
-    '}';
-  }
-
-  public static testMethod String createEventResponse() {
-    return '{' +
-      '"type": "click",' +
-      '"data": {' +
-        '"environment_id": "5ae96bb9-80e5-43ea-916e-1f3412fbc283",' +
-        '"session_token": "mock_session_token",' +
-        '"client_timestamp": "2017-07-14T12:55:40.652Z",' +
-        '"display_rank": 1,' +
-        '"collection_id": "mock_collid",' +
-        '"document_id": "mock_docid",' +
-        '"query_id": "mock_queryid"' +
-      '}' +
-    '}';
-  }
-
-  public static testMethod String logQueryResponse() {
-    return '{' +
-      '"matching_results": 2,' +
-      '"results": [' +
-        '{' +
-          '"environment_id": "5ae96bb9-80e5-43ea-916e-1f3412fbc283",' +
-          '"customer_id": "",' +
-          '"natural_language_query": "Who beat Ken Jennings in Jeopardy!",' +
-          '"document_results": {' +
-            '"results": [],' +
-            '"count": 0' +
-          '},' +
-          '"created_timestamp": "2017-07-14T12:55:40.652Z",' +
-          '"query_id": "mock_queryid",' +
-          '"session_token": "mock_session_token",' +
-          '"event_type": "query"' +
-        '},' +
-        '{' +
-          '"environment_id": "5ae96bb9-80e5-43ea-916e-1f3412fbc283",' +
-          '"customer_id": "",' +
-          '"document_results": {' +
-            '"results": [' +
-              '{' +
-                '"position": 1,' +
-                '"document_id": "mock_docid",' +
-                '"score": 1.0,' +
-                '"collection_id": "mock_collid"' +
-              '},' +
-              '{' +
-                '"position": 2,' +
-                '"document_id": "mock_docid",' +
-                '"score": 1.0,' +
-                '"collection_id": "mock_collid"' +
-              '}' +
-            '],' +
-            '"count": 2' +
-          '},' +
-          '"created_timestamp": "2017-07-14T12:55:40.652Z",' +
-          '"query_id": "mock_queryid",' +
-          '"session_token": "mock_session_token",' +
-          '"event_type": "query"' +
-        '}' +
-      ']' +
-    '}'; 
-  }
-
-  public static testMethod String metricResponse() {
-    return '{' +
-      '"aggregations": [' +
-        '{' +
-          '"interval": "1d",' +
-          '"event_type": "click",' +
-          '"results": [' +
-            '{' +
-              '"key_as_string": "2018-08-05T20:00:00.000",' +
-              '"key": 1533513600000,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key_as_string": "2018-08-06T20:00:00.000",' +
-              '"key": 1533600000000,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key_as_string": "2018-08-07T20:00:00.000",' +
-              '"key": 1533686400000,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key_as_string": "2018-08-08T20:00:00.000",' +
-              '"key": 1533772800000,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key_as_string": "2018-08-09T20:00:00.000",' +
-              '"key": 1533859200000,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key_as_string": "2018-08-10T20:00:00.000",' +
-              '"key": 1533945600000,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key_as_string": "2018-08-11T20:00:00.000",' +
-              '"key": 1534032000000,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key_as_string": "2018-08-12T20:00:00.000",' +
-              '"key": 1534118400000,' +
-              '"event_rate": 0.09090909090909091' +
-            '}' +
-          ']' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String metricTokenResponse() {
-    return '{' +
-      '"aggregations": [' +
-        '{' +
-          '"event_type": "click",' +
-          '"results": [' +
-            '{' +
-              '"key": "beat",' +
-              '"matching_results": 117,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key": "in",' +
-              '"matching_results": 117,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key": "jennings",' +
-              '"matching_results": 117,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key": "jeopardy",' +
-              '"matching_results": 117,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key": "ken",' +
-              '"matching_results": 117,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key": "who",' +
-              '"matching_results": 117,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key": "watson",' +
-              '"matching_results": 3,' +
-              '"event_rate": 0.0' +
-            '},' +
-            '{' +
-              '"key": "1",' +
-              '"matching_results": 2,' +
-              '"event_rate": 0.5' +
-            '},' +
-            '{' +
-              '"key": "field",' +
-              '"matching_results": 2,' +
-              '"event_rate": 0.5' +
-            '},' +
-            '{' +
-              '"key": "number",' +
-              '"matching_results": 2,' +
-              '"event_rate": 0.5' +
-            '}' +
-          ']' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String tokenDictStatusResponse() {
-    return '{' +
-      '"status" : "active",' +
-      '"type" : "tokenization_dictionary"' +
-    '}';
-  }
-
-  public static testMethod String tokenDictStatusResponseStopwords() {
-    return '{' +
-      '"status" : "active",' +
-      '"type" : "stopwords"' +
-    '}';
-  }
-
-  public static testMethod String gatewayResponse() {
-    return '{' +
-      '"gateway_id": "gateway_id",' +
-      '"name": "name",' +
-      '"status": "connected",' +
-      '"token": "token",' +
-      '"token_id": "token_id"' +
-    '}';
-  }
-
-  public static testMethod String listGatewaysResponse() {
-    return '{' +
-      '"gateways": [' +
-        '{' +
-          '"gateway_id": "gateway_id_1",' +
-          '"name": "name",' +
-          '"status": "connected",' +
-          '"token": "token",' +
-          '"token_id": "token_id"' +
-        '},' +
-        '{' +
-          '"gateway_id": "gateway_id_2",' +
-          '"name": "name",' +
-          '"status": "connected",' +
-          '"token": "token",' +
-          '"token_id": "token_id"' +
-        '}' +
-      ']' +
     '}';
   }
 

@@ -53,7 +53,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testBadRequestException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(400, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -72,7 +72,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testConflictException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(409, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -91,7 +91,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testForbiddenException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(403, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -110,7 +110,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testNotAcceptableException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(406, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -129,7 +129,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testInternalServerErrorException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(500, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -148,7 +148,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testNotFoundException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(404, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -167,7 +167,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testRequestTooLargeException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(413, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -186,7 +186,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testResponseException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(519, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -205,7 +205,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testServiceUnavailableException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(503, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -224,7 +224,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testTooManyRequestsException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(429, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -243,7 +243,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testUnauthorizedException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(401, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
@@ -261,7 +261,7 @@ private class IBMWatsonServiceTest {
    *
    */
   static testMethod void testUnsupportedExceptionException() {
-    String body = IBMWatsonMockResponses.environment();
+    String body = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(415, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
