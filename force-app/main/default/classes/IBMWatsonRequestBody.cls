@@ -45,7 +45,16 @@ public virtual class IBMWatsonRequestBody {
   }
 
   public static IBMWatsonRequestBody create(IBMWatsonFile fileContent, String contentType) {
-    IBMWatsonMediaType mediaType = (contentType != null) ? IBMWatsonMediaType.parse(contentType) : IBMWatsonHttpMediaType.BINARY_FILE;
+    IBMWatsonMediaType mediaType = null;
+    if (contentType != null) {
+      mediaType = IBMWatsonMediaType.parse(contentType);
+    }
+
+    // Default to binary/octet-stream if we can't parse the content type.
+    if (mediaType == null) {
+      mediaType = IBMWatsonHttpMediaType.BINARY_FILE;
+    }
+
     return create(fileContent, mediaType);
   }
 
