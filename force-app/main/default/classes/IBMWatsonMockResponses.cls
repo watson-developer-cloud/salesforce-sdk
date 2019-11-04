@@ -3906,7 +3906,7 @@ public class IBMWatsonMockResponses {
 
   public static testMethod String languageTranslatorV3TranslationModel() {
     return '{' +
-      '"model_id ": "model_id", ' +
+      '"model_id": "model_id", ' +
       '"source": "source", ' +
       '"target": "target", ' +
       '"base_model_id": "base_model_id", ' +
@@ -3922,7 +3922,7 @@ public class IBMWatsonMockResponses {
   public static testMethod String languageTranslatorV3TranslationModels() {
     return '{' +
       '"models": [{' +
-        '"model_id ": "model_id", ' +
+        '"model_id": "model_id", ' +
         '"source": "source", ' +
         '"target": "target", ' +
         '"base_model_id": "base_model_id", ' +
