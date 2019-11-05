@@ -4440,18 +4440,8 @@ public class IBMWatsonMockResponses {
                 '}' +
               '], ' +
               '"end_time": 0.5' +
-            '}, ' +
-            '{' +
-              '"start_time": 5.33, ' +
-              '"alternatives": [' +
-                '{' +
-                  '"confidence": 0.9953, ' +
-                  '"word": "Sunday"' +
-                '}' +
-              '], ' +
-              '"end_time": 6.04' +
             '}' +
-          '], ' +
+          '],' +
           '"keywords_result": {' +
             '"keyword": [' +
               '{' +
@@ -4466,14 +4456,14 @@ public class IBMWatsonMockResponses {
             '{' +
               '"timestamps": [' +
                 '[' +
-                  '"timestamps",' +
+                  '"timestamps"' +
                 ']' +
-              '], ' +
+              '],' +
               '"word_confidence": [' +
                 '[' +
                   '"word_confidence"' +
                 ']' +
-              ']' +
+              '],' +
               '"confidence": 0.5, ' +
               '"transcript": "transcript"' +
             '}' +
@@ -4536,7 +4526,7 @@ public class IBMWatsonMockResponses {
           '"to": 0.5,' +
           '"speaker": 10,' +
           '"confidence": 0.5,' +
-          '"final": true,' +
+          '"final": true' +
         '}' +
       '],' +
       '"warnings": [' +
@@ -4621,12 +4611,12 @@ public class IBMWatsonMockResponses {
             '}' +
           '},' +
           '"warnings": [' +
-            '"string"' +
+            '"warnings"' +
           ']' +
         '}' +
       '], ' +
       '"warnings": [' +
-        '"string"' +
+        '"warnings"' +
       ']' +
     '}';
   }
@@ -4702,12 +4692,12 @@ public class IBMWatsonMockResponses {
                 '}' +
               '},' +
               '"warnings": [' +
-                '"string"' +
+                '"warnings"' +
               ']' +
             '}' +
           '], ' +
           '"warnings": [' +
-            '"string"' +
+            '"warnings"' +
           ']' +
         '}' +
       ']' +
@@ -4731,7 +4721,7 @@ public class IBMWatsonMockResponses {
       '"error": "error",' +
       '"versions": [' +
         '"versions"' +
-      ']' +
+      '],' +
       '"updated": "updated"' +
     '}';
   }
@@ -4755,7 +4745,7 @@ public class IBMWatsonMockResponses {
           '"error": "error",' +
           '"versions": [' +
             '"versions"' +
-          ']' +
+          '],' +
           '"updated": "updated"' +
         '}' +
       ']' +
@@ -4871,7 +4861,7 @@ public class IBMWatsonMockResponses {
       '"description": "description", ' +
       '"versions": [' +
         '"versions"' +
-      ']' +
+      '],' +
       '"progress": 10, ' +
       '"language": "language", ' +
       '"status": "status", ' +
@@ -4892,7 +4882,7 @@ public class IBMWatsonMockResponses {
           '"description": "description", ' +
           '"versions": [' +
             '"versions"' +
-          ']' +
+          '],' +
           '"progress": 10, ' +
           '"language": "language", ' +
           '"status": "status", ' +
@@ -4925,7 +4915,7 @@ public class IBMWatsonMockResponses {
   public static testMethod String speechToTextV1AudioListing() {
     return '{' +
       '"duration": 10, ' +
-      '"name": "string", ' +
+      '"name": "name", ' +
       '"details": {' +
         '"type": "type", ' +
         '"codec": "codec", ' +
@@ -5222,6 +5212,7 @@ public class IBMWatsonMockResponses {
       '"name": "name", ' +
       '"owner": "owner", ' +
       '"status": "status", ' +
+      '"core_ml_enabled": true,' +
       '"explanation": "explanation", ' +
       '"created": "1995-06-12T01:11:11.111Z", ' +
       '"retrained": "1995-06-12T01:11:11.111Z", ' +
@@ -5242,6 +5233,7 @@ public class IBMWatsonMockResponses {
           '"name": "name", ' +
           '"owner": "owner", ' +
           '"status": "status", ' +
+          '"core_ml_enabled": true,' +
           '"explanation": "explanation", ' +
           '"created": "1995-06-12T01:11:11.111Z", ' +
           '"retrained": "1995-06-12T01:11:11.111Z", ' +
