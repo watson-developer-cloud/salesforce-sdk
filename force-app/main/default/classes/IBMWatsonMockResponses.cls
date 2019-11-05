@@ -4526,80 +4526,84 @@ public class IBMWatsonMockResponses {
       '"part_of_speech": "part_of_speech"' +
     '}';
   }
-  public static testMethod String toneAnalysis() {
+
+
+  // --- Tone Analyzer v3 ---
+
+  public static testMethod String toneAnalyzerV3ToneAnalysis() {
     return  '{' +
-            ' "document_tone": {' +
-            ' "tones": [' +
-            '   {' +
-            '     "score": 0, ' +
-            '     "tone_id": "string", ' +
-            '     "tone_name": "string"' +
-            '   }' +
-            ' ], ' +
-            ' "tone_categories": [' +
-            '   {' +
-            '     "tones": [' +
-            '       {' +
-            '         "score": 0, ' +
-            '         "tone_id": "string", ' +
-            '         "tone_name": "string"' +
-            '       }' +
-            '     ], ' +
-            '     "category_id": "string", ' +
-            '     "category_name": "string"' +
-            '   }' +
-            ' ], ' +
-            ' "warning": "string"' +
-            '  }, ' +
-            '  "sentences_tone": [' +
-            '    {' +
-            '      "sentence_id": 0, ' +
-            '      "text": "string", ' +
-            '      "tones": [' +
-            '        {' +
-            '          "score": 0, ' +
-            '          "tone_id": "string", ' +
-            '          "tone_name": "string"' +
-            '        }' +
-            '      ], ' +
-            '      "tone_categories": [' +
-            '        {' +
-            '          "tones": [' +
-            '            {' +
-            '              "score": 0, ' +
-            '              "tone_id": "string", ' +
-            '              "tone_name": "string"' +
-            '            }' +
-            '          ], ' +
-            '          "category_id": "string", ' +
-            '          "category_name": "string"' +
-            '        }' +
-            '      ], ' +
-            '      "input_from": 0, ' +
-            '      "input_to": 0' +
-            '    }' +
-            '  ]' +
-            '}';
+      '"document_tone": {' +
+        '"tones": [' +
+          '{' +
+            '"score": 0.5, ' +
+            '"tone_id": "tone_id", ' +
+            '"tone_name": "tone_name"' +
+          '}' +
+        '], ' +
+        '"tone_categories": [' +
+          '{' +
+            '"tones": [' +
+              '{' +
+                '"score": 0.5, ' +
+                '"tone_id": "tone_id", ' +
+                '"tone_name": "tone_name"' +
+              '}' +
+            '], ' +
+            '"category_id": "category_id", ' +
+            '"category_name": "category_name"' +
+          '}' +
+        '], ' +
+        '"warning": "warning"' +
+      '}, ' +
+      '"sentences_tone": [' +
+        '{' +
+          '"sentence_id": 10, ' +
+          '"text": "text", ' +
+          '"tones": [' +
+            '{' +
+              '"score": 0.5, ' +
+              '"tone_id": "tone_id", ' +
+              '"tone_name": "tone_name"' +
+            '}' +
+          '], ' +
+          '"tone_categories": [' +
+            '{' +
+              '"tones": [' +
+                '{' +
+                  '"score": 0.5, ' +
+                  '"tone_id": "tone_id", ' +
+                  '"tone_name": "tone_name"' +
+                '}' +
+              '], ' +
+              '"category_id": "category_id", ' +
+              '"category_name": "category_name"' +
+            '}' +
+          '], ' +
+          '"input_from": 10, ' +
+          '"input_to": 10' +
+        '}' +
+      ']' +
+    '}';
   }
-  
-  public static testMethod String utteranceAnalyses() {
+
+  public static testMethod String toneAnalyzerV3UtteranceAnalyses() {
     return  '{' +
-            '  "utterances_tone": [' +
-            '    {' +
-            '      "utterance_id": 0, ' +
-            '      "utterance_text": "string", ' +
-            '      "tones": [' +
-            '        {' +
-            '          "score": 0, ' +
-            '          "tone_id": "string", ' +
-            '          "tone_name": "string"' +
-            '        }' +
-            '      ], ' +
-            '      "error": "string"' +
-            '    }' +
-            '  ], ' +
-            '  "warning": "string"' +
-            '}';
+      '"utterances_tone": [' +
+        '{' +
+          '"utterance_id": 10, ' +
+          '"utterance_text": "utterance_text", ' +
+          '"tones": [' +
+            '{' +
+              '"score": 0.5, ' +
+              '"tone_id": "tone_id", ' +
+              '"tone_name": "tone_name"' +
+            '}' +
+          '], ' +
+          '"error": "error"' +
+        '}' +
+      '], ' +
+      '"warning": "warning"' +
+    '}';
   }
   
   public static testMethod String classifiedImages() {
