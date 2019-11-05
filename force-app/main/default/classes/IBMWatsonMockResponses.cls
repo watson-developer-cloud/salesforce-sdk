@@ -4679,137 +4679,228 @@ public class IBMWatsonMockResponses {
   }
   
   public static testMethod String voices() {
+  // --- Visual Recognition v4 ---
+
+  public static testMethod String visualRecognitionV4AnalyzeResponse() {
     return '{' +
-           ' "voices": [' +
-           '   {' +
-           '     "url": "string", ' +
-           '     "gender": "string", ' +
-           '     "name": "string", ' +
-           '     "language": "string", ' +
-           '     "description": "string", ' +
-           '     "customizable": true, ' +
-           '     "supported_features": {' +
-           '       "custom_pronunciation": true, ' +
-           '       "voice_transformation": true' +
-           '     }, ' +
-           '     "customization": {' +
-           '       "customization_id": "string", ' +
-           '       "name": "string", ' +
-           '       "language": "string", ' +
-           '       "owner": "string", ' +
-           '       "created": "string", ' +
-           '       "last_modified": "string", ' +
-           '       "description": "string", ' +
-           '       "words": [' +
-           '         {' +
-           '           "word": "string", ' +
-           '           "translation": "string", ' +
-           '           "part_of_speech": "Josi"' +
-           '         }' +
-           '       ]' +
-           '     }' +
-           '   }' +
-           ' ]' +
-           '}';
+      '"images": [' +
+        '{' +
+          '"source": {' +
+            '"type": "type",' +
+            '"filename": "filename",' +
+            '"archive_filename": "archive_filename",' +
+            '"source_url": "source_url",' +
+            '"resolved_url": "resolved_url"' +
+          '},' +
+          '"dimensions": {' +
+            '"height": 10,' +
+            '"width": 10' +
+          '},' +
+          '"objects": {' +
+            '"collections": [' +
+              '{' +
+                '"collection_id": "collection_id",' +
+                '"objects": [' +
+                  '{' +
+                    '"object": "object",' +
+                    '"location": {' +
+                      '"top": 10,' +
+                      '"left": 10,' +
+                      '"width": 10,' +
+                      '"height": 10' +
+                    '},' +
+                    '"score": 0.5' +
+                  '}' +
+                ']' +
+              '}' +
+            ']' +
+          '},' +
+          '"errors": {' +
+            '"code": "code",' +
+            '"message": "message",' +
+            '"more_info": "more_info",' +
+            '"target": {' +
+              '"type": "type",' +
+              '"name": "name"' +
+            '}' +
+          '}' +
+        '}' +
+      '],' +
+      '"warnings": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message",' +
+          '"more_info": "more_info"' +
+        '}' +
+      '],' +
+      '"trace": "trace"' +
+    '}';
   }
-  
-  public static testMethod String voice() {
+
+  public static testMethod String visualRecognitionV4Collection() {
     return '{' +
-           '     "url": "string", ' +
-           '     "gender": "string", ' +
-           '     "name": "string", ' +
-           '     "language": "string", ' +
-           '     "description": "string", ' +
-           '     "customizable": true, ' +
-           '     "supported_features": {' +
-           '       "custom_pronunciation": true, ' +
-           '       "voice_transformation": true' +
-           '     }, ' +
-           '     "customization": {' +
-           '       "customization_id": "string", ' +
-           '       "name": "string", ' +
-           '       "language": "string", ' +
-           '       "owner": "string", ' +
-           '       "created": "string", ' +
-           '       "last_modified": "string", ' +
-           '       "description": "string", ' +
-           '       "words": [' +
-           '         {' +
-           '           "word": "string", ' +
-           '           "translation": "string", ' +
-           '           "part_of_speech": "Josi"' +
-           '         }' +
-           '       ]' +
-           '     }' +
-           '}';
+      '"collection_id": "collection_id",' +
+      '"name": "name",' +
+      '"description": "description",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"image_count": 10,' +
+      '"training_status": {' +
+        '"objects": {' +
+          '"ready": true,' +
+          '"in_progress": true,' +
+          '"data_changed": true,' +
+          '"latest_failed": true,' +
+          '"description": "description"' +
+        '}' +
+      '}' +
+    '}';
   }
-  
-  public static testMethod String pronunciation() {
+
+  public static testMethod String visualRecognitionV4CollectionsList() {
     return '{' +
-           '  "pronunciation": "string"' +
-           '}';
+      '"collections": [' +
+        '{' +
+          '"collection_id": "collection_id",' +
+          '"name": "name",' +
+          '"description": "description",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"image_count": 10,' +
+          '"training_status": {' +
+            '"objects": {' +
+              '"ready": true,' +
+              '"in_progress": true,' +
+              '"data_changed": true,' +
+              '"latest_failed": true,' +
+              '"description": "description"' +
+            '}' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
   }
-  
-  public static testMethod String voiceModels() {
+
+  public static testMethod String visualRecognitionV4ImageDetails() {
     return '{' +
-           '  "customizations": [' +
-           '    {' +
-           '      "customization_id": "string", ' +
-           '      "name": "string", ' +
-           '      "language": "string", ' +
-           '      "owner": "string", ' +
-           '      "created": "string", ' +
-           '      "last_modified": "string", ' +
-           '      "description": "string", ' +
-           '      "words": [' +
-           '        {' +
-           '          "word": "string", ' +
-           '          "translation": "string", ' +
-           '          "part_of_speech": "Josi"' +
-           '        }' +
-           '      ]' +
-           '    }' +
-           '  ]' +
-           '}';
+      '"image_id": "image_id",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"source": {' +
+        '"type": "type",' +
+        '"filename": "filename",' +
+        '"archive_filename": "archive_filename",' +
+        '"source_url": "source_url",' +
+        '"resolved_url": "resolved_url"' +
+      '},' +
+      '"dimensions": {' +
+        '"height": 10,' +
+        '"width": 10' +
+      '},' +
+      '"errors": {' +
+        '"code": "code",' +
+        '"message": "message",' +
+        '"more_info": "more_info",' +
+        '"target": {' +
+          '"type": "type",' +
+          '"name": "name"' +
+        '}' +
+      '},' +
+      '"training_data": {' +
+        '"objects": [' +
+          '{' +
+            '"object": "object",' +
+            '"location": {' +
+              '"top": 10,' +
+              '"left": 10,' +
+              '"width": 10,' +
+              '"height": 10' +
+            '}' +
+          '}' +
+        ']' +
+      '}' +
+    '}';
   }
-  
-  public static testMethod String voiceModel() {
+
+  public static testMethod String visualRecognitionV4ImageDetailsList() {
     return '{' +
-           '      "customization_id": "string", ' +
-           '      "name": "string", ' +
-           '      "language": "string", ' +
-           '      "owner": "string", ' +
-           '      "created": "string", ' +
-           '      "last_modified": "string", ' +
-           '      "description": "string", ' +
-           '      "words": [' +
-           '        {' +
-           '          "word": "string", ' +
-           '          "translation": "string", ' +
-           '          "part_of_speech": "Josi"' +
-           '        }' +
-           '      ]' +
-           '}';
+      '"images": [' +
+        '{' +
+          '"image_id": "image_id",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"source": {' +
+            '"type": "type",' +
+            '"filename": "filename",' +
+            '"archive_filename": "archive_filename",' +
+            '"source_url": "source_url",' +
+            '"resolved_url": "resolved_url"' +
+          '},' +
+          '"dimensions": {' +
+            '"height": 10,' +
+            '"width": 10' +
+          '},' +
+          '"errors": {' +
+            '"code": "code",' +
+            '"message": "message",' +
+            '"more_info": "more_info",' +
+            '"target": {' +
+              '"type": "type",' +
+              '"name": "name"' +
+            '}' +
+          '},' +
+          '"training_data": {' +
+            '"objects": [' +
+              '{' +
+                '"object": "object",' +
+                '"location": {' +
+                  '"top": 10,' +
+                  '"left": 10,' +
+                  '"width": 10,' +
+                  '"height": 10' +
+                '}' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      '],' +
+      '"warnings": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message",' +
+          '"more_info": "more_info"' +
+        '}' +
+      '],' +
+      '"trace": "trace"' +
+    '}';
   }
-  
-  public static testMethod String words() {
+
+  public static testMethod String visualRecognitionV4ImageSummaryList() {
     return '{' +
-           '  "words": [' +
-           '    {' +
-           '      "word": "string", ' +
-           '      "translation": "string", ' +
-           '      "part_of_speech": "Josi"' +
-           '    }' +
-           '  ]' +
-           '}';
+      '"images": [' +
+        '{' +
+          '"image_id": "image_id",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      ']' +
+    '}';
   }
-  
-  public static testMethod String word() {
+
+  public static testMethod String visualRecognitionV4TrainingDataObjects() {
     return '{' +
-           '  "word": "string", ' +
-           '  "translation": "string", ' +
-           '  "part_of_speech": "Josi"' +
-           '}';
+      '"objects": [' +
+        '{' +
+          '"object": "object",' +
+          '"location": {' +
+            '"top": 10,' +
+            '"left": 10,' +
+            '"width": 10,' +
+            '"height": 10' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
   }
 
   public static testMethod String speechToTextListModels() {
