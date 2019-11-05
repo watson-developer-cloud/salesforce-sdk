@@ -1740,11 +1740,11 @@ private class IBMCompareComplyV1Test {
 
 
   static testMethod void testConvertToHtml() {
-    String body = IBMWatsonMockResponses.compareComplyV1HtmlReturn();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1HtmlReturn();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -1756,9 +1756,13 @@ private class IBMCompareComplyV1Test {
       .contentType('application/pdf')
       .body(Blob.valueOf('Test file contents string'))
       .build();
+    String fileContentType = 'file_content_type';
+    String model = 'model';
 
     IBMCompareComplyV1Models.ConvertToHtmlOptions options = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
       .file(file)
+      .fileContentType(fileContentType)
+      .model(model)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -1788,11 +1792,11 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testClassifyElements() {
-    String body = IBMWatsonMockResponses.compareComplyV1ClassifyReturn();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1ClassifyReturn();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -1804,9 +1808,13 @@ private class IBMCompareComplyV1Test {
       .contentType('application/pdf')
       .body(Blob.valueOf('Test file contents string'))
       .build();
+    String fileContentType = 'file_content_type';
+    String model = 'model';
 
     IBMCompareComplyV1Models.ClassifyElementsOptions options = new IBMCompareComplyV1Models.ClassifyElementsOptionsBuilder()
       .file(file)
+      .fileContentType(fileContentType)
+      .model(model)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -2424,11 +2432,11 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testExtractTables() {
-    String body = IBMWatsonMockResponses.compareComplyV1TableReturn();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1TableReturn();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -2440,9 +2448,13 @@ private class IBMCompareComplyV1Test {
       .contentType('application/pdf')
       .body(Blob.valueOf('Test file contents string'))
       .build();
+    String fileContentType = 'file_content_type';
+    String model = 'model';
 
     IBMCompareComplyV1Models.ExtractTablesOptions options = new IBMCompareComplyV1Models.ExtractTablesOptionsBuilder()
       .file(file)
+      .fileContentType(fileContentType)
+      .model(model)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -2712,11 +2724,11 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testCompareDocuments() {
-    String body = IBMWatsonMockResponses.compareComplyV1CompareReturn();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1CompareReturn();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -2734,10 +2746,20 @@ private class IBMCompareComplyV1Test {
       .contentType('application/pdf')
       .body(Blob.valueOf('Test file contents string'))
       .build();
+    String file1ContentType = 'file1content_type';
+    String file2ContentType = 'file2content_type';
+    String file1Label = 'file1label';
+    String file2Label = 'file2label';
+    String model = 'model';
 
     IBMCompareComplyV1Models.CompareDocumentsOptions options = new IBMCompareComplyV1Models.CompareDocumentsOptionsBuilder()
       .file1(file1)
       .file2(file2)
+      .file1ContentType(file1ContentType)
+      .file2ContentType(file2ContentType)
+      .file1Label(file1Label)
+      .file2Label(file2Label)
+      .model(model)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -2871,11 +2893,11 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testAddFeedback() {
-    String body = IBMWatsonMockResponses.compareComplyV1FeedbackReturn();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1FeedbackReturn();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -2910,9 +2932,13 @@ private class IBMCompareComplyV1Test {
       .originalLabels(originalLabels)
       .updatedLabels(updatedLabels)
       .build();
+    String userId = 'user_id';
+    String comment = 'comment';
 
     IBMCompareComplyV1Models.AddFeedbackOptions options = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
       .feedbackData(feedbackData)
+      .userId(userId)
+      .comment(comment)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3038,18 +3064,50 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testListFeedback() {
-    String body = IBMWatsonMockResponses.compareComplyV1FeedbackList();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1FeedbackList();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    String feedbackType = 'feedback_type';
+    Datetime before = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime after = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String documentTitle = 'document_title';
+    String modelId = 'model_id';
+    String modelVersion = 'model_version';
+    String categoryRemoved = 'category_removed';
+    String categoryAdded = 'category_added';
+    String categoryNotChanged = 'category_not_changed';
+    String typeRemoved = 'type_removed';
+    String typeAdded = 'type_added';
+    String typeNotChanged = 'type_not_changed';
+    Long pageLimit = 10L;
+    String cursor = 'cursor';
+    String xSort = 'x_sort';
+    Boolean includeTotal = true;
 
     IBMCompareComplyV1Models.ListFeedbackOptions options = new IBMCompareComplyV1Models.ListFeedbackOptionsBuilder()
+      .feedbackType(feedbackType)
+      .before(before)
+      .after(after)
+      .documentTitle(documentTitle)
+      .modelId(modelId)
+      .modelVersion(modelVersion)
+      .categoryRemoved(categoryRemoved)
+      .categoryAdded(categoryAdded)
+      .categoryNotChanged(categoryNotChanged)
+      .typeRemoved(typeRemoved)
+      .typeAdded(typeAdded)
+      .typeNotChanged(typeNotChanged)
+      .pageLimit(pageLimit)
+      .cursor(cursor)
+      .xSort(xSort)
+      .includeTotal(includeTotal)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3171,20 +3229,22 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testGetFeedback() {
-    String body = IBMWatsonMockResponses.compareComplyV1GetFeedback();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1GetFeedback();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String feedbackId = 'feedback_id';
+    String model = 'model';
 
     IBMCompareComplyV1Models.GetFeedbackOptions options = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
       .feedbackId(feedbackId)
+      .model(model)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3306,20 +3366,22 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteFeedback() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String feedbackId = 'feedback_id';
+    String model = 'model';
 
     IBMCompareComplyV1Models.DeleteFeedbackOptions options = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
       .feedbackId(feedbackId)
+      .model(model)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3328,11 +3390,11 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateBatch() {
-    String body = IBMWatsonMockResponses.compareComplyV1BatchStatus();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1BatchStatus();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -3355,6 +3417,7 @@ private class IBMCompareComplyV1Test {
       .build();
     String outputBucketLocation = 'output_bucket_location';
     String outputBucketName = 'output_bucket_name';
+    String model = 'model';
 
     IBMCompareComplyV1Models.CreateBatchOptions options = new IBMCompareComplyV1Models.CreateBatchOptionsBuilder()
       .function(function)
@@ -3364,6 +3427,7 @@ private class IBMCompareComplyV1Test {
       .outputCredentialsFile(outputCredentialsFile)
       .outputBucketLocation(outputBucketLocation)
       .outputBucketName(outputBucketName)
+      .model(model)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3425,11 +3489,11 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testListBatches() {
-    String body = IBMWatsonMockResponses.compareComplyV1Batches();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1Batches();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -3498,11 +3562,11 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testGetBatch() {
-    String body = IBMWatsonMockResponses.compareComplyV1BatchStatus();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1BatchStatus();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -3573,11 +3637,11 @@ private class IBMCompareComplyV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateBatch() {
-    String body = IBMWatsonMockResponses.compareComplyV1BatchStatus();
+    String mockResponseBody = IBMWatsonMockResponses.compareComplyV1BatchStatus();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -3585,10 +3649,12 @@ private class IBMCompareComplyV1Test {
 
     String batchId = 'batch_id';
     String action = 'action';
+    String model = 'model';
 
     IBMCompareComplyV1Models.UpdateBatchOptions options = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
       .batchId(batchId)
       .action(action)
+      .model(model)
       .addHeader('Test-Header', 'test_value')
       .build();
 

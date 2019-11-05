@@ -2256,6 +2256,7 @@ private class IBMDiscoveryV1Test {
     String collectionId = 'collection_id';
     Double score = 0.5;
     IBMDiscoveryV1Models.QueryResultMetadata resultMetadata = new IBMDiscoveryV1Models.QueryResultMetadata();
+    resultMetadata.setScore(score);
     String title = 'title';
     Long code = 10L;
     String filename = 'filename';
@@ -2433,6 +2434,7 @@ private class IBMDiscoveryV1Test {
     String collectionId = 'collection_id';
     Double score = 0.5;
     IBMDiscoveryV1Models.QueryResultMetadata resultMetadata = new IBMDiscoveryV1Models.QueryResultMetadata();
+    resultMetadata.setScore(score);
     String title = 'title';
 
     IBMDiscoveryV1Models.QueryResult testRequestModel = new IBMDiscoveryV1Models.QueryResult();
@@ -3131,20 +3133,24 @@ private class IBMDiscoveryV1Test {
 
 
   static testMethod void testCreateEnvironment() {
-    String body = IBMWatsonMockResponses.discoveryV1Environment();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String name = 'name';
+    String description = 'description';
+    String size = 'size';
 
     IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder()
       .name(name)
+      .description(description)
+      .size(size)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3230,18 +3236,20 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListEnvironments() {
-    String body = IBMWatsonMockResponses.discoveryV1ListEnvironmentsResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1ListEnvironmentsResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    String name = 'name';
 
     IBMDiscoveryV1Models.ListEnvironmentsOptions options = new IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
+      .name(name)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3327,11 +3335,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetEnvironment() {
-    String body = IBMWatsonMockResponses.discoveryV1Environment();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -3426,20 +3434,26 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateEnvironment() {
-    String body = IBMWatsonMockResponses.discoveryV1Environment();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
+    String name = 'name';
+    String description = 'description';
+    String size = 'size';
 
     IBMDiscoveryV1Models.UpdateEnvironmentOptions options = new IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
       .environmentId(environmentId)
+      .name(name)
+      .description(description)
+      .size(size)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3525,11 +3539,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteEnvironment() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -3547,11 +3561,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListFields() {
-    String body = IBMWatsonMockResponses.discoveryV1ListCollectionFieldsResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1ListCollectionFieldsResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -3580,11 +3594,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateConfiguration() {
-    String body = IBMWatsonMockResponses.discoveryV1Configuration();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Configuration();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -3592,13 +3606,32 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String name = 'name';
+    String description = 'description';
+    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
+      .build();
     String destinationField = 'destination_field';
     String sourceField = 'source_field';
     String enrichment = 'enrichment';
+    IBMDiscoveryV1Models.Enrichment enrichmentsItem = new IBMDiscoveryV1Models.EnrichmentBuilder()
+      .destinationField(destinationField)
+      .sourceField(sourceField)
+      .enrichment(enrichment)
+      .build();
+    List<IBMDiscoveryV1Models.Enrichment> enrichments = new List<IBMDiscoveryV1Models.Enrichment> { enrichmentsItem } ;
+    IBMDiscoveryV1Models.NormalizationOperation normalizationsItem = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.NormalizationOperation> normalizations = new List<IBMDiscoveryV1Models.NormalizationOperation> { normalizationsItem } ;
+    IBMDiscoveryV1Models.Source source = new IBMDiscoveryV1Models.SourceBuilder()
+      .build();
 
     IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
       .environmentId(environmentId)
       .name(name)
+      .description(description)
+      .conversions(conversions)
+      .enrichments(enrichments)
+      .normalizations(normalizations)
+      .source(source)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3948,20 +3981,22 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListConfigurations() {
-    String body = IBMWatsonMockResponses.discoveryV1ListConfigurationsResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1ListConfigurationsResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
+    String name = 'name';
 
     IBMDiscoveryV1Models.ListConfigurationsOptions options = new IBMDiscoveryV1Models.ListConfigurationsOptionsBuilder()
       .environmentId(environmentId)
+      .name(name)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4311,11 +4346,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetConfiguration() {
-    String body = IBMWatsonMockResponses.discoveryV1Configuration();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Configuration();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4676,11 +4711,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateConfiguration() {
-    String body = IBMWatsonMockResponses.discoveryV1Configuration();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Configuration();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4689,14 +4724,33 @@ private class IBMDiscoveryV1Test {
     String environmentId = 'environment_id';
     String configurationId = 'configuration_id';
     String name = 'name';
+    String description = 'description';
+    IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.ConversionsBuilder()
+      .build();
     String destinationField = 'destination_field';
     String sourceField = 'source_field';
     String enrichment = 'enrichment';
+    IBMDiscoveryV1Models.Enrichment enrichmentsItem = new IBMDiscoveryV1Models.EnrichmentBuilder()
+      .destinationField(destinationField)
+      .sourceField(sourceField)
+      .enrichment(enrichment)
+      .build();
+    List<IBMDiscoveryV1Models.Enrichment> enrichments = new List<IBMDiscoveryV1Models.Enrichment> { enrichmentsItem } ;
+    IBMDiscoveryV1Models.NormalizationOperation normalizationsItem = new IBMDiscoveryV1Models.NormalizationOperationBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.NormalizationOperation> normalizations = new List<IBMDiscoveryV1Models.NormalizationOperation> { normalizationsItem } ;
+    IBMDiscoveryV1Models.Source source = new IBMDiscoveryV1Models.SourceBuilder()
+      .build();
 
     IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder()
       .environmentId(environmentId)
       .configurationId(configurationId)
       .name(name)
+      .description(description)
+      .conversions(conversions)
+      .enrichments(enrichments)
+      .normalizations(normalizations)
+      .source(source)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5046,11 +5100,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteConfiguration() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5070,11 +5124,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateCollection() {
-    String body = IBMWatsonMockResponses.discoveryV1Collection();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Collection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5082,10 +5136,16 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String name = 'name';
+    String description = 'description';
+    String configurationId = 'configuration_id';
+    String language = 'language';
 
     IBMDiscoveryV1Models.CreateCollectionOptions options = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder()
       .environmentId(environmentId)
       .name(name)
+      .description(description)
+      .configurationId(configurationId)
+      .language(language)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5215,20 +5275,22 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListCollections() {
-    String body = IBMWatsonMockResponses.discoveryV1ListCollectionsResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1ListCollectionsResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
+    String name = 'name';
 
     IBMDiscoveryV1Models.ListCollectionsOptions options = new IBMDiscoveryV1Models.ListCollectionsOptionsBuilder()
       .environmentId(environmentId)
+      .name(name)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5358,11 +5420,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetCollection() {
-    String body = IBMWatsonMockResponses.discoveryV1Collection();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Collection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5503,11 +5565,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateCollection() {
-    String body = IBMWatsonMockResponses.discoveryV1Collection();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Collection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5515,10 +5577,16 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
+    String name = 'name';
+    String description = 'description';
+    String configurationId = 'configuration_id';
 
     IBMDiscoveryV1Models.UpdateCollectionOptions options = new IBMDiscoveryV1Models.UpdateCollectionOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
+      .name(name)
+      .description(description)
+      .configurationId(configurationId)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5648,11 +5716,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteCollection() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5672,11 +5740,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListCollectionFields() {
-    String body = IBMWatsonMockResponses.discoveryV1ListCollectionFieldsResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1ListCollectionFieldsResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5705,11 +5773,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListExpansions() {
-    String body = IBMWatsonMockResponses.discoveryV1Expansions();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Expansions();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5738,11 +5806,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateExpansions() {
-    String body = IBMWatsonMockResponses.discoveryV1Expansions();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Expansions();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5777,11 +5845,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteExpansions() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5801,11 +5869,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetTokenizationDictionaryStatus() {
-    String body = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5834,11 +5902,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateTokenizationDictionary() {
-    String body = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5849,10 +5917,17 @@ private class IBMDiscoveryV1Test {
     String text = 'text';
     List<String> tokens = new List<String> { 'tokens' } ;
     String partOfSpeech = 'part_of_speech';
+    IBMDiscoveryV1Models.TokenDictRule tokenizationRulesItem = new IBMDiscoveryV1Models.TokenDictRuleBuilder()
+      .text(text)
+      .tokens(tokens)
+      .partOfSpeech(partOfSpeech)
+      .build();
+    List<IBMDiscoveryV1Models.TokenDictRule> tokenizationRules = new List<IBMDiscoveryV1Models.TokenDictRule> { tokenizationRulesItem } ;
 
     IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions options = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
+      .tokenizationRules(tokenizationRules)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5870,11 +5945,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteTokenizationDictionary() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5894,11 +5969,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetStopwordListStatus() {
-    String body = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5927,11 +6002,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateStopwordList() {
-    String body = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TokenDictStatusResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5969,11 +6044,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteStopwordList() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5992,12 +6067,12 @@ private class IBMDiscoveryV1Test {
 
     Test.stopTest();
   }
-  /* static testMethod void testAddDocument() {
-    String body = IBMWatsonMockResponses.discoveryV1DocumentAccepted();
+  static testMethod void testAddDocument() {
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1DocumentAccepted();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6005,10 +6080,23 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
+    IBMWatsonFile file = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/json')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+    String filename = 'filename';
+    String fileContentType = 'file_content_type';
+    String metadata = 'metadata';
 
     IBMDiscoveryV1Models.AddDocumentOptions options = new IBMDiscoveryV1Models.AddDocumentOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
+      .file(file)
+      .filename(filename)
+      .fileContentType(fileContentType)
+      .metadata(metadata)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6052,13 +6140,13 @@ private class IBMDiscoveryV1Test {
     );
 
     Test.stopTest();
-  } */
+  }
   static testMethod void testGetDocumentStatus() {
-    String body = IBMWatsonMockResponses.discoveryV1DocumentStatus();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1DocumentStatus();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6136,12 +6224,12 @@ private class IBMDiscoveryV1Test {
 
     Test.stopTest();
   }
-  /* static testMethod void testUpdateDocument() {
-    String body = IBMWatsonMockResponses.discoveryV1DocumentAccepted();
+  static testMethod void testUpdateDocument() {
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1DocumentAccepted();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6150,11 +6238,24 @@ private class IBMDiscoveryV1Test {
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
     String documentId = 'document_id';
+    IBMWatsonFile file = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/json')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+    String filename = 'filename';
+    String fileContentType = 'file_content_type';
+    String metadata = 'metadata';
 
     IBMDiscoveryV1Models.UpdateDocumentOptions options = new IBMDiscoveryV1Models.UpdateDocumentOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
       .documentId(documentId)
+      .file(file)
+      .filename(filename)
+      .fileContentType(fileContentType)
+      .metadata(metadata)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6198,13 +6299,13 @@ private class IBMDiscoveryV1Test {
     );
 
     Test.stopTest();
-  } */
+  }
   static testMethod void testDeleteDocument() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6226,11 +6327,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testQuery() {
-    String body = IBMWatsonMockResponses.discoveryV1QueryResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1QueryResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6238,10 +6339,52 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
+    String filter = 'filter';
+    String query = 'query';
+    String naturalLanguageQuery = 'natural_language_query';
+    Boolean passages = true;
+    String aggregation = 'aggregation';
+    Long count = 10L;
+    String xReturn = 'x_return';
+    Long offset = 10L;
+    String xSort = 'x_sort';
+    Boolean highlight = true;
+    String passagesFields = 'passages_fields';
+    Long passagesCount = 10L;
+    Long passagesCharacters = 10L;
+    Boolean deduplicate = true;
+    String deduplicateField = 'deduplicate_field';
+    Boolean similar = true;
+    String similarDocumentIds = 'similar_document_ids';
+    String similarFields = 'similar_fields';
+    String bias = 'bias';
+    Boolean spellingSuggestions = true;
+    Boolean xWatsonLoggingOptOut = true;
 
     IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
+      .filter(filter)
+      .query(query)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .passages(passages)
+      .aggregation(aggregation)
+      .count(count)
+      .xReturn(xReturn)
+      .offset(offset)
+      .xSort(xSort)
+      .highlight(highlight)
+      .passagesFields(passagesFields)
+      .passagesCount(passagesCount)
+      .passagesCharacters(passagesCharacters)
+      .deduplicate(deduplicate)
+      .deduplicateField(deduplicateField)
+      .similar(similar)
+      .similarDocumentIds(similarDocumentIds)
+      .similarFields(similarFields)
+      .bias(bias)
+      .spellingSuggestions(spellingSuggestions)
+      .xWatsonLoggingOptOut(xWatsonLoggingOptOut)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6459,11 +6602,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testQueryNotices() {
-    String body = IBMWatsonMockResponses.discoveryV1QueryNoticesResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1QueryNoticesResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6471,10 +6614,44 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
+    String filter = 'filter';
+    String query = 'query';
+    String naturalLanguageQuery = 'natural_language_query';
+    Boolean passages = true;
+    String aggregation = 'aggregation';
+    Long count = 10L;
+    List<String> xReturn = new List<String> { 'x_return' } ;
+    Long offset = 10L;
+    List<String> xSort = new List<String> { 'x_sort' } ;
+    Boolean highlight = true;
+    List<String> passagesFields = new List<String> { 'passages_fields' } ;
+    Long passagesCount = 10L;
+    Long passagesCharacters = 10L;
+    String deduplicateField = 'deduplicate_field';
+    Boolean similar = true;
+    List<String> similarDocumentIds = new List<String> { 'similar_document_ids' } ;
+    List<String> similarFields = new List<String> { 'similar_fields' } ;
 
     IBMDiscoveryV1Models.QueryNoticesOptions options = new IBMDiscoveryV1Models.QueryNoticesOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
+      .filter(filter)
+      .query(query)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .passages(passages)
+      .aggregation(aggregation)
+      .count(count)
+      .xReturn(xReturn)
+      .offset(offset)
+      .xSort(xSort)
+      .highlight(highlight)
+      .passagesFields(passagesFields)
+      .passagesCount(passagesCount)
+      .passagesCharacters(passagesCharacters)
+      .deduplicateField(deduplicateField)
+      .similar(similar)
+      .similarDocumentIds(similarDocumentIds)
+      .similarFields(similarFields)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6724,20 +6901,62 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testFederatedQuery() {
-    String body = IBMWatsonMockResponses.discoveryV1QueryResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1QueryResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
+    String filter = 'filter';
+    String query = 'query';
+    String naturalLanguageQuery = 'natural_language_query';
+    Boolean passages = true;
+    String aggregation = 'aggregation';
+    Long count = 10L;
+    String xReturn = 'x_return';
+    Long offset = 10L;
+    String xSort = 'x_sort';
+    Boolean highlight = true;
+    String passagesFields = 'passages_fields';
+    Long passagesCount = 10L;
+    Long passagesCharacters = 10L;
+    Boolean deduplicate = true;
+    String deduplicateField = 'deduplicate_field';
+    Boolean similar = true;
+    String similarDocumentIds = 'similar_document_ids';
+    String similarFields = 'similar_fields';
+    String bias = 'bias';
+    String collectionIds = 'collection_ids';
+    Boolean xWatsonLoggingOptOut = true;
 
     IBMDiscoveryV1Models.FederatedQueryOptions options = new IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
       .environmentId(environmentId)
+      .filter(filter)
+      .query(query)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .passages(passages)
+      .aggregation(aggregation)
+      .count(count)
+      .xReturn(xReturn)
+      .offset(offset)
+      .xSort(xSort)
+      .highlight(highlight)
+      .passagesFields(passagesFields)
+      .passagesCount(passagesCount)
+      .passagesCharacters(passagesCharacters)
+      .deduplicate(deduplicate)
+      .deduplicateField(deduplicateField)
+      .similar(similar)
+      .similarDocumentIds(similarDocumentIds)
+      .similarFields(similarFields)
+      .bias(bias)
+      .collectionIds(collectionIds)
+      .xWatsonLoggingOptOut(xWatsonLoggingOptOut)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6955,11 +7174,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testFederatedQueryNotices() {
-    String body = IBMWatsonMockResponses.discoveryV1QueryNoticesResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1QueryNoticesResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6967,10 +7186,36 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     List<String> collectionIds = new List<String> { 'collection_ids' } ;
+    String filter = 'filter';
+    String query = 'query';
+    String naturalLanguageQuery = 'natural_language_query';
+    String aggregation = 'aggregation';
+    Long count = 10L;
+    List<String> xReturn = new List<String> { 'x_return' } ;
+    Long offset = 10L;
+    List<String> xSort = new List<String> { 'x_sort' } ;
+    Boolean highlight = true;
+    String deduplicateField = 'deduplicate_field';
+    Boolean similar = true;
+    List<String> similarDocumentIds = new List<String> { 'similar_document_ids' } ;
+    List<String> similarFields = new List<String> { 'similar_fields' } ;
 
     IBMDiscoveryV1Models.FederatedQueryNoticesOptions options = new IBMDiscoveryV1Models.FederatedQueryNoticesOptionsBuilder()
       .environmentId(environmentId)
       .collectionIds(collectionIds)
+      .filter(filter)
+      .query(query)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .aggregation(aggregation)
+      .count(count)
+      .xReturn(xReturn)
+      .offset(offset)
+      .xSort(xSort)
+      .highlight(highlight)
+      .deduplicateField(deduplicateField)
+      .similar(similar)
+      .similarDocumentIds(similarDocumentIds)
+      .similarFields(similarFields)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7220,11 +7465,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetAutocompletion() {
-    String body = IBMWatsonMockResponses.discoveryV1Completions();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Completions();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7233,11 +7478,15 @@ private class IBMDiscoveryV1Test {
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
     String prefix = 'prefix';
+    String field = 'field';
+    Long count = 10L;
 
     IBMDiscoveryV1Models.GetAutocompletionOptions options = new IBMDiscoveryV1Models.GetAutocompletionOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
       .prefix(prefix)
+      .field(field)
+      .count(count)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7251,11 +7500,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListTrainingData() {
-    String body = IBMWatsonMockResponses.discoveryV1TrainingDataSet();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TrainingDataSet();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7308,11 +7557,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testAddTrainingData() {
-    String body = IBMWatsonMockResponses.discoveryV1TrainingQuery();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TrainingQuery();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7320,10 +7569,18 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
+    String naturalLanguageQuery = 'natural_language_query';
+    String filter = 'filter';
+    IBMDiscoveryV1Models.TrainingExample examplesItem = new IBMDiscoveryV1Models.TrainingExampleBuilder()
+      .build();
+    List<IBMDiscoveryV1Models.TrainingExample> examples = new List<IBMDiscoveryV1Models.TrainingExample> { examplesItem } ;
 
     IBMDiscoveryV1Models.AddTrainingDataOptions options = new IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
+      .naturalLanguageQuery(naturalLanguageQuery)
+      .filter(filter)
+      .examples(examples)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7357,11 +7614,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteAllTrainingData() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7381,11 +7638,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetTrainingData() {
-    String body = IBMWatsonMockResponses.discoveryV1TrainingQuery();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TrainingQuery();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7432,11 +7689,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteTrainingData() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7458,11 +7715,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListTrainingExamples() {
-    String body = IBMWatsonMockResponses.discoveryV1TrainingExampleList();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TrainingExampleList();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7497,11 +7754,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateTrainingExample() {
-    String body = IBMWatsonMockResponses.discoveryV1TrainingExample();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TrainingExample();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7510,11 +7767,17 @@ private class IBMDiscoveryV1Test {
     String environmentId = 'environment_id';
     String collectionId = 'collection_id';
     String queryId = 'query_id';
+    String documentId = 'document_id';
+    String crossReference = 'cross_reference';
+    Long relevance = 10L;
 
     IBMDiscoveryV1Models.CreateTrainingExampleOptions options = new IBMDiscoveryV1Models.CreateTrainingExampleOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
       .queryId(queryId)
+      .documentId(documentId)
+      .crossReference(crossReference)
+      .relevance(relevance)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7536,11 +7799,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteTrainingExample() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7564,11 +7827,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateTrainingExample() {
-    String body = IBMWatsonMockResponses.discoveryV1TrainingExample();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TrainingExample();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7578,12 +7841,16 @@ private class IBMDiscoveryV1Test {
     String collectionId = 'collection_id';
     String queryId = 'query_id';
     String exampleId = 'example_id';
+    String crossReference = 'cross_reference';
+    Long relevance = 10L;
 
     IBMDiscoveryV1Models.UpdateTrainingExampleOptions options = new IBMDiscoveryV1Models.UpdateTrainingExampleOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
       .queryId(queryId)
       .exampleId(exampleId)
+      .crossReference(crossReference)
+      .relevance(relevance)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7605,11 +7872,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetTrainingExample() {
-    String body = IBMWatsonMockResponses.discoveryV1TrainingExample();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1TrainingExample();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7646,11 +7913,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteUserData() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7668,11 +7935,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateEvent() {
-    String body = IBMWatsonMockResponses.discoveryV1CreateEventResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1CreateEventResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7734,18 +8001,28 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testQueryLog() {
-    String body = IBMWatsonMockResponses.discoveryV1LogQueryResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1LogQueryResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    String filter = 'filter';
+    String query = 'query';
+    Long count = 10L;
+    Long offset = 10L;
+    List<String> xSort = new List<String> { 'x_sort' } ;
 
     IBMDiscoveryV1Models.QueryLogOptions options = new IBMDiscoveryV1Models.QueryLogOptionsBuilder()
+      .filter(filter)
+      .query(query)
+      .count(count)
+      .offset(offset)
+      .xSort(xSort)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7835,18 +8112,24 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetMetricsQuery() {
-    String body = IBMWatsonMockResponses.discoveryV1MetricResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1MetricResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    Datetime startTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime endTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String resultType = 'result_type';
 
     IBMDiscoveryV1Models.GetMetricsQueryOptions options = new IBMDiscoveryV1Models.GetMetricsQueryOptionsBuilder()
+      .startTime(startTime)
+      .endTime(endTime)
+      .resultType(resultType)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7880,18 +8163,24 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetMetricsQueryEvent() {
-    String body = IBMWatsonMockResponses.discoveryV1MetricResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1MetricResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    Datetime startTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime endTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String resultType = 'result_type';
 
     IBMDiscoveryV1Models.GetMetricsQueryEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryEventOptionsBuilder()
+      .startTime(startTime)
+      .endTime(endTime)
+      .resultType(resultType)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7925,18 +8214,24 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetMetricsQueryNoResults() {
-    String body = IBMWatsonMockResponses.discoveryV1MetricResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1MetricResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    Datetime startTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime endTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String resultType = 'result_type';
 
     IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions options = new IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptionsBuilder()
+      .startTime(startTime)
+      .endTime(endTime)
+      .resultType(resultType)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7970,18 +8265,24 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetMetricsEventRate() {
-    String body = IBMWatsonMockResponses.discoveryV1MetricResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1MetricResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    Datetime startTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    Datetime endTime = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
+    String resultType = 'result_type';
 
     IBMDiscoveryV1Models.GetMetricsEventRateOptions options = new IBMDiscoveryV1Models.GetMetricsEventRateOptionsBuilder()
+      .startTime(startTime)
+      .endTime(endTime)
+      .resultType(resultType)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -8015,18 +8316,20 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetMetricsQueryTokenEvent() {
-    String body = IBMWatsonMockResponses.discoveryV1MetricTokenResponse();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1MetricTokenResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    Long count = 10L;
 
     IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptionsBuilder()
+      .count(count)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -8052,11 +8355,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListCredentials() {
-    String body = IBMWatsonMockResponses.discoveryV1CredentialsList();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1CredentialsList();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -8163,20 +8466,27 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateCredentials() {
-    String body = IBMWatsonMockResponses.discoveryV1Credentials();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Credentials();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
+    String sourceType = 'source_type';
+    IBMDiscoveryV1Models.CredentialDetails credentialDetails = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
+      .build();
+    String status = 'status';
 
     IBMDiscoveryV1Models.CreateCredentialsOptions options = new IBMDiscoveryV1Models.CreateCredentialsOptionsBuilder()
       .environmentId(environmentId)
+      .sourceType(sourceType)
+      .credentialDetails(credentialDetails)
+      .status(status)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -8274,11 +8584,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetCredentials() {
-    String body = IBMWatsonMockResponses.discoveryV1Credentials();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Credentials();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -8387,11 +8697,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateCredentials() {
-    String body = IBMWatsonMockResponses.discoveryV1Credentials();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Credentials();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -8399,10 +8709,17 @@ private class IBMDiscoveryV1Test {
 
     String environmentId = 'environment_id';
     String credentialId = 'credential_id';
+    String sourceType = 'source_type';
+    IBMDiscoveryV1Models.CredentialDetails credentialDetails = new IBMDiscoveryV1Models.CredentialDetailsBuilder()
+      .build();
+    String status = 'status';
 
     IBMDiscoveryV1Models.UpdateCredentialsOptions options = new IBMDiscoveryV1Models.UpdateCredentialsOptionsBuilder()
       .environmentId(environmentId)
       .credentialId(credentialId)
+      .sourceType(sourceType)
+      .credentialDetails(credentialDetails)
+      .status(status)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -8500,11 +8817,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteCredentials() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -8524,11 +8841,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testListGateways() {
-    String body = IBMWatsonMockResponses.discoveryV1GatewayList();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1GatewayList();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -8567,20 +8884,22 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateGateway() {
-    String body = IBMWatsonMockResponses.discoveryV1Gateway();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Gateway();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String environmentId = 'environment_id';
+    String name = 'name';
 
     IBMDiscoveryV1Models.CreateGatewayOptions options = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
       .environmentId(environmentId)
+      .name(name)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -8610,11 +8929,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testGetGateway() {
-    String body = IBMWatsonMockResponses.discoveryV1Gateway();
+    String mockResponseBody = IBMWatsonMockResponses.discoveryV1Gateway();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -8655,11 +8974,11 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteGateway() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);

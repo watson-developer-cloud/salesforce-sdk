@@ -83,6 +83,8 @@ private class IBMNaturalLanguageClassifierV1Test {
     String url = 'url';
     String classifierId = 'classifier_id';
     IBMNaturalLanguageClassifierV1Models.Classifier classifiersItem = new IBMNaturalLanguageClassifierV1Models.Classifier();
+    classifiersItem.setUrl(url);
+    classifiersItem.setClassifierId(classifierId);
     List<IBMNaturalLanguageClassifierV1Models.Classifier> classifiers = new List<IBMNaturalLanguageClassifierV1Models.Classifier> { classifiersItem } ;
 
     IBMNaturalLanguageClassifierV1Models.ClassifierList testRequestModel = new IBMNaturalLanguageClassifierV1Models.ClassifierList();
@@ -215,11 +217,11 @@ private class IBMNaturalLanguageClassifierV1Test {
 
 
   static testMethod void testClassify() {
-    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1Classification();
+    String mockResponseBody = IBMWatsonMockResponses.naturalLanguageClassifierV1Classification();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -264,11 +266,11 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.stopTest();
   }
   static testMethod void testClassifyCollection() {
-    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1ClassificationCollection();
+    String mockResponseBody = IBMWatsonMockResponses.naturalLanguageClassifierV1ClassificationCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -317,11 +319,11 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateClassifier() {
-    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1Classifier();
+    String mockResponseBody = IBMWatsonMockResponses.naturalLanguageClassifierV1Classifier();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -380,11 +382,11 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.stopTest();
   }
   static testMethod void testListClassifiers() {
-    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1ClassifierList();
+    String mockResponseBody = IBMWatsonMockResponses.naturalLanguageClassifierV1ClassifierList();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -429,11 +431,11 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.stopTest();
   }
   static testMethod void testGetClassifier() {
-    String body = IBMWatsonMockResponses.naturalLanguageClassifierV1Classifier();
+    String mockResponseBody = IBMWatsonMockResponses.naturalLanguageClassifierV1Classifier();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -480,11 +482,11 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteClassifier() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);

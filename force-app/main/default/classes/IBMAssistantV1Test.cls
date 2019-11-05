@@ -62,6 +62,7 @@ private class IBMAssistantV1Test {
     List<IBMAssistantV1Models.Counterexample> counterexamples = new List<IBMAssistantV1Models.Counterexample> { counterexamplesItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.CounterexampleCollection testRequestModel = new IBMAssistantV1Models.CounterexampleCollection();
     testRequestModel.setCounterexamples(counterexamples);
@@ -683,6 +684,7 @@ private class IBMAssistantV1Test {
     List<IBMAssistantV1Models.DialogNode> dialogNodes = new List<IBMAssistantV1Models.DialogNode> { dialogNodesItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.DialogNodeCollection testRequestModel = new IBMAssistantV1Models.DialogNodeCollection();
     testRequestModel.setDialogNodes(dialogNodes);
@@ -1054,9 +1056,11 @@ private class IBMAssistantV1Test {
     Test.startTest();
     String entity = 'entity';
     IBMAssistantV1Models.Entity entitiesItem = new IBMAssistantV1Models.Entity();
+    entitiesItem.setEntity(entity);
     List<IBMAssistantV1Models.Entity> entities = new List<IBMAssistantV1Models.Entity> { entitiesItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.EntityCollection testRequestModel = new IBMAssistantV1Models.EntityCollection();
     testRequestModel.setEntities(entities);
@@ -1088,9 +1092,13 @@ private class IBMAssistantV1Test {
     String intent = 'intent';
     List<Long> location = new List<Long> { 10L } ;
     IBMAssistantV1Models.EntityMention examplesItem = new IBMAssistantV1Models.EntityMention();
+    examplesItem.setText(text);
+    examplesItem.setIntent(intent);
+    examplesItem.setLocation(location);
     List<IBMAssistantV1Models.EntityMention> examples = new List<IBMAssistantV1Models.EntityMention> { examplesItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.EntityMentionCollection testRequestModel = new IBMAssistantV1Models.EntityMentionCollection();
     testRequestModel.setExamples(examples);
@@ -1130,6 +1138,7 @@ private class IBMAssistantV1Test {
     List<IBMAssistantV1Models.Example> examples = new List<IBMAssistantV1Models.Example> { examplesItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.ExampleCollection testRequestModel = new IBMAssistantV1Models.ExampleCollection();
     testRequestModel.setExamples(examples);
@@ -1331,9 +1340,11 @@ private class IBMAssistantV1Test {
     Test.startTest();
     String intent = 'intent';
     IBMAssistantV1Models.Intent intentsItem = new IBMAssistantV1Models.Intent();
+    intentsItem.setIntent(intent);
     List<IBMAssistantV1Models.Intent> intents = new List<IBMAssistantV1Models.Intent> { intentsItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.IntentCollection testRequestModel = new IBMAssistantV1Models.IntentCollection();
     testRequestModel.setIntents(intents);
@@ -1656,6 +1667,11 @@ private class IBMAssistantV1Test {
       .text(text)
       .build();
     IBMAssistantV1Models.MessageResponse response = new IBMAssistantV1Models.MessageResponse();
+    response.setInput(input);
+    response.setIntents(intents);
+    response.setEntities(entities);
+    response.setContext(context);
+    response.setOutput(output);
     String logId = 'log_id';
     String requestTimestamp = 'request_timestamp';
     String responseTimestamp = 'response_timestamp';
@@ -1717,12 +1733,24 @@ private class IBMAssistantV1Test {
       .text(text)
       .build();
     IBMAssistantV1Models.MessageResponse response = new IBMAssistantV1Models.MessageResponse();
+    response.setInput(input);
+    response.setIntents(intents);
+    response.setEntities(entities);
+    response.setContext(context);
+    response.setOutput(output);
     String logId = 'log_id';
     String requestTimestamp = 'request_timestamp';
     String responseTimestamp = 'response_timestamp';
     String workspaceId = 'workspace_id';
     String language = 'language';
     IBMAssistantV1Models.Log logsItem = new IBMAssistantV1Models.Log();
+    logsItem.setRequest(request);
+    logsItem.setResponse(response);
+    logsItem.setLogId(logId);
+    logsItem.setRequestTimestamp(requestTimestamp);
+    logsItem.setResponseTimestamp(responseTimestamp);
+    logsItem.setWorkspaceId(workspaceId);
+    logsItem.setLanguage(language);
     List<IBMAssistantV1Models.Log> logs = new List<IBMAssistantV1Models.Log> { logsItem } ;
     IBMAssistantV1Models.LogPagination pagination = new IBMAssistantV1Models.LogPagination();
 
@@ -2160,6 +2188,7 @@ private class IBMAssistantV1Test {
     List<IBMAssistantV1Models.Synonym> synonyms = new List<IBMAssistantV1Models.Synonym> { synonymsItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.SynonymCollection testRequestModel = new IBMAssistantV1Models.SynonymCollection();
     testRequestModel.setSynonyms(synonyms);
@@ -2527,6 +2556,7 @@ private class IBMAssistantV1Test {
     List<IBMAssistantV1Models.Value> values = new List<IBMAssistantV1Models.Value> { valuesItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.ValueCollection testRequestModel = new IBMAssistantV1Models.ValueCollection();
     testRequestModel.setValues(values);
@@ -2548,9 +2578,11 @@ private class IBMAssistantV1Test {
       .build();
     String intent = 'intent';
     IBMAssistantV1Models.Intent intentsItem = new IBMAssistantV1Models.Intent();
+    intentsItem.setIntent(intent);
     List<IBMAssistantV1Models.Intent> intents = new List<IBMAssistantV1Models.Intent> { intentsItem } ;
     String entity = 'entity';
     IBMAssistantV1Models.Entity entitiesItem = new IBMAssistantV1Models.Entity();
+    entitiesItem.setEntity(entity);
     List<IBMAssistantV1Models.Entity> entities = new List<IBMAssistantV1Models.Entity> { entitiesItem } ;
     String dialogNode = 'dialog_node';
     IBMAssistantV1Models.DialogNode dialogNodesItem = new IBMAssistantV1Models.DialogNodeBuilder()
@@ -2594,9 +2626,13 @@ private class IBMAssistantV1Test {
     Boolean learningOptOut = true;
     String workspaceId = 'workspace_id';
     IBMAssistantV1Models.Workspace workspacesItem = new IBMAssistantV1Models.Workspace();
+    workspacesItem.setName(name);
+    workspacesItem.setLanguage(language);
+    workspacesItem.setLearningOptOut(learningOptOut);
     List<IBMAssistantV1Models.Workspace> workspaces = new List<IBMAssistantV1Models.Workspace> { workspacesItem } ;
     String refreshUrl = 'refresh_url';
     IBMAssistantV1Models.Pagination pagination = new IBMAssistantV1Models.Pagination();
+    pagination.setRefreshUrl(refreshUrl);
 
     IBMAssistantV1Models.WorkspaceCollection testRequestModel = new IBMAssistantV1Models.WorkspaceCollection();
     testRequestModel.setWorkspaces(workspaces);
@@ -2663,22 +2699,38 @@ private class IBMAssistantV1Test {
 
 
   static testMethod void testMessage() {
-    String body = IBMWatsonMockResponses.assistantV1MessageResponse();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1MessageResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String workspaceId = 'workspace_id';
+    IBMAssistantV1Models.MessageInput input = new IBMAssistantV1Models.MessageInputBuilder()
+      .build();
     String intent = 'intent';
     Double confidence = 0.5;
+    IBMAssistantV1Models.RuntimeIntent intentsItem = new IBMAssistantV1Models.RuntimeIntentBuilder()
+      .intent(intent)
+      .confidence(confidence)
+      .build();
+    List<IBMAssistantV1Models.RuntimeIntent> intents = new List<IBMAssistantV1Models.RuntimeIntent> { intentsItem } ;
     String entity = 'entity';
     List<Long> location = new List<Long> { 10L } ;
     String value = 'value';
+    IBMAssistantV1Models.RuntimeEntity entitiesItem = new IBMAssistantV1Models.RuntimeEntityBuilder()
+      .entity(entity)
+      .location(location)
+      .value(value)
+      .build();
+    List<IBMAssistantV1Models.RuntimeEntity> entities = new List<IBMAssistantV1Models.RuntimeEntity> { entitiesItem } ;
+    Boolean alternateIntents = true;
+    IBMAssistantV1Models.Context context = new IBMAssistantV1Models.ContextBuilder()
+      .build();
     String level = 'level';
     String msg = 'msg';
     IBMAssistantV1Models.LogMessage logMessagesItem = new IBMAssistantV1Models.LogMessageBuilder()
@@ -2687,9 +2739,21 @@ private class IBMAssistantV1Test {
       .build();
     List<IBMAssistantV1Models.LogMessage> logMessages = new List<IBMAssistantV1Models.LogMessage> { logMessagesItem } ;
     List<String> text = new List<String> { 'text' } ;
+    IBMAssistantV1Models.OutputData output = new IBMAssistantV1Models.OutputDataBuilder()
+      .logMessages(logMessages)
+      .text(text)
+      .build();
+    Boolean nodesVisitedDetails = true;
 
     IBMAssistantV1Models.MessageOptions options = new IBMAssistantV1Models.MessageOptionsBuilder()
       .workspaceId(workspaceId)
+      .input(input)
+      .intents(intents)
+      .entities(entities)
+      .alternateIntents(alternateIntents)
+      .context(context)
+      .output(output)
+      .nodesVisitedDetails(nodesVisitedDetails)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3027,18 +3091,26 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListWorkspaces() {
-    String body = IBMWatsonMockResponses.assistantV1WorkspaceCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1WorkspaceCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    Long pageLimit = 10L;
+    String xSort = 'x_sort';
+    String cursor = 'cursor';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListWorkspacesOptions options = new IBMAssistantV1Models.ListWorkspacesOptionsBuilder()
+      .pageLimit(pageLimit)
+      .xSort(xSort)
+      .cursor(cursor)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3412,22 +3484,56 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateWorkspace() {
-    String body = IBMWatsonMockResponses.assistantV1Workspace();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Workspace();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    String name = 'name';
+    String description = 'description';
+    String language = 'language';
+    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
+    metadata.put('metadata_key', 'metadata');
+    Boolean learningOptOut = true;
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettingsBuilder()
+      .build();
     String intent = 'intent';
+    IBMAssistantV1Models.CreateIntent intentsItem = new IBMAssistantV1Models.CreateIntentBuilder()
+      .intent(intent)
+      .build();
+    List<IBMAssistantV1Models.CreateIntent> intents = new List<IBMAssistantV1Models.CreateIntent> { intentsItem } ;
     String entity = 'entity';
+    IBMAssistantV1Models.CreateEntity entitiesItem = new IBMAssistantV1Models.CreateEntityBuilder()
+      .entity(entity)
+      .build();
+    List<IBMAssistantV1Models.CreateEntity> entities = new List<IBMAssistantV1Models.CreateEntity> { entitiesItem } ;
     String dialogNode = 'dialog_node';
+    IBMAssistantV1Models.DialogNode dialogNodesItem = new IBMAssistantV1Models.DialogNodeBuilder()
+      .dialogNode(dialogNode)
+      .build();
+    List<IBMAssistantV1Models.DialogNode> dialogNodes = new List<IBMAssistantV1Models.DialogNode> { dialogNodesItem } ;
     String text = 'text';
+    IBMAssistantV1Models.Counterexample counterexamplesItem = new IBMAssistantV1Models.CounterexampleBuilder()
+      .text(text)
+      .build();
+    List<IBMAssistantV1Models.Counterexample> counterexamples = new List<IBMAssistantV1Models.Counterexample> { counterexamplesItem } ;
 
     IBMAssistantV1Models.CreateWorkspaceOptions options = new IBMAssistantV1Models.CreateWorkspaceOptionsBuilder()
+      .name(name)
+      .description(description)
+      .language(language)
+      .metadata(metadata)
+      .learningOptOut(learningOptOut)
+      .systemSettings(systemSettings)
+      .intents(intents)
+      .entities(entities)
+      .dialogNodes(dialogNodes)
+      .counterexamples(counterexamples)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -3777,20 +3883,26 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testGetWorkspace() {
-    String body = IBMWatsonMockResponses.assistantV1Workspace();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Workspace();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String workspaceId = 'workspace_id';
+    Boolean xExport = true;
+    Boolean includeAudit = true;
+    String xSort = 'x_sort';
 
     IBMAssistantV1Models.GetWorkspaceOptions options = new IBMAssistantV1Models.GetWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
+      .xExport(xExport)
+      .includeAudit(includeAudit)
+      .xSort(xSort)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4140,24 +4252,60 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateWorkspace() {
-    String body = IBMWatsonMockResponses.assistantV1Workspace();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Workspace();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String workspaceId = 'workspace_id';
+    String name = 'name';
+    String description = 'description';
+    String language = 'language';
+    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
+    metadata.put('metadata_key', 'metadata');
+    Boolean learningOptOut = true;
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettingsBuilder()
+      .build();
     String intent = 'intent';
+    IBMAssistantV1Models.CreateIntent intentsItem = new IBMAssistantV1Models.CreateIntentBuilder()
+      .intent(intent)
+      .build();
+    List<IBMAssistantV1Models.CreateIntent> intents = new List<IBMAssistantV1Models.CreateIntent> { intentsItem } ;
     String entity = 'entity';
+    IBMAssistantV1Models.CreateEntity entitiesItem = new IBMAssistantV1Models.CreateEntityBuilder()
+      .entity(entity)
+      .build();
+    List<IBMAssistantV1Models.CreateEntity> entities = new List<IBMAssistantV1Models.CreateEntity> { entitiesItem } ;
     String dialogNode = 'dialog_node';
+    IBMAssistantV1Models.DialogNode dialogNodesItem = new IBMAssistantV1Models.DialogNodeBuilder()
+      .dialogNode(dialogNode)
+      .build();
+    List<IBMAssistantV1Models.DialogNode> dialogNodes = new List<IBMAssistantV1Models.DialogNode> { dialogNodesItem } ;
     String text = 'text';
+    IBMAssistantV1Models.Counterexample counterexamplesItem = new IBMAssistantV1Models.CounterexampleBuilder()
+      .text(text)
+      .build();
+    List<IBMAssistantV1Models.Counterexample> counterexamples = new List<IBMAssistantV1Models.Counterexample> { counterexamplesItem } ;
+    Boolean append = true;
 
     IBMAssistantV1Models.UpdateWorkspaceOptions options = new IBMAssistantV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
+      .name(name)
+      .description(description)
+      .language(language)
+      .metadata(metadata)
+      .learningOptOut(learningOptOut)
+      .systemSettings(systemSettings)
+      .intents(intents)
+      .entities(entities)
+      .dialogNodes(dialogNodes)
+      .counterexamples(counterexamples)
+      .append(append)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4507,11 +4655,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteWorkspace() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4529,20 +4677,30 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListIntents() {
-    String body = IBMWatsonMockResponses.assistantV1IntentCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1IntentCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String workspaceId = 'workspace_id';
+    Boolean xExport = true;
+    Long pageLimit = 10L;
+    String xSort = 'x_sort';
+    String cursor = 'cursor';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListIntentsOptions options = new IBMAssistantV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
+      .xExport(xExport)
+      .pageLimit(pageLimit)
+      .xSort(xSort)
+      .cursor(cursor)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4612,11 +4770,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateIntent() {
-    String body = IBMWatsonMockResponses.assistantV1Intent();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Intent();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4624,11 +4782,18 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String intent = 'intent';
+    String description = 'description';
     String text = 'text';
+    IBMAssistantV1Models.Example examplesItem = new IBMAssistantV1Models.ExampleBuilder()
+      .text(text)
+      .build();
+    List<IBMAssistantV1Models.Example> examples = new List<IBMAssistantV1Models.Example> { examplesItem } ;
 
     IBMAssistantV1Models.CreateIntentOptions options = new IBMAssistantV1Models.CreateIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intent)
+      .description(description)
+      .examples(examples)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4674,11 +4839,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testGetIntent() {
-    String body = IBMWatsonMockResponses.assistantV1Intent();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Intent();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4686,10 +4851,14 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String intent = 'intent';
+    Boolean xExport = true;
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.GetIntentOptions options = new IBMAssistantV1Models.GetIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intent)
+      .xExport(xExport)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4735,11 +4904,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateIntent() {
-    String body = IBMWatsonMockResponses.assistantV1Intent();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Intent();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4747,11 +4916,20 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String intent = 'intent';
+    String newIntent = 'new_intent';
+    String newDescription = 'new_description';
     String text = 'text';
+    IBMAssistantV1Models.Example newExamplesItem = new IBMAssistantV1Models.ExampleBuilder()
+      .text(text)
+      .build();
+    List<IBMAssistantV1Models.Example> newExamples = new List<IBMAssistantV1Models.Example> { newExamplesItem } ;
 
     IBMAssistantV1Models.UpdateIntentOptions options = new IBMAssistantV1Models.UpdateIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intent)
+      .newIntent(newIntent)
+      .newDescription(newDescription)
+      .newExamples(newExamples)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4797,11 +4975,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteIntent() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4821,11 +4999,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListExamples() {
-    String body = IBMWatsonMockResponses.assistantV1ExampleCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1ExampleCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4833,10 +5011,18 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String intent = 'intent';
+    Long pageLimit = 10L;
+    String xSort = 'x_sort';
+    String cursor = 'cursor';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListExamplesOptions options = new IBMAssistantV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intent)
+      .pageLimit(pageLimit)
+      .xSort(xSort)
+      .cursor(cursor)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4890,11 +5076,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateExample() {
-    String body = IBMWatsonMockResponses.assistantV1Example();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Example();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4905,11 +5091,17 @@ private class IBMAssistantV1Test {
     String text = 'text';
     String entity = 'entity';
     List<Long> location = new List<Long> { 10L } ;
+    IBMAssistantV1Models.Mention mentionsItem = new IBMAssistantV1Models.MentionBuilder()
+      .entity(entity)
+      .location(location)
+      .build();
+    List<IBMAssistantV1Models.Mention> mentions = new List<IBMAssistantV1Models.Mention> { mentionsItem } ;
 
     IBMAssistantV1Models.CreateExampleOptions options = new IBMAssistantV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intent)
       .text(text)
+      .mentions(mentions)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4939,11 +5131,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testGetExample() {
-    String body = IBMWatsonMockResponses.assistantV1Example();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Example();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4952,11 +5144,13 @@ private class IBMAssistantV1Test {
     String workspaceId = 'workspace_id';
     String intent = 'intent';
     String text = 'text';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.GetExampleOptions options = new IBMAssistantV1Models.GetExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intent)
       .text(text)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -4986,11 +5180,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateExample() {
-    String body = IBMWatsonMockResponses.assistantV1Example();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Example();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -4999,13 +5193,21 @@ private class IBMAssistantV1Test {
     String workspaceId = 'workspace_id';
     String intent = 'intent';
     String text = 'text';
+    String newText = 'new_text';
     String entity = 'entity';
     List<Long> location = new List<Long> { 10L } ;
+    IBMAssistantV1Models.Mention newMentionsItem = new IBMAssistantV1Models.MentionBuilder()
+      .entity(entity)
+      .location(location)
+      .build();
+    List<IBMAssistantV1Models.Mention> newMentions = new List<IBMAssistantV1Models.Mention> { newMentionsItem } ;
 
     IBMAssistantV1Models.UpdateExampleOptions options = new IBMAssistantV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intent)
       .text(text)
+      .newText(newText)
+      .newMentions(newMentions)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5035,11 +5237,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteExample() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5061,20 +5263,28 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListCounterexamples() {
-    String body = IBMWatsonMockResponses.assistantV1CounterexampleCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1CounterexampleCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String workspaceId = 'workspace_id';
+    Long pageLimit = 10L;
+    String xSort = 'x_sort';
+    String cursor = 'cursor';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListCounterexamplesOptions options = new IBMAssistantV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
+      .pageLimit(pageLimit)
+      .xSort(xSort)
+      .cursor(cursor)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5120,11 +5330,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateCounterexample() {
-    String body = IBMWatsonMockResponses.assistantV1Counterexample();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Counterexample();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5157,11 +5367,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testGetCounterexample() {
-    String body = IBMWatsonMockResponses.assistantV1Counterexample();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Counterexample();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5169,10 +5379,12 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String text = 'text';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.GetCounterexampleOptions options = new IBMAssistantV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(text)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5194,11 +5406,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateCounterexample() {
-    String body = IBMWatsonMockResponses.assistantV1Counterexample();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Counterexample();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5206,10 +5418,12 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String text = 'text';
+    String newText = 'new_text';
 
     IBMAssistantV1Models.UpdateCounterexampleOptions options = new IBMAssistantV1Models.UpdateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(text)
+      .newText(newText)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5231,11 +5445,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteCounterexample() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5255,20 +5469,30 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListEntities() {
-    String body = IBMWatsonMockResponses.assistantV1EntityCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1EntityCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String workspaceId = 'workspace_id';
+    Boolean xExport = true;
+    Long pageLimit = 10L;
+    String xSort = 'x_sort';
+    String cursor = 'cursor';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListEntitiesOptions options = new IBMAssistantV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
+      .xExport(xExport)
+      .pageLimit(pageLimit)
+      .xSort(xSort)
+      .cursor(cursor)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5346,11 +5570,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateEntity() {
-    String body = IBMWatsonMockResponses.assistantV1Entity();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Entity();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5358,11 +5582,23 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String entity = 'entity';
+    String description = 'description';
+    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
+    metadata.put('metadata_key', 'metadata');
+    Boolean fuzzyMatch = true;
     String value = 'value';
+    IBMAssistantV1Models.CreateValue valuesItem = new IBMAssistantV1Models.CreateValueBuilder()
+      .value(value)
+      .build();
+    List<IBMAssistantV1Models.CreateValue> values = new List<IBMAssistantV1Models.CreateValue> { valuesItem } ;
 
     IBMAssistantV1Models.CreateEntityOptions options = new IBMAssistantV1Models.CreateEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
+      .description(description)
+      .metadata(metadata)
+      .fuzzyMatch(fuzzyMatch)
+      .values(values)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5416,11 +5652,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testGetEntity() {
-    String body = IBMWatsonMockResponses.assistantV1Entity();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Entity();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5428,10 +5664,14 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String entity = 'entity';
+    Boolean xExport = true;
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.GetEntityOptions options = new IBMAssistantV1Models.GetEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
+      .xExport(xExport)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5485,11 +5725,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateEntity() {
-    String body = IBMWatsonMockResponses.assistantV1Entity();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Entity();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5497,11 +5737,25 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String entity = 'entity';
+    String newEntity = 'new_entity';
+    String newDescription = 'new_description';
+    IBMWatsonMapModel newMetadata = new IBMWatsonMapModel();
+    newMetadata.put('newMetadata_key', 'new_metadata');
+    Boolean newFuzzyMatch = true;
     String value = 'value';
+    IBMAssistantV1Models.CreateValue newValuesItem = new IBMAssistantV1Models.CreateValueBuilder()
+      .value(value)
+      .build();
+    List<IBMAssistantV1Models.CreateValue> newValues = new List<IBMAssistantV1Models.CreateValue> { newValuesItem } ;
 
     IBMAssistantV1Models.UpdateEntityOptions options = new IBMAssistantV1Models.UpdateEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
+      .newEntity(newEntity)
+      .newDescription(newDescription)
+      .newMetadata(newMetadata)
+      .newFuzzyMatch(newFuzzyMatch)
+      .newValues(newValues)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5555,11 +5809,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteEntity() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5579,11 +5833,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListMentions() {
-    String body = IBMWatsonMockResponses.assistantV1EntityMentionCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1EntityMentionCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5591,10 +5845,14 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String entity = 'entity';
+    Boolean xExport = true;
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListMentionsOptions options = new IBMAssistantV1Models.ListMentionsOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
+      .xExport(xExport)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5640,11 +5898,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListValues() {
-    String body = IBMWatsonMockResponses.assistantV1ValueCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1ValueCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5652,10 +5910,20 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String entity = 'entity';
+    Boolean xExport = true;
+    Long pageLimit = 10L;
+    String xSort = 'x_sort';
+    String cursor = 'cursor';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListValuesOptions options = new IBMAssistantV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
+      .xExport(xExport)
+      .pageLimit(pageLimit)
+      .xSort(xSort)
+      .cursor(cursor)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5713,11 +5981,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateValue() {
-    String body = IBMWatsonMockResponses.assistantV1Value();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Value();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5726,11 +5994,20 @@ private class IBMAssistantV1Test {
     String workspaceId = 'workspace_id';
     String entity = 'entity';
     String value = 'value';
+    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
+    metadata.put('metadata_key', 'metadata');
+    String xType = 'x_type';
+    List<String> synonyms = new List<String> { 'synonyms' } ;
+    List<String> patterns = new List<String> { 'patterns' } ;
 
     IBMAssistantV1Models.CreateValueOptions options = new IBMAssistantV1Models.CreateValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
       .value(value)
+      .metadata(metadata)
+      .xType(xType)
+      .synonyms(synonyms)
+      .patterns(patterns)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5764,11 +6041,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testGetValue() {
-    String body = IBMWatsonMockResponses.assistantV1Value();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Value();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5777,11 +6054,15 @@ private class IBMAssistantV1Test {
     String workspaceId = 'workspace_id';
     String entity = 'entity';
     String value = 'value';
+    Boolean xExport = true;
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.GetValueOptions options = new IBMAssistantV1Models.GetValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
       .value(value)
+      .xExport(xExport)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5815,11 +6096,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateValue() {
-    String body = IBMWatsonMockResponses.assistantV1Value();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Value();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5828,11 +6109,22 @@ private class IBMAssistantV1Test {
     String workspaceId = 'workspace_id';
     String entity = 'entity';
     String value = 'value';
+    String newValue = 'new_value';
+    IBMWatsonMapModel newMetadata = new IBMWatsonMapModel();
+    newMetadata.put('newMetadata_key', 'new_metadata');
+    String newType = 'new_type';
+    List<String> newSynonyms = new List<String> { 'new_synonyms' } ;
+    List<String> newPatterns = new List<String> { 'new_patterns' } ;
 
     IBMAssistantV1Models.UpdateValueOptions options = new IBMAssistantV1Models.UpdateValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
       .value(value)
+      .newValue(newValue)
+      .newMetadata(newMetadata)
+      .newType(newType)
+      .newSynonyms(newSynonyms)
+      .newPatterns(newPatterns)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5866,11 +6158,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteValue() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5892,11 +6184,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListSynonyms() {
-    String body = IBMWatsonMockResponses.assistantV1SynonymCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1SynonymCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5905,11 +6197,19 @@ private class IBMAssistantV1Test {
     String workspaceId = 'workspace_id';
     String entity = 'entity';
     String value = 'value';
+    Long pageLimit = 10L;
+    String xSort = 'x_sort';
+    String cursor = 'cursor';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListSynonymsOptions options = new IBMAssistantV1Models.ListSynonymsOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
       .value(value)
+      .pageLimit(pageLimit)
+      .xSort(xSort)
+      .cursor(cursor)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -5955,11 +6255,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateSynonym() {
-    String body = IBMWatsonMockResponses.assistantV1Synonym();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Synonym();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -5996,11 +6296,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testGetSynonym() {
-    String body = IBMWatsonMockResponses.assistantV1Synonym();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Synonym();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6010,12 +6310,14 @@ private class IBMAssistantV1Test {
     String entity = 'entity';
     String value = 'value';
     String synonym = 'synonym';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.GetSynonymOptions options = new IBMAssistantV1Models.GetSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
       .value(value)
       .synonym(synonym)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6037,11 +6339,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateSynonym() {
-    String body = IBMWatsonMockResponses.assistantV1Synonym();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1Synonym();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6051,12 +6353,14 @@ private class IBMAssistantV1Test {
     String entity = 'entity';
     String value = 'value';
     String synonym = 'synonym';
+    String newSynonym = 'new_synonym';
 
     IBMAssistantV1Models.UpdateSynonymOptions options = new IBMAssistantV1Models.UpdateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entity)
       .value(value)
       .synonym(synonym)
+      .newSynonym(newSynonym)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6078,11 +6382,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteSynonym() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6106,20 +6410,28 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListDialogNodes() {
-    String body = IBMWatsonMockResponses.assistantV1DialogNodeCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1DialogNodeCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String workspaceId = 'workspace_id';
+    Long pageLimit = 10L;
+    String xSort = 'x_sort';
+    String cursor = 'cursor';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.ListDialogNodesOptions options = new IBMAssistantV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
+      .pageLimit(pageLimit)
+      .xSort(xSort)
+      .cursor(cursor)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6349,11 +6661,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testCreateDialogNode() {
-    String body = IBMWatsonMockResponses.assistantV1DialogNode();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1DialogNode();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6361,13 +6673,56 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String dialogNode = 'dialog_node';
+    String description = 'description';
+    String conditions = 'conditions';
+    String parent = 'parent';
+    String previousSibling = 'previous_sibling';
+    IBMAssistantV1Models.DialogNodeOutput output = new IBMAssistantV1Models.DialogNodeOutputBuilder()
+      .build();
+    IBMWatsonMapModel context = new IBMWatsonMapModel();
+    context.put('context_key', 'context');
+    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
+    metadata.put('metadata_key', 'metadata');
     String behavior = 'behavior';
+    IBMAssistantV1Models.DialogNodeNextStep nextStep = new IBMAssistantV1Models.DialogNodeNextStepBuilder()
+      .behavior(behavior)
+      .build();
+    String title = 'title';
+    String xType = 'x_type';
+    String eventName = 'event_name';
+    String variable = 'variable';
     String name = 'name';
     String resultVariable = 'result_variable';
+    IBMAssistantV1Models.DialogNodeAction actionsItem = new IBMAssistantV1Models.DialogNodeActionBuilder()
+      .name(name)
+      .resultVariable(resultVariable)
+      .build();
+    List<IBMAssistantV1Models.DialogNodeAction> actions = new List<IBMAssistantV1Models.DialogNodeAction> { actionsItem } ;
+    String digressIn = 'digress_in';
+    String digressOut = 'digress_out';
+    String digressOutSlots = 'digress_out_slots';
+    String userLabel = 'user_label';
 
     IBMAssistantV1Models.CreateDialogNodeOptions options = new IBMAssistantV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNode)
+      .description(description)
+      .conditions(conditions)
+      .parent(parent)
+      .previousSibling(previousSibling)
+      .output(output)
+      .context(context)
+      .metadata(metadata)
+      .nextStep(nextStep)
+      .title(title)
+      .xType(xType)
+      .eventName(eventName)
+      .variable(variable)
+      .actions(actions)
+      .digressIn(digressIn)
+      .digressOut(digressOut)
+      .digressOutSlots(digressOutSlots)
+      .userLabel(userLabel)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6573,11 +6928,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testGetDialogNode() {
-    String body = IBMWatsonMockResponses.assistantV1DialogNode();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1DialogNode();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6585,10 +6940,12 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String dialogNode = 'dialog_node';
+    Boolean includeAudit = true;
 
     IBMAssistantV1Models.GetDialogNodeOptions options = new IBMAssistantV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNode)
+      .includeAudit(includeAudit)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -6794,11 +7151,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testUpdateDialogNode() {
-    String body = IBMWatsonMockResponses.assistantV1DialogNode();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1DialogNode();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -6806,13 +7163,58 @@ private class IBMAssistantV1Test {
 
     String workspaceId = 'workspace_id';
     String dialogNode = 'dialog_node';
+    String newDialogNode = 'new_dialog_node';
+    String newDescription = 'new_description';
+    String newConditions = 'new_conditions';
+    String newParent = 'new_parent';
+    String newPreviousSibling = 'new_previous_sibling';
+    IBMAssistantV1Models.DialogNodeOutput newOutput = new IBMAssistantV1Models.DialogNodeOutputBuilder()
+      .build();
+    IBMWatsonMapModel newContext = new IBMWatsonMapModel();
+    newContext.put('newContext_key', 'new_context');
+    IBMWatsonMapModel newMetadata = new IBMWatsonMapModel();
+    newMetadata.put('newMetadata_key', 'new_metadata');
     String behavior = 'behavior';
+    IBMAssistantV1Models.DialogNodeNextStep newNextStep = new IBMAssistantV1Models.DialogNodeNextStepBuilder()
+      .behavior(behavior)
+      .build();
+    String newTitle = 'new_title';
+    String newType = 'new_type';
+    String newEventName = 'new_event_name';
+    String newVariable = 'new_variable';
     String name = 'name';
     String resultVariable = 'result_variable';
+    IBMAssistantV1Models.DialogNodeAction newActionsItem = new IBMAssistantV1Models.DialogNodeActionBuilder()
+      .name(name)
+      .resultVariable(resultVariable)
+      .build();
+    List<IBMAssistantV1Models.DialogNodeAction> newActions = new List<IBMAssistantV1Models.DialogNodeAction> { newActionsItem } ;
+    String newDigressIn = 'new_digress_in';
+    String newDigressOut = 'new_digress_out';
+    String newDigressOutSlots = 'new_digress_out_slots';
+    String newUserLabel = 'new_user_label';
 
     IBMAssistantV1Models.UpdateDialogNodeOptions options = new IBMAssistantV1Models.UpdateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNode)
+      .newDialogNode(newDialogNode)
+      .newDescription(newDescription)
+      .newConditions(newConditions)
+      .newParent(newParent)
+      .newPreviousSibling(newPreviousSibling)
+      .newOutput(newOutput)
+      .newContext(newContext)
+      .newMetadata(newMetadata)
+      .newNextStep(newNextStep)
+      .newTitle(newTitle)
+      .newType(newType)
+      .newEventName(newEventName)
+      .newVariable(newVariable)
+      .newActions(newActions)
+      .newDigressIn(newDigressIn)
+      .newDigressOut(newDigressOut)
+      .newDigressOutSlots(newDigressOutSlots)
+      .newUserLabel(newUserLabel)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7018,11 +7420,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteDialogNode() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -7042,20 +7444,28 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListLogs() {
-    String body = IBMWatsonMockResponses.assistantV1LogCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1LogCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String workspaceId = 'workspace_id';
+    String xSort = 'x_sort';
+    String filter = 'filter';
+    Long pageLimit = 10L;
+    String cursor = 'cursor';
 
     IBMAssistantV1Models.ListLogsOptions options = new IBMAssistantV1Models.ListLogsOptionsBuilder()
       .workspaceId(workspaceId)
+      .xSort(xSort)
+      .filter(filter)
+      .pageLimit(pageLimit)
+      .cursor(cursor)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -7753,20 +8163,26 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testListAllLogs() {
-    String body = IBMWatsonMockResponses.assistantV1LogCollection();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV1LogCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String filter = 'filter';
+    String xSort = 'x_sort';
+    Long pageLimit = 10L;
+    String cursor = 'cursor';
 
     IBMAssistantV1Models.ListAllLogsOptions options = new IBMAssistantV1Models.ListAllLogsOptionsBuilder()
       .filter(filter)
+      .xSort(xSort)
+      .pageLimit(pageLimit)
+      .cursor(cursor)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -8464,11 +8880,11 @@ private class IBMAssistantV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteUserData() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);

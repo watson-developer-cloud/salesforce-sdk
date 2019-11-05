@@ -71,6 +71,13 @@ private class IBMLanguageTranslatorV3Test {
     String target = 'target';
     Datetime created = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
     IBMLanguageTranslatorV3Models.DocumentStatus documentsItem = new IBMLanguageTranslatorV3Models.DocumentStatus();
+    documentsItem.setDocumentId(documentId);
+    documentsItem.setFilename(filename);
+    documentsItem.setStatus(status);
+    documentsItem.setModelId(modelId);
+    documentsItem.setSource(source);
+    documentsItem.setTarget(target);
+    documentsItem.setCreated(created);
     List<IBMLanguageTranslatorV3Models.DocumentStatus> documents = new List<IBMLanguageTranslatorV3Models.DocumentStatus> { documentsItem } ;
 
     IBMLanguageTranslatorV3Models.DocumentList testRequestModel = new IBMLanguageTranslatorV3Models.DocumentList();
@@ -176,6 +183,8 @@ private class IBMLanguageTranslatorV3Test {
     String language = 'language';
     String name = 'name';
     IBMLanguageTranslatorV3Models.IdentifiableLanguage languagesItem = new IBMLanguageTranslatorV3Models.IdentifiableLanguage();
+    languagesItem.setLanguage(language);
+    languagesItem.setName(name);
     List<IBMLanguageTranslatorV3Models.IdentifiableLanguage> languages = new List<IBMLanguageTranslatorV3Models.IdentifiableLanguage> { languagesItem } ;
 
     IBMLanguageTranslatorV3Models.IdentifiableLanguages testRequestModel = new IBMLanguageTranslatorV3Models.IdentifiableLanguages();
@@ -202,6 +211,8 @@ private class IBMLanguageTranslatorV3Test {
     String language = 'language';
     Double confidence = 0.5;
     IBMLanguageTranslatorV3Models.IdentifiedLanguage languagesItem = new IBMLanguageTranslatorV3Models.IdentifiedLanguage();
+    languagesItem.setLanguage(language);
+    languagesItem.setConfidence(confidence);
     List<IBMLanguageTranslatorV3Models.IdentifiedLanguage> languages = new List<IBMLanguageTranslatorV3Models.IdentifiedLanguage> { languagesItem } ;
 
     IBMLanguageTranslatorV3Models.IdentifiedLanguages testRequestModel = new IBMLanguageTranslatorV3Models.IdentifiedLanguages();
@@ -215,11 +226,9 @@ private class IBMLanguageTranslatorV3Test {
     String text = 'text';
 
     IBMLanguageTranslatorV3Models.IdentifyOptions testRequestModel = new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
-      .text(text)
       .build();
     testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(text, testRequestModel.text());
     Test.stopTest();
   }
   static testMethod void testListDocumentsOptionsModel() {
@@ -365,6 +374,7 @@ private class IBMLanguageTranslatorV3Test {
     Test.startTest();
     String modelId = 'model_id';
     IBMLanguageTranslatorV3Models.TranslationModel modelsItem = new IBMLanguageTranslatorV3Models.TranslationModel();
+    modelsItem.setModelId(modelId);
     List<IBMLanguageTranslatorV3Models.TranslationModel> models = new List<IBMLanguageTranslatorV3Models.TranslationModel> { modelsItem } ;
 
     IBMLanguageTranslatorV3Models.TranslationModels testRequestModel = new IBMLanguageTranslatorV3Models.TranslationModels();
@@ -379,6 +389,7 @@ private class IBMLanguageTranslatorV3Test {
     Long characterCount = 10L;
     String translation = 'translation';
     IBMLanguageTranslatorV3Models.Translation translationsItem = new IBMLanguageTranslatorV3Models.Translation();
+    translationsItem.setTranslation(translation);
     List<IBMLanguageTranslatorV3Models.Translation> translations = new List<IBMLanguageTranslatorV3Models.Translation> { translationsItem } ;
 
     IBMLanguageTranslatorV3Models.TranslationResult testRequestModel = new IBMLanguageTranslatorV3Models.TranslationResult();
@@ -394,20 +405,26 @@ private class IBMLanguageTranslatorV3Test {
 
 
   static testMethod void testTranslate() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3TranslationResult();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3TranslationResult();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     List<String> text = new List<String> { 'text' } ;
+    String modelId = 'model_id';
+    String source = 'source';
+    String target = 'target';
 
     IBMLanguageTranslatorV3Models.TranslateOptions options = new IBMLanguageTranslatorV3Models.TranslateOptionsBuilder()
       .text(text)
+      .modelId(modelId)
+      .source(source)
+      .target(target)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -429,11 +446,11 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testListIdentifiableLanguages() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3IdentifiableLanguages();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3IdentifiableLanguages();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -458,11 +475,11 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testIdentify() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3IdentifiedLanguages();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3IdentifiedLanguages();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -471,7 +488,6 @@ private class IBMLanguageTranslatorV3Test {
     String text = 'text';
 
     IBMLanguageTranslatorV3Models.IdentifyOptions options = new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
-      .text(text)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -489,18 +505,24 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testListModels() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3TranslationModels();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3TranslationModels();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
+    String source = 'source';
+    String target = 'target';
+    Boolean xDefault = true;
 
     IBMLanguageTranslatorV3Models.ListModelsOptions options = new IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder()
+      .source(source)
+      .target(target)
+      .xDefault(xDefault)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -550,20 +572,36 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testCreateModel() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3TranslationModel();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3TranslationModel();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String baseModelId = 'base_model_id';
+    IBMWatsonFile forcedGlossary = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/octet-stream')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+    IBMWatsonFile parallelCorpus = new IBMWatsonFile.FileBuilder()
+      .name('test_file')
+      .description('File for unit testing')
+      .contentType('application/octet-stream')
+      .body(Blob.valueOf('Test file contents string'))
+      .build();
+    String name = 'name';
 
     IBMLanguageTranslatorV3Models.CreateModelOptions options = new IBMLanguageTranslatorV3Models.CreateModelOptionsBuilder()
       .baseModelId(baseModelId)
+      .forcedGlossary(forcedGlossary)
+      .parallelCorpus(parallelCorpus)
+      .name(name)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -613,11 +651,11 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testDeleteModel() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -635,11 +673,11 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testGetModel() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3TranslationModel();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3TranslationModel();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -698,11 +736,11 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testListDocuments() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3DocumentList();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3DocumentList();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -763,11 +801,11 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testTranslateDocument() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3DocumentStatus();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3DocumentStatus();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -780,10 +818,20 @@ private class IBMLanguageTranslatorV3Test {
       .body(Blob.valueOf('Test file contents string'))
       .build();
     String filename = 'filename';
+    String fileContentType = 'file_content_type';
+    String modelId = 'model_id';
+    String source = 'source';
+    String target = 'target';
+    String documentId = 'document_id';
 
     IBMLanguageTranslatorV3Models.TranslateDocumentOptions options = new IBMLanguageTranslatorV3Models.TranslateDocumentOptionsBuilder()
       .file(file)
       .filename(filename)
+      .fileContentType(fileContentType)
+      .modelId(modelId)
+      .source(source)
+      .target(target)
+      .documentId(documentId)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -837,11 +885,11 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testGetDocumentStatus() {
-    String body = IBMWatsonMockResponses.languageTranslatorV3DocumentStatus();
+    String mockResponseBody = IBMWatsonMockResponses.languageTranslatorV3DocumentStatus();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -904,11 +952,11 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testDeleteDocument() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -926,20 +974,22 @@ private class IBMLanguageTranslatorV3Test {
     Test.stopTest();
   }
   static testMethod void testGetTranslatedDocument() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
     String documentId = 'document_id';
+    String accept = 'accept';
 
     IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptions options = new IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptionsBuilder()
       .documentId(documentId)
+      .accept(accept)
       .addHeader('Test-Header', 'test_value')
       .build();
 

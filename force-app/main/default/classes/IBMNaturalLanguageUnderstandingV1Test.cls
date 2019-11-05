@@ -899,11 +899,11 @@ private class IBMNaturalLanguageUnderstandingV1Test {
 
 
   static testMethod void testAnalyze() {
-    String body = IBMWatsonMockResponses.naturalLanguageUnderstandingV1AnalysisResults();
+    String mockResponseBody = IBMWatsonMockResponses.naturalLanguageUnderstandingV1AnalysisResults();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -911,9 +911,27 @@ private class IBMNaturalLanguageUnderstandingV1Test {
 
     IBMNaturalLanguageUnderstandingV1Models.Features features = new IBMNaturalLanguageUnderstandingV1Models.FeaturesBuilder()
       .build();
+    String text = 'text';
+    String html = 'html';
+    String url = 'url';
+    Boolean clean = true;
+    String xpath = 'xpath';
+    Boolean fallbackToRaw = true;
+    Boolean returnAnalyzedText = true;
+    String language = 'language';
+    Long limitTextCharacters = 10L;
 
     IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions options = new IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptionsBuilder()
       .features(features)
+      .text(text)
+      .html(html)
+      .url(url)
+      .clean(clean)
+      .xpath(xpath)
+      .fallbackToRaw(fallbackToRaw)
+      .returnAnalyzedText(returnAnalyzedText)
+      .language(language)
+      .limitTextCharacters(limitTextCharacters)
       .addHeader('Test-Header', 'test_value')
       .build();
 
@@ -1251,11 +1269,11 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     Test.stopTest();
   }
   static testMethod void testListModels() {
-    String body = IBMWatsonMockResponses.naturalLanguageUnderstandingV1ListModelsResults();
+    String mockResponseBody = IBMWatsonMockResponses.naturalLanguageUnderstandingV1ListModelsResults();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -1304,11 +1322,11 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     Test.stopTest();
   }
   static testMethod void testDeleteModel() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);

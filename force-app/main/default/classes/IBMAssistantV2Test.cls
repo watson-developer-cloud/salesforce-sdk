@@ -334,6 +334,8 @@ private class IBMAssistantV2Test {
     String name = 'name';
     String resultVariable = 'result_variable';
     IBMAssistantV2Models.DialogNodeAction actionsItem = new IBMAssistantV2Models.DialogNodeAction();
+    actionsItem.setName(name);
+    actionsItem.setResultVariable(resultVariable);
     List<IBMAssistantV2Models.DialogNodeAction> actions = new List<IBMAssistantV2Models.DialogNodeAction> { actionsItem } ;
     IBMAssistantV2Models.MessageOutputDebug debug = new IBMAssistantV2Models.MessageOutputDebug();
     IBMWatsonMapModel userDefined = new IBMWatsonMapModel();
@@ -362,6 +364,8 @@ private class IBMAssistantV2Test {
     String level = 'level';
     String message = 'message';
     IBMAssistantV2Models.DialogLogMessage logMessagesItem = new IBMAssistantV2Models.DialogLogMessage();
+    logMessagesItem.setLevel(level);
+    logMessagesItem.setMessage(message);
     List<IBMAssistantV2Models.DialogLogMessage> logMessages = new List<IBMAssistantV2Models.DialogLogMessage> { logMessagesItem } ;
     Boolean branchExited = true;
     String branchExitedReason = 'branch_exited_reason';
@@ -452,15 +456,21 @@ private class IBMAssistantV2Test {
     String label = 'label';
     IBMAssistantV2Models.DialogNodeOutputOptionsElementValue value = new IBMAssistantV2Models.DialogNodeOutputOptionsElementValue();
     IBMAssistantV2Models.DialogNodeOutputOptionsElement optionsItem = new IBMAssistantV2Models.DialogNodeOutputOptionsElement();
+    optionsItem.setLabel(label);
+    optionsItem.setValue(value);
     List<IBMAssistantV2Models.DialogNodeOutputOptionsElement> options = new List<IBMAssistantV2Models.DialogNodeOutputOptionsElement> { optionsItem } ;
     String messageToHumanAgent = 'message_to_human_agent';
     IBMAssistantV2Models.DialogSuggestionValue dialogSuggestionValue = new IBMAssistantV2Models.DialogSuggestionValue();
     IBMAssistantV2Models.DialogSuggestion suggestionsItem = new IBMAssistantV2Models.DialogSuggestion();
+    suggestionsItem.setLabel(label);
+    suggestionsItem.setValue(dialogSuggestionValue);
     List<IBMAssistantV2Models.DialogSuggestion> suggestions = new List<IBMAssistantV2Models.DialogSuggestion> { suggestionsItem } ;
     String header = 'header';
     String id = 'id';
     IBMAssistantV2Models.SearchResultMetadata resultMetadata = new IBMAssistantV2Models.SearchResultMetadata();
     IBMAssistantV2Models.SearchResult resultsItem = new IBMAssistantV2Models.SearchResult();
+    resultsItem.setId(id);
+    resultsItem.setResultMetadata(resultMetadata);
     List<IBMAssistantV2Models.SearchResult> results = new List<IBMAssistantV2Models.SearchResult> { resultsItem } ;
 
     IBMAssistantV2Models.RuntimeResponseGeneric testRequestModel = new IBMAssistantV2Models.RuntimeResponseGenericBuilder()
@@ -562,11 +572,11 @@ private class IBMAssistantV2Test {
 
 
   static testMethod void testCreateSession() {
-    String body = IBMWatsonMockResponses.assistantV2SessionResponse();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV2SessionResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -589,11 +599,11 @@ private class IBMAssistantV2Test {
     Test.stopTest();
   }
   static testMethod void testDeleteSession() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -613,11 +623,11 @@ private class IBMAssistantV2Test {
     Test.stopTest();
   }
   static testMethod void testMessage() {
-    String body = IBMWatsonMockResponses.assistantV2MessageResponse();
+    String mockResponseBody = IBMWatsonMockResponses.assistantV2MessageResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
+      mockResponseBody,
       null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -625,10 +635,16 @@ private class IBMAssistantV2Test {
 
     String assistantId = 'assistant_id';
     String sessionId = 'session_id';
+    IBMAssistantV2Models.MessageInput input = new IBMAssistantV2Models.MessageInputBuilder()
+      .build();
+    IBMAssistantV2Models.MessageContext context = new IBMAssistantV2Models.MessageContextBuilder()
+      .build();
 
     IBMAssistantV2Models.MessageOptions options = new IBMAssistantV2Models.MessageOptionsBuilder()
       .assistantId(assistantId)
       .sessionId(sessionId)
+      .input(input)
+      .context(context)
       .addHeader('Test-Header', 'test_value')
       .build();
 
