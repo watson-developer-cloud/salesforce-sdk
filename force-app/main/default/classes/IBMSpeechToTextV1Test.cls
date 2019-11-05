@@ -1324,8 +1324,10 @@ private class IBMSpeechToTextV1Test {
     Test.startTest();
     String transcript = 'transcript';
     Double confidence = 0.5;
-    List<String> timestamps = new List<String> { 'timestamps' } ;
-    List<String> wordConfidence = new List<String> { 'word_confidence' } ;
+    List<String> timestampsItem = new List<String> { 'timestamps' };
+    List<List<String>> timestamps = new List<List<String>> { timestampsItem } ;
+    List<String> wordConfidenceItem = new List<String> { 'word_confidence' };
+    List<List<String>> wordConfidence = new List<List<String>> { wordConfidenceItem } ;
 
     IBMSpeechToTextV1Models.SpeechRecognitionAlternative testRequestModel = new IBMSpeechToTextV1Models.SpeechRecognitionAlternative();
     testRequestModel.setTranscript(transcript);
@@ -1346,9 +1348,19 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.SpeechRecognitionAlternative alternativesItem = new IBMSpeechToTextV1Models.SpeechRecognitionAlternative();
     alternativesItem.setTranscript(transcript);
     List<IBMSpeechToTextV1Models.SpeechRecognitionAlternative> alternatives = new List<IBMSpeechToTextV1Models.SpeechRecognitionAlternative> { alternativesItem } ;
+    String normalizedText = 'normalized_text';
     Double startTime = 0.5;
     Double endTime = 0.5;
     Double confidence = 0.5;
+    IBMSpeechToTextV1Models.KeywordResult keywordResultItem = new IBMSpeechToTextV1Models.KeywordResult();
+    keywordResultItem.setNormalizedText(normalizedText);
+    keywordResultItem.setStartTime(startTime);
+    keywordResultItem.setEndTime(endTime);
+    keywordResultItem.setConfidence(confidence);
+    List<IBMSpeechToTextV1Models.KeywordResult> keywordResult = new List<IBMSpeechToTextV1Models.KeywordResult> { keywordResultItem };
+    Map<String, List<IBMSpeechToTextV1Models.KeywordResult>> keywordsResult = new Map<String, List<IBMSpeechToTextV1Models.KeywordResult>> {
+      'keyword' => keywordResult
+    };
     String word = 'word';
     IBMSpeechToTextV1Models.WordAlternativeResult wordAlternativeResultItem = new IBMSpeechToTextV1Models.WordAlternativeResult();
     wordAlternativeResultItem.setConfidence(confidence);
@@ -1855,11 +1867,11 @@ private class IBMSpeechToTextV1Test {
     );
     System.assertEquals(
       'timestamps',
-      response.getResults().get(0).getAlternatives().get(0).getTimestamps().get(0)
+      response.getResults().get(0).getAlternatives().get(0).getTimestamps().get(0).get(0)
     );
     System.assertEquals(
       'word_confidence',
-      response.getResults().get(0).getAlternatives().get(0).getWordConfidence().get(0)
+      response.getResults().get(0).getAlternatives().get(0).getWordConfidence().get(0).get(0)
     );
     System.assertEquals(
       0.5,
