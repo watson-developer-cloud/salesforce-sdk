@@ -4301,7 +4301,95 @@ public class IBMWatsonMockResponses {
   }
 
 
+  // --- Personality Insights v3 ---
 
+  public static testMethod String personalityInsightsV3Profile() {
+    return '{' +
+      '"processed_language": "processed_language", ' +
+      '"word_count": 10, ' +
+      '"word_count_message": "word_count_message", ' +
+      '"personality": [' +
+        '{' +
+          '"trait_id": "trait_id", ' +
+          '"name": "name", ' +
+          '"category": "category", ' +
+          '"percentile": 0.5, ' +
+          '"raw_score": 0.5, ' +
+          '"significant": true, ' +
+          '"children": [' +
+            '{' +
+              '"trait_id": "trait_id", ' +
+              '"name": "name", ' +
+              '"category": "category", ' +
+              '"percentile": 0.5, ' +
+              '"raw_score": 0.5, ' +
+              '"significant": true ' +
+            '}' +
+          ']' +
+        '}' +
+      '], ' +
+      '"values": [' +
+        '{' +
+          '"trait_id": "trait_id", ' +
+          '"name": "name", ' +
+          '"category": "category", ' +
+          '"percentile": 0.5, ' +
+          '"raw_score": 0.5, ' +
+          '"significant": true, ' +
+          '"children": [' +
+            '{' +
+              '"trait_id": "trait_id", ' +
+              '"name": "name", ' +
+              '"category": "category", ' +
+              '"percentile": 0.5, ' +
+              '"raw_score": 0.5, ' +
+              '"significant": true ' +
+            '}' +
+          ']' +
+        '}' +
+      '], ' +
+      '"needs": [' +
+        '{' +
+          '"trait_id": "trait_id", ' +
+          '"name": "name", ' +
+          '"category": "category", ' +
+          '"percentile": 0.5, ' +
+          '"raw_score": 0.5, ' +
+          '"significant": true, ' +
+          '"children": [' +
+            '{' +
+              '"trait_id": "trait_id", ' +
+              '"name": "name", ' +
+              '"category": "category", ' +
+              '"percentile": 0.5, ' +
+              '"raw_score": 0.5, ' +
+              '"significant": true ' +
+            '}' +
+          ']' +
+        '}' +
+      '], ' +
+      '"behavior": [' +
+        '{' +
+          '"trait_id": "trait_id", ' +
+          '"name": "name", ' +
+          '"category": "category", ' +
+          '"percentage": 0.5 ' +
+        '}' +
+      '], ' +
+      '"consumption_preferences": [' +
+        '{' +
+          '"consumption_preference_category_id": "consumption_preference_category_id", ' +
+          '"name": "name"' +
+        '}' +
+      '], ' +
+      '"warnings": [' +
+        '{' +
+          '"warning_id": "warning_id", ' +
+          '"message": "message"' +
+        '}' +
+      ']' +
+    '}';
+  }
 
   public static testMethod String collectionTrained() {
     return  '{' +
