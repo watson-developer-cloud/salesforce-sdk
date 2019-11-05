@@ -4391,124 +4391,140 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
-  public static testMethod String collectionTrained() {
-    return  '{' +
-            '  "collection_id": "800e58e4-198d-45eb-be87-74e1d6df4e96", ' +
-            '  "name": "test-collection", ' +
-            '  "configuration_id": "3c4fff84-1500-455c-b125-eaa2d319f6d3", ' +
-            '  "language": "de", ' +
-            '  "status": "active", ' +
-            '  "description": "A trained test collection to show as an example", ' +
-            '  "created": "2017-07-14T12:55:40.652Z", ' +
-            '  "updated": "2017-07-14T12:55:40.652Z", ' +
-            '  "document_counts": {' +
-            '    "available": 0, ' +
-            '    "processing": 0, ' +
-            '    "failed": 0,' +
-            '    "pending": 100' +
-            '  }, ' +
-            '  "disk_usage": {' +
-            '    "used_bytes": 260' +
-            '  }, ' +
-            '  "training_status": {' +
-            '    "data_updated": "2017-07-14T12:55:40.652Z", ' +
-            '    "total_examples": 10, ' +
-            '    "sufficient_label_diversity": true, ' +
-            '    "processing": false, ' +
-            '    "minimum_examples_added": true, ' +
-            '    "successfully_trained": "2017-07-14T12:55:40.652Z", ' +
-            '    "available": true, ' +
-            '    "notices": 0, ' +
-            '    "minimum_queries_added": true' +
-            '  }' +
-            '}';
+
+  // --- Text to Speech v1 ---
+
+  public static testMethod String textToSpeechV1Voices() {
+    return '{' +
+      '"voices": [' +
+        '{' +
+          '"url": "url", ' +
+          '"gender": "gender", ' +
+          '"name": "name", ' +
+          '"language": "language", ' +
+          '"description": "description", ' +
+          '"customizable": true, ' +
+          '"supported_features": {' +
+            '"custom_pronunciation": true, ' +
+            '"voice_transformation": true' +
+          '}, ' +
+          '"customization": {' +
+            '"customization_id": "customization_id", ' +
+            '"name": "name", ' +
+            '"language": "language", ' +
+            '"owner": "owner", ' +
+            '"created": "created", ' +
+            '"last_modified": "last_modified", ' +
+            '"description": "description", ' +
+            '"words": [' +
+              '{' +
+                '"word": "word", ' +
+                '"translation": "translation", ' +
+                '"part_of_speech": "part_of_speech"' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
   }
-  
-   public static testMethod String listModelsResults() {
-    return  '{' +
-            '  "models": [' +
-            '    {' +
-            '      "status": "string", ' +
-            '      "model_id": "string", ' +
-            '      "language": "string", ' +
-            '      "description": "string"' +
-            '    }' +
-            '  ]' +
-            '}';
+
+  public static testMethod String textToSpeechV1Voice() {
+    return '{' +
+      '"url": "url", ' +
+      '"gender": "gender", ' +
+      '"name": "name", ' +
+      '"language": "language", ' +
+      '"description": "description", ' +
+      '"customizable": true, ' +
+      '"supported_features": {' +
+        '"custom_pronunciation": true, ' +
+        '"voice_transformation": true' +
+      '}, ' +
+      '"customization": {' +
+        '"customization_id": "customization_id", ' +
+        '"name": "name", ' +
+        '"language": "language", ' +
+        '"owner": "owner", ' +
+        '"created": "created", ' +
+        '"last_modified": "last_modified", ' +
+        '"description": "description", ' +
+        '"words": [' +
+          '{' +
+            '"word": "word", ' +
+            '"translation": "translation", ' +
+            '"part_of_speech": "part_of_speech"' +
+          '}' +
+        ']' +
+      '}' +
+    '}';
   }
-  
-  public static testMethod String profile() {
-    return  '{' +
-            '  "processed_language": "ar", ' +
-            '  "word_count": 0, ' +
-            '  "word_count_message": "string", ' +
-            '  "personality": [' +
-            '    {' +
-            '      "trait_id": "string", ' +
-            '      "name": "string", ' +
-            '      "category": "personality", ' +
-            '      "percentile": 0, ' +
-            '      "raw_score": 0, ' +
-            '      "significant": true, ' +
-            '      "children": [' +
-            '        {}' +
-            '      ]' +
-            '    }' +
-            '  ], ' +
-            '  "values": [' +
-            '    {' +
-            '      "trait_id": "string", ' +
-            '      "name": "string", ' +
-            '      "category": "personality", ' +
-            '      "percentile": 0, ' +
-            '      "raw_score": 0, ' +
-            '      "significant": true, ' +
-            '      "children": [' +
-            '        {}' +
-            '      ]' +
-            '    }' +
-            '  ], ' +
-            '  "needs": [' +
-            '    {' +
-            '      "trait_id": "string", ' +
-            '      "name": "string", ' +
-            '      "category": "personality", ' +
-            '      "percentile": 0, ' +
-            '      "raw_score": 0, ' +
-            '      "significant": true, ' +
-            '      "children": [' +
-            '        {}' +
-            '      ]' +
-            '    }' +
-            '  ], ' +
-            '  "behavior": [' +
-            '    {' +
-            '      "trait_id": "string", ' +
-            '      "name": "string", ' +
-            '      "category": "string", ' +
-            '      "percentage": 0' +
-            '    }' +
-            '  ], ' +
-            '  "consumption_preferences": [' +
-            '    {' +
-            '      "consumption_preference_category_id": "string", ' +
-            '      "name": "string", ' +
-            '      "consumption_preferences": [' +
-            '        {' +
-            '          "consumption_preference_id": "string", ' +
-            '          "name": "string", ' +
-            '          "score": "0.0"' +
-            '        }' +
-            '      ]' +
-            '    }' +
-            '  ], ' +
-            '  "warnings": [' +
-            '    {' +
-            '      "warning_id": "WORD_COUNT_MESSAGE", ' +
-            '      "message": "string"' +
-            '    }' +
-            '  ]' +
-            '}';
+
+  public static testMethod String textToSpeechV1Pronunciation() {
+    return '{' +
+      '"pronunciation": "pronunciation"' +
+    '}';
+  }
+
+  public static testMethod String textToSpeechV1VoiceModel() {
+    return '{' +
+      '"customization_id": "customization_id", ' +
+      '"name": "name", ' +
+      '"language": "language", ' +
+      '"owner": "owner", ' +
+      '"created": "created", ' +
+      '"last_modified": "last_modified", ' +
+      '"description": "description", ' +
+      '"words": [' +
+        '{' +
+          '"word": "word", ' +
+          '"translation": "translation", ' +
+          '"part_of_speech": "part_of_speech"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String textToSpeechV1VoiceModels() {
+    return '{' +
+      '"customizations": [' +
+        '{' +
+          '"customization_id": "customization_id", ' +
+          '"name": "name", ' +
+          '"language": "language", ' +
+          '"owner": "owner", ' +
+          '"created": "created", ' +
+          '"last_modified": "last_modified", ' +
+          '"description": "description", ' +
+          '"words": [' +
+            '{' +
+              '"word": "word", ' +
+              '"translation": "translation", ' +
+              '"part_of_speech": "part_of_speech"' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String textToSpeechV1Words() {
+    return '{' +
+      '"words": [' +
+        '{' +
+          '"word": "word", ' +
+          '"translation": "translation", ' +
+          '"part_of_speech": "part_of_speech"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String textToSpeechV1Translation() {
+    return '{' +
+      '"translation": "translation", ' +
+      '"part_of_speech": "part_of_speech"' +
+    '}';
   }
   public static testMethod String toneAnalysis() {
     return  '{' +
