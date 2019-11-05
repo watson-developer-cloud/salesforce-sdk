@@ -4392,6 +4392,575 @@ public class IBMWatsonMockResponses {
   }
 
 
+  // --- Speech to Text v1 ---
+
+  public static testMethod String speechToTextV1SpeechModels() {
+    return '{' +
+      '"models": [' +
+        '{' +
+          '"name": "name", ' +
+          '"language": "language", ' +
+          '"url": "url", ' +
+          '"rate": 10, ' +
+          '"supported_features": {' +
+            '"custom_language_model": true, ' +
+            '"speaker_labels": true' +
+          '}, ' +
+          '"description": "description"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1SpeechModel() {
+    return '{' +
+      '"name": "name", ' +
+      '"language": "language", ' +
+      '"url": "url", ' +
+      '"rate": 10, ' +
+      '"supported_features": {' +
+        '"custom_language_model": true, ' +
+        '"speaker_labels": true' +
+      '}, ' +
+      '"description": "description"' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1SpeechRecognitionResults() {
+    return ' {' +
+      '"results": [' +
+        '{' +
+          '"word_alternatives": [' +
+            '{' +
+              '"start_time": 0.5, ' +
+              '"alternatives": [' +
+                '{' +
+                  '"confidence": 0.5, ' +
+                  '"word": "word"' +
+                '}' +
+              '], ' +
+              '"end_time": 0.5' +
+            '}, ' +
+            '{' +
+              '"start_time": 5.33, ' +
+              '"alternatives": [' +
+                '{' +
+                  '"confidence": 0.9953, ' +
+                  '"word": "Sunday"' +
+                '}' +
+              '], ' +
+              '"end_time": 6.04' +
+            '}' +
+          '], ' +
+          '"keywords_result": {' +
+            '"keyword": [' +
+              '{' +
+                '"normalized_text": "normalized_text", ' +
+                '"start_time": 0.5, ' +
+                '"confidence": 0.5, ' +
+                '"end_time": 0.5' +
+              '}' +
+            ']' +
+          '}, ' +
+          '"alternatives": [' +
+            '{' +
+              '"timestamps": [' +
+                '[' +
+                  '"timestamps",' +
+                ']' +
+              '], ' +
+              '"word_confidence": [' +
+                '[' +
+                  '"word_confidence"' +
+                ']' +
+              ']' +
+              '"confidence": 0.5, ' +
+              '"transcript": "transcript"' +
+            '}' +
+          '], ' +
+          '"final": true' +
+        '}' +
+      '], ' +
+      '"result_index": 10,' +
+      '"audio_metrics": {' +
+        '"sampling_interval": 0.5,' +
+        '"accumulated": {' +
+          '"final": true,' +
+          '"end_time": 0.5,' +
+          '"speech_ratio": 0.5,' +
+          '"high_frequency_loss": 0.5,' +
+          '"signal_to_noise_ratio": 0.5,' +
+          '"direct_current_offset": [' +
+            '{' +
+              '"begin": 0.5,' +
+              '"end": 0.5,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"clipping_rate": [' +
+            '{' +
+              '"begin": 0.5,' +
+              '"end": 0.5,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"speech_level": [' +
+            '{' +
+              '"begin": 0.5,' +
+              '"end": 0.5,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"non_speech_level": [' +
+            '{' +
+              '"begin": 0.5,' +
+              '"end": 0.5,' +
+              '"count": 10' +
+            '}' +
+          ']' +
+        '}' +
+      '},' +
+      '"processing_metrics": {' +
+        '"processed_audio": {' +
+          '"received": 0.5,' +
+          '"seen_by_engine": 0.5,' +
+          '"transcription": 0.5,' +
+          '"speaker_labels": 0.5' +
+        '},' +
+        '"wall_clock_since_first_byte_received": 0.5,' +
+        '"periodic": true' +
+      '},' +
+      '"speaker_labels": [' +
+        '{' +
+          '"from": 0.5,' +
+          '"to": 0.5,' +
+          '"speaker": 10,' +
+          '"confidence": 0.5,' +
+          '"final": true,' +
+        '}' +
+      '],' +
+      '"warnings": [' +
+        '"warnings"' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1RegisterStatus() {
+    return '{' +
+      '"status": "status", ' +
+      '"url": "url"' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1RecognitionJob() {
+    return '{' +
+      '"id": "id", ' +
+      '"status": "status", ' +
+      '"created": "created", ' +
+      '"updated": "updated", ' +
+      '"url": "url", ' +
+      '"user_token": "user_token", ' +
+      '"results": [' +
+        '{' +
+          '"result_index": 10, ' +
+          '"speaker_labels": [' +
+            '{' +
+              '"from": 0.5, ' +
+              '"to": 0.5, ' +
+              '"speaker": 10, ' +
+              '"confidence": 0.5, ' +
+              '"final": true' +
+            '}' +
+          '], ' +
+          '"processing_metrics": {' +
+            '"processed_audio": {' +
+              '"received": 0.5,' +
+              '"seen_by_engine": 0.5,' +
+              '"transcription": 0.5,' +
+              '"speaker_labels": 0.5' +
+            '},' +
+            '"wall_clock_since_first_byte_received": 0.5,' +
+            '"periodic": true' +
+          '},' +
+          '"audio_metrics": {' +
+            '"sampling_interval": 0.5,' +
+            '"accumulated": {' +
+              '"final": true,' +
+              '"end_time": 0.5,' +
+              '"speech_ratio": 0.5,' +
+              '"high_frequency_loss": 0.5,' +
+              '"signal_to_noise_ratio": 0.5,' +
+              '"direct_current_offset": [' +
+                '{' +
+                  '"begin": 0.5,' +
+                  '"end": 0.5,' +
+                  '"count": 10' +
+                '}' +
+              '],' +
+              '"clipping_rate": [' +
+                '{' +
+                  '"begin": 0.5,' +
+                  '"end": 0.5,' +
+                  '"count": 10' +
+                '}' +
+              '],' +
+              '"speech_level": [' +
+                '{' +
+                  '"begin": 0.5,' +
+                  '"end": 0.5,' +
+                  '"count": 10' +
+                '}' +
+              '],' +
+              '"non_speech_level": [' +
+                '{' +
+                  '"begin": 0.5,' +
+                  '"end": 0.5,' +
+                  '"count": 10' +
+                '}' +
+              ']' +
+            '}' +
+          '},' +
+          '"warnings": [' +
+            '"string"' +
+          ']' +
+        '}' +
+      '], ' +
+      '"warnings": [' +
+        '"string"' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1RecognitionJobs() {
+    return '{' +
+      '"recognitions": [' +
+        '{' +
+          '"id": "id", ' +
+          '"status": "status", ' +
+          '"created": "created", ' +
+          '"updated": "updated", ' +
+          '"url": "url", ' +
+          '"user_token": "user_token", ' +
+          '"results": [' +
+            '{' +
+              '"result_index": 10, ' +
+              '"speaker_labels": [' +
+                '{' +
+                  '"from": 0.5, ' +
+                  '"to": 0.5, ' +
+                  '"speaker": 10, ' +
+                  '"confidence": 0.5, ' +
+                  '"final": true' +
+                '}' +
+              '], ' +
+              '"processing_metrics": {' +
+                '"processed_audio": {' +
+                  '"received": 0.5,' +
+                  '"seen_by_engine": 0.5,' +
+                  '"transcription": 0.5,' +
+                  '"speaker_labels": 0.5' +
+                '},' +
+                '"wall_clock_since_first_byte_received": 0.5,' +
+                '"periodic": true' +
+              '},' +
+              '"audio_metrics": {' +
+                '"sampling_interval": 0.5,' +
+                '"accumulated": {' +
+                  '"final": true,' +
+                  '"end_time": 0.5,' +
+                  '"speech_ratio": 0.5,' +
+                  '"high_frequency_loss": 0.5,' +
+                  '"signal_to_noise_ratio": 0.5,' +
+                  '"direct_current_offset": [' +
+                    '{' +
+                      '"begin": 0.5,' +
+                      '"end": 0.5,' +
+                      '"count": 10' +
+                    '}' +
+                  '],' +
+                  '"clipping_rate": [' +
+                    '{' +
+                      '"begin": 0.5,' +
+                      '"end": 0.5,' +
+                      '"count": 10' +
+                    '}' +
+                  '],' +
+                  '"speech_level": [' +
+                    '{' +
+                      '"begin": 0.5,' +
+                      '"end": 0.5,' +
+                      '"count": 10' +
+                    '}' +
+                  '],' +
+                  '"non_speech_level": [' +
+                    '{' +
+                      '"begin": 0.5,' +
+                      '"end": 0.5,' +
+                      '"count": 10' +
+                    '}' +
+                  ']' +
+                '}' +
+              '},' +
+              '"warnings": [' +
+                '"string"' +
+              ']' +
+            '}' +
+          '], ' +
+          '"warnings": [' +
+            '"string"' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1LanguageModel() {
+    return '{' +
+      '"owner": "owner", ' +
+      '"base_model_name": "base_model_name", ' +
+      '"customization_id": "customization_id", ' +
+      '"dialect": "dialect", ' +
+      '"created": "created", ' +
+      '"name": "name", ' +
+      '"description": "description", ' +
+      '"progress": 10, ' +
+      '"language": "language", ' +
+      '"status": "status", ' +
+      '"dialect": "dialect", ' +
+      '"warnings": "warnings",' +
+      '"error": "error",' +
+      '"versions": [' +
+        '"versions"' +
+      ']' +
+      '"updated": "updated"' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1LanguageModels() {
+    return '{' +
+      '"customizations": [' +
+        '{' +
+          '"owner": "owner", ' +
+          '"base_model_name": "base_model_name", ' +
+          '"customization_id": "customization_id", ' +
+          '"dialect": "dialect", ' +
+          '"created": "created", ' +
+          '"name": "name", ' +
+          '"description": "description", ' +
+          '"progress": 10, ' +
+          '"language": "language", ' +
+          '"status": "status", ' +
+          '"dialect": "dialect", ' +
+          '"warnings": "warnings",' +
+          '"error": "error",' +
+          '"versions": [' +
+            '"versions"' +
+          ']' +
+          '"updated": "updated"' +
+        '}' +
+      ']' +
+    '}';
+  }
+  
+  public static testMethod String speechToTextV1TrainingResponse() {
+    return '{' +
+      '"warnings": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1Corpora() {
+    return '{' +
+      '"corpora": [' +
+        '{' +
+          '"out_of_vocabulary_words": 10, ' +
+          '"total_words": 10, ' +
+          '"name": "name", ' +
+          '"status": "status",' +
+          '"error": "error"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1Corpus() {
+    return '{' +
+      '"out_of_vocabulary_words": 10, ' +
+      '"total_words": 10, ' +
+      '"name": "name", ' +
+      '"status": "status",' +
+      '"error": "error"' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1Words() {
+    return '{' +
+      '"words": [' +
+        '{' +
+          '"display_as": "display_as", ' +
+          '"sounds_like": [' +
+            '"sounds_like"' +
+          '], ' +
+          '"count": 10, ' +
+          '"source": [' +
+            '"source"' +
+          '], ' +
+          '"error": [' +
+            '{' +
+              '"element": "element"' +
+            '}' +
+          '],' +
+          '"word": "word"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1Word() {
+    return '{' +
+      '"display_as": "display_as", ' +
+      '"sounds_like": [' +
+        '"sounds_like"' +
+      '], ' +
+      '"count": 10, ' +
+      '"source": [' +
+        '"source"' +
+      '], ' +
+      '"error": [' +
+        '{' +
+          '"element": "element"' +
+        '}' +
+      '],' +
+      '"word": "word"' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1Grammars() {
+    return '{' +
+      '"grammars": [' +
+        '{' +
+          '"out_of_vocabulary_words": 10,' +
+          '"name": "name",' +
+          '"status": "status",' +
+          '"error": "error"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1Grammar() {
+    return '{' +
+      '"out_of_vocabulary_words": 10,' +
+      '"name": "name",' +
+      '"status": "status",' +
+      '"error": "error"' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1AcousticModel() {
+    return '{' +
+      '"owner": "owner", ' +
+      '"base_model_name": "base_model_name", ' +
+      '"customization_id": "customization_id", ' +
+      '"created": "created", ' +
+      '"name": "name", ' +
+      '"description": "description", ' +
+      '"versions": [' +
+        '"versions"' +
+      ']' +
+      '"progress": 10, ' +
+      '"language": "language", ' +
+      '"status": "status", ' +
+      '"warnings": "warnings",' +
+      '"updated": "updated"' +
+    '}';
+  }
+  
+  public static testMethod String speechToTextV1AcousticModels() {
+    return '{' +
+      '"customizations": [' +
+        '{' +
+          '"owner": "owner", ' +
+          '"base_model_name": "base_model_name", ' +
+          '"customization_id": "customization_id", ' +
+          '"created": "created", ' +
+          '"name": "name", ' +
+          '"description": "description", ' +
+          '"versions": [' +
+            '"versions"' +
+          ']' +
+          '"progress": 10, ' +
+          '"language": "language", ' +
+          '"status": "status", ' +
+          '"warnings": "warnings",' +
+          '"updated": "updated"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1AudioResources() {
+    return '{' +
+      '"total_minutes_of_audio": 0.5,' +
+      '"audio": [' +
+        '{' +
+          '"duration": 10, ' +
+          '"name": "name", ' +
+          '"details": {' +
+            '"type": "type", ' +
+            '"codec": "codec", ' +
+            '"frequency": 10, ' +
+            '"compression": "compression"' +
+          '}, ' +
+          '"status": "status"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String speechToTextV1AudioListing() {
+    return '{' +
+      '"duration": 10, ' +
+      '"name": "string", ' +
+      '"details": {' +
+        '"type": "type", ' +
+        '"codec": "codec", ' +
+        '"frequency": 10, ' +
+        '"compression": "compression"' +
+      '}, ' +
+      '"status": "status", ' +
+      '"container": {' +
+        '"duration": 10, ' +
+        '"name": "name", ' +
+        '"details": {' +
+          '"type": "type", ' +
+          '"codec": "codec", ' +
+          '"frequency": 10, ' +
+          '"compression": "compression"' +
+        '},' +
+        '"status": "status"' +
+      '},' +
+      '"audio": [' +
+        '{' +
+          '"duration": 10, ' +
+          '"name": "name", ' +
+          '"details": {' +
+            '"type": "type", ' +
+            '"codec": "codec", ' +
+            '"frequency": 10, ' +
+            '"compression": "compression"' +
+          '}, ' +
+          '"status": "status"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+
   // --- Text to Speech v1 ---
 
   public static testMethod String textToSpeechV1Voices() {
@@ -4605,80 +5174,89 @@ public class IBMWatsonMockResponses {
       '"warning": "warning"' +
     '}';
   }
-  
-  public static testMethod String classifiedImages() {
+
+
+  // --- Visual Recognition v3 ---
+
+  public static testMethod String visualRecognitionV3ClassifiedImages() {
     return  '{' +
-                      '  "custom_classes": 0, ' +
-                      '  "images_processed": 0, ' +
-                      '  "images": [' +
-                      '    {' +
-                      '      "source_url": "string", ' +
-                      '      "resolved_url": "string", ' +
-                      '      "image": "string", ' +
-                      '      "error": {' +
-                      '        "error_id": "string", ' +
-                      '        "description": "string"' +
-                      '      }, ' +
-                      '      "classifiers": [' +
-                      '        {' +
-                      '          "name": "string", ' +
-                      '          "classifier_id": "string", ' +
-                      '          "classes": [' +
-                      '            {' +
-                      '              "class": "string", ' +
-                      '              "score": 0, ' +
-                      '              "type_hierarchy": "string"' +
-                      '            }' +
-                      '          ]' +
-                      '        }' +
-                      '      ]' +
-                      '    }' +
-                      '  ], ' +
-                      '  "warnings": [' +
-                      '    {' +
-                      '      "warning_id": "string", ' +
-                      '      "description": "string"' +
-                      '    }' +
-                      '  ]' +
-                      '}';
+      '"custom_classes": 10, ' +
+      '"images_processed": 10, ' +
+      '"images": [' +
+        '{' +
+          '"source_url": "source_url", ' +
+          '"resolved_url": "resolved_url", ' +
+          '"image": "image", ' +
+          '"error": {' +
+            '"code": 10, ' +
+            '"error_id": "error_id", ' +
+            '"description": "description"' +
+          '}, ' +
+          '"classifiers": [' +
+            '{' +
+              '"name": "name", ' +
+              '"classifier_id": "classifier_id", ' +
+              '"classes": [' +
+                '{' +
+                  '"class": "class", ' +
+                  '"score": 0.5, ' +
+                  '"type_hierarchy": "type_hierarchy"' +
+                '}' +
+              ']' +
+            '}' +
+          ']' +
+        '}' +
+      '], ' +
+      '"warnings": [' +
+        '{' +
+          '"warning_id": "warning_id", ' +
+          '"description": "description"' +
+        '}' +
+      ']' +
+    '}';
   }
 
-  public static testMethod String classifiers() {
+  public static testMethod String visualRecognitionV3Classifier() {
     return  '{' +
-                      '  "classifiers": [' +
-                      '    {' +
-                      '      "classifier_id": "string", ' +
-                      '      "name": "string", ' +
-                      '      "owner": "string", ' +
-                      '      "status": "ready", ' +
-                      '      "explanation": "string", ' +
-                      '      "created": "2017-12-01T17:50:28.684Z", ' +
-                      '      "classes": [' +
-                      '        {' +
-                      '          "class": "string"' +
-                      '        }' +
-                      '      ]' +
-                      '    }' +
-                      '  ]' +
-                      '}';
+      '"classifier_id": "classifier_id", ' +
+      '"name": "name", ' +
+      '"owner": "owner", ' +
+      '"status": "status", ' +
+      '"explanation": "explanation", ' +
+      '"created": "1995-06-12T01:11:11.111Z", ' +
+      '"retrained": "1995-06-12T01:11:11.111Z", ' +
+      '"updated": "1995-06-12T01:11:11.111Z", ' +
+      '"classes": [' +
+        '{' +
+          '"class": "class"' +
+        '}' +
+      ']' +
+    '}';
   }
-  public static testMethod String classifier() {
+
+  public static testMethod String visualRecognitionV3Classifiers() {
     return  '{' +
-            '      "classifier_id": "string", ' +
-            '      "name": "string", ' +
-            '      "owner": "string", ' +
-            '      "status": "ready", ' +
-            '      "explanation": "string", ' +
-            '      "created": "2017-12-01T17:50:28.684Z", ' +
-            '      "classes": [' +
-            '        {' +
-            '          "class": "string"' +
-            '        }' +
-            '      ]' +
-            '}';
+      '"classifiers": [' +
+        '{' +
+          '"classifier_id": "classifier_id", ' +
+          '"name": "name", ' +
+          '"owner": "owner", ' +
+          '"status": "status", ' +
+          '"explanation": "explanation", ' +
+          '"created": "1995-06-12T01:11:11.111Z", ' +
+          '"retrained": "1995-06-12T01:11:11.111Z", ' +
+          '"updated": "1995-06-12T01:11:11.111Z", ' +
+          '"classes": [' +
+            '{' +
+              '"class": "class"' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
   }
-  
-  public static testMethod String voices() {
+
+
   // --- Visual Recognition v4 ---
 
   public static testMethod String visualRecognitionV4AnalyzeResponse() {
@@ -4901,596 +5479,9 @@ public class IBMWatsonMockResponses {
       ']' +
     '}';
   }
-  }
 
-  public static testMethod String speechToTextListModels() {
-    return '{' +
-      ' "models": [' +
-      '  {' +
-      '    "name": "en-US_NarrowbandModel", ' +
-      '    "language": "en-US", ' +
-      '    "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/en-US_NarrowbandModel", ' +
-      '    "rate": 8000, ' +
-      '    "supported_features": {' +
-      '      "custom_language_model": true, ' +
-      '      "speaker_labels": true' +
-      '    }, ' +
-      '    "description": "US English narrowband model."' +
-      '  }, ' +
-      '  {' +
-      '    "name": "es-ES_BroadbandModel", ' +
-      '    "language": "es-ES", ' +
-      '    "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/es-ES_BroadbandModel", ' +
-      '    "rate": 16000, ' +
-      '    "supported_features": {' +
-      '      "custom_language_model": true, ' +
-      '      "speaker_labels": true' +
-      '    }, ' +
-      '    "description": "Spanish broadband model."' +
-      '  }, ' +
-      '  {' +
-      '    "name": "es-ES_NarrowbandModel", ' +
-      '    "language": "es-ES", ' +
-      '    "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/es-ES_NarrowbandModel", ' +
-      '    "rate": 8000, ' +
-      '    "supported_features": {' +
-      '      "custom_language_model": true, ' +
-      '      "speaker_labels": true' +
-      '    }, ' +
-      '    "description": "Spanish narrowband model."' +
-      '  }, ' +
-      '  {' +
-      '    "name": "en-US_BroadbandModel", ' +
-      '    "language": "en-US", ' +
-      '    "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/en-US_BroadbandModel", ' +
-      '    "rate": 16000, ' +
-      '    "supported_features": {' +
-      '      "custom_language_model": true, ' +
-      '      "speaker_labels": true' +
-      '    }, ' +
-      '    "description": "US English broadband model."' +
-      '  }' +
-      ' ]' +
-      '}';
-  }
-  
-  public static testMethod String speechToTextGetModel() {
-    return '{' +
-     ' "name": "en-US_NarrowbandModel", ' +
-     ' "language": "en-US", ' +
-     ' "sessions": "https://stream.watsonplatform.net/speech-to-text/api/v1/sessions?model=en-US_NarrowbandModel", ' +
-     ' "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/en-US_NarrowbandModel", ' +
-     ' "rate": 8000, ' +
-     ' "supported_features": {' +
-     '   "custom_language_model": true, ' +
-     '   "speaker_labels": true' +
-     ' }, ' +
-     ' "description": "US English narrowband model."' +
-     ' }';
-  }
-  
-  public static testMethod String speechToTextCreateJob() {
-    return '{' +
-      ' "created": "2017-12-13T16:11:55.815Z", ' +
-      ' "id": "56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
-      ' "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/recognitions/56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
-      ' "status": "processing"' +
-    '}';
-  }
-  
-  public static testMethod String speechToTextCheckJobCreate() {
-    return '{' +
-           '  "id": "string", ' +
-           '  "status": "waiting", ' +
-           '  "created": "string", ' +
-           '  "updated": "string", ' +
-           '  "url": "string", ' +
-           '  "user_token": "string", ' +
-           '  "results": [' +
-           '    {' +
-           '      "results": [' +
-           '        {' +
-           '          "final": true, ' +
-           '          "alternatives": [' +
-           '            {' +
-           '              "transcript": "string", ' +
-           '              "confidence": 0, ' +
-           '              "timestamps": [' +
-           '                [' +
-           '                  "thunderstorms", ' +
-           '                  1.49, ' +
-           '                  2.32 ' +
-           '                ]' +
-           '              ], ' +
-           '              "word_confidence": [ ' +
-           '                [' +
-           '                  "thunderstorms", ' +
-           '                  1' +
-           '                ]' +
-           '              ]' +
-           '            }' +
-           '          ], ' +
-           '          "keywords_result": {' +
-           '            "keyword": [' +
-           '              {' +
-           '                "normalized_text": "string", ' +
-           '                "start_time": 0, ' +
-           '                "end_time": 0, ' +
-           '                "confidence": 0' +
-           '              }' +
-           '            ]' +
-           '          }, ' +
-           '          "word_alternatives": [' +
-           '            {' +
-           '              "start_time": 0, ' +
-           '              "end_time": 0, ' +
-           '              "alternatives": [' +
-           '                {' +
-           '                  "confidence": 0, ' +
-           '                  "word": "string"' +
-           '                }' +
-           '              ]' +
-           '            }' +
-           '          ]' +
-           '        }' +
-           '      ], ' +
-           '      "result_index": 0, ' +
-           '      "speaker_labels": [' +
-           '        {' +
-           '          "from": 0, ' +
-           '          "to": 0, ' +
-           '          "speaker": 0, ' +
-           '          "confidence": 0, ' +
-           '          "final": true' +
-           '        }' +
-           '      ], ' +
-           '      "warnings": [' +
-           '        "string"' +
-           '      ]' +
-           '    }' +
-           '  ], ' +
-           '  "warnings": [' +
-           '    "string"' +
-           '  ]' +
-           '}';
-  }
-  
-  public static testMethod String speechToTextCheckJob() {
-    return '{' +
-      ' "created": "2017-12-13T16:11:55.815Z", ' +
-      ' "id": "56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
-      ' "updated": "2017-12-13T16:11:57.393Z", ' +
-      ' "status": "failed"' +
-      '}';
-  }
-  
-  public static testMethod String speechToTextCheckJobs() {
-    return '{' +
-      ' "recognitions": [' +
-      ' {' +
-      '   "created": "2017-12-13T16:11:55.815Z", ' +
-      '   "id": "56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
-      '   "updated": "2017-12-13T16:11:57.393Z", ' +
-      '   "status": "completed"' +
-      ' }' +
-    ' ]' +
-    ' }';
-  }
-  
-  public static testMethod String speechToTextDeleteJob() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextRegisterCallback() {
-    return '{' +
-    ' "status": "created", ' +
-    ' "url": "https://ibmdf17-watson-dxhub.my.salesforce.com/"' +
-    '}';
-  }
-  
-  public static testMethod String speechToTextUnRegisterCallback() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextListLanguageModels() {
-    return '{' +
-      ' "customizations": [' +
-      ' {' +
-      '  "owner": "952e2069-9ece-48d8-96c9-0206b4473819", ' +
-      '  "base_model_name": "en-US_BroadbandModel", ' +
-      '  "customization_id": "d0bdc477-59e6-4e45-86f3-1a9a39664eb5", ' +
-      '  "dialect": "en-US", ' +
-      '  "created": "2017-12-11T17:50:11.862Z", ' +
-      '  "name": "custom_en_US", ' +
-      '  "description": "language customization", ' +
-      '  "progress": 100, ' +
-      '  "language": "en-US", ' +
-      '  "status": "available"' +
-      ' }' +
-      ']' +
-      '}';
-  }
-  
-  public static testMethod String speechToTextGetLanguageModel() {
-    return '{' +
-      ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819", ' +
-      ' "base_model_name": "en-US_BroadbandModel", ' +
-      ' "customization_id": "d0bdc477-59e6-4e45-86f3-1a9a39664eb5", ' +
-      ' "dialect": "en-US", ' +
-      ' "created": "2017-12-11T17:50:11.862Z", ' +
-      ' "name": "custom_en_US", ' +
-      ' "description": "language customization", ' +
-      ' "progress": 100, ' +
-      ' "language": "en-US", ' +
-      ' "status": "available", ' +
-      ' "dialect": "customization", ' +
-      ' "warnings": "customization",' +
-      ' "updated": "2019-10-11T19:16:58.547Z"' +
-      ' }';
-  }
-  
-  public static testMethod String speechToTextTrainLanguageModel() {
-    return '{' +
-      '"warnings": [' +
-        '{' +
-          '"description": "description",' +
-          '"warning_id": "warning_id"' +
-        '}' +
-      ']' +
-    '}';
-  }
-  
-  public static testMethod String speechToTextUpgradeLanguageModel() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextResetLanguageModel() {
-    return '{}';
-  }
 
-  public static testMethod String speechToTextDeleteLanguageModel() {
-    return '{}';
-  }
-
-  public static testMethod String speechToTextListCorpora() {
-    return '{' +
-      ' "corpora": [' +
-      ' {' +
-      '   "out_of_vocabulary_words": 3, ' +
-      '   "total_words": 160, ' +
-      '   "name": "custom_corpus", ' +
-      '   "status": "analyzed"' +
-      ' }' +
-      ']' +
-      '}';
-  }
-
-  public static testMethod String speechToTextGetCorpus() {
-    return '{' +
-      ' "out_of_vocabulary_words": 3, ' +
-      ' "total_words": 160, ' +
-      ' "name": "custom_corpus", ' +
-      ' "status": "analyzed", ' +
-      ' "error": "none"' +
-      '}';
-  }
-
-  public static testMethod String speechToTextDeleteCorpus() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextAddCorpus() {
-    return '{}';
-  }
-
-  public static testMethod String speechToTextDeleteWord() {
-    return '{}';
-  }
-
-  public static testMethod String speechToTextGetWord() {
-    return '{' +
-      ' "display_as": "words matter", ' +
-      ' "sounds_like": [' +
-      '   "words matter"' +
-      ' ], ' +
-      ' "count": 2, ' +
-      ' "source": [' +
-       '  "custom_corpus"' +
-      ' ], ' +
-      ' "error": [{' +
-      '  "element": "custom_corpus"' +
-      ' }], ' +
-      ' "word": "words matter"' +
-      '}';
-  }
-  
-  public static testMethod String speechToTextListWords() {
-    return '{' +
-      ' "words": [' +
-      ' {' +
-      ' "display_as": "words matter", ' +
-      ' "sounds_like": [' +
-      '   "words matter"' +
-      ' ], ' +
-      ' "count": 2, ' +
-      ' "source": [' +
-      '  "custom_corpus"' +
-      ' ], ' +
-      ' "error": [{' +
-       '  "element": "custom_corpus"' +
-      ' }], ' +
-      ' "word": "words matter"' +
-      '}]}';
-  }
-  
-  
-  public static testMethod String speechToTextListAcousticModels() {
-    return '{' +
-      ' "customizations": [' +
-      '   {' +
-      '     "owner": "952e2069-9ece-48d8-96c9-0206b4473819", ' +
-      '     "base_model_name": "en-US_BroadbandModel", ' +
-      '     "customization_id": "825485d7-af3f-44e7-b1ea-76130dec8a61", ' +
-      '     "created": "2017-12-11T17:57:06.654Z", ' +
-      '     "name": "custom acoustic", ' +
-      '     "description": "customization", ' +
-      '     "progress": 0, ' +
-      '     "language": "en-US", ' +
-      '     "status": "ready"' +
-      '   }' +
-      ' ]' +
-      '}';
-  }
-  
-  public static testMethod String speechToTextGetAcousticModel() {
-    return '{' +
-      ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819", ' +
-      ' "base_model_name": "en-US_BroadbandModel", ' +
-      ' "customization_id": "825485d7-af3f-44e7-b1ea-76130dec8a61", ' +
-      ' "created": "2017-12-11T17:57:06.654Z", ' +
-      ' "name": "custom acoustic", ' +
-      ' "description": "customization", ' +
-      ' "progress": 0, ' +
-      ' "language": "en-US", ' +
-      ' "status": "ready", ' +
-      ' "warnings": "customization",' +
-      ' "updated": "2019-10-11T19:16:58.547Z"' +
-      '}';
-  }
-
-  public static testMethod String speechToTextDeleteAcousticModel() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextTrainAcousticModel() {
-    return '{}';
-  }
-
-  public static testMethod String speechToTextResetAcousticModel() {
-    return '{}';
-  }
-
-  public static testMethod String speechToTextDeleteAudio() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextGetAudio() {
-    return '{' +
-      '  "duration": 0, ' +
-      '  "name": "string", ' +
-      '  "details": {' +
-      '   "type": "audio", ' +
-      '   "codec": "string", ' +
-      '   "frequency": 0, ' +
-      '   "compression": "zip"' +
-      '  }, ' +
-      ' "status": "ok", ' +
-      ' "container": ' +
-      '  {' +
-      '   "duration": 0, ' +
-      '   "name": "string", ' +
-      '   "details": {' +
-      '   "type": "audio", ' +
-      '   "codec": "string", ' +
-      '   "frequency": 0, ' +
-      '   "compression": "zip"' +
-      '  }, ' +
-      ' "status": "ok"' +
-      ' }, ' +
-      ' "audio": [' +
-      '  {' +
-      '   "duration": 0, ' +
-      '   "name": "string", ' +
-      '   "details": {' +
-      '   "type": "audio", ' +
-      '   "codec": "string", ' +
-      '   "frequency": 0, ' +
-      '   "compression": "zip"' +
-      '  }, ' +
-      ' "status": "ok"' +
-      '}' +
-      ']' +
-      '}';
-  }
-  
-  public static testMethod String speechToTextListAudio() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextAddAudio() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextAddWord() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextCreateAcousticModel() {
-    return '{}';
-  }
-  
-  public static testMethod String speechToTextCreateLanguageModel() {
-    return '{' +
-     ' "customization_id": "74f4807e-b5ff-4866-824e-6bba1a84fe96", ' +
-     ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819", ' +
-     ' "base_model_name": "en-US_BroadbandModel", ' +
-     ' "created": "2017-12-11T17:57:06.654Z", ' +
-     ' "name": "custom acoustic", ' +
-     ' "description": "customization", ' +
-     ' "progress": 0, ' +
-     ' "language": "en-US", ' +
-     ' "status": "ready", ' +
-     ' "dialect": "customization", ' +
-     ' "warnings": "customization"' +
-     '}';
-  }
-
-  public static testMethod String speechToTextRecognize() {
-    return ' {' +
-      '"results": [' +
-      '  {' +
-      '    "word_alternatives": [' +
-      '      {' +
-      '        "start_time": 0.14, ' +
-      '        "alternatives": [' +
-      '          {' +
-      '            "confidence": 1, ' +
-      '            "word": "a"' +
-      '          }' +
-      '        ], ' +
-      '        "end_time": 0.28' +
-      '      }, ' +
-      '      {' +
-      '        "start_time": 5.33, ' +
-      '        "alternatives": [' +
-      '          {' +
-      '            "confidence": 0.9953, ' +
-      '            "word": "Sunday"' +
-      '          }' +
-      '        ], ' +
-      '        "end_time": 6.04' +
-      '      }' +
-      '    ], ' +
-      '    "keywords_result": {' +
-      '      "tornadoes": [' +
-      '        {' +
-      '          "normalized_text": "tornadoes", ' +
-      '          "start_time": 3.03, ' +
-      '          "confidence": 0.953, ' +
-      '          "end_time": 3.85' +
-      '        }' +
-      '      ], ' +
-      '      "colorado": [' +
-      '        {' +
-      '          "normalized_text": "Colorado", ' +
-      '          "start_time": 4.59, ' +
-      '          "confidence": 0.999, ' +
-      '          "end_time": 5.18' +
-      '        }' +
-      '      ]' +
-      '    }, ' +
-      '    "alternatives": [' +
-      '      {' +
-      '        "timestamps": [' +
-      '          [' +
-      '            "a", ' +
-      '            0.14, ' +
-      '            0.28' +
-      '          ], ' +
-      '          [' +
-      '            "Sunday", ' +
-      '            5.33, ' +
-      '            6.04' +
-      '          ]' +
-      '        ], ' +
-      '        "confidence": 0.983, ' +
-      '        "transcript": "a line of severe thunderstorms with several possible tornadoes is approaching Colorado on Sunday "' +
-      '      }' +
-      '    ], ' +
-      '    "final": true' +
-      '  }' +
-      '], ' +
-      '"result_index": 0,' +
-      '"audio_metrics": {' +
-        '"sampling_interval": 0.1,' +
-        '"accumulated": {' +
-          '"final": true,' +
-          '"end_time": 0.2,' +
-          '"speech_ratio": 0.4,' +
-          '"high_frequency_loss": 0.5,' +
-          '"signal_to_noise_ratio": 0.3,' +
-          '"direct_current_offset": [' +
-            '{' +
-              '"begin": 3.1,' +
-              '"end": 6.2,' +
-              '"count": 10' +
-            '}' +
-          '],' +
-          '"clipping_rate": [' +
-            '{' +
-              '"begin": 3.1,' +
-              '"end": 6.2,' +
-              '"count": 10' +
-            '}' +
-          '],' +
-          '"speech_level": [' +
-            '{' +
-              '"begin": 3.1,' +
-              '"end": 6.2,' +
-              '"count": 10' +
-            '}' +
-          '],' +
-          '"non_speech_level": [' +
-            '{' +
-              '"begin": 3.1,' +
-              '"end": 6.2,' +
-              '"count": 10' +
-            '}' +
-          ']' +
-        '}' +
-      '},' +
-      '"processing_metrics": {' +
-        '"processed_audio": {' +
-          '"received": 300.0,' +
-          '"seen_by_engine": 400.0,' +
-          '"transcription": 500.0,' +
-          '"speaker_labels": 600.0' +
-        '},' +
-        '"wall_clock_since_first_byte_received": 47.0,' +
-        '"periodic": true' +
-      '}' +
-    '}';
-  }
-  
-  public static testMethod String expansionsResponse() {
-    return '{' +
-    ' "expansions": [' +
-    ' {' +
-    '   "input_terms": [' +
-    '     "weekday",' +
-    '     "week day"' +
-    '   ],' +
-    '   "expanded_terms": [' +
-    '     "monday",' +
-    '     "tuesday",' +
-    '     "wednesday",' +
-    '     "thursday",' +
-    '     "friday"' +
-    '   ]' +
-    ' },' +
-    ' {' +
-    '   "input_terms": [' +
-    '     "weekend",' +
-    '     "week end"' +
-    '   ],' +
-    '   "expanded_terms": [' +
-    '     "saturday",' +
-    '     "sunday"' +
-    '   ]' +
-    ' }' +
-    ' ]' +
-    '}';
-  }
+  // --- Miscellaneous ---
 
   public static testMethod String validTokenData() {
     return '{' +
@@ -5509,54 +5500,6 @@ public class IBMWatsonMockResponses {
       '"token_type": "Bearer",' +
       '"expires_in": 3600,' +
       '"expiration": 10000' +
-    '}';
-  }
-
-  public static testMethod String credentials() {
-    return '{' +
-      '"credential_id" : "00000d8c-0000-00e8-ba89-0ed5f89f718b",' +
-      '"source_type" : "salesforce",' +
-      '"credential_details" : {' +
-        '"credential_type" : "username_password",' +
-        '"url" : "login.salesforce.com",' +
-        '"username" : "user@email.address"' +
-      '},' +
-      '"status" : "connected"' +
-    '}';
-  }
-
-  public static testMethod String mentions() {
-    return '{' +
-      '"examples" : [ {' +
-        '"text" : "I would like to order a pizza",' +
-        '"intent" : "FoodTypes",' +
-        '"location" : [ 20, 24 ]' +
-      '} ]' +
-    '}';
-  }
-
-  public static testMethod String listGrammarsResponse() {
-    return '{' +
-      '"grammars": [' +
-        '{' +
-          '"out_of_vocabulary_words": 10,' +
-          '"name": "name_1",' +
-          '"status": "analyzed"' +
-        '},' +
-        '{' +
-          '"out_of_vocabulary_words": 20,' +
-          '"name": "name_2",' +
-          '"status": "analyzed"' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String getGrammarResponse() {
-    return '{' +
-      '"out_of_vocabulary_words": 10,' +
-      '"name": "grammar_name",' +
-      '"status": "analyzed"' +
     '}';
   }
 
@@ -5605,227 +5548,6 @@ public class IBMWatsonMockResponses {
       '"accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwicGVybWlzc2lvbnMiOlsiYWRtaW5pc3RyYXRvciIsIm1hbmFnZV9jYXRhbG9nIiwiYWNjZXNzX2NhdGFsb2ciLCJtYW5hZ2VfcG9saWNpZXMiLCJhY2Nlc3NfcG9saWNpZXMiLCJ2aXJ0dWFsaXplX3RyYW5zZm9ybSIsImNhbl9wcm92aXNpb24iLCJkZXBsb3ltZW50X2FkbWluIl0sInN1YiI6ImFkbWluIiwiaXNzIjoiS05PWFNTTyIsImF1ZCI6IkRTWCIsInVpZCI6Ijk5OSIsImlhdCI6MTU1OTMyODk1NSwiZXhwIjoxNTU5MzI4OTU1fQ==.GE-ML3JWmI3oB0z5mjMG3jFtYVVA5bQCsOTOOj9ab7PcgJc1mA5hn1sONkO0JAFADhUoAgpG4KgQef5tjnCSrtl1tbnDuhaP1DH4QKMCZOkWrKyfQ2X8P1jhyJmV-KpE4wuTrGdMoMVj4wVRZwnxMRSK6LhV6pIzyOLLYR21zcW_2KcKWxCYfIC7tiM1d2PSM5nWa_5Vb068F8PtdiFUElEYHYKrvmwpV57_k2jpXoY6zw8PDcIiWQe3g20w6vCB6zWhxbcFWyjMg1tPOZHgTNNskPShHQBbtZFsSrc7rkNPzttKF70m7_JqrRYUZDNN8TmuR9uyitwxEFkr2L0WDQ",' +
       '"_messageCode_": "success",' +
       '"message": "success"' +
-    '}';
-  }
-
-  public static testMethod String analyzeResponse() {
-    return '{' +
-      '"images": [' +
-        '{' +
-          '"source": {' +
-            '"type": "file",' +
-            '"filename": "filename",' +
-            '"archive_filename": "archive_filename",' +
-            '"source_url": "source_url",' +
-            '"resolved_url": "resolved_url"' +
-          '},' +
-          '"dimensions": {' +
-            '"height": 200,' +
-            '"width": 100' +
-          '},' +
-          '"objects": {' +
-            '"collections": [' +
-              '{' +
-                '"collection_id": "123456789",' +
-                '"objects": [' +
-                  '{' +
-                    '"object": "object",' +
-                    '"location": {' +
-                      '"top": 0,' +
-                      '"left": 10,' +
-                      '"width": 100,' +
-                      '"height": 200' +
-                    '},' +
-                    '"score": 5.0' +
-                  '}' +
-                ']' +
-              '}' +
-            ']' +
-          '},' +
-          '"errors": {' +
-            '"code": "code",' +
-            '"message": "message",' +
-            '"more_info": "more_info",' +
-            '"target": {' +
-              '"type": "field",' +
-              '"name": "name"' +
-            '}' +
-          '}' +
-        '}' +
-      '],' +
-      '"warnings": [' +
-        '{' +
-          '"code": "code",' +
-          '"message": "message",' +
-          '"more_info": "more_info"' +
-        '}' +
-      '],' +
-      '"trace": "trace"' +
-    '}';
-  }
-
-  public static testMethod String visRecCollection() {
-    return '{' +
-      '"collection_id": "123456789",' +
-      '"name": "name",' +
-      '"description": "description",' +
-      '"created": "1995-06-12T01:11:11.111Z",' +
-      '"updated": "1995-06-12T01:11:11.111Z",' +
-      '"image_count": 50,' +
-      '"training_status": {' +
-        '"objects": {' +
-          '"ready": true,' +
-          '"in_progress": true,' +
-          '"data_changed": true,' +
-          '"latest_failed": true,' +
-          '"description": "description"' +
-        '}' +
-      '}' +
-    '}';
-  }
-
-  public static testMethod String collectionsList() {
-    return '{' +
-      '"collections": [' +
-        '{' +
-          '"collection_id": "123456789",' +
-          '"name": "name",' +
-          '"description": "description",' +
-          '"created": "1995-06-12T01:11:11.111Z",' +
-          '"updated": "1995-06-12T01:11:11.111Z",' +
-          '"image_count": 50,' +
-          '"training_status": {' +
-            '"objects": {' +
-              '"ready": true,' +
-              '"in_progress": true,' +
-              '"data_changed": true,' +
-              '"latest_failed": true,' +
-              '"description": "description"' +
-            '}' +
-          '}' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String imageDetails() {
-    return '{' +
-      '"image_id": "image_id",' +
-      '"updated": "1995-06-12T01:11:11.111Z",' +
-      '"created": "1995-06-12T01:11:11.111Z",' +
-      '"source": {' +
-        '"type": "file",' +
-        '"filename": "filename",' +
-        '"archive_filename": "archive_filename",' +
-        '"source_url": "source_url",' +
-        '"resolved_url": "resolved_url"' +
-      '},' +
-      '"dimensions": {' +
-        '"height": 200,' +
-        '"width": 100' +
-      '},' +
-      '"errors": {' +
-        '"code": "code",' +
-        '"message": "message",' +
-        '"more_info": "more_info",' +
-        '"target": {' +
-          '"type": "field",' +
-          '"name": "name"' +
-        '}' +
-      '},' +
-      '"training_data": {' +
-        '"objects": [' +
-          '{' +
-            '"object": "object",' +
-            '"location": {' +
-              '"top": 0,' +
-              '"left": 10,' +
-              '"width": 100,' +
-              '"height": 200' +
-            '}' +
-          '}' +
-        ']' +
-      '}' +
-    '}';
-  }
-
-  public static testMethod String imageDetailsList() {
-    return '{' +
-      '"images": [' +
-        '{' +
-          '"image_id": "image_id",' +
-          '"updated": "1995-06-12T01:11:11.111Z",' +
-          '"created": "1995-06-12T01:11:11.111Z",' +
-          '"source": {' +
-            '"type": "file",' +
-            '"filename": "filename",' +
-            '"archive_filename": "archive_filename",' +
-            '"source_url": "source_url",' +
-            '"resolved_url": "resolved_url"' +
-          '},' +
-          '"dimensions": {' +
-            '"height": 200,' +
-            '"width": 100' +
-          '},' +
-          '"errors": {' +
-            '"code": "code",' +
-            '"message": "message",' +
-            '"more_info": "more_info",' +
-            '"target": {' +
-              '"type": "field",' +
-              '"name": "name"' +
-            '}' +
-          '},' +
-          '"training_data": {' +
-            '"objects": [' +
-              '{' +
-                '"object": "object",' +
-                '"location": {' +
-                  '"top": 0,' +
-                  '"left": 10,' +
-                  '"width": 100,' +
-                  '"height": 200' +
-                '}' +
-              '}' +
-            ']' +
-          '}' +
-        '}' +
-      '],' +
-      '"warnings": [' +
-        '{' +
-          '"code": "code",' +
-          '"message": "message",' +
-          '"more_info": "more_info"' +
-        '}' +
-      '],' +
-      '"trace": "trace"' +
-    '}';
-  }
-
-  public static testMethod String imageSummaryList() {
-    return '{' +
-      '"images": [' +
-        '{' +
-          '"image_id": "image_id",' +
-          '"updated": "1995-06-12T01:11:11.111Z"' +
-        '}' +
-      ']' +
-    '}';
-  }
-
-  public static testMethod String trainingDataObjects() {
-    return '{' +
-      '"objects": [' +
-        '{' +
-          '"object": "object",' +
-          '"location": {' +
-            '"top": 0,' +
-            '"left": 10,' +
-            '"width": 100,' +
-            '"height": 200' +
-          '}' +
-        '}' +
-      ']' +
     '}';
   }
 }
