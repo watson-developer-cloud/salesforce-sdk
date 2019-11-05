@@ -300,6 +300,7 @@ private class IBMToneAnalyzerV3Test {
     String acceptLanguage = 'accept_language';
 
     IBMToneAnalyzerV3Models.ToneOptions options = new IBMToneAnalyzerV3Models.ToneOptionsBuilder()
+      .toneInput(toneInput)
       .sentences(sentences)
       .tones(tones)
       .contentLanguage(contentLanguage)
