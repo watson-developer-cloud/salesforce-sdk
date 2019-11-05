@@ -228,12 +228,15 @@ private class IBMVisualRecognitionV3Test {
   static testMethod void testCreateClassifierOptionsModel() {
     Test.startTest();
     String name = 'name';
-    IBMWatsonFile positiveExamples = new IBMWatsonFile.FileBuilder()
+    IBMWatsonFile positiveExampleFile = new IBMWatsonFile.FileBuilder()
       .name('test_file')
       .description('File for unit testing')
       .contentType('application/octet-stream')
       .body(Blob.valueOf('Test file contents string'))
       .build();
+    Map<String, IBMWatsonFile> positiveExamples = new Map<String, IBMWatsonFile> {
+      'positive_example' => positiveExampleFile
+    };
     IBMWatsonFile negativeExamples = new IBMWatsonFile.FileBuilder()
       .name('test_file')
       .description('File for unit testing')
@@ -335,12 +338,15 @@ private class IBMVisualRecognitionV3Test {
   static testMethod void testUpdateClassifierOptionsModel() {
     Test.startTest();
     String classifierId = 'classifier_id';
-    IBMWatsonFile positiveExamples = new IBMWatsonFile.FileBuilder()
+    IBMWatsonFile positiveExampleFile = new IBMWatsonFile.FileBuilder()
       .name('test_file')
       .description('File for unit testing')
       .contentType('application/octet-stream')
       .body(Blob.valueOf('Test file contents string'))
       .build();
+    Map<String, IBMWatsonFile> positiveExamples = new Map<String, IBMWatsonFile> {
+      'positive_example' => positiveExampleFile
+    };
     IBMWatsonFile negativeExamples = new IBMWatsonFile.FileBuilder()
       .name('test_file')
       .description('File for unit testing')
@@ -492,12 +498,15 @@ private class IBMVisualRecognitionV3Test {
     Test.startTest();
 
     String name = 'name';
-    IBMWatsonFile positiveExamples = new IBMWatsonFile.FileBuilder()
+    IBMWatsonFile positiveExampleFile = new IBMWatsonFile.FileBuilder()
       .name('test_file')
       .description('File for unit testing')
       .contentType('application/octet-stream')
       .body(Blob.valueOf('Test file contents string'))
       .build();
+    Map<String, IBMWatsonFile> positiveExamples = new Map<String, IBMWatsonFile> {
+      'positive_example' => positiveExampleFile
+    };
     IBMWatsonFile negativeExamples = new IBMWatsonFile.FileBuilder()
       .name('test_file')
       .description('File for unit testing')
@@ -697,12 +706,15 @@ private class IBMVisualRecognitionV3Test {
     Test.startTest();
 
     String classifierId = 'classifier_id';
-    IBMWatsonFile positiveExamples = new IBMWatsonFile.FileBuilder()
+    IBMWatsonFile positiveExampleFile = new IBMWatsonFile.FileBuilder()
       .name('test_file')
       .description('File for unit testing')
       .contentType('application/octet-stream')
       .body(Blob.valueOf('Test file contents string'))
       .build();
+    Map<String, IBMWatsonFile> positiveExamples = new Map<String, IBMWatsonFile> {
+      'positive_example' => positiveExampleFile
+    };
     IBMWatsonFile negativeExamples = new IBMWatsonFile.FileBuilder()
       .name('test_file')
       .description('File for unit testing')
