@@ -226,6 +226,7 @@ private class IBMLanguageTranslatorV3Test {
     String text = 'text';
 
     IBMLanguageTranslatorV3Models.IdentifyOptions testRequestModel = new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
+      .text(text)
       .build();
     testRequestModel = testRequestModel.newBuilder().build();
 
@@ -488,6 +489,7 @@ private class IBMLanguageTranslatorV3Test {
     String text = 'text';
 
     IBMLanguageTranslatorV3Models.IdentifyOptions options = new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
+      .text(text)
       .addHeader('Test-Header', 'test_value')
       .build();
 
