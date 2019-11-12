@@ -302,7 +302,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
           ConsumptionPreferences currentItem = ret.getConsumptionPreferences().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('consumptionPreferences');
-          ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferences.class);
+          ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ConsumptionPreferences.class);
           newConsumptionPreferences.add(newItem);
         }
         ret.consumptionPreferences = newConsumptionPreferences;
@@ -345,13 +345,13 @@ public class IBMPersonalityInsightsV3Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for contentItems
       if (contentItems != null) {
         List<Object> contentItemsJsonList = new List<Object>();
         for (ContentItem listItem : contentItems) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           contentItemsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('contentItems', contentItemsJsonList);
@@ -570,7 +570,7 @@ public class IBMPersonalityInsightsV3Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -960,7 +960,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedPersonality.size(); i++) {
           Trait currentItem = ret.getPersonality().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('personality');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Trait.class);
           newPersonality.add(newItem);
         }
         ret.personality = newPersonality;
@@ -973,7 +973,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedNeeds.size(); i++) {
           Trait currentItem = ret.getNeeds().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('needs');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Trait.class);
           newNeeds.add(newItem);
         }
         ret.needs = newNeeds;
@@ -986,7 +986,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           Trait currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Trait.class);
           newValues.add(newItem);
         }
         ret.values = newValues;
@@ -999,7 +999,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedBehavior.size(); i++) {
           Behavior currentItem = ret.getBehavior().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('behavior');
-          Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Behavior.class);
+          Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Behavior.class);
           newBehavior.add(newItem);
         }
         ret.behavior = newBehavior;
@@ -1012,7 +1012,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
           ConsumptionPreferencesCategory currentItem = ret.getConsumptionPreferences().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('consumptionPreferences');
-          ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferencesCategory.class);
+          ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ConsumptionPreferencesCategory.class);
           newConsumptionPreferences.add(newItem);
         }
         ret.consumptionPreferences = newConsumptionPreferences;
@@ -1025,7 +1025,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           Warning currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Warning.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
@@ -1520,7 +1520,7 @@ public class IBMPersonalityInsightsV3Models {
         for (Integer i = 0; i < deserializedChildren.size(); i++) {
           Trait currentItem = ret.getChildren().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('children');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Trait.class);
           newChildren.add(newItem);
         }
         ret.children = newChildren;

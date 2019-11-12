@@ -127,7 +127,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
     if (messageOptions.context() != null) {
       contentJson.put('context', messageOptions.context().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV2Models.MessageResponse) createServiceCall(builder.build(), IBMAssistantV2Models.MessageResponse.class);
   }

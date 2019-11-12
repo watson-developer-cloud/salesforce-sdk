@@ -81,10 +81,14 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('threshold', String.valueOf(classifyOptions.threshold()));
     }
     if (classifyOptions.owners() != null) {
-      multipartBuilder.addFormDataPart('owners', String.join(classifyOptions.owners(), ','));
+      for (String item : classifyOptions.owners()) {
+        multipartBuilder.addFormDataPart('owners', item);
+      }
     }
     if (classifyOptions.classifierIds() != null) {
-      multipartBuilder.addFormDataPart('classifier_ids', String.join(classifyOptions.classifierIds(), ','));
+      for (String item : classifyOptions.classifierIds()) {
+        multipartBuilder.addFormDataPart('classifier_ids', item);
+      }
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());

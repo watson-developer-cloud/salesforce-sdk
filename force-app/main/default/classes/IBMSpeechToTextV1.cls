@@ -653,7 +653,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createLanguageModelOptions.description() != null) {
       contentJson.put('description', createLanguageModelOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMSpeechToTextV1Models.LanguageModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.LanguageModel.class);
   }
@@ -1138,7 +1138,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
       wordsList.add(wordsItem.replacePropertyNames());
     }
     contentJson.put('words', wordsList);
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);
   }
@@ -1201,7 +1201,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (addWordOptions.displayAs() != null) {
       contentJson.put('display_as', addWordOptions.displayAs());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);
   }
@@ -1444,7 +1444,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createAcousticModelOptions.description() != null) {
       contentJson.put('description', createAcousticModelOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMSpeechToTextV1Models.AcousticModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AcousticModel.class);
   }

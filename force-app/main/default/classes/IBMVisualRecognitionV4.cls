@@ -2,11 +2,6 @@
  * Provide images to the IBM Watson&trade; Visual Recognition service for analysis. The service detects objects based on
  * a set of images with training data.
  *
- * **Beta:** The Visual Recognition v4 API and Object Detection model are beta features. For more information about beta
- * features, see the [Release
- * notes](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-release-notes#beta).
- * {: important}
- *
  * @version V4
  * @see <a href="https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-object-detection-overview">Visual Recognition</a>
  */
@@ -129,7 +124,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     if (createCollectionOptions.description() != null) {
       contentJson.put('description', createCollectionOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMVisualRecognitionV4Models.Collection) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.Collection.class);
   }
@@ -214,7 +209,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     if (updateCollectionOptions.description() != null) {
       contentJson.put('description', updateCollectionOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMVisualRecognitionV4Models.Collection) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.Collection.class);
   }
@@ -458,7 +453,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
       }
       contentJson.put('objects', objectsList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMVisualRecognitionV4Models.TrainingDataObjects) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.TrainingDataObjects.class);
   }

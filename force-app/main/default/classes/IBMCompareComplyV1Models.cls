@@ -202,7 +202,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -328,7 +328,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedElementPair.size(); i++) {
           ElementPair currentItem = ret.getElementPair().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('elementPair');
-          ElementPair newItem = (ElementPair) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementPair.class);
+          ElementPair newItem = (ElementPair) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ElementPair.class);
           newElementPair.add(newItem);
         }
         ret.elementPair = newElementPair;
@@ -426,7 +426,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -682,7 +682,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for documentCounts
       Map<String, Object> documentCountsMap = (Map<String, Object>) jsonMap.get('documentCounts');
-      DocCounts newDocumentCounts = (DocCounts) new DocCounts().deserialize(JSON.serialize(documentCountsMap), documentCountsMap, DocCounts.class);
+      DocCounts newDocumentCounts = (DocCounts) new DocCounts().deserialize(JSON.serialize(documentCountsMap, true), documentCountsMap, DocCounts.class);
       ret.setDocumentCounts(newDocumentCounts);
 
       return ret;
@@ -730,7 +730,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedBatches.size(); i++) {
           BatchStatus currentItem = ret.getBatches().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('batches');
-          BatchStatus newItem = (BatchStatus) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BatchStatus.class);
+          BatchStatus newItem = (BatchStatus) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), BatchStatus.class);
           newBatches.add(newItem);
         }
         ret.batches = newBatches;
@@ -1080,7 +1080,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for attributes
@@ -1090,7 +1090,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
-          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Attribute.class);
           newAttributes.add(newItem);
         }
         ret.attributes = newAttributes;
@@ -1171,7 +1171,7 @@ public class IBMCompareComplyV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -1588,7 +1588,7 @@ public class IBMCompareComplyV1Models {
     public List<ContractCurrencies> getContractCurrencies() {
       return contractCurrencies;
     }
- 
+
     /**
      * Gets the tables.
      *
@@ -1776,7 +1776,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for document
       Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
-      Document newDocument = (Document) new Document().deserialize(JSON.serialize(documentMap), documentMap, Document.class);
+      Document newDocument = (Document) new Document().deserialize(JSON.serialize(documentMap, true), documentMap, Document.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for elements
@@ -1786,7 +1786,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedElements.size(); i++) {
           Element currentItem = ret.getElements().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('elements');
-          Element newItem = (Element) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Element.class);
+          Element newItem = (Element) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Element.class);
           newElements.add(newItem);
         }
         ret.elements = newElements;
@@ -1799,7 +1799,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedEffectiveDates.size(); i++) {
           EffectiveDates currentItem = ret.getEffectiveDates().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('effectiveDates');
-          EffectiveDates newItem = (EffectiveDates) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EffectiveDates.class);
+          EffectiveDates newItem = (EffectiveDates) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), EffectiveDates.class);
           newEffectiveDates.add(newItem);
         }
         ret.effectiveDates = newEffectiveDates;
@@ -1812,7 +1812,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContractAmounts.size(); i++) {
           ContractAmts currentItem = ret.getContractAmounts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contractAmounts');
-          ContractAmts newItem = (ContractAmts) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractAmts.class);
+          ContractAmts newItem = (ContractAmts) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ContractAmts.class);
           newContractAmounts.add(newItem);
         }
         ret.contractAmounts = newContractAmounts;
@@ -1825,7 +1825,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTerminationDates.size(); i++) {
           TerminationDates currentItem = ret.getTerminationDates().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('terminationDates');
-          TerminationDates newItem = (TerminationDates) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TerminationDates.class);
+          TerminationDates newItem = (TerminationDates) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TerminationDates.class);
           newTerminationDates.add(newItem);
         }
         ret.terminationDates = newTerminationDates;
@@ -1838,7 +1838,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContractTypes.size(); i++) {
           ContractTypes currentItem = ret.getContractTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contractTypes');
-          ContractTypes newItem = (ContractTypes) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTypes.class);
+          ContractTypes newItem = (ContractTypes) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ContractTypes.class);
           newContractTypes.add(newItem);
         }
         ret.contractTypes = newContractTypes;
@@ -1851,7 +1851,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContractTerms.size(); i++) {
           ContractTerms currentItem = ret.getContractTerms().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contractTerms');
-          ContractTerms newItem = (ContractTerms) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTerms.class);
+          ContractTerms newItem = (ContractTerms) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ContractTerms.class);
           newContractTerms.add(newItem);
         }
         ret.contractTerms = newContractTerms;
@@ -1864,7 +1864,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedPaymentTerms.size(); i++) {
           PaymentTerms currentItem = ret.getPaymentTerms().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('paymentTerms');
-          PaymentTerms newItem = (PaymentTerms) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), PaymentTerms.class);
+          PaymentTerms newItem = (PaymentTerms) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), PaymentTerms.class);
           newPaymentTerms.add(newItem);
         }
         ret.paymentTerms = newPaymentTerms;
@@ -1877,7 +1877,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContractCurrencies.size(); i++) {
           ContractCurrencies currentItem = ret.getContractCurrencies().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contractCurrencies');
-          ContractCurrencies newItem = (ContractCurrencies) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractCurrencies.class);
+          ContractCurrencies newItem = (ContractCurrencies) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ContractCurrencies.class);
           newContractCurrencies.add(newItem);
         }
         ret.contractCurrencies = newContractCurrencies;
@@ -1890,7 +1890,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTables.size(); i++) {
           Tables currentItem = ret.getTables().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tables');
-          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
+          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Tables.class);
           newTables.add(newItem);
         }
         ret.tables = newTables;
@@ -1898,7 +1898,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for documentStructure
       Map<String, Object> documentStructureMap = (Map<String, Object>) jsonMap.get('documentStructure');
-      DocStructure newDocumentStructure = (DocStructure) new DocStructure().deserialize(JSON.serialize(documentStructureMap), documentStructureMap, DocStructure.class);
+      DocStructure newDocumentStructure = (DocStructure) new DocStructure().deserialize(JSON.serialize(documentStructureMap, true), documentStructureMap, DocStructure.class);
       ret.setDocumentStructure(newDocumentStructure);
 
       // calling custom deserializer for parties
@@ -1908,7 +1908,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedParties.size(); i++) {
           Parties currentItem = ret.getParties().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('parties');
-          Parties newItem = (Parties) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Parties.class);
+          Parties newItem = (Parties) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Parties.class);
           newParties.add(newItem);
         }
         ret.parties = newParties;
@@ -2122,7 +2122,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(locationMap), locationMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(locationMap, true), locationMap, IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -2522,7 +2522,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedDocuments.size(); i++) {
           Document currentItem = ret.getDocuments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('documents');
-          Document newItem = (Document) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Document.class);
+          Document newItem = (Document) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Document.class);
           newDocuments.add(newItem);
         }
         ret.documents = newDocuments;
@@ -2535,7 +2535,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAlignedElements.size(); i++) {
           AlignedElement currentItem = ret.getAlignedElements().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('alignedElements');
-          AlignedElement newItem = (AlignedElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AlignedElement.class);
+          AlignedElement newItem = (AlignedElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), AlignedElement.class);
           newAlignedElements.add(newItem);
         }
         ret.alignedElements = newAlignedElements;
@@ -2548,7 +2548,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedUnalignedElements.size(); i++) {
           UnalignedElement currentItem = ret.getUnalignedElements().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('unalignedElements');
-          UnalignedElement newItem = (UnalignedElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UnalignedElement.class);
+          UnalignedElement newItem = (UnalignedElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), UnalignedElement.class);
           newUnalignedElements.add(newItem);
         }
         ret.unalignedElements = newUnalignedElements;
@@ -2677,7 +2677,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -2842,12 +2842,12 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for interpretation
       Map<String, Object> interpretationMap = (Map<String, Object>) jsonMap.get('interpretation');
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap), interpretationMap, Interpretation.class);
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap, true), interpretationMap, Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -2990,7 +2990,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -3155,12 +3155,12 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for interpretation
       Map<String, Object> interpretationMap = (Map<String, Object>) jsonMap.get('interpretation');
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap), interpretationMap, Interpretation.class);
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap, true), interpretationMap, Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -3278,7 +3278,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -4130,7 +4130,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedSectionTitles.size(); i++) {
           SectionTitles currentItem = ret.getSectionTitles().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('sectionTitles');
-          SectionTitles newItem = (SectionTitles) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SectionTitles.class);
+          SectionTitles newItem = (SectionTitles) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SectionTitles.class);
           newSectionTitles.add(newItem);
         }
         ret.sectionTitles = newSectionTitles;
@@ -4143,7 +4143,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedLeadingSentences.size(); i++) {
           LeadingSentence currentItem = ret.getLeadingSentences().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('leadingSentences');
-          LeadingSentence newItem = (LeadingSentence) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LeadingSentence.class);
+          LeadingSentence newItem = (LeadingSentence) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), LeadingSentence.class);
           newLeadingSentences.add(newItem);
         }
         ret.leadingSentences = newLeadingSentences;
@@ -4156,7 +4156,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedParagraphs.size(); i++) {
           Paragraphs currentItem = ret.getParagraphs().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('paragraphs');
-          Paragraphs newItem = (Paragraphs) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Paragraphs.class);
+          Paragraphs newItem = (Paragraphs) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Paragraphs.class);
           newParagraphs.add(newItem);
         }
         ret.paragraphs = newParagraphs;
@@ -4406,7 +4406,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -4538,7 +4538,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -4548,7 +4548,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
+          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TypeLabel.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -4561,7 +4561,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
+          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Category.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -4574,7 +4574,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
-          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Attribute.class);
           newAttributes.add(newItem);
         }
         ret.attributes = newAttributes;
@@ -4807,7 +4807,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -4817,7 +4817,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabelComparison currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
+          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TypeLabelComparison.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -4830,7 +4830,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           CategoryComparison currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
+          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), CategoryComparison.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -4843,7 +4843,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
-          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Attribute.class);
           newAttributes.add(newItem);
         }
         ret.attributes = newAttributes;
@@ -5128,7 +5128,7 @@ public class IBMCompareComplyV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -5145,7 +5145,7 @@ public class IBMCompareComplyV1Models {
 
       // performing custom serialization for document
       if (document != null) {
-        String documentJsonString = JSON.serialize(document.replacePropertyNames());
+        String documentJsonString = JSON.serialize(document.replacePropertyNames(), true);
         String documentKey = 'document';
         if (propertyNameMapping.containsKey(documentKey)) {
           documentKey = propertyNameMapping.get(documentKey);
@@ -5155,7 +5155,7 @@ public class IBMCompareComplyV1Models {
 
       // performing custom serialization for location
       if (location != null) {
-        String locationJsonString = JSON.serialize(location.replacePropertyNames());
+        String locationJsonString = JSON.serialize(location.replacePropertyNames(), true);
         String locationKey = 'location';
         if (propertyNameMapping.containsKey(locationKey)) {
           locationKey = propertyNameMapping.get(locationKey);
@@ -5165,7 +5165,7 @@ public class IBMCompareComplyV1Models {
 
       // performing custom serialization for originalLabels
       if (originalLabels != null) {
-        String originalLabelsJsonString = JSON.serialize(originalLabels.replacePropertyNames());
+        String originalLabelsJsonString = JSON.serialize(originalLabels.replacePropertyNames(), true);
         String originalLabelsKey = 'originalLabels';
         if (propertyNameMapping.containsKey(originalLabelsKey)) {
           originalLabelsKey = propertyNameMapping.get(originalLabelsKey);
@@ -5175,7 +5175,7 @@ public class IBMCompareComplyV1Models {
 
       // performing custom serialization for updatedLabels
       if (updatedLabels != null) {
-        String updatedLabelsJsonString = JSON.serialize(updatedLabels.replacePropertyNames());
+        String updatedLabelsJsonString = JSON.serialize(updatedLabels.replacePropertyNames(), true);
         String updatedLabelsKey = 'updatedLabels';
         if (propertyNameMapping.containsKey(updatedLabelsKey)) {
           updatedLabelsKey = propertyNameMapping.get(updatedLabelsKey);
@@ -5556,27 +5556,27 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for document
       Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
-      ShortDoc newDocument = (ShortDoc) new ShortDoc().deserialize(JSON.serialize(documentMap), documentMap, ShortDoc.class);
+      ShortDoc newDocument = (ShortDoc) new ShortDoc().deserialize(JSON.serialize(documentMap, true), documentMap, ShortDoc.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for originalLabels
       Map<String, Object> originalLabelsMap = (Map<String, Object>) jsonMap.get('originalLabels');
-      OriginalLabelsOut newOriginalLabels = (OriginalLabelsOut) new OriginalLabelsOut().deserialize(JSON.serialize(originalLabelsMap), originalLabelsMap, OriginalLabelsOut.class);
+      OriginalLabelsOut newOriginalLabels = (OriginalLabelsOut) new OriginalLabelsOut().deserialize(JSON.serialize(originalLabelsMap, true), originalLabelsMap, OriginalLabelsOut.class);
       ret.setOriginalLabels(newOriginalLabels);
 
       // calling custom deserializer for updatedLabels
       Map<String, Object> updatedLabelsMap = (Map<String, Object>) jsonMap.get('updatedLabels');
-      UpdatedLabelsOut newUpdatedLabels = (UpdatedLabelsOut) new UpdatedLabelsOut().deserialize(JSON.serialize(updatedLabelsMap), updatedLabelsMap, UpdatedLabelsOut.class);
+      UpdatedLabelsOut newUpdatedLabels = (UpdatedLabelsOut) new UpdatedLabelsOut().deserialize(JSON.serialize(updatedLabelsMap, true), updatedLabelsMap, UpdatedLabelsOut.class);
       ret.setUpdatedLabels(newUpdatedLabels);
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -5624,7 +5624,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedFeedback.size(); i++) {
           GetFeedback currentItem = ret.getFeedback().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('feedback');
-          GetFeedback newItem = (GetFeedback) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), GetFeedback.class);
+          GetFeedback newItem = (GetFeedback) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), GetFeedback.class);
           newFeedback.add(newItem);
         }
         ret.feedback = newFeedback;
@@ -5767,7 +5767,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for feedbackData
       Map<String, Object> feedbackDataMap = (Map<String, Object>) jsonMap.get('feedbackData');
-      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(feedbackDataMap), feedbackDataMap, FeedbackDataOutput.class);
+      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(feedbackDataMap, true), feedbackDataMap, FeedbackDataOutput.class);
       ret.setFeedbackData(newFeedbackData);
 
       return ret;
@@ -5976,7 +5976,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for feedbackData
       Map<String, Object> feedbackDataMap = (Map<String, Object>) jsonMap.get('feedbackData');
-      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(feedbackDataMap), feedbackDataMap, FeedbackDataOutput.class);
+      FeedbackDataOutput newFeedbackData = (FeedbackDataOutput) new FeedbackDataOutput().deserialize(JSON.serialize(feedbackDataMap, true), feedbackDataMap, FeedbackDataOutput.class);
       ret.setFeedbackData(newFeedbackData);
 
       return ret;
@@ -6419,7 +6419,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -6484,7 +6484,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for key
       Map<String, Object> keyMap = (Map<String, Object>) jsonMap.get('key');
-      Key newKey = (Key) new Key().deserialize(JSON.serialize(keyMap), keyMap, Key.class);
+      Key newKey = (Key) new Key().deserialize(JSON.serialize(keyMap, true), keyMap, Key.class);
       ret.setKey(newKey);
 
       // calling custom deserializer for value
@@ -6494,7 +6494,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedValue.size(); i++) {
           Value currentItem = ret.getValue().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('value');
-          Value newItem = (Value) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Value.class);
           newValue.add(newItem);
         }
         ret.value = newValue;
@@ -6571,7 +6571,7 @@ public class IBMCompareComplyV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -6726,7 +6726,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for elementLocations
@@ -6736,7 +6736,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedElementLocations.size(); i++) {
           ElementLocations currentItem = ret.getElementLocations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('elementLocations');
-          ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
+          ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ElementLocations.class);
           newElementLocations.add(newItem);
         }
         ret.elementLocations = newElementLocations;
@@ -7364,7 +7364,7 @@ public class IBMCompareComplyV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -7500,7 +7500,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -7554,13 +7554,13 @@ public class IBMCompareComplyV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for types
       if (types != null) {
         List<Object> typesJsonList = new List<Object>();
         for (TypeLabel listItem : types) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           typesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('types', typesJsonList);
@@ -7570,7 +7570,7 @@ public class IBMCompareComplyV1Models {
       if (categories != null) {
         List<Object> categoriesJsonList = new List<Object>();
         for (Category listItem : categories) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           categoriesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('categories', categoriesJsonList);
@@ -7759,7 +7759,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
+          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TypeLabel.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -7772,7 +7772,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
+          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Category.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -7955,7 +7955,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -8113,7 +8113,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAddresses.size(); i++) {
           Address currentItem = ret.getAddresses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('addresses');
-          Address newItem = (Address) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Address.class);
+          Address newItem = (Address) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Address.class);
           newAddresses.add(newItem);
         }
         ret.addresses = newAddresses;
@@ -8126,7 +8126,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContacts.size(); i++) {
           Contact currentItem = ret.getContacts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contacts');
-          Contact newItem = (Contact) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contact.class);
+          Contact newItem = (Contact) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Contact.class);
           newContacts.add(newItem);
         }
         ret.contacts = newContacts;
@@ -8139,7 +8139,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedMentions.size(); i++) {
           Mention currentItem = ret.getMentions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('mentions');
-          Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mention.class);
+          Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Mention.class);
           newMentions.add(newItem);
         }
         ret.mentions = newMentions;
@@ -8307,12 +8307,12 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for interpretation
       Map<String, Object> interpretationMap = (Map<String, Object>) jsonMap.get('interpretation');
-      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap), interpretationMap, Interpretation.class);
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(interpretationMap, true), interpretationMap, Interpretation.class);
       ret.setInterpretation(newInterpretation);
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -8523,7 +8523,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -8589,7 +8589,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -8709,7 +8709,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for elementLocations
@@ -8719,7 +8719,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedElementLocations.size(); i++) {
           ElementLocations currentItem = ret.getElementLocations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('elementLocations');
-          ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
+          ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ElementLocations.class);
           newElementLocations.add(newItem);
         }
         ret.elementLocations = newElementLocations;
@@ -8793,7 +8793,7 @@ public class IBMCompareComplyV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -9029,7 +9029,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(locationMap), locationMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(locationMap, true), locationMap, IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -9146,7 +9146,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for document
       Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
-      DocInfo newDocument = (DocInfo) new DocInfo().deserialize(JSON.serialize(documentMap), documentMap, DocInfo.class);
+      DocInfo newDocument = (DocInfo) new DocInfo().deserialize(JSON.serialize(documentMap, true), documentMap, DocInfo.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for tables
@@ -9156,7 +9156,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTables.size(); i++) {
           Tables currentItem = ret.getTables().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tables');
-          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
+          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Tables.class);
           newTables.add(newItem);
         }
         ret.tables = newTables;
@@ -9226,7 +9226,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -9485,17 +9485,17 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for sectionTitle
       Map<String, Object> sectionTitleMap = (Map<String, Object>) jsonMap.get('sectionTitle');
-      SectionTitle newSectionTitle = (SectionTitle) new SectionTitle().deserialize(JSON.serialize(sectionTitleMap), sectionTitleMap, SectionTitle.class);
+      SectionTitle newSectionTitle = (SectionTitle) new SectionTitle().deserialize(JSON.serialize(sectionTitleMap, true), sectionTitleMap, SectionTitle.class);
       ret.setSectionTitle(newSectionTitle);
 
       // calling custom deserializer for title
       Map<String, Object> titleMap = (Map<String, Object>) jsonMap.get('title');
-      TableTitle newTitle = (TableTitle) new TableTitle().deserialize(JSON.serialize(titleMap), titleMap, TableTitle.class);
+      TableTitle newTitle = (TableTitle) new TableTitle().deserialize(JSON.serialize(titleMap, true), titleMap, TableTitle.class);
       ret.setTitle(newTitle);
 
       // calling custom deserializer for tableHeaders
@@ -9505,7 +9505,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTableHeaders.size(); i++) {
           TableHeaders currentItem = ret.getTableHeaders().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tableHeaders');
-          TableHeaders newItem = (TableHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TableHeaders.class);
+          TableHeaders newItem = (TableHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TableHeaders.class);
           newTableHeaders.add(newItem);
         }
         ret.tableHeaders = newTableHeaders;
@@ -9518,7 +9518,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedRowHeaders.size(); i++) {
           RowHeaders currentItem = ret.getRowHeaders().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('rowHeaders');
-          RowHeaders newItem = (RowHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaders.class);
+          RowHeaders newItem = (RowHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RowHeaders.class);
           newRowHeaders.add(newItem);
         }
         ret.rowHeaders = newRowHeaders;
@@ -9531,7 +9531,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedColumnHeaders.size(); i++) {
           ColumnHeaders currentItem = ret.getColumnHeaders().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('columnHeaders');
-          ColumnHeaders newItem = (ColumnHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaders.class);
+          ColumnHeaders newItem = (ColumnHeaders) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ColumnHeaders.class);
           newColumnHeaders.add(newItem);
         }
         ret.columnHeaders = newColumnHeaders;
@@ -9544,7 +9544,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedBodyCells.size(); i++) {
           BodyCells currentItem = ret.getBodyCells().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('bodyCells');
-          BodyCells newItem = (BodyCells) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BodyCells.class);
+          BodyCells newItem = (BodyCells) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), BodyCells.class);
           newBodyCells.add(newItem);
         }
         ret.bodyCells = newBodyCells;
@@ -9557,7 +9557,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedContexts.size(); i++) {
           Contexts currentItem = ret.getContexts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('contexts');
-          Contexts newItem = (Contexts) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contexts.class);
+          Contexts newItem = (Contexts) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Contexts.class);
           newContexts.add(newItem);
         }
         ret.contexts = newContexts;
@@ -9570,7 +9570,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedKeyValuePairs.size(); i++) {
           KeyValuePair currentItem = ret.getKeyValuePairs().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('keyValuePairs');
-          KeyValuePair newItem = (KeyValuePair) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeyValuePair.class);
+          KeyValuePair newItem = (KeyValuePair) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), KeyValuePair.class);
           newKeyValuePairs.add(newItem);
         }
         ret.keyValuePairs = newKeyValuePairs;
@@ -9715,7 +9715,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -9791,7 +9791,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for label
       Map<String, Object> labelMap = (Map<String, Object>) jsonMap.get('label');
-      Label newLabel = (Label) new Label().deserialize(JSON.serialize(labelMap), labelMap, Label.class);
+      Label newLabel = (Label) new Label().deserialize(JSON.serialize(labelMap, true), labelMap, Label.class);
       retBuilder.label(newLabel);
 
       return retBuilder.build();
@@ -9799,7 +9799,7 @@ public class IBMCompareComplyV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -9812,7 +9812,7 @@ public class IBMCompareComplyV1Models {
 
       // performing custom serialization for label
       if (label != null) {
-        String labelJsonString = JSON.serialize(label.replacePropertyNames());
+        String labelJsonString = JSON.serialize(label.replacePropertyNames(), true);
         String labelKey = 'label';
         if (propertyNameMapping.containsKey(labelKey)) {
           labelKey = propertyNameMapping.get(labelKey);
@@ -9927,7 +9927,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for label
       Map<String, Object> labelMap = (Map<String, Object>) jsonMap.get('label');
-      Label newLabel = (Label) new Label().deserialize(JSON.serialize(labelMap), labelMap, Label.class);
+      Label newLabel = (Label) new Label().deserialize(JSON.serialize(labelMap, true), labelMap, Label.class);
       ret.setLabel(newLabel);
 
       return ret;
@@ -10089,7 +10089,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
@@ -10099,7 +10099,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabelComparison currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
+          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TypeLabelComparison.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -10112,7 +10112,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           CategoryComparison currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
+          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), CategoryComparison.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -10125,7 +10125,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedAttributes.size(); i++) {
           Attribute currentItem = ret.getAttributes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('attributes');
-          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Attribute.class);
           newAttributes.add(newItem);
         }
         ret.attributes = newAttributes;
@@ -10331,13 +10331,13 @@ public class IBMCompareComplyV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for types
       if (types != null) {
         List<Object> typesJsonList = new List<Object>();
         for (TypeLabel listItem : types) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           typesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('types', typesJsonList);
@@ -10347,7 +10347,7 @@ public class IBMCompareComplyV1Models {
       if (categories != null) {
         List<Object> categoriesJsonList = new List<Object>();
         for (Category listItem : categories) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           categoriesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('categories', categoriesJsonList);
@@ -10536,7 +10536,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
           TypeLabel currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types');
-          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
+          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TypeLabel.class);
           newTypes.add(newItem);
         }
         ret.types = newTypes;
@@ -10549,7 +10549,7 @@ public class IBMCompareComplyV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           Category currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
+          Category newItem = (Category) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Category.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -10647,7 +10647,7 @@ public class IBMCompareComplyV1Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;

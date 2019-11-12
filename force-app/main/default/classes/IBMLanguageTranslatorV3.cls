@@ -76,7 +76,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     if (translateOptions.target() != null) {
       contentJson.put('target', translateOptions.target());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMLanguageTranslatorV3Models.TranslationResult) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationResult.class);
   }

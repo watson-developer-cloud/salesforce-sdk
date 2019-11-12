@@ -3901,15 +3901,17 @@ public class IBMWatsonMockResponses {
               '}' +
             ']' +
           '},' +
-          '"errors": {' +
-            '"code": "code",' +
-            '"message": "message",' +
-            '"more_info": "more_info",' +
-            '"target": {' +
-              '"type": "field",' +
-              '"name": "name"' +
+          '"errors": [' +
+            '{' +
+              '"code": "code",' +
+              '"message": "message",' +
+              '"more_info": "more_info",' +
+              '"target": {' +
+                '"type": "field",' +
+                '"name": "name"' +
+              '}' +
             '}' +
-          '}' +
+          ']' +
         '}' +
       '],' +
       '"warnings": [' +
@@ -3983,15 +3985,17 @@ public class IBMWatsonMockResponses {
         '"height": 200,' +
         '"width": 100' +
       '},' +
-      '"errors": {' +
-        '"code": "code",' +
-        '"message": "message",' +
-        '"more_info": "more_info",' +
-        '"target": {' +
-          '"type": "field",' +
-          '"name": "name"' +
+      '"errors": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message",' +
+          '"more_info": "more_info",' +
+          '"target": {' +
+            '"type": "field",' +
+            '"name": "name"' +
+          '}' +
         '}' +
-      '},' +
+      '],' +
       '"training_data": {' +
         '"objects": [' +
           '{' +
@@ -4026,15 +4030,17 @@ public class IBMWatsonMockResponses {
             '"height": 200,' +
             '"width": 100' +
           '},' +
-          '"errors": {' +
-            '"code": "code",' +
-            '"message": "message",' +
-            '"more_info": "more_info",' +
-            '"target": {' +
-              '"type": "field",' +
-              '"name": "name"' +
+          '"errors": [' +
+            '{' +
+              '"code": "code",' +
+              '"message": "message",' +
+              '"more_info": "more_info",' +
+              '"target": {' +
+                '"type": "field",' +
+                '"name": "name"' +
+              '}' +
             '}' +
-          '},' +
+          '],' +
           '"training_data": {' +
             '"objects": [' +
               '{' +

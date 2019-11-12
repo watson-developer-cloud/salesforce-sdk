@@ -330,7 +330,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for usage
       Map<String, Object> usageMap = (Map<String, Object>) jsonMap.get('usage');
-      AnalysisResultsUsage newUsage = (AnalysisResultsUsage) new AnalysisResultsUsage().deserialize(JSON.serialize(usageMap), usageMap, AnalysisResultsUsage.class);
+      AnalysisResultsUsage newUsage = (AnalysisResultsUsage) new AnalysisResultsUsage().deserialize(JSON.serialize(usageMap, true), usageMap, AnalysisResultsUsage.class);
       ret.setUsage(newUsage);
 
       // calling custom deserializer for concepts
@@ -340,7 +340,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedConcepts.size(); i++) {
           ConceptsResult currentItem = ret.getConcepts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('concepts');
-          ConceptsResult newItem = (ConceptsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConceptsResult.class);
+          ConceptsResult newItem = (ConceptsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ConceptsResult.class);
           newConcepts.add(newItem);
         }
         ret.concepts = newConcepts;
@@ -353,7 +353,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           EntitiesResult currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          EntitiesResult newItem = (EntitiesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntitiesResult.class);
+          EntitiesResult newItem = (EntitiesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), EntitiesResult.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -366,7 +366,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedKeywords.size(); i++) {
           KeywordsResult currentItem = ret.getKeywords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('keywords');
-          KeywordsResult newItem = (KeywordsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeywordsResult.class);
+          KeywordsResult newItem = (KeywordsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), KeywordsResult.class);
           newKeywords.add(newItem);
         }
         ret.keywords = newKeywords;
@@ -379,7 +379,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
           CategoriesResult currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories');
-          CategoriesResult newItem = (CategoriesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesResult.class);
+          CategoriesResult newItem = (CategoriesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), CategoriesResult.class);
           newCategories.add(newItem);
         }
         ret.categories = newCategories;
@@ -387,12 +387,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for emotion
       Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
-      EmotionResult newEmotion = (EmotionResult) new EmotionResult().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionResult.class);
+      EmotionResult newEmotion = (EmotionResult) new EmotionResult().deserialize(JSON.serialize(emotionMap, true), emotionMap, EmotionResult.class);
       ret.setEmotion(newEmotion);
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      AnalysisResultsMetadata newMetadata = (AnalysisResultsMetadata) new AnalysisResultsMetadata().deserialize(JSON.serialize(metadataMap), metadataMap, AnalysisResultsMetadata.class);
+      AnalysisResultsMetadata newMetadata = (AnalysisResultsMetadata) new AnalysisResultsMetadata().deserialize(JSON.serialize(metadataMap, true), metadataMap, AnalysisResultsMetadata.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for relations
@@ -402,7 +402,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedRelations.size(); i++) {
           RelationsResult currentItem = ret.getRelations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('relations');
-          RelationsResult newItem = (RelationsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationsResult.class);
+          RelationsResult newItem = (RelationsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RelationsResult.class);
           newRelations.add(newItem);
         }
         ret.relations = newRelations;
@@ -415,7 +415,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedSemanticRoles.size(); i++) {
           SemanticRolesResult currentItem = ret.getSemanticRoles().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('semanticRoles');
-          SemanticRolesResult newItem = (SemanticRolesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesResult.class);
+          SemanticRolesResult newItem = (SemanticRolesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SemanticRolesResult.class);
           newSemanticRoles.add(newItem);
         }
         ret.semanticRoles = newSemanticRoles;
@@ -423,12 +423,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for sentiment
       Map<String, Object> sentimentMap = (Map<String, Object>) jsonMap.get('sentiment');
-      SentimentResult newSentiment = (SentimentResult) new SentimentResult().deserialize(JSON.serialize(sentimentMap), sentimentMap, SentimentResult.class);
+      SentimentResult newSentiment = (SentimentResult) new SentimentResult().deserialize(JSON.serialize(sentimentMap, true), sentimentMap, SentimentResult.class);
       ret.setSentiment(newSentiment);
 
       // calling custom deserializer for syntax
       Map<String, Object> syntaxMap = (Map<String, Object>) jsonMap.get('syntax');
-      SyntaxResult newSyntax = (SyntaxResult) new SyntaxResult().deserialize(JSON.serialize(syntaxMap), syntaxMap, SyntaxResult.class);
+      SyntaxResult newSyntax = (SyntaxResult) new SyntaxResult().deserialize(JSON.serialize(syntaxMap, true), syntaxMap, SyntaxResult.class);
       ret.setSyntax(newSyntax);
 
       return ret;
@@ -571,7 +571,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedAuthors.size(); i++) {
           Author currentItem = ret.getAuthors().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('authors');
-          Author newItem = (Author) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Author.class);
+          Author newItem = (Author) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Author.class);
           newAuthors.add(newItem);
         }
         ret.authors = newAuthors;
@@ -584,7 +584,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedFeeds.size(); i++) {
           Feed currentItem = ret.getFeeds().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('feeds');
-          Feed newItem = (Feed) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Feed.class);
+          Feed newItem = (Feed) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Feed.class);
           newFeeds.add(newItem);
         }
         ret.feeds = newFeeds;
@@ -1318,7 +1318,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for explanation
       Map<String, Object> explanationMap = (Map<String, Object>) jsonMap.get('explanation');
-      CategoriesResultExplanation newExplanation = (CategoriesResultExplanation) new CategoriesResultExplanation().deserialize(JSON.serialize(explanationMap), explanationMap, CategoriesResultExplanation.class);
+      CategoriesResultExplanation newExplanation = (CategoriesResultExplanation) new CategoriesResultExplanation().deserialize(JSON.serialize(explanationMap, true), explanationMap, CategoriesResultExplanation.class);
       ret.setExplanation(newExplanation);
 
       return ret;
@@ -1375,7 +1375,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedRelevantText.size(); i++) {
           CategoriesRelevantText currentItem = ret.getRelevantText().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('relevantText');
-          CategoriesRelevantText newItem = (CategoriesRelevantText) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesRelevantText.class);
+          CategoriesRelevantText newItem = (CategoriesRelevantText) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), CategoriesRelevantText.class);
           newRelevantText.add(newItem);
         }
         ret.relevantText = newRelevantText;
@@ -1778,7 +1778,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for emotion
       Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
-      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionScores.class);
+      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap, true), emotionMap, EmotionScores.class);
       ret.setEmotion(newEmotion);
 
       return ret;
@@ -2025,7 +2025,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for document
       Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
-      DocumentEmotionResults newDocument = (DocumentEmotionResults) new DocumentEmotionResults().deserialize(JSON.serialize(documentMap), documentMap, DocumentEmotionResults.class);
+      DocumentEmotionResults newDocument = (DocumentEmotionResults) new DocumentEmotionResults().deserialize(JSON.serialize(documentMap, true), documentMap, DocumentEmotionResults.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for targets
@@ -2035,7 +2035,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedTargets.size(); i++) {
           TargetedEmotionResults currentItem = ret.getTargets().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('targets');
-          TargetedEmotionResults newItem = (TargetedEmotionResults) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TargetedEmotionResults.class);
+          TargetedEmotionResults newItem = (TargetedEmotionResults) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TargetedEmotionResults.class);
           newTargets.add(newItem);
         }
         ret.targets = newTargets;
@@ -2591,7 +2591,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedMentions.size(); i++) {
           EntityMention currentItem = ret.getMentions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('mentions');
-          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
+          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), EntityMention.class);
           newMentions.add(newItem);
         }
         ret.mentions = newMentions;
@@ -2599,17 +2599,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for emotion
       Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
-      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionScores.class);
+      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap, true), emotionMap, EmotionScores.class);
       ret.setEmotion(newEmotion);
 
       // calling custom deserializer for sentiment
       Map<String, Object> sentimentMap = (Map<String, Object>) jsonMap.get('sentiment');
-      FeatureSentimentResults newSentiment = (FeatureSentimentResults) new FeatureSentimentResults().deserialize(JSON.serialize(sentimentMap), sentimentMap, FeatureSentimentResults.class);
+      FeatureSentimentResults newSentiment = (FeatureSentimentResults) new FeatureSentimentResults().deserialize(JSON.serialize(sentimentMap, true), sentimentMap, FeatureSentimentResults.class);
       ret.setSentiment(newSentiment);
 
       // calling custom deserializer for disambiguation
       Map<String, Object> disambiguationMap = (Map<String, Object>) jsonMap.get('disambiguation');
-      DisambiguationResult newDisambiguation = (DisambiguationResult) new DisambiguationResult().deserialize(JSON.serialize(disambiguationMap), disambiguationMap, DisambiguationResult.class);
+      DisambiguationResult newDisambiguation = (DisambiguationResult) new DisambiguationResult().deserialize(JSON.serialize(disambiguationMap, true), disambiguationMap, DisambiguationResult.class);
       ret.setDisambiguation(newDisambiguation);
 
       return ret;
@@ -2926,7 +2926,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for concepts
       if (concepts != null) {
-        String conceptsJsonString = JSON.serialize(concepts.replacePropertyNames());
+        String conceptsJsonString = JSON.serialize(concepts.replacePropertyNames(), true);
         String conceptsKey = 'concepts';
         if (propertyNameMapping.containsKey(conceptsKey)) {
           conceptsKey = propertyNameMapping.get(conceptsKey);
@@ -2936,7 +2936,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for emotion
       if (emotion != null) {
-        String emotionJsonString = JSON.serialize(emotion.replacePropertyNames());
+        String emotionJsonString = JSON.serialize(emotion.replacePropertyNames(), true);
         String emotionKey = 'emotion';
         if (propertyNameMapping.containsKey(emotionKey)) {
           emotionKey = propertyNameMapping.get(emotionKey);
@@ -2946,7 +2946,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for entities
       if (entities != null) {
-        String entitiesJsonString = JSON.serialize(entities.replacePropertyNames());
+        String entitiesJsonString = JSON.serialize(entities.replacePropertyNames(), true);
         String entitiesKey = 'entities';
         if (propertyNameMapping.containsKey(entitiesKey)) {
           entitiesKey = propertyNameMapping.get(entitiesKey);
@@ -2956,7 +2956,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for keywords
       if (keywords != null) {
-        String keywordsJsonString = JSON.serialize(keywords.replacePropertyNames());
+        String keywordsJsonString = JSON.serialize(keywords.replacePropertyNames(), true);
         String keywordsKey = 'keywords';
         if (propertyNameMapping.containsKey(keywordsKey)) {
           keywordsKey = propertyNameMapping.get(keywordsKey);
@@ -2966,7 +2966,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames(), true);
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -2976,7 +2976,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for relations
       if (relations != null) {
-        String relationsJsonString = JSON.serialize(relations.replacePropertyNames());
+        String relationsJsonString = JSON.serialize(relations.replacePropertyNames(), true);
         String relationsKey = 'relations';
         if (propertyNameMapping.containsKey(relationsKey)) {
           relationsKey = propertyNameMapping.get(relationsKey);
@@ -2986,7 +2986,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for semanticRoles
       if (semanticRoles != null) {
-        String semanticRolesJsonString = JSON.serialize(semanticRoles.replacePropertyNames());
+        String semanticRolesJsonString = JSON.serialize(semanticRoles.replacePropertyNames(), true);
         String semanticRolesKey = 'semanticRoles';
         if (propertyNameMapping.containsKey(semanticRolesKey)) {
           semanticRolesKey = propertyNameMapping.get(semanticRolesKey);
@@ -2996,7 +2996,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for sentiment
       if (sentiment != null) {
-        String sentimentJsonString = JSON.serialize(sentiment.replacePropertyNames());
+        String sentimentJsonString = JSON.serialize(sentiment.replacePropertyNames(), true);
         String sentimentKey = 'sentiment';
         if (propertyNameMapping.containsKey(sentimentKey)) {
           sentimentKey = propertyNameMapping.get(sentimentKey);
@@ -3006,7 +3006,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for categories
       if (categories != null) {
-        String categoriesJsonString = JSON.serialize(categories.replacePropertyNames());
+        String categoriesJsonString = JSON.serialize(categories.replacePropertyNames(), true);
         String categoriesKey = 'categories';
         if (propertyNameMapping.containsKey(categoriesKey)) {
           categoriesKey = propertyNameMapping.get(categoriesKey);
@@ -3016,7 +3016,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for syntax
       if (syntax != null) {
-        String syntaxJsonString = JSON.serialize(syntax.replacePropertyNames());
+        String syntaxJsonString = JSON.serialize(syntax.replacePropertyNames(), true);
         String syntaxKey = 'syntax';
         if (propertyNameMapping.containsKey(syntaxKey)) {
           syntaxKey = propertyNameMapping.get(syntaxKey);
@@ -3482,12 +3482,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for emotion
       Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
-      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionScores.class);
+      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap, true), emotionMap, EmotionScores.class);
       ret.setEmotion(newEmotion);
 
       // calling custom deserializer for sentiment
       Map<String, Object> sentimentMap = (Map<String, Object>) jsonMap.get('sentiment');
-      FeatureSentimentResults newSentiment = (FeatureSentimentResults) new FeatureSentimentResults().deserialize(JSON.serialize(sentimentMap), sentimentMap, FeatureSentimentResults.class);
+      FeatureSentimentResults newSentiment = (FeatureSentimentResults) new FeatureSentimentResults().deserialize(JSON.serialize(sentimentMap, true), sentimentMap, FeatureSentimentResults.class);
       ret.setSentiment(newSentiment);
 
       return ret;
@@ -3591,7 +3591,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedModels.size(); i++) {
           Model currentItem = ret.getModels().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('models');
-          Model newItem = (Model) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Model.class);
+          Model newItem = (Model) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Model.class);
           newModels.add(newItem);
         }
         ret.models = newModels;
@@ -3937,7 +3937,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RelationEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          RelationEntity newItem = (RelationEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationEntity.class);
+          RelationEntity newItem = (RelationEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RelationEntity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -4210,7 +4210,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedArguments.size(); i++) {
           RelationArgument currentItem = ret.getArguments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('arguments');
-          RelationArgument newItem = (RelationArgument) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationArgument.class);
+          RelationArgument newItem = (RelationArgument) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RelationArgument.class);
           newArguments.add(newItem);
         }
         ret.arguments = newArguments;
@@ -4572,17 +4572,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for subject
       Map<String, Object> subjectMap = (Map<String, Object>) jsonMap.get('subject');
-      SemanticRolesResultSubject newSubject = (SemanticRolesResultSubject) new SemanticRolesResultSubject().deserialize(JSON.serialize(subjectMap), subjectMap, SemanticRolesResultSubject.class);
+      SemanticRolesResultSubject newSubject = (SemanticRolesResultSubject) new SemanticRolesResultSubject().deserialize(JSON.serialize(subjectMap, true), subjectMap, SemanticRolesResultSubject.class);
       ret.setSubject(newSubject);
 
       // calling custom deserializer for action
       Map<String, Object> actionMap = (Map<String, Object>) jsonMap.get('action');
-      SemanticRolesResultAction newAction = (SemanticRolesResultAction) new SemanticRolesResultAction().deserialize(JSON.serialize(actionMap), actionMap, SemanticRolesResultAction.class);
+      SemanticRolesResultAction newAction = (SemanticRolesResultAction) new SemanticRolesResultAction().deserialize(JSON.serialize(actionMap, true), actionMap, SemanticRolesResultAction.class);
       ret.setAction(newAction);
 
       // calling custom deserializer for xObject
       Map<String, Object> xObjectMap = (Map<String, Object>) jsonMap.get('xObject');
-      SemanticRolesResultObject newXObject = (SemanticRolesResultObject) new SemanticRolesResultObject().deserialize(JSON.serialize(xObjectMap), xObjectMap, SemanticRolesResultObject.class);
+      SemanticRolesResultObject newXObject = (SemanticRolesResultObject) new SemanticRolesResultObject().deserialize(JSON.serialize(xObjectMap, true), xObjectMap, SemanticRolesResultObject.class);
       ret.setXObject(newXObject);
 
       return ret;
@@ -4667,7 +4667,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for verb
       Map<String, Object> verbMap = (Map<String, Object>) jsonMap.get('verb');
-      SemanticRolesVerb newVerb = (SemanticRolesVerb) new SemanticRolesVerb().deserialize(JSON.serialize(verbMap), verbMap, SemanticRolesVerb.class);
+      SemanticRolesVerb newVerb = (SemanticRolesVerb) new SemanticRolesVerb().deserialize(JSON.serialize(verbMap, true), verbMap, SemanticRolesVerb.class);
       ret.setVerb(newVerb);
 
       return ret;
@@ -4737,7 +4737,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedKeywords.size(); i++) {
           SemanticRolesKeyword currentItem = ret.getKeywords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('keywords');
-          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
+          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SemanticRolesKeyword.class);
           newKeywords.add(newItem);
         }
         ret.keywords = newKeywords;
@@ -4832,7 +4832,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           SemanticRolesEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          SemanticRolesEntity newItem = (SemanticRolesEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesEntity.class);
+          SemanticRolesEntity newItem = (SemanticRolesEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SemanticRolesEntity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -4845,7 +4845,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedKeywords.size(); i++) {
           SemanticRolesKeyword currentItem = ret.getKeywords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('keywords');
-          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
+          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SemanticRolesKeyword.class);
           newKeywords.add(newItem);
         }
         ret.keywords = newKeywords;
@@ -5153,7 +5153,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for document
       Map<String, Object> documentMap = (Map<String, Object>) jsonMap.get('document');
-      DocumentSentimentResults newDocument = (DocumentSentimentResults) new DocumentSentimentResults().deserialize(JSON.serialize(documentMap), documentMap, DocumentSentimentResults.class);
+      DocumentSentimentResults newDocument = (DocumentSentimentResults) new DocumentSentimentResults().deserialize(JSON.serialize(documentMap, true), documentMap, DocumentSentimentResults.class);
       ret.setDocument(newDocument);
 
       // calling custom deserializer for targets
@@ -5163,7 +5163,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedTargets.size(); i++) {
           TargetedSentimentResults currentItem = ret.getTargets().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('targets');
-          TargetedSentimentResults newItem = (TargetedSentimentResults) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TargetedSentimentResults.class);
+          TargetedSentimentResults newItem = (TargetedSentimentResults) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TargetedSentimentResults.class);
           newTargets.add(newItem);
         }
         ret.targets = newTargets;
@@ -5222,7 +5222,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // performing custom serialization for tokens
       if (tokens != null) {
-        String tokensJsonString = JSON.serialize(tokens.replacePropertyNames());
+        String tokensJsonString = JSON.serialize(tokens.replacePropertyNames(), true);
         jsonMap.put('tokens', JSON.deserializeUntyped(tokensJsonString));
       }
 
@@ -5449,7 +5449,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedTokens.size(); i++) {
           TokenResult currentItem = ret.getTokens().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tokens');
-          TokenResult newItem = (TokenResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TokenResult.class);
+          TokenResult newItem = (TokenResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TokenResult.class);
           newTokens.add(newItem);
         }
         ret.tokens = newTokens;
@@ -5462,7 +5462,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         for (Integer i = 0; i < deserializedSentences.size(); i++) {
           SentenceResult currentItem = ret.getSentences().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('sentences');
-          SentenceResult newItem = (SentenceResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceResult.class);
+          SentenceResult newItem = (SentenceResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SentenceResult.class);
           newSentences.add(newItem);
         }
         ret.sentences = newSentences;
@@ -5530,7 +5530,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       // calling custom deserializer for emotion
       Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
-      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap), emotionMap, EmotionScores.class);
+      EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(emotionMap, true), emotionMap, EmotionScores.class);
       ret.setEmotion(newEmotion);
 
       return ret;

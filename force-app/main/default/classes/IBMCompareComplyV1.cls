@@ -217,7 +217,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     if (addFeedbackOptions.comment() != null) {
       contentJson.put('comment', addFeedbackOptions.comment());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMCompareComplyV1Models.FeedbackReturn) createServiceCall(builder.build(), IBMCompareComplyV1Models.FeedbackReturn.class);
   }
