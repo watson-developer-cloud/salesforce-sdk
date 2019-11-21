@@ -789,8 +789,8 @@ public class IBMAssistantV2Models {
     /**
      * Gets the label.
      *
-     * The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
-     * corresponding dialog node.
+     * The user-facing label for the disambiguation option. This label is taken from the **title** or **user_label**
+     * property of the corresponding dialog node, depending on the disambiguation options.
      *
      * @return the label
      */
