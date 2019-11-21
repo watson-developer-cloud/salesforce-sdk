@@ -186,13 +186,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createWorkspaceOptions.systemSettings() != null) {
       contentJson.put('system_settings', createWorkspaceOptions.systemSettings().replacePropertyNames());
     }
-    if (createWorkspaceOptions.webhooks() != null) {
-      List<Object> webhooksList = new List<Object>();
-      for (IBMAssistantV1Models.Webhook webhooksItem : createWorkspaceOptions.webhooks()) {
-        webhooksList.add(webhooksItem.replacePropertyNames());
-      }
-      contentJson.put('webhooks', webhooksList);
-    }
     if (createWorkspaceOptions.intents() != null) {
       List<Object> intentsList = new List<Object>();
       for (IBMAssistantV1Models.CreateIntent intentsItem : createWorkspaceOptions.intents()) {
@@ -220,6 +213,13 @@ public class IBMAssistantV1 extends IBMWatsonService {
         counterexamplesList.add(counterexamplesItem.replacePropertyNames());
       }
       contentJson.put('counterexamples', counterexamplesList);
+    }
+    if (createWorkspaceOptions.webhooks() != null) {
+      List<Object> webhooksList = new List<Object>();
+      for (IBMAssistantV1Models.Webhook webhooksItem : createWorkspaceOptions.webhooks()) {
+        webhooksList.add(webhooksItem.replacePropertyNames());
+      }
+      contentJson.put('webhooks', webhooksList);
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
@@ -309,13 +309,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateWorkspaceOptions.systemSettings() != null) {
       contentJson.put('system_settings', updateWorkspaceOptions.systemSettings().replacePropertyNames());
     }
-    if (updateWorkspaceOptions.webhooks() != null) {
-      List<Object> webhooksList = new List<Object>();
-      for (IBMAssistantV1Models.Webhook webhooksItem : updateWorkspaceOptions.webhooks()) {
-        webhooksList.add(webhooksItem.replacePropertyNames());
-      }
-      contentJson.put('webhooks', webhooksList);
-    }
     if (updateWorkspaceOptions.intents() != null) {
       List<Object> intentsList = new List<Object>();
       for (IBMAssistantV1Models.CreateIntent intentsItem : updateWorkspaceOptions.intents()) {
@@ -343,6 +336,13 @@ public class IBMAssistantV1 extends IBMWatsonService {
         counterexamplesList.add(counterexamplesItem.replacePropertyNames());
       }
       contentJson.put('counterexamples', counterexamplesList);
+    }
+    if (updateWorkspaceOptions.webhooks() != null) {
+      List<Object> webhooksList = new List<Object>();
+      for (IBMAssistantV1Models.Webhook webhooksItem : updateWorkspaceOptions.webhooks()) {
+        webhooksList.add(webhooksItem.replacePropertyNames());
+      }
+      contentJson.put('webhooks', webhooksList);
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 

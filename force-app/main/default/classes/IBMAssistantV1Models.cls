@@ -3299,11 +3299,11 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
-    private List<Webhook> webhooks;
     private List<CreateIntent> intents;
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
 
     /**
      * Gets the name.
@@ -3373,15 +3373,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the webhooks.
-     *
-     * @return the webhooks
-     */
-    public List<Webhook> webhooks() {
-      return webhooks;
-    }
-
-    /**
      * Gets the intents.
      *
      * An array of objects defining the intents for the workspace.
@@ -3425,6 +3416,15 @@ public class IBMAssistantV1Models {
       return counterexamples;
     }
 
+    /**
+     * Gets the webhooks.
+     *
+     * @return the webhooks
+     */
+    public List<Webhook> webhooks() {
+      return webhooks;
+    }
+
     private CreateWorkspaceOptions(CreateWorkspaceOptionsBuilder builder) {
       name = builder.name;
       description = builder.description;
@@ -3432,11 +3432,11 @@ public class IBMAssistantV1Models {
       metadata = builder.metadata;
       learningOptOut = builder.learningOptOut;
       systemSettings = builder.systemSettings;
-      webhooks = builder.webhooks;
       intents = builder.intents;
       entities = builder.entities;
       dialogNodes = builder.dialogNodes;
       counterexamples = builder.counterexamples;
+      webhooks = builder.webhooks;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3460,11 +3460,11 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
-    private List<Webhook> webhooks;
     private List<CreateIntent> intents;
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
 
     private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions createWorkspaceOptions) {
       name = createWorkspaceOptions.name;
@@ -3473,11 +3473,11 @@ public class IBMAssistantV1Models {
       metadata = createWorkspaceOptions.metadata;
       learningOptOut = createWorkspaceOptions.learningOptOut;
       systemSettings = createWorkspaceOptions.systemSettings;
-      webhooks = createWorkspaceOptions.webhooks;
       intents = createWorkspaceOptions.intents;
       entities = createWorkspaceOptions.entities;
       dialogNodes = createWorkspaceOptions.dialogNodes;
       counterexamples = createWorkspaceOptions.counterexamples;
+      webhooks = createWorkspaceOptions.webhooks;
       this.requestHeaders.putAll(createWorkspaceOptions.requestHeaders());
     }
 
@@ -3494,21 +3494,6 @@ public class IBMAssistantV1Models {
      */
     public CreateWorkspaceOptions build() {
       return new CreateWorkspaceOptions(this);
-    }
-
-    /**
-     * Adds an webhooks to webhooks.
-     *
-     * @param webhooks the new webhooks
-     * @return the CreateWorkspaceOptions builder
-     */
-    public CreateWorkspaceOptionsBuilder addWebhooks(Webhook webhooks) {
-      IBMWatsonValidator.notNull(webhooks, 'webhooks cannot be null');
-      if (this.webhooks == null) {
-        this.webhooks = new List<Webhook>();
-      }
-      this.webhooks.add(webhooks);
-      return this;
     }
 
     /**
@@ -3568,6 +3553,21 @@ public class IBMAssistantV1Models {
         this.counterexamples = new List<Counterexample>();
       }
       this.counterexamples.add(counterexamples);
+      return this;
+    }
+
+    /**
+     * Adds an webhooks to webhooks.
+     *
+     * @param webhooks the new webhooks
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder addWebhooks(Webhook webhooks) {
+      IBMWatsonValidator.notNull(webhooks, 'webhooks cannot be null');
+      if (this.webhooks == null) {
+        this.webhooks = new List<Webhook>();
+      }
+      this.webhooks.add(webhooks);
       return this;
     }
 
@@ -3638,18 +3638,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the webhooks.
-     * Existing webhooks will be replaced.
-     *
-     * @param webhooks the webhooks
-     * @return the CreateWorkspaceOptions builder
-     */
-    public CreateWorkspaceOptionsBuilder webhooks(List<Webhook> webhooks) {
-      this.webhooks = webhooks;
-      return this;
-    }
-
-    /**
      * Set the intents.
      * Existing intents will be replaced.
      *
@@ -3694,6 +3682,18 @@ public class IBMAssistantV1Models {
      */
     public CreateWorkspaceOptionsBuilder counterexamples(List<Counterexample> counterexamples) {
       this.counterexamples = counterexamples;
+      return this;
+    }
+
+    /**
+     * Set the webhooks.
+     * Existing webhooks will be replaced.
+     *
+     * @param webhooks the webhooks
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder webhooks(List<Webhook> webhooks) {
+      this.webhooks = webhooks;
       return this;
     }
 
@@ -19370,11 +19370,11 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
-    private List<Webhook> webhooks;
     private List<CreateIntent> intents;
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
     private Boolean append;
 
     /**
@@ -19456,15 +19456,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Gets the webhooks.
-     *
-     * @return the webhooks
-     */
-    public List<Webhook> webhooks() {
-      return webhooks;
-    }
-
-    /**
      * Gets the intents.
      *
      * An array of objects defining the intents for the workspace.
@@ -19509,6 +19500,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Gets the webhooks.
+     *
+     * @return the webhooks
+     */
+    public List<Webhook> webhooks() {
+      return webhooks;
+    }
+
+    /**
      * Gets the append.
      *
      * Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements
@@ -19534,11 +19534,11 @@ public class IBMAssistantV1Models {
       metadata = builder.metadata;
       learningOptOut = builder.learningOptOut;
       systemSettings = builder.systemSettings;
-      webhooks = builder.webhooks;
       intents = builder.intents;
       entities = builder.entities;
       dialogNodes = builder.dialogNodes;
       counterexamples = builder.counterexamples;
+      webhooks = builder.webhooks;
       append = builder.append;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -19564,11 +19564,11 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
-    private List<Webhook> webhooks;
     private List<CreateIntent> intents;
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
     private Boolean append;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
@@ -19579,11 +19579,11 @@ public class IBMAssistantV1Models {
       metadata = updateWorkspaceOptions.metadata;
       learningOptOut = updateWorkspaceOptions.learningOptOut;
       systemSettings = updateWorkspaceOptions.systemSettings;
-      webhooks = updateWorkspaceOptions.webhooks;
       intents = updateWorkspaceOptions.intents;
       entities = updateWorkspaceOptions.entities;
       dialogNodes = updateWorkspaceOptions.dialogNodes;
       counterexamples = updateWorkspaceOptions.counterexamples;
+      webhooks = updateWorkspaceOptions.webhooks;
       append = updateWorkspaceOptions.append;
       this.requestHeaders.putAll(updateWorkspaceOptions.requestHeaders());
     }
@@ -19610,21 +19610,6 @@ public class IBMAssistantV1Models {
      */
     public UpdateWorkspaceOptions build() {
       return new UpdateWorkspaceOptions(this);
-    }
-
-    /**
-     * Adds an webhooks to webhooks.
-     *
-     * @param webhooks the new webhooks
-     * @return the UpdateWorkspaceOptions builder
-     */
-    public UpdateWorkspaceOptionsBuilder addWebhooks(Webhook webhooks) {
-      IBMWatsonValidator.notNull(webhooks, 'webhooks cannot be null');
-      if (this.webhooks == null) {
-        this.webhooks = new List<Webhook>();
-      }
-      this.webhooks.add(webhooks);
-      return this;
     }
 
     /**
@@ -19684,6 +19669,21 @@ public class IBMAssistantV1Models {
         this.counterexamples = new List<Counterexample>();
       }
       this.counterexamples.add(counterexamples);
+      return this;
+    }
+
+    /**
+     * Adds an webhooks to webhooks.
+     *
+     * @param webhooks the new webhooks
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder addWebhooks(Webhook webhooks) {
+      IBMWatsonValidator.notNull(webhooks, 'webhooks cannot be null');
+      if (this.webhooks == null) {
+        this.webhooks = new List<Webhook>();
+      }
+      this.webhooks.add(webhooks);
       return this;
     }
 
@@ -19765,18 +19765,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the webhooks.
-     * Existing webhooks will be replaced.
-     *
-     * @param webhooks the webhooks
-     * @return the UpdateWorkspaceOptions builder
-     */
-    public UpdateWorkspaceOptionsBuilder webhooks(List<Webhook> webhooks) {
-      this.webhooks = webhooks;
-      return this;
-    }
-
-    /**
      * Set the intents.
      * Existing intents will be replaced.
      *
@@ -19821,6 +19809,18 @@ public class IBMAssistantV1Models {
      */
     public UpdateWorkspaceOptionsBuilder counterexamples(List<Counterexample> counterexamples) {
       this.counterexamples = counterexamples;
+      return this;
+    }
+
+    /**
+     * Set the webhooks.
+     * Existing webhooks will be replaced.
+     *
+     * @param webhooks the webhooks
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder webhooks(List<Webhook> webhooks) {
+      this.webhooks = webhooks;
       return this;
     }
 
@@ -20583,7 +20583,6 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
-    private List<Webhook> webhooks;
     private String workspaceId;
     private String status;
     private Datetime created;
@@ -20592,6 +20591,7 @@ public class IBMAssistantV1Models {
     private List<Entity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
 
     /**
      * Gets the name.
@@ -20664,16 +20664,6 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public WorkspaceSystemSettings getSystemSettings() {
       return systemSettings;
-    }
-
-    /**
-     * Gets the webhooks.
-     *
-     * @return the webhooks
-     */
-    @AuraEnabled
-    public List<Webhook> getWebhooks() {
-      return webhooks;
     }
 
     /**
@@ -20773,6 +20763,16 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Gets the webhooks.
+     *
+     * @return the webhooks
+     */
+    @AuraEnabled
+    public List<Webhook> getWebhooks() {
+      return webhooks;
+    }
+
+    /**
      * Sets the name.
      *
      * @param name the new name
@@ -20827,15 +20827,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Sets the webhooks.
-     *
-     * @param webhooks the new webhooks
-     */
-    public void setWebhooks(final List<Webhook> webhooks) {
-      this.webhooks = webhooks;
-    }
-
-    /**
      * Sets the intents.
      *
      * @param intents the new intents
@@ -20871,6 +20862,15 @@ public class IBMAssistantV1Models {
       this.counterexamples = counterexamples;
     }
 
+    /**
+     * Sets the webhooks.
+     *
+     * @param webhooks the new webhooks
+     */
+    public void setWebhooks(final List<Webhook> webhooks) {
+      this.webhooks = webhooks;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -20897,19 +20897,6 @@ public class IBMAssistantV1Models {
       Map<String, Object> systemSettingsMap = (Map<String, Object>) jsonMap.get('systemSettings');
       WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(systemSettingsMap, true), systemSettingsMap, WorkspaceSystemSettings.class);
       ret.setSystemSettings(newSystemSettings);
-
-      // calling custom deserializer for webhooks
-      List<Webhook> newWebhooks = new List<Webhook>();
-      List<Webhook> deserializedWebhooks = ret.getWebhooks();
-      if (deserializedWebhooks != null) {
-        for (Integer i = 0; i < deserializedWebhooks.size(); i++) {
-          Webhook currentItem = ret.getWebhooks().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('webhooks');
-          Webhook newItem = (Webhook) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Webhook.class);
-          newWebhooks.add(newItem);
-        }
-        ret.webhooks = newWebhooks;
-      }
 
       // calling custom deserializer for intents
       List<Intent> newIntents = new List<Intent>();
@@ -20961,6 +20948,19 @@ public class IBMAssistantV1Models {
           newCounterexamples.add(newItem);
         }
         ret.counterexamples = newCounterexamples;
+      }
+
+      // calling custom deserializer for webhooks
+      List<Webhook> newWebhooks = new List<Webhook>();
+      List<Webhook> deserializedWebhooks = ret.getWebhooks();
+      if (deserializedWebhooks != null) {
+        for (Integer i = 0; i < deserializedWebhooks.size(); i++) {
+          Webhook currentItem = ret.getWebhooks().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('webhooks');
+          Webhook newItem = (Webhook) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Webhook.class);
+          newWebhooks.add(newItem);
+        }
+        ret.webhooks = newWebhooks;
       }
 
       return ret;
