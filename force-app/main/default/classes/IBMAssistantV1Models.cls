@@ -21393,6 +21393,7 @@ public class IBMAssistantV1Models {
     private String sensitivity;
     private Boolean randomize;
     private Long maxSuggestions;
+    private String suggestionTextPolicy;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -21474,6 +21475,18 @@ public class IBMAssistantV1Models {
     public Long getMaxSuggestions() {
       return maxSuggestions;
     }
+
+    /**
+     * Gets the suggestionTextPolicy.
+     *
+     * For internal use only.
+     *
+     * @return the suggestionTextPolicy
+     */
+    @AuraEnabled
+    public String getSuggestionTextPolicy() {
+      return suggestionTextPolicy;
+    }
   
     private WorkspaceSystemSettingsDisambiguation(WorkspaceSystemSettingsDisambiguationBuilder builder) {
       this.prompt = builder.prompt;
@@ -21482,6 +21495,7 @@ public class IBMAssistantV1Models {
       this.sensitivity = builder.sensitivity;
       this.randomize = builder.randomize;
       this.maxSuggestions = builder.maxSuggestions;
+      this.suggestionTextPolicy = builder.suggestionTextPolicy;
     }
 
     /**
@@ -21501,7 +21515,8 @@ public class IBMAssistantV1Models {
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'none_of_the_above_prompt' => 'noneOfTheAbovePrompt',
-        'max_suggestions' => 'maxSuggestions'
+        'max_suggestions' => 'maxSuggestions',
+        'suggestion_text_policy' => 'suggestionTextPolicy'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -21522,7 +21537,8 @@ public class IBMAssistantV1Models {
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'noneOfTheAbovePrompt' => 'none_of_the_above_prompt',
-        'maxSuggestions' => 'max_suggestions'
+        'maxSuggestions' => 'max_suggestions',
+        'suggestionTextPolicy' => 'suggestion_text_policy'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -21540,6 +21556,7 @@ public class IBMAssistantV1Models {
     private String sensitivity;
     private Boolean randomize;
     private Long maxSuggestions;
+    private String suggestionTextPolicy;
 
     private WorkspaceSystemSettingsDisambiguationBuilder(WorkspaceSystemSettingsDisambiguation workspaceSystemSettingsDisambiguation) {
       this.prompt = workspaceSystemSettingsDisambiguation.prompt;
@@ -21548,6 +21565,7 @@ public class IBMAssistantV1Models {
       this.sensitivity = workspaceSystemSettingsDisambiguation.sensitivity;
       this.randomize = workspaceSystemSettingsDisambiguation.randomize;
       this.maxSuggestions = workspaceSystemSettingsDisambiguation.maxSuggestions;
+      this.suggestionTextPolicy = workspaceSystemSettingsDisambiguation.suggestionTextPolicy;
     }
 
     /**
@@ -21630,6 +21648,19 @@ public class IBMAssistantV1Models {
       this.maxSuggestions = maxSuggestions;
       return this;
     }
+
+    /**
+     * Set the suggestionTextPolicy.
+     *
+     * @param suggestionTextPolicy the suggestionTextPolicy
+     * @return the WorkspaceSystemSettingsDisambiguation builder
+     */
+    public WorkspaceSystemSettingsDisambiguationBuilder suggestionTextPolicy(String suggestionTextPolicy) {
+      this.suggestionTextPolicy = suggestionTextPolicy;
+      return this;
+    }
+  }
+
   /**
    * Workspace settings related to detection of irrelevant input.
    */
