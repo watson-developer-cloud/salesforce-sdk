@@ -459,6 +459,37 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
   }
 
   /**
+   * Get training usage.
+   *
+   * Information about the completed training events. You can use this information to determine how close you are to the
+   * training limits for the month.
+   *
+   * @param getTrainingUsageOptions the {@link IBMVisualRecognitionV4Models.GetTrainingUsageOptions} containing the options for the call
+   * @return the {@link IBMVisualRecognitionV4Models.TrainingEvents} with the response
+   */
+  public IBMVisualRecognitionV4Models.TrainingEvents getTrainingUsage(IBMVisualRecognitionV4Models.GetTrainingUsageOptions getTrainingUsageOptions) {
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v4/training_usage');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=watson_vision_combined;service_version=V4;operation_id=getTrainingUsage');
+    Map<String, String> requestHeaders = (getTrainingUsageOptions != null) ? getTrainingUsageOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getTrainingUsageOptions != null && getTrainingUsageOptions.startTime() != null) {
+      builder.query('start_time', getTrainingUsageOptions.startTime());
+    }
+    if (getTrainingUsageOptions != null && getTrainingUsageOptions.endTime() != null) {
+      builder.query('end_time', getTrainingUsageOptions.endTime());
+    }
+
+    return (IBMVisualRecognitionV4Models.TrainingEvents) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.TrainingEvents.class);
+  }
+
+  /**
    * Delete labeled data.
    *
    * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with

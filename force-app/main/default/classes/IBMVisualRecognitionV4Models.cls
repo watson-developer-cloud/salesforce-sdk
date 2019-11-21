@@ -1924,7 +1924,9 @@ public class IBMVisualRecognitionV4Models {
     /**
      * Gets the size.
      *
-     * Specify the image size.
+     * The image size. Specify `thumbnail` to return a version that maintains the original aspect ratio but is no larger
+     * than 200 pixels in the larger dimension. For example, an original 800 x 1000 image is resized to 160 x 200
+     * pixels.
      *
      * @return the size
      */
@@ -2033,6 +2035,117 @@ public class IBMVisualRecognitionV4Models {
      * @return the GetJpegImageOptions builder
      */
     public GetJpegImageOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getTrainingUsage options.
+   */
+  public class GetTrainingUsageOptions extends IBMWatsonOptionsModel {
+    private String startTime;
+    private String endTime;
+
+    /**
+     * Gets the startTime.
+     *
+     * The earliest day to include training events. Specify dates in YYYY-MM-DD format. If empty or not specified, the
+     * earliest training event is included.
+     *
+     * @return the startTime
+     */
+    public String startTime() {
+      return startTime;
+    }
+
+    /**
+     * Gets the endTime.
+     *
+     * The most recent day to include training events. Specify dates in YYYY-MM-DD format. All events for the day are
+     * included. If empty or not specified, the current day is used. Specify the same value as `start_time` to request
+     * events for a single day.
+     *
+     * @return the endTime
+     */
+    public String endTime() {
+      return endTime;
+    }
+
+    private GetTrainingUsageOptions(GetTrainingUsageOptionsBuilder builder) {
+      startTime = builder.startTime;
+      endTime = builder.endTime;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetTrainingUsageOptions builder
+     */
+    public GetTrainingUsageOptionsBuilder newBuilder() {
+      return new GetTrainingUsageOptionsBuilder(this);
+    }
+  }
+
+  /**
+   * GetTrainingUsageOptions Builder.
+   */
+  public class GetTrainingUsageOptionsBuilder extends IBMWatsonOptionsModel {
+    private String startTime;
+    private String endTime;
+
+    private GetTrainingUsageOptionsBuilder(GetTrainingUsageOptions getTrainingUsageOptions) {
+      startTime = getTrainingUsageOptions.startTime;
+      endTime = getTrainingUsageOptions.endTime;
+      this.requestHeaders.putAll(getTrainingUsageOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetTrainingUsageOptionsBuilder() {
+    }
+
+    /**
+     * Builds a GetTrainingUsageOptions.
+     *
+     * @return the getTrainingUsageOptions
+     */
+    public GetTrainingUsageOptions build() {
+      return new GetTrainingUsageOptions(this);
+    }
+
+    /**
+     * Set the startTime.
+     *
+     * @param startTime the startTime
+     * @return the GetTrainingUsageOptions builder
+     */
+    public GetTrainingUsageOptionsBuilder startTime(String startTime) {
+      this.startTime = startTime;
+      return this;
+    }
+
+    /**
+     * Set the endTime.
+     *
+     * @param endTime the endTime
+     * @return the GetTrainingUsageOptions builder
+     */
+    public GetTrainingUsageOptionsBuilder endTime(String endTime) {
+      this.endTime = endTime;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetTrainingUsageOptions builder
+     */
+    public GetTrainingUsageOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -3764,6 +3877,293 @@ public class IBMVisualRecognitionV4Models {
           newObjects.add(newItem);
         }
         ret.objects = newObjects;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Details about the training event.
+   */
+  public class TrainingEvent extends IBMWatsonGenericModel {
+    private String xType;
+    private String collectionId;
+    private Datetime completionTime;
+    private String status;
+    private Long imageCount;
+
+    /**
+     * Gets the xType.
+     *
+     * Trained object type. Only `objects` is currently supported.
+     *
+     * @return the xType
+     */
+    @AuraEnabled
+    public String getXType() {
+      return xType;
+    }
+
+    /**
+     * Gets the collectionId.
+     *
+     * Identifier of the trained collection.
+     *
+     * @return the collectionId
+     */
+    @AuraEnabled
+    public String getCollectionId() {
+      return collectionId;
+    }
+
+    /**
+     * Gets the completionTime.
+     *
+     * Date and time in Coordinated Universal Time (UTC) that training on the collection finished.
+     *
+     * @return the completionTime
+     */
+    @AuraEnabled
+    public Datetime getCompletionTime() {
+      return completionTime;
+    }
+
+    /**
+     * Gets the status.
+     *
+     * Training status of the training event.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status;
+    }
+
+    /**
+     * Gets the imageCount.
+     *
+     * The total number of images that were used in training for this training event.
+     *
+     * @return the imageCount
+     */
+    @AuraEnabled
+    public Long getImageCount() {
+      return imageCount;
+    }
+
+    /**
+     * Sets the xType.
+     *
+     * @param xType the new xType
+     */
+    public void setXType(final String xType) {
+      this.xType = xType;
+    }
+
+    /**
+     * Sets the collectionId.
+     *
+     * @param collectionId the new collectionId
+     */
+    public void setCollectionId(final String collectionId) {
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Sets the completionTime.
+     *
+     * @param completionTime the new completionTime
+     */
+    public void setCompletionTime(final Datetime completionTime) {
+      this.completionTime = completionTime;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status = status;
+    }
+
+    /**
+     * Sets the imageCount.
+     *
+     * @param imageCount the new imageCount
+     */
+    public void setImageCount(final long imageCount) {
+      this.imageCount = imageCount;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xType',
+        'collection_id' => 'collectionId',
+        'completion_time' => 'completionTime',
+        'image_count' => 'imageCount'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TrainingEvent ret = (TrainingEvent) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Details about the training events.
+   */
+  public class TrainingEvents extends IBMWatsonResponseModel {
+    private Datetime startTime;
+    private Datetime endTime;
+    private Long completedEvents;
+    private Long trainedImages;
+    private List<TrainingEvent> events;
+
+    /**
+     * Gets the startTime.
+     *
+     * The starting day for the returned training events in Coordinated Universal Time (UTC). If not specified in the
+     * request, it identifies the earliest training event.
+     *
+     * @return the startTime
+     */
+    @AuraEnabled
+    public Datetime getStartTime() {
+      return startTime;
+    }
+
+    /**
+     * Gets the endTime.
+     *
+     * The ending day for the returned training events in Coordinated Universal Time (UTC). If not specified in the
+     * request, it lists the current time.
+     *
+     * @return the endTime
+     */
+    @AuraEnabled
+    public Datetime getEndTime() {
+      return endTime;
+    }
+
+    /**
+     * Gets the completedEvents.
+     *
+     * The total number of training events in the response for the start and end times.
+     *
+     * @return the completedEvents
+     */
+    @AuraEnabled
+    public Long getCompletedEvents() {
+      return completedEvents;
+    }
+
+    /**
+     * Gets the trainedImages.
+     *
+     * The total number of images that were used in training for the start and end times.
+     *
+     * @return the trainedImages
+     */
+    @AuraEnabled
+    public Long getTrainedImages() {
+      return trainedImages;
+    }
+
+    /**
+     * Gets the events.
+     *
+     * The completed training events for the start and end time.
+     *
+     * @return the events
+     */
+    @AuraEnabled
+    public List<TrainingEvent> getEvents() {
+      return events;
+    }
+
+    /**
+     * Sets the startTime.
+     *
+     * @param startTime the new startTime
+     */
+    public void setStartTime(final Datetime startTime) {
+      this.startTime = startTime;
+    }
+
+    /**
+     * Sets the endTime.
+     *
+     * @param endTime the new endTime
+     */
+    public void setEndTime(final Datetime endTime) {
+      this.endTime = endTime;
+    }
+
+    /**
+     * Sets the completedEvents.
+     *
+     * @param completedEvents the new completedEvents
+     */
+    public void setCompletedEvents(final long completedEvents) {
+      this.completedEvents = completedEvents;
+    }
+
+    /**
+     * Sets the trainedImages.
+     *
+     * @param trainedImages the new trainedImages
+     */
+    public void setTrainedImages(final long trainedImages) {
+      this.trainedImages = trainedImages;
+    }
+
+    /**
+     * Sets the events.
+     *
+     * @param events the new events
+     */
+    public void setEvents(final List<TrainingEvent> events) {
+      this.events = events;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'start_time' => 'startTime',
+        'end_time' => 'endTime',
+        'completed_events' => 'completedEvents',
+        'trained_images' => 'trainedImages'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TrainingEvents ret = (TrainingEvents) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for events
+      List<TrainingEvent> newEvents = new List<TrainingEvent>();
+      List<TrainingEvent> deserializedEvents = ret.getEvents();
+      if (deserializedEvents != null) {
+        for (Integer i = 0; i < deserializedEvents.size(); i++) {
+          TrainingEvent currentItem = ret.getEvents().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('events');
+          TrainingEvent newItem = (TrainingEvent) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TrainingEvent.class);
+          newEvents.add(newItem);
+        }
+        ret.events = newEvents;
       }
 
       return ret;
