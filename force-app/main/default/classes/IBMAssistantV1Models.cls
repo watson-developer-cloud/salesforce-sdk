@@ -21134,6 +21134,7 @@ public class IBMAssistantV1Models {
     private WorkspaceSystemSettingsTooling tooling;
     private WorkspaceSystemSettingsDisambiguation disambiguation;
     private IBMWatsonMapModel humanAgentAssist;
+    private WorkspaceSystemSettingsOffTopic offTopic;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -21178,11 +21179,24 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getHumanAgentAssist() {
       return humanAgentAssist;
     }
+
+    /**
+     * Gets the offTopic.
+     *
+     * Workspace settings related to detection of irrelevant input.
+     *
+     * @return the offTopic
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettingsOffTopic getOffTopic() {
+      return offTopic;
+    }
   
     private WorkspaceSystemSettings(WorkspaceSystemSettingsBuilder builder) {
       this.tooling = builder.tooling;
       this.disambiguation = builder.disambiguation;
       this.humanAgentAssist = builder.humanAgentAssist;
+      this.offTopic = builder.offTopic;
     }
 
     /**
@@ -21201,7 +21215,8 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'human_agent_assist' => 'humanAgentAssist'
+        'human_agent_assist' => 'humanAgentAssist',
+        'off_topic' => 'offTopic'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -21224,6 +21239,11 @@ public class IBMAssistantV1Models {
       IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(humanAgentAssistMap, true), humanAgentAssistMap, IBMWatsonMapModel.class);
       retBuilder.humanAgentAssist(newHumanAgentAssist);
 
+      // calling custom deserializer for offTopic
+      Map<String, Object> offTopicMap = (Map<String, Object>) jsonMap.get('offTopic');
+      WorkspaceSystemSettingsOffTopic newOffTopic = (WorkspaceSystemSettingsOffTopic) new WorkspaceSystemSettingsOffTopic().deserialize(JSON.serialize(offTopicMap, true), offTopicMap, WorkspaceSystemSettingsOffTopic.class);
+      retBuilder.offTopic(newOffTopic);
+
       return retBuilder.build();
     }
 
@@ -21236,7 +21256,8 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'humanAgentAssist' => 'human_agent_assist'
+        'humanAgentAssist' => 'human_agent_assist',
+        'offTopic' => 'off_topic'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -21270,6 +21291,16 @@ public class IBMAssistantV1Models {
         jsonMap.put(humanAgentAssistKey, JSON.deserializeUntyped(humanAgentAssistJsonString));
       }
 
+      // performing custom serialization for offTopic
+      if (offTopic != null) {
+        String offTopicJsonString = JSON.serialize(offTopic.replacePropertyNames(), true);
+        String offTopicKey = 'offTopic';
+        if (propertyNameMapping.containsKey(offTopicKey)) {
+          offTopicKey = propertyNameMapping.get(offTopicKey);
+        }
+        jsonMap.put(offTopicKey, JSON.deserializeUntyped(offTopicJsonString));
+      }
+
       return jsonMap;
     }
   }
@@ -21281,11 +21312,13 @@ public class IBMAssistantV1Models {
     private WorkspaceSystemSettingsTooling tooling;
     private WorkspaceSystemSettingsDisambiguation disambiguation;
     private IBMWatsonMapModel humanAgentAssist;
+    private WorkspaceSystemSettingsOffTopic offTopic;
 
     private WorkspaceSystemSettingsBuilder(WorkspaceSystemSettings workspaceSystemSettings) {
       this.tooling = workspaceSystemSettings.tooling;
       this.disambiguation = workspaceSystemSettings.disambiguation;
       this.humanAgentAssist = workspaceSystemSettings.humanAgentAssist;
+      this.offTopic = workspaceSystemSettings.offTopic;
     }
 
     /**
@@ -21333,6 +21366,17 @@ public class IBMAssistantV1Models {
      */
     public WorkspaceSystemSettingsBuilder humanAgentAssist(IBMWatsonMapModel humanAgentAssist) {
       this.humanAgentAssist = humanAgentAssist;
+      return this;
+    }
+
+    /**
+     * Set the offTopic.
+     *
+     * @param offTopic the offTopic
+     * @return the WorkspaceSystemSettings builder
+     */
+    public WorkspaceSystemSettingsBuilder offTopic(WorkspaceSystemSettingsOffTopic offTopic) {
+      this.offTopic = offTopic;
       return this;
     }
   }
@@ -21584,6 +21628,97 @@ public class IBMAssistantV1Models {
      */
     public WorkspaceSystemSettingsDisambiguationBuilder maxSuggestions(Long maxSuggestions) {
       this.maxSuggestions = maxSuggestions;
+      return this;
+    }
+  /**
+   * Workspace settings related to detection of irrelevant input.
+   */
+  public class WorkspaceSystemSettingsOffTopic extends IBMWatsonGenericModel {
+    private Boolean enabled;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WorkspaceSystemSettingsOffTopic() { }
+
+    /**
+     * Gets the enabled.
+     *
+     * Whether enhanced irrelevance detection is enabled for the workspace.
+     *
+     * @return the enabled
+     */
+    @AuraEnabled
+    public Boolean getEnabled() {
+      return enabled;
+    }
+  
+    private WorkspaceSystemSettingsOffTopic(WorkspaceSystemSettingsOffTopicBuilder builder) {
+      this.enabled = builder.enabled;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a WorkspaceSystemSettingsOffTopic builder
+     */
+    public WorkspaceSystemSettingsOffTopicBuilder newBuilder() {
+      return new WorkspaceSystemSettingsOffTopicBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettingsOffTopic ret = (WorkspaceSystemSettingsOffTopic) super.deserialize(jsonString, jsonMap, classType);
+      WorkspaceSystemSettingsOffTopicBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsOffTopic Builder.
+   */
+  public class WorkspaceSystemSettingsOffTopicBuilder {
+    private Boolean enabled;
+
+    private WorkspaceSystemSettingsOffTopicBuilder(WorkspaceSystemSettingsOffTopic workspaceSystemSettingsOffTopic) {
+      this.enabled = workspaceSystemSettingsOffTopic.enabled;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WorkspaceSystemSettingsOffTopicBuilder() {
+    }
+
+    /**
+     * Builds a WorkspaceSystemSettingsOffTopic.
+     *
+     * @return the workspaceSystemSettingsOffTopic
+     */
+    public WorkspaceSystemSettingsOffTopic build() {
+      return new WorkspaceSystemSettingsOffTopic(this);
+    }
+
+    /**
+     * Set the enabled.
+     *
+     * @param enabled the enabled
+     * @return the WorkspaceSystemSettingsOffTopic builder
+     */
+    public WorkspaceSystemSettingsOffTopicBuilder enabled(Boolean enabled) {
+      this.enabled = enabled;
       return this;
     }
   }
