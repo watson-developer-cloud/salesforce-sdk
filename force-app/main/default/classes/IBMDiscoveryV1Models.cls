@@ -18521,7 +18521,6 @@ public class IBMDiscoveryV1Models {
     private IBMWatsonMapModel metadata;
     private String collectionId;
     private QueryResultMetadata resultMetadata;
-    private String title;
     private Long code;
     private String filename;
     private String fileType;
@@ -18567,16 +18566,6 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public QueryResultMetadata getResultMetadata() {
       return resultMetadata;
-    }
-
-    /**
-     * Gets the title.
-     *
-     * @return the title
-     */
-    @AuraEnabled
-    public String getTitle() {
-      return title;
     }
 
     /**
@@ -18673,15 +18662,6 @@ public class IBMDiscoveryV1Models {
      */
     public void setResultMetadata(final QueryResultMetadata resultMetadata) {
       this.resultMetadata = resultMetadata;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title = title;
     }
 
     /**
@@ -19892,7 +19872,6 @@ public class IBMDiscoveryV1Models {
     private IBMWatsonMapModel metadata;
     private String collectionId;
     private QueryResultMetadata resultMetadata;
-    private String title;
     private Map<String, Object> additionalProperties;
 
     /**
@@ -19933,16 +19912,6 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public QueryResultMetadata getResultMetadata() {
       return resultMetadata;
-    }
-
-    /**
-     * Gets the title.
-     *
-     * @return the title
-     */
-    @AuraEnabled
-    public String getTitle() {
-      return title;
     }
 
     /**
@@ -19989,15 +19958,6 @@ public class IBMDiscoveryV1Models {
      */
     public void setResultMetadata(final QueryResultMetadata resultMetadata) {
       this.resultMetadata = resultMetadata;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title = title;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
