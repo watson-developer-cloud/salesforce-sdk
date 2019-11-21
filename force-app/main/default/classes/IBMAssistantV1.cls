@@ -1631,6 +1631,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createDialogNodeOptions.userLabel() != null) {
       contentJson.put('user_label', createDialogNodeOptions.userLabel());
     }
+    if (createDialogNodeOptions.disambiguationOptOut() != null) {
+      contentJson.put('disambiguation_opt_out', createDialogNodeOptions.disambiguationOptOut());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.DialogNode) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNode.class);
@@ -1750,6 +1753,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     }
     if (updateDialogNodeOptions.newUserLabel() != null) {
       contentJson.put('user_label', updateDialogNodeOptions.newUserLabel());
+    }
+    if (updateDialogNodeOptions.newDisambiguationOptOut() != null) {
+      contentJson.put('disambiguation_opt_out', updateDialogNodeOptions.newDisambiguationOptOut());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 

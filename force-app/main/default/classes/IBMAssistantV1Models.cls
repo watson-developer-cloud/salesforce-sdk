@@ -764,6 +764,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
+    private Boolean disambiguationOptOut;
 
     /**
      * Gets the workspaceId.
@@ -978,6 +979,17 @@ public class IBMAssistantV1Models {
       return userLabel;
     }
 
+    /**
+     * Gets the disambiguationOptOut.
+     *
+     * Whether the dialog node should be excluded from disambiguation suggestions.
+     *
+     * @return the disambiguationOptOut
+     */
+    public Boolean disambiguationOptOut() {
+      return disambiguationOptOut;
+    }
+
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
@@ -1000,6 +1012,7 @@ public class IBMAssistantV1Models {
       digressOut = builder.digressOut;
       digressOutSlots = builder.digressOutSlots;
       userLabel = builder.userLabel;
+      disambiguationOptOut = builder.disambiguationOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1036,6 +1049,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
+    private Boolean disambiguationOptOut;
 
     private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions createDialogNodeOptions) {
       workspaceId = createDialogNodeOptions.workspaceId;
@@ -1057,6 +1071,7 @@ public class IBMAssistantV1Models {
       digressOut = createDialogNodeOptions.digressOut;
       digressOutSlots = createDialogNodeOptions.digressOutSlots;
       userLabel = createDialogNodeOptions.userLabel;
+      disambiguationOptOut = createDialogNodeOptions.disambiguationOptOut;
       this.requestHeaders.putAll(createDialogNodeOptions.requestHeaders());
     }
 
@@ -1312,6 +1327,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the disambiguationOptOut.
+     *
+     * @param disambiguationOptOut the disambiguationOptOut
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder disambiguationOptOut(Boolean disambiguationOptOut) {
+      this.disambiguationOptOut = disambiguationOptOut;
+      return this;
+    }
+
+    /**
      * Set the dialogNode.
      *
      * @param dialogNode the dialogNode
@@ -1336,6 +1362,7 @@ public class IBMAssistantV1Models {
       this.digressOut = dialogNode.getDigressOut();
       this.digressOutSlots = dialogNode.getDigressOutSlots();
       this.userLabel = dialogNode.getUserLabel();
+      this.disambiguationOptOut = dialogNode.getDisambiguationOptOut();
       return this;
     }
 
@@ -4879,6 +4906,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
+    private Boolean disambiguationOptOut;
     private Boolean disabled;
     private Datetime created;
     private Datetime updated;
@@ -5110,6 +5138,18 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Gets the disambiguationOptOut.
+     *
+     * Whether the dialog node should be excluded from disambiguation suggestions.
+     *
+     * @return the disambiguationOptOut
+     */
+    @AuraEnabled
+    public Boolean getDisambiguationOptOut() {
+      return disambiguationOptOut;
+    }
+
+    /**
      * Gets the disabled.
      *
      * For internal use only.
@@ -5165,6 +5205,7 @@ public class IBMAssistantV1Models {
       this.digressOut = builder.digressOut;
       this.digressOutSlots = builder.digressOutSlots;
       this.userLabel = builder.userLabel;
+      this.disambiguationOptOut = builder.disambiguationOptOut;
       this.disabled = builder.disabled;
       this.created = builder.created;
       this.updated = builder.updated;
@@ -5194,7 +5235,8 @@ public class IBMAssistantV1Models {
         'digress_in' => 'digressIn',
         'digress_out' => 'digressOut',
         'digress_out_slots' => 'digressOutSlots',
-        'user_label' => 'userLabel'
+        'user_label' => 'userLabel',
+        'disambiguation_opt_out' => 'disambiguationOptOut'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -5255,7 +5297,8 @@ public class IBMAssistantV1Models {
         'digressIn' => 'digress_in',
         'digressOut' => 'digress_out',
         'digressOutSlots' => 'digress_out_slots',
-        'userLabel' => 'user_label'
+        'userLabel' => 'user_label',
+        'disambiguationOptOut' => 'disambiguation_opt_out'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -5339,6 +5382,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
+    private Boolean disambiguationOptOut;
     private Boolean disabled;
     private Datetime created;
     private Datetime updated;
@@ -5362,6 +5406,7 @@ public class IBMAssistantV1Models {
       this.digressOut = dialogNode.digressOut;
       this.digressOutSlots = dialogNode.digressOutSlots;
       this.userLabel = dialogNode.userLabel;
+      this.disambiguationOptOut = dialogNode.disambiguationOptOut;
       this.disabled = dialogNode.disabled;
       this.created = dialogNode.created;
       this.updated = dialogNode.updated;
@@ -5602,6 +5647,17 @@ public class IBMAssistantV1Models {
      */
     public DialogNodeBuilder userLabel(String userLabel) {
       this.userLabel = userLabel;
+      return this;
+    }
+
+    /**
+     * Set the disambiguationOptOut.
+     *
+     * @param disambiguationOptOut the disambiguationOptOut
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder disambiguationOptOut(Boolean disambiguationOptOut) {
+      this.disambiguationOptOut = disambiguationOptOut;
       return this;
     }
 
@@ -7742,8 +7798,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the label.
      *
-     * The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
-     * corresponding dialog node.
+     * The user-facing label for the disambiguation option. This label is taken from the **title** or **user_label**
+     * property of the corresponding dialog node, depending on the disambiguation options.
      *
      * @return the label
      */
@@ -11334,8 +11390,8 @@ public class IBMAssistantV1Models {
      * Gets the filter.
      *
      * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
-     * query that includes a value for `language`, as well as a value for `workspace_id` or
-     * `request.context.metadata.deployment`. For more information, see the
+     * query that includes a value for `language`, as well as a value for `request.context.system.assistant_id`,
+     * `workspace_id`, or `request.context.metadata.deployment`. For more information, see the
      * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
      *
      * @return the filter
@@ -17541,6 +17597,7 @@ public class IBMAssistantV1Models {
     private String newDigressOut;
     private String newDigressOutSlots;
     private String newUserLabel;
+    private Boolean newDisambiguationOptOut;
 
     /**
      * Gets the workspaceId.
@@ -17766,6 +17823,17 @@ public class IBMAssistantV1Models {
       return newUserLabel;
     }
 
+    /**
+     * Gets the newDisambiguationOptOut.
+     *
+     * Whether the dialog node should be excluded from disambiguation suggestions.
+     *
+     * @return the newDisambiguationOptOut
+     */
+    public Boolean newDisambiguationOptOut() {
+      return newDisambiguationOptOut;
+    }
+
     private UpdateDialogNodeOptions(UpdateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.dialogNode, 'dialogNode cannot be empty');
@@ -17789,6 +17857,7 @@ public class IBMAssistantV1Models {
       newDigressOut = builder.newDigressOut;
       newDigressOutSlots = builder.newDigressOutSlots;
       newUserLabel = builder.newUserLabel;
+      newDisambiguationOptOut = builder.newDisambiguationOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -17826,6 +17895,7 @@ public class IBMAssistantV1Models {
     private String newDigressOut;
     private String newDigressOutSlots;
     private String newUserLabel;
+    private Boolean newDisambiguationOptOut;
 
     private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions updateDialogNodeOptions) {
       workspaceId = updateDialogNodeOptions.workspaceId;
@@ -17848,6 +17918,7 @@ public class IBMAssistantV1Models {
       newDigressOut = updateDialogNodeOptions.newDigressOut;
       newDigressOutSlots = updateDialogNodeOptions.newDigressOutSlots;
       newUserLabel = updateDialogNodeOptions.newUserLabel;
+      newDisambiguationOptOut = updateDialogNodeOptions.newDisambiguationOptOut;
       this.requestHeaders.putAll(updateDialogNodeOptions.requestHeaders());
     }
 
@@ -18110,6 +18181,17 @@ public class IBMAssistantV1Models {
      */
     public UpdateDialogNodeOptionsBuilder newUserLabel(String newUserLabel) {
       this.newUserLabel = newUserLabel;
+      return this;
+    }
+
+    /**
+     * Set the newDisambiguationOptOut.
+     *
+     * @param newDisambiguationOptOut the newDisambiguationOptOut
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newDisambiguationOptOut(Boolean newDisambiguationOptOut) {
+      this.newDisambiguationOptOut = newDisambiguationOptOut;
       return this;
     }
 
