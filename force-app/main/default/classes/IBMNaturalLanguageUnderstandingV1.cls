@@ -107,7 +107,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     if (analyzeOptions.limitTextCharacters() != null) {
       contentJson.put('limit_text_characters', analyzeOptions.limitTextCharacters());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMNaturalLanguageUnderstandingV1Models.AnalysisResults) createServiceCall(builder.build(), IBMNaturalLanguageUnderstandingV1Models.AnalysisResults.class);
   }

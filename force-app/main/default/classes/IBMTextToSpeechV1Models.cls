@@ -2364,12 +2364,12 @@ public class IBMTextToSpeechV1Models {
 
       // calling custom deserializer for supportedFeatures
       Map<String, Object> supportedFeaturesMap = (Map<String, Object>) jsonMap.get('supportedFeatures');
-      SupportedFeatures newSupportedFeatures = (SupportedFeatures) new SupportedFeatures().deserialize(JSON.serialize(supportedFeaturesMap), supportedFeaturesMap, SupportedFeatures.class);
+      SupportedFeatures newSupportedFeatures = (SupportedFeatures) new SupportedFeatures().deserialize(JSON.serialize(supportedFeaturesMap, true), supportedFeaturesMap, SupportedFeatures.class);
       ret.setSupportedFeatures(newSupportedFeatures);
 
       // calling custom deserializer for customization
       Map<String, Object> customizationMap = (Map<String, Object>) jsonMap.get('customization');
-      VoiceModel newCustomization = (VoiceModel) new VoiceModel().deserialize(JSON.serialize(customizationMap), customizationMap, VoiceModel.class);
+      VoiceModel newCustomization = (VoiceModel) new VoiceModel().deserialize(JSON.serialize(customizationMap, true), customizationMap, VoiceModel.class);
       ret.setCustomization(newCustomization);
 
       return ret;
@@ -2586,7 +2586,7 @@ public class IBMTextToSpeechV1Models {
         for (Integer i = 0; i < deserializedWords.size(); i++) {
           Word currentItem = ret.getWords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('words');
-          Word newItem = (Word) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
+          Word newItem = (Word) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Word.class);
           newWords.add(newItem);
         }
         ret.words = newWords;
@@ -2639,7 +2639,7 @@ public class IBMTextToSpeechV1Models {
         for (Integer i = 0; i < deserializedCustomizations.size(); i++) {
           VoiceModel currentItem = ret.getCustomizations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('customizations');
-          VoiceModel newItem = (VoiceModel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), VoiceModel.class);
+          VoiceModel newItem = (VoiceModel) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), VoiceModel.class);
           newCustomizations.add(newItem);
         }
         ret.customizations = newCustomizations;
@@ -2690,7 +2690,7 @@ public class IBMTextToSpeechV1Models {
         for (Integer i = 0; i < deserializedVoices.size(); i++) {
           Voice currentItem = ret.getVoices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('voices');
-          Voice newItem = (Voice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Voice.class);
+          Voice newItem = (Voice) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Voice.class);
           newVoices.add(newItem);
         }
         ret.voices = newVoices;
@@ -2943,7 +2943,7 @@ public class IBMTextToSpeechV1Models {
         for (Integer i = 0; i < deserializedWords.size(); i++) {
           Word currentItem = ret.getWords().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('words');
-          Word newItem = (Word) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
+          Word newItem = (Word) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Word.class);
           newWords.add(newItem);
         }
         retBuilder.words(newWords);
@@ -2960,7 +2960,7 @@ public class IBMTextToSpeechV1Models {
       if (words != null) {
         List<Object> wordsJsonList = new List<Object>();
         for (Word listItem : words) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           wordsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('words', wordsJsonList);

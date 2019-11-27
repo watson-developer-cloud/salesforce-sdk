@@ -136,7 +136,7 @@ public class IBMNaturalLanguageClassifierV1Models {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassifiedClass currentItem = ret.getClasses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
-          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
+          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ClassifiedClass.class);
           newClasses.add(newItem);
         }
         ret.classes = newClasses;
@@ -238,7 +238,7 @@ public class IBMNaturalLanguageClassifierV1Models {
         for (Integer i = 0; i < deserializedCollection.size(); i++) {
           CollectionItem currentItem = ret.getCollection().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('collection');
-          CollectionItem newItem = (CollectionItem) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CollectionItem.class);
+          CollectionItem newItem = (CollectionItem) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), CollectionItem.class);
           newCollection.add(newItem);
         }
         ret.collection = newCollection;
@@ -508,7 +508,7 @@ public class IBMNaturalLanguageClassifierV1Models {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           Classifier currentItem = ret.getClassifiers().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
-          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
+          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Classifier.class);
           newClassifiers.add(newItem);
         }
         ret.classifiers = newClassifiers;
@@ -688,7 +688,7 @@ public class IBMNaturalLanguageClassifierV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -953,7 +953,7 @@ public class IBMNaturalLanguageClassifierV1Models {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassifiedClass currentItem = ret.getClasses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
-          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
+          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ClassifiedClass.class);
           newClasses.add(newItem);
         }
         ret.classes = newClasses;

@@ -36,7 +36,7 @@ public class IBMDiscoveryV1Models {
      * Gets the file.
      *
      * The content of the document to ingest. The maximum supported file size when adding a file to a collection is 50
-     * megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files larger than the
+     * megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files larger than the
      * supported size are rejected.
      *
      * @return the file
@@ -537,7 +537,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
@@ -836,27 +836,27 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for documentCounts
       Map<String, Object> documentCountsMap = (Map<String, Object>) jsonMap.get('documentCounts');
-      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(documentCountsMap), documentCountsMap, DocumentCounts.class);
+      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(documentCountsMap, true), documentCountsMap, DocumentCounts.class);
       ret.setDocumentCounts(newDocumentCounts);
 
       // calling custom deserializer for diskUsage
       Map<String, Object> diskUsageMap = (Map<String, Object>) jsonMap.get('diskUsage');
-      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(diskUsageMap), diskUsageMap, CollectionDiskUsage.class);
+      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(diskUsageMap, true), diskUsageMap, CollectionDiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for trainingStatus
       Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap, true), trainingStatusMap, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       // calling custom deserializer for crawlStatus
       Map<String, Object> crawlStatusMap = (Map<String, Object>) jsonMap.get('crawlStatus');
-      CollectionCrawlStatus newCrawlStatus = (CollectionCrawlStatus) new CollectionCrawlStatus().deserialize(JSON.serialize(crawlStatusMap), crawlStatusMap, CollectionCrawlStatus.class);
+      CollectionCrawlStatus newCrawlStatus = (CollectionCrawlStatus) new CollectionCrawlStatus().deserialize(JSON.serialize(crawlStatusMap, true), crawlStatusMap, CollectionCrawlStatus.class);
       ret.setCrawlStatus(newCrawlStatus);
 
       // calling custom deserializer for smartDocumentUnderstanding
       Map<String, Object> smartDocumentUnderstandingMap = (Map<String, Object>) jsonMap.get('smartDocumentUnderstanding');
-      SduStatus newSmartDocumentUnderstanding = (SduStatus) new SduStatus().deserialize(JSON.serialize(smartDocumentUnderstandingMap), smartDocumentUnderstandingMap, SduStatus.class);
+      SduStatus newSmartDocumentUnderstanding = (SduStatus) new SduStatus().deserialize(JSON.serialize(smartDocumentUnderstandingMap, true), smartDocumentUnderstandingMap, SduStatus.class);
       ret.setSmartDocumentUnderstanding(newSmartDocumentUnderstanding);
 
       return ret;
@@ -906,7 +906,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for sourceCrawl
       Map<String, Object> sourceCrawlMap = (Map<String, Object>) jsonMap.get('sourceCrawl');
-      SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(sourceCrawlMap), sourceCrawlMap, SourceStatus.class);
+      SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(sourceCrawlMap, true), sourceCrawlMap, SourceStatus.class);
       ret.setSourceCrawl(newSourceCrawl);
 
       return ret;
@@ -1215,7 +1215,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for conversions
       Map<String, Object> conversionsMap = (Map<String, Object>) jsonMap.get('conversions');
-      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(conversionsMap), conversionsMap, Conversions.class);
+      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(conversionsMap, true), conversionsMap, Conversions.class);
       retBuilder.conversions(newConversions);
 
       // calling custom deserializer for enrichments
@@ -1225,7 +1225,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEnrichments.size(); i++) {
           Enrichment currentItem = ret.getEnrichments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('enrichments');
-          Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Enrichment.class);
+          Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Enrichment.class);
           newEnrichments.add(newItem);
         }
         retBuilder.enrichments(newEnrichments);
@@ -1238,7 +1238,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNormalizations.size(); i++) {
           NormalizationOperation currentItem = ret.getNormalizations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('normalizations');
-          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
+          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), NormalizationOperation.class);
           newNormalizations.add(newItem);
         }
         retBuilder.normalizations(newNormalizations);
@@ -1246,7 +1246,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for source
       Map<String, Object> sourceMap = (Map<String, Object>) jsonMap.get('source');
-      Source newSource = (Source) new Source().deserialize(JSON.serialize(sourceMap), sourceMap, Source.class);
+      Source newSource = (Source) new Source().deserialize(JSON.serialize(sourceMap, true), sourceMap, Source.class);
       retBuilder.source(newSource);
 
       return retBuilder.build();
@@ -1254,7 +1254,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -1267,7 +1267,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for conversions
       if (conversions != null) {
-        String conversionsJsonString = JSON.serialize(conversions.replacePropertyNames());
+        String conversionsJsonString = JSON.serialize(conversions.replacePropertyNames(), true);
         String conversionsKey = 'conversions';
         if (propertyNameMapping.containsKey(conversionsKey)) {
           conversionsKey = propertyNameMapping.get(conversionsKey);
@@ -1279,7 +1279,7 @@ public class IBMDiscoveryV1Models {
       if (enrichments != null) {
         List<Object> enrichmentsJsonList = new List<Object>();
         for (Enrichment listItem : enrichments) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           enrichmentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String enrichmentsKey = 'enrichments';
@@ -1293,7 +1293,7 @@ public class IBMDiscoveryV1Models {
       if (normalizations != null) {
         List<Object> normalizationsJsonList = new List<Object>();
         for (NormalizationOperation listItem : normalizations) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           normalizationsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String normalizationsKey = 'normalizations';
@@ -1305,7 +1305,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for source
       if (source != null) {
-        String sourceJsonString = JSON.serialize(source.replacePropertyNames());
+        String sourceJsonString = JSON.serialize(source.replacePropertyNames(), true);
         String sourceKey = 'source';
         if (propertyNameMapping.containsKey(sourceKey)) {
           sourceKey = propertyNameMapping.get(sourceKey);
@@ -1628,22 +1628,22 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for pdf
       Map<String, Object> pdfMap = (Map<String, Object>) jsonMap.get('pdf');
-      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(pdfMap), pdfMap, PdfSettings.class);
+      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(pdfMap, true), pdfMap, PdfSettings.class);
       retBuilder.pdf(newPdf);
 
       // calling custom deserializer for word
       Map<String, Object> wordMap = (Map<String, Object>) jsonMap.get('word');
-      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(wordMap), wordMap, WordSettings.class);
+      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(wordMap, true), wordMap, WordSettings.class);
       retBuilder.word(newWord);
 
       // calling custom deserializer for html
       Map<String, Object> htmlMap = (Map<String, Object>) jsonMap.get('html');
-      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(htmlMap), htmlMap, HtmlSettings.class);
+      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(htmlMap, true), htmlMap, HtmlSettings.class);
       retBuilder.html(newHtml);
 
       // calling custom deserializer for segment
       Map<String, Object> segmentMap = (Map<String, Object>) jsonMap.get('segment');
-      SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(segmentMap), segmentMap, SegmentSettings.class);
+      SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(segmentMap, true), segmentMap, SegmentSettings.class);
       retBuilder.segment(newSegment);
 
       // calling custom deserializer for jsonNormalizations
@@ -1653,7 +1653,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedJsonNormalizations.size(); i++) {
           NormalizationOperation currentItem = ret.getJsonNormalizations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('jsonNormalizations');
-          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
+          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), NormalizationOperation.class);
           newJsonNormalizations.add(newItem);
         }
         retBuilder.jsonNormalizations(newJsonNormalizations);
@@ -1664,7 +1664,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -1678,7 +1678,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for pdf
       if (pdf != null) {
-        String pdfJsonString = JSON.serialize(pdf.replacePropertyNames());
+        String pdfJsonString = JSON.serialize(pdf.replacePropertyNames(), true);
         String pdfKey = 'pdf';
         if (propertyNameMapping.containsKey(pdfKey)) {
           pdfKey = propertyNameMapping.get(pdfKey);
@@ -1688,7 +1688,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for word
       if (word != null) {
-        String wordJsonString = JSON.serialize(word.replacePropertyNames());
+        String wordJsonString = JSON.serialize(word.replacePropertyNames(), true);
         String wordKey = 'word';
         if (propertyNameMapping.containsKey(wordKey)) {
           wordKey = propertyNameMapping.get(wordKey);
@@ -1698,7 +1698,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for html
       if (html != null) {
-        String htmlJsonString = JSON.serialize(html.replacePropertyNames());
+        String htmlJsonString = JSON.serialize(html.replacePropertyNames(), true);
         String htmlKey = 'html';
         if (propertyNameMapping.containsKey(htmlKey)) {
           htmlKey = propertyNameMapping.get(htmlKey);
@@ -1708,7 +1708,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for segment
       if (segment != null) {
-        String segmentJsonString = JSON.serialize(segment.replacePropertyNames());
+        String segmentJsonString = JSON.serialize(segment.replacePropertyNames(), true);
         String segmentKey = 'segment';
         if (propertyNameMapping.containsKey(segmentKey)) {
           segmentKey = propertyNameMapping.get(segmentKey);
@@ -1720,7 +1720,7 @@ public class IBMDiscoveryV1Models {
       if (jsonNormalizations != null) {
         List<Object> jsonNormalizationsJsonList = new List<Object>();
         for (NormalizationOperation listItem : jsonNormalizations) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           jsonNormalizationsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String jsonNormalizationsKey = 'jsonNormalizations';
@@ -2874,7 +2874,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for data
       Map<String, Object> dataMap = (Map<String, Object>) jsonMap.get('data');
-      EventData newData = (EventData) new EventData().deserialize(JSON.serialize(dataMap), dataMap, EventData.class);
+      EventData newData = (EventData) new EventData().deserialize(JSON.serialize(dataMap, true), dataMap, EventData.class);
       ret.setData(newData);
 
       return ret;
@@ -4134,7 +4134,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -4539,7 +4539,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for credentialDetails
       Map<String, Object> credentialDetailsMap = (Map<String, Object>) jsonMap.get('credentialDetails');
-      CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(credentialDetailsMap), credentialDetailsMap, CredentialDetails.class);
+      CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(credentialDetailsMap, true), credentialDetailsMap, CredentialDetails.class);
       retBuilder.credentialDetails(newCredentialDetails);
 
       return retBuilder.build();
@@ -4547,7 +4547,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -4562,7 +4562,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for credentialDetails
       if (credentialDetails != null) {
-        String credentialDetailsJsonString = JSON.serialize(credentialDetails.replacePropertyNames());
+        String credentialDetailsJsonString = JSON.serialize(credentialDetails.replacePropertyNames(), true);
         String credentialDetailsKey = 'credentialDetails';
         if (propertyNameMapping.containsKey(credentialDetailsKey)) {
           credentialDetailsKey = propertyNameMapping.get(credentialDetailsKey);
@@ -4691,7 +4691,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedCredentials.size(); i++) {
           Credentials currentItem = ret.getCredentials().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('credentials');
-          Credentials newItem = (Credentials) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Credentials.class);
+          Credentials newItem = (Credentials) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Credentials.class);
           newCredentials.add(newItem);
         }
         ret.credentials = newCredentials;
@@ -6475,7 +6475,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Notice.class);
           newNotices.add(newItem);
         }
         ret.notices = newNotices;
@@ -6713,7 +6713,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Notice.class);
           newNotices.add(newItem);
         }
         ret.notices = newNotices;
@@ -6881,7 +6881,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for options
       Map<String, Object> optionsMap = (Map<String, Object>) jsonMap.get('options');
-      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(optionsMap), optionsMap, EnrichmentOptions.class);
+      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(optionsMap, true), optionsMap, EnrichmentOptions.class);
       retBuilder.options(newOptions);
 
       return retBuilder.build();
@@ -6889,7 +6889,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -6904,7 +6904,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for options
       if (options != null) {
-        String optionsJsonString = JSON.serialize(options.replacePropertyNames());
+        String optionsJsonString = JSON.serialize(options.replacePropertyNames(), true);
         String optionsKey = 'options';
         if (propertyNameMapping.containsKey(optionsKey)) {
           optionsKey = propertyNameMapping.get(optionsKey);
@@ -7123,7 +7123,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for features
       Map<String, Object> featuresMap = (Map<String, Object>) jsonMap.get('features');
-      NluEnrichmentFeatures newFeatures = (NluEnrichmentFeatures) new NluEnrichmentFeatures().deserialize(JSON.serialize(featuresMap), featuresMap, NluEnrichmentFeatures.class);
+      NluEnrichmentFeatures newFeatures = (NluEnrichmentFeatures) new NluEnrichmentFeatures().deserialize(JSON.serialize(featuresMap, true), featuresMap, NluEnrichmentFeatures.class);
       retBuilder.features(newFeatures);
 
       return retBuilder.build();
@@ -7131,11 +7131,11 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for features
       if (features != null) {
-        String featuresJsonString = JSON.serialize(features.replacePropertyNames());
+        String featuresJsonString = JSON.serialize(features.replacePropertyNames(), true);
         jsonMap.put('features', JSON.deserializeUntyped(featuresJsonString));
       }
 
@@ -7442,12 +7442,12 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for indexCapacity
       Map<String, Object> indexCapacityMap = (Map<String, Object>) jsonMap.get('indexCapacity');
-      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(indexCapacityMap), indexCapacityMap, IndexCapacity.class);
+      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(indexCapacityMap, true), indexCapacityMap, IndexCapacity.class);
       ret.setIndexCapacity(newIndexCapacity);
 
       // calling custom deserializer for searchStatus
       Map<String, Object> searchStatusMap = (Map<String, Object>) jsonMap.get('searchStatus');
-      SearchStatus newSearchStatus = (SearchStatus) new SearchStatus().deserialize(JSON.serialize(searchStatusMap), searchStatusMap, SearchStatus.class);
+      SearchStatus newSearchStatus = (SearchStatus) new SearchStatus().deserialize(JSON.serialize(searchStatusMap, true), searchStatusMap, SearchStatus.class);
       ret.setSearchStatus(newSearchStatus);
 
       return ret;
@@ -7663,7 +7663,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -7889,7 +7889,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -8061,7 +8061,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedExpansions.size(); i++) {
           Expansion currentItem = ret.getExpansions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('expansions');
-          Expansion newItem = (Expansion) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Expansion.class);
+          Expansion newItem = (Expansion) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Expansion.class);
           newExpansions.add(newItem);
         }
         retBuilder.expansions(newExpansions);
@@ -8072,13 +8072,13 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for expansions
       if (expansions != null) {
         List<Object> expansionsJsonList = new List<Object>();
         for (Expansion listItem : expansions) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           expansionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('expansions', expansionsJsonList);
@@ -9547,7 +9547,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -9843,7 +9843,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedGateways.size(); i++) {
           Gateway currentItem = ret.getGateways().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('gateways');
-          Gateway newItem = (Gateway) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Gateway.class);
+          Gateway newItem = (Gateway) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Gateway.class);
           newGateways.add(newItem);
         }
         ret.gateways = newGateways;
@@ -12101,12 +12101,12 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for keepContent
       Map<String, Object> keepContentMap = (Map<String, Object>) jsonMap.get('keepContent');
-      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(keepContentMap), keepContentMap, XPathPatterns.class);
+      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(keepContentMap, true), keepContentMap, XPathPatterns.class);
       retBuilder.keepContent(newKeepContent);
 
       // calling custom deserializer for excludeContent
       Map<String, Object> excludeContentMap = (Map<String, Object>) jsonMap.get('excludeContent');
-      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(excludeContentMap), excludeContentMap, XPathPatterns.class);
+      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(excludeContentMap, true), excludeContentMap, XPathPatterns.class);
       retBuilder.excludeContent(newExcludeContent);
 
       return retBuilder.build();
@@ -12114,7 +12114,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -12132,7 +12132,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for keepContent
       if (keepContent != null) {
-        String keepContentJsonString = JSON.serialize(keepContent.replacePropertyNames());
+        String keepContentJsonString = JSON.serialize(keepContent.replacePropertyNames(), true);
         String keepContentKey = 'keepContent';
         if (propertyNameMapping.containsKey(keepContentKey)) {
           keepContentKey = propertyNameMapping.get(keepContentKey);
@@ -12142,7 +12142,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for excludeContent
       if (excludeContent != null) {
-        String excludeContentJsonString = JSON.serialize(excludeContent.replacePropertyNames());
+        String excludeContentJsonString = JSON.serialize(excludeContent.replacePropertyNames(), true);
         String excludeContentKey = 'excludeContent';
         if (propertyNameMapping.containsKey(excludeContentKey)) {
           excludeContentKey = propertyNameMapping.get(excludeContentKey);
@@ -12407,17 +12407,17 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for documents
       Map<String, Object> documentsMap = (Map<String, Object>) jsonMap.get('documents');
-      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(documentsMap), documentsMap, EnvironmentDocuments.class);
+      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(documentsMap, true), documentsMap, EnvironmentDocuments.class);
       ret.setDocuments(newDocuments);
 
       // calling custom deserializer for diskUsage
       Map<String, Object> diskUsageMap = (Map<String, Object>) jsonMap.get('diskUsage');
-      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(diskUsageMap), diskUsageMap, DiskUsage.class);
+      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(diskUsageMap, true), diskUsageMap, DiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for collections
       Map<String, Object> collectionsMap = (Map<String, Object>) jsonMap.get('collections');
-      CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(collectionsMap), collectionsMap, CollectionUsage.class);
+      CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(collectionsMap, true), collectionsMap, CollectionUsage.class);
       ret.setCollections(newCollections);
 
       return ret;
@@ -12597,7 +12597,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedFields.size(); i++) {
           Field currentItem = ret.getFields().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fields');
-          Field newItem = (Field) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Field.class);
+          Field newItem = (Field) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Field.class);
           newFields.add(newItem);
         }
         ret.fields = newFields;
@@ -12766,7 +12766,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedCollections.size(); i++) {
           Collection currentItem = ret.getCollections().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('collections');
-          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Collection.class);
+          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Collection.class);
           newCollections.add(newItem);
         }
         ret.collections = newCollections;
@@ -12935,7 +12935,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedConfigurations.size(); i++) {
           Configuration currentItem = ret.getConfigurations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('configurations');
-          Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Configuration.class);
+          Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Configuration.class);
           newConfigurations.add(newItem);
         }
         ret.configurations = newConfigurations;
@@ -13160,7 +13160,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedEnvironments.size(); i++) {
           Environment currentItem = ret.getEnvironments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('environments');
-          Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Environment.class);
+          Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Environment.class);
           newEnvironments.add(newItem);
         }
         ret.environments = newEnvironments;
@@ -13861,7 +13861,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           LogQueryResponseResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          LogQueryResponseResult newItem = (LogQueryResponseResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResult.class);
+          LogQueryResponseResult newItem = (LogQueryResponseResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), LogQueryResponseResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -14250,7 +14250,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for documentResults
       Map<String, Object> documentResultsMap = (Map<String, Object>) jsonMap.get('documentResults');
-      LogQueryResponseResultDocuments newDocumentResults = (LogQueryResponseResultDocuments) new LogQueryResponseResultDocuments().deserialize(JSON.serialize(documentResultsMap), documentResultsMap, LogQueryResponseResultDocuments.class);
+      LogQueryResponseResultDocuments newDocumentResults = (LogQueryResponseResultDocuments) new LogQueryResponseResultDocuments().deserialize(JSON.serialize(documentResultsMap, true), documentResultsMap, LogQueryResponseResultDocuments.class);
       ret.setDocumentResults(newDocumentResults);
 
       return ret;
@@ -14321,7 +14321,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           LogQueryResponseResultDocumentsResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          LogQueryResponseResultDocumentsResult newItem = (LogQueryResponseResultDocumentsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResultDocumentsResult.class);
+          LogQueryResponseResultDocumentsResult newItem = (LogQueryResponseResultDocumentsResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), LogQueryResponseResultDocumentsResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -14557,7 +14557,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           MetricAggregationResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          MetricAggregationResult newItem = (MetricAggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregationResult.class);
+          MetricAggregationResult newItem = (MetricAggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), MetricAggregationResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -14729,7 +14729,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           MetricAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          MetricAggregation newItem = (MetricAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregation.class);
+          MetricAggregation newItem = (MetricAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), MetricAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
@@ -14809,7 +14809,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           MetricTokenAggregationResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          MetricTokenAggregationResult newItem = (MetricTokenAggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregationResult.class);
+          MetricTokenAggregationResult newItem = (MetricTokenAggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), MetricTokenAggregationResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -14951,7 +14951,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           MetricTokenAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          MetricTokenAggregation newItem = (MetricTokenAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregation.class);
+          MetricTokenAggregation newItem = (MetricTokenAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), MetricTokenAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
@@ -15004,7 +15004,7 @@ public class IBMDiscoveryV1Models {
       NluEnrichmentCategoriesBuilder retBuilder = ret.newBuilder();
 
       NluEnrichmentCategories builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -15017,7 +15017,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
@@ -15105,7 +15105,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -15221,7 +15221,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -15438,7 +15438,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -15722,42 +15722,42 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for keywords
       Map<String, Object> keywordsMap = (Map<String, Object>) jsonMap.get('keywords');
-      NluEnrichmentKeywords newKeywords = (NluEnrichmentKeywords) new NluEnrichmentKeywords().deserialize(JSON.serialize(keywordsMap), keywordsMap, NluEnrichmentKeywords.class);
+      NluEnrichmentKeywords newKeywords = (NluEnrichmentKeywords) new NluEnrichmentKeywords().deserialize(JSON.serialize(keywordsMap, true), keywordsMap, NluEnrichmentKeywords.class);
       retBuilder.keywords(newKeywords);
 
       // calling custom deserializer for entities
       Map<String, Object> entitiesMap = (Map<String, Object>) jsonMap.get('entities');
-      NluEnrichmentEntities newEntities = (NluEnrichmentEntities) new NluEnrichmentEntities().deserialize(JSON.serialize(entitiesMap), entitiesMap, NluEnrichmentEntities.class);
+      NluEnrichmentEntities newEntities = (NluEnrichmentEntities) new NluEnrichmentEntities().deserialize(JSON.serialize(entitiesMap, true), entitiesMap, NluEnrichmentEntities.class);
       retBuilder.entities(newEntities);
 
       // calling custom deserializer for sentiment
       Map<String, Object> sentimentMap = (Map<String, Object>) jsonMap.get('sentiment');
-      NluEnrichmentSentiment newSentiment = (NluEnrichmentSentiment) new NluEnrichmentSentiment().deserialize(JSON.serialize(sentimentMap), sentimentMap, NluEnrichmentSentiment.class);
+      NluEnrichmentSentiment newSentiment = (NluEnrichmentSentiment) new NluEnrichmentSentiment().deserialize(JSON.serialize(sentimentMap, true), sentimentMap, NluEnrichmentSentiment.class);
       retBuilder.sentiment(newSentiment);
 
       // calling custom deserializer for emotion
       Map<String, Object> emotionMap = (Map<String, Object>) jsonMap.get('emotion');
-      NluEnrichmentEmotion newEmotion = (NluEnrichmentEmotion) new NluEnrichmentEmotion().deserialize(JSON.serialize(emotionMap), emotionMap, NluEnrichmentEmotion.class);
+      NluEnrichmentEmotion newEmotion = (NluEnrichmentEmotion) new NluEnrichmentEmotion().deserialize(JSON.serialize(emotionMap, true), emotionMap, NluEnrichmentEmotion.class);
       retBuilder.emotion(newEmotion);
 
       // calling custom deserializer for categories
       Map<String, Object> categoriesMap = (Map<String, Object>) jsonMap.get('categories');
-      NluEnrichmentCategories newCategories = (NluEnrichmentCategories) new NluEnrichmentCategories().deserialize(JSON.serialize(categoriesMap), categoriesMap, NluEnrichmentCategories.class);
+      NluEnrichmentCategories newCategories = (NluEnrichmentCategories) new NluEnrichmentCategories().deserialize(JSON.serialize(categoriesMap, true), categoriesMap, NluEnrichmentCategories.class);
       retBuilder.categories(newCategories);
 
       // calling custom deserializer for semanticRoles
       Map<String, Object> semanticRolesMap = (Map<String, Object>) jsonMap.get('semanticRoles');
-      NluEnrichmentSemanticRoles newSemanticRoles = (NluEnrichmentSemanticRoles) new NluEnrichmentSemanticRoles().deserialize(JSON.serialize(semanticRolesMap), semanticRolesMap, NluEnrichmentSemanticRoles.class);
+      NluEnrichmentSemanticRoles newSemanticRoles = (NluEnrichmentSemanticRoles) new NluEnrichmentSemanticRoles().deserialize(JSON.serialize(semanticRolesMap, true), semanticRolesMap, NluEnrichmentSemanticRoles.class);
       retBuilder.semanticRoles(newSemanticRoles);
 
       // calling custom deserializer for relations
       Map<String, Object> relationsMap = (Map<String, Object>) jsonMap.get('relations');
-      NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(relationsMap), relationsMap, NluEnrichmentRelations.class);
+      NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(relationsMap, true), relationsMap, NluEnrichmentRelations.class);
       retBuilder.relations(newRelations);
 
       // calling custom deserializer for concepts
       Map<String, Object> conceptsMap = (Map<String, Object>) jsonMap.get('concepts');
-      NluEnrichmentConcepts newConcepts = (NluEnrichmentConcepts) new NluEnrichmentConcepts().deserialize(JSON.serialize(conceptsMap), conceptsMap, NluEnrichmentConcepts.class);
+      NluEnrichmentConcepts newConcepts = (NluEnrichmentConcepts) new NluEnrichmentConcepts().deserialize(JSON.serialize(conceptsMap, true), conceptsMap, NluEnrichmentConcepts.class);
       retBuilder.concepts(newConcepts);
 
       return retBuilder.build();
@@ -15765,7 +15765,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -15778,7 +15778,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for keywords
       if (keywords != null) {
-        String keywordsJsonString = JSON.serialize(keywords.replacePropertyNames());
+        String keywordsJsonString = JSON.serialize(keywords.replacePropertyNames(), true);
         String keywordsKey = 'keywords';
         if (propertyNameMapping.containsKey(keywordsKey)) {
           keywordsKey = propertyNameMapping.get(keywordsKey);
@@ -15788,7 +15788,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for entities
       if (entities != null) {
-        String entitiesJsonString = JSON.serialize(entities.replacePropertyNames());
+        String entitiesJsonString = JSON.serialize(entities.replacePropertyNames(), true);
         String entitiesKey = 'entities';
         if (propertyNameMapping.containsKey(entitiesKey)) {
           entitiesKey = propertyNameMapping.get(entitiesKey);
@@ -15798,7 +15798,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for sentiment
       if (sentiment != null) {
-        String sentimentJsonString = JSON.serialize(sentiment.replacePropertyNames());
+        String sentimentJsonString = JSON.serialize(sentiment.replacePropertyNames(), true);
         String sentimentKey = 'sentiment';
         if (propertyNameMapping.containsKey(sentimentKey)) {
           sentimentKey = propertyNameMapping.get(sentimentKey);
@@ -15808,7 +15808,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for emotion
       if (emotion != null) {
-        String emotionJsonString = JSON.serialize(emotion.replacePropertyNames());
+        String emotionJsonString = JSON.serialize(emotion.replacePropertyNames(), true);
         String emotionKey = 'emotion';
         if (propertyNameMapping.containsKey(emotionKey)) {
           emotionKey = propertyNameMapping.get(emotionKey);
@@ -15818,7 +15818,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for categories
       if (categories != null) {
-        String categoriesJsonString = JSON.serialize(categories.replacePropertyNames());
+        String categoriesJsonString = JSON.serialize(categories.replacePropertyNames(), true);
         String categoriesKey = 'categories';
         if (propertyNameMapping.containsKey(categoriesKey)) {
           categoriesKey = propertyNameMapping.get(categoriesKey);
@@ -15828,7 +15828,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for semanticRoles
       if (semanticRoles != null) {
-        String semanticRolesJsonString = JSON.serialize(semanticRoles.replacePropertyNames());
+        String semanticRolesJsonString = JSON.serialize(semanticRoles.replacePropertyNames(), true);
         String semanticRolesKey = 'semanticRoles';
         if (propertyNameMapping.containsKey(semanticRolesKey)) {
           semanticRolesKey = propertyNameMapping.get(semanticRolesKey);
@@ -15838,7 +15838,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for relations
       if (relations != null) {
-        String relationsJsonString = JSON.serialize(relations.replacePropertyNames());
+        String relationsJsonString = JSON.serialize(relations.replacePropertyNames(), true);
         String relationsKey = 'relations';
         if (propertyNameMapping.containsKey(relationsKey)) {
           relationsKey = propertyNameMapping.get(relationsKey);
@@ -15848,7 +15848,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for concepts
       if (concepts != null) {
-        String conceptsJsonString = JSON.serialize(concepts.replacePropertyNames());
+        String conceptsJsonString = JSON.serialize(concepts.replacePropertyNames(), true);
         String conceptsKey = 'concepts';
         if (propertyNameMapping.containsKey(conceptsKey)) {
           conceptsKey = propertyNameMapping.get(conceptsKey);
@@ -16073,7 +16073,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -16202,7 +16202,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -16330,7 +16330,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -16472,7 +16472,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -16653,7 +16653,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -16917,7 +16917,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedFonts.size(); i++) {
           FontSetting currentItem = ret.getFonts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fonts');
-          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
+          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), FontSetting.class);
           newFonts.add(newItem);
         }
         retBuilder.fonts(newFonts);
@@ -16928,13 +16928,13 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for fonts
       if (fonts != null) {
         List<Object> fontsJsonList = new List<Object>();
         for (FontSetting listItem : fonts) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           fontsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('fonts', fontsJsonList);
@@ -17044,7 +17044,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for heading
       Map<String, Object> headingMap = (Map<String, Object>) jsonMap.get('heading');
-      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(headingMap), headingMap, PdfHeadingDetection.class);
+      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(headingMap, true), headingMap, PdfHeadingDetection.class);
       retBuilder.heading(newHeading);
 
       return retBuilder.build();
@@ -17052,11 +17052,11 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for heading
       if (heading != null) {
-        String headingJsonString = JSON.serialize(heading.replacePropertyNames());
+        String headingJsonString = JSON.serialize(heading.replacePropertyNames(), true);
         jsonMap.put('heading', JSON.deserializeUntyped(headingJsonString));
       }
 
@@ -17440,7 +17440,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           AggregationResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AggregationResult.class);
+          AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), AggregationResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -17453,7 +17453,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
@@ -17461,7 +17461,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for hits
       Map<String, Object> hitsMap = (Map<String, Object>) jsonMap.get('hits');
-      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(hitsMap), hitsMap, TopHitsResults.class);
+      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(hitsMap, true), hitsMap, TopHitsResults.class);
       ret.setHits(newHits);
 
       return ret;
@@ -18477,7 +18477,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryNoticesResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryNoticesResult.class);
+          QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryNoticesResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -18490,7 +18490,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
@@ -18503,7 +18503,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedPassages.size(); i++) {
           QueryPassages currentItem = ret.getPassages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('passages');
-          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
+          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryPassages.class);
           newPassages.add(newItem);
         }
         ret.passages = newPassages;
@@ -18521,7 +18521,6 @@ public class IBMDiscoveryV1Models {
     private IBMWatsonMapModel metadata;
     private String collectionId;
     private QueryResultMetadata resultMetadata;
-    private String title;
     private Long code;
     private String filename;
     private String fileType;
@@ -18567,16 +18566,6 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public QueryResultMetadata getResultMetadata() {
       return resultMetadata;
-    }
-
-    /**
-     * Gets the title.
-     *
-     * @return the title
-     */
-    @AuraEnabled
-    public String getTitle() {
-      return title;
     }
 
     /**
@@ -18676,15 +18665,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title = title;
-    }
-
-    /**
      * Sets the code.
      *
      * @param code the new code
@@ -18747,12 +18727,12 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap, true), metadataMap, IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for resultMetadata
       Map<String, Object> resultMetadataMap = (Map<String, Object>) jsonMap.get('resultMetadata');
-      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(resultMetadataMap), resultMetadataMap, QueryResultMetadata.class);
+      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(resultMetadataMap, true), resultMetadataMap, QueryResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
       // calling custom deserializer for notices
@@ -18762,13 +18742,13 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Notice.class);
           newNotices.add(newItem);
         }
         ret.setNotices(newNotices);
       }
 
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -19843,7 +19823,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results');
-          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
+          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryResult.class);
           newResults.add(newItem);
         }
         ret.results = newResults;
@@ -19856,7 +19836,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.aggregations = newAggregations;
@@ -19869,7 +19849,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedPassages.size(); i++) {
           QueryPassages currentItem = ret.getPassages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('passages');
-          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
+          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryPassages.class);
           newPassages.add(newItem);
         }
         ret.passages = newPassages;
@@ -19877,7 +19857,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for retrievalDetails
       Map<String, Object> retrievalDetailsMap = (Map<String, Object>) jsonMap.get('retrievalDetails');
-      RetrievalDetails newRetrievalDetails = (RetrievalDetails) new RetrievalDetails().deserialize(JSON.serialize(retrievalDetailsMap), retrievalDetailsMap, RetrievalDetails.class);
+      RetrievalDetails newRetrievalDetails = (RetrievalDetails) new RetrievalDetails().deserialize(JSON.serialize(retrievalDetailsMap, true), retrievalDetailsMap, RetrievalDetails.class);
       ret.setRetrievalDetails(newRetrievalDetails);
 
       return ret;
@@ -19892,7 +19872,6 @@ public class IBMDiscoveryV1Models {
     private IBMWatsonMapModel metadata;
     private String collectionId;
     private QueryResultMetadata resultMetadata;
-    private String title;
     private Map<String, Object> additionalProperties;
 
     /**
@@ -19933,16 +19912,6 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public QueryResultMetadata getResultMetadata() {
       return resultMetadata;
-    }
-
-    /**
-     * Gets the title.
-     *
-     * @return the title
-     */
-    @AuraEnabled
-    public String getTitle() {
-      return title;
     }
 
     /**
@@ -19991,15 +19960,6 @@ public class IBMDiscoveryV1Models {
       this.resultMetadata = resultMetadata;
     }
 
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title = title;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -20017,15 +19977,15 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap, true), metadataMap, IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for resultMetadata
       Map<String, Object> resultMetadataMap = (Map<String, Object>) jsonMap.get('resultMetadata');
-      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(resultMetadataMap), resultMetadataMap, QueryResultMetadata.class);
+      QueryResultMetadata newResultMetadata = (QueryResultMetadata) new QueryResultMetadata().deserialize(JSON.serialize(resultMetadataMap, true), resultMetadataMap, QueryResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -20294,7 +20254,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for customFields
       Map<String, Object> customFieldsMap = (Map<String, Object>) jsonMap.get('customFields');
-      SduStatusCustomFields newCustomFields = (SduStatusCustomFields) new SduStatusCustomFields().deserialize(JSON.serialize(customFieldsMap), customFieldsMap, SduStatusCustomFields.class);
+      SduStatusCustomFields newCustomFields = (SduStatusCustomFields) new SduStatusCustomFields().deserialize(JSON.serialize(customFieldsMap, true), customFieldsMap, SduStatusCustomFields.class);
       ret.setCustomFields(newCustomFields);
 
       return ret;
@@ -20582,7 +20542,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -20797,12 +20757,12 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for schedule
       Map<String, Object> scheduleMap = (Map<String, Object>) jsonMap.get('schedule');
-      SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(scheduleMap), scheduleMap, SourceSchedule.class);
+      SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(scheduleMap, true), scheduleMap, SourceSchedule.class);
       retBuilder.schedule(newSchedule);
 
       // calling custom deserializer for options
       Map<String, Object> optionsMap = (Map<String, Object>) jsonMap.get('options');
-      SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(optionsMap), optionsMap, SourceOptions.class);
+      SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(optionsMap, true), optionsMap, SourceOptions.class);
       retBuilder.options(newOptions);
 
       return retBuilder.build();
@@ -20810,7 +20770,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -20824,7 +20784,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for schedule
       if (schedule != null) {
-        String scheduleJsonString = JSON.serialize(schedule.replacePropertyNames());
+        String scheduleJsonString = JSON.serialize(schedule.replacePropertyNames(), true);
         String scheduleKey = 'schedule';
         if (propertyNameMapping.containsKey(scheduleKey)) {
           scheduleKey = propertyNameMapping.get(scheduleKey);
@@ -20834,7 +20794,7 @@ public class IBMDiscoveryV1Models {
 
       // performing custom serialization for options
       if (options != null) {
-        String optionsJsonString = JSON.serialize(options.replacePropertyNames());
+        String optionsJsonString = JSON.serialize(options.replacePropertyNames(), true);
         String optionsKey = 'options';
         if (propertyNameMapping.containsKey(optionsKey)) {
           optionsKey = propertyNameMapping.get(optionsKey);
@@ -21059,7 +21019,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedFolders.size(); i++) {
           SourceOptionsFolder currentItem = ret.getFolders().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('folders');
-          SourceOptionsFolder newItem = (SourceOptionsFolder) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsFolder.class);
+          SourceOptionsFolder newItem = (SourceOptionsFolder) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SourceOptionsFolder.class);
           newFolders.add(newItem);
         }
         retBuilder.folders(newFolders);
@@ -21072,7 +21032,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedObjects.size(); i++) {
           SourceOptionsObject currentItem = ret.getObjects().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('objects');
-          SourceOptionsObject newItem = (SourceOptionsObject) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsObject.class);
+          SourceOptionsObject newItem = (SourceOptionsObject) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SourceOptionsObject.class);
           newObjects.add(newItem);
         }
         retBuilder.objects(newObjects);
@@ -21085,7 +21045,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedSiteCollections.size(); i++) {
           SourceOptionsSiteColl currentItem = ret.getSiteCollections().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('siteCollections');
-          SourceOptionsSiteColl newItem = (SourceOptionsSiteColl) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsSiteColl.class);
+          SourceOptionsSiteColl newItem = (SourceOptionsSiteColl) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SourceOptionsSiteColl.class);
           newSiteCollections.add(newItem);
         }
         retBuilder.siteCollections(newSiteCollections);
@@ -21098,7 +21058,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedUrls.size(); i++) {
           SourceOptionsWebCrawl currentItem = ret.getUrls().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('urls');
-          SourceOptionsWebCrawl newItem = (SourceOptionsWebCrawl) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsWebCrawl.class);
+          SourceOptionsWebCrawl newItem = (SourceOptionsWebCrawl) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SourceOptionsWebCrawl.class);
           newUrls.add(newItem);
         }
         retBuilder.urls(newUrls);
@@ -21111,7 +21071,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedBuckets.size(); i++) {
           SourceOptionsBuckets currentItem = ret.getBuckets().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('buckets');
-          SourceOptionsBuckets newItem = (SourceOptionsBuckets) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsBuckets.class);
+          SourceOptionsBuckets newItem = (SourceOptionsBuckets) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SourceOptionsBuckets.class);
           newBuckets.add(newItem);
         }
         retBuilder.buckets(newBuckets);
@@ -21122,7 +21082,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -21138,7 +21098,7 @@ public class IBMDiscoveryV1Models {
       if (folders != null) {
         List<Object> foldersJsonList = new List<Object>();
         for (SourceOptionsFolder listItem : folders) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           foldersJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String foldersKey = 'folders';
@@ -21152,7 +21112,7 @@ public class IBMDiscoveryV1Models {
       if (objects != null) {
         List<Object> objectsJsonList = new List<Object>();
         for (SourceOptionsObject listItem : objects) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           objectsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String objectsKey = 'objects';
@@ -21166,7 +21126,7 @@ public class IBMDiscoveryV1Models {
       if (siteCollections != null) {
         List<Object> siteCollectionsJsonList = new List<Object>();
         for (SourceOptionsSiteColl listItem : siteCollections) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           siteCollectionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String siteCollectionsKey = 'siteCollections';
@@ -21180,7 +21140,7 @@ public class IBMDiscoveryV1Models {
       if (urls != null) {
         List<Object> urlsJsonList = new List<Object>();
         for (SourceOptionsWebCrawl listItem : urls) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           urlsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String urlsKey = 'urls';
@@ -21194,7 +21154,7 @@ public class IBMDiscoveryV1Models {
       if (buckets != null) {
         List<Object> bucketsJsonList = new List<Object>();
         for (SourceOptionsBuckets listItem : buckets) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           bucketsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String bucketsKey = 'buckets';
@@ -21463,7 +21423,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -21626,7 +21586,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -21790,7 +21750,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -21939,7 +21899,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -22182,7 +22142,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -22448,7 +22408,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -22681,7 +22641,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -22954,7 +22914,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedHits.size(); i++) {
           QueryResult currentItem = ret.getHits().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('hits');
-          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
+          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryResult.class);
           newHits.add(newItem);
         }
         ret.hits = newHits;
@@ -23057,7 +23017,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedQueries.size(); i++) {
           TrainingQuery currentItem = ret.getQueries().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('queries');
-          TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingQuery.class);
+          TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TrainingQuery.class);
           newQueries.add(newItem);
         }
         ret.queries = newQueries;
@@ -23153,7 +23113,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -23273,7 +23233,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           TrainingExample currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
-          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
+          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TrainingExample.class);
           newExamples.add(newItem);
         }
         ret.examples = newExamples;
@@ -23398,7 +23358,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           TrainingExample currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
-          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
+          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TrainingExample.class);
           newExamples.add(newItem);
         }
         ret.examples = newExamples;
@@ -24443,7 +24403,7 @@ public class IBMDiscoveryV1Models {
      * Gets the file.
      *
      * The content of the document to ingest. The maximum supported file size when adding a file to a collection is 50
-     * megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files larger than the
+     * megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files larger than the
      * supported size are rejected.
      *
      * @return the file
@@ -25122,7 +25082,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedFonts.size(); i++) {
           FontSetting currentItem = ret.getFonts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fonts');
-          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
+          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), FontSetting.class);
           newFonts.add(newItem);
         }
         retBuilder.fonts(newFonts);
@@ -25135,7 +25095,7 @@ public class IBMDiscoveryV1Models {
         for (Integer i = 0; i < deserializedStyles.size(); i++) {
           WordStyle currentItem = ret.getStyles().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('styles');
-          WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordStyle.class);
+          WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), WordStyle.class);
           newStyles.add(newItem);
         }
         retBuilder.styles(newStyles);
@@ -25146,13 +25106,13 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for fonts
       if (fonts != null) {
         List<Object> fontsJsonList = new List<Object>();
         for (FontSetting listItem : fonts) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           fontsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('fonts', fontsJsonList);
@@ -25162,7 +25122,7 @@ public class IBMDiscoveryV1Models {
       if (styles != null) {
         List<Object> stylesJsonList = new List<Object>();
         for (WordStyle listItem : styles) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           stylesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('styles', stylesJsonList);
@@ -25301,7 +25261,7 @@ public class IBMDiscoveryV1Models {
 
       // calling custom deserializer for heading
       Map<String, Object> headingMap = (Map<String, Object>) jsonMap.get('heading');
-      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(headingMap), headingMap, WordHeadingDetection.class);
+      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(headingMap, true), headingMap, WordHeadingDetection.class);
       retBuilder.heading(newHeading);
 
       return retBuilder.build();
@@ -25309,11 +25269,11 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for heading
       if (heading != null) {
-        String headingJsonString = JSON.serialize(heading.replacePropertyNames());
+        String headingJsonString = JSON.serialize(heading.replacePropertyNames(), true);
         jsonMap.put('heading', JSON.deserializeUntyped(headingJsonString));
       }
 
@@ -25422,7 +25382,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -25544,7 +25504,7 @@ public class IBMDiscoveryV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }

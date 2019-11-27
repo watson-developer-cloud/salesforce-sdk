@@ -3901,15 +3901,17 @@ public class IBMWatsonMockResponses {
               '}' +
             ']' +
           '},' +
-          '"errors": {' +
-            '"code": "code",' +
-            '"message": "message",' +
-            '"more_info": "more_info",' +
-            '"target": {' +
-              '"type": "field",' +
-              '"name": "name"' +
+          '"errors": [' +
+            '{' +
+              '"code": "code",' +
+              '"message": "message",' +
+              '"more_info": "more_info",' +
+              '"target": {' +
+                '"type": "field",' +
+                '"name": "name"' +
+              '}' +
             '}' +
-          '}' +
+          ']' +
         '}' +
       '],' +
       '"warnings": [' +
@@ -3983,15 +3985,17 @@ public class IBMWatsonMockResponses {
         '"height": 200,' +
         '"width": 100' +
       '},' +
-      '"errors": {' +
-        '"code": "code",' +
-        '"message": "message",' +
-        '"more_info": "more_info",' +
-        '"target": {' +
-          '"type": "field",' +
-          '"name": "name"' +
+      '"errors": [' +
+        '{' +
+          '"code": "code",' +
+          '"message": "message",' +
+          '"more_info": "more_info",' +
+          '"target": {' +
+            '"type": "field",' +
+            '"name": "name"' +
+          '}' +
         '}' +
-      '},' +
+      '],' +
       '"training_data": {' +
         '"objects": [' +
           '{' +
@@ -4026,15 +4030,17 @@ public class IBMWatsonMockResponses {
             '"height": 200,' +
             '"width": 100' +
           '},' +
-          '"errors": {' +
-            '"code": "code",' +
-            '"message": "message",' +
-            '"more_info": "more_info",' +
-            '"target": {' +
-              '"type": "field",' +
-              '"name": "name"' +
+          '"errors": [' +
+            '{' +
+              '"code": "code",' +
+              '"message": "message",' +
+              '"more_info": "more_info",' +
+              '"target": {' +
+                '"type": "field",' +
+                '"name": "name"' +
+              '}' +
             '}' +
-          '},' +
+          '],' +
           '"training_data": {' +
             '"objects": [' +
               '{' +
@@ -4083,6 +4089,321 @@ public class IBMWatsonMockResponses {
             '"width": 100,' +
             '"height": 200' +
           '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2ListCollectionsResponse() {
+    return '{' +
+      '"collections": [' +
+        '{' +
+          '"collection_id": "collection_id",' +
+          '"name": "name"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2Completions() {
+    return '{' +
+      '"completions": [' +
+        '"completion"' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2ComponentSettingsResponse() {
+    return '{' +
+      '"fields_shown": {' +
+        '"body": {' +
+          '"use_passage": true,' +
+          '"field": "field"' +
+        '},' +
+        '"title": {' +
+          '"field": "field"' +
+        '}' +
+      '},' +
+      '"autocomplete": true,' +
+      '"structured_search": true,' +
+      '"results_per_page": 17,' +
+      '"aggregations": [' +
+        '{' +
+          '"name": "name",' +
+          '"label": "label",' +
+          '"multiple_selections_allowed": true,' +
+          '"visualization_type": "visualization_type"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2DocumentAccepted() {
+    return '{' +
+      '"document_id": "document_id",' +
+      '"status": "status"' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2ListFieldsResponse() {
+    return '{' +
+      '"fields": [' +
+        '{' +
+          '"field": "field",' +
+          '"type": "type",' +
+          '"collection_id": "collection_id"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2QueryNoticesResponse() {
+    return '{' +
+      '"matching_results": 6,' +
+      '"notices": [' +
+        '{' +
+          '"notice_id": "notice_id",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"document_id": "document_id",' +
+          '"collection_id": "collection_id",' +
+          '"query_id": "query_id",' +
+          '"severity": "severity",' +
+          '"step": "step",' +
+          '"description": "description"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2QueryResponse() {
+    return '{' +
+      '"matching_results": 6,' +
+      '"results": [' +
+        '{' +
+          '"document_id": "document_id",' +
+          '"metadata": {},' +
+          '"result_metadata": {' +
+            '"document_retrieval_source": "document_retrieval_source",' +
+            '"collection_id": "collection_id",' +
+            '"confidence": 0.0' +
+          '},' +
+          '"document_passages": [' +
+            '{' +
+              '"passage_text": "passage_text",' +
+              '"start_offset": 7,' +
+              '"end_offset": 8,' +
+              '"field": "field"' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"aggregations": [' +
+        '{' +
+          '"type": "type"' +
+        '}' +
+      '],' +
+      '"retrieval_details": {' +
+        '"document_retrieval_strategy": "document_retrieval_strategy"' +
+      '},' +
+      '"suggested_query": "suggested_query",' +
+      '"suggested_refinements": [' +
+        '{' +
+          '"text": "text"' +
+        '}' +
+      '],' +
+      '"table_results": [' +
+        '{' +
+          '"table_id": "table_id",' +
+          '"source_document_id": "source_document_id",' +
+          '"collection_id": "collection_id",' +
+          '"table_html": "table_html",' +
+          '"table_html_offset": 9,' +
+          '"table": {' +
+            '"location": {' +
+              '"begin": 10,' +
+              '"end": 11' +
+            '},' +
+            '"text": "text",' +
+            '"section_title": {' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 11' +
+              '}' +
+            '},' +
+            '"title": {' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 10,' +
+                '"end": 11' +
+              '}' +
+            '},' +
+            '"table_headers": [' +
+              '{' +
+                '"cell_id": "cell_id",' +
+                '"location": {},' +
+                '"text": "text",' +
+                '"row_index_begin": 12,' +
+                '"row_index_end": 13,' +
+                '"column_index_begin": 14,' +
+                '"column_index_end": 15' +
+              '}' +
+            '],' +
+            '"row_headers": [' +
+              '{' +
+                '"cell_id": "cell_id",' +
+                '"location": {' +
+                  '"begin": 10,' +
+                  '"end": 11' +
+                '},' +
+                '"text": "text",' +
+                '"text_normalized": "text_normalized",' +
+                '"row_index_begin": 12,' +
+                '"row_index_end": 13,' +
+                '"column_index_begin": 14,' +
+                '"column_index_end": 15' +
+              '}' +
+            '],' +
+            '"column_headers": [' +
+              '{' +
+                '"cell_id": "cell_id",' +
+                '"location": {},' +
+                '"text": "text",' +
+                '"text_normalized": "text_normalized",' +
+                '"row_index_begin": 12,' +
+                '"row_index_end": 13,' +
+                '"column_index_begin": 14,' +
+                '"column_index_end": 15' +
+              '}' +
+            '],' +
+            '"key_value_pairs": [' +
+              '{' +
+                '"key": {' +
+                  '"cell_id": "cell_id",' +
+                  '"location": {' +
+                    '"begin": 10,' +
+                    '"end": 11' +
+                  '},' +
+                  '"text": "text"' +
+                '},' +
+                '"value": [' +
+                  '{' +
+                    '"cell_id": "cell_id",' +
+                    '"location": {' +
+                      '"begin": 10,' +
+                      '"end": 11' +
+                    '},' +
+                    '"text": "text"' +
+                  '}' +
+                ']' +
+              '}' +
+            '],' +
+            '"body_cells": [' +
+              '{' +
+                '"cell_id": "cell_id",' +
+                '"location": {' +
+                  '"begin": 10,' +
+                  '"end": 11' +
+                '},' +
+                '"text": "text",' +
+                '"row_index_begin": 12,' +
+                '"row_index_end": 13,' +
+                '"column_index_begin": 14,' +
+                '"column_index_end": 15,' +
+                '"row_header_ids": [' +
+                  '{' +
+                    '"id": "id"' +
+                  '}' +
+                '],' +
+                '"row_header_texts": [' +
+                  '{' +
+                    '"text": "text"' +
+                  '}' +
+                '],' +
+                '"row_header_texts_normalized": [' +
+                  '{' +
+                    '"text_normalized": "text_normalized"' +
+                  '}' +
+                '],' +
+                '"column_header_ids": [' +
+                  '{' +
+                    '"id": "id"' +
+                  '}' +
+                '],' +
+                '"column_header_texts": [' +
+                  '{' +
+                    '"text": "text"' +
+                  '}' +
+                '],' +
+                '"column_header_texts_normalized": [' +
+                  '{' +
+                    '"text_normalized": "text_normalized"' +
+                  '}' +
+                '],' +
+                '"attributes": [' +
+                  '{' +
+                    '"type": "type",' +
+                    '"text": "text",' +
+                    '"location": {' +
+                      '"begin": 10,' +
+                      '"end": 11' +
+                    '}' +
+                  '}' +
+                ']' +
+              '}' +
+            '],' +
+            '"contexts": [' +
+              '{' +
+                '"text": "text",' +
+                '"location": {' +
+                  '"begin": 10,' +
+                  '"end": 11' +
+                '}' +
+              '}' +
+            ']' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2TrainingQuery() {
+    return '{' +
+      '"query_id": "query_id",' +
+      '"natural_language_query": "natural_language_query",' +
+      '"filter": "filter",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z",' +
+      '"examples": [' +
+        '{' +
+          '"document_id": "document_id",' +
+          '"collection_id": "collection_id",' +
+          '"relevance": 1,' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String discoveryV2TrainingQuerySet() {
+    return '{' +
+      '"queries": [' +
+        '{' +
+          '"query_id": "query_id",' +
+          '"natural_language_query": "natural_language_query",' +
+          '"filter": "filter",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z",' +
+          '"examples": [' +
+            '{' +
+              '"document_id": "document_id",' +
+              '"collection_id": "collection_id",' +
+              '"relevance": 1,' +
+              '"created": "1995-06-12T01:11:11.111Z",' +
+              '"updated": "1995-06-12T01:11:11.111Z"' +
+            '}' +
+          ']' +
         '}' +
       ']' +
     '}';

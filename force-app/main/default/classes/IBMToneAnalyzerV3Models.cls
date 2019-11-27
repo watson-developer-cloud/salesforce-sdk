@@ -97,7 +97,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
-          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
+          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ToneScore.class);
           newTones.add(newItem);
         }
         ret.tones = newTones;
@@ -110,7 +110,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedToneCategories.size(); i++) {
           ToneCategory currentItem = ret.getToneCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('toneCategories');
-          ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
+          ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ToneCategory.class);
           newToneCategories.add(newItem);
         }
         ret.toneCategories = newToneCategories;
@@ -288,7 +288,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
-          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
+          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ToneScore.class);
           newTones.add(newItem);
         }
         ret.tones = newTones;
@@ -301,7 +301,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedToneCategories.size(); i++) {
           ToneCategory currentItem = ret.getToneCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('toneCategories');
-          ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
+          ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ToneCategory.class);
           newToneCategories.add(newItem);
         }
         ret.toneCategories = newToneCategories;
@@ -379,7 +379,7 @@ public class IBMToneAnalyzerV3Models {
 
       // calling custom deserializer for documentTone
       Map<String, Object> documentToneMap = (Map<String, Object>) jsonMap.get('documentTone');
-      DocumentAnalysis newDocumentTone = (DocumentAnalysis) new DocumentAnalysis().deserialize(JSON.serialize(documentToneMap), documentToneMap, DocumentAnalysis.class);
+      DocumentAnalysis newDocumentTone = (DocumentAnalysis) new DocumentAnalysis().deserialize(JSON.serialize(documentToneMap, true), documentToneMap, DocumentAnalysis.class);
       ret.setDocumentTone(newDocumentTone);
 
       // calling custom deserializer for sentencesTone
@@ -389,7 +389,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedSentencesTone.size(); i++) {
           SentenceAnalysis currentItem = ret.getSentencesTone().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('sentencesTone');
-          SentenceAnalysis newItem = (SentenceAnalysis) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceAnalysis.class);
+          SentenceAnalysis newItem = (SentenceAnalysis) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), SentenceAnalysis.class);
           newSentencesTone.add(newItem);
         }
         ret.sentencesTone = newSentencesTone;
@@ -493,7 +493,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneScore currentItem = ret.getTones().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
-          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
+          ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ToneScore.class);
           newTones.add(newItem);
         }
         ret.tones = newTones;
@@ -795,7 +795,7 @@ public class IBMToneAnalyzerV3Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -1270,7 +1270,7 @@ public class IBMToneAnalyzerV3Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -1406,7 +1406,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedUtterancesTone.size(); i++) {
           UtteranceAnalysis currentItem = ret.getUtterancesTone().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('utterancesTone');
-          UtteranceAnalysis newItem = (UtteranceAnalysis) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UtteranceAnalysis.class);
+          UtteranceAnalysis newItem = (UtteranceAnalysis) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), UtteranceAnalysis.class);
           newUtterancesTone.add(newItem);
         }
         ret.utterancesTone = newUtterancesTone;
@@ -1535,7 +1535,7 @@ public class IBMToneAnalyzerV3Models {
         for (Integer i = 0; i < deserializedTones.size(); i++) {
           ToneChatScore currentItem = ret.getTones().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('tones');
-          ToneChatScore newItem = (ToneChatScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneChatScore.class);
+          ToneChatScore newItem = (ToneChatScore) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ToneChatScore.class);
           newTones.add(newItem);
         }
         ret.tones = newTones;

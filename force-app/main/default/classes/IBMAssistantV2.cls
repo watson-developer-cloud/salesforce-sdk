@@ -49,7 +49,9 @@ public class IBMAssistantV2 extends IBMWatsonService {
    * Create a session.
    *
    * Create a new session. A session is used to send user input to a skill and receive responses. It also maintains the
-   * state of the conversation.
+   * state of the conversation. A session persists until it is deleted, or until it times out because of inactivity.
+   * (For more information, see the
+   * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-settings).
    *
    * @param createSessionOptions the {@link IBMAssistantV2Models.CreateSessionOptions} containing the options for the call
    * @return the {@link IBMAssistantV2Models.SessionResponse} with the response
@@ -75,7 +77,8 @@ public class IBMAssistantV2 extends IBMWatsonService {
   /**
    * Delete session.
    *
-   * Deletes a session explicitly before it times out.
+   * Deletes a session explicitly before it times out. (For more information about the session inactivity timeout, see
+   * the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-settings)).
    *
    * @param deleteSessionOptions the {@link IBMAssistantV2Models.DeleteSessionOptions} containing the options for the call
    * @return the service call
@@ -127,7 +130,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
     if (messageOptions.context() != null) {
       contentJson.put('context', messageOptions.context().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV2Models.MessageResponse) createServiceCall(builder.build(), IBMAssistantV2Models.MessageResponse.class);
   }

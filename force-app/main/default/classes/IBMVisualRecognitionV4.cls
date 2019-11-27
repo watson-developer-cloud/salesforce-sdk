@@ -2,11 +2,6 @@
  * Provide images to the IBM Watson&trade; Visual Recognition service for analysis. The service detects objects based on
  * a set of images with training data.
  *
- * **Beta:** The Visual Recognition v4 API and Object Detection model are beta features. For more information about beta
- * features, see the [Release
- * notes](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-release-notes#beta).
- * {: important}
- *
  * @version V4
  * @see <a href="https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-object-detection-overview">Visual Recognition</a>
  */
@@ -129,7 +124,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     if (createCollectionOptions.description() != null) {
       contentJson.put('description', createCollectionOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMVisualRecognitionV4Models.Collection) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.Collection.class);
   }
@@ -214,7 +209,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     if (updateCollectionOptions.description() != null) {
       contentJson.put('description', updateCollectionOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMVisualRecognitionV4Models.Collection) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.Collection.class);
   }
@@ -458,9 +453,40 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
       }
       contentJson.put('objects', objectsList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMVisualRecognitionV4Models.TrainingDataObjects) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.TrainingDataObjects.class);
+  }
+
+  /**
+   * Get training usage.
+   *
+   * Information about the completed training events. You can use this information to determine how close you are to the
+   * training limits for the month.
+   *
+   * @param getTrainingUsageOptions the {@link IBMVisualRecognitionV4Models.GetTrainingUsageOptions} containing the options for the call
+   * @return the {@link IBMVisualRecognitionV4Models.TrainingEvents} with the response
+   */
+  public IBMVisualRecognitionV4Models.TrainingEvents getTrainingUsage(IBMVisualRecognitionV4Models.GetTrainingUsageOptions getTrainingUsageOptions) {
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + '/v4/training_usage');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=watson_vision_combined;service_version=V4;operation_id=getTrainingUsage');
+    Map<String, String> requestHeaders = (getTrainingUsageOptions != null) ? getTrainingUsageOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getTrainingUsageOptions != null && getTrainingUsageOptions.startTime() != null) {
+      builder.query('start_time', getTrainingUsageOptions.startTime());
+    }
+    if (getTrainingUsageOptions != null && getTrainingUsageOptions.endTime() != null) {
+      builder.query('end_time', getTrainingUsageOptions.endTime());
+    }
+
+    return (IBMVisualRecognitionV4Models.TrainingEvents) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.TrainingEvents.class);
   }
 
   /**

@@ -148,7 +148,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
       utterancesList.add(utterancesItem.replacePropertyNames());
     }
     contentJson.put('utterances', utterancesList);
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMToneAnalyzerV3Models.UtteranceAnalyses) createServiceCall(builder.build(), IBMToneAnalyzerV3Models.UtteranceAnalyses.class);
   }

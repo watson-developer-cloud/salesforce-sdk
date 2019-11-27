@@ -101,7 +101,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (messageOptions.output() != null) {
       contentJson.put('output', messageOptions.output().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.MessageResponse) createServiceCall(builder.build(), IBMAssistantV1Models.MessageResponse.class);
   }
@@ -214,7 +214,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
       contentJson.put('counterexamples', counterexamplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    if (createWorkspaceOptions.webhooks() != null) {
+      List<Object> webhooksList = new List<Object>();
+      for (IBMAssistantV1Models.Webhook webhooksItem : createWorkspaceOptions.webhooks()) {
+        webhooksList.add(webhooksItem.replacePropertyNames());
+      }
+      contentJson.put('webhooks', webhooksList);
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
   }
@@ -330,7 +337,14 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
       contentJson.put('counterexamples', counterexamplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    if (updateWorkspaceOptions.webhooks() != null) {
+      List<Object> webhooksList = new List<Object>();
+      for (IBMAssistantV1Models.Webhook webhooksItem : updateWorkspaceOptions.webhooks()) {
+        webhooksList.add(webhooksItem.replacePropertyNames());
+      }
+      contentJson.put('webhooks', webhooksList);
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
   }
@@ -443,7 +457,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
       contentJson.put('examples', examplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
   }
@@ -523,7 +537,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
       contentJson.put('examples', newExamplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
   }
@@ -629,7 +643,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
       contentJson.put('mentions', mentionsList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
   }
@@ -701,7 +715,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
       contentJson.put('mentions', newMentionsList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
   }
@@ -800,7 +814,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createCounterexampleOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
   }
@@ -865,7 +879,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateCounterexampleOptions.newText() != null) {
       contentJson.put('text', updateCounterexampleOptions.newText());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
   }
@@ -984,7 +998,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
       contentJson.put('values', valuesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
   }
@@ -1070,7 +1084,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
       contentJson.put('values', newValuesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
   }
@@ -1218,7 +1232,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createValueOptions.patterns() != null) {
       contentJson.put('patterns', createValueOptions.patterns());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
   }
@@ -1299,7 +1313,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateValueOptions.newPatterns() != null) {
       contentJson.put('patterns', updateValueOptions.newPatterns());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
   }
@@ -1398,7 +1412,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('synonym', createSynonymOptions.synonym());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
   }
@@ -1463,7 +1477,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateSynonymOptions.newSynonym() != null) {
       contentJson.put('synonym', updateSynonymOptions.newSynonym());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
   }
@@ -1617,7 +1631,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createDialogNodeOptions.userLabel() != null) {
       contentJson.put('user_label', createDialogNodeOptions.userLabel());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    if (createDialogNodeOptions.disambiguationOptOut() != null) {
+      contentJson.put('disambiguation_opt_out', createDialogNodeOptions.disambiguationOptOut());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.DialogNode) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNode.class);
   }
@@ -1737,7 +1754,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (updateDialogNodeOptions.newUserLabel() != null) {
       contentJson.put('user_label', updateDialogNodeOptions.newUserLabel());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    if (updateDialogNodeOptions.newDisambiguationOptOut() != null) {
+      contentJson.put('disambiguation_opt_out', updateDialogNodeOptions.newDisambiguationOptOut());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.DialogNode) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNode.class);
   }

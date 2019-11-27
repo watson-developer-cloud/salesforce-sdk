@@ -6,6 +6,8 @@
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. If you'd like, you can follow along with our video playlist [here](https://www.youtube.com/playlist?list=PLZDyxLlNKRY8qrs90oRPvVHocJhYOOj3n) to start using the SDK. Otherwise, continue reading to learn how to get started.
 
+**NOTE:** The new Discovery v2 service (`IBMDiscoveryV2`) is only accessible on Cloud Pak for Data. See the [ICP/Cloud Pak for Data](#icp/cloud-pak-for-data) section for more information on how to get set up.
+
 ## Before you begin
 
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
@@ -305,8 +307,8 @@ Both the Text to Speech and Speech to Text services have API endpoints which sup
 
 The above library adds minimal overhead and will allow for the use of WebSockets. Also, being Javascript, this SDK can integrate smoothly with Lightning apps and be used alongside the Salesforce SDK.
 
-## ICP
-If you're using this SDK to interact with a service on IBM Cloud Private (ICP), you'll need to add your self-signed certificate to your Salesforce organization. You can do this in the Certificate and Key Management section of the security settings.
+## ICP/Cloud Pak for Data
+If you're using this SDK to interact with a service on IBM Cloud Private (ICP) or Cloud Pak for Data (CP4D), you'll need to add your self-signed certificate to your Salesforce organization. You can do this in the Certificate and Key Management section of the security settings.
 
 ## Functional tests
 

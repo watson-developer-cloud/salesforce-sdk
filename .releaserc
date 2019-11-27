@@ -1,12 +1,23 @@
 {
   "branch": "master",
-  "verifyConditions": ["@semantic-release/git", "@semantic-release/exec"],
-  "prepare": [
-    "@semantic-release/git",
-    {
-      "path": "@semantic-release/exec",
-      "cmd": "bumpversion --current-version ${lastRelease.version} --new-version ${nextRelease.version} patch --allow-dirty"
-    }
-  ],
-  "publish": ["@semantic-release/github"]
+  "debug": true,
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "bumpversion --current-version ${lastRelease.version} --new-version ${nextRelease.version} --verbose --allow-dirty patch"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "message": "docs(release): Add release notes for ${nextRelease.version}"
+      }
+    ],
+    "@semantic-release/github"
+    ]
+  ]
 }

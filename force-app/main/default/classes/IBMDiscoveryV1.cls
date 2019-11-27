@@ -76,7 +76,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createEnvironmentOptions.size() != null) {
       contentJson.put('size', createEnvironmentOptions.size());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Environment) createServiceCall(builder.build(), IBMDiscoveryV1Models.Environment.class);
   }
@@ -163,7 +163,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateEnvironmentOptions.size() != null) {
       contentJson.put('size', updateEnvironmentOptions.size());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Environment) createServiceCall(builder.build(), IBMDiscoveryV1Models.Environment.class);
   }
@@ -273,7 +273,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createConfigurationOptions.source() != null) {
       contentJson.put('source', createConfigurationOptions.source().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Configuration) createServiceCall(builder.build(), IBMDiscoveryV1Models.Configuration.class);
   }
@@ -381,7 +381,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateConfigurationOptions.source() != null) {
       contentJson.put('source', updateConfigurationOptions.source().replacePropertyNames());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Configuration) createServiceCall(builder.build(), IBMDiscoveryV1Models.Configuration.class);
   }
@@ -444,7 +444,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createCollectionOptions.language() != null) {
       contentJson.put('language', createCollectionOptions.language());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
   }
@@ -529,7 +529,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateCollectionOptions.configurationId() != null) {
       contentJson.put('configuration_id', updateCollectionOptions.configurationId());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
   }
@@ -636,7 +636,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       expansionsList.add(expansionsItem.replacePropertyNames());
     }
     contentJson.put('expansions', expansionsList);
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
   }
@@ -720,7 +720,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       }
       contentJson.put('tokenization_rules', tokenizationRulesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.TokenDictStatusResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.TokenDictStatusResponse.class);
   }
@@ -1068,7 +1068,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryOptions.spellingSuggestions() != null) {
       contentJson.put('spelling_suggestions', queryOptions.spellingSuggestions());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
   }
@@ -1239,7 +1239,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.collectionIds() != null) {
       contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
   }
@@ -1409,7 +1409,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       }
       contentJson.put('examples', examplesList);
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.TrainingQuery) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingQuery.class);
   }
@@ -1543,7 +1543,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createTrainingExampleOptions.relevance() != null) {
       contentJson.put('relevance', createTrainingExampleOptions.relevance());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
   }
@@ -1600,7 +1600,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateTrainingExampleOptions.relevance() != null) {
       contentJson.put('relevance', updateTrainingExampleOptions.relevance());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
   }
@@ -1687,7 +1687,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('type', createEventOptions.xType());
     contentJson.put('data', createEventOptions.data().replacePropertyNames());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.CreateEventResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.CreateEventResponse.class);
   }
@@ -1959,7 +1959,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createCredentialsOptions.status() != null) {
       contentJson.put('status', createCredentialsOptions.status());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
   }
@@ -2025,7 +2025,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateCredentialsOptions.status() != null) {
       contentJson.put('status', updateCredentialsOptions.status());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
   }
@@ -2105,7 +2105,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createGatewayOptions.name() != null) {
       contentJson.put('name', createGatewayOptions.name());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Gateway) createServiceCall(builder.build(), IBMDiscoveryV1Models.Gateway.class);
   }

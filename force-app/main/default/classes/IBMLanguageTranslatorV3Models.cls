@@ -401,7 +401,7 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedDocuments.size(); i++) {
           DocumentStatus currentItem = ret.getDocuments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('documents');
-          DocumentStatus newItem = (DocumentStatus) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentStatus.class);
+          DocumentStatus newItem = (DocumentStatus) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DocumentStatus.class);
           newDocuments.add(newItem);
         }
         ret.documents = newDocuments;
@@ -1092,7 +1092,7 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedLanguages.size(); i++) {
           IdentifiableLanguage currentItem = ret.getLanguages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('languages');
-          IdentifiableLanguage newItem = (IdentifiableLanguage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiableLanguage.class);
+          IdentifiableLanguage newItem = (IdentifiableLanguage) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), IdentifiableLanguage.class);
           newLanguages.add(newItem);
         }
         ret.languages = newLanguages;
@@ -1203,7 +1203,7 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedLanguages.size(); i++) {
           IdentifiedLanguage currentItem = ret.getLanguages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('languages');
-          IdentifiedLanguage newItem = (IdentifiedLanguage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiedLanguage.class);
+          IdentifiedLanguage newItem = (IdentifiedLanguage) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), IdentifiedLanguage.class);
           newLanguages.add(newItem);
         }
         ret.languages = newLanguages;
@@ -2324,7 +2324,7 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedModels.size(); i++) {
           TranslationModel currentItem = ret.getModels().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('models');
-          TranslationModel newItem = (TranslationModel) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TranslationModel.class);
+          TranslationModel newItem = (TranslationModel) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TranslationModel.class);
           newModels.add(newItem);
         }
         ret.models = newModels;
@@ -2427,7 +2427,7 @@ public class IBMLanguageTranslatorV3Models {
         for (Integer i = 0; i < deserializedTranslations.size(); i++) {
           Translation currentItem = ret.getTranslations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('translations');
-          Translation newItem = (Translation) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Translation.class);
+          Translation newItem = (Translation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Translation.class);
           newTranslations.add(newItem);
         }
         ret.translations = newTranslations;

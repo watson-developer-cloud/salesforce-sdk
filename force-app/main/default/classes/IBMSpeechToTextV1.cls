@@ -626,6 +626,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * base model for which it is created. The model is owned by the instance of the service whose credentials are used to
    * create it.
    *
+   * You can create a maximum of 1024 custom language models, per credential. The service returns an error if you
+   * attempt to create more than 1024 models. You do not lose any models, but you cannot create any more until your
+   * model count is below the limit.
+   *
    * **See also:** [Create a custom language
    * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#createModel-language).
    *
@@ -653,7 +657,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createLanguageModelOptions.description() != null) {
       contentJson.put('description', createLanguageModelOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMSpeechToTextV1Models.LanguageModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.LanguageModel.class);
   }
@@ -1138,7 +1142,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
       wordsList.add(wordsItem.replacePropertyNames());
     }
     contentJson.put('words', wordsList);
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);
   }
@@ -1201,7 +1205,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (addWordOptions.displayAs() != null) {
       contentJson.put('display_as', addWordOptions.displayAs());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);
   }
@@ -1420,6 +1424,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * base model for which it is created. The model is owned by the instance of the service whose credentials are used to
    * create it.
    *
+   * You can create a maximum of 1024 custom acoustic models, per credential. The service returns an error if you
+   * attempt to create more than 1024 models. You do not lose any models, but you cannot create any more until your
+   * model count is below the limit.
+   *
    * **See also:** [Create a custom acoustic
    * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#createModel-acoustic).
    *
@@ -1444,7 +1452,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createAcousticModelOptions.description() != null) {
       contentJson.put('description', createAcousticModelOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMSpeechToTextV1Models.AcousticModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AcousticModel.class);
   }

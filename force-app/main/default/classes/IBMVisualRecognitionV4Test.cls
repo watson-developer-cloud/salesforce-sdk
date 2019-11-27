@@ -411,11 +411,11 @@ private class IBMVisualRecognitionV4Test {
         response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getHeight());
     System.assertEquals(SCORE,
         response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getScore());
-    System.assertEquals(CODE, response.getImages().get(0).getErrors().getCode());
-    System.assertEquals(MESSAGE, response.getImages().get(0).getErrors().getMessage());
-    System.assertEquals(MORE_INFO, response.getImages().get(0).getErrors().getMoreInfo());
-    System.assertEquals(ERROR_TYPE, response.getImages().get(0).getErrors().getTarget().getXType());
-    System.assertEquals(NAME, response.getImages().get(0).getErrors().getTarget().getName());
+    System.assertEquals(CODE, response.getImages().get(0).getErrors().get(0).getCode());
+    System.assertEquals(MESSAGE, response.getImages().get(0).getErrors().get(0).getMessage());
+    System.assertEquals(MORE_INFO, response.getImages().get(0).getErrors().get(0).getMoreInfo());
+    System.assertEquals(ERROR_TYPE, response.getImages().get(0).getErrors().get(0).getTarget().getXType());
+    System.assertEquals(NAME, response.getImages().get(0).getErrors().get(0).getTarget().getName());
     System.assertEquals(CODE, response.getWarnings().get(0).getCode());
     System.assertEquals(MESSAGE, response.getWarnings().get(0).getMessage());
     System.assertEquals(MORE_INFO, response.getWarnings().get(0).getMoreInfo());
@@ -563,11 +563,11 @@ private class IBMVisualRecognitionV4Test {
     System.assertEquals(RESOLVED_URL, response.getSource().getResolvedUrl());
     System.assertEquals(HEIGHT, response.getDimensions().getHeight());
     System.assertEquals(WIDTH, response.getDimensions().getWidth());
-    System.assertEquals(CODE, response.getErrors().getCode());
-    System.assertEquals(MESSAGE, response.getErrors().getMessage());
-    System.assertEquals(MORE_INFO, response.getErrors().getMoreInfo());
-    System.assertEquals(ERROR_TYPE, response.getErrors().getTarget().getXType());
-    System.assertEquals(NAME, response.getErrors().getTarget().getName());
+    System.assertEquals(CODE, response.getErrors().get(0).getCode());
+    System.assertEquals(MESSAGE, response.getErrors().get(0).getMessage());
+    System.assertEquals(MORE_INFO, response.getErrors().get(0).getMoreInfo());
+    System.assertEquals(ERROR_TYPE, response.getErrors().get(0).getTarget().getXType());
+    System.assertEquals(NAME, response.getErrors().get(0).getTarget().getName());
     System.assertEquals(OBJECT_VAL, response.getTrainingData().getObjects().get(0).getXObject());
     System.assertEquals(TOP, response.getTrainingData().getObjects().get(0).getLocation().getTop());
     System.assertEquals(LEFT, response.getTrainingData().getObjects().get(0).getLocation().getLeft());

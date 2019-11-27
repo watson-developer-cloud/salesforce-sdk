@@ -737,7 +737,7 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedImages.size(); i++) {
           Image currentItem = ret.getImages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('images');
-          Image newItem = (Image) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Image.class);
+          Image newItem = (Image) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Image.class);
           newImages.add(newItem);
         }
         ret.images = newImages;
@@ -750,7 +750,7 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           Warning currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Warning.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
@@ -892,7 +892,7 @@ public class IBMVisualRecognitionV4Models {
 
       // calling custom deserializer for trainingStatus
       Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.get('trainingStatus');
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap, true), trainingStatusMap, TrainingStatus.class);
       ret.trainingStatus = newTrainingStatus;
 
       return ret;
@@ -969,7 +969,7 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedObjects.size(); i++) {
           ObjectDetail currentItem = ret.getObjects().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('objects');
-          ObjectDetail newItem = (ObjectDetail) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ObjectDetail.class);
+          ObjectDetail newItem = (ObjectDetail) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ObjectDetail.class);
           newObjects.add(newItem);
         }
         ret.objects = newObjects;
@@ -1020,7 +1020,7 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedCollections.size(); i++) {
           Collection currentItem = ret.getCollections().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('collections');
-          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Collection.class);
+          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Collection.class);
           newCollections.add(newItem);
         }
         ret.collections = newCollections;
@@ -1485,7 +1485,7 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedCollections.size(); i++) {
           CollectionObjects currentItem = ret.getCollections().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('collections');
-          CollectionObjects newItem = (CollectionObjects) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CollectionObjects.class);
+          CollectionObjects newItem = (CollectionObjects) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), CollectionObjects.class);
           newCollections.add(newItem);
         }
         ret.collections = newCollections;
@@ -1604,7 +1604,7 @@ public class IBMVisualRecognitionV4Models {
 
       // calling custom deserializer for target
       Map<String, Object> targetMap = (Map<String, Object>) jsonMap.get('target');
-      ErrorTarget newTarget = (ErrorTarget) new ErrorTarget().deserialize(JSON.serialize(targetMap), targetMap, ErrorTarget.class);
+      ErrorTarget newTarget = (ErrorTarget) new ErrorTarget().deserialize(JSON.serialize(targetMap, true), targetMap, ErrorTarget.class);
       ret.setTarget(newTarget);
 
       return ret;
@@ -1924,7 +1924,9 @@ public class IBMVisualRecognitionV4Models {
     /**
      * Gets the size.
      *
-     * Specify the image size.
+     * The image size. Specify `thumbnail` to return a version that maintains the original aspect ratio but is no larger
+     * than 200 pixels in the larger dimension. For example, an original 800 x 1000 image is resized to 160 x 200
+     * pixels.
      *
      * @return the size
      */
@@ -2039,13 +2041,124 @@ public class IBMVisualRecognitionV4Models {
   }
 
   /**
+   * The getTrainingUsage options.
+   */
+  public class GetTrainingUsageOptions extends IBMWatsonOptionsModel {
+    private String startTime;
+    private String endTime;
+
+    /**
+     * Gets the startTime.
+     *
+     * The earliest day to include training events. Specify dates in YYYY-MM-DD format. If empty or not specified, the
+     * earliest training event is included.
+     *
+     * @return the startTime
+     */
+    public String startTime() {
+      return startTime;
+    }
+
+    /**
+     * Gets the endTime.
+     *
+     * The most recent day to include training events. Specify dates in YYYY-MM-DD format. All events for the day are
+     * included. If empty or not specified, the current day is used. Specify the same value as `start_time` to request
+     * events for a single day.
+     *
+     * @return the endTime
+     */
+    public String endTime() {
+      return endTime;
+    }
+
+    private GetTrainingUsageOptions(GetTrainingUsageOptionsBuilder builder) {
+      startTime = builder.startTime;
+      endTime = builder.endTime;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetTrainingUsageOptions builder
+     */
+    public GetTrainingUsageOptionsBuilder newBuilder() {
+      return new GetTrainingUsageOptionsBuilder(this);
+    }
+  }
+
+  /**
+   * GetTrainingUsageOptions Builder.
+   */
+  public class GetTrainingUsageOptionsBuilder extends IBMWatsonOptionsModel {
+    private String startTime;
+    private String endTime;
+
+    private GetTrainingUsageOptionsBuilder(GetTrainingUsageOptions getTrainingUsageOptions) {
+      startTime = getTrainingUsageOptions.startTime;
+      endTime = getTrainingUsageOptions.endTime;
+      this.requestHeaders.putAll(getTrainingUsageOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetTrainingUsageOptionsBuilder() {
+    }
+
+    /**
+     * Builds a GetTrainingUsageOptions.
+     *
+     * @return the getTrainingUsageOptions
+     */
+    public GetTrainingUsageOptions build() {
+      return new GetTrainingUsageOptions(this);
+    }
+
+    /**
+     * Set the startTime.
+     *
+     * @param startTime the startTime
+     * @return the GetTrainingUsageOptions builder
+     */
+    public GetTrainingUsageOptionsBuilder startTime(String startTime) {
+      this.startTime = startTime;
+      return this;
+    }
+
+    /**
+     * Set the endTime.
+     *
+     * @param endTime the endTime
+     * @return the GetTrainingUsageOptions builder
+     */
+    public GetTrainingUsageOptionsBuilder endTime(String endTime) {
+      this.endTime = endTime;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetTrainingUsageOptions builder
+     */
+    public GetTrainingUsageOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * Details about an image.
    */
   public class Image extends IBMWatsonGenericModel {
     private ImageSource source;
     private ImageDimensions dimensions;
     private DetectedObjects objects;
-    private Error errors;
+    private List<Error> errors;
 
     /**
      * Gets the source.
@@ -2086,12 +2199,12 @@ public class IBMVisualRecognitionV4Models {
     /**
      * Gets the errors.
      *
-     * Details about an error.
+     * A container for the problems in the request.
      *
      * @return the errors
      */
     @AuraEnabled
-    public Error getErrors() {
+    public List<Error> getErrors() {
       return errors;
     }
 
@@ -2127,7 +2240,7 @@ public class IBMVisualRecognitionV4Models {
      *
      * @param errors the new errors
      */
-    public void setErrors(final Error errors) {
+    public void setErrors(final List<Error> errors) {
       this.errors = errors;
     }
 
@@ -2140,23 +2253,31 @@ public class IBMVisualRecognitionV4Models {
 
       // calling custom deserializer for source
       Map<String, Object> sourceMap = (Map<String, Object>) jsonMap.get('source');
-      ImageSource newSource = (ImageSource) new ImageSource().deserialize(JSON.serialize(sourceMap), sourceMap, ImageSource.class);
+      ImageSource newSource = (ImageSource) new ImageSource().deserialize(JSON.serialize(sourceMap, true), sourceMap, ImageSource.class);
       ret.setSource(newSource);
 
       // calling custom deserializer for dimensions
       Map<String, Object> dimensionsMap = (Map<String, Object>) jsonMap.get('dimensions');
-      ImageDimensions newDimensions = (ImageDimensions) new ImageDimensions().deserialize(JSON.serialize(dimensionsMap), dimensionsMap, ImageDimensions.class);
+      ImageDimensions newDimensions = (ImageDimensions) new ImageDimensions().deserialize(JSON.serialize(dimensionsMap, true), dimensionsMap, ImageDimensions.class);
       ret.setDimensions(newDimensions);
 
       // calling custom deserializer for objects
       Map<String, Object> objectsMap = (Map<String, Object>) jsonMap.get('objects');
-      DetectedObjects newObjects = (DetectedObjects) new DetectedObjects().deserialize(JSON.serialize(objectsMap), objectsMap, DetectedObjects.class);
+      DetectedObjects newObjects = (DetectedObjects) new DetectedObjects().deserialize(JSON.serialize(objectsMap, true), objectsMap, DetectedObjects.class);
       ret.setObjects(newObjects);
 
       // calling custom deserializer for errors
-      Map<String, Object> errorsMap = (Map<String, Object>) jsonMap.get('errors');
-      Error newErrors = (Error) new Error().deserialize(JSON.serialize(errorsMap), errorsMap, Error.class);
-      ret.setErrors(newErrors);
+      List<Error> newErrors = new List<Error>();
+      List<Error> deserializedErrors = ret.getErrors();
+      if (deserializedErrors != null) {
+        for (Integer i = 0; i < deserializedErrors.size(); i++) {
+          Error currentItem = ret.getErrors().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('errors');
+          Error newItem = (Error) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Error.class);
+          newErrors.add(newItem);
+        }
+        ret.errors = newErrors;
+      }
 
       return ret;
     }
@@ -2171,7 +2292,7 @@ public class IBMVisualRecognitionV4Models {
     private Datetime created;
     private ImageSource source;
     private ImageDimensions dimensions;
-    private Error errors;
+    private List<Error> errors;
     private TrainingDataObjects trainingData;
 
     /**
@@ -2237,12 +2358,10 @@ public class IBMVisualRecognitionV4Models {
     /**
      * Gets the errors.
      *
-     * Details about an error.
-     *
      * @return the errors
      */
     @AuraEnabled
-    public Error getErrors() {
+    public List<Error> getErrors() {
       return errors;
     }
 
@@ -2308,7 +2427,7 @@ public class IBMVisualRecognitionV4Models {
      *
      * @param errors the new errors
      */
-    public void setErrors(final Error errors) {
+    public void setErrors(final List<Error> errors) {
       this.errors = errors;
     }
 
@@ -2338,22 +2457,30 @@ public class IBMVisualRecognitionV4Models {
 
       // calling custom deserializer for source
       Map<String, Object> sourceMap = (Map<String, Object>) jsonMap.get('source');
-      ImageSource newSource = (ImageSource) new ImageSource().deserialize(JSON.serialize(sourceMap), sourceMap, ImageSource.class);
+      ImageSource newSource = (ImageSource) new ImageSource().deserialize(JSON.serialize(sourceMap, true), sourceMap, ImageSource.class);
       ret.setSource(newSource);
 
       // calling custom deserializer for dimensions
       Map<String, Object> dimensionsMap = (Map<String, Object>) jsonMap.get('dimensions');
-      ImageDimensions newDimensions = (ImageDimensions) new ImageDimensions().deserialize(JSON.serialize(dimensionsMap), dimensionsMap, ImageDimensions.class);
+      ImageDimensions newDimensions = (ImageDimensions) new ImageDimensions().deserialize(JSON.serialize(dimensionsMap, true), dimensionsMap, ImageDimensions.class);
       ret.setDimensions(newDimensions);
 
       // calling custom deserializer for errors
-      Map<String, Object> errorsMap = (Map<String, Object>) jsonMap.get('errors');
-      Error newErrors = (Error) new Error().deserialize(JSON.serialize(errorsMap), errorsMap, Error.class);
-      ret.setErrors(newErrors);
+      List<Error> newErrors = new List<Error>();
+      List<Error> deserializedErrors = ret.getErrors();
+      if (deserializedErrors != null) {
+        for (Integer i = 0; i < deserializedErrors.size(); i++) {
+          Error currentItem = ret.getErrors().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('errors');
+          Error newItem = (Error) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Error.class);
+          newErrors.add(newItem);
+        }
+        ret.errors = newErrors;
+      }
 
       // calling custom deserializer for trainingData
       Map<String, Object> trainingDataMap = (Map<String, Object>) jsonMap.get('trainingData');
-      TrainingDataObjects newTrainingData = (TrainingDataObjects) new TrainingDataObjects().deserialize(JSON.serialize(trainingDataMap), trainingDataMap, TrainingDataObjects.class);
+      TrainingDataObjects newTrainingData = (TrainingDataObjects) new TrainingDataObjects().deserialize(JSON.serialize(trainingDataMap, true), trainingDataMap, TrainingDataObjects.class);
       ret.setTrainingData(newTrainingData);
 
       return ret;
@@ -2445,7 +2572,7 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedImages.size(); i++) {
           ImageDetails currentItem = ret.getImages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('images');
-          ImageDetails newItem = (ImageDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ImageDetails.class);
+          ImageDetails newItem = (ImageDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ImageDetails.class);
           newImages.add(newItem);
         }
         ret.images = newImages;
@@ -2458,7 +2585,7 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           Warning currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Warning.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
@@ -2772,7 +2899,7 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedImages.size(); i++) {
           ImageSummary currentItem = ret.getImages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('images');
-          ImageSummary newItem = (ImageSummary) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ImageSummary.class);
+          ImageSummary newItem = (ImageSummary) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ImageSummary.class);
           newImages.add(newItem);
         }
         ret.images = newImages;
@@ -3026,7 +3153,7 @@ public class IBMVisualRecognitionV4Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -3211,7 +3338,7 @@ public class IBMVisualRecognitionV4Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -3339,7 +3466,7 @@ public class IBMVisualRecognitionV4Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -3622,7 +3749,7 @@ public class IBMVisualRecognitionV4Models {
 
       // calling custom deserializer for location
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap), locationMap, Location.class);
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       retBuilder.location(newLocation);
 
       return retBuilder.build();
@@ -3630,7 +3757,7 @@ public class IBMVisualRecognitionV4Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -3643,7 +3770,7 @@ public class IBMVisualRecognitionV4Models {
 
       // performing custom serialization for location
       if (location != null) {
-        String locationJsonString = JSON.serialize(location.replacePropertyNames());
+        String locationJsonString = JSON.serialize(location.replacePropertyNames(), true);
         String locationKey = 'location';
         if (propertyNameMapping.containsKey(locationKey)) {
           locationKey = propertyNameMapping.get(locationKey);
@@ -3746,10 +3873,297 @@ public class IBMVisualRecognitionV4Models {
         for (Integer i = 0; i < deserializedObjects.size(); i++) {
           TrainingDataObject currentItem = ret.getObjects().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('objects');
-          TrainingDataObject newItem = (TrainingDataObject) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingDataObject.class);
+          TrainingDataObject newItem = (TrainingDataObject) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TrainingDataObject.class);
           newObjects.add(newItem);
         }
         ret.objects = newObjects;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Details about the training event.
+   */
+  public class TrainingEvent extends IBMWatsonGenericModel {
+    private String xType;
+    private String collectionId;
+    private Datetime completionTime;
+    private String status;
+    private Long imageCount;
+
+    /**
+     * Gets the xType.
+     *
+     * Trained object type. Only `objects` is currently supported.
+     *
+     * @return the xType
+     */
+    @AuraEnabled
+    public String getXType() {
+      return xType;
+    }
+
+    /**
+     * Gets the collectionId.
+     *
+     * Identifier of the trained collection.
+     *
+     * @return the collectionId
+     */
+    @AuraEnabled
+    public String getCollectionId() {
+      return collectionId;
+    }
+
+    /**
+     * Gets the completionTime.
+     *
+     * Date and time in Coordinated Universal Time (UTC) that training on the collection finished.
+     *
+     * @return the completionTime
+     */
+    @AuraEnabled
+    public Datetime getCompletionTime() {
+      return completionTime;
+    }
+
+    /**
+     * Gets the status.
+     *
+     * Training status of the training event.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status;
+    }
+
+    /**
+     * Gets the imageCount.
+     *
+     * The total number of images that were used in training for this training event.
+     *
+     * @return the imageCount
+     */
+    @AuraEnabled
+    public Long getImageCount() {
+      return imageCount;
+    }
+
+    /**
+     * Sets the xType.
+     *
+     * @param xType the new xType
+     */
+    public void setXType(final String xType) {
+      this.xType = xType;
+    }
+
+    /**
+     * Sets the collectionId.
+     *
+     * @param collectionId the new collectionId
+     */
+    public void setCollectionId(final String collectionId) {
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Sets the completionTime.
+     *
+     * @param completionTime the new completionTime
+     */
+    public void setCompletionTime(final Datetime completionTime) {
+      this.completionTime = completionTime;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status = status;
+    }
+
+    /**
+     * Sets the imageCount.
+     *
+     * @param imageCount the new imageCount
+     */
+    public void setImageCount(final long imageCount) {
+      this.imageCount = imageCount;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xType',
+        'collection_id' => 'collectionId',
+        'completion_time' => 'completionTime',
+        'image_count' => 'imageCount'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TrainingEvent ret = (TrainingEvent) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Details about the training events.
+   */
+  public class TrainingEvents extends IBMWatsonResponseModel {
+    private Datetime startTime;
+    private Datetime endTime;
+    private Long completedEvents;
+    private Long trainedImages;
+    private List<TrainingEvent> events;
+
+    /**
+     * Gets the startTime.
+     *
+     * The starting day for the returned training events in Coordinated Universal Time (UTC). If not specified in the
+     * request, it identifies the earliest training event.
+     *
+     * @return the startTime
+     */
+    @AuraEnabled
+    public Datetime getStartTime() {
+      return startTime;
+    }
+
+    /**
+     * Gets the endTime.
+     *
+     * The ending day for the returned training events in Coordinated Universal Time (UTC). If not specified in the
+     * request, it lists the current time.
+     *
+     * @return the endTime
+     */
+    @AuraEnabled
+    public Datetime getEndTime() {
+      return endTime;
+    }
+
+    /**
+     * Gets the completedEvents.
+     *
+     * The total number of training events in the response for the start and end times.
+     *
+     * @return the completedEvents
+     */
+    @AuraEnabled
+    public Long getCompletedEvents() {
+      return completedEvents;
+    }
+
+    /**
+     * Gets the trainedImages.
+     *
+     * The total number of images that were used in training for the start and end times.
+     *
+     * @return the trainedImages
+     */
+    @AuraEnabled
+    public Long getTrainedImages() {
+      return trainedImages;
+    }
+
+    /**
+     * Gets the events.
+     *
+     * The completed training events for the start and end time.
+     *
+     * @return the events
+     */
+    @AuraEnabled
+    public List<TrainingEvent> getEvents() {
+      return events;
+    }
+
+    /**
+     * Sets the startTime.
+     *
+     * @param startTime the new startTime
+     */
+    public void setStartTime(final Datetime startTime) {
+      this.startTime = startTime;
+    }
+
+    /**
+     * Sets the endTime.
+     *
+     * @param endTime the new endTime
+     */
+    public void setEndTime(final Datetime endTime) {
+      this.endTime = endTime;
+    }
+
+    /**
+     * Sets the completedEvents.
+     *
+     * @param completedEvents the new completedEvents
+     */
+    public void setCompletedEvents(final long completedEvents) {
+      this.completedEvents = completedEvents;
+    }
+
+    /**
+     * Sets the trainedImages.
+     *
+     * @param trainedImages the new trainedImages
+     */
+    public void setTrainedImages(final long trainedImages) {
+      this.trainedImages = trainedImages;
+    }
+
+    /**
+     * Sets the events.
+     *
+     * @param events the new events
+     */
+    public void setEvents(final List<TrainingEvent> events) {
+      this.events = events;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'start_time' => 'startTime',
+        'end_time' => 'endTime',
+        'completed_events' => 'completedEvents',
+        'trained_images' => 'trainedImages'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      TrainingEvents ret = (TrainingEvents) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for events
+      List<TrainingEvent> newEvents = new List<TrainingEvent>();
+      List<TrainingEvent> deserializedEvents = ret.getEvents();
+      if (deserializedEvents != null) {
+        for (Integer i = 0; i < deserializedEvents.size(); i++) {
+          TrainingEvent currentItem = ret.getEvents().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('events');
+          TrainingEvent newItem = (TrainingEvent) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), TrainingEvent.class);
+          newEvents.add(newItem);
+        }
+        ret.events = newEvents;
       }
 
       return ret;
@@ -3804,7 +4218,7 @@ public class IBMVisualRecognitionV4Models {
 
       // calling custom deserializer for objects
       Map<String, Object> objectsMap = (Map<String, Object>) jsonMap.get('objects');
-      ObjectTrainingStatus newObjects = (ObjectTrainingStatus) new ObjectTrainingStatus().deserialize(JSON.serialize(objectsMap), objectsMap, ObjectTrainingStatus.class);
+      ObjectTrainingStatus newObjects = (ObjectTrainingStatus) new ObjectTrainingStatus().deserialize(JSON.serialize(objectsMap, true), objectsMap, ObjectTrainingStatus.class);
       retBuilder.objects(newObjects);
 
       return retBuilder.build();
@@ -3812,11 +4226,11 @@ public class IBMVisualRecognitionV4Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for objects
       if (objects != null) {
-        String objectsJsonString = JSON.serialize(objects.replacePropertyNames());
+        String objectsJsonString = JSON.serialize(objects.replacePropertyNames(), true);
         jsonMap.put('objects', JSON.deserializeUntyped(objectsJsonString));
       }
 

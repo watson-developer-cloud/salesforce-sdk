@@ -274,7 +274,7 @@ public class IBMVisualRecognitionV3Models {
 
       // calling custom deserializer for error
       Map<String, Object> errorMap = (Map<String, Object>) jsonMap.get('error');
-      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(errorMap), errorMap, ErrorInfo.class);
+      ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(errorMap, true), errorMap, ErrorInfo.class);
       ret.setError(newError);
 
       // calling custom deserializer for classifiers
@@ -284,7 +284,7 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           ClassifierResult currentItem = ret.getClassifiers().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
-          ClassifierResult newItem = (ClassifierResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifierResult.class);
+          ClassifierResult newItem = (ClassifierResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ClassifierResult.class);
           newClassifiers.add(newItem);
         }
         ret.classifiers = newClassifiers;
@@ -411,7 +411,7 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedImages.size(); i++) {
           ClassifiedImage currentItem = ret.getImages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('images');
-          ClassifiedImage newItem = (ClassifiedImage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedImage.class);
+          ClassifiedImage newItem = (ClassifiedImage) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ClassifiedImage.class);
           newImages.add(newItem);
         }
         ret.images = newImages;
@@ -424,7 +424,7 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedWarnings.size(); i++) {
           WarningInfo currentItem = ret.getWarnings().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('warnings');
-          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
+          WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), WarningInfo.class);
           newWarnings.add(newItem);
         }
         ret.warnings = newWarnings;
@@ -683,7 +683,7 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ModelClass currentItem = ret.getClasses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
-          ModelClass newItem = (ModelClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ModelClass.class);
+          ModelClass newItem = (ModelClass) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ModelClass.class);
           newClasses.add(newItem);
         }
         ret.classes = newClasses;
@@ -785,7 +785,7 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedClasses.size(); i++) {
           ClassResult currentItem = ret.getClasses().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classes');
-          ClassResult newItem = (ClassResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassResult.class);
+          ClassResult newItem = (ClassResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ClassResult.class);
           newClasses.add(newItem);
         }
         ret.classes = newClasses;
@@ -836,7 +836,7 @@ public class IBMVisualRecognitionV3Models {
         for (Integer i = 0; i < deserializedClassifiers.size(); i++) {
           Classifier currentItem = ret.getClassifiers().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('classifiers');
-          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
+          Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Classifier.class);
           newClassifiers.add(newItem);
         }
         ret.classifiers = newClassifiers;

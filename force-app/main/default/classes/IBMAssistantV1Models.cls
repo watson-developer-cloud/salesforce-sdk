@@ -71,7 +71,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -249,16 +249,16 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for xSystem
       Map<String, Object> xSystemMap = (Map<String, Object>) jsonMap.get('xSystem');
-      SystemResponse newXSystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(xSystemMap), xSystemMap, SystemResponse.class);
+      SystemResponse newXSystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(xSystemMap, true), xSystemMap, SystemResponse.class);
       retBuilder.xSystem(newXSystem);
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      MessageContextMetadata newMetadata = (MessageContextMetadata) new MessageContextMetadata().deserialize(JSON.serialize(metadataMap), metadataMap, MessageContextMetadata.class);
+      MessageContextMetadata newMetadata = (MessageContextMetadata) new MessageContextMetadata().deserialize(JSON.serialize(metadataMap, true), metadataMap, MessageContextMetadata.class);
       retBuilder.metadata(newMetadata);
 
       Context builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -271,7 +271,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -286,7 +286,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for xSystem
       if (xSystem != null) {
-        String xSystemJsonString = JSON.serialize(xSystem.replacePropertyNames());
+        String xSystemJsonString = JSON.serialize(xSystem.replacePropertyNames(), true);
         String xSystemKey = 'xSystem';
         if (propertyNameMapping.containsKey(xSystemKey)) {
           xSystemKey = propertyNameMapping.get(xSystemKey);
@@ -296,7 +296,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames(), true);
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -451,7 +451,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -592,7 +592,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
           Counterexample currentItem = ret.getCounterexamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples');
-          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
+          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Counterexample.class);
           newCounterexamples.add(newItem);
         }
         ret.counterexamples = newCounterexamples;
@@ -600,7 +600,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -764,6 +764,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
+    private Boolean disambiguationOptOut;
 
     /**
      * Gets the workspaceId.
@@ -978,6 +979,17 @@ public class IBMAssistantV1Models {
       return userLabel;
     }
 
+    /**
+     * Gets the disambiguationOptOut.
+     *
+     * Whether the dialog node should be excluded from disambiguation suggestions.
+     *
+     * @return the disambiguationOptOut
+     */
+    public Boolean disambiguationOptOut() {
+      return disambiguationOptOut;
+    }
+
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
@@ -1000,6 +1012,7 @@ public class IBMAssistantV1Models {
       digressOut = builder.digressOut;
       digressOutSlots = builder.digressOutSlots;
       userLabel = builder.userLabel;
+      disambiguationOptOut = builder.disambiguationOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1036,6 +1049,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
+    private Boolean disambiguationOptOut;
 
     private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions createDialogNodeOptions) {
       workspaceId = createDialogNodeOptions.workspaceId;
@@ -1057,6 +1071,7 @@ public class IBMAssistantV1Models {
       digressOut = createDialogNodeOptions.digressOut;
       digressOutSlots = createDialogNodeOptions.digressOutSlots;
       userLabel = createDialogNodeOptions.userLabel;
+      disambiguationOptOut = createDialogNodeOptions.disambiguationOptOut;
       this.requestHeaders.putAll(createDialogNodeOptions.requestHeaders());
     }
 
@@ -1312,6 +1327,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the disambiguationOptOut.
+     *
+     * @param disambiguationOptOut the disambiguationOptOut
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder disambiguationOptOut(Boolean disambiguationOptOut) {
+      this.disambiguationOptOut = disambiguationOptOut;
+      return this;
+    }
+
+    /**
      * Set the dialogNode.
      *
      * @param dialogNode the dialogNode
@@ -1336,6 +1362,7 @@ public class IBMAssistantV1Models {
       this.digressOut = dialogNode.getDigressOut();
       this.digressOutSlots = dialogNode.getDigressOutSlots();
       this.userLabel = dialogNode.getUserLabel();
+      this.disambiguationOptOut = dialogNode.getDisambiguationOptOut();
       return this;
     }
 
@@ -1466,7 +1493,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -1479,7 +1506,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames(), true);
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -1491,7 +1518,7 @@ public class IBMAssistantV1Models {
       if (values != null) {
         List<Object> valuesJsonList = new List<Object>();
         for (CreateValue listItem : values) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           valuesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String valuesKey = 'values';
@@ -2182,13 +2209,13 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for examples
       if (examples != null) {
         List<Object> examplesJsonList = new List<Object>();
         for (Example listItem : examples) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           examplesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('examples', examplesJsonList);
@@ -2814,7 +2841,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -2827,7 +2854,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames(), true);
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -3303,6 +3330,7 @@ public class IBMAssistantV1Models {
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
 
     /**
      * Gets the name.
@@ -3415,6 +3443,15 @@ public class IBMAssistantV1Models {
       return counterexamples;
     }
 
+    /**
+     * Gets the webhooks.
+     *
+     * @return the webhooks
+     */
+    public List<Webhook> webhooks() {
+      return webhooks;
+    }
+
     private CreateWorkspaceOptions(CreateWorkspaceOptionsBuilder builder) {
       name = builder.name;
       description = builder.description;
@@ -3426,6 +3463,7 @@ public class IBMAssistantV1Models {
       entities = builder.entities;
       dialogNodes = builder.dialogNodes;
       counterexamples = builder.counterexamples;
+      webhooks = builder.webhooks;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3453,6 +3491,7 @@ public class IBMAssistantV1Models {
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
 
     private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions createWorkspaceOptions) {
       name = createWorkspaceOptions.name;
@@ -3465,6 +3504,7 @@ public class IBMAssistantV1Models {
       entities = createWorkspaceOptions.entities;
       dialogNodes = createWorkspaceOptions.dialogNodes;
       counterexamples = createWorkspaceOptions.counterexamples;
+      webhooks = createWorkspaceOptions.webhooks;
       this.requestHeaders.putAll(createWorkspaceOptions.requestHeaders());
     }
 
@@ -3540,6 +3580,21 @@ public class IBMAssistantV1Models {
         this.counterexamples = new List<Counterexample>();
       }
       this.counterexamples.add(counterexamples);
+      return this;
+    }
+
+    /**
+     * Adds an webhooks to webhooks.
+     *
+     * @param webhooks the new webhooks
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder addWebhooks(Webhook webhooks) {
+      IBMWatsonValidator.notNull(webhooks, 'webhooks cannot be null');
+      if (this.webhooks == null) {
+        this.webhooks = new List<Webhook>();
+      }
+      this.webhooks.add(webhooks);
       return this;
     }
 
@@ -3654,6 +3709,18 @@ public class IBMAssistantV1Models {
      */
     public CreateWorkspaceOptionsBuilder counterexamples(List<Counterexample> counterexamples) {
       this.counterexamples = counterexamples;
+      return this;
+    }
+
+    /**
+     * Set the webhooks.
+     * Existing webhooks will be replaced.
+     *
+     * @param webhooks the webhooks
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder webhooks(List<Webhook> webhooks) {
+      this.webhooks = webhooks;
       return this;
     }
 
@@ -4839,6 +4906,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
+    private Boolean disambiguationOptOut;
     private Boolean disabled;
     private Datetime created;
     private Datetime updated;
@@ -5070,6 +5138,18 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Gets the disambiguationOptOut.
+     *
+     * Whether the dialog node should be excluded from disambiguation suggestions.
+     *
+     * @return the disambiguationOptOut
+     */
+    @AuraEnabled
+    public Boolean getDisambiguationOptOut() {
+      return disambiguationOptOut;
+    }
+
+    /**
      * Gets the disabled.
      *
      * For internal use only.
@@ -5125,6 +5205,7 @@ public class IBMAssistantV1Models {
       this.digressOut = builder.digressOut;
       this.digressOutSlots = builder.digressOutSlots;
       this.userLabel = builder.userLabel;
+      this.disambiguationOptOut = builder.disambiguationOptOut;
       this.disabled = builder.disabled;
       this.created = builder.created;
       this.updated = builder.updated;
@@ -5154,7 +5235,8 @@ public class IBMAssistantV1Models {
         'digress_in' => 'digressIn',
         'digress_out' => 'digressOut',
         'digress_out_slots' => 'digressOutSlots',
-        'user_label' => 'userLabel'
+        'user_label' => 'userLabel',
+        'disambiguation_opt_out' => 'disambiguationOptOut'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -5164,22 +5246,22 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for output
       Map<String, Object> outputMap = (Map<String, Object>) jsonMap.get('output');
-      DialogNodeOutput newOutput = (DialogNodeOutput) new DialogNodeOutput().deserialize(JSON.serialize(outputMap), outputMap, DialogNodeOutput.class);
+      DialogNodeOutput newOutput = (DialogNodeOutput) new DialogNodeOutput().deserialize(JSON.serialize(outputMap, true), outputMap, DialogNodeOutput.class);
       retBuilder.output(newOutput);
 
       // calling custom deserializer for context
       Map<String, Object> contextMap = (Map<String, Object>) jsonMap.get('context');
-      IBMWatsonMapModel newContext = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(contextMap), contextMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newContext = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(contextMap, true), contextMap, IBMWatsonMapModel.class);
       retBuilder.context(newContext);
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap, true), metadataMap, IBMWatsonMapModel.class);
       retBuilder.metadata(newMetadata);
 
       // calling custom deserializer for nextStep
       Map<String, Object> nextStepMap = (Map<String, Object>) jsonMap.get('nextStep');
-      DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(nextStepMap), nextStepMap, DialogNodeNextStep.class);
+      DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(nextStepMap, true), nextStepMap, DialogNodeNextStep.class);
       retBuilder.nextStep(newNextStep);
 
       // calling custom deserializer for actions
@@ -5189,7 +5271,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedActions.size(); i++) {
           DialogNodeAction currentItem = ret.getActions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('actions');
-          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
+          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeAction.class);
           newActions.add(newItem);
         }
         retBuilder.actions(newActions);
@@ -5200,7 +5282,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -5215,13 +5297,14 @@ public class IBMAssistantV1Models {
         'digressIn' => 'digress_in',
         'digressOut' => 'digress_out',
         'digressOutSlots' => 'digress_out_slots',
-        'userLabel' => 'user_label'
+        'userLabel' => 'user_label',
+        'disambiguationOptOut' => 'disambiguation_opt_out'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       // performing custom serialization for output
       if (output != null) {
-        String outputJsonString = JSON.serialize(output.replacePropertyNames());
+        String outputJsonString = JSON.serialize(output.replacePropertyNames(), true);
         String outputKey = 'output';
         if (propertyNameMapping.containsKey(outputKey)) {
           outputKey = propertyNameMapping.get(outputKey);
@@ -5231,7 +5314,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for context
       if (context != null) {
-        String contextJsonString = JSON.serialize(context.replacePropertyNames());
+        String contextJsonString = JSON.serialize(context.replacePropertyNames(), true);
         String contextKey = 'context';
         if (propertyNameMapping.containsKey(contextKey)) {
           contextKey = propertyNameMapping.get(contextKey);
@@ -5241,7 +5324,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames(), true);
         String metadataKey = 'metadata';
         if (propertyNameMapping.containsKey(metadataKey)) {
           metadataKey = propertyNameMapping.get(metadataKey);
@@ -5251,7 +5334,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for nextStep
       if (nextStep != null) {
-        String nextStepJsonString = JSON.serialize(nextStep.replacePropertyNames());
+        String nextStepJsonString = JSON.serialize(nextStep.replacePropertyNames(), true);
         String nextStepKey = 'nextStep';
         if (propertyNameMapping.containsKey(nextStepKey)) {
           nextStepKey = propertyNameMapping.get(nextStepKey);
@@ -5263,7 +5346,7 @@ public class IBMAssistantV1Models {
       if (actions != null) {
         List<Object> actionsJsonList = new List<Object>();
         for (DialogNodeAction listItem : actions) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           actionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String actionsKey = 'actions';
@@ -5299,6 +5382,7 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
+    private Boolean disambiguationOptOut;
     private Boolean disabled;
     private Datetime created;
     private Datetime updated;
@@ -5322,6 +5406,7 @@ public class IBMAssistantV1Models {
       this.digressOut = dialogNode.digressOut;
       this.digressOutSlots = dialogNode.digressOutSlots;
       this.userLabel = dialogNode.userLabel;
+      this.disambiguationOptOut = dialogNode.disambiguationOptOut;
       this.disabled = dialogNode.disabled;
       this.created = dialogNode.created;
       this.updated = dialogNode.updated;
@@ -5566,6 +5651,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the disambiguationOptOut.
+     *
+     * @param disambiguationOptOut the disambiguationOptOut
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder disambiguationOptOut(Boolean disambiguationOptOut) {
+      this.disambiguationOptOut = disambiguationOptOut;
+      return this;
+    }
+
+    /**
      * Set the disabled.
      *
      * @param disabled the disabled
@@ -5712,7 +5808,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for parameters
       Map<String, Object> parametersMap = (Map<String, Object>) jsonMap.get('parameters');
-      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(parametersMap), parametersMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(parametersMap, true), parametersMap, IBMWatsonMapModel.class);
       retBuilder.parameters(newParameters);
 
       return retBuilder.build();
@@ -5720,7 +5816,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -5734,7 +5830,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for parameters
       if (parameters != null) {
-        String parametersJsonString = JSON.serialize(parameters.replacePropertyNames());
+        String parametersJsonString = JSON.serialize(parameters.replacePropertyNames(), true);
         String parametersKey = 'parameters';
         if (propertyNameMapping.containsKey(parametersKey)) {
           parametersKey = propertyNameMapping.get(parametersKey);
@@ -5916,7 +6012,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
           DialogNode currentItem = ret.getDialogNodes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('dialogNodes');
-          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
+          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNode.class);
           newDialogNodes.add(newItem);
         }
         ret.dialogNodes = newDialogNodes;
@@ -5924,7 +6020,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -6035,7 +6131,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -6195,7 +6291,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedGeneric.size(); i++) {
           DialogNodeOutputGeneric currentItem = ret.getGeneric().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
-          DialogNodeOutputGeneric newItem = (DialogNodeOutputGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputGeneric.class);
+          DialogNodeOutputGeneric newItem = (DialogNodeOutputGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeOutputGeneric.class);
           newGeneric.add(newItem);
         }
         retBuilder.generic(newGeneric);
@@ -6203,11 +6299,11 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for modifiers
       Map<String, Object> modifiersMap = (Map<String, Object>) jsonMap.get('modifiers');
-      DialogNodeOutputModifiers newModifiers = (DialogNodeOutputModifiers) new DialogNodeOutputModifiers().deserialize(JSON.serialize(modifiersMap), modifiersMap, DialogNodeOutputModifiers.class);
+      DialogNodeOutputModifiers newModifiers = (DialogNodeOutputModifiers) new DialogNodeOutputModifiers().deserialize(JSON.serialize(modifiersMap, true), modifiersMap, DialogNodeOutputModifiers.class);
       retBuilder.modifiers(newModifiers);
 
       DialogNodeOutput builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -6220,7 +6316,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
@@ -6228,7 +6324,7 @@ public class IBMAssistantV1Models {
       if (generic != null) {
         List<Object> genericJsonList = new List<Object>();
         for (DialogNodeOutputGeneric listItem : generic) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           genericJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('generic', genericJsonList);
@@ -6236,7 +6332,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for modifiers
       if (modifiers != null) {
-        String modifiersJsonString = JSON.serialize(modifiers.replacePropertyNames());
+        String modifiersJsonString = JSON.serialize(modifiers.replacePropertyNames(), true);
         jsonMap.put('modifiers', JSON.deserializeUntyped(modifiersJsonString));
       }
 
@@ -6600,7 +6696,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           DialogNodeOutputTextValuesElement currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values');
-          DialogNodeOutputTextValuesElement newItem = (DialogNodeOutputTextValuesElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputTextValuesElement.class);
+          DialogNodeOutputTextValuesElement newItem = (DialogNodeOutputTextValuesElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeOutputTextValuesElement.class);
           newValues.add(newItem);
         }
         retBuilder.values(newValues);
@@ -6613,7 +6709,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedOptions.size(); i++) {
           DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('options');
-          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
         retBuilder.options(newOptions);
@@ -6624,7 +6720,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -6644,7 +6740,7 @@ public class IBMAssistantV1Models {
       if (values != null) {
         List<Object> valuesJsonList = new List<Object>();
         for (DialogNodeOutputTextValuesElement listItem : values) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           valuesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String valuesKey = 'values';
@@ -6658,7 +6754,7 @@ public class IBMAssistantV1Models {
       if (options != null) {
         List<Object> optionsJsonList = new List<Object>();
         for (DialogNodeOutputOptionsElement listItem : options) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           optionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String optionsKey = 'options';
@@ -6996,7 +7092,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -7103,7 +7199,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for value
       Map<String, Object> valueMap = (Map<String, Object>) jsonMap.get('value');
-      DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(valueMap), valueMap, DialogNodeOutputOptionsElementValue.class);
+      DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(valueMap, true), valueMap, DialogNodeOutputOptionsElementValue.class);
       retBuilder.value(newValue);
 
       return retBuilder.build();
@@ -7111,11 +7207,11 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for value
       if (value != null) {
-        String valueJsonString = JSON.serialize(value.replacePropertyNames());
+        String valueJsonString = JSON.serialize(value.replacePropertyNames(), true);
         jsonMap.put('value', JSON.deserializeUntyped(valueJsonString));
       }
 
@@ -7266,7 +7362,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for input
       Map<String, Object> inputMap = (Map<String, Object>) jsonMap.get('input');
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap), inputMap, MessageInput.class);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap, true), inputMap, MessageInput.class);
       retBuilder.input(newInput);
 
       // calling custom deserializer for intents
@@ -7276,7 +7372,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
-          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeIntent.class);
           newIntents.add(newItem);
         }
         retBuilder.intents(newIntents);
@@ -7289,7 +7385,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeEntity.class);
           newEntities.add(newItem);
         }
         retBuilder.entities(newEntities);
@@ -7300,11 +7396,11 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for input
       if (input != null) {
-        String inputJsonString = JSON.serialize(input.replacePropertyNames());
+        String inputJsonString = JSON.serialize(input.replacePropertyNames(), true);
         jsonMap.put('input', JSON.deserializeUntyped(inputJsonString));
       }
 
@@ -7312,7 +7408,7 @@ public class IBMAssistantV1Models {
       if (intents != null) {
         List<Object> intentsJsonList = new List<Object>();
         for (RuntimeIntent listItem : intents) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           intentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('intents', intentsJsonList);
@@ -7322,7 +7418,7 @@ public class IBMAssistantV1Models {
       if (entities != null) {
         List<Object> entitiesJsonList = new List<Object>();
         for (RuntimeEntity listItem : entities) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           entitiesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('entities', entitiesJsonList);
@@ -7478,7 +7574,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -7606,7 +7702,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -7702,8 +7798,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the label.
      *
-     * The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
-     * corresponding dialog node.
+     * The user-facing label for the disambiguation option. This label is taken from the **title** or **user_label**
+     * property of the corresponding dialog node, depending on the disambiguation options.
      *
      * @return the label
      */
@@ -7786,12 +7882,12 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for value
       Map<String, Object> valueMap = (Map<String, Object>) jsonMap.get('value');
-      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(valueMap), valueMap, DialogSuggestionValue.class);
+      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(valueMap, true), valueMap, DialogSuggestionValue.class);
       retBuilder.value(newValue);
 
       // calling custom deserializer for output
       Map<String, Object> outputMap = (Map<String, Object>) jsonMap.get('output');
-      DialogSuggestionOutput newOutput = (DialogSuggestionOutput) new DialogSuggestionOutput().deserialize(JSON.serialize(outputMap), outputMap, DialogSuggestionOutput.class);
+      DialogSuggestionOutput newOutput = (DialogSuggestionOutput) new DialogSuggestionOutput().deserialize(JSON.serialize(outputMap, true), outputMap, DialogSuggestionOutput.class);
       retBuilder.output(newOutput);
 
       return retBuilder.build();
@@ -7799,7 +7895,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -7812,7 +7908,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for value
       if (value != null) {
-        String valueJsonString = JSON.serialize(value.replacePropertyNames());
+        String valueJsonString = JSON.serialize(value.replacePropertyNames(), true);
         String valueKey = 'value';
         if (propertyNameMapping.containsKey(valueKey)) {
           valueKey = propertyNameMapping.get(valueKey);
@@ -7822,7 +7918,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for output
       if (output != null) {
-        String outputJsonString = JSON.serialize(output.replacePropertyNames());
+        String outputJsonString = JSON.serialize(output.replacePropertyNames(), true);
         String outputKey = 'output';
         if (propertyNameMapping.containsKey(outputKey)) {
           outputKey = propertyNameMapping.get(outputKey);
@@ -8027,7 +8123,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedNodesVisitedDetails.size(); i++) {
           DialogNodeVisitedDetails currentItem = ret.getNodesVisitedDetails().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('nodesVisitedDetails');
-          DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeVisitedDetails.class);
+          DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeVisitedDetails.class);
           newNodesVisitedDetails.add(newItem);
         }
         retBuilder.nodesVisitedDetails(newNodesVisitedDetails);
@@ -8040,14 +8136,14 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedGeneric.size(); i++) {
           DialogSuggestionResponseGeneric currentItem = ret.getGeneric().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
-          DialogSuggestionResponseGeneric newItem = (DialogSuggestionResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestionResponseGeneric.class);
+          DialogSuggestionResponseGeneric newItem = (DialogSuggestionResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogSuggestionResponseGeneric.class);
           newGeneric.add(newItem);
         }
         retBuilder.generic(newGeneric);
       }
 
       DialogSuggestionOutput builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -8060,7 +8156,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -8077,7 +8173,7 @@ public class IBMAssistantV1Models {
       if (nodesVisitedDetails != null) {
         List<Object> nodesVisitedDetailsJsonList = new List<Object>();
         for (DialogNodeVisitedDetails listItem : nodesVisitedDetails) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           nodesVisitedDetailsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String nodesVisitedDetailsKey = 'nodesVisitedDetails';
@@ -8091,7 +8187,7 @@ public class IBMAssistantV1Models {
       if (generic != null) {
         List<Object> genericJsonList = new List<Object>();
         for (DialogSuggestionResponseGeneric listItem : generic) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           genericJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String genericKey = 'generic';
@@ -8476,7 +8572,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedOptions.size(); i++) {
           DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('options');
-          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
         retBuilder.options(newOptions);
@@ -8487,7 +8583,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -8505,7 +8601,7 @@ public class IBMAssistantV1Models {
       if (options != null) {
         List<Object> optionsJsonList = new List<Object>();
         for (DialogNodeOutputOptionsElement listItem : options) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           optionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String optionsKey = 'options';
@@ -8800,7 +8896,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for input
       Map<String, Object> inputMap = (Map<String, Object>) jsonMap.get('input');
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap), inputMap, MessageInput.class);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap, true), inputMap, MessageInput.class);
       retBuilder.input(newInput);
 
       // calling custom deserializer for intents
@@ -8810,7 +8906,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
-          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeIntent.class);
           newIntents.add(newItem);
         }
         retBuilder.intents(newIntents);
@@ -8823,7 +8919,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeEntity.class);
           newEntities.add(newItem);
         }
         retBuilder.entities(newEntities);
@@ -8834,11 +8930,11 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for input
       if (input != null) {
-        String inputJsonString = JSON.serialize(input.replacePropertyNames());
+        String inputJsonString = JSON.serialize(input.replacePropertyNames(), true);
         jsonMap.put('input', JSON.deserializeUntyped(inputJsonString));
       }
 
@@ -8846,7 +8942,7 @@ public class IBMAssistantV1Models {
       if (intents != null) {
         List<Object> intentsJsonList = new List<Object>();
         for (RuntimeIntent listItem : intents) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           intentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('intents', intentsJsonList);
@@ -8856,7 +8952,7 @@ public class IBMAssistantV1Models {
       if (entities != null) {
         List<Object> entitiesJsonList = new List<Object>();
         for (RuntimeEntity listItem : entities) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           entitiesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('entities', entitiesJsonList);
@@ -9121,7 +9217,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap, true), metadataMap, IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for values
@@ -9131,7 +9227,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           Value currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values');
-          Value newItem = (Value) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Value.class);
           newValues.add(newItem);
         }
         ret.values = newValues;
@@ -9204,7 +9300,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           Entity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          Entity newItem = (Entity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Entity.class);
+          Entity newItem = (Entity) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Entity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -9212,7 +9308,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -9364,7 +9460,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           EntityMention currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
-          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
+          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), EntityMention.class);
           newExamples.add(newItem);
         }
         ret.examples = newExamples;
@@ -9372,7 +9468,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -9476,7 +9572,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedMentions.size(); i++) {
           Mention currentItem = ret.getMentions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('mentions');
-          Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mention.class);
+          Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Mention.class);
           newMentions.add(newItem);
         }
         retBuilder.mentions(newMentions);
@@ -9487,13 +9583,13 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for mentions
       if (mentions != null) {
         List<Object> mentionsJsonList = new List<Object>();
         for (Mention listItem : mentions) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           mentionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('mentions', mentionsJsonList);
@@ -9667,7 +9763,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           Example currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
-          Example newItem = (Example) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Example.class);
+          Example newItem = (Example) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Example.class);
           newExamples.add(newItem);
         }
         ret.examples = newExamples;
@@ -9675,7 +9771,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -11193,7 +11289,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           Example currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples');
-          Example newItem = (Example) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Example.class);
+          Example newItem = (Example) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Example.class);
           newExamples.add(newItem);
         }
         ret.examples = newExamples;
@@ -11266,7 +11362,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           Intent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
-          Intent newItem = (Intent) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Intent.class);
+          Intent newItem = (Intent) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Intent.class);
           newIntents.add(newItem);
         }
         ret.intents = newIntents;
@@ -11274,7 +11370,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -11294,8 +11390,8 @@ public class IBMAssistantV1Models {
      * Gets the filter.
      *
      * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
-     * query that includes a value for `language`, as well as a value for `workspace_id` or
-     * `request.context.metadata.deployment`. For more information, see the
+     * query that includes a value for `language`, as well as a value for `request.context.system.assistant_id`,
+     * `workspace_id`, or `request.context.metadata.deployment`. For more information, see the
      * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
      *
      * @return the filter
@@ -13743,12 +13839,12 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for request
       Map<String, Object> requestMap = (Map<String, Object>) jsonMap.get('request');
-      MessageRequest newRequest = (MessageRequest) new MessageRequest().deserialize(JSON.serialize(requestMap), requestMap, MessageRequest.class);
+      MessageRequest newRequest = (MessageRequest) new MessageRequest().deserialize(JSON.serialize(requestMap, true), requestMap, MessageRequest.class);
       ret.setRequest(newRequest);
 
       // calling custom deserializer for response
       Map<String, Object> responseMap = (Map<String, Object>) jsonMap.get('response');
-      MessageResponse newResponse = (MessageResponse) new MessageResponse().deserialize(JSON.serialize(responseMap), responseMap, MessageResponse.class);
+      MessageResponse newResponse = (MessageResponse) new MessageResponse().deserialize(JSON.serialize(responseMap, true), responseMap, MessageResponse.class);
       ret.setResponse(newResponse);
 
       return ret;
@@ -13818,7 +13914,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedLogs.size(); i++) {
           Log currentItem = ret.getLogs().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('logs');
-          Log newItem = (Log) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Log.class);
+          Log newItem = (Log) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Log.class);
           newLogs.add(newItem);
         }
         ret.logs = newLogs;
@@ -13826,7 +13922,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(paginationMap), paginationMap, LogPagination.class);
+      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, LogPagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -13899,7 +13995,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -14122,7 +14218,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -14280,7 +14376,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -14400,7 +14496,7 @@ public class IBMAssistantV1Models {
       MessageInputBuilder retBuilder = ret.newBuilder();
 
       MessageInput builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -14413,7 +14509,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
@@ -14924,7 +15020,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for input
       Map<String, Object> inputMap = (Map<String, Object>) jsonMap.get('input');
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap), inputMap, MessageInput.class);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap, true), inputMap, MessageInput.class);
       retBuilder.input(newInput);
 
       // calling custom deserializer for intents
@@ -14934,7 +15030,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
-          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeIntent.class);
           newIntents.add(newItem);
         }
         retBuilder.intents(newIntents);
@@ -14947,7 +15043,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeEntity.class);
           newEntities.add(newItem);
         }
         retBuilder.entities(newEntities);
@@ -14955,12 +15051,12 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for context
       Map<String, Object> contextMap = (Map<String, Object>) jsonMap.get('context');
-      Context newContext = (Context) new Context().deserialize(JSON.serialize(contextMap), contextMap, Context.class);
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(contextMap, true), contextMap, Context.class);
       retBuilder.context(newContext);
 
       // calling custom deserializer for output
       Map<String, Object> outputMap = (Map<String, Object>) jsonMap.get('output');
-      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(outputMap), outputMap, OutputData.class);
+      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(outputMap, true), outputMap, OutputData.class);
       retBuilder.output(newOutput);
 
       // calling custom deserializer for actions
@@ -14970,7 +15066,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedActions.size(); i++) {
           DialogNodeAction currentItem = ret.getActions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('actions');
-          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
+          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeAction.class);
           newActions.add(newItem);
         }
         retBuilder.actions(newActions);
@@ -14981,7 +15077,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -14994,7 +15090,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for input
       if (input != null) {
-        String inputJsonString = JSON.serialize(input.replacePropertyNames());
+        String inputJsonString = JSON.serialize(input.replacePropertyNames(), true);
         String inputKey = 'input';
         if (propertyNameMapping.containsKey(inputKey)) {
           inputKey = propertyNameMapping.get(inputKey);
@@ -15006,7 +15102,7 @@ public class IBMAssistantV1Models {
       if (intents != null) {
         List<Object> intentsJsonList = new List<Object>();
         for (RuntimeIntent listItem : intents) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           intentsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String intentsKey = 'intents';
@@ -15020,7 +15116,7 @@ public class IBMAssistantV1Models {
       if (entities != null) {
         List<Object> entitiesJsonList = new List<Object>();
         for (RuntimeEntity listItem : entities) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           entitiesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String entitiesKey = 'entities';
@@ -15032,7 +15128,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for context
       if (context != null) {
-        String contextJsonString = JSON.serialize(context.replacePropertyNames());
+        String contextJsonString = JSON.serialize(context.replacePropertyNames(), true);
         String contextKey = 'context';
         if (propertyNameMapping.containsKey(contextKey)) {
           contextKey = propertyNameMapping.get(contextKey);
@@ -15042,7 +15138,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for output
       if (output != null) {
-        String outputJsonString = JSON.serialize(output.replacePropertyNames());
+        String outputJsonString = JSON.serialize(output.replacePropertyNames(), true);
         String outputKey = 'output';
         if (propertyNameMapping.containsKey(outputKey)) {
           outputKey = propertyNameMapping.get(outputKey);
@@ -15054,7 +15150,7 @@ public class IBMAssistantV1Models {
       if (actions != null) {
         List<Object> actionsJsonList = new List<Object>();
         for (DialogNodeAction listItem : actions) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           actionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String actionsKey = 'actions';
@@ -15398,7 +15494,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for input
       Map<String, Object> inputMap = (Map<String, Object>) jsonMap.get('input');
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap), inputMap, MessageInput.class);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(inputMap, true), inputMap, MessageInput.class);
       ret.setInput(newInput);
 
       // calling custom deserializer for intents
@@ -15408,7 +15504,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
-          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeIntent.class);
           newIntents.add(newItem);
         }
         ret.intents = newIntents;
@@ -15421,7 +15517,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeEntity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -15429,12 +15525,12 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for context
       Map<String, Object> contextMap = (Map<String, Object>) jsonMap.get('context');
-      Context newContext = (Context) new Context().deserialize(JSON.serialize(contextMap), contextMap, Context.class);
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(contextMap, true), contextMap, Context.class);
       ret.setContext(newContext);
 
       // calling custom deserializer for output
       Map<String, Object> outputMap = (Map<String, Object>) jsonMap.get('output');
-      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(outputMap), outputMap, OutputData.class);
+      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(outputMap, true), outputMap, OutputData.class);
       ret.setOutput(newOutput);
 
       // calling custom deserializer for actions
@@ -15444,7 +15540,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedActions.size(); i++) {
           DialogNodeAction currentItem = ret.getActions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('actions');
-          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
+          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeAction.class);
           newActions.add(newItem);
         }
         ret.actions = newActions;
@@ -15574,7 +15670,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedNodesVisitedDetails.size(); i++) {
           DialogNodeVisitedDetails currentItem = ret.getNodesVisitedDetails().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('nodesVisitedDetails');
-          DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeVisitedDetails.class);
+          DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeVisitedDetails.class);
           newNodesVisitedDetails.add(newItem);
         }
         retBuilder.nodesVisitedDetails(newNodesVisitedDetails);
@@ -15587,7 +15683,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedLogMessages.size(); i++) {
           LogMessage currentItem = ret.getLogMessages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('logMessages');
-          LogMessage newItem = (LogMessage) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogMessage.class);
+          LogMessage newItem = (LogMessage) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), LogMessage.class);
           newLogMessages.add(newItem);
         }
         retBuilder.logMessages(newLogMessages);
@@ -15600,14 +15696,14 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedGeneric.size(); i++) {
           RuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('generic');
-          RuntimeResponseGeneric newItem = (RuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeResponseGeneric.class);
+          RuntimeResponseGeneric newItem = (RuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeResponseGeneric.class);
           newGeneric.add(newItem);
         }
         retBuilder.generic(newGeneric);
       }
 
       OutputData builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -15620,7 +15716,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -15638,7 +15734,7 @@ public class IBMAssistantV1Models {
       if (nodesVisitedDetails != null) {
         List<Object> nodesVisitedDetailsJsonList = new List<Object>();
         for (DialogNodeVisitedDetails listItem : nodesVisitedDetails) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           nodesVisitedDetailsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String nodesVisitedDetailsKey = 'nodesVisitedDetails';
@@ -15652,7 +15748,7 @@ public class IBMAssistantV1Models {
       if (logMessages != null) {
         List<Object> logMessagesJsonList = new List<Object>();
         for (LogMessage listItem : logMessages) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           logMessagesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String logMessagesKey = 'logMessages';
@@ -15666,7 +15762,7 @@ public class IBMAssistantV1Models {
       if (generic != null) {
         List<Object> genericJsonList = new List<Object>();
         for (RuntimeResponseGeneric listItem : generic) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           genericJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String genericKey = 'generic';
@@ -16138,7 +16234,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap, true), metadataMap, IBMWatsonMapModel.class);
       retBuilder.metadata(newMetadata);
 
       // calling custom deserializer for groups
@@ -16148,7 +16244,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedGroups.size(); i++) {
           CaptureGroup currentItem = ret.getGroups().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('groups');
-          CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CaptureGroup.class);
+          CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), CaptureGroup.class);
           newGroups.add(newItem);
         }
         retBuilder.groups(newGroups);
@@ -16159,11 +16255,11 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // performing custom serialization for metadata
       if (metadata != null) {
-        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames());
+        String metadataJsonString = JSON.serialize(metadata.replacePropertyNames(), true);
         jsonMap.put('metadata', JSON.deserializeUntyped(metadataJsonString));
       }
 
@@ -16171,7 +16267,7 @@ public class IBMAssistantV1Models {
       if (groups != null) {
         List<Object> groupsJsonList = new List<Object>();
         for (CaptureGroup listItem : groups) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           groupsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         jsonMap.put('groups', groupsJsonList);
@@ -16394,7 +16490,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -16639,8 +16735,8 @@ public class IBMAssistantV1Models {
      *
      * An array of objects describing the possible matching dialog nodes from which the user can choose.
      *
-     * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
-     * users.
+     * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Plus
+     * and Premium users.
      *
      * @return the suggestions
      */
@@ -16700,7 +16796,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedOptions.size(); i++) {
           DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('options');
-          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
         retBuilder.options(newOptions);
@@ -16713,7 +16809,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
           DialogSuggestion currentItem = ret.getSuggestions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions');
-          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
+          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogSuggestion.class);
           newSuggestions.add(newItem);
         }
         retBuilder.suggestions(newSuggestions);
@@ -16724,7 +16820,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
@@ -16742,7 +16838,7 @@ public class IBMAssistantV1Models {
       if (options != null) {
         List<Object> optionsJsonList = new List<Object>();
         for (DialogNodeOutputOptionsElement listItem : options) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           optionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String optionsKey = 'options';
@@ -16756,7 +16852,7 @@ public class IBMAssistantV1Models {
       if (suggestions != null) {
         List<Object> suggestionsJsonList = new List<Object>();
         for (DialogSuggestion listItem : suggestions) {
-          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames());
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
           suggestionsJsonList.add(JSON.deserializeUntyped(listItemJsonString));
         }
         String suggestionsKey = 'suggestions';
@@ -17085,7 +17181,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       return jsonMap;
     }
@@ -17226,7 +17322,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedSynonyms.size(); i++) {
           Synonym currentItem = ret.getSynonyms().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('synonyms');
-          Synonym newItem = (Synonym) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Synonym.class);
+          Synonym newItem = (Synonym) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Synonym.class);
           newSynonyms.add(newItem);
         }
         ret.synonyms = newSynonyms;
@@ -17234,7 +17330,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -17284,7 +17380,7 @@ public class IBMAssistantV1Models {
       SystemResponseBuilder retBuilder = ret.newBuilder();
 
       SystemResponse builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true))).keySet();
 
       for (String key : jsonMap.keySet()) {
         if (!baseProps.contains(key)) {
@@ -17297,7 +17393,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       jsonMap = IBMWatsonJSONUtil.raiseAdditionalProperties(jsonMap);
 
@@ -17501,6 +17597,7 @@ public class IBMAssistantV1Models {
     private String newDigressOut;
     private String newDigressOutSlots;
     private String newUserLabel;
+    private Boolean newDisambiguationOptOut;
 
     /**
      * Gets the workspaceId.
@@ -17726,6 +17823,17 @@ public class IBMAssistantV1Models {
       return newUserLabel;
     }
 
+    /**
+     * Gets the newDisambiguationOptOut.
+     *
+     * Whether the dialog node should be excluded from disambiguation suggestions.
+     *
+     * @return the newDisambiguationOptOut
+     */
+    public Boolean newDisambiguationOptOut() {
+      return newDisambiguationOptOut;
+    }
+
     private UpdateDialogNodeOptions(UpdateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.dialogNode, 'dialogNode cannot be empty');
@@ -17749,6 +17857,7 @@ public class IBMAssistantV1Models {
       newDigressOut = builder.newDigressOut;
       newDigressOutSlots = builder.newDigressOutSlots;
       newUserLabel = builder.newUserLabel;
+      newDisambiguationOptOut = builder.newDisambiguationOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -17786,6 +17895,7 @@ public class IBMAssistantV1Models {
     private String newDigressOut;
     private String newDigressOutSlots;
     private String newUserLabel;
+    private Boolean newDisambiguationOptOut;
 
     private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions updateDialogNodeOptions) {
       workspaceId = updateDialogNodeOptions.workspaceId;
@@ -17808,6 +17918,7 @@ public class IBMAssistantV1Models {
       newDigressOut = updateDialogNodeOptions.newDigressOut;
       newDigressOutSlots = updateDialogNodeOptions.newDigressOutSlots;
       newUserLabel = updateDialogNodeOptions.newUserLabel;
+      newDisambiguationOptOut = updateDialogNodeOptions.newDisambiguationOptOut;
       this.requestHeaders.putAll(updateDialogNodeOptions.requestHeaders());
     }
 
@@ -18070,6 +18181,17 @@ public class IBMAssistantV1Models {
      */
     public UpdateDialogNodeOptionsBuilder newUserLabel(String newUserLabel) {
       this.newUserLabel = newUserLabel;
+      return this;
+    }
+
+    /**
+     * Set the newDisambiguationOptOut.
+     *
+     * @param newDisambiguationOptOut the newDisambiguationOptOut
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newDisambiguationOptOut(Boolean newDisambiguationOptOut) {
+      this.newDisambiguationOptOut = newDisambiguationOptOut;
       return this;
     }
 
@@ -19334,6 +19456,7 @@ public class IBMAssistantV1Models {
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
     private Boolean append;
 
     /**
@@ -19459,6 +19582,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Gets the webhooks.
+     *
+     * @return the webhooks
+     */
+    public List<Webhook> webhooks() {
+      return webhooks;
+    }
+
+    /**
      * Gets the append.
      *
      * Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements
@@ -19488,6 +19620,7 @@ public class IBMAssistantV1Models {
       entities = builder.entities;
       dialogNodes = builder.dialogNodes;
       counterexamples = builder.counterexamples;
+      webhooks = builder.webhooks;
       append = builder.append;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -19517,6 +19650,7 @@ public class IBMAssistantV1Models {
     private List<CreateEntity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
     private Boolean append;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
@@ -19531,6 +19665,7 @@ public class IBMAssistantV1Models {
       entities = updateWorkspaceOptions.entities;
       dialogNodes = updateWorkspaceOptions.dialogNodes;
       counterexamples = updateWorkspaceOptions.counterexamples;
+      webhooks = updateWorkspaceOptions.webhooks;
       append = updateWorkspaceOptions.append;
       this.requestHeaders.putAll(updateWorkspaceOptions.requestHeaders());
     }
@@ -19616,6 +19751,21 @@ public class IBMAssistantV1Models {
         this.counterexamples = new List<Counterexample>();
       }
       this.counterexamples.add(counterexamples);
+      return this;
+    }
+
+    /**
+     * Adds an webhooks to webhooks.
+     *
+     * @param webhooks the new webhooks
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder addWebhooks(Webhook webhooks) {
+      IBMWatsonValidator.notNull(webhooks, 'webhooks cannot be null');
+      if (this.webhooks == null) {
+        this.webhooks = new List<Webhook>();
+      }
+      this.webhooks.add(webhooks);
       return this;
     }
 
@@ -19741,6 +19891,18 @@ public class IBMAssistantV1Models {
      */
     public UpdateWorkspaceOptionsBuilder counterexamples(List<Counterexample> counterexamples) {
       this.counterexamples = counterexamples;
+      return this;
+    }
+
+    /**
+     * Set the webhooks.
+     * Existing webhooks will be replaced.
+     *
+     * @param webhooks the webhooks
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder webhooks(List<Webhook> webhooks) {
+      this.webhooks = webhooks;
       return this;
     }
 
@@ -19916,7 +20078,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap, true), metadataMap, IBMWatsonMapModel.class);
       retBuilder.metadata(newMetadata);
 
       return retBuilder.build();
@@ -20144,7 +20306,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           Value currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values');
-          Value newItem = (Value) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Value.class);
           newValues.add(newItem);
         }
         ret.values = newValues;
@@ -20152,10 +20314,344 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
+    }
+  }
+
+  /**
+   * A webhook that can be used by dialog nodes to make programmatic calls to an external function.
+   *
+   * **Note:** Currently, only a single webhook named `main_webhook` is supported.
+   */
+  public class Webhook extends IBMWatsonGenericModel {
+    private String url;
+    private String name;
+    private List<WebhookHeader> headers;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Webhook() { }
+
+    /**
+     * Gets the url.
+     *
+     * The URL for the external service or application to which you want to send HTTP POST requests.
+     *
+     * @return the url
+     */
+    @AuraEnabled
+    public String getUrl() {
+      return url;
+    }
+
+    /**
+     * Gets the name.
+     *
+     * The name of the webhook. Currently, `main_webhook` is the only supported value.
+     *
+     * @return the name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name;
+    }
+
+    /**
+     * Gets the headers.
+     *
+     * An optional array of HTTP headers to pass with the HTTP request.
+     *
+     * @return the headers
+     */
+    @AuraEnabled
+    public List<WebhookHeader> getHeaders() {
+      return headers;
+    }
+  
+    private Webhook(WebhookBuilder builder) {
+      IBMWatsonValidator.notNull(builder.url, 'url cannot be null');
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      this.url = builder.url;
+      this.name = builder.name;
+      this.headers = builder.headers;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a Webhook builder
+     */
+    public WebhookBuilder newBuilder() {
+      return new WebhookBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Webhook ret = (Webhook) super.deserialize(jsonString, jsonMap, classType);
+      WebhookBuilder retBuilder = ret.newBuilder();
+
+      // calling custom deserializer for headers
+      List<WebhookHeader> newHeaders = new List<WebhookHeader>();
+      List<WebhookHeader> deserializedHeaders = ret.getHeaders();
+      if (deserializedHeaders != null) {
+        for (Integer i = 0; i < deserializedHeaders.size(); i++) {
+          WebhookHeader currentItem = ret.getHeaders().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('headers');
+          WebhookHeader newItem = (WebhookHeader) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), WebhookHeader.class);
+          newHeaders.add(newItem);
+        }
+        retBuilder.headers(newHeaders);
+      }
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      // performing custom serialization for headers
+      if (headers != null) {
+        List<Object> headersJsonList = new List<Object>();
+        for (WebhookHeader listItem : headers) {
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
+          headersJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('headers', headersJsonList);
+      }
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * Webhook Builder.
+   */
+  public class WebhookBuilder {
+    private String url;
+    private String name;
+    private List<WebhookHeader> headers;
+
+    private WebhookBuilder(Webhook webhook) {
+      this.url = webhook.url;
+      this.name = webhook.name;
+      this.headers = webhook.headers;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WebhookBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param url the url
+     * @param name the name
+     */
+    public WebhookBuilder(String url, String name) {
+      this.url = url;
+      this.name = name;
+    }
+
+    /**
+     * Builds a Webhook.
+     *
+     * @return the webhook
+     */
+    public Webhook build() {
+      return new Webhook(this);
+    }
+
+    /**
+     * Adds an headers to headers.
+     *
+     * @param headers the new headers
+     * @return the Webhook builder
+     */
+    public WebhookBuilder addHeaders(WebhookHeader headers) {
+      IBMWatsonValidator.notNull(headers, 'headers cannot be null');
+      if (this.headers == null) {
+        this.headers = new List<WebhookHeader>();
+      }
+      this.headers.add(headers);
+      return this;
+    }
+
+    /**
+     * Set the url.
+     *
+     * @param url the url
+     * @return the Webhook builder
+     */
+    public WebhookBuilder url(String url) {
+      this.url = url;
+      return this;
+    }
+
+    /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the Webhook builder
+     */
+    public WebhookBuilder name(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
+     * Set the headers.
+     * Existing headers will be replaced.
+     *
+     * @param headers the headers
+     * @return the Webhook builder
+     */
+    public WebhookBuilder headers(List<WebhookHeader> headers) {
+      this.headers = headers;
+      return this;
+    }
+  }
+
+  /**
+   * A key/value pair defining an HTTP header and a value.
+   */
+  public class WebhookHeader extends IBMWatsonGenericModel {
+    private String name;
+    private String value;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WebhookHeader() { }
+
+    /**
+     * Gets the name.
+     *
+     * The name of an HTTP header (for example, `Authorization`).
+     *
+     * @return the name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name;
+    }
+
+    /**
+     * Gets the value.
+     *
+     * The value of an HTTP header.
+     *
+     * @return the value
+     */
+    @AuraEnabled
+    public String getValue() {
+      return value;
+    }
+  
+    private WebhookHeader(WebhookHeaderBuilder builder) {
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
+      this.name = builder.name;
+      this.value = builder.value;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a WebhookHeader builder
+     */
+    public WebhookHeaderBuilder newBuilder() {
+      return new WebhookHeaderBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WebhookHeader ret = (WebhookHeader) super.deserialize(jsonString, jsonMap, classType);
+      WebhookHeaderBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * WebhookHeader Builder.
+   */
+  public class WebhookHeaderBuilder {
+    private String name;
+    private String value;
+
+    private WebhookHeaderBuilder(WebhookHeader webhookHeader) {
+      this.name = webhookHeader.name;
+      this.value = webhookHeader.value;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WebhookHeaderBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param name the name
+     * @param value the value
+     */
+    public WebhookHeaderBuilder(String name, String value) {
+      this.name = name;
+      this.value = value;
+    }
+
+    /**
+     * Builds a WebhookHeader.
+     *
+     * @return the webhookHeader
+     */
+    public WebhookHeader build() {
+      return new WebhookHeader(this);
+    }
+
+    /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the WebhookHeader builder
+     */
+    public WebhookHeaderBuilder name(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the WebhookHeader builder
+     */
+    public WebhookHeaderBuilder value(String value) {
+      this.value = value;
+      return this;
     }
   }
 
@@ -20177,6 +20673,7 @@ public class IBMAssistantV1Models {
     private List<Entity> entities;
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
+    private List<Webhook> webhooks;
 
     /**
      * Gets the name.
@@ -20348,6 +20845,16 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Gets the webhooks.
+     *
+     * @return the webhooks
+     */
+    @AuraEnabled
+    public List<Webhook> getWebhooks() {
+      return webhooks;
+    }
+
+    /**
      * Sets the name.
      *
      * @param name the new name
@@ -20437,6 +20944,15 @@ public class IBMAssistantV1Models {
       this.counterexamples = counterexamples;
     }
 
+    /**
+     * Sets the webhooks.
+     *
+     * @param webhooks the new webhooks
+     */
+    public void setWebhooks(final List<Webhook> webhooks) {
+      this.webhooks = webhooks;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -20456,12 +20972,12 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for metadata
       Map<String, Object> metadataMap = (Map<String, Object>) jsonMap.get('metadata');
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap), metadataMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(metadataMap, true), metadataMap, IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for systemSettings
       Map<String, Object> systemSettingsMap = (Map<String, Object>) jsonMap.get('systemSettings');
-      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(systemSettingsMap), systemSettingsMap, WorkspaceSystemSettings.class);
+      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(systemSettingsMap, true), systemSettingsMap, WorkspaceSystemSettings.class);
       ret.setSystemSettings(newSystemSettings);
 
       // calling custom deserializer for intents
@@ -20471,7 +20987,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           Intent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents');
-          Intent newItem = (Intent) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Intent.class);
+          Intent newItem = (Intent) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Intent.class);
           newIntents.add(newItem);
         }
         ret.intents = newIntents;
@@ -20484,7 +21000,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           Entity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities');
-          Entity newItem = (Entity) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Entity.class);
+          Entity newItem = (Entity) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Entity.class);
           newEntities.add(newItem);
         }
         ret.entities = newEntities;
@@ -20497,7 +21013,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
           DialogNode currentItem = ret.getDialogNodes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('dialogNodes');
-          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
+          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), DialogNode.class);
           newDialogNodes.add(newItem);
         }
         ret.dialogNodes = newDialogNodes;
@@ -20510,10 +21026,23 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
           Counterexample currentItem = ret.getCounterexamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples');
-          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
+          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Counterexample.class);
           newCounterexamples.add(newItem);
         }
         ret.counterexamples = newCounterexamples;
+      }
+
+      // calling custom deserializer for webhooks
+      List<Webhook> newWebhooks = new List<Webhook>();
+      List<Webhook> deserializedWebhooks = ret.getWebhooks();
+      if (deserializedWebhooks != null) {
+        for (Integer i = 0; i < deserializedWebhooks.size(); i++) {
+          Webhook currentItem = ret.getWebhooks().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('webhooks');
+          Webhook newItem = (Webhook) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Webhook.class);
+          newWebhooks.add(newItem);
+        }
+        ret.webhooks = newWebhooks;
       }
 
       return ret;
@@ -20583,7 +21112,7 @@ public class IBMAssistantV1Models {
         for (Integer i = 0; i < deserializedWorkspaces.size(); i++) {
           Workspace currentItem = ret.getWorkspaces().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('workspaces');
-          Workspace newItem = (Workspace) currentItem.deserialize(JSON.serialize(itemInMap.get(i)), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Workspace.class);
+          Workspace newItem = (Workspace) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), Workspace.class);
           newWorkspaces.add(newItem);
         }
         ret.workspaces = newWorkspaces;
@@ -20591,7 +21120,7 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for pagination
       Map<String, Object> paginationMap = (Map<String, Object>) jsonMap.get('pagination');
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap), paginationMap, Pagination.class);
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(paginationMap, true), paginationMap, Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -20605,6 +21134,7 @@ public class IBMAssistantV1Models {
     private WorkspaceSystemSettingsTooling tooling;
     private WorkspaceSystemSettingsDisambiguation disambiguation;
     private IBMWatsonMapModel humanAgentAssist;
+    private WorkspaceSystemSettingsOffTopic offTopic;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -20629,7 +21159,7 @@ public class IBMAssistantV1Models {
      *
      * Workspace settings related to the disambiguation feature.
      *
-     * **Note:** This feature is available only to Premium users.
+     * **Note:** This feature is available only to Plus and Premium users.
      *
      * @return the disambiguation
      */
@@ -20649,11 +21179,24 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getHumanAgentAssist() {
       return humanAgentAssist;
     }
+
+    /**
+     * Gets the offTopic.
+     *
+     * Workspace settings related to detection of irrelevant input.
+     *
+     * @return the offTopic
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettingsOffTopic getOffTopic() {
+      return offTopic;
+    }
   
     private WorkspaceSystemSettings(WorkspaceSystemSettingsBuilder builder) {
       this.tooling = builder.tooling;
       this.disambiguation = builder.disambiguation;
       this.humanAgentAssist = builder.humanAgentAssist;
+      this.offTopic = builder.offTopic;
     }
 
     /**
@@ -20672,7 +21215,8 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'human_agent_assist' => 'humanAgentAssist'
+        'human_agent_assist' => 'humanAgentAssist',
+        'off_topic' => 'offTopic'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -20682,38 +21226,44 @@ public class IBMAssistantV1Models {
 
       // calling custom deserializer for tooling
       Map<String, Object> toolingMap = (Map<String, Object>) jsonMap.get('tooling');
-      WorkspaceSystemSettingsTooling newTooling = (WorkspaceSystemSettingsTooling) new WorkspaceSystemSettingsTooling().deserialize(JSON.serialize(toolingMap), toolingMap, WorkspaceSystemSettingsTooling.class);
+      WorkspaceSystemSettingsTooling newTooling = (WorkspaceSystemSettingsTooling) new WorkspaceSystemSettingsTooling().deserialize(JSON.serialize(toolingMap, true), toolingMap, WorkspaceSystemSettingsTooling.class);
       retBuilder.tooling(newTooling);
 
       // calling custom deserializer for disambiguation
       Map<String, Object> disambiguationMap = (Map<String, Object>) jsonMap.get('disambiguation');
-      WorkspaceSystemSettingsDisambiguation newDisambiguation = (WorkspaceSystemSettingsDisambiguation) new WorkspaceSystemSettingsDisambiguation().deserialize(JSON.serialize(disambiguationMap), disambiguationMap, WorkspaceSystemSettingsDisambiguation.class);
+      WorkspaceSystemSettingsDisambiguation newDisambiguation = (WorkspaceSystemSettingsDisambiguation) new WorkspaceSystemSettingsDisambiguation().deserialize(JSON.serialize(disambiguationMap, true), disambiguationMap, WorkspaceSystemSettingsDisambiguation.class);
       retBuilder.disambiguation(newDisambiguation);
 
       // calling custom deserializer for humanAgentAssist
       Map<String, Object> humanAgentAssistMap = (Map<String, Object>) jsonMap.get('humanAgentAssist');
-      IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(humanAgentAssistMap), humanAgentAssistMap, IBMWatsonMapModel.class);
+      IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(humanAgentAssistMap, true), humanAgentAssistMap, IBMWatsonMapModel.class);
       retBuilder.humanAgentAssist(newHumanAgentAssist);
+
+      // calling custom deserializer for offTopic
+      Map<String, Object> offTopicMap = (Map<String, Object>) jsonMap.get('offTopic');
+      WorkspaceSystemSettingsOffTopic newOffTopic = (WorkspaceSystemSettingsOffTopic) new WorkspaceSystemSettingsOffTopic().deserialize(JSON.serialize(offTopicMap, true), offTopicMap, WorkspaceSystemSettingsOffTopic.class);
+      retBuilder.offTopic(newOffTopic);
 
       return retBuilder.build();
     }
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'humanAgentAssist' => 'human_agent_assist'
+        'humanAgentAssist' => 'human_agent_assist',
+        'offTopic' => 'off_topic'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
       // performing custom serialization for tooling
       if (tooling != null) {
-        String toolingJsonString = JSON.serialize(tooling.replacePropertyNames());
+        String toolingJsonString = JSON.serialize(tooling.replacePropertyNames(), true);
         String toolingKey = 'tooling';
         if (propertyNameMapping.containsKey(toolingKey)) {
           toolingKey = propertyNameMapping.get(toolingKey);
@@ -20723,7 +21273,7 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for disambiguation
       if (disambiguation != null) {
-        String disambiguationJsonString = JSON.serialize(disambiguation.replacePropertyNames());
+        String disambiguationJsonString = JSON.serialize(disambiguation.replacePropertyNames(), true);
         String disambiguationKey = 'disambiguation';
         if (propertyNameMapping.containsKey(disambiguationKey)) {
           disambiguationKey = propertyNameMapping.get(disambiguationKey);
@@ -20733,12 +21283,22 @@ public class IBMAssistantV1Models {
 
       // performing custom serialization for humanAgentAssist
       if (humanAgentAssist != null) {
-        String humanAgentAssistJsonString = JSON.serialize(humanAgentAssist.replacePropertyNames());
+        String humanAgentAssistJsonString = JSON.serialize(humanAgentAssist.replacePropertyNames(), true);
         String humanAgentAssistKey = 'humanAgentAssist';
         if (propertyNameMapping.containsKey(humanAgentAssistKey)) {
           humanAgentAssistKey = propertyNameMapping.get(humanAgentAssistKey);
         }
         jsonMap.put(humanAgentAssistKey, JSON.deserializeUntyped(humanAgentAssistJsonString));
+      }
+
+      // performing custom serialization for offTopic
+      if (offTopic != null) {
+        String offTopicJsonString = JSON.serialize(offTopic.replacePropertyNames(), true);
+        String offTopicKey = 'offTopic';
+        if (propertyNameMapping.containsKey(offTopicKey)) {
+          offTopicKey = propertyNameMapping.get(offTopicKey);
+        }
+        jsonMap.put(offTopicKey, JSON.deserializeUntyped(offTopicJsonString));
       }
 
       return jsonMap;
@@ -20752,11 +21312,13 @@ public class IBMAssistantV1Models {
     private WorkspaceSystemSettingsTooling tooling;
     private WorkspaceSystemSettingsDisambiguation disambiguation;
     private IBMWatsonMapModel humanAgentAssist;
+    private WorkspaceSystemSettingsOffTopic offTopic;
 
     private WorkspaceSystemSettingsBuilder(WorkspaceSystemSettings workspaceSystemSettings) {
       this.tooling = workspaceSystemSettings.tooling;
       this.disambiguation = workspaceSystemSettings.disambiguation;
       this.humanAgentAssist = workspaceSystemSettings.humanAgentAssist;
+      this.offTopic = workspaceSystemSettings.offTopic;
     }
 
     /**
@@ -20806,18 +21368,32 @@ public class IBMAssistantV1Models {
       this.humanAgentAssist = humanAgentAssist;
       return this;
     }
+
+    /**
+     * Set the offTopic.
+     *
+     * @param offTopic the offTopic
+     * @return the WorkspaceSystemSettings builder
+     */
+    public WorkspaceSystemSettingsBuilder offTopic(WorkspaceSystemSettingsOffTopic offTopic) {
+      this.offTopic = offTopic;
+      return this;
+    }
   }
 
   /**
    * Workspace settings related to the disambiguation feature.
    *
-   * **Note:** This feature is available only to Premium users.
+   * **Note:** This feature is available only to Plus and Premium users.
    */
   public class WorkspaceSystemSettingsDisambiguation extends IBMWatsonGenericModel {
     private String prompt;
     private String noneOfTheAbovePrompt;
     private Boolean enabled;
     private String sensitivity;
+    private Boolean randomize;
+    private Long maxSuggestions;
+    private String suggestionTextPolicy;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -20874,12 +21450,52 @@ public class IBMAssistantV1Models {
     public String getSensitivity() {
       return sensitivity;
     }
+
+    /**
+     * Gets the randomize.
+     *
+     * Whether the order in which disambiguation suggestions are presented should be randomized (but still influenced by
+     * relative confidence).
+     *
+     * @return the randomize
+     */
+    @AuraEnabled
+    public Boolean getRandomize() {
+      return randomize;
+    }
+
+    /**
+     * Gets the maxSuggestions.
+     *
+     * The maximum number of disambigation suggestions that can be included in a `suggestion` response.
+     *
+     * @return the maxSuggestions
+     */
+    @AuraEnabled
+    public Long getMaxSuggestions() {
+      return maxSuggestions;
+    }
+
+    /**
+     * Gets the suggestionTextPolicy.
+     *
+     * For internal use only.
+     *
+     * @return the suggestionTextPolicy
+     */
+    @AuraEnabled
+    public String getSuggestionTextPolicy() {
+      return suggestionTextPolicy;
+    }
   
     private WorkspaceSystemSettingsDisambiguation(WorkspaceSystemSettingsDisambiguationBuilder builder) {
       this.prompt = builder.prompt;
       this.noneOfTheAbovePrompt = builder.noneOfTheAbovePrompt;
       this.enabled = builder.enabled;
       this.sensitivity = builder.sensitivity;
+      this.randomize = builder.randomize;
+      this.maxSuggestions = builder.maxSuggestions;
+      this.suggestionTextPolicy = builder.suggestionTextPolicy;
     }
 
     /**
@@ -20898,7 +21514,9 @@ public class IBMAssistantV1Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'none_of_the_above_prompt' => 'noneOfTheAbovePrompt'
+        'none_of_the_above_prompt' => 'noneOfTheAbovePrompt',
+        'max_suggestions' => 'maxSuggestions',
+        'suggestion_text_policy' => 'suggestionTextPolicy'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -20911,14 +21529,16 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'noneOfTheAbovePrompt' => 'none_of_the_above_prompt'
+        'noneOfTheAbovePrompt' => 'none_of_the_above_prompt',
+        'maxSuggestions' => 'max_suggestions',
+        'suggestionTextPolicy' => 'suggestion_text_policy'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -20934,12 +21554,18 @@ public class IBMAssistantV1Models {
     private String noneOfTheAbovePrompt;
     private Boolean enabled;
     private String sensitivity;
+    private Boolean randomize;
+    private Long maxSuggestions;
+    private String suggestionTextPolicy;
 
     private WorkspaceSystemSettingsDisambiguationBuilder(WorkspaceSystemSettingsDisambiguation workspaceSystemSettingsDisambiguation) {
       this.prompt = workspaceSystemSettingsDisambiguation.prompt;
       this.noneOfTheAbovePrompt = workspaceSystemSettingsDisambiguation.noneOfTheAbovePrompt;
       this.enabled = workspaceSystemSettingsDisambiguation.enabled;
       this.sensitivity = workspaceSystemSettingsDisambiguation.sensitivity;
+      this.randomize = workspaceSystemSettingsDisambiguation.randomize;
+      this.maxSuggestions = workspaceSystemSettingsDisambiguation.maxSuggestions;
+      this.suggestionTextPolicy = workspaceSystemSettingsDisambiguation.suggestionTextPolicy;
     }
 
     /**
@@ -20998,6 +21624,132 @@ public class IBMAssistantV1Models {
      */
     public WorkspaceSystemSettingsDisambiguationBuilder sensitivity(String sensitivity) {
       this.sensitivity = sensitivity;
+      return this;
+    }
+
+    /**
+     * Set the randomize.
+     *
+     * @param randomize the randomize
+     * @return the WorkspaceSystemSettingsDisambiguation builder
+     */
+    public WorkspaceSystemSettingsDisambiguationBuilder randomize(Boolean randomize) {
+      this.randomize = randomize;
+      return this;
+    }
+
+    /**
+     * Set the maxSuggestions.
+     *
+     * @param maxSuggestions the maxSuggestions
+     * @return the WorkspaceSystemSettingsDisambiguation builder
+     */
+    public WorkspaceSystemSettingsDisambiguationBuilder maxSuggestions(Long maxSuggestions) {
+      this.maxSuggestions = maxSuggestions;
+      return this;
+    }
+
+    /**
+     * Set the suggestionTextPolicy.
+     *
+     * @param suggestionTextPolicy the suggestionTextPolicy
+     * @return the WorkspaceSystemSettingsDisambiguation builder
+     */
+    public WorkspaceSystemSettingsDisambiguationBuilder suggestionTextPolicy(String suggestionTextPolicy) {
+      this.suggestionTextPolicy = suggestionTextPolicy;
+      return this;
+    }
+  }
+
+  /**
+   * Workspace settings related to detection of irrelevant input.
+   */
+  public class WorkspaceSystemSettingsOffTopic extends IBMWatsonGenericModel {
+    private Boolean enabled;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WorkspaceSystemSettingsOffTopic() { }
+
+    /**
+     * Gets the enabled.
+     *
+     * Whether enhanced irrelevance detection is enabled for the workspace.
+     *
+     * @return the enabled
+     */
+    @AuraEnabled
+    public Boolean getEnabled() {
+      return enabled;
+    }
+  
+    private WorkspaceSystemSettingsOffTopic(WorkspaceSystemSettingsOffTopicBuilder builder) {
+      this.enabled = builder.enabled;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a WorkspaceSystemSettingsOffTopic builder
+     */
+    public WorkspaceSystemSettingsOffTopicBuilder newBuilder() {
+      return new WorkspaceSystemSettingsOffTopicBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettingsOffTopic ret = (WorkspaceSystemSettingsOffTopic) super.deserialize(jsonString, jsonMap, classType);
+      WorkspaceSystemSettingsOffTopicBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsOffTopic Builder.
+   */
+  public class WorkspaceSystemSettingsOffTopicBuilder {
+    private Boolean enabled;
+
+    private WorkspaceSystemSettingsOffTopicBuilder(WorkspaceSystemSettingsOffTopic workspaceSystemSettingsOffTopic) {
+      this.enabled = workspaceSystemSettingsOffTopic.enabled;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WorkspaceSystemSettingsOffTopicBuilder() {
+    }
+
+    /**
+     * Builds a WorkspaceSystemSettingsOffTopic.
+     *
+     * @return the workspaceSystemSettingsOffTopic
+     */
+    public WorkspaceSystemSettingsOffTopic build() {
+      return new WorkspaceSystemSettingsOffTopic(this);
+    }
+
+    /**
+     * Set the enabled.
+     *
+     * @param enabled the enabled
+     * @return the WorkspaceSystemSettingsOffTopic builder
+     */
+    public WorkspaceSystemSettingsOffTopicBuilder enabled(Boolean enabled) {
+      this.enabled = enabled;
       return this;
     }
   }
@@ -21059,7 +21811,7 @@ public class IBMAssistantV1Models {
 
     public Map<String, Object> replacePropertyNames() {
       // get map representation of current model
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this));
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
 
       // remove headers if there are any
       jsonMap.remove('headers');
