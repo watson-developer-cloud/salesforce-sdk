@@ -1,3 +1,20 @@
+# [5.1.0](https://github.com/watson-developer-cloud/salesforce-sdk/compare/v5.0.0...v5.1.0) (2019-11-27)
+
+
+### Bug Fixes
+
+* **Discovery v1:** Remove incorrectly-defined title prop from QueryResult and QueryNoticesResult ([6deb3f2](https://github.com/watson-developer-cloud/salesforce-sdk/commit/6deb3f26a85c6b0d4040d7e83aaa4b2b4efdb70c))
+
+
+### Features
+
+* **Assistant v1:** Add disambiguationOptOut prop to dialog nodes ([079c545](https://github.com/watson-developer-cloud/salesforce-sdk/commit/079c5454b2371d6169351004983092b3fac168a7))
+* **Assistant v1:** Add offTopic prop to WorkspaceSystemSettings ([869d179](https://github.com/watson-developer-cloud/salesforce-sdk/commit/869d179df721a85b43ccfb5c1c3882352b300a1d))
+* **Assistant v1:** Add suggestionTextPolicy prop to WorkspaceSystemSettingsDisambiguation ([d7d4a7d](https://github.com/watson-developer-cloud/salesforce-sdk/commit/d7d4a7df1e11af18dccf10f62f95589b628fdf02))
+* **Assistant v1:** Add workspace webhook functionality ([d78ad68](https://github.com/watson-developer-cloud/salesforce-sdk/commit/d78ad686b9247396936fc0839f62a6ae7b411901))
+* **Discovery v2:** Add initial generation of service ([896b9ae](https://github.com/watson-developer-cloud/salesforce-sdk/commit/896b9ae0f284926237cc1a8f25af4b699707c830))
+* **Visual Recognition v4:** Add getTrainingUsage method ([24e01e8](https://github.com/watson-developer-cloud/salesforce-sdk/commit/24e01e84353cde9c1175cc510734a72006c13c85))
+
 # [5.0.0](https://github.com/watson-developer-cloud/salesforce-sdk/compare/v4.4.5...v5.0.0) (2019-11-27)
 
 
