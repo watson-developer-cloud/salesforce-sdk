@@ -114,11 +114,11 @@ private class IBMAssistantV2Test {
     Test.startTest();
 
     IBMAssistantV2Models.MessageContextSkill testRequestModel = new IBMAssistantV2Models.MessageContextSkillBuilder()
-      .userDefined('testString')
+      .userDefined(createMockMap())
       .build();
     testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals('testString', testRequestModel.getUserDefined());
+    System.assertEquals(createMockMap(), testRequestModel.getUserDefined());
     Test.stopTest();
   }
   static testMethod void testMessageContextSkillsModel() {

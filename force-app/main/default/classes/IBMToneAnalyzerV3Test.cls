@@ -57,8 +57,7 @@ private class IBMToneAnalyzerV3Test {
 
     IBMToneAnalyzerV3Models.ToneOptions testRequestModel = new IBMToneAnalyzerV3Models.ToneOptionsBuilder()
       .toneInput(toneInputModel)
-      .body('testString')
-      .contentType('application/json')
+      .text('testString')
       .sentences(true)
       .tones(new List<String> { 'emotion' })
       .contentLanguage('en')
@@ -68,7 +67,6 @@ private class IBMToneAnalyzerV3Test {
 
     System.assertEquals(toneInputModel, testRequestModel.toneInput());
     System.assertEquals('testString', testRequestModel.body());
-    System.assertEquals('application/json', testRequestModel.contentType());
     System.assertEquals(true, testRequestModel.sentences());
     System.assertEquals(new List<String> { 'emotion' }, testRequestModel.tones());
     System.assertEquals('en', testRequestModel.contentLanguage());
@@ -105,8 +103,7 @@ private class IBMToneAnalyzerV3Test {
       .build();
     IBMToneAnalyzerV3Models.ToneOptions toneOptionsModel = new IBMToneAnalyzerV3Models.ToneOptionsBuilder()
       .toneInput(toneInputModel)
-      .body('testString')
-      .contentType('application/json')
+      .text('testString')
       .sentences(true)
       .tones(new List<String> { 'emotion' })
       .contentLanguage('en')

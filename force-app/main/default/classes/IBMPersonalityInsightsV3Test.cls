@@ -87,8 +87,7 @@ private class IBMPersonalityInsightsV3Test {
 
     IBMPersonalityInsightsV3Models.ProfileOptions testRequestModel = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
       .content(contentModel)
-      .body('testString')
-      .contentType('application/json')
+      .text('testString')
       .contentLanguage('ar')
       .acceptLanguage('ar')
       .rawScores(true)
@@ -99,7 +98,6 @@ private class IBMPersonalityInsightsV3Test {
 
     System.assertEquals(contentModel, testRequestModel.content());
     System.assertEquals('testString', testRequestModel.body());
-    System.assertEquals('application/json', testRequestModel.contentType());
     System.assertEquals('ar', testRequestModel.contentLanguage());
     System.assertEquals('ar', testRequestModel.acceptLanguage());
     System.assertEquals(true, testRequestModel.rawScores());
@@ -135,8 +133,7 @@ private class IBMPersonalityInsightsV3Test {
       .build();
     IBMPersonalityInsightsV3Models.ProfileOptions profileOptionsModel = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
       .content(contentModel)
-      .body('testString')
-      .contentType('application/json')
+      .text('testString')
       .contentLanguage('ar')
       .acceptLanguage('ar')
       .rawScores(true)
@@ -364,8 +361,7 @@ private class IBMPersonalityInsightsV3Test {
       .build();
     IBMPersonalityInsightsV3Models.ProfileOptions profileOptionsModel = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
       .content(contentModel)
-      .body('testString')
-      .contentType('application/json')
+      .text('testString')
       .contentLanguage('ar')
       .acceptLanguage('ar')
       .rawScores(true)
