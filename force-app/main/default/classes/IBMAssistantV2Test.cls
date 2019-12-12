@@ -1,437 +1,475 @@
 @isTest
 private class IBMAssistantV2Test {
-  private static String VERSION;
-
-  private static String ASSISTANT_ID;
-  private static String SESSION_ID;
-  private static String TIMEZONE;
-  private static Long TURN_COUNT;
-  private static String USER_ID;
-  private static String GROUP_STR;
-  private static List<Long> LOCATION;
-  private static Double CONFIDENCE;
-  private static String ENTITY;
-  private static IBMWatsonMapModel KEY_VAL;
-  private static String VALUE;
-  private static String INTENT;
-  private static String TEXT;
-  private static String SUGGESTION_ID;
-  private static String MESSAGE;
-  private static String CONDITIONS;
-  private static String TITLE;
-  private static String DIALOG_NODE;
-  private static String NAME;
-  private static String RESULT_VARIABLE;
-  private static String CREDENTIALS;
-  private static String DESCRIPTION;
-  private static Long TIME_VAL;
-  private static String SOURCE;
-  private static String TOPIC;
-  private static String LABEL;
-  private static String ACTION_TYPE;
-  private static String BRANCH_EXITED_REASON;
-  private static String INFO;
-  private static String BUTTON;
-  private static String USER_DEFINED;
-  private static String RESPONSE_TYPE;
-  private static String PREFERENCE;
-  private static String HEADER_NAME;
-  private static String HEADER_VAL;
-
   private static IBMAssistantV2 service;
+  private static IBMWatsonFile mockFile;
 
   static {
-    VERSION = '2019-02-28';
-    ASSISTANT_ID = 'assistant_id';
-    SESSION_ID = 'session_id';
-    TIMEZONE = 'timezone';
-    TURN_COUNT = 10;
-    USER_ID = 'user_id';
-    GROUP_STR = 'group';
-    LOCATION = new List<Long> { 1, 2 };
-    CONFIDENCE = 0.0;
-    ENTITY = 'entity';
-    KEY_VAL = new IBMWatsonMapModel();
-    KEY_VAL.put('key', 'value');
-    VALUE = 'value';
-    INTENT = 'intent';
-    TEXT = 'text';
-    SUGGESTION_ID = 'suggestion_id';
-    MESSAGE = 'message';
-    CONDITIONS = 'conditions';
-    TITLE = 'title';
-    DIALOG_NODE = 'dialog_node';
-    NAME = 'name';
-    RESULT_VARIABLE = 'result_variable';
-    CREDENTIALS = 'credentials';
-    DESCRIPTION = 'description';
-    TIME_VAL = 1234;
-    SOURCE = 'source';
-    TOPIC = 'topic';
-    LABEL = 'label';
-    ACTION_TYPE = 'client';
-    BRANCH_EXITED_REASON = 'completed';
-    INFO = 'info';
-    BUTTON = 'button';
-    USER_DEFINED = 'user_defined';
-    RESPONSE_TYPE = 'type';
-    PREFERENCE = 'preference';
-    HEADER_NAME = 'Test-Header';
-    HEADER_VAL = 'test_value';
-
-    service = new IBMAssistantV2(VERSION, new IBMWatsonNoAuthAuthenticator());
+    service = new IBMAssistantV2('2019-02-28', new IBMWatsonNoAuthAuthenticator());
+    mockFile = new IBMWatsonFile.FileBuilder()
+      .name('mock-file.txt')
+      .description('Test file')
+      .contentType('text/plain')
+      .body(blob.valueOf('Test string'))
+      .build();
   }
 
-  static testMethod void testCaptureGroup() {
+  static IBMWatsonMapModel createMockMap() {
+    IBMWatsonMapModel mockMap = new IBMWatsonMapModel();
+    mockMap.put('testKey', 'testVal');
+    return mockMap;
+  }
+
+  static testMethod void testCaptureGroupModel() {
     Test.startTest();
 
-    IBMAssistantV2Models.CaptureGroup captureGroup = new IBMAssistantV2Models.CaptureGroupBuilder()
-      .xgroup(GROUP_STR)
-      .location(LOCATION)
+    IBMAssistantV2Models.CaptureGroup testRequestModel = new IBMAssistantV2Models.CaptureGroupBuilder()
+      .xGroup('testString')
+      .location(new List<Long> { 38 })
       .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(GROUP_STR, captureGroup.getXgroup());
-    System.assertEquals(LOCATION, captureGroup.getLocation());
+    System.assertEquals('testString', testRequestModel.getXGroup());
+    System.assertEquals(new List<Long> { 38 }, testRequestModel.getLocation());
     Test.stopTest();
   }
-
-  static testMethod void testCreateSessionOptions() {
+  static testMethod void testCreateSessionOptionsModel() {
     Test.startTest();
 
-    IBMAssistantV2Models.CreateSessionOptions createSessionOptions = new IBMAssistantV2Models.CreateSessionOptionsBuilder()
-        .assistantId(ASSISTANT_ID)
-        .build();
-    createSessionOptions = createSessionOptions.newBuilder().build();
+    IBMAssistantV2Models.CreateSessionOptions testRequestModel = new IBMAssistantV2Models.CreateSessionOptionsBuilder()
+      .assistantId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(ASSISTANT_ID, createSessionOptions.assistantId());
+    System.assertEquals('testString', testRequestModel.assistantId());
     Test.stopTest();
   }
-
-  static testMethod void testDeleteSessionOptions() {
+  static testMethod void testDeleteSessionOptionsModel() {
     Test.startTest();
 
-    IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptions = new IBMAssistantV2Models.DeleteSessionOptionsBuilder()
-        .assistantId(ASSISTANT_ID)
-        .sessionId(SESSION_ID)
-        .build();
-    deleteSessionOptions = deleteSessionOptions.newBuilder().build();
+    IBMAssistantV2Models.DeleteSessionOptions testRequestModel = new IBMAssistantV2Models.DeleteSessionOptionsBuilder()
+      .assistantId('testString')
+      .sessionId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(ASSISTANT_ID, deleteSessionOptions.assistantId());
-    System.assertEquals(SESSION_ID, deleteSessionOptions.sessionId());
+    System.assertEquals('testString', testRequestModel.assistantId());
+    System.assertEquals('testString', testRequestModel.sessionId());
     Test.stopTest();
   }
-
-  static testMethod void testMessageContextGlobalSystem() {
+  static testMethod void testMessageContextModel() {
     Test.startTest();
-
-    IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystem = new IBMAssistantV2Models.MessageContextGlobalSystemBuilder()
-      .timezone(TIMEZONE)
-      .turnCount(TURN_COUNT)
-      .userId(USER_ID)
+    IBMAssistantV2Models.MessageContextSkills messageContextSkillsModel = new IBMAssistantV2Models.MessageContextSkillsBuilder()
+      .build();
+    IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystemModel = new IBMAssistantV2Models.MessageContextGlobalSystemBuilder()
+      .timezone('testString')
+      .userId('testString')
+      .turnCount(38)
+      .build();
+    IBMAssistantV2Models.MessageContextGlobal messageContextGlobalModel = new IBMAssistantV2Models.MessageContextGlobalBuilder()
+      .xSystem(messageContextGlobalSystemModel)
       .build();
 
-    System.assertEquals(TIMEZONE, messageContextGlobalSystem.getTimezone());
-    System.assertEquals(TURN_COUNT, messageContextGlobalSystem.getTurnCount());
-    System.assertEquals(USER_ID, messageContextGlobalSystem.getUserId());
+    IBMAssistantV2Models.MessageContext testRequestModel = new IBMAssistantV2Models.MessageContextBuilder()
+      .xGlobal(messageContextGlobalModel)
+      .skills(messageContextSkillsModel)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(messageContextGlobalModel, testRequestModel.getXGlobal());
+    System.assertEquals(messageContextSkillsModel, testRequestModel.getSkills());
     Test.stopTest();
   }
-
-  static testMethod void testMessageContextGlobal() {
+  static testMethod void testMessageContextGlobalModel() {
     Test.startTest();
-
-    IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystem = new IBMAssistantV2Models.MessageContextGlobalSystem();
-
-    IBMAssistantV2Models.MessageContextGlobal messageContextGlobal = new IBMAssistantV2Models.MessageContextGlobalBuilder()
-      .xsystem(messageContextGlobalSystem)
+    IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystemModel = new IBMAssistantV2Models.MessageContextGlobalSystemBuilder()
+      .timezone('testString')
+      .userId('testString')
+      .turnCount(38)
       .build();
 
-    System.assertEquals(messageContextGlobalSystem, messageContextGlobal.getXsystem());
+    IBMAssistantV2Models.MessageContextGlobal testRequestModel = new IBMAssistantV2Models.MessageContextGlobalBuilder()
+      .xSystem(messageContextGlobalSystemModel)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(messageContextGlobalSystemModel, testRequestModel.getXSystem());
     Test.stopTest();
   }
-
-  static testMethod void testMessageContext() {
+  static testMethod void testMessageContextGlobalSystemModel() {
     Test.startTest();
 
-    IBMAssistantV2Models.MessageContextGlobal messageContextGlobal = new IBMAssistantV2Models.MessageContextGlobal();
-    IBMAssistantV2Models.MessageContextSkills messageContextSkills = new IBMAssistantV2Models.MessageContextSkills();
-
-    IBMAssistantV2Models.MessageContext messageContext = new IBMAssistantV2Models.MessageContextBuilder()
-      .xglobal(messageContextGlobal)
-      .skills(messageContextSkills)
+    IBMAssistantV2Models.MessageContextGlobalSystem testRequestModel = new IBMAssistantV2Models.MessageContextGlobalSystemBuilder()
+      .timezone('testString')
+      .userId('testString')
+      .turnCount(38)
       .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(messageContextGlobal, messageContext.getXglobal());
-    System.assertEquals(messageContextSkills, messageContext.getSkills());
+    System.assertEquals('testString', testRequestModel.getTimezone());
+    System.assertEquals('testString', testRequestModel.getUserId());
+    System.assertEquals(38, testRequestModel.getTurnCount());
     Test.stopTest();
   }
-
-  static testMethod void testMessageInput() {
+  static testMethod void testMessageContextSkillModel() {
     Test.startTest();
 
-    IBMAssistantV2Models.RuntimeEntity entity1 = new IBMAssistantV2Models.RuntimeEntityBuilder()
-      .entity(ENTITY)
-      .location(LOCATION)
-      .value(VALUE)
+    IBMAssistantV2Models.MessageContextSkill testRequestModel = new IBMAssistantV2Models.MessageContextSkillBuilder()
+      .userDefined('testString')
       .build();
-    IBMAssistantV2Models.RuntimeEntity entity2 = new IBMAssistantV2Models.RuntimeEntityBuilder()
-      .entity(ENTITY)
-      .location(LOCATION)
-      .value(VALUE)
-      .build();
-    List<IBMAssistantV2Models.RuntimeEntity> entityList = new List<IBMAssistantV2Models.RuntimeEntity>();
-    entityList.add(entity1);
-    IBMAssistantV2Models.RuntimeIntent intent1 = new IBMAssistantV2Models.RuntimeIntentBuilder()
-      .confidence(CONFIDENCE)
-      .intent(INTENT)
-      .build();
-    IBMAssistantV2Models.RuntimeIntent intent2 = new IBMAssistantV2Models.RuntimeIntentBuilder()
-      .confidence(CONFIDENCE)
-      .intent(INTENT)
-      .build();
-    List<IBMAssistantV2Models.RuntimeIntent> intentList = new List<IBMAssistantV2Models.RuntimeIntent>();
-    intentList.add(intent1);
-    IBMAssistantV2Models.MessageInputOptions inputOptions = new IBMAssistantV2Models.MessageInputOptions();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    IBMAssistantV2Models.MessageInput messageInput = new IBMAssistantV2Models.MessageInputBuilder()
-        .messageType(TEXT)
-        .entities(entityList)
-        .addEntities(entity2)
-        .intents(intentList)
-        .addIntents(intent2)
-        .options(inputOptions)
-        .suggestionId(SUGGESTION_ID)
-        .text(TEXT)
-        .build();
-    messageInput = messageInput.newBuilder().build();
-
-    entityList.add(entity2);
-    intentList.add(intent2);
-    System.assertEquals(TEXT, messageInput.getMessageType());
-    System.assertEquals(entityList, messageInput.getEntities());
-    System.assertEquals(intentList, messageInput.getIntents());
-    System.assertEquals(inputOptions, messageInput.getOptions());
-    System.assertEquals(SUGGESTION_ID, messageInput.getSuggestionId());
-    System.assertEquals(TEXT, messageInput.getText());
+    System.assertEquals('testString', testRequestModel.getUserDefined());
     Test.stopTest();
   }
-
-  static testMethod void testMessageInputOptions() {
+  static testMethod void testMessageContextSkillsModel() {
     Test.startTest();
 
-    IBMAssistantV2Models.MessageInputOptions inputOptions = new IBMAssistantV2Models.MessageInputOptionsBuilder()
-      .alternateIntents(true)
+    IBMAssistantV2Models.MessageContextSkills testRequestModel = new IBMAssistantV2Models.MessageContextSkillsBuilder()
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    Test.stopTest();
+  }
+  static testMethod void testMessageInputModel() {
+    Test.startTest();
+    IBMAssistantV2Models.CaptureGroup captureGroupModel = new IBMAssistantV2Models.CaptureGroupBuilder()
+      .xGroup('testString')
+      .location(new List<Long> { 38 })
+      .build();
+    IBMAssistantV2Models.RuntimeEntity runtimeEntityModel = new IBMAssistantV2Models.RuntimeEntityBuilder()
+      .entity('testString')
+      .location(new List<Long> { 38 })
+      .value('testString')
+      .confidence((Double) 72.5)
+      .metadata(createMockMap())
+      .groups(new List<IBMAssistantV2Models.CaptureGroup> { captureGroupModel })
+      .build();
+    IBMAssistantV2Models.RuntimeIntent runtimeIntentModel = new IBMAssistantV2Models.RuntimeIntentBuilder()
+      .intent('testString')
+      .confidence((Double) 72.5)
+      .build();
+    IBMAssistantV2Models.MessageInputOptions messageInputOptionsModel = new IBMAssistantV2Models.MessageInputOptionsBuilder()
       .debug(true)
       .restart(true)
+      .alternateIntents(true)
       .returnContext(true)
       .build();
 
-    System.assert(inputOptions.getAlternateIntents());
-    System.assert(inputOptions.getDebug());
-    System.assert(inputOptions.getRestart());
-    System.assert(inputOptions.getReturnContext());
+    IBMAssistantV2Models.MessageInput testRequestModel = new IBMAssistantV2Models.MessageInputBuilder()
+      .messageType('text')
+      .text('testString')
+      .options(messageInputOptionsModel)
+      .intents(new List<IBMAssistantV2Models.RuntimeIntent> { runtimeIntentModel })
+      .entities(new List<IBMAssistantV2Models.RuntimeEntity> { runtimeEntityModel })
+      .suggestionId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('text', testRequestModel.getMessageType());
+    System.assertEquals('testString', testRequestModel.getText());
+    System.assertEquals(messageInputOptionsModel, testRequestModel.getOptions());
+    System.assertEquals(new List<IBMAssistantV2Models.RuntimeIntent> { runtimeIntentModel }, testRequestModel.getIntents());
+    System.assertEquals(new List<IBMAssistantV2Models.RuntimeEntity> { runtimeEntityModel }, testRequestModel.getEntities());
+    System.assertEquals('testString', testRequestModel.getSuggestionId());
     Test.stopTest();
   }
-
-  static testMethod void testMessageOptions() {
+  static testMethod void testMessageInputOptionsModel() {
     Test.startTest();
 
-    IBMAssistantV2Models.MessageContext messageContext = new IBMAssistantV2Models.MessageContext();
-    IBMAssistantV2Models.MessageInput messageInput = new IBMAssistantV2Models.MessageInputBuilder().build();
+    IBMAssistantV2Models.MessageInputOptions testRequestModel = new IBMAssistantV2Models.MessageInputOptionsBuilder()
+      .debug(true)
+      .restart(true)
+      .alternateIntents(true)
+      .returnContext(true)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    IBMAssistantV2Models.MessageOptions messageOptions = new IBMAssistantV2Models.MessageOptionsBuilder()
-        .assistantId(ASSISTANT_ID)
-        .context(messageContext)
-        .input(messageInput)
-        .sessionId(SESSION_ID)
-        .build();
-    messageOptions = messageOptions.newBuilder().build();
-
-    System.assertEquals(ASSISTANT_ID, messageOptions.assistantId());
-    System.assertEquals(messageContext, messageOptions.context());
-    System.assertEquals(messageInput, messageOptions.input());
-    System.assertEquals(SESSION_ID, messageOptions.sessionId());
+    System.assertEquals(true, testRequestModel.getDebug());
+    System.assertEquals(true, testRequestModel.getRestart());
+    System.assertEquals(true, testRequestModel.getAlternateIntents());
+    System.assertEquals(true, testRequestModel.getReturnContext());
     Test.stopTest();
   }
-
-  static testMethod void testRuntimeEntity() {
+  static testMethod void testMessageOptionsModel() {
     Test.startTest();
-
-    IBMAssistantV2Models.CaptureGroup captureGroup = new IBMAssistantV2Models.CaptureGroupBuilder()
-      .xgroup(GROUP_STR)
+    IBMAssistantV2Models.MessageContextSkills messageContextSkillsModel = new IBMAssistantV2Models.MessageContextSkillsBuilder()
       .build();
-    List<IBMAssistantV2Models.CaptureGroup> captureGroupList = new List<IBMAssistantV2Models.CaptureGroup> { captureGroup };
-    IBMAssistantV2Models.RuntimeEntity runtimeEntity = new IBMAssistantV2Models.RuntimeEntityBuilder()
-      .confidence(CONFIDENCE)
-      .entity(ENTITY)
-      .groups(captureGroupList)
-      .location(LOCATION)
-      .metadata(KEY_VAL)
-      .value(VALUE)
+    IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystemModel = new IBMAssistantV2Models.MessageContextGlobalSystemBuilder()
+      .timezone('testString')
+      .userId('testString')
+      .turnCount(38)
+      .build();
+    IBMAssistantV2Models.MessageContextGlobal messageContextGlobalModel = new IBMAssistantV2Models.MessageContextGlobalBuilder()
+      .xSystem(messageContextGlobalSystemModel)
+      .build();
+    IBMAssistantV2Models.MessageContext messageContextModel = new IBMAssistantV2Models.MessageContextBuilder()
+      .xGlobal(messageContextGlobalModel)
+      .skills(messageContextSkillsModel)
+      .build();
+    IBMAssistantV2Models.CaptureGroup captureGroupModel = new IBMAssistantV2Models.CaptureGroupBuilder()
+      .xGroup('testString')
+      .location(new List<Long> { 38 })
+      .build();
+    IBMAssistantV2Models.RuntimeEntity runtimeEntityModel = new IBMAssistantV2Models.RuntimeEntityBuilder()
+      .entity('testString')
+      .location(new List<Long> { 38 })
+      .value('testString')
+      .confidence((Double) 72.5)
+      .metadata(createMockMap())
+      .groups(new List<IBMAssistantV2Models.CaptureGroup> { captureGroupModel })
+      .build();
+    IBMAssistantV2Models.RuntimeIntent runtimeIntentModel = new IBMAssistantV2Models.RuntimeIntentBuilder()
+      .intent('testString')
+      .confidence((Double) 72.5)
+      .build();
+    IBMAssistantV2Models.MessageInputOptions messageInputOptionsModel = new IBMAssistantV2Models.MessageInputOptionsBuilder()
+      .debug(true)
+      .restart(true)
+      .alternateIntents(true)
+      .returnContext(true)
+      .build();
+    IBMAssistantV2Models.MessageInput messageInputModel = new IBMAssistantV2Models.MessageInputBuilder()
+      .messageType('text')
+      .text('testString')
+      .options(messageInputOptionsModel)
+      .intents(new List<IBMAssistantV2Models.RuntimeIntent> { runtimeIntentModel })
+      .entities(new List<IBMAssistantV2Models.RuntimeEntity> { runtimeEntityModel })
+      .suggestionId('testString')
       .build();
 
-    System.assertEquals(CONFIDENCE, runtimeEntity.getConfidence());
-    System.assertEquals(ENTITY, runtimeEntity.getEntity());
-    System.assertEquals(captureGroupList, runtimeEntity.getGroups());
-    System.assertEquals(LOCATION, runtimeEntity.getLocation());
-    System.assertEquals(KEY_VAL, runtimeEntity.getMetadata());
-    System.assertEquals(VALUE, runtimeEntity.getValue());
+    IBMAssistantV2Models.MessageOptions testRequestModel = new IBMAssistantV2Models.MessageOptionsBuilder()
+      .assistantId('testString')
+      .sessionId('testString')
+      .input(messageInputModel)
+      .context(messageContextModel)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.assistantId());
+    System.assertEquals('testString', testRequestModel.sessionId());
+    System.assertEquals(messageInputModel, testRequestModel.input());
+    System.assertEquals(messageContextModel, testRequestModel.context());
     Test.stopTest();
   }
-
-  static testMethod void testRuntimeIntent() {
+  static testMethod void testRuntimeEntityModel() {
     Test.startTest();
-
-    IBMAssistantV2Models.RuntimeIntent runtimeIntent = new IBMAssistantV2Models.RuntimeIntentBuilder()
-      .confidence(CONFIDENCE)
-      .intent(INTENT)
+    IBMAssistantV2Models.CaptureGroup captureGroupModel = new IBMAssistantV2Models.CaptureGroupBuilder()
+      .xGroup('testString')
+      .location(new List<Long> { 38 })
       .build();
 
-    System.assertEquals(CONFIDENCE, runtimeIntent.getConfidence());
-    System.assertEquals(INTENT, runtimeIntent.getIntent());
+    IBMAssistantV2Models.RuntimeEntity testRequestModel = new IBMAssistantV2Models.RuntimeEntityBuilder()
+      .entity('testString')
+      .location(new List<Long> { 38 })
+      .value('testString')
+      .confidence((Double) 72.5)
+      .metadata(createMockMap())
+      .groups(new List<IBMAssistantV2Models.CaptureGroup> { captureGroupModel })
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.getEntity());
+    System.assertEquals(new List<Long> { 38 }, testRequestModel.getLocation());
+    System.assertEquals('testString', testRequestModel.getValue());
+    System.assertEquals((Double) 72.5, testRequestModel.getConfidence());
+    System.assertEquals(createMockMap(), testRequestModel.getMetadata());
+    System.assertEquals(new List<IBMAssistantV2Models.CaptureGroup> { captureGroupModel }, testRequestModel.getGroups());
     Test.stopTest();
   }
-
-  static testMethod void testRuntimeResponseGeneric() {
+  static testMethod void testRuntimeIntentModel() {
     Test.startTest();
 
-    IBMAssistantV2Models.DialogNodeOutputOptionsElement option1 = new IBMAssistantV2Models.DialogNodeOutputOptionsElement();
-    IBMAssistantV2Models.DialogNodeOutputOptionsElement option2 = new IBMAssistantV2Models.DialogNodeOutputOptionsElement();
-    List<IBMAssistantV2Models.DialogNodeOutputOptionsElement> options = new List<IBMAssistantV2Models.DialogNodeOutputOptionsElement> { option1 };
-    IBMAssistantV2Models.DialogSuggestion suggestion1 = new IBMAssistantV2Models.DialogSuggestion();
-    IBMAssistantV2Models.DialogSuggestion suggestion2 = new IBMAssistantV2Models.DialogSuggestion();
-    List<IBMAssistantV2Models.DialogSuggestion> suggestions = new List<IBMAssistantV2Models.DialogSuggestion> { suggestion1 };
-
-    IBMAssistantV2Models.RuntimeResponseGeneric generic = new IBMAssistantV2Models.RuntimeResponseGenericBuilder()
-      .responseType(RESPONSE_TYPE)
-      .text(TEXT)
-      .xtime(TIME_VAL)
-      .typing(true)
-      .source(SOURCE)
-      .title(TITLE)
-      .description(DESCRIPTION)
-      .preference(PREFERENCE)
-      .options(options)
-      .messageToHumanAgent(MESSAGE)
-      .topic(TOPIC)
-      .suggestions(suggestions)
-      .addOptions(option2)
-      .addSuggestions(suggestion2)
+    IBMAssistantV2Models.RuntimeIntent testRequestModel = new IBMAssistantV2Models.RuntimeIntentBuilder()
+      .intent('testString')
+      .confidence((Double) 72.5)
       .build();
-    generic = generic.newBuilder().build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    options.add(option2);
-    suggestions.add(suggestion2);
-
-    System.assertEquals(RESPONSE_TYPE, generic.getResponseType());
-    System.assertEquals(TEXT, generic.getText());
-    System.assertEquals(TIME_VAL, generic.getXtime());
-    System.assert(generic.getTyping());
-    System.assertEquals(SOURCE, generic.getSource());
-    System.assertEquals(TITLE, generic.getTitle());
-    System.assertEquals(DESCRIPTION, generic.getDescription());
-    System.assertEquals(PREFERENCE, generic.getPreference());
-    System.assertEquals(options, generic.getOptions());
-    System.assertEquals(MESSAGE, generic.getMessageToHumanAgent());
-    System.assertEquals(TOPIC, generic.getTopic());
-    System.assertEquals(suggestions, generic.getSuggestions());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testMessage() {
-    String body = IBMWatsonMockResponses.messageResponseV2();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-      200,
-      'Success',
-      body,
-      null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMAssistantV2Models.MessageOptions messageOptions = new IBMAssistantV2Models.MessageOptionsBuilder()
-      .assistantId(ASSISTANT_ID)
-      .sessionId(SESSION_ID)
-      .build();
-    IBMAssistantV2Models.MessageResponse response = service.message(messageOptions);
-
-    System.assert(response.getContext() != null);
-    System.assert(response.getOutput() != null);
-
-    System.assertEquals(ACTION_TYPE, response.getOutput().getActions().get(0).getXType());
-    System.assertEquals(NAME, response.getOutput().getActions().get(0).getName());
-    System.assertEquals(KEY_VAL, response.getOutput().getActions().get(0).getParameters());
-    System.assertEquals(RESULT_VARIABLE, response.getOutput().getActions().get(0).getResultVariable());
-    System.assertEquals(CREDENTIALS, response.getOutput().getActions().get(0).getCredentials());
-    System.assertEquals(BRANCH_EXITED_REASON, response.getOutput().getDebug().getBranchExitedReason());
-    System.assertEquals(INFO, response.getOutput().getDebug().getLogMessages().get(0).getLevel());
-    System.assertEquals(MESSAGE, response.getOutput().getDebug().getLogMessages().get(0).getMessage());
-    System.assertEquals(CONDITIONS, response.getOutput().getDebug().getNodesVisited().get(0).getConditions());
-    System.assertEquals(TITLE, response.getOutput().getDebug().getNodesVisited().get(0).getTitle());
-    System.assertEquals(DIALOG_NODE, response.getOutput().getDebug().getNodesVisited().get(0).getDialogNode());
-    System.assert(response.getOutput().getDebug().getBranchExited());
-    System.assertEquals(DESCRIPTION, response.getOutput().getGeneric().get(0).getDescription());
-    System.assertEquals(TEXT, response.getOutput().getGeneric().get(0).getResponseType());
-    System.assertEquals(BUTTON, response.getOutput().getGeneric().get(0).getPreference());
-    System.assertEquals(TEXT, response.getOutput().getGeneric().get(0).getText());
-    System.assertEquals(TIME_VAL, response.getOutput().getGeneric().get(0).getXtime());
-    System.assert(response.getOutput().getGeneric().get(0).getTyping());
-    System.assertEquals(SOURCE, response.getOutput().getGeneric().get(0).getSource());
-    System.assertEquals(TITLE, response.getOutput().getGeneric().get(0).getTitle());
-    System.assertEquals(MESSAGE, response.getOutput().getGeneric().get(0).getMessageToHumanAgent());
-    System.assertEquals(TOPIC, response.getOutput().getGeneric().get(0).getTopic());
-    System.assertEquals(LABEL, response.getOutput().getGeneric().get(0).getOptions().get(0).getLabel());
-    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput() != null);
-    System.assertEquals(LABEL, response.getOutput().getGeneric().get(0).getSuggestions().get(0).getLabel());
-    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue() != null);
-    System.assertEquals(KEY_VAL, response.getOutput().getUserDefined());
+    System.assertEquals('testString', testRequestModel.getIntent());
+    System.assertEquals((Double) 72.5, testRequestModel.getConfidence());
     Test.stopTest();
   }
 
   static testMethod void testCreateSession() {
-    String body = IBMWatsonMockResponses.sessionResponse();
+    String mockResponseBody = '{"session_id": "sessionId"}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV2Models.CreateSessionOptions createSessionOptions = new IBMAssistantV2Models.CreateSessionOptionsBuilder()
-        .assistantId(ASSISTANT_ID)
-        .addHeader(HEADER_NAME, HEADER_VAL)
-        .build();
-    IBMAssistantV2Models.SessionResponse response = service.createSession(createSessionOptions);
+    IBMAssistantV2Models.CreateSessionOptions createSessionOptionsModel = new IBMAssistantV2Models.CreateSessionOptionsBuilder()
+      .assistantId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    System.assert(response != null);
-    System.assertEquals(SESSION_ID, response.getSessionId());
+    IBMAssistantV2Models.SessionResponse response = service.createSession(createSessionOptionsModel);
+    System.assert(response.getSessionId() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testDeleteSession() {
-    String body = '';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String mockResponseBody = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptions = new IBMAssistantV2Models.DeleteSessionOptionsBuilder()
-        .assistantId(ASSISTANT_ID)
-        .sessionId(SESSION_ID)
-        .addHeader(HEADER_NAME, HEADER_VAL)
-        .build();
-    service.deleteSession(deleteSessionOptions);
+    IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptionsModel = new IBMAssistantV2Models.DeleteSessionOptionsBuilder()
+      .assistantId('testString')
+      .sessionId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteSession(deleteSessionOptionsModel);
 
     Test.stopTest();
   }
-
-  static testMethod void testMessageContextSkills() {
+  static testMethod void testMessage() {
+    String mockResponseBody = '{"output": {"generic": [{"response_type": "responseType", "text": "text", "time": "5", "typing": true, "source": "source", "title": "title", "description": "description", "preference": "preference", "options": [{"label": "label", "value": {"input": {"message_type": "messageType", "text": "text", "options": {"debug": false, "restart": false, "alternate_intents": true, "return_context": false}, "intents": [{"intent": "intent", "confidence": "10"}], "entities": [{"entity": "entity", "location": ["8"], "value": "value", "confidence": "10", "metadata": {}, "groups": [{"group": "xGroup", "location": ["8"]}]}], "suggestion_id": "suggestionId"}}}], "message_to_human_agent": "messageToHumanAgent", "topic": "topic", "suggestions": [{"label": "label", "value": {"input": {"message_type": "messageType", "text": "text", "options": {"debug": false, "restart": false, "alternate_intents": true, "return_context": false}, "intents": [{"intent": "intent", "confidence": "10"}], "entities": [{"entity": "entity", "location": ["8"], "value": "value", "confidence": "10", "metadata": {}, "groups": [{"group": "xGroup", "location": ["8"]}]}], "suggestion_id": "suggestionId"}}, "output": {}}], "header": "header", "results": [{"id": "id", "result_metadata": {"confidence": "10", "score": "5"}, "body": "body", "title": "title", "url": "url", "highlight": {"body": ["body"], "title": ["title"], "url": ["url"]}}]}], "intents": [{"intent": "intent", "confidence": "10"}], "entities": [{"entity": "entity", "location": ["8"], "value": "value", "confidence": "10", "metadata": {}, "groups": [{"group": "xGroup", "location": ["8"]}]}], "actions": [{"name": "name", "type": "xType", "parameters": {}, "result_variable": "resultVariable", "credentials": "credentials"}], "debug": {"nodes_visited": [{"dialog_node": "dialogNode", "title": "title", "conditions": "conditions"}], "log_messages": [{"level": "level", "message": "message"}], "branch_exited": true, "branch_exited_reason": "branchExitedReason"}, "user_defined": {}}, "context": {"global": {"system": {"timezone": "timezone", "user_id": "userId", "turn_count": "9"}}, "skills": {}}}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV2Models.MessageContextSkills messageContextSkills = new IBMAssistantV2Models.MessageContextSkills();
-    messageContextSkills.put(NAME, USER_DEFINED);
+    IBMAssistantV2Models.MessageContextSkills messageContextSkillsModel = new IBMAssistantV2Models.MessageContextSkillsBuilder()
+      .build();
+    IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystemModel = new IBMAssistantV2Models.MessageContextGlobalSystemBuilder()
+      .timezone('testString')
+      .userId('testString')
+      .turnCount(38)
+      .build();
+    IBMAssistantV2Models.MessageContextGlobal messageContextGlobalModel = new IBMAssistantV2Models.MessageContextGlobalBuilder()
+      .xSystem(messageContextGlobalSystemModel)
+      .build();
+    IBMAssistantV2Models.MessageContext messageContextModel = new IBMAssistantV2Models.MessageContextBuilder()
+      .xGlobal(messageContextGlobalModel)
+      .skills(messageContextSkillsModel)
+      .build();
+    IBMAssistantV2Models.CaptureGroup captureGroupModel = new IBMAssistantV2Models.CaptureGroupBuilder()
+      .xGroup('testString')
+      .location(new List<Long> { 38 })
+      .build();
+    IBMAssistantV2Models.RuntimeEntity runtimeEntityModel = new IBMAssistantV2Models.RuntimeEntityBuilder()
+      .entity('testString')
+      .location(new List<Long> { 38 })
+      .value('testString')
+      .confidence((Double) 72.5)
+      .metadata(createMockMap())
+      .groups(new List<IBMAssistantV2Models.CaptureGroup> { captureGroupModel })
+      .build();
+    IBMAssistantV2Models.RuntimeIntent runtimeIntentModel = new IBMAssistantV2Models.RuntimeIntentBuilder()
+      .intent('testString')
+      .confidence((Double) 72.5)
+      .build();
+    IBMAssistantV2Models.MessageInputOptions messageInputOptionsModel = new IBMAssistantV2Models.MessageInputOptionsBuilder()
+      .debug(true)
+      .restart(true)
+      .alternateIntents(true)
+      .returnContext(true)
+      .build();
+    IBMAssistantV2Models.MessageInput messageInputModel = new IBMAssistantV2Models.MessageInputBuilder()
+      .messageType('text')
+      .text('testString')
+      .options(messageInputOptionsModel)
+      .intents(new List<IBMAssistantV2Models.RuntimeIntent> { runtimeIntentModel })
+      .entities(new List<IBMAssistantV2Models.RuntimeEntity> { runtimeEntityModel })
+      .suggestionId('testString')
+      .build();
+    IBMAssistantV2Models.MessageOptions messageOptionsModel = new IBMAssistantV2Models.MessageOptionsBuilder()
+      .assistantId('testString')
+      .sessionId('testString')
+      .input(messageInputModel)
+      .context(messageContextModel)
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    System.assert(messageContextSkills.getDynamicProperties().containsKey(NAME));
-    System.assertEquals(USER_DEFINED, messageContextSkills.getDynamicProperties().get(NAME));
+    IBMAssistantV2Models.MessageResponse response = service.message(messageOptionsModel);
+    System.assert(response.getOutput().getGeneric().get(0).getResponseType() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getText() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getXTime() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getTyping() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSource() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getTitle() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getDescription() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getPreference() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getLabel() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getMessageType() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getText() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getOptions().getDebug() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getOptions().getRestart() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getOptions().getAlternateIntents() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getOptions().getReturnContext() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getIntents().get(0).getIntent() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getIntents().get(0).getConfidence() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getEntities().get(0).getEntity() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getEntities().get(0).getLocation().get(0) != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getEntities().get(0).getValue() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getEntities().get(0).getConfidence() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getEntities().get(0).getGroups().get(0).getXGroup() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getEntities().get(0).getGroups().get(0).getLocation().get(0) != null);
+    System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getSuggestionId() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getMessageToHumanAgent() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getTopic() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getLabel() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getMessageType() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getText() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getOptions().getDebug() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getOptions().getRestart() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getOptions().getAlternateIntents() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getOptions().getReturnContext() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getIntents().get(0).getIntent() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getIntents().get(0).getConfidence() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getEntities().get(0).getEntity() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getEntities().get(0).getLocation().get(0) != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getEntities().get(0).getValue() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getEntities().get(0).getConfidence() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getEntities().get(0).getGroups().get(0).getXGroup() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getEntities().get(0).getGroups().get(0).getLocation().get(0) != null);
+    System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getSuggestionId() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getHeader() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getId() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getResultMetadata().getConfidence() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getResultMetadata().getScore() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getBody() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getTitle() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getUrl() != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getHighlight().getBody().get(0) != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getHighlight().getTitle().get(0) != null);
+    System.assert(response.getOutput().getGeneric().get(0).getResults().get(0).getHighlight().getUrl().get(0) != null);
+    System.assert(response.getOutput().getIntents().get(0).getIntent() != null);
+    System.assert(response.getOutput().getIntents().get(0).getConfidence() != null);
+    System.assert(response.getOutput().getEntities().get(0).getEntity() != null);
+    System.assert(response.getOutput().getEntities().get(0).getLocation().get(0) != null);
+    System.assert(response.getOutput().getEntities().get(0).getValue() != null);
+    System.assert(response.getOutput().getEntities().get(0).getConfidence() != null);
+    System.assert(response.getOutput().getEntities().get(0).getGroups().get(0).getXGroup() != null);
+    System.assert(response.getOutput().getEntities().get(0).getGroups().get(0).getLocation().get(0) != null);
+    System.assert(response.getOutput().getActions().get(0).getName() != null);
+    System.assert(response.getOutput().getActions().get(0).getXType() != null);
+    System.assert(response.getOutput().getActions().get(0).getResultVariable() != null);
+    System.assert(response.getOutput().getActions().get(0).getCredentials() != null);
+    System.assert(response.getOutput().getDebug().getNodesVisited().get(0).getDialogNode() != null);
+    System.assert(response.getOutput().getDebug().getNodesVisited().get(0).getTitle() != null);
+    System.assert(response.getOutput().getDebug().getNodesVisited().get(0).getConditions() != null);
+    System.assert(response.getOutput().getDebug().getLogMessages().get(0).getLevel() != null);
+    System.assert(response.getOutput().getDebug().getLogMessages().get(0).getMessage() != null);
+    System.assert(response.getOutput().getDebug().getBranchExited() != null);
+    System.assert(response.getOutput().getDebug().getBranchExitedReason() != null);
+    System.assert(response.getContext().getXGlobal().getXSystem().getTimezone() != null);
+    System.assert(response.getContext().getXGlobal().getXSystem().getUserId() != null);
+    System.assert(response.getContext().getXGlobal().getXSystem().getTurnCount() != null);
 
     Test.stopTest();
   }

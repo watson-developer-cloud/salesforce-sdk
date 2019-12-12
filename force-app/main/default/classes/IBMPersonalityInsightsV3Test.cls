@@ -1,126 +1,380 @@
 @isTest
 private class IBMPersonalityInsightsV3Test {
-  private static String VERSION;
-  private static String HEADER_KEY;
-  private static String HEADER_VAL;
-
   private static IBMPersonalityInsightsV3 service;
+  private static IBMWatsonFile mockFile;
 
   static {
-    VERSION = '2017-10-13';
-    HEADER_KEY = 'Header-Key';
-    HEADER_VAL = 'header_val';
-    service = new IBMPersonalityInsightsV3(VERSION, new IBMWatsonNoAuthAuthenticator());
+    service = new IBMPersonalityInsightsV3('2017-10-13', new IBMWatsonNoAuthAuthenticator());
+    mockFile = new IBMWatsonFile.FileBuilder()
+      .name('mock-file.txt')
+      .description('Test file')
+      .contentType('text/plain')
+      .body(blob.valueOf('Test string'))
+      .build();
   }
 
-  /**
-   * Generates a personality profile based on input text.
-   *
-   */
-  static testMethod void testProfile() {
-    String body = IBMWatsonMockResponses.profile();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
+  static IBMWatsonMapModel createMockMap() {
+    IBMWatsonMapModel mockMap = new IBMWatsonMapModel();
+    mockMap.put('testKey', 'testVal');
+    return mockMap;
+  }
+
+  static testMethod void testContentModel() {
     Test.startTest();
-    IBMPersonalityInsightsV3Models.ContentItem contentItem = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
-      .content('text/plain')
-      .id('test')
-      .created(1)
-      .updated(1)
-      .contenttype(IBMWatsonHttpMediaType.APPLICATION_JSON)
-      .language('en')
-      .parentid('test')
-      .reply(false)
-      .forward(false)
+    IBMPersonalityInsightsV3Models.ContentItem contentItemModel = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
+      .content('testString')
+      .id('testString')
+      .created(26L)
+      .updated(26L)
+      .contenttype('text/plain')
+      .language('ar')
+      .parentid('testString')
+      .reply(true)
+      .forward(true)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    contentItem = contentItem.newBuilder().build();
-    IBMPersonalityInsightsV3Models.Content content = new IBMPersonalityInsightsV3Models.ContentBuilder()
-      .addContentItems(contentItem)
-      .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem>{ contentItem })
+
+    IBMPersonalityInsightsV3Models.Content testRequestModel = new IBMPersonalityInsightsV3Models.ContentBuilder()
+      .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem> { contentItemModel })
       .build();
-    // or you can use following
-    content = new IBMPersonalityInsightsV3Models.ContentBuilder(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
-      .addContentItems(contentItem)
-      .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(new List<IBMPersonalityInsightsV3Models.ContentItem> { contentItemModel }, testRequestModel.contentItems());
+    Test.stopTest();
+  }
+  static testMethod void testContentItemModel() {
+    Test.startTest();
+
+    IBMPersonalityInsightsV3Models.ContentItem testRequestModel = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
+      .content('testString')
+      .id('testString')
+      .created(26L)
+      .updated(26L)
+      .contenttype('text/plain')
+      .language('ar')
+      .parentid('testString')
+      .reply(true)
+      .forward(true)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    content = content.newBuilder().build();
-    IBMPersonalityInsightsV3Models.ProfileOptions options = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
-      .contentLanguage('en')
-      .acceptLanguage('en')
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.content());
+    System.assertEquals('testString', testRequestModel.id());
+    System.assertEquals(26L, testRequestModel.created());
+    System.assertEquals(26L, testRequestModel.updated());
+    System.assertEquals('text/plain', testRequestModel.contenttype());
+    System.assertEquals('ar', testRequestModel.language());
+    System.assertEquals('testString', testRequestModel.parentid());
+    System.assertEquals(true, testRequestModel.reply());
+    System.assertEquals(true, testRequestModel.forward());
+    Test.stopTest();
+  }
+  static testMethod void testProfileOptionsModel() {
+    Test.startTest();
+    IBMPersonalityInsightsV3Models.ContentItem contentItemModel = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
+      .content('testString')
+      .id('testString')
+      .created(26L)
+      .updated(26L)
+      .contenttype('text/plain')
+      .language('ar')
+      .parentid('testString')
+      .reply(true)
+      .forward(true)
+      .build();
+    IBMPersonalityInsightsV3Models.Content contentModel = new IBMPersonalityInsightsV3Models.ContentBuilder()
+      .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem> { contentItemModel })
+      .build();
+
+    IBMPersonalityInsightsV3Models.ProfileOptions testRequestModel = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
+      .content(contentModel)
+      .body('testString')
+      .contentType('application/json')
+      .contentLanguage('ar')
+      .acceptLanguage('ar')
       .rawScores(true)
+      .csvHeaders(true)
       .consumptionPreferences(true)
-      .content(content)
-      .html('<html><body>test</body></html>')
-      .text('test')
-      .addHeader(HEADER_KEY, HEADER_VAL)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary
-    options = options.newBuilder().build();
-    IBMPersonalityInsightsV3Models.Profile resp = service.profile(options);
-    System.assertEquals(content.contentItems().size(), 1);
-    System.assertEquals(contentItem.content(), 'text/plain');
-    System.assertEquals(contentItem.contenttype(), IBMWatsonHttpMediaType.APPLICATION_JSON);
-    System.assertEquals(contentItem.created(), 1);
-    System.assertEquals(contentItem.updated(), 1);
-    System.assertEquals(contentItem.id(), 'test');
-    System.assertEquals(contentItem.parentid(), 'test');
-    System.assertEquals(contentItem.language(), 'en');
-    System.assertEquals(contentItem.reply(), false);
-    System.assertEquals(contentItem.forward(), false);
-    System.assertEquals(resp.getProcessedLanguage(), 'ar');
-    System.assertEquals(resp.getPersonality()[0].getTraitId(), 'string');
-    System.assertEquals(resp.getPersonality()[0].getName(), 'string');
-    System.assertEquals(resp.getPersonality()[0].getCategory(), 'personality');
-    System.assertEquals(resp.getPersonality()[0].getPercentile(), 0);
-    System.assertEquals(resp.getPersonality()[0].getRawScore(), 0);
-    System.assertEquals(resp.getPersonality()[0].getSignificant(), true);
-    System.assertEquals(resp.getPersonality()[0].getChildren().size(), 1);
-    System.assertEquals(resp.getValues().size(), 1);
-    System.assertEquals(resp.getNeeds().size(), 1);
-    System.assertEquals(resp.getBehavior()[0].getTraitId(), 'string');
-    System.assertEquals(resp.getBehavior()[0].getName(), 'string');
-    System.assertEquals(resp.getBehavior()[0].getCategory(), 'string');
-    System.assertEquals(resp.getBehavior()[0].getPercentage(), 0);
-    System.assertEquals(resp.getConsumptionPreferences()[0].getConsumptionPreferenceCategoryId(), 'string');
-    System.assertEquals(resp.getConsumptionPreferences()[0].getName(), 'string');
-    System.assertEquals(resp.getConsumptionPreferences()[0].getConsumptionPreferences()[0].getConsumptionPreferenceId(), 'string');
-    System.assertEquals(resp.getConsumptionPreferences()[0].getConsumptionPreferences()[0].getName(), 'string');
-    System.assertEquals(resp.getConsumptionPreferences()[0].getConsumptionPreferences()[0].getScore(), 0.0);
-    System.assertEquals(resp.getwarnings()[0].getWarningId(), 'WORD_COUNT_MESSAGE');
-    System.assertEquals(resp.getwarnings()[0].getMessage(), 'string');
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(contentModel, testRequestModel.content());
+    System.assertEquals('testString', testRequestModel.body());
+    System.assertEquals('application/json', testRequestModel.contentType());
+    System.assertEquals('ar', testRequestModel.contentLanguage());
+    System.assertEquals('ar', testRequestModel.acceptLanguage());
+    System.assertEquals(true, testRequestModel.rawScores());
+    System.assertEquals(true, testRequestModel.csvHeaders());
+    System.assertEquals(true, testRequestModel.consumptionPreferences());
     Test.stopTest();
   }
 
-  static testMethod void testProfileAsCsv() {
-    String testBody = 'this,is,a,csv,file';
-    Map<String, String> responseHeaders = new Map<String, String> {
-      IBMWatsonHttpHeaders.CONTENT_DISPOSITION => 'filename=testfile.csv',
-      IBMWatsonHttpHeaders.CONTENT_TYPE => 'test/csv'
-    };
+  static testMethod void testProfile() {
+    String mockResponseBody = '{"processed_language": "processedLanguage", "word_count": "9", "word_count_message": "wordCountMessage", "personality": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": []}]}]}]}]}]}]}]}]}]}], "needs": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": []}]}]}]}]}]}]}]}]}]}], "values": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": [{"trait_id": "traitId", "name": "name", "category": "category", "percentile": "10", "raw_score": "8", "significant": false, "children": []}]}]}]}]}]}]}]}]}]}], "behavior": [{"trait_id": "traitId", "name": "name", "category": "category", "percentage": "10"}], "consumption_preferences": [{"consumption_preference_category_id": "consumptionPreferenceCategoryId", "name": "name", "consumption_preferences": [{"consumption_preference_id": "consumptionPreferenceId", "name": "name", "score": "5"}]}], "warnings": [{"warning_id": "warningId", "message": "message"}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      testBody,
-      responseHeaders
+      mockResponseBody,
+      null
     );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMPersonalityInsightsV3Models.ProfileOptions options = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
-      .text('text')
-      .contentLanguage('en')
-      .acceptLanguage('en')
+    IBMPersonalityInsightsV3Models.ContentItem contentItemModel = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
+      .content('testString')
+      .id('testString')
+      .created(26L)
+      .updated(26L)
+      .contenttype('text/plain')
+      .language('ar')
+      .parentid('testString')
+      .reply(true)
+      .forward(true)
+      .build();
+    IBMPersonalityInsightsV3Models.Content contentModel = new IBMPersonalityInsightsV3Models.ContentBuilder()
+      .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem> { contentItemModel })
+      .build();
+    IBMPersonalityInsightsV3Models.ProfileOptions profileOptionsModel = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
+      .content(contentModel)
+      .body('testString')
+      .contentType('application/json')
+      .contentLanguage('ar')
+      .acceptLanguage('ar')
       .rawScores(true)
       .csvHeaders(true)
       .consumptionPreferences(true)
-      .addHeader(HEADER_KEY, HEADER_VAL)
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMWatsonFile response = service.profileAsCsv(options);
 
-    System.assert(response != null);
-    System.assertEquals(testBody, response.bodyAsString());
+    IBMPersonalityInsightsV3Models.Profile response = service.profile(profileOptionsModel);
+    System.assert(response.getProcessedLanguage() != null);
+    System.assert(response.getWordCount() != null);
+    System.assert(response.getWordCountMessage() != null);
+    System.assert(response.getPersonality().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getPersonality().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getNeeds().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getTraitId() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getName() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getCategory() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getPercentile() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getRawScore() != null);
+    System.assert(response.getValues().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).getSignificant() != null);
+    System.assert(response.getBehavior().get(0).getTraitId() != null);
+    System.assert(response.getBehavior().get(0).getName() != null);
+    System.assert(response.getBehavior().get(0).getCategory() != null);
+    System.assert(response.getBehavior().get(0).getPercentage() != null);
+    System.assert(response.getConsumptionPreferences().get(0).getConsumptionPreferenceCategoryId() != null);
+    System.assert(response.getConsumptionPreferences().get(0).getName() != null);
+    System.assert(response.getConsumptionPreferences().get(0).getConsumptionPreferences().get(0).getConsumptionPreferenceId() != null);
+    System.assert(response.getConsumptionPreferences().get(0).getConsumptionPreferences().get(0).getName() != null);
+    System.assert(response.getConsumptionPreferences().get(0).getConsumptionPreferences().get(0).getScore() != null);
+    System.assert(response.getWarnings().get(0).getWarningId() != null);
+    System.assert(response.getWarnings().get(0).getMessage() != null);
+
+    Test.stopTest();
+  }
+  static testMethod void testProfileAsCsv() {
+    String mockResponseBody = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMPersonalityInsightsV3Models.ContentItem contentItemModel = new IBMPersonalityInsightsV3Models.ContentItemBuilder()
+      .content('testString')
+      .id('testString')
+      .created(26L)
+      .updated(26L)
+      .contenttype('text/plain')
+      .language('ar')
+      .parentid('testString')
+      .reply(true)
+      .forward(true)
+      .build();
+    IBMPersonalityInsightsV3Models.Content contentModel = new IBMPersonalityInsightsV3Models.ContentBuilder()
+      .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem> { contentItemModel })
+      .build();
+    IBMPersonalityInsightsV3Models.ProfileOptions profileOptionsModel = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
+      .content(contentModel)
+      .body('testString')
+      .contentType('application/json')
+      .contentLanguage('ar')
+      .acceptLanguage('ar')
+      .rawScores(true)
+      .csvHeaders(true)
+      .consumptionPreferences(true)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.profileAsCsv(profileOptionsModel);
 
     Test.stopTest();
   }

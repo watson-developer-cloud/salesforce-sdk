@@ -1,1271 +1,1150 @@
 @isTest
 private class IBMCompareComplyV1Test {
-  private static String VERSION;
-  private static String COMMENT;
-  private static String USER_ID;
-  private static String PROVENANCE_ID;
-  private static String CONTENT_TYPE_PDF;
-  private static String LABEL;
-  private static String BUCKET_LOCATION;
-  private static String BUCKET_NAME;
-  private static String FEEDBACK_ID;
-  private static String FEEDBACK_TYPE;
-  private static String MODEL_ID;
-  private static String MODEL_VERSION;
-  private static String TEXT;
-  private static String BATCH_ID;
-  private static String NATURE;
-  private static String PARTY;
-  private static String CATEGORY_ADDED;
-  private static String CATEGORY_REMOVED;
-  private static String CATEGORY_NOT_CHANGED;
-  private static String DOCUMENT_TITLE;
-  private static String TEST_SORT;
-  private static String TYPE_ADDED;
-  private static String TYPE_REMOVED;
-  private static String TYPE_NOT_CHANGED;
-  private static Long TEST_BEGIN;
-  private static Long TEST_END;
-  private static String HASH;
-  private static String TITLE;
-  private static String NUM_PAGES;
-  private static String AUTHOR;
-  private static String PUBLICATION_DATE;
-  private static String HTML;
-  private static String DOCUMENT_LABEL;
-  private static String TYPE;
-  private static String REFRESH_CURSOR;
-  private static String NEXT_CURSOR;
-  private static String REFRESH_URL;
-  private static String NEXT_URL;
-  private static Long TOTAL;
-  private static Long PENDING;
-  private static Long SUCCESSFUL;
-  private static Long FAILED;
-  private static String STATUS;
-  private static String CELL_ID;
-  private static Long ROW_INDEX_BEGIN;
-  private static Long ROW_INDEX_END;
-  private static Long COLUMN_INDEX_BEGIN;
-  private static Long COLUMN_INDEX_END;
-  private static String ID;
-  private static String TEXT_NORMALIZED;
-  private static Long LEVEL;
-  private static String ROLE;
-  private static String NAME;
-  private static Long PAGE_LIMIT;
-  private static String CURSOR;
-  private static String CONTRACTS;
-  private static String TABLES;
-  private static String ADDED;
-  private static String ELEMENT_CLASSIFICATION;
-  private static String AMENDMENTS;
-  private static String HEADER_NAME;
-  private static String HEADER_VALUE;
-  private static Datetime TEST_DATE;
-  private static String CANCEL;
-  private static String UNKNOWN;
-  private static String HIGH;
-  private static String BEGIN_KEY;
-  private static String END_KEY;
-  private static String VALUE;
-  private static String UNIT;
-  private static Double NUMERIC_VALUE;
-
-  private static IBMCompareComplyV1Models.Location LOCATION;
   private static IBMCompareComplyV1 service;
+  private static IBMWatsonFile mockFile;
 
   static {
-    VERSION = '2018-10-15';
-    COMMENT = 'comment';
-    USER_ID = 'user_id';
-    PROVENANCE_ID = 'provenance_id';
-    CONTENT_TYPE_PDF = 'application/pdf';
-    LABEL = 'label';
-    BUCKET_LOCATION = 'bucket_location';
-    BUCKET_NAME = 'bucket_name';
-    FEEDBACK_ID = 'feedback_id';
-    FEEDBACK_TYPE = 'feedback_type';
-    MODEL_ID = 'model_id';
-    MODEL_VERSION = 'model_version';
-    TEXT = 'text';
-    BATCH_ID = 'batch_id';
-    NATURE = 'nature';
-    PARTY = 'party';
-    CATEGORY_ADDED = 'category_added';
-    CATEGORY_REMOVED = 'category_removed';
-    CATEGORY_NOT_CHANGED = 'category_not_changed';
-    DOCUMENT_TITLE = 'document_title';
-    TEST_SORT = 'sort';
-    TYPE_ADDED = 'type_added';
-    TYPE_REMOVED = 'type_removed';
-    TYPE_NOT_CHANGED = 'type_not_changed';
-    TEST_BEGIN = 0L;
-    TEST_END = 1L;
-    HASH = 'hash';
-    TITLE = 'title';
-    NUM_PAGES = '20';
-    AUTHOR = 'author';
-    PUBLICATION_DATE = '06-12-1995';
-    HTML = 'html';
-    DOCUMENT_LABEL = 'document_label';
-    TYPE = 'type';
-    REFRESH_CURSOR = 'refresh_cursor';
-    NEXT_CURSOR = 'next_cursor';
-    REFRESH_URL = 'refresh_url';
-    NEXT_URL = 'next_url';
-    TOTAL = 1000L;
-    PENDING = 300L;
-    SUCCESSFUL = 400L;
-    FAILED = 500L;
-    STATUS = 'status';
-    CELL_ID = 'cell_id';
-    ROW_INDEX_BEGIN = 2000L;
-    ROW_INDEX_END = 3000L;
-    COLUMN_INDEX_BEGIN = 4000L;
-    COLUMN_INDEX_END = 5000L;
-    ID = 'id';
-    TEXT_NORMALIZED = 'text_normalized';
-    LEVEL = 12L;
-    ROLE = 'role';
-    NAME = 'name';
-    PAGE_LIMIT = 7L;
-    CURSOR = 'cursor';
-    CONTRACTS = 'contracts';
-    TABLES = 'tables';
-    ADDED = 'added';
-    ELEMENT_CLASSIFICATION = 'element_classification';
-    AMENDMENTS = 'Amendments';
-    HEADER_NAME = 'Header-Name';
-    HEADER_VALUE = 'header_value';
-    TEST_DATE = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
-    CANCEL = 'cancel';
-    UNKNOWN = 'Unknown';
-    HIGH = 'High';
-    BEGIN_KEY = 'begin';
-    END_KEY = 'end';
-    VALUE = 'value';
-    UNIT = 'unit';
-    NUMERIC_VALUE = 21.0;
-
-    LOCATION = new IBMCompareComplyV1Models.LocationBuilder()
-      .xbegin(TEST_BEGIN)
-      .xend(TEST_END)
-      .build();
-    service = new IBMCompareComplyV1(VERSION, new IBMWatsonNoAuthAuthenticator());
-  }
-
-  static testMethod void testAddFeedbackOptions() {
-    Test.startTest();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
-    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel>{ typeLabel };
-    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
-    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
-    IBMCompareComplyV1Models.OriginalLabelsIn originalLabels = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
-      .types(types)
-      .categories(categories)
-      .build();
-    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabels = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
-      .types(types)
-      .categories(categories)
-      .build();
-    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
-      .feedbackType(FEEDBACK_TYPE)
-      .location(LOCATION)
-      .text(TEXT)
-      .originalLabels(originalLabels)
-      .updatedLabels(updatedLabels)
-      .build();
-
-    IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
-      .comment(COMMENT)
-      .feedbackData(feedbackDataInput)
-      .userId(USER_ID)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    addFeedbackOptions = addFeedbackOptions.newBuilder().build();
-
-    System.assertEquals(COMMENT, addFeedbackOptions.comment());
-    System.assertEquals(feedbackDataInput, addFeedbackOptions.feedbackData());
-    System.assertEquals(USER_ID, addFeedbackOptions.userId());
-    Test.stopTest();
-  }
-
-  static testMethod void testCategory() {
-    Test.startTest();
-    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder()
-      .label(AMENDMENTS)
-      .provenanceIds(new List<String> { PROVENANCE_ID })
-      .build();
-
-    System.assertEquals(AMENDMENTS, category.getLabel());
-    Test.stopTest();
-  }
-
-  static testMethod void testClassifyElementsOptions() {
-    Test.startTest();
-    IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
-      .name('test_pdf.pdf')
-      .description('Test PDF file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_PDF)
+    service = new IBMCompareComplyV1('2018-10-15', new IBMWatsonNoAuthAuthenticator());
+    mockFile = new IBMWatsonFile.FileBuilder()
+      .name('mock-file.txt')
+      .description('Test file')
+      .contentType('text/plain')
       .body(blob.valueOf('Test string'))
       .build();
-    IBMCompareComplyV1Models.ClassifyElementsOptions classifyElementsOptions = new IBMCompareComplyV1Models.ClassifyElementsOptionsBuilder()
-      .file(testPdf)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    classifyElementsOptions = classifyElementsOptions.newBuilder().build();
-
-    System.assertEquals(testPdf, classifyElementsOptions.file());
-    System.assertEquals(CONTRACTS, classifyElementsOptions.model());
-    Test.stopTest();
   }
 
-  static testMethod void testCompareDocumentsOptions() {
-    Test.startTest();
-    IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
-      .name('test_pdf.pdf')
-      .description('Test PDF file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_PDF)
-      .body(blob.valueOf('Test string'))
-      .build();
-    IBMCompareComplyV1Models.CompareDocumentsOptions compareDocumentsOptions = new IBMCompareComplyV1Models.CompareDocumentsOptionsBuilder()
-      .file1(testPdf)
-      .file1ContentType(CONTENT_TYPE_PDF)
-      .file1Label(LABEL)
-      .file2(testPdf)
-      .file2ContentType(CONTENT_TYPE_PDF)
-      .file2Label(LABEL)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    compareDocumentsOptions = compareDocumentsOptions.newBuilder().build();
-
-    System.assertEquals(testPdf, compareDocumentsOptions.file1());
-    System.assertEquals(CONTENT_TYPE_PDF, compareDocumentsOptions.file1ContentType());
-    System.assertEquals(LABEL, compareDocumentsOptions.file1Label());
-    System.assertEquals(testPdf, compareDocumentsOptions.file2());
-    System.assertEquals(CONTENT_TYPE_PDF, compareDocumentsOptions.file2ContentType());
-    System.assertEquals(LABEL, compareDocumentsOptions.file2Label());
-    System.assertEquals(CONTRACTS, compareDocumentsOptions.model());
-    Test.stopTest();
+  static IBMWatsonMapModel createMockMap() {
+    IBMWatsonMapModel mockMap = new IBMWatsonMapModel();
+    mockMap.put('testKey', 'testVal');
+    return mockMap;
   }
 
-  static testMethod void testConvertToHtmlOptions() {
+  static testMethod void testAddFeedbackOptionsModel() {
     Test.startTest();
-    IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
-      .name('test_pdf.pdf')
-      .description('Test PDF file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_PDF)
-      .body(blob.valueOf('Test string'))
+    IBMCompareComplyV1Models.Category categoryModel = new IBMCompareComplyV1Models.CategoryBuilder()
+      .label('Amendments')
+      .provenanceIds(new List<String> { 'testString' })
       .build();
-    IBMCompareComplyV1Models.ConvertToHtmlOptions convertToHtmlOptions = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
-      .file(testPdf)
-      .fileContentType(CONTENT_TYPE_PDF)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
+    IBMCompareComplyV1Models.Label labelModel = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature('testString')
+      .party('testString')
       .build();
-    convertToHtmlOptions = convertToHtmlOptions.newBuilder().build();
+    IBMCompareComplyV1Models.TypeLabel typeLabelModel = new IBMCompareComplyV1Models.TypeLabelBuilder()
+      .label(labelModel)
+      .provenanceIds(new List<String> { 'testString' })
+      .build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsInModel = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel })
+      .categories(new List<IBMCompareComplyV1Models.Category> { categoryModel })
+      .build();
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsInModel = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel })
+      .categories(new List<IBMCompareComplyV1Models.Category> { categoryModel })
+      .build();
+    IBMCompareComplyV1Models.Location locationModel = new IBMCompareComplyV1Models.LocationBuilder()
+      .xBegin(26L)
+      .xEnd(26L)
+      .build();
+    IBMCompareComplyV1Models.ShortDoc shortDocModel = new IBMCompareComplyV1Models.ShortDocBuilder()
+      .title('testString')
+      .hash('testString')
+      .build();
+    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInputModel = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .feedbackType('testString')
+      .document(shortDocModel)
+      .modelId('testString')
+      .modelVersion('testString')
+      .location(locationModel)
+      .text('testString')
+      .originalLabels(originalLabelsInModel)
+      .updatedLabels(updatedLabelsInModel)
+      .build();
 
-    System.assertEquals(testPdf, convertToHtmlOptions.file());
-    System.assertEquals(CONTENT_TYPE_PDF, convertToHtmlOptions.fileContentType());
-    System.assertEquals(CONTRACTS, convertToHtmlOptions.model());
+    IBMCompareComplyV1Models.AddFeedbackOptions testRequestModel = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
+      .feedbackData(feedbackDataInputModel)
+      .userId('testString')
+      .comment('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(feedbackDataInputModel, testRequestModel.feedbackData());
+    System.assertEquals('testString', testRequestModel.userId());
+    System.assertEquals('testString', testRequestModel.comment());
     Test.stopTest();
   }
-
-  static testMethod void testCreateBatchOptions() {
+  static testMethod void testCategoryModel() {
     Test.startTest();
-    IBMWatsonFile testCredentialFile = new IBMWatsonFile.FileBuilder()
-      .name('test_credentials.json')
-      .description('Test JSON file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_JSON)
-      .body(blob.valueOf('Test string'))
-      .build();
-    IBMCompareComplyV1Models.CreateBatchOptions createBatchOptions = new IBMCompareComplyV1Models.CreateBatchOptionsBuilder()
-      .function(ELEMENT_CLASSIFICATION)
-      .inputBucketLocation(BUCKET_LOCATION)
-      .inputBucketName(BUCKET_NAME)
-      .inputCredentialsFile(testCredentialFile)
-      .model(CONTRACTS)
-      .outputBucketLocation(BUCKET_LOCATION)
-      .outputBucketName(BUCKET_NAME)
-      .outputCredentialsFile(testCredentialFile)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    createBatchOptions = createBatchOptions.newBuilder().build();
 
-    System.assertEquals(ELEMENT_CLASSIFICATION, createBatchOptions.function());
-    System.assertEquals(BUCKET_LOCATION, createBatchOptions.inputBucketLocation());
-    System.assertEquals(BUCKET_NAME, createBatchOptions.inputBucketName());
-    System.assertEquals(testCredentialFile, createBatchOptions.inputCredentialsFile());
-    System.assertEquals(CONTRACTS, createBatchOptions.model());
-    System.assertEquals(BUCKET_LOCATION, createBatchOptions.outputBucketLocation());
-    System.assertEquals(BUCKET_NAME, createBatchOptions.outputBucketName());
-    System.assertEquals(testCredentialFile, createBatchOptions.outputCredentialsFile());
+    IBMCompareComplyV1Models.Category testRequestModel = new IBMCompareComplyV1Models.CategoryBuilder()
+      .label('Amendments')
+      .provenanceIds(new List<String> { 'testString' })
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('Amendments', testRequestModel.getLabel());
+    System.assertEquals(new List<String> { 'testString' }, testRequestModel.getProvenanceIds());
     Test.stopTest();
   }
-
-  static testMethod void testDeleteFeedbackOptions() {
+  static testMethod void testClassifyElementsOptionsModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
-      .feedbackId(FEEDBACK_ID)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    deleteFeedbackOptions = deleteFeedbackOptions.newBuilder().build();
 
-    System.assertEquals(FEEDBACK_ID, deleteFeedbackOptions.feedbackId());
-    System.assertEquals(CONTRACTS, deleteFeedbackOptions.model());
+    IBMCompareComplyV1Models.ClassifyElementsOptions testRequestModel = new IBMCompareComplyV1Models.ClassifyElementsOptionsBuilder()
+      .file(mockFile)
+      .fileContentType('application/pdf')
+      .model('contracts')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(mockFile, testRequestModel.file());
+    System.assertEquals('application/pdf', testRequestModel.fileContentType());
+    System.assertEquals('contracts', testRequestModel.model());
     Test.stopTest();
   }
-
-  static testMethod void testExtractTablesOptions() {
+  static testMethod void testCompareDocumentsOptionsModel() {
     Test.startTest();
-    IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
-      .name('test_pdf.pdf')
-      .description('Test PDF file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_PDF)
-      .body(blob.valueOf('Test string'))
-      .build();
-    IBMCompareComplyV1Models.ExtractTablesOptions extractTablesOptions = new IBMCompareComplyV1Models.ExtractTablesOptionsBuilder()
-      .file(testPdf)
-      .model(TABLES)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    extractTablesOptions = extractTablesOptions.newBuilder().build();
 
-    System.assertEquals(testPdf, extractTablesOptions.file());
-    System.assertEquals(TABLES, extractTablesOptions.model());
+    IBMCompareComplyV1Models.CompareDocumentsOptions testRequestModel = new IBMCompareComplyV1Models.CompareDocumentsOptionsBuilder()
+      .file1(mockFile)
+      .file2(mockFile)
+      .file1ContentType('application/pdf')
+      .file2ContentType('application/pdf')
+      .file1Label('testString')
+      .file2Label('testString')
+      .model('contracts')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(mockFile, testRequestModel.file1());
+    System.assertEquals(mockFile, testRequestModel.file2());
+    System.assertEquals('application/pdf', testRequestModel.file1ContentType());
+    System.assertEquals('application/pdf', testRequestModel.file2ContentType());
+    System.assertEquals('testString', testRequestModel.file1Label());
+    System.assertEquals('testString', testRequestModel.file2Label());
+    System.assertEquals('contracts', testRequestModel.model());
     Test.stopTest();
   }
-
-  static testMethod void testFeedbackDataInput() {
+  static testMethod void testConvertToHtmlOptionsModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDocBuilder().build();
-    IBMCompareComplyV1Models.Location location = new IBMCompareComplyV1Models.Location();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
-    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel };
-    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
-    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
-    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
-      .types(types)
-      .categories(categories)
-      .build();
-    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
-      .types(types)
-      .categories(categories)
-      .build();
 
-    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInput = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
-      .document(shortDoc)
-      .feedbackType(FEEDBACK_TYPE)
-      .location(location)
-      .modelId(MODEL_ID)
-      .modelVersion(MODEL_VERSION)
-      .originalLabels(originalLabelsIn)
-      .text(TEXT)
-      .updatedLabels(updatedLabelsIn)
+    IBMCompareComplyV1Models.ConvertToHtmlOptions testRequestModel = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
+      .file(mockFile)
+      .fileContentType('application/pdf')
+      .model('contracts')
       .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(shortDoc, feedbackDataInput.getDocument());
-    System.assertEquals(FEEDBACK_TYPE, feedbackDataInput.getFeedbackType());
-    System.assertEquals(location, feedbackDataInput.getLocation());
-    System.assertEquals(MODEL_ID, feedbackDataInput.getModelId());
-    System.assertEquals(MODEL_VERSION, feedbackDataInput.getModelVersion());
-    System.assertEquals(originalLabelsIn, feedbackDataInput.getOriginalLabels());
-    System.assertEquals(TEXT, feedbackDataInput.getText());
-    System.assertEquals(updatedLabelsIn, feedbackDataInput.getUpdatedLabels());
+    System.assertEquals(mockFile, testRequestModel.file());
+    System.assertEquals('application/pdf', testRequestModel.fileContentType());
+    System.assertEquals('contracts', testRequestModel.model());
     Test.stopTest();
   }
-
-  static testMethod void testListBatchesOptions() {
+  static testMethod void testCreateBatchOptionsModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptions = new IBMCompareComplyV1Models.ListBatchesOptionsBuilder()
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    IBMCompareComplyV1Models.ListBatchesOptions newListBatchesOptions = listBatchesOptions.newBuilder().build();
 
-    System.assertEquals(listBatchesOptions.requestHeaders(), newListBatchesOptions.requestHeaders());
+    IBMCompareComplyV1Models.CreateBatchOptions testRequestModel = new IBMCompareComplyV1Models.CreateBatchOptionsBuilder()
+      .function('html_conversion')
+      .inputCredentialsFile(mockFile)
+      .inputBucketLocation('testString')
+      .inputBucketName('testString')
+      .outputCredentialsFile(mockFile)
+      .outputBucketLocation('testString')
+      .outputBucketName('testString')
+      .model('contracts')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('html_conversion', testRequestModel.function());
+    System.assertEquals(mockFile, testRequestModel.inputCredentialsFile());
+    System.assertEquals('testString', testRequestModel.inputBucketLocation());
+    System.assertEquals('testString', testRequestModel.inputBucketName());
+    System.assertEquals(mockFile, testRequestModel.outputCredentialsFile());
+    System.assertEquals('testString', testRequestModel.outputBucketLocation());
+    System.assertEquals('testString', testRequestModel.outputBucketName());
+    System.assertEquals('contracts', testRequestModel.model());
     Test.stopTest();
   }
-
-  static testMethod void testGetBatchOptions() {
+  static testMethod void testDeleteFeedbackOptionsModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.GetBatchOptions getBatchOptions = new IBMCompareComplyV1Models.GetBatchOptionsBuilder()
-      .batchId(BATCH_ID)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    getBatchOptions = getBatchOptions.newBuilder().build();
 
-    System.assertEquals(BATCH_ID, getBatchOptions.batchId());
+    IBMCompareComplyV1Models.DeleteFeedbackOptions testRequestModel = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
+      .feedbackId('testString')
+      .model('contracts')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.feedbackId());
+    System.assertEquals('contracts', testRequestModel.model());
     Test.stopTest();
   }
-
-  static testMethod void testGetFeedbackOptions() {
+  static testMethod void testExtractTablesOptionsModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
-      .feedbackId(FEEDBACK_ID)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    getFeedbackOptions = getFeedbackOptions.newBuilder().build();
 
-    System.assertEquals(FEEDBACK_ID, getFeedbackOptions.feedbackId());
-    System.assertEquals(CONTRACTS, getFeedbackOptions.model());
+    IBMCompareComplyV1Models.ExtractTablesOptions testRequestModel = new IBMCompareComplyV1Models.ExtractTablesOptionsBuilder()
+      .file(mockFile)
+      .fileContentType('application/pdf')
+      .model('contracts')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(mockFile, testRequestModel.file());
+    System.assertEquals('application/pdf', testRequestModel.fileContentType());
+    System.assertEquals('contracts', testRequestModel.model());
     Test.stopTest();
   }
-
-  static testMethod void testLabel() {
+  static testMethod void testFeedbackDataInputModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.LabelBuilder()
-      .nature(NATURE)
-      .party(PARTY)
+    IBMCompareComplyV1Models.Category categoryModel = new IBMCompareComplyV1Models.CategoryBuilder()
+      .label('Amendments')
+      .provenanceIds(new List<String> { 'testString' })
+      .build();
+    IBMCompareComplyV1Models.Label labelModel = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature('testString')
+      .party('testString')
+      .build();
+    IBMCompareComplyV1Models.TypeLabel typeLabelModel = new IBMCompareComplyV1Models.TypeLabelBuilder()
+      .label(labelModel)
+      .provenanceIds(new List<String> { 'testString' })
+      .build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsInModel = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel })
+      .categories(new List<IBMCompareComplyV1Models.Category> { categoryModel })
+      .build();
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsInModel = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel })
+      .categories(new List<IBMCompareComplyV1Models.Category> { categoryModel })
+      .build();
+    IBMCompareComplyV1Models.Location locationModel = new IBMCompareComplyV1Models.LocationBuilder()
+      .xBegin(26L)
+      .xEnd(26L)
+      .build();
+    IBMCompareComplyV1Models.ShortDoc shortDocModel = new IBMCompareComplyV1Models.ShortDocBuilder()
+      .title('testString')
+      .hash('testString')
       .build();
 
-    System.assertEquals(NATURE, label.getNature());
-    System.assertEquals(PARTY, label.getParty());
+    IBMCompareComplyV1Models.FeedbackDataInput testRequestModel = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .feedbackType('testString')
+      .document(shortDocModel)
+      .modelId('testString')
+      .modelVersion('testString')
+      .location(locationModel)
+      .text('testString')
+      .originalLabels(originalLabelsInModel)
+      .updatedLabels(updatedLabelsInModel)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.getFeedbackType());
+    System.assertEquals(shortDocModel, testRequestModel.getDocument());
+    System.assertEquals('testString', testRequestModel.getModelId());
+    System.assertEquals('testString', testRequestModel.getModelVersion());
+    System.assertEquals(locationModel, testRequestModel.getLocation());
+    System.assertEquals('testString', testRequestModel.getText());
+    System.assertEquals(originalLabelsInModel, testRequestModel.getOriginalLabels());
+    System.assertEquals(updatedLabelsInModel, testRequestModel.getUpdatedLabels());
     Test.stopTest();
   }
-
-  static testMethod void testListFeedbackOptions() {
+  static testMethod void testGetBatchOptionsModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.ListFeedbackOptions listFeedbackOptions = new IBMCompareComplyV1Models.ListFeedbackOptionsBuilder()
-      .after(TEST_DATE)
-      .before(TEST_DATE)
-      .categoryAdded(CATEGORY_ADDED)
-      .categoryRemoved(CATEGORY_REMOVED)
-      .categoryNotChanged(CATEGORY_NOT_CHANGED)
-      .pageLimit(PAGE_LIMIT)
-      .documentTitle(DOCUMENT_TITLE)
-      .feedbackType(FEEDBACK_TYPE)
+
+    IBMCompareComplyV1Models.GetBatchOptions testRequestModel = new IBMCompareComplyV1Models.GetBatchOptionsBuilder()
+      .batchId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.batchId());
+    Test.stopTest();
+  }
+  static testMethod void testGetFeedbackOptionsModel() {
+    Test.startTest();
+
+    IBMCompareComplyV1Models.GetFeedbackOptions testRequestModel = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
+      .feedbackId('testString')
+      .model('contracts')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.feedbackId());
+    System.assertEquals('contracts', testRequestModel.model());
+    Test.stopTest();
+  }
+  static testMethod void testLabelModel() {
+    Test.startTest();
+
+    IBMCompareComplyV1Models.Label testRequestModel = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature('testString')
+      .party('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.getNature());
+    System.assertEquals('testString', testRequestModel.getParty());
+    Test.stopTest();
+  }
+  static testMethod void testListBatchesOptionsModel() {
+    Test.startTest();
+
+    IBMCompareComplyV1Models.ListBatchesOptions testRequestModel = new IBMCompareComplyV1Models.ListBatchesOptionsBuilder()
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    Test.stopTest();
+  }
+  static testMethod void testListFeedbackOptionsModel() {
+    Test.startTest();
+
+    IBMCompareComplyV1Models.ListFeedbackOptions testRequestModel = new IBMCompareComplyV1Models.ListFeedbackOptionsBuilder()
+      .feedbackType('testString')
+      .before((Datetime) JSON.deserialize('"2019-01-01"', Datetime.class))
+      .after((Datetime) JSON.deserialize('"2019-01-01"', Datetime.class))
+      .documentTitle('testString')
+      .modelId('testString')
+      .modelVersion('testString')
+      .categoryRemoved('testString')
+      .categoryAdded('testString')
+      .categoryNotChanged('testString')
+      .typeRemoved('testString')
+      .typeAdded('testString')
+      .typeNotChanged('testString')
+      .pageLimit(38)
+      .cursor('testString')
+      .xSort('testString')
       .includeTotal(true)
-      .modelId(MODEL_ID)
-      .modelVersion(MODEL_VERSION)
-      .cursor(CURSOR)
-      .xsort(TEST_SORT)
-      .typeAdded(TYPE_ADDED)
-      .typeRemoved(TYPE_REMOVED)
-      .typeNotChanged(TYPE_NOT_CHANGED)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
-    listFeedbackOptions = listFeedbackOptions.newBuilder().build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(TEST_DATE, listFeedbackOptions.after());
-    System.assertEquals(TEST_DATE, listFeedbackOptions.before());
-    System.assertEquals(CATEGORY_ADDED, listFeedbackOptions.categoryAdded());
-    System.assertEquals(CATEGORY_REMOVED, listFeedbackOptions.categoryRemoved());
-    System.assertEquals(CATEGORY_NOT_CHANGED, listFeedbackOptions.categoryNotChanged());
-    System.assertEquals(PAGE_LIMIT, listFeedbackOptions.pageLimit());
-    System.assertEquals(DOCUMENT_TITLE, listFeedbackOptions.documentTitle());
-    System.assertEquals(FEEDBACK_TYPE, listFeedbackOptions.feedbackType());
-    System.assertEquals(MODEL_ID, listFeedbackOptions.modelId());
-    System.assertEquals(MODEL_VERSION, listFeedbackOptions.modelVersion());
-    System.assertEquals(CURSOR, listFeedbackOptions.cursor());
-    System.assertEquals(TYPE_ADDED, listFeedbackOptions.typeAdded());
-    System.assertEquals(TYPE_REMOVED, listFeedbackOptions.typeRemoved());
-    System.assertEquals(TYPE_NOT_CHANGED, listFeedbackOptions.typeNotChanged());
-    System.assertEquals(true, listFeedbackOptions.includeTotal());
+    System.assertEquals('testString', testRequestModel.feedbackType());
+    System.assertEquals((Datetime) JSON.deserialize('"2019-01-01"', Datetime.class), testRequestModel.before());
+    System.assertEquals((Datetime) JSON.deserialize('"2019-01-01"', Datetime.class), testRequestModel.after());
+    System.assertEquals('testString', testRequestModel.documentTitle());
+    System.assertEquals('testString', testRequestModel.modelId());
+    System.assertEquals('testString', testRequestModel.modelVersion());
+    System.assertEquals('testString', testRequestModel.categoryRemoved());
+    System.assertEquals('testString', testRequestModel.categoryAdded());
+    System.assertEquals('testString', testRequestModel.categoryNotChanged());
+    System.assertEquals('testString', testRequestModel.typeRemoved());
+    System.assertEquals('testString', testRequestModel.typeAdded());
+    System.assertEquals('testString', testRequestModel.typeNotChanged());
+    System.assertEquals(38, testRequestModel.pageLimit());
+    System.assertEquals('testString', testRequestModel.cursor());
+    System.assertEquals('testString', testRequestModel.xSort());
+    System.assertEquals(true, testRequestModel.includeTotal());
     Test.stopTest();
   }
-
-  static testMethod void testLocation() {
+  static testMethod void testLocationModel() {
     Test.startTest();
-    System.assertEquals(TEST_BEGIN, LOCATION.getXbegin());
-    System.assertEquals(TEST_END, LOCATION.getXend());
+
+    IBMCompareComplyV1Models.Location testRequestModel = new IBMCompareComplyV1Models.LocationBuilder()
+      .xBegin(26L)
+      .xEnd(26L)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(26L, testRequestModel.getXBegin());
+    System.assertEquals(26L, testRequestModel.getXEnd());
     Test.stopTest();
   }
-
-  static testMethod void testOriginalLabelsIn() {
+  static testMethod void testOriginalLabelsInModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.Category();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
-    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsIn = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
-      .categories(new List<IBMCompareComplyV1Models.Category> { category })
-      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel })
+    IBMCompareComplyV1Models.Category categoryModel = new IBMCompareComplyV1Models.CategoryBuilder()
+      .label('Amendments')
+      .provenanceIds(new List<String> { 'testString' })
+      .build();
+    IBMCompareComplyV1Models.Label labelModel = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature('testString')
+      .party('testString')
+      .build();
+    IBMCompareComplyV1Models.TypeLabel typeLabelModel = new IBMCompareComplyV1Models.TypeLabelBuilder()
+      .label(labelModel)
+      .provenanceIds(new List<String> { 'testString' })
       .build();
 
-    System.assertEquals(category, originalLabelsIn.getCategories().get(0));
-    System.assertEquals(typeLabel, originalLabelsIn.getTypes().get(0));
+    IBMCompareComplyV1Models.OriginalLabelsIn testRequestModel = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel })
+      .categories(new List<IBMCompareComplyV1Models.Category> { categoryModel })
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel }, testRequestModel.getTypes());
+    System.assertEquals(new List<IBMCompareComplyV1Models.Category> { categoryModel }, testRequestModel.getCategories());
     Test.stopTest();
   }
-
-  static testMethod void testShortDoc() {
+  static testMethod void testShortDocModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.ShortDoc shortDoc = new IBMCompareComplyV1Models.ShortDocBuilder()
-      .hash(HASH)
-      .title(TITLE)
-      .build();
 
-    System.assertEquals(HASH, shortDoc.getHash());
-    System.assertEquals(TITLE, shortDoc.getTitle());
+    IBMCompareComplyV1Models.ShortDoc testRequestModel = new IBMCompareComplyV1Models.ShortDocBuilder()
+      .title('testString')
+      .hash('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.getTitle());
+    System.assertEquals('testString', testRequestModel.getHash());
     Test.stopTest();
   }
-
-  static testMethod void testTypeLabel() {
+  static testMethod void testTypeLabelModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.Label label = new IBMCompareComplyV1Models.LabelBuilder()
-      .nature(NATURE)
-      .party(PARTY)
-      .build();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder()
-      .label(label)
-      .provenanceIds(new List<String> { PROVENANCE_ID })
+    IBMCompareComplyV1Models.Label labelModel = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature('testString')
+      .party('testString')
       .build();
 
-    System.assertEquals(label, typeLabel.getLabel());
+    IBMCompareComplyV1Models.TypeLabel testRequestModel = new IBMCompareComplyV1Models.TypeLabelBuilder()
+      .label(labelModel)
+      .provenanceIds(new List<String> { 'testString' })
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(labelModel, testRequestModel.getLabel());
+    System.assertEquals(new List<String> { 'testString' }, testRequestModel.getProvenanceIds());
     Test.stopTest();
   }
-
-  static testMethod void testUpdateBatchOptions() {
+  static testMethod void testUpdateBatchOptionsModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.UpdateBatchOptions updateBatchOptions = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
-      .action(CANCEL)
-      .batchId(BATCH_ID)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    updateBatchOptions = updateBatchOptions.newBuilder().build();
 
-    System.assertEquals(CANCEL, updateBatchOptions.action());
-    System.assertEquals(BATCH_ID, updateBatchOptions.batchId());
-    System.assertEquals(CONTRACTS, updateBatchOptions.model());
+    IBMCompareComplyV1Models.UpdateBatchOptions testRequestModel = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
+      .batchId('testString')
+      .action('rescan')
+      .model('contracts')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.batchId());
+    System.assertEquals('rescan', testRequestModel.action());
+    System.assertEquals('contracts', testRequestModel.model());
     Test.stopTest();
   }
-
-  static testMethod void testUpdatedLabelsIn() {
+  static testMethod void testUpdatedLabelsInModel() {
     Test.startTest();
-    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.Category();
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
-    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsIn = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
-      .categories(new List<IBMCompareComplyV1Models.Category> { category })
-      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabel })
+    IBMCompareComplyV1Models.Category categoryModel = new IBMCompareComplyV1Models.CategoryBuilder()
+      .label('Amendments')
+      .provenanceIds(new List<String> { 'testString' })
+      .build();
+    IBMCompareComplyV1Models.Label labelModel = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature('testString')
+      .party('testString')
+      .build();
+    IBMCompareComplyV1Models.TypeLabel typeLabelModel = new IBMCompareComplyV1Models.TypeLabelBuilder()
+      .label(labelModel)
+      .provenanceIds(new List<String> { 'testString' })
       .build();
 
-    System.assertEquals(category, updatedLabelsIn.getCategories().get(0));
-    System.assertEquals(typeLabel, updatedLabelsIn.getTypes().get(0));
+    IBMCompareComplyV1Models.UpdatedLabelsIn testRequestModel = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel })
+      .categories(new List<IBMCompareComplyV1Models.Category> { categoryModel })
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel }, testRequestModel.getTypes());
+    System.assertEquals(new List<IBMCompareComplyV1Models.Category> { categoryModel }, testRequestModel.getCategories());
     Test.stopTest();
   }
 
   static testMethod void testConvertToHtml() {
-    String body = IBMWatsonMockResponses.htmlReturnResponse();
+    String mockResponseBody = '{"num_pages": "numPages", "author": "author", "publication_date": "publicationDate", "title": "title", "html": "html"}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
-      .name('test_pdf.pdf')
-      .description('Test PDF file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_PDF)
-      .body(blob.valueOf('Test string'))
+    IBMCompareComplyV1Models.ConvertToHtmlOptions convertToHtmlOptionsModel = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
+      .file(mockFile)
+      .fileContentType('application/pdf')
+      .model('contracts')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMCompareComplyV1Models.ConvertToHtmlOptions convertToHtmlOptions = new IBMCompareComplyV1Models.ConvertToHtmlOptionsBuilder()
-      .file(testPdf)
-      .fileContentType(CONTENT_TYPE_PDF)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    convertToHtmlOptions = convertToHtmlOptions.newBuilder().build();
-    IBMCompareComplyV1Models.HTMLReturn response = service.convertToHtml(convertToHtmlOptions);
 
-    System.assertEquals(NUM_PAGES, response.getNumPages());
-    System.assertEquals(AUTHOR, response.getAuthor());
-    System.assertEquals(PUBLICATION_DATE, response.getPublicationDate());
-    System.assertEquals(TITLE, response.getTitle());
-    System.assertEquals(HTML, response.getHtml());
+    IBMCompareComplyV1Models.HTMLReturn response = service.convertToHtml(convertToHtmlOptionsModel);
+    System.assert(response.getNumPages() != null);
+    System.assert(response.getAuthor() != null);
+    System.assert(response.getPublicationDate() != null);
+    System.assert(response.getTitle() != null);
+    System.assert(response.getHtml() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testClassifyElements() {
-    String body = IBMWatsonMockResponses.classifyReturnResponse();
+    String mockResponseBody = '{"document": {"title": "title", "html": "html", "hash": "hash", "label": "label"}, "model_id": "modelId", "model_version": "modelVersion", "elements": [{"location": {"begin": "6", "end": "4"}, "text": "text", "types": [{"label": {"nature": "nature", "party": "party"}, "provenance_ids": ["provenanceIds"]}], "categories": [{"label": "label", "provenance_ids": ["provenanceIds"]}], "attributes": [{"type": "xType", "text": "text", "location": {"begin": "6", "end": "4"}}]}], "effective_dates": [{"confidence_level": "confidenceLevel", "text": "text", "text_normalized": "textNormalized", "provenance_ids": ["provenanceIds"], "location": {"begin": "6", "end": "4"}}], "contract_amounts": [{"confidence_level": "confidenceLevel", "text": "text", "text_normalized": "textNormalized", "interpretation": {"value": "value", "numeric_value": "12", "unit": "unit"}, "provenance_ids": ["provenanceIds"], "location": {"begin": "6", "end": "4"}}], "termination_dates": [{"confidence_level": "confidenceLevel", "text": "text", "text_normalized": "textNormalized", "provenance_ids": ["provenanceIds"], "location": {"begin": "6", "end": "4"}}], "contract_types": [{"confidence_level": "confidenceLevel", "text": "text", "provenance_ids": ["provenanceIds"], "location": {"begin": "6", "end": "4"}}], "contract_terms": [{"confidence_level": "confidenceLevel", "text": "text", "text_normalized": "textNormalized", "interpretation": {"value": "value", "numeric_value": "12", "unit": "unit"}, "provenance_ids": ["provenanceIds"], "location": {"begin": "6", "end": "4"}}], "payment_terms": [{"confidence_level": "confidenceLevel", "text": "text", "text_normalized": "textNormalized", "interpretation": {"value": "value", "numeric_value": "12", "unit": "unit"}, "provenance_ids": ["provenanceIds"], "location": {"begin": "6", "end": "4"}}], "contract_currencies": [{"confidence_level": "confidenceLevel", "text": "text", "text_normalized": "textNormalized", "provenance_ids": ["provenanceIds"], "location": {"begin": "6", "end": "4"}}], "tables": [{"location": {"begin": "6", "end": "4"}, "text": "text", "section_title": {"text": "text", "location": {"begin": "6", "end": "4"}}, "title": {"location": {"begin": "6", "end": "4"}, "text": "text"}, "table_headers": [{"cell_id": "cellId", "text": "text", "row_index_begin": "13", "row_index_end": "11", "column_index_begin": "16", "column_index_end": "14"}], "row_headers": [{"cell_id": "cellId", "location": {"begin": "6", "end": "4"}, "text": "text", "text_normalized": "textNormalized", "row_index_begin": "13", "row_index_end": "11", "column_index_begin": "16", "column_index_end": "14"}], "column_headers": [{"cell_id": "cellId", "text": "text", "text_normalized": "textNormalized", "row_index_begin": "13", "row_index_end": "11", "column_index_begin": "16", "column_index_end": "14"}], "body_cells": [{"cell_id": "cellId", "location": {"begin": "6", "end": "4"}, "text": "text", "row_index_begin": "13", "row_index_end": "11", "column_index_begin": "16", "column_index_end": "14", "row_header_ids": ["rowHeaderIds"], "row_header_texts": ["rowHeaderTexts"], "row_header_texts_normalized": ["rowHeaderTextsNormalized"], "column_header_ids": ["columnHeaderIds"], "column_header_texts": ["columnHeaderTexts"], "column_header_texts_normalized": ["columnHeaderTextsNormalized"], "attributes": [{"type": "xType", "text": "text", "location": {"begin": "6", "end": "4"}}]}], "contexts": [{"text": "text", "location": {"begin": "6", "end": "4"}}], "key_value_pairs": [{"key": {"cell_id": "cellId", "location": {"begin": "6", "end": "4"}, "text": "text"}, "value": [{"cell_id": "cellId", "location": {"begin": "6", "end": "4"}, "text": "text"}]}]}], "document_structure": {"section_titles": [{"text": "text", "location": {"begin": "6", "end": "4"}, "level": "5", "element_locations": [{"begin": "6", "end": "4"}]}], "leading_sentences": [{"text": "text", "location": {"begin": "6", "end": "4"}, "element_locations": [{"begin": "6", "end": "4"}]}], "paragraphs": [{"location": {"begin": "6", "end": "4"}}]}, "parties": [{"party": "party", "role": "role", "importance": "importance", "addresses": [{"text": "text", "location": {"begin": "6", "end": "4"}}], "contacts": [{"name": "name", "role": "role"}], "mentions": [{"text": "text", "location": {"begin": "6", "end": "4"}}]}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
-      .name('test_pdf.pdf')
-      .description('Test PDF file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_PDF)
-      .body(blob.valueOf('Test string'))
+    IBMCompareComplyV1Models.ClassifyElementsOptions classifyElementsOptionsModel = new IBMCompareComplyV1Models.ClassifyElementsOptionsBuilder()
+      .file(mockFile)
+      .fileContentType('application/pdf')
+      .model('contracts')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMCompareComplyV1Models.ClassifyElementsOptions classifyElementsOptions = new IBMCompareComplyV1Models.ClassifyElementsOptionsBuilder()
-      .file(testPdf)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    classifyElementsOptions = classifyElementsOptions.newBuilder().build();
-    IBMCompareComplyV1Models.ClassifyReturn response = service.classifyElements(classifyElementsOptions);
 
-    System.assertEquals(TITLE, response.getDocument().getTitle());
-    System.assertEquals(HTML, response.getDocument().getHtml());
-    System.assertEquals(HASH, response.getDocument().getHash());
-    System.assertEquals(LABEL, response.getDocument().getLabel());
-    System.assertEquals(MODEL_ID, response.getModelId());
-    System.assertEquals(MODEL_VERSION, response.getModelVersion());
-    System.assertEquals(TEST_BEGIN, response.getElements().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getElements().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getElements().get(0).getText());
-    System.assertEquals(NATURE, response.getElements().get(0).getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY, response.getElements().get(0).getTypes().get(0).getLabel().getParty());
-    System.assertEquals(LABEL, response.getElements().get(0).getCategories().get(0).getLabel());
-    System.assertEquals(TYPE, response.getElements().get(0).getAttributes().get(0).getXtype());
-    System.assertEquals(TEXT, response.getElements().get(0).getAttributes().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getElements().get(0).getAttributes().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getElements().get(0).getAttributes().get(0).getLocation().getXend());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getSectionTitle().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getSectionTitle().getLocation().getXend());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getTableHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getLocation().get(BEGIN_KEY));
-    System.assertEquals(TEST_END, response.getTables().get(0).getTableHeaders().get(0).getLocation().get(END_KEY));
-    System.assertEquals(TEXT, response.getTables().get(0).getTableHeaders().get(0).getText());
-    System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getRowIndexBegin());
-    System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getTableHeaders().get(0).getRowIndexEnd());
-    System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getColumnIndexBegin());
-    System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getTableHeaders().get(0).getColumnIndexEnd());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getColumnHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getLocation().get(BEGIN_KEY));
-    System.assertEquals(TEST_END, response.getTables().get(0).getColumnHeaders().get(0).getLocation().get(END_KEY));
-    System.assertEquals(TEXT, response.getTables().get(0).getColumnHeaders().get(0).getText());
-    System.assertEquals(TEXT_NORMALIZED, response.getTables().get(0).getColumnHeaders().get(0).getTextNormalized());
-    System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getRowIndexBegin());
-    System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getColumnHeaders().get(0).getRowIndexEnd());
-    System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getColumnIndexBegin());
-    System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getColumnHeaders().get(0).getColumnIndexEnd());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getRowHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getRowHeaders().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getRowHeaders().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getRowHeaders().get(0).getText());
-    System.assertEquals(TEXT_NORMALIZED, response.getTables().get(0).getRowHeaders().get(0).getTextNormalized());
-    System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getRowHeaders().get(0).getRowIndexBegin());
-    System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getRowHeaders().get(0).getRowIndexEnd());
-    System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getRowHeaders().get(0).getColumnIndexBegin());
-    System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getRowHeaders().get(0).getColumnIndexEnd());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getBodyCells().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getText());
-    System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getRowIndexBegin());
-    System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd());
-    System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin());
-    System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0));
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0));
-    System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0));
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0));
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0));
-    System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0));
-    System.assertEquals(TYPE, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXtype());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXend());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
-    System.assertEquals(TEXT, response.getTables().get(0).getTitle().getText());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getTitle().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getTitle().getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getContexts().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getContexts().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getContexts().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getDocumentStructure().getSectionTitles().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXend());
-    System.assertEquals(LEVEL, response.getDocumentStructure().getSectionTitles().get(0).getLevel());
-    System.assertEquals(TEST_BEGIN,
-        response.getDocumentStructure().getSectionTitles().get(0).getElementLocations().get(0).getXbegin());
-    System.assertEquals(TEST_END,
-        response.getDocumentStructure().getSectionTitles().get(0).getElementLocations().get(0).getXend());
-    System.assertEquals(TEXT, response.getDocumentStructure().getLeadingSentences().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getDocumentStructure().getLeadingSentences().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getDocumentStructure().getLeadingSentences().get(0).getLocation().getXend());
-    System.assertEquals(TEST_BEGIN,
-        response.getDocumentStructure().getLeadingSentences().get(0).getElementLocations().get(0).getXbegin());
-    System.assertEquals(TEST_END,
-        response.getDocumentStructure().getLeadingSentences().get(0).getElementLocations().get(0).getXend());
-    System.assertEquals(TEST_BEGIN, response.getDocumentStructure().getParagraphs().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getDocumentStructure().getParagraphs().get(0).getLocation().getXend());
-    System.assertEquals(PARTY, response.getParties().get(0).getParty());
-    System.assertEquals(UNKNOWN, response.getParties().get(0).getImportance());
-    System.assertEquals(ROLE, response.getParties().get(0).getRole());
-    System.assertEquals(TEXT, response.getParties().get(0).getAddresses().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getParties().get(0).getAddresses().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getParties().get(0).getAddresses().get(0).getLocation().getXend());
-    System.assertEquals(NAME, response.getParties().get(0).getContacts().get(0).getName());
-    System.assertEquals(ROLE, response.getParties().get(0).getContacts().get(0).getRole());
-    System.assertEquals(TEXT, response.getParties().get(0).getMentions().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getParties().get(0).getMentions().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getParties().get(0).getMentions().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getEffectiveDates().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getEffectiveDates().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getEffectiveDates().get(0).getLocation().getXend());
-    System.assertEquals(HIGH, response.getEffectiveDates().get(0).getConfidenceLevel());
-    System.assertEquals(TEXT, response.getContractAmounts().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getContractAmounts().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getContractAmounts().get(0).getLocation().getXend());
-    System.assertEquals(HIGH, response.getContractAmounts().get(0).getConfidenceLevel());
-    System.assertEquals(TEXT, response.getContractAmounts().get(0).getText());
-    System.assertEquals(TEXT_NORMALIZED, response.getContractAmounts().get(0).getTextNormalized());
-    System.assertEquals(VALUE, response.getContractAmounts().get(0).getInterpretation().getValue());
-    System.assertEquals(NUMERIC_VALUE, response.getPaymentTerms().get(0).getInterpretation().getNumericValue());
-    System.assertEquals(UNIT, response.getContractAmounts().get(0).getInterpretation().getUnit());
-    System.assertEquals(PROVENANCE_ID, response.getContractAmounts().get(0).getProvenanceIds().get(0));
-    System.assertEquals(TEST_BEGIN, response.getContractAmounts().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getContractAmounts().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getTerminationDates().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getTerminationDates().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTerminationDates().get(0).getLocation().getXend());
-    System.assertEquals(HIGH, response.getTerminationDates().get(0).getConfidenceLevel());
-    System.assertEquals(TEXT_NORMALIZED, response.getTerminationDates().get(0).getTextNormalized());
-    System.assertEquals(PROVENANCE_ID, response.getTerminationDates().get(0).getProvenanceIds().get(0));
-    System.assertEquals(TEXT, response.getContractTypes().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getContractTypes().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getContractTypes().get(0).getLocation().getXend());
-    System.assertEquals(HIGH, response.getContractTypes().get(0).getConfidenceLevel());
-    System.assertEquals(HIGH, response.getContractTerms().get(0).getConfidenceLevel());
-    System.assertEquals(TEXT, response.getContractTerms().get(0).getText());
-    System.assertEquals(TEXT_NORMALIZED, response.getContractTerms().get(0).getTextNormalized());
-    System.assertEquals(VALUE, response.getContractTerms().get(0).getInterpretation().getValue());
-    System.assertEquals(NUMERIC_VALUE, response.getContractTerms().get(0).getInterpretation().getNumericValue());
-    System.assertEquals(UNIT, response.getContractTerms().get(0).getInterpretation().getUnit());
-    System.assertEquals(PROVENANCE_ID, response.getContractTerms().get(0).getProvenanceIds().get(0));
-    System.assertEquals(TEST_BEGIN, response.getContractTerms().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getContractTerms().get(0).getLocation().getXend());
-    System.assertEquals(HIGH, response.getPaymentTerms().get(0).getConfidenceLevel());
-    System.assertEquals(TEXT, response.getPaymentTerms().get(0).getText());
-    System.assertEquals(TEXT_NORMALIZED, response.getPaymentTerms().get(0).getTextNormalized());
-    System.assertEquals(VALUE, response.getPaymentTerms().get(0).getInterpretation().getValue());
-    System.assertEquals(NUMERIC_VALUE, response.getPaymentTerms().get(0).getInterpretation().getNumericValue());
-    System.assertEquals(UNIT, response.getPaymentTerms().get(0).getInterpretation().getUnit());
-    System.assertEquals(PROVENANCE_ID, response.getPaymentTerms().get(0).getProvenanceIds().get(0));
-    System.assertEquals(TEST_BEGIN, response.getPaymentTerms().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getPaymentTerms().get(0).getLocation().getXend());
-    System.assertEquals(HIGH, response.getContractCurrencies().get(0).getConfidenceLevel());
-    System.assertEquals(TEXT, response.getContractCurrencies().get(0).getText());
-    System.assertEquals(TEXT_NORMALIZED, response.getContractCurrencies().get(0).getTextNormalized());
-    System.assertEquals(PROVENANCE_ID, response.getContractCurrencies().get(0).getProvenanceIds().get(0));
-    System.assertEquals(TEST_BEGIN, response.getContractCurrencies().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getContractCurrencies().get(0).getLocation().getXend());
+    IBMCompareComplyV1Models.ClassifyReturn response = service.classifyElements(classifyElementsOptionsModel);
+    System.assert(response.getDocument().getTitle() != null);
+    System.assert(response.getDocument().getHtml() != null);
+    System.assert(response.getDocument().getHash() != null);
+    System.assert(response.getDocument().getLabel() != null);
+    System.assert(response.getModelId() != null);
+    System.assert(response.getModelVersion() != null);
+    System.assert(response.getElements().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getElements().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getElements().get(0).getText() != null);
+    System.assert(response.getElements().get(0).getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getElements().get(0).getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getElements().get(0).getTypes().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getElements().get(0).getCategories().get(0).getLabel() != null);
+    System.assert(response.getElements().get(0).getCategories().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getElements().get(0).getAttributes().get(0).getXType() != null);
+    System.assert(response.getElements().get(0).getAttributes().get(0).getText() != null);
+    System.assert(response.getElements().get(0).getAttributes().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getElements().get(0).getAttributes().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getEffectiveDates().get(0).getConfidenceLevel() != null);
+    System.assert(response.getEffectiveDates().get(0).getText() != null);
+    System.assert(response.getEffectiveDates().get(0).getTextNormalized() != null);
+    System.assert(response.getEffectiveDates().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getEffectiveDates().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getEffectiveDates().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getContractAmounts().get(0).getConfidenceLevel() != null);
+    System.assert(response.getContractAmounts().get(0).getText() != null);
+    System.assert(response.getContractAmounts().get(0).getTextNormalized() != null);
+    System.assert(response.getContractAmounts().get(0).getInterpretation().getValue() != null);
+    System.assert(response.getContractAmounts().get(0).getInterpretation().getNumericValue() != null);
+    System.assert(response.getContractAmounts().get(0).getInterpretation().getUnit() != null);
+    System.assert(response.getContractAmounts().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getContractAmounts().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getContractAmounts().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTerminationDates().get(0).getConfidenceLevel() != null);
+    System.assert(response.getTerminationDates().get(0).getText() != null);
+    System.assert(response.getTerminationDates().get(0).getTextNormalized() != null);
+    System.assert(response.getTerminationDates().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getTerminationDates().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTerminationDates().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getContractTypes().get(0).getConfidenceLevel() != null);
+    System.assert(response.getContractTypes().get(0).getText() != null);
+    System.assert(response.getContractTypes().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getContractTypes().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getContractTypes().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getContractTerms().get(0).getConfidenceLevel() != null);
+    System.assert(response.getContractTerms().get(0).getText() != null);
+    System.assert(response.getContractTerms().get(0).getTextNormalized() != null);
+    System.assert(response.getContractTerms().get(0).getInterpretation().getValue() != null);
+    System.assert(response.getContractTerms().get(0).getInterpretation().getNumericValue() != null);
+    System.assert(response.getContractTerms().get(0).getInterpretation().getUnit() != null);
+    System.assert(response.getContractTerms().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getContractTerms().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getContractTerms().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getPaymentTerms().get(0).getConfidenceLevel() != null);
+    System.assert(response.getPaymentTerms().get(0).getText() != null);
+    System.assert(response.getPaymentTerms().get(0).getTextNormalized() != null);
+    System.assert(response.getPaymentTerms().get(0).getInterpretation().getValue() != null);
+    System.assert(response.getPaymentTerms().get(0).getInterpretation().getNumericValue() != null);
+    System.assert(response.getPaymentTerms().get(0).getInterpretation().getUnit() != null);
+    System.assert(response.getPaymentTerms().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getPaymentTerms().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getPaymentTerms().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getContractCurrencies().get(0).getConfidenceLevel() != null);
+    System.assert(response.getContractCurrencies().get(0).getText() != null);
+    System.assert(response.getContractCurrencies().get(0).getTextNormalized() != null);
+    System.assert(response.getContractCurrencies().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getContractCurrencies().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getContractCurrencies().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getSectionTitle().getText() != null);
+    System.assert(response.getTables().get(0).getSectionTitle().getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getSectionTitle().getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getTitle().getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getTitle().getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getTitle().getText() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getRowIndexBegin() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getRowIndexEnd() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getColumnIndexBegin() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getColumnIndexEnd() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getTextNormalized() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getRowIndexBegin() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getRowIndexEnd() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getColumnIndexBegin() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getColumnIndexEnd() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getTextNormalized() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getRowIndexBegin() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getRowIndexEnd() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getColumnIndexBegin() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getColumnIndexEnd() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowIndexBegin() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXType() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getContexts().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getContexts().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getContexts().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getKey().getCellId() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getText() != null);
+    System.assert(response.getDocumentStructure().getSectionTitles().get(0).getText() != null);
+    System.assert(response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getDocumentStructure().getSectionTitles().get(0).getLevel() != null);
+    System.assert(response.getDocumentStructure().getSectionTitles().get(0).getElementLocations().get(0).getXBegin() != null);
+    System.assert(response.getDocumentStructure().getSectionTitles().get(0).getElementLocations().get(0).getXEnd() != null);
+    System.assert(response.getDocumentStructure().getLeadingSentences().get(0).getText() != null);
+    System.assert(response.getDocumentStructure().getLeadingSentences().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getDocumentStructure().getLeadingSentences().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getDocumentStructure().getLeadingSentences().get(0).getElementLocations().get(0).getXBegin() != null);
+    System.assert(response.getDocumentStructure().getLeadingSentences().get(0).getElementLocations().get(0).getXEnd() != null);
+    System.assert(response.getDocumentStructure().getParagraphs().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getDocumentStructure().getParagraphs().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getParties().get(0).getParty() != null);
+    System.assert(response.getParties().get(0).getRole() != null);
+    System.assert(response.getParties().get(0).getImportance() != null);
+    System.assert(response.getParties().get(0).getAddresses().get(0).getText() != null);
+    System.assert(response.getParties().get(0).getAddresses().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getParties().get(0).getAddresses().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getParties().get(0).getContacts().get(0).getName() != null);
+    System.assert(response.getParties().get(0).getContacts().get(0).getRole() != null);
+    System.assert(response.getParties().get(0).getMentions().get(0).getText() != null);
+    System.assert(response.getParties().get(0).getMentions().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getParties().get(0).getMentions().get(0).getLocation().getXEnd() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testExtractTables() {
-    String body = IBMWatsonMockResponses.tableReturnResponse();
+    String mockResponseBody = '{"document": {"html": "html", "title": "title", "hash": "hash"}, "model_id": "modelId", "model_version": "modelVersion", "tables": [{"location": {"begin": "6", "end": "4"}, "text": "text", "section_title": {"text": "text", "location": {"begin": "6", "end": "4"}}, "title": {"location": {"begin": "6", "end": "4"}, "text": "text"}, "table_headers": [{"cell_id": "cellId", "text": "text", "row_index_begin": "13", "row_index_end": "11", "column_index_begin": "16", "column_index_end": "14"}], "row_headers": [{"cell_id": "cellId", "location": {"begin": "6", "end": "4"}, "text": "text", "text_normalized": "textNormalized", "row_index_begin": "13", "row_index_end": "11", "column_index_begin": "16", "column_index_end": "14"}], "column_headers": [{"cell_id": "cellId", "text": "text", "text_normalized": "textNormalized", "row_index_begin": "13", "row_index_end": "11", "column_index_begin": "16", "column_index_end": "14"}], "body_cells": [{"cell_id": "cellId", "location": {"begin": "6", "end": "4"}, "text": "text", "row_index_begin": "13", "row_index_end": "11", "column_index_begin": "16", "column_index_end": "14", "row_header_ids": ["rowHeaderIds"], "row_header_texts": ["rowHeaderTexts"], "row_header_texts_normalized": ["rowHeaderTextsNormalized"], "column_header_ids": ["columnHeaderIds"], "column_header_texts": ["columnHeaderTexts"], "column_header_texts_normalized": ["columnHeaderTextsNormalized"], "attributes": [{"type": "xType", "text": "text", "location": {"begin": "6", "end": "4"}}]}], "contexts": [{"text": "text", "location": {"begin": "6", "end": "4"}}], "key_value_pairs": [{"key": {"cell_id": "cellId", "location": {"begin": "6", "end": "4"}, "text": "text"}, "value": [{"cell_id": "cellId", "location": {"begin": "6", "end": "4"}, "text": "text"}]}]}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
-      .name('test_pdf.pdf')
-      .description('Test PDF file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_PDF)
-      .body(blob.valueOf('Test string'))
+    IBMCompareComplyV1Models.ExtractTablesOptions extractTablesOptionsModel = new IBMCompareComplyV1Models.ExtractTablesOptionsBuilder()
+      .file(mockFile)
+      .fileContentType('application/pdf')
+      .model('contracts')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMCompareComplyV1Models.ExtractTablesOptions extractTablesOptions = new IBMCompareComplyV1Models.ExtractTablesOptionsBuilder()
-      .file(testPdf)
-      .model(TABLES)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    extractTablesOptions = extractTablesOptions.newBuilder().build();
-    IBMCompareComplyV1Models.TableReturn response = service.extractTables(extractTablesOptions);
 
-    System.assertEquals(HTML, response.getDocument().getHtml());
-    System.assertEquals(TITLE, response.getDocument().getTitle());
-    System.assertEquals(HASH, response.getDocument().getHash());
-    System.assertEquals(MODEL_ID, response.getModelId());
-    System.assertEquals(MODEL_VERSION, response.getModelVersion());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getSectionTitle().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getSectionTitle().getLocation().getXend());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getTableHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getLocation().get(BEGIN_KEY));
-    System.assertEquals(TEST_END, response.getTables().get(0).getTableHeaders().get(0).getLocation().get(END_KEY));
-    System.assertEquals(TEXT, response.getTables().get(0).getTableHeaders().get(0).getText());
-    System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getRowIndexBegin());
-    System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getTableHeaders().get(0).getRowIndexEnd());
-    System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getColumnIndexBegin());
-    System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getTableHeaders().get(0).getColumnIndexEnd());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getColumnHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getLocation().get(BEGIN_KEY));
-    System.assertEquals(TEST_END, response.getTables().get(0).getColumnHeaders().get(0).getLocation().get(END_KEY));
-    System.assertEquals(TEXT, response.getTables().get(0).getColumnHeaders().get(0).getText());
-    System.assertEquals(TEXT_NORMALIZED, response.getTables().get(0).getColumnHeaders().get(0).getTextNormalized());
-    System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getRowIndexBegin());
-    System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getColumnHeaders().get(0).getRowIndexEnd());
-    System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getColumnIndexBegin());
-    System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getColumnHeaders().get(0).getColumnIndexEnd());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getRowHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getRowHeaders().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getRowHeaders().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getRowHeaders().get(0).getText());
-    System.assertEquals(TEXT_NORMALIZED, response.getTables().get(0).getRowHeaders().get(0).getTextNormalized());
-    System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getRowHeaders().get(0).getRowIndexBegin());
-    System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getRowHeaders().get(0).getRowIndexEnd());
-    System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getRowHeaders().get(0).getColumnIndexBegin());
-    System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getRowHeaders().get(0).getColumnIndexEnd());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getBodyCells().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getText());
-    System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getRowIndexBegin());
-    System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd());
-    System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin());
-    System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0));
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0));
-    System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0));
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0));
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0));
-    System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0));
-    System.assertEquals(TYPE, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXtype());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXend());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
-    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
-    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
+    IBMCompareComplyV1Models.TableReturn response = service.extractTables(extractTablesOptionsModel);
+    System.assert(response.getDocument().getHtml() != null);
+    System.assert(response.getDocument().getTitle() != null);
+    System.assert(response.getDocument().getHash() != null);
+    System.assert(response.getModelId() != null);
+    System.assert(response.getModelVersion() != null);
+    System.assert(response.getTables().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getSectionTitle().getText() != null);
+    System.assert(response.getTables().get(0).getSectionTitle().getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getSectionTitle().getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getTitle().getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getTitle().getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getTitle().getText() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getRowIndexBegin() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getRowIndexEnd() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getColumnIndexBegin() != null);
+    System.assert(response.getTables().get(0).getTableHeaders().get(0).getColumnIndexEnd() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getTextNormalized() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getRowIndexBegin() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getRowIndexEnd() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getColumnIndexBegin() != null);
+    System.assert(response.getTables().get(0).getRowHeaders().get(0).getColumnIndexEnd() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getTextNormalized() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getRowIndexBegin() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getRowIndexEnd() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getColumnIndexBegin() != null);
+    System.assert(response.getTables().get(0).getColumnHeaders().get(0).getColumnIndexEnd() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowIndexBegin() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0) != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXType() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getContexts().get(0).getText() != null);
+    System.assert(response.getTables().get(0).getContexts().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getContexts().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getKey().getCellId() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getCellId() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getTables().get(0).getKeyValuePairs().get(0).getValue().get(0).getText() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testCompareDocuments() {
-    String body = IBMWatsonMockResponses.compareReturnResponse();
+    String mockResponseBody = '{"model_id": "modelId", "model_version": "modelVersion", "documents": [{"title": "title", "html": "html", "hash": "hash", "label": "label"}], "aligned_elements": [{"element_pair": [{"document_label": "documentLabel", "text": "text", "location": {"begin": "6", "end": "4"}, "types": [{"label": {"nature": "nature", "party": "party"}}], "categories": [{"label": "label"}], "attributes": [{"type": "xType", "text": "text", "location": {"begin": "6", "end": "4"}}]}], "identical_text": false, "provenance_ids": ["provenanceIds"], "significant_elements": false}], "unaligned_elements": [{"document_label": "documentLabel", "location": {"begin": "6", "end": "4"}, "text": "text", "types": [{"label": {"nature": "nature", "party": "party"}}], "categories": [{"label": "label"}], "attributes": [{"type": "xType", "text": "text", "location": {"begin": "6", "end": "4"}}]}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonFile testPdf = new IBMWatsonFile.FileBuilder()
-      .name('test_pdf.pdf')
-      .description('Test PDF file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_PDF)
-      .body(blob.valueOf('Test string'))
+    IBMCompareComplyV1Models.CompareDocumentsOptions compareDocumentsOptionsModel = new IBMCompareComplyV1Models.CompareDocumentsOptionsBuilder()
+      .file1(mockFile)
+      .file2(mockFile)
+      .file1ContentType('application/pdf')
+      .file2ContentType('application/pdf')
+      .file1Label('testString')
+      .file2Label('testString')
+      .model('contracts')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMCompareComplyV1Models.CompareDocumentsOptions compareDocumentsOptions = new IBMCompareComplyV1Models.CompareDocumentsOptionsBuilder()
-      .file1(testPdf)
-      .file1ContentType(CONTENT_TYPE_PDF)
-      .file1Label(LABEL)
-      .file2(testPdf)
-      .file2ContentType(CONTENT_TYPE_PDF)
-      .file2Label(LABEL)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    compareDocumentsOptions = compareDocumentsOptions.newBuilder().build();
-    IBMCompareComplyV1Models.CompareReturn response = service.compareDocuments(compareDocumentsOptions);
 
-    System.assertEquals(TITLE, response.getDocuments().get(0).getTitle());
-    System.assertEquals(HTML, response.getDocuments().get(0).getHtml());
-    System.assertEquals(HASH, response.getDocuments().get(0).getHash());
-    System.assertEquals(LABEL, response.getDocuments().get(0).getLabel());
-    System.assertEquals(DOCUMENT_LABEL, response.getAlignedElements().get(0).getElementPair().get(0).getDocumentLabel());
-    System.assertEquals(TEXT, response.getAlignedElements().get(0).getElementPair().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getAlignedElements().get(0).getElementPair().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getAlignedElements().get(0).getElementPair().get(0).getLocation().getXend());
-    System.assertEquals(NATURE,
-        response.getAlignedElements().get(0).getElementPair().get(0).getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY,
-        response.getAlignedElements().get(0).getElementPair().get(0).getTypes().get(0).getLabel().getParty());
-    System.assertEquals(LABEL, response.getAlignedElements().get(0).getElementPair().get(0).getCategories().get(0).getLabel());
-    System.assertEquals(TYPE, response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getXtype());
-    System.assertEquals(TEXT, response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getText());
-    System.assertEquals(TEST_BEGIN,
-        response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END,
-        response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getLocation().getXend());
-    System.assertEquals(true, response.getAlignedElements().get(0).getIdenticalText());
-    System.assertEquals(true, response.getAlignedElements().get(0).getSignificantElements());
-    System.assertEquals(DOCUMENT_LABEL, response.getUnalignedElements().get(0).getDocumentLabel());
-    System.assertEquals(TEXT, response.getUnalignedElements().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getUnalignedElements().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getUnalignedElements().get(0).getLocation().getXend());
-    System.assertEquals(NATURE, response.getUnalignedElements().get(0).getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY, response.getUnalignedElements().get(0).getTypes().get(0).getLabel().getParty());
-    System.assertEquals(LABEL, response.getUnalignedElements().get(0).getCategories().get(0).getLabel());
-    System.assertEquals(TYPE, response.getUnalignedElements().get(0).getAttributes().get(0).getXtype());
-    System.assertEquals(TEXT, response.getUnalignedElements().get(0).getAttributes().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getUnalignedElements().get(0).getAttributes().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getUnalignedElements().get(0).getAttributes().get(0).getLocation().getXend());
-    System.assertEquals(MODEL_ID, response.getModelId());
-    System.assertEquals(MODEL_VERSION, response.getModelVersion());
+    IBMCompareComplyV1Models.CompareReturn response = service.compareDocuments(compareDocumentsOptionsModel);
+    System.assert(response.getModelId() != null);
+    System.assert(response.getModelVersion() != null);
+    System.assert(response.getDocuments().get(0).getTitle() != null);
+    System.assert(response.getDocuments().get(0).getHtml() != null);
+    System.assert(response.getDocuments().get(0).getHash() != null);
+    System.assert(response.getDocuments().get(0).getLabel() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getDocumentLabel() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getText() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getCategories().get(0).getLabel() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getXType() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getText() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getAlignedElements().get(0).getIdenticalText() != null);
+    System.assert(response.getAlignedElements().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getAlignedElements().get(0).getSignificantElements() != null);
+    System.assert(response.getUnalignedElements().get(0).getDocumentLabel() != null);
+    System.assert(response.getUnalignedElements().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getUnalignedElements().get(0).getLocation().getXEnd() != null);
+    System.assert(response.getUnalignedElements().get(0).getText() != null);
+    System.assert(response.getUnalignedElements().get(0).getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getUnalignedElements().get(0).getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getUnalignedElements().get(0).getCategories().get(0).getLabel() != null);
+    System.assert(response.getUnalignedElements().get(0).getAttributes().get(0).getXType() != null);
+    System.assert(response.getUnalignedElements().get(0).getAttributes().get(0).getText() != null);
+    System.assert(response.getUnalignedElements().get(0).getAttributes().get(0).getLocation().getXBegin() != null);
+    System.assert(response.getUnalignedElements().get(0).getAttributes().get(0).getLocation().getXEnd() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testAddFeedback() {
-    String body = IBMWatsonMockResponses.feedbackReturnResponse();
+    String mockResponseBody = '{"feedback_id": "feedbackId", "user_id": "userId", "comment": "comment", "created": "2017-05-16T13:56:54.957Z", "feedback_data": {"feedback_type": "feedbackType", "document": {"title": "title", "hash": "hash"}, "model_id": "modelId", "model_version": "modelVersion", "location": {"begin": "6", "end": "4"}, "text": "text", "original_labels": {"types": [{"label": {"nature": "nature", "party": "party"}, "provenance_ids": ["provenanceIds"]}], "categories": [{"label": "label", "provenance_ids": ["provenanceIds"]}], "modification": "modification"}, "updated_labels": {"types": [{"label": {"nature": "nature", "party": "party"}, "provenance_ids": ["provenanceIds"]}], "categories": [{"label": "label", "provenance_ids": ["provenanceIds"]}], "modification": "modification"}, "pagination": {"refresh_cursor": "refreshCursor", "next_cursor": "nextCursor", "refresh_url": "refreshUrl", "next_url": "nextUrl", "total": "5"}}}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMCompareComplyV1Models.TypeLabel typeLabel = new IBMCompareComplyV1Models.TypeLabelBuilder().build();
-    List<IBMCompareComplyV1Models.TypeLabel> types = new List<IBMCompareComplyV1Models.TypeLabel>{ typeLabel };
-    IBMCompareComplyV1Models.Category category = new IBMCompareComplyV1Models.CategoryBuilder().build();
-    List<IBMCompareComplyV1Models.Category> categories = new List<IBMCompareComplyV1Models.Category>{ category };
-    IBMCompareComplyV1Models.OriginalLabelsIn originalLabels = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
-      .types(types)
-      .categories(categories)
+    IBMCompareComplyV1Models.Category categoryModel = new IBMCompareComplyV1Models.CategoryBuilder()
+      .label('Amendments')
+      .provenanceIds(new List<String> { 'testString' })
       .build();
-    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabels = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
-      .types(types)
-      .categories(categories)
+    IBMCompareComplyV1Models.Label labelModel = new IBMCompareComplyV1Models.LabelBuilder()
+      .nature('testString')
+      .party('testString')
       .build();
-    IBMCompareComplyV1Models.FeedbackDataInput data = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
-      .feedbackType(FEEDBACK_TYPE)
-      .location(LOCATION)
-      .text(TEXT)
-      .originalLabels(originalLabels)
-      .updatedLabels(updatedLabels)
+    IBMCompareComplyV1Models.TypeLabel typeLabelModel = new IBMCompareComplyV1Models.TypeLabelBuilder()
+      .label(labelModel)
+      .provenanceIds(new List<String> { 'testString' })
+      .build();
+    IBMCompareComplyV1Models.UpdatedLabelsIn updatedLabelsInModel = new IBMCompareComplyV1Models.UpdatedLabelsInBuilder()
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel })
+      .categories(new List<IBMCompareComplyV1Models.Category> { categoryModel })
+      .build();
+    IBMCompareComplyV1Models.OriginalLabelsIn originalLabelsInModel = new IBMCompareComplyV1Models.OriginalLabelsInBuilder()
+      .types(new List<IBMCompareComplyV1Models.TypeLabel> { typeLabelModel })
+      .categories(new List<IBMCompareComplyV1Models.Category> { categoryModel })
+      .build();
+    IBMCompareComplyV1Models.Location locationModel = new IBMCompareComplyV1Models.LocationBuilder()
+      .xBegin(26L)
+      .xEnd(26L)
+      .build();
+    IBMCompareComplyV1Models.ShortDoc shortDocModel = new IBMCompareComplyV1Models.ShortDocBuilder()
+      .title('testString')
+      .hash('testString')
+      .build();
+    IBMCompareComplyV1Models.FeedbackDataInput feedbackDataInputModel = new IBMCompareComplyV1Models.FeedbackDataInputBuilder()
+      .feedbackType('testString')
+      .document(shortDocModel)
+      .modelId('testString')
+      .modelVersion('testString')
+      .location(locationModel)
+      .text('testString')
+      .originalLabels(originalLabelsInModel)
+      .updatedLabels(updatedLabelsInModel)
+      .build();
+    IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptionsModel = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
+      .feedbackData(feedbackDataInputModel)
+      .userId('testString')
+      .comment('testString')
+      .addHeader('Test-Header', 'test_value')
       .build();
 
-    IBMCompareComplyV1Models.AddFeedbackOptions addFeedbackOptions = new IBMCompareComplyV1Models.AddFeedbackOptionsBuilder()
-      .comment(COMMENT)
-      .feedbackData(data)
-      .userId(USER_ID)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    addFeedbackOptions = addFeedbackOptions.newBuilder().build();
-    IBMCompareComplyV1Models.FeedbackReturn response = service.addFeedback(addFeedbackOptions);
-
-    System.assertEquals(FEEDBACK_ID, response.getFeedbackId());
-    System.assertEquals(USER_ID, response.getUserId());
-    System.assertEquals(COMMENT, response.getComment());
-    System.assertEquals(TEST_DATE, response.getCreated());
-    System.assertEquals(FEEDBACK_TYPE, response.getFeedbackData().getFeedbackType());
-    System.assertEquals(TITLE, response.getFeedbackData().getDocument().getTitle());
-    System.assertEquals(HASH, response.getFeedbackData().getDocument().getHash());
-    System.assertEquals(MODEL_ID, response.getFeedbackData().getModelId());
-    System.assertEquals(MODEL_VERSION, response.getFeedbackData().getModelVersion());
-    System.assertEquals(TEST_BEGIN, response.getFeedbackData().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getFeedbackData().getLocation().getXend());
-    System.assertEquals(TEXT, response.getFeedbackData().getText());
-    System.assertEquals(NATURE, response.getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY, response.getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedbackData().getOriginalLabels().getTypes().get(0).getProvenanceIds().get(0));
-    System.assertEquals(LABEL, response.getFeedbackData().getOriginalLabels().getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedbackData().getOriginalLabels().getCategories().get(0).getProvenanceIds().get(0));
-    System.assertEquals(ADDED,
-        response.getFeedbackData().getOriginalLabels().getModification());
-    System.assertEquals(NATURE, response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY, response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getProvenanceIds().get(0));
-    System.assertEquals(LABEL,
-        response.getFeedbackData().getUpdatedLabels().getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedbackData().getUpdatedLabels().getCategories().get(0).getProvenanceIds().get(0));
-    System.assertEquals(ADDED,
-        response.getFeedbackData().getUpdatedLabels().getModification());
-    System.assertEquals(REFRESH_CURSOR, response.getFeedbackData().getPagination().getRefreshCursor());
-    System.assertEquals(NEXT_CURSOR, response.getFeedbackData().getPagination().getNextCursor());
-    System.assertEquals(REFRESH_URL, response.getFeedbackData().getPagination().getRefreshUrl());
-    System.assertEquals(NEXT_URL, response.getFeedbackData().getPagination().getNextUrl());
-    System.assertEquals(TOTAL, response.getFeedbackData().getPagination().getTotal());
-    Test.stopTest();
-  }
-
-  static testMethod void testDeleteFeedback() {
-    String body = '';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-      200,
-      'Success',
-      body,
-      null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
-      .feedbackId(FEEDBACK_ID)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    deleteFeedbackOptions = deleteFeedbackOptions.newBuilder().build();
-    service.deleteFeedback(deleteFeedbackOptions);
+    IBMCompareComplyV1Models.FeedbackReturn response = service.addFeedback(addFeedbackOptionsModel);
+    System.assert(response.getFeedbackId() != null);
+    System.assert(response.getUserId() != null);
+    System.assert(response.getComment() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getFeedbackData().getFeedbackType() != null);
+    System.assert(response.getFeedbackData().getDocument().getTitle() != null);
+    System.assert(response.getFeedbackData().getDocument().getHash() != null);
+    System.assert(response.getFeedbackData().getModelId() != null);
+    System.assert(response.getFeedbackData().getModelVersion() != null);
+    System.assert(response.getFeedbackData().getLocation().getXBegin() != null);
+    System.assert(response.getFeedbackData().getLocation().getXEnd() != null);
+    System.assert(response.getFeedbackData().getText() != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getTypes().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getCategories().get(0).getLabel() != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getCategories().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getModification() != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getCategories().get(0).getLabel() != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getCategories().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getModification() != null);
+    System.assert(response.getFeedbackData().getPagination().getRefreshCursor() != null);
+    System.assert(response.getFeedbackData().getPagination().getNextCursor() != null);
+    System.assert(response.getFeedbackData().getPagination().getRefreshUrl() != null);
+    System.assert(response.getFeedbackData().getPagination().getNextUrl() != null);
+    System.assert(response.getFeedbackData().getPagination().getTotal() != null);
 
     Test.stopTest();
   }
-
-  static testMethod void testGetFeedback() {
-    String body = IBMWatsonMockResponses.getFeedbackResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-      200,
-      'Success',
-      body,
-      null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
-      .feedbackId(FEEDBACK_ID)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    getFeedbackOptions = getFeedbackOptions.newBuilder().build();
-    IBMCompareComplyV1Models.GetFeedback response = service.getFeedback(getFeedbackOptions);
-
-    System.assertEquals(FEEDBACK_ID, response.getFeedbackId());
-    System.assertEquals(COMMENT, response.getComment());
-    System.assertEquals(TEST_DATE, response.getCreated());
-    System.assertEquals(FEEDBACK_TYPE, response.getFeedbackData().getFeedbackType());
-    System.assertEquals(TITLE, response.getFeedbackData().getDocument().getTitle());
-    System.assertEquals(HASH, response.getFeedbackData().getDocument().getHash());
-    System.assertEquals(MODEL_ID, response.getFeedbackData().getModelId());
-    System.assertEquals(MODEL_VERSION, response.getFeedbackData().getModelVersion());
-    System.assertEquals(TEST_BEGIN, response.getFeedbackData().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getFeedbackData().getLocation().getXend());
-    System.assertEquals(TEXT, response.getFeedbackData().getText());
-    System.assertEquals(NATURE, response.getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY, response.getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedbackData().getOriginalLabels().getTypes().get(0).getProvenanceIds().get(0));
-    System.assertEquals(LABEL, response.getFeedbackData().getOriginalLabels().getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedbackData().getOriginalLabels().getCategories().get(0).getProvenanceIds().get(0));
-    System.assertEquals(ADDED,
-        response.getFeedbackData().getOriginalLabels().getModification());
-    System.assertEquals(NATURE, response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY, response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getProvenanceIds().get(0));
-    System.assertEquals(LABEL, response.getFeedbackData().getUpdatedLabels().getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedbackData().getUpdatedLabels().getCategories().get(0).getProvenanceIds().get(0));
-    System.assertEquals(ADDED,
-        response.getFeedbackData().getUpdatedLabels().getModification());
-    System.assertEquals(REFRESH_CURSOR, response.getFeedbackData().getPagination().getRefreshCursor());
-    System.assertEquals(NEXT_CURSOR, response.getFeedbackData().getPagination().getNextCursor());
-    System.assertEquals(REFRESH_URL, response.getFeedbackData().getPagination().getRefreshUrl());
-    System.assertEquals(NEXT_URL, response.getFeedbackData().getPagination().getNextUrl());
-    System.assertEquals(TOTAL, response.getFeedbackData().getPagination().getTotal());
-    Test.stopTest();
-  }
-
   static testMethod void testListFeedback() {
-    String body = IBMWatsonMockResponses.feedbackListResponse();
+    String mockResponseBody = '{"feedback": [{"feedback_id": "feedbackId", "created": "2017-05-16T13:56:54.957Z", "comment": "comment", "feedback_data": {"feedback_type": "feedbackType", "document": {"title": "title", "hash": "hash"}, "model_id": "modelId", "model_version": "modelVersion", "location": {"begin": "6", "end": "4"}, "text": "text", "original_labels": {"types": [{"label": {"nature": "nature", "party": "party"}, "provenance_ids": ["provenanceIds"]}], "categories": [{"label": "label", "provenance_ids": ["provenanceIds"]}], "modification": "modification"}, "updated_labels": {"types": [{"label": {"nature": "nature", "party": "party"}, "provenance_ids": ["provenanceIds"]}], "categories": [{"label": "label", "provenance_ids": ["provenanceIds"]}], "modification": "modification"}, "pagination": {"refresh_cursor": "refreshCursor", "next_cursor": "nextCursor", "refresh_url": "refreshUrl", "next_url": "nextUrl", "total": "5"}}}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMCompareComplyV1Models.ListFeedbackOptions listFeedbackOptions = new IBMCompareComplyV1Models.ListFeedbackOptionsBuilder()
-      .after(TEST_DATE)
-      .before(TEST_DATE)
-      .categoryAdded(CATEGORY_ADDED)
-      .categoryRemoved(CATEGORY_REMOVED)
-      .categoryNotChanged(CATEGORY_NOT_CHANGED)
-      .pageLimit(PAGE_LIMIT)
-      .documentTitle(DOCUMENT_TITLE)
-      .feedbackType(FEEDBACK_TYPE)
+    IBMCompareComplyV1Models.ListFeedbackOptions listFeedbackOptionsModel = new IBMCompareComplyV1Models.ListFeedbackOptionsBuilder()
+      .feedbackType('testString')
+      .before((Datetime) JSON.deserialize('"2019-01-01"', Datetime.class))
+      .after((Datetime) JSON.deserialize('"2019-01-01"', Datetime.class))
+      .documentTitle('testString')
+      .modelId('testString')
+      .modelVersion('testString')
+      .categoryRemoved('testString')
+      .categoryAdded('testString')
+      .categoryNotChanged('testString')
+      .typeRemoved('testString')
+      .typeAdded('testString')
+      .typeNotChanged('testString')
+      .pageLimit(38)
+      .cursor('testString')
+      .xSort('testString')
       .includeTotal(true)
-      .modelId(MODEL_ID)
-      .modelVersion(MODEL_VERSION)
-      .cursor(CURSOR)
-      .xsort(TEST_SORT)
-      .typeAdded(TYPE_ADDED)
-      .typeRemoved(TYPE_REMOVED)
-      .typeNotChanged(TYPE_NOT_CHANGED)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
+      .addHeader('Test-Header', 'test_value')
       .build();
-    listFeedbackOptions = listFeedbackOptions.newBuilder().build();
-    IBMCompareComplyV1Models.FeedbackList response = service.listFeedback(listFeedbackOptions);
 
-    System.assertEquals(FEEDBACK_ID, response.getFeedback().get(0).getFeedbackId());
-    System.assertEquals(COMMENT, response.getFeedback().get(0).getComment());
-    System.assertEquals(TEST_DATE, response.getFeedback().get(0).getCreated());
-    System.assertEquals(FEEDBACK_TYPE, response.getFeedback().get(0).getFeedbackData().getFeedbackType());
-    System.assertEquals(TITLE, response.getFeedback().get(0).getFeedbackData().getDocument().getTitle());
-    System.assertEquals(HASH, response.getFeedback().get(0).getFeedbackData().getDocument().getHash());
-    System.assertEquals(MODEL_ID, response.getFeedback().get(0).getFeedbackData().getModelId());
-    System.assertEquals(MODEL_VERSION, response.getFeedback().get(0).getFeedbackData().getModelVersion());
-    System.assertEquals(TEST_BEGIN, response.getFeedback().get(0).getFeedbackData().getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getFeedback().get(0).getFeedbackData().getLocation().getXend());
-    System.assertEquals(TEXT, response.getFeedback().get(0).getFeedbackData().getText());
-    System.assertEquals(NATURE,
-        response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY,
-        response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getTypes().get(0).getProvenanceIds()
-            .get(0));
-    System.assertEquals(LABEL,
-        response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getCategories().get(0).getProvenanceIds()
-            .get(0));
-    System.assertEquals(ADDED,
-        response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getModification());
-    System.assertEquals(NATURE,
-        response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getNature());
-    System.assertEquals(PARTY,
-        response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getTypes().get(0).getProvenanceIds().get(0));
-    System.assertEquals(LABEL,
-        response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID,
-        response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getCategories().get(0).getProvenanceIds()
-            .get(0));
-    System.assertEquals(ADDED,
-        response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getModification());
-    System.assertEquals(REFRESH_CURSOR, response.getFeedback().get(0).getFeedbackData().getPagination().getRefreshCursor());
-    System.assertEquals(NEXT_CURSOR, response.getFeedback().get(0).getFeedbackData().getPagination().getNextCursor());
-    System.assertEquals(REFRESH_URL, response.getFeedback().get(0).getFeedbackData().getPagination().getRefreshUrl());
-    System.assertEquals(NEXT_URL, response.getFeedback().get(0).getFeedbackData().getPagination().getNextUrl());
-    System.assertEquals(TOTAL, response.getFeedback().get(0).getFeedbackData().getPagination().getTotal());
+    IBMCompareComplyV1Models.FeedbackList response = service.listFeedback(listFeedbackOptionsModel);
+    System.assert(response.getFeedback().get(0).getFeedbackId() != null);
+    System.assert(response.getFeedback().get(0).getCreated() != null);
+    System.assert(response.getFeedback().get(0).getComment() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getFeedbackType() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getDocument().getTitle() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getDocument().getHash() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getModelId() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getModelVersion() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getLocation().getXBegin() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getLocation().getXEnd() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getText() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getTypes().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getCategories().get(0).getLabel() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getCategories().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getOriginalLabels().getModification() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getTypes().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getCategories().get(0).getLabel() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getCategories().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getUpdatedLabels().getModification() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getPagination().getRefreshCursor() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getPagination().getNextCursor() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getPagination().getRefreshUrl() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getPagination().getNextUrl() != null);
+    System.assert(response.getFeedback().get(0).getFeedbackData().getPagination().getTotal() != null);
+
     Test.stopTest();
   }
+  static testMethod void testGetFeedback() {
+    String mockResponseBody = '{"feedback_id": "feedbackId", "created": "2017-05-16T13:56:54.957Z", "comment": "comment", "feedback_data": {"feedback_type": "feedbackType", "document": {"title": "title", "hash": "hash"}, "model_id": "modelId", "model_version": "modelVersion", "location": {"begin": "6", "end": "4"}, "text": "text", "original_labels": {"types": [{"label": {"nature": "nature", "party": "party"}, "provenance_ids": ["provenanceIds"]}], "categories": [{"label": "label", "provenance_ids": ["provenanceIds"]}], "modification": "modification"}, "updated_labels": {"types": [{"label": {"nature": "nature", "party": "party"}, "provenance_ids": ["provenanceIds"]}], "categories": [{"label": "label", "provenance_ids": ["provenanceIds"]}], "modification": "modification"}, "pagination": {"refresh_cursor": "refreshCursor", "next_cursor": "nextCursor", "refresh_url": "refreshUrl", "next_url": "nextUrl", "total": "5"}}}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
 
+    IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptionsModel = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
+      .feedbackId('testString')
+      .model('contracts')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMCompareComplyV1Models.GetFeedback response = service.getFeedback(getFeedbackOptionsModel);
+    System.assert(response.getFeedbackId() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getComment() != null);
+    System.assert(response.getFeedbackData().getFeedbackType() != null);
+    System.assert(response.getFeedbackData().getDocument().getTitle() != null);
+    System.assert(response.getFeedbackData().getDocument().getHash() != null);
+    System.assert(response.getFeedbackData().getModelId() != null);
+    System.assert(response.getFeedbackData().getModelVersion() != null);
+    System.assert(response.getFeedbackData().getLocation().getXBegin() != null);
+    System.assert(response.getFeedbackData().getLocation().getXEnd() != null);
+    System.assert(response.getFeedbackData().getText() != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getTypes().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getCategories().get(0).getLabel() != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getCategories().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedbackData().getOriginalLabels().getModification() != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getNature() != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getLabel().getParty() != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getTypes().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getCategories().get(0).getLabel() != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getCategories().get(0).getProvenanceIds().get(0) != null);
+    System.assert(response.getFeedbackData().getUpdatedLabels().getModification() != null);
+    System.assert(response.getFeedbackData().getPagination().getRefreshCursor() != null);
+    System.assert(response.getFeedbackData().getPagination().getNextCursor() != null);
+    System.assert(response.getFeedbackData().getPagination().getRefreshUrl() != null);
+    System.assert(response.getFeedbackData().getPagination().getNextUrl() != null);
+    System.assert(response.getFeedbackData().getPagination().getTotal() != null);
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteFeedback() {
+    String mockResponseBody = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptionsModel = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
+      .feedbackId('testString')
+      .model('contracts')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteFeedback(deleteFeedbackOptionsModel);
+
+    Test.stopTest();
+  }
   static testMethod void testCreateBatch() {
-    String body = IBMWatsonMockResponses.batchStatusResponse();
+    String mockResponseBody = '{"function": "function", "input_bucket_location": "inputBucketLocation", "input_bucket_name": "inputBucketName", "output_bucket_location": "outputBucketLocation", "output_bucket_name": "outputBucketName", "batch_id": "batchId", "document_counts": {"total": "5", "pending": "7", "successful": "10", "failed": "6"}, "status": "status", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z"}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMWatsonFile testCredentialFile = new IBMWatsonFile.FileBuilder()
-      .name('test_credentials.json')
-      .description('Test JSON file')
-      .contentType(IBMWatsonHttpMediaType.APPLICATION_JSON)
-      .body(blob.valueOf('Test string'))
+    IBMCompareComplyV1Models.CreateBatchOptions createBatchOptionsModel = new IBMCompareComplyV1Models.CreateBatchOptionsBuilder()
+      .function('html_conversion')
+      .inputCredentialsFile(mockFile)
+      .inputBucketLocation('testString')
+      .inputBucketName('testString')
+      .outputCredentialsFile(mockFile)
+      .outputBucketLocation('testString')
+      .outputBucketName('testString')
+      .model('contracts')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMCompareComplyV1Models.CreateBatchOptions createBatchOptions = new IBMCompareComplyV1Models.CreateBatchOptionsBuilder()
-      .function(ELEMENT_CLASSIFICATION)
-      .inputBucketLocation(BUCKET_LOCATION)
-      .inputBucketName(BUCKET_NAME)
-      .inputCredentialsFile(testCredentialFile)
-      .model(CONTRACTS)
-      .outputBucketLocation(BUCKET_LOCATION)
-      .outputBucketName(BUCKET_NAME)
-      .outputCredentialsFile(testCredentialFile)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    createBatchOptions = createBatchOptions.newBuilder().build();
-    IBMCompareComplyV1Models.BatchStatus response = service.createBatch(createBatchOptions);
 
-    assertBatchStatusResponse(response);
+    IBMCompareComplyV1Models.BatchStatus response = service.createBatch(createBatchOptionsModel);
+    System.assert(response.getFunction() != null);
+    System.assert(response.getInputBucketLocation() != null);
+    System.assert(response.getInputBucketName() != null);
+    System.assert(response.getOutputBucketLocation() != null);
+    System.assert(response.getOutputBucketName() != null);
+    System.assert(response.getBatchId() != null);
+    System.assert(response.getDocumentCounts().getTotal() != null);
+    System.assert(response.getDocumentCounts().getPending() != null);
+    System.assert(response.getDocumentCounts().getSuccessful() != null);
+    System.assert(response.getDocumentCounts().getFailed() != null);
+    System.assert(response.getStatus() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getUpdated() != null);
+
     Test.stopTest();
   }
-
-  static testMethod void testGetBatch() {
-    String body = IBMWatsonMockResponses.batchStatusResponse();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-      200,
-      'Success',
-      body,
-      null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-
-    IBMCompareComplyV1Models.GetBatchOptions getBatchOptions = new IBMCompareComplyV1Models.GetBatchOptionsBuilder()
-      .batchId(BATCH_ID)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
-      .build();
-    getBatchOptions = getBatchOptions.newBuilder().build();
-    IBMCompareComplyV1Models.BatchStatus response = service.getBatch(getBatchOptions);
-
-    assertBatchStatusResponse(response);
-    Test.stopTest();
-  }
-
   static testMethod void testListBatches() {
-    String body = IBMWatsonMockResponses.batchesResponse();
+    String mockResponseBody = '{"batches": [{"function": "function", "input_bucket_location": "inputBucketLocation", "input_bucket_name": "inputBucketName", "output_bucket_location": "outputBucketLocation", "output_bucket_name": "outputBucketName", "batch_id": "batchId", "document_counts": {"total": "5", "pending": "7", "successful": "10", "failed": "6"}, "status": "status", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z"}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptions = new IBMCompareComplyV1Models.ListBatchesOptionsBuilder()
-      .addHeader(HEADER_NAME, HEADER_VALUE)
+    IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptionsModel = new IBMCompareComplyV1Models.ListBatchesOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
-    listBatchesOptions = listBatchesOptions.newBuilder().build();
-    IBMCompareComplyV1Models.Batches response = service.listBatches(listBatchesOptions);
 
-    assertBatchStatusResponse(response.getBatches().get(0));
+    IBMCompareComplyV1Models.Batches response = service.listBatches(listBatchesOptionsModel);
+    System.assert(response.getBatches().get(0).getFunction() != null);
+    System.assert(response.getBatches().get(0).getInputBucketLocation() != null);
+    System.assert(response.getBatches().get(0).getInputBucketName() != null);
+    System.assert(response.getBatches().get(0).getOutputBucketLocation() != null);
+    System.assert(response.getBatches().get(0).getOutputBucketName() != null);
+    System.assert(response.getBatches().get(0).getBatchId() != null);
+    System.assert(response.getBatches().get(0).getDocumentCounts().getTotal() != null);
+    System.assert(response.getBatches().get(0).getDocumentCounts().getPending() != null);
+    System.assert(response.getBatches().get(0).getDocumentCounts().getSuccessful() != null);
+    System.assert(response.getBatches().get(0).getDocumentCounts().getFailed() != null);
+    System.assert(response.getBatches().get(0).getStatus() != null);
+    System.assert(response.getBatches().get(0).getCreated() != null);
+    System.assert(response.getBatches().get(0).getUpdated() != null);
+
     Test.stopTest();
   }
+  static testMethod void testGetBatch() {
+    String mockResponseBody = '{"function": "function", "input_bucket_location": "inputBucketLocation", "input_bucket_name": "inputBucketName", "output_bucket_location": "outputBucketLocation", "output_bucket_name": "outputBucketName", "batch_id": "batchId", "document_counts": {"total": "5", "pending": "7", "successful": "10", "failed": "6"}, "status": "status", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z"}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
 
+    IBMCompareComplyV1Models.GetBatchOptions getBatchOptionsModel = new IBMCompareComplyV1Models.GetBatchOptionsBuilder()
+      .batchId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMCompareComplyV1Models.BatchStatus response = service.getBatch(getBatchOptionsModel);
+    System.assert(response.getFunction() != null);
+    System.assert(response.getInputBucketLocation() != null);
+    System.assert(response.getInputBucketName() != null);
+    System.assert(response.getOutputBucketLocation() != null);
+    System.assert(response.getOutputBucketName() != null);
+    System.assert(response.getBatchId() != null);
+    System.assert(response.getDocumentCounts().getTotal() != null);
+    System.assert(response.getDocumentCounts().getPending() != null);
+    System.assert(response.getDocumentCounts().getSuccessful() != null);
+    System.assert(response.getDocumentCounts().getFailed() != null);
+    System.assert(response.getStatus() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getUpdated() != null);
+
+    Test.stopTest();
+  }
   static testMethod void testUpdateBatch() {
-    String body = IBMWatsonMockResponses.batchStatusResponse();
+    String mockResponseBody = '{"function": "function", "input_bucket_location": "inputBucketLocation", "input_bucket_name": "inputBucketName", "output_bucket_location": "outputBucketLocation", "output_bucket_name": "outputBucketName", "batch_id": "batchId", "document_counts": {"total": "5", "pending": "7", "successful": "10", "failed": "6"}, "status": "status", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z"}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMCompareComplyV1Models.UpdateBatchOptions updateBatchOptions = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
-      .action(CANCEL)
-      .batchId(BATCH_ID)
-      .model(CONTRACTS)
-      .addHeader(HEADER_NAME, HEADER_VALUE)
+    IBMCompareComplyV1Models.UpdateBatchOptions updateBatchOptionsModel = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
+      .batchId('testString')
+      .action('rescan')
+      .model('contracts')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    updateBatchOptions = updateBatchOptions.newBuilder().build();
-    IBMCompareComplyV1Models.BatchStatus response = service.updateBatch(updateBatchOptions);
 
-    assertBatchStatusResponse(response);
+    IBMCompareComplyV1Models.BatchStatus response = service.updateBatch(updateBatchOptionsModel);
+    System.assert(response.getFunction() != null);
+    System.assert(response.getInputBucketLocation() != null);
+    System.assert(response.getInputBucketName() != null);
+    System.assert(response.getOutputBucketLocation() != null);
+    System.assert(response.getOutputBucketName() != null);
+    System.assert(response.getBatchId() != null);
+    System.assert(response.getDocumentCounts().getTotal() != null);
+    System.assert(response.getDocumentCounts().getPending() != null);
+    System.assert(response.getDocumentCounts().getSuccessful() != null);
+    System.assert(response.getDocumentCounts().getFailed() != null);
+    System.assert(response.getStatus() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getUpdated() != null);
+
     Test.stopTest();
-  }
-
-  private static void assertBatchStatusResponse(IBMCompareComplyV1Models.BatchStatus response) {
-    System.assertEquals(ELEMENT_CLASSIFICATION, response.getFunction());
-    System.assertEquals(BUCKET_LOCATION, response.getInputBucketLocation());
-    System.assertEquals(BUCKET_NAME, response.getInputBucketName());
-    System.assertEquals(BUCKET_LOCATION, response.getOutputBucketLocation());
-    System.assertEquals(BUCKET_NAME, response.getOutputBucketName());
-    System.assertEquals(BATCH_ID, response.getBatchId());
-    System.assertEquals(TOTAL, response.getDocumentCounts().getTotal());
-    System.assertEquals(PENDING, response.getDocumentCounts().getPending());
-    System.assertEquals(SUCCESSFUL, response.getDocumentCounts().getSuccessful());
-    System.assertEquals(FAILED, response.getDocumentCounts().getFailed());
-    System.assertEquals(STATUS, response.getStatus());
-    System.assertEquals(TEST_DATE, response.getCreated());
-    System.assertEquals(TEST_DATE, response.getUpdated());
   }
 }

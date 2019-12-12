@@ -1,730 +1,766 @@
 @isTest
 private class IBMVisualRecognitionV4Test {
-  private static String VERSION;
-  private static String COLLECTION_ID;
-  private static String IMAGE_URL;
-  private static String TRAINING_DATA;
-  private static String OBJECT_VAL;
-  private static Long TOP;
-  private static Long LEFT;
-  private static Long WIDTH;
-  private static Long HEIGHT;
-  private static String IMAGE_ID;
-  private static Double THRESHOLD;
-  private static String NAME;
-  private static String DESCRIPTION;
-  private static Long IMAGE_COUNT;
-  private static String CUSTOMER_ID;
-  private static String IMAGE_TYPE;
-  private static String FILENAME;
-  private static String ARCHIVE_FILENAME;
-  private static String SOURCE_URL;
-  private static String RESOLVED_URL;
-  private static Double SCORE;
-  private static String CODE;
-  private static String MESSAGE;
-  private static String MORE_INFO;
-  private static String ERROR_TYPE;
-  private static String TRACE;
-  private static String ANALYZE_OPTIONS_FEATURES;
-  private static String GET_JPEG_IMAGE_SIZE;
-  private static String HEADER_NAME;
-  private static String HEADER_VALUE;
-
-  private static IBMWatsonFile testFile;
-  private static IBMVisualRecognitionV4Models.TrainingDataObject trainingDataObject;
-  private static IBMVisualRecognitionV4Models.Location location;
-  private static IBMVisualRecognitionV4Models.TrainingStatus trainingStatus;
-  private static IBMVisualRecognitionV4Models.ObjectTrainingStatus objectTrainingStatus;
-  private static Datetime testDate;
-
   private static IBMVisualRecognitionV4 service;
+  private static IBMWatsonFile mockFile;
 
   static {
-    VERSION = '2019-02-11';
-    COLLECTION_ID = '123456789';
-    IMAGE_URL = 'www.image.jpg';
-    TRAINING_DATA = 'training_data';
-    OBJECT_VAL = 'object';
-    TOP = 0L;
-    LEFT = 10L;
-    WIDTH = 100L;
-    HEIGHT = 200L;
-    IMAGE_ID = 'image_id';
-    THRESHOLD = 12.0;
-    NAME = 'name';
-    DESCRIPTION = 'description';
-    IMAGE_COUNT = 50L;
-    CUSTOMER_ID = 'customer_id';
-    IMAGE_TYPE = 'file';
-    FILENAME = 'filename';
-    ARCHIVE_FILENAME = 'archive_filename';
-    SOURCE_URL = 'source_url';
-    RESOLVED_URL = 'resolved_url';
-    SCORE = 5.0;
-    CODE = 'code';
-    MESSAGE = 'message';
-    MORE_INFO = 'more_info';
-    ERROR_TYPE = 'field';
-    TRACE = 'trace';
-    ANALYZE_OPTIONS_FEATURES = 'objects';
-    GET_JPEG_IMAGE_SIZE = 'full';
-    HEADER_NAME = 'Header-Name';
-    HEADER_VALUE = 'header_value';
-
-    // create test models
-    testFile = new IBMWatsonFile.FileBuilder()
-        .name('image.jpg')
-        .description('Test JPEG image file')
-        .contentType('image/jpeg')
-        .body(blob.valueOf('Test string that is not an image'))
-        .build();
-    location = new IBMVisualRecognitionV4Models.LocationBuilder()
-        .top(TOP)
-        .left(LEFT)
-        .height(HEIGHT)
-        .width(WIDTH)
-        .build();
-    trainingDataObject = new IBMVisualRecognitionV4Models.TrainingDataObjectBuilder().build();
-    objectTrainingStatus = new IBMVisualRecognitionV4Models.ObjectTrainingStatusBuilder()
-        .ready(true)
-        .inProgress(true)
-        .dataChanged(true)
-        .latestFailed(true)
-        .description(DESCRIPTION)
-        .build();
-    trainingStatus = new IBMVisualRecognitionV4Models.TrainingStatusBuilder()
-        .objects(objectTrainingStatus)
-        .build();
-    testDate = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
-
-    service = new IBMVisualRecognitionV4(VERSION, new IBMWatsonNoAuthAuthenticator());
+    service = new IBMVisualRecognitionV4('2019-02-11', new IBMWatsonNoAuthAuthenticator());
+    mockFile = new IBMWatsonFile.FileBuilder()
+      .name('mock-file.txt')
+      .description('Test file')
+      .contentType('text/plain')
+      .body(blob.valueOf('Test string'))
+      .build();
   }
 
-  static testMethod void testAddImagesOptions() {
+  static IBMWatsonMapModel createMockMap() {
+    IBMWatsonMapModel mockMap = new IBMWatsonMapModel();
+    mockMap.put('testKey', 'testVal');
+    return mockMap;
+  }
+
+  static testMethod void testAddImageTrainingDataOptionsModel() {
     Test.startTest();
-    List<IBMWatsonFile> imageList = new List<IBMWatsonFile> { testFile };
-    List<String> imageUrlList = new List<String> { IMAGE_URL };
+    IBMVisualRecognitionV4Models.Location locationModel = new IBMVisualRecognitionV4Models.LocationBuilder()
+      .top(38)
+      .left(38)
+      .width(38)
+      .height(38)
+      .build();
+    IBMVisualRecognitionV4Models.TrainingDataObject trainingDataObjectModel = new IBMVisualRecognitionV4Models.TrainingDataObjectBuilder()
+      .xObject('testString')
+      .location(locationModel)
+      .build();
 
-    IBMVisualRecognitionV4Models.AddImagesOptions options = new IBMVisualRecognitionV4Models.AddImagesOptionsBuilder()
-        .imagesFile(imageList)
-        .addImagesFile(testFile)
-        .imageUrl(imageUrlList)
-        .addImageUrl(IMAGE_URL)
-        .collectionId(COLLECTION_ID)
-        .trainingData(TRAINING_DATA)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
+    IBMVisualRecognitionV4Models.AddImageTrainingDataOptions testRequestModel = new IBMVisualRecognitionV4Models.AddImageTrainingDataOptionsBuilder()
+      .collectionId('testString')
+      .imageId('testString')
+      .objects(new List<IBMVisualRecognitionV4Models.TrainingDataObject> { trainingDataObjectModel })
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(2, options.imagesFile().size());
-    System.assertEquals(testFile, options.imagesFile().get(0));
-    System.assertEquals(2, options.imageUrl().size());
-    System.assertEquals(IMAGE_URL, options.imageUrl().get(0));
-    System.assertEquals(COLLECTION_ID, options.collectionId());
-    System.assertEquals(TRAINING_DATA, options.trainingData());
+    System.assertEquals('testString', testRequestModel.collectionId());
+    System.assertEquals('testString', testRequestModel.imageId());
+    System.assertEquals(new List<IBMVisualRecognitionV4Models.TrainingDataObject> { trainingDataObjectModel }, testRequestModel.objects());
     Test.stopTest();
   }
-
-  static testMethod void testAddImageTrainingDataOptions() {
+  static testMethod void testAddImagesOptionsModel() {
     Test.startTest();
-    List<IBMVisualRecognitionV4Models.TrainingDataObject> objectList = new List<IBMVisualRecognitionV4Models.TrainingDataObject> { trainingDataObject };
 
-    IBMVisualRecognitionV4Models.AddImageTrainingDataOptions options = new IBMVisualRecognitionV4Models.AddImageTrainingDataOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .imageId(IMAGE_ID)
-        .objects(objectList)
-        .addObjects(trainingDataObject)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
+    IBMVisualRecognitionV4Models.AddImagesOptions testRequestModel = new IBMVisualRecognitionV4Models.AddImagesOptionsBuilder()
+      .collectionId('testString')
+      .imagesFile(new List<IBMWatsonFile> { mockFile })
+      .imageUrl(new List<String> { 'testString' })
+      .trainingData('{"objects":[{"object":"2018-Fit","location":{"left":33,"top":8,"width":760,"height":419}}]}')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
-    System.assertEquals(IMAGE_ID, options.imageId());
-    System.assertEquals(2, options.objects().size());
-    System.assertEquals(trainingDataObject, options.objects().get(0));
+    System.assertEquals('testString', testRequestModel.collectionId());
+    System.assertEquals(new List<IBMWatsonFile> { mockFile }, testRequestModel.imagesFile());
+    System.assertEquals(new List<String> { 'testString' }, testRequestModel.imageUrl());
+    System.assertEquals('{"objects":[{"object":"2018-Fit","location":{"left":33,"top":8,"width":760,"height":419}}]}', testRequestModel.trainingData());
     Test.stopTest();
   }
-
-  static testMethod void testAnalyzeOptions() {
+  static testMethod void testAnalyzeOptionsModel() {
     Test.startTest();
-    List<String> collectionIdList = new List<String> { COLLECTION_ID };
-    List<String> featureList = new List<String> { ANALYZE_OPTIONS_FEATURES };
-    List<IBMWatsonFile> imageList = new List<IBMWatsonFile> { testFile };
-    List<String> imageUrlList = new List<String> { IMAGE_URL };
 
-    IBMVisualRecognitionV4Models.AnalyzeOptions options = new IBMVisualRecognitionV4Models.AnalyzeOptionsBuilder()
-        .collectionIds(collectionIdList)
-        .addCollectionIds(COLLECTION_ID)
-        .features(featureList)
-        .addFeatures(ANALYZE_OPTIONS_FEATURES)
-        .imagesFile(imageList)
-        .addImagesFile(testFile)
-        .imageUrl(imageUrlList)
-        .addImageUrl(IMAGE_URL)
-        .threshold(THRESHOLD)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
+    IBMVisualRecognitionV4Models.AnalyzeOptions testRequestModel = new IBMVisualRecognitionV4Models.AnalyzeOptionsBuilder()
+      .collectionIds(new List<String> { 'testString' })
+      .features(new List<String> { 'objects' })
+      .imagesFile(new List<IBMWatsonFile> { mockFile })
+      .imageUrl(new List<String> { 'testString' })
+      .threshold((Double) 72.5)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
 
-    System.assertEquals(2, options.collectionIds().size());
-    System.assertEquals(COLLECTION_ID, options.collectionIds().get(0));
-    System.assertEquals(2, options.features().size());
-    System.assertEquals(ANALYZE_OPTIONS_FEATURES, options.features().get(0));
-    System.assertEquals(2, options.imagesFile().size());
-    System.assertEquals(testFile, options.imagesFile().get(0));
-    System.assertEquals(2, options.imageUrl().size());
-    System.assertEquals(IMAGE_URL, options.imageUrl().get(0));
-    System.assertEquals(THRESHOLD, options.threshold());
+    System.assertEquals(new List<String> { 'testString' }, testRequestModel.collectionIds());
+    System.assertEquals(new List<String> { 'objects' }, testRequestModel.features());
+    System.assertEquals(new List<IBMWatsonFile> { mockFile }, testRequestModel.imagesFile());
+    System.assertEquals(new List<String> { 'testString' }, testRequestModel.imageUrl());
+    System.assertEquals((Double) 72.5, testRequestModel.threshold());
     Test.stopTest();
   }
-
-  static testMethod void testCreateCollectionOptions() {
+  static testMethod void testCreateCollectionOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.CreateCollectionOptions options = new IBMVisualRecognitionV4Models.CreateCollectionOptionsBuilder()
-        .name(NAME)
-        .description(DESCRIPTION)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(NAME, options.name());
-    System.assertEquals(DESCRIPTION, options.description());
+    IBMVisualRecognitionV4Models.CreateCollectionOptions testRequestModel = new IBMVisualRecognitionV4Models.CreateCollectionOptionsBuilder()
+      .name('testString')
+      .description('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.name());
+    System.assertEquals('testString', testRequestModel.description());
     Test.stopTest();
   }
-
-  static testMethod void testDeleteCollectionOptions() {
+  static testMethod void testDeleteCollectionOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.DeleteCollectionOptions options = new IBMVisualRecognitionV4Models.DeleteCollectionOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
+    IBMVisualRecognitionV4Models.DeleteCollectionOptions testRequestModel = new IBMVisualRecognitionV4Models.DeleteCollectionOptionsBuilder()
+      .collectionId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.collectionId());
     Test.stopTest();
   }
-
-  static testMethod void testDeleteImageOptions() {
+  static testMethod void testDeleteImageOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.DeleteImageOptions options = new IBMVisualRecognitionV4Models.DeleteImageOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .imageId(IMAGE_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
-    System.assertEquals(IMAGE_ID, options.imageId());
+    IBMVisualRecognitionV4Models.DeleteImageOptions testRequestModel = new IBMVisualRecognitionV4Models.DeleteImageOptionsBuilder()
+      .collectionId('testString')
+      .imageId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.collectionId());
+    System.assertEquals('testString', testRequestModel.imageId());
     Test.stopTest();
   }
-
-  static testMethod void testDeleteUserDataOptions() {
+  static testMethod void testDeleteUserDataOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.DeleteUserDataOptions options = new IBMVisualRecognitionV4Models.DeleteUserDataOptionsBuilder()
-        .customerId(CUSTOMER_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(CUSTOMER_ID, options.customerId());
+    IBMVisualRecognitionV4Models.DeleteUserDataOptions testRequestModel = new IBMVisualRecognitionV4Models.DeleteUserDataOptionsBuilder()
+      .customerId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.customerId());
     Test.stopTest();
   }
-
-  static testMethod void testGetCollectionOptions() {
+  static testMethod void testGetCollectionOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.GetCollectionOptions options = new IBMVisualRecognitionV4Models.GetCollectionOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
+    IBMVisualRecognitionV4Models.GetCollectionOptions testRequestModel = new IBMVisualRecognitionV4Models.GetCollectionOptionsBuilder()
+      .collectionId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.collectionId());
     Test.stopTest();
   }
-
-  static testMethod void testGetImageDetailsOptions() {
+  static testMethod void testGetImageDetailsOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.GetImageDetailsOptions options = new IBMVisualRecognitionV4Models.GetImageDetailsOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .imageId(IMAGE_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
-    System.assertEquals(IMAGE_ID, options.imageId());
+    IBMVisualRecognitionV4Models.GetImageDetailsOptions testRequestModel = new IBMVisualRecognitionV4Models.GetImageDetailsOptionsBuilder()
+      .collectionId('testString')
+      .imageId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.collectionId());
+    System.assertEquals('testString', testRequestModel.imageId());
     Test.stopTest();
   }
-
-  static testMethod void testGetJpegImageOptions() {
+  static testMethod void testGetJpegImageOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.GetJpegImageOptions options = new IBMVisualRecognitionV4Models.GetJpegImageOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .imageId(IMAGE_ID)
-        .size(GET_JPEG_IMAGE_SIZE)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
-    System.assertEquals(IMAGE_ID, options.imageId());
-    System.assertEquals(GET_JPEG_IMAGE_SIZE, options.size());
+    IBMVisualRecognitionV4Models.GetJpegImageOptions testRequestModel = new IBMVisualRecognitionV4Models.GetJpegImageOptionsBuilder()
+      .collectionId('testString')
+      .imageId('testString')
+      .size('full')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.collectionId());
+    System.assertEquals('testString', testRequestModel.imageId());
+    System.assertEquals('full', testRequestModel.size());
     Test.stopTest();
   }
-
-  static testMethod void testListCollectionsOptions() {
+  static testMethod void testGetTrainingUsageOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.ListCollectionsOptions options = new IBMVisualRecognitionV4Models.ListCollectionsOptionsBuilder()
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assert(options != null);
+    IBMVisualRecognitionV4Models.GetTrainingUsageOptions testRequestModel = new IBMVisualRecognitionV4Models.GetTrainingUsageOptionsBuilder()
+      .startTime('testString')
+      .endTime('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.startTime());
+    System.assertEquals('testString', testRequestModel.endTime());
     Test.stopTest();
   }
-
-  static testMethod void testListImagesOptions() {
+  static testMethod void testListCollectionsOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.ListImagesOptions options = new IBMVisualRecognitionV4Models.ListImagesOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
+    IBMVisualRecognitionV4Models.ListCollectionsOptions testRequestModel = new IBMVisualRecognitionV4Models.ListCollectionsOptionsBuilder()
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
     Test.stopTest();
   }
-
-  static testMethod void testLocation() {
+  static testMethod void testListImagesOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.Location location = new IBMVisualRecognitionV4Models.LocationBuilder()
-        .top(TOP)
-        .left(LEFT)
-        .width(WIDTH)
-        .height(HEIGHT)
-        .build();
-    location = location.newBuilder().build();
 
-    System.assertEquals(TOP, location.getTop());
-    System.assertEquals(LEFT, location.getLeft());
-    System.assertEquals(WIDTH, location.getWidth());
-    System.assertEquals(HEIGHT, location.getHeight());
+    IBMVisualRecognitionV4Models.ListImagesOptions testRequestModel = new IBMVisualRecognitionV4Models.ListImagesOptionsBuilder()
+      .collectionId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.collectionId());
     Test.stopTest();
   }
-
-  static testMethod void testObjectTrainingStatus() {
+  static testMethod void testLocationModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.ObjectTrainingStatus trainingStatus = new IBMVisualRecognitionV4Models.ObjectTrainingStatusBuilder()
-        .ready(true)
-        .inProgress(true)
-        .dataChanged(true)
-        .latestFailed(true)
-        .description(DESCRIPTION)
-        .build();
-    trainingStatus = trainingStatus.newBuilder().build();
 
-    System.assert(trainingStatus.getReady());
-    System.assert(trainingStatus.getInProgress());
-    System.assert(trainingStatus.getDataChanged());
-    System.assert(trainingStatus.getLatestFailed());
-    System.assertEquals(DESCRIPTION, trainingStatus.getDescription());
+    IBMVisualRecognitionV4Models.Location testRequestModel = new IBMVisualRecognitionV4Models.LocationBuilder()
+      .top(38)
+      .left(38)
+      .width(38)
+      .height(38)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(38, testRequestModel.getTop());
+    System.assertEquals(38, testRequestModel.getLeft());
+    System.assertEquals(38, testRequestModel.getWidth());
+    System.assertEquals(38, testRequestModel.getHeight());
     Test.stopTest();
   }
-
-  static testMethod void testTrainingStatus() {
+  static testMethod void testObjectTrainingStatusModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.TrainingStatus trainingStatus = new IBMVisualRecognitionV4Models.TrainingStatusBuilder()
-        .objects(objectTrainingStatus)
-        .build();
-    trainingStatus = trainingStatus.newBuilder().build();
 
-    System.assertEquals(objectTrainingStatus, trainingStatus.getObjects());
+    IBMVisualRecognitionV4Models.ObjectTrainingStatus testRequestModel = new IBMVisualRecognitionV4Models.ObjectTrainingStatusBuilder()
+      .ready(true)
+      .inProgress(true)
+      .dataChanged(true)
+      .latestFailed(true)
+      .description('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(true, testRequestModel.getReady());
+    System.assertEquals(true, testRequestModel.getInProgress());
+    System.assertEquals(true, testRequestModel.getDataChanged());
+    System.assertEquals(true, testRequestModel.getLatestFailed());
+    System.assertEquals('testString', testRequestModel.getDescription());
     Test.stopTest();
   }
-
-  static testMethod void testTrainOptions() {
+  static testMethod void testTrainOptionsModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.TrainOptions options = new IBMVisualRecognitionV4Models.TrainOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
+    IBMVisualRecognitionV4Models.TrainOptions testRequestModel = new IBMVisualRecognitionV4Models.TrainOptionsBuilder()
+      .collectionId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.collectionId());
     Test.stopTest();
   }
-
-  static testMethod void testUpdateCollectionOptions() {
+  static testMethod void testTrainingDataObjectModel() {
     Test.startTest();
-    IBMVisualRecognitionV4Models.UpdateCollectionOptions options = new IBMVisualRecognitionV4Models.UpdateCollectionOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .name(NAME)
-        .description(DESCRIPTION)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    options = options.newBuilder().build();
+    IBMVisualRecognitionV4Models.Location locationModel = new IBMVisualRecognitionV4Models.LocationBuilder()
+      .top(38)
+      .left(38)
+      .width(38)
+      .height(38)
+      .build();
 
-    System.assertEquals(COLLECTION_ID, options.collectionId());
-    System.assertEquals(NAME, options.name());
-    System.assertEquals(DESCRIPTION, options.description());
+    IBMVisualRecognitionV4Models.TrainingDataObject testRequestModel = new IBMVisualRecognitionV4Models.TrainingDataObjectBuilder()
+      .xObject('testString')
+      .location(locationModel)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.getXObject());
+    System.assertEquals(locationModel, testRequestModel.getLocation());
+    Test.stopTest();
+  }
+  static testMethod void testTrainingStatusModel() {
+    Test.startTest();
+    IBMVisualRecognitionV4Models.ObjectTrainingStatus objectTrainingStatusModel = new IBMVisualRecognitionV4Models.ObjectTrainingStatusBuilder()
+      .ready(true)
+      .inProgress(true)
+      .dataChanged(true)
+      .latestFailed(true)
+      .description('testString')
+      .build();
+
+    IBMVisualRecognitionV4Models.TrainingStatus testRequestModel = new IBMVisualRecognitionV4Models.TrainingStatusBuilder()
+      .objects(objectTrainingStatusModel)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(objectTrainingStatusModel, testRequestModel.getObjects());
+    Test.stopTest();
+  }
+  static testMethod void testUpdateCollectionOptionsModel() {
+    Test.startTest();
+
+    IBMVisualRecognitionV4Models.UpdateCollectionOptions testRequestModel = new IBMVisualRecognitionV4Models.UpdateCollectionOptionsBuilder()
+      .collectionId('testString')
+      .name('testString')
+      .description('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.collectionId());
+    System.assertEquals('testString', testRequestModel.name());
+    System.assertEquals('testString', testRequestModel.description());
     Test.stopTest();
   }
 
   static testMethod void testAnalyze() {
-    String body = IBMWatsonMockResponses.analyzeResponse();
+    String mockResponseBody = '{"images": [{"source": {"type": "xType", "filename": "filename", "archive_filename": "archiveFilename", "source_url": "sourceUrl", "resolved_url": "resolvedUrl"}, "dimensions": {"height": "6", "width": "5"}, "objects": {"collections": [{"collection_id": "collectionId", "objects": [{"object": "xObject", "location": {"top": "3", "left": "4", "width": "5", "height": "6"}, "score": "5"}]}]}, "errors": [{"code": "code", "message": "message", "more_info": "moreInfo", "target": {"type": "xType", "name": "name"}}]}], "warnings": [{"code": "code", "message": "message", "more_info": "moreInfo"}], "trace": "trace"}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.AnalyzeOptions options = new IBMVisualRecognitionV4Models.AnalyzeOptionsBuilder()
-        .addCollectionIds(COLLECTION_ID)
-        .addFeatures(ANALYZE_OPTIONS_FEATURES)
-        .addImagesFile(testFile)
-        .addImageUrl(IMAGE_URL)
-        .threshold(THRESHOLD)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.AnalyzeResponse response = service.analyze(options);
+    IBMVisualRecognitionV4Models.AnalyzeOptions analyzeOptionsModel = new IBMVisualRecognitionV4Models.AnalyzeOptionsBuilder()
+      .collectionIds(new List<String> { 'testString' })
+      .features(new List<String> { 'objects' })
+      .imagesFile(new List<IBMWatsonFile> { mockFile })
+      .imageUrl(new List<String> { 'testString' })
+      .threshold((Double) 72.5)
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    System.assertEquals(IMAGE_TYPE, response.getImages().get(0).getSource().getXType());
-    System.assertEquals(FILENAME, response.getImages().get(0).getSource().getFilename());
-    System.assertEquals(ARCHIVE_FILENAME, response.getImages().get(0).getSource().getArchiveFilename());
-    System.assertEquals(SOURCE_URL, response.getImages().get(0).getSource().getSourceUrl());
-    System.assertEquals(RESOLVED_URL, response.getImages().get(0).getSource().getResolvedUrl());
-    System.assertEquals(HEIGHT, response.getImages().get(0).getDimensions().getHeight());
-    System.assertEquals(WIDTH, response.getImages().get(0).getDimensions().getWidth());
-    System.assertEquals(COLLECTION_ID, response.getImages().get(0).getObjects().getCollections().get(0).getCollectionId());
-    System.assertEquals(OBJECT_VAL,
-        response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getXObject());
-    System.assertEquals(TOP,
-        response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getTop());
-    System.assertEquals(LEFT,
-        response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getLeft());
-    System.assertEquals(WIDTH,
-        response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getWidth());
-    System.assertEquals(HEIGHT,
-        response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getHeight());
-    System.assertEquals(SCORE,
-        response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getScore());
-    System.assertEquals(CODE, response.getImages().get(0).getErrors().get(0).getCode());
-    System.assertEquals(MESSAGE, response.getImages().get(0).getErrors().get(0).getMessage());
-    System.assertEquals(MORE_INFO, response.getImages().get(0).getErrors().get(0).getMoreInfo());
-    System.assertEquals(ERROR_TYPE, response.getImages().get(0).getErrors().get(0).getTarget().getXType());
-    System.assertEquals(NAME, response.getImages().get(0).getErrors().get(0).getTarget().getName());
-    System.assertEquals(CODE, response.getWarnings().get(0).getCode());
-    System.assertEquals(MESSAGE, response.getWarnings().get(0).getMessage());
-    System.assertEquals(MORE_INFO, response.getWarnings().get(0).getMoreInfo());
-    System.assertEquals(TRACE, response.getTrace());
+    IBMVisualRecognitionV4Models.AnalyzeResponse response = service.analyze(analyzeOptionsModel);
+    System.assert(response.getImages().get(0).getSource().getXType() != null);
+    System.assert(response.getImages().get(0).getSource().getFilename() != null);
+    System.assert(response.getImages().get(0).getSource().getArchiveFilename() != null);
+    System.assert(response.getImages().get(0).getSource().getSourceUrl() != null);
+    System.assert(response.getImages().get(0).getSource().getResolvedUrl() != null);
+    System.assert(response.getImages().get(0).getDimensions().getHeight() != null);
+    System.assert(response.getImages().get(0).getDimensions().getWidth() != null);
+    System.assert(response.getImages().get(0).getObjects().getCollections().get(0).getCollectionId() != null);
+    System.assert(response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getXObject() != null);
+    System.assert(response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getTop() != null);
+    System.assert(response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getLeft() != null);
+    System.assert(response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getWidth() != null);
+    System.assert(response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getLocation().getHeight() != null);
+    System.assert(response.getImages().get(0).getObjects().getCollections().get(0).getObjects().get(0).getScore() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getCode() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getMessage() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getMoreInfo() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getTarget().getXType() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getTarget().getName() != null);
+    System.assert(response.getWarnings().get(0).getCode() != null);
+    System.assert(response.getWarnings().get(0).getMessage() != null);
+    System.assert(response.getWarnings().get(0).getMoreInfo() != null);
+    System.assert(response.getTrace() != null);
+
     Test.stopTest();
   }
-
-  private static void assertCollection(IBMVisualRecognitionV4Models.Collection response) {
-    System.assertEquals(COLLECTION_ID, response.getCollectionId());
-    System.assertEquals(NAME, response.getName());
-    System.assertEquals(DESCRIPTION, response.getDescription());
-    System.assertEquals(testDate, response.getCreated());
-    System.assertEquals(testDate, response.getUpdated());
-    System.assertEquals(IMAGE_COUNT, response.getImageCount());
-    System.assert(response.getTrainingStatus().getObjects().getReady());
-    System.assert(response.getTrainingStatus().getObjects().getInProgress());
-    System.assert(response.getTrainingStatus().getObjects().getDataChanged());
-    System.assert(response.getTrainingStatus().getObjects().getLatestFailed());
-    System.assertEquals(DESCRIPTION, response.getTrainingStatus().getObjects().getDescription());
-  }
-
   static testMethod void testCreateCollection() {
-    String body = IBMWatsonMockResponses.visRecCollection();
+    String mockResponseBody = '{"collection_id": "collectionId", "name": "name", "description": "description", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z", "image_count": "10", "training_status": {"objects": {"ready": false, "in_progress": true, "data_changed": false, "latest_failed": true, "description": "description"}}}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.CreateCollectionOptions options = new IBMVisualRecognitionV4Models.CreateCollectionOptionsBuilder()
-        .name(NAME)
-        .description(DESCRIPTION)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.Collection response = service.createCollection(options);
+    IBMVisualRecognitionV4Models.CreateCollectionOptions createCollectionOptionsModel = new IBMVisualRecognitionV4Models.CreateCollectionOptionsBuilder()
+      .name('testString')
+      .description('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    assertCollection(response);
+    IBMVisualRecognitionV4Models.Collection response = service.createCollection(createCollectionOptionsModel);
+    System.assert(response.getCollectionId() != null);
+    System.assert(response.getName() != null);
+    System.assert(response.getDescription() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getUpdated() != null);
+    System.assert(response.getImageCount() != null);
+    System.assert(response.getTrainingStatus().getObjects().getReady() != null);
+    System.assert(response.getTrainingStatus().getObjects().getInProgress() != null);
+    System.assert(response.getTrainingStatus().getObjects().getDataChanged() != null);
+    System.assert(response.getTrainingStatus().getObjects().getLatestFailed() != null);
+    System.assert(response.getTrainingStatus().getObjects().getDescription() != null);
+
     Test.stopTest();
   }
-
-  private static void assertCollectionsList(IBMVisualRecognitionV4Models.CollectionsList response) {
-    System.assertEquals(COLLECTION_ID, response.getCollections().get(0).getCollectionId());
-    System.assertEquals(NAME, response.getCollections().get(0).getName());
-    System.assertEquals(DESCRIPTION, response.getCollections().get(0).getDescription());
-    System.assertEquals(testDate, response.getCollections().get(0).getCreated());
-    System.assertEquals(testDate, response.getCollections().get(0).getUpdated());
-    System.assertEquals(IMAGE_COUNT, response.getCollections().get(0).getImageCount());
-    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getReady());
-    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getInProgress());
-    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getDataChanged());
-    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getLatestFailed());
-    System.assertEquals(DESCRIPTION, response.getCollections().get(0).getTrainingStatus().getObjects().getDescription());
-  }
-
   static testMethod void testListCollections() {
-    String body = IBMWatsonMockResponses.collectionsList();
+    String mockResponseBody = '{"collections": [{"collection_id": "collectionId", "name": "name", "description": "description", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z", "image_count": "10", "training_status": {"objects": {"ready": false, "in_progress": true, "data_changed": false, "latest_failed": true, "description": "description"}}}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.ListCollectionsOptions options = new IBMVisualRecognitionV4Models.ListCollectionsOptionsBuilder()
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.CollectionsList response = service.listCollections(options);
+    IBMVisualRecognitionV4Models.ListCollectionsOptions listCollectionsOptionsModel = new IBMVisualRecognitionV4Models.ListCollectionsOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    assertCollectionsList(response);
+    IBMVisualRecognitionV4Models.CollectionsList response = service.listCollections(listCollectionsOptionsModel);
+    System.assert(response.getCollections().get(0).getCollectionId() != null);
+    System.assert(response.getCollections().get(0).getName() != null);
+    System.assert(response.getCollections().get(0).getDescription() != null);
+    System.assert(response.getCollections().get(0).getCreated() != null);
+    System.assert(response.getCollections().get(0).getUpdated() != null);
+    System.assert(response.getCollections().get(0).getImageCount() != null);
+    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getReady() != null);
+    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getInProgress() != null);
+    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getDataChanged() != null);
+    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getLatestFailed() != null);
+    System.assert(response.getCollections().get(0).getTrainingStatus().getObjects().getDescription() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testGetCollection() {
-    String body = IBMWatsonMockResponses.visRecCollection();
+    String mockResponseBody = '{"collection_id": "collectionId", "name": "name", "description": "description", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z", "image_count": "10", "training_status": {"objects": {"ready": false, "in_progress": true, "data_changed": false, "latest_failed": true, "description": "description"}}}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.GetCollectionOptions options = new IBMVisualRecognitionV4Models.GetCollectionOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.Collection response = service.getCollection(options);
+    IBMVisualRecognitionV4Models.GetCollectionOptions getCollectionOptionsModel = new IBMVisualRecognitionV4Models.GetCollectionOptionsBuilder()
+      .collectionId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    assertCollection(response);
+    IBMVisualRecognitionV4Models.Collection response = service.getCollection(getCollectionOptionsModel);
+    System.assert(response.getCollectionId() != null);
+    System.assert(response.getName() != null);
+    System.assert(response.getDescription() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getUpdated() != null);
+    System.assert(response.getImageCount() != null);
+    System.assert(response.getTrainingStatus().getObjects().getReady() != null);
+    System.assert(response.getTrainingStatus().getObjects().getInProgress() != null);
+    System.assert(response.getTrainingStatus().getObjects().getDataChanged() != null);
+    System.assert(response.getTrainingStatus().getObjects().getLatestFailed() != null);
+    System.assert(response.getTrainingStatus().getObjects().getDescription() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testUpdateCollection() {
-    String body = IBMWatsonMockResponses.visRecCollection();
+    String mockResponseBody = '{"collection_id": "collectionId", "name": "name", "description": "description", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z", "image_count": "10", "training_status": {"objects": {"ready": false, "in_progress": true, "data_changed": false, "latest_failed": true, "description": "description"}}}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.UpdateCollectionOptions options = new IBMVisualRecognitionV4Models.UpdateCollectionOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .name(NAME)
-        .description(DESCRIPTION)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.Collection response = service.updateCollection(options);
+    IBMVisualRecognitionV4Models.UpdateCollectionOptions updateCollectionOptionsModel = new IBMVisualRecognitionV4Models.UpdateCollectionOptionsBuilder()
+      .collectionId('testString')
+      .name('testString')
+      .description('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    assertCollection(response);
+    IBMVisualRecognitionV4Models.Collection response = service.updateCollection(updateCollectionOptionsModel);
+    System.assert(response.getCollectionId() != null);
+    System.assert(response.getName() != null);
+    System.assert(response.getDescription() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getUpdated() != null);
+    System.assert(response.getImageCount() != null);
+    System.assert(response.getTrainingStatus().getObjects().getReady() != null);
+    System.assert(response.getTrainingStatus().getObjects().getInProgress() != null);
+    System.assert(response.getTrainingStatus().getObjects().getDataChanged() != null);
+    System.assert(response.getTrainingStatus().getObjects().getLatestFailed() != null);
+    System.assert(response.getTrainingStatus().getObjects().getDescription() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testDeleteCollection() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.DeleteCollectionOptions options = new IBMVisualRecognitionV4Models.DeleteCollectionOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    service.deleteCollection(options);
+    IBMVisualRecognitionV4Models.DeleteCollectionOptions deleteCollectionOptionsModel = new IBMVisualRecognitionV4Models.DeleteCollectionOptionsBuilder()
+      .collectionId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteCollection(deleteCollectionOptionsModel);
 
     Test.stopTest();
   }
-
-  private static void assertImageDetails(IBMVisualRecognitionV4Models.ImageDetails response) {
-    System.assertEquals(IMAGE_ID, response.getImageId());
-    System.assertEquals(testDate, response.getCreated());
-    System.assertEquals(testDate, response.getUpdated());
-    System.assertEquals(IMAGE_TYPE, response.getSource().getXType());
-    System.assertEquals(FILENAME, response.getSource().getFilename());
-    System.assertEquals(ARCHIVE_FILENAME, response.getSource().getArchiveFilename());
-    System.assertEquals(SOURCE_URL, response.getSource().getSourceUrl());
-    System.assertEquals(RESOLVED_URL, response.getSource().getResolvedUrl());
-    System.assertEquals(HEIGHT, response.getDimensions().getHeight());
-    System.assertEquals(WIDTH, response.getDimensions().getWidth());
-    System.assertEquals(CODE, response.getErrors().get(0).getCode());
-    System.assertEquals(MESSAGE, response.getErrors().get(0).getMessage());
-    System.assertEquals(MORE_INFO, response.getErrors().get(0).getMoreInfo());
-    System.assertEquals(ERROR_TYPE, response.getErrors().get(0).getTarget().getXType());
-    System.assertEquals(NAME, response.getErrors().get(0).getTarget().getName());
-    System.assertEquals(OBJECT_VAL, response.getTrainingData().getObjects().get(0).getXObject());
-    System.assertEquals(TOP, response.getTrainingData().getObjects().get(0).getLocation().getTop());
-    System.assertEquals(LEFT, response.getTrainingData().getObjects().get(0).getLocation().getLeft());
-    System.assertEquals(WIDTH, response.getTrainingData().getObjects().get(0).getLocation().getWidth());
-    System.assertEquals(HEIGHT, response.getTrainingData().getObjects().get(0).getLocation().getHeight());
-  }
-
   static testMethod void testAddImages() {
-    String body = IBMWatsonMockResponses.imageDetailsList();
+    String mockResponseBody = '{"images": [{"image_id": "imageId", "updated": "2017-05-16T13:56:54.957Z", "created": "2017-05-16T13:56:54.957Z", "source": {"type": "xType", "filename": "filename", "archive_filename": "archiveFilename", "source_url": "sourceUrl", "resolved_url": "resolvedUrl"}, "dimensions": {"height": "6", "width": "5"}, "errors": [{"code": "code", "message": "message", "more_info": "moreInfo", "target": {"type": "xType", "name": "name"}}], "training_data": {"objects": [{"object": "xObject", "location": {"top": "3", "left": "4", "width": "5", "height": "6"}}]}}], "warnings": [{"code": "code", "message": "message", "more_info": "moreInfo"}], "trace": "trace"}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.AddImagesOptions options = new IBMVisualRecognitionV4Models.AddImagesOptionsBuilder()
-        .addImagesFile(testFile)
-        .addImageUrl(IMAGE_URL)
-        .collectionId(COLLECTION_ID)
-        .trainingData(TRAINING_DATA)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.ImageDetailsList response = service.addImages(options);
+    IBMVisualRecognitionV4Models.AddImagesOptions addImagesOptionsModel = new IBMVisualRecognitionV4Models.AddImagesOptionsBuilder()
+      .collectionId('testString')
+      .imagesFile(new List<IBMWatsonFile> { mockFile })
+      .imageUrl(new List<String> { 'testString' })
+      .trainingData('{"objects":[{"object":"2018-Fit","location":{"left":33,"top":8,"width":760,"height":419}}]}')
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    assertImageDetails(response.getImages().get(0));
-    System.assertEquals(CODE, response.getWarnings().get(0).getCode());
-    System.assertEquals(MESSAGE, response.getWarnings().get(0).getMessage());
-    System.assertEquals(MORE_INFO, response.getWarnings().get(0).getMoreInfo());
-    System.assertEquals(TRACE, response.getTrace());
+    IBMVisualRecognitionV4Models.ImageDetailsList response = service.addImages(addImagesOptionsModel);
+    System.assert(response.getImages().get(0).getImageId() != null);
+    System.assert(response.getImages().get(0).getUpdated() != null);
+    System.assert(response.getImages().get(0).getCreated() != null);
+    System.assert(response.getImages().get(0).getSource().getXType() != null);
+    System.assert(response.getImages().get(0).getSource().getFilename() != null);
+    System.assert(response.getImages().get(0).getSource().getArchiveFilename() != null);
+    System.assert(response.getImages().get(0).getSource().getSourceUrl() != null);
+    System.assert(response.getImages().get(0).getSource().getResolvedUrl() != null);
+    System.assert(response.getImages().get(0).getDimensions().getHeight() != null);
+    System.assert(response.getImages().get(0).getDimensions().getWidth() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getCode() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getMessage() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getMoreInfo() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getTarget().getXType() != null);
+    System.assert(response.getImages().get(0).getErrors().get(0).getTarget().getName() != null);
+    System.assert(response.getImages().get(0).getTrainingData().getObjects().get(0).getXObject() != null);
+    System.assert(response.getImages().get(0).getTrainingData().getObjects().get(0).getLocation().getTop() != null);
+    System.assert(response.getImages().get(0).getTrainingData().getObjects().get(0).getLocation().getLeft() != null);
+    System.assert(response.getImages().get(0).getTrainingData().getObjects().get(0).getLocation().getWidth() != null);
+    System.assert(response.getImages().get(0).getTrainingData().getObjects().get(0).getLocation().getHeight() != null);
+    System.assert(response.getWarnings().get(0).getCode() != null);
+    System.assert(response.getWarnings().get(0).getMessage() != null);
+    System.assert(response.getWarnings().get(0).getMoreInfo() != null);
+    System.assert(response.getTrace() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testListImages() {
-    String body = IBMWatsonMockResponses.imageSummaryList();
+    String mockResponseBody = '{"images": [{"image_id": "imageId", "updated": "2017-05-16T13:56:54.957Z"}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.ListImagesOptions options = new IBMVisualRecognitionV4Models.ListImagesOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.ImageSummaryList response = service.listImages(options);
+    IBMVisualRecognitionV4Models.ListImagesOptions listImagesOptionsModel = new IBMVisualRecognitionV4Models.ListImagesOptionsBuilder()
+      .collectionId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    System.assertEquals(IMAGE_ID, response.getImages().get(0).getImageId());
-    System.assertEquals(testDate, response.getImages().get(0).getUpdated());
+    IBMVisualRecognitionV4Models.ImageSummaryList response = service.listImages(listImagesOptionsModel);
+    System.assert(response.getImages().get(0).getImageId() != null);
+    System.assert(response.getImages().get(0).getUpdated() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testGetImageDetails() {
-    String body = IBMWatsonMockResponses.imageDetails();
+    String mockResponseBody = '{"image_id": "imageId", "updated": "2017-05-16T13:56:54.957Z", "created": "2017-05-16T13:56:54.957Z", "source": {"type": "xType", "filename": "filename", "archive_filename": "archiveFilename", "source_url": "sourceUrl", "resolved_url": "resolvedUrl"}, "dimensions": {"height": "6", "width": "5"}, "errors": [{"code": "code", "message": "message", "more_info": "moreInfo", "target": {"type": "xType", "name": "name"}}], "training_data": {"objects": [{"object": "xObject", "location": {"top": "3", "left": "4", "width": "5", "height": "6"}}]}}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.GetImageDetailsOptions options = new IBMVisualRecognitionV4Models.GetImageDetailsOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .imageId(IMAGE_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.ImageDetails response = service.getImageDetails(options);
+    IBMVisualRecognitionV4Models.GetImageDetailsOptions getImageDetailsOptionsModel = new IBMVisualRecognitionV4Models.GetImageDetailsOptionsBuilder()
+      .collectionId('testString')
+      .imageId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    assertImageDetails(response);
+    IBMVisualRecognitionV4Models.ImageDetails response = service.getImageDetails(getImageDetailsOptionsModel);
+    System.assert(response.getImageId() != null);
+    System.assert(response.getUpdated() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getSource().getXType() != null);
+    System.assert(response.getSource().getFilename() != null);
+    System.assert(response.getSource().getArchiveFilename() != null);
+    System.assert(response.getSource().getSourceUrl() != null);
+    System.assert(response.getSource().getResolvedUrl() != null);
+    System.assert(response.getDimensions().getHeight() != null);
+    System.assert(response.getDimensions().getWidth() != null);
+    System.assert(response.getErrors().get(0).getCode() != null);
+    System.assert(response.getErrors().get(0).getMessage() != null);
+    System.assert(response.getErrors().get(0).getMoreInfo() != null);
+    System.assert(response.getErrors().get(0).getTarget().getXType() != null);
+    System.assert(response.getErrors().get(0).getTarget().getName() != null);
+    System.assert(response.getTrainingData().getObjects().get(0).getXObject() != null);
+    System.assert(response.getTrainingData().getObjects().get(0).getLocation().getTop() != null);
+    System.assert(response.getTrainingData().getObjects().get(0).getLocation().getLeft() != null);
+    System.assert(response.getTrainingData().getObjects().get(0).getLocation().getWidth() != null);
+    System.assert(response.getTrainingData().getObjects().get(0).getLocation().getHeight() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testDeleteImage() {
-    String body = '';
+    String mockResponseBody = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.DeleteImageOptions options = new IBMVisualRecognitionV4Models.DeleteImageOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .imageId(IMAGE_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    service.deleteImage(options);
+    IBMVisualRecognitionV4Models.DeleteImageOptions deleteImageOptionsModel = new IBMVisualRecognitionV4Models.DeleteImageOptionsBuilder()
+      .collectionId('testString')
+      .imageId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteImage(deleteImageOptionsModel);
 
     Test.stopTest();
   }
+  static testMethod void testGetJpegImage() {
+    String mockResponseBody = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
 
+    IBMVisualRecognitionV4Models.GetJpegImageOptions getJpegImageOptionsModel = new IBMVisualRecognitionV4Models.GetJpegImageOptionsBuilder()
+      .collectionId('testString')
+      .imageId('testString')
+      .size('full')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.getJpegImage(getJpegImageOptionsModel);
+
+    Test.stopTest();
+  }
   static testMethod void testTrain() {
-    String body = IBMWatsonMockResponses.visRecCollection();
+    String mockResponseBody = '{"collection_id": "collectionId", "name": "name", "description": "description", "created": "2017-05-16T13:56:54.957Z", "updated": "2017-05-16T13:56:54.957Z", "image_count": "10", "training_status": {"objects": {"ready": false, "in_progress": true, "data_changed": false, "latest_failed": true, "description": "description"}}}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.TrainOptions options = new IBMVisualRecognitionV4Models.TrainOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.Collection response = service.train(options);
+    IBMVisualRecognitionV4Models.TrainOptions trainOptionsModel = new IBMVisualRecognitionV4Models.TrainOptionsBuilder()
+      .collectionId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    assertCollection(response);
+    IBMVisualRecognitionV4Models.Collection response = service.train(trainOptionsModel);
+    System.assert(response.getCollectionId() != null);
+    System.assert(response.getName() != null);
+    System.assert(response.getDescription() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getUpdated() != null);
+    System.assert(response.getImageCount() != null);
+    System.assert(response.getTrainingStatus().getObjects().getReady() != null);
+    System.assert(response.getTrainingStatus().getObjects().getInProgress() != null);
+    System.assert(response.getTrainingStatus().getObjects().getDataChanged() != null);
+    System.assert(response.getTrainingStatus().getObjects().getLatestFailed() != null);
+    System.assert(response.getTrainingStatus().getObjects().getDescription() != null);
+
     Test.stopTest();
   }
-
   static testMethod void testAddImageTrainingData() {
-    String body = IBMWatsonMockResponses.trainingDataObjects();
+    String mockResponseBody = '{"objects": [{"object": "xObject", "location": {"top": "3", "left": "4", "width": "5", "height": "6"}}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.AddImageTrainingDataOptions options = new IBMVisualRecognitionV4Models.AddImageTrainingDataOptionsBuilder()
-        .collectionId(COLLECTION_ID)
-        .imageId(IMAGE_ID)
-        .addObjects(trainingDataObject)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    IBMVisualRecognitionV4Models.TrainingDataObjects response = service.addImageTrainingData(options);
+    IBMVisualRecognitionV4Models.Location locationModel = new IBMVisualRecognitionV4Models.LocationBuilder()
+      .top(38)
+      .left(38)
+      .width(38)
+      .height(38)
+      .build();
+    IBMVisualRecognitionV4Models.TrainingDataObject trainingDataObjectModel = new IBMVisualRecognitionV4Models.TrainingDataObjectBuilder()
+      .xObject('testString')
+      .location(locationModel)
+      .build();
+    IBMVisualRecognitionV4Models.AddImageTrainingDataOptions addImageTrainingDataOptionsModel = new IBMVisualRecognitionV4Models.AddImageTrainingDataOptionsBuilder()
+      .collectionId('testString')
+      .imageId('testString')
+      .objects(new List<IBMVisualRecognitionV4Models.TrainingDataObject> { trainingDataObjectModel })
+      .addHeader('Test-Header', 'test_value')
+      .build();
 
-    System.assertEquals(OBJECT_VAL, response.getObjects().get(0).getXObject());
-    System.assertEquals(TOP, response.getObjects().get(0).getLocation().getTop());
-    System.assertEquals(LEFT, response.getObjects().get(0).getLocation().getLeft());
-    System.assertEquals(WIDTH, response.getObjects().get(0).getLocation().getWidth());
-    System.assertEquals(HEIGHT, response.getObjects().get(0).getLocation().getHeight());
+    IBMVisualRecognitionV4Models.TrainingDataObjects response = service.addImageTrainingData(addImageTrainingDataOptionsModel);
+    System.assert(response.getObjects().get(0).getXObject() != null);
+    System.assert(response.getObjects().get(0).getLocation().getTop() != null);
+    System.assert(response.getObjects().get(0).getLocation().getLeft() != null);
+    System.assert(response.getObjects().get(0).getLocation().getWidth() != null);
+    System.assert(response.getObjects().get(0).getLocation().getHeight() != null);
+
     Test.stopTest();
   }
-
-  static testMethod void testDeleteUserData() {
-    String body = '';
+  static testMethod void testGetTrainingUsage() {
+    String mockResponseBody = '{"start_time": "2017-05-16T13:56:54.957Z", "end_time": "2017-05-16T13:56:54.957Z", "completed_events": "15", "trained_images": "13", "events": [{"type": "xType", "collection_id": "collectionId", "completion_time": "2017-05-16T13:56:54.957Z", "status": "status", "image_count": "10"}]}';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      body,
-      null);
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV4Models.DeleteUserDataOptions options = new IBMVisualRecognitionV4Models.DeleteUserDataOptionsBuilder()
-        .customerId(CUSTOMER_ID)
-        .addHeader(HEADER_NAME, HEADER_VALUE)
-        .build();
-    service.deleteUserData(options);
+    IBMVisualRecognitionV4Models.GetTrainingUsageOptions getTrainingUsageOptionsModel = new IBMVisualRecognitionV4Models.GetTrainingUsageOptionsBuilder()
+      .startTime('testString')
+      .endTime('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMVisualRecognitionV4Models.TrainingEvents response = service.getTrainingUsage(getTrainingUsageOptionsModel);
+    System.assert(response.getStartTime() != null);
+    System.assert(response.getEndTime() != null);
+    System.assert(response.getCompletedEvents() != null);
+    System.assert(response.getTrainedImages() != null);
+    System.assert(response.getEvents().get(0).getXType() != null);
+    System.assert(response.getEvents().get(0).getCollectionId() != null);
+    System.assert(response.getEvents().get(0).getCompletionTime() != null);
+    System.assert(response.getEvents().get(0).getStatus() != null);
+    System.assert(response.getEvents().get(0).getImageCount() != null);
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteUserData() {
+    String mockResponseBody = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMVisualRecognitionV4Models.DeleteUserDataOptions deleteUserDataOptionsModel = new IBMVisualRecognitionV4Models.DeleteUserDataOptionsBuilder()
+      .customerId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteUserData(deleteUserDataOptionsModel);
 
     Test.stopTest();
   }

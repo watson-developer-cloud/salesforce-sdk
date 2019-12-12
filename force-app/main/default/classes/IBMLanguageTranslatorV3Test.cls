@@ -1,433 +1,503 @@
 @isTest
 private class IBMLanguageTranslatorV3Test {
-  private static String version;
-  private static String headerKey;
-  private static String headerVal;
-  private static String documentId;
-  private static String accept;
-  private static String fileContentType;
-  private static String source;
-  private static String target;
-  private static String modelId;
-  private static String filename;
-  private static String baseModelId;
-  private static Long wordCount;
-  private static Long characterCount;
-  private static String dateString;
-  private static Datetime dateValue;
-  private static String status;
-
   private static IBMLanguageTranslatorV3 service;
+  private static IBMWatsonFile mockFile;
 
   static {
-    version = '2018-05-01';
-    headerKey = 'Test-Header';
-    headerVal = 'test_value';
-    documentId = 'id';
-    accept = IBMWatsonHttpMediaType.APPLICATION_PDF;
-    fileContentType = IBMWatsonHttpMediaType.TEXT_PLAIN;
-    source = 'en';
-    target = 'es';
-    modelId = 'model-id';
-    filename = 'test-file.txt';
-    baseModelId = 'en-es';
-    wordCount = 1L;
-    characterCount = 2L;
-    dateString = '"2018-08-24T08:20:30.5Z"';
-    dateValue = (Datetime) JSON.deserialize(dateString, Datetime.class);
-    status = 'available';
-
     service = new IBMLanguageTranslatorV3('2018-05-01', new IBMWatsonNoAuthAuthenticator());
+    mockFile = new IBMWatsonFile.FileBuilder()
+      .name('mock-file.txt')
+      .description('Test file')
+      .contentType('text/plain')
+      .body(blob.valueOf('Test string'))
+      .build();
   }
 
-  /**
-   *  Test translate
-   */
+  static IBMWatsonMapModel createMockMap() {
+    IBMWatsonMapModel mockMap = new IBMWatsonMapModel();
+    mockMap.put('testKey', 'testVal');
+    return mockMap;
+  }
+
+  static testMethod void testCreateModelOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.CreateModelOptions testRequestModel = new IBMLanguageTranslatorV3Models.CreateModelOptionsBuilder()
+      .baseModelId('testString')
+      .forcedGlossary(mockFile)
+      .parallelCorpus(mockFile)
+      .name('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.baseModelId());
+    System.assertEquals(mockFile, testRequestModel.forcedGlossary());
+    System.assertEquals(mockFile, testRequestModel.parallelCorpus());
+    System.assertEquals('testString', testRequestModel.name());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteDocumentOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.DeleteDocumentOptions testRequestModel = new IBMLanguageTranslatorV3Models.DeleteDocumentOptionsBuilder()
+      .documentId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.documentId());
+    Test.stopTest();
+  }
+  static testMethod void testDeleteModelOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.DeleteModelOptions testRequestModel = new IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder()
+      .modelId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.modelId());
+    Test.stopTest();
+  }
+  static testMethod void testGetDocumentStatusOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.GetDocumentStatusOptions testRequestModel = new IBMLanguageTranslatorV3Models.GetDocumentStatusOptionsBuilder()
+      .documentId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.documentId());
+    Test.stopTest();
+  }
+  static testMethod void testGetModelOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.GetModelOptions testRequestModel = new IBMLanguageTranslatorV3Models.GetModelOptionsBuilder()
+      .modelId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.modelId());
+    Test.stopTest();
+  }
+  static testMethod void testGetTranslatedDocumentOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptions testRequestModel = new IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptionsBuilder()
+      .documentId('testString')
+      .accept('application/powerpoint')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.documentId());
+    System.assertEquals('application/powerpoint', testRequestModel.accept());
+    Test.stopTest();
+  }
+  static testMethod void testIdentifyOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.IdentifyOptions testRequestModel = new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
+      .text('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.text());
+    Test.stopTest();
+  }
+  static testMethod void testListDocumentsOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.ListDocumentsOptions testRequestModel = new IBMLanguageTranslatorV3Models.ListDocumentsOptionsBuilder()
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    Test.stopTest();
+  }
+  static testMethod void testListIdentifiableLanguagesOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions testRequestModel = new IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptionsBuilder()
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    Test.stopTest();
+  }
+  static testMethod void testListModelsOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.ListModelsOptions testRequestModel = new IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder()
+      .source('testString')
+      .target('testString')
+      .xDefault(true)
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals('testString', testRequestModel.source());
+    System.assertEquals('testString', testRequestModel.target());
+    System.assertEquals(true, testRequestModel.xDefault());
+    Test.stopTest();
+  }
+  static testMethod void testTranslateDocumentOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.TranslateDocumentOptions testRequestModel = new IBMLanguageTranslatorV3Models.TranslateDocumentOptionsBuilder()
+      .file(mockFile)
+      .filename('testString')
+      .fileContentType('application/powerpoint')
+      .modelId('testString')
+      .source('testString')
+      .target('testString')
+      .documentId('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(mockFile, testRequestModel.file());
+    System.assertEquals('testString', testRequestModel.filename());
+    System.assertEquals('application/powerpoint', testRequestModel.fileContentType());
+    System.assertEquals('testString', testRequestModel.modelId());
+    System.assertEquals('testString', testRequestModel.source());
+    System.assertEquals('testString', testRequestModel.target());
+    System.assertEquals('testString', testRequestModel.documentId());
+    Test.stopTest();
+  }
+  static testMethod void testTranslateOptionsModel() {
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.TranslateOptions testRequestModel = new IBMLanguageTranslatorV3Models.TranslateOptionsBuilder()
+      .text(new List<String> { 'testString' })
+      .modelId('testString')
+      .source('testString')
+      .target('testString')
+      .build();
+    testRequestModel = testRequestModel.newBuilder().build();
+
+    System.assertEquals(new List<String> { 'testString' }, testRequestModel.text());
+    System.assertEquals('testString', testRequestModel.modelId());
+    System.assertEquals('testString', testRequestModel.source());
+    System.assertEquals('testString', testRequestModel.target());
+    Test.stopTest();
+  }
+
   static testMethod void testTranslate() {
-    String body = IBMWatsonMockResponses.Translate();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String mockResponseBody = '{"word_count": "9", "character_count": "14", "translations": [{"translation": "translation"}]}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    String modelId = '3e7dfdbe-f757-4150-afee-458e71eb93fb';
-    String source = 'en';
-    String target = 'es';
-    IBMLanguageTranslatorV3Models.TranslateOptions translateOptions =
-      new IBMLanguageTranslatorV3Models.TranslateOptionsBuilder()
-      .source(source)
-      .target(target)
-      .modelId(modelId)
-      .text(new List<String>{'Hello'})
-      .addText('World')
-      .addHeader(headerKey, headerVal)
+
+    IBMLanguageTranslatorV3Models.TranslateOptions translateOptionsModel = new IBMLanguageTranslatorV3Models.TranslateOptionsBuilder()
+      .text(new List<String> { 'testString' })
+      .modelId('testString')
+      .source('testString')
+      .target('testString')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    translateOptions = translateOptions.newBuilder().build();
-    IBMLanguageTranslatorV3Models.TranslationResult translate =
-      service.translate(translateOptions);
-    System.assertEquals(translate.getWordCount(), 1);
-    System.assertEquals(translate.getCharacterCount(), 5);
-    System.assert(translate.getTranslations() != null);
-    IBMLanguageTranslatorV3Models.TranslateOptionsBuilder newTranslateOptionsBuilder =
-      translateOptions.newBuilder();
-    translate.setWordCount(4);
-    translate.setCharacterCount(10);
+
+    IBMLanguageTranslatorV3Models.TranslationResult response = service.translate(translateOptionsModel);
+    System.assert(response.getWordCount() != null);
+    System.assert(response.getCharacterCount() != null);
+    System.assert(response.getTranslations().get(0).getTranslation() != null);
+
     Test.stopTest();
   }
-
-  /**
-   *  Test identify
-   */
-  static testMethod void testIdentify() {
-    String body = IBMWatsonMockResponses.ListIdentifiableLanguages();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-    IBMLanguageTranslatorV3Models.IdentifyOptions identifyOptions =
-      new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
-      .text('sample')
-      .addHeader(headerKey, headerVal)
-      .build();
-    identifyOptions = identifyOptions.newBuilder().build();
-    IBMLanguageTranslatorV3Models.IdentifiedLanguages identify =
-      service.identify(identifyOptions);
-    Test.stopTest();
-  }
-
-  /**
-   *  Test Identifiable Languages
-   */
   static testMethod void testListIdentifiableLanguages() {
-    String body = IBMWatsonMockResponses.ListIdentifiableLanguages();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String mockResponseBody = '{"languages": [{"language": "language", "name": "name"}]}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions =
-      new IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptionsBuilder()
-      .addHeader(headerKey, headerVal)
-      .build();
-    listIdentifiableLanguagesOptions = listIdentifiableLanguagesOptions.newBuilder().build();
-    IBMLanguageTranslatorV3Models.IdentifiableLanguages listIdentifiableLanguages =
-      service.listIdentifiableLanguages(listIdentifiableLanguagesOptions);
 
-    List<IBMLanguageTranslatorV3Models.IdentifiableLanguage> languageList = listIdentifiableLanguages.getLanguages();
-    System.assert(languageList != null && languageList.size() == 4);
-    IBMLanguageTranslatorV3Models.IdentifiableLanguage IdentifiableLanguage;
-    for (Integer i = 0; i < languageList.size(); i++) {
-      if (languageList[i].getLanguage() == 'af' && languageList[i].getName() == 'Afrikaans' ) {
-        IdentifiableLanguage = languageList[i];
-        break;
-      }
-    }
-    System.assert(IdentifiableLanguage != null);
-    IdentifiableLanguage.setLanguage('es');
-    IdentifiableLanguage.setName('Spanish');
+    IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptionsModel = new IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMLanguageTranslatorV3Models.IdentifiableLanguages response = service.listIdentifiableLanguages(listIdentifiableLanguagesOptionsModel);
+    System.assert(response.getLanguages().get(0).getLanguage() != null);
+    System.assert(response.getLanguages().get(0).getName() != null);
+
     Test.stopTest();
   }
-
-  /**
-   *  Test create a model
-   */
-  static testMethod void testCreateModel() {
-    String body = IBMWatsonMockResponses.CreateModel();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+  static testMethod void testIdentify() {
+    String mockResponseBody = '{"languages": [{"language": "language", "confidence": "10"}]}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    // Forced Glossary
-    Attachment forcedGlossaryAttachment = new Attachment(Body = Blob.valueOf('glossary'),
-      Name='glossary.txt',
-      Description='language glossary',
-      ContentType='text/plain');
-    IBMWatsonFile forcedGlossary = new IBMWatsonFile.FileBuilder()
-      .attachment(forcedGlossaryAttachment)
+
+    IBMLanguageTranslatorV3Models.IdentifyOptions identifyOptionsModel = new IBMLanguageTranslatorV3Models.IdentifyOptionsBuilder()
+      .text('testString')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    // Parallel Corpus
-    Attachment parallelCorpusAttachment = new Attachment(Body = Blob.valueOf('parallelCorpus'),
-      Name='parallelCorpus.txt',
-      Description='parallelCorpus',
-      ContentType='text/plain');
-    IBMWatsonFile parallelCorpus = new IBMWatsonFile.FileBuilder()
-      .attachment(parallelCorpusAttachment)
-      .build();
-    IBMLanguageTranslatorV3Models.CreateModelOptions createModelOptions =
-      new IBMLanguageTranslatorV3Models.CreateModelOptionsBuilder()
-      .name('custom-english-to-spanish')
-      .baseModelId('en-es')
-      .forcedGlossary(forcedGlossary)
-      .parallelCorpus(parallelCorpus)
-      .addHeader(headerKey, headerVal)
-      .build();
-    createModelOptions = createModelOptions.newBuilder().build();
-    IBMLanguageTranslatorV3Models.TranslationModel TranslationModel =
-      service.createModel(createModelOptions);
-    System.assertEquals(TranslationModel.getModelId(), '3e7dfdbe-f757-4150-afee-458e71eb93fb');
-    // name is optionally returned and this mockup does not
-    System.assert(String.isBlank(TranslationModel.getName()));
-    System.assert(String.isBlank(TranslationModel.getSource()));
-    System.assert(String.isBlank(TranslationModel.getTarget()));
-    System.assert(String.isBlank(TranslationModel.getBaseModelId()));
-    System.assert(String.isBlank(TranslationModel.getDomain()));
-    TranslationModel.getCustomizable();
-    TranslationModel.getDefaultModel();
-    System.assert(String.isBlank(TranslationModel.getOwner()));
-    System.assert(String.isBlank(TranslationModel.getStatus()));
-    TranslationModel.setModelId('3e7dfdbe-f757-4150-afee-458e71eb93fb');
-    TranslationModel.setName('custom-english-to-spanish');
-    TranslationModel.setSource('en');
-    TranslationModel.setTarget('es');
-    TranslationModel.setBaseModelId('3e7dfdbe-f757-4150-afee-458e71eb93fb');
-    TranslationModel.setDomain('travel');
-    TranslationModel.setCustomizable(true);
-    TranslationModel.setDefaultModel(true);
-    TranslationModel.setOwner('74a239fa-f2db-42ef-8737-7bf74f49e35f');
-    IBMLanguageTranslatorV3Models.CreateModelOptionsBuilder newCreateModelOptionsBuilder1 =
-      createModelOptions.newBuilder();
-    IBMLanguageTranslatorV3Models.CreateModelOptionsBuilder newCreateModelOptionsBuilder2 =
-      new IBMLanguageTranslatorV3Models.CreateModelOptionsBuilder('en-es');
+
+    IBMLanguageTranslatorV3Models.IdentifiedLanguages response = service.identify(identifyOptionsModel);
+    System.assert(response.getLanguages().get(0).getLanguage() != null);
+    System.assert(response.getLanguages().get(0).getConfidence() != null);
+
     Test.stopTest();
   }
-
-  /**
-   *  Test delete a model
-   */
-  static testMethod void testDeleteModel() {
-    String body = IBMWatsonMockResponses.DeleteModel();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-    IBMLanguageTranslatorV3Models.DeleteModelOptions deleteModelOptions =
-      new IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder()
-      .modelId('3e7dfdbe-f757-4150-afee-458e71eb93fb')
-      .addHeader(headerKey, headerVal)
-      .build();
-    deleteModelOptions = deleteModelOptions.newBuilder().build();
-    service.deleteModel(deleteModelOptions);
-    IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder newDeleteModelOptionsBuilder1 =
-      deleteModelOptions.newBuilder();
-    IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder newDeleteModelOptionsBuilder2 =
-      new IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder('3e7dfdbe-f757-4150-afee-458e71eb93fb');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test get model data
-   */
-  static testMethod void testGetModel() {
-    String body = IBMWatsonMockResponses.GetModel();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-    IBMLanguageTranslatorV3Models.GetModelOptions getModelOptions =
-      new IBMLanguageTranslatorV3Models.GetModelOptionsBuilder()
-      .modelId('3e7dfdbe-f757-4150-afee-458e71eb93fb')
-      .addHeader(headerKey, headerVal)
-      .build();
-    getModelOptions = getModelOptions.newBuilder().build();
-    IBMLanguageTranslatorV3Models.TranslationModel getModel =
-      service.getModel(getModelOptions);
-    IBMLanguageTranslatorV3Models.GetModelOptionsBuilder newGetModelOptionsBuilder1 =
-      getModelOptions.newBuilder();
-    IBMLanguageTranslatorV3Models.GetModelOptionsBuilder newGetModelOptionsBuilder2 =
-      new IBMLanguageTranslatorV3Models.GetModelOptionsBuilder('3e7dfdbe-f757-4150-afee-458e71eb93fb');
-    Test.stopTest();
-  }
-
-  /**
-   *  Test list model data
-   */
   static testMethod void testListModels() {
-    String body = IBMWatsonMockResponses.ListModels();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-    IBMLanguageTranslatorV3Models.ListModelsOptions listModelsOptions =
-      new IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder()
-      .source('en')
-      .target('es')
-      .xDefault(false)
-      .addHeader(headerKey, headerVal)
-      .build();
-    listModelsOptions = listModelsOptions.newBuilder().build();
-    IBMLanguageTranslatorV3Models.TranslationModels listModels =
-      service.listModels(listModelsOptions);
-    IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder newListModelsOptionsBuilder =
-      listModelsOptions.newBuilder();
-    Test.stopTest();
-  }
-
-  static testMethod void testDeleteDocumentOptions() {
-    Test.startTest();
-
-    IBMLanguageTranslatorV3Models.DeleteDocumentOptions options = new IBMLanguageTranslatorV3Models.DeleteDocumentOptionsBuilder()
-      .documentId(documentId)
-      .addHeader(headerKey, headerVal)
-      .build();
-    options = options.newBuilder().build();
-
-    System.assertEquals(documentId, options.documentId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetDocumentStatusOptions() {
-    Test.startTest();
-
-    IBMLanguageTranslatorV3Models.GetDocumentStatusOptions options = new IBMLanguageTranslatorV3Models.GetDocumentStatusOptionsBuilder()
-      .documentId(documentId)
-      .addHeader(headerKey, headerVal)
-      .build();
-    options = options.newBuilder().build();
-
-    System.assertEquals(documentId, options.documentId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testGetTranslatedDocumentOptions() {
-    Test.startTest();
-
-    IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptions options = new IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptionsBuilder()
-      .documentId(documentId)
-      .accept(accept)
-      .addHeader(headerKey, headerVal)
-      .build();
-    options = options.newBuilder().build();
-
-    System.assertEquals(documentId, options.documentId());
-    System.assertEquals(accept, options.accept());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testListDocumentsOptions() {
-    Test.startTest();
-
-    IBMLanguageTranslatorV3Models.ListDocumentsOptions options = new IBMLanguageTranslatorV3Models.ListDocumentsOptionsBuilder()
-      .addHeader(headerKey, headerVal)
-      .build();
-    options = options.newBuilder().build();
-
-    System.assert(options != null);
-
-    Test.stopTest();
-  }
-
-  static testMethod void testTranslateDocumentOptions() {
-    Test.startTest();
-
-    Attachment documentAttachment = new Attachment(Body = Blob.valueOf('words'),
-      Name='document.txt',
-      Description='document to be translated',
-      ContentType='text/plain');
-    IBMWatsonFile document = new IBMWatsonFile.FileBuilder()
-      .attachment(documentAttachment)
-      .build();
-
-    IBMLanguageTranslatorV3Models.TranslateDocumentOptions options = new IBMLanguageTranslatorV3Models.TranslateDocumentOptionsBuilder()
-      .file(document)
-      .filename(filename)
-      .fileContentType(fileContentType)
-      .modelId(modelId)
-      .source(source)
-      .target(target)
-      .documentId(documentId)
-      .addHeader(headerKey, headerVal)
-      .build();
-    options = options.newBuilder().build();
-
-    System.assertEquals(document, options.file());
-    System.assertEquals(filename, options.filename());
-    System.assertEquals(fileContentType, options.fileContentType());
-    System.assertEquals(modelId, options.modelId());
-    System.assertEquals(source, options.source());
-    System.assertEquals(target, options.target());
-    System.assertEquals(documentId, options.documentId());
-
-    Test.stopTest();
-  }
-
-  static testMethod void testTranslateDocument() {
-    String body = IBMWatsonMockResponses.languageTranslatorDocumentStatus();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String mockResponseBody = '{"models": [{"model_id": "modelId", "name": "name", "source": "source", "target": "target", "base_model_id": "baseModelId", "domain": "domain", "customizable": true, "default_model": true, "owner": "owner", "status": "status"}]}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    Attachment documentAttachment = new Attachment(Body = Blob.valueOf('words'),
-      Name='document.txt',
-      Description='document to be translated',
-      ContentType='text/plain');
-    IBMWatsonFile document = new IBMWatsonFile.FileBuilder()
-      .attachment(documentAttachment)
+    IBMLanguageTranslatorV3Models.ListModelsOptions listModelsOptionsModel = new IBMLanguageTranslatorV3Models.ListModelsOptionsBuilder()
+      .source('testString')
+      .target('testString')
+      .xDefault(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
 
-    IBMLanguageTranslatorV3Models.TranslateDocumentOptions options = new IBMLanguageTranslatorV3Models.TranslateDocumentOptionsBuilder()
-      .file(document)
-      .filename(filename)
-      .addHeader(headerKey, headerVal)
-      .build();
-    options = options.newBuilder().build();
-    IBMLanguageTranslatorV3Models.DocumentStatus response = service.translateDocument(options);
-
-    System.assertEquals(documentId, response.getDocumentId());
-    System.assertEquals(filename, response.getFilename());
-    System.assertEquals(status, response.getStatus());
-    System.assertEquals(modelId, response.getModelId());
-    System.assertEquals(baseModelId, response.getBaseModelId());
-    System.assertEquals(source, response.getSource());
-    System.assertEquals(target, response.getTarget());
-    System.assertEquals(dateValue, response.getCreated());
-    System.assertEquals(dateValue, response.getCompleted());
-    System.assertEquals(wordCount, response.getWordCount());
-    System.assertEquals(characterCount, response.getCharacterCount());
+    IBMLanguageTranslatorV3Models.TranslationModels response = service.listModels(listModelsOptionsModel);
+    System.assert(response.getModels().get(0).getModelId() != null);
+    System.assert(response.getModels().get(0).getName() != null);
+    System.assert(response.getModels().get(0).getSource() != null);
+    System.assert(response.getModels().get(0).getTarget() != null);
+    System.assert(response.getModels().get(0).getBaseModelId() != null);
+    System.assert(response.getModels().get(0).getDomain() != null);
+    System.assert(response.getModels().get(0).getCustomizable() != null);
+    System.assert(response.getModels().get(0).getDefaultModel() != null);
+    System.assert(response.getModels().get(0).getOwner() != null);
+    System.assert(response.getModels().get(0).getStatus() != null);
 
     Test.stopTest();
   }
+  static testMethod void testCreateModel() {
+    String mockResponseBody = '{"model_id": "modelId", "name": "name", "source": "source", "target": "target", "base_model_id": "baseModelId", "domain": "domain", "customizable": true, "default_model": true, "owner": "owner", "status": "status"}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
 
+    IBMLanguageTranslatorV3Models.CreateModelOptions createModelOptionsModel = new IBMLanguageTranslatorV3Models.CreateModelOptionsBuilder()
+      .baseModelId('testString')
+      .forcedGlossary(mockFile)
+      .parallelCorpus(mockFile)
+      .name('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMLanguageTranslatorV3Models.TranslationModel response = service.createModel(createModelOptionsModel);
+    System.assert(response.getModelId() != null);
+    System.assert(response.getName() != null);
+    System.assert(response.getSource() != null);
+    System.assert(response.getTarget() != null);
+    System.assert(response.getBaseModelId() != null);
+    System.assert(response.getDomain() != null);
+    System.assert(response.getCustomizable() != null);
+    System.assert(response.getDefaultModel() != null);
+    System.assert(response.getOwner() != null);
+    System.assert(response.getStatus() != null);
+
+    Test.stopTest();
+  }
+  static testMethod void testDeleteModel() {
+    String mockResponseBody = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.DeleteModelOptions deleteModelOptionsModel = new IBMLanguageTranslatorV3Models.DeleteModelOptionsBuilder()
+      .modelId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.deleteModel(deleteModelOptionsModel);
+
+    Test.stopTest();
+  }
+  static testMethod void testGetModel() {
+    String mockResponseBody = '{"model_id": "modelId", "name": "name", "source": "source", "target": "target", "base_model_id": "baseModelId", "domain": "domain", "customizable": true, "default_model": true, "owner": "owner", "status": "status"}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.GetModelOptions getModelOptionsModel = new IBMLanguageTranslatorV3Models.GetModelOptionsBuilder()
+      .modelId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMLanguageTranslatorV3Models.TranslationModel response = service.getModel(getModelOptionsModel);
+    System.assert(response.getModelId() != null);
+    System.assert(response.getName() != null);
+    System.assert(response.getSource() != null);
+    System.assert(response.getTarget() != null);
+    System.assert(response.getBaseModelId() != null);
+    System.assert(response.getDomain() != null);
+    System.assert(response.getCustomizable() != null);
+    System.assert(response.getDefaultModel() != null);
+    System.assert(response.getOwner() != null);
+    System.assert(response.getStatus() != null);
+
+    Test.stopTest();
+  }
   static testMethod void testListDocuments() {
-    String body = IBMWatsonMockResponses.listDocuments();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String mockResponseBody = '{"documents": [{"document_id": "documentId", "filename": "filename", "status": "status", "model_id": "modelId", "base_model_id": "baseModelId", "source": "source", "target": "target", "created": "2017-05-16T13:56:54.957Z", "completed": "2017-05-16T13:56:54.957Z", "word_count": "9", "character_count": "14"}]}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3Models.ListDocumentsOptions options = new IBMLanguageTranslatorV3Models.ListDocumentsOptionsBuilder()
-      .addHeader(headerKey, headerVal)
+    IBMLanguageTranslatorV3Models.ListDocumentsOptions listDocumentsOptionsModel = new IBMLanguageTranslatorV3Models.ListDocumentsOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
-    options = options.newBuilder().build();
-    IBMLanguageTranslatorV3Models.DocumentList response = service.listDocuments(options);
 
-    System.assert(response.getDocuments().size() > 0);
+    IBMLanguageTranslatorV3Models.DocumentList response = service.listDocuments(listDocumentsOptionsModel);
+    System.assert(response.getDocuments().get(0).getDocumentId() != null);
+    System.assert(response.getDocuments().get(0).getFilename() != null);
+    System.assert(response.getDocuments().get(0).getStatus() != null);
+    System.assert(response.getDocuments().get(0).getModelId() != null);
+    System.assert(response.getDocuments().get(0).getBaseModelId() != null);
+    System.assert(response.getDocuments().get(0).getSource() != null);
+    System.assert(response.getDocuments().get(0).getTarget() != null);
+    System.assert(response.getDocuments().get(0).getCreated() != null);
+    System.assert(response.getDocuments().get(0).getCompleted() != null);
+    System.assert(response.getDocuments().get(0).getWordCount() != null);
+    System.assert(response.getDocuments().get(0).getCharacterCount() != null);
 
     Test.stopTest();
   }
+  static testMethod void testTranslateDocument() {
+    String mockResponseBody = '{"document_id": "documentId", "filename": "filename", "status": "status", "model_id": "modelId", "base_model_id": "baseModelId", "source": "source", "target": "target", "created": "2017-05-16T13:56:54.957Z", "completed": "2017-05-16T13:56:54.957Z", "word_count": "9", "character_count": "14"}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
 
+    IBMLanguageTranslatorV3Models.TranslateDocumentOptions translateDocumentOptionsModel = new IBMLanguageTranslatorV3Models.TranslateDocumentOptionsBuilder()
+      .file(mockFile)
+      .filename('testString')
+      .fileContentType('application/powerpoint')
+      .modelId('testString')
+      .source('testString')
+      .target('testString')
+      .documentId('testString')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    IBMLanguageTranslatorV3Models.DocumentStatus response = service.translateDocument(translateDocumentOptionsModel);
+    System.assert(response.getDocumentId() != null);
+    System.assert(response.getFilename() != null);
+    System.assert(response.getStatus() != null);
+    System.assert(response.getModelId() != null);
+    System.assert(response.getBaseModelId() != null);
+    System.assert(response.getSource() != null);
+    System.assert(response.getTarget() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getCompleted() != null);
+    System.assert(response.getWordCount() != null);
+    System.assert(response.getCharacterCount() != null);
+
+    Test.stopTest();
+  }
   static testMethod void testGetDocumentStatus() {
-    String body = IBMWatsonMockResponses.languageTranslatorDocumentStatus();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String mockResponseBody = '{"document_id": "documentId", "filename": "filename", "status": "status", "model_id": "modelId", "base_model_id": "baseModelId", "source": "source", "target": "target", "created": "2017-05-16T13:56:54.957Z", "completed": "2017-05-16T13:56:54.957Z", "word_count": "9", "character_count": "14"}';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3Models.GetDocumentStatusOptions options = new IBMLanguageTranslatorV3Models.GetDocumentStatusOptionsBuilder()
-      .documentId(documentId)
-      .addHeader(headerKey, headerVal)
+    IBMLanguageTranslatorV3Models.GetDocumentStatusOptions getDocumentStatusOptionsModel = new IBMLanguageTranslatorV3Models.GetDocumentStatusOptionsBuilder()
+      .documentId('testString')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    options = options.newBuilder().build();
-    IBMLanguageTranslatorV3Models.DocumentStatus response = service.getDocumentStatus(options);
 
-    System.assert(response != null);
+    IBMLanguageTranslatorV3Models.DocumentStatus response = service.getDocumentStatus(getDocumentStatusOptionsModel);
+    System.assert(response.getDocumentId() != null);
+    System.assert(response.getFilename() != null);
+    System.assert(response.getStatus() != null);
+    System.assert(response.getModelId() != null);
+    System.assert(response.getBaseModelId() != null);
+    System.assert(response.getSource() != null);
+    System.assert(response.getTarget() != null);
+    System.assert(response.getCreated() != null);
+    System.assert(response.getCompleted() != null);
+    System.assert(response.getWordCount() != null);
+    System.assert(response.getCharacterCount() != null);
 
     Test.stopTest();
   }
-
   static testMethod void testDeleteDocument() {
-    String body = '';
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    String mockResponseBody = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMLanguageTranslatorV3Models.DeleteDocumentOptions options = new IBMLanguageTranslatorV3Models.DeleteDocumentOptionsBuilder()
-      .documentId(documentId)
-      .addHeader(headerKey, headerVal)
+    IBMLanguageTranslatorV3Models.DeleteDocumentOptions deleteDocumentOptionsModel = new IBMLanguageTranslatorV3Models.DeleteDocumentOptionsBuilder()
+      .documentId('testString')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    options = options.newBuilder().build();
-    service.deleteDocument(options);
+
+    service.deleteDocument(deleteDocumentOptionsModel);
+
+    Test.stopTest();
+  }
+  static testMethod void testGetTranslatedDocument() {
+    String mockResponseBody = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      mockResponseBody,
+      null
+    );
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptions getTranslatedDocumentOptionsModel = new IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptionsBuilder()
+      .documentId('testString')
+      .accept('application/powerpoint')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+
+    service.getTranslatedDocument(getTranslatedDocumentOptionsModel);
 
     Test.stopTest();
   }
