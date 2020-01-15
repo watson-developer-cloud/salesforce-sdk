@@ -293,7 +293,7 @@ public class IBMDiscoveryV2 extends IBMWatsonService {
    * **_/v2/projects/{project_id}/collections/{collection_id}/documents** method.
    *
    * **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
-   * modify a collection that conects to an external source such as Microsoft SharePoint.
+   * modify a collection that connects to an external source such as Microsoft SharePoint.
    *
    * @param addDocumentOptions the {@link IBMDiscoveryV2Models.AddDocumentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV2Models.DocumentAccepted} with the response
@@ -343,7 +343,7 @@ public class IBMDiscoveryV2 extends IBMWatsonService {
    * same **document_id** if it exists.
    *
    * **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
-   * modify a collection that conects to an external source such as Microsoft SharePoint.
+   * modify a collection that connects to an external source such as Microsoft SharePoint.
    *
    * @param updateDocumentOptions the {@link IBMDiscoveryV2Models.UpdateDocumentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV2Models.DocumentAccepted} with the response
@@ -387,7 +387,7 @@ public class IBMDiscoveryV2 extends IBMWatsonService {
    * status code `200`) with the status set to 'deleted'.
    *
    * **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
-   * modify a collection that conects to an external source such as Microsoft SharePoint.
+   * modify a collection that connects to an external source such as Microsoft SharePoint.
    *
    * @param deleteDocumentOptions the {@link IBMDiscoveryV2Models.DeleteDocumentOptions} containing the options for the call
    * @return the service call
@@ -483,18 +483,14 @@ public class IBMDiscoveryV2 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (createTrainingQueryOptions.naturalLanguageQuery() != null) {
-      contentJson.put('natural_language_query', createTrainingQueryOptions.naturalLanguageQuery());
+    contentJson.put('natural_language_query', createTrainingQueryOptions.naturalLanguageQuery());
+    List<Object> examplesList = new List<Object>();
+    for (IBMDiscoveryV2Models.TrainingExample examplesItem : createTrainingQueryOptions.examples()) {
+      examplesList.add(examplesItem.replacePropertyNames());
     }
+    contentJson.put('examples', examplesList);
     if (createTrainingQueryOptions.filter() != null) {
       contentJson.put('filter', createTrainingQueryOptions.filter());
-    }
-    if (createTrainingQueryOptions.examples() != null) {
-      List<Object> examplesList = new List<Object>();
-      for (IBMDiscoveryV2Models.TrainingExample examplesItem : createTrainingQueryOptions.examples()) {
-        examplesList.add(examplesItem.replacePropertyNames());
-      }
-      contentJson.put('examples', examplesList);
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 

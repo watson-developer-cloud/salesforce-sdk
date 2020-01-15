@@ -38,7 +38,7 @@ public class IBMDiscoveryV2Models {
      * Gets the file.
      *
      * The content of the document to ingest. The maximum supported file size when adding a file to a collection is 50
-     * megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files larger than the
+     * megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files larger than the
      * supported size are rejected.
      *
      * @return the file
@@ -800,8 +800,8 @@ public class IBMDiscoveryV2Models {
   public class CreateTrainingQueryOptions extends IBMWatsonOptionsModel {
     private String projectId;
     private String naturalLanguageQuery;
-    private String filter;
     private List<TrainingExample> examples;
+    private String filter;
 
     /**
      * Gets the projectId.
@@ -827,17 +827,6 @@ public class IBMDiscoveryV2Models {
     }
 
     /**
-     * Gets the filter.
-     *
-     * The filter used on the collection before the **natural_language_query** is applied.
-     *
-     * @return the filter
-     */
-    public String filter() {
-      return filter;
-    }
-
-    /**
      * Gets the examples.
      *
      * Array of training examples.
@@ -848,12 +837,25 @@ public class IBMDiscoveryV2Models {
       return examples;
     }
 
+    /**
+     * Gets the filter.
+     *
+     * The filter used on the collection before the **natural_language_query** is applied.
+     *
+     * @return the filter
+     */
+    public String filter() {
+      return filter;
+    }
+
     private CreateTrainingQueryOptions(CreateTrainingQueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.projectId, 'projectId cannot be empty');
+      IBMWatsonValidator.notNull(builder.naturalLanguageQuery, 'naturalLanguageQuery cannot be null');
+      IBMWatsonValidator.notNull(builder.examples, 'examples cannot be null');
       projectId = builder.projectId;
       naturalLanguageQuery = builder.naturalLanguageQuery;
-      filter = builder.filter;
       examples = builder.examples;
+      filter = builder.filter;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -873,14 +875,14 @@ public class IBMDiscoveryV2Models {
   public class CreateTrainingQueryOptionsBuilder extends IBMWatsonOptionsModel {
     private String projectId;
     private String naturalLanguageQuery;
-    private String filter;
     private List<TrainingExample> examples;
+    private String filter;
 
     private CreateTrainingQueryOptionsBuilder(CreateTrainingQueryOptions createTrainingQueryOptions) {
       projectId = createTrainingQueryOptions.projectId;
       naturalLanguageQuery = createTrainingQueryOptions.naturalLanguageQuery;
-      filter = createTrainingQueryOptions.filter;
       examples = createTrainingQueryOptions.examples;
+      filter = createTrainingQueryOptions.filter;
       this.requestHeaders.putAll(createTrainingQueryOptions.requestHeaders());
     }
 
@@ -894,9 +896,13 @@ public class IBMDiscoveryV2Models {
      * Instantiates a new builder with required properties.
      *
      * @param projectId the projectId
+     * @param naturalLanguageQuery the naturalLanguageQuery
+     * @param examples the examples
      */
-    public CreateTrainingQueryOptionsBuilder(String projectId) {
+    public CreateTrainingQueryOptionsBuilder(String projectId, String naturalLanguageQuery, List<TrainingExample> examples) {
       this.projectId = projectId;
+      this.naturalLanguageQuery = naturalLanguageQuery;
+      this.examples = examples;
     }
 
     /**
@@ -946,17 +952,6 @@ public class IBMDiscoveryV2Models {
     }
 
     /**
-     * Set the filter.
-     *
-     * @param filter the filter
-     * @return the CreateTrainingQueryOptions builder
-     */
-    public CreateTrainingQueryOptionsBuilder filter(String filter) {
-      this.filter = filter;
-      return this;
-    }
-
-    /**
      * Set the examples.
      * Existing examples will be replaced.
      *
@@ -969,6 +964,17 @@ public class IBMDiscoveryV2Models {
     }
 
     /**
+     * Set the filter.
+     *
+     * @param filter the filter
+     * @return the CreateTrainingQueryOptions builder
+     */
+    public CreateTrainingQueryOptionsBuilder filter(String filter) {
+      this.filter = filter;
+      return this;
+    }
+
+    /**
      * Set the trainingQuery.
      *
      * @param trainingQuery the trainingQuery
@@ -976,8 +982,8 @@ public class IBMDiscoveryV2Models {
      */
     public CreateTrainingQueryOptionsBuilder trainingQuery(TrainingQuery trainingQuery) {
       this.naturalLanguageQuery = trainingQuery.getNaturalLanguageQuery();
-      this.filter = trainingQuery.getFilter();
       this.examples = trainingQuery.getExamples();
+      this.filter = trainingQuery.getFilter();
       return this;
     }
 
@@ -2505,6 +2511,7 @@ public class IBMDiscoveryV2Models {
     private Long histogramInterval;
     private List<QueryHistogramAggregationResult> histogramResults;
     private String timesliceInterval;
+    private List<QueryTimesliceAggregationResult> timesliceResults;
     private String path;
     private Long matchingResults;
     private List<QueryAggregation> aggregations;
@@ -2596,6 +2603,18 @@ public class IBMDiscoveryV2Models {
     @AuraEnabled
     public String getTimesliceInterval() {
       return timesliceInterval;
+    }
+
+    /**
+     * Gets the timesliceResults.
+     *
+     * Array of aggregation results.
+     *
+     * @return the timesliceResults
+     */
+    @AuraEnabled
+    public List<QueryTimesliceAggregationResult> getTimesliceResults() {
+      return timesliceResults;
     }
 
     /**
@@ -2746,6 +2765,15 @@ public class IBMDiscoveryV2Models {
     }
 
     /**
+     * Sets the timesliceResults.
+     *
+     * @param timesliceResults the new timesliceResults
+     */
+    public void setTimesliceResults(final List<QueryTimesliceAggregationResult> timesliceResults) {
+      this.timesliceResults = timesliceResults;
+    }
+
+    /**
      * Sets the path.
      *
      * @param path the new path
@@ -2820,6 +2848,7 @@ public class IBMDiscoveryV2Models {
         'histogram_interval' => 'histogramInterval',
         'histogram_results' => 'histogramResults',
         'timeslice_interval' => 'timesliceInterval',
+        'timeslice_results' => 'timesliceResults',
         'matching_results' => 'matchingResults'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
@@ -2851,6 +2880,19 @@ public class IBMDiscoveryV2Models {
           newHistogramResults.add(newItem);
         }
         ret.histogramResults = newHistogramResults;
+      }
+
+      // calling custom deserializer for timesliceResults
+      List<QueryTimesliceAggregationResult> newTimesliceResults = new List<QueryTimesliceAggregationResult>();
+      List<QueryTimesliceAggregationResult> deserializedTimesliceResults = ret.getTimesliceResults();
+      if (deserializedTimesliceResults != null) {
+        for (Integer i = 0; i < deserializedTimesliceResults.size(); i++) {
+          QueryTimesliceAggregationResult currentItem = ret.getTimesliceResults().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('timesliceResults');
+          QueryTimesliceAggregationResult newItem = (QueryTimesliceAggregationResult) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryTimesliceAggregationResult.class);
+          newTimesliceResults.add(newItem);
+        }
+        ret.timesliceResults = newTimesliceResults;
       }
 
       // calling custom deserializer for aggregations
@@ -3002,7 +3044,7 @@ public class IBMDiscoveryV2Models {
     /**
      * Gets the perDocument.
      *
-     * When `true`, passages will be returned whithin their respective result.
+     * When `true`, passages will be returned within their respective result.
      *
      * @return the perDocument
      */
@@ -4297,7 +4339,7 @@ public class IBMDiscoveryV2Models {
     /**
      * Gets the suggestedRefinements.
      *
-     * Array of suggested refinments.
+     * Array of suggested refinements.
      *
      * @return the suggestedRefinements
      */
@@ -5118,6 +5160,131 @@ public class IBMDiscoveryV2Models {
   }
 
   /**
+   * A timeslice interval segment.
+   */
+  public class QueryTimesliceAggregationResult extends IBMWatsonGenericModel {
+    private String keyAsString;
+    private Long key;
+    private Long matchingResults;
+    private List<QueryAggregation> aggregations;
+
+    /**
+     * Gets the keyAsString.
+     *
+     * String date value of the upper bound for the timeslice interval in ISO-8601 format.
+     *
+     * @return the keyAsString
+     */
+    @AuraEnabled
+    public String getKeyAsString() {
+      return keyAsString;
+    }
+
+    /**
+     * Gets the key.
+     *
+     * Numeric date value of the upper bound for the timeslice interval in UNIX milliseconds since epoch.
+     *
+     * @return the key
+     */
+    @AuraEnabled
+    public Long getKey() {
+      return key;
+    }
+
+    /**
+     * Gets the matchingResults.
+     *
+     * Number of documents with the specified key as the upper bound.
+     *
+     * @return the matchingResults
+     */
+    @AuraEnabled
+    public Long getMatchingResults() {
+      return matchingResults;
+    }
+
+    /**
+     * Gets the aggregations.
+     *
+     * An array of sub aggregations.
+     *
+     * @return the aggregations
+     */
+    @AuraEnabled
+    public List<QueryAggregation> getAggregations() {
+      return aggregations;
+    }
+
+    /**
+     * Sets the keyAsString.
+     *
+     * @param keyAsString the new keyAsString
+     */
+    public void setKeyAsString(final String keyAsString) {
+      this.keyAsString = keyAsString;
+    }
+
+    /**
+     * Sets the key.
+     *
+     * @param key the new key
+     */
+    public void setKey(final long key) {
+      this.key = key;
+    }
+
+    /**
+     * Sets the matchingResults.
+     *
+     * @param matchingResults the new matchingResults
+     */
+    public void setMatchingResults(final long matchingResults) {
+      this.matchingResults = matchingResults;
+    }
+
+    /**
+     * Sets the aggregations.
+     *
+     * @param aggregations the new aggregations
+     */
+    public void setAggregations(final List<QueryAggregation> aggregations) {
+      this.aggregations = aggregations;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'key_as_string' => 'keyAsString',
+        'matching_results' => 'matchingResults'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      QueryTimesliceAggregationResult ret = (QueryTimesliceAggregationResult) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for aggregations
+      List<QueryAggregation> newAggregations = new List<QueryAggregation>();
+      List<QueryAggregation> deserializedAggregations = ret.getAggregations();
+      if (deserializedAggregations != null) {
+        for (Integer i = 0; i < deserializedAggregations.size(); i++) {
+          QueryAggregation currentItem = ret.getAggregations().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations');
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), QueryAggregation.class);
+          newAggregations.add(newItem);
+        }
+        ret.aggregations = newAggregations;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
    * A query response containing the matching documents for the preceding aggregations.
    */
   public class QueryTopHitsAggregationResult extends IBMWatsonGenericModel {
@@ -5206,7 +5373,7 @@ public class IBMDiscoveryV2Models {
     /**
      * Gets the documentRetrievalStrategy.
      *
-     * Indentifies the document retrieval strategy used for this query. `relevancy_training` indicates that the results
+     * Identifies the document retrieval strategy used for this query. `relevancy_training` indicates that the results
      * were returned using a relevancy trained model.
      *
      *  **Note**: In the event of trained collections being queried, but the trained model is not used to return
@@ -7924,7 +8091,7 @@ public class IBMDiscoveryV2Models {
      * Gets the file.
      *
      * The content of the document to ingest. The maximum supported file size when adding a file to a collection is 50
-     * megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files larger than the
+     * megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files larger than the
      * supported size are rejected.
      *
      * @return the file
