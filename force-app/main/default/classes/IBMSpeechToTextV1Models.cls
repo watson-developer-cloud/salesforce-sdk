@@ -9229,8 +9229,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript;
     private Double confidence;
-    private List<String> timestamps;
-    private List<String> wordConfidence;
+    private List<List<String>> timestamps;
+    private List<List<String>> wordConfidence;
 
     /**
      * Gets the transcript.
@@ -9267,7 +9267,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<String> getTimestamps() {
+    public List<List<String>> getTimestamps() {
       return timestamps;
     }
 
@@ -9281,7 +9281,7 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<String> getWordConfidence() {
+    public List<List<String>> getWordConfidence() {
       return wordConfidence;
     }
 
@@ -9308,7 +9308,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<String> timestamps) {
+    public void setTimestamps(final List<List<String>> timestamps) {
       this.timestamps = timestamps;
     }
 
@@ -9317,7 +9317,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<String> wordConfidence) {
+    public void setWordConfidence(final List<List<String>> wordConfidence) {
       this.wordConfidence = wordConfidence;
     }
 
@@ -9345,7 +9345,7 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionResult extends IBMWatsonGenericModel {
     private Boolean xFinal;
     private List<SpeechRecognitionAlternative> alternatives;
-    private IBMWatsonMapModel keywordsResult;
+    private Map<String, List<KeywordResult>> keywordsResult;
     private List<WordAlternativeResults> wordAlternatives;
     private String endOfUtterance;
 
@@ -9386,7 +9386,7 @@ public class IBMSpeechToTextV1Models {
      * @return the keywordsResult
      */
     @AuraEnabled
-    public IBMWatsonMapModel getKeywordsResult() {
+    public Map<String, List<KeywordResult>> getKeywordsResult() {
       return keywordsResult;
     }
 
@@ -9444,7 +9444,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param keywordsResult the new keywordsResult
      */
-    public void setKeywordsResult(final IBMWatsonMapModel keywordsResult) {
+    public void setKeywordsResult(final Map<String, List<KeywordResult>> keywordsResult) {
       this.keywordsResult = keywordsResult;
     }
 
@@ -9497,9 +9497,23 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywordsResult
-      Map<String, Object> keywordsResultMap = (Map<String, Object>) jsonMap.get('keywordsResult');
-      IBMWatsonMapModel newKeywordsResult = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(keywordsResultMap, true), keywordsResultMap, IBMWatsonMapModel.class);
-      ret.setKeywordsResult(newKeywordsResult);
+      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
+      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
+      if (deserializedKeywordsResult != null) {
+        for (String key : deserializedKeywordsResult.keySet()) {
+          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
+          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
+          for (Integer i = 0; i < keywordResultList.size(); i++) {
+            KeywordResult currentItem = keywordResultList.get(i);
+            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywordsResult');
+            Object innerObject = ((List<Object>) itemInMap.get(key)).get(i);
+            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(innerObject), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerObject)), KeywordResult.class);
+            newKeywordResult.add(newItem);
+          }
+          newKeywordsResult.put(key, newKeywordResult);
+        }
+        ret.setKeywordsResult(newKeywordsResult);
+      }
 
       // calling custom deserializer for wordAlternatives
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
