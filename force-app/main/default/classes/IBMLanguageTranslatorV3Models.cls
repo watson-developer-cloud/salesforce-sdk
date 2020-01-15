@@ -540,7 +540,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the wordCount.
      *
-     * The number of words in the source document, present only if status=available.
+     * An estimate of the number of words in the source document. Returned only if `status` is `available`.
      *
      * @return the wordCount
      */
@@ -1568,7 +1568,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the file.
      *
-     * The source file to translate.
+     * The contents of the source file to translate.
      *
      * [Supported file
      * types](https://cloud.ibm.com/docs/services/language-translator?topic=language-translator-document-translator-tutorial#supported-file-formats)
@@ -2345,7 +2345,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the wordCount.
      *
-     * Number of words in the input text.
+     * An estimate of the number of words in the input text.
      *
      * @return the wordCount
      */

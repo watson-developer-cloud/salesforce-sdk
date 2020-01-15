@@ -1192,7 +1192,8 @@ public class IBMVisualRecognitionV3Models {
      * one positive example file in a call.
      *
      * Specify the parameter name by appending `_positive_examples` to the class name. For example,
-     * `goldenretriever_positive_examples` creates the class **goldenretriever**.
+     * `goldenretriever_positive_examples` creates the class **goldenretriever**. The string cannot contain the
+     * following characters: ``$ * - { } \ | / ' " ` [ ]``.
      *
      * Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
      * maximum number of images is 10,000 images or 100 MB per .zip file.
@@ -1935,7 +1936,8 @@ public class IBMVisualRecognitionV3Models {
      * or update classes in the classifier. You can include more than one positive example file in a call.
      *
      * Specify the parameter name by appending `_positive_examples` to the class name. For example,
-     * `goldenretriever_positive_examples` creates the class `goldenretriever`.
+     * `goldenretriever_positive_examples` creates the class `goldenretriever`. The string cannot contain the following
+     * characters: ``$ * - { } \ | / ' " ` [ ]``.
      *
      * Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
      * maximum number of images is 10,000 images or 100 MB per .zip file.

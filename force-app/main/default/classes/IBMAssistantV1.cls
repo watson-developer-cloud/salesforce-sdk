@@ -1879,6 +1879,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
    * For more information about personal data and customer IDs, see [Information
    * security](https://cloud.ibm.com/docs/services/assistant?topic=assistant-information-security#information-security).
    *
+   * This operation is limited to 4 requests per minute. For more information, see **Rate limiting**.
+   *
    * @param deleteUserDataOptions the {@link IBMAssistantV1Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call
    */

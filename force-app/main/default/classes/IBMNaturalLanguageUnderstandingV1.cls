@@ -5,7 +5,7 @@
  *
  * You can create [custom
  * models](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
- * with Watson Knowledge Studio to detect custom entities, relations, and categories in Natural Language Understanding.
+ * with Watson Knowledge Studio to detect custom entities and relations in Natural Language Understanding.
  *
  * @version V1
  * @see <a href="https://cloud.ibm.com/docs/services/natural-language-understanding/">Natural Language Understanding</a>
@@ -61,6 +61,10 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    * - Semantic roles
    * - Sentiment
    * - Syntax (Experimental).
+   *
+   * If a language for the input text is not specified with the `language` parameter, the service [automatically detects
+   * the
+   * language](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-detectable-languages).
    *
    * @param analyzeOptions the {@link IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageUnderstandingV1Models.AnalysisResults} with the response
