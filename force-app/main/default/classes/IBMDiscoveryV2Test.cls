@@ -883,6 +883,8 @@ private class IBMDiscoveryV2Test {
 
     IBMDiscoveryV2Models.CreateTrainingQueryOptions options = new IBMDiscoveryV2Models.CreateTrainingQueryOptionsBuilder()
       .projectId(PROJECT_ID)
+      .naturalLanguageQuery(NATURAL_LANGUAGE_QUERY)
+      .addExamples(trainingExampleMock)
       .build();
     IBMDiscoveryV2Models.TrainingQuery response = service.createTrainingQuery(options);
 
