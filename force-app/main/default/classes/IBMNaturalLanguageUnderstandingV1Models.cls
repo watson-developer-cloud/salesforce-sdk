@@ -1064,7 +1064,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class CategoriesOptions extends IBMWatsonGenericModel {
     private Boolean explanation;
     private Long xLimit;
-    private String model;
 
     /**
      * Gets the explanation.
@@ -1088,24 +1087,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long xLimit() {
       return xLimit;
     }
-
-    /**
-     * Gets the model.
-     *
-     * Enter a [custom
-     * model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
-     * ID to override the standard categories model.
-     *
-     * @return the model
-     */
-    public String model() {
-      return model;
-    }
   
     private CategoriesOptions(CategoriesOptionsBuilder builder) {
       this.explanation = builder.explanation;
       this.xLimit = builder.xLimit;
-      this.model = builder.model;
     }
 
     /**
@@ -1140,12 +1125,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class CategoriesOptionsBuilder {
     private Boolean explanation;
     private Long xLimit;
-    private String model;
 
     private CategoriesOptionsBuilder(CategoriesOptions categoriesOptions) {
       this.explanation = categoriesOptions.explanation;
       this.xLimit = categoriesOptions.xLimit;
-      this.model = categoriesOptions.model;
     }
 
     /**
@@ -1182,17 +1165,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public CategoriesOptionsBuilder xLimit(Long xLimit) {
       this.xLimit = xLimit;
-      return this;
-    }
-
-    /**
-     * Set the model.
-     *
-     * @param model the model
-     * @return the CategoriesOptions builder
-     */
-    public CategoriesOptionsBuilder model(String model) {
-      this.model = model;
       return this;
     }
   }
