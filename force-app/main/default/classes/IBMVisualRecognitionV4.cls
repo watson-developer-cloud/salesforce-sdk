@@ -69,12 +69,8 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    for (String item : analyzeOptions.collectionIds()) {
-      multipartBuilder.addFormDataPart('collection_ids', item);
-    }
-    for (String item : analyzeOptions.features()) {
-      multipartBuilder.addFormDataPart('features', item);
-    }
+    multipartBuilder.addFormDataPart('collection_ids', String.join(analyzeOptions.collectionIds(), ','));
+    multipartBuilder.addFormDataPart('features', String.join(analyzeOptions.features(), ','));
     if (analyzeOptions.imagesFile() != null) {
       for (IBMWatsonFile item : analyzeOptions.imagesFile()) {
         IBMWatsonRequestBody itemBody = IBMWatsonRequestBody.create(item, item.contentType());
