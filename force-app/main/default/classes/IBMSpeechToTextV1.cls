@@ -252,6 +252,12 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.audioMetrics() != null) {
       builder.query('audio_metrics', String.valueOf(recognizeOptions.audioMetrics()));
     }
+    if (recognizeOptions.endOfPhraseSilenceTime() != null) {
+      builder.query('end_of_phrase_silence_time', String.valueOf(recognizeOptions.endOfPhraseSilenceTime()));
+    }
+    if (recognizeOptions.splitTranscriptAtPhraseEnd() != null) {
+      builder.query('split_transcript_at_phrase_end', String.valueOf(recognizeOptions.splitTranscriptAtPhraseEnd()));
+    }
     builder.bodyContent(recognizeOptions.contentType(), null, null, recognizeOptions.audio());
 
     return (IBMSpeechToTextV1Models.SpeechRecognitionResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechRecognitionResults.class);
@@ -521,6 +527,12 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.audioMetrics() != null) {
       builder.query('audio_metrics', String.valueOf(createJobOptions.audioMetrics()));
     }
+    if (createJobOptions.endOfPhraseSilenceTime() != null) {
+      builder.query('end_of_phrase_silence_time', String.valueOf(createJobOptions.endOfPhraseSilenceTime()));
+    }
+    if (createJobOptions.splitTranscriptAtPhraseEnd() != null) {
+      builder.query('split_transcript_at_phrase_end', String.valueOf(createJobOptions.splitTranscriptAtPhraseEnd()));
+    }
     builder.bodyContent(createJobOptions.contentType(), null, null, createJobOptions.audio());
 
     return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
@@ -626,7 +638,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * base model for which it is created. The model is owned by the instance of the service whose credentials are used to
    * create it.
    *
-   * You can create a maximum of 1024 custom language models, per credential. The service returns an error if you
+   * You can create a maximum of 1024 custom language models per owning credentials. The service returns an error if you
    * attempt to create more than 1024 models. You do not lose any models, but you cannot create any more until your
    * model count is below the limit.
    *
@@ -1424,7 +1436,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * base model for which it is created. The model is owned by the instance of the service whose credentials are used to
    * create it.
    *
-   * You can create a maximum of 1024 custom acoustic models, per credential. The service returns an error if you
+   * You can create a maximum of 1024 custom acoustic models per owning credentials. The service returns an error if you
    * attempt to create more than 1024 models. You do not lose any models, but you cannot create any more until your
    * model count is below the limit.
    *
