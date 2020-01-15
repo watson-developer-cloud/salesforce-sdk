@@ -30,13 +30,11 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions options = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptionsBuilder()
       .xlimit(LIMIT_VAL)
       .explanation(true)
-      .model(MODEL)
       .build();
     options = options.newBuilder().build();
 
     System.assertEquals(LIMIT_VAL, options.xlimit());
     System.assert(options.explanation());
-    System.assertEquals(MODEL, options.model());
 
     Test.stopTest();
   }
