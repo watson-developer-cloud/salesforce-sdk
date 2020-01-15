@@ -64,6 +64,7 @@ private class IBMSpeechToTextV1Test {
   private static String description;
   private static String warningId;
   private static String updated;
+  private static Double endOfPhraseSilenceTime;
 
   private static IBMSpeechToTextV1 service;
 
@@ -106,6 +107,7 @@ private class IBMSpeechToTextV1Test {
     description = 'description';
     warningId = 'warning_id';
     updated = '2019-10-11T19:16:58.547Z';
+    endOfPhraseSilenceTime = 2.0;
 
     service = new IBMSpeechToTextV1(new IBMWatsonNoAuthAuthenticator());
   }
@@ -184,6 +186,8 @@ private class IBMSpeechToTextV1Test {
       .smartFormatting(true)
       .speakerLabels(true)
       .baseModelVersion('version')
+      .endOfPhraseSilenceTime(endOfPhraseSilenceTime)
+      .splitTranscriptAtPhraseEnd(true)
       .addHeader(headerKey, headerVal)
       .build();
     IBMSpeechToTextV1Models.RecognitionJob createJob = service.createJob(createJobOptions);
@@ -204,6 +208,7 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getEndTime(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getAlternatives()[0].getWord(), 'string');
+    System.assertEquals('end_of_data', createJob.getResults().get(0).getResults().get(0).getEndOfUtterance());
     System.assertEquals(createJob.getresults()[0].getResultIndex(),0);
     System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getXfrom(),0);
     System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getTo(),0);
@@ -882,6 +887,8 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions = new IBMSpeechToTextV1Models.RecognizeOptionsBuilder()
       .audio(audio)
       .contentType(fileContentType)
+      .endOfPhraseSilenceTime(endOfPhraseSilenceTime)
+      .splitTranscriptAtPhraseEnd(true)
       .addHeader(headerKey, headerVal)
       .build();
     IBMSpeechToTextV1Models.SpeechRecognitionResults speechResults = service.recognize(recognizeOptions);
@@ -889,6 +896,7 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getEndTime(),0.28);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),1);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getWord(), 'a');
+    System.assertEquals('end_of_data', speechResults.getResults().get(0).getEndOfUtterance());
     System.assertEquals(speechResults.getAudioMetrics().getSamplingInterval(), samplingInterval);
     System.assert(speechResults.getAudioMetrics().getAccumulated().getXfinal());
     System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getEndTime(), endTime);
@@ -1171,6 +1179,8 @@ private class IBMSpeechToTextV1Test {
       .processingMetrics(true)
       .processingMetricsInterval(processingMetricsInterval)
       .audioMetrics(true)
+      .endOfPhraseSilenceTime(endOfPhraseSilenceTime)
+      .splitTranscriptAtPhraseEnd(true)
       .addHeader(headerKey, headerVal)
       .build();
     options = options.newBuilder().build();
@@ -1202,6 +1212,8 @@ private class IBMSpeechToTextV1Test {
     System.assert(options.processingMetrics());
     System.assertEquals(processingMetricsInterval, options.processingMetricsInterval());
     System.assert(options.audioMetrics());
+    System.assertEquals(endOfPhraseSilenceTime, options.endOfPhraseSilenceTime());
+    System.assert(options.splitTranscriptAtPhraseEnd());
 
     Test.stopTest();
   }
@@ -1241,6 +1253,8 @@ private class IBMSpeechToTextV1Test {
       .grammarName(grammarName)
       .redaction(true)
       .audioMetrics(true)
+      .endOfPhraseSilenceTime(endOfPhraseSilenceTime)
+      .splitTranscriptAtPhraseEnd(true)
       .addHeader(headerKey, headerVal)
       .build();
     options = options.newBuilder().build();
@@ -1266,6 +1280,8 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(grammarName, options.grammarName());
     System.assert(options.redaction());
     System.assert(options.audioMetrics());
+    System.assertEquals(endOfPhraseSilenceTime, options.endOfPhraseSilenceTime());
+    System.assert(options.splitTranscriptAtPhraseEnd());
 
     Test.stopTest();
   }

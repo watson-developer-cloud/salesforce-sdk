@@ -1925,7 +1925,8 @@ public class IBMWatsonMockResponses {
            '                }' +
            '              ]' +
            '            }' +
-           '          ]' +
+           '          ],' +
+           '          "end_of_utterance": "end_of_data"' +
            '        }' +
            '      ], ' +
            '      "result_index": 0, ' +
@@ -2301,7 +2302,8 @@ public class IBMWatsonMockResponses {
       '        "transcript": "a line of severe thunderstorms with several possible tornadoes is approaching Colorado on Sunday "' +
       '      }' +
       '    ], ' +
-      '    "final": true' +
+      '    "final": true,' +
+      '    "end_of_utterance": "end_of_data"' +
       '  }' +
       '], ' +
       '"result_index": 0,' +
