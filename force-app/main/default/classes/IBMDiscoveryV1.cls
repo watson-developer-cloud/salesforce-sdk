@@ -520,9 +520,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (updateCollectionOptions.name() != null) {
-      contentJson.put('name', updateCollectionOptions.name());
-    }
+    contentJson.put('name', updateCollectionOptions.name());
     if (updateCollectionOptions.description() != null) {
       contentJson.put('description', updateCollectionOptions.description());
     }
@@ -1179,6 +1177,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
     if (federatedQueryOptions.filter() != null) {
       contentJson.put('filter', federatedQueryOptions.filter());
     }
@@ -1235,9 +1234,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (federatedQueryOptions.bias() != null) {
       contentJson.put('bias', federatedQueryOptions.bias());
-    }
-    if (federatedQueryOptions.collectionIds() != null) {
-      contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
@@ -1666,7 +1662,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * Create event.
    *
    * The **Events** API can be used to create log entries that are associated with specific queries. For example, you
-   * can record which documents in the results set were "clicked" by a user and when that click occured.
+   * can record which documents in the results set were "clicked" by a user and when that click occurred.
    *
    * @param createEventOptions the {@link IBMDiscoveryV1Models.CreateEventOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.CreateEventResponse} with the response

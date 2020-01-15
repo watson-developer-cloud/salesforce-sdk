@@ -8713,6 +8713,7 @@ public class IBMDiscoveryV1Models {
    */
   public class FederatedQueryOptions extends IBMWatsonOptionsModel {
     private String environmentId;
+    private String collectionIds;
     private String filter;
     private String query;
     private String naturalLanguageQuery;
@@ -8732,7 +8733,6 @@ public class IBMDiscoveryV1Models {
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
-    private String collectionIds;
     private Boolean xWatsonLoggingOptOut;
 
     /**
@@ -8744,6 +8744,17 @@ public class IBMDiscoveryV1Models {
      */
     public String environmentId() {
       return environmentId;
+    }
+
+    /**
+     * Gets the collectionIds.
+     *
+     * A comma-separated list of collection IDs to be queried against.
+     *
+     * @return the collectionIds
+     */
+    public String collectionIds() {
+      return collectionIds;
     }
 
     /**
@@ -8980,17 +8991,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the collectionIds.
-     *
-     * A comma-separated list of collection IDs to be queried against.
-     *
-     * @return the collectionIds
-     */
-    public String collectionIds() {
-      return collectionIds;
-    }
-
-    /**
      * Gets the xWatsonLoggingOptOut.
      *
      * If `true`, queries are not stored in the Discovery **Logs** endpoint.
@@ -9003,7 +9003,9 @@ public class IBMDiscoveryV1Models {
 
     private FederatedQueryOptions(FederatedQueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notNull(builder.collectionIds, 'collectionIds cannot be null');
       environmentId = builder.environmentId;
+      collectionIds = builder.collectionIds;
       filter = builder.filter;
       query = builder.query;
       naturalLanguageQuery = builder.naturalLanguageQuery;
@@ -9023,7 +9025,6 @@ public class IBMDiscoveryV1Models {
       similarDocumentIds = builder.similarDocumentIds;
       similarFields = builder.similarFields;
       bias = builder.bias;
-      collectionIds = builder.collectionIds;
       xWatsonLoggingOptOut = builder.xWatsonLoggingOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -9043,6 +9044,7 @@ public class IBMDiscoveryV1Models {
    */
   public class FederatedQueryOptionsBuilder extends IBMWatsonOptionsModel {
     private String environmentId;
+    private String collectionIds;
     private String filter;
     private String query;
     private String naturalLanguageQuery;
@@ -9062,11 +9064,11 @@ public class IBMDiscoveryV1Models {
     private String similarDocumentIds;
     private String similarFields;
     private String bias;
-    private String collectionIds;
     private Boolean xWatsonLoggingOptOut;
 
     private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
       environmentId = federatedQueryOptions.environmentId;
+      collectionIds = federatedQueryOptions.collectionIds;
       filter = federatedQueryOptions.filter;
       query = federatedQueryOptions.query;
       naturalLanguageQuery = federatedQueryOptions.naturalLanguageQuery;
@@ -9086,7 +9088,6 @@ public class IBMDiscoveryV1Models {
       similarDocumentIds = federatedQueryOptions.similarDocumentIds;
       similarFields = federatedQueryOptions.similarFields;
       bias = federatedQueryOptions.bias;
-      collectionIds = federatedQueryOptions.collectionIds;
       xWatsonLoggingOptOut = federatedQueryOptions.xWatsonLoggingOptOut;
       this.requestHeaders.putAll(federatedQueryOptions.requestHeaders());
     }
@@ -9101,9 +9102,11 @@ public class IBMDiscoveryV1Models {
      * Instantiates a new builder with required properties.
      *
      * @param environmentId the environmentId
+     * @param collectionIds the collectionIds
      */
-    public FederatedQueryOptionsBuilder(String environmentId) {
+    public FederatedQueryOptionsBuilder(String environmentId, String collectionIds) {
       this.environmentId = environmentId;
+      this.collectionIds = collectionIds;
     }
 
     /**
@@ -9123,6 +9126,17 @@ public class IBMDiscoveryV1Models {
      */
     public FederatedQueryOptionsBuilder environmentId(String environmentId) {
       this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionIds.
+     *
+     * @param collectionIds the collectionIds
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder collectionIds(String collectionIds) {
+      this.collectionIds = collectionIds;
       return this;
     }
 
@@ -9332,17 +9346,6 @@ public class IBMDiscoveryV1Models {
      */
     public FederatedQueryOptionsBuilder bias(String bias) {
       this.bias = bias;
-      return this;
-    }
-
-    /**
-     * Set the collectionIds.
-     *
-     * @param collectionIds the collectionIds
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder collectionIds(String collectionIds) {
-      this.collectionIds = collectionIds;
       return this;
     }
 
@@ -23673,6 +23676,7 @@ public class IBMDiscoveryV1Models {
     private UpdateCollectionOptions(UpdateCollectionOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
       environmentId = builder.environmentId;
       collectionId = builder.collectionId;
       name = builder.name;
@@ -23721,10 +23725,12 @@ public class IBMDiscoveryV1Models {
      *
      * @param environmentId the environmentId
      * @param collectionId the collectionId
+     * @param name the name
      */
-    public UpdateCollectionOptionsBuilder(String environmentId, String collectionId) {
+    public UpdateCollectionOptionsBuilder(String environmentId, String collectionId, String name) {
       this.environmentId = environmentId;
       this.collectionId = collectionId;
+      this.name = name;
     }
 
     /**
