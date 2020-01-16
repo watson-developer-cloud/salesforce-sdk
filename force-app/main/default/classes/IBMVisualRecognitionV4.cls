@@ -1,3 +1,16 @@
+/*
+ * (C) Copyright IBM Corp. 2019, 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
 /**
  * Provide images to the IBM Watson&trade; Visual Recognition service for analysis. The service detects objects based on
  * a set of images with training data.
@@ -70,7 +83,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     multipartBuilder.addFormDataPart('collection_ids', String.join(analyzeOptions.collectionIds(), ','));
-    multipartBuilder.addFormDataPart('features', String.join(analyzeOptions.features(), ','));
+     multipartBuilder.addFormDataPart('features', String.join(analyzeOptions.features(), ','));
     if (analyzeOptions.imagesFile() != null) {
       for (IBMWatsonFile item : analyzeOptions.imagesFile()) {
         IBMWatsonRequestBody itemBody = IBMWatsonRequestBody.create(item, item.contentType());
