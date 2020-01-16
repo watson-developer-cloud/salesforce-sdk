@@ -1,3 +1,16 @@
+/*
+ * (C) Copyright IBM Corp. 2017, 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
 /**
  * The IBM&reg; Text to Speech service provides APIs that use IBM's speech-synthesis capabilities to synthesize text
  * into natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male
@@ -196,7 +209,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * You can also request the pronunciation for a specific voice to see the default translation for the language of that
    * voice or for a specific custom voice model to see the translation for that voice model.
    *
-   * **Note:** This method is currently a beta release.
+   * **Note:** This method is currently a beta release. The method does not support the Arabic, Chinese, and Dutch
+   * languages.
    *
    * **See also:** [Querying a word from a
    * language](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryLanguage).
@@ -239,7 +253,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * specify the language and a description for the new model. The model is owned by the instance of the service whose
    * credentials are used to create it.
    *
-   * **Note:** This method is currently a beta release.
+   * **Note:** This method is currently a beta release. The service does not support voice model customization for the
+   * Arabic, Chinese, and Dutch languages.
    *
    * **See also:** [Creating a custom
    * model](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsCreate).

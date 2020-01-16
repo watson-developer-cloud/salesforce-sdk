@@ -1,3 +1,16 @@
+/*
+ * (C) Copyright IBM Corp. 2018, 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
 public class IBMLanguageTranslatorV3Models {
   /**
    * The createModel options.
@@ -540,7 +553,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the wordCount.
      *
-     * The number of words in the source document, present only if status=available.
+     * An estimate of the number of words in the source document. Returned only if `status` is `available`.
      *
      * @return the wordCount
      */
@@ -1568,7 +1581,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the file.
      *
-     * The source file to translate.
+     * The contents of the source file to translate.
      *
      * [Supported file
      * types](https://cloud.ibm.com/docs/services/language-translator?topic=language-translator-document-translator-tutorial#supported-file-formats)
@@ -2345,7 +2358,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the wordCount.
      *
-     * Number of words in the input text.
+     * An estimate of the number of words in the input text.
      *
      * @return the wordCount
      */

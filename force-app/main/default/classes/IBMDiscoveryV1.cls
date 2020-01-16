@@ -1,3 +1,16 @@
+/*
+ * (C) Copyright IBM Corp. 2017, 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
 /**
  * IBM Watson&trade; Discovery is a cognitive search and content analytics engine that you can add to applications to
  * identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and
@@ -520,9 +533,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (updateCollectionOptions.name() != null) {
-      contentJson.put('name', updateCollectionOptions.name());
-    }
+    contentJson.put('name', updateCollectionOptions.name());
     if (updateCollectionOptions.description() != null) {
       contentJson.put('description', updateCollectionOptions.description());
     }
@@ -1179,6 +1190,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
     if (federatedQueryOptions.filter() != null) {
       contentJson.put('filter', federatedQueryOptions.filter());
     }
@@ -1235,9 +1247,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (federatedQueryOptions.bias() != null) {
       contentJson.put('bias', federatedQueryOptions.bias());
-    }
-    if (federatedQueryOptions.collectionIds() != null) {
-      contentJson.put('collection_ids', federatedQueryOptions.collectionIds());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
@@ -1666,7 +1675,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * Create event.
    *
    * The **Events** API can be used to create log entries that are associated with specific queries. For example, you
-   * can record which documents in the results set were "clicked" by a user and when that click occured.
+   * can record which documents in the results set were "clicked" by a user and when that click occurred.
    *
    * @param createEventOptions the {@link IBMDiscoveryV1Models.CreateEventOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.CreateEventResponse} with the response

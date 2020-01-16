@@ -1,3 +1,16 @@
+/*
+ * (C) Copyright IBM Corp. 2017, 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
 public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * Results of the analysis, organized by feature.
@@ -1064,7 +1077,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class CategoriesOptions extends IBMWatsonGenericModel {
     private Boolean explanation;
     private Long xLimit;
-    private String model;
 
     /**
      * Gets the explanation.
@@ -1088,24 +1100,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Long xLimit() {
       return xLimit;
     }
-
-    /**
-     * Gets the model.
-     *
-     * Enter a [custom
-     * model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
-     * ID to override the standard categories model.
-     *
-     * @return the model
-     */
-    public String model() {
-      return model;
-    }
   
     private CategoriesOptions(CategoriesOptionsBuilder builder) {
       this.explanation = builder.explanation;
       this.xLimit = builder.xLimit;
-      this.model = builder.model;
     }
 
     /**
@@ -1140,12 +1138,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class CategoriesOptionsBuilder {
     private Boolean explanation;
     private Long xLimit;
-    private String model;
 
     private CategoriesOptionsBuilder(CategoriesOptions categoriesOptions) {
       this.explanation = categoriesOptions.explanation;
       this.xLimit = categoriesOptions.xLimit;
-      this.model = categoriesOptions.model;
     }
 
     /**
@@ -1182,17 +1178,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public CategoriesOptionsBuilder xLimit(Long xLimit) {
       this.xLimit = xLimit;
-      return this;
-    }
-
-    /**
-     * Set the model.
-     *
-     * @param model the model
-     * @return the CategoriesOptions builder
-     */
-    public CategoriesOptionsBuilder model(String model) {
-      this.model = model;
       return this;
     }
   }

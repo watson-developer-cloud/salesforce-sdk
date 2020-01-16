@@ -1,3 +1,16 @@
+/*
+ * (C) Copyright IBM Corp. 2017, 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
 public class IBMSpeechToTextV1Models {
   /**
    * Information about an existing custom acoustic model.
@@ -2903,6 +2916,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean processingMetrics;
     private Double processingMetricsInterval;
     private Boolean audioMetrics;
+    private Double endOfPhraseSilenceTime;
+    private Boolean splitTranscriptAtPhraseEnd;
 
     /**
      * Gets the audio.
@@ -3285,6 +3300,9 @@ public class IBMSpeechToTextV1Models {
      * processing metrics for transcription events, for example, for final and interim results. By default, the service
      * returns no processing metrics.
      *
+     * See [Processing
+     * metrics](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-metrics#processing_metrics).
+     *
      * @return the processingMetrics
      */
     public Boolean processingMetrics() {
@@ -3304,6 +3322,9 @@ public class IBMSpeechToTextV1Models {
      * events instead of at periodic intervals, set the value to a large number. If the value is larger than the
      * duration of the audio, the service returns processing metrics only for transcription events.
      *
+     * See [Processing
+     * metrics](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-metrics#processing_metrics).
+     *
      * @return the processingMetricsInterval
      */
     public Double processingMetricsInterval() {
@@ -3316,10 +3337,55 @@ public class IBMSpeechToTextV1Models {
      * If `true`, requests detailed information about the signal characteristics of the input audio. The service returns
      * audio metrics with the final transcription results. By default, the service returns no audio metrics.
      *
+     * See [Audio
+     * metrics](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-metrics#audio_metrics).
+     *
      * @return the audioMetrics
      */
     public Boolean audioMetrics() {
       return audioMetrics;
+    }
+
+    /**
+     * Gets the endOfPhraseSilenceTime.
+     *
+     * If `true`, specifies the duration of the pause interval at which the service splits a transcript into multiple
+     * final results. If the service detects pauses or extended silence before it reaches the end of the audio stream,
+     * its response can include multiple final results. Silence indicates a point at which the speaker pauses between
+     * spoken words or phrases.
+     *
+     * Specify a value for the pause interval in the range of 0.0 to 120.0.
+     * * A value greater than 0 specifies the interval that the service is to use for speech recognition.
+     * * A value of 0 indicates that the service is to use the default interval. It is equivalent to omitting the
+     * parameter.
+     *
+     * The default pause interval for most languages is 0.8 seconds; the default for Chinese is 0.6 seconds.
+     *
+     * See [End of phrase silence
+     * time](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#silence_time).
+     *
+     * @return the endOfPhraseSilenceTime
+     */
+    public Double endOfPhraseSilenceTime() {
+      return endOfPhraseSilenceTime;
+    }
+
+    /**
+     * Gets the splitTranscriptAtPhraseEnd.
+     *
+     * If `true`, directs the service to split the transcript into multiple final results based on semantic features of
+     * the input, for example, at the conclusion of meaningful phrases such as sentences. The service bases its
+     * understanding of semantic features on the base language model that you use with a request. Custom language models
+     * and grammars can also influence how and where the service splits a transcript. By default, the service splits
+     * transcripts based solely on the pause interval.
+     *
+     * See [Split transcript at phrase
+     * end](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#split_transcript).
+     *
+     * @return the splitTranscriptAtPhraseEnd
+     */
+    public Boolean splitTranscriptAtPhraseEnd() {
+      return splitTranscriptAtPhraseEnd;
     }
 
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
@@ -3351,6 +3417,8 @@ public class IBMSpeechToTextV1Models {
       processingMetrics = builder.processingMetrics;
       processingMetricsInterval = builder.processingMetricsInterval;
       audioMetrics = builder.audioMetrics;
+      endOfPhraseSilenceTime = builder.endOfPhraseSilenceTime;
+      splitTranscriptAtPhraseEnd = builder.splitTranscriptAtPhraseEnd;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3395,6 +3463,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean processingMetrics;
     private Double processingMetricsInterval;
     private Boolean audioMetrics;
+    private Double endOfPhraseSilenceTime;
+    private Boolean splitTranscriptAtPhraseEnd;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       audio = createJobOptions.audio;
@@ -3424,6 +3494,8 @@ public class IBMSpeechToTextV1Models {
       processingMetrics = createJobOptions.processingMetrics;
       processingMetricsInterval = createJobOptions.processingMetricsInterval;
       audioMetrics = createJobOptions.audioMetrics;
+      endOfPhraseSilenceTime = createJobOptions.endOfPhraseSilenceTime;
+      splitTranscriptAtPhraseEnd = createJobOptions.splitTranscriptAtPhraseEnd;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -3761,6 +3833,28 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptionsBuilder audioMetrics(Boolean audioMetrics) {
       this.audioMetrics = audioMetrics;
+      return this;
+    }
+
+    /**
+     * Set the endOfPhraseSilenceTime.
+     *
+     * @param endOfPhraseSilenceTime the endOfPhraseSilenceTime
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder endOfPhraseSilenceTime(Double endOfPhraseSilenceTime) {
+      this.endOfPhraseSilenceTime = endOfPhraseSilenceTime;
+      return this;
+    }
+
+    /**
+     * Set the splitTranscriptAtPhraseEnd.
+     *
+     * @param splitTranscriptAtPhraseEnd the splitTranscriptAtPhraseEnd
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder splitTranscriptAtPhraseEnd(Boolean splitTranscriptAtPhraseEnd) {
+      this.splitTranscriptAtPhraseEnd = splitTranscriptAtPhraseEnd;
       return this;
     }
 
@@ -7657,6 +7751,8 @@ public class IBMSpeechToTextV1Models {
     private String grammarName;
     private Boolean redaction;
     private Boolean audioMetrics;
+    private Double endOfPhraseSilenceTime;
+    private Boolean splitTranscriptAtPhraseEnd;
 
     /**
      * Gets the audio.
@@ -7969,10 +8065,55 @@ public class IBMSpeechToTextV1Models {
      * If `true`, requests detailed information about the signal characteristics of the input audio. The service returns
      * audio metrics with the final transcription results. By default, the service returns no audio metrics.
      *
+     * See [Audio
+     * metrics](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-metrics#audio_metrics).
+     *
      * @return the audioMetrics
      */
     public Boolean audioMetrics() {
       return audioMetrics;
+    }
+
+    /**
+     * Gets the endOfPhraseSilenceTime.
+     *
+     * If `true`, specifies the duration of the pause interval at which the service splits a transcript into multiple
+     * final results. If the service detects pauses or extended silence before it reaches the end of the audio stream,
+     * its response can include multiple final results. Silence indicates a point at which the speaker pauses between
+     * spoken words or phrases.
+     *
+     * Specify a value for the pause interval in the range of 0.0 to 120.0.
+     * * A value greater than 0 specifies the interval that the service is to use for speech recognition.
+     * * A value of 0 indicates that the service is to use the default interval. It is equivalent to omitting the
+     * parameter.
+     *
+     * The default pause interval for most languages is 0.8 seconds; the default for Chinese is 0.6 seconds.
+     *
+     * See [End of phrase silence
+     * time](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#silence_time).
+     *
+     * @return the endOfPhraseSilenceTime
+     */
+    public Double endOfPhraseSilenceTime() {
+      return endOfPhraseSilenceTime;
+    }
+
+    /**
+     * Gets the splitTranscriptAtPhraseEnd.
+     *
+     * If `true`, directs the service to split the transcript into multiple final results based on semantic features of
+     * the input, for example, at the conclusion of meaningful phrases such as sentences. The service bases its
+     * understanding of semantic features on the base language model that you use with a request. Custom language models
+     * and grammars can also influence how and where the service splits a transcript. By default, the service splits
+     * transcripts based solely on the pause interval.
+     *
+     * See [Split transcript at phrase
+     * end](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#split_transcript).
+     *
+     * @return the splitTranscriptAtPhraseEnd
+     */
+    public Boolean splitTranscriptAtPhraseEnd() {
+      return splitTranscriptAtPhraseEnd;
     }
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
@@ -7998,6 +8139,8 @@ public class IBMSpeechToTextV1Models {
       grammarName = builder.grammarName;
       redaction = builder.redaction;
       audioMetrics = builder.audioMetrics;
+      endOfPhraseSilenceTime = builder.endOfPhraseSilenceTime;
+      splitTranscriptAtPhraseEnd = builder.splitTranscriptAtPhraseEnd;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -8036,6 +8179,8 @@ public class IBMSpeechToTextV1Models {
     private String grammarName;
     private Boolean redaction;
     private Boolean audioMetrics;
+    private Double endOfPhraseSilenceTime;
+    private Boolean splitTranscriptAtPhraseEnd;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio = recognizeOptions.audio;
@@ -8059,6 +8204,8 @@ public class IBMSpeechToTextV1Models {
       grammarName = recognizeOptions.grammarName;
       redaction = recognizeOptions.redaction;
       audioMetrics = recognizeOptions.audioMetrics;
+      endOfPhraseSilenceTime = recognizeOptions.endOfPhraseSilenceTime;
+      splitTranscriptAtPhraseEnd = recognizeOptions.splitTranscriptAtPhraseEnd;
       this.requestHeaders.putAll(recognizeOptions.requestHeaders());
     }
 
@@ -8330,6 +8477,28 @@ public class IBMSpeechToTextV1Models {
      */
     public RecognizeOptionsBuilder audioMetrics(Boolean audioMetrics) {
       this.audioMetrics = audioMetrics;
+      return this;
+    }
+
+    /**
+     * Set the endOfPhraseSilenceTime.
+     *
+     * @param endOfPhraseSilenceTime the endOfPhraseSilenceTime
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder endOfPhraseSilenceTime(Double endOfPhraseSilenceTime) {
+      this.endOfPhraseSilenceTime = endOfPhraseSilenceTime;
+      return this;
+    }
+
+    /**
+     * Set the splitTranscriptAtPhraseEnd.
+     *
+     * @param splitTranscriptAtPhraseEnd the splitTranscriptAtPhraseEnd
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder splitTranscriptAtPhraseEnd(Boolean splitTranscriptAtPhraseEnd) {
+      this.splitTranscriptAtPhraseEnd = splitTranscriptAtPhraseEnd;
       return this;
     }
 
@@ -9191,6 +9360,7 @@ public class IBMSpeechToTextV1Models {
     private List<SpeechRecognitionAlternative> alternatives;
     private Map<String, List<KeywordResult>> keywordsResult;
     private List<WordAlternativeResults> wordAlternatives;
+    private String endOfUtterance;
 
     /**
      * Gets the xFinal.
@@ -9247,6 +9417,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * Gets the endOfUtterance.
+     *
+     * If the `split_transcript_at_phrase_end` parameter is `true`, describes the reason for the split:
+     * * `end_of_data` - The end of the input audio stream.
+     * * `full_stop` - A full semantic stop, such as for the conclusion of a grammatical sentence. The insertion of
+     * splits is influenced by the base language model and biased by custom language models and grammars.
+     * * `reset` - The amount of audio that is currently being processed exceeds the two-minute maximum. The service
+     * splits the transcript to avoid excessive memory use.
+     * * `silence` - A pause or silence that is at least as long as the pause interval.
+     *
+     * @return the endOfUtterance
+     */
+    @AuraEnabled
+    public String getEndOfUtterance() {
+      return endOfUtterance;
+    }
+
+    /**
      * Sets the xFinal.
      *
      * @param xFinal the new xFinal
@@ -9282,6 +9470,15 @@ public class IBMSpeechToTextV1Models {
       this.wordAlternatives = wordAlternatives;
     }
 
+    /**
+     * Sets the endOfUtterance.
+     *
+     * @param endOfUtterance the new endOfUtterance
+     */
+    public void setEndOfUtterance(final String endOfUtterance) {
+      this.endOfUtterance = endOfUtterance;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -9291,7 +9488,8 @@ public class IBMSpeechToTextV1Models {
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'final' => 'xFinal',
         'keywords_result' => 'keywordsResult',
-        'word_alternatives' => 'wordAlternatives'
+        'word_alternatives' => 'wordAlternatives',
+        'end_of_utterance' => 'endOfUtterance'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);

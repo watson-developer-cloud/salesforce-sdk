@@ -1,3 +1,16 @@
+/*
+ * (C) Copyright IBM Corp. 2017, 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
 /**
  * Analyze various features of text content at scale. Provide text, raw HTML, or a public URL and IBM Watson Natural
  * Language Understanding will give you results for the features you request. The service cleans HTML content before
@@ -5,7 +18,7 @@
  *
  * You can create [custom
  * models](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
- * with Watson Knowledge Studio to detect custom entities, relations, and categories in Natural Language Understanding.
+ * with Watson Knowledge Studio to detect custom entities and relations in Natural Language Understanding.
  *
  * @version V1
  * @see <a href="https://cloud.ibm.com/docs/services/natural-language-understanding/">Natural Language Understanding</a>
@@ -61,6 +74,10 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    * - Semantic roles
    * - Sentiment
    * - Syntax (Experimental).
+   *
+   * If a language for the input text is not specified with the `language` parameter, the service [automatically detects
+   * the
+   * language](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-detectable-languages).
    *
    * @param analyzeOptions the {@link IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageUnderstandingV1Models.AnalysisResults} with the response

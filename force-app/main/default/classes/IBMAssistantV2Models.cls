@@ -1,3 +1,16 @@
+/*
+ * (C) Copyright IBM Corp. 2018, 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
 public class IBMAssistantV2Models {
   /**
    * CaptureGroup.
@@ -1385,6 +1398,7 @@ public class IBMAssistantV2Models {
    */
   public class MessageContextSkill extends IBMWatsonGenericModel {
     private IBMWatsonMapModel userDefined;
+    private IBMWatsonMapModel xSystem;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -1403,9 +1417,22 @@ public class IBMAssistantV2Models {
     public IBMWatsonMapModel getUserDefined() {
       return userDefined;
     }
+
+    /**
+     * Gets the xSystem.
+     *
+     * For internal use only.
+     *
+     * @return the xSystem
+     */
+    @AuraEnabled
+    public IBMWatsonMapModel getXSystem() {
+      return xSystem;
+    }
   
     private MessageContextSkill(MessageContextSkillBuilder builder) {
       this.userDefined = builder.userDefined;
+      this.xSystem = builder.xSystem;
     }
 
     /**
@@ -1424,7 +1451,8 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'user_defined' => 'userDefined'
+        'user_defined' => 'userDefined',
+        'system' => 'xSystem'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -1436,6 +1464,11 @@ public class IBMAssistantV2Models {
       Map<String, Object> userDefinedMap = (Map<String, Object>) jsonMap.get('userDefined');
       IBMWatsonMapModel newUserDefined = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(userDefinedMap, true), userDefinedMap, IBMWatsonMapModel.class);
       retBuilder.userDefined(newUserDefined);
+
+      // calling custom deserializer for xSystem
+      Map<String, Object> xSystemMap = (Map<String, Object>) jsonMap.get('xSystem');
+      IBMWatsonMapModel newXSystem = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(xSystemMap, true), xSystemMap, IBMWatsonMapModel.class);
+      retBuilder.xSystem(newXSystem);
 
       return retBuilder.build();
     }
@@ -1449,7 +1482,8 @@ public class IBMAssistantV2Models {
 
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
-        'userDefined' => 'user_defined'
+        'userDefined' => 'user_defined',
+        'xSystem' => 'system'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -1463,6 +1497,16 @@ public class IBMAssistantV2Models {
         jsonMap.put(userDefinedKey, JSON.deserializeUntyped(userDefinedJsonString));
       }
 
+      // performing custom serialization for xSystem
+      if (xSystem != null) {
+        String xSystemJsonString = JSON.serialize(xSystem.replacePropertyNames(), true);
+        String xSystemKey = 'xSystem';
+        if (propertyNameMapping.containsKey(xSystemKey)) {
+          xSystemKey = propertyNameMapping.get(xSystemKey);
+        }
+        jsonMap.put(xSystemKey, JSON.deserializeUntyped(xSystemJsonString));
+      }
+
       return jsonMap;
     }
   }
@@ -1472,9 +1516,11 @@ public class IBMAssistantV2Models {
    */
   public class MessageContextSkillBuilder {
     private IBMWatsonMapModel userDefined;
+    private IBMWatsonMapModel xSystem;
 
     private MessageContextSkillBuilder(MessageContextSkill messageContextSkill) {
       this.userDefined = messageContextSkill.userDefined;
+      this.xSystem = messageContextSkill.xSystem;
     }
 
     /**
@@ -1500,6 +1546,17 @@ public class IBMAssistantV2Models {
      */
     public MessageContextSkillBuilder userDefined(IBMWatsonMapModel userDefined) {
       this.userDefined = userDefined;
+      return this;
+    }
+
+    /**
+     * Set the xSystem.
+     *
+     * @param xSystem the xSystem
+     * @return the MessageContextSkill builder
+     */
+    public MessageContextSkillBuilder xSystem(IBMWatsonMapModel xSystem) {
+      this.xSystem = xSystem;
       return this;
     }
   }
