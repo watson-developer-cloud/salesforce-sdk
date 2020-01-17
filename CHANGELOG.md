@@ -1,3 +1,10 @@
+## [5.2.1](https://github.com/watson-developer-cloud/salesforce-sdk/compare/v5.2.0...v5.2.1) (2020-01-17)
+
+
+### Bug Fixes
+
+* **Natural Language Understanding:** Add back model parameter in CategoriesOptions, which was mistak ([2319ada](https://github.com/watson-developer-cloud/salesforce-sdk/commit/2319adada8def2bbaa8a53bc21925e348a097652))
+
 # [5.2.0](https://github.com/watson-developer-cloud/salesforce-sdk/compare/v5.1.0...v5.2.0) (2020-01-17)
 
 
