@@ -1,3 +1,17 @@
+# [5.2.0](https://github.com/watson-developer-cloud/salesforce-sdk/compare/v5.1.0...v5.2.0) (2020-01-17)
+
+
+### Bug Fixes
+
+* **Discovery v1:** Ensure required parameters are sent to avoid service errors ([51a9917](https://github.com/watson-developer-cloud/salesforce-sdk/commit/51a99179e9ef51cf73f785c60e4a395458a52341))
+* **Discovery v2:** Ensure required parameters are sent to avoid service errors ([e71019e](https://github.com/watson-developer-cloud/salesforce-sdk/commit/e71019eda38722c03c0f5bcb27b33a49e8f61f74))
+
+
+### Features
+
+* **Assistant v2:** Add xSystem property to MessageContextSkill model ([9f53194](https://github.com/watson-developer-cloud/salesforce-sdk/commit/9f53194d37d54305b6017f7fa1f5e00c13f6109d))
+* **Speech to Text:** Add endOfPhraseSilenceTime and splitTranscriptAtPhraseEnd params to recognizeO ([5bce0ab](https://github.com/watson-developer-cloud/salesforce-sdk/commit/5bce0abe217cfac8fff212368940cd69b4ed8a71))
+
 # [5.1.0](https://github.com/watson-developer-cloud/salesforce-sdk/compare/v5.0.0...v5.1.0) (2019-11-27)
 
 
