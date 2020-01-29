@@ -252,6 +252,30 @@ IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
 Map<String, String> responseHeaders = response.getHeaders();
 ```
 
+## Transaction IDs
+
+Every SDK call returns a response with a transaction ID in the `x-global-transaction-id` header. This transaction ID is useful for troubleshooting and accessing relevant logs from your service instance.
+
+```java
+IBMWatsonAuthenticator authenticator = new IBMWatsonIAMAuthenticator('API_KEY');
+IBMAssistantV1 service = new IBMAssistantV1('2019-02-28', authenticator);
+
+IBMAssistantV1Models.CreateIntentOptions options =
+  new IBMAssistantV1Models.ListWorkspacesOptionsBuilder().build();
+IBMAssistantV1Models.WorkspaceCollection> response;
+
+try {
+  // In a successful case, you can grab the ID with the following code.
+  response = service.listWorkspaces(options);
+	String transactionId = response.getHeaders().get('x-global-transaction-id');
+} catch (IBMWatsonServiceExceptions.ServiceException e) {
+  // This is how you get the ID from a failed request.
+  // Make sure to use the IBMWatsonServiceExceptions.ServiceException class
+  // or one of its subclasses!
+  String transactionId = e.getResponse().getHeader('x-global-transaction-id');
+}
+```
+
 ## Using the SDK with Lightning
 
 The Watson Salesforce SDK models are Lightning-ready, meaning that you can access model properties through Javascript for your Lightning apps. Everything should work as expected, but it's important to note that there are two ways to go about dealing with dynamic models through Javascript. These models are ones which may have properties unknown until runtime and which extend `IBMWatsonDynamicModel`.
