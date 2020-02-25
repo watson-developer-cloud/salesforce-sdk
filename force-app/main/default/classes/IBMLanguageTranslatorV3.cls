@@ -18,7 +18,7 @@
  * their own language, and more.
  *
  * @version V3
- * @see <a href="https://cloud.ibm.com/docs/services/language-translator/">Language Translator</a>
+ * @see <a href="https://cloud.ibm.com/docs/language-translator/">Language Translator</a>
  */
 public class IBMLanguageTranslatorV3 extends IBMWatsonService {
 
