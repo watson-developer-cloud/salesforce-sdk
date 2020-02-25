@@ -1003,7 +1003,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      *
      * Training data in CSV format. Each text value must have at least one class. The data can include up to 3,000
      * classes and 20,000 records. For details, see [Data
-     * preparation](https://cloud.ibm.com/docs/services/natural-language-classifier?topic=natural-language-classifier-using-your-data).
+     * preparation](https://cloud.ibm.com/docs/natural-language-classifier?topic=natural-language-classifier-using-your-data).
      *
      * @return the trainingData
      */

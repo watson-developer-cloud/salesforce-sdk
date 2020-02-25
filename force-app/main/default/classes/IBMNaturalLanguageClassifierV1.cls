@@ -17,7 +17,7 @@
  * that the service can apply those classes to new inputs.
  *
  * @version V1
- * @see <a href="https://cloud.ibm.com/docs/services/natural-language-classifier/">Natural Language Classifier</a>
+ * @see <a href="https://cloud.ibm.com/docs/natural-language-classifier/">Natural Language Classifier</a>
  */
 public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
 
