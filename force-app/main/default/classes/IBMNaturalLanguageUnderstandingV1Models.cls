@@ -760,7 +760,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the clean.
      *
      * Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the [Analyzing
-     * webpages](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
+     * webpages](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
      * documentation.
      *
      * @return the clean
@@ -773,7 +773,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the xpath.
      *
      * An [XPath
-     * query](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
+     * query](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
      * to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
      * is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      *
@@ -810,7 +810,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * ISO 639-1 code that specifies the language of your text. This overrides automatic language detection. Language
      * support differs depending on the features you include in your analysis. See [Language
-     * support](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-language-support)
+     * support](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support)
      * for more information.
      *
      * @return the language
@@ -1106,7 +1106,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the model.
      *
      * Enter a [custom
-     * model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     * model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
      * ID to override the standard categories model.
      *
      * @return the model
@@ -1265,7 +1265,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the
      * [Categories
-     * hierarchy](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-categories#categories-hierarchy)
+     * hierarchy](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-categories#categories-hierarchy)
      * documentation.
      *
      * @return the label
@@ -2190,7 +2190,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
   /**
    * Identifies people, cities, organizations, and other entities in the content. See [Entity types and
-   * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-entity-types).
+   * subtypes](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types).
    *
    * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
    * Arabic, Chinese, and Dutch are supported only through custom models.
@@ -2228,7 +2228,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the model.
      *
      * Enter a [custom
-     * model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     * model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
      * ID to override the standard entity detection model.
      *
      * @return the model
@@ -2803,7 +2803,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the entities.
      *
      * Identifies people, cities, organizations, and other entities in the content. See [Entity types and
-     * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-entity-types).
+     * subtypes](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types).
      *
      * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
      * Arabic, Chinese, and Dutch are supported only through custom models.
@@ -2844,7 +2844,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo`
      * relation might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-     * types](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-relations).
+     * types](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations).
      *
      * Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
      * Portuguese custom models are also supported.
@@ -4034,7 +4034,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
    * might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-   * types](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-relations).
+   * types](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations).
    *
    * Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
    * Portuguese custom models are also supported.
@@ -4046,7 +4046,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the model.
      *
      * Enter a [custom
-     * model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     * model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
      * ID to override the default model.
      *
      * @return the model
