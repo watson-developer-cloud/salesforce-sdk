@@ -18,7 +18,7 @@
  * The Assistant v1 API provides authoring methods your application can use to create or update a workspace.
  *
  * @version V1
- * @see <a href="https://cloud.ibm.com/docs/services/assistant/">Assistant</a>
+ * @see <a href="https://cloud.ibm.com/docs/assistant/">Assistant</a>
  */
 public class IBMAssistantV1 extends IBMWatsonService {
 
@@ -64,7 +64,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
    *
    * **Important:** This method has been superseded by the new v2 runtime API. The v2 API offers significant advantages,
    * including ease of deployment, automatic state management, versioning, and search capabilities. For more
-   * information, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-api-overview).
+   * information, see the [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-api-overview).
    *
    * There is no rate limit for this operation.
    *
@@ -180,6 +180,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (createWorkspaceOptions != null && createWorkspaceOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(createWorkspaceOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (createWorkspaceOptions.name() != null) {
       contentJson.put('name', createWorkspaceOptions.name());
@@ -302,6 +305,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     if (updateWorkspaceOptions.append() != null) {
       builder.query('append', String.valueOf(updateWorkspaceOptions.append()));
+    }
+    if (updateWorkspaceOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(updateWorkspaceOptions.includeAudit()));
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateWorkspaceOptions.name() != null) {
@@ -458,6 +464,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (createIntentOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(createIntentOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('intent', createIntentOptions.intent());
     if (createIntentOptions.description() != null) {
@@ -536,6 +545,12 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (updateIntentOptions.append() != null) {
+      builder.query('append', String.valueOf(updateIntentOptions.append()));
+    }
+    if (updateIntentOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(updateIntentOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateIntentOptions.newIntent() != null) {
       contentJson.put('intent', updateIntentOptions.newIntent());
@@ -647,6 +662,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (createExampleOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(createExampleOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createExampleOptions.text());
     if (createExampleOptions.mentions() != null) {
@@ -717,6 +735,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (updateExampleOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(updateExampleOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateExampleOptions.newText() != null) {
       contentJson.put('text', updateExampleOptions.newText());
@@ -825,6 +846,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (createCounterexampleOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(createCounterexampleOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createCounterexampleOptions.text());
     builder.bodyJson(JSON.serialize(contentJson, true));
@@ -888,6 +912,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (updateCounterexampleOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(updateCounterexampleOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateCounterexampleOptions.newText() != null) {
       contentJson.put('text', updateCounterexampleOptions.newText());
@@ -993,6 +1020,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (createEntityOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(createEntityOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('entity', createEntityOptions.entity());
     if (createEntityOptions.description() != null) {
@@ -1077,6 +1107,12 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (updateEntityOptions.append() != null) {
+      builder.query('append', String.valueOf(updateEntityOptions.append()));
+    }
+    if (updateEntityOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(updateEntityOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateEntityOptions.newEntity() != null) {
       contentJson.put('entity', updateEntityOptions.newEntity());
@@ -1231,6 +1267,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (createValueOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(createValueOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('value', createValueOptions.value());
     if (createValueOptions.metadata() != null) {
@@ -1310,6 +1349,12 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (updateValueOptions.append() != null) {
+      builder.query('append', String.valueOf(updateValueOptions.append()));
+    }
+    if (updateValueOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(updateValueOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateValueOptions.newValue() != null) {
       contentJson.put('value', updateValueOptions.newValue());
@@ -1423,6 +1468,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (createSynonymOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(createSynonymOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('synonym', createSynonymOptions.synonym());
     builder.bodyJson(JSON.serialize(contentJson, true));
@@ -1486,6 +1534,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (updateSynonymOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(updateSynonymOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateSynonymOptions.newSynonym() != null) {
       contentJson.put('synonym', updateSynonymOptions.newSynonym());
@@ -1587,6 +1638,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (createDialogNodeOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(createDialogNodeOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('dialog_node', createDialogNodeOptions.dialogNode());
     if (createDialogNodeOptions.description() != null) {
@@ -1708,6 +1762,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
+    if (updateDialogNodeOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(updateDialogNodeOptions.includeAudit()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateDialogNodeOptions.newDialogNode() != null) {
       contentJson.put('dialog_node', updateDialogNodeOptions.newDialogNode());
@@ -1890,7 +1947,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
    *
    * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
    * For more information about personal data and customer IDs, see [Information
-   * security](https://cloud.ibm.com/docs/services/assistant?topic=assistant-information-security#information-security).
+   * security](https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security).
    *
    * This operation is limited to 4 requests per minute. For more information, see **Rate limiting**.
    *

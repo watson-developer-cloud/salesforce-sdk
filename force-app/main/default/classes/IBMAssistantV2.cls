@@ -19,7 +19,7 @@
  * receive a response.
  *
  * @version V2
- * @see <a href="https://cloud.ibm.com/docs/services/assistant/">Assistant</a>
+ * @see <a href="https://cloud.ibm.com/docs/assistant/">Assistant</a>
  */
 public class IBMAssistantV2 extends IBMWatsonService {
 
@@ -64,7 +64,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
    * Create a new session. A session is used to send user input to a skill and receive responses. It also maintains the
    * state of the conversation. A session persists until it is deleted, or until it times out because of inactivity.
    * (For more information, see the
-   * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-settings).
+   * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-settings).
    *
    * @param createSessionOptions the {@link IBMAssistantV2Models.CreateSessionOptions} containing the options for the call
    * @return the {@link IBMAssistantV2Models.SessionResponse} with the response
@@ -91,7 +91,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
    * Delete session.
    *
    * Deletes a session explicitly before it times out. (For more information about the session inactivity timeout, see
-   * the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-settings)).
+   * the [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-settings)).
    *
    * @param deleteSessionOptions the {@link IBMAssistantV2Models.DeleteSessionOptions} containing the options for the call
    * @return the service call

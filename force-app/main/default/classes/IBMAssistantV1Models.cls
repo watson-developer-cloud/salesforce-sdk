@@ -626,6 +626,7 @@ public class IBMAssistantV1Models {
   public class CreateCounterexampleOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String text;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -651,11 +652,23 @@ public class IBMAssistantV1Models {
       return text;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private CreateCounterexampleOptions(CreateCounterexampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
       workspaceId = builder.workspaceId;
       text = builder.text;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -675,10 +688,12 @@ public class IBMAssistantV1Models {
   public class CreateCounterexampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String text;
+    private Boolean includeAudit;
 
     private CreateCounterexampleOptionsBuilder(CreateCounterexampleOptions createCounterexampleOptions) {
       workspaceId = createCounterexampleOptions.workspaceId;
       text = createCounterexampleOptions.text;
+      includeAudit = createCounterexampleOptions.includeAudit;
       this.requestHeaders.putAll(createCounterexampleOptions.requestHeaders());
     }
 
@@ -731,6 +746,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the CreateCounterexampleOptions builder
+     */
+    public CreateCounterexampleOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Set the counterexample.
      *
      * @param counterexample the counterexample
@@ -778,6 +804,7 @@ public class IBMAssistantV1Models {
     private String digressOutSlots;
     private String userLabel;
     private Boolean disambiguationOptOut;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -851,7 +878,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      *
      * @return the output
      */
@@ -1003,6 +1030,17 @@ public class IBMAssistantV1Models {
       return disambiguationOptOut;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
@@ -1026,6 +1064,7 @@ public class IBMAssistantV1Models {
       digressOutSlots = builder.digressOutSlots;
       userLabel = builder.userLabel;
       disambiguationOptOut = builder.disambiguationOptOut;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1063,6 +1102,7 @@ public class IBMAssistantV1Models {
     private String digressOutSlots;
     private String userLabel;
     private Boolean disambiguationOptOut;
+    private Boolean includeAudit;
 
     private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions createDialogNodeOptions) {
       workspaceId = createDialogNodeOptions.workspaceId;
@@ -1085,6 +1125,7 @@ public class IBMAssistantV1Models {
       digressOutSlots = createDialogNodeOptions.digressOutSlots;
       userLabel = createDialogNodeOptions.userLabel;
       disambiguationOptOut = createDialogNodeOptions.disambiguationOptOut;
+      includeAudit = createDialogNodeOptions.includeAudit;
       this.requestHeaders.putAll(createDialogNodeOptions.requestHeaders());
     }
 
@@ -1347,6 +1388,17 @@ public class IBMAssistantV1Models {
      */
     public CreateDialogNodeOptionsBuilder disambiguationOptOut(Boolean disambiguationOptOut) {
       this.disambiguationOptOut = disambiguationOptOut;
+      return this;
+    }
+
+    /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
       return this;
     }
 
@@ -1695,6 +1747,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private Boolean fuzzyMatch;
     private List<CreateValue> values;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -1765,6 +1818,17 @@ public class IBMAssistantV1Models {
       return values;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private CreateEntityOptions(CreateEntityOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
@@ -1774,6 +1838,7 @@ public class IBMAssistantV1Models {
       metadata = builder.metadata;
       fuzzyMatch = builder.fuzzyMatch;
       values = builder.values;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1797,6 +1862,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel metadata;
     private Boolean fuzzyMatch;
     private List<CreateValue> values;
+    private Boolean includeAudit;
 
     private CreateEntityOptionsBuilder(CreateEntityOptions createEntityOptions) {
       workspaceId = createEntityOptions.workspaceId;
@@ -1805,6 +1871,7 @@ public class IBMAssistantV1Models {
       metadata = createEntityOptions.metadata;
       fuzzyMatch = createEntityOptions.fuzzyMatch;
       values = createEntityOptions.values;
+      includeAudit = createEntityOptions.includeAudit;
       this.requestHeaders.putAll(createEntityOptions.requestHeaders());
     }
 
@@ -1917,6 +1984,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the CreateEntityOptions builder
+     */
+    public CreateEntityOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -1937,6 +2015,7 @@ public class IBMAssistantV1Models {
     private String intent;
     private String text;
     private List<Mention> mentions;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -1984,6 +2063,17 @@ public class IBMAssistantV1Models {
       return mentions;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private CreateExampleOptions(CreateExampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
@@ -1992,6 +2082,7 @@ public class IBMAssistantV1Models {
       intent = builder.intent;
       text = builder.text;
       mentions = builder.mentions;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2013,12 +2104,14 @@ public class IBMAssistantV1Models {
     private String intent;
     private String text;
     private List<Mention> mentions;
+    private Boolean includeAudit;
 
     private CreateExampleOptionsBuilder(CreateExampleOptions createExampleOptions) {
       workspaceId = createExampleOptions.workspaceId;
       intent = createExampleOptions.intent;
       text = createExampleOptions.text;
       mentions = createExampleOptions.mentions;
+      includeAudit = createExampleOptions.includeAudit;
       this.requestHeaders.putAll(createExampleOptions.requestHeaders());
     }
 
@@ -2107,6 +2200,17 @@ public class IBMAssistantV1Models {
      */
     public CreateExampleOptionsBuilder mentions(List<Mention> mentions) {
       this.mentions = mentions;
+      return this;
+    }
+
+    /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the CreateExampleOptions builder
+     */
+    public CreateExampleOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
       return this;
     }
 
@@ -2360,6 +2464,7 @@ public class IBMAssistantV1Models {
     private String intent;
     private String description;
     private List<Example> examples;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -2407,6 +2512,17 @@ public class IBMAssistantV1Models {
       return examples;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private CreateIntentOptions(CreateIntentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notNull(builder.intent, 'intent cannot be null');
@@ -2414,6 +2530,7 @@ public class IBMAssistantV1Models {
       intent = builder.intent;
       description = builder.description;
       examples = builder.examples;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2435,12 +2552,14 @@ public class IBMAssistantV1Models {
     private String intent;
     private String description;
     private List<Example> examples;
+    private Boolean includeAudit;
 
     private CreateIntentOptionsBuilder(CreateIntentOptions createIntentOptions) {
       workspaceId = createIntentOptions.workspaceId;
       intent = createIntentOptions.intent;
       description = createIntentOptions.description;
       examples = createIntentOptions.examples;
+      includeAudit = createIntentOptions.includeAudit;
       this.requestHeaders.putAll(createIntentOptions.requestHeaders());
     }
 
@@ -2531,6 +2650,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the CreateIntentOptions builder
+     */
+    public CreateIntentOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -2551,6 +2681,7 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private String synonym;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -2598,6 +2729,17 @@ public class IBMAssistantV1Models {
       return synonym;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private CreateSynonymOptions(CreateSynonymOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
@@ -2607,6 +2749,7 @@ public class IBMAssistantV1Models {
       entity = builder.entity;
       value = builder.value;
       synonym = builder.synonym;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2628,12 +2771,14 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private String synonym;
+    private Boolean includeAudit;
 
     private CreateSynonymOptionsBuilder(CreateSynonymOptions createSynonymOptions) {
       workspaceId = createSynonymOptions.workspaceId;
       entity = createSynonymOptions.entity;
       value = createSynonymOptions.value;
       synonym = createSynonymOptions.synonym;
+      includeAudit = createSynonymOptions.includeAudit;
       this.requestHeaders.putAll(createSynonymOptions.requestHeaders());
     }
 
@@ -2708,6 +2853,17 @@ public class IBMAssistantV1Models {
      */
     public CreateSynonymOptionsBuilder synonym(String synonym) {
       this.synonym = synonym;
+      return this;
+    }
+
+    /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the CreateSynonymOptions builder
+     */
+    public CreateSynonymOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
       return this;
     }
 
@@ -2802,7 +2958,7 @@ public class IBMAssistantV1Models {
      * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
      * value type), but not both. A pattern is a regular expression; for more information about how to specify a
      * pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
      *
      * @return the patterns
      */
@@ -3046,6 +3202,7 @@ public class IBMAssistantV1Models {
     private String xType;
     private List<String> synonyms;
     private List<String> patterns;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -3124,12 +3281,23 @@ public class IBMAssistantV1Models {
      * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
      * value type), but not both. A pattern is a regular expression; for more information about how to specify a
      * pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
      *
      * @return the patterns
      */
     public List<String> patterns() {
       return patterns;
+    }
+
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
     }
 
     private CreateValueOptions(CreateValueOptionsBuilder builder) {
@@ -3143,6 +3311,7 @@ public class IBMAssistantV1Models {
       xType = builder.xType;
       synonyms = builder.synonyms;
       patterns = builder.patterns;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3167,6 +3336,7 @@ public class IBMAssistantV1Models {
     private String xType;
     private List<String> synonyms;
     private List<String> patterns;
+    private Boolean includeAudit;
 
     private CreateValueOptionsBuilder(CreateValueOptions createValueOptions) {
       workspaceId = createValueOptions.workspaceId;
@@ -3176,6 +3346,7 @@ public class IBMAssistantV1Models {
       xType = createValueOptions.xType;
       synonyms = createValueOptions.synonyms;
       patterns = createValueOptions.patterns;
+      includeAudit = createValueOptions.includeAudit;
       this.requestHeaders.putAll(createValueOptions.requestHeaders());
     }
 
@@ -3317,6 +3488,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the CreateValueOptions builder
+     */
+    public CreateValueOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -3344,6 +3526,7 @@ public class IBMAssistantV1Models {
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
     private List<Webhook> webhooks;
+    private Boolean includeAudit;
 
     /**
      * Gets the name.
@@ -3465,6 +3648,17 @@ public class IBMAssistantV1Models {
       return webhooks;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private CreateWorkspaceOptions(CreateWorkspaceOptionsBuilder builder) {
       name = builder.name;
       description = builder.description;
@@ -3477,6 +3671,7 @@ public class IBMAssistantV1Models {
       dialogNodes = builder.dialogNodes;
       counterexamples = builder.counterexamples;
       webhooks = builder.webhooks;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3505,6 +3700,7 @@ public class IBMAssistantV1Models {
     private List<DialogNode> dialogNodes;
     private List<Counterexample> counterexamples;
     private List<Webhook> webhooks;
+    private Boolean includeAudit;
 
     private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions createWorkspaceOptions) {
       name = createWorkspaceOptions.name;
@@ -3518,6 +3714,7 @@ public class IBMAssistantV1Models {
       dialogNodes = createWorkspaceOptions.dialogNodes;
       counterexamples = createWorkspaceOptions.counterexamples;
       webhooks = createWorkspaceOptions.webhooks;
+      includeAudit = createWorkspaceOptions.includeAudit;
       this.requestHeaders.putAll(createWorkspaceOptions.requestHeaders());
     }
 
@@ -3734,6 +3931,17 @@ public class IBMAssistantV1Models {
      */
     public CreateWorkspaceOptionsBuilder webhooks(List<Webhook> webhooks) {
       this.webhooks = webhooks;
+      return this;
+    }
+
+    /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
       return this;
     }
 
@@ -4996,7 +5204,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      *
      * @return the output
      */
@@ -6232,7 +6440,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
    */
   public class DialogNodeOutput extends IBMWatsonDynamicModel {
     private List<DialogNodeOutputGeneric> generic;
@@ -6605,7 +6813,7 @@ public class IBMAssistantV1Models {
      * The text of the search query. This can be either a natural-language query or a query that uses the Discovery
      * query language syntax, depending on the value of the **query_type** property. For more information, see the
      * [Discovery service
-     * documentation](https://cloud.ibm.com/docs/services/discovery/query-operators.html#query-operators). Required when
+     * documentation](https://cloud.ibm.com/docs/discovery/query-operators.html#query-operators). Required when
      * **response_type**=`search_skill`.
      *
      * @return the query
@@ -6632,7 +6840,7 @@ public class IBMAssistantV1Models {
      *
      * An optional filter that narrows the set of documents to be searched. For more information, see the [Discovery
      * service documentation]([Discovery service
-     * documentation](https://cloud.ibm.com/docs/services/discovery/query-parameters.html#filter).
+     * documentation](https://cloud.ibm.com/docs/discovery/query-parameters.html#filter).
      *
      * @return the filter
      */
@@ -11405,7 +11613,7 @@ public class IBMAssistantV1Models {
      * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
      * query that includes a value for `language`, as well as a value for `request.context.system.assistant_id`,
      * `workspace_id`, or `request.context.metadata.deployment`. For more information, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-filter-reference#filter-reference).
      *
      * @return the filter
      */
@@ -12669,8 +12877,7 @@ public class IBMAssistantV1Models {
      * Gets the filter.
      *
      * A cacheable parameter that limits the results to those matching the specified filter. For more information, see
-     * the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
+     * the [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-filter-reference#filter-reference).
      *
      * @return the filter
      */
@@ -16136,6 +16343,8 @@ public class IBMAssistantV1Models {
     private Double confidence;
     private IBMWatsonMapModel metadata;
     private List<CaptureGroup> groups;
+    private RuntimeEntityInterpretation interpretation;
+    private RuntimeEntityRole role;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -16215,6 +16424,36 @@ public class IBMAssistantV1Models {
     public List<CaptureGroup> getGroups() {
       return groups;
     }
+
+    /**
+     * Gets the interpretation.
+     *
+     * An object containing detailed information about the entity recognized in the user input. This property is
+     * included only if the new system entities are enabled for the workspace.
+     *
+     * For more information about how the new system entities are interpreted, see the
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
+     *
+     * @return the interpretation
+     */
+    @AuraEnabled
+    public RuntimeEntityInterpretation getInterpretation() {
+      return interpretation;
+    }
+
+    /**
+     * Gets the role.
+     *
+     * An object describing the role played by a system entity that is specifies the beginning or end of a range
+     * recognized in the user input. This property is included only if the new system entities are enabled for the
+     * workspace.
+     *
+     * @return the role
+     */
+    @AuraEnabled
+    public RuntimeEntityRole getRole() {
+      return role;
+    }
   
     private RuntimeEntity(RuntimeEntityBuilder builder) {
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
@@ -16226,6 +16465,8 @@ public class IBMAssistantV1Models {
       this.confidence = builder.confidence;
       this.metadata = builder.metadata;
       this.groups = builder.groups;
+      this.interpretation = builder.interpretation;
+      this.role = builder.role;
     }
 
     /**
@@ -16263,6 +16504,16 @@ public class IBMAssistantV1Models {
         retBuilder.groups(newGroups);
       }
 
+      // calling custom deserializer for interpretation
+      Map<String, Object> interpretationMap = (Map<String, Object>) jsonMap.get('interpretation');
+      RuntimeEntityInterpretation newInterpretation = (RuntimeEntityInterpretation) new RuntimeEntityInterpretation().deserialize(JSON.serialize(interpretationMap, true), interpretationMap, RuntimeEntityInterpretation.class);
+      retBuilder.interpretation(newInterpretation);
+
+      // calling custom deserializer for role
+      Map<String, Object> roleMap = (Map<String, Object>) jsonMap.get('role');
+      RuntimeEntityRole newRole = (RuntimeEntityRole) new RuntimeEntityRole().deserialize(JSON.serialize(roleMap, true), roleMap, RuntimeEntityRole.class);
+      retBuilder.role(newRole);
+
       return retBuilder.build();
     }
 
@@ -16286,6 +16537,18 @@ public class IBMAssistantV1Models {
         jsonMap.put('groups', groupsJsonList);
       }
 
+      // performing custom serialization for interpretation
+      if (interpretation != null) {
+        String interpretationJsonString = JSON.serialize(interpretation.replacePropertyNames(), true);
+        jsonMap.put('interpretation', JSON.deserializeUntyped(interpretationJsonString));
+      }
+
+      // performing custom serialization for role
+      if (role != null) {
+        String roleJsonString = JSON.serialize(role.replacePropertyNames(), true);
+        jsonMap.put('role', JSON.deserializeUntyped(roleJsonString));
+      }
+
       return jsonMap;
     }
   }
@@ -16300,6 +16563,8 @@ public class IBMAssistantV1Models {
     private Double confidence;
     private IBMWatsonMapModel metadata;
     private List<CaptureGroup> groups;
+    private RuntimeEntityInterpretation interpretation;
+    private RuntimeEntityRole role;
 
     private RuntimeEntityBuilder(RuntimeEntity runtimeEntity) {
       this.entity = runtimeEntity.entity;
@@ -16308,6 +16573,8 @@ public class IBMAssistantV1Models {
       this.confidence = runtimeEntity.confidence;
       this.metadata = runtimeEntity.metadata;
       this.groups = runtimeEntity.groups;
+      this.interpretation = runtimeEntity.interpretation;
+      this.role = runtimeEntity.role;
     }
 
     /**
@@ -16433,6 +16700,981 @@ public class IBMAssistantV1Models {
      */
     public RuntimeEntityBuilder groups(List<CaptureGroup> groups) {
       this.groups = groups;
+      return this;
+    }
+
+    /**
+     * Set the interpretation.
+     *
+     * @param interpretation the interpretation
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder interpretation(RuntimeEntityInterpretation interpretation) {
+      this.interpretation = interpretation;
+      return this;
+    }
+
+    /**
+     * Set the role.
+     *
+     * @param role the role
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder role(RuntimeEntityRole role) {
+      this.role = role;
+      return this;
+    }
+  }
+
+  /**
+   * RuntimeEntityInterpretation.
+   */
+  public class RuntimeEntityInterpretation extends IBMWatsonGenericModel {
+    private String calendarType;
+    private String datetimeLink;
+    private String festival;
+    private String granularity;
+    private String rangeLink;
+    private String rangeModifier;
+    private Double relativeDay;
+    private Double relativeMonth;
+    private Double relativeWeek;
+    private Double relativeWeekend;
+    private Double relativeYear;
+    private Double specificDay;
+    private String specificDayOfWeek;
+    private Double specificMonth;
+    private Double specificQuarter;
+    private Double specificYear;
+    private Double numericValue;
+    private String subtype;
+    private String partOfDay;
+    private Double relativeHour;
+    private Double relativeMinute;
+    private Double relativeSecond;
+    private Double specificHour;
+    private Double specificMinute;
+    private Double specificSecond;
+    private String timezone;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeEntityInterpretation() { }
+
+    /**
+     * Gets the calendarType.
+     *
+     * The calendar used to represent a recognized date (for example, `Gregorian`).
+     *
+     * @return the calendarType
+     */
+    @AuraEnabled
+    public String getCalendarType() {
+      return calendarType;
+    }
+
+    /**
+     * Gets the datetimeLink.
+     *
+     * A unique identifier used to associate a recognized time and date. If the user input contains a date and time that
+     * are mentioned together (for example, `Today at 5`, the same **datetime_link** value is returned for both the
+     * `@sys-date` and `@sys-time` entities).
+     *
+     * @return the datetimeLink
+     */
+    @AuraEnabled
+    public String getDatetimeLink() {
+      return datetimeLink;
+    }
+
+    /**
+     * Gets the festival.
+     *
+     * A locale-specific holiday name (such as `thanksgiving` or `christmas`). This property is included when a
+     * `@sys-date` entity is recognized based on a holiday name in the user input.
+     *
+     * @return the festival
+     */
+    @AuraEnabled
+    public String getFestival() {
+      return festival;
+    }
+
+    /**
+     * Gets the granularity.
+     *
+     * The precision or duration of a time range specified by a recognized `@sys-time` or `@sys-date` entity.
+     *
+     * @return the granularity
+     */
+    @AuraEnabled
+    public String getGranularity() {
+      return granularity;
+    }
+
+    /**
+     * Gets the rangeLink.
+     *
+     * A unique identifier used to associate multiple recognized `@sys-date`, `@sys-time`, or `@sys-number` entities
+     * that are recognized as a range of values in the user's input (for example, `from July 4 until July 14` or `from
+     * 20 to 25`).
+     *
+     * @return the rangeLink
+     */
+    @AuraEnabled
+    public String getRangeLink() {
+      return rangeLink;
+    }
+
+    /**
+     * Gets the rangeModifier.
+     *
+     * The word in the user input that indicates that a `sys-date` or `sys-time` entity is part of an implied range
+     * where only one date or time is specified (for example, `since` or `until`).
+     *
+     * @return the rangeModifier
+     */
+    @AuraEnabled
+    public String getRangeModifier() {
+      return rangeModifier;
+    }
+
+    /**
+     * Gets the relativeDay.
+     *
+     * A recognized mention of a relative day, represented numerically as an offset from the current date (for example,
+     * `-1` for `yesterday` or `10` for `in ten days`).
+     *
+     * @return the relativeDay
+     */
+    @AuraEnabled
+    public Double getRelativeDay() {
+      return relativeDay;
+    }
+
+    /**
+     * Gets the relativeMonth.
+     *
+     * A recognized mention of a relative month, represented numerically as an offset from the current month (for
+     * example, `1` for `next month` or `-3` for `three months ago`).
+     *
+     * @return the relativeMonth
+     */
+    @AuraEnabled
+    public Double getRelativeMonth() {
+      return relativeMonth;
+    }
+
+    /**
+     * Gets the relativeWeek.
+     *
+     * A recognized mention of a relative week, represented numerically as an offset from the current week (for example,
+     * `2` for `in two weeks` or `-1` for `last week).
+     *
+     * @return the relativeWeek
+     */
+    @AuraEnabled
+    public Double getRelativeWeek() {
+      return relativeWeek;
+    }
+
+    /**
+     * Gets the relativeWeekend.
+     *
+     * A recognized mention of a relative date range for a weekend, represented numerically as an offset from the
+     * current weekend (for example, `0` for `this weekend` or `-1` for `last weekend`).
+     *
+     * @return the relativeWeekend
+     */
+    @AuraEnabled
+    public Double getRelativeWeekend() {
+      return relativeWeekend;
+    }
+
+    /**
+     * Gets the relativeYear.
+     *
+     * A recognized mention of a relative year, represented numerically as an offset from the current year (for example,
+     * `1` for `next year` or `-5` for `five years ago`).
+     *
+     * @return the relativeYear
+     */
+    @AuraEnabled
+    public Double getRelativeYear() {
+      return relativeYear;
+    }
+
+    /**
+     * Gets the specificDay.
+     *
+     * A recognized mention of a specific date, represented numerically as the date within the month (for example, `30`
+     * for `June 30`.).
+     *
+     * @return the specificDay
+     */
+    @AuraEnabled
+    public Double getSpecificDay() {
+      return specificDay;
+    }
+
+    /**
+     * Gets the specificDayOfWeek.
+     *
+     * A recognized mention of a specific day of the week as a lowercase string (for example, `monday`).
+     *
+     * @return the specificDayOfWeek
+     */
+    @AuraEnabled
+    public String getSpecificDayOfWeek() {
+      return specificDayOfWeek;
+    }
+
+    /**
+     * Gets the specificMonth.
+     *
+     * A recognized mention of a specific month, represented numerically (for example, `7` for `July`).
+     *
+     * @return the specificMonth
+     */
+    @AuraEnabled
+    public Double getSpecificMonth() {
+      return specificMonth;
+    }
+
+    /**
+     * Gets the specificQuarter.
+     *
+     * A recognized mention of a specific quarter, represented numerically (for example, `3` for `the third quarter`).
+     *
+     * @return the specificQuarter
+     */
+    @AuraEnabled
+    public Double getSpecificQuarter() {
+      return specificQuarter;
+    }
+
+    /**
+     * Gets the specificYear.
+     *
+     * A recognized mention of a specific year (for example, `2016`).
+     *
+     * @return the specificYear
+     */
+    @AuraEnabled
+    public Double getSpecificYear() {
+      return specificYear;
+    }
+
+    /**
+     * Gets the numericValue.
+     *
+     * A recognized numeric value, represented as an integer or double.
+     *
+     * @return the numericValue
+     */
+    @AuraEnabled
+    public Double getNumericValue() {
+      return numericValue;
+    }
+
+    /**
+     * Gets the subtype.
+     *
+     * The type of numeric value recognized in the user input (`integer` or `rational`).
+     *
+     * @return the subtype
+     */
+    @AuraEnabled
+    public String getSubtype() {
+      return subtype;
+    }
+
+    /**
+     * Gets the partOfDay.
+     *
+     * A recognized term for a time that was mentioned as a part of the day in the user's input (for example, `morning`
+     * or `afternoon`).
+     *
+     * @return the partOfDay
+     */
+    @AuraEnabled
+    public String getPartOfDay() {
+      return partOfDay;
+    }
+
+    /**
+     * Gets the relativeHour.
+     *
+     * A recognized mention of a relative hour, represented numerically as an offset from the current hour (for example,
+     * `3` for `in three hours` or `-1` for `an hour ago`).
+     *
+     * @return the relativeHour
+     */
+    @AuraEnabled
+    public Double getRelativeHour() {
+      return relativeHour;
+    }
+
+    /**
+     * Gets the relativeMinute.
+     *
+     * A recognized mention of a relative time, represented numerically as an offset in minutes from the current time
+     * (for example, `5` for `in five minutes` or `-15` for `fifteen minutes ago`).
+     *
+     * @return the relativeMinute
+     */
+    @AuraEnabled
+    public Double getRelativeMinute() {
+      return relativeMinute;
+    }
+
+    /**
+     * Gets the relativeSecond.
+     *
+     * A recognized mention of a relative time, represented numerically as an offset in seconds from the current time
+     * (for example, `10` for `in ten seconds` or `-30` for `thirty seconds ago`).
+     *
+     * @return the relativeSecond
+     */
+    @AuraEnabled
+    public Double getRelativeSecond() {
+      return relativeSecond;
+    }
+
+    /**
+     * Gets the specificHour.
+     *
+     * A recognized specific hour mentioned as part of a time value (for example, `10` for `10:15 AM`.).
+     *
+     * @return the specificHour
+     */
+    @AuraEnabled
+    public Double getSpecificHour() {
+      return specificHour;
+    }
+
+    /**
+     * Gets the specificMinute.
+     *
+     * A recognized specific minute mentioned as part of a time value (for example, `15` for `10:15 AM`.).
+     *
+     * @return the specificMinute
+     */
+    @AuraEnabled
+    public Double getSpecificMinute() {
+      return specificMinute;
+    }
+
+    /**
+     * Gets the specificSecond.
+     *
+     * A recognized specific second mentioned as part of a time value (for example, `30` for `10:15:30 AM`.).
+     *
+     * @return the specificSecond
+     */
+    @AuraEnabled
+    public Double getSpecificSecond() {
+      return specificSecond;
+    }
+
+    /**
+     * Gets the timezone.
+     *
+     * A recognized time zone mentioned as part of a time value (for example, `EST`).
+     *
+     * @return the timezone
+     */
+    @AuraEnabled
+    public String getTimezone() {
+      return timezone;
+    }
+  
+    private RuntimeEntityInterpretation(RuntimeEntityInterpretationBuilder builder) {
+      this.calendarType = builder.calendarType;
+      this.datetimeLink = builder.datetimeLink;
+      this.festival = builder.festival;
+      this.granularity = builder.granularity;
+      this.rangeLink = builder.rangeLink;
+      this.rangeModifier = builder.rangeModifier;
+      this.relativeDay = builder.relativeDay;
+      this.relativeMonth = builder.relativeMonth;
+      this.relativeWeek = builder.relativeWeek;
+      this.relativeWeekend = builder.relativeWeekend;
+      this.relativeYear = builder.relativeYear;
+      this.specificDay = builder.specificDay;
+      this.specificDayOfWeek = builder.specificDayOfWeek;
+      this.specificMonth = builder.specificMonth;
+      this.specificQuarter = builder.specificQuarter;
+      this.specificYear = builder.specificYear;
+      this.numericValue = builder.numericValue;
+      this.subtype = builder.subtype;
+      this.partOfDay = builder.partOfDay;
+      this.relativeHour = builder.relativeHour;
+      this.relativeMinute = builder.relativeMinute;
+      this.relativeSecond = builder.relativeSecond;
+      this.specificHour = builder.specificHour;
+      this.specificMinute = builder.specificMinute;
+      this.specificSecond = builder.specificSecond;
+      this.timezone = builder.timezone;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder newBuilder() {
+      return new RuntimeEntityInterpretationBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'calendar_type' => 'calendarType',
+        'datetime_link' => 'datetimeLink',
+        'range_link' => 'rangeLink',
+        'range_modifier' => 'rangeModifier',
+        'relative_day' => 'relativeDay',
+        'relative_month' => 'relativeMonth',
+        'relative_week' => 'relativeWeek',
+        'relative_weekend' => 'relativeWeekend',
+        'relative_year' => 'relativeYear',
+        'specific_day' => 'specificDay',
+        'specific_day_of_week' => 'specificDayOfWeek',
+        'specific_month' => 'specificMonth',
+        'specific_quarter' => 'specificQuarter',
+        'specific_year' => 'specificYear',
+        'numeric_value' => 'numericValue',
+        'part_of_day' => 'partOfDay',
+        'relative_hour' => 'relativeHour',
+        'relative_minute' => 'relativeMinute',
+        'relative_second' => 'relativeSecond',
+        'specific_hour' => 'specificHour',
+        'specific_minute' => 'specificMinute',
+        'specific_second' => 'specificSecond'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      RuntimeEntityInterpretation ret = (RuntimeEntityInterpretation) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeEntityInterpretationBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'calendarType' => 'calendar_type',
+        'datetimeLink' => 'datetime_link',
+        'rangeLink' => 'range_link',
+        'rangeModifier' => 'range_modifier',
+        'relativeDay' => 'relative_day',
+        'relativeMonth' => 'relative_month',
+        'relativeWeek' => 'relative_week',
+        'relativeWeekend' => 'relative_weekend',
+        'relativeYear' => 'relative_year',
+        'specificDay' => 'specific_day',
+        'specificDayOfWeek' => 'specific_day_of_week',
+        'specificMonth' => 'specific_month',
+        'specificQuarter' => 'specific_quarter',
+        'specificYear' => 'specific_year',
+        'numericValue' => 'numeric_value',
+        'partOfDay' => 'part_of_day',
+        'relativeHour' => 'relative_hour',
+        'relativeMinute' => 'relative_minute',
+        'relativeSecond' => 'relative_second',
+        'specificHour' => 'specific_hour',
+        'specificMinute' => 'specific_minute',
+        'specificSecond' => 'specific_second'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * RuntimeEntityInterpretation Builder.
+   */
+  public class RuntimeEntityInterpretationBuilder {
+    private String calendarType;
+    private String datetimeLink;
+    private String festival;
+    private String granularity;
+    private String rangeLink;
+    private String rangeModifier;
+    private Double relativeDay;
+    private Double relativeMonth;
+    private Double relativeWeek;
+    private Double relativeWeekend;
+    private Double relativeYear;
+    private Double specificDay;
+    private String specificDayOfWeek;
+    private Double specificMonth;
+    private Double specificQuarter;
+    private Double specificYear;
+    private Double numericValue;
+    private String subtype;
+    private String partOfDay;
+    private Double relativeHour;
+    private Double relativeMinute;
+    private Double relativeSecond;
+    private Double specificHour;
+    private Double specificMinute;
+    private Double specificSecond;
+    private String timezone;
+
+    private RuntimeEntityInterpretationBuilder(RuntimeEntityInterpretation runtimeEntityInterpretation) {
+      this.calendarType = runtimeEntityInterpretation.calendarType;
+      this.datetimeLink = runtimeEntityInterpretation.datetimeLink;
+      this.festival = runtimeEntityInterpretation.festival;
+      this.granularity = runtimeEntityInterpretation.granularity;
+      this.rangeLink = runtimeEntityInterpretation.rangeLink;
+      this.rangeModifier = runtimeEntityInterpretation.rangeModifier;
+      this.relativeDay = runtimeEntityInterpretation.relativeDay;
+      this.relativeMonth = runtimeEntityInterpretation.relativeMonth;
+      this.relativeWeek = runtimeEntityInterpretation.relativeWeek;
+      this.relativeWeekend = runtimeEntityInterpretation.relativeWeekend;
+      this.relativeYear = runtimeEntityInterpretation.relativeYear;
+      this.specificDay = runtimeEntityInterpretation.specificDay;
+      this.specificDayOfWeek = runtimeEntityInterpretation.specificDayOfWeek;
+      this.specificMonth = runtimeEntityInterpretation.specificMonth;
+      this.specificQuarter = runtimeEntityInterpretation.specificQuarter;
+      this.specificYear = runtimeEntityInterpretation.specificYear;
+      this.numericValue = runtimeEntityInterpretation.numericValue;
+      this.subtype = runtimeEntityInterpretation.subtype;
+      this.partOfDay = runtimeEntityInterpretation.partOfDay;
+      this.relativeHour = runtimeEntityInterpretation.relativeHour;
+      this.relativeMinute = runtimeEntityInterpretation.relativeMinute;
+      this.relativeSecond = runtimeEntityInterpretation.relativeSecond;
+      this.specificHour = runtimeEntityInterpretation.specificHour;
+      this.specificMinute = runtimeEntityInterpretation.specificMinute;
+      this.specificSecond = runtimeEntityInterpretation.specificSecond;
+      this.timezone = runtimeEntityInterpretation.timezone;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeEntityInterpretationBuilder() {
+    }
+
+    /**
+     * Builds a RuntimeEntityInterpretation.
+     *
+     * @return the runtimeEntityInterpretation
+     */
+    public RuntimeEntityInterpretation build() {
+      return new RuntimeEntityInterpretation(this);
+    }
+
+    /**
+     * Set the calendarType.
+     *
+     * @param calendarType the calendarType
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder calendarType(String calendarType) {
+      this.calendarType = calendarType;
+      return this;
+    }
+
+    /**
+     * Set the datetimeLink.
+     *
+     * @param datetimeLink the datetimeLink
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder datetimeLink(String datetimeLink) {
+      this.datetimeLink = datetimeLink;
+      return this;
+    }
+
+    /**
+     * Set the festival.
+     *
+     * @param festival the festival
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder festival(String festival) {
+      this.festival = festival;
+      return this;
+    }
+
+    /**
+     * Set the granularity.
+     *
+     * @param granularity the granularity
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder granularity(String granularity) {
+      this.granularity = granularity;
+      return this;
+    }
+
+    /**
+     * Set the rangeLink.
+     *
+     * @param rangeLink the rangeLink
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder rangeLink(String rangeLink) {
+      this.rangeLink = rangeLink;
+      return this;
+    }
+
+    /**
+     * Set the rangeModifier.
+     *
+     * @param rangeModifier the rangeModifier
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder rangeModifier(String rangeModifier) {
+      this.rangeModifier = rangeModifier;
+      return this;
+    }
+
+    /**
+     * Set the relativeDay.
+     *
+     * @param relativeDay the relativeDay
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeDay(Double relativeDay) {
+      this.relativeDay = relativeDay;
+      return this;
+    }
+
+    /**
+     * Set the relativeMonth.
+     *
+     * @param relativeMonth the relativeMonth
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeMonth(Double relativeMonth) {
+      this.relativeMonth = relativeMonth;
+      return this;
+    }
+
+    /**
+     * Set the relativeWeek.
+     *
+     * @param relativeWeek the relativeWeek
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeWeek(Double relativeWeek) {
+      this.relativeWeek = relativeWeek;
+      return this;
+    }
+
+    /**
+     * Set the relativeWeekend.
+     *
+     * @param relativeWeekend the relativeWeekend
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeWeekend(Double relativeWeekend) {
+      this.relativeWeekend = relativeWeekend;
+      return this;
+    }
+
+    /**
+     * Set the relativeYear.
+     *
+     * @param relativeYear the relativeYear
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeYear(Double relativeYear) {
+      this.relativeYear = relativeYear;
+      return this;
+    }
+
+    /**
+     * Set the specificDay.
+     *
+     * @param specificDay the specificDay
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificDay(Double specificDay) {
+      this.specificDay = specificDay;
+      return this;
+    }
+
+    /**
+     * Set the specificDayOfWeek.
+     *
+     * @param specificDayOfWeek the specificDayOfWeek
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificDayOfWeek(String specificDayOfWeek) {
+      this.specificDayOfWeek = specificDayOfWeek;
+      return this;
+    }
+
+    /**
+     * Set the specificMonth.
+     *
+     * @param specificMonth the specificMonth
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificMonth(Double specificMonth) {
+      this.specificMonth = specificMonth;
+      return this;
+    }
+
+    /**
+     * Set the specificQuarter.
+     *
+     * @param specificQuarter the specificQuarter
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificQuarter(Double specificQuarter) {
+      this.specificQuarter = specificQuarter;
+      return this;
+    }
+
+    /**
+     * Set the specificYear.
+     *
+     * @param specificYear the specificYear
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificYear(Double specificYear) {
+      this.specificYear = specificYear;
+      return this;
+    }
+
+    /**
+     * Set the numericValue.
+     *
+     * @param numericValue the numericValue
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder numericValue(Double numericValue) {
+      this.numericValue = numericValue;
+      return this;
+    }
+
+    /**
+     * Set the subtype.
+     *
+     * @param subtype the subtype
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder subtype(String subtype) {
+      this.subtype = subtype;
+      return this;
+    }
+
+    /**
+     * Set the partOfDay.
+     *
+     * @param partOfDay the partOfDay
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder partOfDay(String partOfDay) {
+      this.partOfDay = partOfDay;
+      return this;
+    }
+
+    /**
+     * Set the relativeHour.
+     *
+     * @param relativeHour the relativeHour
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeHour(Double relativeHour) {
+      this.relativeHour = relativeHour;
+      return this;
+    }
+
+    /**
+     * Set the relativeMinute.
+     *
+     * @param relativeMinute the relativeMinute
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeMinute(Double relativeMinute) {
+      this.relativeMinute = relativeMinute;
+      return this;
+    }
+
+    /**
+     * Set the relativeSecond.
+     *
+     * @param relativeSecond the relativeSecond
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeSecond(Double relativeSecond) {
+      this.relativeSecond = relativeSecond;
+      return this;
+    }
+
+    /**
+     * Set the specificHour.
+     *
+     * @param specificHour the specificHour
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificHour(Double specificHour) {
+      this.specificHour = specificHour;
+      return this;
+    }
+
+    /**
+     * Set the specificMinute.
+     *
+     * @param specificMinute the specificMinute
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificMinute(Double specificMinute) {
+      this.specificMinute = specificMinute;
+      return this;
+    }
+
+    /**
+     * Set the specificSecond.
+     *
+     * @param specificSecond the specificSecond
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificSecond(Double specificSecond) {
+      this.specificSecond = specificSecond;
+      return this;
+    }
+
+    /**
+     * Set the timezone.
+     *
+     * @param timezone the timezone
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder timezone(String timezone) {
+      this.timezone = timezone;
+      return this;
+    }
+  }
+
+  /**
+   * An object describing the role played by a system entity that is specifies the beginning or end of a range
+   * recognized in the user input. This property is included only if the new system entities are enabled for the
+   * workspace.
+   */
+  public class RuntimeEntityRole extends IBMWatsonGenericModel {
+    private String xType;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeEntityRole() { }
+
+    /**
+     * Gets the xType.
+     *
+     * The relationship of the entity to the range.
+     *
+     * @return the xType
+     */
+    @AuraEnabled
+    public String getXType() {
+      return xType;
+    }
+  
+    private RuntimeEntityRole(RuntimeEntityRoleBuilder builder) {
+      this.xType = builder.xType;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a RuntimeEntityRole builder
+     */
+    public RuntimeEntityRoleBuilder newBuilder() {
+      return new RuntimeEntityRoleBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      RuntimeEntityRole ret = (RuntimeEntityRole) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeEntityRoleBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xType' => 'type'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * RuntimeEntityRole Builder.
+   */
+  public class RuntimeEntityRoleBuilder {
+    private String xType;
+
+    private RuntimeEntityRoleBuilder(RuntimeEntityRole runtimeEntityRole) {
+      this.xType = runtimeEntityRole.xType;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeEntityRoleBuilder() {
+    }
+
+    /**
+     * Builds a RuntimeEntityRole.
+     *
+     * @return the runtimeEntityRole
+     */
+    public RuntimeEntityRole build() {
+      return new RuntimeEntityRole(this);
+    }
+
+    /**
+     * Set the xType.
+     *
+     * @param xType the xType
+     * @return the RuntimeEntityRole builder
+     */
+    public RuntimeEntityRoleBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
   }
@@ -17444,6 +18686,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String text;
     private String newText;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -17480,12 +18723,24 @@ public class IBMAssistantV1Models {
       return newText;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private UpdateCounterexampleOptions(UpdateCounterexampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.text, 'text cannot be empty');
       workspaceId = builder.workspaceId;
       text = builder.text;
       newText = builder.newText;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -17506,11 +18761,13 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String text;
     private String newText;
+    private Boolean includeAudit;
 
     private UpdateCounterexampleOptionsBuilder(UpdateCounterexampleOptions updateCounterexampleOptions) {
       workspaceId = updateCounterexampleOptions.workspaceId;
       text = updateCounterexampleOptions.text;
       newText = updateCounterexampleOptions.newText;
+      includeAudit = updateCounterexampleOptions.includeAudit;
       this.requestHeaders.putAll(updateCounterexampleOptions.requestHeaders());
     }
 
@@ -17574,6 +18831,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the UpdateCounterexampleOptions builder
+     */
+    public UpdateCounterexampleOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -17611,6 +18879,7 @@ public class IBMAssistantV1Models {
     private String newDigressOutSlots;
     private String newUserLabel;
     private Boolean newDisambiguationOptOut;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -17695,7 +18964,7 @@ public class IBMAssistantV1Models {
      * Gets the newOutput.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      *
      * @return the newOutput
      */
@@ -17847,6 +19116,17 @@ public class IBMAssistantV1Models {
       return newDisambiguationOptOut;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private UpdateDialogNodeOptions(UpdateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.dialogNode, 'dialogNode cannot be empty');
@@ -17871,6 +19151,7 @@ public class IBMAssistantV1Models {
       newDigressOutSlots = builder.newDigressOutSlots;
       newUserLabel = builder.newUserLabel;
       newDisambiguationOptOut = builder.newDisambiguationOptOut;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -17909,6 +19190,7 @@ public class IBMAssistantV1Models {
     private String newDigressOutSlots;
     private String newUserLabel;
     private Boolean newDisambiguationOptOut;
+    private Boolean includeAudit;
 
     private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions updateDialogNodeOptions) {
       workspaceId = updateDialogNodeOptions.workspaceId;
@@ -17932,6 +19214,7 @@ public class IBMAssistantV1Models {
       newDigressOutSlots = updateDialogNodeOptions.newDigressOutSlots;
       newUserLabel = updateDialogNodeOptions.newUserLabel;
       newDisambiguationOptOut = updateDialogNodeOptions.newDisambiguationOptOut;
+      includeAudit = updateDialogNodeOptions.includeAudit;
       this.requestHeaders.putAll(updateDialogNodeOptions.requestHeaders());
     }
 
@@ -18209,6 +19492,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -18232,6 +19526,8 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel newMetadata;
     private Boolean newFuzzyMatch;
     private List<CreateValue> newValues;
+    private Boolean append;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -18312,6 +19608,34 @@ public class IBMAssistantV1Models {
       return newValues;
     }
 
+    /**
+     * Gets the append.
+     *
+     * Whether the new data is to be appended to the existing data in the entity. If **append**=`false`, elements
+     * included in the new data completely replace the corresponding existing elements, including all subelements. For
+     * example, if the new data for the entity includes **values** and **append**=`false`, all existing values for the
+     * entity are discarded and replaced with the new values.
+     *
+     * If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
+     * data collide with existing elements, the update request fails.
+     *
+     * @return the append
+     */
+    public Boolean append() {
+      return append;
+    }
+
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private UpdateEntityOptions(UpdateEntityOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
@@ -18322,6 +19646,8 @@ public class IBMAssistantV1Models {
       newMetadata = builder.newMetadata;
       newFuzzyMatch = builder.newFuzzyMatch;
       newValues = builder.newValues;
+      append = builder.append;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -18346,6 +19672,8 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel newMetadata;
     private Boolean newFuzzyMatch;
     private List<CreateValue> newValues;
+    private Boolean append;
+    private Boolean includeAudit;
 
     private UpdateEntityOptionsBuilder(UpdateEntityOptions updateEntityOptions) {
       workspaceId = updateEntityOptions.workspaceId;
@@ -18355,6 +19683,8 @@ public class IBMAssistantV1Models {
       newMetadata = updateEntityOptions.newMetadata;
       newFuzzyMatch = updateEntityOptions.newFuzzyMatch;
       newValues = updateEntityOptions.newValues;
+      append = updateEntityOptions.append;
+      includeAudit = updateEntityOptions.includeAudit;
       this.requestHeaders.putAll(updateEntityOptions.requestHeaders());
     }
 
@@ -18478,6 +19808,28 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the append.
+     *
+     * @param append the append
+     * @return the UpdateEntityOptions builder
+     */
+    public UpdateEntityOptionsBuilder append(Boolean append) {
+      this.append = append;
+      return this;
+    }
+
+    /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the UpdateEntityOptions builder
+     */
+    public UpdateEntityOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -18499,6 +19851,7 @@ public class IBMAssistantV1Models {
     private String text;
     private String newText;
     private List<Mention> newMentions;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -18557,6 +19910,17 @@ public class IBMAssistantV1Models {
       return newMentions;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private UpdateExampleOptions(UpdateExampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
@@ -18566,6 +19930,7 @@ public class IBMAssistantV1Models {
       text = builder.text;
       newText = builder.newText;
       newMentions = builder.newMentions;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -18588,6 +19953,7 @@ public class IBMAssistantV1Models {
     private String text;
     private String newText;
     private List<Mention> newMentions;
+    private Boolean includeAudit;
 
     private UpdateExampleOptionsBuilder(UpdateExampleOptions updateExampleOptions) {
       workspaceId = updateExampleOptions.workspaceId;
@@ -18595,6 +19961,7 @@ public class IBMAssistantV1Models {
       text = updateExampleOptions.text;
       newText = updateExampleOptions.newText;
       newMentions = updateExampleOptions.newMentions;
+      includeAudit = updateExampleOptions.includeAudit;
       this.requestHeaders.putAll(updateExampleOptions.requestHeaders());
     }
 
@@ -18698,6 +20065,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the UpdateExampleOptions builder
+     */
+    public UpdateExampleOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -18719,6 +20097,8 @@ public class IBMAssistantV1Models {
     private String newIntent;
     private String newDescription;
     private List<Example> newExamples;
+    private Boolean append;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -18777,6 +20157,34 @@ public class IBMAssistantV1Models {
       return newExamples;
     }
 
+    /**
+     * Gets the append.
+     *
+     * Whether the new data is to be appended to the existing data in the object. If **append**=`false`, elements
+     * included in the new data completely replace the corresponding existing elements, including all subelements. For
+     * example, if the new data for the intent includes **examples** and **append**=`false`, all existing examples for
+     * the intent are discarded and replaced with the new examples.
+     *
+     * If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
+     * data collide with existing elements, the update request fails.
+     *
+     * @return the append
+     */
+    public Boolean append() {
+      return append;
+    }
+
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private UpdateIntentOptions(UpdateIntentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
@@ -18785,6 +20193,8 @@ public class IBMAssistantV1Models {
       newIntent = builder.newIntent;
       newDescription = builder.newDescription;
       newExamples = builder.newExamples;
+      append = builder.append;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -18807,6 +20217,8 @@ public class IBMAssistantV1Models {
     private String newIntent;
     private String newDescription;
     private List<Example> newExamples;
+    private Boolean append;
+    private Boolean includeAudit;
 
     private UpdateIntentOptionsBuilder(UpdateIntentOptions updateIntentOptions) {
       workspaceId = updateIntentOptions.workspaceId;
@@ -18814,6 +20226,8 @@ public class IBMAssistantV1Models {
       newIntent = updateIntentOptions.newIntent;
       newDescription = updateIntentOptions.newDescription;
       newExamples = updateIntentOptions.newExamples;
+      append = updateIntentOptions.append;
+      includeAudit = updateIntentOptions.includeAudit;
       this.requestHeaders.putAll(updateIntentOptions.requestHeaders());
     }
 
@@ -18915,6 +20329,28 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the append.
+     *
+     * @param append the append
+     * @return the UpdateIntentOptions builder
+     */
+    public UpdateIntentOptionsBuilder append(Boolean append) {
+      this.append = append;
+      return this;
+    }
+
+    /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the UpdateIntentOptions builder
+     */
+    public UpdateIntentOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -18936,6 +20372,7 @@ public class IBMAssistantV1Models {
     private String value;
     private String synonym;
     private String newSynonym;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -18994,6 +20431,17 @@ public class IBMAssistantV1Models {
       return newSynonym;
     }
 
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
+    }
+
     private UpdateSynonymOptions(UpdateSynonymOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
@@ -19004,6 +20452,7 @@ public class IBMAssistantV1Models {
       value = builder.value;
       synonym = builder.synonym;
       newSynonym = builder.newSynonym;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -19026,6 +20475,7 @@ public class IBMAssistantV1Models {
     private String value;
     private String synonym;
     private String newSynonym;
+    private Boolean includeAudit;
 
     private UpdateSynonymOptionsBuilder(UpdateSynonymOptions updateSynonymOptions) {
       workspaceId = updateSynonymOptions.workspaceId;
@@ -19033,6 +20483,7 @@ public class IBMAssistantV1Models {
       value = updateSynonymOptions.value;
       synonym = updateSynonymOptions.synonym;
       newSynonym = updateSynonymOptions.newSynonym;
+      includeAudit = updateSynonymOptions.includeAudit;
       this.requestHeaders.putAll(updateSynonymOptions.requestHeaders());
     }
 
@@ -19122,6 +20573,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the UpdateSynonymOptions builder
+     */
+    public UpdateSynonymOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -19146,6 +20608,8 @@ public class IBMAssistantV1Models {
     private String newType;
     private List<String> newSynonyms;
     private List<String> newPatterns;
+    private Boolean append;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -19235,12 +20699,40 @@ public class IBMAssistantV1Models {
      * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
      * value type), but not both. A pattern is a regular expression; for more information about how to specify a
      * pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
      *
      * @return the newPatterns
      */
     public List<String> newPatterns() {
       return newPatterns;
+    }
+
+    /**
+     * Gets the append.
+     *
+     * Whether the new data is to be appended to the existing data in the entity value. If **append**=`false`, elements
+     * included in the new data completely replace the corresponding existing elements, including all subelements. For
+     * example, if the new data for the entity value includes **synonyms** and **append**=`false`, all existing synonyms
+     * for the entity value are discarded and replaced with the new synonyms.
+     *
+     * If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
+     * data collide with existing elements, the update request fails.
+     *
+     * @return the append
+     */
+    public Boolean append() {
+      return append;
+    }
+
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
     }
 
     private UpdateValueOptions(UpdateValueOptionsBuilder builder) {
@@ -19255,6 +20747,8 @@ public class IBMAssistantV1Models {
       newType = builder.newType;
       newSynonyms = builder.newSynonyms;
       newPatterns = builder.newPatterns;
+      append = builder.append;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -19280,6 +20774,8 @@ public class IBMAssistantV1Models {
     private String newType;
     private List<String> newSynonyms;
     private List<String> newPatterns;
+    private Boolean append;
+    private Boolean includeAudit;
 
     private UpdateValueOptionsBuilder(UpdateValueOptions updateValueOptions) {
       workspaceId = updateValueOptions.workspaceId;
@@ -19290,6 +20786,8 @@ public class IBMAssistantV1Models {
       newType = updateValueOptions.newType;
       newSynonyms = updateValueOptions.newSynonyms;
       newPatterns = updateValueOptions.newPatterns;
+      append = updateValueOptions.append;
+      includeAudit = updateValueOptions.includeAudit;
       this.requestHeaders.putAll(updateValueOptions.requestHeaders());
     }
 
@@ -19442,6 +20940,28 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the append.
+     *
+     * @param append the append
+     * @return the UpdateValueOptions builder
+     */
+    public UpdateValueOptionsBuilder append(Boolean append) {
+      this.append = append;
+      return this;
+    }
+
+    /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the UpdateValueOptions builder
+     */
+    public UpdateValueOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -19471,6 +20991,7 @@ public class IBMAssistantV1Models {
     private List<Counterexample> counterexamples;
     private List<Webhook> webhooks;
     private Boolean append;
+    private Boolean includeAudit;
 
     /**
      * Gets the workspaceId.
@@ -19606,10 +21127,10 @@ public class IBMAssistantV1Models {
     /**
      * Gets the append.
      *
-     * Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements
+     * Whether the new data is to be appended to the existing data in the object. If **append**=`false`, elements
      * included in the new data completely replace the corresponding existing elements, including all subelements. For
-     * example, if the new data includes **entities** and **append**=`false`, all existing entities in the workspace are
-     * discarded and replaced with the new entities.
+     * example, if the new data for a workspace includes **entities** and **append**=`false`, all existing entities in
+     * the workspace are discarded and replaced with the new entities.
      *
      * If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
      * data collide with existing elements, the update request fails.
@@ -19618,6 +21139,17 @@ public class IBMAssistantV1Models {
      */
     public Boolean append() {
       return append;
+    }
+
+    /**
+     * Gets the includeAudit.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the includeAudit
+     */
+    public Boolean includeAudit() {
+      return includeAudit;
     }
 
     private UpdateWorkspaceOptions(UpdateWorkspaceOptionsBuilder builder) {
@@ -19635,6 +21167,7 @@ public class IBMAssistantV1Models {
       counterexamples = builder.counterexamples;
       webhooks = builder.webhooks;
       append = builder.append;
+      includeAudit = builder.includeAudit;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -19665,6 +21198,7 @@ public class IBMAssistantV1Models {
     private List<Counterexample> counterexamples;
     private List<Webhook> webhooks;
     private Boolean append;
+    private Boolean includeAudit;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
       workspaceId = updateWorkspaceOptions.workspaceId;
@@ -19680,6 +21214,7 @@ public class IBMAssistantV1Models {
       counterexamples = updateWorkspaceOptions.counterexamples;
       webhooks = updateWorkspaceOptions.webhooks;
       append = updateWorkspaceOptions.append;
+      includeAudit = updateWorkspaceOptions.includeAudit;
       this.requestHeaders.putAll(updateWorkspaceOptions.requestHeaders());
     }
 
@@ -19931,6 +21466,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the includeAudit.
+     *
+     * @param includeAudit the includeAudit
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -20020,7 +21566,7 @@ public class IBMAssistantV1Models {
      * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
      * value type), but not both. A pattern is a regular expression; for more information about how to specify a
      * pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
      *
      * @return the patterns
      */
@@ -21147,6 +22693,7 @@ public class IBMAssistantV1Models {
     private WorkspaceSystemSettingsTooling tooling;
     private WorkspaceSystemSettingsDisambiguation disambiguation;
     private IBMWatsonMapModel humanAgentAssist;
+    private WorkspaceSystemSettingsSystemEntities systemEntities;
     private WorkspaceSystemSettingsOffTopic offTopic;
 
     /**
@@ -21194,6 +22741,18 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Gets the systemEntities.
+     *
+     * Workspace settings related to the behavior of system entities.
+     *
+     * @return the systemEntities
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettingsSystemEntities getSystemEntities() {
+      return systemEntities;
+    }
+
+    /**
      * Gets the offTopic.
      *
      * Workspace settings related to detection of irrelevant input.
@@ -21209,6 +22768,7 @@ public class IBMAssistantV1Models {
       this.tooling = builder.tooling;
       this.disambiguation = builder.disambiguation;
       this.humanAgentAssist = builder.humanAgentAssist;
+      this.systemEntities = builder.systemEntities;
       this.offTopic = builder.offTopic;
     }
 
@@ -21229,6 +22789,7 @@ public class IBMAssistantV1Models {
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'human_agent_assist' => 'humanAgentAssist',
+        'system_entities' => 'systemEntities',
         'off_topic' => 'offTopic'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
@@ -21252,6 +22813,11 @@ public class IBMAssistantV1Models {
       IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(humanAgentAssistMap, true), humanAgentAssistMap, IBMWatsonMapModel.class);
       retBuilder.humanAgentAssist(newHumanAgentAssist);
 
+      // calling custom deserializer for systemEntities
+      Map<String, Object> systemEntitiesMap = (Map<String, Object>) jsonMap.get('systemEntities');
+      WorkspaceSystemSettingsSystemEntities newSystemEntities = (WorkspaceSystemSettingsSystemEntities) new WorkspaceSystemSettingsSystemEntities().deserialize(JSON.serialize(systemEntitiesMap, true), systemEntitiesMap, WorkspaceSystemSettingsSystemEntities.class);
+      retBuilder.systemEntities(newSystemEntities);
+
       // calling custom deserializer for offTopic
       Map<String, Object> offTopicMap = (Map<String, Object>) jsonMap.get('offTopic');
       WorkspaceSystemSettingsOffTopic newOffTopic = (WorkspaceSystemSettingsOffTopic) new WorkspaceSystemSettingsOffTopic().deserialize(JSON.serialize(offTopicMap, true), offTopicMap, WorkspaceSystemSettingsOffTopic.class);
@@ -21270,6 +22836,7 @@ public class IBMAssistantV1Models {
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'humanAgentAssist' => 'human_agent_assist',
+        'systemEntities' => 'system_entities',
         'offTopic' => 'off_topic'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -21304,6 +22871,16 @@ public class IBMAssistantV1Models {
         jsonMap.put(humanAgentAssistKey, JSON.deserializeUntyped(humanAgentAssistJsonString));
       }
 
+      // performing custom serialization for systemEntities
+      if (systemEntities != null) {
+        String systemEntitiesJsonString = JSON.serialize(systemEntities.replacePropertyNames(), true);
+        String systemEntitiesKey = 'systemEntities';
+        if (propertyNameMapping.containsKey(systemEntitiesKey)) {
+          systemEntitiesKey = propertyNameMapping.get(systemEntitiesKey);
+        }
+        jsonMap.put(systemEntitiesKey, JSON.deserializeUntyped(systemEntitiesJsonString));
+      }
+
       // performing custom serialization for offTopic
       if (offTopic != null) {
         String offTopicJsonString = JSON.serialize(offTopic.replacePropertyNames(), true);
@@ -21325,12 +22902,14 @@ public class IBMAssistantV1Models {
     private WorkspaceSystemSettingsTooling tooling;
     private WorkspaceSystemSettingsDisambiguation disambiguation;
     private IBMWatsonMapModel humanAgentAssist;
+    private WorkspaceSystemSettingsSystemEntities systemEntities;
     private WorkspaceSystemSettingsOffTopic offTopic;
 
     private WorkspaceSystemSettingsBuilder(WorkspaceSystemSettings workspaceSystemSettings) {
       this.tooling = workspaceSystemSettings.tooling;
       this.disambiguation = workspaceSystemSettings.disambiguation;
       this.humanAgentAssist = workspaceSystemSettings.humanAgentAssist;
+      this.systemEntities = workspaceSystemSettings.systemEntities;
       this.offTopic = workspaceSystemSettings.offTopic;
     }
 
@@ -21379,6 +22958,17 @@ public class IBMAssistantV1Models {
      */
     public WorkspaceSystemSettingsBuilder humanAgentAssist(IBMWatsonMapModel humanAgentAssist) {
       this.humanAgentAssist = humanAgentAssist;
+      return this;
+    }
+
+    /**
+     * Set the systemEntities.
+     *
+     * @param systemEntities the systemEntities
+     * @return the WorkspaceSystemSettings builder
+     */
+    public WorkspaceSystemSettingsBuilder systemEntities(WorkspaceSystemSettingsSystemEntities systemEntities) {
+      this.systemEntities = systemEntities;
       return this;
     }
 
@@ -21762,6 +23352,99 @@ public class IBMAssistantV1Models {
      * @return the WorkspaceSystemSettingsOffTopic builder
      */
     public WorkspaceSystemSettingsOffTopicBuilder enabled(Boolean enabled) {
+      this.enabled = enabled;
+      return this;
+    }
+  }
+
+  /**
+   * Workspace settings related to the behavior of system entities.
+   */
+  public class WorkspaceSystemSettingsSystemEntities extends IBMWatsonGenericModel {
+    private Boolean enabled;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public WorkspaceSystemSettingsSystemEntities() { }
+
+    /**
+     * Gets the enabled.
+     *
+     * Whether the new system entities are enabled for the workspace.
+     *
+     * @return the enabled
+     */
+    @AuraEnabled
+    public Boolean getEnabled() {
+      return enabled;
+    }
+  
+    private WorkspaceSystemSettingsSystemEntities(WorkspaceSystemSettingsSystemEntitiesBuilder builder) {
+      this.enabled = builder.enabled;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a WorkspaceSystemSettingsSystemEntities builder
+     */
+    public WorkspaceSystemSettingsSystemEntitiesBuilder newBuilder() {
+      return new WorkspaceSystemSettingsSystemEntitiesBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettingsSystemEntities ret = (WorkspaceSystemSettingsSystemEntities) super.deserialize(jsonString, jsonMap, classType);
+      WorkspaceSystemSettingsSystemEntitiesBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsSystemEntities Builder.
+   */
+  public class WorkspaceSystemSettingsSystemEntitiesBuilder {
+    private Boolean enabled;
+
+    private WorkspaceSystemSettingsSystemEntitiesBuilder(WorkspaceSystemSettingsSystemEntities workspaceSystemSettingsSystemEntities) {
+      this.enabled = workspaceSystemSettingsSystemEntities.enabled;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public WorkspaceSystemSettingsSystemEntitiesBuilder() {
+    }
+
+    /**
+     * Builds a WorkspaceSystemSettingsSystemEntities.
+     *
+     * @return the workspaceSystemSettingsSystemEntities
+     */
+    public WorkspaceSystemSettingsSystemEntities build() {
+      return new WorkspaceSystemSettingsSystemEntities(this);
+    }
+
+    /**
+     * Set the enabled.
+     *
+     * @param enabled the enabled
+     * @return the WorkspaceSystemSettingsSystemEntities builder
+     */
+    public WorkspaceSystemSettingsSystemEntitiesBuilder enabled(Boolean enabled) {
       this.enabled = enabled;
       return this;
     }
