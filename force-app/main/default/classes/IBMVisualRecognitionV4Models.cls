@@ -1366,6 +1366,127 @@ public class IBMVisualRecognitionV4Models {
   }
 
   /**
+   * The deleteObject options.
+   */
+  public class DeleteObjectOptions extends IBMWatsonOptionsModel {
+    private String collectionId;
+    private String xObject;
+
+    /**
+     * Gets the collectionId.
+     *
+     * The identifier of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    /**
+     * Gets the xObject.
+     *
+     * The name of the object.
+     *
+     * @return the xObject
+     */
+    public String xObject() {
+      return xObject;
+    }
+
+    private DeleteObjectOptions(DeleteObjectOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.xObject, 'xObject cannot be empty');
+      collectionId = builder.collectionId;
+      xObject = builder.xObject;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteObjectOptions builder
+     */
+    public DeleteObjectOptionsBuilder newBuilder() {
+      return new DeleteObjectOptionsBuilder(this);
+    }
+  }
+
+  /**
+   * DeleteObjectOptions Builder.
+   */
+  public class DeleteObjectOptionsBuilder extends IBMWatsonOptionsModel {
+    private String collectionId;
+    private String xObject;
+
+    private DeleteObjectOptionsBuilder(DeleteObjectOptions deleteObjectOptions) {
+      collectionId = deleteObjectOptions.collectionId;
+      xObject = deleteObjectOptions.xObject;
+      this.requestHeaders.putAll(deleteObjectOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteObjectOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param collectionId the collectionId
+     * @param xObject the xObject
+     */
+    public DeleteObjectOptionsBuilder(String collectionId, String xObject) {
+      this.collectionId = collectionId;
+      this.xObject = xObject;
+    }
+
+    /**
+     * Builds a DeleteObjectOptions.
+     *
+     * @return the deleteObjectOptions
+     */
+    public DeleteObjectOptions build() {
+      return new DeleteObjectOptions(this);
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the DeleteObjectOptions builder
+     */
+    public DeleteObjectOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the xObject.
+     *
+     * @param xObject the xObject
+     * @return the DeleteObjectOptions builder
+     */
+    public DeleteObjectOptionsBuilder xObject(String xObject) {
+      this.xObject = xObject;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteObjectOptions builder
+     */
+    public DeleteObjectOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The deleteUserData options.
    */
   public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
@@ -2048,6 +2169,127 @@ public class IBMVisualRecognitionV4Models {
      * @return the GetJpegImageOptions builder
      */
     public GetJpegImageOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getObjectMetadata options.
+   */
+  public class GetObjectMetadataOptions extends IBMWatsonOptionsModel {
+    private String collectionId;
+    private String xObject;
+
+    /**
+     * Gets the collectionId.
+     *
+     * The identifier of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    /**
+     * Gets the xObject.
+     *
+     * The name of the object.
+     *
+     * @return the xObject
+     */
+    public String xObject() {
+      return xObject;
+    }
+
+    private GetObjectMetadataOptions(GetObjectMetadataOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.xObject, 'xObject cannot be empty');
+      collectionId = builder.collectionId;
+      xObject = builder.xObject;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetObjectMetadataOptions builder
+     */
+    public GetObjectMetadataOptionsBuilder newBuilder() {
+      return new GetObjectMetadataOptionsBuilder(this);
+    }
+  }
+
+  /**
+   * GetObjectMetadataOptions Builder.
+   */
+  public class GetObjectMetadataOptionsBuilder extends IBMWatsonOptionsModel {
+    private String collectionId;
+    private String xObject;
+
+    private GetObjectMetadataOptionsBuilder(GetObjectMetadataOptions getObjectMetadataOptions) {
+      collectionId = getObjectMetadataOptions.collectionId;
+      xObject = getObjectMetadataOptions.xObject;
+      this.requestHeaders.putAll(getObjectMetadataOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetObjectMetadataOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param collectionId the collectionId
+     * @param xObject the xObject
+     */
+    public GetObjectMetadataOptionsBuilder(String collectionId, String xObject) {
+      this.collectionId = collectionId;
+      this.xObject = xObject;
+    }
+
+    /**
+     * Builds a GetObjectMetadataOptions.
+     *
+     * @return the getObjectMetadataOptions
+     */
+    public GetObjectMetadataOptions build() {
+      return new GetObjectMetadataOptions(this);
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the GetObjectMetadataOptions builder
+     */
+    public GetObjectMetadataOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the xObject.
+     *
+     * @param xObject the xObject
+     * @return the GetObjectMetadataOptions builder
+     */
+    public GetObjectMetadataOptionsBuilder xObject(String xObject) {
+      this.xObject = xObject;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetObjectMetadataOptions builder
+     */
+    public GetObjectMetadataOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -3071,6 +3313,98 @@ public class IBMVisualRecognitionV4Models {
   }
 
   /**
+   * The listObjectMetadata options.
+   */
+  public class ListObjectMetadataOptions extends IBMWatsonOptionsModel {
+    private String collectionId;
+
+    /**
+     * Gets the collectionId.
+     *
+     * The identifier of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    private ListObjectMetadataOptions(ListObjectMetadataOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      collectionId = builder.collectionId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListObjectMetadataOptions builder
+     */
+    public ListObjectMetadataOptionsBuilder newBuilder() {
+      return new ListObjectMetadataOptionsBuilder(this);
+    }
+  }
+
+  /**
+   * ListObjectMetadataOptions Builder.
+   */
+  public class ListObjectMetadataOptionsBuilder extends IBMWatsonOptionsModel {
+    private String collectionId;
+
+    private ListObjectMetadataOptionsBuilder(ListObjectMetadataOptions listObjectMetadataOptions) {
+      collectionId = listObjectMetadataOptions.collectionId;
+      this.requestHeaders.putAll(listObjectMetadataOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListObjectMetadataOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param collectionId the collectionId
+     */
+    public ListObjectMetadataOptionsBuilder(String collectionId) {
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a ListObjectMetadataOptions.
+     *
+     * @return the listObjectMetadataOptions
+     */
+    public ListObjectMetadataOptions build() {
+      return new ListObjectMetadataOptions(this);
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the ListObjectMetadataOptions builder
+     */
+    public ListObjectMetadataOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListObjectMetadataOptions builder
+     */
+    public ListObjectMetadataOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * Defines the location of the bounding box around the object.
    */
   public class Location extends IBMWatsonGenericModel {
@@ -3353,6 +3687,135 @@ public class IBMVisualRecognitionV4Models {
       Map<String, Object> locationMap = (Map<String, Object>) jsonMap.get('location');
       Location newLocation = (Location) new Location().deserialize(JSON.serialize(locationMap, true), locationMap, Location.class);
       ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Basic information about an object.
+   */
+  public class ObjectMetadata extends IBMWatsonResponseModel {
+    private String xObject;
+    private Long count;
+
+    /**
+     * Gets the xObject.
+     *
+     * The name of the object.
+     *
+     * @return the xObject
+     */
+    @AuraEnabled
+    public String getXObject() {
+      return xObject;
+    }
+
+    /**
+     * Gets the count.
+     *
+     * Number of bounding boxes with this object name in the collection.
+     *
+     * @return the count
+     */
+    @AuraEnabled
+    public Long getCount() {
+      return count;
+    }
+
+    /**
+     * Sets the xObject.
+     *
+     * @param xObject the new xObject
+     */
+    public void setXObject(final String xObject) {
+      this.xObject = xObject;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'object' => 'xObject'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ObjectMetadata ret = (ObjectMetadata) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * List of objects.
+   */
+  public class ObjectMetadataList extends IBMWatsonResponseModel {
+    private Long objectCount;
+    private List<ObjectMetadata> objects;
+
+    /**
+     * Gets the objectCount.
+     *
+     * Number of unique named objects in the collection.
+     *
+     * @return the objectCount
+     */
+    @AuraEnabled
+    public Long getObjectCount() {
+      return objectCount;
+    }
+
+    /**
+     * Gets the objects.
+     *
+     * The objects in the collection.
+     *
+     * @return the objects
+     */
+    @AuraEnabled
+    public List<ObjectMetadata> getObjects() {
+      return objects;
+    }
+
+    /**
+     * Sets the objects.
+     *
+     * @param objects the new objects
+     */
+    public void setObjects(final List<ObjectMetadata> objects) {
+      this.objects = objects;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'object_count' => 'objectCount'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      ObjectMetadataList ret = (ObjectMetadataList) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for objects
+      List<ObjectMetadata> newObjects = new List<ObjectMetadata>();
+      List<ObjectMetadata> deserializedObjects = ret.getObjects();
+      if (deserializedObjects != null) {
+        for (Integer i = 0; i < deserializedObjects.size(); i++) {
+          ObjectMetadata currentItem = ret.getObjects().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('objects');
+          ObjectMetadata newItem = (ObjectMetadata) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), ObjectMetadata.class);
+          newObjects.add(newItem);
+        }
+        ret.objects = newObjects;
+      }
 
       return ret;
     }
@@ -4437,6 +4900,317 @@ public class IBMVisualRecognitionV4Models {
      * @return the UpdateCollectionOptions builder
      */
     public UpdateCollectionOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * Basic information about an updated object.
+   */
+  public class UpdateObjectMetadata extends IBMWatsonResponseModel {
+    private String xObject;
+    private Long count;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public UpdateObjectMetadata() { }
+
+    /**
+     * Gets the xObject.
+     *
+     * The updated name of the object. The name can contain alphanumeric, underscore, hyphen, space, and dot characters.
+     * It cannot begin with the reserved prefix `sys-`.
+     *
+     * @return the xObject
+     */
+    @AuraEnabled
+    public String getXObject() {
+      return xObject;
+    }
+
+    /**
+     * Gets the count.
+     *
+     * Number of bounding boxes in the collection with the updated object name.
+     *
+     * @return the count
+     */
+    @AuraEnabled
+    public Long getCount() {
+      return count;
+    }
+  
+    private UpdateObjectMetadata(UpdateObjectMetadataBuilder builder) {
+      IBMWatsonValidator.notNull(builder.xObject, 'xObject cannot be null');
+      IBMWatsonValidator.notNull(builder.count, 'count cannot be null');
+      this.xObject = builder.xObject;
+      this.count = builder.count;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a UpdateObjectMetadata builder
+     */
+    public UpdateObjectMetadataBuilder newBuilder() {
+      return new UpdateObjectMetadataBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'object' => 'xObject'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      UpdateObjectMetadata ret = (UpdateObjectMetadata) super.deserialize(jsonString, jsonMap, classType);
+      UpdateObjectMetadataBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xObject' => 'object'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * UpdateObjectMetadata Builder.
+   */
+  public class UpdateObjectMetadataBuilder {
+    private String xObject;
+    private Long count;
+
+    private UpdateObjectMetadataBuilder(UpdateObjectMetadata updateObjectMetadata) {
+      this.xObject = updateObjectMetadata.xObject;
+      this.count = updateObjectMetadata.count;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public UpdateObjectMetadataBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param xObject the xObject
+     * @param count the count
+     */
+    public UpdateObjectMetadataBuilder(String xObject, Long count) {
+      this.xObject = xObject;
+      this.count = count;
+    }
+
+    /**
+     * Builds a UpdateObjectMetadata.
+     *
+     * @return the updateObjectMetadata
+     */
+    public UpdateObjectMetadata build() {
+      return new UpdateObjectMetadata(this);
+    }
+
+    /**
+     * Set the xObject.
+     *
+     * @param xObject the xObject
+     * @return the UpdateObjectMetadata builder
+     */
+    public UpdateObjectMetadataBuilder xObject(String xObject) {
+      this.xObject = xObject;
+      return this;
+    }
+
+    /**
+     * Set the count.
+     *
+     * @param count the count
+     * @return the UpdateObjectMetadata builder
+     */
+    public UpdateObjectMetadataBuilder count(Long count) {
+      this.count = count;
+      return this;
+    }
+  }
+
+  /**
+   * The updateObjectMetadata options.
+   */
+  public class UpdateObjectMetadataOptions extends IBMWatsonOptionsModel {
+    private String collectionId;
+    private String xObject;
+    private String newObject;
+
+    /**
+     * Gets the collectionId.
+     *
+     * The identifier of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    /**
+     * Gets the xObject.
+     *
+     * The name of the object.
+     *
+     * @return the xObject
+     */
+    public String xObject() {
+      return xObject;
+    }
+
+    /**
+     * Gets the newObject.
+     *
+     * The updated name of the object. The name can contain alphanumeric, underscore, hyphen, space, and dot characters.
+     * It cannot begin with the reserved prefix `sys-`.
+     *
+     * @return the newObject
+     */
+    public String newObject() {
+      return newObject;
+    }
+
+    private UpdateObjectMetadataOptions(UpdateObjectMetadataOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.xObject, 'xObject cannot be empty');
+      IBMWatsonValidator.notNull(builder.newObject, 'newObject cannot be null');
+      collectionId = builder.collectionId;
+      xObject = builder.xObject;
+      newObject = builder.newObject;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a UpdateObjectMetadataOptions builder
+     */
+    public UpdateObjectMetadataOptionsBuilder newBuilder() {
+      return new UpdateObjectMetadataOptionsBuilder(this);
+    }
+  }
+
+  /**
+   * UpdateObjectMetadataOptions Builder.
+   */
+  public class UpdateObjectMetadataOptionsBuilder extends IBMWatsonOptionsModel {
+    private String collectionId;
+    private String xObject;
+    private String newObject;
+
+    private UpdateObjectMetadataOptionsBuilder(UpdateObjectMetadataOptions updateObjectMetadataOptions) {
+      collectionId = updateObjectMetadataOptions.collectionId;
+      xObject = updateObjectMetadataOptions.xObject;
+      newObject = updateObjectMetadataOptions.newObject;
+      this.requestHeaders.putAll(updateObjectMetadataOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public UpdateObjectMetadataOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param collectionId the collectionId
+     * @param xObject the xObject
+     * @param newObject the newObject
+     */
+    public UpdateObjectMetadataOptionsBuilder(String collectionId, String xObject, String newObject) {
+      this.collectionId = collectionId;
+      this.xObject = xObject;
+      this.newObject = newObject;
+    }
+
+    /**
+     * Builds a UpdateObjectMetadataOptions.
+     *
+     * @return the updateObjectMetadataOptions
+     */
+    public UpdateObjectMetadataOptions build() {
+      return new UpdateObjectMetadataOptions(this);
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the UpdateObjectMetadataOptions builder
+     */
+    public UpdateObjectMetadataOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the xObject.
+     *
+     * @param xObject the xObject
+     * @return the UpdateObjectMetadataOptions builder
+     */
+    public UpdateObjectMetadataOptionsBuilder xObject(String xObject) {
+      this.xObject = xObject;
+      return this;
+    }
+
+    /**
+     * Set the newObject.
+     *
+     * @param newObject the newObject
+     * @return the UpdateObjectMetadataOptions builder
+     */
+    public UpdateObjectMetadataOptionsBuilder newObject(String newObject) {
+      this.newObject = newObject;
+      return this;
+    }
+
+    /**
+     * Set the updateObjectMetadata.
+     *
+     * @param updateObjectMetadata the updateObjectMetadata
+     * @return the UpdateObjectMetadataOptions builder
+     */
+    public UpdateObjectMetadataOptionsBuilder updateObjectMetadata(UpdateObjectMetadata updateObjectMetadata) {
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateObjectMetadataOptions builder
+     */
+    public UpdateObjectMetadataOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
