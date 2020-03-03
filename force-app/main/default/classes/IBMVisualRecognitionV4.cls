@@ -16,7 +16,7 @@
  * a set of images with training data.
  *
  * @version V4
- * @see <a href="https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-object-detection-overview">Visual Recognition</a>
+ * @see <a href="https://cloud.ibm.com/docs/visual-recognition?topic=visual-recognition-object-detection-overview">Visual Recognition</a>
  */
 public class IBMVisualRecognitionV4 extends IBMWatsonService {
 
@@ -83,7 +83,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     multipartBuilder.addFormDataPart('collection_ids', String.join(analyzeOptions.collectionIds(), ','));
-     multipartBuilder.addFormDataPart('features', String.join(analyzeOptions.features(), ','));
+    multipartBuilder.addFormDataPart('features', String.join(analyzeOptions.features(), ','));
     if (analyzeOptions.imagesFile() != null) {
       for (IBMWatsonFile item : analyzeOptions.imagesFile()) {
         IBMWatsonRequestBody itemBody = IBMWatsonRequestBody.create(item, item.contentType());
@@ -403,6 +403,110 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
   }
 
   /**
+   * List object metadata.
+   *
+   * Retrieves a list of object names in a collection.
+   *
+   * @param listObjectMetadataOptions the {@link IBMVisualRecognitionV4Models.ListObjectMetadataOptions} containing the options for the call
+   * @return the {@link IBMVisualRecognitionV4Models.ObjectMetadataList} with the response
+   */
+  public IBMVisualRecognitionV4Models.ObjectMetadataList listObjectMetadata(IBMVisualRecognitionV4Models.ListObjectMetadataOptions listObjectMetadataOptions) {
+    IBMWatsonValidator.notNull(listObjectMetadataOptions, 'listObjectMetadataOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v4/collections/{0}/objects', new String[]{ listObjectMetadataOptions.collectionId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=watson_vision_combined;service_version=V4;operation_id=listObjectMetadata');
+    Map<String, String> requestHeaders = (listObjectMetadataOptions != null) ? listObjectMetadataOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMVisualRecognitionV4Models.ObjectMetadataList) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.ObjectMetadataList.class);
+  }
+
+  /**
+   * Update an object name.
+   *
+   * Update the name of an object. A successful request updates the training data for all images that use the object.
+   *
+   * @param updateObjectMetadataOptions the {@link IBMVisualRecognitionV4Models.UpdateObjectMetadataOptions} containing the options for the call
+   * @return the {@link IBMVisualRecognitionV4Models.UpdateObjectMetadata} with the response
+   */
+  public IBMVisualRecognitionV4Models.UpdateObjectMetadata updateObjectMetadata(IBMVisualRecognitionV4Models.UpdateObjectMetadataOptions updateObjectMetadataOptions) {
+    IBMWatsonValidator.notNull(updateObjectMetadataOptions, 'updateObjectMetadataOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getServiceURL() + String.format('/v4/collections/{0}/objects/{1}', new String[]{ updateObjectMetadataOptions.collectionId(), updateObjectMetadataOptions.xObject() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=watson_vision_combined;service_version=V4;operation_id=updateObjectMetadata');
+    Map<String, String> requestHeaders = (updateObjectMetadataOptions != null) ? updateObjectMetadataOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('object', updateObjectMetadataOptions.newObject());
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMVisualRecognitionV4Models.UpdateObjectMetadata) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.UpdateObjectMetadata.class);
+  }
+
+  /**
+   * Get object metadata.
+   *
+   * Get the number of bounding boxes for a single object in a collection.
+   *
+   * @param getObjectMetadataOptions the {@link IBMVisualRecognitionV4Models.GetObjectMetadataOptions} containing the options for the call
+   * @return the {@link IBMVisualRecognitionV4Models.ObjectMetadata} with the response
+   */
+  public IBMVisualRecognitionV4Models.ObjectMetadata getObjectMetadata(IBMVisualRecognitionV4Models.GetObjectMetadataOptions getObjectMetadataOptions) {
+    IBMWatsonValidator.notNull(getObjectMetadataOptions, 'getObjectMetadataOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getServiceURL() + String.format('/v4/collections/{0}/objects/{1}', new String[]{ getObjectMetadataOptions.collectionId(), getObjectMetadataOptions.xObject() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=watson_vision_combined;service_version=V4;operation_id=getObjectMetadata');
+    Map<String, String> requestHeaders = (getObjectMetadataOptions != null) ? getObjectMetadataOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMVisualRecognitionV4Models.ObjectMetadata) createServiceCall(builder.build(), IBMVisualRecognitionV4Models.ObjectMetadata.class);
+  }
+
+  /**
+   * Delete an object.
+   *
+   * Delete one object from a collection. A successful request deletes the training data from all images that use the
+   * object.
+   *
+   * @param deleteObjectOptions the {@link IBMVisualRecognitionV4Models.DeleteObjectOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteObject(IBMVisualRecognitionV4Models.DeleteObjectOptions deleteObjectOptions) {
+    IBMWatsonValidator.notNull(deleteObjectOptions, 'deleteObjectOptions cannot be null');
+    IBMWatsonValidator.notEmpty(getServiceURL(), 'The service URL cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getServiceURL() + String.format('/v4/collections/{0}/objects/{1}', new String[]{ deleteObjectOptions.collectionId(), deleteObjectOptions.xObject() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=watson_vision_combined;service_version=V4;operation_id=deleteObject');
+    Map<String, String> requestHeaders = (deleteObjectOptions != null) ? deleteObjectOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
    * Train a collection.
    *
    * Start training on images in a collection. The collection must have enough training data and untrained data (the
@@ -510,7 +614,7 @@ public class IBMVisualRecognitionV4 extends IBMWatsonService {
    *
    * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
    * For more information about personal data and customer IDs, see [Information
-   * security](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-information-security).
+   * security](https://cloud.ibm.com/docs/visual-recognition?topic=visual-recognition-information-security).
    *
    * @param deleteUserDataOptions the {@link IBMVisualRecognitionV4Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call

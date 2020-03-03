@@ -18,7 +18,7 @@
  * eliminate the need for manual filtering of results.
  *
  * @version V2
- * @see <a href="https://cloud.ibm.com/docs/services/discovery-data/">Discovery</a>
+ * @see <a href="https://cloud.ibm.com/docs/discovery-data/">Discovery</a>
  */
 public class IBMDiscoveryV2 extends IBMWatsonService {
 
@@ -81,7 +81,7 @@ public class IBMDiscoveryV2 extends IBMWatsonService {
    * Query a project.
    *
    * By using this method, you can construct queries. For details, see the [Discovery
-   * documentation](https://cloud.ibm.com/docs/services/discovery-data?topic=discovery-data-query-concepts).
+   * documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-concepts).
    *
    * @param queryOptions the {@link IBMDiscoveryV2Models.QueryOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV2Models.QueryResponse} with the response

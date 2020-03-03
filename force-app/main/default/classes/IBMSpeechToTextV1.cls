@@ -31,7 +31,7 @@
  * customization is beta functionality that is available for all supported languages.
  *
  * @version V1
- * @see <a href="https://cloud.ibm.com/docs/services/speech-to-text/">Speech to Text</a>
+ * @see <a href="https://cloud.ibm.com/docs/speech-to-text/">Speech to Text</a>
  */
 public class IBMSpeechToTextV1 extends IBMWatsonService {
 
@@ -66,7 +66,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * model and its minimum sampling rate in Hertz, among other things.
    *
    * **See also:** [Languages and
-   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
+   * models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models).
    *
    * @param listModelsOptions the {@link IBMSpeechToTextV1Models.ListModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechModels} with the response
@@ -93,7 +93,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * includes the name of the model and its minimum sampling rate in Hertz, among other things.
    *
    * **See also:** [Languages and
-   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
+   * models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models).
    *
    * @param getModelOptions the {@link IBMSpeechToTextV1Models.GetModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechModel} with the response
@@ -124,7 +124,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * use the `--data-binary` option to upload the file for the request.)
    *
    * **See also:** [Making a basic HTTP
-   * request](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-basic).
+   * request](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-http#HTTP-basic).
    *
    * ### Streaming mode
    *
@@ -135,8 +135,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * `inactivity_timeout` parameter to change the default of 30 seconds.
    *
    * **See also:**
-   * * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#transmission)
-   * * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts)
+   * * [Audio transmission](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#transmission)
+   * * [Timeouts](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#timeouts)
    *
    * ### Audio formats (content types)
    *
@@ -172,7 +172,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * audio is lower than the minimum required rate, the request fails.
    *
    *  **See also:** [Audio
-   * formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
+   * formats](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
    *
    * ### Multipart speech recognition
    *
@@ -188,7 +188,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * example, if you want to spot a very large number of keywords.
    *
    * **See also:** [Making a multipart HTTP
-   * request](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-multi).
+   * request](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-http#HTTP-multi).
    *
    * @param recognizeOptions the {@link IBMSpeechToTextV1Models.RecognizeOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechRecognitionResults} with the response
@@ -305,7 +305,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * You can register a maximum of 20 callback URLS in a one-hour span of time.
    *
    * **See also:** [Registering a callback
-   * URL](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#register).
+   * URL](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-async#register).
    *
    * @param registerCallbackOptions the {@link IBMSpeechToTextV1Models.RegisterCallbackOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RegisterStatus} with the response
@@ -340,7 +340,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
    *
    * **See also:** [Unregistering a callback
-   * URL](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#unregister).
+   * URL](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-async#unregister).
    *
    * @param unregisterCallbackOptions the {@link IBMSpeechToTextV1Models.UnregisterCallbackOptions} containing the options for the call
    * @return the service call
@@ -397,7 +397,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * WebSocket API. (With the `curl` command, use the `--data-binary` option to upload the file for the request.)
    *
    * **See also:** [Creating a
-   * job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#create).
+   * job](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-async#create).
    *
    * ### Streaming mode
    *
@@ -408,8 +408,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * `inactivity_timeout` parameter to change the default of 30 seconds.
    *
    * **See also:**
-   * * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#transmission)
-   * * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts)
+   * * [Audio transmission](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#transmission)
+   * * [Timeouts](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#timeouts)
    *
    * ### Audio formats (content types)
    *
@@ -445,7 +445,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * audio is lower than the minimum required rate, the request fails.
    *
    *  **See also:** [Audio
-   * formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
+   * formats](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
    *
    * @param createJobOptions the {@link IBMSpeechToTextV1Models.CreateJobOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
@@ -562,7 +562,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * whichever comes first.
    *
    * **See also:** [Checking the status of the latest
-   * jobs](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#jobs).
+   * jobs](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-async#jobs).
    *
    * @param checkJobsOptions the {@link IBMSpeechToTextV1Models.CheckJobsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJobs} with the response
@@ -595,7 +595,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * associated with the calling credentials.
    *
    * **See also:** [Checking the status and retrieving the results of a
-   * job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#job).
+   * job](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-async#job).
    *
    * @param checkJobOptions the {@link IBMSpeechToTextV1Models.CheckJobOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
@@ -624,7 +624,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * for the results expires. You must use credentials for the instance of the service that owns a job to delete it.
    *
    * **See also:** [Deleting a
-   * job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#delete-async).
+   * job](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-async#delete-async).
    *
    * @param deleteJobOptions the {@link IBMSpeechToTextV1Models.DeleteJobOptions} containing the options for the call
    * @return the service call
@@ -656,7 +656,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * model count is below the limit.
    *
    * **See also:** [Create a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#createModel-language).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-languageCreate#createModel-language).
    *
    * @param createLanguageModelOptions the {@link IBMSpeechToTextV1Models.CreateLanguageModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
@@ -696,7 +696,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * list information about it.
    *
    * **See also:** [Listing custom language
-   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language).
+   * models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language).
    *
    * @param listLanguageModelsOptions the {@link IBMSpeechToTextV1Models.ListLanguageModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModels} with the response
@@ -726,7 +726,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * that owns a model to list information about it.
    *
    * **See also:** [Listing custom language
-   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language).
+   * models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language).
    *
    * @param getLanguageModelOptions the {@link IBMSpeechToTextV1Models.GetLanguageModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
@@ -755,7 +755,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * service that owns a model to delete it.
    *
    * **See also:** [Deleting a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#deleteModel-language).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageLanguageModels#deleteModel-language).
    *
    * @param deleteLanguageModelOptions the {@link IBMSpeechToTextV1Models.DeleteLanguageModelOptions} containing the options for the call
    * @return the service call
@@ -796,7 +796,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * completes.
    *
    * **See also:** [Train the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#trainModel-language).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-languageCreate#trainModel-language).
    *
    *
    * ### Training failures
@@ -845,7 +845,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * credentials for the instance of the service that owns a model to reset it.
    *
    * **See also:** [Resetting a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#resetModel-language).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageLanguageModels#resetModel-language).
    *
    * @param resetLanguageModelOptions the {@link IBMSpeechToTextV1Models.ResetLanguageModelOptions} containing the options for the call
    * @return the service call
@@ -883,7 +883,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * requests for the model until the upgrade completes.
    *
    * **See also:** [Upgrading a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeLanguage).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customUpgrade#upgradeLanguage).
    *
    * @param upgradeLanguageModelOptions the {@link IBMSpeechToTextV1Models.UpgradeLanguageModelOptions} containing the options for the call
    * @return the service call
@@ -913,7 +913,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * of the service that owns a model to list its corpora.
    *
    * **See also:** [Listing corpora for a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora).
    *
    * @param listCorporaOptions the {@link IBMSpeechToTextV1Models.ListCorporaOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Corpora} with the response
@@ -970,9 +970,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * **See also:**
    * * [Working with
-   * corpora](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingCorpora)
+   * corpora](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-corporaWords#workingCorpora)
    * * [Add a corpus to the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addCorpus).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-languageCreate#addCorpus).
    *
    * @param addCorpusOptions the {@link IBMSpeechToTextV1Models.AddCorpusOptions} containing the options for the call
    * @return the service call
@@ -1010,7 +1010,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * service that owns a model to list its corpora.
    *
    * **See also:** [Listing corpora for a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora).
    *
    * @param getCorpusOptions the {@link IBMSpeechToTextV1Models.GetCorpusOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Corpus} with the response
@@ -1041,7 +1041,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * model** method. You must use credentials for the instance of the service that owns a model to delete its corpora.
    *
    * **See also:** [Deleting a corpus from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#deleteCorpus).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageCorpora#deleteCorpus).
    *
    * @param deleteCorpusOptions the {@link IBMSpeechToTextV1Models.DeleteCorpusOptions} containing the options for the call
    * @return the service call
@@ -1072,7 +1072,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * credentials for the instance of the service that owns a model to list information about its words.
    *
    * **See also:** [Listing words from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#listWords).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageWords#listWords).
    *
    * @param listWordsOptions the {@link IBMSpeechToTextV1Models.ListWordsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Words} with the response
@@ -1142,9 +1142,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * **See also:**
    * * [Working with custom
-   * words](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingWords)
+   * words](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-corporaWords#workingWords)
    * * [Add words to the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addWords).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-languageCreate#addWords).
    *
    * @param addWordsOptions the {@link IBMSpeechToTextV1Models.AddWordsOptions} containing the options for the call
    * @return the service call
@@ -1201,9 +1201,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * **See also:**
    * * [Working with custom
-   * words](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingWords)
+   * words](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-corporaWords#workingWords)
    * * [Add words to the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addWords).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-languageCreate#addWords).
    *
    * @param addWordOptions the {@link IBMSpeechToTextV1Models.AddWordOptions} containing the options for the call
    * @return the service call
@@ -1242,7 +1242,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * service that owns a model to list information about its words.
    *
    * **See also:** [Listing words from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#listWords).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageWords#listWords).
    *
    * @param getWordOptions the {@link IBMSpeechToTextV1Models.GetWordOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Word} with the response
@@ -1273,7 +1273,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * must use credentials for the instance of the service that owns a model to delete its words.
    *
    * **See also:** [Deleting a word from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#deleteWord).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageWords#deleteWord).
    *
    * @param deleteWordOptions the {@link IBMSpeechToTextV1Models.DeleteWordOptions} containing the options for the call
    * @return the service call
@@ -1302,7 +1302,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * service that owns a model to list its grammars.
    *
    * **See also:** [Listing grammars from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars).
    *
    * @param listGrammarsOptions the {@link IBMSpeechToTextV1Models.ListGrammarsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Grammars} with the response
@@ -1354,9 +1354,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * **See also:**
    * * [Understanding
-   * grammars](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-grammarUnderstand#grammarUnderstand)
+   * grammars](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-grammarUnderstand#grammarUnderstand)
    * * [Add a grammar to the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-grammarAdd#addGrammar).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-grammarAdd#addGrammar).
    *
    * @param addGrammarOptions the {@link IBMSpeechToTextV1Models.AddGrammarOptions} containing the options for the call
    * @return the service call
@@ -1390,7 +1390,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * service that owns a model to list its grammars.
    *
    * **See also:** [Listing grammars from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars).
    *
    * @param getGrammarOptions the {@link IBMSpeechToTextV1Models.GetGrammarOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Grammar} with the response
@@ -1421,7 +1421,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * must use credentials for the instance of the service that owns a model to delete its grammar.
    *
    * **See also:** [Deleting a grammar from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#deleteGrammar).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageGrammars#deleteGrammar).
    *
    * @param deleteGrammarOptions the {@link IBMSpeechToTextV1Models.DeleteGrammarOptions} containing the options for the call
    * @return the service call
@@ -1454,7 +1454,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * model count is below the limit.
    *
    * **See also:** [Create a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#createModel-acoustic).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-acoustic#createModel-acoustic).
    *
    * @param createAcousticModelOptions the {@link IBMSpeechToTextV1Models.CreateAcousticModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
@@ -1491,7 +1491,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * list information about it.
    *
    * **See also:** [Listing custom acoustic
-   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic).
+   * models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic).
    *
    * @param listAcousticModelsOptions the {@link IBMSpeechToTextV1Models.ListAcousticModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModels} with the response
@@ -1521,7 +1521,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * that owns a model to list information about it.
    *
    * **See also:** [Listing custom acoustic
-   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic).
+   * models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic).
    *
    * @param getAcousticModelOptions the {@link IBMSpeechToTextV1Models.GetAcousticModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
@@ -1550,7 +1550,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * that owns a model to delete it.
    *
    * **See also:** [Deleting a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#deleteModel-acoustic).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageAcousticModels#deleteModel-acoustic).
    *
    * @param deleteAcousticModelOptions the {@link IBMSpeechToTextV1Models.DeleteAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -1600,9 +1600,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * **See also:**
    * * [Train the custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#trainModel-acoustic)
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-acoustic#trainModel-acoustic)
    * * [Using custom acoustic and custom language models
-   * together](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-useBoth#useBoth)
+   * together](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-useBoth#useBoth)
    *
    * ### Training failures
    *
@@ -1650,7 +1650,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * model to reset it.
    *
    * **See also:** [Resetting a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#resetModel-acoustic).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageAcousticModels#resetModel-acoustic).
    *
    * @param resetAcousticModelOptions the {@link IBMSpeechToTextV1Models.ResetAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -1695,7 +1695,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * was not trained with a custom language model.
    *
    * **See also:** [Upgrading a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeAcoustic).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customUpgrade#upgradeAcoustic).
    *
    * @param upgradeAcousticModelOptions the {@link IBMSpeechToTextV1Models.UpgradeAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -1733,7 +1733,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * its audio resources.
    *
    * **See also:** [Listing audio resources for a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#listAudio).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageAudio#listAudio).
    *
    * @param listAudioOptions the {@link IBMSpeechToTextV1Models.ListAudioOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AudioResources} with the response
@@ -1786,7 +1786,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * until it becomes `ok`.
    *
    * **See also:** [Add audio to the custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#addAudio).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-acoustic#addAudio).
    *
    * ### Content types for audio-type resources
    *
@@ -1816,7 +1816,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * rate of the audio is lower than the minimum required rate, the service labels the audio file as `invalid`.
    *
    *  **See also:** [Audio
-   * formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
+   * formats](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
    *
    * ### Content types for archive-type resources
    *
@@ -1892,7 +1892,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * You must use credentials for the instance of the service that owns a model to list its audio resources.
    *
    * **See also:** [Listing audio resources for a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#listAudio).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageAudio#listAudio).
    *
    * @param getAudioOptions the {@link IBMSpeechToTextV1Models.GetAudioOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AudioListing} with the response
@@ -1925,7 +1925,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * a model to delete its audio resources.
    *
    * **See also:** [Deleting an audio resource from a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#deleteAudio).
+   * model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageAudio#deleteAudio).
    *
    * @param deleteAudioOptions the {@link IBMSpeechToTextV1Models.DeleteAudioOptions} containing the options for the call
    * @return the service call
@@ -1958,7 +1958,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * data.
    *
    * **See also:** [Information
-   * security](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-information-security#information-security).
+   * security](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-information-security#information-security).
    *
    * @param deleteUserDataOptions the {@link IBMSpeechToTextV1Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call

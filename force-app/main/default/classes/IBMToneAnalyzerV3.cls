@@ -22,7 +22,7 @@
  * `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
  *
  * @version V3
- * @see <a href="https://cloud.ibm.com/docs/services/tone-analyzer/">Tone Analyzer</a>
+ * @see <a href="https://cloud.ibm.com/docs/tone-analyzer/">Tone Analyzer</a>
  */
 public class IBMToneAnalyzerV3 extends IBMWatsonService {
 
@@ -79,7 +79,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * service removes HTML tags and analyzes only the textual content.
    *
    * **See also:** [Using the general-purpose
-   * endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utgpe#utgpe).
+   * endpoint](https://cloud.ibm.com/docs/tone-analyzer?topic=tone-analyzer-utgpe#utgpe).
    *
    * @param toneOptions the {@link IBMToneAnalyzerV3Models.ToneOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.ToneAnalysis} with the response
@@ -131,7 +131,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * UTF-8.
    *
    * **See also:** [Using the customer-engagement
-   * endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utco#utco).
+   * endpoint](https://cloud.ibm.com/docs/tone-analyzer?topic=tone-analyzer-utco#utco).
    *
    * @param toneChatOptions the {@link IBMToneAnalyzerV3Models.ToneChatOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.UtteranceAnalyses} with the response

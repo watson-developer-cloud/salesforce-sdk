@@ -1,15 +1,28 @@
-<project name="IBM Watson Salesforce SDK" default="deployWatsonCheckOnly" basedir="." xmlns:sf="antlib:com.salesforce">
+<project name="IBM Watson Salesforce SDK" default="deployWatsonCheckOnly" basedir="." 
+  xmlns:sf="antlib:com.salesforce">
 
   <property file="build.properties"/>
   <property environment="env"/>
 
-  <condition property="sf.username" value=""> <not> <isset property="sf.username"/> </not> </condition>
-  <condition property="sf.password" value=""> <not> <isset property="sf.password"/> </not> </condition>
-  <condition property="sf.sessionId" value=""> <not> <isset property="sf.sessionId"/> </not> </condition>
+  <condition property="sf.username" value="">
+    <not>
+      <isset property="sf.username"/>
+    </not>
+  </condition>
+  <condition property="sf.password" value="">
+    <not>
+      <isset property="sf.password"/>
+    </not>
+  </condition>
+  <condition property="sf.sessionId" value="">
+    <not>
+      <isset property="sf.sessionId"/>
+    </not>
+  </condition>
 
   <taskdef resource="com/salesforce/antlib.xml" uri="antlib:com.salesforce">
     <classpath>
-      <pathelement location="ant-salesforce.jar" />          
+      <pathelement location="ant-salesforce.jar" />
     </classpath>
   </taskdef>
   <taskdef name="for" classname="net.sf.antcontrib.logic.ForTask">
@@ -17,12 +30,12 @@
       <pathelement location="ant-contrib-1.0b3.jar"/>
     </classpath>
   </taskdef>
-  <taskdef name="if" classname="net.sf.antcontrib.logic.IfTask" >
+  <taskdef name="if" classname="net.sf.antcontrib.logic.IfTask">
     <classpath>
       <pathelement location="ant-contrib-1.0b3.jar"/>
     </classpath>
   </taskdef>
-  
+
   <!-- Deploy files to the organization -->
   <target name="deployWatson">
     <property name="service" value="IBM"/>
@@ -77,6 +90,7 @@
     <echo message="Testing deployment of IBM Watson Salesforce SDK..."/>
     <echo message="Run 'ant deployWatson' to deploy this library to your organization."/>
     <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="../antapioutput" pollWaitMillis="1000" rollbackOnError="true" checkOnly="true"/>
+    <!-- #pragma: whitelist secret -->
   </target>
 
 </project>

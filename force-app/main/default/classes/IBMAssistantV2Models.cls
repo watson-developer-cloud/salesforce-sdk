@@ -185,7 +185,7 @@ public class IBMAssistantV2Models {
      *
      * Unique identifier of the assistant. To find the assistant ID in the Watson Assistant user interface, open the
      * assistant settings and click **API Details**. For information about creating assistants, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-add#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
@@ -282,7 +282,7 @@ public class IBMAssistantV2Models {
      *
      * Unique identifier of the assistant. To find the assistant ID in the Watson Assistant user interface, open the
      * assistant settings and click **API Details**. For information about creating assistants, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-add#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
@@ -1230,6 +1230,8 @@ public class IBMAssistantV2Models {
     private String timezone;
     private String userId;
     private Long turnCount;
+    private String locale;
+    private String referenceTime;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -1277,11 +1279,49 @@ public class IBMAssistantV2Models {
     public Long getTurnCount() {
       return turnCount;
     }
+
+    /**
+     * Gets the locale.
+     *
+     * The language code for localization in the user input. The specified locale overrides the default for the
+     * assistant, and is used for interpreting entity values in user input such as date values. For example,
+     * `04/03/2018` might be interpreted either as April 3 or March 4, depending on the locale.
+     *
+     *  This property is included only if the new system entities are enabled for the skill.
+     *
+     * @return the locale
+     */
+    @AuraEnabled
+    public String getLocale() {
+      return locale;
+    }
+
+    /**
+     * Gets the referenceTime.
+     *
+     * The base time for interpreting any relative time mentions in the user input. The specified time overrides the
+     * current server time, and is used to calculate times mentioned in relative terms such as `now` or `tomorrow`. This
+     * can be useful for simulating past or future times for testing purposes, or when analyzing documents such as news
+     * articles.
+     *
+     * This value must be a UTC time value formatted according to ISO 8601 (for example, `2019-06-26T12:00:00Z` for noon
+     * on 26 June 2019.
+     *
+     * This property is included only if the new system entities are enabled for the skill.
+     *
+     * @return the referenceTime
+     */
+    @AuraEnabled
+    public String getReferenceTime() {
+      return referenceTime;
+    }
   
     private MessageContextGlobalSystem(MessageContextGlobalSystemBuilder builder) {
       this.timezone = builder.timezone;
       this.userId = builder.userId;
       this.turnCount = builder.turnCount;
+      this.locale = builder.locale;
+      this.referenceTime = builder.referenceTime;
     }
 
     /**
@@ -1301,7 +1341,8 @@ public class IBMAssistantV2Models {
       // replace any names that are different between the API and SDK
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'user_id' => 'userId',
-        'turn_count' => 'turnCount'
+        'turn_count' => 'turnCount',
+        'reference_time' => 'referenceTime'
       };
       jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
@@ -1322,7 +1363,8 @@ public class IBMAssistantV2Models {
       // replace any names that are different between the SDK and API
       Map<String, String> propertyNameMapping = new Map<String, String> {
         'userId' => 'user_id',
-        'turnCount' => 'turn_count'
+        'turnCount' => 'turn_count',
+        'referenceTime' => 'reference_time'
       };
       jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
 
@@ -1337,11 +1379,15 @@ public class IBMAssistantV2Models {
     private String timezone;
     private String userId;
     private Long turnCount;
+    private String locale;
+    private String referenceTime;
 
     private MessageContextGlobalSystemBuilder(MessageContextGlobalSystem messageContextGlobalSystem) {
       this.timezone = messageContextGlobalSystem.timezone;
       this.userId = messageContextGlobalSystem.userId;
       this.turnCount = messageContextGlobalSystem.turnCount;
+      this.locale = messageContextGlobalSystem.locale;
+      this.referenceTime = messageContextGlobalSystem.referenceTime;
     }
 
     /**
@@ -1389,6 +1435,28 @@ public class IBMAssistantV2Models {
      */
     public MessageContextGlobalSystemBuilder turnCount(Long turnCount) {
       this.turnCount = turnCount;
+      return this;
+    }
+
+    /**
+     * Set the locale.
+     *
+     * @param locale the locale
+     * @return the MessageContextGlobalSystem builder
+     */
+    public MessageContextGlobalSystemBuilder locale(String locale) {
+      this.locale = locale;
+      return this;
+    }
+
+    /**
+     * Set the referenceTime.
+     *
+     * @param referenceTime the referenceTime
+     * @return the MessageContextGlobalSystem builder
+     */
+    public MessageContextGlobalSystemBuilder referenceTime(String referenceTime) {
+      this.referenceTime = referenceTime;
       return this;
     }
   }
@@ -2208,7 +2276,7 @@ public class IBMAssistantV2Models {
      *
      * Unique identifier of the assistant. To find the assistant ID in the Watson Assistant user interface, open the
      * assistant settings and click **API Details**. For information about creating assistants, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-add#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
@@ -2816,6 +2884,9 @@ public class IBMAssistantV2Models {
     private Double confidence;
     private IBMWatsonMapModel metadata;
     private List<CaptureGroup> groups;
+    private RuntimeEntityInterpretation interpretation;
+    private List<RuntimeEntityAlternative> alternatives;
+    private RuntimeEntityRole role;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -2895,6 +2966,52 @@ public class IBMAssistantV2Models {
     public List<CaptureGroup> getGroups() {
       return groups;
     }
+
+    /**
+     * Gets the interpretation.
+     *
+     * An object containing detailed information about the entity recognized in the user input. This property is
+     * included only if the new system entities are enabled for the skill.
+     *
+     * For more information about how the new system entities are interpreted, see the
+     * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
+     *
+     * @return the interpretation
+     */
+    @AuraEnabled
+    public RuntimeEntityInterpretation getInterpretation() {
+      return interpretation;
+    }
+
+    /**
+     * Gets the alternatives.
+     *
+     * An array of possible alternative values that the user might have intended instead of the value returned in the
+     * **value** property. This property is returned only for `@sys-time` and `@sys-date` entities when the user's input
+     * is ambiguous.
+     *
+     * This property is included only if the new system entities are enabled for the skill.
+     *
+     * @return the alternatives
+     */
+    @AuraEnabled
+    public List<RuntimeEntityAlternative> getAlternatives() {
+      return alternatives;
+    }
+
+    /**
+     * Gets the role.
+     *
+     * An object describing the role played by a system entity that is specifies the beginning or end of a range
+     * recognized in the user input. This property is included only if the new system entities are enabled for the
+     * skill.
+     *
+     * @return the role
+     */
+    @AuraEnabled
+    public RuntimeEntityRole getRole() {
+      return role;
+    }
   
     private RuntimeEntity(RuntimeEntityBuilder builder) {
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
@@ -2906,6 +3023,9 @@ public class IBMAssistantV2Models {
       this.confidence = builder.confidence;
       this.metadata = builder.metadata;
       this.groups = builder.groups;
+      this.interpretation = builder.interpretation;
+      this.alternatives = builder.alternatives;
+      this.role = builder.role;
     }
 
     /**
@@ -2943,6 +3063,29 @@ public class IBMAssistantV2Models {
         retBuilder.groups(newGroups);
       }
 
+      // calling custom deserializer for interpretation
+      Map<String, Object> interpretationMap = (Map<String, Object>) jsonMap.get('interpretation');
+      RuntimeEntityInterpretation newInterpretation = (RuntimeEntityInterpretation) new RuntimeEntityInterpretation().deserialize(JSON.serialize(interpretationMap, true), interpretationMap, RuntimeEntityInterpretation.class);
+      retBuilder.interpretation(newInterpretation);
+
+      // calling custom deserializer for alternatives
+      List<RuntimeEntityAlternative> newAlternatives = new List<RuntimeEntityAlternative>();
+      List<RuntimeEntityAlternative> deserializedAlternatives = ret.getAlternatives();
+      if (deserializedAlternatives != null) {
+        for (Integer i = 0; i < deserializedAlternatives.size(); i++) {
+          RuntimeEntityAlternative currentItem = ret.getAlternatives().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('alternatives');
+          RuntimeEntityAlternative newItem = (RuntimeEntityAlternative) currentItem.deserialize(JSON.serialize(itemInMap.get(i), true), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i), true)), RuntimeEntityAlternative.class);
+          newAlternatives.add(newItem);
+        }
+        retBuilder.alternatives(newAlternatives);
+      }
+
+      // calling custom deserializer for role
+      Map<String, Object> roleMap = (Map<String, Object>) jsonMap.get('role');
+      RuntimeEntityRole newRole = (RuntimeEntityRole) new RuntimeEntityRole().deserialize(JSON.serialize(roleMap, true), roleMap, RuntimeEntityRole.class);
+      retBuilder.role(newRole);
+
       return retBuilder.build();
     }
 
@@ -2966,6 +3109,28 @@ public class IBMAssistantV2Models {
         jsonMap.put('groups', groupsJsonList);
       }
 
+      // performing custom serialization for interpretation
+      if (interpretation != null) {
+        String interpretationJsonString = JSON.serialize(interpretation.replacePropertyNames(), true);
+        jsonMap.put('interpretation', JSON.deserializeUntyped(interpretationJsonString));
+      }
+
+      // performing custom serialization for alternatives
+      if (alternatives != null) {
+        List<Object> alternativesJsonList = new List<Object>();
+        for (RuntimeEntityAlternative listItem : alternatives) {
+          String listItemJsonString = JSON.serialize(listItem.replacePropertyNames(), true);
+          alternativesJsonList.add(JSON.deserializeUntyped(listItemJsonString));
+        }
+        jsonMap.put('alternatives', alternativesJsonList);
+      }
+
+      // performing custom serialization for role
+      if (role != null) {
+        String roleJsonString = JSON.serialize(role.replacePropertyNames(), true);
+        jsonMap.put('role', JSON.deserializeUntyped(roleJsonString));
+      }
+
       return jsonMap;
     }
   }
@@ -2980,6 +3145,9 @@ public class IBMAssistantV2Models {
     private Double confidence;
     private IBMWatsonMapModel metadata;
     private List<CaptureGroup> groups;
+    private RuntimeEntityInterpretation interpretation;
+    private List<RuntimeEntityAlternative> alternatives;
+    private RuntimeEntityRole role;
 
     private RuntimeEntityBuilder(RuntimeEntity runtimeEntity) {
       this.entity = runtimeEntity.entity;
@@ -2988,6 +3156,9 @@ public class IBMAssistantV2Models {
       this.confidence = runtimeEntity.confidence;
       this.metadata = runtimeEntity.metadata;
       this.groups = runtimeEntity.groups;
+      this.interpretation = runtimeEntity.interpretation;
+      this.alternatives = runtimeEntity.alternatives;
+      this.role = runtimeEntity.role;
     }
 
     /**
@@ -3045,6 +3216,21 @@ public class IBMAssistantV2Models {
         this.groups = new List<CaptureGroup>();
       }
       this.groups.add(groups);
+      return this;
+    }
+
+    /**
+     * Adds an alternatives to alternatives.
+     *
+     * @param alternatives the new alternatives
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder addAlternatives(RuntimeEntityAlternative alternatives) {
+      IBMWatsonValidator.notNull(alternatives, 'alternatives cannot be null');
+      if (this.alternatives == null) {
+        this.alternatives = new List<RuntimeEntityAlternative>();
+      }
+      this.alternatives.add(alternatives);
       return this;
     }
 
@@ -3113,6 +3299,1112 @@ public class IBMAssistantV2Models {
      */
     public RuntimeEntityBuilder groups(List<CaptureGroup> groups) {
       this.groups = groups;
+      return this;
+    }
+
+    /**
+     * Set the interpretation.
+     *
+     * @param interpretation the interpretation
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder interpretation(RuntimeEntityInterpretation interpretation) {
+      this.interpretation = interpretation;
+      return this;
+    }
+
+    /**
+     * Set the alternatives.
+     * Existing alternatives will be replaced.
+     *
+     * @param alternatives the alternatives
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder alternatives(List<RuntimeEntityAlternative> alternatives) {
+      this.alternatives = alternatives;
+      return this;
+    }
+
+    /**
+     * Set the role.
+     *
+     * @param role the role
+     * @return the RuntimeEntity builder
+     */
+    public RuntimeEntityBuilder role(RuntimeEntityRole role) {
+      this.role = role;
+      return this;
+    }
+  }
+
+  /**
+   * An alternative value for the recognized entity.
+   */
+  public class RuntimeEntityAlternative extends IBMWatsonGenericModel {
+    private String value;
+    private Double confidence;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeEntityAlternative() { }
+
+    /**
+     * Gets the value.
+     *
+     * The entity value that was recognized in the user input.
+     *
+     * @return the value
+     */
+    @AuraEnabled
+    public String getValue() {
+      return value;
+    }
+
+    /**
+     * Gets the confidence.
+     *
+     * A decimal percentage that represents Watson's confidence in the recognized entity.
+     *
+     * @return the confidence
+     */
+    @AuraEnabled
+    public Double getConfidence() {
+      return confidence;
+    }
+  
+    private RuntimeEntityAlternative(RuntimeEntityAlternativeBuilder builder) {
+      this.value = builder.value;
+      this.confidence = builder.confidence;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a RuntimeEntityAlternative builder
+     */
+    public RuntimeEntityAlternativeBuilder newBuilder() {
+      return new RuntimeEntityAlternativeBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RuntimeEntityAlternative ret = (RuntimeEntityAlternative) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeEntityAlternativeBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * RuntimeEntityAlternative Builder.
+   */
+  public class RuntimeEntityAlternativeBuilder {
+    private String value;
+    private Double confidence;
+
+    private RuntimeEntityAlternativeBuilder(RuntimeEntityAlternative runtimeEntityAlternative) {
+      this.value = runtimeEntityAlternative.value;
+      this.confidence = runtimeEntityAlternative.confidence;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeEntityAlternativeBuilder() {
+    }
+
+    /**
+     * Builds a RuntimeEntityAlternative.
+     *
+     * @return the runtimeEntityAlternative
+     */
+    public RuntimeEntityAlternative build() {
+      return new RuntimeEntityAlternative(this);
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the RuntimeEntityAlternative builder
+     */
+    public RuntimeEntityAlternativeBuilder value(String value) {
+      this.value = value;
+      return this;
+    }
+
+    /**
+     * Set the confidence.
+     *
+     * @param confidence the confidence
+     * @return the RuntimeEntityAlternative builder
+     */
+    public RuntimeEntityAlternativeBuilder confidence(Double confidence) {
+      this.confidence = confidence;
+      return this;
+    }
+  }
+
+  /**
+   * RuntimeEntityInterpretation.
+   */
+  public class RuntimeEntityInterpretation extends IBMWatsonGenericModel {
+    private String calendarType;
+    private String datetimeLink;
+    private String festival;
+    private String granularity;
+    private String rangeLink;
+    private String rangeModifier;
+    private Double relativeDay;
+    private Double relativeMonth;
+    private Double relativeWeek;
+    private Double relativeWeekend;
+    private Double relativeYear;
+    private Double specificDay;
+    private String specificDayOfWeek;
+    private Double specificMonth;
+    private Double specificQuarter;
+    private Double specificYear;
+    private Double numericValue;
+    private String subtype;
+    private String partOfDay;
+    private Double relativeHour;
+    private Double relativeMinute;
+    private Double relativeSecond;
+    private Double specificHour;
+    private Double specificMinute;
+    private Double specificSecond;
+    private String timezone;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeEntityInterpretation() { }
+
+    /**
+     * Gets the calendarType.
+     *
+     * The calendar used to represent a recognized date (for example, `Gregorian`).
+     *
+     * @return the calendarType
+     */
+    @AuraEnabled
+    public String getCalendarType() {
+      return calendarType;
+    }
+
+    /**
+     * Gets the datetimeLink.
+     *
+     * A unique identifier used to associate a recognized time and date. If the user input contains a date and time that
+     * are mentioned together (for example, `Today at 5`, the same **datetime_link** value is returned for both the
+     * `@sys-date` and `@sys-time` entities).
+     *
+     * @return the datetimeLink
+     */
+    @AuraEnabled
+    public String getDatetimeLink() {
+      return datetimeLink;
+    }
+
+    /**
+     * Gets the festival.
+     *
+     * A locale-specific holiday name (such as `thanksgiving` or `christmas`). This property is included when a
+     * `@sys-date` entity is recognized based on a holiday name in the user input.
+     *
+     * @return the festival
+     */
+    @AuraEnabled
+    public String getFestival() {
+      return festival;
+    }
+
+    /**
+     * Gets the granularity.
+     *
+     * The precision or duration of a time range specified by a recognized `@sys-time` or `@sys-date` entity.
+     *
+     * @return the granularity
+     */
+    @AuraEnabled
+    public String getGranularity() {
+      return granularity;
+    }
+
+    /**
+     * Gets the rangeLink.
+     *
+     * A unique identifier used to associate multiple recognized `@sys-date`, `@sys-time`, or `@sys-number` entities
+     * that are recognized as a range of values in the user's input (for example, `from July 4 until July 14` or `from
+     * 20 to 25`).
+     *
+     * @return the rangeLink
+     */
+    @AuraEnabled
+    public String getRangeLink() {
+      return rangeLink;
+    }
+
+    /**
+     * Gets the rangeModifier.
+     *
+     * The word in the user input that indicates that a `sys-date` or `sys-time` entity is part of an implied range
+     * where only one date or time is specified (for example, `since` or `until`).
+     *
+     * @return the rangeModifier
+     */
+    @AuraEnabled
+    public String getRangeModifier() {
+      return rangeModifier;
+    }
+
+    /**
+     * Gets the relativeDay.
+     *
+     * A recognized mention of a relative day, represented numerically as an offset from the current date (for example,
+     * `-1` for `yesterday` or `10` for `in ten days`).
+     *
+     * @return the relativeDay
+     */
+    @AuraEnabled
+    public Double getRelativeDay() {
+      return relativeDay;
+    }
+
+    /**
+     * Gets the relativeMonth.
+     *
+     * A recognized mention of a relative month, represented numerically as an offset from the current month (for
+     * example, `1` for `next month` or `-3` for `three months ago`).
+     *
+     * @return the relativeMonth
+     */
+    @AuraEnabled
+    public Double getRelativeMonth() {
+      return relativeMonth;
+    }
+
+    /**
+     * Gets the relativeWeek.
+     *
+     * A recognized mention of a relative week, represented numerically as an offset from the current week (for example,
+     * `2` for `in two weeks` or `-1` for `last week).
+     *
+     * @return the relativeWeek
+     */
+    @AuraEnabled
+    public Double getRelativeWeek() {
+      return relativeWeek;
+    }
+
+    /**
+     * Gets the relativeWeekend.
+     *
+     * A recognized mention of a relative date range for a weekend, represented numerically as an offset from the
+     * current weekend (for example, `0` for `this weekend` or `-1` for `last weekend`).
+     *
+     * @return the relativeWeekend
+     */
+    @AuraEnabled
+    public Double getRelativeWeekend() {
+      return relativeWeekend;
+    }
+
+    /**
+     * Gets the relativeYear.
+     *
+     * A recognized mention of a relative year, represented numerically as an offset from the current year (for example,
+     * `1` for `next year` or `-5` for `five years ago`).
+     *
+     * @return the relativeYear
+     */
+    @AuraEnabled
+    public Double getRelativeYear() {
+      return relativeYear;
+    }
+
+    /**
+     * Gets the specificDay.
+     *
+     * A recognized mention of a specific date, represented numerically as the date within the month (for example, `30`
+     * for `June 30`.).
+     *
+     * @return the specificDay
+     */
+    @AuraEnabled
+    public Double getSpecificDay() {
+      return specificDay;
+    }
+
+    /**
+     * Gets the specificDayOfWeek.
+     *
+     * A recognized mention of a specific day of the week as a lowercase string (for example, `monday`).
+     *
+     * @return the specificDayOfWeek
+     */
+    @AuraEnabled
+    public String getSpecificDayOfWeek() {
+      return specificDayOfWeek;
+    }
+
+    /**
+     * Gets the specificMonth.
+     *
+     * A recognized mention of a specific month, represented numerically (for example, `7` for `July`).
+     *
+     * @return the specificMonth
+     */
+    @AuraEnabled
+    public Double getSpecificMonth() {
+      return specificMonth;
+    }
+
+    /**
+     * Gets the specificQuarter.
+     *
+     * A recognized mention of a specific quarter, represented numerically (for example, `3` for `the third quarter`).
+     *
+     * @return the specificQuarter
+     */
+    @AuraEnabled
+    public Double getSpecificQuarter() {
+      return specificQuarter;
+    }
+
+    /**
+     * Gets the specificYear.
+     *
+     * A recognized mention of a specific year (for example, `2016`).
+     *
+     * @return the specificYear
+     */
+    @AuraEnabled
+    public Double getSpecificYear() {
+      return specificYear;
+    }
+
+    /**
+     * Gets the numericValue.
+     *
+     * A recognized numeric value, represented as an integer or double.
+     *
+     * @return the numericValue
+     */
+    @AuraEnabled
+    public Double getNumericValue() {
+      return numericValue;
+    }
+
+    /**
+     * Gets the subtype.
+     *
+     * The type of numeric value recognized in the user input (`integer` or `rational`).
+     *
+     * @return the subtype
+     */
+    @AuraEnabled
+    public String getSubtype() {
+      return subtype;
+    }
+
+    /**
+     * Gets the partOfDay.
+     *
+     * A recognized term for a time that was mentioned as a part of the day in the user's input (for example, `morning`
+     * or `afternoon`).
+     *
+     * @return the partOfDay
+     */
+    @AuraEnabled
+    public String getPartOfDay() {
+      return partOfDay;
+    }
+
+    /**
+     * Gets the relativeHour.
+     *
+     * A recognized mention of a relative hour, represented numerically as an offset from the current hour (for example,
+     * `3` for `in three hours` or `-1` for `an hour ago`).
+     *
+     * @return the relativeHour
+     */
+    @AuraEnabled
+    public Double getRelativeHour() {
+      return relativeHour;
+    }
+
+    /**
+     * Gets the relativeMinute.
+     *
+     * A recognized mention of a relative time, represented numerically as an offset in minutes from the current time
+     * (for example, `5` for `in five minutes` or `-15` for `fifteen minutes ago`).
+     *
+     * @return the relativeMinute
+     */
+    @AuraEnabled
+    public Double getRelativeMinute() {
+      return relativeMinute;
+    }
+
+    /**
+     * Gets the relativeSecond.
+     *
+     * A recognized mention of a relative time, represented numerically as an offset in seconds from the current time
+     * (for example, `10` for `in ten seconds` or `-30` for `thirty seconds ago`).
+     *
+     * @return the relativeSecond
+     */
+    @AuraEnabled
+    public Double getRelativeSecond() {
+      return relativeSecond;
+    }
+
+    /**
+     * Gets the specificHour.
+     *
+     * A recognized specific hour mentioned as part of a time value (for example, `10` for `10:15 AM`.).
+     *
+     * @return the specificHour
+     */
+    @AuraEnabled
+    public Double getSpecificHour() {
+      return specificHour;
+    }
+
+    /**
+     * Gets the specificMinute.
+     *
+     * A recognized specific minute mentioned as part of a time value (for example, `15` for `10:15 AM`.).
+     *
+     * @return the specificMinute
+     */
+    @AuraEnabled
+    public Double getSpecificMinute() {
+      return specificMinute;
+    }
+
+    /**
+     * Gets the specificSecond.
+     *
+     * A recognized specific second mentioned as part of a time value (for example, `30` for `10:15:30 AM`.).
+     *
+     * @return the specificSecond
+     */
+    @AuraEnabled
+    public Double getSpecificSecond() {
+      return specificSecond;
+    }
+
+    /**
+     * Gets the timezone.
+     *
+     * A recognized time zone mentioned as part of a time value (for example, `EST`).
+     *
+     * @return the timezone
+     */
+    @AuraEnabled
+    public String getTimezone() {
+      return timezone;
+    }
+  
+    private RuntimeEntityInterpretation(RuntimeEntityInterpretationBuilder builder) {
+      this.calendarType = builder.calendarType;
+      this.datetimeLink = builder.datetimeLink;
+      this.festival = builder.festival;
+      this.granularity = builder.granularity;
+      this.rangeLink = builder.rangeLink;
+      this.rangeModifier = builder.rangeModifier;
+      this.relativeDay = builder.relativeDay;
+      this.relativeMonth = builder.relativeMonth;
+      this.relativeWeek = builder.relativeWeek;
+      this.relativeWeekend = builder.relativeWeekend;
+      this.relativeYear = builder.relativeYear;
+      this.specificDay = builder.specificDay;
+      this.specificDayOfWeek = builder.specificDayOfWeek;
+      this.specificMonth = builder.specificMonth;
+      this.specificQuarter = builder.specificQuarter;
+      this.specificYear = builder.specificYear;
+      this.numericValue = builder.numericValue;
+      this.subtype = builder.subtype;
+      this.partOfDay = builder.partOfDay;
+      this.relativeHour = builder.relativeHour;
+      this.relativeMinute = builder.relativeMinute;
+      this.relativeSecond = builder.relativeSecond;
+      this.specificHour = builder.specificHour;
+      this.specificMinute = builder.specificMinute;
+      this.specificSecond = builder.specificSecond;
+      this.timezone = builder.timezone;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder newBuilder() {
+      return new RuntimeEntityInterpretationBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'calendar_type' => 'calendarType',
+        'datetime_link' => 'datetimeLink',
+        'range_link' => 'rangeLink',
+        'range_modifier' => 'rangeModifier',
+        'relative_day' => 'relativeDay',
+        'relative_month' => 'relativeMonth',
+        'relative_week' => 'relativeWeek',
+        'relative_weekend' => 'relativeWeekend',
+        'relative_year' => 'relativeYear',
+        'specific_day' => 'specificDay',
+        'specific_day_of_week' => 'specificDayOfWeek',
+        'specific_month' => 'specificMonth',
+        'specific_quarter' => 'specificQuarter',
+        'specific_year' => 'specificYear',
+        'numeric_value' => 'numericValue',
+        'part_of_day' => 'partOfDay',
+        'relative_hour' => 'relativeHour',
+        'relative_minute' => 'relativeMinute',
+        'relative_second' => 'relativeSecond',
+        'specific_hour' => 'specificHour',
+        'specific_minute' => 'specificMinute',
+        'specific_second' => 'specificSecond'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      RuntimeEntityInterpretation ret = (RuntimeEntityInterpretation) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeEntityInterpretationBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'calendarType' => 'calendar_type',
+        'datetimeLink' => 'datetime_link',
+        'rangeLink' => 'range_link',
+        'rangeModifier' => 'range_modifier',
+        'relativeDay' => 'relative_day',
+        'relativeMonth' => 'relative_month',
+        'relativeWeek' => 'relative_week',
+        'relativeWeekend' => 'relative_weekend',
+        'relativeYear' => 'relative_year',
+        'specificDay' => 'specific_day',
+        'specificDayOfWeek' => 'specific_day_of_week',
+        'specificMonth' => 'specific_month',
+        'specificQuarter' => 'specific_quarter',
+        'specificYear' => 'specific_year',
+        'numericValue' => 'numeric_value',
+        'partOfDay' => 'part_of_day',
+        'relativeHour' => 'relative_hour',
+        'relativeMinute' => 'relative_minute',
+        'relativeSecond' => 'relative_second',
+        'specificHour' => 'specific_hour',
+        'specificMinute' => 'specific_minute',
+        'specificSecond' => 'specific_second'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * RuntimeEntityInterpretation Builder.
+   */
+  public class RuntimeEntityInterpretationBuilder {
+    private String calendarType;
+    private String datetimeLink;
+    private String festival;
+    private String granularity;
+    private String rangeLink;
+    private String rangeModifier;
+    private Double relativeDay;
+    private Double relativeMonth;
+    private Double relativeWeek;
+    private Double relativeWeekend;
+    private Double relativeYear;
+    private Double specificDay;
+    private String specificDayOfWeek;
+    private Double specificMonth;
+    private Double specificQuarter;
+    private Double specificYear;
+    private Double numericValue;
+    private String subtype;
+    private String partOfDay;
+    private Double relativeHour;
+    private Double relativeMinute;
+    private Double relativeSecond;
+    private Double specificHour;
+    private Double specificMinute;
+    private Double specificSecond;
+    private String timezone;
+
+    private RuntimeEntityInterpretationBuilder(RuntimeEntityInterpretation runtimeEntityInterpretation) {
+      this.calendarType = runtimeEntityInterpretation.calendarType;
+      this.datetimeLink = runtimeEntityInterpretation.datetimeLink;
+      this.festival = runtimeEntityInterpretation.festival;
+      this.granularity = runtimeEntityInterpretation.granularity;
+      this.rangeLink = runtimeEntityInterpretation.rangeLink;
+      this.rangeModifier = runtimeEntityInterpretation.rangeModifier;
+      this.relativeDay = runtimeEntityInterpretation.relativeDay;
+      this.relativeMonth = runtimeEntityInterpretation.relativeMonth;
+      this.relativeWeek = runtimeEntityInterpretation.relativeWeek;
+      this.relativeWeekend = runtimeEntityInterpretation.relativeWeekend;
+      this.relativeYear = runtimeEntityInterpretation.relativeYear;
+      this.specificDay = runtimeEntityInterpretation.specificDay;
+      this.specificDayOfWeek = runtimeEntityInterpretation.specificDayOfWeek;
+      this.specificMonth = runtimeEntityInterpretation.specificMonth;
+      this.specificQuarter = runtimeEntityInterpretation.specificQuarter;
+      this.specificYear = runtimeEntityInterpretation.specificYear;
+      this.numericValue = runtimeEntityInterpretation.numericValue;
+      this.subtype = runtimeEntityInterpretation.subtype;
+      this.partOfDay = runtimeEntityInterpretation.partOfDay;
+      this.relativeHour = runtimeEntityInterpretation.relativeHour;
+      this.relativeMinute = runtimeEntityInterpretation.relativeMinute;
+      this.relativeSecond = runtimeEntityInterpretation.relativeSecond;
+      this.specificHour = runtimeEntityInterpretation.specificHour;
+      this.specificMinute = runtimeEntityInterpretation.specificMinute;
+      this.specificSecond = runtimeEntityInterpretation.specificSecond;
+      this.timezone = runtimeEntityInterpretation.timezone;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeEntityInterpretationBuilder() {
+    }
+
+    /**
+     * Builds a RuntimeEntityInterpretation.
+     *
+     * @return the runtimeEntityInterpretation
+     */
+    public RuntimeEntityInterpretation build() {
+      return new RuntimeEntityInterpretation(this);
+    }
+
+    /**
+     * Set the calendarType.
+     *
+     * @param calendarType the calendarType
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder calendarType(String calendarType) {
+      this.calendarType = calendarType;
+      return this;
+    }
+
+    /**
+     * Set the datetimeLink.
+     *
+     * @param datetimeLink the datetimeLink
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder datetimeLink(String datetimeLink) {
+      this.datetimeLink = datetimeLink;
+      return this;
+    }
+
+    /**
+     * Set the festival.
+     *
+     * @param festival the festival
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder festival(String festival) {
+      this.festival = festival;
+      return this;
+    }
+
+    /**
+     * Set the granularity.
+     *
+     * @param granularity the granularity
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder granularity(String granularity) {
+      this.granularity = granularity;
+      return this;
+    }
+
+    /**
+     * Set the rangeLink.
+     *
+     * @param rangeLink the rangeLink
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder rangeLink(String rangeLink) {
+      this.rangeLink = rangeLink;
+      return this;
+    }
+
+    /**
+     * Set the rangeModifier.
+     *
+     * @param rangeModifier the rangeModifier
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder rangeModifier(String rangeModifier) {
+      this.rangeModifier = rangeModifier;
+      return this;
+    }
+
+    /**
+     * Set the relativeDay.
+     *
+     * @param relativeDay the relativeDay
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeDay(Double relativeDay) {
+      this.relativeDay = relativeDay;
+      return this;
+    }
+
+    /**
+     * Set the relativeMonth.
+     *
+     * @param relativeMonth the relativeMonth
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeMonth(Double relativeMonth) {
+      this.relativeMonth = relativeMonth;
+      return this;
+    }
+
+    /**
+     * Set the relativeWeek.
+     *
+     * @param relativeWeek the relativeWeek
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeWeek(Double relativeWeek) {
+      this.relativeWeek = relativeWeek;
+      return this;
+    }
+
+    /**
+     * Set the relativeWeekend.
+     *
+     * @param relativeWeekend the relativeWeekend
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeWeekend(Double relativeWeekend) {
+      this.relativeWeekend = relativeWeekend;
+      return this;
+    }
+
+    /**
+     * Set the relativeYear.
+     *
+     * @param relativeYear the relativeYear
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeYear(Double relativeYear) {
+      this.relativeYear = relativeYear;
+      return this;
+    }
+
+    /**
+     * Set the specificDay.
+     *
+     * @param specificDay the specificDay
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificDay(Double specificDay) {
+      this.specificDay = specificDay;
+      return this;
+    }
+
+    /**
+     * Set the specificDayOfWeek.
+     *
+     * @param specificDayOfWeek the specificDayOfWeek
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificDayOfWeek(String specificDayOfWeek) {
+      this.specificDayOfWeek = specificDayOfWeek;
+      return this;
+    }
+
+    /**
+     * Set the specificMonth.
+     *
+     * @param specificMonth the specificMonth
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificMonth(Double specificMonth) {
+      this.specificMonth = specificMonth;
+      return this;
+    }
+
+    /**
+     * Set the specificQuarter.
+     *
+     * @param specificQuarter the specificQuarter
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificQuarter(Double specificQuarter) {
+      this.specificQuarter = specificQuarter;
+      return this;
+    }
+
+    /**
+     * Set the specificYear.
+     *
+     * @param specificYear the specificYear
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificYear(Double specificYear) {
+      this.specificYear = specificYear;
+      return this;
+    }
+
+    /**
+     * Set the numericValue.
+     *
+     * @param numericValue the numericValue
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder numericValue(Double numericValue) {
+      this.numericValue = numericValue;
+      return this;
+    }
+
+    /**
+     * Set the subtype.
+     *
+     * @param subtype the subtype
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder subtype(String subtype) {
+      this.subtype = subtype;
+      return this;
+    }
+
+    /**
+     * Set the partOfDay.
+     *
+     * @param partOfDay the partOfDay
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder partOfDay(String partOfDay) {
+      this.partOfDay = partOfDay;
+      return this;
+    }
+
+    /**
+     * Set the relativeHour.
+     *
+     * @param relativeHour the relativeHour
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeHour(Double relativeHour) {
+      this.relativeHour = relativeHour;
+      return this;
+    }
+
+    /**
+     * Set the relativeMinute.
+     *
+     * @param relativeMinute the relativeMinute
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeMinute(Double relativeMinute) {
+      this.relativeMinute = relativeMinute;
+      return this;
+    }
+
+    /**
+     * Set the relativeSecond.
+     *
+     * @param relativeSecond the relativeSecond
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder relativeSecond(Double relativeSecond) {
+      this.relativeSecond = relativeSecond;
+      return this;
+    }
+
+    /**
+     * Set the specificHour.
+     *
+     * @param specificHour the specificHour
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificHour(Double specificHour) {
+      this.specificHour = specificHour;
+      return this;
+    }
+
+    /**
+     * Set the specificMinute.
+     *
+     * @param specificMinute the specificMinute
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificMinute(Double specificMinute) {
+      this.specificMinute = specificMinute;
+      return this;
+    }
+
+    /**
+     * Set the specificSecond.
+     *
+     * @param specificSecond the specificSecond
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder specificSecond(Double specificSecond) {
+      this.specificSecond = specificSecond;
+      return this;
+    }
+
+    /**
+     * Set the timezone.
+     *
+     * @param timezone the timezone
+     * @return the RuntimeEntityInterpretation builder
+     */
+    public RuntimeEntityInterpretationBuilder timezone(String timezone) {
+      this.timezone = timezone;
+      return this;
+    }
+  }
+
+  /**
+   * An object describing the role played by a system entity that is specifies the beginning or end of a range
+   * recognized in the user input. This property is included only if the new system entities are enabled for the skill.
+   */
+  public class RuntimeEntityRole extends IBMWatsonGenericModel {
+    private String xType;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public RuntimeEntityRole() { }
+
+    /**
+     * Gets the xType.
+     *
+     * The relationship of the entity to the range.
+     *
+     * @return the xType
+     */
+    @AuraEnabled
+    public String getXType() {
+      return xType;
+    }
+  
+    private RuntimeEntityRole(RuntimeEntityRoleBuilder builder) {
+      this.xType = builder.xType;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a RuntimeEntityRole builder
+     */
+    public RuntimeEntityRoleBuilder newBuilder() {
+      return new RuntimeEntityRoleBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      // replace any names that are different between the API and SDK
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'type' => 'xType'
+      };
+      jsonString = IBMWatsonJSONUtil.replaceKeyNamesInString(jsonString, propertyNameMapping);
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      RuntimeEntityRole ret = (RuntimeEntityRole) super.deserialize(jsonString, jsonMap, classType);
+      RuntimeEntityRoleBuilder retBuilder = ret.newBuilder();
+
+      return retBuilder.build();
+    }
+
+    public Map<String, Object> replacePropertyNames() {
+      // get map representation of current model
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this, true));
+
+      // remove headers if there are any
+      jsonMap.remove('headers');
+
+      // replace any names that are different between the SDK and API
+      Map<String, String> propertyNameMapping = new Map<String, String> {
+        'xType' => 'type'
+      };
+      jsonMap = IBMWatsonJSONUtil.replaceKeyNamesInMap(jsonMap, propertyNameMapping);
+
+      return jsonMap;
+    }
+  }
+
+  /**
+   * RuntimeEntityRole Builder.
+   */
+  public class RuntimeEntityRoleBuilder {
+    private String xType;
+
+    private RuntimeEntityRoleBuilder(RuntimeEntityRole runtimeEntityRole) {
+      this.xType = runtimeEntityRole.xType;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public RuntimeEntityRoleBuilder() {
+    }
+
+    /**
+     * Builds a RuntimeEntityRole.
+     *
+     * @return the runtimeEntityRole
+     */
+    public RuntimeEntityRole build() {
+      return new RuntimeEntityRole(this);
+    }
+
+    /**
+     * Set the xType.
+     *
+     * @param xType the xType
+     * @return the RuntimeEntityRole builder
+     */
+    public RuntimeEntityRoleBuilder xType(String xType) {
+      this.xType = xType;
       return this;
     }
   }

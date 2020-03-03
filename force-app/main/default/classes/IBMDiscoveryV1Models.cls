@@ -4060,7 +4060,7 @@ public class IBMDiscoveryV1Models {
      * The access key ID associated with the cloud object store. Only valid, and required, with a **credential_type** of
      * `aws4_hmac`. This value is never returned and is only used when creating or modifying **credentials**. For more
      * infomation, see the [cloud object store
-     * documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     * documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
      *
      * @return the accessKeyId
      */
@@ -4075,7 +4075,7 @@ public class IBMDiscoveryV1Models {
      * The secret access key associated with the cloud object store. Only valid, and required, with a
      * **credential_type** of `aws4_hmac`. This value is never returned and is only used when creating or modifying
      * **credentials**. For more infomation, see the [cloud object store
-     * documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     * documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
      *
      * @return the secretAccessKey
      */
@@ -6819,7 +6819,7 @@ public class IBMDiscoveryV1Models {
      *  When using `elements` the **options** object must contain Element Classification options. Additionally, when
      * using the `elements` enrichment the configuration specified and files ingested must meet all the criteria
      * specified in [the
-     * documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification).
+     * documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification#element-classification).
      *
      * @return the enrichment
      */
