@@ -52,7 +52,7 @@ case $key in
   *)    # unknown option
   POSITIONAL+=("$1") # save it in an array for later
   shift # past argument
-  ;;  
+  ;;
 esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
@@ -68,7 +68,7 @@ apex_classes_metadata=(`cat ../config/SFDXService/sfdx-deploy-config.json | jq -
 sourceApiVersion=`cat ../config/SFDXService/sfdx-deploy-config.json | jq '.sourceApiVersion'`
 
 echo "sourceApiVersion=$sourceApiVersion"
-  
+
 # deploy directory
 if [ ! -d ../sfdx-deploy/classes ]; then
   echo "creating deployment directory..."
