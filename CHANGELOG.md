@@ -1,3 +1,20 @@
+# [5.3.0](https://github.com/watson-developer-cloud/salesforce-sdk/compare/v5.2.1...v5.3.0) (2020-03-03)
+
+
+### Features
+
+* **assistant:** generated changes ([7f4ddff](https://github.com/watson-developer-cloud/salesforce-sdk/commit/7f4ddfff34f9bbea49eea1908d57bcf83b449ebe))
+* **compare-comply:** generated changes ([2e35da4](https://github.com/watson-developer-cloud/salesforce-sdk/commit/2e35da40db9302d6f2a648d7936a80f4ddc495fa))
+* **discovery:** generated changes ([6fbbc17](https://github.com/watson-developer-cloud/salesforce-sdk/commit/6fbbc177fff75284977c297f5d6033910a74a7e9))
+* **language-translator:** generated changes ([b666d3f](https://github.com/watson-developer-cloud/salesforce-sdk/commit/b666d3f32b44e1cd5f12387eef9cf1766081619f))
+* **nlc:** generated changes ([75fb2c8](https://github.com/watson-developer-cloud/salesforce-sdk/commit/75fb2c8a70981711d510e7fd458ab5172435b42c))
+* **nlu:** generated changes ([71270db](https://github.com/watson-developer-cloud/salesforce-sdk/commit/71270db417ba4cf9b38b9e8589fb39718ae01d15))
+* **personality-insights:** generated changes ([801706d](https://github.com/watson-developer-cloud/salesforce-sdk/commit/801706d5463bfc3acf90bd23e3a0592d6caa5cae))
+* **speech-to-text:** generated changes ([7e34d77](https://github.com/watson-developer-cloud/salesforce-sdk/commit/7e34d773e5d868d1ff7768ef477020351c657f8b))
+* **text-to-speech:** generated changes ([917cdbe](https://github.com/watson-developer-cloud/salesforce-sdk/commit/917cdbe617e227055140c88af5962bdb43475acd))
+* **tone-analyzer:** generated changes ([6a6f0f4](https://github.com/watson-developer-cloud/salesforce-sdk/commit/6a6f0f4893b50b1e5933761193721c45c8e0209c))
+* **visual-recognition:** generated changes ([3bb2432](https://github.com/watson-developer-cloud/salesforce-sdk/commit/3bb2432223f78d15c3290da06c17261ff177876f))
+
 ## [5.2.1](https://github.com/watson-developer-cloud/salesforce-sdk/compare/v5.2.0...v5.2.1) (2020-01-17)
 
 
