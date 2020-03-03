@@ -20,13 +20,13 @@ install:
 - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then cd appscan; make asoc-tool; cd ../; fi'
 before_script:
 - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then chmod a+x ./appscan/ASOC.sh; fi'
-script:
-- "./install/test-in-scratch-org.sh"
-- 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then ./appscan/ASOC.sh; fi'
-after_success:
-- sfdx force:org:delete -u ciorg -p
-after_failure:
-- sfdx force:org:delete -u ciorg -p
+# script:
+# - "./install/test-in-scratch-org.sh"
+# - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then ./appscan/ASOC.sh; fi'
+# after_success:
+# - sfdx force:org:delete -u ciorg -p
+# after_failure:
+# - sfdx force:org:delete -u ciorg -p
 before_deploy:
 - nvm install 12
 - npm install @semantic-release/exec
