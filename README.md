@@ -6,7 +6,7 @@
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. If you'd like, you can follow along with our video playlist [here](https://www.youtube.com/playlist?list=PLZDyxLlNKRY8qrs90oRPvVHocJhYOOj3n) to start using the SDK. Otherwise, continue reading to learn how to get started.
 
-**NOTE:** The new Discovery v2 service (`IBMDiscoveryV2`) is only accessible on Cloud Pak for Data. See the [ICP/Cloud Pak for Data](#icp/cloud-pak-for-data) section for more information on how to get set up.
+**NOTE:** This is a Community SDK and not an official SDK. See https://cloud.ibm.com/docs/watson?topic=watson-using-sdks#community-sdks
 
 ## Before you begin
 
